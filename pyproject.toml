@@ -60,6 +60,9 @@ ignore = [
 quote-style = "double"
 indent-style = "space"
 line-ending = "auto"
+exclude = [
+  "src/computational_biomedicine_study_hub/content/dm857/module_01_foundations.py"
+]
 
 [tool.mypy]
 python_version = "3.11"
