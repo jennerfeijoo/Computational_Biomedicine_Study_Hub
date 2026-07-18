@@ -83,7 +83,9 @@ def _localized_module() -> LocalizedLearningModule:
                         "Læs den forrige værdi.",
                     ),
                 ),
-                code=_text("count = 1\ncount += 1", "count = 1\ncount += 1", "count = 1\ncount += 1"),
+                code=_text(
+                    "count = 1\ncount += 1", "count = 1\ncount += 1", "count = 1\ncount += 1"
+                ),
                 expected_output=_text("2", "2", "2"),
                 explanation=_text(
                     "El estado final contiene 2.",
@@ -243,9 +245,7 @@ def test_free_text_items_use_localized_accepted_answers() -> None:
         explanation=_text("Explicación", "Explanation", "Forklaring"),
     )
 
-    assert item.materialize(AppLocale.DANISH_DENMARK).correct_answers == (
-        "Aktuelle værdier",
-    )
+    assert item.materialize(AppLocale.DANISH_DENMARK).correct_answers == ("Aktuelle værdier",)
 
 
 def test_localized_module_rejects_duplicate_stable_ids() -> None:

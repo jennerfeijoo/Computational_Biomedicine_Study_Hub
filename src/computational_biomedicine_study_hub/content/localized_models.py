@@ -38,9 +38,7 @@ class LocalizedText:
         }
         for locale, value in values.items():
             if not value.strip():
-                raise ValueError(
-                    f"Localized text cannot be empty for locale {locale.value!r}."
-                )
+                raise ValueError(f"Localized text cannot be empty for locale {locale.value!r}.")
 
     def for_locale(self, locale: AppLocale | str) -> str:
         """Return the text for one supported locale without fallback."""
@@ -197,9 +195,7 @@ class LocalizedAssessmentItem:
             if not self.options:
                 raise ValueError(f"Assessment item {self.item_id!r} requires options.")
             if not self.correct_option_ids:
-                raise ValueError(
-                    f"Assessment item {self.item_id!r} requires correct option IDs."
-                )
+                raise ValueError(f"Assessment item {self.item_id!r} requires correct option IDs.")
             if self.accepted_answers:
                 raise ValueError(
                     f"Assessment item {self.item_id!r} cannot mix option IDs "
@@ -212,9 +208,7 @@ class LocalizedAssessmentItem:
                     "for a non-option activity."
                 )
             if not self.accepted_answers:
-                raise ValueError(
-                    f"Assessment item {self.item_id!r} requires accepted answers."
-                )
+                raise ValueError(f"Assessment item {self.item_id!r} requires accepted answers.")
 
         invalid_ids = set(self.correct_option_ids) - set(option_ids)
         if invalid_ids:
@@ -224,8 +218,7 @@ class LocalizedAssessmentItem:
             )
 
         if (
-            self.activity_type
-            in {ActivityType.MULTIPLE_CHOICE, ActivityType.TRUE_FALSE}
+            self.activity_type in {ActivityType.MULTIPLE_CHOICE, ActivityType.TRUE_FALSE}
             and len(self.correct_option_ids) != 1
         ):
             raise ValueError(f"Assessment item {self.item_id!r} requires one correct option.")
@@ -282,8 +275,7 @@ class LocalizedTutorSupportPacket:
                 fragment.for_locale(locale) for fragment in self.knowledge_fragments
             ),
             common_misconceptions=tuple(
-                misconception.for_locale(locale)
-                for misconception in self.common_misconceptions
+                misconception.for_locale(locale) for misconception in self.common_misconceptions
             ),
             socratic_questions=tuple(
                 question.for_locale(locale) for question in self.socratic_questions
@@ -328,13 +320,9 @@ class LocalizedLearningModule:
         }
         for name, values in required.items():
             if not values:
-                raise ValueError(
-                    f"Localized learning module {self.module_id!r} requires {name}."
-                )
+                raise ValueError(f"Localized learning module {self.module_id!r} requires {name}.")
 
-        self._validate_unique_ids(
-            "objective", tuple(item.objective_id for item in self.objectives)
-        )
+        self._validate_unique_ids("objective", tuple(item.objective_id for item in self.objectives))
         self._validate_unique_ids("concept", tuple(item.concept_id for item in self.concepts))
         self._validate_unique_ids(
             "worked example", tuple(item.example_id for item in self.worked_examples)
@@ -356,15 +344,11 @@ class LocalizedLearningModule:
             summary=self.summary.for_locale(resolved),
             objectives=tuple(item.materialize(resolved) for item in self.objectives),
             concepts=tuple(item.materialize(resolved) for item in self.concepts),
-            worked_examples=tuple(
-                item.materialize(resolved) for item in self.worked_examples
-            ),
+            worked_examples=tuple(item.materialize(resolved) for item in self.worked_examples),
             practice_exercises=tuple(
                 item.materialize(resolved) for item in self.practice_exercises
             ),
-            assessment_items=tuple(
-                item.materialize(resolved) for item in self.assessment_items
-            ),
+            assessment_items=tuple(item.materialize(resolved) for item in self.assessment_items),
             tutor_support=self.tutor_support.materialize(resolved),
         )
 
