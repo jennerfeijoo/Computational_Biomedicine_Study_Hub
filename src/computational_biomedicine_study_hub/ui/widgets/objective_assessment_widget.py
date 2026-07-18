@@ -259,6 +259,8 @@ class ObjectiveAssessmentWidget(QWidget):
     def _clear_cards(self) -> None:
         while self._cards_layout.count():
             item = self._cards_layout.takeAt(0)
+            if item is None:
+                break
             widget = item.widget()
             if widget is not None:
                 widget.setParent(None)
