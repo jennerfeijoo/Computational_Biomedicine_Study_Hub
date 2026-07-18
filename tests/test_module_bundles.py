@@ -17,22 +17,26 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 def test_dm857_bundle_catalog_covers_every_completed_module_once() -> None:
     validate_bundle_catalog(LOCALIZED_BUNDLES)
 
-    assert len(LOCALIZED_BUNDLES) == 3
-    assert len(BUNDLES) == 3
+    assert len(LOCALIZED_BUNDLES) == 6
+    assert len(BUNDLES) == 6
     assert [bundle.module.module_id for bundle in BUNDLES] == [
         "dm857.m01",
         "dm857.m02",
         "dm857.m03",
+        "dm857.m04",
+        "dm857.m05",
+        "dm857.m06",
     ]
     assert all(bundle.content_version == "1.0.0" for bundle in BUNDLES)
     assert all(bundle.objective_question_bank for bundle in BUNDLES)
+    assert all(len(bundle.objective_question_bank) >= 20 for bundle in BUNDLES)
 
 
 def test_localized_bundle_materializes_module_and_bank_in_the_same_locale() -> None:
-    bundle = LOCALIZED_BUNDLES[1].materialize(AppLocale.DANISH_DENMARK)
+    bundle = LOCALIZED_BUNDLES[4].materialize(AppLocale.DANISH_DENMARK)
 
-    assert bundle.module.module_id == "dm857.m02"
-    assert bundle.module.title.startswith("Boolesk")
+    assert bundle.module.module_id == "dm857.m05"
+    assert bundle.module.title.startswith("Strenge")
     assert all(item.prompt.strip() for item in bundle.objective_question_bank)
     assert all(item.option_ids for item in bundle.objective_question_bank)
     assert all(item.correct_option_ids for item in bundle.objective_question_bank)
