@@ -119,16 +119,20 @@ def test_module_two_randomized_bank_is_large_unique_and_trilingual() -> None:
         ]
         assert all(item.prompt.strip() for item in bank)
         assert all(item.explanation.strip() for item in bank)
+        assert all(len(item.correct_answers) == 1 for item in bank)
         assert all(set(item.correct_answers).issubset(set(item.options)) for item in bank)
 
 
 def test_module_two_uses_safe_terminology_and_non_clinical_boundaries() -> None:
+    required_disclaimers = {
+        AppLocale.SPANISH_SPAIN: ("reglas didácticas", "no recomendaciones clínicas"),
+        AppLocale.ENGLISH: ("teaching rules", "not clinical recommendations"),
+        AppLocale.DANISH_DENMARK: ("undervisningsregler", "ikke kliniske anbefalinger"),
+    }
+
     for locale in AppLocale:
         module = LOCALIZED_MODULE_02_CONDITIONALS.materialize(locale)
         exported = "\n".join(document.text for document in module.tutor_documents()).casefold()
 
         assert "corrida" not in exported
-        assert (
-            "clinical recommendations" not in exported or "not clinical recommendations" in exported
-        )
-        assert "kliniske anbefalinger" not in exported or "ikke kliniske anbefalinger" in exported
+        assert all(phrase in exported for phrase in required_disclaimers[locale])
