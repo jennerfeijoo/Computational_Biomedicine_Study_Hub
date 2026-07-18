@@ -75,6 +75,7 @@ class OllamaSettingsPage(QWidget):
         self._client_factory = client_factory or OllamaClient
         self._probe_thread: QThread | None = None
         self._probe_worker: OllamaProbeWorker | None = None
+        self._auto_probe_timer: QTimer | None = None
 
         self._base_url = QLineEdit(self._stored_base_url())
         self._base_url.setObjectName("ollamaBaseUrl")
@@ -134,7 +135,7 @@ class OllamaSettingsPage(QWidget):
         layout.addStretch(1)
 
         if auto_probe:
-            QTimer.singleShot(0, self.start_probe)
+            self._schedule_auto_probe()
 
     @property
     def base_url(self) -> str:
@@ -253,6 +254,14 @@ class OllamaSettingsPage(QWidget):
         self._probe_button.setEnabled(True)
         self._probe_thread = None
         self._probe_worker = None
+
+    def _schedule_auto_probe(self) -> None:
+        """Schedule one probe owned by this page so deletion cancels it safely."""
+        timer = QTimer(self)
+        timer.setSingleShot(True)
+        timer.timeout.connect(self.start_probe)
+        self._auto_probe_timer = timer
+        timer.start(0)
 
     def _persist_current_preferences(self) -> None:
         normalized_url = OllamaConfig(base_url=self.base_url).normalized_base_url()
