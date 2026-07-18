@@ -8,7 +8,7 @@ from string import Formatter
 from typing import Final
 
 from .catalogs import CATALOGS
-from .locales import AppLocale, DEFAULT_LOCALE
+from .locales import DEFAULT_LOCALE, AppLocale
 from .messages import ALL_MESSAGE_KEYS, MessageKey
 
 _FORMATTER: Final = Formatter()
