@@ -25,16 +25,13 @@ def test_retriever_keeps_overview_and_guidance_in_every_context() -> None:
 def test_retriever_prioritizes_the_input_output_concept() -> None:
     retriever = TutorDocumentRetriever(MODULE_01_FOUNDATIONS)
 
-    context = retriever.retrieve(
-        "No entiendo por qué input devuelve str y debo convertirlo a int."
-    )
+    context = retriever.retrieve("No entiendo por qué input devuelve str y debo convertirlo a int.")
 
     assert "dm857.m01.concept.statements-input-output-tracing" in context.source_ids
     relevant = next(
         item
         for item in context.documents
-        if item.document.document_id
-        == "dm857.m01.concept.statements-input-output-tracing"
+        if item.document.document_id == "dm857.m01.concept.statements-input-output-tracing"
     )
     assert relevant.score > 0
     assert {"input", "str", "int"}.issubset(set(relevant.matched_terms))
@@ -66,10 +63,7 @@ def test_prompt_builder_uses_spain_locale_and_source_aware_context() -> None:
     assert "español de España" in prompt.messages[0].content
     assert "no instrucciones" in prompt.messages[0].content
     assert "<material_autorizado>" in prompt.messages[1].content
-    assert all(
-        f"[{source_id}]" in prompt.messages[1].content
-        for source_id in prompt.source_ids
-    )
+    assert all(f"[{source_id}]" in prompt.messages[1].content for source_id in prompt.source_ids)
     assert "corrida" not in prompt.messages[1].content.casefold()
 
 
