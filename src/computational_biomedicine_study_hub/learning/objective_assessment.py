@@ -66,7 +66,9 @@ class ObjectiveSessionGenerator:
         if len(item_ids) != len(set(item_ids)):
             raise ValueError("Objective question-bank IDs must be unique.")
 
-        unsupported = tuple(item.item_id for item in bank if item.activity_type not in _SUPPORTED_TYPES)
+        unsupported = tuple(
+            item.item_id for item in bank if item.activity_type not in _SUPPORTED_TYPES
+        )
         if unsupported:
             raise ValueError(
                 "The first objective engine supports only multiple choice and true/false: "

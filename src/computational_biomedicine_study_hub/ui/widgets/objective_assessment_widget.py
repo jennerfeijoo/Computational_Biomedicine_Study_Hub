@@ -121,8 +121,7 @@ class ObjectiveQuestionCard(QFrame):
             state = "correct"
         else:
             message = (
-                f"Incorrecto. Respuesta correcta: {feedback.correct_answer}. "
-                f"{feedback.explanation}"
+                f"Incorrecto. Respuesta correcta: {feedback.correct_answer}. {feedback.explanation}"
             )
             state = "incorrect"
 
