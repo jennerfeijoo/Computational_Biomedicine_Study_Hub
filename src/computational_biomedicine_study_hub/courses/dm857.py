@@ -14,7 +14,7 @@ from PySide6.QtWidgets import (
 )
 
 from ..content.bundles import ModuleBundle
-from ..content.dm857 import LOCALIZED_BUNDLES
+from ..content.dm857 import BUNDLES, LOCALIZED_BUNDLES
 from ..i18n import DEFAULT_LOCALE, AppLocale, MessageKey, Translator
 from ..ui.pages.module_reader_page import ModuleReaderPage
 from .models import CourseRegistration
@@ -27,8 +27,10 @@ class DM857Page(QWidget):
         super().__init__()
         self.setObjectName("dm857CoursePage")
         self._translator = Translator(locale)
-        self._bundles: tuple[ModuleBundle, ...] = tuple(
-            bundle.materialize(locale) for bundle in LOCALIZED_BUNDLES
+        self._bundles: tuple[ModuleBundle, ...] = (
+            BUNDLES
+            if locale == DEFAULT_LOCALE
+            else tuple(bundle.materialize(locale) for bundle in LOCALIZED_BUNDLES)
         )
 
         self._module_selector = QComboBox()
@@ -158,7 +160,9 @@ COURSE = CourseRegistration(
         AppLocale.SPANISH_SPAIN: (
             "Python, pensamiento algorítmico, estructuras de datos y pruebas automatizadas."
         ),
-        AppLocale.ENGLISH: ("Python, algorithmic thinking, data structures and automated testing."),
+        AppLocale.ENGLISH: (
+            "Python, algorithmic thinking, data structures and automated testing."
+        ),
         AppLocale.DANISH_DENMARK: (
             "Python, algoritmisk tænkning, datastrukturer og automatiserede test."
         ),
