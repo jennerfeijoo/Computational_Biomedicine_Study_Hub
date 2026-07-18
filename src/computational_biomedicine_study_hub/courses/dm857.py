@@ -1,4 +1,4 @@
-"""DM857 course registration and authored-module navigation."""
+"""DM857 course registration and lazy authored-module navigation."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ from .models import CourseRegistration
 
 
 class DM857Page(QWidget):
-    """Host every completed DM857 module in one compact course page."""
+    """Construct each completed module reader once, when first selected."""
 
     def __init__(self) -> None:
         super().__init__()
@@ -32,18 +32,14 @@ class DM857Page(QWidget):
         self._module_title = QLabel()
         self._module_title.setObjectName("moduleContextTitle")
         self._module_title.setWordWrap(True)
-        self._readers: list[ModuleReaderPage] = []
+        self._reader_cache: dict[int, ModuleReaderPage] = {}
 
         for number, bundle in enumerate(BUNDLES, start=1):
             self._module_selector.addItem(f"Módulo {number}", bundle.module.module_id)
-            reader = ModuleReaderPage(
-                bundle.module,
-                objective_question_bank=bundle.objective_question_bank,
-                show_context_bar=False,
-            )
-            reader.setProperty("contentVersion", bundle.content_version)
-            self._readers.append(reader)
-            self._module_stack.addWidget(reader)
+            placeholder = QWidget()
+            placeholder.setObjectName("moduleReaderPlaceholder")
+            placeholder.setProperty("moduleId", bundle.module.module_id)
+            self._module_stack.addWidget(placeholder)
 
         context_bar = QFrame()
         context_bar.setObjectName("moduleContextBar")
@@ -69,31 +65,68 @@ class DM857Page(QWidget):
     @property
     def reader(self) -> ModuleReaderPage:
         """Return the reader for the currently selected module."""
-        return self._readers[self._module_stack.currentIndex()]
+        return self._reader_for_index(self.current_module_index)
 
     @property
     def module_count(self) -> int:
         """Return the number of completed modules available in the course page."""
-        return len(self._readers)
+        return len(BUNDLES)
 
     @property
     def current_module_index(self) -> int:
         """Return the zero-based selected module index."""
-        return self._module_stack.currentIndex()
+        return self._module_selector.currentIndex()
+
+    @property
+    def constructed_reader_count(self) -> int:
+        """Return the number of readers constructed during this page lifetime."""
+        return len(self._reader_cache)
+
+    def has_constructed_reader(self, index: int) -> bool:
+        """Return whether a module reader has been constructed for one index."""
+        return index in self._reader_cache
 
     def select_module(self, index: int) -> bool:
         """Select a completed module by zero-based index."""
         if not 0 <= index < self.module_count:
             return False
-        self._module_selector.setCurrentIndex(index)
+        if index == self.current_module_index:
+            self._activate_module(index)
+        else:
+            self._module_selector.setCurrentIndex(index)
         return True
 
     @Slot(int)
     def _activate_module(self, index: int) -> None:
         if not 0 <= index < self.module_count:
             return
-        self._module_stack.setCurrentIndex(index)
-        self._module_title.setText(self._readers[index].module.title)
+        reader = self._reader_for_index(index)
+        self._module_stack.setCurrentWidget(reader)
+        self._module_title.setText(reader.module.title)
+
+    def _reader_for_index(self, index: int) -> ModuleReaderPage:
+        if not 0 <= index < self.module_count:
+            raise IndexError(index)
+        cached = self._reader_cache.get(index)
+        if cached is not None:
+            return cached
+
+        bundle = BUNDLES[index]
+        reader = ModuleReaderPage(
+            bundle.module,
+            objective_question_bank=bundle.objective_question_bank,
+            show_context_bar=False,
+        )
+        reader.setProperty("contentVersion", bundle.content_version)
+
+        placeholder = self._module_stack.widget(index)
+        if placeholder is None:
+            raise RuntimeError(f"Missing module placeholder at index {index}.")
+        self._module_stack.removeWidget(placeholder)
+        placeholder.deleteLater()
+        self._module_stack.insertWidget(index, reader)
+        self._reader_cache[index] = reader
+        return reader
 
 
 def create_page() -> QWidget:
