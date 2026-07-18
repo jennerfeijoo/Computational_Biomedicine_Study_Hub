@@ -1,0 +1,175 @@
+        (
+            title_en,
+            problem_en,
+            reasoning_en,
+            explanation_en,
+            title_da,
+            problem_da,
+            reasoning_da,
+            explanation_da,
+        ) = translation
+        examples.append(
+            LocalizedWorkedExample(
+                example_id=source.example_id,
+                title=_t(source.title, title_en, title_da),
+                problem=_t(source.problem, problem_en, problem_da),
+                reasoning=tuple(
+                    _t(es, en, da)
+                    for es, en, da in zip(
+                        source.reasoning,
+                        reasoning_en,
+                        reasoning_da,
+                        strict=True,
+                    )
+                ),
+                code=_same(source.code),
+                expected_output=_same(source.expected_output),
+                explanation=_t(source.explanation, explanation_en, explanation_da),
+            )
+        )
+    return tuple(examples)
+
+
+def _localized_practice() -> tuple[LocalizedPracticeExercise, ...]:
+    exercises: list[LocalizedPracticeExercise] = []
+    for source, translation in zip(_ES.practice_exercises, _PRACTICE_EN_DA, strict=True):
+        prompt_en, hints_en, solution_en, explanation_en, prompt_da, hints_da, solution_da, explanation_da = translation
+        exercises.append(
+            LocalizedPracticeExercise(
+                exercise_id=source.exercise_id,
+                activity_type=source.activity_type,
+                prompt=_t(source.prompt, prompt_en, prompt_da),
+                hints=tuple(
+                    _t(es, en, da)
+                    for es, en, da in zip(source.hints, hints_en, hints_da, strict=True)
+                ),
+                solution=_t(source.solution, solution_en, solution_da),
+                explanation=_t(source.explanation, explanation_en, explanation_da),
+                starter_code=_same(source.starter_code) if source.starter_code else None,
+            )
+        )
+    return tuple(exercises)
+
+
+def _localized_assessments() -> tuple[LocalizedAssessmentItem, ...]:
+    source = _ES.assessment_items
+    return (
+        LocalizedAssessmentItem(
+            item_id=source[0].item_id,
+            activity_type=ActivityType.MULTIPLE_CHOICE,
+            prompt=_t(source[0].prompt, "Which statement best describes an expression in Python?", "Hvilken påstand beskriver bedst et udtryk i Python?"),
+            options=(
+                _option("evaluates", source[0].options[0], "An evaluable combination that produces a value", "En kombination, der kan evalueres og giver en værdi"),
+                _option("permanent", source[0].options[1], "A name permanently associated with a type", "Et navn, der permanent er knyttet til en type"),
+                _option("prints", source[0].options[2], "Any line that prints text", "Enhver linje, der udskriver tekst"),
+                _option("error", source[0].options[3], "An error detected at runtime", "En fejl, der opdages under kørsel"),
+            ),
+            correct_option_ids=("evaluates",),
+            accepted_answers=(),
+            explanation=_t(source[0].explanation, "An expression may contain literals, variables, operators, and calls, and produces a value when evaluated.", "Et udtryk kan indeholde literaler, variable, operatorer og kald og giver en værdi, når det evalueres."),
+        ),
+        LocalizedAssessmentItem(
+            item_id=source[1].item_id,
+            activity_type=ActivityType.TRUE_FALSE,
+            prompt=_t(source[1].prompt, "The statement x = x + 1 expresses mathematical equality.", "Sætningen x = x + 1 udtrykker matematisk lighed."),
+            options=(_option("true", "Verdadero", "True", "Sandt"), _option("false", "Falso", "False", "Falsk")),
+            correct_option_ids=("false",),
+            accepted_answers=(),
+            explanation=_t(source[1].explanation, "It is a state update: x + 1 is evaluated and x is then reassigned.", "Det er en tilstandsopdatering: x + 1 evalueres, og derefter gentildeles x."),
+        ),
+        LocalizedAssessmentItem(
+            item_id=source[2].item_id,
+            activity_type=ActivityType.MULTIPLE_SELECT,
+            prompt=_t(source[2].prompt, "Select all expressions whose result is a float.", "Vælg alle udtryk, hvis resultat er en float."),
+            options=tuple(
+                _option(option_id, es, es, es)
+                for option_id, es in zip(("div", "floor", "float_cast", "add", "int_cast"), source[2].options, strict=True)
+            ),
+            correct_option_ids=("div", "float_cast"),
+            accepted_answers=(),
+            explanation=_t(source[2].explanation, "/ produces float and float(5) creates 5.0; the others produce int.", "/ giver float, og float(5) opretter 5.0; de øvrige giver int."),
+        ),
+        LocalizedAssessmentItem(
+            item_id=source[3].item_id,
+            activity_type=ActivityType.CODE_TRACING,
+            prompt=_t(source[3].prompt, "Give the exact output:\nx = 4\ny = x + 3\nx = 10\nprint(y)", "Angiv det præcise output:\nx = 4\ny = x + 3\nx = 10\nprint(y)"),
+            options=(),
+            correct_option_ids=(),
+            accepted_answers=(_same("7"),),
+            explanation=_t(source[3].explanation, "y receives 7 before x is reassigned.", "y får værdien 7, før x gentildeles."),
+            rubric=(_t(source[3].rubric[0], "States the output 7.", "Angiver outputtet 7."), _t(source[3].rubric[1], "Explains that variables do not retain an automatic dependency.", "Forklarer, at variable ikke bevarer en automatisk afhængighed.")),
+        ),
+        LocalizedAssessmentItem(
+            item_id=source[4].item_id,
+            activity_type=ActivityType.FILL_IN_THE_BLANK,
+            prompt=_t(source[4].prompt, "The exponentiation operator in Python is ____.", "Potensoperatoren i Python er ____."),
+            options=(),
+            correct_option_ids=(),
+            accepted_answers=(_same("**"),),
+            explanation=_t(source[4].explanation, "Python uses **; ^ is a bitwise operation.", "Python bruger **; ^ er en bitvis operation."),
+        ),
+        LocalizedAssessmentItem(
+            item_id=source[5].item_id,
+            activity_type=ActivityType.DEBUGGING,
+            prompt=_t(source[5].prompt, "Identify the main error in total = '12' / 3 and propose a correction.", "Identificér hovedfejlen i total = '12' / 3 og foreslå en rettelse."),
+            options=(),
+            correct_option_ids=(),
+            accepted_answers=(_t(source[5].correct_answers[0], "TypeError; total = int('12') / 3", "TypeError; total = int('12') / 3"),),
+            explanation=_t(source[5].explanation, "The syntax is valid, but / does not accept str as a numeric operand.", "Syntaksen er gyldig, men / accepterer ikke str som numerisk operand."),
+            rubric=tuple(
+                _t(es, en, da)
+                for es, en, da in zip(
+                    source[5].rubric,
+                    ("Identifies TypeError or a type mismatch.", "Converts the string before division.", "Justifies the conversion using the numeric meaning."),
+                    ("Identificerer TypeError eller typeuoverensstemmelse.", "Konverterer strengen før division.", "Begrunder konverteringen ud fra den numeriske betydning."),
+                    strict=True,
+                )
+            ),
+        ),
+        LocalizedAssessmentItem(
+            item_id=source[6].item_id,
+            activity_type=ActivityType.ORDERING,
+            prompt=_t(source[6].prompt, "Order the stages from the real situation to concrete execution.", "Sæt faserne i rækkefølge fra den virkelige situation til konkret udførelse."),
+            options=(
+                _option("program", "Programa", "Program", "Program"),
+                _option("problem", "Problema", "Problem", "Problem"),
+                _option("algorithm", "Algoritmo", "Algorithm", "Algoritme"),
+                _option("model", "Modelo", "Model", "Model"),
+            ),
+            correct_option_ids=("problem", "model", "algorithm", "program"),
+            accepted_answers=(),
+            explanation=_t(source[6].explanation, "Problem, model, algorithm, and program form the correct sequence.", "Problem, model, algoritme og program er den korrekte rækkefølge."),
+        ),
+        LocalizedAssessmentItem(
+            item_id=source[7].item_id,
+            activity_type=ActivityType.MATCHING,
+            prompt=_t(source[7].prompt, "Match each error with its description.", "Match hver fejl med dens beskrivelse."),
+            options=(
+                _option("syntax", source[7].options[0], "SyntaxError → invalid structure", "SyntaxError → ugyldig struktur"),
+                _option("type", source[7].options[1], "TypeError → operation incompatible with the types", "TypeError → operation uforenelig med typerne"),
+                _option("logic", source[7].options[2], "Logic error → incorrect result without necessarily raising an exception", "Logisk fejl → forkert resultat uden nødvendigvis at udløse en undtagelse"),
+            ),
+            correct_option_ids=("syntax", "type", "logic"),
+            accepted_answers=(),
+            explanation=_t(source[7].explanation, "The three categories require different diagnostic strategies.", "De tre kategorier kræver forskellige diagnostiske strategier."),
+        ),
+        LocalizedAssessmentItem(
+            item_id=source[8].item_id,
+            activity_type=ActivityType.SHORT_ANSWER,
+            prompt=_t(source[8].prompt, "Define the minimum information a program test must contain.", "Definér den minimale information, som en programtest skal indeholde."),
+            options=(),
+            correct_option_ids=(),
+            accepted_answers=(_t(source[8].correct_answers[0], "A concrete input, an expected result, and a comparison criterion.", "Et konkret input, et forventet resultat og et sammenligningskriterium."),),
+            explanation=_t(source[8].explanation, "Without an expected result there is no test, only execution.", "Uden et forventet resultat er der ingen test, kun udførelse."),
+            rubric=tuple(
+                _t(es, en, da)
+                for es, en, da in zip(
+                    source[8].rubric,
+                    ("Mentions the input.", "Mentions the expected result.", "Mentions comparison or an acceptance criterion."),
+                    ("Nævner inputtet.", "Nævner det forventede resultat.", "Nævner sammenligning eller acceptkriterium."),
+                    strict=True,
+                )
+            ),
+        ),
+        LocalizedAssessmentItem(
+            item_id=source[9].item_id,
