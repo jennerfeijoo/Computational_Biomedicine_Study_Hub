@@ -48,6 +48,7 @@ class ModuleReaderPage(QWidget):
         parent: QWidget | None = None,
         *,
         objective_question_bank: tuple[AssessmentItem, ...] = (),
+        show_context_bar: bool = True,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("moduleReaderPage")
@@ -57,7 +58,8 @@ class ModuleReaderPage(QWidget):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(8)
-        layout.addWidget(self._build_context_bar())
+        if show_context_bar:
+            layout.addWidget(self._build_context_bar())
 
         self._tabs = QTabWidget()
         self._tabs.setObjectName("moduleTabs")
@@ -95,8 +97,10 @@ class ModuleReaderPage(QWidget):
         bar_layout.setContentsMargins(14, 8, 14, 8)
         bar_layout.setSpacing(12)
 
+        module_token = self._module.module_id.rsplit(".", maxsplit=1)[-1]
+        number_text = module_token.removeprefix("m").lstrip("0") or "0"
         kicker = self._label(
-            f"{self._module.course_code} · Módulo 1",
+            f"{self._module.course_code} · Módulo {number_text}",
             "moduleContextKicker",
         )
         kicker.setWordWrap(False)
@@ -189,8 +193,7 @@ class ModuleReaderPage(QWidget):
         if self._objective_question_bank:
             notice = self._label(
                 "Responde cada pregunta y pulsa Comprobar respuesta para obtener corrección "
-                "inmediata. Nueva práctica genera otra combinación del banco y vuelve a "
-                "barajar las opciones.",
+                "inmediata. Nueva práctica genera otra combinación del banco y vuelve a "n                "barajar las opciones.",
                 "moduleSectionNotice",
             )
             layout.addWidget(notice)
