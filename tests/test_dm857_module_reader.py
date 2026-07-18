@@ -43,9 +43,7 @@ def test_module_reader_exposes_five_study_sections(qapp: QApplication) -> None:
 def test_module_reader_renders_all_authored_content_cards(qapp: QApplication) -> None:
     reader = ModuleReaderPage(MODULE_01_FOUNDATIONS)
 
-    assert len(reader.findChildren(QFrame, "conceptCard")) == len(
-        MODULE_01_FOUNDATIONS.concepts
-    )
+    assert len(reader.findChildren(QFrame, "conceptCard")) == len(MODULE_01_FOUNDATIONS.concepts)
     assert len(reader.findChildren(QFrame, "exampleCard")) == len(
         MODULE_01_FOUNDATIONS.worked_examples
     )

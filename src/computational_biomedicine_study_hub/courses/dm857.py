@@ -26,9 +26,7 @@ class DM857Page(QWidget):
         module_heading.setObjectName("sectionHeading")
         layout.addWidget(module_heading)
 
-        self._module_button = QPushButton(
-            f"Módulo 1 · {MODULE_01_FOUNDATIONS.title}"
-        )
+        self._module_button = QPushButton(f"Módulo 1 · {MODULE_01_FOUNDATIONS.title}")
         self._module_button.setObjectName("moduleSelectorButton")
         self._module_button.setCheckable(True)
         self._module_button.setChecked(True)
