@@ -48,7 +48,8 @@ def test_generator_builds_balanced_varied_sessions_and_shuffles_options() -> Non
         ActivityType.TRUE_FALSE,
     }
     assert all(
-        set(question.display_options) == set(question.item.options) for question in first.questions
+        set(question.display_options) == set(question.item.options)
+        for question in first.questions
     )
 
 
@@ -82,7 +83,7 @@ def test_generator_rejects_unsupported_activity_types() -> None:
     )
 
     with pytest.raises(ValueError, match="supports only"):
-        ObjectiveSessionGenerator((unsupported,))
+        ObjectiveSessionGenerator((unsupported,), question_count=1)
 
 
 def test_dm857_page_renders_six_interactive_questions(qapp: QApplication) -> None:
