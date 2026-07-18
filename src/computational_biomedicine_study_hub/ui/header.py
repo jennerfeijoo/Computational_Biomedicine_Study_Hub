@@ -12,7 +12,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ..i18n import AppLocale, DEFAULT_LOCALE
+from ..i18n import DEFAULT_LOCALE, AppLocale
 
 
 class PageHeader(QWidget):

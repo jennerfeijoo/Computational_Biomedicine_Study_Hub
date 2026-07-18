@@ -7,7 +7,7 @@ from collections.abc import Sequence
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QFrame, QLabel, QVBoxLayout, QWidget
 
-from ...i18n import AppLocale, DEFAULT_LOCALE, UiCopyKey, ui_text
+from ...i18n import DEFAULT_LOCALE, AppLocale, UiCopyKey, ui_text
 
 
 class CourseOverviewPage(QWidget):

@@ -47,9 +47,7 @@ class ObjectiveQuestionCard(QFrame):
         layout.setContentsMargins(18, 16, 18, 16)
         layout.setSpacing(10)
 
-        number_label = QLabel(
-            ui_text(locale, UiCopyKey.OBJECTIVE_QUESTION_NUMBER, number=number)
-        )
+        number_label = QLabel(ui_text(locale, UiCopyKey.OBJECTIVE_QUESTION_NUMBER, number=number))
         number_label.setObjectName("objectiveQuestionNumber")
         layout.addWidget(number_label)
 
@@ -70,9 +68,7 @@ class ObjectiveQuestionCard(QFrame):
             self._option_buttons.append(button)
             layout.addWidget(button)
 
-        self._check_button = QPushButton(
-            ui_text(locale, UiCopyKey.OBJECTIVE_CHECK)
-        )
+        self._check_button = QPushButton(ui_text(locale, UiCopyKey.OBJECTIVE_CHECK))
         self._check_button.setObjectName("checkObjectiveAnswerButton")
         self._check_button.clicked.connect(self.check_answer)
         layout.addWidget(self._check_button, 0)
@@ -229,9 +225,7 @@ class ObjectiveAssessmentWidget(QWidget):
         self._score = QLabel()
         self._score.setObjectName("objectiveAssessmentScore")
 
-        self._new_session_button = QPushButton(
-            ui_text(locale, UiCopyKey.OBJECTIVE_NEW_SESSION)
-        )
+        self._new_session_button = QPushButton(ui_text(locale, UiCopyKey.OBJECTIVE_NEW_SESSION))
         self._new_session_button.setObjectName("newAssessmentSessionButton")
         self._new_session_button.clicked.connect(self.new_session)
 

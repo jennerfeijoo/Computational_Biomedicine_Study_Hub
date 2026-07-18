@@ -295,7 +295,9 @@ class ModuleReaderPage(QWidget):
     def _concept_card(self, concept: ConceptBlock) -> QFrame:
         card, layout = self._card("conceptCard", concept.title)
         layout.addWidget(self._label(concept.body, "contentBody"))
-        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_ESSENTIAL_POINTS)))
+        layout.addWidget(
+            self._subheading(self._translator.text(MessageKey.MODULE_ESSENTIAL_POINTS))
+        )
         layout.addWidget(self._label(self._bullets(concept.key_points), "contentBulletList"))
         return card
 

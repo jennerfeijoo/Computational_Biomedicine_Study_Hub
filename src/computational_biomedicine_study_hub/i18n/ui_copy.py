@@ -121,9 +121,7 @@ SPANISH_UI_COPY: dict[UiCopyKey, str] = {
     UiCopyKey.OBJECTIVE_CHECK: "Comprobar respuesta",
     UiCopyKey.OBJECTIVE_SELECT_WARNING: "Selecciona una respuesta antes de comprobar.",
     UiCopyKey.OBJECTIVE_CORRECT: "Correcto. {explanation}",
-    UiCopyKey.OBJECTIVE_INCORRECT: (
-        "Incorrecto. Respuesta correcta: {answer}. {explanation}"
-    ),
+    UiCopyKey.OBJECTIVE_INCORRECT: ("Incorrecto. Respuesta correcta: {answer}. {explanation}"),
     UiCopyKey.OBJECTIVE_TITLE: "Evaluación objetiva aleatoria",
     UiCopyKey.OBJECTIVE_NEW_SESSION: "Nueva práctica",
     UiCopyKey.OBJECTIVE_METADATA: (
@@ -203,9 +201,7 @@ ENGLISH_UI_COPY: dict[UiCopyKey, str] = {
     UiCopyKey.OBJECTIVE_CHECK: "Check answer",
     UiCopyKey.OBJECTIVE_SELECT_WARNING: "Select an answer before checking.",
     UiCopyKey.OBJECTIVE_CORRECT: "Correct. {explanation}",
-    UiCopyKey.OBJECTIVE_INCORRECT: (
-        "Incorrect. Correct answer: {answer}. {explanation}"
-    ),
+    UiCopyKey.OBJECTIVE_INCORRECT: ("Incorrect. Correct answer: {answer}. {explanation}"),
     UiCopyKey.OBJECTIVE_TITLE: "Randomized objective assessment",
     UiCopyKey.OBJECTIVE_NEW_SESSION: "New practice",
     UiCopyKey.OBJECTIVE_METADATA: (
@@ -282,9 +278,7 @@ DANISH_UI_COPY: dict[UiCopyKey, str] = {
     UiCopyKey.OBJECTIVE_CHECK: "Kontrollér svar",
     UiCopyKey.OBJECTIVE_SELECT_WARNING: "Vælg et svar før kontrollen.",
     UiCopyKey.OBJECTIVE_CORRECT: "Korrekt. {explanation}",
-    UiCopyKey.OBJECTIVE_INCORRECT: (
-        "Forkert. Korrekt svar: {answer}. {explanation}"
-    ),
+    UiCopyKey.OBJECTIVE_INCORRECT: ("Forkert. Korrekt svar: {answer}. {explanation}"),
     UiCopyKey.OBJECTIVE_TITLE: "Tilfældig objektiv evaluering",
     UiCopyKey.OBJECTIVE_NEW_SESSION: "Ny træning",
     UiCopyKey.OBJECTIVE_METADATA: (

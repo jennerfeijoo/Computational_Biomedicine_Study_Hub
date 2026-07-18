@@ -9,7 +9,7 @@ from computational_biomedicine_study_hub.ui.main_window import MainWindow
 
 
 def _settings(tmp_path: object) -> QSettings:
-    path = getattr(tmp_path, "__truediv__")("language.ini")
+    path = tmp_path.__truediv__("language.ini")
     return QSettings(str(path), QSettings.Format.IniFormat)
 
 

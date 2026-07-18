@@ -4,10 +4,9 @@ from __future__ import annotations
 
 from PySide6.QtWidgets import QWidget
 
-from ..i18n import AppLocale, DEFAULT_LOCALE
+from ..i18n import DEFAULT_LOCALE, AppLocale
 from ..ui.pages.course_overview_page import CourseOverviewPage
 from .models import CourseRegistration
-
 
 _OVERVIEW = {
     AppLocale.SPANISH_SPAIN: (
@@ -78,11 +77,7 @@ COURSE = CourseRegistration(
         AppLocale.SPANISH_SPAIN: (
             "Estadística avanzada, Bioconductor y pipelines para datos ómicos."
         ),
-        AppLocale.ENGLISH: (
-            "Advanced statistics, Bioconductor and pipelines for omics data."
-        ),
-        AppLocale.DANISH_DENMARK: (
-            "Avanceret statistik, Bioconductor og pipelines til omikdata."
-        ),
+        AppLocale.ENGLISH: ("Advanced statistics, Bioconductor and pipelines for omics data."),
+        AppLocale.DANISH_DENMARK: ("Avanceret statistik, Bioconductor og pipelines til omikdata."),
     },
 )

@@ -68,9 +68,7 @@ class GuidedPracticeCard(QFrame):
         identity.setContentsMargins(0, 0, 0, 0)
         identity.setSpacing(10)
 
-        number_label = QLabel(
-            ui_text(locale, UiCopyKey.PRACTICE_NUMBER, number=number)
-        )
+        number_label = QLabel(ui_text(locale, UiCopyKey.PRACTICE_NUMBER, number=number))
         number_label.setObjectName("guidedPracticeExerciseNumber")
         activity_label = QLabel(self._activity_label(exercise.activity_type.value))
         activity_label.setObjectName("guidedPracticeExerciseType")
@@ -108,9 +106,7 @@ class GuidedPracticeCard(QFrame):
         self._hint_button.setEnabled(bool(exercise.hints))
         self._hint_button.clicked.connect(self.show_next_hint)
 
-        self._solution_button = QPushButton(
-            ui_text(locale, UiCopyKey.PRACTICE_REFERENCE_BUTTON)
-        )
+        self._solution_button = QPushButton(ui_text(locale, UiCopyKey.PRACTICE_REFERENCE_BUTTON))
         self._solution_button.setObjectName("guidedPracticeSecondaryButton")
         self._solution_button.clicked.connect(self.reveal_solution)
 
@@ -131,9 +127,7 @@ class GuidedPracticeCard(QFrame):
         solution_layout.setContentsMargins(14, 12, 14, 12)
         solution_layout.setSpacing(7)
 
-        solution_title = QLabel(
-            ui_text(locale, UiCopyKey.PRACTICE_REFERENCE_TITLE)
-        )
+        solution_title = QLabel(ui_text(locale, UiCopyKey.PRACTICE_REFERENCE_TITLE))
         solution_title.setObjectName("guidedPracticeSolutionTitle")
         solution_layout.addWidget(solution_title)
 
@@ -157,9 +151,7 @@ class GuidedPracticeCard(QFrame):
         assessment_layout.setContentsMargins(0, 4, 0, 0)
         assessment_layout.setSpacing(8)
 
-        assessment_label = QLabel(
-            ui_text(locale, UiCopyKey.PRACTICE_SELF_ASSESSMENT)
-        )
+        assessment_label = QLabel(ui_text(locale, UiCopyKey.PRACTICE_SELF_ASSESSMENT))
         assessment_label.setObjectName("guidedPracticeExerciseType")
         self._solved_button = QPushButton(ui_text(locale, UiCopyKey.PRACTICE_SOLVED))
         self._solved_button.setObjectName("guidedPracticeSolvedButton")
@@ -237,22 +229,16 @@ class GuidedPracticeCard(QFrame):
         self._hint.show()
 
         if self._visible_hint_count == len(self._exercise.hints):
-            self._hint_button.setText(
-                ui_text(self._locale, UiCopyKey.PRACTICE_NO_MORE_HINTS)
-            )
+            self._hint_button.setText(ui_text(self._locale, UiCopyKey.PRACTICE_NO_MORE_HINTS))
             self._hint_button.setEnabled(False)
         else:
-            self._hint_button.setText(
-                ui_text(self._locale, UiCopyKey.PRACTICE_SHOW_NEXT_HINT)
-            )
+            self._hint_button.setText(ui_text(self._locale, UiCopyKey.PRACTICE_SHOW_NEXT_HINT))
 
     @Slot()
     def reveal_solution(self) -> None:
         """Reveal the authored solution and enable student self-assessment."""
         self._solution_panel.show()
-        self._solution_button.setText(
-            ui_text(self._locale, UiCopyKey.PRACTICE_SOLUTION_VISIBLE)
-        )
+        self._solution_button.setText(ui_text(self._locale, UiCopyKey.PRACTICE_SOLUTION_VISIBLE))
         self._solution_button.setEnabled(False)
 
     @Slot()
@@ -332,9 +318,7 @@ class GuidedPracticeWidget(QWidget):
         self._progress = QLabel()
         self._progress.setObjectName("guidedPracticeProgress")
 
-        self._new_session_button = QPushButton(
-            ui_text(locale, UiCopyKey.PRACTICE_NEW_SESSION)
-        )
+        self._new_session_button = QPushButton(ui_text(locale, UiCopyKey.PRACTICE_NEW_SESSION))
         self._new_session_button.setObjectName("newGuidedPracticeButton")
         self._new_session_button.clicked.connect(self.new_session)
 

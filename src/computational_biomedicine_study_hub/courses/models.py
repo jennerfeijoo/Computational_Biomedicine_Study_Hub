@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 
 from PySide6.QtWidgets import QWidget
 
-from ..i18n import AppLocale, DEFAULT_LOCALE
+from ..i18n import DEFAULT_LOCALE, AppLocale
 
 
 @dataclass(frozen=True, slots=True)

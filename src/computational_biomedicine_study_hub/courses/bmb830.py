@@ -4,10 +4,9 @@ from __future__ import annotations
 
 from PySide6.QtWidgets import QWidget
 
-from ..i18n import AppLocale, DEFAULT_LOCALE
+from ..i18n import DEFAULT_LOCALE, AppLocale
 from ..ui.pages.course_overview_page import CourseOverviewPage
 from .models import CourseRegistration
-
 
 _OVERVIEW = {
     AppLocale.SPANISH_SPAIN: (
