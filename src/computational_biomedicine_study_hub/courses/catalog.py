@@ -10,7 +10,6 @@ from .dm847 import COURSE as DM847
 from .dm857 import COURSE as DM857
 from .models import CourseRegistration
 
-
 COURSES: tuple[CourseRegistration, ...] = (
     DM857,
     DM847,
