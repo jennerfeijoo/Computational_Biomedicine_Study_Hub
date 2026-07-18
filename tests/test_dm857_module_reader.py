@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QApplication, QComboBox, QFrame, QLabel, QTabWidge
 from computational_biomedicine_study_hub.content.dm857 import (
     MODULE_01_FOUNDATIONS,
     MODULE_02_CONDITIONALS,
+    MODULE_03_ITERATION,
 )
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
 from computational_biomedicine_study_hub.ui.pages.module_reader_page import ModuleReaderPage
@@ -20,22 +21,23 @@ def test_dm857_page_hosts_completed_modules_without_duplicate_identity_cards(
     context_title = page.findChild(QLabel, "moduleContextTitle")
     selector = page.findChild(QComboBox, "courseModuleSelector")
 
-    assert page.module_count == 2
+    assert page.module_count == 3
     assert page.reader.module is MODULE_01_FOUNDATIONS
     assert context_bar is not None
     assert context_title is not None
     assert context_title.text() == MODULE_01_FOUNDATIONS.title
     assert selector is not None
-    assert selector.count() == 2
+    assert selector.count() == 3
     assert [selector.itemText(index) for index in range(selector.count())] == [
         "Módulo 1",
         "Módulo 2",
+        "Módulo 3",
     ]
     assert page.findChild(QFrame, "courseIdentityCard") is None
     assert page.findChild(QFrame, "moduleIdentityCard") is None
 
 
-def test_dm857_page_switches_to_module_two_in_the_same_compact_layout(
+def test_dm857_page_switches_between_completed_modules_in_the_same_compact_layout(
     qapp: QApplication,
 ) -> None:
     page = DM857Page()
@@ -46,8 +48,14 @@ def test_dm857_page_switches_to_module_two_in_the_same_compact_layout(
     assert page.current_module_index == 1
     assert page.reader.module is MODULE_02_CONDITIONALS
     assert context_title.text() == MODULE_02_CONDITIONALS.title
+
+    assert page.select_module(2)
+    assert page.current_module_index == 2
+    assert page.reader.module is MODULE_03_ITERATION
+    assert context_title.text() == MODULE_03_ITERATION.title
+
     assert not page.select_module(-1)
-    assert not page.select_module(2)
+    assert not page.select_module(3)
 
 
 def test_module_reader_exposes_five_study_sections(qapp: QApplication) -> None:
@@ -70,11 +78,11 @@ def test_module_reader_exposes_five_study_sections(qapp: QApplication) -> None:
 
 
 def test_module_reader_uses_module_id_for_the_context_number(qapp: QApplication) -> None:
-    reader = ModuleReaderPage(MODULE_02_CONDITIONALS)
+    reader = ModuleReaderPage(MODULE_03_ITERATION)
     kicker = reader.findChild(QLabel, "moduleContextKicker")
 
     assert kicker is not None
-    assert kicker.text() == "DM857 · Módulo 2"
+    assert kicker.text() == "DM857 · Módulo 3"
 
 
 def test_module_reader_renders_authored_content_and_guided_practice(
