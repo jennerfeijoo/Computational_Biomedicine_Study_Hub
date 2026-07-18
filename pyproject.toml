@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "computational-biomedicine-study-hub"
+version = "0.1.0"
+description = "Offline-first PySide6 study companion for computational biomedicine."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "Jenner Feijoo" }
+]
+dependencies = [
+  "PySide6>=6.7,<7"
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.10,<2",
+  "pytest>=8.2,<9",
+  "pytest-qt>=4.4,<5",
+  "ruff>=0.5,<1"
+]
+
+[project.scripts]
+cb-study-hub = "computational_biomedicine_study_hub.application:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/computational_biomedicine_study_hub"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+  "B",
+  "E",
+  "F",
+  "I",
+  "N",
+  "UP"
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["computational_biomedicine_study_hub"]
+mypy_path = "src"
+warn_unused_configs = true
