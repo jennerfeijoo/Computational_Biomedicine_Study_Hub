@@ -25,8 +25,7 @@ class FakeTransport:
 
 def test_config_normalizes_local_server_urls() -> None:
     assert (
-        OllamaConfig("http://localhost:11434").normalized_base_url()
-        == "http://localhost:11434/api"
+        OllamaConfig("http://localhost:11434").normalized_base_url() == "http://localhost:11434/api"
     )
     assert (
         OllamaConfig("http://localhost:11434/api/").normalized_base_url()
@@ -85,9 +84,7 @@ def test_client_lists_and_sorts_available_models() -> None:
     ],
 )
 def test_client_rejects_invalid_model_lists(response: dict[str, Any]) -> None:
-    transport = FakeTransport(
-        responses={"http://localhost:11434/api/tags": response}
-    )
+    transport = FakeTransport(responses={"http://localhost:11434/api/tags": response})
     client = OllamaClient(transport=transport)
 
     with pytest.raises(OllamaProtocolError):

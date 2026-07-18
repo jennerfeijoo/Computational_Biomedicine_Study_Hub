@@ -66,9 +66,7 @@ class OllamaModel:
         return cls(
             name=str(payload.get("name") or payload.get("model") or "").strip(),
             parameter_size=str(details.get("parameter_size") or "").strip(),
-            quantization_level=str(
-                details.get("quantization_level") or ""
-            ).strip(),
+            quantization_level=str(details.get("quantization_level") or "").strip(),
             family=str(details.get("family") or "").strip(),
             size_bytes=size_bytes,
         )
@@ -101,9 +99,7 @@ class UrllibJsonTransport:
         except HTTPError as exc:
             detail = exc.read().decode("utf-8", errors="replace").strip()
             message = detail or str(exc.reason) or f"HTTP {exc.code}"
-            raise OllamaConnectionError(
-                f"Ollama returned HTTP {exc.code}: {message}"
-            ) from exc
+            raise OllamaConnectionError(f"Ollama returned HTTP {exc.code}: {message}") from exc
         except (URLError, TimeoutError, OSError) as exc:
             raise OllamaConnectionError(
                 "No se pudo conectar con Ollama. Comprueba que el servicio "
@@ -116,9 +112,7 @@ class UrllibJsonTransport:
             raise OllamaProtocolError("Ollama returned invalid JSON.") from exc
 
         if not isinstance(payload, dict):
-            raise OllamaProtocolError(
-                "Ollama returned a JSON value that was not an object."
-            )
+            raise OllamaProtocolError("Ollama returned a JSON value that was not an object.")
         return payload
 
 
@@ -152,9 +146,7 @@ class OllamaClient:
         )
         raw_models = payload.get("models")
         if not isinstance(raw_models, list):
-            raise OllamaProtocolError(
-                "Ollama did not return a valid model list."
-            )
+            raise OllamaProtocolError("Ollama did not return a valid model list.")
 
         models: list[OllamaModel] = []
         for raw_model in raw_models:

@@ -38,9 +38,7 @@ def test_settings_page_prefers_and_persists_qwen_automatically(
     assert page.selected_model == "qwen3.6:27b"
     assert page.status_text == "Conectado automáticamente con qwen3.6:27b."
     assert settings.value(OllamaSettingsPage.MODEL_KEY) == "qwen3.6:27b"
-    assert settings.value(OllamaSettingsPage.BASE_URL_KEY) == (
-        "http://localhost:11434/api"
-    )
+    assert settings.value(OllamaSettingsPage.BASE_URL_KEY) == ("http://localhost:11434/api")
 
 
 def test_settings_page_falls_back_when_preferred_model_is_missing(

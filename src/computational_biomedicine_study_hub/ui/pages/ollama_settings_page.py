@@ -188,11 +188,7 @@ class OllamaSettingsPage(QWidget):
     def apply_probe_success(self, version: str, models_payload: object) -> None:
         """Display a successful connection result and select the preferred model."""
         models = (
-            tuple(
-                model
-                for model in models_payload
-                if isinstance(model, OllamaModel)
-            )
+            tuple(model for model in models_payload if isinstance(model, OllamaModel))
             if isinstance(models_payload, tuple)
             else ()
         )
@@ -202,9 +198,7 @@ class OllamaSettingsPage(QWidget):
         self._models.addItems([model.name for model in models])
 
         if not models:
-            self._status.setText(
-                "Conexión correcta, pero Ollama no informó modelos instalados."
-            )
+            self._status.setText("Conexión correcta, pero Ollama no informó modelos instalados.")
             self._save_button.setEnabled(False)
             self._set_status_state("success")
             return
@@ -212,9 +206,7 @@ class OllamaSettingsPage(QWidget):
         preferred_index = self._models.findText(self.PREFERRED_MODEL)
         if preferred_index >= 0:
             self._models.setCurrentIndex(preferred_index)
-            self._status.setText(
-                f"Conectado automáticamente con {self.PREFERRED_MODEL}."
-            )
+            self._status.setText(f"Conectado automáticamente con {self.PREFERRED_MODEL}.")
         else:
             stored_model = str(self._settings.value(self.MODEL_KEY, "")).strip()
             stored_index = self._models.findText(stored_model) if stored_model else -1
@@ -244,9 +236,7 @@ class OllamaSettingsPage(QWidget):
     def save_preferences(self) -> None:
         """Persist the normalized URL and selected model."""
         self._persist_current_preferences()
-        self._status.setText(
-            f"Configuración guardada para el modelo {self.selected_model}."
-        )
+        self._status.setText(f"Configuración guardada para el modelo {self.selected_model}.")
         self._set_status_state("success")
 
     @Slot()

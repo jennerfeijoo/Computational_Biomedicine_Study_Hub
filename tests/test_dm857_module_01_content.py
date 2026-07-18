@@ -22,9 +22,7 @@ def test_module_one_covers_varied_retrieval_and_assessment_modes() -> None:
     practice_types = {
         exercise.activity_type for exercise in MODULE_01_FOUNDATIONS.practice_exercises
     }
-    assessment_types = {
-        item.activity_type for item in MODULE_01_FOUNDATIONS.assessment_items
-    }
+    assessment_types = {item.activity_type for item in MODULE_01_FOUNDATIONS.assessment_items}
 
     assert {
         ActivityType.CODE_TRACING,

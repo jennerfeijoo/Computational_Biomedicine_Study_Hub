@@ -73,9 +73,7 @@ class AssessmentItem:
         if not self.prompt.strip():
             raise ValueError(f"Assessment item {self.item_id!r} has an empty prompt.")
         if not self.correct_answers:
-            raise ValueError(
-                f"Assessment item {self.item_id!r} must define a correct answer."
-            )
+            raise ValueError(f"Assessment item {self.item_id!r} must define a correct answer.")
 
         option_based = {
             ActivityType.MULTIPLE_CHOICE,
@@ -85,17 +83,17 @@ class AssessmentItem:
             ActivityType.ORDERING,
         }
         if self.activity_type in option_based and not self.options:
-            raise ValueError(
-                f"Assessment item {self.item_id!r} requires answer options."
-            )
+            raise ValueError(f"Assessment item {self.item_id!r} requires answer options.")
 
-        if self.activity_type in {
-            ActivityType.MULTIPLE_CHOICE,
-            ActivityType.TRUE_FALSE,
-        } and len(self.correct_answers) != 1:
-            raise ValueError(
-                f"Assessment item {self.item_id!r} requires exactly one answer."
-            )
+        if (
+            self.activity_type
+            in {
+                ActivityType.MULTIPLE_CHOICE,
+                ActivityType.TRUE_FALSE,
+            }
+            and len(self.correct_answers) != 1
+        ):
+            raise ValueError(f"Assessment item {self.item_id!r} requires exactly one answer.")
 
         invalid_answers = set(self.correct_answers) - set(self.options)
         if self.options and invalid_answers:
@@ -167,9 +165,7 @@ class LearningModule:
         }
         for collection_name, values in required_collections.items():
             if not values:
-                raise ValueError(
-                    f"Learning module {self.module_id!r} requires {collection_name}."
-                )
+                raise ValueError(f"Learning module {self.module_id!r} requires {collection_name}.")
 
         self._validate_unique_ids(
             "objective",
@@ -213,10 +209,7 @@ class LearningModule:
                 TutorKnowledgeDocument(
                     document_id=f"{self.module_id}.concept.{concept.concept_id}",
                     title=concept.title,
-                    text=(
-                        f"{concept.body}\n\nKey points:\n- "
-                        + "\n- ".join(concept.key_points)
-                    ),
+                    text=(f"{concept.body}\n\nKey points:\n- " + "\n- ".join(concept.key_points)),
                     tags=tags + ("concept", concept.concept_id),
                 )
             )
