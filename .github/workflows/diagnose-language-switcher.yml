@@ -1,0 +1,44 @@
+name: Diagnose Language Switcher
+
+on:
+  push:
+    branches:
+      - feat/instant-language-buttons
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    env:
+      QT_QPA_PLATFORM: offscreen
+
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/instant-language-buttons
+
+      - name: Install Qt runtime libraries
+        run: sudo apt-get update && sudo apt-get install --yes libegl1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install project
+        run: python -m pip install -e ".[dev]"
+
+      - name: Capture full test diagnostics
+        run: pytest -vv > ci_language_switcher_diagnostics.txt 2>&1 || true
+
+      - name: Remove workflow and commit diagnostics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/diagnose-language-switcher.yml
+          git add ci_language_switcher_diagnostics.txt
+          git commit -m "capture language switcher diagnostics"
+          git push origin HEAD:feat/instant-language-buttons
