@@ -9,7 +9,6 @@ from computational_biomedicine_study_hub.content import (
 from computational_biomedicine_study_hub.content.dm857 import (
     BUNDLES,
     LOCALIZED_BUNDLES,
-    LOCALIZED_MODULE_01_FOUNDATIONS,
     LOCALIZED_OBJECTIVE_QUESTION_BANK,
 )
 from computational_biomedicine_study_hub.i18n import AppLocale
@@ -42,7 +41,7 @@ def test_localized_bundle_materializes_module_and_bank_in_the_same_locale() -> N
 def test_bundle_rejects_an_objective_bank_from_another_module() -> None:
     with pytest.raises(ValueError, match="out-of-scope"):
         LocalizedModuleBundle(
-            localized_module=LOCALIZED_MODULE_01_FOUNDATIONS,
+            localized_module=LOCALIZED_BUNDLES[1].localized_module,
             localized_objective_question_bank=(LOCALIZED_OBJECTIVE_QUESTION_BANK[0],),
             content_version="1.0.0",
         )
