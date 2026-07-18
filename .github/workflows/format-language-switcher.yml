@@ -1,0 +1,41 @@
+name: Format Language Switcher
+
+on:
+  push:
+    branches:
+      - feat/instant-language-buttons
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/instant-language-buttons
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Ruff
+        run: python -m pip install "ruff>=0.5,<1"
+
+      - name: Apply lint fixes and formatting
+        run: |
+          ruff check --fix .
+          ruff format .
+
+      - name: Remove temporary workflow and commit formatting
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/format-language-switcher.yml
+          git add .
+          git commit -m "format immediate language switching"
+          git push origin HEAD:feat/instant-language-buttons
