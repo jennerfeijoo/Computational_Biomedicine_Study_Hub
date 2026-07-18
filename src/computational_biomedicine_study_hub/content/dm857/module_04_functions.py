@@ -458,7 +458,7 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                     "Nøgleordsargumentet gør en anden præcision eksplicit.",
                 ),
             ),
-            "def format_measurement(value: float, digits: int = 2) -> str:\n    return f\"{value:.{digits}f}\"\n\nprint(format_measurement(12.3456))\nprint(format_measurement(12.3456, digits=3))",
+            'def format_measurement(value: float, digits: int = 2) -> str:\n    return f"{value:.{digits}f}"\n\nprint(format_measurement(12.3456))\nprint(format_measurement(12.3456, digits=3))',
             "12.35\n12.346",
             (
                 "El valor predeterminado reduce ruido en llamadas habituales y el argumento nombrado evita ambigüedad.",
@@ -490,7 +490,7 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                     "Hver vej returnerer en eksplicit bool.",
                 ),
             ),
-            "def has_identifier(text: str) -> bool:\n    if not text.strip():\n        return False\n    return True\n\nprint(has_identifier(\"  \"))\nprint(has_identifier(\"sample_04\"))",
+            'def has_identifier(text: str) -> bool:\n    if not text.strip():\n        return False\n    return True\n\nprint(has_identifier("  "))\nprint(has_identifier("sample_04"))',
             "False\nTrue",
             (
                 "El retorno temprano mantiene plana la estructura y evita una rama else innecesaria.",
@@ -554,7 +554,7 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                     "Assertions sammenligner returværdier.",
                 ),
             ),
-            "def safe_ratio(numerator: float, denominator: float) -> float | None:\n    if denominator == 0:\n        return None\n    return numerator / denominator\n\nassert safe_ratio(6, 3) == 2\nassert safe_ratio(6, 0) is None\nprint(\"tests passed\")",
+            'def safe_ratio(numerator: float, denominator: float) -> float | None:\n    if denominator == 0:\n        return None\n    return numerator / denominator\n\nassert safe_ratio(6, 3) == 2\nassert safe_ratio(6, 0) is None\nprint("tests passed")',
             "tests passed",
             (
                 "Cada ruta de retorno queda cubierta por una prueba específica.",
@@ -694,7 +694,13 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "Complete: a variable defined inside a function usually has ____ scope.",
                 "Udfyld: en variabel defineret inde i en funktion har normalt ____ scope.",
             ),
-            (("Piensa en local frente a global.", "Think local versus global.", "Tænk lokalt versus globalt."),),
+            (
+                (
+                    "Piensa en local frente a global.",
+                    "Think local versus global.",
+                    "Tænk lokalt versus globalt.",
+                ),
+            ),
             ("local", "local", "lokalt"),
             (
                 "El nombre sólo está disponible dentro del ámbito de la llamada.",
@@ -737,9 +743,9 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
             "m04.p07",
             ActivityType.CODE_COMPLETION,
             (
-                "Añade un valor predeterminado separator=\",\" a una función join_pair.",
-                "Add a default value separator=\",\" to a join_pair function.",
-                "Tilføj standardværdien separator=\",\" til funktionen join_pair.",
+                'Añade un valor predeterminado separator="," a una función join_pair.',
+                'Add a default value separator="," to a join_pair function.',
+                'Tilføj standardværdien separator="," til funktionen join_pair.',
             ),
             (
                 (
@@ -754,9 +760,9 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 ),
             ),
             (
-                "def join_pair(left: str, right: str, separator: str = \",\") -> str:\n    return left + separator + right",
-                "def join_pair(left: str, right: str, separator: str = \",\") -> str:\n    return left + separator + right",
-                "def join_pair(left: str, right: str, separator: str = \",\") -> str:\n    return left + separator + right",
+                'def join_pair(left: str, right: str, separator: str = ",") -> str:\n    return left + separator + right',
+                'def join_pair(left: str, right: str, separator: str = ",") -> str:\n    return left + separator + right',
+                'def join_pair(left: str, right: str, separator: str = ",") -> str:\n    return left + separator + right',
             ),
             (
                 "El valor predeterminado se usa cuando la llamada omite separator.",
@@ -943,7 +949,13 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "Reassigning local name value does not reassign x in the caller's scope.",
                 "Gentildeling af det lokale navn value gentildeler ikke x i det kaldende scope.",
             ),
-            rubric=(("Traza ámbitos por separado.", "Traces scopes separately.", "Gennemgår scopes separat."),),
+            rubric=(
+                (
+                    "Traza ámbitos por separado.",
+                    "Traces scopes separately.",
+                    "Gennemgår scopes separat.",
+                ),
+            ),
         ),
         authored_item(
             "dm857.m04.assessment.002",
@@ -960,10 +972,27 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "En ren funktion afhænger af argumenter og ændrer ikke ekstern tilstand.",
             ),
             options=(
-                ("same_input", ("Mismo input, mismo resultado", "Same input, same result", "Samme input, samme resultat")),
-                ("no_external_mutation", ("No modifica estado externo", "Does not mutate external state", "Ændrer ikke ekstern tilstand")),
+                (
+                    "same_input",
+                    (
+                        "Mismo input, mismo resultado",
+                        "Same input, same result",
+                        "Samme input, samme resultat",
+                    ),
+                ),
+                (
+                    "no_external_mutation",
+                    (
+                        "No modifica estado externo",
+                        "Does not mutate external state",
+                        "Ændrer ikke ekstern tilstand",
+                    ),
+                ),
                 ("must_print", ("Siempre imprime", "Always prints", "Udskriver altid")),
-                ("must_global", ("Debe leer una global", "Must read a global", "Skal læse en global variabel")),
+                (
+                    "must_global",
+                    ("Debe leer una global", "Must read a global", "Skal læse en global variabel"),
+                ),
             ),
             correct_option_ids=("same_input", "no_external_mutation"),
         ),
@@ -975,7 +1004,13 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "Fix a call that supplies parameter digits twice.",
                 "Ret et kald, der leverer parameteren digits to gange.",
             ),
-            (("Usar sólo format_value(3.2, digits=3).", "Use only format_value(3.2, digits=3).", "Brug kun format_value(3.2, digits=3)."),),
+            (
+                (
+                    "Usar sólo format_value(3.2, digits=3).",
+                    "Use only format_value(3.2, digits=3).",
+                    "Brug kun format_value(3.2, digits=3).",
+                ),
+            ),
             (
                 "Un parámetro no puede recibir simultáneamente un argumento posicional y otro nombrado.",
                 "A parameter cannot receive both a positional and a keyword argument.",
@@ -1012,12 +1047,26 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "Parameter-definition; argument-kald; forudsætning-før; efterbetingelse-efter.",
             ),
             options=(
-                ("parameter_definition", ("Parámetro → definición", "Parameter → definition", "Parameter → definition")),
+                (
+                    "parameter_definition",
+                    ("Parámetro → definición", "Parameter → definition", "Parameter → definition"),
+                ),
                 ("argument_call", ("Argumento → llamada", "Argument → call", "Argument → kald")),
-                ("pre_before", ("Precondición → antes", "Precondition → before", "Forudsætning → før")),
-                ("post_after", ("Poscondición → después", "Postcondition → after", "Efterbetingelse → efter")),
+                (
+                    "pre_before",
+                    ("Precondición → antes", "Precondition → before", "Forudsætning → før"),
+                ),
+                (
+                    "post_after",
+                    ("Poscondición → después", "Postcondition → after", "Efterbetingelse → efter"),
+                ),
             ),
-            correct_option_ids=("parameter_definition", "argument_call", "pre_before", "post_after"),
+            correct_option_ids=(
+                "parameter_definition",
+                "argument_call",
+                "pre_before",
+                "post_after",
+            ),
         ),
         authored_item(
             "dm857.m04.assessment.006",
@@ -1049,13 +1098,25 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "Write an is_even(value) function returning bool.",
                 "Skriv en is_even(value)-funktion, der returnerer bool.",
             ),
-            (("def is_even(value):\n    return value % 2 == 0", "def is_even(value):\n    return value % 2 == 0", "def is_even(value):\n    return value % 2 == 0"),),
+            (
+                (
+                    "def is_even(value):\n    return value % 2 == 0",
+                    "def is_even(value):\n    return value % 2 == 0",
+                    "def is_even(value):\n    return value % 2 == 0",
+                ),
+            ),
             (
                 "La comparación ya produce un bool y puede retornarse directamente.",
                 "The comparison already produces a bool and can be returned directly.",
                 "Sammenligningen producerer allerede en bool og kan returneres direkte.",
             ),
-            rubric=(("Retorna bool sin imprimir.", "Returns bool without printing.", "Returnerer bool uden udskrivning."),),
+            rubric=(
+                (
+                    "Retorna bool sin imprimir.",
+                    "Returns bool without printing.",
+                    "Returnerer bool uden udskrivning.",
+                ),
+            ),
         ),
         authored_item(
             "dm857.m04.assessment.008",
@@ -1065,7 +1126,13 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "Distinguish a function's contract from its implementation.",
                 "Skeln mellem en funktions kontrakt og implementering.",
             ),
-            (("El contrato describe comportamiento observable; la implementación describe cómo se obtiene.", "The contract describes observable behavior; implementation describes how it is obtained.", "Kontrakten beskriver observerbar adfærd; implementeringen beskriver, hvordan den opnås."),),
+            (
+                (
+                    "El contrato describe comportamiento observable; la implementación describe cómo se obtiene.",
+                    "The contract describes observable behavior; implementation describes how it is obtained.",
+                    "Kontrakten beskriver observerbar adfærd; implementeringen beskriver, hvordan den opnås.",
+                ),
+            ),
             (
                 "Esta separación permite cambiar el algoritmo sin alterar a los llamadores.",
                 "This separation allows the algorithm to change without altering callers.",
@@ -1080,7 +1147,13 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "Interpret why three tests pass and an empty input fails.",
                 "Fortolk, hvorfor tre test består, og et tomt input fejler.",
             ),
-            (("Falta cubrir o implementar la precondición para entrada vacía.", "The precondition for empty input is missing from tests or implementation.", "Forudsætningen for tomt input mangler i test eller implementering."),),
+            (
+                (
+                    "Falta cubrir o implementar la precondición para entrada vacía.",
+                    "The precondition for empty input is missing from tests or implementation.",
+                    "Forudsætningen for tomt input mangler i test eller implementering.",
+                ),
+            ),
             (
                 "Un conjunto de pruebas puede ser verde y seguir omitiendo una frontera importante.",
                 "A test set can be green while still omitting an important boundary.",
@@ -1095,7 +1168,13 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "Explain when a side effect is justified.",
                 "Forklar, hvornår en sideeffekt er berettiget.",
             ),
-            (("Cuando la responsabilidad exige interactuar con estado externo y el efecto está aislado y documentado.", "When the responsibility requires interaction with external state and the effect is isolated and documented.", "Når ansvaret kræver interaktion med ekstern tilstand, og effekten er isoleret og dokumenteret."),),
+            (
+                (
+                    "Cuando la responsabilidad exige interactuar con estado externo y el efecto está aislado y documentado.",
+                    "When the responsibility requires interaction with external state and the effect is isolated and documented.",
+                    "Når ansvaret kræver interaktion med ekstern tilstand, og effekten er isoleret og dokumenteret.",
+                ),
+            ),
             (
                 "Entrada/salida y persistencia requieren efectos, pero deben quedar en fronteras explícitas.",
                 "Input/output and persistence require effects, but they should remain at explicit boundaries.",
@@ -1110,13 +1189,25 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "Design functions to validate, transform, and summarize a didactic measurement.",
                 "Design funktioner til at validere, transformere og opsummere en didaktisk måling.",
             ),
-            (("validate_measurement, transform_measurement, summarize_measurement y una función coordinadora.", "validate_measurement, transform_measurement, summarize_measurement, and one coordinating function.", "validate_measurement, transform_measurement, summarize_measurement og en koordinerende funktion."),),
+            (
+                (
+                    "validate_measurement, transform_measurement, summarize_measurement y una función coordinadora.",
+                    "validate_measurement, transform_measurement, summarize_measurement, and one coordinating function.",
+                    "validate_measurement, transform_measurement, summarize_measurement og en koordinerende funktion.",
+                ),
+            ),
             (
                 "Separar responsabilidades permite probar cada contrato.",
                 "Separating responsibilities allows each contract to be tested.",
                 "Adskilte ansvarsområder gør hver kontrakt testbar.",
             ),
-            rubric=(("Define entradas y retornos.", "Defines inputs and returns.", "Definerer input og returværdier."),),
+            rubric=(
+                (
+                    "Define entradas y retornos.",
+                    "Defines inputs and returns.",
+                    "Definerer input og returværdier.",
+                ),
+            ),
         ),
         authored_item(
             "dm857.m04.assessment.012",
@@ -1126,7 +1217,13 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "Fix a function that mutates a global list during a calculation.",
                 "Ret en funktion, der ændrer en global liste under en beregning.",
             ),
-            (("Recibir los datos como parámetro y retornar un resultado nuevo sin modificar la global.", "Receive data as a parameter and return a new result without mutating the global.", "Modtag data som parameter og returnér et nyt resultat uden at ændre den globale liste."),),
+            (
+                (
+                    "Recibir los datos como parámetro y retornar un resultado nuevo sin modificar la global.",
+                    "Receive data as a parameter and return a new result without mutating the global.",
+                    "Modtag data som parameter og returnér et nyt resultat uden at ændre den globale liste.",
+                ),
+            ),
             (
                 "La dependencia y el efecto se vuelven explícitos o se eliminan.",
                 "The dependency and effect become explicit or are removed.",
@@ -1141,7 +1238,13 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "Trace a function with two return statements and identify unreachable lines.",
                 "Gennemgå en funktion med to return-sætninger og identificér utilgængelige linjer.",
             ),
-            (("Las líneas posteriores al primer return ejecutado no se ejecutan en esa llamada.", "Lines after the first executed return do not run in that call.", "Linjer efter den første udførte return kører ikke i det kald."),),
+            (
+                (
+                    "Las líneas posteriores al primer return ejecutado no se ejecutan en esa llamada.",
+                    "Lines after the first executed return do not run in that call.",
+                    "Linjer efter den første udførte return kører ikke i det kald.",
+                ),
+            ),
             (
                 "return finaliza inmediatamente la llamada actual.",
                 "return immediately ends the current call.",
@@ -1156,7 +1259,13 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
                 "Justify why a function with twenty responsibilities is hard to test.",
                 "Begrund, hvorfor en funktion med tyve ansvarsområder er vanskelig at teste.",
             ),
-            (("Combina muchas entradas, rutas, efectos y causas de fallo, por lo que los casos crecen y los defectos son difíciles de aislar.", "It combines many inputs, paths, effects, and failure causes, so cases grow and defects are hard to isolate.", "Den kombinerer mange input, veje, effekter og fejlkilder, så antallet af tilfælde vokser, og fejl er svære at isolere."),),
+            (
+                (
+                    "Combina muchas entradas, rutas, efectos y causas de fallo, por lo que los casos crecen y los defectos son difíciles de aislar.",
+                    "It combines many inputs, paths, effects, and failure causes, so cases grow and defects are hard to isolate.",
+                    "Den kombinerer mange input, veje, effekter og fejlkilder, så antallet af tilfælde vokser, og fejl er svære at isolere.",
+                ),
+            ),
             (
                 "La descomposición reduce el espacio de estados de cada prueba.",
                 "Decomposition reduces the state space of each test.",
@@ -1192,71 +1301,291 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
             "med verificerbare kontrakter, og komposition forbinder resultaterne. Biomedicinske eksempler er programmeringsøvelser og ikke protokoller.",
         ),
         (
-            ("Una llamada crea un ámbito local nuevo.", "A call creates a new local scope.", "Et kald opretter et nyt lokalt scope."),
-            ("Los parámetros reciben argumentos.", "Parameters receive arguments.", "Parametre modtager argumenter."),
-            ("Los argumentos nombrados se vinculan por nombre.", "Keyword arguments bind by name.", "Nøgleordsargumenter bindes efter navn."),
-            ("return finaliza la llamada actual.", "return ends the current call.", "return afslutter det aktuelle kald."),
+            (
+                "Una llamada crea un ámbito local nuevo.",
+                "A call creates a new local scope.",
+                "Et kald opretter et nyt lokalt scope.",
+            ),
+            (
+                "Los parámetros reciben argumentos.",
+                "Parameters receive arguments.",
+                "Parametre modtager argumenter.",
+            ),
+            (
+                "Los argumentos nombrados se vinculan por nombre.",
+                "Keyword arguments bind by name.",
+                "Nøgleordsargumenter bindes efter navn.",
+            ),
+            (
+                "return finaliza la llamada actual.",
+                "return ends the current call.",
+                "return afslutter det aktuelle kald.",
+            ),
             ("print retorna None.", "print returns None.", "print returnerer None."),
-            ("Sin return ejecutado, una función retorna None.", "Without an executed return, a function returns None.", "Uden udført return returnerer en funktion None."),
-            ("Una función pura no modifica estado externo.", "A pure function does not modify external state.", "En ren funktion ændrer ikke ekstern tilstand."),
-            ("Los efectos secundarios deben aislarse.", "Side effects should be isolated.", "Sideeffekter bør isoleres."),
-            ("Una precondición restringe entradas.", "A precondition restricts inputs.", "En forudsætning begrænser input."),
-            ("Una poscondición describe la garantía.", "A postcondition describes the guarantee.", "En efterbetingelse beskriver garantien."),
-            ("La composición conecta retornos con argumentos.", "Composition connects returns to arguments.", "Komposition forbinder returværdier med argumenter."),
-            ("Las pruebas deben cubrir cada ruta de retorno.", "Tests should cover every return path.", "Test bør dække hver returvej."),
-            ("Las dependencias explícitas mejoran testabilidad.", "Explicit dependencies improve testability.", "Eksplicitte afhængigheder forbedrer testbarhed."),
-            ("Una responsabilidad pequeña reduce acoplamiento.", "A small responsibility reduces coupling.", "Et lille ansvar reducerer kobling."),
+            (
+                "Sin return ejecutado, una función retorna None.",
+                "Without an executed return, a function returns None.",
+                "Uden udført return returnerer en funktion None.",
+            ),
+            (
+                "Una función pura no modifica estado externo.",
+                "A pure function does not modify external state.",
+                "En ren funktion ændrer ikke ekstern tilstand.",
+            ),
+            (
+                "Los efectos secundarios deben aislarse.",
+                "Side effects should be isolated.",
+                "Sideeffekter bør isoleres.",
+            ),
+            (
+                "Una precondición restringe entradas.",
+                "A precondition restricts inputs.",
+                "En forudsætning begrænser input.",
+            ),
+            (
+                "Una poscondición describe la garantía.",
+                "A postcondition describes the guarantee.",
+                "En efterbetingelse beskriver garantien.",
+            ),
+            (
+                "La composición conecta retornos con argumentos.",
+                "Composition connects returns to arguments.",
+                "Komposition forbinder returværdier med argumenter.",
+            ),
+            (
+                "Las pruebas deben cubrir cada ruta de retorno.",
+                "Tests should cover every return path.",
+                "Test bør dække hver returvej.",
+            ),
+            (
+                "Las dependencias explícitas mejoran testabilidad.",
+                "Explicit dependencies improve testability.",
+                "Eksplicitte afhængigheder forbedrer testbarhed.",
+            ),
+            (
+                "Una responsabilidad pequeña reduce acoplamiento.",
+                "A small responsibility reduces coupling.",
+                "Et lille ansvar reducerer kobling.",
+            ),
         ),
         (
-            ("Confundir parámetro con argumento.", "Confusing a parameter with an argument.", "At forveksle parameter og argument."),
-            ("Creer que print devuelve el valor mostrado.", "Believing print returns the displayed value.", "At tro, at print returnerer den viste værdi."),
-            ("Olvidar una ruta sin return.", "Forgetting a path without return.", "At glemme en vej uden return."),
-            ("Suponer que una variable local existe fuera de la función.", "Assuming a local variable exists outside the function.", "At antage, at en lokal variabel findes uden for funktionen."),
-            ("Usar globales como dependencias ocultas.", "Using globals as hidden dependencies.", "At bruge globale værdier som skjulte afhængigheder."),
-            ("Mezclar cálculo y presentación.", "Mixing calculation and presentation.", "At blande beregning og præsentation."),
-            ("Usar valores predeterminados mutables sin comprenderlos.", "Using mutable defaults without understanding them.", "At bruge muterbare standardværdier uden forståelse."),
-            ("Crear funciones con demasiadas responsabilidades.", "Creating functions with too many responsibilities.", "At skabe funktioner med for mange ansvarsområder."),
-            ("Documentar implementación en lugar de contrato.", "Documenting implementation instead of contract.", "At dokumentere implementering i stedet for kontrakt."),
-            ("Probar sólo el caso normal.", "Testing only the normal case.", "Kun at teste det normale tilfælde."),
-            ("Creer que una función pura es automáticamente correcta.", "Believing a pure function is automatically correct.", "At tro, at en ren funktion automatisk er korrekt."),
-            ("Añadir parámetros que la función no necesita.", "Adding parameters the function does not need.", "At tilføje parametre, som funktionen ikke behøver."),
+            (
+                "Confundir parámetro con argumento.",
+                "Confusing a parameter with an argument.",
+                "At forveksle parameter og argument.",
+            ),
+            (
+                "Creer que print devuelve el valor mostrado.",
+                "Believing print returns the displayed value.",
+                "At tro, at print returnerer den viste værdi.",
+            ),
+            (
+                "Olvidar una ruta sin return.",
+                "Forgetting a path without return.",
+                "At glemme en vej uden return.",
+            ),
+            (
+                "Suponer que una variable local existe fuera de la función.",
+                "Assuming a local variable exists outside the function.",
+                "At antage, at en lokal variabel findes uden for funktionen.",
+            ),
+            (
+                "Usar globales como dependencias ocultas.",
+                "Using globals as hidden dependencies.",
+                "At bruge globale værdier som skjulte afhængigheder.",
+            ),
+            (
+                "Mezclar cálculo y presentación.",
+                "Mixing calculation and presentation.",
+                "At blande beregning og præsentation.",
+            ),
+            (
+                "Usar valores predeterminados mutables sin comprenderlos.",
+                "Using mutable defaults without understanding them.",
+                "At bruge muterbare standardværdier uden forståelse.",
+            ),
+            (
+                "Crear funciones con demasiadas responsabilidades.",
+                "Creating functions with too many responsibilities.",
+                "At skabe funktioner med for mange ansvarsområder.",
+            ),
+            (
+                "Documentar implementación en lugar de contrato.",
+                "Documenting implementation instead of contract.",
+                "At dokumentere implementering i stedet for kontrakt.",
+            ),
+            (
+                "Probar sólo el caso normal.",
+                "Testing only the normal case.",
+                "Kun at teste det normale tilfælde.",
+            ),
+            (
+                "Creer que una función pura es automáticamente correcta.",
+                "Believing a pure function is automatically correct.",
+                "At tro, at en ren funktion automatisk er korrekt.",
+            ),
+            (
+                "Añadir parámetros que la función no necesita.",
+                "Adding parameters the function does not need.",
+                "At tilføje parametre, som funktionen ikke behøver.",
+            ),
         ),
         (
-            ("¿Qué recibe exactamente esta función?", "What exactly does this function receive?", "Hvad modtager denne funktion præcist?"),
-            ("¿Qué valor retorna cada ruta?", "What value does each path return?", "Hvilken værdi returnerer hver vej?"),
-            ("¿Qué dependencia no aparece en los parámetros?", "Which dependency is absent from the parameters?", "Hvilken afhængighed fremgår ikke af parametrene?"),
-            ("¿Este print debería ser un return?", "Should this print be a return?", "Burde dette print være en return?"),
-            ("¿Qué nombre local existe durante la llamada?", "Which local name exists during the call?", "Hvilket lokalt navn findes under kaldet?"),
-            ("¿La función modifica estado externo?", "Does the function modify external state?", "Ændrer funktionen ekstern tilstand?"),
+            (
+                "¿Qué recibe exactamente esta función?",
+                "What exactly does this function receive?",
+                "Hvad modtager denne funktion præcist?",
+            ),
+            (
+                "¿Qué valor retorna cada ruta?",
+                "What value does each path return?",
+                "Hvilken værdi returnerer hver vej?",
+            ),
+            (
+                "¿Qué dependencia no aparece en los parámetros?",
+                "Which dependency is absent from the parameters?",
+                "Hvilken afhængighed fremgår ikke af parametrene?",
+            ),
+            (
+                "¿Este print debería ser un return?",
+                "Should this print be a return?",
+                "Burde dette print være en return?",
+            ),
+            (
+                "¿Qué nombre local existe durante la llamada?",
+                "Which local name exists during the call?",
+                "Hvilket lokalt navn findes under kaldet?",
+            ),
+            (
+                "¿La función modifica estado externo?",
+                "Does the function modify external state?",
+                "Ændrer funktionen ekstern tilstand?",
+            ),
             ("¿Cuál es la precondición?", "What is the precondition?", "Hvad er forudsætningen?"),
-            ("¿Cuál es la poscondición observable?", "What is the observable postcondition?", "Hvad er den observerbare efterbetingelse?"),
-            ("¿Puede separarse una responsabilidad?", "Can one responsibility be separated?", "Kan ét ansvarsområde adskilles?"),
-            ("¿Qué prueba cubre esta rama?", "Which test covers this branch?", "Hvilken test dækker denne gren?"),
-            ("¿Qué ocurre si se omite el argumento opcional?", "What happens when the optional argument is omitted?", "Hvad sker der, når det valgfrie argument udelades?"),
-            ("¿Cómo reutilizará el llamador el retorno?", "How will the caller reuse the return value?", "Hvordan genbruger den kaldende kode returværdien?"),
+            (
+                "¿Cuál es la poscondición observable?",
+                "What is the observable postcondition?",
+                "Hvad er den observerbare efterbetingelse?",
+            ),
+            (
+                "¿Puede separarse una responsabilidad?",
+                "Can one responsibility be separated?",
+                "Kan ét ansvarsområde adskilles?",
+            ),
+            (
+                "¿Qué prueba cubre esta rama?",
+                "Which test covers this branch?",
+                "Hvilken test dækker denne gren?",
+            ),
+            (
+                "¿Qué ocurre si se omite el argumento opcional?",
+                "What happens when the optional argument is omitted?",
+                "Hvad sker der, når det valgfrie argument udelades?",
+            ),
+            (
+                "¿Cómo reutilizará el llamador el retorno?",
+                "How will the caller reuse the return value?",
+                "Hvordan genbruger den kaldende kode returværdien?",
+            ),
         ),
         (
-            ("Define con precisión parámetros y retorno.", "Precisely defines parameters and return.", "Definerer parametre og retur præcist."),
-            ("Distingue return de print.", "Distinguishes return from print.", "Skelner mellem return og print."),
-            ("Traza ámbitos locales correctamente.", "Traces local scopes correctly.", "Gennemgår lokale scopes korrekt."),
-            ("Reconoce efectos secundarios.", "Recognizes side effects.", "Genkender sideeffekter."),
-            ("Formula contratos verificables.", "Formulates verifiable contracts.", "Formulerer verificerbare kontrakter."),
-            ("Descompone responsabilidades coherentemente.", "Decomposes responsibilities coherently.", "Dekomponerer ansvarsområder sammenhængende."),
-            ("Compone funciones sin ocultar flujo.", "Composes functions without hiding flow.", "Sammensætter funktioner uden at skjule flow."),
-            ("Cubre rutas de retorno con pruebas.", "Covers return paths with tests.", "Dækker returveje med test."),
-            ("Evita dependencias globales innecesarias.", "Avoids unnecessary global dependencies.", "Undgår unødvendige globale afhængigheder."),
-            ("Explica errores con vocabulario técnico correcto.", "Explains errors with correct technical vocabulary.", "Forklarer fejl med korrekt teknisk ordforråd."),
+            (
+                "Define con precisión parámetros y retorno.",
+                "Precisely defines parameters and return.",
+                "Definerer parametre og retur præcist.",
+            ),
+            (
+                "Distingue return de print.",
+                "Distinguishes return from print.",
+                "Skelner mellem return og print.",
+            ),
+            (
+                "Traza ámbitos locales correctamente.",
+                "Traces local scopes correctly.",
+                "Gennemgår lokale scopes korrekt.",
+            ),
+            (
+                "Reconoce efectos secundarios.",
+                "Recognizes side effects.",
+                "Genkender sideeffekter.",
+            ),
+            (
+                "Formula contratos verificables.",
+                "Formulates verifiable contracts.",
+                "Formulerer verificerbare kontrakter.",
+            ),
+            (
+                "Descompone responsabilidades coherentemente.",
+                "Decomposes responsibilities coherently.",
+                "Dekomponerer ansvarsområder sammenhængende.",
+            ),
+            (
+                "Compone funciones sin ocultar flujo.",
+                "Composes functions without hiding flow.",
+                "Sammensætter funktioner uden at skjule flow.",
+            ),
+            (
+                "Cubre rutas de retorno con pruebas.",
+                "Covers return paths with tests.",
+                "Dækker returveje med test.",
+            ),
+            (
+                "Evita dependencias globales innecesarias.",
+                "Avoids unnecessary global dependencies.",
+                "Undgår unødvendige globale afhængigheder.",
+            ),
+            (
+                "Explica errores con vocabulario técnico correcto.",
+                "Explains errors with correct technical vocabulary.",
+                "Forklarer fejl med korrekt teknisk ordforråd.",
+            ),
         ),
         (
-            ("Dar primero una pista en ejercicios.", "Give a hint first in exercises.", "Giv først et hint i øvelser."),
-            ("No sustituir return por print.", "Do not substitute print for return.", "Erstat ikke return med print."),
-            ("Hacer visible el ámbito de cada nombre.", "Make each name's scope visible.", "Gør hvert navns scope synligt."),
-            ("Separar cálculo de entrada/salida.", "Separate calculation from input/output.", "Adskil beregning fra input/output."),
-            ("No introducir clases antes de tiempo.", "Do not introduce classes prematurely.", "Introducér ikke klasser for tidligt."),
-            ("No usar bibliotecas para ocultar el concepto.", "Do not use libraries to hide the concept.", "Brug ikke biblioteker til at skjule konceptet."),
-            ("No presentar ejemplos como recomendaciones clínicas.", "Do not present examples as clinical advice.", "Præsenter ikke eksempler som kliniske anbefalinger."),
-            ("Relacionar pruebas con contratos.", "Relate tests to contracts.", "Knyt test til kontrakter."),
-            ("Indicar cuando una ruta retorna None.", "Indicate when a path returns None.", "Angiv, når en vej returnerer None."),
+            (
+                "Dar primero una pista en ejercicios.",
+                "Give a hint first in exercises.",
+                "Giv først et hint i øvelser.",
+            ),
+            (
+                "No sustituir return por print.",
+                "Do not substitute print for return.",
+                "Erstat ikke return med print.",
+            ),
+            (
+                "Hacer visible el ámbito de cada nombre.",
+                "Make each name's scope visible.",
+                "Gør hvert navns scope synligt.",
+            ),
+            (
+                "Separar cálculo de entrada/salida.",
+                "Separate calculation from input/output.",
+                "Adskil beregning fra input/output.",
+            ),
+            (
+                "No introducir clases antes de tiempo.",
+                "Do not introduce classes prematurely.",
+                "Introducér ikke klasser for tidligt.",
+            ),
+            (
+                "No usar bibliotecas para ocultar el concepto.",
+                "Do not use libraries to hide the concept.",
+                "Brug ikke biblioteker til at skjule konceptet.",
+            ),
+            (
+                "No presentar ejemplos como recomendaciones clínicas.",
+                "Do not present examples as clinical advice.",
+                "Præsenter ikke eksempler som kliniske anbefalinger.",
+            ),
+            (
+                "Relacionar pruebas con contratos.",
+                "Relate tests to contracts.",
+                "Knyt test til kontrakter.",
+            ),
+            (
+                "Indicar cuando una ruta retorna None.",
+                "Indicate when a path returns None.",
+                "Angiv, når en vej returnerer None.",
+            ),
         ),
         (
             "Official DM857 course description, SDU, active version approved in 2025.",
@@ -1269,45 +1598,563 @@ LOCALIZED_MODULE_04_FUNCTIONS = LocalizedLearningModule(
 LOCALIZED_OBJECTIVE_QUESTION_BANK_04 = (
     objective_mcq(
         "dm857.m04.bank.001",
-        ("¿Qué describe un parámetro?", "What does a parameter describe?", "Hvad beskriver en parameter?"),
         (
-            ("definition_name", ("Un nombre en la definición", "A name in the definition", "Et navn i definitionen")),
+            "¿Qué describe un parámetro?",
+            "What does a parameter describe?",
+            "Hvad beskriver en parameter?",
+        ),
+        (
+            (
+                "definition_name",
+                (
+                    "Un nombre en la definición",
+                    "A name in the definition",
+                    "Et navn i definitionen",
+                ),
+            ),
             ("call_value", ("Un valor en la llamada", "A value in the call", "En værdi i kaldet")),
             ("printed_text", ("Texto impreso", "Printed text", "Udskrevet tekst")),
             ("global_only", ("Siempre una global", "Always a global", "Altid en global variabel")),
         ),
         "definition_name",
-        ("El parámetro es el nombre declarado en la cabecera.", "A parameter is the name declared in the header.", "En parameter er navnet i funktionshovedet."),
+        (
+            "El parámetro es el nombre declarado en la cabecera.",
+            "A parameter is the name declared in the header.",
+            "En parameter er navnet i funktionshovedet.",
+        ),
     ),
-    objective_tf("dm857.m04.bank.002", ("print y return son equivalentes.", "print and return are equivalent.", "print og return er ækvivalente."), correct=False, explanation=("print produce salida y retorna None; return entrega un valor.", "print produces output and returns None; return delivers a value.", "print producerer output og returnerer None; return leverer en værdi.")),
-    objective_mcq("dm857.m04.bank.003", ("¿Qué retorna una función sin return ejecutado?", "What does a function return when no return executes?", "Hvad returnerer en funktion, når ingen return udføres?"), (("none", ("None", "None", "None")), ("zero", ("0", "0", "0")), ("false", ("False", "False", "False")), ("error", ("Siempre error", "Always an error", "Altid en fejl"))), "none", ("Python retorna None implícitamente.", "Python implicitly returns None.", "Python returnerer implicit None.")),
-    objective_tf("dm857.m04.bank.004", ("Cada llamada crea variables locales nuevas.", "Each call creates new local variables.", "Hvert kald opretter nye lokale variable."), correct=True, explanation=("El ámbito local pertenece a la llamada.", "Local scope belongs to the call.", "Lokalt scope tilhører kaldet.")),
-    objective_mcq("dm857.m04.bank.005", ("¿Qué argumento mejora claridad cuando hay varios números similares?", "Which argument style improves clarity when several numbers look similar?", "Hvilken argumentstil forbedrer klarheden, når flere tal ligner hinanden?"), (("keyword", ("Nombrado", "Keyword", "Nøgleord")), ("positional", ("Sólo posicional", "Positional only", "Kun positionelt")), ("global", ("Global", "Global", "Global")), ("printed", ("Impreso", "Printed", "Udskrevet"))), "keyword", ("El nombre hace explícito el significado del valor.", "The name makes the value's meaning explicit.", "Navnet gør værdiens betydning eksplicit.")),
-    objective_tf("dm857.m04.bank.006", ("Una función pura modifica una lista global.", "A pure function mutates a global list.", "En ren funktion ændrer en global liste."), correct=False, explanation=("Modificar estado externo es un efecto secundario.", "Mutating external state is a side effect.", "Ændring af ekstern tilstand er en sideeffekt.")),
-    objective_mcq("dm857.m04.bank.007", ("¿Qué palabra finaliza una llamada y entrega un valor?", "Which keyword ends a call and delivers a value?", "Hvilket nøgleord afslutter et kald og leverer en værdi?"), (("return", ("return", "return", "return")), ("print", ("print", "print", "print")), ("def", ("def", "def", "def")), ("pass", ("pass", "pass", "pass"))), "return", ("return transfiere el valor al llamador.", "return transfers the value to the caller.", "return overfører værdien til den kaldende kode.")),
-    objective_tf("dm857.m04.bank.008", ("El código posterior a un return ejecutado se ejecuta normalmente.", "Code after an executed return runs normally.", "Kode efter en udført return kører normalt."), correct=False, explanation=("La llamada termina al ejecutar return.", "The call ends when return executes.", "Kaldet slutter, når return udføres.")),
-    objective_mcq("dm857.m04.bank.009", ("¿Qué describe una precondición?", "What does a precondition describe?", "Hvad beskriver en forudsætning?"), (("before", ("Lo que debe cumplirse antes", "What must hold before", "Hvad der skal gælde før")), ("after", ("Sólo el resultado final", "Only the final result", "Kun slutresultatet")), ("implementation", ("Cada línea interna", "Every internal line", "Hver intern linje")), ("format", ("El color del editor", "The editor color", "Editorens farve"))), "before", ("La precondición restringe entradas válidas.", "A precondition restricts valid inputs.", "En forudsætning begrænser gyldige input.")),
-    objective_tf("dm857.m04.bank.010", ("Una poscondición describe una garantía observable.", "A postcondition describes an observable guarantee.", "En efterbetingelse beskriver en observerbar garanti."), correct=True, explanation=("Se aplica cuando se cumplen las precondiciones.", "It applies when preconditions hold.", "Den gælder, når forudsætningerne er opfyldt.")),
-    objective_mcq("dm857.m04.bank.011", ("¿Qué facilita una función pequeña?", "What does a small function facilitate?", "Hvad gør en lille funktion lettere?"), (("testing", ("Pruebas y aislamiento", "Testing and isolation", "Test og isolering")), ("hidden_state", ("Más estado oculto", "More hidden state", "Mere skjult tilstand")), ("duplication", ("Más duplicación", "More duplication", "Mere duplikering")), ("ambiguity", ("Más ambigüedad", "More ambiguity", "Mere tvetydighed"))), "testing", ("Una responsabilidad reducida limita causas de fallo.", "A narrow responsibility limits failure causes.", "Et begrænset ansvar begrænser fejlkilder.")),
-    objective_tf("dm857.m04.bank.012", ("Los parámetros son globales por definición.", "Parameters are global by definition.", "Parametre er globale pr. definition."), correct=False, explanation=("Los parámetros son locales a cada llamada.", "Parameters are local to each call.", "Parametre er lokale for hvert kald.")),
-    objective_mcq("dm857.m04.bank.013", ("¿Qué es composición?", "What is composition?", "Hvad er komposition?"), (("chain", ("Usar el retorno como argumento de otra función", "Use one return as another function's argument", "Brug én returværdi som argument til en anden funktion")), ("copy", ("Copiar código", "Copy code", "Kopiér kode")), ("global", ("Crear una global", "Create a global", "Opret en global variabel")), ("print", ("Imprimir dos veces", "Print twice", "Udskriv to gange"))), "chain", ("La composición conecta interfaces mediante valores.", "Composition connects interfaces through values.", "Komposition forbinder grænseflader gennem værdier.")),
-    objective_tf("dm857.m04.bank.014", ("Un efecto secundario siempre es un error.", "A side effect is always an error.", "En sideeffekt er altid en fejl."), correct=False, explanation=("Puede ser necesario, pero debe aislarse y documentarse.", "It may be necessary, but should be isolated and documented.", "Den kan være nødvendig, men bør isoleres og dokumenteres.")),
-    objective_mcq("dm857.m04.bank.015", ("¿Qué prueba detecta una ruta sin return?", "Which test exposes a path without return?", "Hvilken test afslører en vej uden return?"), (("branch_input", ("Una entrada que active esa rama", "An input that activates that branch", "Et input, der aktiverer grenen")), ("same_only", ("Repetir el caso normal", "Repeat the normal case", "Gentag det normale tilfælde")), ("format", ("Cambiar formato", "Change formatting", "Skift formatering")), ("comment", ("Añadir comentario", "Add a comment", "Tilføj en kommentar"))), "branch_input", ("La prueba debe ejecutar la ruta defectuosa.", "The test must execute the defective path.", "Testen skal udføre den fejlbehæftede vej.")),
-    objective_tf("dm857.m04.bank.016", ("Una docstring debe repetir cada línea del cuerpo.", "A docstring should repeat every body line.", "En docstring bør gentage hver linje i kroppen."), correct=False, explanation=("Debe describir contrato y uso, no narrar cada instrucción.", "It should describe contract and use, not narrate every statement.", "Den bør beskrive kontrakt og brug, ikke hver instruktion.")),
-    objective_mcq("dm857.m04.bank.017", ("¿Qué retorna print(3)?", "What does print(3) return?", "Hvad returnerer print(3)?"), (("none", ("None", "None", "None")), ("three", ("3", "3", "3")), ("string", ("'3'", "'3'", "'3'")), ("true", ("True", "True", "True"))), "none", ("La función muestra 3 y retorna None.", "The function displays 3 and returns None.", "Funktionen viser 3 og returnerer None.")),
-    objective_tf("dm857.m04.bank.018", ("Dos llamadas pueden usar el mismo nombre local sin compartir valor.", "Two calls may use the same local name without sharing a value.", "To kald kan bruge samme lokale navn uden at dele værdi."), correct=True, explanation=("Cada llamada tiene su propio ámbito local.", "Each call has its own local scope.", "Hvert kald har sit eget lokale scope.")),
-    objective_mcq("dm857.m04.bank.019", ("¿Qué hace un valor predeterminado?", "What does a default value do?", "Hvad gør en standardværdi?"), (("omission", ("Se usa si se omite el argumento", "It is used when the argument is omitted", "Den bruges, når argumentet udelades")), ("mandatory", ("Hace obligatorio el argumento", "It makes the argument mandatory", "Den gør argumentet obligatorisk")), ("global", ("Lo convierte en global", "It makes it global", "Den gør det globalt")), ("print", ("Lo imprime", "It prints it", "Den udskriver det"))), "omission", ("La llamada puede aceptar el valor establecido en la definición.", "The call may accept the value established in the definition.", "Kaldet kan bruge værdien fra definitionen.")),
-    objective_tf("dm857.m04.bank.020", ("Un argumento nombrado se vincula por el nombre del parámetro.", "A keyword argument binds by parameter name.", "Et nøgleordsargument bindes efter parameternavnet."), correct=True, explanation=("Por eso puede mejorar la legibilidad.", "That is why it can improve readability.", "Derfor kan det forbedre læsbarheden.")),
-    objective_mcq("dm857.m04.bank.021", ("¿Qué debe comprobar una prueba unitaria?", "What should a unit test check?", "Hvad bør en enhedstest kontrollere?"), (("return", ("Valor retornado y contrato", "Returned value and contract", "Returværdi og kontrakt")), ("color", ("Color de ventana", "Window color", "Vinduesfarve")), ("typing_speed", ("Velocidad al escribir", "Typing speed", "Skrivehastighed")), ("global_count", ("Número de globales", "Number of globals", "Antal globale variable"))), "return", ("La prueba verifica comportamiento observable.", "The test verifies observable behavior.", "Testen verificerer observerbar adfærd.")),
-    objective_tf("dm857.m04.bank.022", ("Una función puede retornar una tupla.", "A function may return a tuple.", "En funktion kan returnere en tuple."), correct=True, explanation=("return puede entregar cualquier objeto de Python.", "return can deliver any Python object.", "return kan levere ethvert Python-objekt.")),
-    objective_mcq("dm857.m04.bank.023", ("¿Qué reduce acoplamiento?", "What reduces coupling?", "Hvad reducerer kobling?"), (("clear_interface", ("Interfaces claras y responsabilidades pequeñas", "Clear interfaces and small responsibilities", "Klare grænseflader og små ansvarsområder")), ("global_state", ("Más estado global", "More global state", "Mere global tilstand")), ("duplicate", ("Duplicar código", "Duplicate code", "Duplikér kode")), ("hidden_io", ("Entrada/salida oculta", "Hidden input/output", "Skjult input/output"))), "clear_interface", ("Las fronteras explícitas limitan dependencias.", "Explicit boundaries limit dependencies.", "Eksplicitte grænser begrænser afhængigheder.")),
-    objective_tf("dm857.m04.bank.024", ("Una función pura puede seguir conteniendo un error lógico.", "A pure function may still contain a logic error.", "En ren funktion kan stadig indeholde en logisk fejl."), correct=True, explanation=("La pureza facilita razonar, pero no garantiza la fórmula.", "Purity aids reasoning but does not guarantee the formula.", "Renhed hjælper ræsonnement, men garanterer ikke formlen.")),
-    objective_mcq("dm857.m04.bank.025", ("¿Qué ocurre al llamar f(x=2, 3)?", "What happens when calling f(x=2, 3)?", "Hvad sker der ved kaldet f(x=2, 3)?"), (("syntax", ("Error: posicional después de nombrado", "Error: positional after keyword", "Fejl: positionelt argument efter nøgleordsargument")), ("valid", ("Es válido", "It is valid", "Det er gyldigt")), ("none", ("Retorna None siempre", "Always returns None", "Returnerer altid None")), ("global", ("x se vuelve global", "x becomes global", "x bliver global"))), "syntax", ("Los posicionales deben aparecer antes de los nombrados.", "Positional arguments must precede keyword arguments.", "Positionelle argumenter skal stå før nøgleordsargumenter.")),
-    objective_tf("dm857.m04.bank.026", ("Una variable local queda accesible después de terminar la llamada.", "A local variable remains accessible after the call ends.", "En lokal variabel forbliver tilgængelig efter kaldet."), correct=False, explanation=("El nombre local deja de estar disponible fuera de su ámbito.", "The local name is unavailable outside its scope.", "Det lokale navn er ikke tilgængeligt uden for sit scope.")),
-    objective_mcq("dm857.m04.bank.027", ("¿Qué representa una poscondición de square(x)?", "What is a postcondition for square(x)?", "Hvad er en efterbetingelse for square(x)?"), (("relation", ("El retorno es x * x", "The return equals x * x", "Returværdien er x * x")), ("parameter", ("x es parámetro", "x is a parameter", "x er en parameter")), ("line", ("Usa una línea", "It uses one line", "Den bruger én linje")), ("print", ("Imprime x", "It prints x", "Den udskriver x"))), "relation", ("La poscondición expresa la garantía del resultado.", "The postcondition states the result guarantee.", "Efterbetingelsen angiver resultatgarantien.")),
-    objective_tf("dm857.m04.bank.028", ("La descomposición puede permitir probar partes antes de integrarlas.", "Decomposition can allow parts to be tested before integration.", "Dekomponering kan gøre det muligt at teste dele før integration."), correct=True, explanation=("Cada función pequeña puede verificarse de forma aislada.", "Each small function can be verified in isolation.", "Hver lille funktion kan verificeres isoleret.")),
-    objective_mcq("dm857.m04.bank.029", ("¿Cuál es un efecto secundario?", "Which is a side effect?", "Hvad er en sideeffekt?"), (("write_file", ("Escribir un archivo", "Writing a file", "At skrive en fil")), ("add", ("Retornar a + b", "Returning a + b", "At returnere a + b")), ("compare", ("Retornar a == b", "Returning a == b", "At returnere a == b")), ("tuple", ("Retornar una tupla", "Returning a tuple", "At returnere en tuple"))), "write_file", ("Escribir modifica estado fuera de la función.", "Writing changes state outside the function.", "Filskrivning ændrer tilstand uden for funktionen.")),
-    objective_tf("dm857.m04.bank.030", ("Un parámetro obligatorio puede aparecer después de uno con valor predeterminado en la misma lista simple.", "A required parameter may follow a defaulted parameter in the same simple parameter list.", "En obligatorisk parameter kan stå efter en parameter med standardværdi i samme simple parameterliste."), correct=False, explanation=("Los parámetros obligatorios deben preceder a los predeterminados.", "Required parameters must precede defaulted parameters.", "Obligatoriske parametre skal stå før parametre med standardværdi.")),
+    objective_tf(
+        "dm857.m04.bank.002",
+        (
+            "print y return son equivalentes.",
+            "print and return are equivalent.",
+            "print og return er ækvivalente.",
+        ),
+        correct=False,
+        explanation=(
+            "print produce salida y retorna None; return entrega un valor.",
+            "print produces output and returns None; return delivers a value.",
+            "print producerer output og returnerer None; return leverer en værdi.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.003",
+        (
+            "¿Qué retorna una función sin return ejecutado?",
+            "What does a function return when no return executes?",
+            "Hvad returnerer en funktion, når ingen return udføres?",
+        ),
+        (
+            ("none", ("None", "None", "None")),
+            ("zero", ("0", "0", "0")),
+            ("false", ("False", "False", "False")),
+            ("error", ("Siempre error", "Always an error", "Altid en fejl")),
+        ),
+        "none",
+        (
+            "Python retorna None implícitamente.",
+            "Python implicitly returns None.",
+            "Python returnerer implicit None.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.004",
+        (
+            "Cada llamada crea variables locales nuevas.",
+            "Each call creates new local variables.",
+            "Hvert kald opretter nye lokale variable.",
+        ),
+        correct=True,
+        explanation=(
+            "El ámbito local pertenece a la llamada.",
+            "Local scope belongs to the call.",
+            "Lokalt scope tilhører kaldet.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.005",
+        (
+            "¿Qué argumento mejora claridad cuando hay varios números similares?",
+            "Which argument style improves clarity when several numbers look similar?",
+            "Hvilken argumentstil forbedrer klarheden, når flere tal ligner hinanden?",
+        ),
+        (
+            ("keyword", ("Nombrado", "Keyword", "Nøgleord")),
+            ("positional", ("Sólo posicional", "Positional only", "Kun positionelt")),
+            ("global", ("Global", "Global", "Global")),
+            ("printed", ("Impreso", "Printed", "Udskrevet")),
+        ),
+        "keyword",
+        (
+            "El nombre hace explícito el significado del valor.",
+            "The name makes the value's meaning explicit.",
+            "Navnet gør værdiens betydning eksplicit.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.006",
+        (
+            "Una función pura modifica una lista global.",
+            "A pure function mutates a global list.",
+            "En ren funktion ændrer en global liste.",
+        ),
+        correct=False,
+        explanation=(
+            "Modificar estado externo es un efecto secundario.",
+            "Mutating external state is a side effect.",
+            "Ændring af ekstern tilstand er en sideeffekt.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.007",
+        (
+            "¿Qué palabra finaliza una llamada y entrega un valor?",
+            "Which keyword ends a call and delivers a value?",
+            "Hvilket nøgleord afslutter et kald og leverer en værdi?",
+        ),
+        (
+            ("return", ("return", "return", "return")),
+            ("print", ("print", "print", "print")),
+            ("def", ("def", "def", "def")),
+            ("pass", ("pass", "pass", "pass")),
+        ),
+        "return",
+        (
+            "return transfiere el valor al llamador.",
+            "return transfers the value to the caller.",
+            "return overfører værdien til den kaldende kode.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.008",
+        (
+            "El código posterior a un return ejecutado se ejecuta normalmente.",
+            "Code after an executed return runs normally.",
+            "Kode efter en udført return kører normalt.",
+        ),
+        correct=False,
+        explanation=(
+            "La llamada termina al ejecutar return.",
+            "The call ends when return executes.",
+            "Kaldet slutter, når return udføres.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.009",
+        (
+            "¿Qué describe una precondición?",
+            "What does a precondition describe?",
+            "Hvad beskriver en forudsætning?",
+        ),
+        (
+            (
+                "before",
+                ("Lo que debe cumplirse antes", "What must hold before", "Hvad der skal gælde før"),
+            ),
+            ("after", ("Sólo el resultado final", "Only the final result", "Kun slutresultatet")),
+            ("implementation", ("Cada línea interna", "Every internal line", "Hver intern linje")),
+            ("format", ("El color del editor", "The editor color", "Editorens farve")),
+        ),
+        "before",
+        (
+            "La precondición restringe entradas válidas.",
+            "A precondition restricts valid inputs.",
+            "En forudsætning begrænser gyldige input.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.010",
+        (
+            "Una poscondición describe una garantía observable.",
+            "A postcondition describes an observable guarantee.",
+            "En efterbetingelse beskriver en observerbar garanti.",
+        ),
+        correct=True,
+        explanation=(
+            "Se aplica cuando se cumplen las precondiciones.",
+            "It applies when preconditions hold.",
+            "Den gælder, når forudsætningerne er opfyldt.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.011",
+        (
+            "¿Qué facilita una función pequeña?",
+            "What does a small function facilitate?",
+            "Hvad gør en lille funktion lettere?",
+        ),
+        (
+            ("testing", ("Pruebas y aislamiento", "Testing and isolation", "Test og isolering")),
+            ("hidden_state", ("Más estado oculto", "More hidden state", "Mere skjult tilstand")),
+            ("duplication", ("Más duplicación", "More duplication", "Mere duplikering")),
+            ("ambiguity", ("Más ambigüedad", "More ambiguity", "Mere tvetydighed")),
+        ),
+        "testing",
+        (
+            "Una responsabilidad reducida limita causas de fallo.",
+            "A narrow responsibility limits failure causes.",
+            "Et begrænset ansvar begrænser fejlkilder.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.012",
+        (
+            "Los parámetros son globales por definición.",
+            "Parameters are global by definition.",
+            "Parametre er globale pr. definition.",
+        ),
+        correct=False,
+        explanation=(
+            "Los parámetros son locales a cada llamada.",
+            "Parameters are local to each call.",
+            "Parametre er lokale for hvert kald.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.013",
+        ("¿Qué es composición?", "What is composition?", "Hvad er komposition?"),
+        (
+            (
+                "chain",
+                (
+                    "Usar el retorno como argumento de otra función",
+                    "Use one return as another function's argument",
+                    "Brug én returværdi som argument til en anden funktion",
+                ),
+            ),
+            ("copy", ("Copiar código", "Copy code", "Kopiér kode")),
+            ("global", ("Crear una global", "Create a global", "Opret en global variabel")),
+            ("print", ("Imprimir dos veces", "Print twice", "Udskriv to gange")),
+        ),
+        "chain",
+        (
+            "La composición conecta interfaces mediante valores.",
+            "Composition connects interfaces through values.",
+            "Komposition forbinder grænseflader gennem værdier.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.014",
+        (
+            "Un efecto secundario siempre es un error.",
+            "A side effect is always an error.",
+            "En sideeffekt er altid en fejl.",
+        ),
+        correct=False,
+        explanation=(
+            "Puede ser necesario, pero debe aislarse y documentarse.",
+            "It may be necessary, but should be isolated and documented.",
+            "Den kan være nødvendig, men bør isoleres og dokumenteres.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.015",
+        (
+            "¿Qué prueba detecta una ruta sin return?",
+            "Which test exposes a path without return?",
+            "Hvilken test afslører en vej uden return?",
+        ),
+        (
+            (
+                "branch_input",
+                (
+                    "Una entrada que active esa rama",
+                    "An input that activates that branch",
+                    "Et input, der aktiverer grenen",
+                ),
+            ),
+            (
+                "same_only",
+                ("Repetir el caso normal", "Repeat the normal case", "Gentag det normale tilfælde"),
+            ),
+            ("format", ("Cambiar formato", "Change formatting", "Skift formatering")),
+            ("comment", ("Añadir comentario", "Add a comment", "Tilføj en kommentar")),
+        ),
+        "branch_input",
+        (
+            "La prueba debe ejecutar la ruta defectuosa.",
+            "The test must execute the defective path.",
+            "Testen skal udføre den fejlbehæftede vej.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.016",
+        (
+            "Una docstring debe repetir cada línea del cuerpo.",
+            "A docstring should repeat every body line.",
+            "En docstring bør gentage hver linje i kroppen.",
+        ),
+        correct=False,
+        explanation=(
+            "Debe describir contrato y uso, no narrar cada instrucción.",
+            "It should describe contract and use, not narrate every statement.",
+            "Den bør beskrive kontrakt og brug, ikke hver instruktion.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.017",
+        ("¿Qué retorna print(3)?", "What does print(3) return?", "Hvad returnerer print(3)?"),
+        (
+            ("none", ("None", "None", "None")),
+            ("three", ("3", "3", "3")),
+            ("string", ("'3'", "'3'", "'3'")),
+            ("true", ("True", "True", "True")),
+        ),
+        "none",
+        (
+            "La función muestra 3 y retorna None.",
+            "The function displays 3 and returns None.",
+            "Funktionen viser 3 og returnerer None.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.018",
+        (
+            "Dos llamadas pueden usar el mismo nombre local sin compartir valor.",
+            "Two calls may use the same local name without sharing a value.",
+            "To kald kan bruge samme lokale navn uden at dele værdi.",
+        ),
+        correct=True,
+        explanation=(
+            "Cada llamada tiene su propio ámbito local.",
+            "Each call has its own local scope.",
+            "Hvert kald har sit eget lokale scope.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.019",
+        (
+            "¿Qué hace un valor predeterminado?",
+            "What does a default value do?",
+            "Hvad gør en standardværdi?",
+        ),
+        (
+            (
+                "omission",
+                (
+                    "Se usa si se omite el argumento",
+                    "It is used when the argument is omitted",
+                    "Den bruges, når argumentet udelades",
+                ),
+            ),
+            (
+                "mandatory",
+                (
+                    "Hace obligatorio el argumento",
+                    "It makes the argument mandatory",
+                    "Den gør argumentet obligatorisk",
+                ),
+            ),
+            ("global", ("Lo convierte en global", "It makes it global", "Den gør det globalt")),
+            ("print", ("Lo imprime", "It prints it", "Den udskriver det")),
+        ),
+        "omission",
+        (
+            "La llamada puede aceptar el valor establecido en la definición.",
+            "The call may accept the value established in the definition.",
+            "Kaldet kan bruge værdien fra definitionen.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.020",
+        (
+            "Un argumento nombrado se vincula por el nombre del parámetro.",
+            "A keyword argument binds by parameter name.",
+            "Et nøgleordsargument bindes efter parameternavnet.",
+        ),
+        correct=True,
+        explanation=(
+            "Por eso puede mejorar la legibilidad.",
+            "That is why it can improve readability.",
+            "Derfor kan det forbedre læsbarheden.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.021",
+        (
+            "¿Qué debe comprobar una prueba unitaria?",
+            "What should a unit test check?",
+            "Hvad bør en enhedstest kontrollere?",
+        ),
+        (
+            (
+                "return",
+                (
+                    "Valor retornado y contrato",
+                    "Returned value and contract",
+                    "Returværdi og kontrakt",
+                ),
+            ),
+            ("color", ("Color de ventana", "Window color", "Vinduesfarve")),
+            ("typing_speed", ("Velocidad al escribir", "Typing speed", "Skrivehastighed")),
+            ("global_count", ("Número de globales", "Number of globals", "Antal globale variable")),
+        ),
+        "return",
+        (
+            "La prueba verifica comportamiento observable.",
+            "The test verifies observable behavior.",
+            "Testen verificerer observerbar adfærd.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.022",
+        (
+            "Una función puede retornar una tupla.",
+            "A function may return a tuple.",
+            "En funktion kan returnere en tuple.",
+        ),
+        correct=True,
+        explanation=(
+            "return puede entregar cualquier objeto de Python.",
+            "return can deliver any Python object.",
+            "return kan levere ethvert Python-objekt.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.023",
+        ("¿Qué reduce acoplamiento?", "What reduces coupling?", "Hvad reducerer kobling?"),
+        (
+            (
+                "clear_interface",
+                (
+                    "Interfaces claras y responsabilidades pequeñas",
+                    "Clear interfaces and small responsibilities",
+                    "Klare grænseflader og små ansvarsområder",
+                ),
+            ),
+            ("global_state", ("Más estado global", "More global state", "Mere global tilstand")),
+            ("duplicate", ("Duplicar código", "Duplicate code", "Duplikér kode")),
+            ("hidden_io", ("Entrada/salida oculta", "Hidden input/output", "Skjult input/output")),
+        ),
+        "clear_interface",
+        (
+            "Las fronteras explícitas limitan dependencias.",
+            "Explicit boundaries limit dependencies.",
+            "Eksplicitte grænser begrænser afhængigheder.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.024",
+        (
+            "Una función pura puede seguir conteniendo un error lógico.",
+            "A pure function may still contain a logic error.",
+            "En ren funktion kan stadig indeholde en logisk fejl.",
+        ),
+        correct=True,
+        explanation=(
+            "La pureza facilita razonar, pero no garantiza la fórmula.",
+            "Purity aids reasoning but does not guarantee the formula.",
+            "Renhed hjælper ræsonnement, men garanterer ikke formlen.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.025",
+        (
+            "¿Qué ocurre al llamar f(x=2, 3)?",
+            "What happens when calling f(x=2, 3)?",
+            "Hvad sker der ved kaldet f(x=2, 3)?",
+        ),
+        (
+            (
+                "syntax",
+                (
+                    "Error: posicional después de nombrado",
+                    "Error: positional after keyword",
+                    "Fejl: positionelt argument efter nøgleordsargument",
+                ),
+            ),
+            ("valid", ("Es válido", "It is valid", "Det er gyldigt")),
+            ("none", ("Retorna None siempre", "Always returns None", "Returnerer altid None")),
+            ("global", ("x se vuelve global", "x becomes global", "x bliver global")),
+        ),
+        "syntax",
+        (
+            "Los posicionales deben aparecer antes de los nombrados.",
+            "Positional arguments must precede keyword arguments.",
+            "Positionelle argumenter skal stå før nøgleordsargumenter.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.026",
+        (
+            "Una variable local queda accesible después de terminar la llamada.",
+            "A local variable remains accessible after the call ends.",
+            "En lokal variabel forbliver tilgængelig efter kaldet.",
+        ),
+        correct=False,
+        explanation=(
+            "El nombre local deja de estar disponible fuera de su ámbito.",
+            "The local name is unavailable outside its scope.",
+            "Det lokale navn er ikke tilgængeligt uden for sit scope.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.027",
+        (
+            "¿Qué representa una poscondición de square(x)?",
+            "What is a postcondition for square(x)?",
+            "Hvad er en efterbetingelse for square(x)?",
+        ),
+        (
+            (
+                "relation",
+                ("El retorno es x * x", "The return equals x * x", "Returværdien er x * x"),
+            ),
+            ("parameter", ("x es parámetro", "x is a parameter", "x er en parameter")),
+            ("line", ("Usa una línea", "It uses one line", "Den bruger én linje")),
+            ("print", ("Imprime x", "It prints x", "Den udskriver x")),
+        ),
+        "relation",
+        (
+            "La poscondición expresa la garantía del resultado.",
+            "The postcondition states the result guarantee.",
+            "Efterbetingelsen angiver resultatgarantien.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.028",
+        (
+            "La descomposición puede permitir probar partes antes de integrarlas.",
+            "Decomposition can allow parts to be tested before integration.",
+            "Dekomponering kan gøre det muligt at teste dele før integration.",
+        ),
+        correct=True,
+        explanation=(
+            "Cada función pequeña puede verificarse de forma aislada.",
+            "Each small function can be verified in isolation.",
+            "Hver lille funktion kan verificeres isoleret.",
+        ),
+    ),
+    objective_mcq(
+        "dm857.m04.bank.029",
+        ("¿Cuál es un efecto secundario?", "Which is a side effect?", "Hvad er en sideeffekt?"),
+        (
+            ("write_file", ("Escribir un archivo", "Writing a file", "At skrive en fil")),
+            ("add", ("Retornar a + b", "Returning a + b", "At returnere a + b")),
+            ("compare", ("Retornar a == b", "Returning a == b", "At returnere a == b")),
+            ("tuple", ("Retornar una tupla", "Returning a tuple", "At returnere en tuple")),
+        ),
+        "write_file",
+        (
+            "Escribir modifica estado fuera de la función.",
+            "Writing changes state outside the function.",
+            "Filskrivning ændrer tilstand uden for funktionen.",
+        ),
+    ),
+    objective_tf(
+        "dm857.m04.bank.030",
+        (
+            "Un parámetro obligatorio puede aparecer después de uno con valor predeterminado en la misma lista simple.",
+            "A required parameter may follow a defaulted parameter in the same simple parameter list.",
+            "En obligatorisk parameter kan stå efter en parameter med standardværdi i samme simple parameterliste.",
+        ),
+        correct=False,
+        explanation=(
+            "Los parámetros obligatorios deben preceder a los predeterminados.",
+            "Required parameters must precede defaulted parameters.",
+            "Obligatoriske parametre skal stå før parametre med standardværdi.",
+        ),
+    ),
 )
 
 

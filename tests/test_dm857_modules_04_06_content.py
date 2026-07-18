@@ -188,9 +188,7 @@ def test_new_module_banks_are_unique_objective_and_locale_independent(
         assert tuple(item.correct_option_ids for item in bank) == reference_correct_ids
         assert len({item.prompt for item in bank}) == len(bank), locale
         assert all(len(item.correct_option_ids) == 1 for item in bank)
-        assert all(
-            set(item.correct_option_ids).issubset(set(item.option_ids)) for item in bank
-        )
+        assert all(set(item.correct_option_ids).issubset(set(item.option_ids)) for item in bank)
 
 
 @pytest.mark.parametrize(
