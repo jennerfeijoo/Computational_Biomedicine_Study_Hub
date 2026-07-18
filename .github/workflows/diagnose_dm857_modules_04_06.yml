@@ -1,0 +1,43 @@
+name: Diagnose DM857 modules 4 through 6
+
+on:
+  push:
+    branches:
+      - feat/dm857-modules-04-06
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/dm857-modules-04-06
+
+      - name: Install Qt runtime libraries
+        run: sudo apt-get update && sudo apt-get install --yes libegl1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install project
+        run: python -m pip install -e ".[dev]"
+
+      - name: Capture test diagnostics
+        run: pytest -vv > ci_dm857_04_06_diagnostics.txt 2>&1 || true
+
+      - name: Commit diagnostics and remove temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/diagnose_dm857_modules_04_06.yml
+          git add ci_dm857_04_06_diagnostics.txt
+          git commit -m "capture DM857 modules 4 through 6 diagnostics"
+          git push origin HEAD:feat/dm857-modules-04-06
