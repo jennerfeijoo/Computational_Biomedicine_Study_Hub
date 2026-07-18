@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-from PySide6.QtCore import QObject, QSettings, QThread, Signal, Slot
+from PySide6.QtCore import QObject, QSettings, QThread, QTimer, Signal, Slot
 from PySide6.QtWidgets import (
     QComboBox,
     QFormLayout,
@@ -58,11 +58,14 @@ class OllamaSettingsPage(QWidget):
 
     BASE_URL_KEY = "ollama/base_url"
     MODEL_KEY = "ollama/model"
+    PREFERRED_MODEL = "qwen3.6:27b"
 
     def __init__(
         self,
         settings: QSettings | None = None,
         client_factory: ClientFactory | None = None,
+        *,
+        auto_probe: bool = True,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
@@ -77,11 +80,11 @@ class OllamaSettingsPage(QWidget):
         self._base_url.setObjectName("ollamaBaseUrl")
         self._base_url.setPlaceholderText("http://localhost:11434/api")
 
-        self._probe_button = QPushButton("Probar conexión")
+        self._probe_button = QPushButton("Reconectar")
         self._probe_button.setObjectName("primaryActionButton")
         self._probe_button.clicked.connect(self.start_probe)
 
-        self._status = QLabel("Conexión no comprobada.")
+        self._status = QLabel("Conexión pendiente.")
         self._status.setObjectName("ollamaStatus")
         self._status.setWordWrap(True)
         self._set_status_state("idle")
@@ -117,8 +120,8 @@ class OllamaSettingsPage(QWidget):
         group_layout.addLayout(actions)
 
         explanation = QLabel(
-            "Esta pantalla solo verifica la instalación local y permite seleccionar "
-            "el modelo que usarán futuras funciones de tutoría y evaluación."
+            "La aplicación se conecta automáticamente con Ollama y prioriza "
+            f"{self.PREFERRED_MODEL}. El botón Reconectar permite repetir la comprobación."
         )
         explanation.setObjectName("settingsExplanation")
         explanation.setWordWrap(True)
@@ -129,6 +132,9 @@ class OllamaSettingsPage(QWidget):
         layout.addWidget(explanation)
         layout.addWidget(group)
         layout.addStretch(1)
+
+        if auto_probe:
+            QTimer.singleShot(0, self.start_probe)
 
     @property
     def base_url(self) -> str:
@@ -173,41 +179,54 @@ class OllamaSettingsPage(QWidget):
         self._models.setEnabled(False)
         self._models.clear()
         self._version.setText("—")
-        self._status.setText("Conectando con Ollama…")
+        self._status.setText("Conectando automáticamente con Ollama…")
         self._set_status_state("pending")
         thread.start()
 
     @Slot(str, object)
     def apply_probe_success(self, version: str, models_payload: object) -> None:
-        """Display a successful connection result."""
-        models = tuple(
-            model
-            for model in models_payload
-            if isinstance(model, OllamaModel)
-        ) if isinstance(models_payload, tuple) else ()
+        """Display a successful connection result and select the preferred model."""
+        models = (
+            tuple(
+                model
+                for model in models_payload
+                if isinstance(model, OllamaModel)
+            )
+            if isinstance(models_payload, tuple)
+            else ()
+        )
 
         self._version.setText(version)
         self._models.clear()
         self._models.addItems([model.name for model in models])
 
-        stored_model = str(self._settings.value(self.MODEL_KEY, "")).strip()
-        if stored_model:
-            stored_index = self._models.findText(stored_model)
-            if stored_index >= 0:
-                self._models.setCurrentIndex(stored_index)
-
-        if models:
-            self._status.setText(
-                f"Conexión correcta. Se detectaron {len(models)} modelos locales."
-            )
-            self._models.setEnabled(True)
-            self._save_button.setEnabled(True)
-        else:
+        if not models:
             self._status.setText(
                 "Conexión correcta, pero Ollama no informó modelos instalados."
             )
             self._save_button.setEnabled(False)
+            self._set_status_state("success")
+            return
 
+        preferred_index = self._models.findText(self.PREFERRED_MODEL)
+        if preferred_index >= 0:
+            self._models.setCurrentIndex(preferred_index)
+            self._status.setText(
+                f"Conectado automáticamente con {self.PREFERRED_MODEL}."
+            )
+        else:
+            stored_model = str(self._settings.value(self.MODEL_KEY, "")).strip()
+            stored_index = self._models.findText(stored_model) if stored_model else -1
+            if stored_index >= 0:
+                self._models.setCurrentIndex(stored_index)
+            self._status.setText(
+                f"Conexión correcta, pero no se encontró {self.PREFERRED_MODEL}. "
+                "Se seleccionó un modelo local disponible."
+            )
+
+        self._models.setEnabled(True)
+        self._save_button.setEnabled(True)
+        self._persist_current_preferences()
         self._set_status_state("success")
 
     @Slot(str)
@@ -223,11 +242,7 @@ class OllamaSettingsPage(QWidget):
     @Slot()
     def save_preferences(self) -> None:
         """Persist the normalized URL and selected model."""
-        normalized_url = OllamaConfig(base_url=self.base_url).normalized_base_url()
-        self._base_url.setText(normalized_url)
-        self._settings.setValue(self.BASE_URL_KEY, normalized_url)
-        self._settings.setValue(self.MODEL_KEY, self.selected_model)
-        self._settings.sync()
+        self._persist_current_preferences()
         self._status.setText(
             f"Configuración guardada para el modelo {self.selected_model}."
         )
@@ -238,6 +253,13 @@ class OllamaSettingsPage(QWidget):
         self._probe_button.setEnabled(True)
         self._probe_thread = None
         self._probe_worker = None
+
+    def _persist_current_preferences(self) -> None:
+        normalized_url = OllamaConfig(base_url=self.base_url).normalized_base_url()
+        self._base_url.setText(normalized_url)
+        self._settings.setValue(self.BASE_URL_KEY, normalized_url)
+        self._settings.setValue(self.MODEL_KEY, self.selected_model)
+        self._settings.sync()
 
     def _stored_base_url(self) -> str:
         value = str(
