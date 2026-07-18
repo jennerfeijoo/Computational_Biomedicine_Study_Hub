@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from PySide6.QtCore import Signal, Slot
+from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtWidgets import (
     QFrame,
     QHBoxLayout,
@@ -119,10 +119,7 @@ class GuidedPracticeCard(QFrame):
         self._solution = QLabel(exercise.solution)
         self._solution.setObjectName("guidedPracticeSolutionText")
         self._solution.setWordWrap(True)
-        self._solution.setTextInteractionFlags(
-            self._solution.textInteractionFlags()
-            | self._solution.textInteractionFlags().TextSelectableByMouse
-        )
+        self._solution.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
         solution_layout.addWidget(self._solution)
 
         explanation_title = QLabel("Por qué")
@@ -204,9 +201,7 @@ class GuidedPracticeCard(QFrame):
         self._visible_hint_count += 1
         visible_hints = self._exercise.hints[: self._visible_hint_count]
         self._hint.setText(
-            "\n".join(
-                f"Pista {index}: {hint}" for index, hint in enumerate(visible_hints, start=1)
-            )
+            "\n".join(f"Pista {index}: {hint}" for index, hint in enumerate(visible_hints, start=1))
         )
         self._hint.show()
 
