@@ -51,12 +51,14 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(960, 640)
         self.setStyleSheet(APPLICATION_STYLESHEET + LANGUAGE_STYLESHEET)
 
-        self._settings = settings or QSettings()
+        self._settings = settings if settings is not None else QSettings()
         self._language = LanguageController(self._settings, self)
         self._translator = self._language.translator
         self._courses: tuple[CourseRegistration, ...] = COURSES
         self._pages: dict[str, QWidget] = {}
-        self._descriptors: dict[str, PageDescriptor] = localized_page_descriptors(self._translator)
+        self._descriptors: dict[str, PageDescriptor] = localized_page_descriptors(
+            self._translator
+        )
 
         self._navigation = NavigationSidebar(self._courses, self._translator)
         self._navigation.route_selected.connect(self._on_route_selected)
@@ -64,6 +66,7 @@ class MainWindow(QMainWindow):
         self._header.language_selected.connect(self._language.set_locale)
         self._language.locale_changed.connect(self._apply_locale)
         self._stack = QStackedWidget()
+        self._stack.setObjectName("mainPageStack")
 
         content = QWidget()
         content_layout = QVBoxLayout(content)
@@ -128,7 +131,9 @@ class MainWindow(QMainWindow):
 
         pages: dict[str, QWidget] = {
             RouteId.HOME.value: home_page,
-            RouteId.REVIEW.value: PlaceholderPage(ui_text(locale, UiCopyKey.REVIEW_PLACEHOLDER)),
+            RouteId.REVIEW.value: PlaceholderPage(
+                ui_text(locale, UiCopyKey.REVIEW_PLACEHOLDER)
+            ),
             RouteId.ASSESSMENTS.value: PlaceholderPage(
                 ui_text(locale, UiCopyKey.ASSESSMENTS_PLACEHOLDER)
             ),
