@@ -1,0 +1,110 @@
+    ),
+    (
+        "Which situation describes a logic error?",
+        ("Using 100 instead of 1000 to convert mL to µL without an exception", "An unclosed parenthesis", "Dividing by zero", "Adding str and int"),
+        "The program executes, but the result violates the specification.",
+        "Hvilken situation beskriver en logisk fejl?",
+        ("At bruge 100 i stedet for 1000 ved konvertering fra mL til µL uden undtagelse", "En parentes, der ikke er lukket", "Division med nul", "Addition af str og int"),
+        "Programmet kører, men resultatet bryder specifikationen.",
+    ),
+    (
+        "What minimum information turns an execution into a test?",
+        ("Input, expected result, and comparison criterion", "Only source code", "An input without an expected result", "The absence of errors"),
+        "A test compares an observed result with an expected result for a concrete input.",
+        "Hvilken minimal information gør en kørsel til en test?",
+        ("Input, forventet resultat og sammenligningskriterium", "Kun kildekoden", "Et input uden forventet resultat", "Fravær af fejl"),
+        "En test sammenligner et observeret resultat med et forventet resultat for et konkret input.",
+    ),
+    (
+        "The absence of exceptions proves that a program is correct.",
+        ("True", "False"),
+        "A logic error may exist even when the program finishes.",
+        "Fravær af undtagelser beviser, at et program er korrekt.",
+        ("Sandt", "Falsk"),
+        "Der kan være en logisk fejl, selv om programmet afslutter.",
+    ),
+    (
+        "Which name best reduces the risk of confusing units?",
+        ("total_volume_ul", "value", "number", "x"),
+        "The name includes meaning and unit.",
+        "Hvilket navn reducerer bedst risikoen for at forveksle enheder?",
+        ("total_volume_ul", "value", "number", "x"),
+        "Navnet indeholder betydning og enhed.",
+    ),
+    (
+        "What is the result of 8 + 4 * 3?",
+        ("20", "36", "24", "12"),
+        "Multiplication is evaluated before addition.",
+        "Hvad er resultatet af 8 + 4 * 3?",
+        ("20", "36", "24", "12"),
+        "Multiplikation evalueres før addition.",
+    ),
+    (
+        "What is the result of (8 + 4) * 3?",
+        ("36", "20", "24", "15"),
+        "Parentheses force addition before multiplication.",
+        "Hvad er resultatet af (8 + 4) * 3?",
+        ("36", "20", "24", "15"),
+        "Parenteserne tvinger addition før multiplikation.",
+    ),
+    (
+        "A variable can refer to values of different types at different times.",
+        ("True", "False"),
+        "Python is dynamically typed, although every value has a concrete type.",
+        "En variabel kan henvise til værdier af forskellige typer på forskellige tidspunkter.",
+        ("Sandt", "Falsk"),
+        "Python er dynamisk typet, selv om hver værdi har en konkret type.",
+    ),
+    (
+        "Why is it appropriate to convert to int at the end of the usable-read calculation?",
+        ("The result is a count and the calculation may require float", "int always improves precision", "Python does not allow int times float", "All biomedical data must be integers"),
+        "The conversion follows the meaning of the result; decimals may need to be preserved during calculation.",
+        "Hvorfor er det passende at konvertere til int til sidst i beregningen af anvendelige reads?",
+        ("Resultatet er et antal, og beregningen kan kræve float", "int forbedrer altid præcisionen", "Python tillader ikke int gange float", "Alle biomedicinske data skal være heltal"),
+        "Konverteringen følger resultatets betydning; decimaler kan være nødvendige under beregningen.",
+    ),
+)
+
+
+def _localized_item(index: int) -> LocalizedAssessmentItem:
+    source = _ES_BANK[index]
+    prompt_en, options_en, explanation_en, prompt_da, options_da, explanation_da = _BANK_TRANSLATIONS[index]
+    correct_indexes = tuple(source.options.index(answer) for answer in source.correct_answers)
+    option_ids = tuple(f"o{position}" for position in range(len(source.options)))
+    return LocalizedAssessmentItem(
+        item_id=source.item_id,
+        activity_type=source.activity_type,
+        prompt=_t(source.prompt, prompt_en, prompt_da),
+        options=tuple(
+            LocalizedAssessmentOption(
+                option_id=option_id,
+                text=_t(spanish, english, danish),
+            )
+            for option_id, spanish, english, danish in zip(
+                option_ids,
+                source.options,
+                options_en,
+                options_da,
+                strict=True,
+            )
+        ),
+        correct_option_ids=tuple(option_ids[position] for position in correct_indexes),
+        accepted_answers=(),
+        explanation=_t(source.explanation, explanation_en, explanation_da),
+    )
+
+
+LOCALIZED_OBJECTIVE_QUESTION_BANK = tuple(
+    _localized_item(index) for index in range(len(_ES_BANK))
+)
+
+
+def materialize_objective_question_bank(
+    locale: AppLocale | str,
+) -> tuple[AssessmentItem, ...]:
+    """Create the deterministic objective bank in one selected language."""
+    resolved = locale if isinstance(locale, AppLocale) else AppLocale.resolve(locale)
+    return tuple(item.materialize(resolved) for item in LOCALIZED_OBJECTIVE_QUESTION_BANK)
+
+
+__all__ = ["LOCALIZED_OBJECTIVE_QUESTION_BANK", "materialize_objective_question_bank"]
