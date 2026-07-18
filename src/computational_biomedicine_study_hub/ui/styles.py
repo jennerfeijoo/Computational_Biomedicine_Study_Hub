@@ -88,6 +88,13 @@ QGroupBox#settingsGroup {
     border-radius: 10px;
 }
 
+QFrame#moduleContextBar {
+    background: #eaf2fd;
+    border: none;
+    border-left: 4px solid #2f80ed;
+    border-radius: 6px;
+}
+
 QGroupBox#settingsGroup {
     margin-top: 12px;
     padding: 16px;
@@ -109,6 +116,18 @@ QLabel#courseCode,
 QLabel#moduleKicker {
     color: #2f80ed;
     font-size: 17px;
+    font-weight: 700;
+}
+
+QLabel#moduleContextKicker {
+    color: #1d5fa7;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+QLabel#moduleContextTitle {
+    color: #243b53;
+    font-size: 15px;
     font-weight: 700;
 }
 
