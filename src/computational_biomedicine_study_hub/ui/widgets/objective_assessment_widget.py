@@ -56,9 +56,9 @@ class ObjectiveQuestionCard(QFrame):
         self._button_group.setExclusive(True)
         self._option_buttons: list[QRadioButton] = []
         for option in question.display_options:
-            button = QRadioButton(option)
+            button = QRadioButton(option.text)
             button.setObjectName("objectiveOption")
-            button.setProperty("answerValue", option)
+            button.setProperty("answerId", option.option_id)
             button.setMinimumHeight(38)
             self._button_group.addButton(button)
             self._option_buttons.append(button)
@@ -81,8 +81,17 @@ class ObjectiveQuestionCard(QFrame):
         return self._question.item.item_id
 
     @property
+    def selected_option_id(self) -> str:
+        """Return the stable ID for the selected option or an empty string."""
+        selected = self._button_group.checkedButton()
+        if selected is None:
+            return ""
+        value = selected.property("answerId")
+        return value if isinstance(value, str) else ""
+
+    @property
     def selected_answer(self) -> str:
-        """Return the currently selected option or an empty string."""
+        """Return the visible text for the currently selected option."""
         selected = self._button_group.checkedButton()
         return selected.text() if selected is not None else ""
 
@@ -96,8 +105,18 @@ class ObjectiveQuestionCard(QFrame):
         """Return visible feedback text for tests and accessibility."""
         return self._feedback.text()
 
+    def choose_option(self, option_id: str) -> bool:
+        """Select one option by its stable authored identifier."""
+        for button in self._option_buttons:
+            if button.property("answerId") == option_id:
+                button.setChecked(True)
+                return True
+        return False
+
     def choose_answer(self, answer: str) -> bool:
-        """Select one option by its exact authored text."""
+        """Compatibility helper that accepts either an option ID or visible text."""
+        if self.choose_option(answer):
+            return True
         for button in self._option_buttons:
             if button.text() == answer:
                 button.setChecked(True)
@@ -110,12 +129,12 @@ class ObjectiveQuestionCard(QFrame):
         if self._answered:
             return
 
-        selected_answer = self.selected_answer
-        if not selected_answer:
+        selected_option_id = self.selected_option_id
+        if not selected_option_id:
             self._show_feedback("Selecciona una respuesta antes de comprobar.", "warning")
             return
 
-        feedback = grade_objective_answer(self._question, selected_answer)
+        feedback = grade_objective_answer(self._question, selected_option_id)
         if feedback.is_correct:
             message = f"Correcto. {feedback.explanation}"
             state = "correct"
