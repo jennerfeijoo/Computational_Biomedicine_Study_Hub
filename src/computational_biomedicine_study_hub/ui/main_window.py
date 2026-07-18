@@ -16,6 +16,7 @@ from ..courses import COURSES, CourseRegistration
 from .header import PageHeader
 from .navigation import NavigationSidebar
 from .pages.home_page import HomePage
+from .pages.ollama_settings_page import OllamaSettingsPage
 from .pages.placeholder_page import PlaceholderPage
 from .routes import (
     PAGE_DESCRIPTORS,
@@ -119,10 +120,7 @@ class MainWindow(QMainWindow):
             RouteId.GLOSSARY.value: PlaceholderPage(
                 "El glosario se poblará junto con cada módulo académico."
             ),
-            RouteId.SETTINGS.value: PlaceholderPage(
-                "Aquí se configurarán preferencias e integraciones locales "
-                "como Ollama."
-            ),
+            RouteId.SETTINGS.value: OllamaSettingsPage(settings=self._settings),
         }
 
         for course in self._courses:
