@@ -13,7 +13,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ..content.dm857 import MODULES, OBJECTIVE_QUESTION_BANKS
+from ..content.dm857 import BUNDLES
 from ..ui.pages.module_reader_page import ModuleReaderPage
 from .models import CourseRegistration
 
@@ -34,13 +34,14 @@ class DM857Page(QWidget):
         self._module_title.setWordWrap(True)
         self._readers: list[ModuleReaderPage] = []
 
-        for number, module in enumerate(MODULES, start=1):
-            self._module_selector.addItem(f"Módulo {number}", module.module_id)
+        for number, bundle in enumerate(BUNDLES, start=1):
+            self._module_selector.addItem(f"Módulo {number}", bundle.module.module_id)
             reader = ModuleReaderPage(
-                module,
-                objective_question_bank=OBJECTIVE_QUESTION_BANKS[module.module_id],
+                bundle.module,
+                objective_question_bank=bundle.objective_question_bank,
                 show_context_bar=False,
             )
+            reader.setProperty("contentVersion", bundle.content_version)
             self._readers.append(reader)
             self._module_stack.addWidget(reader)
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .bundles import LocalizedModuleBundle, ModuleBundle, validate_bundle_catalog
 from .localized_models import (
     LocalizedAssessmentItem,
     LocalizedAssessmentOption,
@@ -15,6 +16,7 @@ from .localized_models import (
 )
 from .models import (
     AssessmentItem,
+    AssessmentOption,
     ConceptBlock,
     LearningModule,
     LearningObjective,
@@ -26,6 +28,7 @@ from .models import (
 
 __all__ = [
     "AssessmentItem",
+    "AssessmentOption",
     "ConceptBlock",
     "LearningModule",
     "LearningObjective",
@@ -34,12 +37,15 @@ __all__ = [
     "LocalizedConceptBlock",
     "LocalizedLearningModule",
     "LocalizedLearningObjective",
+    "LocalizedModuleBundle",
     "LocalizedPracticeExercise",
     "LocalizedText",
     "LocalizedTutorSupportPacket",
     "LocalizedWorkedExample",
+    "ModuleBundle",
     "PracticeExercise",
     "TutorKnowledgeDocument",
     "TutorSupportPacket",
     "WorkedExample",
+    "validate_bundle_catalog",
 ]

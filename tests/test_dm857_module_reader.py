@@ -9,7 +9,10 @@ from computational_biomedicine_study_hub.content.dm857 import (
 )
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
 from computational_biomedicine_study_hub.ui.pages.module_reader_page import ModuleReaderPage
-from computational_biomedicine_study_hub.ui.widgets import GuidedPracticeWidget
+from computational_biomedicine_study_hub.ui.widgets import (
+    GuidedPracticeWidget,
+    ObjectiveAssessmentWidget,
+)
 
 
 def test_dm857_page_hosts_completed_modules_without_duplicate_identity_cards(
@@ -101,6 +104,18 @@ def test_module_reader_renders_authored_content_and_guided_practice(
     assert len(reader.findChildren(QFrame, "assessmentCard")) == len(
         MODULE_01_FOUNDATIONS.assessment_items
     )
+
+
+def test_course_reader_shows_objective_practice_and_complete_assessment(
+    qapp: QApplication,
+) -> None:
+    page = DM857Page()
+    reader = page.reader
+
+    assert reader.findChild(ObjectiveAssessmentWidget, "objectiveAssessmentWidget") is not None
+    assert reader.findChild(QLabel, "objectiveAssessmentSectionTitle") is not None
+    assert reader.findChild(QLabel, "authoredAssessmentSectionTitle") is not None
+    assert len(reader.findChildren(QFrame, "assessmentCard")) == len(reader.module.assessment_items)
 
 
 def test_assessment_reader_does_not_render_answer_feedback(qapp: QApplication) -> None:

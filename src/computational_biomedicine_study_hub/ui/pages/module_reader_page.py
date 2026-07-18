@@ -191,6 +191,9 @@ class ModuleReaderPage(QWidget):
         assert isinstance(layout, QVBoxLayout)
 
         if self._objective_question_bank:
+            objective_heading = self._subheading("Práctica objetiva aleatoria")
+            objective_heading.setObjectName("objectiveAssessmentSectionTitle")
+            layout.addWidget(objective_heading)
             notice = self._label(
                 "Responde cada pregunta y pulsa Comprobar respuesta para obtener corrección "
                 "inmediata. Nueva práctica genera otra combinación del banco y vuelve a "
@@ -199,16 +202,20 @@ class ModuleReaderPage(QWidget):
             )
             layout.addWidget(notice)
             layout.addWidget(ObjectiveAssessmentWidget(self._objective_question_bank))
-        else:
-            notice = self._label(
-                "Las respuestas correctas permanecen separadas del lector. Los controles "
-                "interactivos se activarán cuando el módulo disponga de un banco objetivo.",
-                "moduleSectionNotice",
-            )
-            layout.addWidget(notice)
 
-            for number, item in enumerate(self._module.assessment_items, start=1):
-                layout.addWidget(self._assessment_card(number, item))
+        complete_heading = self._subheading("Evaluación completa del módulo")
+        complete_heading.setObjectName("authoredAssessmentSectionTitle")
+        layout.addWidget(complete_heading)
+        complete_notice = self._label(
+            "Estas actividades cubren trazado, depuración, ordenación, relación de conceptos, "
+            "código, interpretación y respuestas abiertas. Las soluciones permanecen separadas "
+            "del lector para conservar su función evaluativa.",
+            "moduleSectionNotice",
+        )
+        layout.addWidget(complete_notice)
+
+        for number, item in enumerate(self._module.assessment_items, start=1):
+            layout.addWidget(self._assessment_card(number, item))
 
         layout.addStretch(1)
         return self._scroll_area(body, "moduleAssessmentScroll")

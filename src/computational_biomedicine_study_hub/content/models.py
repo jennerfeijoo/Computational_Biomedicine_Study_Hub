@@ -56,8 +56,30 @@ class PracticeExercise:
 
 
 @dataclass(frozen=True, slots=True)
+class AssessmentOption:
+    """One visible answer option with a language-independent identity."""
+
+    option_id: str
+    text: str
+
+    def __post_init__(self) -> None:
+        if not self.option_id.strip():
+            raise ValueError("Assessment option IDs cannot be empty.")
+        if self.option_id != self.option_id.strip():
+            raise ValueError("Assessment option IDs cannot contain surrounding whitespace.")
+        if not self.text.strip():
+            raise ValueError(f"Assessment option {self.option_id!r} cannot have empty text.")
+
+
+@dataclass(frozen=True, slots=True)
 class AssessmentItem:
-    """An assessable item with deterministic answers and feedback."""
+    """An assessable item with deterministic, locale-independent answer keys.
+
+    ``options`` and ``correct_answers`` remain as compatibility-facing visible text.
+    ``option_ids`` and ``correct_option_ids`` are the authoritative identities used by
+    objective grading and future persistence. Legacy monolingual content receives
+    deterministic generated IDs during validation.
+    """
 
     item_id: str
     activity_type: ActivityType
@@ -66,12 +88,18 @@ class AssessmentItem:
     correct_answers: tuple[str, ...]
     explanation: str
     rubric: tuple[str, ...] = ()
+    option_ids: tuple[str, ...] = ()
+    correct_option_ids: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         if not self.item_id.strip():
             raise ValueError("Assessment item IDs cannot be empty.")
+        if self.item_id != self.item_id.strip():
+            raise ValueError("Assessment item IDs cannot contain surrounding whitespace.")
         if not self.prompt.strip():
             raise ValueError(f"Assessment item {self.item_id!r} has an empty prompt.")
+        if not self.explanation.strip():
+            raise ValueError(f"Assessment item {self.item_id!r} has an empty explanation.")
         if not self.correct_answers:
             raise ValueError(f"Assessment item {self.item_id!r} must define a correct answer.")
 
@@ -82,8 +110,14 @@ class AssessmentItem:
             ActivityType.MATCHING,
             ActivityType.ORDERING,
         }
-        if self.activity_type in option_based and not self.options:
+        is_option_based = self.activity_type in option_based
+
+        if is_option_based and not self.options:
             raise ValueError(f"Assessment item {self.item_id!r} requires answer options.")
+        if not is_option_based and (self.option_ids or self.correct_option_ids):
+            raise ValueError(
+                f"Assessment item {self.item_id!r} cannot use option IDs for free-text grading."
+            )
 
         if (
             self.activity_type
@@ -95,12 +129,86 @@ class AssessmentItem:
         ):
             raise ValueError(f"Assessment item {self.item_id!r} requires exactly one answer.")
 
-        invalid_answers = set(self.correct_answers) - set(self.options)
-        if self.options and invalid_answers:
-            raise ValueError(
-                f"Assessment item {self.item_id!r} contains answers outside its options: "
-                f"{sorted(invalid_answers)}"
+        if self.options:
+            self._validate_visible_options()
+            effective_option_ids = self.option_ids or tuple(
+                f"option_{index}" for index in range(1, len(self.options) + 1)
             )
+            self._validate_option_ids(effective_option_ids)
+            object.__setattr__(self, "option_ids", effective_option_ids)
+
+            invalid_answers = set(self.correct_answers) - set(self.options)
+            if invalid_answers:
+                raise ValueError(
+                    f"Assessment item {self.item_id!r} contains answers outside its options: "
+                    f"{sorted(invalid_answers)}"
+                )
+
+            effective_correct_ids = self.correct_option_ids or tuple(
+                effective_option_ids[self.options.index(answer)] for answer in self.correct_answers
+            )
+            invalid_ids = set(effective_correct_ids) - set(effective_option_ids)
+            if invalid_ids:
+                raise ValueError(
+                    f"Assessment item {self.item_id!r} references unknown option IDs: "
+                    f"{sorted(invalid_ids)}"
+                )
+            if len(effective_correct_ids) != len(self.correct_answers):
+                raise ValueError(
+                    f"Assessment item {self.item_id!r} has misaligned answer text and option IDs."
+                )
+
+            text_by_id = dict(zip(effective_option_ids, self.options, strict=True))
+            for answer_text, option_id in zip(
+                self.correct_answers,
+                effective_correct_ids,
+                strict=True,
+            ):
+                if text_by_id[option_id] != answer_text:
+                    raise ValueError(
+                        f"Assessment item {self.item_id!r} maps option ID {option_id!r} "
+                        "to the wrong visible answer."
+                    )
+            object.__setattr__(self, "correct_option_ids", effective_correct_ids)
+
+    @property
+    def option_objects(self) -> tuple[AssessmentOption, ...]:
+        """Return stable IDs paired with their visible localized text."""
+        return tuple(
+            AssessmentOption(option_id=option_id, text=text)
+            for option_id, text in zip(self.option_ids, self.options, strict=True)
+        )
+
+    def option_text(self, option_id: str) -> str:
+        """Resolve visible text for one stable option ID."""
+        for option in self.option_objects:
+            if option.option_id == option_id:
+                return option.text
+        raise KeyError(option_id)
+
+    def _validate_visible_options(self) -> None:
+        normalized = tuple(option.strip().casefold() for option in self.options)
+        if any(not option for option in normalized):
+            raise ValueError(f"Assessment item {self.item_id!r} contains an empty option.")
+        if len(normalized) != len(set(normalized)):
+            raise ValueError(
+                f"Assessment item {self.item_id!r} contains duplicate visible options."
+            )
+
+    def _validate_option_ids(self, option_ids: tuple[str, ...]) -> None:
+        if len(option_ids) != len(self.options):
+            raise ValueError(
+                f"Assessment item {self.item_id!r} must define one option ID per option."
+            )
+        normalized = tuple(option_id.strip().casefold() for option_id in option_ids)
+        if any(not option_id for option_id in normalized):
+            raise ValueError(f"Assessment item {self.item_id!r} contains an empty option ID.")
+        if any(option_id != option_id.strip() for option_id in option_ids):
+            raise ValueError(
+                f"Assessment item {self.item_id!r} has option IDs with surrounding whitespace."
+            )
+        if len(normalized) != len(set(normalized)):
+            raise ValueError(f"Assessment item {self.item_id!r} has duplicate option IDs.")
 
 
 @dataclass(frozen=True, slots=True)

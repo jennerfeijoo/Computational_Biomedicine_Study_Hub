@@ -6,7 +6,7 @@ import random
 from dataclasses import dataclass
 from typing import Final
 
-from ..content.models import AssessmentItem
+from ..content.models import AssessmentItem, AssessmentOption
 from .activity_types import ActivityType
 
 _SUPPORTED_TYPES: Final = {
@@ -20,7 +20,7 @@ class ObjectiveSessionQuestion:
     """One authored item with a session-specific option order."""
 
     item: AssessmentItem
-    display_options: tuple[str, ...]
+    display_options: tuple[AssessmentOption, ...]
 
 
 @dataclass(frozen=True, slots=True)
@@ -37,10 +37,12 @@ class ObjectiveAssessmentSession:
 
 @dataclass(frozen=True, slots=True)
 class ObjectiveAnswerFeedback:
-    """Deterministic grading output for one selected answer."""
+    """Deterministic grading output for one selected option ID."""
 
     is_correct: bool
+    selected_option_id: str
     selected_answer: str
+    correct_option_id: str
     correct_answer: str
     explanation: str
 
@@ -98,7 +100,7 @@ class ObjectiveSessionGenerator:
 
         questions: list[ObjectiveSessionQuestion] = []
         for item in selected:
-            options = list(item.options)
+            options = list(item.option_objects)
             self._rng.shuffle(options)
             questions.append(ObjectiveSessionQuestion(item=item, display_options=tuple(options)))
 
@@ -151,18 +153,21 @@ class ObjectiveSessionGenerator:
 
 def grade_objective_answer(
     question: ObjectiveSessionQuestion,
-    selected_answer: str,
+    selected_option_id: str,
 ) -> ObjectiveAnswerFeedback:
-    """Grade one objective answer exactly against authored ground truth."""
-    answer = selected_answer.strip()
-    if answer not in question.item.options:
-        raise ValueError("The selected answer is not one of the question options.")
+    """Grade one objective answer by stable ID against authored ground truth."""
+    option_id = selected_option_id.strip()
+    option_by_id = {option.option_id: option for option in question.item.option_objects}
+    if option_id not in option_by_id:
+        raise ValueError("The selected option ID is not one of the question options.")
 
-    correct_answer = question.item.correct_answers[0]
+    correct_option_id = question.item.correct_option_ids[0]
     return ObjectiveAnswerFeedback(
-        is_correct=answer == correct_answer,
-        selected_answer=answer,
-        correct_answer=correct_answer,
+        is_correct=option_id == correct_option_id,
+        selected_option_id=option_id,
+        selected_answer=option_by_id[option_id].text,
+        correct_option_id=correct_option_id,
+        correct_answer=option_by_id[correct_option_id].text,
         explanation=question.item.explanation,
     )
 

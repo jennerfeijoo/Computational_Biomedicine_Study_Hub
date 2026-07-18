@@ -159,6 +159,8 @@ class LocalizedAssessmentOption:
     def __post_init__(self) -> None:
         if not self.option_id.strip():
             raise ValueError("Assessment option IDs cannot be empty.")
+        if self.option_id != self.option_id.strip():
+            raise ValueError("Assessment option IDs cannot contain surrounding whitespace.")
 
 
 @dataclass(frozen=True, slots=True)
@@ -177,10 +179,23 @@ class LocalizedAssessmentItem:
     def __post_init__(self) -> None:
         if not self.item_id.strip():
             raise ValueError("Assessment item IDs cannot be empty.")
+        if self.item_id != self.item_id.strip():
+            raise ValueError("Assessment item IDs cannot contain surrounding whitespace.")
 
-        option_ids = tuple(option.option_id.strip() for option in self.options)
-        if len(option_ids) != len(set(option_ids)):
+        option_ids = tuple(option.option_id for option in self.options)
+        normalized_ids = tuple(option_id.casefold() for option_id in option_ids)
+        if len(normalized_ids) != len(set(normalized_ids)):
             raise ValueError(f"Assessment item {self.item_id!r} has duplicate option IDs.")
+
+        for locale in AppLocale:
+            localized_texts = tuple(
+                option.text.for_locale(locale).strip().casefold() for option in self.options
+            )
+            if len(localized_texts) != len(set(localized_texts)):
+                raise ValueError(
+                    f"Assessment item {self.item_id!r} has duplicate option text for "
+                    f"locale {locale.value!r}."
+                )
 
         option_based = {
             ActivityType.MULTIPLE_CHOICE,
@@ -240,6 +255,8 @@ class LocalizedAssessmentItem:
             correct_answers=correct_answers,
             explanation=self.explanation.for_locale(locale),
             rubric=tuple(criterion.for_locale(locale) for criterion in self.rubric),
+            option_ids=tuple(option.option_id for option in self.options),
+            correct_option_ids=self.correct_option_ids,
         )
 
 
