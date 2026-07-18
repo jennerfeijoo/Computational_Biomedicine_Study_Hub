@@ -2,7 +2,10 @@ from __future__ import annotations
 
 from PySide6.QtWidgets import QApplication, QStackedWidget
 
-from computational_biomedicine_study_hub.content.dm857 import MODULE_01_FOUNDATIONS, MODULE_06_SEQUENCES
+from computational_biomedicine_study_hub.content.dm857 import (
+    MODULE_01_FOUNDATIONS,
+    MODULE_06_SEQUENCES,
+)
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
 from computational_biomedicine_study_hub.ui.pages.module_reader_page import ModuleReaderPage
 
