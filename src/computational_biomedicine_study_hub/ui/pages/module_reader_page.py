@@ -1,4 +1,4 @@
-"""Read-only PySide6 renderer for one authored learning module."""
+"""PySide6 renderer for one authored learning module."""
 
 from __future__ import annotations
 
@@ -7,6 +7,7 @@ from collections.abc import Iterable
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QFrame,
+    QHBoxLayout,
     QLabel,
     QPlainTextEdit,
     QScrollArea,
@@ -23,6 +24,8 @@ from ...content.models import (
     PracticeExercise,
     WorkedExample,
 )
+from ...learning.assessment_session import SUPPORTED_ACTIVITY_TYPES
+from ..assessment_session_widget import AssessmentSessionWidget
 
 _ACTIVITY_LABELS = {
     "worked_example": "Ejemplo resuelto",
@@ -44,17 +47,28 @@ _ACTIVITY_LABELS = {
 
 
 class ModuleReaderPage(QWidget):
-    """Render theory, examples, practice and assessment without grading interactions."""
+    """Render authored content and a deterministic randomized assessment."""
 
-    def __init__(self, module: LearningModule, parent: QWidget | None = None) -> None:
+    def __init__(
+        self,
+        module: LearningModule,
+        *,
+        assessment_bank: tuple[AssessmentItem, ...] | None = None,
+        parent: QWidget | None = None,
+    ) -> None:
         super().__init__(parent)
         self.setObjectName("moduleReaderPage")
         self._module = module
+        self._assessment_bank = assessment_bank or tuple(
+            item
+            for item in module.assessment_items
+            if item.activity_type in SUPPORTED_ACTIVITY_TYPES
+        )
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(16)
-        layout.addWidget(self._build_identity_card())
+        layout.setSpacing(10)
+        layout.addWidget(self._build_compact_module_bar())
 
         self._tabs = QTabWidget()
         self._tabs.setObjectName("moduleTabs")
@@ -84,24 +98,18 @@ class ModuleReaderPage(QWidget):
                 return True
         return False
 
-    def _build_identity_card(self) -> QFrame:
-        card = QFrame()
-        card.setObjectName("moduleIdentityCard")
-        card_layout = QVBoxLayout(card)
-        card_layout.setContentsMargins(22, 18, 22, 18)
-        card_layout.setSpacing(7)
+    def _build_compact_module_bar(self) -> QFrame:
+        bar = QFrame()
+        bar.setObjectName("moduleCompactBar")
+        bar_layout = QHBoxLayout(bar)
+        bar_layout.setContentsMargins(16, 10, 16, 10)
+        bar_layout.setSpacing(12)
 
-        kicker = self._label(
-            f"{self._module.course_code} · Módulo 1",
-            "moduleKicker",
-        )
-        title = self._label(self._module.title, "moduleTitle")
-        summary = self._label(self._module.summary, "moduleSummary")
-
-        card_layout.addWidget(kicker)
-        card_layout.addWidget(title)
-        card_layout.addWidget(summary)
-        return card
+        kicker = self._label(f"{self._module.course_code} · Módulo 1", "moduleKicker")
+        title = self._label(self._module.title, "moduleCompactTitle")
+        bar_layout.addWidget(kicker)
+        bar_layout.addWidget(title, 1)
+        return bar
 
     def _build_overview_tab(self) -> QScrollArea:
         body = self._scroll_body()
@@ -128,14 +136,11 @@ class ModuleReaderPage(QWidget):
             )
         )
 
-        sequence = (
-            "Teoría conectada → ejemplos resueltos → práctica formativa → "
-            "evaluación del aprendizaje."
-        )
         layout.addWidget(
             self._text_card(
                 "Secuencia de estudio",
-                sequence,
+                "Teoría conectada → ejemplos resueltos → práctica formativa → "
+                "evaluación del aprendizaje.",
                 object_name="moduleSequenceCard",
             )
         )
@@ -168,8 +173,8 @@ class ModuleReaderPage(QWidget):
         assert isinstance(layout, QVBoxLayout)
 
         notice = self._label(
-            "Esta entrega presenta los ejercicios y sus pistas. La respuesta interactiva, "
-            "el registro de intentos y la retroalimentación se implementarán por separado.",
+            "Resuelve primero sin ejecutar el código. Usa las pistas de forma progresiva y "
+            "comprueba después tu razonamiento.",
             "moduleSectionNotice",
         )
         layout.addWidget(notice)
@@ -179,22 +184,11 @@ class ModuleReaderPage(QWidget):
         layout.addStretch(1)
         return self._scroll_area(body, "modulePracticeScroll")
 
-    def _build_assessment_tab(self) -> QScrollArea:
-        body = self._scroll_body()
-        layout = body.layout()
-        assert isinstance(layout, QVBoxLayout)
-
-        notice = self._label(
-            "Las respuestas correctas permanecen separadas del lector. La siguiente entrega "
-            "incorporará controles de respuesta y corrección determinista.",
-            "moduleSectionNotice",
+    def _build_assessment_tab(self) -> QWidget:
+        return AssessmentSessionWidget(
+            self._assessment_bank,
+            question_count=min(6, len(self._assessment_bank)),
         )
-        layout.addWidget(notice)
-
-        for number, item in enumerate(self._module.assessment_items, start=1):
-            layout.addWidget(self._assessment_card(number, item))
-        layout.addStretch(1)
-        return self._scroll_area(body, "moduleAssessmentScroll")
 
     def _concept_card(self, concept: ConceptBlock) -> QFrame:
         card, layout = self._card("conceptCard", concept.title)
@@ -228,20 +222,6 @@ class ModuleReaderPage(QWidget):
 
         layout.addWidget(self._subheading("Pistas"))
         layout.addWidget(self._label(self._numbered(exercise.hints), "contentBulletList"))
-        return card
-
-    def _assessment_card(self, number: int, item: AssessmentItem) -> QFrame:
-        activity = self._activity_label(item.activity_type.value)
-        card, layout = self._card("assessmentCard", f"Pregunta {number} · {activity}")
-        layout.addWidget(self._label(item.prompt, "assessmentPrompt"))
-
-        if item.options:
-            layout.addWidget(self._subheading("Opciones"))
-            layout.addWidget(self._label(self._bullets(item.options), "assessmentOptions"))
-
-        if item.rubric:
-            layout.addWidget(self._subheading("Criterios que se evaluarán"))
-            layout.addWidget(self._label(self._bullets(item.rubric), "assessmentRubric"))
         return card
 
     def _text_card(self, title: str, text: str, *, object_name: str) -> QFrame:
