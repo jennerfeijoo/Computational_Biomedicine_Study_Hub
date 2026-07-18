@@ -1,0 +1,62 @@
+name: Format DM857 module 2
+
+on:
+  push:
+    branches:
+      - feat/dm857-module-02-conditionals
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/dm857-module-02-conditionals
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Ruff
+        run: python -m pip install "ruff>=0.5,<1"
+
+      - name: Format changed Python files
+        run: |
+          ruff check \
+            src/computational_biomedicine_study_hub/content/dm857/__init__.py \
+            src/computational_biomedicine_study_hub/content/dm857/module_02_conditionals.py \
+            src/computational_biomedicine_study_hub/content/dm857/module_02_objective_bank.py \
+            src/computational_biomedicine_study_hub/courses/dm857.py \
+            src/computational_biomedicine_study_hub/ui/pages/module_reader_page.py \
+            tests/test_dm857_module_02_content.py \
+            tests/test_dm857_module_reader.py \
+            --fix
+          ruff format \
+            src/computational_biomedicine_study_hub/content/dm857/__init__.py \
+            src/computational_biomedicine_study_hub/content/dm857/module_02_conditionals.py \
+            src/computational_biomedicine_study_hub/content/dm857/module_02_objective_bank.py \
+            src/computational_biomedicine_study_hub/courses/dm857.py \
+            src/computational_biomedicine_study_hub/ui/pages/module_reader_page.py \
+            tests/test_dm857_module_02_content.py \
+            tests/test_dm857_module_reader.py
+
+      - name: Commit formatted files and remove temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/format_dm857_module2.yml
+          git add \
+            src/computational_biomedicine_study_hub/content/dm857/__init__.py \
+            src/computational_biomedicine_study_hub/content/dm857/module_02_conditionals.py \
+            src/computational_biomedicine_study_hub/content/dm857/module_02_objective_bank.py \
+            src/computational_biomedicine_study_hub/courses/dm857.py \
+            src/computational_biomedicine_study_hub/ui/pages/module_reader_page.py \
+            tests/test_dm857_module_02_content.py \
+            tests/test_dm857_module_reader.py
+          git commit -m "format DM857 module 2 implementation"
+          git push origin HEAD:feat/dm857-module-02-conditionals
