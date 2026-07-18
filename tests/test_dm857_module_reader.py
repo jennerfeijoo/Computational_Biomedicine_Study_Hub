@@ -1,3 +1,5 @@
+"""Integration tests for DM857 module navigation and lazy reader sections."""
+
 from __future__ import annotations
 
 from PySide6.QtWidgets import QApplication, QComboBox, QFrame, QLabel, QTabWidget
