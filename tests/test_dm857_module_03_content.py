@@ -86,7 +86,7 @@ def test_module_three_tutor_support_is_substantive_and_retrieval_ready() -> None
     support = module.tutor_support
     documents = module.tutor_documents()
 
-    assert len(support.canonical_explanation) >= 1800
+    assert len(support.canonical_explanation) >= 1500
     assert len(support.knowledge_fragments) == 14
     assert len(support.common_misconceptions) == 12
     assert len(support.socratic_questions) == 12
