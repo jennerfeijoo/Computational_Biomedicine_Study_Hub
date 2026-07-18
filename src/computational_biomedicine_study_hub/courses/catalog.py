@@ -11,11 +11,11 @@ from .dm857 import COURSE as DM857
 from .models import CourseRegistration
 
 
-COURSES: tuple[CourseRegistration, ...] = tuple(
-    sorted(
-        (DM857, DM847, BMB830, BMB831),
-        key=lambda course: (course.semester, course.code),
-    )
+COURSES: tuple[CourseRegistration, ...] = (
+    DM857,
+    DM847,
+    BMB830,
+    BMB831,
 )
 
 
