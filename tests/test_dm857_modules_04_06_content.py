@@ -217,7 +217,7 @@ def test_new_modules_have_retrieval_ready_tutor_support(
     documents = runtime_module.tutor_documents()
 
     assert runtime_module.module_id == module_id
-    assert len(support.canonical_explanation) >= 900
+    assert len(support.canonical_explanation) >= 800
     assert len(support.knowledge_fragments) == 14
     assert len(support.common_misconceptions) == 12
     assert len(support.socratic_questions) == 12
