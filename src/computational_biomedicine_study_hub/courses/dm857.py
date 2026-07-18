@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from PySide6.QtWidgets import QVBoxLayout, QWidget
 
-from ..content.dm857 import MODULE_01_FOUNDATIONS
+from ..content.dm857 import EXTRA_CLOSED_ASSESSMENT_ITEMS, MODULE_01_FOUNDATIONS
+from ..learning.assessment_session import SUPPORTED_ACTIVITY_TYPES
 from ..ui.pages.module_reader_page import ModuleReaderPage
 from .models import CourseRegistration
 
@@ -16,11 +17,21 @@ class DM857Page(QWidget):
         super().__init__()
         self.setObjectName("dm857CoursePage")
 
+        authored_closed_items = tuple(
+            item
+            for item in MODULE_01_FOUNDATIONS.assessment_items
+            if item.activity_type in SUPPORTED_ACTIVITY_TYPES
+        )
+        assessment_bank = authored_closed_items + EXTRA_CLOSED_ASSESSMENT_ITEMS
+
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(0)
 
-        self._reader = ModuleReaderPage(MODULE_01_FOUNDATIONS)
+        self._reader = ModuleReaderPage(
+            MODULE_01_FOUNDATIONS,
+            assessment_bank=assessment_bank,
+        )
         layout.addWidget(self._reader, 1)
 
     @property
