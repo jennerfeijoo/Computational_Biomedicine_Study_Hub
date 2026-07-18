@@ -37,10 +37,7 @@ def test_translator_returns_complete_messages_in_all_languages() -> None:
 
     for locale, rendered in expected.items():
         translator = Translator(locale)
-        assert (
-            translator.text(MessageKey.COURSE_METADATA, semester=1, ects=10)
-            == rendered
-        )
+        assert translator.text(MessageKey.COURSE_METADATA, semester=1, ects=10) == rendered
 
 
 def test_translator_can_change_locale_without_reconstruction() -> None:
