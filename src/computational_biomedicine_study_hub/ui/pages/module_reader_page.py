@@ -7,6 +7,7 @@ from collections.abc import Iterable
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QFrame,
+    QHBoxLayout,
     QLabel,
     QPlainTextEdit,
     QScrollArea,
@@ -53,12 +54,13 @@ class ModuleReaderPage(QWidget):
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(16)
-        layout.addWidget(self._build_identity_card())
+        layout.setSpacing(8)
+        layout.addWidget(self._build_context_bar())
 
         self._tabs = QTabWidget()
         self._tabs.setObjectName("moduleTabs")
         self._tabs.setDocumentMode(True)
+        self._tabs.setUsesScrollButtons(True)
         self._tabs.addTab(self._build_overview_tab(), "Resumen")
         self._tabs.addTab(self._build_concepts_tab(), "Conceptos")
         self._tabs.addTab(self._build_examples_tab(), "Ejemplos")
@@ -84,24 +86,24 @@ class ModuleReaderPage(QWidget):
                 return True
         return False
 
-    def _build_identity_card(self) -> QFrame:
-        card = QFrame()
-        card.setObjectName("moduleIdentityCard")
-        card_layout = QVBoxLayout(card)
-        card_layout.setContentsMargins(22, 18, 22, 18)
-        card_layout.setSpacing(7)
+    def _build_context_bar(self) -> QFrame:
+        bar = QFrame()
+        bar.setObjectName("moduleContextBar")
+        bar_layout = QHBoxLayout(bar)
+        bar_layout.setContentsMargins(14, 8, 14, 8)
+        bar_layout.setSpacing(12)
 
         kicker = self._label(
             f"{self._module.course_code} · Módulo 1",
-            "moduleKicker",
+            "moduleContextKicker",
         )
-        title = self._label(self._module.title, "moduleTitle")
-        summary = self._label(self._module.summary, "moduleSummary")
+        kicker.setWordWrap(False)
+        title = self._label(self._module.title, "moduleContextTitle")
+        title.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
 
-        card_layout.addWidget(kicker)
-        card_layout.addWidget(title)
-        card_layout.addWidget(summary)
-        return card
+        bar_layout.addWidget(kicker)
+        bar_layout.addWidget(title, 1)
+        return bar
 
     def _build_overview_tab(self) -> QScrollArea:
         body = self._scroll_body()
