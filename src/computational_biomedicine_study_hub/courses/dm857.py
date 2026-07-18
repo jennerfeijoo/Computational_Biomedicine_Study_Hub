@@ -1,32 +1,66 @@
-"""DM857 course registration and initial page."""
+"""DM857 course registration and authored-module reader."""
 
 from __future__ import annotations
 
-from PySide6.QtWidgets import QWidget
+from PySide6.QtWidgets import QFrame, QLabel, QPushButton, QVBoxLayout, QWidget
 
-from ..ui.pages.course_overview_page import CourseOverviewPage
+from ..content.dm857 import MODULE_01_FOUNDATIONS
+from ..ui.pages.module_reader_page import ModuleReaderPage
 from .models import CourseRegistration
 
 
-class DM857Page(CourseOverviewPage):
-    """Initial programming course page; modules will be implemented independently."""
+class DM857Page(QWidget):
+    """Host the independently authored modules for Introduction to Programming."""
 
     def __init__(self) -> None:
-        super().__init__(
-            code="DM857",
-            ects=10,
-            summary=(
-                "Programación estructurada en Python, resolución de problemas, "
-                "estructuras de datos, recursión y testing."
-            ),
-            planned_sections=(
-                "Conceptos y pensamiento computacional",
-                "Ejemplos de código ejecutables",
-                "Resolución guiada de problemas",
-                "Testing, depuración y errores frecuentes",
-                "Preguntas de explicación oral",
-            ),
+        super().__init__()
+        self.setObjectName("dm857CoursePage")
+
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(16)
+
+        layout.addWidget(self._build_course_card())
+
+        module_heading = QLabel("Módulos disponibles")
+        module_heading.setObjectName("sectionHeading")
+        layout.addWidget(module_heading)
+
+        self._module_button = QPushButton(f"Módulo 1 · {MODULE_01_FOUNDATIONS.title}")
+        self._module_button.setObjectName("moduleSelectorButton")
+        self._module_button.setCheckable(True)
+        self._module_button.setChecked(True)
+        self._module_button.setEnabled(False)
+        layout.addWidget(self._module_button)
+
+        self._reader = ModuleReaderPage(MODULE_01_FOUNDATIONS)
+        layout.addWidget(self._reader, 1)
+
+    @property
+    def reader(self) -> ModuleReaderPage:
+        """Return the active module reader."""
+        return self._reader
+
+    @staticmethod
+    def _build_course_card() -> QFrame:
+        card = QFrame()
+        card.setObjectName("courseIdentityCard")
+        card_layout = QVBoxLayout(card)
+        card_layout.setContentsMargins(20, 18, 20, 18)
+        card_layout.setSpacing(7)
+
+        code = QLabel("DM857 · 10 ECTS")
+        code.setObjectName("courseCode")
+        card_layout.addWidget(code)
+
+        summary = QLabel(
+            "Programación estructurada en Python, resolución de problemas, estructuras "
+            "de datos, recursión, abstracción, testing y depuración."
         )
+        summary.setObjectName("courseSummary")
+        summary.setWordWrap(True)
+        card_layout.addWidget(summary)
+        return card
 
 
 def create_page() -> QWidget:

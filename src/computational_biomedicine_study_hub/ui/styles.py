@@ -61,7 +61,9 @@ QLabel#courseCardMetadata,
 QLabel#courseCardSummary,
 QLabel#courseSummary,
 QLabel#courseNotice,
-QLabel#settingsExplanation {
+QLabel#settingsExplanation,
+QLabel#moduleSummary,
+QLabel#moduleSectionNotice {
     color: #66727f;
 }
 
@@ -72,6 +74,14 @@ QLabel#sectionHeading {
 
 QFrame#courseCard,
 QFrame#courseIdentityCard,
+QFrame#moduleIdentityCard,
+QFrame#moduleOverviewCard,
+QFrame#moduleObjectivesCard,
+QFrame#moduleSequenceCard,
+QFrame#conceptCard,
+QFrame#exampleCard,
+QFrame#practiceCard,
+QFrame#assessmentCard,
 QGroupBox#settingsGroup {
     background: #ffffff;
     border: 1px solid #d8e0e8;
@@ -95,7 +105,8 @@ QFrame#courseCard:hover {
 }
 
 QLabel#courseCardCode,
-QLabel#courseCode {
+QLabel#courseCode,
+QLabel#moduleKicker {
     color: #2f80ed;
     font-size: 17px;
     font-weight: 700;
@@ -106,11 +117,42 @@ QLabel#courseCardTitle {
     font-weight: 600;
 }
 
+QLabel#moduleTitle {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+QLabel#contentCardTitle {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+QLabel#contentSubheading {
+    color: #394b59;
+    font-size: 13px;
+    font-weight: 700;
+    padding-top: 4px;
+}
+
 QLabel#courseCardSummary,
 QLabel#courseSummary,
 QLabel#courseSectionList,
-QLabel#courseNotice {
+QLabel#courseNotice,
+QLabel#moduleSummary,
+QLabel#contentBody,
+QLabel#contentPrompt,
+QLabel#contentBulletList,
+QLabel#assessmentPrompt,
+QLabel#assessmentOptions,
+QLabel#assessmentRubric {
     line-height: 1.35;
+}
+
+QLabel#moduleSectionNotice {
+    background: #edf4fb;
+    border: 1px solid #c7d9ec;
+    border-radius: 8px;
+    padding: 12px;
 }
 
 QLineEdit#ollamaBaseUrl,
@@ -155,10 +197,69 @@ QPushButton#secondaryActionButton:hover {
     background: #edf4fb;
 }
 
+QPushButton#moduleSelectorButton {
+    background: #eaf2fd;
+    color: #1d5fa7;
+    border: 1px solid #9fc1e8;
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+}
+
 QPushButton:disabled,
 QComboBox:disabled {
     color: #96a1ad;
     background: #edf1f5;
+}
+
+QPushButton#moduleSelectorButton:disabled {
+    background: #eaf2fd;
+    color: #1d5fa7;
+    border: 1px solid #9fc1e8;
+}
+
+QTabWidget#moduleTabs::pane {
+    background: #f4f6f8;
+    border: none;
+    top: -1px;
+}
+
+QTabWidget#moduleTabs QTabBar::tab {
+    background: #e5eaf0;
+    color: #52606d;
+    border: 1px solid #cbd5df;
+    border-bottom: none;
+    padding: 9px 15px;
+    margin-right: 3px;
+}
+
+QTabWidget#moduleTabs QTabBar::tab:selected {
+    background: #ffffff;
+    color: #1f2933;
+    font-weight: 700;
+}
+
+QWidget#moduleScrollBody,
+QScrollArea#moduleOverviewScroll,
+QScrollArea#moduleConceptsScroll,
+QScrollArea#moduleExamplesScroll,
+QScrollArea#modulePracticeScroll,
+QScrollArea#moduleAssessmentScroll {
+    background: #f4f6f8;
+}
+
+QPlainTextEdit#exampleCode,
+QPlainTextEdit#exampleOutput,
+QPlainTextEdit#practiceCode {
+    background: #101820;
+    color: #e6edf3;
+    border: 1px solid #263746;
+    border-radius: 7px;
+    padding: 9px;
+    font-family: "Cascadia Code", "Consolas", monospace;
+    font-size: 13px;
+    selection-background-color: #2f80ed;
 }
 
 QLabel#ollamaStatus[connectionState="idle"] {
