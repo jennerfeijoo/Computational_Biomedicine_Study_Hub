@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .locales import AppLocale, DEFAULT_LOCALE, SUPPORTED_LOCALES
+from .locales import DEFAULT_LOCALE, SUPPORTED_LOCALES, AppLocale
 from .messages import ALL_MESSAGE_KEYS, MessageKey
 from .service import TranslationError, Translator, validate_catalogs
 
