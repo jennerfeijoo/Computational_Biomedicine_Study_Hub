@@ -11,10 +11,7 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 
 
 def test_module_one_materializes_complete_content_in_every_locale() -> None:
-    modules = {
-        locale: LOCALIZED_MODULE_01_FOUNDATIONS.materialize(locale)
-        for locale in AppLocale
-    }
+    modules = {locale: LOCALIZED_MODULE_01_FOUNDATIONS.materialize(locale) for locale in AppLocale}
 
     for module in modules.values():
         assert len(module.objectives) == 6
@@ -59,10 +56,7 @@ def test_assessment_correctness_is_stable_across_languages() -> None:
 def test_objective_question_bank_is_complete_in_every_locale() -> None:
     assert len(LOCALIZED_OBJECTIVE_QUESTION_BANK) == 20
 
-    banks = {
-        locale: materialize_objective_question_bank(locale)
-        for locale in AppLocale
-    }
+    banks = {locale: materialize_objective_question_bank(locale) for locale in AppLocale}
     for bank in banks.values():
         assert len(bank) == 20
         assert len({item.item_id for item in bank}) == 20
