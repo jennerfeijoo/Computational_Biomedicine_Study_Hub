@@ -4,12 +4,16 @@ on:
   push:
     branches:
       - feat/dm857-m01-trilingual-content
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
 
 jobs:
   assemble:
+    if: github.head_ref == 'feat/dm857-m01-trilingual-content' || github.ref_name == 'feat/dm857-m01-trilingual-content'
     runs-on: ubuntu-latest
     steps:
       - name: Check out branch
