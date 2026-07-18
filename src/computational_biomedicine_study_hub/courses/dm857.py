@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from PySide6.QtWidgets import QVBoxLayout, QWidget
 
-from ..content.dm857 import MODULE_01_FOUNDATIONS
+from ..content.dm857 import MODULE_01_FOUNDATIONS, OBJECTIVE_QUESTION_BANK
 from ..ui.pages.module_reader_page import ModuleReaderPage
 from .models import CourseRegistration
 
@@ -20,7 +20,10 @@ class DM857Page(QWidget):
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(0)
 
-        self._reader = ModuleReaderPage(MODULE_01_FOUNDATIONS)
+        self._reader = ModuleReaderPage(
+            MODULE_01_FOUNDATIONS,
+            objective_question_bank=OBJECTIVE_QUESTION_BANK,
+        )
         layout.addWidget(self._reader, 1)
 
     @property
