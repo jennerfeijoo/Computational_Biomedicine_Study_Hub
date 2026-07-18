@@ -1,0 +1,167 @@
+            activity_type=ActivityType.CODE_COMPLETION,
+            prompt=_t(source[9].prompt, "Complete so the output is 1500:\nvolume_ml = 1.5\nvolume_ul = ____\nprint(volume_ul)", "Udfyld, så outputtet bliver 1500:\nvolume_ml = 1.5\nvolume_ul = ____\nprint(volume_ul)"),
+            options=(),
+            correct_option_ids=(),
+            accepted_answers=(_same("int(volume_ml * 1000)"),),
+            explanation=_t(source[9].explanation, "Multiplying by 1000 converts mL to µL and int represents the count without a fractional part.", "Multiplikation med 1000 konverterer mL til µL, og int repræsenterer antallet uden decimaldel."),
+        ),
+    )
+
+
+def _localized_tutor_support() -> LocalizedTutorSupportPacket:
+    source = _ES.tutor_support
+    canonical_en = (
+        "This module teaches how to interpret a program as a verifiable transformation from inputs to outputs. "
+        "The learner separates the concrete problem, the model that retains relevant variables, the algorithm "
+        "that specifies the steps, and the Python program that executes them. Within the program, an expression "
+        "is evaluated to produce a value; each value has a type; a variable is a name associated with its current "
+        "value; and an assignment changes state after fully evaluating its right-hand side. Understanding is shown "
+        "by predicting results, tracing state, and justifying conversions from data meaning rather than memorising "
+        "symbols. Correctness requires comparing observed behaviour with a specification through tests that define "
+        "an input, an expected result, and an acceptance criterion."
+    )
+    canonical_da = (
+        "Dette modul lærer den studerende at fortolke et program som en efterprøvelig transformation fra input "
+        "til output. Den studerende adskiller det konkrete problem, modellen der bevarer relevante variable, "
+        "algoritmen der beskriver trinene, og Python-programmet der udfører dem. I programmet evalueres et udtryk "
+        "for at give en værdi; hver værdi har en type; en variabel er et navn knyttet til den aktuelle værdi; og "
+        "en tildeling ændrer tilstanden efter fuld evaluering af højresiden. Forståelse vises ved at forudsige "
+        "resultater, følge tilstanden og begrunde konverteringer ud fra dataenes betydning frem for at huske "
+        "symboler. Korrekthed kræver sammenligning af observeret adfærd med en specifikation gennem test, der "
+        "definerer input, forventet resultat og acceptkriterium."
+    )
+    knowledge_en = (
+        "/ produces float and // produces the floor quotient.",
+        "input() returns str; a numeric string must be converted before arithmetic.",
+        "A variable may be reassigned, but every value has a defined type.",
+        "Assignment evaluates the right-hand side first and then updates the left-hand name.",
+        "Reassigning a variable does not automatically recalculate other variables.",
+        "int() applied to float removes the fractional part toward zero.",
+        "Parentheses may change precedence and document intent.",
+        "A program without exceptions may still contain a logic error.",
+        "A test needs an expected result defined in advance.",
+        "Names containing units reduce dimensional errors.",
+    )
+    knowledge_da = (
+        "/ giver float, og // giver heltalskvotienten nedad.",
+        "input() returnerer str; en numerisk streng skal konverteres før aritmetik.",
+        "En variabel kan gentildeles, men hver værdi har en bestemt type.",
+        "Tildeling evaluerer først højresiden og opdaterer derefter navnet til venstre.",
+        "Gentildeling af en variabel genberegner ikke automatisk andre variable.",
+        "int() anvendt på float fjerner decimaldelen mod nul.",
+        "Parenteser kan ændre præcedens og dokumentere hensigten.",
+        "Et program uden undtagelser kan stadig indeholde en logisk fejl.",
+        "En test kræver et forventet resultat, der er defineret på forhånd.",
+        "Navne med enheder reducerer dimensionsfejl.",
+    )
+    misconceptions_en = (
+        "Confusing = with mathematical equality.",
+        "Believing that '12' is a number because it contains digits.",
+        "Assuming int(4.9) rounds to 5.",
+        "Using ^ for exponentiation.",
+        "Thinking that changing x automatically updates y.",
+        "Treating every error as a syntax error.",
+        "Considering exception-free completion proof of correctness.",
+        "Omitting units from numeric variables.",
+    )
+    misconceptions_da = (
+        "At forveksle = med matematisk lighed.",
+        "At tro, at '12' er et tal, fordi det indeholder cifre.",
+        "At antage, at int(4.9) afrunder til 5.",
+        "At bruge ^ som potensoperator.",
+        "At tro, at en ændring af x automatisk opdaterer y.",
+        "At fortolke enhver fejl som en syntaksfejl.",
+        "At betragte afslutning uden undtagelser som bevis for korrekthed.",
+        "At udelade enheder fra numeriske variable.",
+    )
+    questions_en = (
+        "What are the inputs and what type should each have?",
+        "What value does the right-hand expression produce first?",
+        "Which names change after this statement?",
+        "Is the operation defined for those types?",
+        "What unit does each variable represent?",
+        "What result do you expect for a small input?",
+        "Does the failure prevent execution or produce a wrong answer?",
+        "Can you build one trace row per statement?",
+    )
+    questions_da = (
+        "Hvad er inputtene, og hvilken type bør hvert input have?",
+        "Hvilken værdi giver udtrykket til højre først?",
+        "Hvilke navne ændres efter denne sætning?",
+        "Er operationen defineret for disse typer?",
+        "Hvilken enhed repræsenterer hver variabel?",
+        "Hvilket resultat forventer du for et lille input?",
+        "Forhindrer fejlen udførelse, eller giver den et forkert svar?",
+        "Kan du oprette én gennemgangsrække pr. sætning?",
+    )
+    criteria_en = (
+        "Uses technical vocabulary correctly.",
+        "Predicts both value and type when required.",
+        "Justifies conversions.",
+        "Maintains unit consistency.",
+        "Explains evaluation order.",
+        "Distinguishes syntax, runtime, and logic.",
+        "Proposes concrete tests.",
+        "Connects code with the specification.",
+    )
+    criteria_da = (
+        "Bruger teknisk ordforråd korrekt.",
+        "Forudsiger både værdi og type, når det kræves.",
+        "Begrunder konverteringer.",
+        "Bevarer konsistens i enheder.",
+        "Forklarer evalueringsrækkefølgen.",
+        "Skelner mellem syntaks, kørsel og logik.",
+        "Foreslår konkrete test.",
+        "Forbinder koden med specifikationen.",
+    )
+    constraints_en = (
+        "Give a hint first during an exercise unless the full solution is explicitly requested.",
+        "Do not invent Python rules; propose a minimal test when uncertain.",
+        "Do not validate a result without checking reasoning and types.",
+        "Do not introduce conditionals, loops, advanced functions, or objects when only this module's concepts are required.",
+        "Separate conceptual explanation, tracing, and corrected code.",
+        "Point out unit errors before secondary syntax details.",
+        "Use biomedical examples as context, not as clinical advice.",
+    )
+    constraints_da = (
+        "Giv først et hint under en øvelse, medmindre den fulde løsning udtrykkeligt ønskes.",
+        "Opfind ikke Python-regler; foreslå en minimal test ved tvivl.",
+        "Godkend ikke et resultat uden at kontrollere ræsonnement og typer.",
+        "Introducér ikke betingelser, løkker, avancerede funktioner eller objekter, når kun modulets begreber kræves.",
+        "Adskil konceptuel forklaring, gennemgang og rettet kode.",
+        "Påpeg enhedsfejl før sekundære syntaksdetaljer.",
+        "Brug biomedicinske eksempler som kontekst, ikke som klinisk rådgivning.",
+    )
+    return LocalizedTutorSupportPacket(
+        canonical_explanation=_t(source.canonical_explanation, canonical_en, canonical_da),
+        knowledge_fragments=tuple(_t(es, en, da) for es, en, da in zip(source.knowledge_fragments, knowledge_en, knowledge_da, strict=True)),
+        common_misconceptions=tuple(_t(es, en, da) for es, en, da in zip(source.common_misconceptions, misconceptions_en, misconceptions_da, strict=True)),
+        socratic_questions=tuple(_t(es, en, da) for es, en, da in zip(source.socratic_questions, questions_en, questions_da, strict=True)),
+        grading_criteria=tuple(_t(es, en, da) for es, en, da in zip(source.grading_criteria, criteria_en, criteria_da, strict=True)),
+        response_constraints=tuple(_t(es, en, da) for es, en, da in zip(source.response_constraints, constraints_en, constraints_da, strict=True)),
+        source_basis=source.source_basis,
+    )
+
+
+LOCALIZED_MODULE = LocalizedLearningModule(
+    course_code=_ES.course_code,
+    module_id=_ES.module_id,
+    title=_t(
+        _ES.title,
+        "Problem solving, values, types, and program state",
+        "Problemløsning, værdier, typer og programtilstand",
+    ),
+    summary=_t(
+        _ES.summary,
+        "An introduction to computational reasoning and the minimum elements of a Python program: problem, model, algorithm, expressions, values, types, variables, assignment, type conversion, input and output, tracing, errors, and basic testing.",
+        "En introduktion til computationel tænkning og de grundlæggende elementer i et Python-program: problem, model, algoritme, udtryk, værdier, typer, variable, tildeling, typekonvertering, input og output, gennemgang, fejl og grundlæggende test.",
+    ),
+    objectives=_localized_objectives(),
+    concepts=_localized_concepts(),
+    worked_examples=_localized_examples(),
+    practice_exercises=_localized_practice(),
+    assessment_items=_localized_assessments(),
+    tutor_support=_localized_tutor_support(),
+)
+
+__all__ = ["LOCALIZED_MODULE"]
