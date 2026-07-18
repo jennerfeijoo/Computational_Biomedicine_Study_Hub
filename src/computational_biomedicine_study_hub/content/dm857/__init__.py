@@ -1,4 +1,4 @@
-"""Authored content for DM857 Introduction to Programming."""
+"""Spanish runtime and complete trilingual authored content for DM857."""
 
 from __future__ import annotations
 
