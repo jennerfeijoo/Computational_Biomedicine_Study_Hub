@@ -113,6 +113,7 @@ def test_generator_rejects_unsupported_activity_types() -> None:
 
 def test_dm857_page_renders_six_interactive_questions(qapp: QApplication) -> None:
     page = DM857Page()
+    assert page.reader.select_section("Evaluación")
     widget = page.findChild(ObjectiveAssessmentWidget, "objectiveAssessmentWidget")
 
     assert widget is not None

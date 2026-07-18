@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import QSignalBlocker, Qt, Slot
 from PySide6.QtWidgets import (
     QFrame,
     QHBoxLayout,
@@ -40,7 +40,7 @@ _ACTIVITY_LABELS = {
 
 
 class ModuleReaderPage(QWidget):
-    """Render theory, examples, guided practice and module-specific assessment."""
+    """Render one module while constructing heavy sections on first use."""
 
     def __init__(
         self,
@@ -54,6 +54,14 @@ class ModuleReaderPage(QWidget):
         self.setObjectName("moduleReaderPage")
         self._module = module
         self._objective_question_bank = objective_question_bank
+        self._section_cache: dict[int, QWidget] = {}
+        self._tab_builders: tuple[tuple[str, Callable[[], QWidget]], ...] = (
+            ("Resumen", self._build_overview_tab),
+            ("Conceptos", self._build_concepts_tab),
+            ("Ejemplos", self._build_examples_tab),
+            ("Práctica", self._build_practice_tab),
+            ("Evaluación", self._build_assessment_tab),
+        )
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
@@ -65,11 +73,15 @@ class ModuleReaderPage(QWidget):
         self._tabs.setObjectName("moduleTabs")
         self._tabs.setDocumentMode(True)
         self._tabs.setUsesScrollButtons(True)
-        self._tabs.addTab(self._build_overview_tab(), "Resumen")
-        self._tabs.addTab(self._build_concepts_tab(), "Conceptos")
-        self._tabs.addTab(self._build_examples_tab(), "Ejemplos")
-        self._tabs.addTab(self._build_practice_tab(), "Práctica")
-        self._tabs.addTab(self._build_assessment_tab(), "Evaluación")
+        for index, (label, _) in enumerate(self._tab_builders):
+            placeholder = QWidget()
+            placeholder.setObjectName("moduleTabPlaceholder")
+            placeholder.setProperty("sectionIndex", index)
+            placeholder.setProperty("sectionLabel", label)
+            self._tabs.addTab(placeholder, label)
+        self._tabs.currentChanged.connect(self._ensure_section_loaded)
+        self._ensure_section_loaded(0)
+        self._tabs.setCurrentIndex(0)
         layout.addWidget(self._tabs, 1)
 
     @property
@@ -82,13 +94,48 @@ class ModuleReaderPage(QWidget):
         """Return the visible section label."""
         return self._tabs.tabText(self._tabs.currentIndex())
 
+    @property
+    def constructed_section_count(self) -> int:
+        """Return the number of fully constructed reader sections."""
+        return len(self._section_cache)
+
+    def has_constructed_section(self, label: str) -> bool:
+        """Return whether the named section has already been constructed."""
+        for index, (section_label, _) in enumerate(self._tab_builders):
+            if section_label == label:
+                return index in self._section_cache
+        return False
+
     def select_section(self, label: str) -> bool:
-        """Select a section by its visible label."""
+        """Select a section by its visible label and construct it if required."""
         for index in range(self._tabs.count()):
             if self._tabs.tabText(index) == label:
-                self._tabs.setCurrentIndex(index)
+                if index == self._tabs.currentIndex():
+                    self._ensure_section_loaded(index)
+                else:
+                    self._tabs.setCurrentIndex(index)
                 return True
         return False
+
+    @Slot(int)
+    def _ensure_section_loaded(self, index: int) -> None:
+        if not 0 <= index < len(self._tab_builders) or index in self._section_cache:
+            return
+
+        label, builder = self._tab_builders[index]
+        page = builder()
+        self._section_cache[index] = page
+        placeholder = self._tabs.widget(index)
+        current_index = self._tabs.currentIndex()
+
+        blocker = QSignalBlocker(self._tabs)
+        self._tabs.removeTab(index)
+        self._tabs.insertTab(index, page, label)
+        self._tabs.setCurrentIndex(current_index if current_index >= 0 else index)
+        del blocker
+
+        if placeholder is not None:
+            placeholder.deleteLater()
 
     def _build_context_bar(self) -> QFrame:
         bar = QFrame()
