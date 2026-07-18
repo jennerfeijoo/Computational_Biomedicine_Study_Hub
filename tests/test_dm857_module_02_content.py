@@ -124,10 +124,16 @@ def test_module_two_randomized_bank_is_large_unique_and_trilingual() -> None:
 
 
 def test_module_two_uses_safe_terminology_and_non_clinical_boundaries() -> None:
-    required_disclaimers = {
-        AppLocale.SPANISH_SPAIN: ("reglas didácticas", "no recomendaciones clínicas"),
-        AppLocale.ENGLISH: ("teaching rules", "not clinical recommendations"),
-        AppLocale.DANISH_DENMARK: ("undervisningsregler", "ikke kliniske anbefalinger"),
+    required_constraint = {
+        AppLocale.SPANISH_SPAIN: (
+            "no presentar umbrales didácticos como recomendaciones clínicas o de laboratorio"
+        ),
+        AppLocale.ENGLISH: (
+            "do not present teaching thresholds as clinical or laboratory recommendations"
+        ),
+        AppLocale.DANISH_DENMARK: (
+            "præsentér ikke undervisningsgrænser som kliniske eller laboratoriemæssige anbefalinger"
+        ),
     }
 
     for locale in AppLocale:
@@ -135,4 +141,4 @@ def test_module_two_uses_safe_terminology_and_non_clinical_boundaries() -> None:
         exported = "\n".join(document.text for document in module.tutor_documents()).casefold()
 
         assert "corrida" not in exported
-        assert all(phrase in exported for phrase in required_disclaimers[locale])
+        assert required_constraint[locale] in exported
