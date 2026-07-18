@@ -1,0 +1,56 @@
+name: Fix DM857 module 2 bank
+
+on:
+  push:
+    branches:
+      - feat/dm857-module-02-conditionals
+
+permissions:
+  contents: write
+
+jobs:
+  fix-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/dm857-module-02-conditionals
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Correct true-false answer tuple
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("src/computational_biomedicine_study_hub/content/dm857/module_02_objective_bank.py")
+          text = path.read_text(encoding="utf-8")
+          old = 'correct_option_ids=(("true",) if correct else ("false",)),'
+          new = 'correct_option_ids=("true",) if correct else ("false",),'
+          if old not in text:
+              raise SystemExit("Expected tuple expression was not found")
+          path.write_text(text.replace(old, new), encoding="utf-8")
+          PY
+
+      - name: Install project and development dependencies
+        run: python -m pip install -e ".[dev]"
+
+      - name: Format and validate
+        run: |
+          ruff check .
+          ruff format --check .
+          mypy
+          pytest
+
+      - name: Commit correction and remove temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/fix_dm857_module2_bank.yml
+          git add src/computational_biomedicine_study_hub/content/dm857/module_02_objective_bank.py
+          git commit -m "fix deterministic true-false bank answers"
+          git push origin HEAD:feat/dm857-module-02-conditionals
