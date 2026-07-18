@@ -7,10 +7,11 @@ to later layers.
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass
 from enum import StrEnum
 from math import isfinite
-from typing import Any, Iterable
+from typing import Any
 
 from .ollama import (
     JsonObject,
