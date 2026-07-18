@@ -51,6 +51,11 @@ ignore = [
   "E501"
 ]
 
+[tool.ruff.lint.per-file-ignores]
+"src/computational_biomedicine_study_hub/content/dm857/module_01_foundations.py" = [
+  "I001"
+]
+
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
