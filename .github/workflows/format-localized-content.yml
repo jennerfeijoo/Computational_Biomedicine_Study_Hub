@@ -1,10 +1,12 @@
 name: Format localized content
 
 on:
-  pull_request:
+  push:
+    branches:
+      - feat/localized-academic-models
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   format:
@@ -12,6 +14,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          ref: feat/localized-academic-models
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -26,11 +30,13 @@ jobs:
           ruff check src/computational_biomedicine_study_hub/content/localized_models.py src/computational_biomedicine_study_hub/content/__init__.py tests/test_localized_academic_models.py --fix
           ruff format src/computational_biomedicine_study_hub/content/localized_models.py src/computational_biomedicine_study_hub/content/__init__.py tests/test_localized_academic_models.py
 
-      - name: Upload formatted files
-        uses: actions/upload-artifact@v4
-        with:
-          name: formatted-localized-content
-          path: |
-            src/computational_biomedicine_study_hub/content/localized_models.py
-            src/computational_biomedicine_study_hub/content/__init__.py
-            tests/test_localized_academic_models.py
+      - name: Commit formatting
+        run: |
+          if git diff --quiet; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/computational_biomedicine_study_hub/content/localized_models.py src/computational_biomedicine_study_hub/content/__init__.py tests/test_localized_academic_models.py
+          git commit -m "format localized academic models"
+          git push origin HEAD:feat/localized-academic-models
