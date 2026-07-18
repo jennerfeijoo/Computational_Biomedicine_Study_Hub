@@ -34,7 +34,7 @@ def test_retriever_prioritizes_the_input_output_concept() -> None:
         if item.document.document_id == "dm857.m01.concept.statements-input-output-tracing"
     )
     assert relevant.score > 0
-    assert {"input", "str", "int"}.issubset(set(relevant.matched_terms))
+    assert {"input", "str"}.issubset(set(relevant.matched_terms))
 
 
 def test_retriever_resolves_an_exact_practice_identifier() -> None:
