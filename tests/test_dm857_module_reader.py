@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QApplication, QFrame, QLabel, QTabWidget
 from computational_biomedicine_study_hub.content.dm857 import MODULE_01_FOUNDATIONS
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
 from computational_biomedicine_study_hub.ui.pages.module_reader_page import ModuleReaderPage
+from computational_biomedicine_study_hub.ui.widgets import GuidedPracticeWidget
 
 
 def test_dm857_page_hosts_the_first_authored_module_without_duplicate_course_cards(
@@ -44,16 +45,19 @@ def test_module_reader_exposes_five_study_sections(qapp: QApplication) -> None:
     assert not reader.select_section("Sección inexistente")
 
 
-def test_module_reader_renders_all_authored_content_cards(qapp: QApplication) -> None:
+def test_module_reader_renders_authored_content_and_guided_practice(
+    qapp: QApplication,
+) -> None:
     reader = ModuleReaderPage(MODULE_01_FOUNDATIONS)
+    practice = reader.findChild(GuidedPracticeWidget, "guidedPracticeWidget")
 
     assert len(reader.findChildren(QFrame, "conceptCard")) == len(MODULE_01_FOUNDATIONS.concepts)
     assert len(reader.findChildren(QFrame, "exampleCard")) == len(
         MODULE_01_FOUNDATIONS.worked_examples
     )
-    assert len(reader.findChildren(QFrame, "practiceCard")) == len(
-        MODULE_01_FOUNDATIONS.practice_exercises
-    )
+    assert practice is not None
+    assert len(practice.exercise_cards) == 4
+    assert reader.findChildren(QFrame, "practiceCard") == []
     assert len(reader.findChildren(QFrame, "assessmentCard")) == len(
         MODULE_01_FOUNDATIONS.assessment_items
     )
