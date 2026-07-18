@@ -13,6 +13,7 @@ from PySide6.QtWidgets import (
 )
 
 from ..courses import COURSES, CourseRegistration
+from .assessment_styles import ASSESSMENT_STYLESHEET
 from .header import PageHeader
 from .navigation import NavigationSidebar
 from .pages.home_page import HomePage
@@ -36,7 +37,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Computational Biomedicine Study Hub")
         self.resize(1200, 760)
         self.setMinimumSize(960, 640)
-        self.setStyleSheet(APPLICATION_STYLESHEET)
+        self.setStyleSheet(APPLICATION_STYLESHEET + ASSESSMENT_STYLESHEET)
 
         self._settings = QSettings()
         self._courses: tuple[CourseRegistration, ...] = COURSES
@@ -50,8 +51,8 @@ class MainWindow(QMainWindow):
 
         content = QWidget()
         content_layout = QVBoxLayout(content)
-        content_layout.setContentsMargins(28, 24, 28, 24)
-        content_layout.setSpacing(20)
+        content_layout.setContentsMargins(22, 16, 22, 18)
+        content_layout.setSpacing(12)
         content_layout.addWidget(self._header)
         content_layout.addWidget(self._stack, 1)
 
