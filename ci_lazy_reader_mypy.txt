@@ -1,3 +1,0 @@
-src/computational_biomedicine_study_hub/courses/dm857.py:123: error: Argument 1 to "removeWidget" of "QStackedWidget" has incompatible type "QWidget | None"; expected "QWidget"  [arg-type]
-src/computational_biomedicine_study_hub/courses/dm857.py:124: error: Item "None" of "QWidget | None" has no attribute "deleteLater"  [union-attr]
-Found 2 errors in 1 file (checked 59 source files)
