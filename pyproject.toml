@@ -47,11 +47,14 @@ select = [
   "N",
   "UP"
 ]
+ignore = [
+  "E501"
+]
 
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
-line-ending = "lf"
+line-ending = "auto"
 
 [tool.mypy]
 python_version = "3.11"
