@@ -115,9 +115,7 @@ def test_course_reader_shows_objective_practice_and_complete_assessment(
     assert reader.findChild(ObjectiveAssessmentWidget, "objectiveAssessmentWidget") is not None
     assert reader.findChild(QLabel, "objectiveAssessmentSectionTitle") is not None
     assert reader.findChild(QLabel, "authoredAssessmentSectionTitle") is not None
-    assert len(reader.findChildren(QFrame, "assessmentCard")) == len(
-        reader.module.assessment_items
-    )
+    assert len(reader.findChildren(QFrame, "assessmentCard")) == len(reader.module.assessment_items)
 
 
 def test_assessment_reader_does_not_render_answer_feedback(qapp: QApplication) -> None:

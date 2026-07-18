@@ -31,9 +31,7 @@ def test_dm857_objective_bank_is_large_unique_and_deterministic() -> None:
         for item in OBJECTIVE_QUESTION_BANK
     )
     assert all(len(item.correct_option_ids) == 1 for item in OBJECTIVE_QUESTION_BANK)
-    assert all(
-        item.correct_option_ids[0] in item.option_ids for item in OBJECTIVE_QUESTION_BANK
-    )
+    assert all(item.correct_option_ids[0] in item.option_ids for item in OBJECTIVE_QUESTION_BANK)
 
 
 def test_generator_builds_balanced_varied_sessions_and_shuffles_options() -> None:
@@ -54,8 +52,7 @@ def test_generator_builds_balanced_varied_sessions_and_shuffles_options() -> Non
         ActivityType.TRUE_FALSE,
     }
     assert all(
-        {option.option_id for option in question.display_options}
-        == set(question.item.option_ids)
+        {option.option_id for option in question.display_options} == set(question.item.option_ids)
         for question in first.questions
     )
 
@@ -85,13 +82,9 @@ def test_objective_grading_returns_authored_feedback_by_option_id() -> None:
 
 def test_option_identity_is_preserved_across_all_locales() -> None:
     localized_bundle = LOCALIZED_BUNDLES[0]
-    bundles = {
-        locale: localized_bundle.materialize(locale)
-        for locale in AppLocale
-    }
+    bundles = {locale: localized_bundle.materialize(locale) for locale in AppLocale}
     first_item_by_locale = {
-        locale: bundle.objective_question_bank[0]
-        for locale, bundle in bundles.items()
+        locale: bundle.objective_question_bank[0] for locale, bundle in bundles.items()
     }
 
     item_ids = {item.item_id for item in first_item_by_locale.values()}
@@ -162,9 +155,7 @@ def test_question_card_exposes_correct_answer_after_an_error(qapp: QApplication)
     card: ObjectiveQuestionCard = widget.question_cards[0]
     item = bank_by_id[card.item_id]
     wrong_option_id = next(
-        option_id
-        for option_id in item.option_ids
-        if option_id != item.correct_option_ids[0]
+        option_id for option_id in item.option_ids if option_id != item.correct_option_ids[0]
     )
 
     assert card.choose_option(wrong_option_id)

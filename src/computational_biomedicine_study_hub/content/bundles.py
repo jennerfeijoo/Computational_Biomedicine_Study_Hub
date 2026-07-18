@@ -39,9 +39,7 @@ class ModuleBundle:
             )
 
         wrong_scope = tuple(
-            item_id
-            for item_id in item_ids
-            if not item_id.startswith(f"{self.module.module_id}.")
+            item_id for item_id in item_ids if not item_id.startswith(f"{self.module.module_id}.")
         )
         if wrong_scope:
             raise ValueError(
@@ -103,8 +101,7 @@ class LocalizedModuleBundle:
         return ModuleBundle(
             module=self.localized_module.materialize(resolved),
             objective_question_bank=tuple(
-                item.materialize(resolved)
-                for item in self.localized_objective_question_bank
+                item.materialize(resolved) for item in self.localized_objective_question_bank
             ),
             content_version=self.content_version,
         )

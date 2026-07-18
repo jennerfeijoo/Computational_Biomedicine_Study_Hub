@@ -39,9 +39,7 @@ LOCALIZED_BUNDLES = (
 )
 validate_bundle_catalog(LOCALIZED_BUNDLES)
 
-BUNDLES = tuple(
-    bundle.materialize(AppLocale.SPANISH_SPAIN) for bundle in LOCALIZED_BUNDLES
-)
+BUNDLES = tuple(bundle.materialize(AppLocale.SPANISH_SPAIN) for bundle in LOCALIZED_BUNDLES)
 
 MODULE_01_FOUNDATIONS = BUNDLES[0].module
 MODULE_02_CONDITIONALS = BUNDLES[1].module

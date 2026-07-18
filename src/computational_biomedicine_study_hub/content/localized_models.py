@@ -188,7 +188,9 @@ class LocalizedAssessmentItem:
             raise ValueError(f"Assessment item {self.item_id!r} has duplicate option IDs.")
 
         for locale in AppLocale:
-            localized_texts = tuple(option.text.for_locale(locale).strip().casefold() for option in self.options)
+            localized_texts = tuple(
+                option.text.for_locale(locale).strip().casefold() for option in self.options
+            )
             if len(localized_texts) != len(set(localized_texts)):
                 raise ValueError(
                     f"Assessment item {self.item_id!r} has duplicate option text for "
