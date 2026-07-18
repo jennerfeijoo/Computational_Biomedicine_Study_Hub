@@ -40,13 +40,18 @@ from .styles import APPLICATION_STYLESHEET
 class MainWindow(QMainWindow):
     """Provide localized navigation, course hosting and lightweight persistence."""
 
-    def __init__(self, parent: QWidget | None = None) -> None:
+    def __init__(
+        self,
+        parent: QWidget | None = None,
+        *,
+        settings: QSettings | None = None,
+    ) -> None:
         super().__init__(parent)
         self.resize(1200, 760)
         self.setMinimumSize(960, 640)
         self.setStyleSheet(APPLICATION_STYLESHEET + LANGUAGE_STYLESHEET)
 
-        self._settings = QSettings()
+        self._settings = settings or QSettings()
         self._language = LanguageController(self._settings, self)
         self._translator = self._language.translator
         self._courses: tuple[CourseRegistration, ...] = COURSES
