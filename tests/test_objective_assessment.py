@@ -8,8 +8,8 @@ from PySide6.QtWidgets import QApplication
 from computational_biomedicine_study_hub.content.dm857 import OBJECTIVE_QUESTION_BANK
 from computational_biomedicine_study_hub.content.models import AssessmentItem
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
-from computational_biomedicine_study_hub.learning import (
-    ActivityType,
+from computational_biomedicine_study_hub.learning import ActivityType
+from computational_biomedicine_study_hub.learning.objective_assessment import (
     ObjectiveSessionGenerator,
     grade_objective_answer,
 )
@@ -48,7 +48,8 @@ def test_generator_builds_balanced_varied_sessions_and_shuffles_options() -> Non
         ActivityType.TRUE_FALSE,
     }
     assert all(
-        set(question.display_options) == set(question.item.options) for question in first.questions
+        set(question.display_options) == set(question.item.options)
+        for question in first.questions
     )
 
 
