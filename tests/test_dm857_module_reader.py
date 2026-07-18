@@ -86,6 +86,10 @@ def test_student_can_select_and_autocorrect_an_answer(
     qtbot: QtBot,
 ) -> None:
     page = DM857Page()
+    qtbot.addWidget(page)
+    page.show()
+    assert page.reader.select_section("Evaluación")
+
     widget = page.findChild(AssessmentSessionWidget, "assessmentSessionWidget")
     assert widget is not None
 
@@ -98,6 +102,7 @@ def test_student_can_select_and_autocorrect_an_answer(
     check_button = widget.findChild(QPushButton, "primaryActionButton")
     assert check_button is not None
 
+    qtbot.waitUntil(option.isVisible, timeout=1000)
     qtbot.mouseClick(option, Qt.MouseButton.LeftButton)
     assert check_button.isEnabled()
     qtbot.mouseClick(check_button, Qt.MouseButton.LeftButton)
