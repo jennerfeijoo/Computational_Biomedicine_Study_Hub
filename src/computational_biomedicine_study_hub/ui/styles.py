@@ -60,7 +60,8 @@ QLabel#homeDescription,
 QLabel#courseCardMetadata,
 QLabel#courseCardSummary,
 QLabel#courseSummary,
-QLabel#courseNotice {
+QLabel#courseNotice,
+QLabel#settingsExplanation {
     color: #66727f;
 }
 
@@ -70,10 +71,23 @@ QLabel#sectionHeading {
 }
 
 QFrame#courseCard,
-QFrame#courseIdentityCard {
+QFrame#courseIdentityCard,
+QGroupBox#settingsGroup {
     background: #ffffff;
     border: 1px solid #d8e0e8;
     border-radius: 10px;
+}
+
+QGroupBox#settingsGroup {
+    margin-top: 12px;
+    padding: 16px;
+    font-weight: 700;
+}
+
+QGroupBox#settingsGroup::title {
+    subcontrol-origin: margin;
+    left: 12px;
+    padding: 0 6px;
 }
 
 QFrame#courseCard:hover {
@@ -99,7 +113,22 @@ QLabel#courseNotice {
     line-height: 1.35;
 }
 
-QPushButton#courseOpenButton {
+QLineEdit#ollamaBaseUrl,
+QComboBox#ollamaModelSelector {
+    background: #ffffff;
+    border: 1px solid #cbd5df;
+    border-radius: 7px;
+    min-height: 34px;
+    padding: 0 10px;
+}
+
+QLineEdit#ollamaBaseUrl:focus,
+QComboBox#ollamaModelSelector:focus {
+    border: 1px solid #2f80ed;
+}
+
+QPushButton#courseOpenButton,
+QPushButton#primaryActionButton {
     background: #2f80ed;
     color: #ffffff;
     border: none;
@@ -108,8 +137,44 @@ QPushButton#courseOpenButton {
     font-weight: 600;
 }
 
-QPushButton#courseOpenButton:hover {
+QPushButton#courseOpenButton:hover,
+QPushButton#primaryActionButton:hover {
     background: #2469c7;
+}
+
+QPushButton#secondaryActionButton {
+    background: #ffffff;
+    color: #245a96;
+    border: 1px solid #9eb6cf;
+    border-radius: 7px;
+    padding: 8px 12px;
+    font-weight: 600;
+}
+
+QPushButton#secondaryActionButton:hover {
+    background: #edf4fb;
+}
+
+QPushButton:disabled,
+QComboBox:disabled {
+    color: #96a1ad;
+    background: #edf1f5;
+}
+
+QLabel#ollamaStatus[connectionState="idle"] {
+    color: #66727f;
+}
+
+QLabel#ollamaStatus[connectionState="pending"] {
+    color: #8a5a00;
+}
+
+QLabel#ollamaStatus[connectionState="success"] {
+    color: #16734a;
+}
+
+QLabel#ollamaStatus[connectionState="error"] {
+    color: #b42318;
 }
 
 QLabel#placeholderMessage {
