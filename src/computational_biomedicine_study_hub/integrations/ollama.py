@@ -1,8 +1,4 @@
-"""Connection and model-discovery client for a local Ollama server.
-
-This increment deliberately supports only connection checks and model listing.
-Chat, tutoring, retrieval and assessment are separate later increments.
-"""
+"""Low-level client and transport primitives for a local Ollama server."""
 
 from __future__ import annotations
 
@@ -33,6 +29,7 @@ class OllamaConfig:
 
     base_url: str = "http://localhost:11434/api"
     timeout_seconds: float = 5.0
+    generation_timeout_seconds: float = 180.0
 
     def normalized_base_url(self) -> str:
         """Return a normalized URL ending in ``/api``."""
@@ -73,47 +70,100 @@ class OllamaModel:
 
 
 class JsonTransport(Protocol):
-    """Small transport contract that keeps the client unit-testable."""
+    """Small transport contract that keeps Ollama clients unit-testable."""
 
     def get(self, url: str, *, timeout: float) -> JsonObject:
         """Return a decoded JSON object from a GET request."""
         ...
 
+    def post(
+        self,
+        url: str,
+        payload: JsonObject,
+        *,
+        timeout: float,
+    ) -> JsonObject:
+        """Return a decoded JSON object from a JSON POST request."""
+        ...
+
 
 class UrllibJsonTransport:
-    """Standard-library transport for local JSON endpoints."""
+    """Dependency-free HTTP transport for local Ollama JSON endpoints."""
+
+    USER_AGENT = "Computational-Biomedicine-Study-Hub/0.1"
 
     def get(self, url: str, *, timeout: float) -> JsonObject:
-        request = Request(
-            url,
-            headers={
-                "Accept": "application/json",
-                "User-Agent": "Computational-Biomedicine-Study-Hub/0.1",
-            },
-            method="GET",
-        )
+        """Perform a GET request and decode one JSON object."""
+        return self._request("GET", url, timeout=timeout)
+
+    def post(
+        self,
+        url: str,
+        payload: JsonObject,
+        *,
+        timeout: float,
+    ) -> JsonObject:
+        """Perform a JSON POST request and decode one JSON object."""
+        body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        return self._request("POST", url, timeout=timeout, body=body)
+
+    def _request(
+        self,
+        method: str,
+        url: str,
+        *,
+        timeout: float,
+        body: bytes | None = None,
+    ) -> JsonObject:
+        headers = {
+            "Accept": "application/json",
+            "User-Agent": self.USER_AGENT,
+        }
+        if body is not None:
+            headers["Content-Type"] = "application/json; charset=utf-8"
+
+        request = Request(url, data=body, headers=headers, method=method)
 
         try:
             with urlopen(request, timeout=timeout) as response:  # noqa: S310
                 raw_content = response.read().decode("utf-8")
         except HTTPError as exc:
-            detail = exc.read().decode("utf-8", errors="replace").strip()
-            message = detail or str(exc.reason) or f"HTTP {exc.code}"
-            raise OllamaConnectionError(f"Ollama returned HTTP {exc.code}: {message}") from exc
+            detail = _read_http_error(exc)
+            raise OllamaConnectionError(f"Ollama returned HTTP {exc.code}: {detail}") from exc
         except (URLError, TimeoutError, OSError) as exc:
             raise OllamaConnectionError(
                 "No se pudo conectar con Ollama. Comprueba que el servicio "
                 "esté activo y que la URL configurada sea correcta."
             ) from exc
 
-        try:
-            payload = json.loads(raw_content)
-        except json.JSONDecodeError as exc:
-            raise OllamaProtocolError("Ollama returned invalid JSON.") from exc
+        return _decode_json_object(raw_content)
 
-        if not isinstance(payload, dict):
-            raise OllamaProtocolError("Ollama returned a JSON value that was not an object.")
-        return payload
+
+def _read_http_error(error: HTTPError) -> str:
+    """Extract Ollama's JSON error message when one is available."""
+    raw_detail = error.read().decode("utf-8", errors="replace").strip()
+    if raw_detail:
+        try:
+            payload = json.loads(raw_detail)
+        except json.JSONDecodeError:
+            return raw_detail
+        if isinstance(payload, dict):
+            message = str(payload.get("error") or "").strip()
+            if message:
+                return message
+    return str(error.reason) or f"HTTP {error.code}"
+
+
+def _decode_json_object(raw_content: str) -> JsonObject:
+    """Decode and validate a JSON object response."""
+    try:
+        payload = json.loads(raw_content)
+    except json.JSONDecodeError as exc:
+        raise OllamaProtocolError("Ollama returned invalid JSON.") from exc
+
+    if not isinstance(payload, dict):
+        raise OllamaProtocolError("Ollama returned a JSON value that was not an object.")
+    return payload
 
 
 class OllamaClient:
