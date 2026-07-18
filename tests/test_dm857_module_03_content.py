@@ -119,6 +119,7 @@ def test_module_three_randomized_bank_is_large_unique_and_trilingual() -> None:
         assert [item.item_id for item in bank] == [
             item.item_id for item in OBJECTIVE_QUESTION_BANK_03
         ]
+        assert len({item.prompt for item in bank}) == len(bank)
         assert all(item.prompt.strip() for item in bank)
         assert all(item.explanation.strip() for item in bank)
         assert all(len(item.correct_answers) == 1 for item in bank)
