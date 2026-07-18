@@ -1,3 +1,5 @@
+"""Integrity tests for complete trilingual DM857 modules 10–12."""
+
 from __future__ import annotations
 
 from collections.abc import Callable
