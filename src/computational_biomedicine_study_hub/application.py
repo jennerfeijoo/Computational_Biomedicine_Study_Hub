@@ -9,7 +9,6 @@ from PySide6.QtWidgets import QApplication
 
 from .ui.main_window import MainWindow
 
-
 APPLICATION_NAME = "Computational Biomedicine Study Hub"
 ORGANIZATION_NAME = "Jenner Feijoo"
 ORGANIZATION_DOMAIN = "github.com/jennerfeijoo"
