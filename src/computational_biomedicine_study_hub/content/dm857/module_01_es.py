@@ -4,10 +4,11 @@ from __future__ import annotations
 
 from dataclasses import replace
 
+from ..models import WorkedExample
 from .module_01_foundations import MODULE as _SOURCE_MODULE
 
 
-def _localize_first_example() -> tuple:
+def _localize_first_example() -> tuple[WorkedExample, ...]:
     first, *remaining = _SOURCE_MODULE.worked_examples
     localized_first = replace(
         first,
