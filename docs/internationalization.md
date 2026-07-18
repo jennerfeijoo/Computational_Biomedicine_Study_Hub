@@ -16,15 +16,34 @@ The application supports exactly three locales:
 6. The selected locale will ultimately control the shell, academic content, activities, feedback, diagnostics and Ollama tutor prompts.
 7. Release validation must fail when any visible string or academic field lacks one of the three locales.
 
+## Academic authoring contract
+
+`LocalizedText` requires non-empty Spanish, English and Danish values at construction time. Academic structures use stable language-independent identifiers and localized visible text.
+
+Assessment options have stable IDs. Correct answers reference those IDs instead of translated option labels, so grading remains deterministic when the displayed language changes.
+
+A `LocalizedLearningModule` can be materialized into the existing runtime `LearningModule` for one selected locale. The reader, practice engine, assessment engine and tutor therefore consume one coherent language without duplicating their business logic.
+
+The following fields are localized when they can be visible or supplied to Ollama:
+
+- module titles, summaries and objectives;
+- concept titles, explanations and key points;
+- worked-example problems, reasoning, code, output and explanation;
+- practice prompts, hints, starter code, solutions and feedback;
+- assessment prompts, options, accepted answers, explanations and rubrics;
+- canonical tutor explanations, misconceptions, Socratic questions, grading criteria and response constraints.
+
+Stable identifiers, activity types and bibliographic source references are language-independent.
+
 ## Incremental integration order
 
 1. strict locale and catalog domain layer;
-2. persisted language preference;
-3. shell and navigation retranslation;
-4. settings selector and immediate page rebuild;
-5. localized course metadata;
-6. localized learning-module data models;
-7. complete DM857 module 1 translations;
+2. localized learning-module data models;
+3. complete DM857 module 1 translations;
+4. persisted language preference;
+5. shell and navigation retranslation;
+6. settings selector and immediate page rebuild;
+7. localized course metadata;
 8. tutor retrieval over the selected language;
 9. translation coverage checks for every future module;
 10. packaging tests in all three languages.
