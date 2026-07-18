@@ -127,7 +127,10 @@ def test_module_three_randomized_bank_is_large_unique_and_trilingual() -> None:
 
 def test_module_three_uses_safe_terminology_and_teaching_disclaimers() -> None:
     required_phrases = {
-        AppLocale.SPANISH_SPAIN: ("escenarios de programación didácticos", "no representan protocolos"),
+        AppLocale.SPANISH_SPAIN: (
+            "escenarios de programación didácticos",
+            "no representan protocolos",
+        ),
         AppLocale.ENGLISH: ("programming exercises", "not protocols"),
         AppLocale.DANISH_DENMARK: ("programmeringsøvelser", "ikke protokoller"),
     }
