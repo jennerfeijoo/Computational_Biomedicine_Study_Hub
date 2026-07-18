@@ -120,6 +120,8 @@ class DM857Page(QWidget):
         reader.setProperty("contentVersion", bundle.content_version)
 
         placeholder = self._module_stack.widget(index)
+        if placeholder is None:
+            raise RuntimeError(f"Missing module placeholder at index {index}.")
         self._module_stack.removeWidget(placeholder)
         placeholder.deleteLater()
         self._module_stack.insertWidget(index, reader)
