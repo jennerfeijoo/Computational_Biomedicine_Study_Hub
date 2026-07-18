@@ -1,0 +1,175 @@
+"""Complete English and Danish localization of the authored DM857 module 1."""
+
+from __future__ import annotations
+
+from ...learning.activity_types import ActivityType
+from ..localized_models import (
+    LocalizedAssessmentItem,
+    LocalizedAssessmentOption,
+    LocalizedConceptBlock,
+    LocalizedLearningModule,
+    LocalizedLearningObjective,
+    LocalizedPracticeExercise,
+    LocalizedText,
+    LocalizedTutorSupportPacket,
+    LocalizedWorkedExample,
+)
+from .module_01_es import MODULE as _ES
+
+
+def _t(spanish: str, english: str, danish: str) -> LocalizedText:
+    return LocalizedText(spanish=spanish, english=english, danish=danish)
+
+
+def _same(text: str) -> LocalizedText:
+    return _t(text, text, text)
+
+
+def _option(
+    option_id: str,
+    spanish: str,
+    english: str,
+    danish: str,
+) -> LocalizedAssessmentOption:
+    return LocalizedAssessmentOption(option_id=option_id, text=_t(spanish, english, danish))
+
+
+_OBJECTIVES_EN = (
+    "Separate a concrete situation into inputs, transformations, constraints, and observable outputs.",
+    "Distinguish precisely between expression, value, type, variable, assignment, and statement.",
+    "Predict the value and type of arithmetic and text expressions before executing them.",
+    "Represent program state using a variable trace table.",
+    "Apply explicit conversions between int, float, and str when required by the problem.",
+    "Differentiate syntax, runtime, and logic errors, and propose a minimal test to detect them.",
+)
+_OBJECTIVES_DA = (
+    "Opdele en konkret situation i input, transformationer, begrænsninger og observerbare output.",
+    "Skelne præcist mellem udtryk, værdi, type, variabel, tildeling og sætning.",
+    "Forudsige værdien og typen af aritmetiske udtryk og tekstudtryk før de køres.",
+    "Repræsentere programtilstanden med en tabel over variable efter hvert trin.",
+    "Anvende eksplicitte konverteringer mellem int, float og str, når problemet kræver det.",
+    "Skelne mellem syntaksfejl, kørselsfejl og logiske fejl samt foreslå en minimal test.",
+)
+
+_CONCEPT_TRANSLATIONS = (
+    (
+        "From problem to program",
+        "Programming does not begin with syntax. It begins by building an operational representation of a problem. A real situation contains relevant and incidental details; the model retains only what is needed to produce a verifiable answer. An algorithm is then designed from the model as a finite and unambiguous sequence of steps. The program is a concrete implementation of that algorithm. Separating these layers lets us assess the model, algorithm, and code independently.",
+        (
+            "Problem, model, algorithm, and program are not synonyms.",
+            "Inputs and outputs should be defined before coding.",
+            "A constraint states which values are valid or which behaviour is expected.",
+            "Correctness is judged against the problem specification.",
+        ),
+        "Fra problem til program",
+        "Programmering begynder ikke med syntaks. Den begynder med at opbygge en operationel repræsentation af et problem. En virkelig situation indeholder både relevante og tilfældige detaljer; modellen bevarer kun det, der er nødvendigt for at give et efterprøveligt svar. Ud fra modellen designes en algoritme som en endelig og entydig række af trin. Programmet er en konkret implementering af algoritmen. Når lagene adskilles, kan model, algoritme og kode vurderes hver for sig.",
+        (
+            "Problem, model, algoritme og program er ikke synonymer.",
+            "Input og output bør defineres før kodning.",
+            "En begrænsning angiver gyldige værdier eller forventet adfærd.",
+            "Korrekthed vurderes i forhold til problemspecifikationen.",
+        ),
+    ),
+    (
+        "Expressions, values, and types",
+        "An expression combines literals, variables, operators, and calls that Python can evaluate to obtain a value. Every value has a type, and the type determines which operations are valid and how they are interpreted. For example, 3 + 4 produces the integer 7, whereas '3' + '4' produces the string '34'. Python is dynamically typed: a variable may refer to values of different types, although every value always has a defined type.",
+        (
+            "An expression is evaluated; a statement performs an action or changes state.",
+            "int represents integers, float floating-point numbers, and str text.",
+            "The / operator produces a float, even when division is exact.",
+            "type() lets you inspect the type of a value.",
+        ),
+        "Udtryk, værdier og typer",
+        "Et udtryk kombinerer literaler, variable, operatorer og kald, som Python kan evaluere for at få en værdi. Hver værdi har en type, og typen bestemmer, hvilke operationer der er gyldige, og hvordan de fortolkes. For eksempel giver 3 + 4 heltallet 7, mens '3' + '4' giver tekststrengen '34'. Python er dynamisk typet: en variabel kan henvise til værdier af forskellige typer, men hver værdi har altid en bestemt type.",
+        (
+            "Et udtryk evalueres; en sætning udfører en handling eller ændrer tilstanden.",
+            "int repræsenterer heltal, float decimaltal og str tekst.",
+            "Operatoren / giver en float, selv når divisionen går op.",
+            "type() gør det muligt at undersøge en værdis type.",
+        ),
+    ),
+    (
+        "Variables, assignment, and state",
+        "A variable is a name associated with a value. Assignment first evaluates the expression on the right and then binds the name on the left to the result. This is why x = x + 1 is valid in programming: it is a state update, not mathematical equality. Program state is the set of name-value associations at a particular moment. A trace table records each statement and the resulting state.",
+        (
+            "Assignment uses = and does not assert mathematical equality.",
+            "The right-hand expression is evaluated before the left-hand variable changes.",
+            "Names should describe the meaning of the data.",
+            "Manual tracing helps reason about reassignment.",
+        ),
+        "Variable, tildeling og tilstand",
+        "En variabel er et navn, der er knyttet til en værdi. Tildeling evaluerer først udtrykket til højre og knytter derefter navnet til venstre til resultatet. Derfor er x = x + 1 gyldig i programmering: det er en tilstandsopdatering og ikke matematisk lighed. Programtilstanden er mængden af navn-værdi-forbindelser på et bestemt tidspunkt. En gennemgangstabel registrerer hver sætning og den efterfølgende tilstand.",
+        (
+            "Tildeling bruger = og udtrykker ikke matematisk lighed.",
+            "Udtrykket til højre evalueres, før variablen til venstre ændres.",
+            "Navne bør beskrive dataenes betydning.",
+            "Manuel gennemgang hjælper med at forstå gentildeling.",
+        ),
+    ),
+    (
+        "Operators, precedence, and conversion",
+        "The basic arithmetic operators are +, -, *, /, //, %, and **. Python applies precedence rules: parentheses first, then exponentiation, then multiplication, division, floor division, and modulo, and finally addition and subtraction. Parentheses may change the order or clarify intent. int(), float(), and str() create values of another type when conversion is possible. Conversion may lose information: int(4.9) produces 4, not 5.",
+        (
+            "// performs floor division; % returns the remainder.",
+            "** represents exponentiation; ^ is not exponentiation.",
+            "Precedence can be changed with parentheses.",
+            "Every conversion should be justified by the intended meaning of the data.",
+        ),
+        "Operatorer, præcedens og konvertering",
+        "De grundlæggende aritmetiske operatorer er +, -, *, /, //, % og **. Python anvender præcedensregler: først parenteser, derefter potens, så multiplikation, division, heltalsdivision og modulo, og til sidst addition og subtraktion. Parenteser kan ændre rækkefølgen eller tydeliggøre hensigten. int(), float() og str() opretter værdier af en anden type, når konverteringen er mulig. Konvertering kan miste information: int(4.9) giver 4, ikke 5.",
+        (
+            "// udfører heltalsdivision nedad; % giver resten.",
+            "** repræsenterer potens; ^ er ikke potens.",
+            "Præcedens kan ændres med parenteser.",
+            "Enhver konvertering bør begrundes ud fra dataenes tilsigtede betydning.",
+        ),
+    ),
+    (
+        "Statements, input, output, and tracing",
+        "A statement is an executable instruction. Assignment and a call to print() are examples. input() always returns a string, even when the user types digits; if a numeric quantity is required, conversion must be explicit. print() makes results visible, but printing is not the same as returning a value from a function. Tracing means following each statement, recording modified variables, and noting produced output.",
+        (
+            "input() always returns str.",
+            "Visible output should match the specification.",
+            "A correct trace follows the actual execution order.",
+            "print() displays a value but does not change its type.",
+        ),
+        "Sætninger, input, output og gennemgang",
+        "En sætning er en instruktion, der kan udføres. Tildeling og et kald til print() er eksempler. input() returnerer altid en tekststreng, også når brugeren skriver cifre; hvis der skal bruges en numerisk mængde, skal konverteringen være eksplicit. print() gør resultater synlige, men udskrivning er ikke det samme som at returnere en værdi fra en funktion. Gennemgang betyder at følge hver sætning, registrere ændrede variable og notere output.",
+        (
+            "input() returnerer altid str.",
+            "Synligt output bør svare til specifikationen.",
+            "En korrekt gennemgang følger den faktiske udførelsesrækkefølge.",
+            "print() viser en værdi, men ændrer ikke dens type.",
+        ),
+    ),
+    (
+        "Errors, tests, and evidence of correctness",
+        "A syntax error prevents Python from interpreting the code. A runtime error occurs while executing a syntactically valid statement, for example when dividing by zero or combining incompatible types. A logic error allows the program to finish but produces an incorrect result. The absence of exceptions does not prove correctness. A test compares an observed result with an expected result for a concrete input. Normal cases, boundaries, and cases that expose type or unit errors should be included.",
+        (
+            "Syntax, runtime, and logic describe different failures.",
+            "An error message should be related to the operation that failed.",
+            "A test needs an input, an expected result, and a comparison criterion.",
+            "Several well-chosen cases provide more evidence than one execution.",
+        ),
+        "Fejl, test og evidens for korrekthed",
+        "En syntaksfejl forhindrer Python i at fortolke koden. En kørselsfejl opstår under udførelsen af en syntaktisk gyldig sætning, for eksempel ved division med nul eller kombination af inkompatible typer. En logisk fejl lader programmet afslutte, men giver et forkert resultat. Fravær af undtagelser beviser ikke korrekthed. En test sammenligner et observeret resultat med et forventet resultat for et konkret input. Normale tilfælde, grænser og tilfælde, der afslører type- eller enhedsfejl, bør indgå.",
+        (
+            "Syntaks, kørsel og logik beskriver forskellige fejl.",
+            "En fejlmeddelelse bør forbindes med den operation, der mislykkedes.",
+            "En test kræver input, forventet resultat og et sammenligningskriterium.",
+            "Flere velvalgte tilfælde giver mere evidens end én kørsel.",
+        ),
+    ),
+)
+
+_EXAMPLE_TRANSLATIONS = (
+    (
+        "Calculate the usable yield of a sequencing run",
+        "A sequencing run produces 48_000_000 reads. A total of 92.5% pass quality control. Calculate the expected number of usable reads and display the result as an integer.",
+        (
+            "Represent the total as int and the percentage as float.",
+            "Convert 92.5% to the fraction 0.925.",
+            "Multiply the total by the fraction to obtain a float.",
+            "Convert to int at the end because the result is a count.",
+        ),
+        "Underscores improve readability. Division produces 0.925 as float, and the final conversion to int is justified because the result is a count of reads.",
