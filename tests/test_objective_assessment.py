@@ -48,8 +48,7 @@ def test_generator_builds_balanced_varied_sessions_and_shuffles_options() -> Non
         ActivityType.TRUE_FALSE,
     }
     assert all(
-        set(question.display_options) == set(question.item.options)
-        for question in first.questions
+        set(question.display_options) == set(question.item.options) for question in first.questions
     )
 
 
