@@ -9,8 +9,20 @@ from .ollama import (
     OllamaModel,
     OllamaProtocolError,
 )
+from .ollama_chat import (
+    ChatMessage,
+    ChatResponse,
+    ChatRole,
+    DEFAULT_CHAT_MODEL,
+    OllamaChatClient,
+)
 
 __all__ = [
+    "ChatMessage",
+    "ChatResponse",
+    "ChatRole",
+    "DEFAULT_CHAT_MODEL",
+    "OllamaChatClient",
     "OllamaClient",
     "OllamaConfig",
     "OllamaConnectionError",
