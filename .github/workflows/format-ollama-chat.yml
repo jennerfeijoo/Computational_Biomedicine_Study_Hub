@@ -1,0 +1,35 @@
+name: Format Ollama Chat Snapshot
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Ruff
+        run: python -m pip install "ruff>=0.5,<1"
+
+      - name: Format files
+        run: ruff format src/computational_biomedicine_study_hub/integrations tests/test_ollama_chat.py
+
+      - name: Upload formatted files
+        uses: actions/upload-artifact@v4
+        with:
+          name: formatted-ollama-chat
+          path: |
+            src/computational_biomedicine_study_hub/integrations/__init__.py
+            src/computational_biomedicine_study_hub/integrations/ollama.py
+            src/computational_biomedicine_study_hub/integrations/ollama_chat.py
+            tests/test_ollama_chat.py
