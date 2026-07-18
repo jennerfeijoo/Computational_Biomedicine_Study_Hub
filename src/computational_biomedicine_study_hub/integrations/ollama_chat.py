@@ -133,9 +133,7 @@ class OllamaChatClient:
 
         role_value = str(raw_message.get("role") or "").strip()
         if role_value != ChatRole.ASSISTANT.value:
-            raise OllamaProtocolError(
-                "Ollama returned a chat message with an unexpected role."
-            )
+            raise OllamaProtocolError("Ollama returned a chat message with an unexpected role.")
 
         content = str(raw_message.get("content") or "").strip()
         if not content:
