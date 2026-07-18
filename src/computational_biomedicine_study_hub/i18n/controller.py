@@ -20,7 +20,7 @@ class LanguageController(QObject):
         parent: QObject | None = None,
     ) -> None:
         super().__init__(parent)
-        self._settings = settings or QSettings()
+        self._settings = settings if settings is not None else QSettings()
         stored = self._settings.value(self.SETTINGS_KEY, DEFAULT_LOCALE.value)
         self._translator = Translator(AppLocale.resolve(str(stored)))
 
@@ -37,7 +37,7 @@ class LanguageController(QObject):
     def set_locale(self, locale: AppLocale | str) -> bool:
         """Persist and announce a locale change; return whether it changed."""
         resolved = locale if isinstance(locale, AppLocale) else AppLocale.resolve(locale)
-        if resolved is self.locale:
+        if resolved == self.locale:
             return False
 
         self._translator.set_locale(resolved)
