@@ -63,10 +63,7 @@ def test_module_two_covers_conditionals_and_varied_activity_types() -> None:
 
 
 def test_module_two_materializes_complete_spanish_english_and_danish_versions() -> None:
-    modules = {
-        locale: LOCALIZED_MODULE_02_CONDITIONALS.materialize(locale)
-        for locale in AppLocale
-    }
+    modules = {locale: LOCALIZED_MODULE_02_CONDITIONALS.materialize(locale) for locale in AppLocale}
 
     for module in modules.values():
         assert module.module_id == "dm857.m02"
@@ -131,5 +128,7 @@ def test_module_two_uses_safe_terminology_and_non_clinical_boundaries() -> None:
         exported = "\n".join(document.text for document in module.tutor_documents()).casefold()
 
         assert "corrida" not in exported
-        assert "clinical recommendations" not in exported or "not clinical recommendations" in exported
+        assert (
+            "clinical recommendations" not in exported or "not clinical recommendations" in exported
+        )
         assert "kliniske anbefalinger" not in exported or "ikke kliniske anbefalinger" in exported

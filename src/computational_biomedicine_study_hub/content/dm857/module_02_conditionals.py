@@ -139,10 +139,26 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "såsom is_valid eller has_control. Den booleske værdi True må ikke forveksles med teksten 'True'.",
             ),
             key_points=(
-                _t("bool tiene exactamente dos valores: True y False.", "bool has exactly two values: True and False.", "bool har præcis to værdier: True og False."),
-                _t("Un predicado es una expresión cuyo resultado es booleano.", "A predicate is an expression whose result is Boolean.", "Et prædikat er et udtryk, hvis resultat er boolesk."),
-                _t("True no es lo mismo que la cadena 'True'.", "True is not the same as the string 'True'.", "True er ikke det samme som tekststrengen 'True'."),
-                _t("Los nombres booleanos deben comunicar qué propiedad representan.", "Boolean names should communicate which property they represent.", "Booleske navne bør kommunikere, hvilken egenskab de repræsenterer."),
+                _t(
+                    "bool tiene exactamente dos valores: True y False.",
+                    "bool has exactly two values: True and False.",
+                    "bool har præcis to værdier: True og False.",
+                ),
+                _t(
+                    "Un predicado es una expresión cuyo resultado es booleano.",
+                    "A predicate is an expression whose result is Boolean.",
+                    "Et prædikat er et udtryk, hvis resultat er boolesk.",
+                ),
+                _t(
+                    "True no es lo mismo que la cadena 'True'.",
+                    "True is not the same as the string 'True'.",
+                    "True er ikke det samme som tekststrengen 'True'.",
+                ),
+                _t(
+                    "Los nombres booleanos deben comunicar qué propiedad representan.",
+                    "Boolean names should communicate which property they represent.",
+                    "Booleske navne bør kommunikere, hvilken egenskab de repræsenterer.",
+                ),
             ),
         ),
         LocalizedConceptBlock(
@@ -169,10 +185,26 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "sammenligninger kombineret med and og udtrykker ofte intervaller tydeligere.",
             ),
             key_points=(
-                _t("== compara; = asigna.", "== compares; = assigns.", "== sammenligner; = tildeler."),
-                _t("<= y >= incluyen el valor límite.", "<= and >= include the boundary value.", "<= og >= inkluderer grænseværdien."),
-                _t("Las comparaciones encadenadas son apropiadas para intervalos.", "Chained comparisons are appropriate for intervals.", "Kædede sammenligninger er velegnede til intervaller."),
-                _t("El significado de una comparación depende de los tipos y del modelo.", "The meaning of a comparison depends on the types and the model.", "Betydningen af en sammenligning afhænger af typerne og modellen."),
+                _t(
+                    "== compara; = asigna.",
+                    "== compares; = assigns.",
+                    "== sammenligner; = tildeler.",
+                ),
+                _t(
+                    "<= y >= incluyen el valor límite.",
+                    "<= and >= include the boundary value.",
+                    "<= og >= inkluderer grænseværdien.",
+                ),
+                _t(
+                    "Las comparaciones encadenadas son apropiadas para intervalos.",
+                    "Chained comparisons are appropriate for intervals.",
+                    "Kædede sammenligninger er velegnede til intervaller.",
+                ),
+                _t(
+                    "El significado de una comparación depende de los tipos y del modelo.",
+                    "The meaning of a comparison depends on the types and the model.",
+                    "Betydningen af en sammenligning afhænger af typerne og modellen.",
+                ),
             ),
         ),
         LocalizedConceptBlock(
@@ -201,10 +233,26 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "De Morgans love hjælper med at kontrollere sammensatte negationer.",
             ),
             key_points=(
-                _t("and exige que todas las condiciones combinadas sean verdaderas.", "and requires all combined conditions to be true.", "and kræver, at alle kombinerede betingelser er sande."),
-                _t("or exige al menos una condición verdadera.", "or requires at least one true condition.", "or kræver mindst én sand betingelse."),
-                _t("La precedencia es not, después and y finalmente or.", "Precedence is not, then and, then or.", "Præcedensen er not, derefter and og til sidst or."),
-                _t("Los paréntesis pueden documentar la intención aunque no sean obligatorios.", "Parentheses can document intent even when not required.", "Parenteser kan dokumentere hensigten, selv når de ikke er nødvendige."),
+                _t(
+                    "and exige que todas las condiciones combinadas sean verdaderas.",
+                    "and requires all combined conditions to be true.",
+                    "and kræver, at alle kombinerede betingelser er sande.",
+                ),
+                _t(
+                    "or exige al menos una condición verdadera.",
+                    "or requires at least one true condition.",
+                    "or kræver mindst én sand betingelse.",
+                ),
+                _t(
+                    "La precedencia es not, después and y finalmente or.",
+                    "Precedence is not, then and, then or.",
+                    "Præcedensen er not, derefter and og til sidst or.",
+                ),
+                _t(
+                    "Los paréntesis pueden documentar la intención aunque no sean obligatorios.",
+                    "Parentheses can document intent even when not required.",
+                    "Parenteser kan dokumentere hensigten, selv når de ikke er nødvendige.",
+                ),
             ),
         ),
         LocalizedConceptBlock(
@@ -233,10 +281,26 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "division med nul. Operandernes rækkefølge er derfor en del af korrektheden.",
             ),
             key_points=(
-                _t("and se detiene ante el primer operando falso.", "and stops at the first false operand.", "and stopper ved den første falske operand."),
-                _t("or se detiene ante el primer operando verdadero.", "or stops at the first true operand.", "or stopper ved den første sande operand."),
-                _t("La condición protectora debe situarse antes de la operación sensible.", "The guard condition must appear before the sensitive operation.", "Beskyttelsesbetingelsen skal stå før den følsomme operation."),
-                _t("El cortocircuito no sustituye una especificación clara de los casos inválidos.", "Short-circuiting does not replace a clear specification of invalid cases.", "Kortslutning erstatter ikke en klar specifikation af ugyldige tilfælde."),
+                _t(
+                    "and se detiene ante el primer operando falso.",
+                    "and stops at the first false operand.",
+                    "and stopper ved den første falske operand.",
+                ),
+                _t(
+                    "or se detiene ante el primer operando verdadero.",
+                    "or stops at the first true operand.",
+                    "or stopper ved den første sande operand.",
+                ),
+                _t(
+                    "La condición protectora debe situarse antes de la operación sensible.",
+                    "The guard condition must appear before the sensitive operation.",
+                    "Beskyttelsesbetingelsen skal stå før den følsomme operation.",
+                ),
+                _t(
+                    "El cortocircuito no sustituye una especificación clara de los casos inválidos.",
+                    "Short-circuiting does not replace a clear specification of invalid cases.",
+                    "Kortslutning erstatter ikke en klar specifikation af ugyldige tilfælde.",
+                ),
             ),
         ),
         LocalizedConceptBlock(
@@ -265,10 +329,26 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "af syntaksen. Grenene bør danne sammenhængende kategorier uden utilsigtet overlap eller huller.",
             ),
             key_points=(
-                _t("Se ejecuta la primera rama cuya condición es True.", "The first branch whose condition is True executes.", "Den første gren med betingelsen True udføres."),
-                _t("else no lleva condición y cubre los casos restantes.", "else has no condition and covers the remaining cases.", "else har ingen betingelse og dækker de resterende tilfælde."),
-                _t("La indentación define qué sentencias pertenecen a cada rama.", "Indentation defines which statements belong to each branch.", "Indrykning definerer, hvilke sætninger der tilhører hver gren."),
-                _t("El orden debe revisarse cuando las condiciones se solapan.", "Order must be reviewed when conditions overlap.", "Rækkefølgen skal kontrolleres, når betingelser overlapper."),
+                _t(
+                    "Se ejecuta la primera rama cuya condición es True.",
+                    "The first branch whose condition is True executes.",
+                    "Den første gren med betingelsen True udføres.",
+                ),
+                _t(
+                    "else no lleva condición y cubre los casos restantes.",
+                    "else has no condition and covers the remaining cases.",
+                    "else har ingen betingelse og dækker de resterende tilfælde.",
+                ),
+                _t(
+                    "La indentación define qué sentencias pertenecen a cada rama.",
+                    "Indentation defines which statements belong to each branch.",
+                    "Indrykning definerer, hvilke sætninger der tilhører hver gren.",
+                ),
+                _t(
+                    "El orden debe revisarse cuando las condiciones se solapan.",
+                    "Order must be reviewed when conditions overlap.",
+                    "Rækkefølgen skal kontrolleres, når betingelser overlapper.",
+                ),
             ),
         ),
         LocalizedConceptBlock(
@@ -298,10 +378,26 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "beslutning kun giver mening efter den første. Unødvendig dybde bør undgås.",
             ),
             key_points=(
-                _t("Las condiciones compuestas expresan varios requisitos de una misma decisión.", "Compound conditions express several requirements of one decision.", "Sammensatte betingelser udtrykker flere krav til én beslutning."),
-                _t("El anidamiento expresa decisiones dependientes por etapas.", "Nesting expresses dependent decisions in stages.", "Indlejring udtrykker afhængige beslutninger i trin."),
-                _t("La equivalencia lógica no garantiza igual legibilidad.", "Logical equivalence does not guarantee equal readability.", "Logisk ækvivalens garanterer ikke samme læsbarhed."),
-                _t("La estructura elegida debe reflejar el modelo del problema.", "The chosen structure should reflect the problem model.", "Den valgte struktur bør afspejle problemets model."),
+                _t(
+                    "Las condiciones compuestas expresan varios requisitos de una misma decisión.",
+                    "Compound conditions express several requirements of one decision.",
+                    "Sammensatte betingelser udtrykker flere krav til én beslutning.",
+                ),
+                _t(
+                    "El anidamiento expresa decisiones dependientes por etapas.",
+                    "Nesting expresses dependent decisions in stages.",
+                    "Indlejring udtrykker afhængige beslutninger i trin.",
+                ),
+                _t(
+                    "La equivalencia lógica no garantiza igual legibilidad.",
+                    "Logical equivalence does not guarantee equal readability.",
+                    "Logisk ækvivalens garanterer ikke samme læsbarhed.",
+                ),
+                _t(
+                    "La estructura elegida debe reflejar el modelo del problema.",
+                    "The chosen structure should reflect the problem model.",
+                    "Den valgte struktur bør afspejle problemets model.",
+                ),
             ),
         ),
         LocalizedConceptBlock(
@@ -330,10 +426,26 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "Sammensatte betingelser kræver kontrolleret variation af hver komponent.",
             ),
             key_points=(
-                _t("Cada rama relevante necesita al menos un caso de prueba.", "Every relevant branch needs at least one test case.", "Hver relevant gren kræver mindst ét testtilfælde."),
-                _t("Los operadores inclusivos y exclusivos cambian el comportamiento en el límite.", "Inclusive and exclusive operators change boundary behaviour.", "Inklusive og eksklusive operatorer ændrer adfærden ved grænsen."),
-                _t("La validación debe ocurrir antes de usar un dato en reglas posteriores.", "Validation should occur before data are used in later rules.", "Validering bør ske, før data bruges i senere regler."),
-                _t("Las pruebas deben cubrir valores normales, límite e inválidos.", "Tests should cover normal, boundary, and invalid values.", "Test bør dække normale, grænse- og ugyldige værdier."),
+                _t(
+                    "Cada rama relevante necesita al menos un caso de prueba.",
+                    "Every relevant branch needs at least one test case.",
+                    "Hver relevant gren kræver mindst ét testtilfælde.",
+                ),
+                _t(
+                    "Los operadores inclusivos y exclusivos cambian el comportamiento en el límite.",
+                    "Inclusive and exclusive operators change boundary behaviour.",
+                    "Inklusive og eksklusive operatorer ændrer adfærden ved grænsen.",
+                ),
+                _t(
+                    "La validación debe ocurrir antes de usar un dato en reglas posteriores.",
+                    "Validation should occur before data are used in later rules.",
+                    "Validering bør ske, før data bruges i senere regler.",
+                ),
+                _t(
+                    "Las pruebas deben cubrir valores normales, límite e inválidos.",
+                    "Tests should cover normal, boundary, and invalid values.",
+                    "Test bør dække normale, grænse- og ugyldige værdier.",
+                ),
             ),
         ),
     ),
@@ -357,10 +469,26 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "'review'. Grænserne er kun et programmeringseksempel.",
             ),
             reasoning=(
-                _t("Convertir cada requisito en un predicado independiente.", "Convert each requirement into an independent predicate.", "Omsæt hvert krav til et selvstændigt prædikat."),
-                _t("Usar una comparación encadenada para el intervalo de pureza.", "Use a chained comparison for the purity interval.", "Brug en kædet sammenligning til renhedsintervallet."),
-                _t("Combinar ambos requisitos con and porque los dos deben cumplirse.", "Combine both requirements with and because both must hold.", "Kombinér begge krav med and, fordi begge skal være opfyldt."),
-                _t("Usar else para cubrir todos los casos no aceptables.", "Use else to cover all non-acceptable cases.", "Brug else til at dække alle ikke-acceptable tilfælde."),
+                _t(
+                    "Convertir cada requisito en un predicado independiente.",
+                    "Convert each requirement into an independent predicate.",
+                    "Omsæt hvert krav til et selvstændigt prædikat.",
+                ),
+                _t(
+                    "Usar una comparación encadenada para el intervalo de pureza.",
+                    "Use a chained comparison for the purity interval.",
+                    "Brug en kædet sammenligning til renhedsintervallet.",
+                ),
+                _t(
+                    "Combinar ambos requisitos con and porque los dos deben cumplirse.",
+                    "Combine both requirements with and because both must hold.",
+                    "Kombinér begge krav med and, fordi begge skal være opfyldt.",
+                ),
+                _t(
+                    "Usar else para cubrir todos los casos no aceptables.",
+                    "Use else to cover all non-acceptable cases.",
+                    "Brug else til at dække alle ikke-acceptable tilfælde.",
+                ),
             ),
             code=_same(
                 "concentration_ng_ul = 24.0\n"
@@ -397,9 +525,21 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "Afgør, om signal/control er større end 1.5 uden at dividere, når control er nul.",
             ),
             reasoning=(
-                _t("Comprobar primero que el denominador no sea cero.", "Check first that the denominator is not zero.", "Kontrollér først, at nævneren ikke er nul."),
-                _t("Colocar la división como segundo operando de and.", "Place the division as the second operand of and.", "Placér divisionen som anden operand til and."),
-                _t("Aprovechar que Python no evalúa el segundo operando si el primero es False.", "Use the fact that Python skips the second operand when the first is False.", "Udnyt, at Python springer anden operand over, når den første er False."),
+                _t(
+                    "Comprobar primero que el denominador no sea cero.",
+                    "Check first that the denominator is not zero.",
+                    "Kontrollér først, at nævneren ikke er nul.",
+                ),
+                _t(
+                    "Colocar la división como segundo operando de and.",
+                    "Place the division as the second operand of and.",
+                    "Placér divisionen som anden operand til and.",
+                ),
+                _t(
+                    "Aprovechar que Python no evalúa el segundo operando si el primero es False.",
+                    "Use the fact that Python skips the second operand when the first is False.",
+                    "Udnyt, at Python springer anden operand over, når den første er False.",
+                ),
             ),
             code=_same(
                 "signal = 18.0\n"
@@ -434,9 +574,21 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "fra 36.0 til og med 37.5 og 'above range' over 37.5.",
             ),
             reasoning=(
-                _t("Ordenar las ramas desde el intervalo inferior al superior.", "Order branches from the lower interval to the upper interval.", "Ordne grenene fra det laveste interval til det højeste."),
-                _t("Usar elif con <= 37.5 porque los valores menores que 36.0 ya fueron descartados.", "Use elif with <= 37.5 because values below 36.0 were already excluded.", "Brug elif med <= 37.5, fordi værdier under 36.0 allerede er udelukket."),
-                _t("Usar else para todos los valores superiores restantes.", "Use else for all remaining higher values.", "Brug else til alle resterende højere værdier."),
+                _t(
+                    "Ordenar las ramas desde el intervalo inferior al superior.",
+                    "Order branches from the lower interval to the upper interval.",
+                    "Ordne grenene fra det laveste interval til det højeste.",
+                ),
+                _t(
+                    "Usar elif con <= 37.5 porque los valores menores que 36.0 ya fueron descartados.",
+                    "Use elif with <= 37.5 because values below 36.0 were already excluded.",
+                    "Brug elif med <= 37.5, fordi værdier under 36.0 allerede er udelukket.",
+                ),
+                _t(
+                    "Usar else para todos los valores superiores restantes.",
+                    "Use else for all remaining higher values.",
+                    "Brug else til alle resterende højere værdier.",
+                ),
             ),
             code=_same(
                 "temperature_c = 37.5\n"
@@ -478,9 +630,21 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "'target not met'.",
             ),
             reasoning=(
-                _t("Comprobar primero el dominio válido completo.", "Check the complete valid domain first.", "Kontrollér først hele det gyldige domæne."),
-                _t("Usar una rama elif solo después de saber que el porcentaje es válido.", "Use elif only after establishing that the percentage is valid.", "Brug kun elif, efter at procenten er fastslået som gyldig."),
-                _t("Reservar else para el resto de valores válidos.", "Reserve else for the remaining valid values.", "Reservér else til de resterende gyldige værdier."),
+                _t(
+                    "Comprobar primero el dominio válido completo.",
+                    "Check the complete valid domain first.",
+                    "Kontrollér først hele det gyldige domæne.",
+                ),
+                _t(
+                    "Usar una rama elif solo después de saber que el porcentaje es válido.",
+                    "Use elif only after establishing that the percentage is valid.",
+                    "Brug kun elif, efter at procenten er fastslået som gyldig.",
+                ),
+                _t(
+                    "Reservar else para el resto de valores válidos.",
+                    "Reserve else for the remaining valid values.",
+                    "Reservér else til de resterende gyldige værdier.",
+                ),
             ),
             code=_same(
                 "pass_percentage = 104.0\n"
@@ -515,8 +679,16 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "Uden at køre koden skal du angive det præcise output:\nvalue = 12\nif value > 10:\n    print('A')\nelif value > 5:\n    print('B')\nelse:\n    print('C')",
             ),
             hints=(
-                _t("Busca la primera condición verdadera.", "Find the first true condition.", "Find den første sande betingelse."),
-                _t("Una cadena if-elif-else ejecuta como máximo una rama.", "An if-elif-else chain executes at most one branch.", "En if-elif-else-kæde udfører højst én gren."),
+                _t(
+                    "Busca la primera condición verdadera.",
+                    "Find the first true condition.",
+                    "Find den første sande betingelse.",
+                ),
+                _t(
+                    "Una cadena if-elif-else ejecuta como máximo una rama.",
+                    "An if-elif-else chain executes at most one branch.",
+                    "En if-elif-else-kæde udfører højst én gren.",
+                ),
             ),
             solution=_same("A"),
             explanation=_t(
@@ -534,7 +706,11 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "Match and, or og not med deres sandhedsregel.",
             ),
             hints=(
-                _t("Distingue exigir todas las condiciones de exigir al menos una.", "Distinguish requiring all conditions from requiring at least one.", "Skeln mellem at kræve alle betingelser og mindst én."),
+                _t(
+                    "Distingue exigir todas las condiciones de exigir al menos una.",
+                    "Distinguish requiring all conditions from requiring at least one.",
+                    "Skeln mellem at kræve alle betingelser og mindst én.",
+                ),
             ),
             solution=_t(
                 "and → True solo si ambos operandos son True; or → True si al menos uno es True; not → invierte el valor booleano.",
@@ -556,8 +732,16 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "Fuldfør betingelsen, så værdier fra 10 til og med 25 accepteres.",
             ),
             hints=(
-                _t("Puedes usar una comparación encadenada.", "You can use a chained comparison.", "Du kan bruge en kædet sammenligning."),
-                _t("Ambos límites son inclusivos.", "Both boundaries are inclusive.", "Begge grænser er inklusive."),
+                _t(
+                    "Puedes usar una comparación encadenada.",
+                    "You can use a chained comparison.",
+                    "Du kan bruge en kædet sammenligning.",
+                ),
+                _t(
+                    "Ambos límites son inclusivos.",
+                    "Both boundaries are inclusive.",
+                    "Begge grænser er inklusive.",
+                ),
             ),
             starter_code=_same("value = 18\nif __________:\n    print('accepted')"),
             solution=_same("10 <= value <= 25"),
@@ -576,7 +760,11 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "Ret fejlen og forklar årsagen:\nstatus = 'ready'\nif status = 'ready':\n    print('start')",
             ),
             hints=(
-                _t("Distingue asignación de comparación de igualdad.", "Distinguish assignment from equality comparison.", "Skeln mellem tildeling og lighedssammenligning."),
+                _t(
+                    "Distingue asignación de comparación de igualdad.",
+                    "Distinguish assignment from equality comparison.",
+                    "Skeln mellem tildeling og lighedssammenligning.",
+                ),
             ),
             solution=_same("status = 'ready'\nif status == 'ready':\n    print('start')"),
             explanation=_t(
@@ -595,7 +783,11 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
             ),
             hints=(
                 _t("Evalúa primero x != 0.", "Evaluate x != 0 first.", "Evaluér først x != 0."),
-                _t("Recuerda el cortocircuito de and.", "Remember short-circuiting for and.", "Husk kortslutning for and."),
+                _t(
+                    "Recuerda el cortocircuito de and.",
+                    "Remember short-circuiting for and.",
+                    "Husk kortslutning for and.",
+                ),
             ),
             solution=_same("False"),
             explanation=_t(
@@ -613,7 +805,11 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "Forklar, hvorfor score >= 90 bør kontrolleres før score >= 60 i en if-elif-klassifikation.",
             ),
             hints=(
-                _t("Piensa qué condiciones son verdaderas cuando score vale 95.", "Consider which conditions are true when score is 95.", "Overvej hvilke betingelser der er sande, når score er 95."),
+                _t(
+                    "Piensa qué condiciones son verdaderas cuando score vale 95.",
+                    "Consider which conditions are true when score is 95.",
+                    "Overvej hvilke betingelser der er sande, når score er 95.",
+                ),
             ),
             solution=_t(
                 "Un valor de 95 cumple ambas condiciones. Como se ejecuta la primera rama verdadera, la condición más específica score >= 90 debe aparecer primero para no quedar absorbida por score >= 60.",
@@ -635,7 +831,11 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "Fuldfør: Fra højeste til laveste er præcedensen for Pythons logiske operatorer ____ , ____ , ____.",
             ),
             hints=(
-                _t("La negación se evalúa antes que las combinaciones.", "Negation is evaluated before combinations.", "Negation evalueres før kombinationer."),
+                _t(
+                    "La negación se evalúa antes que las combinaciones.",
+                    "Negation is evaluated before combinations.",
+                    "Negation evalueres før kombinationer.",
+                ),
             ),
             solution=_same("not, and, or"),
             explanation=_t(
@@ -653,9 +853,15 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "Fuldfør en validering, der markerer enhver procent under 0 eller over 100 som ugyldig.",
             ),
             hints=(
-                _t("Los dos casos inválidos se combinan con or.", "The two invalid cases are combined with or.", "De to ugyldige tilfælde kombineres med or."),
+                _t(
+                    "Los dos casos inválidos se combinan con or.",
+                    "The two invalid cases are combined with or.",
+                    "De to ugyldige tilfælde kombineres med or.",
+                ),
             ),
-            starter_code=_same("percentage = 112\nif __________________________:\n    print('invalid')"),
+            starter_code=_same(
+                "percentage = 112\nif __________________________:\n    print('invalid')"
+            ),
             solution=_same("percentage < 0 or percentage > 100"),
             explanation=_t(
                 "Basta con que se cumpla uno de los dos extremos inválidos para rechazar la entrada.",
@@ -672,7 +878,11 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "Forklar mundtligt forskellen mellem en sammensat betingelse og en indlejret betingelse. Medtag et tilfælde, hvor indlejring er begrundet.",
             ),
             hints=(
-                _t("Relaciona la forma del código con decisiones simultáneas o por etapas.", "Relate code form to simultaneous or staged decisions.", "Knyt kodens form til samtidige beslutninger eller beslutninger i trin."),
+                _t(
+                    "Relaciona la forma del código con decisiones simultáneas o por etapas.",
+                    "Relate code form to simultaneous or staged decisions.",
+                    "Knyt kodens form til samtidige beslutninger eller beslutninger i trin.",
+                ),
             ),
             solution=_t(
                 "Una condición compuesta decide con varios requisitos a la vez. Un condicional anidado expresa que una segunda decisión solo se considera después de superar la primera, por ejemplo validar que un dato exista antes de clasificar su valor.",
@@ -694,8 +904,16 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
                 "Foreslå et minimalt testsæt til tre grene: x < 10, 10 <= x <= 20 og x > 20.",
             ),
             hints=(
-                _t("Incluye cada rama y los dos límites.", "Include every branch and both boundaries.", "Medtag hver gren og begge grænser."),
-                _t("Los valores justo a ambos lados revelan errores con < y <=.", "Values immediately on either side expose < versus <= errors.", "Værdier lige på begge sider afslører fejl mellem < og <=."),
+                _t(
+                    "Incluye cada rama y los dos límites.",
+                    "Include every branch and both boundaries.",
+                    "Medtag hver gren og begge grænser.",
+                ),
+                _t(
+                    "Los valores justo a ambos lados revelan errores con < y <=.",
+                    "Values immediately on either side expose < versus <= errors.",
+                    "Værdier lige på begge sider afslører fejl mellem < og <=.",
+                ),
             ),
             solution=_t(
                 "Un conjunto sólido es 9, 10, 20 y 21. Activa las tres ramas y comprueba ambos límites y sus lados inmediatos.",
@@ -713,7 +931,9 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
         LocalizedAssessmentItem(
             item_id="m02.a01",
             activity_type=ActivityType.MULTIPLE_CHOICE,
-            prompt=_t("¿Cuál es el tipo de True?", "What is the type of True?", "Hvilken type har True?"),
+            prompt=_t(
+                "¿Cuál es el tipo de True?", "What is the type of True?", "Hvilken type har True?"
+            ),
             options=(
                 _option("bool", "bool", "bool", "bool"),
                 _option("str", "str", "str", "str"),
@@ -722,24 +942,40 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
             ),
             correct_option_ids=("bool",),
             accepted_answers=(),
-            explanation=_t("True y False son los dos valores del tipo bool.", "True and False are the two bool values.", "True og False er de to værdier af typen bool."),
+            explanation=_t(
+                "True y False son los dos valores del tipo bool.",
+                "True and False are the two bool values.",
+                "True og False er de to værdier af typen bool.",
+            ),
         ),
         LocalizedAssessmentItem(
             item_id="m02.a02",
             activity_type=ActivityType.TRUE_FALSE,
-            prompt=_t("El operador = compara si dos valores son iguales.", "The = operator compares two values for equality.", "Operatoren = sammenligner to værdier for lighed."),
+            prompt=_t(
+                "El operador = compara si dos valores son iguales.",
+                "The = operator compares two values for equality.",
+                "Operatoren = sammenligner to værdier for lighed.",
+            ),
             options=(
                 _option("true", "Verdadero", "True", "Sandt"),
                 _option("false", "Falso", "False", "Falsk"),
             ),
             correct_option_ids=("false",),
             accepted_answers=(),
-            explanation=_t("= asigna; == compara igualdad.", "= assigns; == compares equality.", "= tildeler; == sammenligner lighed."),
+            explanation=_t(
+                "= asigna; == compara igualdad.",
+                "= assigns; == compares equality.",
+                "= tildeler; == sammenligner lighed.",
+            ),
         ),
         LocalizedAssessmentItem(
             item_id="m02.a03",
             activity_type=ActivityType.MULTIPLE_SELECT,
-            prompt=_t("Selecciona todas las expresiones que producen True cuando x = 8.", "Select every expression that is True when x = 8.", "Vælg alle udtryk, der er True, når x = 8."),
+            prompt=_t(
+                "Selecciona todas las expresiones que producen True cuando x = 8.",
+                "Select every expression that is True when x = 8.",
+                "Vælg alle udtryk, der er True, når x = 8.",
+            ),
             options=(
                 _option("gt5", "x > 5", "x > 5", "x > 5"),
                 _option("range", "5 <= x <= 8", "5 <= x <= 8", "5 <= x <= 8"),
@@ -748,126 +984,278 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
             ),
             correct_option_ids=("gt5", "range"),
             accepted_answers=(),
-            explanation=_t("8 es mayor que 5 y pertenece al intervalo cerrado [5, 8].", "8 is greater than 5 and belongs to the closed interval [5, 8].", "8 er større end 5 og tilhører det lukkede interval [5, 8]."),
+            explanation=_t(
+                "8 es mayor que 5 y pertenece al intervalo cerrado [5, 8].",
+                "8 is greater than 5 and belongs to the closed interval [5, 8].",
+                "8 er større end 5 og tilhører det lukkede interval [5, 8].",
+            ),
         ),
         LocalizedAssessmentItem(
             item_id="m02.a04",
             activity_type=ActivityType.CODE_TRACING,
-            prompt=_t("Indica la salida exacta:\nx = 4\nif x > 5:\n    print('high')\nelse:\n    print('low')", "Give the exact output:\nx = 4\nif x > 5:\n    print('high')\nelse:\n    print('low')", "Angiv det præcise output:\nx = 4\nif x > 5:\n    print('high')\nelse:\n    print('low')"),
+            prompt=_t(
+                "Indica la salida exacta:\nx = 4\nif x > 5:\n    print('high')\nelse:\n    print('low')",
+                "Give the exact output:\nx = 4\nif x > 5:\n    print('high')\nelse:\n    print('low')",
+                "Angiv det præcise output:\nx = 4\nif x > 5:\n    print('high')\nelse:\n    print('low')",
+            ),
             options=(),
             correct_option_ids=(),
             accepted_answers=(_same("low"),),
-            explanation=_t("x > 5 es False, por lo que se ejecuta else.", "x > 5 is False, so else executes.", "x > 5 er False, så else udføres."),
+            explanation=_t(
+                "x > 5 es False, por lo que se ejecuta else.",
+                "x > 5 is False, so else executes.",
+                "x > 5 er False, så else udføres.",
+            ),
             rubric=(
                 _t("Indica exactamente low.", "States exactly low.", "Angiver præcist low."),
-                _t("Relaciona la salida con la condición falsa.", "Links the output to the false condition.", "Knytter outputtet til den falske betingelse."),
+                _t(
+                    "Relaciona la salida con la condición falsa.",
+                    "Links the output to the false condition.",
+                    "Knytter outputtet til den falske betingelse.",
+                ),
             ),
         ),
         LocalizedAssessmentItem(
             item_id="m02.a05",
             activity_type=ActivityType.FILL_IN_THE_BLANK,
-            prompt=_t("Completa el operador para expresar 'distinto de': x ____ 0.", "Complete the operator for 'not equal to': x ____ 0.", "Fuldfør operatoren for 'ikke lig med': x ____ 0."),
+            prompt=_t(
+                "Completa el operador para expresar 'distinto de': x ____ 0.",
+                "Complete the operator for 'not equal to': x ____ 0.",
+                "Fuldfør operatoren for 'ikke lig med': x ____ 0.",
+            ),
             options=(),
             correct_option_ids=(),
             accepted_answers=(_same("!="),),
-            explanation=_t("!= compara desigualdad.", "!= compares inequality.", "!= sammenligner ulighed."),
+            explanation=_t(
+                "!= compara desigualdad.", "!= compares inequality.", "!= sammenligner ulighed."
+            ),
         ),
         LocalizedAssessmentItem(
             item_id="m02.a06",
             activity_type=ActivityType.DEBUGGING,
-            prompt=_t("Corrige la condición para evitar dividir por cero: ratio = total / count if total / count > 2 else 0, suponiendo que se debe usar una estructura if normal.", "Correct the condition to avoid division by zero: ratio = total / count if total / count > 2 else 0, assuming a normal if statement should be used.", "Ret betingelsen for at undgå division med nul: ratio = total / count if total / count > 2 else 0, idet der skal bruges en almindelig if-sætning."),
+            prompt=_t(
+                "Corrige la condición para evitar dividir por cero: ratio = total / count if total / count > 2 else 0, suponiendo que se debe usar una estructura if normal.",
+                "Correct the condition to avoid division by zero: ratio = total / count if total / count > 2 else 0, assuming a normal if statement should be used.",
+                "Ret betingelsen for at undgå division med nul: ratio = total / count if total / count > 2 else 0, idet der skal bruges en almindelig if-sætning.",
+            ),
             options=(),
             correct_option_ids=(),
             accepted_answers=(
-                _same("if count != 0 and total / count > 2:\n    ratio = total / count\nelse:\n    ratio = 0"),
+                _same(
+                    "if count != 0 and total / count > 2:\n    ratio = total / count\nelse:\n    ratio = 0"
+                ),
             ),
-            explanation=_t("La comprobación count != 0 debe evaluarse antes de la división.", "count != 0 must be evaluated before division.", "count != 0 skal evalueres før divisionen."),
+            explanation=_t(
+                "La comprobación count != 0 debe evaluarse antes de la división.",
+                "count != 0 must be evaluated before division.",
+                "count != 0 skal evalueres før divisionen.",
+            ),
             rubric=(
-                _t("Comprueba count != 0 antes de dividir.", "Checks count != 0 before division.", "Kontrollerer count != 0 før division."),
-                _t("Conserva una rama alternativa definida.", "Keeps a defined alternative branch.", "Bevarer en defineret alternativ gren."),
-                _t("Explica el papel del cortocircuito.", "Explains the role of short-circuiting.", "Forklarer kortslutningens rolle."),
+                _t(
+                    "Comprueba count != 0 antes de dividir.",
+                    "Checks count != 0 before division.",
+                    "Kontrollerer count != 0 før division.",
+                ),
+                _t(
+                    "Conserva una rama alternativa definida.",
+                    "Keeps a defined alternative branch.",
+                    "Bevarer en defineret alternativ gren.",
+                ),
+                _t(
+                    "Explica el papel del cortocircuito.",
+                    "Explains the role of short-circuiting.",
+                    "Forklarer kortslutningens rolle.",
+                ),
             ),
         ),
         LocalizedAssessmentItem(
             item_id="m02.a07",
             activity_type=ActivityType.ORDERING,
-            prompt=_t("Ordena las comprobaciones para procesar una entrada de forma segura.", "Order the checks for safe input processing.", "Sæt kontrollerne i rækkefølge for sikker behandling af input."),
+            prompt=_t(
+                "Ordena las comprobaciones para procesar una entrada de forma segura.",
+                "Order the checks for safe input processing.",
+                "Sæt kontrollerne i rækkefølge for sikker behandling af input.",
+            ),
             options=(
-                _option("parse", "Convertir la representación al tipo requerido", "Convert the representation to the required type", "Konvertér repræsentationen til den krævede type"),
-                _option("validate", "Validar el dominio permitido", "Validate the allowed domain", "Validér det tilladte domæne"),
-                _option("classify", "Aplicar la clasificación", "Apply the classification", "Anvend klassifikationen"),
+                _option(
+                    "parse",
+                    "Convertir la representación al tipo requerido",
+                    "Convert the representation to the required type",
+                    "Konvertér repræsentationen til den krævede type",
+                ),
+                _option(
+                    "validate",
+                    "Validar el dominio permitido",
+                    "Validate the allowed domain",
+                    "Validér det tilladte domæne",
+                ),
+                _option(
+                    "classify",
+                    "Aplicar la clasificación",
+                    "Apply the classification",
+                    "Anvend klassifikationen",
+                ),
                 _option("report", "Mostrar el resultado", "Report the result", "Vis resultatet"),
             ),
             correct_option_ids=("parse", "validate", "classify", "report"),
             accepted_answers=(),
-            explanation=_t("Primero se obtiene un valor utilizable, después se valida, se clasifica y se comunica.", "First obtain a usable value, then validate, classify, and report it.", "Først opnås en anvendelig værdi, derefter valideres, klassificeres og rapporteres den."),
+            explanation=_t(
+                "Primero se obtiene un valor utilizable, después se valida, se clasifica y se comunica.",
+                "First obtain a usable value, then validate, classify, and report it.",
+                "Først opnås en anvendelig værdi, derefter valideres, klassificeres og rapporteres den.",
+            ),
         ),
         LocalizedAssessmentItem(
             item_id="m02.a08",
             activity_type=ActivityType.MATCHING,
-            prompt=_t("Relaciona cada operador con su función.", "Match each operator with its function.", "Match hver operator med dens funktion."),
+            prompt=_t(
+                "Relaciona cada operador con su función.",
+                "Match each operator with its function.",
+                "Match hver operator med dens funktion.",
+            ),
             options=(
-                _option("and", "and → exige ambas condiciones", "and → requires both conditions", "and → kræver begge betingelser"),
-                _option("or", "or → exige al menos una condición", "or → requires at least one condition", "or → kræver mindst én betingelse"),
-                _option("not", "not → invierte una condición", "not → reverses a condition", "not → vender en betingelse"),
+                _option(
+                    "and",
+                    "and → exige ambas condiciones",
+                    "and → requires both conditions",
+                    "and → kræver begge betingelser",
+                ),
+                _option(
+                    "or",
+                    "or → exige al menos una condición",
+                    "or → requires at least one condition",
+                    "or → kræver mindst én betingelse",
+                ),
+                _option(
+                    "not",
+                    "not → invierte una condición",
+                    "not → reverses a condition",
+                    "not → vender en betingelse",
+                ),
             ),
             correct_option_ids=("and", "or", "not"),
             accepted_answers=(),
-            explanation=_t("Las tres reglas corresponden a la semántica booleana de Python.", "The three rules are Python's Boolean semantics.", "De tre regler svarer til Pythons booleske semantik."),
+            explanation=_t(
+                "Las tres reglas corresponden a la semántica booleana de Python.",
+                "The three rules are Python's Boolean semantics.",
+                "De tre regler svarer til Pythons booleske semantik.",
+            ),
         ),
         LocalizedAssessmentItem(
             item_id="m02.a09",
             activity_type=ActivityType.SHORT_ANSWER,
-            prompt=_t("Define qué significa que and se evalúe en cortocircuito.", "Define what it means for and to short-circuit.", "Definér, hvad det betyder, at and kortslutter."),
+            prompt=_t(
+                "Define qué significa que and se evalúe en cortocircuito.",
+                "Define what it means for and to short-circuit.",
+                "Definér, hvad det betyder, at and kortslutter.",
+            ),
             options=(),
             correct_option_ids=(),
             accepted_answers=(
-                _t("Si el primer operando es False, Python no evalúa el segundo porque el resultado total ya debe ser False.", "If the first operand is False, Python does not evaluate the second because the complete result must already be False.", "Hvis den første operand er False, evaluerer Python ikke den anden, fordi det samlede resultat allerede må være False."),
+                _t(
+                    "Si el primer operando es False, Python no evalúa el segundo porque el resultado total ya debe ser False.",
+                    "If the first operand is False, Python does not evaluate the second because the complete result must already be False.",
+                    "Hvis den første operand er False, evaluerer Python ikke den anden, fordi det samlede resultat allerede må være False.",
+                ),
             ),
-            explanation=_t("El segundo operando solo se evalúa cuando el primero es verdadero.", "The second operand is evaluated only when the first is true.", "Den anden operand evalueres kun, når den første er sand."),
+            explanation=_t(
+                "El segundo operando solo se evalúa cuando el primero es verdadero.",
+                "The second operand is evaluated only when the first is true.",
+                "Den anden operand evalueres kun, når den første er sand.",
+            ),
             rubric=(
-                _t("Menciona la evaluación de izquierda a derecha.", "Mentions left-to-right evaluation.", "Nævner evaluering fra venstre mod højre."),
-                _t("Indica que False en el primer operando detiene and.", "States that False in the first operand stops and.", "Angiver, at False i den første operand stopper and."),
-                _t("Explica que el resultado ya está determinado.", "Explains that the result is already determined.", "Forklarer, at resultatet allerede er bestemt."),
+                _t(
+                    "Menciona la evaluación de izquierda a derecha.",
+                    "Mentions left-to-right evaluation.",
+                    "Nævner evaluering fra venstre mod højre.",
+                ),
+                _t(
+                    "Indica que False en el primer operando detiene and.",
+                    "States that False in the first operand stops and.",
+                    "Angiver, at False i den første operand stopper and.",
+                ),
+                _t(
+                    "Explica que el resultado ya está determinado.",
+                    "Explains that the result is already determined.",
+                    "Forklarer, at resultatet allerede er bestemt.",
+                ),
             ),
         ),
         LocalizedAssessmentItem(
             item_id="m02.a10",
             activity_type=ActivityType.CODE_COMPLETION,
-            prompt=_t("Completa la condición: una muestra se revisa si concentration < 20 o purity no está entre 1.8 y 2.1.", "Complete the condition: a sample is reviewed if concentration < 20 or purity is not between 1.8 and 2.1.", "Fuldfør betingelsen: En prøve gennemgås, hvis concentration < 20, eller purity ikke ligger mellem 1.8 og 2.1."),
+            prompt=_t(
+                "Completa la condición: una muestra se revisa si concentration < 20 o purity no está entre 1.8 y 2.1.",
+                "Complete the condition: a sample is reviewed if concentration < 20 or purity is not between 1.8 and 2.1.",
+                "Fuldfør betingelsen: En prøve gennemgås, hvis concentration < 20, eller purity ikke ligger mellem 1.8 og 2.1.",
+            ),
             options=(),
             correct_option_ids=(),
-            accepted_answers=(
-                _same("concentration < 20 or not 1.8 <= purity <= 2.1"),
+            accepted_answers=(_same("concentration < 20 or not 1.8 <= purity <= 2.1"),),
+            explanation=_t(
+                "or combina cualquiera de los motivos de revisión y not niega el intervalo válido.",
+                "or combines either review reason and not negates the valid interval.",
+                "or kombinerer begge mulige årsager til gennemgang, og not benægter det gyldige interval.",
             ),
-            explanation=_t("or combina cualquiera de los motivos de revisión y not niega el intervalo válido.", "or combines either review reason and not negates the valid interval.", "or kombinerer begge mulige årsager til gennemgang, og not benægter det gyldige interval."),
         ),
         LocalizedAssessmentItem(
             item_id="m02.a11",
             activity_type=ActivityType.DATA_INTERPRETATION,
-            prompt=_t("Una regla usa if x < 10, elif x <= 20 y else. ¿Qué rama recibe x = 20 y por qué?", "A rule uses if x < 10, elif x <= 20, and else. Which branch receives x = 20, and why?", "En regel bruger if x < 10, elif x <= 20 og else. Hvilken gren modtager x = 20, og hvorfor?"),
+            prompt=_t(
+                "Una regla usa if x < 10, elif x <= 20 y else. ¿Qué rama recibe x = 20 y por qué?",
+                "A rule uses if x < 10, elif x <= 20, and else. Which branch receives x = 20, and why?",
+                "En regel bruger if x < 10, elif x <= 20 og else. Hvilken gren modtager x = 20, og hvorfor?",
+            ),
             options=(),
             correct_option_ids=(),
             accepted_answers=(
-                _t("La rama elif, porque 20 no es menor que 10 pero sí cumple x <= 20.", "The elif branch, because 20 is not below 10 but does satisfy x <= 20.", "elif-grenen, fordi 20 ikke er mindre end 10, men opfylder x <= 20."),
+                _t(
+                    "La rama elif, porque 20 no es menor que 10 pero sí cumple x <= 20.",
+                    "The elif branch, because 20 is not below 10 but does satisfy x <= 20.",
+                    "elif-grenen, fordi 20 ikke er mindre end 10, men opfylder x <= 20.",
+                ),
             ),
-            explanation=_t("El operador <= incluye el límite 20.", "The <= operator includes the boundary 20.", "Operatoren <= inkluderer grænsen 20."),
+            explanation=_t(
+                "El operador <= incluye el límite 20.",
+                "The <= operator includes the boundary 20.",
+                "Operatoren <= inkluderer grænsen 20.",
+            ),
             rubric=(
-                _t("Identifica la rama elif.", "Identifies the elif branch.", "Identificerer elif-grenen."),
-                _t("Explica ambos resultados de comparación.", "Explains both comparison results.", "Forklarer begge sammenligningsresultater."),
+                _t(
+                    "Identifica la rama elif.",
+                    "Identifies the elif branch.",
+                    "Identificerer elif-grenen.",
+                ),
+                _t(
+                    "Explica ambos resultados de comparación.",
+                    "Explains both comparison results.",
+                    "Forklarer begge sammenligningsresultater.",
+                ),
             ),
         ),
         LocalizedAssessmentItem(
             item_id="m02.a12",
             activity_type=ActivityType.SHORT_ANSWER,
-            prompt=_t("Propón cuatro valores para probar los límites de 10 <= x <= 20.", "Propose four values to test the boundaries of 10 <= x <= 20.", "Foreslå fire værdier til at teste grænserne for 10 <= x <= 20."),
+            prompt=_t(
+                "Propón cuatro valores para probar los límites de 10 <= x <= 20.",
+                "Propose four values to test the boundaries of 10 <= x <= 20.",
+                "Foreslå fire værdier til at teste grænserne for 10 <= x <= 20.",
+            ),
             options=(),
             correct_option_ids=(),
             accepted_answers=(_same("9, 10, 20, 21"),),
-            explanation=_t("El conjunto comprueba cada límite y el valor inmediatamente exterior.", "The set checks each boundary and the immediately external value.", "Sættet kontrollerer hver grænse og den umiddelbart ydre værdi."),
+            explanation=_t(
+                "El conjunto comprueba cada límite y el valor inmediatamente exterior.",
+                "The set checks each boundary and the immediately external value.",
+                "Sættet kontrollerer hver grænse og den umiddelbart ydre værdi.",
+            ),
             rubric=(
                 _t("Incluye 10 y 20.", "Includes 10 and 20.", "Inkluderer 10 og 20."),
-                _t("Incluye un valor menor que 10 y otro mayor que 20.", "Includes one value below 10 and one above 20.", "Inkluderer én værdi under 10 og én over 20."),
+                _t(
+                    "Incluye un valor menor que 10 y otro mayor que 20.",
+                    "Includes one value below 10 and one above 20.",
+                    "Inkluderer én værdi under 10 og én over 20.",
+                ),
             ),
         ),
     ),
@@ -905,63 +1293,259 @@ LOCALIZED_MODULE_02_CONDITIONALS = LocalizedLearningModule(
             "kliniske eller laboratoriemæssige regler.",
         ),
         knowledge_fragments=(
-            _t("True y False son valores de bool; 'True' y 'False' son cadenas.", "True and False are bool values; 'True' and 'False' are strings.", "True og False er bool-værdier; 'True' og 'False' er tekststrenge."),
-            _t("== comprueba igualdad y = realiza asignación.", "== checks equality and = performs assignment.", "== kontrollerer lighed, og = udfører tildeling."),
-            _t("Las comparaciones encadenadas expresan intervalos sin repetir la variable.", "Chained comparisons express intervals without repeating the variable.", "Kædede sammenligninger udtrykker intervaller uden at gentage variablen."),
-            _t("La precedencia lógica es not, and y or, de mayor a menor.", "Logical precedence is not, and, then or from highest to lowest.", "Den logiske præcedens er not, and og or fra højeste til laveste."),
-            _t("A and B no evalúa B cuando A es False.", "A and B does not evaluate B when A is False.", "A and B evaluerer ikke B, når A er False."),
-            _t("A or B no evalúa B cuando A es True.", "A or B does not evaluate B when A is True.", "A or B evaluerer ikke B, når A er True."),
-            _t("Una cadena if-elif-else ejecuta solo la primera rama verdadera.", "An if-elif-else chain executes only the first true branch.", "En if-elif-else-kæde udfører kun den første sande gren."),
-            _t("else cubre los casos no capturados por condiciones anteriores.", "else covers cases not captured by previous conditions.", "else dækker tilfælde, som tidligere betingelser ikke fangede."),
-            _t("Las condiciones más específicas suelen preceder a las más generales cuando se solapan.", "More specific conditions usually precede more general overlapping conditions.", "Mere specifikke betingelser står normalt før mere generelle overlappende betingelser."),
-            _t("Una condición guardián valida antes de ejecutar una operación sensible.", "A guard condition validates before a sensitive operation executes.", "En beskyttelsesbetingelse validerer, før en følsom operation udføres."),
-            _t("Los límites exactos revelan errores entre < y <= o entre > y >=.", "Exact boundaries expose mistakes between < and <= or > and >=.", "Præcise grænser afslører fejl mellem < og <= eller > og >=."),
-            _t("Una prueba de ramas necesita casos normales, límite e inválidos.", "Branch testing needs normal, boundary, and invalid cases.", "Test af grene kræver normale, grænse- og ugyldige tilfælde."),
+            _t(
+                "True y False son valores de bool; 'True' y 'False' son cadenas.",
+                "True and False are bool values; 'True' and 'False' are strings.",
+                "True og False er bool-værdier; 'True' og 'False' er tekststrenge.",
+            ),
+            _t(
+                "== comprueba igualdad y = realiza asignación.",
+                "== checks equality and = performs assignment.",
+                "== kontrollerer lighed, og = udfører tildeling.",
+            ),
+            _t(
+                "Las comparaciones encadenadas expresan intervalos sin repetir la variable.",
+                "Chained comparisons express intervals without repeating the variable.",
+                "Kædede sammenligninger udtrykker intervaller uden at gentage variablen.",
+            ),
+            _t(
+                "La precedencia lógica es not, and y or, de mayor a menor.",
+                "Logical precedence is not, and, then or from highest to lowest.",
+                "Den logiske præcedens er not, and og or fra højeste til laveste.",
+            ),
+            _t(
+                "A and B no evalúa B cuando A es False.",
+                "A and B does not evaluate B when A is False.",
+                "A and B evaluerer ikke B, når A er False.",
+            ),
+            _t(
+                "A or B no evalúa B cuando A es True.",
+                "A or B does not evaluate B when A is True.",
+                "A or B evaluerer ikke B, når A er True.",
+            ),
+            _t(
+                "Una cadena if-elif-else ejecuta solo la primera rama verdadera.",
+                "An if-elif-else chain executes only the first true branch.",
+                "En if-elif-else-kæde udfører kun den første sande gren.",
+            ),
+            _t(
+                "else cubre los casos no capturados por condiciones anteriores.",
+                "else covers cases not captured by previous conditions.",
+                "else dækker tilfælde, som tidligere betingelser ikke fangede.",
+            ),
+            _t(
+                "Las condiciones más específicas suelen preceder a las más generales cuando se solapan.",
+                "More specific conditions usually precede more general overlapping conditions.",
+                "Mere specifikke betingelser står normalt før mere generelle overlappende betingelser.",
+            ),
+            _t(
+                "Una condición guardián valida antes de ejecutar una operación sensible.",
+                "A guard condition validates before a sensitive operation executes.",
+                "En beskyttelsesbetingelse validerer, før en følsom operation udføres.",
+            ),
+            _t(
+                "Los límites exactos revelan errores entre < y <= o entre > y >=.",
+                "Exact boundaries expose mistakes between < and <= or > and >=.",
+                "Præcise grænser afslører fejl mellem < og <= eller > og >=.",
+            ),
+            _t(
+                "Una prueba de ramas necesita casos normales, límite e inválidos.",
+                "Branch testing needs normal, boundary, and invalid cases.",
+                "Test af grene kræver normale, grænse- og ugyldige tilfælde.",
+            ),
         ),
         common_misconceptions=(
-            _t("Confundir bool con las cadenas 'True' y 'False'.", "Confusing bool with the strings 'True' and 'False'.", "At forveksle bool med tekststrengene 'True' og 'False'."),
-            _t("Usar = cuando se pretende comparar con ==.", "Using = when == is intended.", "At bruge =, når == er tilsigtet."),
-            _t("Suponer que elif se evalúa aunque if ya haya sido verdadero.", "Assuming elif is evaluated after a true if branch.", "At antage, at elif evalueres efter en sand if-gren."),
-            _t("Creer que and y or siempre evalúan ambos operandos.", "Believing and and or always evaluate both operands.", "At tro, at and og or altid evaluerer begge operander."),
-            _t("Colocar una división antes de la condición que debía protegerla.", "Placing division before the guard that should protect it.", "At placere divisionen før den betingelse, der skulle beskytte den."),
-            _t("Ignorar la precedencia al mezclar not, and y or.", "Ignoring precedence when mixing not, and, and or.", "At ignorere præcedens ved blanding af not, and og or."),
-            _t("Ordenar primero una condición general que absorbe una categoría específica.", "Placing a general condition before a specific category it absorbs.", "At placere en generel betingelse før en specifik kategori, som den opsluger."),
-            _t("Tratar todos los límites como exclusivos sin revisar la especificación.", "Treating all boundaries as exclusive without checking the specification.", "At behandle alle grænser som eksklusive uden at kontrollere specifikationen."),
-            _t("Usar anidamiento profundo cuando una condición compuesta sería más clara.", "Using deep nesting when a compound condition would be clearer.", "At bruge dyb indlejring, når en sammensat betingelse ville være tydeligere."),
-            _t("Probar solo un valor central y declarar correcta toda la clasificación.", "Testing one central value and declaring the whole classification correct.", "At teste én central værdi og erklære hele klassifikationen korrekt."),
+            _t(
+                "Confundir bool con las cadenas 'True' y 'False'.",
+                "Confusing bool with the strings 'True' and 'False'.",
+                "At forveksle bool med tekststrengene 'True' og 'False'.",
+            ),
+            _t(
+                "Usar = cuando se pretende comparar con ==.",
+                "Using = when == is intended.",
+                "At bruge =, når == er tilsigtet.",
+            ),
+            _t(
+                "Suponer que elif se evalúa aunque if ya haya sido verdadero.",
+                "Assuming elif is evaluated after a true if branch.",
+                "At antage, at elif evalueres efter en sand if-gren.",
+            ),
+            _t(
+                "Creer que and y or siempre evalúan ambos operandos.",
+                "Believing and and or always evaluate both operands.",
+                "At tro, at and og or altid evaluerer begge operander.",
+            ),
+            _t(
+                "Colocar una división antes de la condición que debía protegerla.",
+                "Placing division before the guard that should protect it.",
+                "At placere divisionen før den betingelse, der skulle beskytte den.",
+            ),
+            _t(
+                "Ignorar la precedencia al mezclar not, and y or.",
+                "Ignoring precedence when mixing not, and, and or.",
+                "At ignorere præcedens ved blanding af not, and og or.",
+            ),
+            _t(
+                "Ordenar primero una condición general que absorbe una categoría específica.",
+                "Placing a general condition before a specific category it absorbs.",
+                "At placere en generel betingelse før en specifik kategori, som den opsluger.",
+            ),
+            _t(
+                "Tratar todos los límites como exclusivos sin revisar la especificación.",
+                "Treating all boundaries as exclusive without checking the specification.",
+                "At behandle alle grænser som eksklusive uden at kontrollere specifikationen.",
+            ),
+            _t(
+                "Usar anidamiento profundo cuando una condición compuesta sería más clara.",
+                "Using deep nesting when a compound condition would be clearer.",
+                "At bruge dyb indlejring, når en sammensat betingelse ville være tydeligere.",
+            ),
+            _t(
+                "Probar solo un valor central y declarar correcta toda la clasificación.",
+                "Testing one central value and declaring the whole classification correct.",
+                "At teste én central værdi og erklære hele klassifikationen korrekt.",
+            ),
         ),
         socratic_questions=(
-            _t("¿Qué afirmación concreta debe ser True para entrar en esta rama?", "What concrete claim must be True to enter this branch?", "Hvilken konkret påstand skal være True for at gå ind i denne gren?"),
-            _t("¿Qué tipo y valor produce cada comparación por separado?", "What type and value does each comparison produce separately?", "Hvilken type og værdi giver hver sammenligning separat?"),
-            _t("¿Qué operador lógico corresponde a exigir todos los requisitos?", "Which logical operator represents requiring every condition?", "Hvilken logisk operator svarer til at kræve alle betingelser?"),
-            _t("¿Puede decidirse el resultado sin evaluar el segundo operando?", "Can the result be determined without evaluating the second operand?", "Kan resultatet bestemmes uden at evaluere den anden operand?"),
-            _t("¿Qué rama se ejecuta primero cuando varias condiciones son verdaderas?", "Which branch executes first when several conditions are true?", "Hvilken gren udføres først, når flere betingelser er sande?"),
-            _t("¿El valor límite pertenece o no a la categoría según la especificación?", "Does the boundary value belong to the category according to the specification?", "Tilhører grænseværdien kategorien ifølge specifikationen?"),
-            _t("¿La segunda decisión tiene sentido si la primera validación falla?", "Does the second decision make sense if the first validation fails?", "Giver den anden beslutning mening, hvis den første validering fejler?"),
-            _t("¿Puedes escribir una tabla con condición, resultado y rama ejecutada?", "Can you write a table with condition, result, and executed branch?", "Kan du skrive en tabel med betingelse, resultat og udført gren?"),
-            _t("¿Qué valor activaría cada rama de forma inequívoca?", "Which value would unambiguously activate each branch?", "Hvilken værdi ville entydigt aktivere hver gren?"),
-            _t("¿Qué prueba distingue < de <= en este límite?", "Which test distinguishes < from <= at this boundary?", "Hvilken test skelner mellem < og <= ved denne grænse?"),
+            _t(
+                "¿Qué afirmación concreta debe ser True para entrar en esta rama?",
+                "What concrete claim must be True to enter this branch?",
+                "Hvilken konkret påstand skal være True for at gå ind i denne gren?",
+            ),
+            _t(
+                "¿Qué tipo y valor produce cada comparación por separado?",
+                "What type and value does each comparison produce separately?",
+                "Hvilken type og værdi giver hver sammenligning separat?",
+            ),
+            _t(
+                "¿Qué operador lógico corresponde a exigir todos los requisitos?",
+                "Which logical operator represents requiring every condition?",
+                "Hvilken logisk operator svarer til at kræve alle betingelser?",
+            ),
+            _t(
+                "¿Puede decidirse el resultado sin evaluar el segundo operando?",
+                "Can the result be determined without evaluating the second operand?",
+                "Kan resultatet bestemmes uden at evaluere den anden operand?",
+            ),
+            _t(
+                "¿Qué rama se ejecuta primero cuando varias condiciones son verdaderas?",
+                "Which branch executes first when several conditions are true?",
+                "Hvilken gren udføres først, når flere betingelser er sande?",
+            ),
+            _t(
+                "¿El valor límite pertenece o no a la categoría según la especificación?",
+                "Does the boundary value belong to the category according to the specification?",
+                "Tilhører grænseværdien kategorien ifølge specifikationen?",
+            ),
+            _t(
+                "¿La segunda decisión tiene sentido si la primera validación falla?",
+                "Does the second decision make sense if the first validation fails?",
+                "Giver den anden beslutning mening, hvis den første validering fejler?",
+            ),
+            _t(
+                "¿Puedes escribir una tabla con condición, resultado y rama ejecutada?",
+                "Can you write a table with condition, result, and executed branch?",
+                "Kan du skrive en tabel med betingelse, resultat og udført gren?",
+            ),
+            _t(
+                "¿Qué valor activaría cada rama de forma inequívoca?",
+                "Which value would unambiguously activate each branch?",
+                "Hvilken værdi ville entydigt aktivere hver gren?",
+            ),
+            _t(
+                "¿Qué prueba distingue < de <= en este límite?",
+                "Which test distinguishes < from <= at this boundary?",
+                "Hvilken test skelner mellem < og <= ved denne grænse?",
+            ),
         ),
         grading_criteria=(
-            _t("Distingue valores booleanos de representaciones textuales.", "Distinguishes Boolean values from text representations.", "Skelner booleske værdier fra tekstrepræsentationer."),
-            _t("Predice correctamente comparaciones y operadores lógicos.", "Correctly predicts comparisons and logical operators.", "Forudsiger sammenligninger og logiske operatorer korrekt."),
-            _t("Explica la precedencia o usa paréntesis sin alterar el significado.", "Explains precedence or uses parentheses without changing meaning.", "Forklarer præcedens eller bruger parenteser uden at ændre betydningen."),
-            _t("Reconoce cuándo el cortocircuito evita evaluar una operación.", "Recognises when short-circuiting prevents an operation from being evaluated.", "Genkender, hvornår kortslutning forhindrer evaluering af en operation."),
-            _t("Justifica la rama ejecutada y el efecto del orden.", "Justifies the executed branch and the effect of order.", "Begrunder den udførte gren og rækkefølgens betydning."),
-            _t("Distingue condiciones compuestas de decisiones anidadas.", "Distinguishes compound conditions from nested decisions.", "Skelner sammensatte betingelser fra indlejrede beslutninger."),
-            _t("Usa operadores inclusivos o exclusivos de acuerdo con el problema.", "Uses inclusive or exclusive operators according to the problem.", "Bruger inklusive eller eksklusive operatorer i overensstemmelse med problemet."),
-            _t("Propone pruebas que cubren ramas y límites.", "Proposes tests that cover branches and boundaries.", "Foreslår test, der dækker grene og grænser."),
-            _t("Mantiene los ejemplos dentro del alcance de condicionales sin introducir bucles o funciones innecesarias.", "Keeps examples within conditional logic without unnecessary loops or functions.", "Holder eksempler inden for betinget logik uden unødvendige løkker eller funktioner."),
+            _t(
+                "Distingue valores booleanos de representaciones textuales.",
+                "Distinguishes Boolean values from text representations.",
+                "Skelner booleske værdier fra tekstrepræsentationer.",
+            ),
+            _t(
+                "Predice correctamente comparaciones y operadores lógicos.",
+                "Correctly predicts comparisons and logical operators.",
+                "Forudsiger sammenligninger og logiske operatorer korrekt.",
+            ),
+            _t(
+                "Explica la precedencia o usa paréntesis sin alterar el significado.",
+                "Explains precedence or uses parentheses without changing meaning.",
+                "Forklarer præcedens eller bruger parenteser uden at ændre betydningen.",
+            ),
+            _t(
+                "Reconoce cuándo el cortocircuito evita evaluar una operación.",
+                "Recognises when short-circuiting prevents an operation from being evaluated.",
+                "Genkender, hvornår kortslutning forhindrer evaluering af en operation.",
+            ),
+            _t(
+                "Justifica la rama ejecutada y el efecto del orden.",
+                "Justifies the executed branch and the effect of order.",
+                "Begrunder den udførte gren og rækkefølgens betydning.",
+            ),
+            _t(
+                "Distingue condiciones compuestas de decisiones anidadas.",
+                "Distinguishes compound conditions from nested decisions.",
+                "Skelner sammensatte betingelser fra indlejrede beslutninger.",
+            ),
+            _t(
+                "Usa operadores inclusivos o exclusivos de acuerdo con el problema.",
+                "Uses inclusive or exclusive operators according to the problem.",
+                "Bruger inklusive eller eksklusive operatorer i overensstemmelse med problemet.",
+            ),
+            _t(
+                "Propone pruebas que cubren ramas y límites.",
+                "Proposes tests that cover branches and boundaries.",
+                "Foreslår test, der dækker grene og grænser.",
+            ),
+            _t(
+                "Mantiene los ejemplos dentro del alcance de condicionales sin introducir bucles o funciones innecesarias.",
+                "Keeps examples within conditional logic without unnecessary loops or functions.",
+                "Holder eksempler inden for betinget logik uden unødvendige løkker eller funktioner.",
+            ),
         ),
         response_constraints=(
-            _t("Responder primero con una pista cuando el estudiante esté resolviendo un ejercicio.", "Give a hint first when the learner is solving an exercise.", "Giv først et hint, når den studerende løser en øvelse."),
-            _t("No presentar umbrales didácticos como recomendaciones clínicas o de laboratorio.", "Do not present teaching thresholds as clinical or laboratory recommendations.", "Præsentér ikke undervisningsgrænser som kliniske eller laboratoriemæssige anbefalinger."),
-            _t("No introducir bucles, funciones avanzadas ni clases para resolver ejercicios del módulo.", "Do not introduce loops, advanced functions, or classes to solve module exercises.", "Indfør ikke løkker, avancerede funktioner eller klasser til moduløvelser."),
-            _t("Separar el valor de cada condición de la rama finalmente ejecutada.", "Separate each condition's value from the branch ultimately executed.", "Adskil værdien af hver betingelse fra den gren, der til sidst udføres."),
-            _t("Cuando haya cortocircuito, indicar explícitamente qué operando no se evalúa.", "When short-circuiting occurs, state explicitly which operand is not evaluated.", "Når kortslutning forekommer, angiv eksplicit hvilken operand der ikke evalueres."),
-            _t("No aceptar una clasificación sin revisar los valores límite.", "Do not accept a classification without checking boundary values.", "Acceptér ikke en klassifikation uden at kontrollere grænseværdier."),
-            _t("Mantener el código en Python válido y respetar la indentación.", "Keep code valid Python and preserve indentation.", "Hold koden som gyldig Python og bevar indrykningen."),
-            _t("Si falta información de la especificación, declarar la ambigüedad en lugar de inventar un límite.", "If the specification lacks information, state the ambiguity instead of inventing a boundary.", "Hvis specifikationen mangler information, angiv tvetydigheden i stedet for at opfinde en grænse."),
+            _t(
+                "Responder primero con una pista cuando el estudiante esté resolviendo un ejercicio.",
+                "Give a hint first when the learner is solving an exercise.",
+                "Giv først et hint, når den studerende løser en øvelse.",
+            ),
+            _t(
+                "No presentar umbrales didácticos como recomendaciones clínicas o de laboratorio.",
+                "Do not present teaching thresholds as clinical or laboratory recommendations.",
+                "Præsentér ikke undervisningsgrænser som kliniske eller laboratoriemæssige anbefalinger.",
+            ),
+            _t(
+                "No introducir bucles, funciones avanzadas ni clases para resolver ejercicios del módulo.",
+                "Do not introduce loops, advanced functions, or classes to solve module exercises.",
+                "Indfør ikke løkker, avancerede funktioner eller klasser til moduløvelser.",
+            ),
+            _t(
+                "Separar el valor de cada condición de la rama finalmente ejecutada.",
+                "Separate each condition's value from the branch ultimately executed.",
+                "Adskil værdien af hver betingelse fra den gren, der til sidst udføres.",
+            ),
+            _t(
+                "Cuando haya cortocircuito, indicar explícitamente qué operando no se evalúa.",
+                "When short-circuiting occurs, state explicitly which operand is not evaluated.",
+                "Når kortslutning forekommer, angiv eksplicit hvilken operand der ikke evalueres.",
+            ),
+            _t(
+                "No aceptar una clasificación sin revisar los valores límite.",
+                "Do not accept a classification without checking boundary values.",
+                "Acceptér ikke en klassifikation uden at kontrollere grænseværdier.",
+            ),
+            _t(
+                "Mantener el código en Python válido y respetar la indentación.",
+                "Keep code valid Python and preserve indentation.",
+                "Hold koden som gyldig Python og bevar indrykningen.",
+            ),
+            _t(
+                "Si falta información de la especificación, declarar la ambigüedad en lugar de inventar un límite.",
+                "If the specification lacks information, state the ambiguity instead of inventing a boundary.",
+                "Hvis specifikationen mangler information, angiv tvetydigheden i stedet for at opfinde en grænse.",
+            ),
         ),
         source_basis=(
             "Official DM857 course description, SDU, active version approved in 2025.",
