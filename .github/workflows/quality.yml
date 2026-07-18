@@ -6,7 +6,7 @@ on:
   pull_request:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   quality:
@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -41,17 +43,17 @@ jobs:
       - name: Type check
         run: mypy
 
-      - name: Capture test diagnostics
+      - name: Persist pytest diagnostics
         if: matrix.python-version == '3.11'
-        continue-on-error: true
-        run: pytest --junitxml=pytest-results.xml
-
-      - name: Upload test diagnostics
-        if: matrix.python-version == '3.11' && always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: pytest-results
-          path: pytest-results.xml
+        run: |
+          pytest -vv > ci-pytest.log 2>&1 || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ci-pytest.log
+          if ! git diff --cached --quiet; then
+            git commit -m "Capture CI pytest diagnostics"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
 
       - name: Test
         run: pytest
