@@ -17,14 +17,8 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ...content.models import (
-    AssessmentItem,
-    ConceptBlock,
-    LearningModule,
-    PracticeExercise,
-    WorkedExample,
-)
-from ..widgets import ObjectiveAssessmentWidget
+from ...content.models import AssessmentItem, ConceptBlock, LearningModule, WorkedExample
+from ..widgets import GuidedPracticeWidget, ObjectiveAssessmentWidget
 
 _ACTIVITY_LABELS = {
     "worked_example": "Ejemplo resuelto",
@@ -46,7 +40,7 @@ _ACTIVITY_LABELS = {
 
 
 class ModuleReaderPage(QWidget):
-    """Render theory, examples, practice and module-specific assessment."""
+    """Render theory, examples, guided practice and module-specific assessment."""
 
     def __init__(
         self,
@@ -178,14 +172,12 @@ class ModuleReaderPage(QWidget):
         assert isinstance(layout, QVBoxLayout)
 
         notice = self._label(
-            "Esta entrega presenta los ejercicios y sus pistas. La respuesta interactiva, "
-            "el registro de intentos y la retroalimentación se implementarán por separado.",
+            "Cada sesión selecciona una combinación diferente de ejercicios. Escribe tu respuesta, "
+            "revela pistas progresivamente y compara después con la solución de referencia.",
             "moduleSectionNotice",
         )
         layout.addWidget(notice)
-
-        for exercise in self._module.practice_exercises:
-            layout.addWidget(self._practice_card(exercise))
+        layout.addWidget(GuidedPracticeWidget(self._module.practice_exercises))
         layout.addStretch(1)
         return self._scroll_area(body, "modulePracticeScroll")
 
@@ -236,19 +228,6 @@ class ModuleReaderPage(QWidget):
         layout.addWidget(self._code_block(example.expected_output, "exampleOutput"))
         layout.addWidget(self._subheading("Explicación"))
         layout.addWidget(self._label(example.explanation, "contentBody"))
-        return card
-
-    def _practice_card(self, exercise: PracticeExercise) -> QFrame:
-        activity = self._activity_label(exercise.activity_type.value)
-        card, layout = self._card("practiceCard", f"{exercise.exercise_id} · {activity}")
-        layout.addWidget(self._label(exercise.prompt, "contentPrompt"))
-
-        if exercise.starter_code:
-            layout.addWidget(self._subheading("Código inicial"))
-            layout.addWidget(self._code_block(exercise.starter_code, "practiceCode"))
-
-        layout.addWidget(self._subheading("Pistas"))
-        layout.addWidget(self._label(self._numbered(exercise.hints), "contentBulletList"))
         return card
 
     def _assessment_card(self, number: int, item: AssessmentItem) -> QFrame:
