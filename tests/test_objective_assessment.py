@@ -5,9 +5,13 @@ import random
 import pytest
 from PySide6.QtWidgets import QApplication
 
-from computational_biomedicine_study_hub.content.dm857 import OBJECTIVE_QUESTION_BANK
+from computational_biomedicine_study_hub.content.dm857 import (
+    LOCALIZED_BUNDLES,
+    OBJECTIVE_QUESTION_BANK,
+)
 from computational_biomedicine_study_hub.content.models import AssessmentItem
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
+from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning import ActivityType
 from computational_biomedicine_study_hub.learning.objective_assessment import (
     ObjectiveSessionGenerator,
@@ -26,8 +30,10 @@ def test_dm857_objective_bank_is_large_unique_and_deterministic() -> None:
         item.activity_type in {ActivityType.MULTIPLE_CHOICE, ActivityType.TRUE_FALSE}
         for item in OBJECTIVE_QUESTION_BANK
     )
-    assert all(len(item.correct_answers) == 1 for item in OBJECTIVE_QUESTION_BANK)
-    assert all(item.correct_answers[0] in item.options for item in OBJECTIVE_QUESTION_BANK)
+    assert all(len(item.correct_option_ids) == 1 for item in OBJECTIVE_QUESTION_BANK)
+    assert all(
+        item.correct_option_ids[0] in item.option_ids for item in OBJECTIVE_QUESTION_BANK
+    )
 
 
 def test_generator_builds_balanced_varied_sessions_and_shuffles_options() -> None:
@@ -48,27 +54,54 @@ def test_generator_builds_balanced_varied_sessions_and_shuffles_options() -> Non
         ActivityType.TRUE_FALSE,
     }
     assert all(
-        set(question.display_options) == set(question.item.options) for question in first.questions
+        {option.option_id for option in question.display_options}
+        == set(question.item.option_ids)
+        for question in first.questions
     )
 
 
-def test_objective_grading_returns_authored_feedback() -> None:
+def test_objective_grading_returns_authored_feedback_by_option_id() -> None:
     generator = ObjectiveSessionGenerator(
         OBJECTIVE_QUESTION_BANK,
         question_count=1,
         rng=random.Random(3),
     )
     question = generator.new_session().questions[0]
-    correct_answer = question.item.correct_answers[0]
-    wrong_answer = next(option for option in question.item.options if option != correct_answer)
+    correct_option_id = question.item.correct_option_ids[0]
+    wrong_option_id = next(
+        option_id for option_id in question.item.option_ids if option_id != correct_option_id
+    )
 
-    correct = grade_objective_answer(question, correct_answer)
-    incorrect = grade_objective_answer(question, wrong_answer)
+    correct = grade_objective_answer(question, correct_option_id)
+    incorrect = grade_objective_answer(question, wrong_option_id)
 
     assert correct.is_correct
+    assert correct.selected_option_id == correct_option_id
     assert not incorrect.is_correct
-    assert incorrect.correct_answer == correct_answer
+    assert incorrect.correct_option_id == correct_option_id
+    assert incorrect.correct_answer == question.item.option_text(correct_option_id)
     assert incorrect.explanation == question.item.explanation
+
+
+def test_option_identity_is_preserved_across_all_locales() -> None:
+    localized_bundle = LOCALIZED_BUNDLES[0]
+    bundles = {
+        locale: localized_bundle.materialize(locale)
+        for locale in AppLocale
+    }
+    first_item_by_locale = {
+        locale: bundle.objective_question_bank[0]
+        for locale, bundle in bundles.items()
+    }
+
+    item_ids = {item.item_id for item in first_item_by_locale.values()}
+    option_ids = {item.option_ids for item in first_item_by_locale.values()}
+    correct_ids = {item.correct_option_ids for item in first_item_by_locale.values()}
+
+    assert len(item_ids) == 1
+    assert len(option_ids) == 1
+    assert len(correct_ids) == 1
+    assert len({item.options for item in first_item_by_locale.values()}) == 3
 
 
 def test_generator_rejects_unsupported_activity_types() -> None:
@@ -108,7 +141,7 @@ def test_question_card_autocorrects_and_updates_score(qapp: QApplication) -> Non
     card = widget.question_cards[0]
     item = bank_by_id[card.item_id]
 
-    assert card.choose_answer(item.correct_answers[0])
+    assert card.choose_option(item.correct_option_ids[0])
     card.check_answer()
 
     assert card.is_answered
@@ -128,14 +161,18 @@ def test_question_card_exposes_correct_answer_after_an_error(qapp: QApplication)
     bank_by_id = {item.item_id: item for item in OBJECTIVE_QUESTION_BANK}
     card: ObjectiveQuestionCard = widget.question_cards[0]
     item = bank_by_id[card.item_id]
-    wrong_answer = next(option for option in item.options if option != item.correct_answers[0])
+    wrong_option_id = next(
+        option_id
+        for option_id in item.option_ids
+        if option_id != item.correct_option_ids[0]
+    )
 
-    assert card.choose_answer(wrong_answer)
+    assert card.choose_option(wrong_option_id)
     card.check_answer()
 
     assert card.is_answered
     assert card.feedback_text.startswith("Incorrecto.")
-    assert item.correct_answers[0] in card.feedback_text
+    assert item.option_text(item.correct_option_ids[0]) in card.feedback_text
     assert widget.score_text == "0 aciertos · 1/6"
 
 
