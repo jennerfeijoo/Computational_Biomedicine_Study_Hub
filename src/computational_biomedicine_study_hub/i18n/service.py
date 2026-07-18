@@ -2,15 +2,18 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass
 from string import Formatter
 from typing import Final
 
-from .catalogs import CATALOGS, Catalog
+from .catalogs import CATALOGS
 from .locales import AppLocale, DEFAULT_LOCALE
 from .messages import ALL_MESSAGE_KEYS, MessageKey
 
 _FORMATTER: Final = Formatter()
+CatalogView = Mapping[MessageKey, str]
+CatalogRegistry = Mapping[AppLocale, CatalogView]
 
 
 class TranslationError(RuntimeError):
@@ -59,10 +62,11 @@ class Translator:
             ) from exc
 
 
-def validate_catalogs(catalogs: dict[AppLocale, Catalog] = CATALOGS) -> None:
+def validate_catalogs(catalogs: CatalogRegistry | None = None) -> None:
     """Require exact key coverage and matching placeholders in every locale."""
+    registry = CATALOGS if catalogs is None else catalogs
     supported = set(AppLocale)
-    available = set(catalogs)
+    available = set(registry)
     if available != supported:
         raise TranslationError(
             "Translation catalogs must exist for every supported locale: "
@@ -70,8 +74,8 @@ def validate_catalogs(catalogs: dict[AppLocale, Catalog] = CATALOGS) -> None:
             f"unexpected={sorted(locale.value for locale in available - supported)}."
         )
 
-    reference = catalogs[DEFAULT_LOCALE]
-    for locale, catalog in catalogs.items():
+    reference = registry[DEFAULT_LOCALE]
+    for locale, catalog in registry.items():
         keys = frozenset(catalog)
         missing = ALL_MESSAGE_KEYS - keys
         unexpected = keys - ALL_MESSAGE_KEYS
