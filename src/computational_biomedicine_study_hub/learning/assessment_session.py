@@ -143,7 +143,7 @@ class AssessmentSession:
 
         if (
             previous_item_ids
-            and selected_ids == previous_item_ids
+            and set(selected_ids) == set(previous_item_ids)
             and len(question_bank) > question_count
         ):
             selected = self._replace_last_question(selected, question_bank)
