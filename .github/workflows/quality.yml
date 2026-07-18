@@ -41,5 +41,17 @@ jobs:
       - name: Type check
         run: mypy
 
+      - name: Capture test diagnostics
+        if: matrix.python-version == '3.11'
+        continue-on-error: true
+        run: pytest --junitxml=pytest-results.xml
+
+      - name: Upload test diagnostics
+        if: matrix.python-version == '3.11' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-results
+          path: pytest-results.xml
+
       - name: Test
         run: pytest
