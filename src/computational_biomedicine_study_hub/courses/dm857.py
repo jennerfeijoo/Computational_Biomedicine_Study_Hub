@@ -19,7 +19,7 @@ from .models import CourseRegistration
 
 
 class DM857Page(QWidget):
-    """Host completed DM857 modules while constructing readers on first use."""
+    """Construct each completed module reader once, when first selected."""
 
     def __init__(self) -> None:
         super().__init__()
