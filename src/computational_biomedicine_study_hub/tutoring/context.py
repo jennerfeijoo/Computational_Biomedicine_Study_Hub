@@ -9,9 +9,7 @@ from dataclasses import dataclass
 from ..content.models import LearningModule, TutorKnowledgeDocument
 from ..integrations import ChatMessage, ChatRole
 
-_TOKEN_PATTERN = re.compile(
-    r"//|\*\*|==|!=|<=|>=|[a-z_][a-z0-9_]*|\d+(?:\.\d+)?|[/%+=^-]"
-)
+_TOKEN_PATTERN = re.compile(r"//|\*\*|==|!=|<=|>=|[a-z_][a-z0-9_]*|\d+(?:\.\d+)?|[/%+=^-]")
 
 _STOP_WORDS = frozenset(
     {
@@ -221,9 +219,7 @@ class TutorDocumentRetriever:
             title_tokens=_tokenize(normalized_title),
             text_tokens=_tokenize(normalized_text),
             tag_tokens=frozenset(
-                term
-                for tag in document.tags
-                for term in _tokenize(_normalize(tag))
+                term for tag in document.tags for term in _tokenize(_normalize(tag))
             ),
         )
 
@@ -307,15 +303,15 @@ class ModuleTutorPromptBuilder:
 
 def _normalize(text: str) -> str:
     decomposed = unicodedata.normalize("NFKD", text.casefold())
-    without_marks = "".join(character for character in decomposed if not unicodedata.combining(character))
+    without_marks = "".join(
+        character for character in decomposed if not unicodedata.combining(character)
+    )
     return " ".join(without_marks.split())
 
 
 def _tokenize(normalized_text: str) -> frozenset[str]:
     return frozenset(
-        token
-        for token in _TOKEN_PATTERN.findall(normalized_text)
-        if token not in _STOP_WORDS
+        token for token in _TOKEN_PATTERN.findall(normalized_text) if token not in _STOP_WORDS
     )
 
 
