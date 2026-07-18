@@ -1,0 +1,46 @@
+name: Format DM857 modules 4 through 6
+
+on:
+  push:
+    branches:
+      - feat/dm857-modules-04-06
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/dm857-modules-04-06
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Ruff
+        run: python -m pip install "ruff>=0.5,<1"
+
+      - name: Format changed Python files
+        run: |
+          ruff format src/computational_biomedicine_study_hub/content/dm857/authoring.py
+          ruff format src/computational_biomedicine_study_hub/content/dm857/module_04_functions.py
+          ruff format src/computational_biomedicine_study_hub/content/dm857/module_05_strings.py
+          ruff format src/computational_biomedicine_study_hub/content/dm857/module_06_sequences.py
+          ruff format src/computational_biomedicine_study_hub/content/dm857/__init__.py
+          ruff format tests/test_dm857_module_reader.py
+          ruff format tests/test_module_bundles.py
+          ruff format tests/test_dm857_modules_04_06_content.py
+
+      - name: Commit formatting and remove temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/format_dm857_modules_04_06.yml
+          git add .
+          git commit -m "format DM857 modules 4 through 6"
+          git push origin HEAD:feat/dm857-modules-04-06
