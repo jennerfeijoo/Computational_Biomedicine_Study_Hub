@@ -1,4 +1,4 @@
-"""Compact, typed helpers for authoring complete trilingual DM857 modules."""
+"""Compact typed helpers for complete trilingual modules with stable activity IDs."""
 
 from __future__ import annotations
 
