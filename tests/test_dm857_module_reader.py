@@ -5,9 +5,9 @@ from __future__ import annotations
 from PySide6.QtWidgets import QApplication, QComboBox, QFrame, QLabel, QTabWidget
 
 from computational_biomedicine_study_hub.content.dm857 import (
-    MODULES,
     MODULE_01_FOUNDATIONS,
     MODULE_09_RECURSION,
+    MODULES,
 )
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
 from computational_biomedicine_study_hub.ui.pages.module_reader_page import ModuleReaderPage
