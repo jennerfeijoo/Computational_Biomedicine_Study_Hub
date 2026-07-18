@@ -56,9 +56,7 @@ class MainWindow(QMainWindow):
         self._translator = self._language.translator
         self._courses: tuple[CourseRegistration, ...] = COURSES
         self._pages: dict[str, QWidget] = {}
-        self._descriptors: dict[str, PageDescriptor] = localized_page_descriptors(
-            self._translator
-        )
+        self._descriptors: dict[str, PageDescriptor] = localized_page_descriptors(self._translator)
 
         self._navigation = NavigationSidebar(self._courses, self._translator)
         self._navigation.route_selected.connect(self._on_route_selected)
@@ -131,9 +129,7 @@ class MainWindow(QMainWindow):
 
         pages: dict[str, QWidget] = {
             RouteId.HOME.value: home_page,
-            RouteId.REVIEW.value: PlaceholderPage(
-                ui_text(locale, UiCopyKey.REVIEW_PLACEHOLDER)
-            ),
+            RouteId.REVIEW.value: PlaceholderPage(ui_text(locale, UiCopyKey.REVIEW_PLACEHOLDER)),
             RouteId.ASSESSMENTS.value: PlaceholderPage(
                 ui_text(locale, UiCopyKey.ASSESSMENTS_PLACEHOLDER)
             ),
