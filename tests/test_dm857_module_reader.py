@@ -9,12 +9,27 @@ from computational_biomedicine_study_hub.content.dm857 import (
     MODULE_04_FUNCTIONS,
     MODULE_05_STRINGS,
     MODULE_06_SEQUENCES,
+    MODULE_07_MAPPINGS_SETS,
+    MODULE_08_FILES_EXCEPTIONS,
+    MODULE_09_RECURSION,
 )
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
 from computational_biomedicine_study_hub.ui.pages.module_reader_page import ModuleReaderPage
 from computational_biomedicine_study_hub.ui.widgets import (
     GuidedPracticeWidget,
     ObjectiveAssessmentWidget,
+)
+
+EXPECTED_MODULES = (
+    MODULE_01_FOUNDATIONS,
+    MODULE_02_CONDITIONALS,
+    MODULE_03_ITERATION,
+    MODULE_04_FUNCTIONS,
+    MODULE_05_STRINGS,
+    MODULE_06_SEQUENCES,
+    MODULE_07_MAPPINGS_SETS,
+    MODULE_08_FILES_EXCEPTIONS,
+    MODULE_09_RECURSION,
 )
 
 
@@ -27,20 +42,15 @@ def test_dm857_page_hosts_completed_modules_without_duplicate_identity_cards(
     context_title = page.findChild(QLabel, "moduleContextTitle")
     selector = page.findChild(QComboBox, "courseModuleSelector")
 
-    assert page.module_count == 6
+    assert page.module_count == 9
     assert page.reader.module is MODULE_01_FOUNDATIONS
     assert context_bar is not None
     assert context_title is not None
     assert context_title.text() == MODULE_01_FOUNDATIONS.title
     assert selector is not None
-    assert selector.count() == 6
+    assert selector.count() == 9
     assert [selector.itemText(index) for index in range(selector.count())] == [
-        "Módulo 1",
-        "Módulo 2",
-        "Módulo 3",
-        "Módulo 4",
-        "Módulo 5",
-        "Módulo 6",
+        f"Módulo {number}" for number in range(1, 10)
     ]
     assert page.findChild(QFrame, "courseIdentityCard") is None
     assert page.findChild(QFrame, "moduleIdentityCard") is None
@@ -51,25 +61,16 @@ def test_dm857_page_switches_between_completed_modules_in_the_same_compact_layou
 ) -> None:
     page = DM857Page()
     context_title = page.findChild(QLabel, "moduleContextTitle")
-
-    expected_modules = (
-        MODULE_01_FOUNDATIONS,
-        MODULE_02_CONDITIONALS,
-        MODULE_03_ITERATION,
-        MODULE_04_FUNCTIONS,
-        MODULE_05_STRINGS,
-        MODULE_06_SEQUENCES,
-    )
     assert context_title is not None
 
-    for index, module in enumerate(expected_modules):
+    for index, module in enumerate(EXPECTED_MODULES):
         assert page.select_module(index)
         assert page.current_module_index == index
         assert page.reader.module is module
         assert context_title.text() == module.title
 
     assert not page.select_module(-1)
-    assert not page.select_module(6)
+    assert not page.select_module(9)
 
 
 def test_module_reader_exposes_five_lazy_study_sections(qapp: QApplication) -> None:
@@ -100,11 +101,11 @@ def test_module_reader_exposes_five_lazy_study_sections(qapp: QApplication) -> N
 
 
 def test_module_reader_uses_module_id_for_the_context_number(qapp: QApplication) -> None:
-    reader = ModuleReaderPage(MODULE_06_SEQUENCES)
+    reader = ModuleReaderPage(MODULE_09_RECURSION)
     kicker = reader.findChild(QLabel, "moduleContextKicker")
 
     assert kicker is not None
-    assert kicker.text() == "DM857 · Módulo 6"
+    assert kicker.text() == "DM857 · Módulo 9"
 
 
 def test_module_reader_constructs_authored_sections_only_when_selected(
