@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import QApplication, QPushButton, QStackedWidget, QTabWidget
 
@@ -8,9 +10,8 @@ from computational_biomedicine_study_hub.i18n import AppLocale, validate_ui_copy
 from computational_biomedicine_study_hub.ui.main_window import MainWindow
 
 
-def _settings(tmp_path: object) -> QSettings:
-    path = tmp_path.__truediv__("language.ini")
-    return QSettings(str(path), QSettings.Format.IniFormat)
+def _settings(tmp_path: Path) -> QSettings:
+    return QSettings(str(tmp_path / "language.ini"), QSettings.Format.IniFormat)
 
 
 def _language_button(window: MainWindow, label: str) -> QPushButton:
@@ -21,7 +22,7 @@ def _language_button(window: MainWindow, label: str) -> QPushButton:
 
 
 def _active_dm857_page(window: MainWindow) -> DM857Page:
-    stack = window.findChild(QStackedWidget)
+    stack = window.findChild(QStackedWidget, "mainPageStack")
     assert stack is not None
     page = stack.currentWidget()
     assert isinstance(page, DM857Page)
@@ -34,7 +35,7 @@ def test_ui_copy_is_complete_for_all_three_languages() -> None:
 
 def test_header_exposes_exact_dk_es_en_buttons(
     qapp: QApplication,
-    tmp_path: object,
+    tmp_path: Path,
 ) -> None:
     window = MainWindow(settings=_settings(tmp_path))
     buttons = window.findChildren(QPushButton, "languageButton")
@@ -45,7 +46,7 @@ def test_header_exposes_exact_dk_es_en_buttons(
 
 def test_language_change_is_immediate_and_preserves_dm857_location(
     qapp: QApplication,
-    tmp_path: object,
+    tmp_path: Path,
 ) -> None:
     settings = _settings(tmp_path)
     window = MainWindow(settings=settings)
@@ -77,7 +78,7 @@ def test_language_change_is_immediate_and_preserves_dm857_location(
 
 def test_persisted_danish_locale_is_restored(
     qapp: QApplication,
-    tmp_path: object,
+    tmp_path: Path,
 ) -> None:
     settings = _settings(tmp_path)
     first = MainWindow(settings=settings)
