@@ -1,8 +1,8 @@
-"""Main application window and navigation shell."""
+"""Main application window, navigation shell and immediate language switching."""
 
 from __future__ import annotations
 
-from PySide6.QtCore import QByteArray, QSettings
+from PySide6.QtCore import QByteArray, QSettings, Slot
 from PySide6.QtGui import QCloseEvent
 from PySide6.QtWidgets import (
     QHBoxLayout,
@@ -13,40 +13,58 @@ from PySide6.QtWidgets import (
 )
 
 from ..courses import COURSES, CourseRegistration
+from ..courses.dm857 import DM857Page
+from ..i18n import (
+    AppLocale,
+    LanguageController,
+    MessageKey,
+    UiCopyKey,
+    ui_text,
+)
 from .header import PageHeader
+from .language_styles import LANGUAGE_STYLESHEET
 from .navigation import NavigationSidebar
 from .pages.home_page import HomePage
 from .pages.ollama_settings_page import OllamaSettingsPage
 from .pages.placeholder_page import PlaceholderPage
 from .routes import (
-    PAGE_DESCRIPTORS,
     PageDescriptor,
     RouteId,
     RouteLike,
+    localized_page_descriptors,
     route_value,
 )
 from .styles import APPLICATION_STYLESHEET
 
 
 class MainWindow(QMainWindow):
-    """Provide stable navigation, course hosting and lightweight persistence."""
+    """Provide localized navigation, course hosting and lightweight persistence."""
 
-    def __init__(self, parent: QWidget | None = None) -> None:
+    def __init__(
+        self,
+        parent: QWidget | None = None,
+        *,
+        settings: QSettings | None = None,
+    ) -> None:
         super().__init__(parent)
-        self.setWindowTitle("Computational Biomedicine Study Hub")
         self.resize(1200, 760)
         self.setMinimumSize(960, 640)
-        self.setStyleSheet(APPLICATION_STYLESHEET)
+        self.setStyleSheet(APPLICATION_STYLESHEET + LANGUAGE_STYLESHEET)
 
-        self._settings = QSettings()
+        self._settings = settings if settings is not None else QSettings()
+        self._language = LanguageController(self._settings, self)
+        self._translator = self._language.translator
         self._courses: tuple[CourseRegistration, ...] = COURSES
         self._pages: dict[str, QWidget] = {}
-        self._descriptors: dict[str, PageDescriptor] = dict(PAGE_DESCRIPTORS)
+        self._descriptors: dict[str, PageDescriptor] = localized_page_descriptors(self._translator)
 
-        self._navigation = NavigationSidebar(self._courses)
+        self._navigation = NavigationSidebar(self._courses, self._translator)
         self._navigation.route_selected.connect(self._on_route_selected)
-        self._header = PageHeader()
+        self._header = PageHeader(self._language.locale)
+        self._header.language_selected.connect(self._language.set_locale)
+        self._language.locale_changed.connect(self._apply_locale)
         self._stack = QStackedWidget()
+        self._stack.setObjectName("mainPageStack")
 
         content = QWidget()
         content_layout = QVBoxLayout(content)
@@ -63,6 +81,7 @@ class MainWindow(QMainWindow):
         shell_layout.addWidget(content, 1)
         self.setCentralWidget(shell)
 
+        self._set_window_title()
         self._register_pages()
         self._restore_window_state()
         self.navigate(self._stored_route())
@@ -78,6 +97,11 @@ class MainWindow(QMainWindow):
                 except ValueError:
                     return route
         return RouteId.HOME
+
+    @property
+    def current_locale(self) -> AppLocale:
+        """Return the active persisted application locale."""
+        return self._language.locale
 
     def navigate(self, route: RouteLike) -> None:
         """Switch to a registered route and persist the selection."""
@@ -99,41 +123,92 @@ class MainWindow(QMainWindow):
         super().closeEvent(event)
 
     def _register_pages(self) -> None:
-        home_page = HomePage(self._courses)
+        locale = self._language.locale
+        home_page = HomePage(self._courses, self._translator)
         home_page.course_selected.connect(self.navigate)
 
         pages: dict[str, QWidget] = {
             RouteId.HOME.value: home_page,
-            RouteId.REVIEW.value: PlaceholderPage(
-                "El motor de repaso incorporará recuperación activa, "
-                "intercalado y repetición espaciada."
-            ),
+            RouteId.REVIEW.value: PlaceholderPage(ui_text(locale, UiCopyKey.REVIEW_PLACEHOLDER)),
             RouteId.ASSESSMENTS.value: PlaceholderPage(
-                "Las evaluaciones incluirán opción múltiple, selección múltiple, "
-                "rellenar espacios, relacionar elementos, ordenar pasos, código "
-                "y explicación oral."
+                ui_text(locale, UiCopyKey.ASSESSMENTS_PLACEHOLDER)
             ),
             RouteId.FLASHCARDS.value: PlaceholderPage(
-                "Las tarjetas cubrirán conceptos, fórmulas, código, errores "
-                "frecuentes y conexiones entre asignaturas."
+                ui_text(locale, UiCopyKey.FLASHCARDS_PLACEHOLDER)
             ),
             RouteId.GLOSSARY.value: PlaceholderPage(
-                "El glosario se poblará junto con cada módulo académico."
+                ui_text(locale, UiCopyKey.GLOSSARY_PLACEHOLDER)
             ),
-            RouteId.SETTINGS.value: OllamaSettingsPage(settings=self._settings),
+            RouteId.SETTINGS.value: OllamaSettingsPage(
+                settings=self._settings,
+                locale=locale,
+            ),
         }
 
         for course in self._courses:
-            pages[course.route] = course.page_factory()
+            pages[course.route] = course.page_factory(locale)
             self._descriptors[course.route] = PageDescriptor(
                 route=course.route,
-                title=f"{course.code} — {course.title}",
-                subtitle=course.summary,
+                title=f"{course.code} — {course.title_for(locale)}",
+                subtitle=course.summary_for(locale),
             )
 
         for route, page in pages.items():
             self._pages[route] = page
             self._stack.addWidget(page)
+
+    @Slot(str)
+    def _apply_locale(self, locale_code: str) -> None:
+        """Rebuild visible pages immediately while preserving study location."""
+        route = route_value(self.current_route)
+        dm857_state = self._capture_dm857_state(route)
+
+        self._header.set_locale(locale_code)
+        self._navigation.retranslate(self._translator)
+        self._descriptors = localized_page_descriptors(self._translator)
+        self._clear_pages()
+        self._register_pages()
+        self._set_window_title()
+        self.navigate(route)
+        self._restore_dm857_state(route, dm857_state)
+
+    def _capture_dm857_state(self, route: str) -> tuple[int, int] | None:
+        dm857_route = next(
+            (course.route for course in self._courses if course.code == "DM857"),
+            "",
+        )
+        if route != dm857_route:
+            return None
+        page = self._pages.get(route)
+        if not isinstance(page, DM857Page):
+            return None
+        return page.current_module_index, page.reader.current_section_index
+
+    def _restore_dm857_state(
+        self,
+        route: str,
+        state: tuple[int, int] | None,
+    ) -> None:
+        if state is None:
+            return
+        page = self._pages.get(route)
+        if not isinstance(page, DM857Page):
+            return
+        module_index, section_index = state
+        page.select_module(module_index)
+        page.reader.select_section_index(section_index)
+
+    def _clear_pages(self) -> None:
+        self._pages.clear()
+        while self._stack.count():
+            page = self._stack.widget(0)
+            if page is None:
+                break
+            self._stack.removeWidget(page)
+            page.deleteLater()
+
+    def _set_window_title(self) -> None:
+        self.setWindowTitle(self._translator.text(MessageKey.APP_NAME))
 
     def _on_route_selected(self, selected_route: str) -> None:
         self.navigate(selected_route)

@@ -15,16 +15,18 @@ from PySide6.QtWidgets import (
 )
 
 from ...courses.models import CourseRegistration
+from ...i18n import MessageKey, Translator
 
 
 class CourseCard(QFrame):
-    """Clickable summary card for one registered course."""
+    """Clickable localized summary card for one registered course."""
 
     selected = Signal(str)
 
     def __init__(
         self,
         course: CourseRegistration,
+        translator: Translator,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
@@ -38,22 +40,28 @@ class CourseCard(QFrame):
         code.setObjectName("courseCardCode")
         layout.addWidget(code)
 
-        title = QLabel(course.title)
+        title = QLabel(course.title_for(translator.locale))
         title.setObjectName("courseCardTitle")
         title.setWordWrap(True)
         layout.addWidget(title)
 
-        metadata = QLabel(f"Semestre {course.semester} · {course.ects} ECTS")
+        metadata = QLabel(
+            translator.text(
+                MessageKey.COURSE_METADATA,
+                semester=course.semester,
+                ects=course.ects,
+            )
+        )
         metadata.setObjectName("courseCardMetadata")
         layout.addWidget(metadata)
 
-        summary = QLabel(course.summary)
+        summary = QLabel(course.summary_for(translator.locale))
         summary.setObjectName("courseCardSummary")
         summary.setWordWrap(True)
         layout.addWidget(summary)
         layout.addStretch(1)
 
-        open_button = QPushButton("Abrir asignatura")
+        open_button = QPushButton(translator.text(MessageKey.COURSE_OPEN))
         open_button.setObjectName("courseOpenButton")
         open_button.clicked.connect(
             lambda checked=False, route=course.route: self.selected.emit(route)
@@ -62,13 +70,14 @@ class CourseCard(QFrame):
 
 
 class HomePage(QWidget):
-    """Display the registered courses and emit the selected course route."""
+    """Display localized registered courses and emit the selected route."""
 
     course_selected = Signal(str)
 
     def __init__(
         self,
         courses: Iterable[CourseRegistration],
+        translator: Translator,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
@@ -78,14 +87,11 @@ class HomePage(QWidget):
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(16)
 
-        heading = QLabel("Asignaturas del primer semestre")
+        heading = QLabel(translator.text(MessageKey.HOME_HEADING))
         heading.setObjectName("sectionHeading")
         layout.addWidget(heading)
 
-        description = QLabel(
-            "Selecciona una asignatura para entrar en su espacio independiente. "
-            "Cada curso podrá utilizar una estructura de aprendizaje diferente."
-        )
+        description = QLabel(translator.text(MessageKey.HOME_DESCRIPTION))
         description.setObjectName("homeDescription")
         description.setWordWrap(True)
         layout.addWidget(description)
@@ -95,7 +101,7 @@ class HomePage(QWidget):
         grid.setVerticalSpacing(14)
 
         for index, course in enumerate(course_list):
-            card = CourseCard(course)
+            card = CourseCard(course, translator)
             card.selected.connect(self.course_selected.emit)
             grid.addWidget(card, index // 2, index % 2)
 

@@ -14,22 +14,33 @@ from PySide6.QtWidgets import (
 )
 
 from ...content.models import PracticeExercise
+from ...i18n import (
+    DEFAULT_LOCALE,
+    AppLocale,
+    MessageKey,
+    Translator,
+    UiCopyKey,
+    ui_text,
+)
 from ...learning.guided_practice import GuidedPracticeSessionGenerator
 from .guided_practice_styles import GUIDED_PRACTICE_STYLESHEET
 
-_ACTIVITY_LABELS = {
-    "code_tracing": "Trazado de código",
-    "matching": "Relacionar conceptos",
-    "code_completion": "Completar código",
-    "debugging": "Depuración",
-    "short_answer": "Respuesta breve",
-    "fill_in_the_blank": "Rellenar espacios",
-    "oral_explanation": "Explicación oral",
+_ACTIVITY_KEYS = {
+    "code_tracing": MessageKey.ACTIVITY_CODE_TRACING,
+    "matching": MessageKey.ACTIVITY_MATCHING,
+    "code_completion": MessageKey.ACTIVITY_CODE_COMPLETION,
+    "debugging": MessageKey.ACTIVITY_DEBUGGING,
+    "short_answer": MessageKey.ACTIVITY_SHORT_ANSWER,
+    "fill_in_the_blank": MessageKey.ACTIVITY_FILL_BLANK,
+    "oral_explanation": MessageKey.ACTIVITY_ORAL_EXPLANATION,
+    "ordering": MessageKey.ACTIVITY_ORDERING,
+    "data_interpretation": MessageKey.ACTIVITY_DATA_INTERPRETATION,
+    "pipeline_design": MessageKey.ACTIVITY_PIPELINE_DESIGN,
 }
 
 
 class GuidedPracticeCard(QFrame):
-    """Provide a workspace, progressive hints and authored reference feedback."""
+    """Provide a localized workspace, progressive hints and reference feedback."""
 
     self_assessed = Signal(str, str)
 
@@ -38,10 +49,14 @@ class GuidedPracticeCard(QFrame):
         number: int,
         exercise: PracticeExercise,
         parent: QWidget | None = None,
+        *,
+        locale: AppLocale = DEFAULT_LOCALE,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("guidedPracticeCard")
         self._exercise = exercise
+        self._locale = locale
+        self._translator = Translator(locale)
         self._visible_hint_count = 0
         self._assessment_state = ""
 
@@ -53,7 +68,7 @@ class GuidedPracticeCard(QFrame):
         identity.setContentsMargins(0, 0, 0, 0)
         identity.setSpacing(10)
 
-        number_label = QLabel(f"Práctica {number}")
+        number_label = QLabel(ui_text(locale, UiCopyKey.PRACTICE_NUMBER, number=number))
         number_label.setObjectName("guidedPracticeExerciseNumber")
         activity_label = QLabel(self._activity_label(exercise.activity_type.value))
         activity_label.setObjectName("guidedPracticeExerciseType")
@@ -67,14 +82,14 @@ class GuidedPracticeCard(QFrame):
         prompt.setWordWrap(True)
         layout.addWidget(prompt)
 
-        answer_label = QLabel("Tu respuesta")
+        answer_label = QLabel(ui_text(locale, UiCopyKey.PRACTICE_YOUR_ANSWER))
         answer_label.setObjectName("contentSubheading")
         layout.addWidget(answer_label)
 
         self._answer_editor = QPlainTextEdit()
         self._answer_editor.setObjectName("guidedPracticeAnswerEditor")
         self._answer_editor.setPlaceholderText(
-            "Escribe aquí tu razonamiento, tabla de trazado, código o explicación."
+            ui_text(locale, UiCopyKey.PRACTICE_ANSWER_PLACEHOLDER)
         )
         self._answer_editor.setMinimumHeight(125)
         self._answer_editor.setTabChangesFocus(False)
@@ -86,12 +101,12 @@ class GuidedPracticeCard(QFrame):
         hint_actions.setContentsMargins(0, 0, 0, 0)
         hint_actions.setSpacing(8)
 
-        self._hint_button = QPushButton("Mostrar pista")
+        self._hint_button = QPushButton(ui_text(locale, UiCopyKey.PRACTICE_SHOW_HINT))
         self._hint_button.setObjectName("guidedPracticeSecondaryButton")
         self._hint_button.setEnabled(bool(exercise.hints))
         self._hint_button.clicked.connect(self.show_next_hint)
 
-        self._solution_button = QPushButton("Ver solución de referencia")
+        self._solution_button = QPushButton(ui_text(locale, UiCopyKey.PRACTICE_REFERENCE_BUTTON))
         self._solution_button.setObjectName("guidedPracticeSecondaryButton")
         self._solution_button.clicked.connect(self.reveal_solution)
 
@@ -112,7 +127,7 @@ class GuidedPracticeCard(QFrame):
         solution_layout.setContentsMargins(14, 12, 14, 12)
         solution_layout.setSpacing(7)
 
-        solution_title = QLabel("Solución de referencia")
+        solution_title = QLabel(ui_text(locale, UiCopyKey.PRACTICE_REFERENCE_TITLE))
         solution_title.setObjectName("guidedPracticeSolutionTitle")
         solution_layout.addWidget(solution_title)
 
@@ -122,7 +137,7 @@ class GuidedPracticeCard(QFrame):
         self._solution.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
         solution_layout.addWidget(self._solution)
 
-        explanation_title = QLabel("Por qué")
+        explanation_title = QLabel(ui_text(locale, UiCopyKey.PRACTICE_WHY))
         explanation_title.setObjectName("guidedPracticeSolutionTitle")
         solution_layout.addWidget(explanation_title)
 
@@ -136,14 +151,14 @@ class GuidedPracticeCard(QFrame):
         assessment_layout.setContentsMargins(0, 4, 0, 0)
         assessment_layout.setSpacing(8)
 
-        assessment_label = QLabel("Autoevaluación:")
+        assessment_label = QLabel(ui_text(locale, UiCopyKey.PRACTICE_SELF_ASSESSMENT))
         assessment_label.setObjectName("guidedPracticeExerciseType")
-        self._solved_button = QPushButton("Lo resolví")
+        self._solved_button = QPushButton(ui_text(locale, UiCopyKey.PRACTICE_SOLVED))
         self._solved_button.setObjectName("guidedPracticeSolvedButton")
         self._solved_button.setCheckable(True)
         self._solved_button.clicked.connect(self.mark_solved)
 
-        self._review_button = QPushButton("Necesito repasar")
+        self._review_button = QPushButton(ui_text(locale, UiCopyKey.PRACTICE_REVIEW))
         self._review_button.setObjectName("guidedPracticeReviewButton")
         self._review_button.setCheckable(True)
         self._review_button.clicked.connect(self.mark_review)
@@ -201,21 +216,29 @@ class GuidedPracticeCard(QFrame):
         self._visible_hint_count += 1
         visible_hints = self._exercise.hints[: self._visible_hint_count]
         self._hint.setText(
-            "\n".join(f"Pista {index}: {hint}" for index, hint in enumerate(visible_hints, start=1))
+            "\n".join(
+                ui_text(
+                    self._locale,
+                    UiCopyKey.PRACTICE_HINT_NUMBER,
+                    number=index,
+                    hint=hint,
+                )
+                for index, hint in enumerate(visible_hints, start=1)
+            )
         )
         self._hint.show()
 
         if self._visible_hint_count == len(self._exercise.hints):
-            self._hint_button.setText("No hay más pistas")
+            self._hint_button.setText(ui_text(self._locale, UiCopyKey.PRACTICE_NO_MORE_HINTS))
             self._hint_button.setEnabled(False)
         else:
-            self._hint_button.setText("Mostrar siguiente pista")
+            self._hint_button.setText(ui_text(self._locale, UiCopyKey.PRACTICE_SHOW_NEXT_HINT))
 
     @Slot()
     def reveal_solution(self) -> None:
         """Reveal the authored solution and enable student self-assessment."""
         self._solution_panel.show()
-        self._solution_button.setText("Solución visible")
+        self._solution_button.setText(ui_text(self._locale, UiCopyKey.PRACTICE_SOLUTION_VISIBLE))
         self._solution_button.setEnabled(False)
 
     @Slot()
@@ -236,13 +259,15 @@ class GuidedPracticeCard(QFrame):
         self._review_button.setChecked(state == "review")
         self.self_assessed.emit(self.exercise_id, state)
 
-    @staticmethod
-    def _activity_label(value: str) -> str:
-        return _ACTIVITY_LABELS.get(value, value.replace("_", " ").capitalize())
+    def _activity_label(self, value: str) -> str:
+        key = _ACTIVITY_KEYS.get(value)
+        if key is not None:
+            return self._translator.text(key)
+        return value.replace("_", " ").capitalize()
 
 
 class GuidedPracticeWidget(QWidget):
-    """Manage repeated randomized guided-practice sessions from authored exercises."""
+    """Manage repeated localized guided-practice sessions."""
 
     def __init__(
         self,
@@ -250,11 +275,13 @@ class GuidedPracticeWidget(QWidget):
         *,
         exercise_count: int = 4,
         generator: GuidedPracticeSessionGenerator | None = None,
+        locale: AppLocale = DEFAULT_LOCALE,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("guidedPracticeWidget")
         self.setStyleSheet(GUIDED_PRACTICE_STYLESHEET)
+        self._locale = locale
 
         self._generator = generator or GuidedPracticeSessionGenerator(
             bank,
@@ -279,7 +306,7 @@ class GuidedPracticeWidget(QWidget):
         header_text_layout.setContentsMargins(0, 0, 0, 0)
         header_text_layout.setSpacing(3)
 
-        title = QLabel("Práctica guiada aleatoria")
+        title = QLabel(ui_text(locale, UiCopyKey.PRACTICE_TITLE))
         title.setObjectName("guidedPracticeTitle")
         header_text_layout.addWidget(title)
 
@@ -291,7 +318,7 @@ class GuidedPracticeWidget(QWidget):
         self._progress = QLabel()
         self._progress.setObjectName("guidedPracticeProgress")
 
-        self._new_session_button = QPushButton("Nueva práctica")
+        self._new_session_button = QPushButton(ui_text(locale, UiCopyKey.PRACTICE_NEW_SESSION))
         self._new_session_button.setObjectName("newGuidedPracticeButton")
         self._new_session_button.clicked.connect(self.new_session)
 
@@ -334,14 +361,18 @@ class GuidedPracticeWidget(QWidget):
         self._clear_cards()
 
         for number, exercise in enumerate(session.exercises, start=1):
-            card = GuidedPracticeCard(number, exercise)
+            card = GuidedPracticeCard(number, exercise, locale=self._locale)
             card.self_assessed.connect(self._record_self_assessment)
             self._exercise_cards.append(card)
             self._cards_layout.addWidget(card)
 
         self._metadata.setText(
-            f"{self._generator.exercise_count} ejercicios seleccionados de un banco de "
-            f"{self._generator.bank_size}. La combinación y el orden cambian entre sesiones."
+            ui_text(
+                self._locale,
+                UiCopyKey.PRACTICE_METADATA,
+                count=self._generator.exercise_count,
+                bank=self._generator.bank_size,
+            )
         )
         self._update_progress()
 
@@ -356,7 +387,14 @@ class GuidedPracticeWidget(QWidget):
         assessed = len(self._results)
         total = self._generator.exercise_count
         self._progress.setText(
-            f"{solved} resueltos · {review} para repasar · {assessed}/{total} valorados"
+            ui_text(
+                self._locale,
+                UiCopyKey.PRACTICE_PROGRESS,
+                solved=solved,
+                review=review,
+                assessed=assessed,
+                total=total,
+            )
         )
 
     def _clear_cards(self) -> None:

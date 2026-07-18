@@ -13,17 +13,25 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ..content.dm857 import BUNDLES
+from ..content.bundles import ModuleBundle
+from ..content.dm857 import BUNDLES, LOCALIZED_BUNDLES
+from ..i18n import DEFAULT_LOCALE, AppLocale, MessageKey, Translator
 from ..ui.pages.module_reader_page import ModuleReaderPage
 from .models import CourseRegistration
 
 
 class DM857Page(QWidget):
-    """Construct each completed module reader once, when first selected."""
+    """Construct each completed localized module reader once, when first selected."""
 
-    def __init__(self) -> None:
+    def __init__(self, locale: AppLocale = DEFAULT_LOCALE) -> None:
         super().__init__()
         self.setObjectName("dm857CoursePage")
+        self._translator = Translator(locale)
+        self._bundles: tuple[ModuleBundle, ...] = (
+            BUNDLES
+            if locale == DEFAULT_LOCALE
+            else tuple(bundle.materialize(locale) for bundle in LOCALIZED_BUNDLES)
+        )
 
         self._module_selector = QComboBox()
         self._module_selector.setObjectName("courseModuleSelector")
@@ -34,8 +42,9 @@ class DM857Page(QWidget):
         self._module_title.setWordWrap(True)
         self._reader_cache: dict[int, ModuleReaderPage] = {}
 
-        for number, bundle in enumerate(BUNDLES, start=1):
-            self._module_selector.addItem(f"Módulo {number}", bundle.module.module_id)
+        for number, bundle in enumerate(self._bundles, start=1):
+            label = self._translator.text(MessageKey.MODULE_LABEL, number=number)
+            self._module_selector.addItem(label, bundle.module.module_id)
             placeholder = QWidget()
             placeholder.setObjectName("moduleReaderPlaceholder")
             placeholder.setProperty("moduleId", bundle.module.module_id)
@@ -70,7 +79,7 @@ class DM857Page(QWidget):
     @property
     def module_count(self) -> int:
         """Return the number of completed modules available in the course page."""
-        return len(BUNDLES)
+        return len(self._bundles)
 
     @property
     def current_module_index(self) -> int:
@@ -111,11 +120,12 @@ class DM857Page(QWidget):
         if cached is not None:
             return cached
 
-        bundle = BUNDLES[index]
+        bundle = self._bundles[index]
         reader = ModuleReaderPage(
             bundle.module,
             objective_question_bank=bundle.objective_question_bank,
             show_context_bar=False,
+            translator=self._translator,
         )
         reader.setProperty("contentVersion", bundle.content_version)
 
@@ -129,16 +139,30 @@ class DM857Page(QWidget):
         return reader
 
 
-def create_page() -> QWidget:
+def create_page(locale: AppLocale = DEFAULT_LOCALE) -> QWidget:
     """Create the DM857 page without constructing widgets during import."""
-    return DM857Page()
+    return DM857Page(locale)
 
 
 COURSE = CourseRegistration(
     code="DM857",
-    title="Introduction to Programming",
+    title="Introducción a la programación",
     ects=10,
     semester=1,
     summary="Python, pensamiento algorítmico, estructuras de datos y testing.",
     page_factory=create_page,
+    localized_titles={
+        AppLocale.SPANISH_SPAIN: "Introducción a la programación",
+        AppLocale.ENGLISH: "Introduction to Programming",
+        AppLocale.DANISH_DENMARK: "Introduktion til programmering",
+    },
+    localized_summaries={
+        AppLocale.SPANISH_SPAIN: (
+            "Python, pensamiento algorítmico, estructuras de datos y pruebas automatizadas."
+        ),
+        AppLocale.ENGLISH: ("Python, algorithmic thinking, data structures and automated testing."),
+        AppLocale.DANISH_DENMARK: (
+            "Python, algoritmisk tænkning, datastrukturer og automatiserede test."
+        ),
+    },
 )

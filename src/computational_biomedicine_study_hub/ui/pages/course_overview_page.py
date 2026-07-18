@@ -7,6 +7,8 @@ from collections.abc import Sequence
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QFrame, QLabel, QVBoxLayout, QWidget
 
+from ...i18n import DEFAULT_LOCALE, AppLocale, UiCopyKey, ui_text
+
 
 class CourseOverviewPage(QWidget):
     """Present course identity and the sections planned for its own implementation."""
@@ -18,6 +20,7 @@ class CourseOverviewPage(QWidget):
         ects: int,
         summary: str,
         planned_sections: Sequence[str],
+        locale: AppLocale = DEFAULT_LOCALE,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
@@ -42,7 +45,7 @@ class CourseOverviewPage(QWidget):
         identity_layout.addWidget(summary_label)
         layout.addWidget(identity)
 
-        section_heading = QLabel("Estructura propia de la asignatura")
+        section_heading = QLabel(ui_text(locale, UiCopyKey.COURSE_STRUCTURE_HEADING))
         section_heading.setObjectName("sectionHeading")
         layout.addWidget(section_heading)
 
@@ -52,10 +55,7 @@ class CourseOverviewPage(QWidget):
         section_list.setWordWrap(True)
         layout.addWidget(section_list)
 
-        notice = QLabel(
-            "Esta pantalla confirma la selección de la asignatura. "
-            "Los módulos y el contenido académico se añadirán en entregas independientes."
-        )
+        notice = QLabel(ui_text(locale, UiCopyKey.COURSE_STRUCTURE_NOTICE))
         notice.setObjectName("courseNotice")
         notice.setWordWrap(True)
         layout.addWidget(notice)

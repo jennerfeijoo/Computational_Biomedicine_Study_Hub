@@ -1,4 +1,4 @@
-"""PySide6 renderer for one authored learning module."""
+"""PySide6 renderer for one localized authored learning module."""
 
 from __future__ import annotations
 
@@ -18,29 +18,30 @@ from PySide6.QtWidgets import (
 )
 
 from ...content.models import AssessmentItem, ConceptBlock, LearningModule, WorkedExample
+from ...i18n import MessageKey, Translator, UiCopyKey, ui_text
 from ..widgets import GuidedPracticeWidget, ObjectiveAssessmentWidget
 
-_ACTIVITY_LABELS = {
-    "worked_example": "Ejemplo resuelto",
-    "flashcard": "Tarjeta de memoria",
-    "multiple_choice": "Opción múltiple",
-    "multiple_select": "Selección múltiple",
-    "true_false": "Verdadero o falso",
-    "fill_in_the_blank": "Rellenar espacios",
-    "matching": "Relacionar elementos",
-    "ordering": "Ordenar pasos",
-    "code_completion": "Completar código",
-    "code_tracing": "Trazado de código",
-    "debugging": "Depuración",
-    "short_answer": "Respuesta breve",
-    "oral_explanation": "Explicación oral",
-    "data_interpretation": "Interpretación de datos",
-    "pipeline_design": "Diseño de pipeline",
+_ACTIVITY_KEYS = {
+    "worked_example": MessageKey.ACTIVITY_WORKED_EXAMPLE,
+    "flashcard": MessageKey.ACTIVITY_FLASHCARD,
+    "multiple_choice": MessageKey.ACTIVITY_MULTIPLE_CHOICE,
+    "multiple_select": MessageKey.ACTIVITY_MULTIPLE_SELECT,
+    "true_false": MessageKey.ACTIVITY_TRUE_FALSE,
+    "fill_in_the_blank": MessageKey.ACTIVITY_FILL_BLANK,
+    "matching": MessageKey.ACTIVITY_MATCHING,
+    "ordering": MessageKey.ACTIVITY_ORDERING,
+    "code_completion": MessageKey.ACTIVITY_CODE_COMPLETION,
+    "code_tracing": MessageKey.ACTIVITY_CODE_TRACING,
+    "debugging": MessageKey.ACTIVITY_DEBUGGING,
+    "short_answer": MessageKey.ACTIVITY_SHORT_ANSWER,
+    "oral_explanation": MessageKey.ACTIVITY_ORAL_EXPLANATION,
+    "data_interpretation": MessageKey.ACTIVITY_DATA_INTERPRETATION,
+    "pipeline_design": MessageKey.ACTIVITY_PIPELINE_DESIGN,
 }
 
 
 class ModuleReaderPage(QWidget):
-    """Render one module while constructing heavy sections on first use."""
+    """Render one localized module while constructing heavy sections on first use."""
 
     def __init__(
         self,
@@ -49,18 +50,20 @@ class ModuleReaderPage(QWidget):
         *,
         objective_question_bank: tuple[AssessmentItem, ...] = (),
         show_context_bar: bool = True,
+        translator: Translator | None = None,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("moduleReaderPage")
         self._module = module
         self._objective_question_bank = objective_question_bank
+        self._translator = translator or Translator()
         self._section_cache: dict[int, QWidget] = {}
-        self._tab_builders: tuple[tuple[str, Callable[[], QWidget]], ...] = (
-            ("Resumen", self._build_overview_tab),
-            ("Conceptos", self._build_concepts_tab),
-            ("Ejemplos", self._build_examples_tab),
-            ("Práctica", self._build_practice_tab),
-            ("Evaluación", self._build_assessment_tab),
+        self._tab_builders: tuple[tuple[MessageKey, Callable[[], QWidget]], ...] = (
+            (MessageKey.MODULE_TAB_OVERVIEW, self._build_overview_tab),
+            (MessageKey.MODULE_TAB_CONCEPTS, self._build_concepts_tab),
+            (MessageKey.MODULE_TAB_EXAMPLES, self._build_examples_tab),
+            (MessageKey.MODULE_TAB_PRACTICE, self._build_practice_tab),
+            (MessageKey.MODULE_TAB_ASSESSMENT, self._build_assessment_tab),
         )
 
         layout = QVBoxLayout(self)
@@ -73,7 +76,8 @@ class ModuleReaderPage(QWidget):
         self._tabs.setObjectName("moduleTabs")
         self._tabs.setDocumentMode(True)
         self._tabs.setUsesScrollButtons(True)
-        for index, (label, _) in enumerate(self._tab_builders):
+        for index, (key, _) in enumerate(self._tab_builders):
+            label = self._translator.text(key)
             placeholder = QWidget()
             placeholder.setObjectName("moduleTabPlaceholder")
             placeholder.setProperty("sectionIndex", index)
@@ -91,8 +95,13 @@ class ModuleReaderPage(QWidget):
 
     @property
     def current_section(self) -> str:
-        """Return the visible section label."""
+        """Return the visible localized section label."""
         return self._tabs.tabText(self._tabs.currentIndex())
+
+    @property
+    def current_section_index(self) -> int:
+        """Return the stable zero-based section index."""
+        return self._tabs.currentIndex()
 
     @property
     def constructed_section_count(self) -> int:
@@ -100,9 +109,9 @@ class ModuleReaderPage(QWidget):
         return len(self._section_cache)
 
     def has_constructed_section(self, label: str) -> bool:
-        """Return whether the named section has already been constructed."""
-        for index, (section_label, _) in enumerate(self._tab_builders):
-            if section_label == label:
+        """Return whether the named localized section has already been constructed."""
+        for index, (key, _) in enumerate(self._tab_builders):
+            if self._translator.text(key) == label:
                 return index in self._section_cache
         return False
 
@@ -110,19 +119,26 @@ class ModuleReaderPage(QWidget):
         """Select a section by its visible label and construct it if required."""
         for index in range(self._tabs.count()):
             if self._tabs.tabText(index) == label:
-                if index == self._tabs.currentIndex():
-                    self._ensure_section_loaded(index)
-                else:
-                    self._tabs.setCurrentIndex(index)
-                return True
+                return self.select_section_index(index)
         return False
+
+    def select_section_index(self, index: int) -> bool:
+        """Select a section by stable index and construct it if required."""
+        if not 0 <= index < self._tabs.count():
+            return False
+        if index == self._tabs.currentIndex():
+            self._ensure_section_loaded(index)
+        else:
+            self._tabs.setCurrentIndex(index)
+        return True
 
     @Slot(int)
     def _ensure_section_loaded(self, index: int) -> None:
         if not 0 <= index < len(self._tab_builders) or index in self._section_cache:
             return
 
-        label, builder = self._tab_builders[index]
+        key, builder = self._tab_builders[index]
+        label = self._translator.text(key)
         page = builder()
         self._section_cache[index] = page
         placeholder = self._tabs.widget(index)
@@ -146,8 +162,9 @@ class ModuleReaderPage(QWidget):
 
         module_token = self._module.module_id.rsplit(".", maxsplit=1)[-1]
         number_text = module_token.removeprefix("m").lstrip("0") or "0"
+        module_label = self._translator.text(MessageKey.MODULE_LABEL, number=number_text)
         kicker = self._label(
-            f"{self._module.course_code} · Módulo {number_text}",
+            f"{self._module.course_code} · {module_label}",
             "moduleContextKicker",
         )
         kicker.setWordWrap(False)
@@ -165,7 +182,7 @@ class ModuleReaderPage(QWidget):
 
         layout.addWidget(
             self._text_card(
-                "Propósito del módulo",
+                self._translator.text(MessageKey.MODULE_PURPOSE),
                 self._module.summary,
                 object_name="moduleOverviewCard",
             )
@@ -177,20 +194,16 @@ class ModuleReaderPage(QWidget):
         )
         layout.addWidget(
             self._text_card(
-                "Objetivos de aprendizaje",
+                self._translator.text(MessageKey.MODULE_OBJECTIVES),
                 objectives,
                 object_name="moduleObjectivesCard",
             )
         )
 
-        sequence = (
-            "Teoría conectada → ejemplos resueltos → práctica formativa → "
-            "evaluación del aprendizaje."
-        )
         layout.addWidget(
             self._text_card(
-                "Secuencia de estudio",
-                sequence,
+                self._translator.text(MessageKey.MODULE_STUDY_SEQUENCE),
+                self._translator.text(MessageKey.MODULE_STUDY_SEQUENCE_TEXT),
                 object_name="moduleSequenceCard",
             )
         )
@@ -223,12 +236,16 @@ class ModuleReaderPage(QWidget):
         assert isinstance(layout, QVBoxLayout)
 
         notice = self._label(
-            "Cada sesión selecciona una combinación diferente de ejercicios. Escribe tu respuesta, "
-            "revela pistas progresivamente y compara después con la solución de referencia.",
+            self._translator.text(MessageKey.MODULE_PRACTICE_NOTICE),
             "moduleSectionNotice",
         )
         layout.addWidget(notice)
-        layout.addWidget(GuidedPracticeWidget(self._module.practice_exercises))
+        layout.addWidget(
+            GuidedPracticeWidget(
+                self._module.practice_exercises,
+                locale=self._translator.locale,
+            )
+        )
         layout.addStretch(1)
         return self._scroll_area(body, "modulePracticeScroll")
 
@@ -238,25 +255,33 @@ class ModuleReaderPage(QWidget):
         assert isinstance(layout, QVBoxLayout)
 
         if self._objective_question_bank:
-            objective_heading = self._subheading("Práctica objetiva aleatoria")
+            objective_heading = self._subheading(
+                ui_text(self._translator.locale, UiCopyKey.MODULE_OBJECTIVE_SECTION)
+            )
             objective_heading.setObjectName("objectiveAssessmentSectionTitle")
             layout.addWidget(objective_heading)
             notice = self._label(
-                "Responde cada pregunta y pulsa Comprobar respuesta para obtener corrección "
-                "inmediata. Nueva práctica genera otra combinación del banco y vuelve a "
-                "barajar las opciones.",
+                self._translator.text(MessageKey.MODULE_ASSESSMENT_NOTICE),
                 "moduleSectionNotice",
             )
             layout.addWidget(notice)
-            layout.addWidget(ObjectiveAssessmentWidget(self._objective_question_bank))
+            layout.addWidget(
+                ObjectiveAssessmentWidget(
+                    self._objective_question_bank,
+                    locale=self._translator.locale,
+                )
+            )
 
-        complete_heading = self._subheading("Evaluación completa del módulo")
+        complete_heading = self._subheading(
+            ui_text(self._translator.locale, UiCopyKey.MODULE_COMPLETE_ASSESSMENT)
+        )
         complete_heading.setObjectName("authoredAssessmentSectionTitle")
         layout.addWidget(complete_heading)
         complete_notice = self._label(
-            "Estas actividades cubren trazado, depuración, ordenación, relación de conceptos, "
-            "código, interpretación y respuestas abiertas. Las soluciones permanecen separadas "
-            "del lector para conservar su función evaluativa.",
+            ui_text(
+                self._translator.locale,
+                UiCopyKey.MODULE_COMPLETE_ASSESSMENT_NOTICE,
+            ),
             "moduleSectionNotice",
         )
         layout.addWidget(complete_notice)
@@ -270,37 +295,52 @@ class ModuleReaderPage(QWidget):
     def _concept_card(self, concept: ConceptBlock) -> QFrame:
         card, layout = self._card("conceptCard", concept.title)
         layout.addWidget(self._label(concept.body, "contentBody"))
-        layout.addWidget(self._subheading("Puntos esenciales"))
+        layout.addWidget(
+            self._subheading(self._translator.text(MessageKey.MODULE_ESSENTIAL_POINTS))
+        )
         layout.addWidget(self._label(self._bullets(concept.key_points), "contentBulletList"))
         return card
 
     def _example_card(self, example: WorkedExample) -> QFrame:
         card, layout = self._card("exampleCard", example.title)
-        layout.addWidget(self._subheading("Problema"))
+        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_PROBLEM)))
         layout.addWidget(self._label(example.problem, "contentBody"))
-        layout.addWidget(self._subheading("Razonamiento"))
+        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_REASONING)))
         layout.addWidget(self._label(self._numbered(example.reasoning), "contentBulletList"))
-        layout.addWidget(self._subheading("Código"))
+        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_CODE)))
         layout.addWidget(self._code_block(example.code, "exampleCode"))
-        layout.addWidget(self._subheading("Salida esperada"))
+        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_EXPECTED_OUTPUT)))
         layout.addWidget(self._code_block(example.expected_output, "exampleOutput"))
-        layout.addWidget(self._subheading("Explicación"))
+        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_EXPLANATION)))
         layout.addWidget(self._label(example.explanation, "contentBody"))
         return card
 
     def _assessment_card(self, number: int, item: AssessmentItem) -> QFrame:
         activity = self._activity_label(item.activity_type.value)
-        card, layout = self._card("assessmentCard", f"Pregunta {number} · {activity}")
+        title = self._translator.text(
+            MessageKey.MODULE_QUESTION,
+            number=number,
+            activity=activity,
+        )
+        card, layout = self._card("assessmentCard", title)
         layout.addWidget(self._label(item.prompt, "assessmentPrompt"))
 
         if item.options:
-            layout.addWidget(self._subheading("Opciones"))
+            layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_OPTIONS)))
             layout.addWidget(self._label(self._bullets(item.options), "assessmentOptions"))
 
         if item.rubric:
-            layout.addWidget(self._subheading("Criterios que se evaluarán"))
+            layout.addWidget(
+                self._subheading(self._translator.text(MessageKey.MODULE_GRADING_CRITERIA))
+            )
             layout.addWidget(self._label(self._bullets(item.rubric), "assessmentRubric"))
         return card
+
+    def _activity_label(self, value: str) -> str:
+        key = _ACTIVITY_KEYS.get(value)
+        if key is not None:
+            return self._translator.text(key)
+        return value.replace("_", " ").capitalize()
 
     def _text_card(self, title: str, text: str, *, object_name: str) -> QFrame:
         card, layout = self._card(object_name, title)
@@ -373,7 +413,3 @@ class ModuleReaderPage(QWidget):
     @staticmethod
     def _numbered(values: Iterable[str]) -> str:
         return "\n".join(f"{index}. {value}" for index, value in enumerate(values, start=1))
-
-    @staticmethod
-    def _activity_label(value: str) -> str:
-        return _ACTIVITY_LABELS.get(value, value.replace("_", " ").capitalize())

@@ -18,6 +18,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
+from ...i18n import DEFAULT_LOCALE, AppLocale, UiCopyKey, ui_text
 from ...integrations import (
     OllamaClient,
     OllamaConfig,
@@ -55,7 +56,7 @@ class OllamaProbeWorker(QObject):
 
 
 class OllamaSettingsPage(QWidget):
-    """Configure, validate and persist the local Ollama connection."""
+    """Configure, validate and persist the localized Ollama connection."""
 
     BASE_URL_KEY = "ollama/base_url"
     MODEL_KEY = "ollama/model"
@@ -67,6 +68,7 @@ class OllamaSettingsPage(QWidget):
         client_factory: ClientFactory | None = None,
         *,
         auto_probe: bool = True,
+        locale: AppLocale = DEFAULT_LOCALE,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
@@ -74,6 +76,7 @@ class OllamaSettingsPage(QWidget):
 
         self._settings = settings or QSettings()
         self._client_factory = client_factory or OllamaClient
+        self._locale = locale
         self._probe_thread: QThread | None = None
         self._probe_worker: OllamaProbeWorker | None = None
         self._auto_probe_enabled = auto_probe
@@ -83,11 +86,11 @@ class OllamaSettingsPage(QWidget):
         self._base_url.setObjectName("ollamaBaseUrl")
         self._base_url.setPlaceholderText("http://localhost:11434/api")
 
-        self._probe_button = QPushButton("Reconectar")
+        self._probe_button = QPushButton(ui_text(locale, UiCopyKey.OLLAMA_RECONNECT))
         self._probe_button.setObjectName("primaryActionButton")
         self._probe_button.clicked.connect(self.start_probe)
 
-        self._status = QLabel("Conexión pendiente.")
+        self._status = QLabel(ui_text(locale, UiCopyKey.OLLAMA_PENDING))
         self._status.setObjectName("ollamaStatus")
         self._status.setWordWrap(True)
         self._set_status_state("idle")
@@ -99,32 +102,35 @@ class OllamaSettingsPage(QWidget):
         self._models.setObjectName("ollamaModelSelector")
         self._models.setEnabled(False)
 
-        self._save_button = QPushButton("Guardar configuración")
+        self._save_button = QPushButton(ui_text(locale, UiCopyKey.OLLAMA_SAVE))
         self._save_button.setObjectName("secondaryActionButton")
         self._save_button.setEnabled(False)
         self._save_button.clicked.connect(self.save_preferences)
 
         form = QFormLayout()
         form.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow)
-        form.addRow("URL local:", self._base_url)
-        form.addRow("Estado:", self._status)
-        form.addRow("Versión detectada:", self._version)
-        form.addRow("Modelo:", self._models)
+        form.addRow(ui_text(locale, UiCopyKey.OLLAMA_URL), self._base_url)
+        form.addRow(ui_text(locale, UiCopyKey.OLLAMA_STATUS), self._status)
+        form.addRow(ui_text(locale, UiCopyKey.OLLAMA_VERSION), self._version)
+        form.addRow(ui_text(locale, UiCopyKey.OLLAMA_MODEL), self._models)
 
         actions = QHBoxLayout()
         actions.addWidget(self._probe_button)
         actions.addWidget(self._save_button)
         actions.addStretch(1)
 
-        group = QGroupBox("Ollama local")
+        group = QGroupBox(ui_text(locale, UiCopyKey.OLLAMA_GROUP))
         group.setObjectName("settingsGroup")
         group_layout = QVBoxLayout(group)
         group_layout.addLayout(form)
         group_layout.addLayout(actions)
 
         explanation = QLabel(
-            "La aplicación se conecta automáticamente con Ollama y prioriza "
-            f"{self.PREFERRED_MODEL}. El botón Reconectar permite repetir la comprobación."
+            ui_text(
+                locale,
+                UiCopyKey.OLLAMA_EXPLANATION,
+                model=self.PREFERRED_MODEL,
+            )
         )
         explanation.setObjectName("settingsExplanation")
         explanation.setWordWrap(True)
@@ -186,7 +192,7 @@ class OllamaSettingsPage(QWidget):
         self._models.setEnabled(False)
         self._models.clear()
         self._version.setText("—")
-        self._status.setText("Conectando automáticamente con Ollama…")
+        self._status.setText(ui_text(self._locale, UiCopyKey.OLLAMA_CONNECTING))
         self._set_status_state("pending")
         thread.start()
 
@@ -204,7 +210,7 @@ class OllamaSettingsPage(QWidget):
         self._models.addItems([model.name for model in models])
 
         if not models:
-            self._status.setText("Conexión correcta, pero Ollama no informó modelos instalados.")
+            self._status.setText(ui_text(self._locale, UiCopyKey.OLLAMA_NO_MODELS))
             self._save_button.setEnabled(False)
             self._set_status_state("success")
             return
@@ -212,15 +218,24 @@ class OllamaSettingsPage(QWidget):
         preferred_index = self._models.findText(self.PREFERRED_MODEL)
         if preferred_index >= 0:
             self._models.setCurrentIndex(preferred_index)
-            self._status.setText(f"Conectado automáticamente con {self.PREFERRED_MODEL}.")
+            self._status.setText(
+                ui_text(
+                    self._locale,
+                    UiCopyKey.OLLAMA_CONNECTED,
+                    model=self.PREFERRED_MODEL,
+                )
+            )
         else:
             stored_model = str(self._settings.value(self.MODEL_KEY, "")).strip()
             stored_index = self._models.findText(stored_model) if stored_model else -1
             if stored_index >= 0:
                 self._models.setCurrentIndex(stored_index)
             self._status.setText(
-                f"Conexión correcta, pero no se encontró {self.PREFERRED_MODEL}. "
-                "Se seleccionó un modelo local disponible."
+                ui_text(
+                    self._locale,
+                    UiCopyKey.OLLAMA_PREFERRED_MISSING,
+                    model=self.PREFERRED_MODEL,
+                )
             )
 
         self._models.setEnabled(True)
@@ -242,7 +257,13 @@ class OllamaSettingsPage(QWidget):
     def save_preferences(self) -> None:
         """Persist the normalized URL and selected model."""
         self._persist_current_preferences()
-        self._status.setText(f"Configuración guardada para el modelo {self.selected_model}.")
+        self._status.setText(
+            ui_text(
+                self._locale,
+                UiCopyKey.OLLAMA_SAVED,
+                model=self.selected_model,
+            )
+        )
         self._set_status_state("success")
 
     @Slot()

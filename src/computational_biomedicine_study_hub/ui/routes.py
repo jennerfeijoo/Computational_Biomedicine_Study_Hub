@@ -1,9 +1,11 @@
-"""Stable route identifiers and page descriptors for the application shell."""
+"""Stable route identifiers and localized page descriptors."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import StrEnum
+
+from ..i18n import MessageKey, Translator
 
 
 class RouteId(StrEnum):
@@ -36,35 +38,41 @@ def route_value(route: RouteLike) -> str:
     return route
 
 
-PAGE_DESCRIPTORS: dict[str, PageDescriptor] = {
-    RouteId.HOME.value: PageDescriptor(
-        RouteId.HOME.value,
-        "Inicio",
-        "Centro de estudio del MSc in Computational Biomedicine.",
+_DESCRIPTOR_KEYS = {
+    RouteId.HOME: (MessageKey.PAGE_HOME_TITLE, MessageKey.PAGE_HOME_SUBTITLE),
+    RouteId.REVIEW: (MessageKey.PAGE_REVIEW_TITLE, MessageKey.PAGE_REVIEW_SUBTITLE),
+    RouteId.ASSESSMENTS: (
+        MessageKey.PAGE_ASSESSMENTS_TITLE,
+        MessageKey.PAGE_ASSESSMENTS_SUBTITLE,
     ),
-    RouteId.REVIEW.value: PageDescriptor(
-        RouteId.REVIEW.value,
-        "Repaso",
-        "Recuperación activa, práctica intercalada y revisión espaciada.",
+    RouteId.FLASHCARDS: (
+        MessageKey.PAGE_FLASHCARDS_TITLE,
+        MessageKey.PAGE_FLASHCARDS_SUBTITLE,
     ),
-    RouteId.ASSESSMENTS.value: PageDescriptor(
-        RouteId.ASSESSMENTS.value,
-        "Evaluaciones",
-        "Preguntas, ejercicios y problemas con retroalimentación.",
-    ),
-    RouteId.FLASHCARDS.value: PageDescriptor(
-        RouteId.FLASHCARDS.value,
-        "Tarjetas de memoria",
-        "Conceptos, fórmulas, código y relaciones esenciales.",
-    ),
-    RouteId.GLOSSARY.value: PageDescriptor(
-        RouteId.GLOSSARY.value,
-        "Glosario",
-        "Definiciones transversales de programación, estadística y biología.",
-    ),
-    RouteId.SETTINGS.value: PageDescriptor(
-        RouteId.SETTINGS.value,
-        "Configuración",
-        "Preferencias de la aplicación e integraciones locales.",
-    ),
+    RouteId.GLOSSARY: (MessageKey.PAGE_GLOSSARY_TITLE, MessageKey.PAGE_GLOSSARY_SUBTITLE),
+    RouteId.SETTINGS: (MessageKey.PAGE_SETTINGS_TITLE, MessageKey.PAGE_SETTINGS_SUBTITLE),
 }
+
+
+def localized_page_descriptors(translator: Translator) -> dict[str, PageDescriptor]:
+    """Return complete shell descriptors in the translator's active locale."""
+    return {
+        route.value: PageDescriptor(
+            route=route.value,
+            title=translator.text(title_key),
+            subtitle=translator.text(subtitle_key),
+        )
+        for route, (title_key, subtitle_key) in _DESCRIPTOR_KEYS.items()
+    }
+
+
+PAGE_DESCRIPTORS = localized_page_descriptors(Translator())
+
+__all__ = [
+    "PAGE_DESCRIPTORS",
+    "PageDescriptor",
+    "RouteId",
+    "RouteLike",
+    "localized_page_descriptors",
+    "route_value",
+]
