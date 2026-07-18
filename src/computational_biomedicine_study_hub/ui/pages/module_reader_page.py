@@ -197,7 +197,8 @@ class ModuleReaderPage(QWidget):
         if self._objective_question_bank:
             notice = self._label(
                 "Responde cada pregunta y pulsa Comprobar respuesta para obtener corrección "
-                "inmediata. Nueva práctica genera otra combinación del banco y vuelve a "n                "barajar las opciones.",
+                "inmediata. Nueva práctica genera otra combinación del banco y vuelve a "
+                "barajar las opciones.",
                 "moduleSectionNotice",
             )
             layout.addWidget(notice)
