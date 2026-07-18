@@ -160,9 +160,7 @@ COURSE = CourseRegistration(
         AppLocale.SPANISH_SPAIN: (
             "Python, pensamiento algorítmico, estructuras de datos y pruebas automatizadas."
         ),
-        AppLocale.ENGLISH: (
-            "Python, algorithmic thinking, data structures and automated testing."
-        ),
+        AppLocale.ENGLISH: ("Python, algorithmic thinking, data structures and automated testing."),
         AppLocale.DANISH_DENMARK: (
             "Python, algoritmisk tænkning, datastrukturer og automatiserede test."
         ),
