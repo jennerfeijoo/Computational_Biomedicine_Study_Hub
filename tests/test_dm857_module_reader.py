@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QApplication,
     QFrame,
@@ -103,9 +102,9 @@ def test_student_can_select_and_autocorrect_an_answer(
     assert check_button is not None
 
     qtbot.waitUntil(option.isVisible, timeout=1000)
-    qtbot.mouseClick(option, Qt.MouseButton.LeftButton)
+    option.click()
     assert check_button.isEnabled()
-    qtbot.mouseClick(check_button, Qt.MouseButton.LeftButton)
+    check_button.click()
 
     assert widget.session.answered_count == 1
     assert widget.session.score == 1
