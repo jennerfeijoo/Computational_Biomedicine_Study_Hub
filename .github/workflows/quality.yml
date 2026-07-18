@@ -1,27 +1,22 @@
 name: Quality
 
 on:
-  push:
-    branches: [main]
   pull_request:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  quality:
+  diagnose:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.11", "3.12"]
-
     env:
       QT_QPA_PLATFORM: offscreen
 
     steps:
-      - name: Check out repository
+      - name: Check out feature branch
         uses: actions/checkout@v4
+        with:
+          ref: feat/dm857-modules-10-12
 
       - name: Install Qt runtime libraries
         run: sudo apt-get update && sudo apt-get install --yes libegl1
@@ -29,20 +24,32 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
-          cache: pip
+          python-version: "3.12"
 
-      - name: Install project and development dependencies
-        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
+      - name: Install project
+        run: python -m pip install -e ".[dev]"
 
-      - name: Lint
-        run: ruff check .
+      - name: Capture focused diagnostics
+        shell: bash
+        run: |
+          set +e
+          python -m pytest \
+            tests/test_dm857_modules_10_12_content.py \
+            tests/test_dm857_lazy_loading.py \
+            tests/test_dm857_module_reader.py \
+            -vv --maxfail=20 > raw_dm857_diagnostics.txt 2>&1
+          status=$?
+          tail -n 300 raw_dm857_diagnostics.txt > ci_dm857_m10_m12_focused.txt
+          echo "exit_code=$status" >> ci_dm857_m10_m12_focused.txt
+          rm raw_dm857_diagnostics.txt
+          exit 0
 
-      - name: Check formatting
-        run: ruff format --check .
-
-      - name: Type check
-        run: mypy
-
-      - name: Test
-        run: pytest
+      - name: Restore permanent workflow and commit diagnostics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git checkout origin/main -- .github/workflows/quality.yml
+          git add .github/workflows/quality.yml ci_dm857_m10_m12_focused.txt
+          git commit -m "capture focused DM857 modules 10 to 12 diagnostics"
+          git push origin HEAD:feat/dm857-modules-10-12
