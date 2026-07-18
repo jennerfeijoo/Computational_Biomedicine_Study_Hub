@@ -44,5 +44,16 @@ jobs:
       - name: Type check
         run: mypy
 
+      - name: Capture Python 3.11 pytest diagnostics
+        if: matrix.python-version == '3.11'
+        run: pytest -vv > pytest-311.txt 2>&1 || true
+
+      - name: Upload Python 3.11 pytest diagnostics
+        if: matrix.python-version == '3.11' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-311
+          path: pytest-311.txt
+
       - name: Test
         run: pytest
