@@ -1,17 +1,13 @@
+"""Integration tests for DM857 module navigation and lazy reader sections."""
+
 from __future__ import annotations
 
 from PySide6.QtWidgets import QApplication, QComboBox, QFrame, QLabel, QTabWidget
 
 from computational_biomedicine_study_hub.content.dm857 import (
     MODULE_01_FOUNDATIONS,
-    MODULE_02_CONDITIONALS,
-    MODULE_03_ITERATION,
-    MODULE_04_FUNCTIONS,
-    MODULE_05_STRINGS,
-    MODULE_06_SEQUENCES,
-    MODULE_07_MAPPINGS_SETS,
-    MODULE_08_FILES_EXCEPTIONS,
     MODULE_09_RECURSION,
+    MODULES,
 )
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
 from computational_biomedicine_study_hub.ui.pages.module_reader_page import ModuleReaderPage
@@ -20,17 +16,7 @@ from computational_biomedicine_study_hub.ui.widgets import (
     ObjectiveAssessmentWidget,
 )
 
-EXPECTED_MODULES = (
-    MODULE_01_FOUNDATIONS,
-    MODULE_02_CONDITIONALS,
-    MODULE_03_ITERATION,
-    MODULE_04_FUNCTIONS,
-    MODULE_05_STRINGS,
-    MODULE_06_SEQUENCES,
-    MODULE_07_MAPPINGS_SETS,
-    MODULE_08_FILES_EXCEPTIONS,
-    MODULE_09_RECURSION,
-)
+EXPECTED_MODULES = MODULES
 
 
 def test_dm857_page_hosts_completed_modules_without_duplicate_identity_cards(
@@ -42,15 +28,15 @@ def test_dm857_page_hosts_completed_modules_without_duplicate_identity_cards(
     context_title = page.findChild(QLabel, "moduleContextTitle")
     selector = page.findChild(QComboBox, "courseModuleSelector")
 
-    assert page.module_count == 9
+    assert page.module_count == len(EXPECTED_MODULES)
     assert page.reader.module is MODULE_01_FOUNDATIONS
     assert context_bar is not None
     assert context_title is not None
     assert context_title.text() == MODULE_01_FOUNDATIONS.title
     assert selector is not None
-    assert selector.count() == 9
+    assert selector.count() == len(EXPECTED_MODULES)
     assert [selector.itemText(index) for index in range(selector.count())] == [
-        f"Módulo {number}" for number in range(1, 10)
+        f"Módulo {number}" for number in range(1, len(EXPECTED_MODULES) + 1)
     ]
     assert page.findChild(QFrame, "courseIdentityCard") is None
     assert page.findChild(QFrame, "moduleIdentityCard") is None
@@ -70,7 +56,7 @@ def test_dm857_page_switches_between_completed_modules_in_the_same_compact_layou
         assert context_title.text() == module.title
 
     assert not page.select_module(-1)
-    assert not page.select_module(9)
+    assert not page.select_module(len(EXPECTED_MODULES))
 
 
 def test_module_reader_exposes_five_lazy_study_sections(qapp: QApplication) -> None:
