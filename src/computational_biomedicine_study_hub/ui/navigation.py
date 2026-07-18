@@ -33,9 +33,7 @@ def build_navigation(
     courses: Iterable[CourseRegistration],
 ) -> tuple[NavigationEntry, ...]:
     """Build navigation without hard-coding future semesters into the widget."""
-    entries: list[NavigationEntry] = [
-        NavigationEntry(RouteId.HOME.value, "Inicio", "GENERAL")
-    ]
+    entries: list[NavigationEntry] = [NavigationEntry(RouteId.HOME.value, "Inicio", "GENERAL")]
 
     semester_ordered_courses = sorted(
         courses,
@@ -124,9 +122,7 @@ class NavigationSidebar(QWidget):
             button.setCheckable(True)
             button.setToolTip(entry.label)
             button.clicked.connect(
-                lambda checked=False, route=entry.route: self.route_selected.emit(
-                    route
-                )
+                lambda checked=False, route=entry.route: self.route_selected.emit(route)
             )
             self._button_group.addButton(button)
             self._buttons[entry.route] = button

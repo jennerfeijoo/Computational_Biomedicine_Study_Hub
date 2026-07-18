@@ -47,11 +47,25 @@ select = [
   "N",
   "UP"
 ]
+ignore = [
+  "E501"
+]
+
+[tool.ruff.lint.per-file-ignores]
+"src/computational_biomedicine_study_hub/content/dm857/module_01_foundations.py" = [
+  "I001"
+]
+"src/computational_biomedicine_study_hub/ui/pages/ollama_settings_page.py" = [
+  "N802"
+]
 
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
-line-ending = "lf"
+line-ending = "auto"
+exclude = [
+  "src/computational_biomedicine_study_hub/content/dm857/module_01_foundations.py"
+]
 
 [tool.mypy]
 python_version = "3.11"

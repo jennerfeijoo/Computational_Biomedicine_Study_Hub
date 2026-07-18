@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-from PySide6.QtCore import QObject, QSettings, QThread, QTimer, Signal, Slot
+from PySide6.QtCore import QObject, QSettings, QThread, Signal, Slot
+from PySide6.QtGui import QShowEvent
 from PySide6.QtWidgets import (
     QComboBox,
     QFormLayout,
@@ -75,6 +76,8 @@ class OllamaSettingsPage(QWidget):
         self._client_factory = client_factory or OllamaClient
         self._probe_thread: QThread | None = None
         self._probe_worker: OllamaProbeWorker | None = None
+        self._auto_probe_enabled = auto_probe
+        self._auto_probe_started = False
 
         self._base_url = QLineEdit(self._stored_base_url())
         self._base_url.setObjectName("ollamaBaseUrl")
@@ -133,9 +136,6 @@ class OllamaSettingsPage(QWidget):
         layout.addWidget(group)
         layout.addStretch(1)
 
-        if auto_probe:
-            QTimer.singleShot(0, self.start_probe)
-
     @property
     def base_url(self) -> str:
         """Return the current URL field value."""
@@ -150,6 +150,13 @@ class OllamaSettingsPage(QWidget):
     def status_text(self) -> str:
         """Return the visible connection status."""
         return self._status.text()
+
+    def showEvent(self, event: QShowEvent) -> None:
+        """Start one automatic probe when the settings page first becomes visible."""
+        super().showEvent(event)
+        if self._auto_probe_enabled and not self._auto_probe_started:
+            self._auto_probe_started = True
+            self.start_probe()
 
     @Slot()
     def start_probe(self) -> None:
@@ -187,11 +194,7 @@ class OllamaSettingsPage(QWidget):
     def apply_probe_success(self, version: str, models_payload: object) -> None:
         """Display a successful connection result and select the preferred model."""
         models = (
-            tuple(
-                model
-                for model in models_payload
-                if isinstance(model, OllamaModel)
-            )
+            tuple(model for model in models_payload if isinstance(model, OllamaModel))
             if isinstance(models_payload, tuple)
             else ()
         )
@@ -201,9 +204,7 @@ class OllamaSettingsPage(QWidget):
         self._models.addItems([model.name for model in models])
 
         if not models:
-            self._status.setText(
-                "Conexión correcta, pero Ollama no informó modelos instalados."
-            )
+            self._status.setText("Conexión correcta, pero Ollama no informó modelos instalados.")
             self._save_button.setEnabled(False)
             self._set_status_state("success")
             return
@@ -211,9 +212,7 @@ class OllamaSettingsPage(QWidget):
         preferred_index = self._models.findText(self.PREFERRED_MODEL)
         if preferred_index >= 0:
             self._models.setCurrentIndex(preferred_index)
-            self._status.setText(
-                f"Conectado automáticamente con {self.PREFERRED_MODEL}."
-            )
+            self._status.setText(f"Conectado automáticamente con {self.PREFERRED_MODEL}.")
         else:
             stored_model = str(self._settings.value(self.MODEL_KEY, "")).strip()
             stored_index = self._models.findText(stored_model) if stored_model else -1
@@ -243,9 +242,7 @@ class OllamaSettingsPage(QWidget):
     def save_preferences(self) -> None:
         """Persist the normalized URL and selected model."""
         self._persist_current_preferences()
-        self._status.setText(
-            f"Configuración guardada para el modelo {self.selected_model}."
-        )
+        self._status.setText(f"Configuración guardada para el modelo {self.selected_model}.")
         self._set_status_state("success")
 
     @Slot()
