@@ -1,2 +1,0 @@
-src/computational_biomedicine_study_hub/ui/widgets/objective_assessment_widget.py:262: error: Item "None" of "QLayoutItem | None" has no attribute "widget"  [union-attr]
-Found 1 error in 1 file (checked 35 source files)
