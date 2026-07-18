@@ -1,9 +1,21 @@
 from __future__ import annotations
 
-from PySide6.QtWidgets import QApplication, QFrame, QLabel, QTabWidget
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import (
+    QApplication,
+    QFrame,
+    QLabel,
+    QPushButton,
+    QRadioButton,
+    QTabWidget,
+)
+from pytestqt.qtbot import QtBot
 
 from computational_biomedicine_study_hub.content.dm857 import MODULE_01_FOUNDATIONS
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
+from computational_biomedicine_study_hub.ui.assessment_session_widget import (
+    AssessmentSessionWidget,
+)
 from computational_biomedicine_study_hub.ui.pages.module_reader_page import ModuleReaderPage
 
 
@@ -26,7 +38,8 @@ def test_dm857_page_hosts_the_first_authored_module_without_duplicate_course_car
 
 
 def test_module_reader_exposes_five_study_sections(qapp: QApplication) -> None:
-    reader = ModuleReaderPage(MODULE_01_FOUNDATIONS)
+    page = DM857Page()
+    reader = page.reader
     tabs = reader.findChild(QTabWidget, "moduleTabs")
 
     assert tabs is not None
@@ -44,8 +57,9 @@ def test_module_reader_exposes_five_study_sections(qapp: QApplication) -> None:
     assert not reader.select_section("Sección inexistente")
 
 
-def test_module_reader_renders_all_authored_content_cards(qapp: QApplication) -> None:
-    reader = ModuleReaderPage(MODULE_01_FOUNDATIONS)
+def test_module_reader_renders_all_authored_learning_cards(qapp: QApplication) -> None:
+    page = DM857Page()
+    reader = page.reader
 
     assert len(reader.findChildren(QFrame, "conceptCard")) == len(MODULE_01_FOUNDATIONS.concepts)
     assert len(reader.findChildren(QFrame, "exampleCard")) == len(
@@ -54,13 +68,41 @@ def test_module_reader_renders_all_authored_content_cards(qapp: QApplication) ->
     assert len(reader.findChildren(QFrame, "practiceCard")) == len(
         MODULE_01_FOUNDATIONS.practice_exercises
     )
-    assert len(reader.findChildren(QFrame, "assessmentCard")) == len(
-        MODULE_01_FOUNDATIONS.assessment_items
+    assert reader.findChildren(QFrame, "assessmentCard") == []
+
+
+def test_assessment_widget_uses_a_larger_random_bank(qapp: QApplication) -> None:
+    page = DM857Page()
+    widget = page.findChild(AssessmentSessionWidget, "assessmentSessionWidget")
+
+    assert widget is not None
+    assert widget.session.question_count == 6
+    assert len(widget.session.item_ids) == 6
+    assert len(set(widget.session.item_ids)) == 6
+
+
+def test_student_can_select_and_autocorrect_an_answer(
+    qapp: QApplication,
+    qtbot: QtBot,
+) -> None:
+    page = DM857Page()
+    widget = page.findChild(AssessmentSessionWidget, "assessmentSessionWidget")
+    assert widget is not None
+
+    correct_answer = widget.session.current_question.item.correct_answers[0]
+    option = next(
+        button
+        for button in widget.findChildren(QRadioButton, "assessmentOption")
+        if button.text() == correct_answer
     )
+    check_button = widget.findChild(QPushButton, "primaryActionButton")
+    assert check_button is not None
 
+    qtbot.mouseClick(option, Qt.MouseButton.LeftButton)
+    assert check_button.isEnabled()
+    qtbot.mouseClick(check_button, Qt.MouseButton.LeftButton)
 
-def test_assessment_reader_does_not_render_answer_feedback(qapp: QApplication) -> None:
-    reader = ModuleReaderPage(MODULE_01_FOUNDATIONS)
-
-    assert reader.findChild(QLabel, "assessmentAnswer") is None
-    assert reader.findChild(QLabel, "assessmentExplanation") is None
+    assert widget.session.answered_count == 1
+    assert widget.session.score == 1
+    assert widget.feedback_text.startswith("Correcto.")
+    assert not option.isEnabled()
