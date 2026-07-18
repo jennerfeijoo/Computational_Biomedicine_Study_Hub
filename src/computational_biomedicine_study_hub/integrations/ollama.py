@@ -129,9 +129,7 @@ class UrllibJsonTransport:
                 raw_content = response.read().decode("utf-8")
         except HTTPError as exc:
             detail = _read_http_error(exc)
-            raise OllamaConnectionError(
-                f"Ollama returned HTTP {exc.code}: {detail}"
-            ) from exc
+            raise OllamaConnectionError(f"Ollama returned HTTP {exc.code}: {detail}") from exc
         except (URLError, TimeoutError, OSError) as exc:
             raise OllamaConnectionError(
                 "No se pudo conectar con Ollama. Comprueba que el servicio "
