@@ -72,7 +72,7 @@ def test_dm857_page_switches_between_completed_modules_in_the_same_compact_layou
     assert not page.select_module(6)
 
 
-def test_module_reader_exposes_five_study_sections(qapp: QApplication) -> None:
+def test_module_reader_exposes_five_lazy_study_sections(qapp: QApplication) -> None:
     reader = ModuleReaderPage(MODULE_01_FOUNDATIONS)
     tabs = reader.findChild(QTabWidget, "moduleTabs")
 
@@ -86,8 +86,16 @@ def test_module_reader_exposes_five_study_sections(qapp: QApplication) -> None:
         "Evaluación",
     ]
     assert reader.current_section == "Resumen"
+    assert reader.constructed_section_count == 1
+    assert reader.has_constructed_section("Resumen")
+    assert not reader.has_constructed_section("Ejemplos")
     assert reader.select_section("Ejemplos")
     assert reader.current_section == "Ejemplos"
+    assert reader.constructed_section_count == 2
+    assert reader.has_constructed_section("Ejemplos")
+    assert reader.select_section("Resumen")
+    assert reader.select_section("Ejemplos")
+    assert reader.constructed_section_count == 2
     assert not reader.select_section("Sección inexistente")
 
 
@@ -99,22 +107,35 @@ def test_module_reader_uses_module_id_for_the_context_number(qapp: QApplication)
     assert kicker.text() == "DM857 · Módulo 6"
 
 
-def test_module_reader_renders_authored_content_and_guided_practice(
+def test_module_reader_constructs_authored_sections_only_when_selected(
     qapp: QApplication,
 ) -> None:
     reader = ModuleReaderPage(MODULE_01_FOUNDATIONS)
-    practice = reader.findChild(GuidedPracticeWidget, "guidedPracticeWidget")
 
+    assert reader.findChildren(QFrame, "conceptCard") == []
+    assert reader.findChildren(QFrame, "exampleCard") == []
+    assert reader.findChild(GuidedPracticeWidget, "guidedPracticeWidget") is None
+    assert reader.findChildren(QFrame, "assessmentCard") == []
+
+    assert reader.select_section("Conceptos")
     assert len(reader.findChildren(QFrame, "conceptCard")) == len(MODULE_01_FOUNDATIONS.concepts)
+
+    assert reader.select_section("Ejemplos")
     assert len(reader.findChildren(QFrame, "exampleCard")) == len(
         MODULE_01_FOUNDATIONS.worked_examples
     )
+
+    assert reader.select_section("Práctica")
+    practice = reader.findChild(GuidedPracticeWidget, "guidedPracticeWidget")
     assert practice is not None
     assert len(practice.exercise_cards) == 4
     assert reader.findChildren(QFrame, "practiceCard") == []
+
+    assert reader.select_section("Evaluación")
     assert len(reader.findChildren(QFrame, "assessmentCard")) == len(
         MODULE_01_FOUNDATIONS.assessment_items
     )
+    assert reader.constructed_section_count == 5
 
 
 def test_course_reader_shows_objective_practice_and_complete_assessment(
@@ -125,6 +146,7 @@ def test_course_reader_shows_objective_practice_and_complete_assessment(
     for index in range(page.module_count):
         assert page.select_module(index)
         reader = page.reader
+        assert reader.select_section("Evaluación")
         assert reader.findChild(ObjectiveAssessmentWidget, "objectiveAssessmentWidget") is not None
         assert reader.findChild(QLabel, "objectiveAssessmentSectionTitle") is not None
         assert reader.findChild(QLabel, "authoredAssessmentSectionTitle") is not None
@@ -135,6 +157,7 @@ def test_course_reader_shows_objective_practice_and_complete_assessment(
 
 def test_assessment_reader_does_not_render_answer_feedback(qapp: QApplication) -> None:
     reader = ModuleReaderPage(MODULE_01_FOUNDATIONS)
+    assert reader.select_section("Evaluación")
 
     assert reader.findChild(QLabel, "assessmentAnswer") is None
     assert reader.findChild(QLabel, "assessmentExplanation") is None
