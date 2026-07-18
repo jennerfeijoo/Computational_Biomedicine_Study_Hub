@@ -1,4 +1,4 @@
-"""Read-only PySide6 renderer for one authored learning module."""
+"""PySide6 renderer for one authored learning module."""
 
 from __future__ import annotations
 
@@ -24,6 +24,7 @@ from ...content.models import (
     PracticeExercise,
     WorkedExample,
 )
+from ..widgets import ObjectiveAssessmentWidget
 
 _ACTIVITY_LABELS = {
     "worked_example": "Ejemplo resuelto",
@@ -45,12 +46,19 @@ _ACTIVITY_LABELS = {
 
 
 class ModuleReaderPage(QWidget):
-    """Render theory, examples, practice and assessment without grading interactions."""
+    """Render theory, examples, practice and module-specific assessment."""
 
-    def __init__(self, module: LearningModule, parent: QWidget | None = None) -> None:
+    def __init__(
+        self,
+        module: LearningModule,
+        parent: QWidget | None = None,
+        *,
+        objective_question_bank: tuple[AssessmentItem, ...] = (),
+    ) -> None:
         super().__init__(parent)
         self.setObjectName("moduleReaderPage")
         self._module = module
+        self._objective_question_bank = objective_question_bank
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
@@ -186,15 +194,25 @@ class ModuleReaderPage(QWidget):
         layout = body.layout()
         assert isinstance(layout, QVBoxLayout)
 
-        notice = self._label(
-            "Las respuestas correctas permanecen separadas del lector. La siguiente entrega "
-            "incorporará controles de respuesta y corrección determinista.",
-            "moduleSectionNotice",
-        )
-        layout.addWidget(notice)
+        if self._objective_question_bank:
+            notice = self._label(
+                "Responde cada pregunta y pulsa Comprobar respuesta para obtener corrección "
+                "inmediata. Nueva práctica genera otra combinación del banco y vuelve a "n                "barajar las opciones.",
+                "moduleSectionNotice",
+            )
+            layout.addWidget(notice)
+            layout.addWidget(ObjectiveAssessmentWidget(self._objective_question_bank))
+        else:
+            notice = self._label(
+                "Las respuestas correctas permanecen separadas del lector. Los controles "
+                "interactivos se activarán cuando el módulo disponga de un banco objetivo.",
+                "moduleSectionNotice",
+            )
+            layout.addWidget(notice)
 
-        for number, item in enumerate(self._module.assessment_items, start=1):
-            layout.addWidget(self._assessment_card(number, item))
+            for number, item in enumerate(self._module.assessment_items, start=1):
+                layout.addWidget(self._assessment_card(number, item))
+
         layout.addStretch(1)
         return self._scroll_area(body, "moduleAssessmentScroll")
 
