@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-from PySide6.QtCore import QObject, QSettings, QThread, QTimer, Signal, Slot
+from PySide6.QtCore import QObject, QSettings, QThread, Signal, Slot
+from PySide6.QtGui import QShowEvent
 from PySide6.QtWidgets import (
     QComboBox,
     QFormLayout,
@@ -75,7 +76,8 @@ class OllamaSettingsPage(QWidget):
         self._client_factory = client_factory or OllamaClient
         self._probe_thread: QThread | None = None
         self._probe_worker: OllamaProbeWorker | None = None
-        self._auto_probe_timer: QTimer | None = None
+        self._auto_probe_enabled = auto_probe
+        self._auto_probe_started = False
 
         self._base_url = QLineEdit(self._stored_base_url())
         self._base_url.setObjectName("ollamaBaseUrl")
@@ -134,9 +136,6 @@ class OllamaSettingsPage(QWidget):
         layout.addWidget(group)
         layout.addStretch(1)
 
-        if auto_probe:
-            self._schedule_auto_probe()
-
     @property
     def base_url(self) -> str:
         """Return the current URL field value."""
@@ -151,6 +150,13 @@ class OllamaSettingsPage(QWidget):
     def status_text(self) -> str:
         """Return the visible connection status."""
         return self._status.text()
+
+    def showEvent(self, event: QShowEvent) -> None:
+        """Start one automatic probe when the settings page first becomes visible."""
+        super().showEvent(event)
+        if self._auto_probe_enabled and not self._auto_probe_started:
+            self._auto_probe_started = True
+            self.start_probe()
 
     @Slot()
     def start_probe(self) -> None:
@@ -244,14 +250,6 @@ class OllamaSettingsPage(QWidget):
         self._probe_button.setEnabled(True)
         self._probe_thread = None
         self._probe_worker = None
-
-    def _schedule_auto_probe(self) -> None:
-        """Schedule one probe owned by this page so deletion cancels it safely."""
-        timer = QTimer(self)
-        timer.setSingleShot(True)
-        timer.timeout.connect(self.start_probe)
-        self._auto_probe_timer = timer
-        timer.start(0)
 
     def _persist_current_preferences(self) -> None:
         normalized_url = OllamaConfig(base_url=self.base_url).normalized_base_url()
