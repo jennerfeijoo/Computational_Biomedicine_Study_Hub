@@ -1,35 +1,98 @@
-"""DM857 course registration and authored-module reader."""
+"""DM857 course registration and authored-module navigation."""
 
 from __future__ import annotations
 
-from PySide6.QtWidgets import QVBoxLayout, QWidget
+from PySide6.QtCore import Slot
+from PySide6.QtWidgets import (
+    QComboBox,
+    QFrame,
+    QHBoxLayout,
+    QLabel,
+    QStackedWidget,
+    QVBoxLayout,
+    QWidget,
+)
 
-from ..content.dm857 import MODULE_01_FOUNDATIONS, OBJECTIVE_QUESTION_BANK
+from ..content.dm857 import MODULES, OBJECTIVE_QUESTION_BANKS
 from ..ui.pages.module_reader_page import ModuleReaderPage
 from .models import CourseRegistration
 
 
 class DM857Page(QWidget):
-    """Host the independently authored modules for Introduction to Programming."""
+    """Host every completed DM857 module in one compact course page."""
 
     def __init__(self) -> None:
         super().__init__()
         self.setObjectName("dm857CoursePage")
 
+        self._module_selector = QComboBox()
+        self._module_selector.setObjectName("courseModuleSelector")
+        self._module_stack = QStackedWidget()
+        self._module_stack.setObjectName("courseModuleStack")
+        self._module_title = QLabel()
+        self._module_title.setObjectName("moduleContextTitle")
+        self._module_title.setWordWrap(True)
+        self._readers: list[ModuleReaderPage] = []
+
+        for number, module in enumerate(MODULES, start=1):
+            self._module_selector.addItem(f"Módulo {number}", module.module_id)
+            reader = ModuleReaderPage(
+                module,
+                objective_question_bank=OBJECTIVE_QUESTION_BANKS[module.module_id],
+                show_context_bar=False,
+            )
+            self._readers.append(reader)
+            self._module_stack.addWidget(reader)
+
+        context_bar = QFrame()
+        context_bar.setObjectName("moduleContextBar")
+        context_layout = QHBoxLayout(context_bar)
+        context_layout.setContentsMargins(14, 8, 14, 8)
+        context_layout.setSpacing(12)
+
+        course_code = QLabel("DM857")
+        course_code.setObjectName("moduleContextKicker")
+        context_layout.addWidget(course_code)
+        context_layout.addWidget(self._module_selector)
+        context_layout.addWidget(self._module_title, 1)
+
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(0)
+        layout.setSpacing(8)
+        layout.addWidget(context_bar)
+        layout.addWidget(self._module_stack, 1)
 
-        self._reader = ModuleReaderPage(
-            MODULE_01_FOUNDATIONS,
-            objective_question_bank=OBJECTIVE_QUESTION_BANK,
-        )
-        layout.addWidget(self._reader, 1)
+        self._module_selector.currentIndexChanged.connect(self._activate_module)
+        self._activate_module(0)
 
     @property
     def reader(self) -> ModuleReaderPage:
-        """Return the active module reader."""
-        return self._reader
+        """Return the reader for the currently selected module."""
+        return self._readers[self._module_stack.currentIndex()]
+
+    @property
+    def module_count(self) -> int:
+        """Return the number of completed modules available in the course page."""
+        return len(self._readers)
+
+    @property
+    def current_module_index(self) -> int:
+        """Return the zero-based selected module index."""
+        return self._module_stack.currentIndex()
+
+    def select_module(self, index: int) -> bool:
+        """Select a completed module by zero-based index."""
+        if not 0 <= index < self.module_count:
+            return False
+        self._module_selector.setCurrentIndex(index)
+        return True
+
+    @Slot(int)
+    def _activate_module(self, index: int) -> None:
+        if not 0 <= index < self.module_count:
+            return
+        self._module_stack.setCurrentIndex(index)
+        self._module_title.setText(self._readers[index].module.title)
 
 
 def create_page() -> QWidget:
