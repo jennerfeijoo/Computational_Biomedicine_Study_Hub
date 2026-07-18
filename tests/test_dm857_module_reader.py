@@ -1,24 +1,28 @@
 from __future__ import annotations
 
-from PySide6.QtWidgets import QApplication, QFrame, QLabel, QPushButton, QTabWidget
+from PySide6.QtWidgets import QApplication, QFrame, QLabel, QTabWidget
 
 from computational_biomedicine_study_hub.content.dm857 import MODULE_01_FOUNDATIONS
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
 from computational_biomedicine_study_hub.ui.pages.module_reader_page import ModuleReaderPage
 
 
-def test_dm857_page_hosts_the_first_authored_module(qapp: QApplication) -> None:
+def test_dm857_page_hosts_the_first_authored_module_without_duplicate_course_cards(
+    qapp: QApplication,
+) -> None:
     page = DM857Page()
 
     reader = page.findChild(ModuleReaderPage, "moduleReaderPage")
-    selector = page.findChild(QPushButton, "moduleSelectorButton")
+    context_bar = page.findChild(QFrame, "moduleContextBar")
+    context_title = page.findChild(QLabel, "moduleContextTitle")
 
     assert reader is not None
     assert reader.module is MODULE_01_FOUNDATIONS
-    assert selector is not None
-    assert selector.isChecked()
-    assert not selector.isEnabled()
-    assert MODULE_01_FOUNDATIONS.title in selector.text()
+    assert context_bar is not None
+    assert context_title is not None
+    assert context_title.text() == MODULE_01_FOUNDATIONS.title
+    assert page.findChild(QFrame, "courseIdentityCard") is None
+    assert page.findChild(QFrame, "moduleIdentityCard") is None
 
 
 def test_module_reader_exposes_five_study_sections(qapp: QApplication) -> None:
