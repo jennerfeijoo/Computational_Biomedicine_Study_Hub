@@ -37,11 +37,11 @@ def build_navigation(
         NavigationEntry(RouteId.HOME.value, "Inicio", "GENERAL")
     ]
 
-    sorted_courses = sorted(
+    semester_ordered_courses = sorted(
         courses,
-        key=lambda course: (course.semester, course.code),
+        key=lambda course: course.semester,
     )
-    for course in sorted_courses:
+    for course in semester_ordered_courses:
         entries.append(
             NavigationEntry(
                 course.route,
@@ -124,8 +124,8 @@ class NavigationSidebar(QWidget):
             button.setCheckable(True)
             button.setToolTip(entry.label)
             button.clicked.connect(
-                lambda checked=False, route=entry.route: (
-                    self.route_selected.emit(route)
+                lambda checked=False, route=entry.route: self.route_selected.emit(
+                    route
                 )
             )
             self._button_group.addButton(button)
