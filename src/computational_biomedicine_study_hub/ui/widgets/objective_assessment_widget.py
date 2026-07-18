@@ -15,6 +15,7 @@ from PySide6.QtWidgets import (
 )
 
 from ...content.models import AssessmentItem
+from ...i18n import DEFAULT_LOCALE, AppLocale, UiCopyKey, ui_text
 from ...learning.objective_assessment import (
     ObjectiveSessionGenerator,
     ObjectiveSessionQuestion,
@@ -24,7 +25,7 @@ from .objective_assessment_styles import OBJECTIVE_ASSESSMENT_STYLESHEET
 
 
 class ObjectiveQuestionCard(QFrame):
-    """Render one selectable question and provide immediate authored feedback."""
+    """Render one selectable localized question with authored feedback."""
 
     answered = Signal(str, bool)
 
@@ -33,17 +34,22 @@ class ObjectiveQuestionCard(QFrame):
         number: int,
         question: ObjectiveSessionQuestion,
         parent: QWidget | None = None,
+        *,
+        locale: AppLocale = DEFAULT_LOCALE,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("objectiveQuestionCard")
         self._question = question
+        self._locale = locale
         self._answered = False
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(18, 16, 18, 16)
         layout.setSpacing(10)
 
-        number_label = QLabel(f"Pregunta {number}")
+        number_label = QLabel(
+            ui_text(locale, UiCopyKey.OBJECTIVE_QUESTION_NUMBER, number=number)
+        )
         number_label.setObjectName("objectiveQuestionNumber")
         layout.addWidget(number_label)
 
@@ -64,7 +70,9 @@ class ObjectiveQuestionCard(QFrame):
             self._option_buttons.append(button)
             layout.addWidget(button)
 
-        self._check_button = QPushButton("Comprobar respuesta")
+        self._check_button = QPushButton(
+            ui_text(locale, UiCopyKey.OBJECTIVE_CHECK)
+        )
         self._check_button.setObjectName("checkObjectiveAnswerButton")
         self._check_button.clicked.connect(self.check_answer)
         layout.addWidget(self._check_button, 0)
@@ -131,16 +139,26 @@ class ObjectiveQuestionCard(QFrame):
 
         selected_option_id = self.selected_option_id
         if not selected_option_id:
-            self._show_feedback("Selecciona una respuesta antes de comprobar.", "warning")
+            self._show_feedback(
+                ui_text(self._locale, UiCopyKey.OBJECTIVE_SELECT_WARNING),
+                "warning",
+            )
             return
 
         feedback = grade_objective_answer(self._question, selected_option_id)
         if feedback.is_correct:
-            message = f"Correcto. {feedback.explanation}"
+            message = ui_text(
+                self._locale,
+                UiCopyKey.OBJECTIVE_CORRECT,
+                explanation=feedback.explanation,
+            )
             state = "correct"
         else:
-            message = (
-                f"Incorrecto. Respuesta correcta: {feedback.correct_answer}. {feedback.explanation}"
+            message = ui_text(
+                self._locale,
+                UiCopyKey.OBJECTIVE_INCORRECT,
+                answer=feedback.correct_answer,
+                explanation=feedback.explanation,
             )
             state = "incorrect"
 
@@ -160,7 +178,7 @@ class ObjectiveQuestionCard(QFrame):
 
 
 class ObjectiveAssessmentWidget(QWidget):
-    """Manage repeated randomized sessions from one authored question bank."""
+    """Manage repeated localized sessions from one authored question bank."""
 
     def __init__(
         self,
@@ -168,11 +186,13 @@ class ObjectiveAssessmentWidget(QWidget):
         *,
         question_count: int = 6,
         generator: ObjectiveSessionGenerator | None = None,
+        locale: AppLocale = DEFAULT_LOCALE,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("objectiveAssessmentWidget")
         self.setStyleSheet(OBJECTIVE_ASSESSMENT_STYLESHEET)
+        self._locale = locale
 
         self._generator = generator or ObjectiveSessionGenerator(
             bank,
@@ -197,7 +217,7 @@ class ObjectiveAssessmentWidget(QWidget):
         header_text_layout.setContentsMargins(0, 0, 0, 0)
         header_text_layout.setSpacing(3)
 
-        title = QLabel("Evaluación objetiva aleatoria")
+        title = QLabel(ui_text(locale, UiCopyKey.OBJECTIVE_TITLE))
         title.setObjectName("objectiveAssessmentTitle")
         header_text_layout.addWidget(title)
 
@@ -209,7 +229,9 @@ class ObjectiveAssessmentWidget(QWidget):
         self._score = QLabel()
         self._score.setObjectName("objectiveAssessmentScore")
 
-        self._new_session_button = QPushButton("Nueva práctica")
+        self._new_session_button = QPushButton(
+            ui_text(locale, UiCopyKey.OBJECTIVE_NEW_SESSION)
+        )
         self._new_session_button.setObjectName("newAssessmentSessionButton")
         self._new_session_button.clicked.connect(self.new_session)
 
@@ -252,15 +274,18 @@ class ObjectiveAssessmentWidget(QWidget):
         self._clear_cards()
 
         for number, question in enumerate(session.questions, start=1):
-            card = ObjectiveQuestionCard(number, question)
+            card = ObjectiveQuestionCard(number, question, locale=self._locale)
             card.answered.connect(self._record_result)
             self._question_cards.append(card)
             self._cards_layout.addWidget(card)
 
         self._metadata.setText(
-            f"{self._generator.question_count} preguntas seleccionadas de un banco de "
-            f"{self._generator.bank_size}. El conjunto, el orden y las opciones cambian "
-            "entre sesiones."
+            ui_text(
+                self._locale,
+                UiCopyKey.OBJECTIVE_METADATA,
+                count=self._generator.question_count,
+                bank=self._generator.bank_size,
+            )
         )
         self._update_score()
 
@@ -273,7 +298,15 @@ class ObjectiveAssessmentWidget(QWidget):
         answered = len(self._results)
         correct = sum(self._results.values())
         total = self._generator.question_count
-        self._score.setText(f"{correct} aciertos · {answered}/{total}")
+        self._score.setText(
+            ui_text(
+                self._locale,
+                UiCopyKey.OBJECTIVE_SCORE,
+                correct=correct,
+                answered=answered,
+                total=total,
+            )
+        )
 
     def _clear_cards(self) -> None:
         while self._cards_layout.count():
