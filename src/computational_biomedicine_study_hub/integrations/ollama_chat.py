@@ -11,7 +11,6 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from enum import StrEnum
 from math import isfinite
-from typing import Any
 
 from .ollama import (
     JsonObject,
@@ -153,7 +152,7 @@ class OllamaChatClient:
         return f"{self.config.normalized_base_url()}/{path.lstrip('/')}"
 
 
-def _non_negative_int(value: Any) -> int:
+def _non_negative_int(value: object) -> int:
     """Normalize optional Ollama counters without accepting booleans."""
     if isinstance(value, bool) or not isinstance(value, int):
         return 0
