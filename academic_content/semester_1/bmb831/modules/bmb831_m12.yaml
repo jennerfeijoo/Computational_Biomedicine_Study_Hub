@@ -1,0 +1,876 @@
+schema_version: 1.0.0
+course_code: BMB831
+module_id: bmb831.m12
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Proyecto individual de informe ómico y defensa científica
+    en: Individual omics report project and scientific defense
+    da: Individuelt omics-rapportprojekt og videnskabeligt forsvar
+  summary:
+    es: >-
+      Integración de BMB831 en un informe individual reproducible sobre datos ómicos. El módulo conecta
+      pregunta biológica, estimando, procedencia, contratos de datos, QC, preprocessing, modelado,
+      validación, visualización, interpretación funcional, sensibilidad y limitaciones. También desarrolla
+      una defensa científica estructurada de las decisiones tomadas, aunque la forma oficial de evaluación
+      se rige por la descripción vigente del curso.
+    en: >-
+      Integration of BMB831 into an individual reproducible report on omics data. The module connects
+      biological question, estimand, provenance, data contracts, QC, preprocessing, modeling, validation,
+      visualization, functional interpretation, sensitivity, and limitations. It also develops a structured
+      scientific defense of analytical decisions, while the official assessment format remains governed by
+      the active course description.
+    da: >-
+      Integration af BMB831 i en individuel reproducerbar rapport om omics-data. Modulet forbinder biologisk
+      spørgsmål, estimand, provenance, datakontrakter, QC, preprocessing, modellering, validering,
+      visualisering, funktionel fortolkning, følsomhed og begrænsninger.
+  estimated_study_hours: 24
+  difficulty: integrative_advanced
+
+alignment:
+  official_learning_outcomes:
+    - bmb831.lo01
+    - bmb831.lo02
+    - bmb831.lo03
+    - bmb831.lo04
+    - bmb831.lo05
+    - bmb831.lo06
+    - bmb831.lo07
+  prerequisite_modules:
+    - bmb831.m01
+    - bmb831.m02
+    - bmb831.m03
+    - bmb831.m04
+    - bmb831.m05
+    - bmb831.m06
+    - bmb831.m07
+    - bmb831.m08
+    - bmb831.m09
+    - bmb831.m10
+    - bmb831.m11
+  later_modules: []
+
+objectives:
+  - id: bmb831.m12.o01
+    text:
+      es: Formular una pregunta biológica, un estimando y criterios de éxito verificables.
+      en: Formulate a biological question, estimand, and verifiable success criteria.
+      da: Formulere et biologisk spørgsmål, estimand og verificerbare succeskriterier.
+  - id: bmb831.m12.o02
+    text:
+      es: Documentar datos, metadatos, versiones, licencias e identificadores.
+      en: Document data, metadata, versions, licenses, and identifiers.
+      da: Dokumentere data, metadata, versioner, licenser og identifikatorer.
+  - id: bmb831.m12.o03
+    text:
+      es: Justificar QC, exclusiones, normalización y transformaciones mediante el mecanismo de medición.
+      en: Justify QC, exclusions, normalization, and transformations from the measurement mechanism.
+      da: Begrunde QC, eksklusioner, normalisering og transformationer ud fra målemekanismen.
+  - id: bmb831.m12.o04
+    text:
+      es: Seleccionar modelos, contrastes y validación acordes con diseño y dependencia.
+      en: Select models, contrasts, and validation aligned with design and dependence.
+      da: Vælge modeller, kontraster og validering tilpasset design og afhængighed.
+  - id: bmb831.m12.o05
+    text:
+      es: Construir figuras y tablas que comuniquen evidencia, incertidumbre y estructura de datos.
+      en: Build figures and tables communicating evidence, uncertainty, and data structure.
+      da: Bygge figurer og tabeller der kommunikerer evidens, usikkerhed og datastruktur.
+  - id: bmb831.m12.o06
+    text:
+      es: Separar observación, inferencia estadística, interpretación biológica y mecanismo propuesto.
+      en: Separate observation, statistical inference, biological interpretation, and proposed mechanism.
+      da: Adskille observation, statistisk inferens, biologisk fortolkning og foreslået mekanisme.
+  - id: bmb831.m12.o07
+    text:
+      es: Evaluar sensibilidad, reproducibilidad, estabilidad y alternativas razonables.
+      en: Evaluate sensitivity, reproducibility, stability, and reasonable alternatives.
+      da: Evaluere følsomhed, reproducerbarhed, stabilitet og rimelige alternativer.
+  - id: bmb831.m12.o08
+    text:
+      es: Defender el informe con respuestas precisas, condicionales y conscientes de límites.
+      en: Defend the report with precise, conditional, limitation-aware answers.
+      da: Forsvare rapporten med præcise, betingede og begrænsningsbevidste svar.
+
+concepts:
+  - id: bmb831.m12.c01
+    title:
+      es: Pregunta, estimando y cadena de decisión
+      en: Question, estimand, and decision chain
+      da: Spørgsmål, estimand og beslutningskæde
+    body:
+      es: >-
+        El informe comienza con una pregunta que identifica población, unidad, exposición o contraste,
+        outcome, tiempo y contexto. El estimando especifica la cantidad que se intenta aprender. Cada
+        decisión posterior —inclusión, transformación, modelo, contraste, visualización y afirmación— debe
+        poder vincularse con ese estimando. Elegir primero una herramienta y adaptar después la pregunta
+        produce una cadena incoherente y difícil de defender.
+      en: >-
+        The report begins with a question identifying population, unit, exposure or contrast, outcome,
+        time, and context. The estimand specifies the target quantity. Every later decision—inclusion,
+        transformation, model, contrast, visualization, and claim—should link back to that estimand.
+        Choosing a tool first and adapting the question afterward creates an incoherent chain.
+      da: >-
+        Rapporten starter med et spørgsmål der identificerer population, enhed, kontrast, outcome, tid og
+        kontekst. Estimandet specificerer målkvantiteten, og alle senere beslutninger skal forbindes til den.
+    key_points:
+      - es: La coherencia de la cadena analítica importa más que la sofisticación aislada.
+        en: Coherence of the analytical chain matters more than isolated sophistication.
+        da: Sammenhæng i analysekæden betyder mere end isoleret kompleksitet.
+      - es: El estimando determina qué efecto, contraste y escala son relevantes.
+        en: The estimand determines the relevant effect, contrast, and scale.
+        da: Estimandet bestemmer relevant effekt, kontrast og skala.
+  - id: bmb831.m12.c02
+    title:
+      es: Contrato de datos, procedencia y elegibilidad
+      en: Data contract, provenance, and eligibility
+      da: Datakontrakt, provenance og eligibility
+    body:
+      es: >-
+        El contrato de datos declara entidades, claves, unidades, dimensiones, escalas, valores ausentes,
+        relaciones entre assays y condiciones de validez. La procedencia conserva origen, versión, licencia,
+        checksum, anotación y transformaciones. Los criterios de inclusión y exclusión deben establecer qué
+        población queda representada y qué sesgo puede introducir la disponibilidad de muestras o modalidades.
+      en: >-
+        The data contract declares entities, keys, units, dimensions, scales, missingness, assay relations,
+        and validity conditions. Provenance preserves source, version, license, checksum, annotation, and
+        transformations. Eligibility criteria define the represented population and possible selection bias.
+      da: >-
+        Datakontrakten deklarerer enheder, nøgler, dimensioner, skalaer, missingness og assay-relationer.
+        Provenance bevarer kilde, version, licens, checksum, annotation og transformationer.
+    key_points:
+      - es: Un archivo utilizable no es necesariamente un dato interpretable.
+        en: A usable file is not necessarily an interpretable dataset.
+        da: En brugbar fil er ikke nødvendigvis et fortolkeligt datasæt.
+      - es: La elegibilidad forma parte del estimando y la generalización.
+        en: Eligibility is part of the estimand and generalization.
+        da: Eligibility er en del af estimand og generalisering.
+  - id: bmb831.m12.c03
+    title:
+      es: Cadena QC–preprocessing–modelo
+      en: QC–preprocessing–model chain
+      da: QC–preprocessing–modelkæde
+    body:
+      es: >-
+        QC identifica fallos, estructura técnica y límites del assay; preprocessing intenta mejorar
+        comparabilidad bajo supuestos; el modelo representa el mecanismo estadístico restante. Estas etapas
+        no son intercambiables. Normalizar no corrige un diseño confundido, imputar no recupera medición y
+        cambiar de familia no resuelve dependencia omitida. Cada transición necesita evidencia y un registro.
+      en: >-
+        QC identifies failures, technical structure, and assay limits; preprocessing improves comparability
+        under assumptions; the model represents the remaining statistical mechanism. These stages are not
+        interchangeable. Normalization cannot repair confounding, imputation cannot recover measurement,
+        and changing family cannot resolve omitted dependence.
+      da: >-
+        QC identificerer fejl og teknisk struktur; preprocessing forbedrer sammenlignelighed under antagelser;
+        modellen repræsenterer den resterende statistiske mekanisme. Trinene kan ikke erstatte hinanden.
+    key_points:
+      - es: Las exclusiones requieren regla, evidencia, conteo y análisis de sensibilidad.
+        en: Exclusions require a rule, evidence, count, and sensitivity analysis.
+        da: Eksklusioner kræver regel, evidens, antal og følsomhedsanalyse.
+      - es: El preprocessing debe declarar qué elimina y qué intenta preservar.
+        en: Preprocessing should state what it removes and what it aims to preserve.
+        da: Preprocessing bør deklarere hvad det fjerner og søger at bevare.
+  - id: bmb831.m12.c04
+    title:
+      es: Modelo, contraste, validación e incertidumbre
+      en: Model, contrast, validation, and uncertainty
+      da: Model, kontrast, validering og usikkerhed
+    body:
+      es: >-
+        El modelo sigue soporte, relación media-varianza, estructura de dependencia y diseño. El contraste
+        debe ser estimable y corresponder a la pregunta. En análisis predictivo, todo paso aprendido entra en
+        resampling; en análisis inferencial, la incertidumbre debe reflejar clustering, multiplicidad y
+        selección. Un valor p aislado no sustituye efecto, intervalo, diagnóstico ni sensibilidad.
+      en: >-
+        The model follows support, mean-variance relation, dependence, and design. The contrast must be
+        estimable and match the question. In prediction, every learned step belongs inside resampling; in
+        inference, uncertainty should reflect clustering, multiplicity, and selection. A p-value does not
+        replace effect, interval, diagnostics, or sensitivity.
+      da: >-
+        Modellen følger støtte, middel-varians-relation, afhængighed og design. Kontrasten skal være estimerbar
+        og matche spørgsmålet. Usikkerhed skal afspejle clustering, multiplicitet og selection.
+    key_points:
+      - es: La unidad de análisis debe coincidir con la unidad de independencia.
+        en: The analysis unit should match the independence unit.
+        da: Analyseenheden bør matche uafhængighedsenheden.
+      - es: La validación estima un procedimiento completo, no un resultado seleccionado.
+        en: Validation estimates a complete procedure, not a selected result.
+        da: Validering estimerer en komplet procedure, ikke et udvalgt resultat.
+  - id: bmb831.m12.c05
+    title:
+      es: Arquitectura de figuras y tablas
+      en: Figure and table architecture
+      da: Figur- og tabelarkitektur
+    body:
+      es: >-
+        Cada figura debe responder una pregunta concreta y conservar n, unidades, escala, grupos, variabilidad
+        y procedencia. Las figuras de QC muestran decisiones; las de resultados muestran efecto e incertidumbre;
+        las multivariantes deben incluir metadata técnica; las vías requieren tamaño, dirección, FDR y
+        redundancia. Las tablas deben mantener IDs estables y no ocultar denominadores ni exclusiones.
+      en: >-
+        Every figure should answer one question and preserve n, units, scale, groups, variability, and
+        provenance. QC figures support decisions; result figures show effect and uncertainty; multivariate
+        figures include technical metadata; pathway displays require size, direction, FDR, and redundancy.
+        Tables retain stable IDs and do not hide denominators or exclusions.
+      da: >-
+        Hver figur bør besvare ét spørgsmål og bevare n, enheder, skala, grupper, variation og provenance.
+        Tabeller bør bevare stabile ID'er og ikke skjule nævnere eller eksklusioner.
+    key_points:
+      - es: Decoración visual no sustituye densidad informativa ni honestidad.
+        en: Visual decoration does not replace information density or honesty.
+        da: Visuel dekoration erstatter ikke informationsdensitet eller ærlighed.
+      - es: Una figura debe poder leerse sin reconstruir decisiones ocultas.
+        en: A figure should be readable without reconstructing hidden decisions.
+        da: En figur bør kunne læses uden at rekonstruere skjulte beslutninger.
+  - id: bmb831.m12.c06
+    title:
+      es: De observación a hipótesis biológica
+      en: From observation to biological hypothesis
+      da: Fra observation til biologisk hypotese
+    body:
+      es: >-
+        La observación describe el patrón medido. La inferencia cuantifica compatibilidad, efecto e incertidumbre
+        bajo el modelo. La interpretación conecta el patrón con conocimiento existente. El mecanismo propone una
+        explicación causal que requiere evidencia adicional. Confundir estos niveles transforma asociación en
+        certeza y una base de anotación en demostración experimental.
+      en: >-
+        Observation describes the measured pattern. Inference quantifies compatibility, effect, and uncertainty
+        under the model. Interpretation connects the pattern to existing knowledge. Mechanism proposes a causal
+        explanation requiring additional evidence. Conflating these levels turns association into certainty.
+      da: >-
+        Observation beskriver mønstret; inferens kvantificerer effekt og usikkerhed; fortolkning forbinder med
+        viden; mekanisme foreslår en kausal forklaring der kræver yderligere evidens.
+    key_points:
+      - es: “Compatible con” suele ser más preciso que “demuestra”.
+        en: “Compatible with” is often more accurate than “demonstrates.”
+        da: “Kompatibel med” er ofte mere præcist end “demonstrerer”.
+      - es: Una hipótesis útil especifica una validación posible.
+        en: A useful hypothesis specifies a possible validation.
+        da: En nyttig hypotese specificerer en mulig validering.
+  - id: bmb831.m12.c07
+    title:
+      es: Reproducibilidad, sensibilidad y resultados negativos
+      en: Reproducibility, sensitivity, and negative results
+      da: Reproducerbarhed, følsomhed og negative resultater
+    body:
+      es: >-
+        El workflow debe reconstruir tablas, figuras y números desde entradas declaradas. Sensibilidad compara
+        decisiones plausibles sin seleccionar la más conveniente. Un resultado negativo es informativo sólo si
+        calidad, precisión y rango detectable permiten excluir efectos relevantes. La ausencia de significancia
+        con intervalos amplios no demuestra equivalencia ni ausencia.
+      en: >-
+        The workflow should rebuild tables, figures, and numbers from declared inputs. Sensitivity compares
+        plausible decisions without selecting the most favorable. A negative result is informative only when
+        quality, precision, and detectable range allow relevant effects to be excluded.
+      da: >-
+        Workflowet bør genskabe tabeller, figurer og tal fra deklarerede input. Følsomhed sammenligner plausible
+        beslutninger uden at vælge den mest fordelagtige. Et negativt resultat kræver tilstrækkelig præcision.
+    key_points:
+      - es: Reproducibilidad permite auditar, no garantiza validez.
+        en: Reproducibility enables audit but does not guarantee validity.
+        da: Reproducerbarhed muliggør audit men garanterer ikke validitet.
+      - es: La sensibilidad debe conservar la pregunta y variar decisiones justificables.
+        en: Sensitivity should preserve the question while varying defensible decisions.
+        da: Følsomhed bør bevare spørgsmålet og variere forsvarlige beslutninger.
+  - id: bmb831.m12.c08
+    title:
+      es: Escritura y defensa científica
+      en: Scientific writing and defense
+      da: Videnskabelig skrivning og forsvar
+    body:
+      es: >-
+        Una narrativa sólida sigue pregunta, datos, método, resultado, interpretación y límite. En defensa,
+        la respuesta debe definir objetos, explicar por qué se eligió el método, interpretar el output y declarar
+        supuestos. Cuando falta información, se debe decir qué falta, qué supuesto provisional se adopta y cómo
+        podría cambiar la conclusión. Reconocer incertidumbre demuestra control del problema.
+      en: >-
+        A strong narrative follows question, data, method, result, interpretation, and limitation. In defense,
+        answers define objects, justify method choice, interpret output, and state assumptions. When information
+        is missing, state what is missing, the provisional assumption, and how the conclusion could change.
+      da: >-
+        En stærk narrativ følger spørgsmål, data, metode, resultat, fortolkning og begrænsning. I forsvar bør
+        svar definere objekter, begrunde metodevalg, fortolke output og deklarere antagelser.
+    key_points:
+      - es: Precisión condicional es superior a certeza inventada.
+        en: Conditional precision is superior to invented certainty.
+        da: Betinget præcision er bedre end opdigtet sikkerhed.
+      - es: Una alternativa razonable muestra comprensión del espacio de decisiones.
+        en: A reasonable alternative demonstrates understanding of the decision space.
+        da: Et rimeligt alternativ viser forståelse af beslutningsrummet.
+
+worked_examples:
+  - id: bmb831.m12.e01
+    title:
+      es: Informe transcriptómico con batch parcialmente cruzado
+      en: Transcriptomics report with partially crossed batch
+      da: Transkriptomikrapport med delvist krydset batch
+    scenario:
+      es: Un estudio compara tratamiento y control en dos lotes, con representación desigual pero no completamente confundida.
+      en: A study compares treatment and control across two batches with unequal but not fully confounded representation.
+      da: Et studie sammenligner behandling og kontrol i to batches med ulige men ikke fuldt confounded repræsentation.
+    reasoning:
+      - es: Cruzar condición por lote y documentar número de muestras en cada combinación.
+        en: Cross-tabulate condition by batch and document counts in each combination.
+        da: Krydstabulér condition efter batch og dokumentér antal i hver kombination.
+      - es: Incluir lote en el diseño, revisar interacción no estimable y comparar sensibilidad.
+        en: Include batch in the design, inspect non-estimable interaction, and compare sensitivity.
+        da: Inkludér batch i designet, vurder ikke-estimerbar interaktion og sammenlign følsomhed.
+      - es: Limitar generalización a la población y procesos observados.
+        en: Limit generalization to the observed population and processing conditions.
+        da: Begræns generalisering til observeret population og behandlingsforhold.
+    conclusion:
+      es: El informe puede estimar un efecto ajustado, pero debe mostrar el desequilibrio y su impacto potencial.
+      en: The report can estimate an adjusted effect but should display imbalance and its potential impact.
+      da: Rapporten kan estimere en justeret effekt men bør vise ubalance og mulig påvirkning.
+  - id: bmb831.m12.e02
+    title:
+      es: Firma predictiva sin valor incremental
+      en: Predictive signature without incremental value
+      da: Prædiktiv signatur uden inkrementel værdi
+    scenario:
+      es: Una firma multi-ómica obtiene AUC 0.79 frente a 0.80 de variables clínicas, con intervalos solapados.
+      en: A multi-omics signature obtains AUC 0.79 versus 0.80 for clinical variables, with overlapping intervals.
+      da: En multi-omics-signatur opnår AUC 0.79 mod 0.80 for kliniske variable med overlappende intervaller.
+    reasoning:
+      - es: Comparar los modelos en los mismos outer folds y revisar calibración y utilidad.
+        en: Compare models in the same outer folds and inspect calibration and utility.
+        da: Sammenlign modeller i samme outer folds og vurder kalibrering og nytte.
+      - es: No interpretar selección molecular como biomarcador validado.
+        en: Do not interpret molecular selection as a validated biomarker.
+        da: Fortolk ikke molekylær selection som valideret biomarkør.
+      - es: Considerar si existe valor descriptivo o mecanístico distinto de predicción.
+        en: Consider whether descriptive or mechanistic value exists apart from prediction.
+        da: Overvej om der findes deskriptiv eller mekanistisk værdi ud over prædiktion.
+    conclusion:
+      es: El informe debe concluir que no se demuestra mejora predictiva incremental.
+      en: The report should conclude that incremental predictive improvement is not demonstrated.
+      da: Rapporten bør konkludere at inkrementel prædiktiv forbedring ikke er demonstreret.
+  - id: bmb831.m12.e03
+    title:
+      es: Vía funcional sensible al universo
+      en: Functional pathway sensitive to the universe
+      da: Funktionel pathway følsom for universet
+    scenario:
+      es: Una vía es significativa usando todo el genoma, pero no usando proteínas detectables como universo.
+      en: A pathway is significant with the whole genome but not with detectable proteins as the universe.
+      da: En pathway er signifikant med hele genomet men ikke med detekterbare proteiner som univers.
+    reasoning:
+      - es: El universo detectable representa mejor la oportunidad de selección.
+        en: The detectable universe better represents selection opportunity.
+        da: Det detekterbare univers repræsenterer selektionsmuligheden bedre.
+      - es: La conclusión es frágil respecto a una decisión fundamental.
+        en: The conclusion is fragile to a fundamental analytical choice.
+        da: Konklusionen er skrøbelig over for et fundamentalt analytisk valg.
+      - es: Reportar ambas versiones y evitar lenguaje de activación.
+        en: Report both versions and avoid activation language.
+        da: Rapportér begge versioner og undgå aktiveringssprog.
+    conclusion:
+      es: El resultado se presenta como hipótesis dependiente del universo, no como mecanismo establecido.
+      en: The result is presented as a universe-dependent hypothesis, not an established mechanism.
+      da: Resultatet præsenteres som en universafhængig hypotese, ikke en etableret mekanisme.
+  - id: bmb831.m12.e04
+    title:
+      es: Resultado negativo e impreciso
+      en: Negative and imprecise result
+      da: Negativt og upræcist resultat
+    scenario:
+      es: Un efecto estimado es cercano a cero, pero el intervalo incluye cambios biológicamente importantes en ambas direcciones.
+      en: An estimated effect is near zero, but the interval includes biologically important changes in both directions.
+      da: En estimeret effekt er nær nul, men intervallet inkluderer biologisk vigtige ændringer i begge retninger.
+    reasoning:
+      - es: La falta de significancia no excluye efectos relevantes.
+        en: Nonsignificance does not exclude relevant effects.
+        da: Manglende signifikans udelukker ikke relevante effekter.
+      - es: Revisar calidad, tamaño efectivo y margen de relevancia.
+        en: Review quality, effective sample size, and relevance margin.
+        da: Vurder kvalitet, effektiv sample-størrelse og relevansmargin.
+      - es: Expresar el resultado como inconcluso o de baja precisión.
+        en: Express the result as inconclusive or imprecise.
+        da: Udtryk resultatet som inkonklusivt eller upræcist.
+    conclusion:
+      es: No debe afirmarse ausencia sin un diseño de equivalencia o precisión suficiente.
+      en: Absence should not be claimed without equivalence design or sufficient precision.
+      da: Fravær bør ikke påstås uden equivalence-design eller tilstrækkelig præcision.
+
+guided_practice:
+  - id: bmb831.m12.p01
+    activity_type: report_blueprint
+    prompt:
+      es: Construye el esquema de un informe ómico desde pregunta hasta limitaciones.
+      en: Build the outline of an omics report from question through limitations.
+      da: Byg strukturen for en omics-rapport fra spørgsmål til begrænsninger.
+    expected_elements:
+      - question_estimand
+      - data_provenance
+      - qc_preprocessing
+      - model_validation
+      - results_figures
+      - interpretation_sensitivity
+      - limitations_reproducibility
+  - id: bmb831.m12.p02
+    activity_type: data_contract
+    prompt:
+      es: Redacta un contrato de datos para una matriz ómica y su metadata.
+      en: Write a data contract for an omics matrix and its metadata.
+      da: Skriv en datakontrakt for en omics-matrix og dens metadata.
+    expected_elements:
+      - entities_keys
+      - dimensions_order
+      - units_scales
+      - missingness_codes
+      - valid_ranges
+      - assay_sample_alignment
+  - id: bmb831.m12.p03
+    activity_type: figure_design
+    prompt:
+      es: Selecciona seis figuras esenciales para un informe transcriptómico o proteómico.
+      en: Select six essential figures for a transcriptomics or proteomics report.
+      da: Vælg seks essentielle figurer til en transkriptomik- eller proteomikrapport.
+    expected_elements:
+      - workflow_or_design
+      - qc_distributions
+      - sample_structure
+      - effect_uncertainty
+      - diagnostic_or_sensitivity
+      - functional_summary
+  - id: bmb831.m12.p04
+    activity_type: claim_ladder
+    prompt:
+      es: Clasifica diez frases como observación, inferencia, interpretación o mecanismo.
+      en: Classify ten statements as observation, inference, interpretation, or mechanism.
+      da: Klassificér ti udsagn som observation, inferens, fortolkning eller mekanisme.
+    expected_elements:
+      - measured_pattern
+      - model_based_effect
+      - annotation_connection
+      - causal_hypothesis
+  - id: bmb831.m12.p05
+    activity_type: sensitivity_plan
+    prompt:
+      es: Diseña una matriz de sensibilidad para preprocessing, modelo y anotación.
+      en: Design a sensitivity matrix for preprocessing, modeling, and annotation.
+      da: Design en følsomhedsmatrix for preprocessing, modellering og annotation.
+    expected_elements:
+      - decision
+      - plausible_alternative
+      - expected_impact
+      - stability_metric
+      - reporting_rule
+  - id: bmb831.m12.p06
+    activity_type: publication_appraisal
+    prompt:
+      es: Reconstruye la cadena analítica de un artículo ómico y señala los eslabones no documentados.
+      en: Reconstruct an omics paper's analytical chain and identify undocumented links.
+      da: Rekonstruér analysekæden i en omics-artikel og identificér udokumenterede led.
+    expected_elements:
+      - question_design
+      - raw_data_processing
+      - statistical_model
+      - multiplicity
+      - validation
+      - claim_scope
+  - id: bmb831.m12.p07
+    activity_type: oral_defense
+    prompt:
+      es: Defiende una decisión de normalización frente a dos alternativas.
+      en: Defend a normalization decision against two alternatives.
+      da: Forsvar en normaliseringsbeslutning mod to alternativer.
+    expected_elements:
+      - measurement_mechanism
+      - target_scale
+      - assumptions
+      - controls
+      - sensitivity
+      - limitation
+  - id: bmb831.m12.p08
+    activity_type: negative_result
+    prompt:
+      es: Determina qué puede concluirse de un resultado no significativo con intervalo amplio.
+      en: Determine what can be concluded from a nonsignificant result with a wide interval.
+      da: Afgør hvad der kan konkluderes fra et ikke-signifikant resultat med bredt interval.
+    expected_elements:
+      - compatible_effects
+      - precision
+      - relevance_margin
+      - power_or_information
+      - revised_claim
+
+objective_bank:
+  - id: bmb831.m12.q01
+    type: multiple_choice
+    prompt:
+      es: ¿Qué debe definirse antes de elegir el pipeline?
+      en: What should be defined before choosing the pipeline?
+      da: Hvad bør defineres før pipeline vælges?
+    options:
+      - id: a
+        text: {es: Pregunta, unidad y estimando, en: Question, unit, and estimand, da: Spørgsmål, enhed og estimand}
+      - id: b
+        text: {es: Paleta de colores, en: Color palette, da: Farvepalette}
+      - id: c
+        text: {es: Paquete más popular, en: Most popular package, da: Mest populære pakke}
+    correct_option_ids: [a]
+    explanation:
+      es: El método debe seguir el objetivo científico y el diseño.
+      en: The method should follow the scientific target and design.
+      da: Metoden bør følge det videnskabelige mål og design.
+  - id: bmb831.m12.q02
+    type: true_false
+    prompt:
+      es: Un workflow reproducible garantiza una conclusión válida.
+      en: A reproducible workflow guarantees a valid conclusion.
+      da: Et reproducerbart workflow garanterer en gyldig konklusion.
+    correct: false
+    explanation:
+      es: También deben validarse diseño, modelo, datos e interpretación.
+      en: Design, model, data, and interpretation also require validation.
+      da: Design, model, data og fortolkning kræver også validering.
+  - id: bmb831.m12.q03
+    type: multiple_select
+    prompt:
+      es: Elementos de procedencia necesarios.
+      en: Required provenance elements.
+      da: Nødvendige provenance-elementer.
+    options:
+      - id: a
+        text: {es: Fuente y versión, en: Source and version, da: Kilde og version}
+      - id: b
+        text: {es: Checksum y licencia, en: Checksum and license, da: Checksum og licens}
+      - id: c
+        text: {es: Transformaciones y parámetros, en: Transformations and parameters, da: Transformationer og parametre}
+      - id: d
+        text: {es: Sólo nombre del archivo, en: Filename only, da: Kun filnavn}
+    correct_option_ids: [a, b, c]
+    explanation:
+      es: La procedencia identifica contenido y cadena de transformación.
+      en: Provenance identifies content and the transformation chain.
+      da: Provenance identificerer indhold og transformationskæde.
+  - id: bmb831.m12.q04
+    type: true_false
+    prompt:
+      es: Normalización puede resolver confusión completa entre condición y lote.
+      en: Normalization can resolve complete confounding between condition and batch.
+      da: Normalisering kan løse komplet confounding mellem condition og batch.
+    correct: false
+    explanation:
+      es: Falta información de diseño para separar efectos.
+      en: The design lacks information to separate effects.
+      da: Designet mangler information til at adskille effekter.
+  - id: bmb831.m12.q05
+    type: multiple_choice
+    prompt:
+      es: Una figura de resultado principal debe priorizar...
+      en: A primary result figure should prioritize...
+      da: En primær resultatfigur bør prioritere...
+    options:
+      - id: a
+        text: {es: Efecto, incertidumbre, n y escala, en: Effect, uncertainty, n, and scale, da: Effekt, usikkerhed, n og skala}
+      - id: b
+        text: {es: Sólo p-value y color, en: Only p-value and color, da: Kun p-værdi og farve}
+    correct_option_ids: [a]
+    explanation:
+      es: Permite interpretar magnitud y precisión.
+      en: It enables interpretation of magnitude and precision.
+      da: Det muliggør fortolkning af størrelse og præcision.
+  - id: bmb831.m12.q06
+    type: true_false
+    prompt:
+      es: Una vía enriquecida demuestra un mecanismo causal.
+      en: An enriched pathway demonstrates a causal mechanism.
+      da: En beriget pathway demonstrerer en kausal mekanisme.
+    correct: false
+    explanation:
+      es: Resume concordancia con anotaciones y genera una hipótesis.
+      en: It summarizes concordance with annotations and generates a hypothesis.
+      da: Det opsummerer overensstemmelse med annotationer og genererer en hypotese.
+  - id: bmb831.m12.q07
+    type: multiple_choice
+    prompt:
+      es: Mejor respuesta ante información faltante durante una defensa.
+      en: Best response when information is missing during a defense.
+      da: Bedste svar når information mangler under et forsvar.
+    options:
+      - id: a
+        text: {es: Declarar lo que falta y razonar condicionalmente, en: State what is missing and reason conditionally, da: Angiv hvad der mangler og ræsonnér betinget}
+      - id: b
+        text: {es: Inventar un valor probable, en: Invent a likely value, da: Opfinde en sandsynlig værdi}
+    correct_option_ids: [a]
+    explanation:
+      es: Conserva precisión y permite explicar cómo cambiaría la decisión.
+      en: It preserves precision and explains how the decision could change.
+      da: Det bevarer præcision og forklarer hvordan beslutningen kunne ændres.
+  - id: bmb831.m12.q08
+    type: true_false
+    prompt:
+      es: p>0.05 con intervalo amplio demuestra ausencia de efecto.
+      en: p>0.05 with a wide interval proves absence of effect.
+      da: p>0.05 med bredt interval beviser fravær af effekt.
+    correct: false
+    explanation:
+      es: El intervalo puede incluir efectos relevantes y refleja baja precisión.
+      en: The interval may include relevant effects and reflects low precision.
+      da: Intervallet kan inkludere relevante effekter og afspejler lav præcision.
+  - id: bmb831.m12.q09
+    type: multiple_choice
+    prompt:
+      es: ¿Qué debe permanecer constante en un análisis de sensibilidad?
+      en: What should remain constant in a sensitivity analysis?
+      da: Hvad bør forblive konstant i en følsomhedsanalyse?
+    options:
+      - id: a
+        text: {es: La pregunta y el estimando, en: The question and estimand, da: Spørgsmålet og estimandet}
+      - id: b
+        text: {es: La conclusión deseada, en: The desired conclusion, da: Den ønskede konklusion}
+    correct_option_ids: [a]
+    explanation:
+      es: Se varían decisiones plausibles, no el objetivo para perseguir un resultado.
+      en: Plausible decisions vary, not the target in pursuit of a result.
+      da: Plausible beslutninger varieres, ikke målet for at forfølge et resultat.
+  - id: bmb831.m12.q10
+    type: true_false
+    prompt:
+      es: Un baseline simple es innecesario si el método es avanzado.
+      en: A simple baseline is unnecessary when the method is advanced.
+      da: En simpel baseline er unødvendig når metoden er avanceret.
+    correct: false
+    explanation:
+      es: El baseline permite determinar si la complejidad añade valor.
+      en: The baseline determines whether complexity adds value.
+      da: Baseline afgør om kompleksitet tilfører værdi.
+  - id: bmb831.m12.q11
+    type: multiple_choice
+    prompt:
+      es: Una limitación útil debe indicar...
+      en: A useful limitation should state...
+      da: En nyttig begrænsning bør angive...
+    options:
+      - id: a
+        text: {es: Fuente, consecuencia y afirmaciones afectadas, en: Source, consequence, and affected claims, da: Kilde, konsekvens og påvirkede påstande}
+      - id: b
+        text: {es: Sólo “se necesita más investigación”, en: Only “more research is needed”, da: Kun “mere forskning er nødvendig”}
+    correct_option_ids: [a]
+    explanation:
+      es: Hace explícito el efecto sobre validez e interpretación.
+      en: It makes the effect on validity and interpretation explicit.
+      da: Det gør effekten på validitet og fortolkning eksplicit.
+  - id: bmb831.m12.q12
+    type: true_false
+    prompt:
+      es: La mejor narrativa reproduce el orden cronológico de todos los intentos analíticos.
+      en: The best narrative reproduces the chronological order of every analytical attempt.
+      da: Den bedste narrativ reproducerer den kronologiske rækkefølge af alle analytiske forsøg.
+    correct: false
+    explanation:
+      es: Debe presentar una cadena lógica, declarando cambios relevantes sin convertir el informe en un diario desordenado.
+      en: It should present a logical chain while disclosing relevant changes, not become an unstructured diary.
+      da: Den bør præsentere en logisk kæde og deklarere relevante ændringer uden at blive en ustruktureret dagbog.
+
+open_assessment_items:
+  - id: bmb831.m12.a01
+    prompt:
+      es: Diseña el plan completo de un informe individual para un dataset transcriptómico, proteómico o multi-ómico.
+      en: Design the complete plan for an individual report using a transcriptomics, proteomics, or multi-omics dataset.
+      da: Design den komplette plan for en individuel rapport med et transkriptomik-, proteomik- eller multi-omics-datasæt.
+    rubric:
+      - {criterion: question_estimand_design, weight: 0.20}
+      - {criterion: provenance_data_contract, weight: 0.20}
+      - {criterion: qc_preprocessing, weight: 0.20}
+      - {criterion: model_validation, weight: 0.20}
+      - {criterion: interpretation_reproducibility, weight: 0.20}
+  - id: bmb831.m12.a02
+    prompt:
+      es: Audita un informe que presenta sólo una lista significativa y un dotplot de vías.
+      en: Audit a report presenting only a significant list and a pathway dotplot.
+      da: Auditér en rapport der kun præsenterer en signifikant liste og et pathway-dotplot.
+    rubric:
+      - {criterion: missing_qc_design, weight: 0.20}
+      - {criterion: effect_uncertainty, weight: 0.20}
+      - {criterion: universe_mapping, weight: 0.20}
+      - {criterion: reproducibility_sensitivity, weight: 0.20}
+      - {criterion: revised_claims, weight: 0.20}
+  - id: bmb831.m12.a03
+    prompt:
+      es: Construye una secuencia de seis figuras que permita defender la cadena de evidencia.
+      en: Build a six-figure sequence supporting the evidence chain.
+      da: Byg en sekvens på seks figurer der understøtter evidenskæden.
+    rubric:
+      - {criterion: design_qc, weight: 0.20}
+      - {criterion: sample_structure, weight: 0.20}
+      - {criterion: main_effect_uncertainty, weight: 0.25}
+      - {criterion: diagnostics_sensitivity, weight: 0.20}
+      - {criterion: functional_context, weight: 0.15}
+  - id: bmb831.m12.a04
+    prompt:
+      es: Defiende una decisión analítica que produce una conclusión distinta bajo una alternativa plausible.
+      en: Defend an analytical decision that yields a different conclusion under a plausible alternative.
+      da: Forsvar en analytisk beslutning der giver en anden konklusion under et plausibelt alternativ.
+    rubric:
+      - {criterion: assumptions, weight: 0.25}
+      - {criterion: evidence_for_choice, weight: 0.25}
+      - {criterion: sensitivity_transparency, weight: 0.25}
+      - {criterion: revised_claim_scope, weight: 0.25}
+  - id: bmb831.m12.a05
+    prompt:
+      es: Responde oralmente a una pregunta inesperada sobre una limitación no discutida en el informe.
+      en: Respond orally to an unexpected question about a limitation not discussed in the report.
+      da: Besvar mundtligt et uventet spørgsmål om en begrænsning der ikke blev diskuteret i rapporten.
+    rubric:
+      - {criterion: identify_missing_information, weight: 0.20}
+      - {criterion: conditional_reasoning, weight: 0.25}
+      - {criterion: consequence_for_validity, weight: 0.25}
+      - {criterion: proposed_analysis_or_data, weight: 0.20}
+      - {criterion: concise_communication, weight: 0.10}
+
+glossary:
+  - id: bmb831.term.analysis_chain
+    term: {es: cadena analítica, en: analytical chain, da: analysekæde}
+    definition:
+      es: Secuencia trazable desde pregunta y datos hasta método, resultado y afirmación.
+      en: Traceable sequence from question and data through method, result, and claim.
+      da: Sporbar sekvens fra spørgsmål og data gennem metode, resultat og påstand.
+  - id: bmb831.term.data_contract
+    term: {es: contrato de datos, en: data contract, da: datakontrakt}
+    definition:
+      es: Especificación de entidades, claves, tipos, escalas, relaciones y condiciones válidas.
+      en: Specification of entities, keys, types, scales, relations, and validity conditions.
+      da: Specifikation af enheder, nøgler, typer, skalaer, relationer og gyldighedsbetingelser.
+  - id: bmb831.term.eligibility
+    term: {es: elegibilidad, en: eligibility, da: eligibility}
+    definition:
+      es: Condiciones que determinan qué unidades pueden entrar en el análisis.
+      en: Conditions determining which units may enter the analysis.
+      da: Betingelser der bestemmer hvilke enheder der kan indgå i analysen.
+  - id: bmb831.term.claim_ladder
+    term: {es: escalera de afirmaciones, en: claim ladder, da: påstandsstige}
+    definition:
+      es: Distinción progresiva entre observación, inferencia, interpretación y mecanismo.
+      en: Progressive distinction among observation, inference, interpretation, and mechanism.
+      da: Progressiv skelnen mellem observation, inferens, fortolkning og mekanisme.
+  - id: bmb831.term.main_result
+    term: {es: resultado principal, en: primary result, da: primært resultat}
+    definition:
+      es: Resultado directamente ligado al estimando y criterio principal del estudio.
+      en: Result directly linked to the study's primary estimand and criterion.
+      da: Resultat direkte knyttet til studiets primære estimand og kriterium.
+  - id: bmb831.term.sensitivity_matrix
+    term: {es: matriz de sensibilidad, en: sensitivity matrix, da: følsomhedsmatrix}
+    definition:
+      es: Tabla que relaciona decisiones plausibles, alternativas e impacto en conclusiones.
+      en: Table linking plausible decisions, alternatives, and impact on conclusions.
+      da: Tabel der forbinder plausible beslutninger, alternativer og påvirkning af konklusioner.
+  - id: bmb831.term.negative_result
+    term: {es: resultado negativo, en: negative result, da: negativt resultat}
+    definition:
+      es: Resultado que no aporta evidencia suficiente de un efecto bajo un análisis definido.
+      en: Result that does not provide sufficient evidence of an effect under a defined analysis.
+      da: Resultat der ikke giver tilstrækkelig evidens for en effekt under en defineret analyse.
+  - id: bmb831.term.relevance_margin
+    term: {es: margen de relevancia, en: relevance margin, da: relevansmargin}
+    definition:
+      es: Umbral de efecto considerado biológica o prácticamente importante.
+      en: Effect threshold considered biologically or practically important.
+      da: Effekttærskel betragtet som biologisk eller praktisk vigtig.
+  - id: bmb831.term.incremental_evidence
+    term: {es: evidencia incremental, en: incremental evidence, da: inkrementel evidens}
+    definition:
+      es: Información adicional demostrada sobre un baseline o conocimiento previo.
+      en: Additional information demonstrated beyond a baseline or prior knowledge.
+      da: Yderligere information demonstreret ud over baseline eller tidligere viden.
+  - id: bmb831.term.traceable_figure
+    term: {es: figura trazable, en: traceable figure, da: sporbar figur}
+    definition:
+      es: Figura regenerable cuyo dato, filtro, código y versión pueden identificarse.
+      en: Regenerable figure whose data, filter, code, and version can be identified.
+      da: Regenererbar figur hvor data, filter, kode og version kan identificeres.
+  - id: bmb831.term.conditional_answer
+    term: {es: respuesta condicional, en: conditional answer, da: betinget svar}
+    definition:
+      es: Respuesta que explicita el supuesto del que depende la conclusión.
+      en: Answer explicitly stating the assumption on which the conclusion depends.
+      da: Svar der eksplicit angiver den antagelse konklusionen afhænger af.
+  - id: bmb831.term.scientific_defense
+    term: {es: defensa científica, en: scientific defense, da: videnskabeligt forsvar}
+    definition:
+      es: Justificación razonada de decisiones, resultados, incertidumbre, alternativas y límites.
+      en: Reasoned justification of decisions, results, uncertainty, alternatives, and limits.
+      da: Ræsonneret begrundelse af beslutninger, resultater, usikkerhed, alternativer og grænser.
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      Un informe ómico sólido conecta pregunta, estimando, datos, QC, preprocessing, modelo, validación,
+      resultado, interpretación y limitación mediante una cadena reproducible. La fuerza de la conclusión
+      no puede superar la calidad del diseño, la medición ni la evidencia estadística y biológica disponible.
+    en: >-
+      A strong omics report connects question, estimand, data, QC, preprocessing, model, validation,
+      result, interpretation, and limitation through a reproducible chain. Claim strength cannot exceed
+      the quality of design, measurement, or available statistical and biological evidence.
+    da: >-
+      En stærk omics-rapport forbinder spørgsmål, estimand, data, QC, preprocessing, model, validering,
+      resultat, fortolkning og begrænsning gennem en reproducerbar kæde.
+  misconceptions:
+    - a complex pipeline is inherently a strong report
+    - reproducibility guarantees scientific validity
+    - a significant feature list is sufficient evidence
+    - pathway enrichment establishes mechanism
+    - nonsignificance proves absence
+    - limitations should be generic and brief
+    - an oral defense rewards certainty over calibrated reasoning
+  socratic_questions:
+    - What exact quantity does the estimand define?
+    - Which preprocessing decision has the greatest impact on the conclusion?
+    - What is the weakest link in the evidence chain?
+    - Which figure directly supports the primary claim?
+    - What alternative method would be reasonable and why?
+    - What result would falsify the proposed biological interpretation?
+    - How would the conclusion change under a different universe, normalization, or split?
+    - Which population or platform is not covered by the data?
+  grading_criteria:
+    - question estimand and design coherence
+    - data provenance and structural validity
+    - assay-aware QC and preprocessing
+    - justified models contrasts and validation
+    - effect uncertainty multiplicity and sensitivity
+    - reproducible figures tables and report
+    - separation of observation inference interpretation and mechanism
+    - precise limitation-aware scientific communication
+  response_constraints:
+    - Do not reveal answer keys during active assessment.
+    - Do not grade open responses by exact-string matching.
+    - Ask for assumptions when the study unit or measurement scale is ambiguous.
+    - Distinguish educational feedback from official grading.
+    - Prefer conditional explanations over unsupported certainty.
+  retrieval_fragments:
+    - id: bmb831.m12.r01
+      text:
+        es: El estimando conecta la pregunta con el efecto, el contraste y la escala reportada.
+        en: The estimand connects the question to the reported effect, contrast, and scale.
+        da: Estimandet forbinder spørgsmålet med den rapporterede effekt, kontrast og skala.
+    - id: bmb831.m12.r02
+      text:
+        es: QC, preprocessing y modelado son etapas distintas y ninguna corrige automáticamente un diseño no identificable.
+        en: QC, preprocessing, and modeling are distinct stages, and none automatically repairs a non-identifiable design.
+        da: QC, preprocessing og modellering er forskellige trin, og ingen reparerer automatisk et ikke-identificerbart design.
+    - id: bmb831.m12.r03
+      text:
+        es: Una figura principal debe mostrar efecto, incertidumbre, n, unidades y escala.
+        en: A primary figure should show effect, uncertainty, n, units, and scale.
+        da: En primær figur bør vise effekt, usikkerhed, n, enheder og skala.
+    - id: bmb831.m12.r04
+      text:
+        es: La observación mide un patrón; el mecanismo causal necesita evidencia adicional independiente.
+        en: Observation measures a pattern; a causal mechanism requires additional independent evidence.
+        da: Observation måler et mønster; en kausal mekanisme kræver yderligere uafhængig evidens.
+    - id: bmb831.m12.r05
+      text:
+        es: Un resultado no significativo con intervalo amplio es impreciso, no evidencia de ausencia.
+        en: A nonsignificant result with a wide interval is imprecise, not evidence of absence.
+        da: Et ikke-signifikant resultat med bredt interval er upræcist, ikke evidens for fravær.
+    - id: bmb831.m12.r06
+      text:
+        es: La sensibilidad compara decisiones plausibles manteniendo fija la pregunta científica.
+        en: Sensitivity analysis compares plausible decisions while keeping the scientific question fixed.
+        da: Følsomhedsanalyse sammenligner plausible beslutninger mens det videnskabelige spørgsmål holdes fast.
