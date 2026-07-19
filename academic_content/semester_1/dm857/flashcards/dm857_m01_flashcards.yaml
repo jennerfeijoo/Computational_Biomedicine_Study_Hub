@@ -1,0 +1,570 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m01
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm857.m01.f01
+    module_id: dm857.m01
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: ¿En qué se diferencian un problema, un modelo, un algoritmo y un programa?
+      en: How do a problem, a model, an algorithm, and a program differ?
+      da: Hvordan adskiller et problem, en model, en algoritme og et program sig fra hinanden?
+    back:
+      es: |-
+        El problema es la situación que se desea resolver. El modelo conserva las variables, relaciones y restricciones necesarias para representarla de forma operativa. El algoritmo es una secuencia finita y no ambigua de pasos que resuelve el modelo. El programa es una implementación concreta del algoritmo en un lenguaje. Un resultado puede fallar porque el modelo omite algo relevante, porque el algoritmo no resuelve el modelo o porque el código implementa mal el algoritmo.
+      en: |-
+        The problem is the situation to be solved. The model retains the variables, relationships, and constraints needed for an operational representation. The algorithm is a finite, unambiguous sequence of steps that solves the model. The program is a concrete implementation of the algorithm in a language. A result can fail because the model omits something relevant, the algorithm does not solve the model, or the code implements the algorithm incorrectly.
+      da: |-
+        Problemet er den situation, der skal løses. Modellen bevarer de variable, relationer og begrænsninger, der er nødvendige for en operationel repræsentation. Algoritmen er en endelig og entydig række trin, som løser modellen. Programmet er en konkret implementering af algoritmen i et programmeringssprog. Et resultat kan være forkert, fordi modellen udelader noget vigtigt, algoritmen ikke løser modellen, eller koden implementerer algoritmen forkert.
+    linked_objectives: [m01.o1]
+    linked_concepts: [problem-model-algorithm-program]
+    tags: [modeling, algorithm, implementation, correctness]
+    reverse_allowed: false
+
+  - id: dm857.m01.f02
+    module_id: dm857.m01
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: Distingue expresión, valor y tipo en Python.
+      en: Distinguish expression, value, and type in Python.
+      da: Skeln mellem udtryk, værdi og type i Python.
+    back:
+      es: |-
+        Una expresión es código evaluable, como `3 + 4`. El valor es el resultado concreto de evaluarla: `7`. El tipo clasifica ese valor y determina su semántica y operaciones válidas: en este caso `int`. La misma notación aparente puede tener otra semántica: `'3' + '4'` produce el valor `'34'` de tipo `str`.
+      en: |-
+        An expression is evaluable code, such as `3 + 4`. The value is the concrete result of evaluating it: `7`. The type classifies that value and determines its semantics and valid operations: here, `int`. Similar-looking notation can have different semantics: `'3' + '4'` produces the value `'34'` of type `str`.
+      da: |-
+        Et udtryk er kode, der kan evalueres, for eksempel `3 + 4`. Værdien er det konkrete resultat af evalueringen: `7`. Typen klassificerer værdien og bestemmer dens betydning og gyldige operationer: her `int`. Notation, der ser ens ud, kan have forskellig betydning: `'3' + '4'` giver værdien `'34'` af typen `str`.
+    linked_objectives: [m01.o2, m01.o3]
+    linked_concepts: [expressions-values-types]
+    tags: [expression, value, type, semantics]
+    reverse_allowed: true
+
+  - id: dm857.m01.f03
+    module_id: dm857.m01
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué es el estado de un programa y cómo puede representarse durante un trazado manual?
+      en: What is program state, and how can it be represented during a manual trace?
+      da: Hvad er programtilstand, og hvordan kan den repræsenteres under en manuel gennemgang?
+    back:
+      es: |-
+        El estado es el conjunto de asociaciones entre nombres y valores en un instante de la ejecución. Una tabla de trazado registra, después de cada sentencia relevante, el valor actual de cada variable y cualquier salida producida. No registra “lo que debería pasar”, sino el orden real de evaluación y actualización.
+      en: |-
+        State is the set of name-to-value associations at a particular point in execution. A trace table records, after each relevant statement, the current value of each variable and any output produced. It records the actual evaluation and update order, not what one expects the program to do.
+      da: |-
+        Tilstanden er mængden af forbindelser mellem navne og værdier på et bestemt tidspunkt i udførelsen. En gennemgangstabel registrerer efter hver relevant sætning den aktuelle værdi af hver variabel og eventuelt produceret output. Den registrerer den faktiske evaluerings- og opdateringsrækkefølge, ikke hvad man forventer, at programmet gør.
+    linked_objectives: [m01.o4]
+    linked_concepts: [variables-assignment-state, statements-input-output-tracing]
+    tags: [state, tracing, variables]
+    reverse_allowed: true
+
+  - id: dm857.m01.f04
+    module_id: dm857.m01
+    mode: conceptual
+    card_type: mechanism
+    difficulty: foundational
+    front:
+      es: ¿En qué orden se ejecuta la asignación `x = x + 1`?
+      en: In what order is the assignment `x = x + 1` executed?
+      da: I hvilken rækkefølge udføres tildelingen `x = x + 1`?
+    back:
+      es: |-
+        Primero se busca el valor actual asociado a `x`. Después se evalúa `x + 1`. Por último, el nombre `x` se vuelve a asociar con el resultado. Si `x` valía `4`, la expresión derecha produce `5` y el nuevo estado contiene `x = 5`. La asignación es una actualización de estado, no una igualdad matemática.
+      en: |-
+        First, Python retrieves the current value bound to `x`. Next, it evaluates `x + 1`. Finally, the name `x` is rebound to the result. If `x` was `4`, the right-hand expression produces `5`, and the new state contains `x = 5`. Assignment is a state update, not mathematical equality.
+      da: |-
+        Først henter Python den aktuelle værdi, som er knyttet til `x`. Derefter evalueres `x + 1`. Til sidst knyttes navnet `x` til resultatet. Hvis `x` var `4`, giver højresiden `5`, og den nye tilstand indeholder `x = 5`. Tildeling er en tilstandsopdatering, ikke matematisk lighed.
+    linked_objectives: [m01.o2, m01.o4]
+    linked_concepts: [variables-assignment-state]
+    tags: [assignment, evaluation_order, state_update]
+    reverse_allowed: false
+
+  - id: dm857.m01.f05
+    module_id: dm857.m01
+    mode: conceptual
+    card_type: mechanism
+    difficulty: intermediate
+    front:
+      es: ¿Qué significa que Python tenga tipado dinámico y qué no significa?
+      en: What does dynamic typing mean in Python, and what does it not mean?
+      da: Hvad betyder dynamisk typning i Python, og hvad betyder det ikke?
+    back:
+      es: |-
+        Significa que un nombre puede asociarse en momentos distintos con valores de tipos diferentes, por ejemplo primero con un `int` y después con un `str`. No significa que los valores carezcan de tipo ni que cualquier operación sea válida. Cada valor conserva un tipo definido, y ese tipo determina las operaciones permitidas. Reutilizar un nombre para significados incompatibles suele reducir la claridad.
+      en: |-
+        It means that a name may be bound at different times to values of different types, for example first to an `int` and later to a `str`. It does not mean that values lack types or that every operation is valid. Every value has a defined type, and that type determines valid operations. Reusing a name for incompatible meanings usually reduces clarity.
+      da: |-
+        Det betyder, at et navn på forskellige tidspunkter kan være knyttet til værdier af forskellige typer, for eksempel først en `int` og senere en `str`. Det betyder ikke, at værdier mangler type, eller at alle operationer er gyldige. Hver værdi har en bestemt type, som afgør de tilladte operationer. Genbrug af et navn til uforenelige betydninger reducerer normalt tydeligheden.
+    linked_objectives: [m01.o2, m01.o3]
+    linked_concepts: [expressions-values-types, variables-assignment-state]
+    tags: [dynamic_typing, value_type, naming]
+    reverse_allowed: false
+
+  - id: dm857.m01.f06
+    module_id: dm857.m01
+    mode: conceptual
+    card_type: workflow_step
+    difficulty: foundational
+    front:
+      es: ¿Qué pasos son necesarios para leer una cantidad numérica con `input()` y mostrar un cálculo?
+      en: What steps are required to read a numeric quantity with `input()` and display a calculation?
+      da: Hvilke trin kræves for at læse en numerisk størrelse med `input()` og vise en beregning?
+    back:
+      es: |-
+        `input()` produce siempre un `str`. El flujo mínimo es: leer el texto, convertirlo explícitamente al tipo numérico adecuado, realizar el cálculo y mostrar el resultado. La conversión debe validarse cuando la entrada pueda ser inválida. Mostrar con `print()` no modifica el tipo ni sustituye la necesidad de comprobar unidades y significado.
+      en: |-
+        `input()` always produces a `str`. The minimum flow is: read the text, explicitly convert it to the appropriate numeric type, perform the calculation, and display the result. Conversion should be validated when input may be invalid. Displaying with `print()` does not change the type or replace the need to check units and meaning.
+      da: |-
+        `input()` giver altid en `str`. Det minimale forløb er: læs teksten, konvertér den eksplicit til den passende numeriske type, udfør beregningen, og vis resultatet. Konverteringen bør valideres, når input kan være ugyldigt. Visning med `print()` ændrer ikke typen og erstatter ikke kontrol af enheder og betydning.
+    linked_objectives: [m01.o2, m01.o5]
+    linked_concepts: [statements-input-output-tracing, operators-precedence-conversion]
+    tags: [input, conversion, output, validation]
+    reverse_allowed: false
+
+  - id: dm857.m01.f07
+    module_id: dm857.m01
+    mode: conceptual
+    card_type: method_assumption
+    difficulty: intermediate
+    front:
+      es: ¿Cuándo es válida una conversión con `int()`, y qué riesgo presenta `int(4.9)`?
+      en: When is conversion with `int()` valid, and what risk does `int(4.9)` illustrate?
+      da: Hvornår er en konvertering med `int()` gyldig, og hvilken risiko viser `int(4.9)`?
+    back:
+      es: |-
+        Es válida cuando el valor de origen puede interpretarse como un entero y esa representación coincide con el significado del dato. `int(4.9)` produce `4`: elimina la parte decimal, no redondea al entero más cercano. El riesgo es perder información o introducir sesgo si el problema exigía redondeo, conservación de decimales o rechazo de valores no enteros.
+      en: |-
+        It is valid when the source value can be interpreted as an integer and that representation matches the meaning of the data. `int(4.9)` produces `4`: it removes the fractional part rather than rounding to the nearest integer. The risk is information loss or bias if the problem requires rounding, preserving decimals, or rejecting non-integer values.
+      da: |-
+        Den er gyldig, når kildeværdien kan fortolkes som et heltal, og denne repræsentation passer til dataenes betydning. `int(4.9)` giver `4`: decimaldelen fjernes, der afrundes ikke til nærmeste heltal. Risikoen er tab af information eller bias, hvis problemet kræver afrunding, bevarelse af decimaler eller afvisning af ikke-heltal.
+    linked_objectives: [m01.o3, m01.o5]
+    linked_concepts: [operators-precedence-conversion]
+    tags: [conversion, truncation, information_loss]
+    reverse_allowed: false
+
+  - id: dm857.m01.f08
+    module_id: dm857.m01
+    mode: conceptual
+    card_type: method_assumption
+    difficulty: foundational
+    front:
+      es: ¿Por qué el tipo de un valor determina si una operación es válida y qué significa?
+      en: Why does a value's type determine whether an operation is valid and what it means?
+      da: Hvorfor bestemmer en værdis type, om en operation er gyldig, og hvad den betyder?
+    back:
+      es: |-
+        El tipo define la representación y las operaciones disponibles. `3 + 4` realiza suma aritmética, mientras que `'3' + '4'` concatena texto. `3 + '4'` no tiene una interpretación automática segura y produce un error de ejecución. Antes de operar, debe comprobarse que los tipos reflejan la misma clase de cantidad o una conversión deliberada.
+      en: |-
+        Type defines representation and available operations. `3 + 4` performs arithmetic addition, whereas `'3' + '4'` concatenates text. `3 + '4'` has no safe automatic interpretation and raises a runtime error. Before operating, check that types represent compatible quantities or perform a deliberate conversion.
+      da: |-
+        Typen definerer repræsentationen og de tilgængelige operationer. `3 + 4` udfører aritmetisk addition, mens `'3' + '4'` sammenkæder tekst. `3 + '4'` har ingen sikker automatisk fortolkning og giver en kørselsfejl. Før en operation bør man kontrollere, at typerne repræsenterer kompatible størrelser, eller foretage en bevidst konvertering.
+    linked_objectives: [m01.o2, m01.o3, m01.o6]
+    linked_concepts: [expressions-values-types]
+    tags: [type_semantics, operations, runtime_error]
+    reverse_allowed: false
+
+  - id: dm857.m01.f09
+    module_id: dm857.m01
+    mode: conceptual
+    card_type: method_assumption
+    difficulty: intermediate
+    front:
+      es: ¿Respecto a qué debe juzgarse la corrección de un programa?
+      en: Against what should program correctness be judged?
+      da: Hvad skal et programs korrekthed vurderes i forhold til?
+    back:
+      es: |-
+        Respecto a una especificación explícita: entradas válidas, transformaciones requeridas, restricciones y salidas esperadas. Que el código se ejecute, parezca razonable o produzca el resultado esperado para un solo ejemplo no basta. También debe examinarse si el modelo representa bien el problema y si los casos de prueba cubren límites y errores plausibles.
+      en: |-
+        Against an explicit specification: valid inputs, required transformations, constraints, and expected outputs. Running without an exception, looking reasonable, or producing the expected result for one example is insufficient. One must also assess whether the model represents the problem and whether tests cover boundaries and plausible failures.
+      da: |-
+        I forhold til en eksplicit specifikation: gyldige input, nødvendige transformationer, begrænsninger og forventede output. At koden kører uden fejl, ser rimelig ud eller giver det forventede resultat for ét eksempel, er ikke nok. Man skal også vurdere, om modellen repræsenterer problemet, og om test dækker grænser og sandsynlige fejl.
+    linked_objectives: [m01.o1, m01.o6]
+    linked_concepts: [problem-model-algorithm-program, errors-tests-and-evidence]
+    tags: [specification, correctness, testing]
+    reverse_allowed: false
+
+  - id: dm857.m01.f10
+    module_id: dm857.m01
+    mode: practical
+    card_type: output_interpretation
+    difficulty: foundational
+    front:
+      es: ¿Cuál es el valor y el tipo de `(8 + 4) * 3 / 2` en Python?
+      en: What are the value and type of `(8 + 4) * 3 / 2` in Python?
+      da: Hvad er værdien og typen af `(8 + 4) * 3 / 2` i Python?
+    back:
+      es: |-
+        El valor es `18.0` y el tipo es `float`. Los paréntesis producen `12`, después `12 * 3` produce `36` como `int`, y `/ 2` produce siempre un `float`, aunque la división sea exacta. Si se necesitara división entera, tendría que justificarse y usarse `//`.
+      en: |-
+        The value is `18.0`, and the type is `float`. Parentheses produce `12`, then `12 * 3` produces the integer `36`, and `/ 2` always produces a `float`, even when division is exact. If integer division were intended, it would need justification and `//`.
+      da: |-
+        Værdien er `18.0`, og typen er `float`. Parentesen giver `12`, derefter giver `12 * 3` heltallet `36`, og `/ 2` giver altid en `float`, selv når divisionen går op. Hvis heltalsdivision var hensigten, skulle det begrundes og skrives med `//`.
+    linked_objectives: [m01.o3]
+    linked_concepts: [expressions-values-types, operators-precedence-conversion]
+    tags: [precedence, division, type_prediction]
+    formula: "(8 + 4) * 3 / 2"
+    reverse_allowed: false
+
+  - id: dm857.m01.f11
+    module_id: dm857.m01
+    mode: practical
+    card_type: code_tracing
+    difficulty: intermediate
+    front:
+      es: Traza el código y determina el estado final y la salida.
+      en: Trace the code and determine the final state and output.
+      da: Gennemgå koden og bestem den endelige tilstand og outputtet.
+    code: |-
+      samples = 3
+      volume_ul = 25
+      total_ul = samples * volume_ul
+      samples = samples + 1
+      print(total_ul, samples)
+    back:
+      es: |-
+        Estado tras la tercera línea: `samples = 3`, `volume_ul = 25`, `total_ul = 75`. La cuarta línea evalúa el valor anterior de `samples` y lo reasigna a `4`. `total_ul` no se recalcula automáticamente, por lo que la salida es `75 4`. Una variable calculada conserva su valor hasta que una sentencia la modifique.
+      en: |-
+        State after line three: `samples = 3`, `volume_ul = 25`, `total_ul = 75`. Line four evaluates the previous value of `samples` and rebinds it to `4`. `total_ul` is not recalculated automatically, so the output is `75 4`. A computed variable keeps its value until a statement changes it.
+      da: |-
+        Tilstanden efter tredje linje er `samples = 3`, `volume_ul = 25`, `total_ul = 75`. Fjerde linje evaluerer den tidligere værdi af `samples` og knytter navnet til `4`. `total_ul` genberegnes ikke automatisk, så outputtet er `75 4`. En beregnet variabel beholder sin værdi, indtil en sætning ændrer den.
+    linked_objectives: [m01.o3, m01.o4]
+    linked_concepts: [variables-assignment-state, statements-input-output-tracing]
+    tags: [trace, reassignment, derived_value]
+    reverse_allowed: false
+
+  - id: dm857.m01.f12
+    module_id: dm857.m01
+    mode: practical
+    card_type: output_interpretation
+    difficulty: intermediate
+    front:
+      es: Un programa pasa una prueba con entrada `10`. ¿Qué evidencia aporta y qué no demuestra?
+      en: A program passes one test with input `10`. What evidence does this provide, and what does it not prove?
+      da: Et program består én test med input `10`. Hvilken evidens giver det, og hvad beviser det ikke?
+    back:
+      es: |-
+        Aporta evidencia de que, para esa entrada y ese resultado esperado, el comportamiento observado coincide con la prueba. No demuestra corrección general, manejo de límites, tipos alternativos, unidades, entradas inválidas ni ausencia de errores lógicos en otras rutas. Deben añadirse casos diseñados a partir de la especificación y de los fallos plausibles.
+      en: |-
+        It provides evidence that, for that input and expected result, observed behavior matches the test. It does not prove general correctness, boundary handling, alternative types, units, invalid-input behavior, or absence of logic errors on other paths. Additional cases should be designed from the specification and plausible failures.
+      da: |-
+        Det giver evidens for, at den observerede adfærd for dette input og dette forventede resultat svarer til testen. Det beviser ikke generel korrekthed, håndtering af grænser, alternative typer, enheder, ugyldige input eller fravær af logiske fejl i andre forløb. Der bør tilføjes test ud fra specifikationen og sandsynlige fejl.
+    linked_objectives: [m01.o6]
+    linked_concepts: [errors-tests-and-evidence]
+    tags: [test_evidence, generalization, boundaries]
+    reverse_allowed: false
+
+  - id: dm857.m01.f13
+    module_id: dm857.m01
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: foundational
+    front:
+      es: «`x = x + 1` es inválido porque contradice la igualdad matemática». ¿Es correcto?
+      en: “`x = x + 1` is invalid because it contradicts mathematical equality.” Is this correct?
+      da: “`x = x + 1` er ugyldigt, fordi det modsiger matematisk lighed.” Er det korrekt?
+    back:
+      es: |-
+        No. En Python, `=` es asignación. Se evalúa primero `x + 1` usando el valor actual de `x`, y luego se actualiza la asociación del nombre `x`. La confusión surge al interpretar `=` como igualdad matemática. Las comparaciones de igualdad utilizan `==` y tampoco actualizan el estado.
+      en: |-
+        No. In Python, `=` is assignment. Python first evaluates `x + 1` using the current value of `x`, then updates the binding of the name `x`. The confusion comes from interpreting `=` as mathematical equality. Equality comparisons use `==` and do not update state.
+      da: |-
+        Nej. I Python er `=` tildeling. Først evalueres `x + 1` med den aktuelle værdi af `x`, og derefter opdateres forbindelsen til navnet `x`. Forvirringen skyldes, at `=` fortolkes som matematisk lighed. Sammenligning af lighed bruger `==` og ændrer ikke tilstanden.
+    linked_objectives: [m01.o2, m01.o4]
+    linked_concepts: [variables-assignment-state]
+    tags: [misconception, assignment, equality]
+    misconception_target: assignment_is_mathematical_equality
+    reverse_allowed: false
+
+  - id: dm857.m01.f14
+    module_id: dm857.m01
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: foundational
+    front:
+      es: «Si una persona escribe `42`, `input()` devuelve el entero `42`». Corrige la afirmación.
+      en: “If a person types `42`, `input()` returns the integer `42`.” Correct the statement.
+      da: “Hvis en person skriver `42`, returnerer `input()` heltallet `42`.” Ret udsagnet.
+    back:
+      es: |-
+        `input()` devuelve la cadena `'42'`. Para usarla como cantidad entera se necesita una conversión explícita, por ejemplo `int(input())`, y conviene manejar el caso en que el texto no represente un entero válido. Los dígitos visibles no determinan por sí solos el tipo del valor leído.
+      en: |-
+        `input()` returns the string `'42'`. To use it as an integer quantity, explicit conversion is required, for example `int(input())`, and invalid integer text should be handled. Visible digits alone do not determine the type of the value read.
+      da: |-
+        `input()` returnerer tekststrengen `'42'`. Hvis den skal bruges som en heltalsstørrelse, kræves en eksplicit konvertering, for eksempel `int(input())`, og ugyldig heltalstekst bør håndteres. Synlige cifre bestemmer ikke i sig selv typen på den læste værdi.
+    linked_objectives: [m01.o2, m01.o5, m01.o6]
+    linked_concepts: [statements-input-output-tracing, operators-precedence-conversion]
+    tags: [misconception, input, string, conversion]
+    misconception_target: input_infers_numeric_type
+    reverse_allowed: false
+
+  - id: dm857.m01.f15
+    module_id: dm857.m01
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front:
+      es: «Si el programa termina sin excepciones, el resultado es correcto». Evalúa la afirmación.
+      en: “If the program finishes without exceptions, the result is correct.” Evaluate the statement.
+      da: “Hvis programmet afsluttes uden exceptions, er resultatet korrekt.” Vurder udsagnet.
+    back:
+      es: |-
+        Es falso. Un error lógico puede producir una ejecución normal y un resultado incorrecto, por ejemplo usar `100` en lugar de `1000` para convertir mililitros a microlitros. La corrección exige comparar resultados observados con resultados esperados derivados de la especificación y usar casos capaces de revelar errores de unidades, límites y tipos.
+      en: |-
+        It is false. A logic error can allow normal execution while producing an incorrect result, for example using `100` instead of `1000` to convert millilitres to microlitres. Correctness requires comparing observed results with expected results derived from the specification and using cases that expose unit, boundary, and type errors.
+      da: |-
+        Det er falsk. En logisk fejl kan lade programmet køre normalt og stadig give et forkert resultat, for eksempel hvis `100` bruges i stedet for `1000` ved konvertering fra milliliter til mikroliter. Korrekthed kræver sammenligning af observerede og forventede resultater udledt af specifikationen samt test, der kan afsløre fejl i enheder, grænser og typer.
+    linked_objectives: [m01.o6]
+    linked_concepts: [errors-tests-and-evidence]
+    tags: [misconception, logic_error, testing]
+    misconception_target: no_exception_means_correct
+    reverse_allowed: false
+
+  - id: dm857.m01.f16
+    module_id: dm857.m01
+    mode: practical
+    card_type: calculation
+    difficulty: foundational
+    front:
+      es: Una corrida produce 48.000.000 lecturas y el 92,5 % supera el control de calidad. ¿Cuántas lecturas útiles se esperan y qué decisión de tipo debe justificarse?
+      en: A run produces 48,000,000 reads, and 92.5% pass quality control. How many usable reads are expected, and which type decision must be justified?
+      da: En kørsel producerer 48.000.000 reads, og 92,5 % består kvalitetskontrollen. Hvor mange anvendelige reads forventes, og hvilken typebeslutning skal begrundes?
+    back:
+      es: |-
+        La fracción es `92.5 / 100 = 0.925`. El producto es `48_000_000 * 0.925 = 44_400_000.0`. Como el resultado representa un conteo exacto en este ejemplo, puede expresarse como `44_400_000` de tipo `int`. En otros porcentajes debe decidirse explícitamente si truncar, redondear o conservar una expectativa decimal.
+      en: |-
+        The fraction is `92.5 / 100 = 0.925`. The product is `48_000_000 * 0.925 = 44_400_000.0`. Because the result represents an exact count in this example, it may be expressed as the integer `44_400_000`. With other percentages, one must explicitly decide whether to truncate, round, or retain a decimal expectation.
+      da: |-
+        Brøken er `92.5 / 100 = 0.925`. Produktet er `48_000_000 * 0.925 = 44_400_000.0`. Da resultatet i dette eksempel repræsenterer et præcist antal, kan det udtrykkes som heltallet `44_400_000`. Ved andre procenter skal man eksplicit beslutte, om der skal trunkeres, afrundes eller bevares en decimal forventning.
+    linked_objectives: [m01.o1, m01.o3, m01.o5]
+    linked_concepts: [problem-model-algorithm-program, operators-precedence-conversion]
+    tags: [percentage, count, conversion, biomedical_context]
+    formula: "48_000_000 * (92.5 / 100)"
+    reverse_allowed: false
+
+  - id: dm857.m01.f17
+    module_id: dm857.m01
+    mode: practical
+    card_type: calculation
+    difficulty: foundational
+    front:
+      es: Se preparan 24 muestras con 35 µL por muestra. Calcula el volumen total en µL y mL y especifica las unidades en el modelo.
+      en: Twenty-four samples require 35 µL each. Calculate the total volume in µL and mL, and specify units in the model.
+      da: Fireogtyve prøver kræver 35 µL hver. Beregn det samlede volumen i µL og mL, og angiv enhederne i modellen.
+    back:
+      es: |-
+        `24 * 35 = 840 µL`. Como `1000 µL = 1 mL`, entonces `840 / 1000 = 0.84 mL`. Nombres como `volume_per_sample_ul`, `total_volume_ul` y `total_volume_ml` reducen la posibilidad de combinar unidades incompatibles. El número sin unidad es insuficiente para interpretar el resultado.
+      en: |-
+        `24 * 35 = 840 µL`. Since `1000 µL = 1 mL`, `840 / 1000 = 0.84 mL`. Names such as `volume_per_sample_ul`, `total_volume_ul`, and `total_volume_ml` reduce the risk of combining incompatible units. A number without a unit is insufficient for interpretation.
+      da: |-
+        `24 * 35 = 840 µL`. Da `1000 µL = 1 mL`, er `840 / 1000 = 0.84 mL`. Navne som `volume_per_sample_ul`, `total_volume_ul` og `total_volume_ml` reducerer risikoen for at blande uforenelige enheder. Et tal uden enhed er utilstrækkeligt til fortolkning.
+    linked_objectives: [m01.o1, m01.o3]
+    linked_concepts: [problem-model-algorithm-program, operators-precedence-conversion]
+    tags: [units, volume, naming, calculation]
+    formula: "24 * 35 / 1000"
+    reverse_allowed: false
+
+  - id: dm857.m01.f18
+    module_id: dm857.m01
+    mode: practical
+    card_type: code_tracing
+    difficulty: intermediate
+    front:
+      es: Predice el valor y el tipo de cada variable al finalizar.
+      en: Predict the final value and type of each variable.
+      da: Forudsig den endelige værdi og type for hver variabel.
+    code: |-
+      a = 7
+      b = 2
+      c = a / b
+      d = a // b
+      e = str(d) + " samples"
+    back:
+      es: |-
+        `a` es `7` (`int`), `b` es `2` (`int`), `c` es `3.5` (`float`), `d` es `3` (`int`) y `e` es `'3 samples'` (`str`). `/` produce división real, `//` produce división entera hacia abajo y `str(d)` convierte el entero antes de concatenarlo con texto.
+      en: |-
+        `a` is `7` (`int`), `b` is `2` (`int`), `c` is `3.5` (`float`), `d` is `3` (`int`), and `e` is `'3 samples'` (`str`). `/` performs true division, `//` performs floor division, and `str(d)` converts the integer before text concatenation.
+      da: |-
+        `a` er `7` (`int`), `b` er `2` (`int`), `c` er `3.5` (`float`), `d` er `3` (`int`), og `e` er `'3 samples'` (`str`). `/` udfører almindelig division, `//` udfører heltalsdivision nedad, og `str(d)` konverterer heltallet før sammenkædning med tekst.
+    linked_objectives: [m01.o3, m01.o4, m01.o5]
+    linked_concepts: [expressions-values-types, operators-precedence-conversion]
+    tags: [division, floor_division, conversion, trace]
+    reverse_allowed: false
+
+  - id: dm857.m01.f19
+    module_id: dm857.m01
+    mode: practical
+    card_type: method_selection
+    difficulty: intermediate
+    front:
+      es: Debes representar una concentración de 2,5 ng/µL y un número de 96 muestras. ¿Qué tipos y nombres elegirías?
+      en: You must represent a concentration of 2.5 ng/µL and a count of 96 samples. Which types and names would you choose?
+      da: Du skal repræsentere en koncentration på 2,5 ng/µL og et antal på 96 prøver. Hvilke typer og navne vælger du?
+    back:
+      es: |-
+        Una elección clara es `concentration_ng_per_ul = 2.5` como `float` y `sample_count = 96` como `int`. Los nombres registran el significado y las unidades; los tipos reflejan que una concentración puede contener decimales y un conteo es discreto. No debe elegirse `int` para la concentración solo para simplificar, porque se perdería información.
+      en: |-
+        A clear choice is `concentration_ng_per_ul = 2.5` as a `float` and `sample_count = 96` as an `int`. The names record meaning and units; the types reflect that concentration may contain decimals and a count is discrete. Choosing `int` for concentration merely for convenience would lose information.
+      da: |-
+        Et tydeligt valg er `concentration_ng_per_ul = 2.5` som `float` og `sample_count = 96` som `int`. Navnene angiver betydning og enheder; typerne afspejler, at en koncentration kan have decimaler, mens et antal er diskret. Man bør ikke vælge `int` til koncentrationen blot for enkelhedens skyld, fordi information går tabt.
+    linked_objectives: [m01.o1, m01.o2, m01.o5]
+    linked_concepts: [expressions-values-types, variables-assignment-state]
+    tags: [modeling, units, naming, type_selection]
+    reverse_allowed: false
+
+  - id: dm857.m01.f20
+    module_id: dm857.m01
+    mode: practical
+    card_type: code_tracing
+    difficulty: intermediate
+    front:
+      es: Construye mentalmente la tabla de trazado y determina la salida.
+      en: Build the trace table mentally and determine the output.
+      da: Opbyg gennemgangstabellen mentalt og bestem outputtet.
+    code: |-
+      x = 5
+      y = x * 2
+      x = y - 3
+      y = x + y
+      print(x, y)
+    back:
+      es: |-
+        Tras `x = 5`: `x=5`. Tras `y = x * 2`: `x=5, y=10`. Tras `x = y - 3`: `x=7, y=10`. Tras `y = x + y`: `x=7, y=17`. La salida es `7 17`. Cada asignación usa el estado anterior y luego lo actualiza.
+      en: |-
+        After `x = 5`: `x=5`. After `y = x * 2`: `x=5, y=10`. After `x = y - 3`: `x=7, y=10`. After `y = x + y`: `x=7, y=17`. The output is `7 17`. Each assignment uses the previous state and then updates it.
+      da: |-
+        Efter `x = 5`: `x=5`. Efter `y = x * 2`: `x=5, y=10`. Efter `x = y - 3`: `x=7, y=10`. Efter `y = x + y`: `x=7, y=17`. Outputtet er `7 17`. Hver tildeling bruger den tidligere tilstand og opdaterer den derefter.
+    linked_objectives: [m01.o3, m01.o4]
+    linked_concepts: [variables-assignment-state, statements-input-output-tracing]
+    tags: [trace_table, reassignment, execution_order]
+    reverse_allowed: false
+
+  - id: dm857.m01.f21
+    module_id: dm857.m01
+    mode: practical
+    card_type: code_completion
+    difficulty: foundational
+    front:
+      es: Completa la conversión para que el programa sume dos cantidades enteras leídas con `input()`.
+      en: Complete the conversion so the program adds two integer quantities read with `input()`.
+      da: Fuldfør konverteringen, så programmet lægger to heltalsstørrelser læst med `input()` sammen.
+    code: |-
+      first = _____(input("First count: "))
+      second = _____(input("Second count: "))
+      print(first + second)
+    back:
+      es: |-
+        Ambos huecos requieren `int`. Sin conversión, dos entradas como `'12'` y `'3'` se concatenarían como `'123'`. La versión mínima es `first = int(input(...))` y `second = int(input(...))`. En código robusto también se manejaría el caso de texto no convertible.
+      en: |-
+        Both blanks require `int`. Without conversion, inputs such as `'12'` and `'3'` would concatenate as `'123'`. The minimum version is `first = int(input(...))` and `second = int(input(...))`. Robust code would also handle text that cannot be converted.
+      da: |-
+        Begge felter kræver `int`. Uden konvertering ville input som `'12'` og `'3'` blive sammenkædet til `'123'`. Den minimale version er `first = int(input(...))` og `second = int(input(...))`. Robust kode bør også håndtere tekst, der ikke kan konverteres.
+    linked_objectives: [m01.o3, m01.o5, m01.o6]
+    linked_concepts: [statements-input-output-tracing, operators-precedence-conversion]
+    tags: [code_completion, input, int, concatenation]
+    accepted_answer_elements:
+      es: [Usar `int` en ambos huecos, explicar que `input()` devuelve `str`, mencionar la validación de entrada.]
+      en: [Use `int` in both blanks, explain that `input()` returns `str`, mention input validation.]
+      da: [Brug `int` i begge felter, forklar at `input()` returnerer `str`, nævn validering af input.]
+    reverse_allowed: false
+
+  - id: dm857.m01.f22
+    module_id: dm857.m01
+    mode: practical
+    card_type: debugging
+    difficulty: foundational
+    front:
+      es: ¿Por qué falla el código y cuál es la corrección mínima coherente con el significado del dato?
+      en: Why does the code fail, and what is the minimum correction consistent with the data's meaning?
+      da: Hvorfor fejler koden, og hvad er den minimale rettelse, der passer til dataenes betydning?
+    code: |-
+      sample_count = 12
+      message = "Samples: " + sample_count
+      print(message)
+    back:
+      es: |-
+        Falla con un `TypeError` porque `+` no concatena automáticamente `str` e `int`. Si el objetivo es construir texto, la corrección mínima es `message = "Samples: " + str(sample_count)`; una f-string, `f"Samples: {sample_count}"`, suele ser más clara. Convertir `sample_count` de forma permanente a texto sería inadecuado si después se necesita para cálculos.
+      en: |-
+        It raises a `TypeError` because `+` does not automatically concatenate `str` and `int`. If the goal is text construction, the minimum correction is `message = "Samples: " + str(sample_count)`; an f-string, `f"Samples: {sample_count}"`, is often clearer. Permanently converting `sample_count` to text would be inappropriate if it is later needed for calculations.
+      da: |-
+        Koden giver en `TypeError`, fordi `+` ikke automatisk sammenkæder `str` og `int`. Hvis formålet er at bygge tekst, er den minimale rettelse `message = "Samples: " + str(sample_count)`; en f-string, `f"Samples: {sample_count}"`, er ofte tydeligere. Permanent konvertering af `sample_count` til tekst er uhensigtsmæssig, hvis værdien senere skal bruges i beregninger.
+    linked_objectives: [m01.o2, m01.o5, m01.o6]
+    linked_concepts: [expressions-values-types, errors-tests-and-evidence]
+    tags: [debugging, type_error, string_formatting]
+    reverse_allowed: false
+
+  - id: dm857.m01.f23
+    module_id: dm857.m01
+    mode: integrative
+    card_type: workflow_step
+    difficulty: advanced
+    front:
+      es: Convierte la pregunta «¿cuántas muestras pueden procesarse con 1.200 µL si cada muestra consume 35 µL?» en entradas, transformación, restricción y salida.
+      en: Convert the question “How many samples can be processed with 1,200 µL if each sample consumes 35 µL?” into inputs, transformation, constraint, and output.
+      da: Omsæt spørgsmålet “Hvor mange prøver kan behandles med 1.200 µL, hvis hver prøve bruger 35 µL?” til input, transformation, begrænsning og output.
+    back:
+      es: |-
+        Entradas: `available_volume_ul = 1200` y `volume_per_sample_ul = 35`. Transformación: división entera `1200 // 35`. Restricciones: ambos volúmenes deben ser positivos, estar en la misma unidad y cada muestra debe consumir exactamente 35 µL en el modelo. Salida: `34` muestras completas, con un resto de `10 µL` calculable mediante `1200 % 35`. La respuesta no incluye muestras parciales.
+      en: |-
+        Inputs: `available_volume_ul = 1200` and `volume_per_sample_ul = 35`. Transformation: floor division `1200 // 35`. Constraints: both volumes must be positive, use the same unit, and each sample must consume exactly 35 µL in the model. Output: `34` complete samples, with `10 µL` remaining from `1200 % 35`. Partial samples are not counted.
+      da: |-
+        Input: `available_volume_ul = 1200` og `volume_per_sample_ul = 35`. Transformation: heltalsdivision `1200 // 35`. Begrænsninger: begge volumener skal være positive, have samme enhed, og hver prøve skal i modellen bruge præcis 35 µL. Output: `34` hele prøver og en rest på `10 µL`, beregnet med `1200 % 35`. Delvise prøver tælles ikke med.
+    linked_objectives: [m01.o1, m01.o2, m01.o3]
+    linked_concepts: [problem-model-algorithm-program, operators-precedence-conversion]
+    tags: [modeling, floor_division, modulo, units, transfer]
+    reverse_allowed: false
+
+  - id: dm857.m01.f24
+    module_id: dm857.m01
+    mode: integrative
+    card_type: method_selection
+    difficulty: advanced
+    front:
+      es: Diseña un conjunto mínimo de pruebas para una función que convierte mililitros a microlitros multiplicando por 1000.
+      en: Design a minimal test set for a function that converts millilitres to microlitres by multiplying by 1000.
+      da: Design et minimalt testsæt til en funktion, der konverterer milliliter til mikroliter ved at gange med 1000.
+    back:
+      es: |-
+        Un conjunto mínimo razonado podría incluir: `1 mL → 1000 µL` para el caso básico; `0 mL → 0 µL` como límite; `0.25 mL → 250 µL` para comprobar decimales; y un caso inválido, como texto o valor negativo, cuya conducta debe estar definida por la especificación. El caso `1 mL` detecta factores como 100 o 10.000, pero no demuestra por sí solo el tratamiento de decimales ni entradas inválidas.
+      en: |-
+        A reasoned minimal set could include: `1 mL → 1000 µL` as a basic case; `0 mL → 0 µL` as a boundary; `0.25 mL → 250 µL` to check decimals; and an invalid case, such as text or a negative value, whose behavior must be defined by the specification. The `1 mL` case detects factors such as 100 or 10,000, but does not by itself prove correct decimal or invalid-input handling.
+      da: |-
+        Et begrundet minimalt sæt kan omfatte: `1 mL → 1000 µL` som grundtilfælde; `0 mL → 0 µL` som grænse; `0.25 mL → 250 µL` for at kontrollere decimaler; samt et ugyldigt tilfælde, for eksempel tekst eller en negativ værdi, hvis adfærd skal være defineret i specifikationen. Tilfældet `1 mL` opdager faktorer som 100 eller 10.000, men beviser ikke alene korrekt håndtering af decimaler eller ugyldige input.
+    linked_objectives: [m01.o1, m01.o6]
+    linked_concepts: [problem-model-algorithm-program, errors-tests-and-evidence]
+    tags: [test_design, boundaries, units, specification]
+    accepted_answer_elements:
+      es: [Caso normal, caso límite, caso decimal, conducta ante entrada inválida, resultados esperados explícitos.]
+      en: [Normal case, boundary case, decimal case, invalid-input behavior, explicit expected results.]
+      da: [Normalt tilfælde, grænsetilfælde, decimaltilfælde, adfærd ved ugyldigt input, eksplicitte forventede resultater.]
+    reverse_allowed: false
+
+coverage:
+  objectives:
+    m01.o1: [dm857.m01.f01, dm857.m01.f09, dm857.m01.f16, dm857.m01.f17, dm857.m01.f19, dm857.m01.f23, dm857.m01.f24]
+    m01.o2: [dm857.m01.f02, dm857.m01.f04, dm857.m01.f05, dm857.m01.f06, dm857.m01.f08, dm857.m01.f13, dm857.m01.f14, dm857.m01.f19, dm857.m01.f22, dm857.m01.f23]
+    m01.o3: [dm857.m01.f02, dm857.m01.f05, dm857.m01.f07, dm857.m01.f08, dm857.m01.f10, dm857.m01.f11, dm857.m01.f16, dm857.m01.f17, dm857.m01.f18, dm857.m01.f20, dm857.m01.f21, dm857.m01.f23]
+    m01.o4: [dm857.m01.f03, dm857.m01.f04, dm857.m01.f11, dm857.m01.f13, dm857.m01.f20]
+    m01.o5: [dm857.m01.f06, dm857.m01.f07, dm857.m01.f14, dm857.m01.f16, dm857.m01.f18, dm857.m01.f19, dm857.m01.f21, dm857.m01.f22]
+    m01.o6: [dm857.m01.f08, dm857.m01.f09, dm857.m01.f12, dm857.m01.f14, dm857.m01.f15, dm857.m01.f21, dm857.m01.f22, dm857.m01.f24]
+  modes:
+    conceptual: 15
+    practical: 7
+    integrative: 2
+  difficulty:
+    foundational: 11
+    intermediate: 9
+    advanced: 4
+  misconception_cards: [dm857.m01.f13, dm857.m01.f14, dm857.m01.f15]
+  interpretation_cards: [dm857.m01.f10, dm857.m01.f11, dm857.m01.f12, dm857.m01.f18, dm857.m01.f20]
