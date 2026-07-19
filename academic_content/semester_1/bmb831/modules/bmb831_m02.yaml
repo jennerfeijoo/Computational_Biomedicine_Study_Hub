@@ -1,0 +1,226 @@
+schema_version: 1.0.0
+course_code: BMB831
+module_id: bmb831.m02
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title: {es: Calidad de datos de alta dimensión, normalización, ausencia y efectos de lote, en: High-dimensional data quality, normalization, missingness, and batch effects, da: Højdimensionel datakvalitet, normalisering, missingness og batch effects}
+  summary:
+    es: >-
+      Evaluación de calidad en matrices ómicas: intensidades, conteos, profundidad, complejidad, distribución,
+      outliers, replicados, missingness, límites de detección, normalización, transformación, batch effects,
+      confusión técnica-biológica y auditoría de correcciones. El módulo diferencia comparabilidad matemática,
+      preservación de señal biológica y supuestos del mecanismo de medición.
+    en: >-
+      Quality assessment in omics matrices: intensities, counts, depth, complexity, distributions, outliers,
+      replicates, missingness, detection limits, normalization, transformation, batch effects, technical-biological
+      confounding, and correction audits. The module separates mathematical comparability from biological validity.
+    da: >-
+      Kvalitetsvurdering af omics-matricer: intensiteter, counts, dybde, kompleksitet, fordelinger, outliers,
+      replikater, missingness, detektionsgrænser, normalisering, transformation og batch effects.
+  estimated_study_hours: 14
+  difficulty: advanced
+
+alignment:
+  official_learning_outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo06]
+  prerequisite_modules: [bmb830.m03, bmb830.m04, bmb831.m01]
+  later_modules: [bmb831.m03, bmb831.m04, bmb831.m05, bmb831.m06, bmb831.m08, bmb831.m09]
+
+objectives:
+  - {id: bmb831.m02.o01, text: {es: Definir la unidad de medición y fuente técnica de cada assay, en: Define the measurement unit and technical source of each assay, da: Definere måleenhed og teknisk kilde for hvert assay}}
+  - {id: bmb831.m02.o02, text: {es: Construir un panel de QC multiescala, en: Build a multiscale QC panel, da: Bygge et flerskala QC-panel}}
+  - {id: bmb831.m02.o03, text: {es: Distinguir outlier técnico, biológico y error de metadata, en: Distinguish technical outlier, biological outlier, and metadata error, da: Skelne teknisk outlier, biologisk outlier og metadatafejl}}
+  - {id: bmb831.m02.o04, text: {es: Seleccionar normalización según el sesgo y objetivo, en: Select normalization according to bias and objective, da: Vælge normalisering efter bias og mål}}
+  - {id: bmb831.m02.o05, text: {es: Interpretar missingness, censura y límite de detección, en: Interpret missingness, censoring, and detection limits, da: Fortolke missingness, censurering og detektionsgrænser}}
+  - {id: bmb831.m02.o06, text: {es: Detectar batch effects y confusión completa, en: Detect batch effects and complete confounding, da: Detektere batch effects og komplet confounding}}
+  - {id: bmb831.m02.o07, text: {es: Auditar una corrección para evitar pérdida de señal, en: Audit correction to avoid signal removal, da: Auditere korrektion for at undgå tab af signal}}
+  - {id: bmb831.m02.o08, text: {es: Documentar exclusiones y sensibilidad del preprocessing, en: Document exclusions and preprocessing sensitivity, da: Dokumentere eksklusioner og preprocessing-følsomhed}}
+
+concepts:
+  - id: bmb831.m02.c01
+    title: {es: Calidad depende del mecanismo de medición, en: Quality depends on the measurement mechanism, da: Kvalitet afhænger af målemekanismen}
+    body:
+      es: >-
+        Un conteo de lecturas, una intensidad de péptido y una abundancia relativa no comparten escala ni ruido.
+        QC debe comenzar con cómo se genera la señal, qué constituye saturación, cero, fondo, duplicación o pérdida.
+        Aplicar métricas genéricas sin mecanismo puede etiquetar variación real como defecto.
+      en: >-
+        Read counts, peptide intensities, and relative abundances differ in scale and noise. QC starts from how
+        signal is generated and what constitutes saturation, zero, background, duplication, or loss.
+      da: >-
+        Read-counts, peptidintensiteter og relative abundanser har forskellig skala og støj.
+    key_points:
+      - {es: QC es específico de assay y pregunta, en: QC is assay- and question-specific, da: QC er assay- og spørgsmålspecifik}
+  - id: bmb831.m02.c02
+    title: {es: QC de muestra, característica y matriz, en: Sample-, feature-, and matrix-level QC, da: Sample-, feature- og matrixniveau-QC}
+    body:
+      es: >-
+        El nivel muestra evalúa profundidad, complejidad, distribución, missingness y correlación con replicados.
+        El nivel característica evalúa prevalencia, intensidad, varianza y detectabilidad. El nivel matriz evalúa
+        estructura global, lotes, separación técnica y relaciones entre metadata y señal.
+      en: >-
+        Sample QC assesses depth, complexity, distribution, missingness, and replicate correlation. Feature QC
+        assesses prevalence, intensity, variance, and detectability. Matrix QC assesses global structure and batches.
+      da: >-
+        Sample-QC vurderer dybde og missingness; feature-QC vurderer prævalens og varians; matrix-QC vurderer global struktur.
+    key_points:
+      - {es: Ninguna métrica aislada define calidad, en: No single metric defines quality, da: Ingen enkelt metrik definerer kvalitet}
+  - id: bmb831.m02.c03
+    title: {es: Normalización y objetivo de comparabilidad, en: Normalization and the comparability target, da: Normalisering og sammenlignelighedsmål}
+    body:
+      es: >-
+        Normalizar intenta reducir variación no deseada bajo supuestos: tamaño de biblioteca, composición, distribución,
+        controles estables o cantidad total. El método debe declarar qué iguala y qué preserva. Forzar distribuciones
+        idénticas puede eliminar cambios globales reales; escalar por total puede inducir dependencias composicionales.
+      en: >-
+        Normalization reduces unwanted variation under assumptions about library size, composition, distributions,
+        stable controls, or totals. The method must state what it equalizes and preserves.
+      da: >-
+        Normalisering reducerer uønsket variation under antagelser om bibliotekstørrelse, komposition eller stabile kontroller.
+    key_points:
+      - {es: Normalización no crea comparabilidad si el diseño está confundido, en: Normalization cannot create comparability under confounded design, da: Normalisering kan ikke skabe sammenlignelighed ved confounded design}
+  - id: bmb831.m02.c04
+    title: {es: Transformación, varianza y distancia, en: Transformation, variance, and distance, da: Transformation, varians og afstand}
+    body:
+      es: >-
+        Log, VST y transformaciones similares cambian escala, estabilizan varianza y modifican distancias. Son útiles para
+        visualización y métodos gaussianos, pero no necesariamente para el modelo de conteos crudos. Pseudocounts dominan
+        valores bajos y deben justificarse.
+      en: >-
+        Log, VST, and related transformations alter scale, stabilize variance, and change distances. They may support
+        visualization and Gaussian methods but need not replace raw-count models. Pseudocounts strongly affect low values.
+      da: >-
+        Log- og VST-transformationer ændrer skala, stabiliserer varians og ændrer afstande.
+    key_points:
+      - {es: Una transformación es una decisión estadística, en: A transformation is a statistical decision, da: En transformation er en statistisk beslutning}
+  - id: bmb831.m02.c05
+    title: {es: Missingness y censura, en: Missingness and censoring, da: Missingness og censurering}
+    body:
+      es: >-
+        Un valor ausente puede ser aleatorio, asociado a covariables, dependiente de abundancia, resultado de filtro o
+        estructuralmente imposible. En proteómica, no detectar puede reflejar límite de detección; en RNA-seq, cero puede ser
+        muestreo. Imputar sin modelar el mecanismo puede reducir varianza o crear diferencias.
+      en: >-
+        Missingness may be random, covariate-related, abundance-dependent, filtering-induced, or structural. In proteomics,
+        non-detection may reflect a limit; in RNA-seq, zero may reflect sampling. Imputation can create artifacts.
+      da: >-
+        Missingness kan være tilfældig, abundance-afhængig, filterinduceret eller strukturel. Imputation kan skabe artefakter.
+    key_points:
+      - {es: “NA” no es un único fenómeno, en: “NA” is not one phenomenon, da: “NA” er ikke ét fænomen}
+  - id: bmb831.m02.c06
+    title: {es: Batch effects, confusión y corrección, en: Batch effects, confounding, and correction, da: Batch effects, confounding og korrektion}
+    body:
+      es: >-
+        Un batch effect es variación asociada a procesamiento, plataforma, fecha, operador o reactivo. Si lote y grupo biológico
+        coinciden completamente, no se pueden separar con datos observados. La corrección estima componentes técnicas bajo
+        supuestos; incluir la variable en el diseño suele ser preferible a modificar datos cuando el modelo lo permite.
+      en: >-
+        Batch effects are variation associated with processing, platform, date, operator, or reagent. Complete confounding
+        prevents separation. Correction estimates technical components under assumptions; design adjustment may be preferable.
+      da: >-
+        Batch effects er variation knyttet til behandling, platform, dato eller reagens. Komplet confounding kan ikke løses statistisk.
+    key_points:
+      - {es: Corregir no recupera información ausente por diseño, en: Correction cannot recover design-missing information, da: Korrektion kan ikke genskabe information der mangler i designet}
+
+worked_examples:
+  - id: bmb831.m02.e01
+    title: {es: PCA separa por lote, en: PCA separates by batch, da: PCA adskiller efter batch}
+    scenario: {es: PC1 coincide con fecha de secuenciación y no con condición., en: PC1 aligns with sequencing date rather than condition., da: PC1 følger sekventeringsdato frem for condition.}
+    reasoning:
+      - {es: Revisar distribución de grupos dentro de cada fecha., en: Inspect group distribution within each date., da: Undersøg gruppefordeling inden for hver dato.}
+      - {es: Si hay solapamiento, incluir batch en diseño y evaluar sensibilidad., en: If overlap exists, include batch in design and assess sensitivity., da: Hvis overlap findes, inkluder batch i design og vurder følsomhed.}
+    conclusion: {es: PCA detecta estructura, no identifica por sí sola su causa., en: PCA detects structure but does not identify its cause by itself., da: PCA opdager struktur men identificerer ikke alene årsagen.}
+  - id: bmb831.m02.e02
+    title: {es: Normalización por total bajo cambio global, en: Total normalization under global shift, da: Totalnormalisering under globalt skift}
+    scenario: {es: Un tratamiento aumenta ampliamente el contenido de RNA por célula., en: A treatment broadly increases RNA content per cell., da: En behandling øger bredt RNA-indhold per celle.}
+    reasoning:
+      - {es: Igualar totales puede ocultar cambio global y crear descensos relativos., en: Equalizing totals may hide the global shift and induce relative decreases., da: Lige totaler kan skjule globalt skift og skabe relative fald.}
+      - {es: Se requieren controles externos o escala por célula para identificarlo., en: External controls or per-cell scale are needed., da: Eksterne kontroller eller per-celle-skala er nødvendig.}
+    conclusion: {es: La normalización depende del estimando y referencia de escala., en: Normalization depends on the estimand and scale reference., da: Normalisering afhænger af estimand og skalareference.}
+  - id: bmb831.m02.e03
+    title: {es: Imputación de mínimos en proteómica, en: Minimum imputation in proteomics, da: Minimumimputation i proteomik}
+    scenario: {es: Todos los NA se reemplazan por un valor pequeño., en: All NAs are replaced by a small value., da: Alle NA erstattes med en lille værdi.}
+    reasoning:
+      - {es: Supone que toda ausencia se debe a baja abundancia., en: It assumes all missingness is due to low abundance., da: Det antager at al missingness skyldes lav abundance.}
+      - {es: Si hay ausencia aleatoria, crea diferencias y reduce incertidumbre., en: Under random missingness it creates differences and understates uncertainty., da: Ved tilfældig missingness skaber det forskelle og undervurderer usikkerhed.}
+    conclusion: {es: El mecanismo debe evaluarse y la imputación someterse a sensibilidad., en: The mechanism must be evaluated and imputation subjected to sensitivity analysis., da: Mekanismen skal vurderes og imputation testes i følsomhedsanalyse.}
+
+guided_practice:
+  - {id: bmb831.m02.p01, activity_type: qc_design, prompt: {es: Diseña QC de muestra, característica y matriz para RNA-seq., en: Design sample-, feature-, and matrix-level QC for RNA-seq., da: Design sample-, feature- og matrixniveau-QC for RNA-seq.}, expected_elements: [library_size, mapping_or_complexity, feature_prevalence, sample_correlation, PCA_with_metadata]}
+  - {id: bmb831.m02.p02, activity_type: method_selection, prompt: {es: Compara normalización por total, factores de tamaño y controles externos., en: Compare total normalization, size factors, and external controls., da: Sammenlign totalnormalisering, size factors og eksterne kontroller.}, expected_elements: [assumptions, preserved_scale, global_shift, composition_bias]}
+  - {id: bmb831.m02.p03, activity_type: missingness_audit, prompt: {es: Clasifica patrones de ausencia en una matriz proteómica., en: Classify missingness patterns in a proteomics matrix., da: Klassificér missingness-mønstre i en proteomikmatrix.}, expected_elements: [sample_level, feature_level, abundance_dependence, batch_association, structural_missingness]}
+  - {id: bmb831.m02.p04, activity_type: confounding_audit, prompt: {es: Determina si condición y lote son separables., en: Determine whether condition and batch are separable., da: Afgør om condition og batch kan adskilles.}, expected_elements: [cross_tabulation, overlap, complete_confounding, design_limit]}
+  - {id: bmb831.m02.p05, activity_type: sensitivity_design, prompt: {es: Propón análisis de sensibilidad a exclusiones y normalización., en: Propose sensitivity analyses for exclusions and normalization., da: Foreslå følsomhedsanalyser for eksklusioner og normalisering.}, expected_elements: [predefined_rules, alternative_normalization, with_without_outlier, effect_stability]}
+  - {id: bmb831.m02.p06, activity_type: oral_explanation, prompt: {es: Explica por qué “corregido por batch” no garantiza ausencia de sesgo., en: Explain why “batch corrected” does not guarantee absence of bias., da: Forklar hvorfor “batch corrected” ikke garanterer fravær af bias.}, expected_elements: [assumptions, residual_batch, signal_removal, confounding]}
+
+objective_bank:
+  - {id: bmb831.m02.q01, type: multiple_choice, prompt: {es: ¿Qué debe preceder a elegir QC?, en: What should precede QC selection?, da: Hvad bør komme før valg af QC?}, options: [{id: a, text: {es: Mecanismo de medición, en: Measurement mechanism, da: Målemekanisme}}, {id: b, text: {es: Color del gráfico, en: Plot color, da: Plotfarve}}, {id: c, text: {es: Nombre del paquete, en: Package name, da: Pakkenavn}}], correct_option_ids: [a], explanation: {es: Define qué errores y escalas son plausibles., en: It defines plausible errors and scales., da: Det definerer plausible fejl og skalaer.}}
+  - {id: bmb831.m02.q02, type: true_false, prompt: {es: Una métrica QC aislada basta para excluir una muestra., en: One isolated QC metric is sufficient to exclude a sample., da: Én isoleret QC-metrik er nok til at ekskludere en sample.}, correct: false, explanation: {es: Se requiere evidencia convergente y regla previa., en: Converging evidence and a prespecified rule are needed., da: Konvergerende evidens og en prædefineret regel er nødvendig.}}
+  - {id: bmb831.m02.q03, type: multiple_choice, prompt: {es: ¿Qué normalización puede ocultar un cambio global?, en: Which normalization can hide a global shift?, da: Hvilken normalisering kan skjule et globalt skift?}, options: [{id: a, text: {es: Igualar totales, en: Equalizing totals, da: Ligestille totaler}}, {id: b, text: {es: Conservar escala absoluta con controles, en: Preserve absolute scale with controls, da: Bevare absolut skala med kontroller}}], correct_option_ids: [a], explanation: {es: Convierte cambios absolutos en relativos., en: It converts absolute shifts into relative ones., da: Det omdanner absolutte skift til relative.}}
+  - {id: bmb831.m02.q04, type: true_false, prompt: {es: Un log1p es neutral respecto a distancias., en: log1p is neutral with respect to distances., da: log1p er neutral med hensyn til afstande.}, correct: false, explanation: {es: Comprime valores altos y cambia geometría., en: It compresses high values and changes geometry., da: Det komprimerer høje værdier og ændrer geometri.}}
+  - {id: bmb831.m02.q05, type: multiple_select, prompt: {es: Posibles causas de NA., en: Possible causes of NA., da: Mulige årsager til NA.}, options: [{id: a, text: {es: Límite de detección, en: Detection limit, da: Detektionsgrænse}}, {id: b, text: {es: Fallo técnico, en: Technical failure, da: Teknisk fejl}}, {id: c, text: {es: Ausencia estructural, en: Structural absence, da: Strukturelt fravær}}, {id: d, text: {es: Único mecanismo universal, en: One universal mechanism, da: Én universel mekanisme}}], correct_option_ids: [a,b,c], explanation: {es: La ausencia es heterogénea., en: Missingness is heterogeneous., da: Missingness er heterogen.}}
+  - {id: bmb831.m02.q06, type: multiple_choice, prompt: {es: Condición y lote coinciden completamente. ¿Solución estadística?, en: Condition and batch fully coincide. Statistical solution?, da: Condition og batch falder fuldstændigt sammen. Statistisk løsning?}, options: [{id: a, text: {es: No se pueden separar con esos datos, en: They cannot be separated with those data, da: De kan ikke adskilles med disse data}}, {id: b, text: {es: ComBat garantiza separación, en: ComBat guarantees separation, da: ComBat garanterer adskillelse}}, {id: c, text: {es: PCA resuelve causalidad, en: PCA resolves causality, da: PCA løser kausalitet}}], correct_option_ids: [a], explanation: {es: Falta variación cruzada para identificar efectos., en: Crossed variation is missing., da: Krydsvariation mangler.}}
+  - {id: bmb831.m02.q07, type: true_false, prompt: {es: Incluir batch en el modelo puede preservar la escala original., en: Including batch in the model can preserve the original data scale., da: At inkludere batch i modellen kan bevare original dataskala.}, correct: true, explanation: {es: Ajusta el efecto sin necesariamente modificar los datos., en: It adjusts the effect without necessarily changing data., da: Det justerer effekten uden nødvendigvis at ændre data.}}
+  - {id: bmb831.m02.q08, type: multiple_choice, prompt: {es: Mejor evidencia de corrección adecuada., en: Best evidence of appropriate correction., da: Bedste evidens for passende korrektion.}, options: [{id: a, text: {es: Reduce señal técnica y preserva controles biológicos esperados, en: Reduces technical signal while preserving expected biological controls, da: Reducerer teknisk signal og bevarer forventede biologiske kontroller}}, {id: b, text: {es: Elimina toda estructura, en: Removes all structure, da: Fjerner al struktur}}, {id: c, text: {es: Produce figura más bonita, en: Produces a prettier figure, da: Giver en pænere figur}}], correct_option_ids: [a], explanation: {es: Debe evaluarse tanto eliminación como preservación., en: Both removal and preservation must be assessed., da: Både fjernelse og bevarelse skal vurderes.}}
+  - {id: bmb831.m02.q09, type: true_false, prompt: {es: Un outlier biológico debe eliminarse automáticamente., en: A biological outlier should be automatically removed., da: En biologisk outlier bør automatisk fjernes.}, correct: false, explanation: {es: Puede ser señal real; exclusión exige criterio y sensibilidad., en: It may be real signal; exclusion needs criteria and sensitivity analysis., da: Det kan være reel signal; eksklusion kræver kriterium og følsomhed.}}
+  - {id: bmb831.m02.q10, type: multiple_choice, prompt: {es: ¿Qué debe acompañar a una exclusión?, en: What should accompany an exclusion?, da: Hvad bør ledsage en eksklusion?}, options: [{id: a, text: {es: Regla, evidencia, conteo y sensibilidad, en: Rule, evidence, count, and sensitivity, da: Regel, evidens, count og følsomhed}}, {id: b, text: {es: Sólo intuición, en: Intuition only, da: Kun intuition}}, {id: c, text: {es: Ocultarla, en: Hide it, da: Skjule den}}], correct_option_ids: [a], explanation: {es: Mantiene trazabilidad y evalúa impacto., en: It preserves traceability and evaluates impact., da: Det bevarer sporbarhed og evaluerer effekt.}}
+
+open_assessment_items:
+  - id: bmb831.m02.a01
+    prompt: {es: Diseña y justifica un panel de QC para un assay ómico concreto., en: Design and justify a QC panel for a specific omics assay., da: Design og begrund et QC-panel for et specifikt omics-assay.}
+    rubric: [{criterion: measurement_mechanism, weight: 0.25}, {criterion: sample_feature_matrix_metrics, weight: 0.30}, {criterion: decision_rules, weight: 0.20}, {criterion: sensitivity_provenance, weight: 0.25}]
+  - id: bmb831.m02.a02
+    prompt: {es: Compara dos estrategias de normalización bajo un cambio global plausible., en: Compare two normalization strategies under a plausible global shift., da: Sammenlign to normaliseringsstrategier under et plausibelt globalt skift.}
+    rubric: [{criterion: assumptions, weight: 0.30}, {criterion: scale_preservation, weight: 0.25}, {criterion: artifacts, weight: 0.25}, {criterion: controls, weight: 0.20}]
+  - id: bmb831.m02.a03
+    prompt: {es: Audita una corrección de batch y determina qué afirmaciones siguen siendo válidas., en: Audit a batch correction and determine which claims remain valid., da: Auditér en batch-korrektion og afgør hvilke påstande der forbliver gyldige.}
+    rubric: [{criterion: design_confounding, weight: 0.30}, {criterion: correction_assumptions, weight: 0.25}, {criterion: signal_preservation, weight: 0.25}, {criterion: claim_scope, weight: 0.20}]
+
+glossary:
+  - {id: bmb831.term.normalization, term: {es: normalización, en: normalization, da: normalisering}, definition: {es: Transformación destinada a mejorar comparabilidad bajo supuestos explícitos., en: Transformation intended to improve comparability under explicit assumptions., da: Transformation der skal forbedre sammenlignelighed under eksplicitte antagelser.}}
+  - {id: bmb831.term.batch_effect, term: {es: efecto de lote, en: batch effect, da: batch effect}, definition: {es: Variación sistemática asociada al procesamiento técnico., en: Systematic variation associated with technical processing., da: Systematisk variation knyttet til teknisk behandling.}}
+  - {id: bmb831.term.complete_confounding, term: {es: confusión completa, en: complete confounding, da: komplet confounding}, definition: {es: Coincidencia sin solapamiento que impide separar efectos., en: Non-overlapping coincidence preventing effect separation., da: Ikke-overlappende sammenfald der forhindrer separation af effekter.}}
+  - {id: bmb831.term.detection_limit, term: {es: límite de detección, en: detection limit, da: detektionsgrænse}, definition: {es: Nivel por debajo del cual la medición no se detecta con fiabilidad., en: Level below which measurement is not reliably detected., da: Niveau under hvilket måling ikke detekteres pålideligt.}}
+  - {id: bmb831.term.composition_bias, term: {es: sesgo composicional, en: composition bias, da: kompositionsbias}, definition: {es: Distorsión causada porque pocas características dominan el total., en: Distortion caused by a few features dominating the total., da: Forvrængning fordi få features dominerer totalen.}}
+  - {id: bmb831.term.vst, term: {es: transformación estabilizadora de varianza, en: variance-stabilizing transformation, da: variansstabiliserende transformation}, definition: {es: Transformación que reduce dependencia entre media y varianza., en: Transformation reducing mean-variance dependence., da: Transformation der reducerer afhængighed mellem middel og varians.}}
+  - {id: bmb831.term.outlier, term: {es: valor atípico, en: outlier, da: outlier}, definition: {es: Observación discordante que requiere investigación contextual., en: Discordant observation requiring contextual investigation., da: Afvigende observation der kræver kontekstuel undersøgelse.}}
+  - {id: bmb831.term.imputation, term: {es: imputación, en: imputation, da: imputation}, definition: {es: Sustitución modelada de valores ausentes con incertidumbre asociada., en: Modeled replacement of missing values with associated uncertainty., da: Modelleret erstatning af manglende værdier med tilhørende usikkerhed.}}
+  - {id: bmb831.term.technical_replicate, term: {es: réplica técnica, en: technical replicate, da: teknisk replikat}, definition: {es: Repetición del proceso de medición sobre la misma unidad biológica., en: Repetition of measurement on the same biological unit., da: Gentagelse af måling på samme biologiske enhed.}}
+  - {id: bmb831.term.qc_panel, term: {es: panel de QC, en: QC panel, da: QC-panel}, definition: {es: Conjunto complementario de métricas y visualizaciones de calidad., en: Complementary set of quality metrics and visualizations., da: Komplementært sæt af kvalitetsmetrikker og visualiseringer.}}
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      El preprocessing válido comienza por el mecanismo de medición, declara qué variación intenta eliminar,
+      qué señal preserva y qué supuestos necesita. Normalización, imputación y corrección de batch no sustituyen un diseño identificable.
+    en: >-
+      Valid preprocessing starts from the measurement mechanism, states which variation it removes, which signal it preserves,
+      and which assumptions it requires. Normalization, imputation, and batch correction cannot replace identifiable design.
+    da: >-
+      Gyldig preprocessing starter fra målemekanismen og deklarerer fjernet variation, bevaret signal og nødvendige antagelser.
+  misconceptions:
+    - normalization makes all samples directly comparable
+    - every zero represents biological absence
+    - batch correction solves complete confounding
+    - outliers are automatically errors
+    - a prettier PCA proves successful correction
+  socratic_questions:
+    - What is the physical meaning of zero in this assay?
+    - Which scale does normalization preserve?
+    - Are condition and batch crossed in the design?
+    - What biological control should remain after correction?
+    - How would conclusions change under another plausible preprocessing choice?
+  grading_criteria:
+    - assay-specific quality reasoning
+    - explicit normalization assumptions
+    - missingness mechanism analysis
+    - recognition of confounding and identifiability
+    - sensitivity and provenance of preprocessing
+  retrieval_fragments:
+    - id: bmb831.m02.r01
+      text: {es: Normalización mejora comparabilidad sólo bajo supuestos sobre escala y composición., en: Normalization improves comparability only under assumptions about scale and composition., da: Normalisering forbedrer kun sammenlignelighed under antagelser om skala og komposition.}
+    - id: bmb831.m02.r02
+      text: {es: Confusión completa entre lote y grupo no puede resolverse estadísticamente., en: Complete confounding between batch and group cannot be statistically resolved., da: Komplet confounding mellem batch og gruppe kan ikke løses statistisk.}
+    - id: bmb831.m02.r03
+      text: {es: Un NA puede representar mecanismos distintos y no debe imputarse universalmente., en: An NA may represent different mechanisms and should not be universally imputed., da: Et NA kan repræsentere forskellige mekanismer og bør ikke imputeres universelt.}
