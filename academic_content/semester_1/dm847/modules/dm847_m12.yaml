@@ -1,0 +1,331 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m12
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Redes biológicas, representación de grafos y razonamiento visual
+    en: Biological networks, graph representation, and visual reasoning
+    da: Biologiske netværk, grafrepræsentation og visuel ræsonnering
+  summary:
+    es: >-
+      Modelado de entidades y relaciones biológicas mediante grafos dirigidos, no dirigidos,
+      ponderados, con signo y multicapa. Incluye representaciones computacionales, recorridos,
+      componentes, grados, centralidades, construcción y procedencia de aristas, layouts,
+      codificación visual, modelos nulos y límites de inferir función o causalidad desde topología.
+    en: >-
+      Modeling biological entities and relations using directed, undirected, weighted, signed,
+      and multilayer graphs. Topics include computational representations, traversals, components,
+      degree and centrality, edge provenance, layouts, visual encodings, null models, and limits of
+      inferring function or causality from topology.
+    da: >-
+      Modellering af biologiske enheder og relationer med rettede, urettede, vægtede, signerede
+      og multilagsgrafer. Modulet omfatter repræsentation, gennemløb, komponenter, centralitet,
+      edge-provenance, layouts, visuelle kodninger og nulmodeller.
+  estimated_study_hours: 11
+  difficulty: intermediate_advanced
+
+alignment:
+  official_learning_outcomes: [dm847.lo05]
+  prerequisite_modules: [dm857.m07, dm857.m10, dm857.m13, dm847.m02, dm847.m03]
+  later_modules: [dm847.m13, dm847.m14, dm847.m15]
+
+objectives:
+  - {id: dm847.m12.o01, text: {es: Definir nodos, aristas, dirección, peso, signo y capas según una pregunta biológica, en: Define nodes, edges, direction, weight, sign, and layers for a biological question, da: Definere noder, kanter, retning, vægt, fortegn og lag for et biologisk spørgsmål}}
+  - {id: dm847.m12.o02, text: {es: Elegir entre lista de aristas, lista de adyacencia y matriz de adyacencia, en: Choose among edge lists, adjacency lists, and adjacency matrices, da: Vælge mellem edge-list, adjacency-list og adjacency-matrix}}
+  - {id: dm847.m12.o03, text: {es: Implementar BFS y DFS y explicar qué propiedades calculan, en: Implement BFS and DFS and explain which properties they compute, da: Implementere BFS og DFS og forklare deres anvendelser}}
+  - {id: dm847.m12.o04, text: {es: Calcular e interpretar grado, fuerza, componentes, distancias y centralidades, en: Compute and interpret degree, strength, components, distances, and centralities, da: Beregne og fortolke grad, styrke, komponenter, afstande og centraliteter}}
+  - {id: dm847.m12.o05, text: {es: Documentar procedencia, tipo de evidencia y confianza de cada arista, en: Document provenance, evidence type, and confidence for each edge, da: Dokumentere provenance, evidenstype og tillid for hver kant}}
+  - {id: dm847.m12.o06, text: {es: Seleccionar layouts y canales visuales sin codificar afirmaciones falsas, en: Select layouts and visual channels without encoding false claims, da: Vælge layouts og visuelle kanaler uden falske påstande}}
+  - {id: dm847.m12.o07, text: {es: Diseñar modelos nulos que conserven propiedades relevantes, en: Design null models preserving relevant properties, da: Designe nulmodeller der bevarer relevante egenskaber}}
+  - {id: dm847.m12.o08, text: {es: Auditar sesgo de muestreo, dependencia y sobreinterpretación topológica, en: Audit sampling bias, dependence, and topological overinterpretation, da: Revidere samplingbias, afhængighed og topologisk overfortolkning}}
+
+concepts:
+  - id: dm847.m12.c01
+    title: {es: Grafo como modelo de una pregunta, en: A graph as a model of a question, da: En graf som model af et spørgsmål}
+    body:
+      es: >-
+        Un grafo G=(V,E) representa entidades como nodos y relaciones como aristas. La misma base
+        biológica puede producir grafos distintos según la pregunta: interacción física, regulación,
+        coexpresión, similitud o asociación clínica no son equivalentes. Antes de calcular métricas
+        deben definirse unidad, dirección, temporalidad, condición y significado de ausencia de arista.
+      en: >-
+        A graph G=(V,E) represents entities as nodes and relations as edges. The same biological
+        resource can yield different graphs because physical interaction, regulation, coexpression,
+        similarity, and clinical association are not equivalent. Node unit, direction, time,
+        condition, and meaning of edge absence must be defined before metrics are calculated.
+      da: >-
+        En graf G=(V,E) repræsenterer enheder som noder og relationer som kanter. Fysisk interaktion,
+        regulering, coexpression og lighed er forskellige relationer og skal defineres før analyse.
+    key_points:
+      - {es: Una arista es una afirmación operacional, en: An edge is an operational claim, da: En kant er en operationel påstand}
+      - {es: Ausencia de evidencia no siempre es evidencia de ausencia, en: Lack of evidence is not always evidence of absence, da: Manglende evidens er ikke altid evidens for fravær}
+  - id: dm847.m12.c02
+    title: {es: Tipos de grafos, en: Graph types, da: Graftyper}
+    body:
+      es: >-
+        Grafos dirigidos modelan regulación o flujo; no dirigidos, relaciones simétricas. Pesos
+        pueden representar fuerza, frecuencia, confianza o distancia, y su interpretación cambia
+        los algoritmos. Aristas con signo distinguen activación e inhibición. Multigrafos permiten
+        varias relaciones por par y redes multicapa separan tejidos, tiempos o tipos de evidencia.
+      en: >-
+        Directed graphs model regulation or flow; undirected graphs model symmetric relations.
+        Weights may represent strength, frequency, confidence, or distance, changing algorithmic
+        interpretation. Signed edges distinguish activation and inhibition. Multigraphs allow
+        several relations per pair, and multilayer networks separate tissues, times, or evidence types.
+      da: >-
+        Rettede grafer modellerer regulering eller flow; urettede grafer symmetriske relationer.
+        Vægte kan være styrke, frekvens, tillid eller afstand. Signerede og multilagsnetværk bevarer mere kontekst.
+    key_points:
+      - {es: Mayor peso puede significar más cercanía o más distancia según la definición, en: Larger weight may mean closer or farther depending on definition, da: Større vægt kan betyde tættere eller længere afhængigt af definitionen}
+  - id: dm847.m12.c03
+    title: {es: Representaciones computacionales, en: Computational representations, da: Beregningsrepræsentationer}
+    body:
+      es: >-
+        Una lista de aristas es compacta y adecuada para intercambio; una lista de adyacencia
+        permite recorrer vecinos en O(grado); una matriz de adyacencia permite consulta O(1) pero
+        usa O(|V|²) memoria. Redes biológicas suelen ser dispersas, por lo que matrices densas
+        desperdician memoria. Los IDs deben ser estables y los atributos mantenerse separados del índice.
+      en: >-
+        An edge list is compact and suited to exchange; an adjacency list traverses neighbors in
+        O(degree); an adjacency matrix provides O(1) edge lookup but uses O(|V|²) memory. Biological
+        networks are often sparse, so dense matrices waste memory. IDs should be stable and attributes
+        kept separate from index positions.
+      da: >-
+        En edge-list er kompakt, en adjacency-list giver nabo-gennemløb i O(grad), og en matrix giver
+        O(1) opslag men O(|V|²) hukommelse. Biologiske netværk er ofte sparse.
+    key_points:
+      - {es: La posición en una matriz no debe convertirse en identidad semántica, en: Matrix position should not become semantic identity, da: Matrixposition bør ikke blive semantisk identitet}
+  - id: dm847.m12.c04
+    title: {es: Recorridos, componentes y distancias, en: Traversals, components, and distances, da: Gennemløb, komponenter og afstande}
+    body:
+      es: >-
+        BFS explora por niveles y calcula distancias mínimas en grafos no ponderados; DFS profundiza
+        y ayuda a detectar componentes, ciclos y ordenamientos según el tipo de grafo. En grafos
+        dirigidos se distinguen componentes débil y fuertemente conexas. En grafos ponderados se
+        requieren algoritmos compatibles con pesos y ausencia de ciclos negativos cuando corresponda.
+      en: >-
+        BFS explores by levels and computes shortest distances in unweighted graphs; DFS explores
+        deeply and supports components, cycles, and orderings depending on graph type. Directed graphs
+        distinguish weakly and strongly connected components. Weighted graphs need algorithms compatible
+        with their weights and, where relevant, absence of negative cycles.
+      da: >-
+        BFS udforsker niveauvist og finder korteste afstande i uvægtede grafer; DFS går i dybden og
+        bruges til komponenter og cykler. Rettede grafer har svage og stærke komponenter.
+    key_points:
+      - {es: Distancia topológica no equivale a distancia física, en: Topological distance is not physical distance, da: Topologisk afstand er ikke fysisk afstand}
+  - id: dm847.m12.c05
+    title: {es: Grado, fuerza y centralidad, en: Degree, strength, and centrality, da: Grad, styrke og centralitet}
+    body:
+      es: >-
+        Grado cuenta vecinos y fuerza suma pesos. Betweenness cuantifica participación en caminos
+        mínimos; closeness resume distancia a otros nodos; eigenvector y PageRank ponderan conexiones
+        con nodos importantes. Cada medida responde una pregunta distinta y puede ser inestable en
+        redes incompletas. Centralidad alta no prueba esencialidad, causalidad ni valor terapéutico.
+      en: >-
+        Degree counts neighbors and strength sums weights. Betweenness measures participation in
+        shortest paths; closeness summarizes distance to others; eigenvector centrality and PageRank
+        weight connections to important nodes. Each measure answers a different question and may be
+        unstable in incomplete networks. High centrality does not prove essentiality or therapeutic value.
+      da: >-
+        Grad tæller naboer og styrke summerer vægte. Betweenness, closeness, eigenvector og PageRank
+        besvarer forskellige spørgsmål. Høj centralitet beviser ikke essentialitet eller kausalitet.
+    key_points:
+      - {es: La interpretación debe nombrar la centralidad exacta, en: Interpretation must name the exact centrality, da: Fortolkningen skal navngive den præcise centralitet}
+  - id: dm847.m12.c06
+    title: {es: Construcción, procedencia y sesgo, en: Construction, provenance, and bias, da: Konstruktion, provenance og bias}
+    body:
+      es: >-
+        Aristas pueden proceder de experimentos físicos, predicción, texto, correlación o bases integradas.
+        Deben conservar fuente, versión, método, organismo, tejido, condición y score. Genes populares
+        reciben más estudio y aparentan mayor grado; combinar evidencias heterogéneas sin capas o etiquetas
+        convierte intensidad de investigación en topología. Duplicados y mapeos de identificadores también alteran la red.
+      en: >-
+        Edges may come from physical experiments, prediction, text mining, correlation, or integrated
+        resources. Preserve source, version, method, organism, tissue, condition, and score. Popular genes
+        are studied more and may appear more connected; pooling heterogeneous evidence without labels turns
+        research intensity into topology. Identifier mapping and duplicates also reshape the network.
+      da: >-
+        Kanter kan komme fra eksperimenter, prædiktion, tekst eller korrelation. Kilde, version, metode,
+        organisme, væv, betingelse og score skal bevares. Forskningsbias kan ligne biologisk centralitet.
+    key_points:
+      - {es: La procedencia es parte de la arista, en: Provenance is part of the edge, da: Provenance er en del af kanten}
+  - id: dm847.m12.c07
+    title: {es: Layout y codificación visual, en: Layout and visual encoding, da: Layout og visuel kodning}
+    body:
+      es: >-
+        Force-directed, circular, hierarchical y spectral layouts posicionan nodos por reglas gráficas,
+        no por coordenadas biológicas salvo que se impongan. Color, tamaño, grosor y forma deben codificar
+        variables declaradas y accesibles. Cambiar semilla puede cambiar la figura. Se deben evitar áreas
+        proporcionales engañosas, paletas no perceptuales y ocultamiento de aristas por sobreplotting.
+      en: >-
+        Force-directed, circular, hierarchical, and spectral layouts position nodes by graphical rules,
+        not biological coordinates unless imposed. Color, size, width, and shape should encode declared,
+        accessible variables. Random seeds may change figures. Avoid misleading area encoding, poor palettes,
+        and edge overplotting.
+      da: >-
+        Force-directed, cirkulære, hierarkiske og spektrale layouts placerer noder efter grafiske regler,
+        ikke biologiske koordinater. Visuelle kanaler skal have eksplicit betydning og reproducerbar seed.
+    key_points:
+      - {es: Cercanía en la figura puede ser sólo efecto del layout, en: Visual proximity may be only a layout effect, da: Visuel nærhed kan kun være en layout-effekt}
+  - id: dm847.m12.c08
+    title: {es: Modelos nulos y comparación, en: Null models and comparison, da: Nulmodeller og sammenligning}
+    body:
+      es: >-
+        Para evaluar si una propiedad es excepcional se compara con redes aleatorizadas que preservan
+        aspectos relevantes: número de nodos y aristas, secuencia de grados, capas, signos o restricciones
+        biológicas. Un modelo Erdős-Rényi puede ser inadecuado para una red con grado heterogéneo. La unidad
+        de randomización debe corresponder al mecanismo y evitar crear aristas biológicamente imposibles.
+      en: >-
+        To assess whether a property is exceptional, compare with randomized networks preserving relevant
+        aspects: node and edge counts, degree sequence, layers, signs, or biological constraints. An
+        Erdős-Rényi null may be inadequate for a heterogeneous-degree network. Randomization must match the
+        mechanism and avoid biologically impossible edges.
+      da: >-
+        Egenskaber sammenlignes med randomiserede netværk, der bevarer relevante aspekter som gradsekvens,
+        lag eller biologiske begrænsninger. Nulmodellen skal passe til spørgsmålet.
+    key_points:
+      - {es: El resultado depende de qué preserva el nulo, en: Results depend on what the null preserves, da: Resultatet afhænger af hvad nulmodellen bevarer}
+
+worked_examples:
+  - id: dm847.m12.e01
+    title: {es: Una red para tres tipos de evidencia, en: A network with three evidence types, da: Et netværk med tre evidenstyper}
+    scenario: {es: Interacciones físicas, regulación y coexpresión conectan los mismos genes., en: Physical interactions, regulation, and coexpression connect the same genes., da: Fysiske interaktioner, regulering og coexpression forbinder de samme gener.}
+    solution_outline:
+      es: >-
+        Construir una red multicapa o multigrafo, conservar dirección para regulación, simetría para
+        coexpresión y tipo de ensayo para interacción. No sumar scores incompatibles sin calibración.
+        Comparar resultados por capa y sólo después integrar mediante una regla documentada.
+      en: >-
+        Build a multilayer network or multigraph, retaining direction for regulation, symmetry for
+        coexpression, and assay type for interaction. Do not sum incompatible scores without calibration.
+        Analyze layers separately before documented integration.
+      da: >-
+        Byg et multilagsnetværk, bevar retning og evidenstype, og integrér først efter lag-specifik analyse.
+    validation: [edge_type_preserved, direction_preserved, no_unjustified_score_pooling]
+  - id: dm847.m12.e02
+    title: {es: Centralidad sensible a sesgo de estudio, en: Centrality sensitive to study bias, da: Centralitet følsom for forskningsbias}
+    scenario: {es: Un gen muy estudiado tiene el mayor grado en una base integrada., en: A heavily studied gene has highest degree in an integrated database., da: Et meget undersøgt gen har højeste grad i en integreret database.}
+    solution_outline:
+      es: >-
+        Estratificar aristas por fuente, año y evidencia; comparar grado en redes de alto y bajo rendimiento;
+        ajustar por número de publicaciones o usar una red específica de ensayo. Concluir que centralidad
+        observada mezcla biología y proceso de observación.
+      en: >-
+        Stratify edges by source, year, and evidence; compare degree in high- and low-throughput networks;
+        adjust for publication count or use assay-specific networks. Conclude that observed centrality mixes
+        biology with the observation process.
+      da: >-
+        Stratificér efter kilde og evidens, sammenlign high-throughput-netværk og rapportér forskningsbias.
+    validation: [source_stratification, bias_proxy, cautious_claim]
+  - id: dm847.m12.e03
+    title: {es: Modelo nulo que preserva grado, en: Degree-preserving null model, da: Gradbevarende nulmodel}
+    scenario: {es: Se evalúa si genes de una vía forman más aristas internas de las esperadas., en: Test whether pathway genes have more internal edges than expected., da: Test om pathway-gener har flere interne kanter end forventet.}
+    solution_outline:
+      es: >-
+        Reconfigurar aristas preservando grados y restricciones de tipo, repetir muchas veces y comparar
+        el conteo observado con la distribución nula. Reportar p empírica, tamaño de efecto y sensibilidad
+        a otros nulos. Evitar permutar etiquetas si grado y anotación están confudidos.
+      en: >-
+        Rewire edges while preserving degrees and type constraints, repeat many times, and compare observed
+        internal-edge count with the null distribution. Report empirical p-value, effect size, and sensitivity.
+      da: >-
+        Rewire kanter med bevaret grad og type, og sammenlign observeret internt kanttal med nulfordelingen.
+    validation: [degree_preserved, constraints_preserved, empirical_p_and_effect]
+
+practice_exercises:
+  - {id: dm847.m12.p01, activity_type: model_design, difficulty: foundational, prompt: {es: Define nodos y aristas para una red de regulación transcripcional., en: Define nodes and edges for a transcriptional-regulation network., da: Definér noder og kanter for et transkriptionsregulatorisk netværk.}, expected_elements: [node_unit, directed_edge, sign, condition, provenance]}
+  - {id: dm847.m12.p02, activity_type: representation, difficulty: intermediate, prompt: {es: Convierte una lista de aristas en lista y matriz de adyacencia., en: Convert an edge list into adjacency-list and matrix forms., da: Konvertér en edge-list til adjacency-list og matrix.}, expected_elements: [stable_ids, directedness, weights, sparse_vs_dense]}
+  - {id: dm847.m12.p03, activity_type: code_tracing, difficulty: intermediate, prompt: {es: Traza BFS y DFS desde el mismo nodo y compara órdenes., en: Trace BFS and DFS from the same node and compare orders., da: Gennemgå BFS og DFS fra samme node og sammenlign rækkefølger.}, expected_elements: [queue_vs_stack, visited_set, component_reachability]}
+  - {id: dm847.m12.p04, activity_type: data_interpretation, difficulty: advanced, prompt: {es: Interpreta grado, betweenness y PageRank de cinco nodos sin usar hub como conclusión universal., en: Interpret degree, betweenness, and PageRank for five nodes without treating hub as a universal conclusion., da: Fortolk grad, betweenness og PageRank uden universel hub-konklusion.}, expected_elements: [metric_specific_meaning, evidence_bias, uncertainty]}
+  - {id: dm847.m12.p05, activity_type: visualization_audit, difficulty: advanced, prompt: {es: Audita una red force-directed que afirma complejos por proximidad visual., en: Audit a force-directed network claiming complexes from visual proximity., da: Revider et force-directed netværk der påstår komplekser ud fra visuel nærhed.}, expected_elements: [layout_not_evidence, cluster_method, edge_provenance, stability_across_seeds]}
+  - {id: dm847.m12.p06, activity_type: null_model_design, difficulty: advanced, prompt: {es: Diseña un nulo para evaluar modularidad conservando grado y capas., en: Design a null for modularity preserving degree and layers., da: Design en nulmodel for modularitet med bevaret grad og lag.}, expected_elements: [preserved_properties, randomization_unit, impossible_edges_excluded, repetitions]
+
+objective_bank:
+  - {id: dm847.m12.q01, type: multiple_choice, prompt: {es: ¿Qué relación suele ser dirigida?, en: Which relation is commonly directed?, da: Hvilken relation er typisk rettet?}, options: [{id: a, es: Regulación transcripcional, en: Transcriptional regulation, da: Transkriptionsregulering}, {id: b, es: Correlación simétrica, en: Symmetric correlation, da: Symmetrisk korrelation}, {id: c, es: Co-pertenencia, en: Co-membership, da: Fælles medlemskab}, {id: d, es: Distancia euclídea, en: Euclidean distance, da: Euklidisk afstand}], correct_option_ids: [a]}
+  - {id: dm847.m12.q02, type: true_false, prompt: {es: En una red ponderada, mayor peso siempre significa menor distancia., en: In a weighted network, larger weight always means shorter distance., da: I et vægtet netværk betyder større vægt altid kortere afstand.}, correct: false}
+  - {id: dm847.m12.q03, type: multiple_choice, prompt: {es: ¿Qué representación usa O(|V|²) memoria?, en: Which representation uses O(|V|²) memory?, da: Hvilken repræsentation bruger O(|V|²) hukommelse?}, options: [{id: a, es: Matriz de adyacencia densa, en: Dense adjacency matrix, da: Tæt adjacency-matrix}, {id: b, es: Lista de aristas, en: Edge list, da: Edge-list}, {id: c, es: Lista de adyacencia dispersa, en: Sparse adjacency list, da: Sparse adjacency-list}, {id: d, es: Tabla de nodos, en: Node table, da: Nodetabel}], correct_option_ids: [a]}
+  - {id: dm847.m12.q04, type: true_false, prompt: {es: BFS calcula distancias mínimas en número de aristas en grafos no ponderados., en: BFS computes shortest edge-count distances in unweighted graphs., da: BFS beregner korteste afstand i antal kanter i uvægtede grafer.}, correct: true}
+  - {id: dm847.m12.q05, type: multiple_choice, prompt: {es: ¿Qué centralidad cuenta vecinos directos?, en: Which centrality counts direct neighbors?, da: Hvilken centralitet tæller direkte naboer?}, options: [{id: a, es: Grado, en: Degree, da: Grad}, {id: b, es: Betweenness, en: Betweenness, da: Betweenness}, {id: c, es: Closeness, en: Closeness, da: Closeness}, {id: d, es: PageRank exclusivamente, en: PageRank only, da: Kun PageRank}], correct_option_ids: [a]}
+  - {id: dm847.m12.q06, type: true_false, prompt: {es: Centralidad alta demuestra esencialidad., en: High centrality proves essentiality., da: Høj centralitet beviser essentialitet.}, correct: false}
+  - {id: dm847.m12.q07, type: multiple_choice, prompt: {es: ¿Qué debe acompañar una arista integrada?, en: What should accompany an integrated edge?, da: Hvad bør ledsage en integreret kant?}, options: [{id: a, es: Fuente, método, condición y confianza, en: Source, method, condition, and confidence, da: Kilde, metode, betingelse og tillid}, {id: b, es: Sólo color, en: Color only, da: Kun farve}, {id: c, es: Posición visual, en: Visual position, da: Visuel position}, {id: d, es: Un nombre corto, en: A short name, da: Et kort navn}], correct_option_ids: [a]}
+  - {id: dm847.m12.q08, type: true_false, prompt: {es: Dos nodos cercanos en un layout force-directed necesariamente interactúan físicamente., en: Two nearby nodes in a force-directed layout necessarily interact physically., da: To nære noder i et force-directed layout interagerer nødvendigvis fysisk.}, correct: false}
+  - {id: dm847.m12.q09, type: multiple_choice, prompt: {es: ¿Qué nulo es útil cuando el grado es heterogéneo?, en: Which null is useful when degree is heterogeneous?, da: Hvilken nulmodel er nyttig ved heterogen grad?}, options: [{id: a, es: Reconfiguración que preserva grado, en: Degree-preserving rewiring, da: Gradbevarende rewiring}, {id: b, es: Ignorar la red, en: Ignore the network, da: Ignorér netværket}, {id: c, es: Ordenar nodos alfabéticamente, en: Alphabetically order nodes, da: Sortér noder alfabetisk}, {id: d, es: Duplicar aristas, en: Duplicate edges, da: Duplikér kanter}], correct_option_ids: [a]}
+  - {id: dm847.m12.q10, type: true_false, prompt: {es: El resultado de significancia puede cambiar con el modelo nulo., en: Significance may change with the null model., da: Signifikans kan ændre sig med nulmodellen.}, correct: true}
+
+open_assessment:
+  - id: dm847.m12.a01
+    prompt: {es: Diseña una red multicapa para regulación, interacción y coexpresión., en: Design a multilayer network for regulation, interaction, and coexpression., da: Design et multilagsnetværk for regulering, interaktion og coexpression.}
+    rubric: [{criterion: relation_specific_definitions, weight: 0.30}, {criterion: attributes_and_provenance, weight: 0.25}, {criterion: representation_and_algorithms, weight: 0.20}, {criterion: integration_and_limits, weight: 0.25}]
+  - id: dm847.m12.a02
+    prompt: {es: Audita una lista de diez genes centrales propuesta como dianas terapéuticas., en: Audit a list of ten central genes proposed as therapeutic targets., da: Revider en liste over ti centrale gener foreslået som terapeutiske targets.}
+    rubric: [{criterion: centrality_definition, weight: 0.20}, {criterion: sampling_and_study_bias, weight: 0.25}, {criterion: biological_validation, weight: 0.30}, {criterion: claim_limits, weight: 0.25}]
+  - id: dm847.m12.a03
+    prompt: {es: Diseña un análisis de modularidad con modelo nulo y evaluación de estabilidad., en: Design a modularity analysis with a null model and stability evaluation., da: Design en modularitetsanalyse med nulmodel og stabilitet.}
+    rubric: [{criterion: network_definition, weight: 0.20}, {criterion: algorithm_and_resolution, weight: 0.25}, {criterion: null_and_randomization, weight: 0.30}, {criterion: stability_and_interpretation, weight: 0.25}]
+
+glossary:
+  - {id: dm847.term.graph, es: Grafo, en: Graph, da: Graf, definition_en: Nodes and edges representing entities and relations.}
+  - {id: dm847.term.directed_edge, es: Arista dirigida, en: Directed edge, da: Rettet kant, definition_en: Ordered relation from source to target.}
+  - {id: dm847.term.weighted_graph, es: Grafo ponderado, en: Weighted graph, da: Vægtet graf, definition_en: Graph whose edges or nodes carry quantitative weights.}
+  - {id: dm847.term.adjacency_list, es: Lista de adyacencia, en: Adjacency list, da: Adjacency-list, definition_en: Neighbor collection stored for each node.}
+  - {id: dm847.term.connected_component, es: Componente conexo, en: Connected component, da: Sammenhængende komponent, definition_en: Maximal set of mutually reachable nodes under a graph definition.}
+  - {id: dm847.term.degree, es: Grado, en: Degree, da: Grad, definition_en: Number of incident neighbors or edges under a stated convention.}
+  - {id: dm847.term.betweenness, es: Betweenness, en: Betweenness centrality, da: Betweenness-centralitet, definition_en: Fraction of shortest paths passing through a node or edge.}
+  - {id: dm847.term.layout, es: Layout, en: Layout, da: Layout, definition_en: Rule assigning visual coordinates to graph elements.}
+  - {id: dm847.term.multilayer_network, es: Red multicapa, en: Multilayer network, da: Multilagsnetværk, definition_en: Graph separating relation types, contexts, or time into layers.}
+  - {id: dm847.term.null_network, es: Red nula, en: Null network, da: Nulnetværk, definition_en: Randomized graph representing a comparison hypothesis.}
+
+hidden_support:
+  canonical_explanation:
+    es: >-
+      Una red es un modelo de relaciones definidas, no una fotografía neutral de la biología. La
+      procedencia y el tipo de evidencia deben conservarse por arista. Las métricas describen topología
+      bajo esa construcción; los layouts sólo organizan una figura. Comparar con nulos adecuados y
+      estratificar por evidencia evita convertir sesgo de estudio en conclusión biológica.
+    en: >-
+      A network is a model of defined relations, not a neutral photograph of biology. Edge provenance
+      and evidence type must be preserved. Metrics describe topology under that construction; layouts
+      only organize a figure. Appropriate nulls and evidence stratification help avoid turning study bias
+      into biological conclusions.
+    da: >-
+      Et netværk er en model af definerede relationer, ikke et neutralt billede af biologien. Provenance
+      skal bevares, layouts er kun grafiske, og nulmodeller skal passe til spørgsmålet.
+  misconceptions:
+    - {id: dm847.m12.mc01, false_belief: {es: Una arista siempre significa interacción física, en: An edge always means physical interaction, da: En kant betyder altid fysisk interaktion}, correction: {es: Su significado depende de la relación definida y la evidencia, en: Its meaning depends on the defined relation and evidence, da: Betydningen afhænger af relation og evidens}}
+    - {id: dm847.m12.mc02, false_belief: {es: Un hub es automáticamente esencial, en: A hub is automatically essential, da: En hub er automatisk essentiel}, correction: {es: Grado puede reflejar sesgo, y esencialidad requiere evidencia independiente, en: Degree may reflect bias and essentiality needs independent evidence, da: Grad kan afspejle bias, og essentialitet kræver uafhængigt bevis}}
+    - {id: dm847.m12.mc03, false_belief: {es: Cercanía visual prueba relación fuerte, en: Visual proximity proves a strong relation, da: Visuel nærhed beviser en stærk relation}, correction: {es: Puede ser una consecuencia del layout y sus parámetros, en: It may be a consequence of layout and parameters, da: Det kan skyldes layout og parametre}}
+  socratic_questions:
+    - ¿Qué afirmación exacta representa cada arista?
+    - ¿Qué evidencia falta cuando no hay arista?
+    - ¿Qué métrica responde realmente la pregunta?
+    - ¿La posición visual tiene significado externo al layout?
+    - ¿Qué propiedades conserva el modelo nulo?
+  knowledge_fragments:
+    - {id: dm847.m12.k01, content_en: Graph construction is part of the scientific hypothesis.}
+    - {id: dm847.m12.k02, content_en: Directed, weighted, signed, and multilayer edges encode different semantics.}
+    - {id: dm847.m12.k03, content_en: Sparse networks favor adjacency-list representations.}
+    - {id: dm847.m12.k04, content_en: BFS gives unweighted shortest-path distances.}
+    - {id: dm847.m12.k05, content_en: Centrality measures answer distinct questions.}
+    - {id: dm847.m12.k06, content_en: Edge provenance and condition should be preserved.}
+    - {id: dm847.m12.k07, content_en: Study intensity can inflate observed degree.}
+    - {id: dm847.m12.k08, content_en: Layout coordinates are usually not biological coordinates.}
+    - {id: dm847.m12.k09, content_en: Null models should preserve properties relevant to the hypothesis.}
+    - {id: dm847.m12.k10, content_en: Topological association does not establish causality.}
+  response_constraints:
+    - Define node and edge semantics before reporting metrics.
+    - Name the exact centrality and weight interpretation.
+    - Preserve evidence source, condition, and version.
+    - Do not infer causality, essentiality, or physical interaction from topology alone.
+
+sources:
+  - {id: sdu.dm847.official.2025, role: official_scope_and_learning_outcomes}
+  - {id: established_graph_algorithm_foundations, role: representation_traversal_and_centrality}
+  - {id: original.dm847.m12, role: original_examples_questions_and_explanations}
+
+limitations:
+  - Biological networks are incomplete, biased, and condition dependent.
+  - Different edge definitions can produce incompatible topological conclusions.
+  - Large network visualizations may hide uncertainty and overplotting.
