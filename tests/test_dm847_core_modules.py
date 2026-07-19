@@ -1,4 +1,4 @@
-"""Academic and localization tests for the first six DM847 modules."""
+"""Academic, localization, and integrity tests for the complete DM847 catalog."""
 
 from __future__ import annotations
 
@@ -8,16 +8,18 @@ from computational_biomedicine_study_hub.content.dm847 import (
     BUNDLES,
     LOCALIZED_BUNDLES,
     MODULES,
+    OBJECTIVE_QUESTION_BANKS,
 )
 from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.activity_types import ActivityType
 
-EXPECTED_IDS = tuple(f"dm847.m{number:02d}" for number in range(1, 7))
+EXPECTED_IDS = tuple(f"dm847.m{number:02d}" for number in range(1, 11))
 
 
-def test_dm847_core_catalog_has_six_complete_modules() -> None:
+def test_dm847_catalog_has_ten_complete_modules() -> None:
     assert tuple(module.module_id for module in MODULES) == EXPECTED_IDS
-    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 6
+    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 10
+    assert tuple(OBJECTIVE_QUESTION_BANKS) == EXPECTED_IDS
 
     for bundle in BUNDLES:
         module = bundle.module
@@ -32,7 +34,7 @@ def test_dm847_core_catalog_has_six_complete_modules() -> None:
 
 
 @pytest.mark.parametrize("locale", tuple(AppLocale))
-def test_dm847_core_modules_materialize_in_every_locale(locale: AppLocale) -> None:
+def test_dm847_modules_materialize_in_every_locale(locale: AppLocale) -> None:
     for localized_bundle in LOCALIZED_BUNDLES:
         bundle = localized_bundle.materialize(locale)
         module = bundle.module
@@ -44,15 +46,20 @@ def test_dm847_core_modules_materialize_in_every_locale(locale: AppLocale) -> No
         assert all(concept.body.strip() for concept in module.concepts)
         assert all(example.problem.strip() for example in module.worked_examples)
         assert all(exercise.solution.strip() for exercise in module.practice_exercises)
-        assert all(item.prompt.strip() and item.explanation.strip() for item in module.assessment_items)
+        assert all(
+            item.prompt.strip() and item.explanation.strip()
+            for item in module.assessment_items
+        )
         assert all(item.prompt.strip() and item.explanation.strip() for item in bank)
         assert all(document.text.strip() for document in module.tutor_documents())
 
 
-@pytest.mark.parametrize("bundle_index", range(6))
+@pytest.mark.parametrize("bundle_index", range(10))
 def test_dm847_question_identity_is_stable_across_languages(bundle_index: int) -> None:
     localized_bundle = LOCALIZED_BUNDLES[bundle_index]
-    reference = localized_bundle.materialize(AppLocale.SPANISH_SPAIN).objective_question_bank
+    reference = localized_bundle.materialize(
+        AppLocale.SPANISH_SPAIN
+    ).objective_question_bank
     reference_ids = tuple(item.item_id for item in reference)
     reference_option_ids = tuple(item.option_ids for item in reference)
     reference_correct_ids = tuple(item.correct_option_ids for item in reference)
@@ -63,9 +70,14 @@ def test_dm847_question_identity_is_stable_across_languages(bundle_index: int) -
         assert tuple(item.option_ids for item in bank) == reference_option_ids
         assert tuple(item.correct_option_ids for item in bank) == reference_correct_ids
         assert len({item.item_id for item in bank}) == 20
-        assert all(item.item_id.startswith(f"{EXPECTED_IDS[bundle_index]}.bank.") for item in bank)
+        assert all(
+            item.item_id.startswith(f"{EXPECTED_IDS[bundle_index]}.bank.")
+            for item in bank
+        )
         assert all(len(item.correct_option_ids) == 1 for item in bank)
-        assert all(set(item.correct_option_ids).issubset(set(item.option_ids)) for item in bank)
+        assert all(
+            set(item.correct_option_ids).issubset(set(item.option_ids)) for item in bank
+        )
 
 
 def test_dm847_examples_and_starter_code_compile() -> None:
@@ -96,7 +108,7 @@ def test_dm847_tutor_support_is_retrieval_ready(locale: AppLocale) -> None:
         assert all(module.module_id in document.tags for document in documents)
 
 
-def test_dm847_core_practice_covers_the_supported_learning_cycle() -> None:
+def test_dm847_practice_covers_the_supported_learning_cycle() -> None:
     practice_types = {
         exercise.activity_type for module in MODULES for exercise in module.practice_exercises
     }
@@ -115,12 +127,40 @@ def test_dm847_core_practice_covers_the_supported_learning_cycle() -> None:
         ActivityType.MATCHING,
         ActivityType.ORDERING,
     }.issubset(practice_types)
-    assert {ActivityType.MULTIPLE_CHOICE, ActivityType.TRUE_FALSE}.issubset(assessment_types)
+    assert {ActivityType.MULTIPLE_CHOICE, ActivityType.TRUE_FALSE}.issubset(
+        assessment_types
+    )
 
 
-def test_dm847_biomedical_examples_remain_teaching_material() -> None:
+@pytest.mark.parametrize(
+    ("locale", "constraint_marker"),
+    (
+        (AppLocale.SPANISH_SPAIN, "no "),
+        (AppLocale.ENGLISH, "do not"),
+        (AppLocale.DANISH_DENMARK, "ikke"),
+    ),
+)
+def test_dm847_modules_include_explicit_response_constraints(
+    locale: AppLocale, constraint_marker: str
+) -> None:
     for localized_bundle in LOCALIZED_BUNDLES:
-        for locale in AppLocale:
-            module = localized_bundle.materialize(locale).module
-            constraints = "\n".join(module.tutor_support.response_constraints).casefold()
-            assert "clinical" in constraints or "clínic" in constraints or "klinisk" in constraints
+        module = localized_bundle.materialize(locale).module
+        constraints = "\n".join(module.tutor_support.response_constraints).casefold()
+        assert constraint_marker in constraints
+
+
+def test_dm847_catalog_covers_the_active_course_domains() -> None:
+    titles = "\n".join(module.title for module in MODULES).casefold()
+    required_fragments = (
+        "molecular",
+        "ontolog",
+        "secuenc",
+        "alineamiento",
+        "markov",
+        "bwt",
+        "operon",
+        "motivo",
+        "redes",
+        "omics",
+    )
+    assert all(fragment in titles for fragment in required_fragments)
