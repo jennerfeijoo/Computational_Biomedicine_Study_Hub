@@ -1,0 +1,304 @@
+schema_version: 1.0.0
+course_code: BMB830
+module_id: bmb830.m10
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Análisis completo, evaluación de publicaciones y examen oral
+    en: End-to-end analysis, publication appraisal, and oral examination
+    da: End-to-end-analyse, publikationskritik og mundtlig eksamen
+  summary:
+    es: >-
+      Integración de todo BMB830 en un flujo reproducible: pregunta biológica, estimando, diseño,
+      procedencia, limpieza, descripción, visualización, modelo, inferencia, diagnóstico y comunicación.
+      El módulo desarrolla lectura crítica de métodos estadísticos en publicaciones, reconstrucción de
+      decisiones analíticas, evaluación de afirmaciones y preparación de una defensa oral basada en
+      interpretación de datos, código R, gráficos, resultados, supuestos, alternativas y limitaciones.
+    en: >-
+      Integration of BMB830 into a reproducible workflow: biological question, estimand, design,
+      provenance, cleaning, description, visualization, modeling, inference, diagnostics, and communication.
+      The module develops critical appraisal of statistical methods in publications, reconstruction of
+      analytical decisions, claim evaluation, and oral defense based on data, R code, plots, output,
+      assumptions, alternatives, and limitations.
+    da: >-
+      Integration af BMB830 i et reproducerbart workflow: spørgsmål, estimand, design, provenance,
+      rensning, visualisering, modellering, inferens, diagnostik og kommunikation samt publikationskritik og mundtligt forsvar.
+  estimated_study_hours: 20
+  difficulty: integrative_advanced
+
+alignment:
+  official_learning_outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo03, bmb830.lo04, bmb830.lo05, bmb830.lo06]
+  prerequisite_modules: [bmb830.m01, bmb830.m02, bmb830.m03, bmb830.m04, bmb830.m05, bmb830.m06, bmb830.m07, bmb830.m08, bmb830.m09]
+  later_modules: [bmb831.m01, bmb831.m02, bmb831.m03, bmb831.m04, bmb831.m05, bmb831.m06, bmb831.m12]
+
+objectives:
+  - {id: bmb830.m10.o01, text: {es: Formular una pregunta, estimando y plan de análisis coherentes, en: Formulate a coherent question, estimand, and analysis plan, da: Formulere et sammenhængende spørgsmål, estimand og analyseplan}}
+  - {id: bmb830.m10.o02, text: {es: Construir un workflow R ejecutable desde una sesión limpia, en: Build an R workflow executable from a clean session, da: Bygge et R-workflow der kan køres fra en ren session}}
+  - {id: bmb830.m10.o03, text: {es: Integrar calidad, descripción, modelado y diagnóstico, en: Integrate quality, description, modeling, and diagnostics, da: Integrere kvalitet, beskrivelse, modellering og diagnostik}}
+  - {id: bmb830.m10.o04, text: {es: Seleccionar efectos, intervalos y visualizaciones acordes con el estimando, en: Select effects, intervals, and visualizations aligned with the estimand, da: Vælge effekter, intervaller og visualiseringer tilpasset estimandet}}
+  - {id: bmb830.m10.o05, text: {es: Evaluar métodos estadísticos de una publicación, en: Evaluate statistical methods in a publication, da: Evaluere statistiske metoder i en publikation}}
+  - {id: bmb830.m10.o06, text: {es: Detectar discrepancias entre resultados y afirmaciones, en: Detect discrepancies between results and claims, da: Finde uoverensstemmelser mellem resultater og påstande}}
+  - {id: bmb830.m10.o07, text: {es: Defender oralmente decisiones y alternativas, en: Orally defend decisions and alternatives, da: Mundtligt forsvare beslutninger og alternativer}}
+  - {id: bmb830.m10.o08, text: {es: Reconocer incertidumbre, sensibilidad y límites de generalización, en: Recognize uncertainty, sensitivity, and generalization limits, da: Genkende usikkerhed, følsomhed og generaliseringsbegrænsninger}}
+
+concepts:
+  - id: bmb830.m10.c01
+    title: {es: Cadena analítica completa, en: Complete analytical chain, da: Komplet analysekæde}
+    body:
+      es: >-
+        Un análisis defendible conecta pregunta biológica, población, unidad, estimando, diseño, datos,
+        preprocessing, método, resultado y afirmación. Cada transición necesita una justificación y una comprobación.
+        Comenzar por una prueba disponible y buscar una pregunta después invierte el proceso científico.
+      en: >-
+        A defensible analysis connects biological question, population, unit, estimand, design, data,
+        preprocessing, method, result, and claim. Every transition requires justification and a check.
+        Starting from an available test and searching for a question reverses the scientific process.
+      da: >-
+        En forsvarlig analyse forbinder spørgsmål, population, enhed, estimand, design, data, preprocessing, metode, resultat og påstand.
+    key_points:
+      - {es: La coherencia entre etapas importa más que la sofisticación aislada, en: Coherence across stages matters more than isolated sophistication, da: Sammenhæng mellem trin betyder mere end isoleret kompleksitet}
+  - id: bmb830.m10.c02
+    title: {es: Plan de análisis y decisiones preespecificadas, en: Analysis plan and prespecified decisions, da: Analyseplan og præspecifikke beslutninger}
+    body:
+      es: >-
+        El plan define outcome principal, unidades, exclusiones, transformaciones, covariables, modelo,
+        contrastes, multiplicidad, gráficos y análisis de sensibilidad. No necesita impedir toda exploración,
+        pero separa claramente decisiones previas y posteriores a observar resultados. Versionar el plan permite auditar cambios.
+      en: >-
+        The plan defines primary outcome, units, exclusions, transformations, covariates, model, contrasts,
+        multiplicity, plots, and sensitivity analyses. It need not prevent exploration but separates pre- and post-result decisions.
+      da: >-
+        Analyseplanen definerer outcome, enheder, eksklusioner, transformationer, kovariater, model, kontraster og følsomhed.
+    key_points:
+      - {es: Cambios posteriores pueden ser válidos si se declaran y justifican, en: Post-result changes may be valid if declared and justified, da: Ændringer efter resultater kan være gyldige hvis de deklareres og begrundes}
+  - id: bmb830.m10.c03
+    title: {es: Workflow reproducible y productos auditables, en: Reproducible workflow and auditable products, da: Reproducerbart workflow og auditerbare produkter}
+    body:
+      es: >-
+        El proyecto conserva datos crudos, manifiesto, scripts o Quarto, funciones, datos derivados y resultados.
+        Una ejecución limpia reconstruye tablas y figuras con versiones y semillas registradas. Los productos incluyen
+        tabla de calidad, diccionario, resumen de exclusiones, resultados principales y archivo de sesión. Copiar resultados
+        manualmente desde la consola rompe la cadena entre código y reporte.
+      en: >-
+        The project preserves raw data, manifest, scripts or Quarto, functions, derived data, and results.
+        A clean run rebuilds tables and figures with recorded versions and seeds. Manual copying from the console breaks provenance.
+      da: >-
+        Projektet bevarer rådata, manifest, scripts eller Quarto, funktioner, afledte data og resultater. En ren kørsel genskaber output.
+    key_points:
+      - {es: La reproducibilidad debe cubrir números y narrativa, en: Reproducibility should cover numbers and narrative, da: Reproducerbarhed bør omfatte både tal og narrativ}
+  - id: bmb830.m10.c04
+    title: {es: Triangulación de evidencia, en: Evidence triangulation, da: Evidenstriangulering}
+    body:
+      es: >-
+        Una conclusión se apoya más sólidamente cuando diseño, estimación, intervalos, visualización, diagnósticos y sensibilidad
+        apuntan de forma coherente. Ningún componente sustituye a los demás: un p pequeño no corrige un gráfico con outlier influyente,
+        y un gráfico convincente no reemplaza incertidumbre. Resultados discordantes deben explicarse, no ocultarse.
+      en: >-
+        A conclusion is stronger when design, estimates, intervals, visualization, diagnostics, and sensitivity agree.
+        No component replaces the others: a small p-value does not repair an influential outlier, and a convincing plot does not replace uncertainty.
+      da: >-
+        En konklusion er stærkere når design, estimater, intervaller, visualisering, diagnostik og følsomhed er sammenhængende.
+    key_points:
+      - {es: Discordancia es información sobre modelo o datos, en: Discordance is information about model or data, da: Uoverensstemmelse er information om model eller data}
+  - id: bmb830.m10.c05
+    title: {es: Lectura crítica de una publicación, en: Critical appraisal of a publication, da: Kritisk vurdering af en publikation}
+    body:
+      es: >-
+        La evaluación reconstruye pregunta, diseño, unidades, variables, preprocessing, modelo, estimando, incertidumbre y afirmación.
+        Debe comprobar si métodos respetan dependencia, si exclusiones están justificadas, si multiplicidad se reconoce, si figuras
+        muestran datos y si la conclusión coincide con efecto e intervalo. La reputación de la revista no sustituye la auditoría.
+      en: >-
+        Appraisal reconstructs question, design, units, variables, preprocessing, model, estimand, uncertainty, and claim.
+        Check dependence, exclusions, multiplicity, data display, and whether conclusions match effect and interval.
+      da: >-
+        Kritisk vurdering rekonstruerer spørgsmål, design, enheder, preprocessing, model, estimand, usikkerhed og påstand.
+    key_points:
+      - {es: “Método estándar” no elimina la necesidad de justificar supuestos, en: “Standard method” does not remove the need to justify assumptions, da: “Standardmetode” fjerner ikke behovet for at begrunde antagelser}
+  - id: bmb830.m10.c06
+    title: {es: Resultados, afirmaciones y lenguaje, en: Results, claims, and language, da: Resultater, påstande og sprog}
+    body:
+      es: >-
+        El resultado reporta estimación, intervalo, n, escala y análisis. La afirmación interpreta su significado dentro del diseño.
+        Verbos causales exigen diseño y supuestos causales; “predice” exige evaluación en datos nuevos; “biomarcador” puede requerir
+        validación analítica y clínica adicional. Un resultado exploratorio se etiqueta como tal y no se presenta como confirmación.
+      en: >-
+        A result reports estimate, interval, n, scale, and analysis. A claim interprets it within the design.
+        Causal verbs require causal design and assumptions; “predicts” requires new-data evaluation; “biomarker” may require further validation.
+      da: >-
+        Et resultat rapporterer estimat, interval, n, skala og analyse. Påstanden skal være begrænset af designet.
+    key_points:
+      - {es: La fuerza del verbo debe corresponder a la fuerza de la evidencia, en: Verb strength should match evidence strength, da: Verbets styrke bør matche evidensens styrke}
+  - id: bmb830.m10.c07
+    title: {es: Defensa oral basada en razonamiento, en: Reasoning-based oral defense, da: Ræsonneringsbaseret mundtligt forsvar}
+    body:
+      es: >-
+        Una respuesta oral sólida comienza con la pregunta, define los objetos, explica el mecanismo del método, interpreta el output
+        y termina con supuestos y alternativas. Memorizar definiciones sin aplicarlas a la figura o tabla es insuficiente.
+        Cuando falta información, debe declararse qué dato sería necesario y cómo cambiaría la decisión.
+      en: >-
+        A strong oral response starts with the question, defines objects, explains the method mechanism, interprets output,
+        and ends with assumptions and alternatives. When information is missing, state what is needed and how it would change the decision.
+      da: >-
+        Et stærkt mundtligt svar starter med spørgsmålet, definerer objekter, forklarer metoden, fortolker output og slutter med antagelser og alternativer.
+    key_points:
+      - {es: Reconocer incertidumbre es competencia, no debilidad, en: Recognizing uncertainty is competence, not weakness, da: At anerkende usikkerhed er kompetence, ikke svaghed}
+  - id: bmb830.m10.c08
+    title: {es: Análisis de sensibilidad y límites, en: Sensitivity analysis and limitations, da: Følsomhedsanalyse og begrænsninger}
+    body:
+      es: >-
+        La sensibilidad evalúa si conclusiones cambian bajo decisiones plausibles: inclusión de extremos, transformación,
+        covariables, missingness, escala, contraste o método. No consiste en probar opciones hasta obtener el resultado deseado.
+        Las limitaciones especifican dirección potencial del sesgo, incertidumbre no cuantificada y poblaciones no cubiertas.
+      en: >-
+        Sensitivity analysis asks whether conclusions change under plausible choices: extremes, transformation, covariates,
+        missingness, scale, contrast, or method. It is not trying options until obtaining a desired result.
+      da: >-
+        Følsomhedsanalyse vurderer om konklusioner ændres under plausible valg. Det er ikke at prøve muligheder indtil ønsket resultat opnås.
+    key_points:
+      - {es: Una limitación útil explica consecuencias, en: A useful limitation explains consequences, da: En nyttig begrænsning forklarer konsekvenser}
+
+worked_examples:
+  - id: bmb830.m10.e01
+    title: {es: Análisis completo de biomarcador, en: End-to-end biomarker analysis, da: End-to-end biomarkøranalyse}
+    scenario: {es: Comparar cambio de biomarcador entre dos grupos con medición basal y final., en: Compare biomarker change between two groups with baseline and follow-up., da: Sammenlign biomarkørændring mellem to grupper med baseline og follow-up.}
+    reasoning:
+      es: >-
+        Definir diferencia media ajustada por basal; auditar unidades y pérdidas; visualizar cambios por sujeto;
+        ajustar `followup ~ group + baseline`; comprobar residuos e influencia; reportar contraste, IC, p y sensibilidad
+        ante valores extremos. La causalidad depende de asignación y pérdidas, no sólo del modelo.
+      en: >-
+        Define baseline-adjusted mean difference; audit units and attrition; plot subject trajectories; fit
+        `followup ~ group + baseline`; assess diagnostics and influence; report contrast, CI, p, and sensitivity.
+      da: >-
+        Definér baseline-justeret mean-forskel, auditér data, visualisér forløb, fit model og rapportér kontrast, CI og følsomhed.
+    conclusion: {es: El flujo conecta estimando, datos, modelo y afirmación., en: The workflow connects estimand, data, model, and claim., da: Workflowet forbinder estimand, data, model og påstand.}
+  - id: bmb830.m10.e02
+    title: {es: Publicación con pseudorreplicación, en: Publication with pseudoreplication, da: Publikation med pseudoreplikation}
+    scenario: {es: Se comparan 400 células de 8 pacientes usando t-test por célula., en: Four hundred cells from eight patients are compared using a cell-level t-test., da: Fire hundrede celler fra otte patienter sammenlignes med t-test per celle.}
+    reasoning: {es: La unidad clínica es paciente; el SE y p son artificialmente pequeños. Debe resumirse o modelarse jerarquía., en: The clinical unit is the patient; SE and p are artificially small. Summarize or model hierarchy., da: Den kliniske enhed er patienten; SE og p er kunstigt små.}
+    conclusion: {es: El tamaño aparente no compensa la dependencia ignorada., en: Apparent size does not compensate for ignored dependence., da: Tilsyneladende størrelse kompenserer ikke for ignoreret afhængighed.}
+  - id: bmb830.m10.e03
+    title: {es: Conclusión fuerte con IC amplio, en: Strong claim with a wide CI, da: Stærk påstand med bredt CI}
+    scenario: {es: OR=1.8, IC95% [0.7,4.9], p=0.22 y el artículo concluye “no existe asociación”., en: OR=1.8, 95% CI [0.7,4.9], p=0.22 and the paper concludes “no association exists”., da: OR=1,8, 95% CI [0,7;4,9], p=0,22 og artiklen konkluderer “ingen association”.}
+    reasoning: {es: El intervalo incluye reducción, ausencia y aumento importante; el resultado es impreciso., en: The interval includes reduction, no association, and substantial increase; the result is imprecise., da: Intervallet inkluderer reduktion, ingen association og stor stigning; resultatet er upræcist.}
+    conclusion: {es: Reescribir como evidencia insuficiente para precisar dirección y magnitud., en: Rewrite as insufficient evidence to determine direction and magnitude precisely., da: Omskriv som utilstrækkelig evidens til præcis retning og magnitude.}
+  - id: bmb830.m10.e04
+    title: {es: PCA presentada como clasificación, en: PCA presented as classification, da: PCA præsenteret som klassifikation}
+    scenario: {es: Un PCA exploratorio separa visualmente grupos en los mismos datos usados para elegir variables., en: Exploratory PCA visually separates groups in the same data used to select variables., da: Eksplorativ PCA separerer visuelt grupper i samme data brugt til variabelvalg.}
+    reasoning: {es: La selección supervisada previa introduce optimismo; PCA no estima generalización ni prueba clases., en: Prior supervised selection induces optimism; PCA does not estimate generalization or prove classes., da: Superviseret variabelvalg giver optimisme; PCA estimerer ikke generalisering.}
+    conclusion: {es: Presentar como exploración y exigir validación externa con pipeline completo., en: Present as exploration and require external validation of the full pipeline., da: Præsenter som eksploration og kræv ekstern validering af hele pipelinet.}
+
+guided_practice:
+  - {id: bmb830.m10.p01, type: analysis_plan, prompt: {es: Redacta un plan de análisis para una pregunta biológica completa., en: Draft an analysis plan for a complete biological question., da: Udarbejd en analyseplan for et komplet biologisk spørgsmål.}, expected_elements: [estimand, units, preprocessing, model, contrasts, sensitivity]}
+  - {id: bmb830.m10.p02, type: workflow_audit, prompt: {es: Audita reproducibilidad de un proyecto R y corrige sus dependencias ocultas., en: Audit reproducibility of an R project and correct hidden dependencies., da: Auditér reproducerbarheden af et R-projekt og ret skjulte afhængigheder.}, expected_elements: [clean_run, paths, versions, generated_outputs]}
+  - {id: bmb830.m10.p03, type: output_interpretation, prompt: {es: Interpreta una tabla de regresión, un IC, un diagnóstico y una figura como una sola evidencia., en: Interpret a regression table, CI, diagnostic, and figure as one body of evidence., da: Fortolk regressionstabel, CI, diagnostik og figur som samlet evidens.}, expected_elements: [effect, precision, assumptions, coherence]}
+  - {id: bmb830.m10.p04, type: publication_appraisal, prompt: {es: Reconstruye unidades, estimando y decisiones de una sección de Métodos., en: Reconstruct units, estimand, and decisions from a Methods section., da: Rekonstruér enheder, estimand og beslutninger fra en Methods-sektion.}, expected_elements: [design, dependence, preprocessing, model]}
+  - {id: bmb830.m10.p05, type: claim_audit, prompt: {es: Clasifica afirmaciones como descriptivas, asociativas, predictivas o causales y corrígelas., en: Classify claims as descriptive, associative, predictive, or causal and correct them., da: Klassificer påstande som deskriptive, associative, prædiktive eller kausale og ret dem.}, expected_elements: [claim_type, evidence_requirement, corrected_language]}
+  - {id: bmb830.m10.p06, type: sensitivity_design, prompt: {es: Diseña un análisis de sensibilidad sin seleccionar por significancia., en: Design a sensitivity analysis without significance-driven selection., da: Design en følsomhedsanalyse uden signifikansdrevet selection.}, expected_elements: [plausible_choices, fixed_outcome, comparison_table]}
+  - {id: bmb830.m10.p07, type: oral_explanation, prompt: {es: Explica en tres minutos un método, su output y sus límites., en: Explain a method, its output, and its limits in three minutes., da: Forklar en metode, dens output og begrænsninger på tre minutter.}, expected_elements: [question, mechanism, interpretation, assumptions]}
+  - {id: bmb830.m10.p08, type: alternative_method, prompt: {es: Compara dos métodos plausibles para el mismo estimando., en: Compare two plausible methods for the same estimand., da: Sammenlign to plausible metoder for samme estimand.}, expected_elements: [shared_target, assumptions, robustness, interpretation]}
+
+objective_bank:
+  - {id: bmb830.m10.q01, type: multiple_choice, prompt: {es: ¿Cuál es el primer paso de un análisis?, en: What is the first step of an analysis?, da: Hvad er første trin i en analyse?}, options: [{id: a, text: {es: Definir pregunta, unidad y estimando, en: Define question, unit, and estimand, da: Definér spørgsmål, enhed og estimand}}, {id: b, text: {es: Elegir el test con menor p, en: Choose the test with the smallest p, da: Vælg test med mindst p}}, {id: c, text: {es: Dibujar asteriscos, en: Draw significance stars, da: Tegn signifikansstjerner}}], correct_option_ids: [a], explanation: {es: El método sigue a la pregunta., en: The method follows the question., da: Metoden følger spørgsmålet.}}
+  - {id: bmb830.m10.q02, type: true_false, prompt: {es: Una ejecución limpia debe reconstruir tablas y figuras., en: A clean run should rebuild tables and figures., da: En ren kørsel bør genskabe tabeller og figurer.}, correct: true, explanation: {es: Es parte de la reproducibilidad., en: This is part of reproducibility., da: Det er del af reproducerbarhed.}}
+  - {id: bmb830.m10.q03, type: multiple_choice, prompt: {es: ¿Qué rompe procedencia?, en: What breaks provenance?, da: Hvad bryder provenance?}, options: [{id: a, text: {es: Copiar manualmente valores desde consola, en: Manually copying values from the console, da: Manuel kopiering af værdier fra konsollen}}, {id: b, text: {es: Generar tablas desde código, en: Generating tables from code, da: Generering af tabeller fra kode}}, {id: c, text: {es: Registrar versiones, en: Recording versions, da: Registrering af versioner}}], correct_option_ids: [a], explanation: {es: Se pierde vínculo automático entre análisis y reporte., en: The automatic link between analysis and report is lost., da: Den automatiske forbindelse mellem analyse og rapport går tabt.}}
+  - {id: bmb830.m10.q04, type: true_false, prompt: {es: Un p pequeño compensa un diseño sesgado., en: A small p-value compensates for biased design., da: En lille p-værdi kompenserer for biased design.}, correct: false, explanation: {es: Cuantifica incompatibilidad bajo el modelo, no validez del diseño., en: It quantifies incompatibility under the model, not design validity., da: Den kvantificerer inkompatibilitet under modellen, ikke designvaliditet.}}
+  - {id: bmb830.m10.q05, type: multiple_choice, prompt: {es: ¿Qué debe reconstruirse al criticar Métodos?, en: What should be reconstructed when appraising Methods?, da: Hvad bør rekonstrueres ved kritik af Methods?}, options: [{id: a, text: {es: unidades, preprocessing, modelo y estimando, en: units, preprocessing, model, and estimand, da: enheder, preprocessing, model og estimand}}, {id: b, text: {es: sólo marca del software, en: software brand only, da: kun softwarebrand}}, {id: c, text: {es: sólo número de referencias, en: reference count only, da: kun antal referencer}}], correct_option_ids: [a], explanation: {es: Determinan qué se estimó y bajo qué supuestos., en: They determine what was estimated and under which assumptions., da: De bestemmer hvad der blev estimeret og under hvilke antagelser.}}
+  - {id: bmb830.m10.q06, type: true_false, prompt: {es: La reputación de una revista elimina la necesidad de evaluar métodos., en: Journal reputation removes the need to evaluate methods., da: Tidsskriftets ry fjerner behovet for metodevurdering.}, correct: false, explanation: {es: Cada análisis requiere auditoría propia., en: Every analysis requires its own appraisal., da: Hver analyse kræver egen vurdering.}}
+  - {id: bmb830.m10.q07, type: multiple_choice, prompt: {es: ¿Qué exige afirmar “predice”?, en: What is required to claim “predicts”?, da: Hvad kræves for at påstå “prædikterer”?}, options: [{id: a, text: {es: Evaluación en datos no usados para construir el modelo, en: Evaluation on data not used to build the model, da: Evaluering på data ikke brugt til modelbygning}}, {id: b, text: {es: Separación visual en entrenamiento, en: Visual separation in training, da: Visuel separation i træning}}, {id: c, text: {es: Un loading grande, en: A large loading, da: En stor loading}}], correct_option_ids: [a], explanation: {es: Predicción implica generalización., en: Prediction implies generalization., da: Prædiktion indebærer generalisering.}}
+  - {id: bmb830.m10.q08, type: true_false, prompt: {es: Un resultado exploratorio puede convertirse en confirmatorio sólo cambiando el lenguaje., en: An exploratory result becomes confirmatory merely by changing wording., da: Et eksplorativt resultat bliver confirmatory kun ved at ændre sprog.}, correct: false, explanation: {es: Requiere evaluación independiente o diseño confirmatorio., en: It requires independent evaluation or confirmatory design., da: Det kræver uafhængig evaluering eller confirmatory design.}}
+  - {id: bmb830.m10.q09, type: multiple_choice, prompt: {es: ¿Qué es triangulación de evidencia?, en: What is evidence triangulation?, da: Hvad er evidenstriangulering?}, options: [{id: a, text: {es: Coherencia entre diseño, efecto, gráfico, diagnóstico y sensibilidad, en: Coherence across design, effect, plot, diagnostics, and sensitivity, da: Sammenhæng mellem design, effekt, plot, diagnostik og følsomhed}}, {id: b, text: {es: Repetir el mismo p tres veces, en: Repeating the same p-value three times, da: Gentage samme p-værdi tre gange}}, {id: c, text: {es: Usar tres colores, en: Using three colors, da: Bruge tre farver}}], correct_option_ids: [a], explanation: {es: Integra fuentes complementarias de validez., en: It integrates complementary validity evidence., da: Det integrerer komplementær validitetsevidens.}}
+  - {id: bmb830.m10.q10, type: true_false, prompt: {es: Un análisis de sensibilidad debe elegir la opción con p menor., en: Sensitivity analysis should choose the option with the smallest p-value., da: En følsomhedsanalyse bør vælge den mulighed med mindst p-værdi.}, correct: false, explanation: {es: Debe comparar decisiones plausibles sin selección oportunista., en: It compares plausible choices without opportunistic selection., da: Den sammenligner plausible valg uden opportunistisk selection.}}
+  - {id: bmb830.m10.q11, type: multiple_choice, prompt: {es: ¿Qué caracteriza una buena respuesta oral?, en: What characterizes a strong oral answer?, da: Hvad karakteriserer et stærkt mundtligt svar?}, options: [{id: a, text: {es: Pregunta, mecanismo, output, supuestos y alternativas, en: Question, mechanism, output, assumptions, and alternatives, da: Spørgsmål, mekanisme, output, antagelser og alternativer}}, {id: b, text: {es: Definición memorizada sin aplicación, en: Memorized definition without application, da: Memoriseret definition uden anvendelse}}, {id: c, text: {es: Ocultar incertidumbre, en: Hiding uncertainty, da: Skjule usikkerhed}}], correct_option_ids: [a], explanation: {es: Demuestra razonamiento transferible., en: It demonstrates transferable reasoning., da: Det demonstrerer overførbar ræsonnering.}}
+  - {id: bmb830.m10.q12, type: true_false, prompt: {es: Reconocer que falta información debilita necesariamente una defensa oral., en: Acknowledging missing information necessarily weakens an oral defense., da: At anerkende manglende information svækker nødvendigvis et mundtligt forsvar.}, correct: false, explanation: {es: Identificar qué falta y su consecuencia demuestra criterio., en: Identifying what is missing and its consequence demonstrates judgment., da: At identificere hvad der mangler og konsekvensen viser dømmekraft.}}
+
+open_assessment:
+  - id: bmb830.m10.a01
+    prompt: {es: Diseña un análisis completo reproducible para un dataset biológico., en: Design a complete reproducible analysis for a biological dataset., da: Design en komplet reproducerbar analyse for et biologisk datasæt.}
+    rubric: [{criterion: question_design_estimand, points: 3}, {criterion: quality_and_workflow, points: 3}, {criterion: model_inference_diagnostics, points: 3}, {criterion: claims_limitations, points: 3}]
+  - id: bmb830.m10.a02
+    prompt: {es: Evalúa críticamente la sección estadística de una publicación., en: Critically appraise the statistical section of a publication., da: Vurder kritisk den statistiske del af en publikation.}
+    rubric: [{criterion: units_and_design, points: 3}, {criterion: preprocessing_and_model, points: 3}, {criterion: uncertainty_multiplicity, points: 3}, {criterion: claim_alignment, points: 3}]
+  - id: bmb830.m10.a03
+    prompt: {es: Defiende oralmente una tabla y una figura no vistas previamente., en: Orally defend interpretation of an unseen table and figure., da: Forsvar mundtligt fortolkningen af en ukendt tabel og figur.}
+    rubric: [{criterion: object_definition, points: 2}, {criterion: statistical_interpretation, points: 4}, {criterion: assumptions_and_alternatives, points: 3}, {criterion: communication, points: 3}]
+  - id: bmb830.m10.a04
+    prompt: {es: Propón y justifica análisis de sensibilidad para tres decisiones críticas., en: Propose and justify sensitivity analyses for three critical decisions., da: Foreslå og begrund følsomhedsanalyser for tre kritiske beslutninger.}
+    rubric: [{criterion: decision_identification, points: 3}, {criterion: plausible_alternatives, points: 3}, {criterion: fixed_target, points: 2}, {criterion: interpretation, points: 2}]
+  - id: bmb830.m10.a05
+    prompt: {es: Compara dos métodos plausibles y recomienda uno sin caricaturizar el otro., en: Compare two plausible methods and recommend one without caricaturing the other., da: Sammenlign to plausible metoder og anbefal én uden at karikere den anden.}
+    rubric: [{criterion: shared_estimand, points: 2}, {criterion: assumptions_and_tradeoffs, points: 4}, {criterion: evidence_based_choice, points: 3}, {criterion: limitations, points: 1}]
+
+glossary:
+  - {id: bmb830.term.analysis_plan, term: {es: plan de análisis, en: analysis plan, da: analyseplan}, definition: {es: Documento que fija decisiones analíticas y su justificación., en: Document specifying analytical decisions and justification., da: Dokument der fastlægger analytiske beslutninger og begrundelser.}}
+  - {id: bmb830.term.primary_outcome, term: {es: outcome principal, en: primary outcome, da: primært outcome}, definition: {es: Resultado priorizado para la inferencia principal., en: Outcome prioritized for primary inference., da: Outcome prioriteret til primær inferens.}}
+  - {id: bmb830.term.audit_trail, term: {es: trazabilidad de auditoría, en: audit trail, da: audit trail}, definition: {es: Registro de decisiones, cambios y productos del análisis., en: Record of analytical decisions, changes, and products., da: Registrering af analysebeslutninger, ændringer og produkter.}}
+  - {id: bmb830.term.triangulation, term: {es: triangulación, en: triangulation, da: triangulering}, definition: {es: Integración de evidencias complementarias sobre una conclusión., en: Integration of complementary evidence about a conclusion., da: Integration af komplementær evidens om en konklusion.}}
+  - {id: bmb830.term.critical_appraisal, term: {es: evaluación crítica, en: critical appraisal, da: kritisk vurdering}, definition: {es: Examen estructurado de validez, métodos e interpretación., en: Structured examination of validity, methods, and interpretation., da: Struktureret undersøgelse af validitet, metoder og fortolkning.}}
+  - {id: bmb830.term.confirmatory, term: {es: confirmatorio, en: confirmatory, da: confirmatory}, definition: {es: Análisis diseñado para evaluar una hipótesis preespecificada con control de error., en: Analysis designed to evaluate a prespecified hypothesis with error control., da: Analyse designet til at evaluere en præspecifik hypotese med fejlkontrol.}}
+  - {id: bmb830.term.exploratory, term: {es: exploratorio, en: exploratory, da: eksplorativ}, definition: {es: Análisis que genera patrones o hipótesis para evaluación posterior., en: Analysis generating patterns or hypotheses for later evaluation., da: Analyse der genererer mønstre eller hypoteser til senere evaluering.}}
+  - {id: bmb830.term.sensitivity_analysis, term: {es: análisis de sensibilidad, en: sensitivity analysis, da: følsomhedsanalyse}, definition: {es: Evaluación de robustez bajo decisiones plausibles., en: Robustness evaluation under plausible decisions., da: Robusthedsvurdering under plausible beslutninger.}}
+  - {id: bmb830.term.generalizability, term: {es: generalización, en: generalizability, da: generaliserbarhed}, definition: {es: Capacidad de aplicar conclusiones a otras poblaciones o contextos., en: Ability to apply conclusions to other populations or contexts., da: Evne til at anvende konklusioner på andre populationer eller kontekster.}}
+  - {id: bmb830.term.claim_scope, term: {es: alcance de afirmación, en: claim scope, da: påstandsområde}, definition: {es: Fuerza y dominio máximo respaldados por la evidencia., en: Maximum strength and domain supported by evidence., da: Maksimal styrke og domæne understøttet af evidens.}}
+  - {id: bmb830.term.clean_run, term: {es: ejecución limpia, en: clean run, da: ren kørsel}, definition: {es: Reconstrucción desde entradas declaradas sin objetos previos., en: Reconstruction from declared inputs without previous objects., da: Rekonstruktion fra deklarerede input uden tidligere objekter.}}
+  - {id: bmb830.term.oral_defense, term: {es: defensa oral, en: oral defense, da: mundtligt forsvar}, definition: {es: Explicación razonada de decisiones, resultados y límites bajo preguntas., en: Reasoned explanation of decisions, results, and limits under questioning., da: Ræsonneret forklaring af beslutninger, resultater og begrænsninger under spørgsmål.}}
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      Para cualquier caso integrador, fuerza esta secuencia: pregunta y estimando; diseño y unidad;
+      procedencia y calidad; descripción; modelo y supuestos; efecto, intervalo y p; diagnósticos;
+      sensibilidad; afirmación y límites. En oral, pregunta siempre por una alternativa razonable.
+    en: >-
+      For any integrative case, enforce: question and estimand; design and unit; provenance and quality;
+      description; model and assumptions; effect, interval, and p; diagnostics; sensitivity; claim and limits.
+      In oral practice, always ask for a reasonable alternative.
+    da: >-
+      For integrative cases: spørgsmål og estimand; design og enhed; provenance og kvalitet;
+      beskrivelse; model og antagelser; effekt, interval og p; diagnostik; følsomhed; påstand og begrænsninger.
+  misconceptions:
+    - sophisticated_method_guarantees_validity
+    - clean_code_equals_correct_science
+    - journal_prestige_equals_method_quality
+    - prediction_claim_needs_only_training_fit
+    - exploratory_can_be_called_confirmatory
+    - sensitivity_means_choose_best_pvalue
+  socratic_questions:
+    - What exact quantity is estimated and for which population?
+    - Can every table and figure be rebuilt from a clean session?
+    - Which analytical decisions were made after seeing results?
+    - Do estimate, interval, plot, and diagnostics tell a coherent story?
+    - What alternative method targets the same estimand?
+    - What evidence would justify a stronger causal or predictive verb?
+  grading_criteria:
+    - maintain end-to-end coherence
+    - produce reproducible R evidence
+    - critically appraise design and statistical methods
+    - interpret effect, uncertainty, and diagnostics jointly
+    - defend alternatives and limitations orally
+  retrieval_fragments:
+    - {id: bmb830.m10.r01, topic: chain, text: {es: Un análisis conecta pregunta, estimando, diseño, datos, método, resultado y afirmación., en: An analysis connects question, estimand, design, data, method, result, and claim., da: En analyse forbinder spørgsmål, estimand, design, data, metode, resultat og påstand.}}
+    - {id: bmb830.m10.r02, topic: plan, text: {es: El plan fija outcome, unidades, exclusiones, modelo, contrastes y sensibilidad antes de resultados., en: The plan fixes outcome, units, exclusions, model, contrasts, and sensitivity before results., da: Planen fastlægger outcome, enheder, eksklusioner, model, kontraster og følsomhed før resultater.}}
+    - {id: bmb830.m10.r03, topic: reproducibility, text: {es: Una ejecución limpia debe reconstruir tablas, figuras y valores reportados., en: A clean run should rebuild reported tables, figures, and values., da: En ren kørsel bør genskabe rapporterede tabeller, figurer og værdier.}}
+    - {id: bmb830.m10.r04, topic: appraisal, text: {es: Criticar una publicación exige reconstruir unidad, preprocessing, estimando, modelo y afirmación., en: Appraising a paper requires reconstructing unit, preprocessing, estimand, model, and claim., da: Kritik af en artikel kræver rekonstruktion af enhed, preprocessing, estimand, model og påstand.}}
+    - {id: bmb830.m10.r05, topic: claims, text: {es: Verbos causales, predictivos y de biomarcador exigen evidencias diferentes., en: Causal, predictive, and biomarker verbs require different evidence., da: Kausale, prædiktive og biomarkør-verber kræver forskellig evidens.}}
+    - {id: bmb830.m10.r06, topic: triangulation, text: {es: Diseño, estimación, gráfico, diagnóstico y sensibilidad deben interpretarse conjuntamente., en: Design, estimation, plot, diagnostics, and sensitivity should be interpreted jointly., da: Design, estimation, plot, diagnostik og følsomhed bør fortolkes samlet.}}
+    - {id: bmb830.m10.r07, topic: exploration, text: {es: Exploración genera hipótesis; confirmación requiere evaluación preespecificada o independiente., en: Exploration generates hypotheses; confirmation requires prespecified or independent evaluation., da: Eksploration genererer hypoteser; confirmation kræver præspecifik eller uafhængig evaluering.}}
+    - {id: bmb830.m10.r08, topic: sensitivity, text: {es: Sensibilidad compara decisiones plausibles manteniendo fija la pregunta, no selecciona el mejor p., en: Sensitivity compares plausible choices while keeping the question fixed; it does not select the best p-value., da: Følsomhed sammenligner plausible valg med fast spørgsmål; den vælger ikke bedste p.}}
+    - {id: bmb830.m10.r09, topic: oral, text: {es: Una respuesta oral define objetos, explica mecanismo, interpreta output y declara límites., en: An oral answer defines objects, explains mechanism, interprets output, and states limits., da: Et mundtligt svar definerer objekter, forklarer mekanisme, fortolker output og angiver begrænsninger.}}
+    - {id: bmb830.m10.r10, topic: missing_info, text: {es: Cuando falta información, especifica qué necesitas y cómo cambiaría la conclusión., en: When information is missing, state what is needed and how it would change the conclusion., da: Når information mangler, angiv hvad der kræves og hvordan konklusionen ville ændres.}}
+    - {id: bmb830.m10.r11, topic: alternative, text: {es: Métodos alternativos deben compararse sobre el mismo estimando y datos evaluativos., en: Alternative methods should be compared on the same estimand and evaluation data., da: Alternative metoder bør sammenlignes på samme estimand og evalueringsdata.}}
+    - {id: bmb830.m10.r12, topic: limitations, text: {es: Una limitación útil explica dirección potencial del sesgo y alcance afectado., en: A useful limitation explains potential bias direction and affected scope., da: En nyttig begrænsning forklarer potentiel biasretning og påvirket område.}}
+
+source_map:
+  - {section: official_assessment_and_outcomes, source: sdu.bmb830.official.2025}
+  - {section: end_to_end_biostatistics, source: repository.biostatistics.yachay}
+  - {section: critical_appraisal_and_modern_inference, source: cetinkaya_hardin.ims.2e}
+  - {section: regression_and_multivariate_review, source: james_witten_hastie_tibshirani.islr.2e}
+
+limitations:
+  - The oral-practice structure is instructional and does not replace the official examiner's format.
+  - Publication examples are original synthetic cases rather than reproduced protected exercises.
+  - Danish text requires final native-language review before release.
