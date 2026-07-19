@@ -1,0 +1,176 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m12
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm857.m12.f01
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front: {es: ¿Qué diferencia una clase de una instancia?, en: What distinguishes a class from an instance?, da: Hvad adskiller en klasse fra en instans?}
+    back: {es: La clase define una familia de objetos y su comportamiento; una instancia es un objeto concreto con identidad y estado propios., en: A class defines an object family and shared behavior; an instance is a concrete object with its own identity and state., da: En klasse definerer en objektfamilie og fælles adfærd; en instans er et konkret objekt med egen identitet og tilstand.}
+    linked_objectives: [m12.o1]
+  - id: dm857.m12.f02
+    mode: conceptual
+    card_type: method_binding
+    difficulty: foundational
+    front: {es: ¿Qué ocurre al evaluar `obj.method`?, en: What happens when evaluating `obj.method`?, da: Hvad sker der ved evaluering af `obj.method`?}
+    back: {es: Se obtiene un método enlazado que recordará `obj` y lo pasará como primer argumento, normalmente llamado `self`., en: A bound method is produced; it remembers `obj` and passes it as the first argument, usually named `self`., da: Der dannes en bundet metode, som husker `obj` og sender det som første argument, normalt `self`.}
+    linked_objectives: [m12.o1]
+  - id: dm857.m12.f03
+    mode: conceptual
+    card_type: misconception
+    difficulty: foundational
+    front: {es: ¿`self` es una palabra reservada de Python?, en: Is `self` a reserved Python keyword?, da: Er `self` et reserveret Python-nøgleord?}
+    back: {es: No. Es una convención muy fuerte para nombrar el primer parámetro de un método de instancia., en: No. It is a strong convention for naming the first parameter of an instance method., da: Nej. Det er en stærk konvention for navnet på første parameter i en instansmetode.}
+    linked_objectives: [m12.o1]
+  - id: dm857.m12.f04
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: Atributo de instancia frente a atributo de clase., en: Instance attribute versus class attribute., da: Instansattribut versus klasseattribut.}
+    back: {es: El de instancia pertenece a un objeto concreto; el de clase pertenece a la clase y puede ser compartido por todas las instancias salvo que sea ocultado., en: An instance attribute belongs to one object; a class attribute belongs to the class and may be shared unless shadowed., da: En instansattribut tilhører ét objekt; en klasseattribut tilhører klassen og kan deles.}
+    linked_objectives: [m12.o1]
+  - id: dm857.m12.f05
+    mode: practical
+    card_type: debugging
+    difficulty: intermediate
+    front: {es: ¿Qué error causa una lista mutable como atributo de clase cuando debería ser por instancia?, en: What defect arises from a mutable class attribute intended to be per-instance?, da: Hvilken fejl opstår ved en muterbar klasseattribut, som burde være pr. instans?}
+    back: {es: Todas las instancias pueden observar y modificar la misma lista, creando estado compartido accidental., en: All instances may observe and mutate the same list, creating accidental shared state., da: Alle instanser kan se og mutere samme liste, hvilket skaber utilsigtet delt tilstand.}
+    linked_objectives: [m12.o1, m12.o8]
+  - id: dm857.m12.f06
+    mode: conceptual
+    card_type: constructor_contract
+    difficulty: intermediate
+    front: {es: ¿Qué debe garantizar `__init__` al terminar?, en: What must `__init__` guarantee when it finishes?, da: Hvad skal `__init__` garantere ved afslutning?}
+    back: {es: Que la instancia queda en un estado válido con todas sus invariantes satisfechas. Debe validar antes de dejar asignaciones parciales., en: That the instance is valid and all invariants hold. Validation should occur before leaving partial assignments., da: At instansen er gyldig og alle invarianter gælder. Validering bør ske før delvise tildelinger.}
+    linked_objectives: [m12.o2, m12.o4]
+  - id: dm857.m12.f07
+    mode: practical
+    card_type: debugging
+    difficulty: intermediate
+    front: {es: ¿Por qué es peligroso `def __init__(self, items=[])`?, en: Why is `def __init__(self, items=[])` dangerous?, da: Hvorfor er `def __init__(self, items=[])` farlig?}
+    back: {es: La lista predeterminada se crea una sola vez y puede compartirse entre llamadas. Se usa `None` y se crea una lista nueva dentro., en: The default list is created once and may be shared across calls. Use `None` and create a fresh list inside., da: Standardlisten oprettes én gang og kan deles. Brug `None` og opret en ny liste inde i konstruktøren.}
+    linked_objectives: [m12.o2, m12.o8]
+  - id: dm857.m12.f08
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front: {es: Diferencia entre `is` y `==`., en: Difference between `is` and `==`., da: Forskel mellem `is` og `==`.}
+    back: {es: `is` compara identidad; `==` compara igualdad lógica según el contrato del tipo., en: `is` compares identity; `==` compares logical equality according to the type contract., da: `is` sammenligner identitet; `==` sammenligner logisk lighed efter typekontrakten.}
+    linked_objectives: [m12.o3]
+  - id: dm857.m12.f09
+    mode: conceptual
+    card_type: equality_hash_contract
+    difficulty: advanced
+    front: {es: Relación obligatoria entre igualdad y hash., en: Required relation between equality and hashing., da: Krævet relation mellem lighed og hash.}
+    back: {es: Si dos objetos hashables son iguales, deben tener el mismo hash. El inverso no es obligatorio porque pueden existir colisiones., en: If two hashable objects are equal, they must have the same hash. The reverse is not required because collisions may occur., da: Hvis to hashbare objekter er lige, skal de have samme hash. Det omvendte er ikke nødvendigt på grund af kollisioner.}
+    linked_objectives: [m12.o3, m12.o6]
+  - id: dm857.m12.f10
+    mode: conceptual
+    card_type: risk_analysis
+    difficulty: advanced
+    front: {es: ¿Por qué un objeto mutable con hash basado en sus campos es riesgoso como clave?, en: Why is a mutable object with field-based hashing risky as a key?, da: Hvorfor er et muterbart objekt med feltbaseret hash risikabelt som nøgle?}
+    back: {es: Si cambia un campo usado en el hash, el objeto puede quedar almacenado en una posición incompatible y dejar de encontrarse correctamente en dict o set., en: If a hashed field changes, the object may remain stored under an incompatible position and become unfindable in dict or set., da: Hvis et felt i hash ændres, kan objektet ligge på en inkompatibel position og ikke længere findes korrekt.}
+    linked_objectives: [m12.o3, m12.o6]
+  - id: dm857.m12.f11
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: `__repr__` frente a `__str__`., en: `__repr__` versus `__str__`., da: `__repr__` versus `__str__`.}
+    back: {es: `__repr__` prioriza una representación inequívoca para depuración; `__str__` puede priorizar legibilidad para usuarios. Ambos deben retornar str., en: `__repr__` prioritizes unambiguous debugging output; `__str__` may prioritize user readability. Both return str., da: `__repr__` prioriterer entydig fejlfinding; `__str__` kan prioritere brugerlæsbarhed. Begge returnerer str.}
+    linked_objectives: [m12.o3, m12.o6]
+  - id: dm857.m12.f12
+    mode: practical
+    card_type: code_review
+    difficulty: intermediate
+    front: {es: ¿Qué comportamientos debe evitar `__repr__`?, en: What behavior should `__repr__` avoid?, da: Hvilken adfærd bør `__repr__` undgå?}
+    back: {es: No debe modificar estado, hacer E/S costosa, lanzar errores habituales ni exponer secretos., en: It should not mutate state, perform costly I/O, commonly fail, or expose secrets., da: Den bør ikke mutere tilstand, udføre dyr I/O, fejle normalt eller afsløre hemmeligheder.}
+    linked_objectives: [m12.o6]
+  - id: dm857.m12.f13
+    mode: conceptual
+    card_type: property_contract
+    difficulty: intermediate
+    front: {es: ¿Cuándo está justificada una property?, en: When is a property justified?, da: Hvornår er en property begrundet?}
+    back: {es: Cuando protege una regla concreta, valida una asignación o calcula un valor coherente manteniendo semántica de atributo. No se añade sólo para ocultar un nombre., en: When it protects a real rule, validates assignment, or computes a coherent attribute-like value. It is not added merely to hide a name., da: Når den beskytter en reel regel, validerer tildeling eller beregner en passende attributlignende værdi.}
+    linked_objectives: [m12.o4]
+  - id: dm857.m12.f14
+    mode: practical
+    card_type: atomicity
+    difficulty: advanced
+    front: {es: ¿Cómo debe comportarse un setter ante un valor inválido?, en: How should a setter behave on an invalid value?, da: Hvordan bør en setter opføre sig ved en ugyldig værdi?}
+    back: {es: Debe validar antes de mutar, lanzar el error documentado y dejar el objeto exactamente en su estado válido anterior., en: It should validate before mutation, raise the documented error, and leave the object exactly in its previous valid state., da: Den bør validere før mutation, rejse den dokumenterede fejl og bevare den tidligere gyldige tilstand.}
+    linked_objectives: [m12.o4, m12.o8]
+  - id: dm857.m12.f15
+    mode: conceptual
+    card_type: dataclass
+    difficulty: intermediate
+    front: {es: ¿Qué genera normalmente `@dataclass`?, en: What does `@dataclass` normally generate?, da: Hvad genererer `@dataclass` normalt?}
+    back: {es: Según opciones, genera métodos como `__init__`, `__repr__` y `__eq__` a partir de campos declarados., en: Depending on options, it generates methods such as `__init__`, `__repr__`, and `__eq__` from declared fields., da: Afhængigt af valgene genererer den metoder som `__init__`, `__repr__` og `__eq__` fra felter.}
+    linked_objectives: [m12.o5]
+  - id: dm857.m12.f16
+    mode: practical
+    card_type: dataclass_default
+    difficulty: intermediate
+    front: {es: ¿Para qué sirve `field(default_factory=list)`?, en: What is `field(default_factory=list)` for?, da: Hvad bruges `field(default_factory=list)` til?}
+    back: {es: Para crear una lista nueva por instancia y evitar compartir una única lista predeterminada., en: To create a fresh list for each instance and avoid sharing one default list., da: Til at oprette en ny liste pr. instans og undgå deling af én standardliste.}
+    linked_objectives: [m12.o5, m12.o8]
+  - id: dm857.m12.f17
+    mode: conceptual
+    card_type: limitation
+    difficulty: advanced
+    front: {es: ¿Qué no garantiza `frozen=True`?, en: What does `frozen=True` not guarantee?, da: Hvad garanterer `frozen=True` ikke?}
+    back: {es: No garantiza inmutabilidad profunda. Una lista u objeto mutable almacenado dentro puede seguir cambiando., en: It does not guarantee deep immutability. A nested list or mutable object may still change., da: Det garanterer ikke dyb uforanderlighed. En indlejret liste eller et muterbart objekt kan stadig ændres.}
+    linked_objectives: [m12.o5]
+  - id: dm857.m12.f18
+    mode: conceptual
+    card_type: protocol
+    difficulty: intermediate
+    front: {es: Requisitos básicos de `__len__` y `__iter__`., en: Basic requirements of `__len__` and `__iter__`., da: Grundkrav til `__len__` og `__iter__`.}
+    back: {es: `__len__` retorna un entero no negativo; `__iter__` produce un iterador con un orden documentado y no debería violar invariantes., en: `__len__` returns a non-negative integer; `__iter__` produces an iterator with documented order and should not violate invariants., da: `__len__` returnerer et ikke-negativt heltal; `__iter__` producerer en iterator med dokumenteret rækkefølge.}
+    linked_objectives: [m12.o6]
+  - id: dm857.m12.f19
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: Composición frente a herencia., en: Composition versus inheritance., da: Komposition versus arv.}
+    back: {es: Composición modela tiene-un y delega; herencia modela es-un y exige sustituibilidad. Reutilizar código no basta para heredar., en: Composition models has-a and delegates; inheritance models is-a and requires substitutability. Code reuse alone does not justify inheritance., da: Komposition modellerer har-en og delegerer; arv modellerer er-en og kræver substituerbarhed.}
+    linked_objectives: [m12.o7]
+  - id: dm857.m12.f20
+    mode: conceptual
+    card_type: polymorphism
+    difficulty: advanced
+    front: {es: ¿Qué es polimorfismo en este contexto?, en: What is polymorphism in this context?, da: Hvad er polymorfi i denne sammenhæng?}
+    back: {es: La capacidad de usar de manera uniforme objetos distintos que satisfacen el mismo protocolo, sin depender de su clase concreta., en: The ability to use different objects uniformly when they satisfy the same protocol, without depending on their concrete class., da: Evnen til at bruge forskellige objekter ensartet, når de opfylder samme protokol, uden afhængighed af konkret klasse.}
+    linked_objectives: [m12.o7]
+  - id: dm857.m12.f21
+    mode: practical
+    card_type: test_design
+    difficulty: advanced
+    front: {es: Prueba mínima para detectar estado mutable compartido entre instancias., en: Minimal test for detecting shared mutable state across instances., da: Minimal test til at opdage delt muterbar tilstand mellem instanser.}
+    back: {es: Crear dos instancias, mutar la colección de una y comprobar que la colección de la otra permanece igual y con identidad distinta., en: Create two instances, mutate one collection, and assert the other remains unchanged and has distinct identity., da: Opret to instanser, mutér én samling og kontrollér at den anden er uændret og har forskellig identitet.}
+    linked_objectives: [m12.o8]
+  - id: dm857.m12.f22
+    mode: practical
+    card_type: test_design
+    difficulty: advanced
+    front: {es: Prueba de atomicidad para una operación mutadora., en: Atomicity test for a mutating operation., da: Atomicitetstest for en muterende operation.}
+    back: {es: Guardar el estado válido, ejecutar una operación inválida que debe fallar y verificar que todos los atributos observables conservan exactamente el estado previo., en: Snapshot valid state, execute an invalid operation expected to fail, and verify all observable attributes remain exactly unchanged., da: Gem gyldig tilstand, udfør en ugyldig operation og verificér at observerbar tilstand er helt uændret.}
+    linked_objectives: [m12.o4, m12.o8]
+  - id: dm857.m12.f23
+    mode: integrative
+    card_type: design_review
+    difficulty: advanced
+    front: {es: ¿Por qué heredar de list puede ser peligroso para una colección validada?, en: Why can inheriting from list be dangerous for a validated collection?, da: Hvorfor kan arv fra list være farlig for en valideret samling?}
+    back: {es: Se heredan muchas rutas de mutación como extend, insert, asignación por índice y slices. Si no todas preservan invariantes, la subclase no es un list válido ni una colección segura. Composición permite restringir la interfaz., en: Many mutation paths are inherited, including extend, insert, index assignment, and slices. If not all preserve invariants, the subclass is unsafe. Composition allows a restricted interface., da: Mange mutationsveje arves. Hvis de ikke alle bevarer invarianter, er designet usikkert; komposition begrænser grænsefladen.}
+    linked_objectives: [m12.o7, m12.o8]
+  - id: dm857.m12.f24
+    mode: integrative
+    card_type: synthesis
+    difficulty: advanced
+    front: {es: Flujo mínimo para diseñar una clase verificable., en: Minimal workflow for designing a verifiable class., da: Minimal arbejdsgang til design af en verificerbar klasse.}
+    back: {es: Identificar concepto y responsabilidades; definir invariantes; validar construcción; separar estado de clase e instancia; diseñar igualdad y representación; preferir composición; preservar atomicidad; probar errores, independencia y protocolos., en: Identify concept and responsibilities; define invariants; validate construction; separate class and instance state; design equality and representation; prefer composition; preserve atomicity; test errors, independence, and protocols., da: Identificér koncept og ansvar, definér invarianter, validér konstruktion, adskil tilstand, design lighed og repræsentation, foretræk komposition og test grundigt.}
+    linked_objectives: [m12.o1, m12.o2, m12.o3, m12.o4, m12.o6, m12.o7, m12.o8]
