@@ -1,0 +1,336 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m15
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title: {es: Complejidad, perfilado y optimización basada en evidencia, en: Complexity, profiling, and evidence-based optimization, da: Kompleksitet, profilering og evidensbaseret optimering}
+  summary:
+    es: >-
+      Análisis del crecimiento temporal y espacial de algoritmos; notación asintótica, casos y
+      operaciones dominantes; coste de estructuras Python; medición rigurosa, benchmarking y perfilado;
+      identificación de cuellos de botella; optimización de algoritmos, estructuras, acceso a datos y
+      bibliotecas; validación de equivalencia y prevención de optimización prematura.
+    en: >-
+      Analysis of algorithmic time and space growth; asymptotic notation, cases, and dominant operations;
+      costs of Python structures; rigorous measurement, benchmarking, and profiling; bottleneck
+      identification; algorithm, structure, data-access, and library optimization; equivalence validation
+      and prevention of premature optimization.
+    da: >-
+      Analyse af algoritmers tids- og pladsvækst; asymptotisk notation, cases og dominerende operationer;
+      omkostninger ved Python-strukturer; måling, benchmarking og profilering; flaskehalse; optimering af
+      algoritmer, strukturer, dataadgang og biblioteker samt validering af ækvivalens.
+  prerequisites: [dm857.m03, dm857.m06, dm857.m07, dm857.m09, dm857.m10, dm857.m13, dm857.m14]
+  official_learning_outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo04, dm857.lo05]
+  estimated_study_hours: 20
+  difficulty: advanced
+
+objectives:
+  - {id: m15.o1, bloom_level: analyze, statement: {es: Identificar tamaño de entrada y operación dominante de un algoritmo., en: Identify input size and the dominant operation of an algorithm., da: Identificere inputstørrelse og dominerende operation i en algoritme.}, evidence: cost_model}
+  - {id: m15.o2, bloom_level: analyze, statement: {es: Clasificar crecimiento constante, logarítmico, lineal, log-lineal, cuadrático y exponencial., en: Classify constant, logarithmic, linear, log-linear, quadratic, and exponential growth., da: Klassificere konstant, logaritmisk, lineær, log-lineær, kvadratisk og eksponentiel vækst.}, evidence: asymptotic_classification}
+  - {id: m15.o3, bloom_level: evaluate, statement: {es: Distinguir peor, promedio, mejor caso y coste amortizado bajo supuestos explícitos., en: Distinguish worst, average, best, and amortized cost under explicit assumptions., da: Skelne mellem værste, gennemsnitlige, bedste og amortiserede omkostninger under eksplicitte antagelser.}, evidence: case_analysis}
+  - {id: m15.o4, bloom_level: analyze, statement: {es: Estimar tiempo y memoria de operaciones sobre secuencias, diccionarios, conjuntos, árboles y arrays., en: Estimate time and memory for operations on sequences, dictionaries, sets, trees, and arrays., da: Estimere tid og hukommelse for operationer på sekvenser, ordbøger, mængder, træer og arrays.}, evidence: structure_cost_analysis}
+  - {id: m15.o5, bloom_level: create, statement: {es: Diseñar benchmarks controlados que midan la pregunta correcta., en: Design controlled benchmarks that measure the intended question., da: Designe kontrollerede benchmarks der måler det tilsigtede spørgsmål.}, evidence: benchmark_plan}
+  - {id: m15.o6, bloom_level: apply, statement: {es: Utilizar perfilado para localizar funciones y líneas responsables del coste observado., en: Use profiling to locate functions and lines responsible for observed cost., da: Bruge profilering til at lokalisere funktioner og linjer bag observeret omkostning.}, evidence: profile_interpretation}
+  - {id: m15.o7, bloom_level: evaluate, statement: {es: Seleccionar una optimización según impacto, evidencia, claridad y riesgo., en: Select an optimization based on impact, evidence, clarity, and risk., da: Vælge en optimering ud fra effekt, evidens, klarhed og risiko.}, evidence: optimization_decision}
+  - {id: m15.o8, bloom_level: create, statement: {es: Demostrar que una versión optimizada conserva contrato, precisión y resultados relevantes., en: Demonstrate that an optimized version preserves contract, precision, and relevant results., da: Demonstrere at en optimeret version bevarer kontrakt, præcision og relevante resultater.}, evidence: equivalence_validation}
+
+concepts:
+  - id: cost-model-and-input-size
+    title: {es: Modelo de coste y tamaño de entrada, en: Cost model and input size, da: Omkostningsmodel og inputstørrelse}
+    body:
+      es: >-
+        Antes de asignar complejidad se define qué representa n y qué operación se cuenta. En una secuencia,
+        n puede ser longitud; en una matriz, filas y columnas son parámetros distintos; en un árbol, n es
+        número de nodos y h su altura. Contar comparaciones, accesos o elementos procesados produce un modelo
+        independiente del equipo. Una afirmación como “es rápido” carece de significado sin tamaño, distribución,
+        entorno y criterio. Los costes constantes pueden importar en datos pequeños, pero el crecimiento domina al escalar.
+      en: >-
+        Before assigning complexity, define what n represents and which operation is counted. Matrices may need
+        rows and columns separately; trees need node count n and height h. Counting comparisons, accesses, or
+        processed items provides a machine-independent model. “Fast” is meaningless without size, distribution,
+        environment, and criterion.
+      da: >-
+        Før kompleksitet angives, defineres n og den talte operation. Matricer kan kræve flere dimensioner,
+        og træer både noder n og højde h. “Hurtig” kræver størrelse, distribution, miljø og kriterium.
+    linked_objectives: [m15.o1, m15.o2]
+  - id: asymptotic-growth
+    title: {es: Crecimiento asintótico, en: Asymptotic growth, da: Asymptotisk vækst}
+    body:
+      es: >-
+        O describe una cota superior de crecimiento, Ω una inferior y Θ un orden ajustado bajo un modelo.
+        Se ignoran constantes y términos inferiores para analizar escala, no para comparar tiempos exactos.
+        O(1), O(log n), O(n), O(n log n), O(n²) y O(2^n) representan familias cualitativamente diferentes.
+        Bucles anidados no implican automáticamente O(n²): los límites pueden depender de variables distintas,
+        disminuir geométricamente o recorrer en total sólo n elementos.
+      en: >-
+        O is an upper growth bound, Ω a lower bound, and Θ a tight order under a model. Constants and lower
+        terms are ignored for scaling, not exact runtime. Nested loops are not automatically O(n²); bounds may
+        use different variables, shrink geometrically, or total only n iterations.
+      da: >-
+        O beskriver en øvre vækstgrænse, Ω en nedre og Θ en stram orden. Indlejrede løkker er ikke automatisk
+        O(n²); grænser og samlet antal iterationer skal analyseres.
+    linked_objectives: [m15.o2]
+  - id: cases-and-amortized-analysis
+    title: {es: Casos y análisis amortizado, en: Cases and amortized analysis, da: Cases og amortiseret analyse}
+    body:
+      es: >-
+        El mejor, promedio y peor caso describen entradas o distribuciones diferentes. El caso promedio requiere
+        una distribución explícita; no significa simplemente “lo habitual”. El análisis amortizado distribuye
+        el coste de operaciones ocasionalmente caras sobre una secuencia completa, como el crecimiento de una
+        lista dinámica. No es promedio probabilístico. Las garantías de diccionarios y conjuntos suelen ser
+        promedio amortizado bajo supuestos de hashing; el peor caso puede ser lineal.
+      en: >-
+        Best, average, and worst cases describe different inputs or distributions. Average case requires an
+        explicit distribution. Amortized analysis spreads occasional expensive operations over a sequence,
+        such as dynamic-array growth; it is not probabilistic average. Hash structures commonly offer average
+        amortized guarantees while worst case may be linear.
+      da: >-
+        Bedste, gennemsnitlige og værste case kræver forskellige inputantagelser. Amortiseret analyse fordeler
+        sjældne dyre operationer over en sekvens og er ikke det samme som probabilistisk gennemsnit.
+    linked_objectives: [m15.o3, m15.o4]
+  - id: python-operation-costs
+    title: {es: Coste de operaciones y elección de estructura, en: Operation cost and structure selection, da: Operationsomkostning og strukturvalg}
+    body:
+      es: >-
+        Indexar una lista es típicamente O(1), buscar un valor O(n), insertar al inicio O(n) y añadir al final
+        amortizado O(1). Pertenencia en dict/set es promedio amortizado O(1), pero depende de hash. Ordenar n
+        elementos cuesta típicamente O(n log n). `list.pop(0)` desplaza elementos; deque evita ese coste.
+        Un árbol de búsqueda sólo ofrece operaciones logarítmicas si su altura está controlada. La estructura
+        debe elegirse por semántica y operaciones, no únicamente por una tabla de costes.
+      en: >-
+        List indexing is typically O(1), value search O(n), front insertion O(n), and append amortized O(1).
+        Dict/set membership is average amortized O(1). Sorting is typically O(n log n). `list.pop(0)` shifts;
+        deque avoids it. Search-tree costs depend on height. Structure choice follows semantics and operations.
+      da: >-
+        Listeindeksering er typisk O(1), værdisøgning O(n), indsættelse forrest O(n) og append amortiseret O(1).
+        Dict/set-medlemskab er gennemsnitligt amortiseret O(1). Strukturvalg følger både semantik og omkostning.
+    linked_objectives: [m15.o4, m15.o7]
+  - id: time-space-and-data-movement
+    title: {es: Tiempo, memoria y movimiento de datos, en: Time, memory, and data movement, da: Tid, hukommelse og databevægelse}
+    body:
+      es: >-
+        Reducir operaciones aritméticas no siempre reduce tiempo si el cuello es asignación, copia, E/S o acceso
+        a memoria. Slicing y concatenación pueden crear objetos; vistas pueden evitar copias pero introducir
+        aliasing. Vectorización reduce overhead de Python, aunque puede crear arrays temporales grandes. El análisis
+        debe incluir memoria máxima, tamaño de trabajo, localidad y cantidad de datos movidos. Una optimización que
+        duplica memoria puede ser inviable aun si reduce tiempo.
+      en: >-
+        Fewer arithmetic operations may not reduce runtime when allocation, copying, I/O, or memory access dominates.
+        Slicing and concatenation may create objects; views avoid copies but introduce aliasing. Vectorization reduces
+        Python overhead yet may allocate large temporaries. Peak memory and data movement matter.
+      da: >-
+        Færre beregninger reducerer ikke nødvendigvis tid, hvis kopiering, I/O eller hukommelsesadgang dominerer.
+        Vektorisering kan skabe store temporære arrays; maksimal hukommelse skal analyseres.
+    linked_objectives: [m15.o4, m15.o7]
+  - id: benchmarking-design
+    title: {es: Diseño de benchmarks, en: Benchmark design, da: Benchmarkdesign}
+    body:
+      es: >-
+        Un benchmark define pregunta, implementación, datos, tamaños, repeticiones, entorno y estadístico de resumen.
+        Debe separar preparación de la operación medida, usar resultados para impedir eliminación conceptual del trabajo,
+        calentar cuando procede y controlar variabilidad. Se comparan múltiples tamaños para observar tendencia, no sólo
+        un punto. La mediana suele resistir ruido, pero deben reportarse dispersión y anomalías. Medir un fragmento
+        artificialmente pequeño puede ocultar costes de integración o transferencia.
+      en: >-
+        A benchmark defines question, implementation, data, sizes, repetitions, environment, and summary statistic.
+        Separate setup from timed work, use results, warm up where relevant, and measure multiple sizes. Report
+        variability and integration costs rather than one convenient timing.
+      da: >-
+        Et benchmark definerer spørgsmål, data, størrelser, gentagelser, miljø og statistik. Setup adskilles fra den
+        målte operation, og flere størrelser bruges til at observere skalering.
+    linked_objectives: [m15.o5]
+  - id: profiling-and-bottlenecks
+    title: {es: Perfilado y cuellos de botella, en: Profiling and bottlenecks, da: Profilering og flaskehalse}
+    body:
+      es: >-
+        El perfilado distribuye tiempo o memoria entre funciones, líneas o llamadas. El tiempo acumulado incluye trabajo
+        en funciones llamadas; el tiempo propio excluye descendientes. Un hotspot frecuente pero barato puede importar
+        más que una llamada aislada cara. El perfil introduce overhead y puede alterar cargas pequeñas, por lo que se usa
+        sobre escenarios representativos. El objetivo es localizar dónde se gasta el recurso, no explicar automáticamente
+        por qué. La explicación requiere revisar algoritmo, datos y operaciones.
+      en: >-
+        Profiling attributes time or memory to functions, lines, or calls. Cumulative time includes callees; self time
+        excludes them. Frequent cheap calls may dominate. Profilers add overhead, so use representative workloads.
+        Profiling locates resource use; algorithm and data analysis explain it.
+      da: >-
+        Profilering fordeler tid eller hukommelse på funktioner, linjer eller kald. Kumulativ tid inkluderer underkald,
+        egen tid gør ikke. Profilering lokaliserer forbrug men forklarer ikke alene årsagen.
+    linked_objectives: [m15.o6]
+  - id: evidence-based-optimization
+    title: {es: Optimización basada en evidencia, en: Evidence-based optimization, da: Evidensbaseret optimering}
+    body:
+      es: >-
+        El flujo correcto es establecer una línea base correcta, definir objetivo y restricción, perfilar, formular una
+        hipótesis, cambiar el cuello de botella y volver a medir. Primero se busca una mejora algorítmica o de estructura;
+        luego se reduce trabajo, copias y conversiones; después se consideran bibliotecas vectorizadas o especializadas.
+        La legibilidad, mantenimiento, precisión y portabilidad forman parte del coste. Optimizar código no dominante
+        añade riesgo sin beneficio relevante.
+      en: >-
+        Start from a correct baseline, define target and constraint, profile, hypothesize, change the bottleneck, and
+        remeasure. Prefer algorithmic or structural improvements, then reduce work and copies, then use specialized
+        libraries. Readability, maintenance, precision, and portability are costs. Optimizing non-dominant code adds risk.
+      da: >-
+        Start med korrekt baseline, mål og begrænsning; profilér, formulér hypotese, ændr flaskehalsen og mål igen.
+        Foretræk algoritmiske forbedringer før mikrooptimering.
+    linked_objectives: [m15.o6, m15.o7]
+  - id: equivalence-and-regression-validation
+    title: {es: Equivalencia, precisión y regresión, en: Equivalence, precision, and regression, da: Ækvivalens, præcision og regression}
+    body:
+      es: >-
+        Una versión optimizada debe conservar el contrato, incluidos errores, orden, mutación, tipos, precisión y casos frontera.
+        Se compara con una referencia confiable en casos pequeños, aleatorios controlados y adversos. Para floats se usan tolerancias
+        justificadas y se comprueba estabilidad numérica. El benchmark se ejecuta después de la suite funcional. Cada optimización
+        debe documentar evidencia anterior y posterior, condiciones de validez y cualquier cambio de memoria o exactitud.
+      en: >-
+        An optimized version preserves the full contract: errors, order, mutation, types, precision, and boundaries. Compare with a
+        trusted reference on small, controlled random, and adversarial cases. Use justified floating tolerances and test numerical
+        stability. Run performance measurement after functional validation and document before/after evidence.
+      da: >-
+        En optimeret version skal bevare hele kontrakten, inklusive fejl, orden, mutation, typer og præcision. Sammenlign med en
+        reference på små, tilfældige og adversarielle cases og dokumentér før/efter-evidens.
+    linked_objectives: [m15.o8]
+
+worked_examples:
+  - id: dm857.m15.e01
+    title: {es: Sustituir búsquedas repetidas por un índice, en: Replace repeated scans with an index, da: Erstat gentagne søgninger med et indeks}
+    problem: {es: Relacionar m consultas con n registros evitando recorrer todos los registros por consulta., en: Match m queries to n records without scanning all records for every query., da: Match m forespørgsler med n poster uden fuldt gennemløb pr. forespørgsel.}
+    assumptions: [record identifiers are unique and hashable, index construction is allowed]
+    reasoning:
+      es: [La versión directa cuesta O(mn)., Construir un dict cuesta O(n) promedio., Resolver m consultas cuesta O(m) promedio.]
+      en: [Direct scanning costs O(mn)., Build a dictionary in average O(n)., Resolve m queries in average O(m).]
+      da: [Direkte søgning koster O(mn)., Byg dict i gennemsnit O(n)., Løs m forespørgsler i O(m).]
+    code: |-
+      by_id = {record["id"]: record for record in records}
+      result = [by_id[query_id] for query_id in query_ids]
+    expected_output: same matched records under the unique-id contract
+    validation: [duplicate identifiers detected before indexing, missing query policy, output order follows query order]
+    explanation: {es: La mejora cambia el algoritmo y usa memoria O(n) adicional; exige validar ids duplicados para no sobrescribir silenciosamente., en: The improvement changes the algorithm and adds O(n) memory; duplicate ids must be detected to prevent silent overwrite., da: Forbedringen ændrer algoritmen og bruger O(n) ekstra hukommelse; dubletter skal opdages.}
+    linked_objectives: [m15.o1, m15.o2, m15.o4, m15.o7, m15.o8]
+  - id: dm857.m15.e02
+    title: {es: Benchmark de pertenencia lista frente a conjunto, en: Benchmark list versus set membership, da: Benchmark liste- versus mængdemedlemskab}
+    problem: {es: Comparar el coste de muchas consultas de pertenencia incluyendo el coste de construir el conjunto., en: Compare many membership queries including set-construction cost., da: Sammenlign mange medlemskabsforespørgsler inklusive konstruktion af mængden.}
+    assumptions: [same values and query distribution, construction may or may not be reusable]
+    reasoning:
+      es: [Definir si se mide una consulta o muchas., Separar y también incluir construcción según escenario., Probar tamaños crecientes y presentes/ausentes.]
+      en: [Define one versus many queries., Separate and include construction according to scenario., Test increasing sizes and present/absent cases.]
+      da: [Definér én eller mange forespørgsler., Mål konstruktion efter scenariet., Test flere størrelser og hit/miss.]
+    expected_output: sets usually win for many queries, while one small query may not repay construction
+    validation: [equivalent membership answers, repeated trials, reported environment and variability]
+    explanation: {es: Un benchmark justo refleja el ciclo de vida real; excluir siempre la construcción puede favorecer artificialmente al conjunto., en: A fair benchmark reflects actual lifecycle; always excluding construction may artificially favor the set., da: Et retfærdigt benchmark afspejler livscyklussen; udeladelse af konstruktion kan favorisere mængden.}
+    linked_objectives: [m15.o4, m15.o5]
+  - id: dm857.m15.e03
+    title: {es: Interpretar un perfil con tiempo acumulado, en: Interpret a profile with cumulative time, da: Fortolk en profil med kumulativ tid}
+    problem: {es: Una función `analyze` tiene poco tiempo propio pero gran tiempo acumulado en `parse_rows`; decidir dónde investigar., en: `analyze` has low self time but high cumulative time in `parse_rows`; decide where to investigate., da: `analyze` har lav egen tid men høj kumulativ tid i `parse_rows`; afgør hvor der undersøges.}
+    assumptions: [profile uses a representative dataset]
+    reasoning:
+      es: [Separar tiempo propio de descendientes., Revisar frecuencia y coste de parse_rows., Formular hipótesis sobre conversiones o I/O.]
+      en: [Separate self from descendant time., Inspect parse_rows frequency and cost., Hypothesize about conversion or I/O.]
+      da: [Adskil egen og underkaldstid., Undersøg frekvens og pris for parse_rows., Formulér hypotese.]
+    expected_output: investigate parse_rows and its callees before micro-optimizing analyze
+    validation: [rerun after change, compare same workload, verify functional equivalence]
+    explanation: {es: La función superior aparece cara porque coordina trabajo; el cuello real está donde se consume tiempo propio o se realizan llamadas dominantes., en: The top function appears expensive because it coordinates work; the bottleneck lies in self time or dominant callees., da: Topfunktionen ser dyr ud som koordinator; flaskehalsen ligger i eget arbejde eller dominerende underkald.}
+    linked_objectives: [m15.o6, m15.o7]
+
+practice_exercises:
+  - {id: dm857.m15.p01, activity_type: complexity_classification, difficulty: foundational, prompt: {es: Clasifica un bucle que duplica `i` hasta superar n., en: Classify a loop doubling `i` until it exceeds n., da: Klassificér en løkke der fordobler `i` indtil den overstiger n.}, reference_solution: {es: O(log n), porque el número de iteraciones satisface 2^k ≈ n., en: O(log n), because the iteration count satisfies 2^k ≈ n., da: O(log n), fordi 2^k ≈ n.}, linked_objectives: [m15.o1, m15.o2]}
+  - {id: dm857.m15.p02, activity_type: complexity_analysis, difficulty: intermediate, prompt: {es: Analiza dos bucles anidados con n filas y p columnas., en: Analyze two nested loops over n rows and p columns., da: Analysér to indlejrede løkker over n rækker og p kolonner.}, reference_solution: {es: Θ(np), no Θ(n²) salvo que p crezca como n., en: Θ(np), not Θ(n²) unless p grows like n., da: Θ(np), ikke Θ(n²) medmindre p vokser som n.}, linked_objectives: [m15.o1, m15.o2]}
+  - {id: dm857.m15.p03, activity_type: amortized_reasoning, difficulty: intermediate, prompt: {es: Explica por qué append de lista es O(1) amortizado aunque algunas inserciones copien., en: Explain why list append is amortized O(1) even though some appends copy., da: Forklar hvorfor list append er amortiseret O(1), selvom nogle append kopierer.}, reference_solution: {es: Las expansiones costosas son infrecuentes y su coste se distribuye sobre muchas inserciones baratas., en: Expensive growth events are infrequent and their cost spreads across many cheap appends., da: Dyre udvidelser er sjældne, og prisen fordeles over mange billige append.}, linked_objectives: [m15.o3, m15.o4]}
+  - {id: dm857.m15.p04, activity_type: benchmark_design, difficulty: advanced, prompt: {es: Diseña un benchmark para comparar dos parsers sin medir la lectura del disco de forma accidental., en: Design a benchmark comparing two parsers without accidentally timing disk reading., da: Design et benchmark af to parsere uden utilsigtet at måle disklæsning.}, reference_solution: {es: Cargar el texto fuera de la región medida, usar el mismo contenido, repetir, validar outputs, medir tamaños crecientes y reportar dispersión; incluir E/S en un benchmark separado de extremo a extremo., en: Load text outside the timed region, use identical content, repeat, validate outputs, scale sizes, report variability, and benchmark end-to-end I/O separately., da: Indlæs tekst uden for målingen, brug samme data, gentag, validér output, skalér størrelser og mål end-to-end separat.}, linked_objectives: [m15.o5]}
+  - {id: dm857.m15.p05, activity_type: profile_interpretation, difficulty: advanced, prompt: {es: Un perfil muestra una función llamada un millón de veces con poco coste por llamada. Propón tres estrategias., en: A profile shows a function called one million times with low per-call cost. Propose three strategies., da: En profil viser en funktion kaldt en million gange med lav pris pr. kald. Foreslå tre strategier.}, reference_solution: {es: Reducir número de llamadas, agrupar/vectorizar trabajo o mover cálculo invariante fuera del bucle; después medir y validar., en: Reduce call count, batch/vectorize work, or hoist invariant computation; then measure and validate., da: Reducér kald, batch/vektorisér eller flyt invariant beregning ud af løkken; mål og validér.}, linked_objectives: [m15.o6, m15.o7]}
+  - {id: dm857.m15.p06, activity_type: equivalence_testing, difficulty: advanced, prompt: {es: Diseña pruebas para comparar una suma iterativa y una vectorizada con floats y ausentes., en: Design tests comparing iterative and vectorized sums with floats and missing values., da: Design test der sammenligner iterativ og vektoriseret sum med floats og manglende værdier.}, reference_solution: {es: Definir política de NaN, usar casos exactos y extremos, comparar con tolerancia justificada, comprobar dtype/shape y no mutación., en: Define NaN policy, use exact and extreme cases, compare with justified tolerance, and check dtype, shape, and mutation., da: Definér NaN-politik, brug grænsecases, begrundet tolerance og kontrollér dtype, shape og mutation.}, linked_objectives: [m15.o8]}
+
+objective_bank:
+  - {id: dm857.m15.q01, activity_type: multiple_choice, prompt: {es: ¿Qué debe definirse antes de calcular complejidad?, en: What must be defined before deriving complexity?, da: Hvad skal defineres før kompleksitet udledes?}, options: [{id: size_operation, text: {es: Tamaño de entrada y operación contada., en: Input size and counted operation., da: Inputstørrelse og talt operation.}}, {id: cpu_brand, text: {es: Sólo la marca de CPU., en: CPU brand only., da: Kun CPU-mærke.}}, {id: output_color, text: {es: El color del resultado., en: Output color., da: Outputfarve.}}], correct_option_ids: [size_operation]}
+  - {id: dm857.m15.q02, activity_type: true_false, prompt: {es: Dos bucles anidados siempre implican O(n²)., en: Two nested loops always imply O(n²)., da: To indlejrede løkker betyder altid O(n²).}, correct_answer: false}
+  - {id: dm857.m15.q03, activity_type: multiple_choice, prompt: {es: ¿Qué crecimiento tiene duplicar hasta n?, en: What growth results from doubling until n?, da: Hvilken vækst giver fordobling indtil n?}, options: [{id: log, text: {es: O(log n), en: O(log n), da: O(log n)}}, {id: linear, text: {es: O(n), en: O(n), da: O(n)}}, {id: exp, text: {es: O(2^n), en: O(2^n), da: O(2^n)}}], correct_option_ids: [log]}
+  - {id: dm857.m15.q04, activity_type: true_false, prompt: {es: Análisis amortizado y caso promedio son sinónimos., en: Amortized analysis and average-case analysis are synonyms., da: Amortiseret analyse og gennemsnitlig case er synonymer.}, correct_answer: false}
+  - {id: dm857.m15.q05, activity_type: multiple_choice, prompt: {es: ¿Qué operación de lista es lineal?, en: Which list operation is linear?, da: Hvilken listeoperation er lineær?}, options: [{id: front_insert, text: {es: Insertar al inicio., en: Insert at the front., da: Indsæt forrest.}}, {id: index, text: {es: Indexar una posición válida., en: Index a valid position., da: Indeksér en gyldig position.}}, {id: len, text: {es: Consultar len., en: Read len., da: Læs len.}}], correct_option_ids: [front_insert]}
+  - {id: dm857.m15.q06, activity_type: true_false, prompt: {es: Vectorizar siempre reduce memoria., en: Vectorization always reduces memory., da: Vektorisering reducerer altid hukommelse.}, correct_answer: false}
+  - {id: dm857.m15.q07, activity_type: multiple_choice, prompt: {es: ¿Qué debe hacerse antes de optimizar?, en: What should be done before optimizing?, da: Hvad bør gøres før optimering?}, options: [{id: baseline_profile, text: {es: Establecer baseline correcta y perfilar., en: Establish a correct baseline and profile., da: Etablér korrekt baseline og profilér.}}, {id: rewrite, text: {es: Reescribir todo., en: Rewrite everything., da: Omskriv alt.}}, {id: remove_tests, text: {es: Eliminar pruebas., en: Remove tests., da: Fjern test.}}], correct_option_ids: [baseline_profile]}
+  - {id: dm857.m15.q08, activity_type: true_false, prompt: {es: El tiempo acumulado de una función incluye tiempo de funciones llamadas., en: A function's cumulative time includes callees., da: En funktions kumulative tid inkluderer underkald.}, correct_answer: true}
+  - {id: dm857.m15.q09, activity_type: multiple_choice, prompt: {es: ¿Qué valida una optimización?, en: What validates an optimization?, da: Hvad validerer en optimering?}, options: [{id: tests_measurement, text: {es: Equivalencia funcional y mejora medida., en: Functional equivalence and measured improvement., da: Funktionel ækvivalens og målt forbedring.}}, {id: shorter_code, text: {es: Código más corto únicamente., en: Shorter code only., da: Kun kortere kode.}}, {id: intuition, text: {es: Intuición del autor., en: Author intuition., da: Forfatterens intuition.}}], correct_option_ids: [tests_measurement]}
+  - {id: dm857.m15.q10, activity_type: true_false, prompt: {es: Un único tiempo sobre un único tamaño permite inferir con seguridad la clase asintótica., en: One timing at one size safely determines asymptotic class., da: Én tidsmåling ved én størrelse bestemmer sikkert asymptotisk klasse.}, correct_answer: false}
+
+assessment_items:
+  - id: dm857.m15.a01
+    activity_type: complexity_and_design_review
+    difficulty: advanced
+    prompt: {es: Analiza un programa que para cada una de m muestras recorre n registros y después ordena p resultados. Deriva tiempo y memoria, identifica supuestos y propone una mejora semánticamente segura., en: Analyze a program that scans n records for each of m samples and then sorts p results. Derive time and memory, state assumptions, and propose a semantically safe improvement., da: Analysér et program der gennemløber n poster for hver af m prøver og sorterer p resultater; udled tid og hukommelse og foreslå sikker forbedring.}
+    accepted_answer_elements: [O(mn + p log p), explicit parameters, indexing alternative, duplicate/missing policy, added memory, equivalence tests]
+    rubric: [{criterion: cost_model, points: 3}, {criterion: assumptions, points: 2}, {criterion: optimization_design, points: 3}, {criterion: validation, points: 2}]
+  - id: dm857.m15.a02
+    activity_type: benchmark_protocol
+    difficulty: advanced
+    prompt: {es: Diseña un protocolo para comparar dos implementaciones de agrupación en datos pequeños y grandes, incluyendo preparación, distribución, repeticiones, memoria, estadísticos y validación., en: Design a protocol comparing two grouping implementations on small and large data, including setup, distribution, repetitions, memory, statistics, and validation., da: Design en protokol til sammenligning af to grupperingsimplementeringer med setup, distribution, gentagelser, hukommelse, statistik og validering.}
+    accepted_answer_elements: [clear question, representative generators, setup separation, multiple sizes, warmup/repetition, median/spread, peak memory, output equivalence]
+    rubric: [{criterion: experimental_design, points: 3}, {criterion: measurement_validity, points: 3}, {criterion: reproducibility, points: 2}, {criterion: equivalence, points: 2}]
+  - id: dm857.m15.a03
+    activity_type: profile_interpretation
+    difficulty: advanced
+    prompt: {es: Interpreta una tabla de perfil con llamadas, tiempo propio y acumulado; selecciona dos candidatos, formula hipótesis y diseña mediciones posteriores., en: Interpret a profile table with call counts, self time, and cumulative time; select two candidates, form hypotheses, and design follow-up measurements., da: Fortolk en profiltabel med kald, egen tid og kumulativ tid; vælg kandidater, formulér hypoteser og design opfølgende målinger.}
+    accepted_answer_elements: [self/cumulative distinction, call-frequency reasoning, representative workload, hypothesis per candidate, reprofile after change]
+    rubric: [{criterion: profile_reading, points: 4}, {criterion: hypothesis_quality, points: 2}, {criterion: follow_up_design, points: 2}, {criterion: caution_and_limits, points: 2}]
+  - id: dm857.m15.a04
+    activity_type: oral_explanation
+    difficulty: advanced
+    prompt: {es: Defiende la afirmación “la optimización más rápida de implementar no siempre es la mejor” considerando rendimiento, memoria, claridad, precisión y mantenimiento., en: Defend the claim “the quickest optimization to implement is not always the best” considering speed, memory, clarity, precision, and maintenance., da: Begrund påstanden “den hurtigste optimering at implementere er ikke altid den bedste” med tid, hukommelse, klarhed, præcision og vedligeholdelse.}
+    accepted_answer_elements: [multi-objective tradeoff, measured bottleneck, regression risk, numerical/semantic equivalence, maintainability]
+    rubric: [{criterion: tradeoff_analysis, points: 4}, {criterion: evidence_requirement, points: 2}, {criterion: example, points: 2}, {criterion: clarity, points: 2}]
+
+flashcards: {source_file: ../flashcards/dm857_m15_flashcards.yaml, expected_count: 24}
+
+glossary:
+  - {id: term.input_size, term: {es: tamaño de entrada, en: input size, da: inputstørrelse}, definition: {es: Parámetro que cuantifica la escala relevante del problema., en: Parameter quantifying relevant problem scale., da: Parameter der kvantificerer problemets relevante skala.}}
+  - {id: term.big_o, term: {es: notación O grande, en: Big-O notation, da: Big-O-notation}, definition: {es: Cota asintótica superior de crecimiento bajo un modelo., en: Asymptotic upper growth bound under a model., da: Asymptotisk øvre vækstgrænse under en model.}}
+  - {id: term.theta, term: {es: notación Θ, en: Theta notation, da: Theta-notation}, definition: {es: Cota asintótica ajustada de crecimiento., en: Tight asymptotic growth bound., da: Stram asymptotisk vækstgrænse.}}
+  - {id: term.amortized_cost, term: {es: coste amortizado, en: amortized cost, da: amortiseret omkostning}, definition: {es: Coste promedio por operación sobre una secuencia garantizada, no probabilística., en: Per-operation cost over a guaranteed sequence, not a probability average., da: Omkostning pr. operation over en garanteret sekvens, ikke probabilistisk gennemsnit.}}
+  - {id: term.benchmark, term: {es: benchmark, en: benchmark, da: benchmark}, definition: {es: Experimento controlado de rendimiento para una pregunta definida., en: Controlled performance experiment for a defined question., da: Kontrolleret ydelseseksperiment for et defineret spørgsmål.}}
+  - {id: term.profiler, term: {es: perfilador, en: profiler, da: profiler}, definition: {es: Herramienta que atribuye consumo de recursos a partes del programa., en: Tool attributing resource use to program components., da: Værktøj der fordeler ressourceforbrug på programdele.}}
+  - {id: term.bottleneck, term: {es: cuello de botella, en: bottleneck, da: flaskehals}, definition: {es: Componente que limita el rendimiento global bajo una carga., en: Component limiting overall performance under a workload., da: Komponent der begrænser samlet ydelse under en belastning.}}
+  - {id: term.self_time, term: {es: tiempo propio, en: self time, da: egen tid}, definition: {es: Tiempo consumido por una función excluyendo funciones llamadas., en: Time spent in a function excluding callees., da: Tid i en funktion eksklusive underkald.}}
+  - {id: term.cumulative_time, term: {es: tiempo acumulado, en: cumulative time, da: kumulativ tid}, definition: {es: Tiempo de una función incluyendo descendientes llamados., en: Function time including called descendants., da: Funktionstid inklusive kaldte efterkommere.}}
+  - {id: term.optimization_baseline, term: {es: línea base de optimización, en: optimization baseline, da: optimeringsbaseline}, definition: {es: Versión correcta y medida contra la que se compara un cambio., en: Correct measured version against which a change is compared., da: Korrekt målt version som ændringer sammenlignes med.}}
+
+hidden_guided_support:
+  visibility: hidden_from_standard_reader
+  canonical_explanation:
+    es: >-
+      El tutor debe rechazar análisis que no definan n, operación dominante, caso y supuestos. Ante una
+      propuesta de optimización debe pedir baseline, perfil, hipótesis, métrica y prueba de equivalencia.
+      Debe distinguir mejora algorítmica de microoptimización y recordar que memoria, precisión y claridad
+      son restricciones. No debe inferir complejidad exclusivamente de un gráfico con pocos puntos.
+    en: >-
+      Reject analysis without n, dominant operation, case, and assumptions. For optimization proposals,
+      require baseline, profile, hypothesis, metric, and equivalence evidence. Distinguish algorithmic
+      improvement from micro-optimization and include memory, precision, and clarity constraints.
+    da: >-
+      Afvis analyse uden n, dominerende operation, case og antagelser. Kræv baseline, profil, hypotese,
+      metrik og ækvivalensbevis før optimering.
+  misconceptions:
+    - {id: m15.mc01, claim: {es: Dos bucles anidados siempre son cuadráticos., en: Two nested loops are always quadratic., da: To indlejrede løkker er altid kvadratiske.}, correction: {es: Deben analizarse límites, variables y número total de iteraciones., en: Bounds, variables, and total iteration count must be analyzed., da: Grænser, variable og samlet iterationsantal skal analyseres.}}
+    - {id: m15.mc02, claim: {es: El profiler dice exactamente cómo corregir el código., en: A profiler tells exactly how to fix code., da: En profiler fortæller præcist hvordan kode rettes.}, correction: {es: Localiza consumo; la causa y solución requieren análisis., en: It locates consumption; cause and solution require analysis., da: Den lokaliserer forbrug; årsag og løsning kræver analyse.}}
+    - {id: m15.mc03, claim: {es: Código vectorizado siempre usa menos memoria., en: Vectorized code always uses less memory., da: Vektoriseret kode bruger altid mindre hukommelse.}, correction: {es: Puede crear arrays temporales grandes y aumentar el pico de memoria., en: It may create large temporaries and increase peak memory., da: Det kan skabe store temporære arrays og øge maksimal hukommelse.}}
+  socratic_questions:
+    - ¿Qué representa n y qué operación estás contando?
+    - ¿Qué caso y distribución de entrada sustenta la afirmación?
+    - ¿El cuello está en cómputo, memoria, copias, conversión o E/S?
+    - ¿La medición incluye preparación que no pertenece a la pregunta?
+    - ¿Qué prueba demuestra equivalencia después del cambio?
+  grading_guidance:
+    do_not_accept: [complexity without size model, single timing as asymptotic proof, optimization without profile or baseline, speedup without functional validation]
+    strong_answer_features: [multi-parameter cost model, explicit cases, representative benchmark, profile-based hypothesis, before/after evidence, memory and precision analysis]
+  retrieval_fragments:
+    - {id: m15.r01, topics: [complexity, nested loops], text: {es: La complejidad se deriva de límites y trabajo total, no del número visual de bucles., en: Complexity follows bounds and total work, not the visual number of loops., da: Kompleksitet følger grænser og samlet arbejde, ikke antallet af synlige løkker.}}
+    - {id: m15.r02, topics: [optimization, profiling], text: {es: Optimiza sólo después de establecer baseline, perfilar una carga representativa y formular una hipótesis comprobable., en: Optimize only after a baseline, representative profile, and testable hypothesis., da: Optimér først efter baseline, repræsentativ profil og testbar hypotese.}}
+
+sources:
+  - {id: source.official_dm857, role: curriculum_alignment, note: Supports program modeling, structure, library use, and testing outcomes.}
+  - {id: source.guttag_python_2021, role: conceptual_reference, note: Algorithmic complexity, data structures, search, sorting, and computational modeling.}
+  - {id: source.hager_wellein_hpc, role: performance_reference, note: Profiling, serial optimization, memory access, compiler and performance modeling principles.}
+
+limitations:
+  - Big-O classifications abstract hardware and constants and do not replace measurement.
+  - Microarchitectural profiling, parallel scaling, GPU optimization, and compiler internals are outside scope.
+  - Performance results are workload- and environment-specific and must not be generalized without evidence.
