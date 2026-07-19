@@ -408,7 +408,7 @@ def read_sequence(path: Path) -> str:
 
 def test_read_sequence_uses_isolated_file(tmp_path: Path) -> None:
     source = tmp_path / \"sample.txt\"
-    source.write_text(\"ac gt\n\", encoding=\"utf-8\")
+    source.write_text(\"ac gt\\n\", encoding=\"utf-8\")
 
     result = read_sequence(source)
 
