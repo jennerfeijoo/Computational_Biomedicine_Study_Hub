@@ -1,0 +1,241 @@
+schema_version: 1.0.0
+course_code: BMB831
+module_id: bmb831.m06
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title: {es: Clustering, clasificación, resampling y validación resistente a fuga, en: Clustering, classification, resampling, and leakage-resistant validation, da: Clustering, klassifikation, resampling og lækageresistent validering}
+  summary:
+    es: >-
+      Diseño y evaluación de análisis no supervisados y supervisados en datos ómicos. Incluye distancias,
+      k-means, clustering jerárquico, estabilidad, clasificación, regularización, particiones agrupadas,
+      validación cruzada anidada, leakage, desbalance, discriminación, calibración, umbrales, subgrupos,
+      domain shift y límites de interpretar firmas predictivas como biomarcadores.
+    en: >-
+      Design and evaluation of unsupervised and supervised analyses in omics data. Covers distances,
+      k-means, hierarchical clustering, stability, classification, regularization, grouped splits,
+      nested cross-validation, leakage, imbalance, discrimination, calibration, thresholds, subgroups,
+      domain shift, and limits of interpreting predictive signatures as biomarkers.
+    da: >-
+      Design og evaluering af usuperviserede og superviserede analyser i omics-data med clustering,
+      regularisering, grouped splits, nested cross-validation, leakage, kalibrering og domain shift.
+  estimated_study_hours: 16
+  difficulty: advanced
+
+alignment:
+  official_learning_outcomes: [bmb831.lo01, bmb831.lo03, bmb831.lo05, bmb831.lo07]
+  prerequisite_modules: [bmb830.m09, bmb831.m02, bmb831.m05]
+  later_modules: [bmb831.m11, bmb831.m12]
+
+objectives:
+  - {id: bmb831.m06.o01, text: {es: Seleccionar distancia y algoritmo de clustering según representación, en: Select distance and clustering algorithm from the representation, da: Vælge afstand og clusteringalgoritme ud fra repræsentationen}}
+  - {id: bmb831.m06.o02, text: {es: Evaluar estabilidad y asociación externa de clusters, en: Evaluate cluster stability and external association, da: Evaluere clusterstabilitet og ekstern association}}
+  - {id: bmb831.m06.o03, text: {es: Definir target, tiempo de predicción y unidad independiente, en: Define target, prediction time, and independent unit, da: Definere target, prædiktionstidspunkt og uafhængig enhed}}
+  - {id: bmb831.m06.o04, text: {es: Diseñar splits agrupados y temporales, en: Design grouped and temporal splits, da: Designe grouped og temporale splits}}
+  - {id: bmb831.m06.o05, text: {es: Encapsular preprocessing dentro de resampling, en: Encapsulate preprocessing within resampling, da: Indkapsle preprocessing inden for resampling}}
+  - {id: bmb831.m06.o06, text: {es: Aplicar validación cruzada anidada, en: Apply nested cross-validation, da: Anvende nested cross-validation}}
+  - {id: bmb831.m06.o07, text: {es: Interpretar discriminación, calibración y umbrales, en: Interpret discrimination, calibration, and thresholds, da: Fortolke diskrimination, kalibrering og tærskler}}
+  - {id: bmb831.m06.o08, text: {es: Evaluar estabilidad, subgrupos y desplazamiento de dominio, en: Evaluate stability, subgroups, and domain shift, da: Evaluere stabilitet, subgrupper og domain shift}}
+
+concepts:
+  - id: bmb831.m06.c01
+    title: {es: Clustering depende de representación y objetivo, en: Clustering depends on representation and objective, da: Clustering afhænger af repræsentation og mål}
+    body:
+      es: >-
+        Clustering no descubre una partición única. Distancia, transformación, selección de variables, algoritmo y k
+        definen la solución. K-means favorece grupos aproximadamente esféricos en distancia euclídea; jerárquico depende
+        del linkage; métodos de densidad responden a otra geometría.
+      en: >-
+        Clustering does not discover one unique partition. Distance, transformation, feature selection, algorithm, and k
+        define the solution. K-means favors roughly spherical Euclidean groups; hierarchical clustering depends on linkage.
+      da: >-
+        Clustering finder ikke én unik partition. Afstand, transformation, features, algoritme og k definerer løsningen.
+    key_points:
+      - {es: Un cluster es resultado de un procedimiento, no una entidad automática, en: A cluster is a procedure output, not an automatic entity, da: En cluster er et procedureoutput, ikke en automatisk enhed}
+  - id: bmb831.m06.c02
+    title: {es: Estabilidad y validez de clusters, en: Cluster stability and validity, da: Clusterstabilitet og validitet}
+    body:
+      es: >-
+        Silhouette y criterios internos describen compactación/separación bajo la misma métrica. Bootstrap, subsampling y
+        perturbación evalúan persistencia. Validez biológica requiere asociación externa reproducible, no usar la misma señal
+        para definir y confirmar clusters. Un cluster estable puede ser técnico.
+      en: >-
+        Internal criteria describe compactness under the same metric. Bootstrap and perturbation assess persistence.
+        Biological validity requires reproducible external association. A stable cluster may still be technical.
+      da: >-
+        Interne kriterier beskriver kompakthed. Bootstrap vurderer persistens; biologisk validitet kræver ekstern association.
+    key_points:
+      - {es: Estabilidad es necesaria a menudo, pero no suficiente, en: Stability is often necessary but not sufficient, da: Stabilitet er ofte nødvendig men ikke tilstrækkelig}
+  - id: bmb831.m06.c03
+    title: {es: Target y tiempo de predicción, en: Target and prediction time, da: Target og prædiktionstidspunkt}
+    body:
+      es: >-
+        Un problema supervisado debe definir outcome, horizonte, tiempo índice y variables disponibles en ese momento.
+        Usar información posterior al tiempo de predicción causa leakage temporal. Repeticiones, células o visitas del mismo
+        paciente deben mantenerse juntas entre particiones.
+      en: >-
+        A supervised problem defines outcome, horizon, index time, and variables available then. Post-index information causes
+        temporal leakage. Repeated measures or cells from one patient must remain in the same partition.
+      da: >-
+        Et superviseret problem definerer outcome, horisont, indekstid og tilgængelige variable. Senere information giver leakage.
+    key_points:
+      - {es: La unidad de split debe abarcar toda dependencia, en: The split unit must encompass the dependency unit, da: Split-enheden skal omfatte afhængighedsenheden}
+  - id: bmb831.m06.c04
+    title: {es: Leakage y pipeline completo, en: Leakage and the complete pipeline, da: Leakage og hele pipelinet}
+    body:
+      es: >-
+        Imputación, escalado, corrección de batch, selección de variables, PCA y ajuste de hiperparámetros aprenden de datos.
+        Deben ajustarse sólo en training y aplicarse a validation/test. Preprocesar toda la matriz antes de CV filtra información,
+        incluso sin usar explícitamente labels.
+      en: >-
+        Imputation, scaling, batch correction, feature selection, PCA, and tuning learn from data. Fit them only on training
+        and apply to validation/test. Whole-dataset preprocessing before CV leaks information even without explicit labels.
+      da: >-
+        Imputation, skalering, batch correction, feature selection, PCA og tuning skal fittes kun på training.
+    key_points:
+      - {es: Se valida el pipeline, no sólo el clasificador, en: The pipeline is validated, not only the classifier, da: Hele pipelinet valideres, ikke kun klassifikatoren}
+  - id: bmb831.m06.c05
+    title: {es: Resampling y validación anidada, en: Resampling and nested validation, da: Resampling og nested validering}
+    body:
+      es: >-
+        El loop interno selecciona hiperparámetros y variables; el externo estima rendimiento del proceso de selección.
+        El test final se reserva y se usa una vez. Los folds deben respetar paciente, sitio, familia, tiempo o lote según la
+        dependencia y uso futuro. Comparar muchos pipelines en el mismo outer CV también introduce selección.
+      en: >-
+        Inner loops select hyperparameters and features; outer loops estimate the selection process. Final test data are used once.
+        Folds respect patient, site, family, time, or batch. Comparing many pipelines on the same outer CV also induces selection.
+      da: >-
+        Indre loops vælger hyperparametre; ydre loops estimerer selektionsproceduren. Testdata bruges én gang.
+    key_points:
+      - {es: Nested CV estima un procedimiento, en: Nested CV estimates a procedure, da: Nested CV estimerer en procedure}
+  - id: bmb831.m06.c06
+    title: {es: Métricas, calibración y utilidad, en: Metrics, calibration, and utility, da: Metrikker, kalibrering og nytte}
+    body:
+      es: >-
+        ROC-AUC mide ranking; PR-AUC es sensible a clase positiva y prevalencia. Sensibilidad, especificidad, PPV y NPV dependen
+        del umbral; valores predictivos dependen de prevalencia. Brier y curvas de calibración evalúan probabilidades.
+        El umbral se elige con costes y datos de desarrollo, no test.
+      en: >-
+        ROC-AUC measures ranking; PR-AUC emphasizes positives. Threshold metrics and predictive values depend on threshold and
+        prevalence. Brier score and calibration curves evaluate probabilities. Thresholds are chosen in development data.
+      da: >-
+        ROC-AUC måler ranking; PR-AUC fokuserer på positive. Kalibrering evaluerer sandsynligheder.
+    key_points:
+      - {es: Discriminación y calibración son distintas, en: Discrimination and calibration are distinct, da: Diskrimination og kalibrering er forskellige}
+  - id: bmb831.m06.c07
+    title: {es: Estabilidad, subgrupos y domain shift, en: Stability, subgroups, and domain shift, da: Stabilitet, subgrupper og domain shift}
+    body:
+      es: >-
+        Firmas seleccionadas pueden variar entre resamples aunque el rendimiento sea parecido. Deben evaluarse frecuencia de selección,
+        signo, calibración y errores por subgrupo. Cambios de plataforma, sitio, prevalencia o población alteran distribución;
+        validación externa y recalibración pueden ser necesarias.
+      en: >-
+        Selected signatures may vary across resamples despite similar performance. Evaluate selection frequency, sign, calibration,
+        and subgroup errors. Platform, site, prevalence, or population shifts require external validation and possibly recalibration.
+      da: >-
+        Valgte signaturer kan variere mellem resamples. Platform-, site- og populationsskift kræver ekstern validering.
+    key_points:
+      - {es: Rendimiento interno no establece transportabilidad, en: Internal performance does not establish transportability, da: Intern performance etablerer ikke transportabilitet}
+
+worked_examples:
+  - id: bmb831.m06.e01
+    title: {es: Leakage por selección global, en: Leakage from global selection, da: Leakage fra global selection}
+    scenario: {es: Se eligen genes por asociación usando todos los datos antes de CV., en: Genes are selected by association using all data before CV., da: Gener vælges efter association på alle data før CV.}
+    reasoning:
+      - {es: Validation labels influyen en features., en: Validation labels influence features., da: Validation-labels påvirker features.}
+      - {es: Selección debe repetirse dentro de cada training fold., en: Selection must be repeated inside each training fold., da: Selection skal gentages i hvert training-fold.}
+    conclusion: {es: El AUC global está optimísticamente sesgado., en: Global AUC is optimistically biased., da: Global AUC er optimistisk biased.}
+  - id: bmb831.m06.e02
+    title: {es: Células repartidas entre folds, en: Cells split across folds, da: Celler delt mellem folds}
+    scenario: {es: Células del mismo paciente aparecen en train y test., en: Cells from the same patient appear in train and test., da: Celler fra samme patient findes i train og test.}
+    reasoning:
+      - {es: El modelo reconoce firma individual., en: The model may recognize patient identity., da: Modellen kan genkende patientidentitet.}
+      - {es: Split debe agrupar por paciente., en: Split must group by patient., da: Split skal grupperes efter patient.}
+    conclusion: {es: La unidad efectiva es paciente, no célula., en: Effective unit is patient, not cell., da: Effektiv enhed er patient, ikke celle.}
+  - id: bmb831.m06.e03
+    title: {es: AUC alta, calibración mala, en: High AUC, poor calibration, da: Høj AUC, dårlig kalibrering}
+    scenario: {es: AUC=0.88 pero riesgos predichos duplican frecuencia observada., en: AUC=0.88 but predicted risks double observed frequency., da: AUC=0.88 men prædikterede risici er dobbelt observeret frekvens.}
+    reasoning:
+      - {es: Ranking es bueno pero probabilidades no son fiables., en: Ranking is good but probabilities are unreliable., da: Ranking er god men sandsynligheder er upålidelige.}
+      - {es: Evaluar intercepto, pendiente y recalibración., en: Assess calibration intercept, slope, and recalibration., da: Vurder kalibreringsintercept, hældning og rekalibrering.}
+    conclusion: {es: Utilidad probabilística requiere calibración además de discriminación., en: Probabilistic use requires calibration as well as discrimination., da: Probabilistisk brug kræver kalibrering ud over diskrimination.}
+
+guided_practice:
+  - {id: bmb831.m06.p01, activity_type: clustering_design, prompt: {es: Compara k-means y jerárquico para perfiles ómicos., en: Compare k-means and hierarchical clustering for omics profiles., da: Sammenlign k-means og hierarkisk clustering for omics-profiler.}, expected_elements: [distance, geometry, k, linkage, stability]}
+  - {id: bmb831.m06.p02, activity_type: resampling_design, prompt: {es: Diseña splits para pacientes, sitios y visitas repetidas., en: Design splits for patients, sites, and repeated visits., da: Design splits for patienter, sites og gentagne besøg.}, expected_elements: [grouped_patient, site_external, temporal_order, no_overlap]}
+  - {id: bmb831.m06.p03, activity_type: pipeline_ordering, prompt: {es: Ordena imputación, escalado, selección, tuning y evaluación., en: Order imputation, scaling, selection, tuning, and evaluation., da: Ordne imputation, skalering, selection, tuning og evaluering.}, expected_elements: [inside_training, inner_loop, outer_evaluation, final_test]}
+  - {id: bmb831.m06.p04, activity_type: metric_selection, prompt: {es: Elige métricas para outcome raro y decisiones con umbral., en: Choose metrics for a rare outcome and threshold decisions., da: Vælg metrikker for sjældent outcome og tærskelbeslutninger.}, expected_elements: [pr_auc, sensitivity, specificity, ppv, calibration, decision_cost]}
+  - {id: bmb831.m06.p05, activity_type: stability_analysis, prompt: {es: Evalúa estabilidad de una firma de diez genes., en: Evaluate stability of a ten-gene signature., da: Evaluér stabilitet af en ti-gen-signatur.}, expected_elements: [selection_frequency, coefficient_sign, performance_distribution, overlap, external_data]}
+  - {id: bmb831.m06.p06, activity_type: publication_appraisal, prompt: {es: Critica un estudio con CV aleatoria de células y sin calibración., en: Critique a study with random cell-level CV and no calibration., da: Kritisk vurder et studie med tilfældig celle-niveau-CV og uden kalibrering.}, expected_elements: [pseudoreplication, leakage, optimistic_metrics, probability_limit, corrected_design]}
+
+objective_bank:
+  - {id: bmb831.m06.q01, type: multiple_choice, prompt: {es: K-means favorece..., en: K-means favors..., da: K-means favoriserer...}, options: [{id: a, text: {es: Grupos aproximadamente esféricos euclídeos, en: Roughly spherical Euclidean groups, da: Omtrent sfæriske euklidiske grupper}}, {id: b, text: {es: Cualquier topología sin supuestos, en: Any topology without assumptions, da: Enhver topologi uden antagelser}}], correct_option_ids: [a], explanation: {es: Minimiza suma de cuadrados a centroides., en: It minimizes squared distances to centroids., da: Det minimerer kvadrerede afstande til centroider.}}
+  - {id: bmb831.m06.q02, type: true_false, prompt: {es: Silhouette alta prueba subtipo biológico., en: High silhouette proves a biological subtype., da: Høj silhouette beviser biologisk subtype.}, correct: false, explanation: {es: Es criterio interno bajo una representación., en: It is an internal criterion under one representation., da: Det er et internt kriterium under én repræsentation.}}
+  - {id: bmb831.m06.q03, type: multiple_choice, prompt: {es: Unidad de split para células de pacientes., en: Split unit for patient-derived cells., da: Split-enhed for celler fra patienter.}, options: [{id: a, text: {es: Paciente, en: Patient, da: Patient}}, {id: b, text: {es: Célula, en: Cell, da: Celle}}], correct_option_ids: [a], explanation: {es: Evita identidad compartida entre train y test., en: It prevents shared identity across train and test., da: Det forhindrer delt identitet mellem train og test.}}
+  - {id: bmb831.m06.q04, type: true_false, prompt: {es: Escalar toda la matriz antes de CV es siempre seguro porque no usa labels., en: Scaling the whole matrix before CV is always safe because labels are unused., da: Skalering af hele matrix før CV er altid sikkert fordi labels ikke bruges.}, correct: false, explanation: {es: Validation data influyen en parámetros de escalado., en: Validation data influence scaling parameters., da: Validation-data påvirker skaleringsparametre.}}
+  - {id: bmb831.m06.q05, type: multiple_choice, prompt: {es: Función del inner loop., en: Function of the inner loop., da: Funktion af inner loop.}, options: [{id: a, text: {es: Seleccionar hiperparámetros y preprocessing, en: Select hyperparameters and preprocessing, da: Vælge hyperparametre og preprocessing}}, {id: b, text: {es: Reportar rendimiento final independiente, en: Report final independent performance, da: Rapportere endelig uafhængig performance}}], correct_option_ids: [a], explanation: {es: El outer loop estima el procedimiento., en: The outer loop estimates the procedure., da: Outer loop estimerer proceduren.}}
+  - {id: bmb831.m06.q06, type: true_false, prompt: {es: Test final puede revisarse repetidamente para elegir modelo., en: Final test data may be repeatedly inspected to choose the model., da: Endelige testdata kan inspiceres gentagne gange for modelvalg.}, correct: false, explanation: {es: Se convertiría en desarrollo y perdería independencia., en: It would become development data and lose independence., da: Det ville blive udviklingsdata og miste uafhængighed.}}
+  - {id: bmb831.m06.q07, type: multiple_choice, prompt: {es: Métrica más informativa con positivos muy raros., en: More informative metric with very rare positives., da: Mere informativ metrik med meget sjældne positive.}, options: [{id: a, text: {es: PR-AUC junto con prevalencia, en: PR-AUC with prevalence, da: PR-AUC med prævalens}}, {id: b, text: {es: Accuracy sola, en: Accuracy alone, da: Accuracy alene}}], correct_option_ids: [a], explanation: {es: Accuracy puede ser alta prediciendo siempre negativo., en: Accuracy may be high by always predicting negative., da: Accuracy kan være høj ved altid at prædiktere negativ.}}
+  - {id: bmb831.m06.q08, type: true_false, prompt: {es: AUC evalúa calibración., en: AUC evaluates calibration., da: AUC evaluerer kalibrering.}, correct: false, explanation: {es: Evalúa ranking/discriminación., en: It evaluates ranking/discrimination., da: Det evaluerer ranking/diskrimination.}}
+  - {id: bmb831.m06.q09, type: multiple_choice, prompt: {es: El umbral debe elegirse en..., en: The threshold should be chosen in..., da: Tærsklen bør vælges i...}, options: [{id: a, text: {es: Datos de desarrollo con costes explícitos, en: Development data with explicit costs, da: Udviklingsdata med eksplicitte omkostninger}}, {id: b, text: {es: Test final para maximizar resultado, en: Final test to maximize results, da: Endelig test for at maksimere resultat}}], correct_option_ids: [a], explanation: {es: Mantiene test independiente., en: It preserves test independence., da: Det bevarer testuafhængighed.}}
+  - {id: bmb831.m06.q10, type: true_false, prompt: {es: Firma estable internamente equivale a biomarcador validado., en: An internally stable signature equals a validated biomarker., da: En internt stabil signatur er en valideret biomarkør.}, correct: false, explanation: {es: Requiere validación externa, analítica y según uso clínica., en: External, analytical, and use-specific clinical validation are required., da: Ekstern, analytisk og brugs-specifik klinisk validering kræves.}}
+
+open_assessment_items:
+  - id: bmb831.m06.a01
+    prompt: {es: Diseña una validación anidada completa para un clasificador ómico p≫n., en: Design complete nested validation for a p≫n omics classifier., da: Design komplet nested validering for en p≫n omics-klassifikator.}
+    rubric: [{criterion: grouped_split, weight: 0.25}, {criterion: inner_pipeline, weight: 0.30}, {criterion: outer_metrics, weight: 0.25}, {criterion: final_test_claims, weight: 0.20}]
+  - id: bmb831.m06.a02
+    prompt: {es: Evalúa si tres clusters representan subtipos biológicos., en: Evaluate whether three clusters represent biological subtypes., da: Evaluér om tre clusters repræsenterer biologiske subtyper.}
+    rubric: [{criterion: representation_algorithm, weight: 0.25}, {criterion: stability, weight: 0.25}, {criterion: external_association, weight: 0.25}, {criterion: replication_claim_scope, weight: 0.25}]
+  - id: bmb831.m06.a03
+    prompt: {es: Critica un modelo con AUC alta, mala calibración y fuerte caída externa., en: Critique a model with high AUC, poor calibration, and strong external degradation., da: Kritisk vurder en model med høj AUC, dårlig kalibrering og stærkt eksternt fald.}
+    rubric: [{criterion: discrimination_calibration, weight: 0.25}, {criterion: domain_shift, weight: 0.25}, {criterion: recalibration_or_revision, weight: 0.25}, {criterion: deployment_claims, weight: 0.25}]
+
+glossary:
+  - {id: bmb831.term.cluster_stability, term: {es: estabilidad de cluster, en: cluster stability, da: clusterstabilitet}, definition: {es: Persistencia de asignaciones o estructura bajo perturbación., en: Persistence of assignments or structure under perturbation., da: Persistens af assignments eller struktur under perturbation.}}
+  - {id: bmb831.term.leakage, term: {es: fuga de información, en: data leakage, da: datalækage}, definition: {es: Uso de información no disponible legítimamente al entrenar o predecir., en: Use of information not legitimately available during training or prediction., da: Brug af information der ikke legitimt er tilgængelig under træning eller prædiktion.}}
+  - {id: bmb831.term.grouped_split, term: {es: partición agrupada, en: grouped split, da: grouped split}, definition: {es: Partición que mantiene unidades dependientes en el mismo fold., en: Split keeping dependent observations in the same fold., da: Split der holder afhængige observationer i samme fold.}}
+  - {id: bmb831.term.nested_cv, term: {es: validación cruzada anidada, en: nested cross-validation, da: nested cross-validation}, definition: {es: Resampling con loop interno de selección y externo de evaluación., en: Resampling with inner selection and outer evaluation loops., da: Resampling med indre selektion og ydre evaluering.}}
+  - {id: bmb831.term.roc_auc, term: {es: ROC-AUC, en: ROC-AUC, da: ROC-AUC}, definition: {es: Probabilidad de ordenar un positivo por encima de un negativo., en: Probability of ranking a positive above a negative., da: Sandsynlighed for at rangere en positiv over en negativ.}}
+  - {id: bmb831.term.pr_auc, term: {es: PR-AUC, en: PR-AUC, da: PR-AUC}, definition: {es: Resumen de precisión-recall sensible a clase positiva y prevalencia., en: Precision-recall summary sensitive to positive class and prevalence., da: Precision-recall-summary følsomt for positiv klasse og prævalens.}}
+  - {id: bmb831.term.calibration, term: {es: calibración, en: calibration, da: kalibrering}, definition: {es: Correspondencia entre probabilidades predichas y frecuencias observadas., en: Agreement between predicted probabilities and observed frequencies., da: Overensstemmelse mellem prædikterede sandsynligheder og observerede frekvenser.}}
+  - {id: bmb831.term.brier_score, term: {es: Brier score, en: Brier score, da: Brier score}, definition: {es: Error cuadrático medio de predicciones probabilísticas binarias., en: Mean squared error of binary probabilistic predictions., da: Middel kvadratisk fejl af binære probabilistiske prædiktioner.}}
+  - {id: bmb831.term.domain_shift, term: {es: desplazamiento de dominio, en: domain shift, da: domain shift}, definition: {es: Cambio de distribución entre desarrollo y uso., en: Distribution change between development and use., da: Fordelingsændring mellem udvikling og brug.}}
+  - {id: bmb831.term.selection_stability, term: {es: estabilidad de selección, en: selection stability, da: selektionsstabilitet}, definition: {es: Persistencia de variables seleccionadas bajo resampling., en: Persistence of selected variables under resampling., da: Persistens af valgte variable under resampling.}}
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      La validación debe reproducir el uso futuro y encapsular todo paso aprendido de datos. Clustering requiere estabilidad
+      y evidencia externa; clasificación requiere splits independientes, nested CV, discriminación, calibración y evaluación de shift.
+    en: >-
+      Validation should mimic future use and encapsulate every data-learned step. Clustering needs stability and external evidence;
+      classification needs independent splits, nested CV, discrimination, calibration, and shift evaluation.
+    da: >-
+      Validering bør efterligne fremtidig brug og indkapsle alle datalærte trin. Clustering kræver stabilitet og ekstern evidens.
+  misconceptions:
+    - unsupervised preprocessing cannot leak
+    - random cell-level splitting is valid for patient prediction
+    - high AUC implies calibrated probabilities
+    - a stable cluster is automatically biological
+    - final test data may be used repeatedly
+  socratic_questions:
+    - What is the true independent deployment unit?
+    - Which pipeline steps learn from data?
+    - Does the resampling mimic future site or time shift?
+    - Are probabilities calibrated at the intended prevalence?
+    - How stable are selected features and subgroup errors?
+  grading_criteria:
+    - representation-aware clustering
+    - grouped leakage-resistant resampling
+    - correct nested CV logic
+    - discrimination calibration threshold interpretation
+    - external validation and restrained biomarker claims
+  retrieval_fragments:
+    - id: bmb831.m06.r01
+      text: {es: Todo preprocessing aprendido debe ajustarse dentro del training fold., en: Every learned preprocessing step must be fitted inside the training fold., da: Hvert datalært preprocessing-trin skal fittes i training-foldet.}
+    - id: bmb831.m06.r02
+      text: {es: AUC mide discriminación, no calibración ni utilidad clínica., en: AUC measures discrimination, not calibration or clinical utility., da: AUC måler diskrimination, ikke kalibrering eller klinisk nytte.}
+    - id: bmb831.m06.r03
+      text: {es: La unidad de split debe ser al menos tan grande como la unidad de dependencia., en: The split unit must be at least as large as the dependency unit., da: Split-enheden skal være mindst lige så stor som afhængighedsenheden.}
