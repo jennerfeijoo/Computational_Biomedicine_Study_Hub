@@ -1,0 +1,883 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m04
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Representación de secuencias, probabilidad, matrices de sustitución y significancia
+    en: Sequence representation, probability, substitution matrices, and significance
+    da: Sekvensrepræsentation, sandsynlighed, substitutionsmatricer og signifikans
+  summary:
+    es: >-
+      Fundamentos para comparar secuencias de ADN, ARN y proteínas: alfabetos, símbolos ambiguos,
+      orientación, formatos, calidad, composición, identidad, similitud, homología, modelos nulos,
+      puntuaciones log-odds, matrices de sustitución, penalizaciones de gaps, sesgo composicional,
+      complejidad baja y significancia estadística. El módulo separa puntuación algorítmica,
+      normalización y evidencia evolutiva.
+    en: >-
+      Foundations for comparing DNA, RNA, and protein sequences: alphabets, ambiguous symbols,
+      orientation, formats, quality, composition, identity, similarity, homology, null models,
+      log-odds scores, substitution matrices, gap penalties, compositional bias, low complexity,
+      and statistical significance. The module separates algorithmic score, normalization,
+      and evolutionary evidence.
+    da: >-
+      Grundlag for sammenligning af DNA-, RNA- og proteinsekvenser: alfabeter, tvetydige symboler,
+      orientering, formater, kvalitet, sammensætning, identitet, lighed, homologi, nulmodeller,
+      log-odds-scorer, substitutionsmatricer, gap-straffe, kompositionsbias, lav kompleksitet og signifikans.
+  prerequisites: [dm847.m01, dm847.m02, bmb830.m05, dm857.m05, dm857.m06]
+  official_learning_outcomes: [dm847.lo04]
+  estimated_study_hours: 22
+  difficulty: intermediate
+
+objectives:
+  - id: m04.o1
+    bloom_level: apply
+    statement:
+      es: Representar secuencias con alfabeto, orientación, identificador, versión y metadatos de calidad explícitos.
+      en: Represent sequences with explicit alphabet, orientation, identifier, version, and quality metadata.
+      da: Repræsentere sekvenser med eksplicit alfabet, orientering, identifikator, version og kvalitetsmetadata.
+    evidence: sequence_record_audit
+  - id: m04.o2
+    bloom_level: analyze
+    statement:
+      es: Distinguir identidad, similitud, homología, ortología, paralogía y analogía sin convertir porcentajes en relaciones evolutivas automáticas.
+      en: Distinguish identity, similarity, homology, orthology, paralogy, and analogy without converting percentages into automatic evolutionary relations.
+      da: Skelne mellem identitet, lighed, homologi, ortologi, paralogi og analogi uden automatiske evolutionære slutninger fra procenter.
+    evidence: evolutionary_claim_audit
+  - id: m04.o3
+    bloom_level: apply
+    statement:
+      es: Calcular composición, frecuencia de k-mers, identidad y puntuaciones simples con denominadores y convenciones declarados.
+      en: Compute composition, k-mer frequency, identity, and simple scores with declared denominators and conventions.
+      da: Beregne sammensætning, k-mer-frekvens, identitet og simple scorer med deklarerede nævnere og konventioner.
+    evidence: sequence_summary_calculation
+  - id: m04.o4
+    bloom_level: understand
+    statement:
+      es: Explicar una puntuación log-odds como evidencia relativa entre un modelo relacionado y un modelo nulo.
+      en: Explain a log-odds score as relative evidence between a related model and a null model.
+      da: Forklare en log-odds-score som relativ evidens mellem en relateret model og en nulmodel.
+    evidence: log_odds_derivation
+  - id: m04.o5
+    bloom_level: analyze
+    statement:
+      es: Interpretar matrices de sustitución de proteínas según datos de construcción, distancia evolutiva y frecuencias de fondo.
+      en: Interpret protein substitution matrices by construction data, evolutionary distance, and background frequencies.
+      da: Fortolke proteinsubstitutionsmatricer efter konstruktionsdata, evolutionær afstand og baggrundsfrekvenser.
+    evidence: matrix_selection_argument
+  - id: m04.o6
+    bloom_level: apply
+    statement:
+      es: Diseñar puntuaciones de coincidencia, sustitución y gaps coherentes con la pregunta biológica y el algoritmo.
+      en: Design match, substitution, and gap scores consistent with the biological question and algorithm.
+      da: Designe match-, substitutions- og gap-scorer i overensstemmelse med biologisk spørgsmål og algoritme.
+    evidence: scoring_scheme_design
+  - id: m04.o7
+    bloom_level: analyze
+    statement:
+      es: Distinguir puntuación bruta, bit score, p-valor, E-value y significancia biológica.
+      en: Distinguish raw score, bit score, p-value, E-value, and biological significance.
+      da: Skelne mellem rå score, bit score, p-værdi, E-value og biologisk signifikans.
+    evidence: significance_interpretation
+  - id: m04.o8
+    bloom_level: evaluate
+    statement:
+      es: Auditar efectos de longitud, tamaño de base, sesgo composicional, complejidad baja, calidad y múltiples búsquedas.
+      en: Audit effects of length, database size, compositional bias, low complexity, quality, and multiple searching.
+      da: Auditere effekter af længde, databasestørrelse, kompositionsbias, lav kompleksitet, kvalitet og multiple søgninger.
+    evidence: sequence_search_limitations_audit
+
+concepts:
+  - id: dm847.m04.c01
+    title:
+      es: Registros de secuencia, alfabetos y orientación
+      en: Sequence records, alphabets, and orientation
+      da: Sekvensposter, alfabeter og orientering
+    body:
+      es: >-
+        Una secuencia no es sólo una cadena. El registro debe indicar entidad, namespace, accesión, versión,
+        organismo, molécula, orientación, coordenadas o longitud y procedencia. ADN usa A,C,G,T y ARN A,C,G,U,
+        pero estándares permiten símbolos de ambigüedad. Proteínas usan códigos de aminoácidos y símbolos para
+        desconocidos o terminación. FASTA conserva identificador y secuencia, pero su cabecera no tiene semántica
+        universal. FASTQ añade calidad por posición y requiere interpretar la codificación. Normalización debe evitar
+        cambiar información biológica, por ejemplo convertir U/T sin declarar el cambio.
+      en: >-
+        A sequence is not merely a string. Its record should state entity, namespace, accession, version,
+        organism, molecule, orientation, coordinates or length, and provenance. DNA uses A,C,G,T and RNA A,C,G,U,
+        while standards permit ambiguity symbols. Proteins use amino-acid codes and symbols for unknowns or stops.
+        FASTA preserves identifier and sequence but its header lacks universal semantics. FASTQ adds per-position quality
+        requiring correct encoding. Normalization must not silently change biology, such as converting U/T without declaration.
+      da: >-
+        En sekvens er ikke kun en streng. Posten bør angive enhed, namespace, accession, version, organisme,
+        molekyle, orientering, koordinater/længde og proveniens. FASTA-headeren har ikke universel semantik,
+        og FASTQ tilføjer positionskvalitet som skal fortolkes korrekt.
+    key_points:
+      - {es: Alfabeto y orientación forman parte del contrato., en: Alphabet and orientation belong to the contract., da: Alfabet og orientering hører til kontrakten.}
+      - {es: Símbolos ambiguos no son automáticamente errores., en: Ambiguous symbols are not automatically errors., da: Tvetydige symboler er ikke automatisk fejl.}
+      - {es: La cabecera FASTA debe analizarse según el recurso de origen., en: FASTA headers must be parsed according to their source resource., da: FASTA-headere skal parses efter kilderessourcen.}
+    linked_objectives: [m04.o1, m04.o8]
+
+  - id: dm847.m04.c02
+    title:
+      es: Identidad, similitud y relaciones evolutivas
+      en: Identity, similarity, and evolutionary relations
+      da: Identitet, lighed og evolutionære relationer
+    body:
+      es: >-
+        Identidad es coincidencia exacta en posiciones comparadas. Similitud puede incorporar sustituciones conservadoras
+        según una matriz. Homología significa ascendencia común y no se expresa como porcentaje: dos secuencias son homólogas
+        o no bajo una hipótesis evolutiva. Ortólogos derivan de especiación y parálogos de duplicación, pero asignarlos requiere
+        contexto filogenético y de genes, no sólo el mejor hit. Analogía describe función o estructura similar sin ascendencia
+        común demostrada. Un alto porcentaje puede surgir en regiones cortas o de complejidad baja.
+      en: >-
+        Identity is exact matching at compared positions. Similarity may include conservative substitutions under a matrix.
+        Homology means common ancestry and is not expressed as a percentage: sequences are homologous or not under an evolutionary hypothesis.
+        Orthologs arise through speciation and paralogs through duplication, but assigning them needs phylogenetic and gene-context evidence,
+        not merely the best hit. Analogy is similar function or structure without demonstrated common ancestry. High percentages may arise
+        in short or low-complexity regions.
+      da: >-
+        Identitet er eksakte matches i sammenlignede positioner. Lighed kan inkludere konservative substitutioner.
+        Homologi betyder fælles afstamning og udtrykkes ikke som procent. Ortologi og paralogi kræver evolutionær kontekst,
+        ikke kun bedste hit.
+    key_points:
+      - {es: No existe «40 % de homología»., en: “40% homology” is not a valid expression., da: “40 % homologi” er ikke en gyldig formulering.}
+      - {es: El denominador de identidad debe declararse., en: Identity denominator must be declared., da: Nævneren for identitet skal deklareres.}
+      - {es: Mejor hit recíproco es una heurística, no una prueba universal de ortología., en: Reciprocal best hit is a heuristic, not universal proof of orthology., da: Reciprocal best hit er en heuristik, ikke universelt bevis på ortologi.}
+    linked_objectives: [m04.o2, m04.o3, m04.o8]
+
+  - id: dm847.m04.c03
+    title:
+      es: Composición, k-mers y modelos de fondo
+      en: Composition, k-mers, and background models
+      da: Sammensætning, k-mers og baggrundsmodeller
+    body:
+      es: >-
+        La composición resume frecuencias de símbolos y k-mers. Bajo un modelo independiente, la probabilidad de una palabra
+        es el producto de frecuencias de sus bases; modelos de Markov capturan dependencias locales. El modelo de fondo debe
+        corresponder a organismo, región y pregunta. GC extremo, repeticiones o uso de codones pueden aumentar coincidencias
+        esperadas y sesgar puntuaciones. Contar k-mers exige decidir solapamiento, reverso-complementarias, símbolos ambiguos,
+        circularidad y normalización por oportunidades posibles.
+      en: >-
+        Composition summarizes symbol and k-mer frequencies. Under an independent model, a word probability is the product
+        of base frequencies; Markov models capture local dependence. Background should match organism, region, and question.
+        Extreme GC, repeats, or codon usage can increase expected matches and bias scores. K-mer counting requires choices about
+        overlap, reverse complements, ambiguous symbols, circularity, and normalization by possible windows.
+      da: >-
+        Sammensætning opsummerer symbol- og k-mer-frekvenser. Under en uafhængig model er ordsandsynligheden produktet af basefrekvenser;
+        Markov-modeller fanger lokale afhængigheder. Baggrundsmodellen bør matche organisme og region.
+    key_points:
+      - {es: Fondo uniforme rara vez es una hipótesis neutra., en: A uniform background is rarely a neutral assumption., da: En uniform baggrund er sjældent en neutral antagelse.}
+      - {es: Una secuencia de longitud n contiene n-k+1 ventanas lineales de k-mer., en: A length-n linear sequence contains n-k+1 k-mer windows., da: En lineær sekvens med længde n har n-k+1 k-mer-vinduer.}
+      - {es: Composición sesgada puede inflar similitud aparente., en: Biased composition can inflate apparent similarity., da: Skæv sammensætning kan inflatere tilsyneladende lighed.}
+    linked_objectives: [m04.o3, m04.o4, m04.o8]
+
+  - id: dm847.m04.c04
+    title:
+      es: Puntuación log-odds y evidencia relativa
+      en: Log-odds scoring and relative evidence
+      da: Log-odds-scoring og relativ evidens
+    body:
+      es: >-
+        Una puntuación log-odds compara la probabilidad de observar un par o patrón bajo un modelo relacionado M1
+        con su probabilidad bajo un modelo nulo M0: s = log(P(data|M1)/P(data|M0)). Un valor positivo favorece M1,
+        cero indica igual soporte y negativo favorece M0, dentro de los modelos elegidos. Los logaritmos convierten
+        productos de posiciones independientes en sumas, permitiendo programación dinámica. La base del logaritmo
+        fija unidades y escalado, no el orden de evidencia.
+      en: >-
+        A log-odds score compares the probability of a pair or pattern under a related model M1 with that under a null M0:
+        s = log(P(data|M1)/P(data|M0)). Positive favors M1, zero gives equal support, and negative favors M0 within the chosen models.
+        Logs convert products across independent positions into sums, enabling dynamic programming. Log base determines units and scaling,
+        not evidence ordering.
+      da: >-
+        En log-odds-score sammenligner sandsynligheden under en relateret model M1 med en nulmodel M0:
+        s = log(P(data|M1)/P(data|M0)). Positiv score favoriserer M1, negativ score M0. Logaritmer gør produkter til summer.
+    key_points:
+      - {es: La puntuación depende de ambos modelos., en: The score depends on both models., da: Scoren afhænger af begge modeller.}
+      - {es: Positivo no significa certeza., en: Positive does not mean certainty., da: Positiv betyder ikke sikkerhed.}
+      - {es: Aditividad requiere supuestos sobre dependencia., en: Additivity relies on dependence assumptions., da: Additivitet afhænger af antagelser om afhængighed.}
+    linked_objectives: [m04.o4, m04.o6]
+
+  - id: dm847.m04.c05
+    title:
+      es: Matrices de sustitución de proteínas
+      en: Protein substitution matrices
+      da: Proteinsubstitutionsmatricer
+    body:
+      es: >-
+        Una matriz de sustitución asigna puntuaciones a pares de aminoácidos según frecuencia observada en alineamientos
+        relacionados frente a frecuencia esperada de fondo. BLOSUM se construye a partir de bloques conservados agrupando
+        secuencias por umbrales de identidad; números mayores suelen corresponder a relaciones más cercanas. PAM parte de
+        cambios aceptados en alineamientos cercanos y extrapola un modelo; números mayores representan mayor distancia.
+        Las matrices no son intercambiables sin considerar distancia, región, composición y propósito.
+      en: >-
+        A substitution matrix scores amino-acid pairs using frequencies observed in related alignments versus background expectation.
+        BLOSUM is built from conserved blocks after clustering sequences by identity thresholds; larger numbers generally target closer relations.
+        PAM starts from accepted changes in close alignments and extrapolates a model; larger numbers represent greater distance.
+        Matrices are not interchangeable without considering distance, region, composition, and purpose.
+      da: >-
+        En substitutionsmatrix scorer aminosyrepar ud fra observerede frekvenser i relaterede alignments mod baggrund.
+        BLOSUM bruger konserverede blokke; højere numre retter sig typisk mod tættere relationer. PAM ekstrapolerer fra nære ændringer;
+        højere numre repræsenterer større afstand.
+    key_points:
+      - {es: Una sustitución conservadora depende del modelo de puntuación., en: A conservative substitution depends on the scoring model., da: En konservativ substitution afhænger af scoringsmodellen.}
+      - {es: BLOSUM62 no es universalmente óptima., en: BLOSUM62 is not universally optimal., da: BLOSUM62 er ikke universelt optimal.}
+      - {es: La matriz incorpora frecuencias de fondo y datos evolutivos., en: The matrix incorporates background frequencies and evolutionary data., da: Matricen inkorporerer baggrundsfrekvenser og evolutionære data.}
+    linked_objectives: [m04.o5, m04.o6]
+
+  - id: dm847.m04.c06
+    title:
+      es: Puntuación de nucleótidos y gaps
+      en: Nucleotide scoring and gaps
+      da: Nukleotidscoring og gaps
+    body:
+      es: >-
+        Para ADN puede usarse match/mismatch simple, pero transiciones, transversiones y composición pueden requerir modelos distintos.
+        Los gaps representan hipótesis de inserción o deleción y no caracteres observados. Una penalización lineal cobra por cada posición;
+        una afín separa apertura y extensión, reflejando que un indel largo suele ser más plausible que muchos eventos independientes.
+        Los parámetros cambian longitud y estructura del alineamiento y deben elegirse junto con la matriz y el algoritmo.
+      en: >-
+        DNA may use simple match/mismatch scoring, but transitions, transversions, and composition may justify different models.
+        Gaps represent insertion/deletion hypotheses rather than observed characters. A linear penalty charges every position;
+        an affine penalty separates opening and extension, reflecting that one long indel is often more plausible than many independent events.
+        Parameters alter alignment length and structure and should be chosen jointly with matrix and algorithm.
+      da: >-
+        DNA kan bruge simpel match/mismatch, men transitions, transversions og sammensætning kan kræve andre modeller.
+        Gaps repræsenterer indel-hypoteser. Affin gap-straf adskiller åbning og forlængelse og påvirker alignmentstrukturen.
+    key_points:
+      - {es: Un gap es una inferencia del alineamiento., en: A gap is an alignment inference., da: Et gap er en alignment-inferens.}
+      - {es: Apertura y extensión modelan costes distintos., en: Opening and extension model different costs., da: Åbning og forlængelse modellerer forskellige omkostninger.}
+      - {es: Parámetros no deben elegirse después de mirar sólo el resultado favorito., en: Parameters should not be chosen after viewing only the preferred result., da: Parametre bør ikke vælges efter kun at se favoritresultatet.}
+    linked_objectives: [m04.o6, m04.o8]
+
+  - id: dm847.m04.c07
+    title:
+      es: Puntuación bruta, bit score, p-valor y E-value
+      en: Raw score, bit score, p-value, and E-value
+      da: Rå score, bit score, p-værdi og E-value
+    body:
+      es: >-
+        La puntuación bruta suma la matriz y gaps bajo parámetros concretos y no es comparable directamente entre configuraciones.
+        Un bit score normaliza una puntuación respecto de parámetros estadísticos del sistema, facilitando comparación dentro de un marco.
+        Un p-valor describe probabilidad de obtener un resultado al menos tan extremo bajo un modelo nulo para una prueba definida.
+        El E-value es el número esperado de resultados de igual o mayor puntuación por azar en una búsqueda; crece con el espacio de búsqueda.
+        Ninguna medida demuestra función o relevancia biológica.
+      en: >-
+        A raw score sums matrix and gap contributions under specific parameters and is not directly comparable across configurations.
+        A bit score normalizes relative to system statistical parameters. A p-value is the probability of an equally or more extreme result
+        under a defined null for one test. An E-value is the expected number of chance results with equal or better score in a search and grows
+        with search space. None demonstrates function or biological relevance.
+      da: >-
+        Rå score summerer matrix- og gapbidrag under bestemte parametre. Bit score normaliserer statistisk.
+        P-værdi gælder en defineret nulmodel; E-value er forventet antal tilfældige hits af samme eller bedre score i en søgning.
+    key_points:
+      - {es: E-value depende del tamaño de la búsqueda., en: E-value depends on search size., da: E-value afhænger af søgestørrelse.}
+      - {es: Puntuaciones de parámetros distintos no son automáticamente comparables., en: Scores from different parameters are not automatically comparable., da: Scorer fra forskellige parametre er ikke automatisk sammenlignelige.}
+      - {es: Significancia estadística y significado biológico son distintos., en: Statistical significance and biological meaning are distinct., da: Statistisk signifikans og biologisk betydning er forskellige.}
+    linked_objectives: [m04.o7, m04.o8]
+
+  - id: dm847.m04.c08
+    title:
+      es: Complejidad baja, sesgo composicional y múltiples búsquedas
+      en: Low complexity, compositional bias, and multiple searching
+      da: Lav kompleksitet, kompositionsbias og multiple søgninger
+    body:
+      es: >-
+        Regiones repetitivas o de baja complejidad producen muchas coincidencias no informativas. Sesgos de composición pueden hacer que
+        el modelo nulo subestime la frecuencia esperada de pares. En bases grandes, incluso eventos raros aparecen. Filtrado o enmascaramiento
+        puede reducir falsos positivos, pero también ocultar señales reales y debe registrarse. Buscar muchas consultas o ajustar parámetros
+        repetidamente aumenta oportunidades de resultados extremos. La interpretación requiere longitud alineada, cobertura, distribución de hits,
+        dominios, contexto y validación independiente.
+      en: >-
+        Repetitive or low-complexity regions produce many uninformative matches. Compositional bias can make the null underestimate expected pairs.
+        In large databases, rare events occur. Filtering or masking reduces false positives but may hide real signals and must be recorded.
+        Many queries or repeated parameter tuning increase opportunities for extremes. Interpretation requires aligned length, coverage, hit distribution,
+        domains, context, and independent validation.
+      da: >-
+        Repetitive eller lav-kompleksitetsregioner giver mange ikke-informative matches. Kompositionsbias kan gøre nulmodellen forkert.
+        Store databaser giver tilfældige ekstreme hits. Filtrering kan hjælpe men også skjule ægte signal og skal registreres.
+    key_points:
+      - {es: Cobertura y longitud importan junto con porcentaje., en: Coverage and length matter alongside percentage., da: Coverage og længde betyder noget sammen med procent.}
+      - {es: Enmascaramiento cambia el espacio analizado., en: Masking changes the analyzed space., da: Maskering ændrer det analyserede rum.}
+      - {es: Repetir búsquedas y elegir el mejor resultado introduce selección., en: Repeated searches and choosing the best introduces selection., da: Gentagne søgninger og valg af bedste resultat introducerer selektion.}
+    linked_objectives: [m04.o2, m04.o7, m04.o8]
+
+worked_examples:
+  - id: dm847.m04.e01
+    title:
+      es: Calcular identidad con denominador explícito
+      en: Calculate identity with an explicit denominator
+      da: Beregn identitet med eksplicit nævner
+    problem:
+      es: >-
+        Un alineamiento tiene 80 posiciones alineadas, 60 coincidencias, 10 sustituciones y 10 posiciones con gap.
+        Calcula identidad sobre columnas totales y sobre posiciones residuo-residuo.
+      en: >-
+        An alignment has 80 aligned columns, 60 matches, 10 substitutions, and 10 gap-containing columns.
+        Calculate identity over all columns and over residue-residue positions.
+      da: >-
+        Et alignment har 80 kolonner, 60 matches, 10 substitutioner og 10 gap-kolonner.
+        Beregn identitet over alle kolonner og over residue-residue-positioner.
+    reasoning:
+      es:
+        - Sobre todas las columnas, denominador 80.
+        - Posiciones residuo-residuo: 60+10=70.
+        - Declarar denominador evita porcentajes aparentemente contradictorios.
+      en:
+        - All-column denominator is 80.
+        - Residue-residue positions total 60+10=70.
+        - Declaring denominator prevents apparently conflicting percentages.
+      da:
+        - Alle kolonner bruger nævner 80.
+        - Residue-residue-positioner er 60+10=70.
+        - Deklarér nævneren.
+    expected_answer:
+      es: 75 % sobre todas las columnas; aproximadamente 85,7 % sobre posiciones residuo-residuo.
+      en: 75% over all columns; approximately 85.7% over residue-residue positions.
+      da: 75 % over alle kolonner; cirka 85,7 % over residue-residue-positioner.
+    limitations:
+      - identity alone does not establish homology or function
+      - alignment construction determines the counted columns
+    linked_objectives: [m04.o2, m04.o3]
+
+  - id: dm847.m04.e02
+    title:
+      es: Interpretar una puntuación log2-odds
+      en: Interpret a log2-odds score
+      da: Fortolk en log2-odds-score
+    problem:
+      es: Un par de residuos tiene probabilidad 0,08 bajo un modelo relacionado y 0,02 bajo el modelo nulo. Calcula log2-odds.
+      en: A residue pair has probability 0.08 under a related model and 0.02 under the null. Calculate log2-odds.
+      da: Et residuepar har sandsynlighed 0,08 under en relateret model og 0,02 under nulmodellen. Beregn log2-odds.
+    reasoning:
+      es:
+        - Cociente de verosimilitudes: 0,08/0,02=4.
+        - log2(4)=2.
+        - La observación es cuatro veces más probable bajo M1 que M0 para este par.
+      en:
+        - Likelihood ratio: 0.08/0.02=4.
+        - log2(4)=2.
+        - The pair is four times as likely under M1 as M0.
+      da:
+        - Likelihood-ratio: 0,08/0,02=4.
+        - log2(4)=2.
+        - Parret er fire gange mere sandsynligt under M1.
+    expected_answer: 2 bits
+    explanation:
+      es: Es evidencia relativa entre modelos, no probabilidad de que la relación sea verdadera.
+      en: It is relative evidence between models, not the probability that the relationship is true.
+      da: Det er relativ evidens mellem modeller, ikke sandsynligheden for at relationen er sand.
+    linked_objectives: [m04.o4]
+
+  - id: dm847.m04.e03
+    title:
+      es: Comparar E-values al cambiar el tamaño de base
+      en: Compare E-values when database size changes
+      da: Sammenlign E-values når databasestørrelsen ændres
+    problem:
+      es: >-
+        Un hit tiene E-value 1e-5 en una base. Aproximadamente, ¿qué ocurre si el espacio de búsqueda se multiplica por 100
+        y la puntuación y modelo permanecen iguales?
+      en: >-
+        A hit has E-value 1e-5 in one database. Approximately what happens if the search space becomes 100 times larger
+        while score and model remain unchanged?
+      da: >-
+        Et hit har E-value 1e-5. Hvad sker cirka hvis søgerummet bliver 100 gange større mens score og model er uændrede?
+    reasoning:
+      es:
+        - E-value cuenta resultados esperados por azar en el espacio de búsqueda.
+        - Escala aproximadamente de forma lineal con el tamaño efectivo de la base bajo el mismo modelo.
+        - 1e-5 × 100 = 1e-3.
+      en:
+        - E-value counts expected chance results in the search space.
+        - It scales approximately linearly with effective database size under the same model.
+        - 1e-5 × 100 = 1e-3.
+      da:
+        - E-value tæller forventede tilfældige hits i søgerummet.
+        - Den skalerer cirka lineært med effektiv databasestørrelse.
+        - 1e-5 × 100 = 1e-3.
+    expected_answer: approximately 1e-3
+    limitations:
+      - exact scaling depends on the statistical model and effective lengths
+      - biological interpretation still requires coverage and context
+    linked_objectives: [m04.o7, m04.o8]
+
+practice_exercises:
+  - id: dm847.m04.p01
+    activity_type: sequence_record_audit
+    difficulty: foundational
+    prompt:
+      es: Audita `>gene1` seguido de una secuencia. Enumera metadatos necesarios antes de integrarla.
+      en: Audit `>gene1` followed by a sequence. List metadata needed before integration.
+      da: Auditér `>gene1` efterfulgt af en sekvens. List nødvendige metadata før integration.
+    accepted_answer_elements:
+      - namespace and accession
+      - version or source release
+      - organism and molecular entity type
+      - alphabet and ambiguity policy
+      - orientation and coordinates when relevant
+      - provenance and checksum
+      - relationship to gene, transcript, or protein clarified
+    linked_objectives: [m04.o1]
+
+  - id: dm847.m04.p02
+    activity_type: kmer_calculation
+    difficulty: foundational
+    prompt:
+      es: Para `ACGACG`, cuenta ventanas de 3-mers solapadas y frecuencias.
+      en: For `ACGACG`, count overlapping 3-mer windows and frequencies.
+      da: For `ACGACG`, tæl overlappende 3-mer-vinduer og frekvenser.
+    reference_solution:
+      es: Ventanas: ACG, CGA, GAC, ACG. Frecuencias: ACG=2, CGA=1, GAC=1; total n-k+1=4.
+      en: Windows: ACG, CGA, GAC, ACG. Frequencies: ACG=2, CGA=1, GAC=1; total n-k+1=4.
+      da: Vinduer: ACG, CGA, GAC, ACG. Frekvenser: ACG=2, CGA=1, GAC=1; total n-k+1=4.
+    linked_objectives: [m04.o3]
+
+  - id: dm847.m04.p03
+    activity_type: claim_audit
+    difficulty: intermediate
+    prompt:
+      es: Corrige «las proteínas tienen 35 % de homología» y formula una afirmación válida.
+      en: Correct “the proteins have 35% homology” and formulate a valid statement.
+      da: Ret “proteinerne har 35 % homologi” og formulér en gyldig påstand.
+    reference_solution:
+      es: >-
+        «Las proteínas presentan 35 % de identidad sobre X residuos alineados con Y % de cobertura bajo estos parámetros.
+        La homología es una hipótesis de ascendencia común que requiere evaluar significancia, longitud, dominios y contexto evolutivo.»
+      en: >-
+        “The proteins show 35% identity across X aligned residues with Y% coverage under these parameters.
+        Homology is a common-ancestry hypothesis requiring significance, length, domains, and evolutionary context.”
+      da: >-
+        “Proteinerne viser 35 % identitet over X alignede residuer med Y % coverage under disse parametre.
+        Homologi er en hypotese om fælles afstamning.”
+    linked_objectives: [m04.o2, m04.o7, m04.o8]
+
+  - id: dm847.m04.p04
+    activity_type: log_odds_calculation
+    difficulty: intermediate
+    prompt:
+      es: Calcula log2-odds si P(par|M1)=0,01 y P(par|M0)=0,04 e interpreta el signo.
+      en: Calculate log2-odds when P(pair|M1)=0.01 and P(pair|M0)=0.04 and interpret the sign.
+      da: Beregn log2-odds når P(par|M1)=0,01 og P(par|M0)=0,04 og fortolk tegnet.
+    reference_solution:
+      es: log2(0,25)=-2 bits; el par es cuatro veces menos probable bajo M1 que bajo M0 y aporta evidencia contra M1 para ese término.
+      en: log2(0.25)=-2 bits; the pair is four times less likely under M1 than M0 and contributes evidence against M1 for that term.
+      da: log2(0,25)=-2 bits; parret er fire gange mindre sandsynligt under M1 og bidrager mod M1.
+    linked_objectives: [m04.o4]
+
+  - id: dm847.m04.p05
+    activity_type: scoring_scheme_design
+    difficulty: advanced
+    prompt:
+      es: Diseña y justifica un esquema para alinear proteínas distantes con dominios conservados y regiones variables.
+      en: Design and justify a scoring scheme for distant proteins with conserved domains and variable regions.
+      da: Design og begrund et scoringsskema for fjerne proteiner med konserverede domæner og variable regioner.
+    accepted_answer_elements:
+      - matrix selected for expected evolutionary distance
+      - affine gaps rather than only linear gaps
+      - domain and low-complexity handling stated
+      - local versus global alignment intention clarified
+      - sensitivity-specificity trade-off discussed
+      - validation against known homologs and decoys proposed
+    linked_objectives: [m04.o5, m04.o6, m04.o8]
+
+  - id: dm847.m04.p06
+    activity_type: significance_interpretation
+    difficulty: advanced
+    prompt:
+      es: >-
+        Dos hits tienen 70 % identidad sobre 20 aa y 28 % sobre 350 aa. Explica por qué el porcentaje solo no decide cuál es más convincente.
+      en: >-
+        Two hits have 70% identity over 20 aa and 28% over 350 aa. Explain why percentage alone cannot decide which is more convincing.
+      da: >-
+        To hits har 70 % identitet over 20 aa og 28 % over 350 aa. Forklar hvorfor procent alene ikke afgør hvilket er mest overbevisende.
+    accepted_answer_elements:
+      - aligned length and coverage differ
+      - short high identity may occur by chance or low complexity
+      - substitution pattern and matrix matter
+      - database size and E-value matter
+      - domains and biological context matter
+      - one cannot compare without full alignment and search statistics
+    linked_objectives: [m04.o2, m04.o7, m04.o8]
+
+objective_question_bank:
+  - id: dm847.m04.q01
+    activity_type: multiple_choice
+    difficulty: foundational
+    prompt: {es: ¿Qué información no tiene semántica universal en FASTA?, en: Which FASTA information lacks universal semantics?, da: Hvilken FASTA-information mangler universel semantik?}
+    options:
+      - id: header
+        text: {es: La estructura interna de la cabecera después de `>`., en: The internal header structure after `>`., da: Den interne headerstruktur efter `>`.}
+      - id: sequence_order
+        text: {es: El orden de símbolos de la secuencia., en: The sequence symbol order., da: Rækkefølgen af sekvenssymboler.}
+      - id: line_breaks_only
+        text: {es: Que la secuencia puede dividirse en líneas., en: That sequence may be wrapped across lines., da: At sekvensen kan brydes over linjer.}
+    correct_option_ids: [header]
+    explanation: {es: Cada recurso define convenciones propias de cabecera que deben documentarse., en: Each resource defines its own header conventions that require documentation., da: Hver ressource definerer egne headerkonventioner som skal dokumenteres.}
+    linked_objectives: [m04.o1]
+
+  - id: dm847.m04.q02
+    activity_type: true_false
+    difficulty: foundational
+    prompt: {es: Los símbolos ambiguos de nucleótidos siempre deben eliminarse como errores., en: Ambiguous nucleotide symbols should always be deleted as errors., da: Tvetydige nukleotidsymboler bør altid slettes som fejl.}
+    correct_answer: false
+    explanation: {es: Pueden representar incertidumbre válida o mezcla; la política depende del análisis y debe registrarse., en: They may represent valid uncertainty or mixtures; policy depends on analysis and must be recorded., da: De kan repræsentere gyldig usikkerhed eller blanding; politikken afhænger af analysen.}
+    linked_objectives: [m04.o1, m04.o8]
+
+  - id: dm847.m04.q03
+    activity_type: multiple_choice
+    difficulty: foundational
+    prompt: {es: ¿Cuál expresión es correcta?, en: Which expression is correct?, da: Hvilket udsagn er korrekt?}
+    options:
+      - id: identity_statement
+        text: {es: 40 % de identidad sobre 200 posiciones alineadas., en: 40% identity across 200 aligned positions., da: 40 % identitet over 200 alignede positioner.}
+      - id: homology_percentage
+        text: {es: 40 % de homología., en: 40% homology., da: 40 % homologi.}
+      - id: function_from_identity
+        text: {es: 40 % de identidad demuestra función idéntica., en: 40% identity proves identical function., da: 40 % identitet beviser identisk funktion.}
+    correct_option_ids: [identity_statement]
+    explanation: {es: Identidad es medible; homología es una hipótesis de ascendencia y función requiere evidencia adicional., en: Identity is measurable; homology is an ancestry hypothesis, and function needs more evidence., da: Identitet er målbar; homologi er en afstamningshypotese, og funktion kræver mere evidens.}
+    linked_objectives: [m04.o2, m04.o3]
+
+  - id: dm847.m04.q04
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt: {es: ¿Por qué usar logaritmos en puntuaciones de secuencia?, en: Why use logarithms in sequence scores?, da: Hvorfor bruges logaritmer i sekvensscorer?}
+    options:
+      - id: products_to_sums
+        text: {es: Convierten productos de probabilidades en sumas aditivas., en: They convert probability products into additive sums., da: De omdanner sandsynlighedsprodukter til additive summer.}
+      - id: remove_models
+        text: {es: Eliminan la necesidad de modelos., en: They remove the need for models., da: De fjerner behovet for modeller.}
+      - id: guarantee_truth
+        text: {es: Garantizan que el alineamiento sea verdadero., en: They guarantee the alignment is true., da: De garanterer at alignmentet er sandt.}
+    correct_option_ids: [products_to_sums]
+    explanation: {es: La aditividad facilita optimización y programación dinámica bajo supuestos de factorización., en: Additivity supports optimization and dynamic programming under factorization assumptions., da: Additivitet understøtter optimering og dynamisk programmering under faktoriseringsantagelser.}
+    linked_objectives: [m04.o4]
+
+  - id: dm847.m04.q05
+    activity_type: true_false
+    difficulty: intermediate
+    prompt: {es: Una puntuación log-odds positiva es probabilidad de que dos secuencias sean homólogas., en: A positive log-odds score is the probability that two sequences are homologous., da: En positiv log-odds-score er sandsynligheden for at to sekvenser er homologe.}
+    correct_answer: false
+    explanation: {es: Es evidencia relativa entre modelos para datos observados, no una probabilidad posterior sin prior y modelo completos., en: It is relative evidence between models, not a posterior probability without a full prior and model., da: Det er relativ evidens mellem modeller, ikke en posterior sandsynlighed uden fuld prior og model.}
+    linked_objectives: [m04.o4]
+
+  - id: dm847.m04.q06
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt: {es: ¿Qué describe mejor BLOSUM62?, en: Which best describes BLOSUM62?, da: Hvad beskriver bedst BLOSUM62?}
+    options:
+      - id: empirical_log_odds
+        text: {es: Matriz log-odds empírica derivada de bloques conservados y agrupación por identidad., en: Empirical log-odds matrix derived from conserved blocks and identity clustering., da: Empirisk log-odds-matrix afledt af konserverede blokke og identitetsklyngning.}
+      - id: dna_quality
+        text: {es: Escala de calidad para bases de ADN., en: A DNA base-quality scale., da: En DNA-basekvalitetsskala.}
+      - id: exact_evolution
+        text: {es: Registro exacto de cada evento evolutivo., en: Exact record of every evolutionary event., da: Eksakt registrering af hver evolutionær hændelse.}
+    correct_option_ids: [empirical_log_odds]
+    explanation: {es: Resume sustituciones observadas frente al fondo; no reconstruye eventos exactos., en: It summarizes observed substitutions relative to background and does not reconstruct exact events., da: Den opsummerer observerede substitutioner mod baggrund og rekonstruerer ikke eksakte hændelser.}
+    linked_objectives: [m04.o5]
+
+  - id: dm847.m04.q07
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt: {es: ¿Qué ventaja tiene una penalización afín de gaps?, en: What is an advantage of affine gap penalties?, da: Hvad er en fordel ved affine gap-straffe?}
+    options:
+      - id: separate_open_extend
+        text: {es: Modela apertura y extensión con costes distintos., en: It models opening and extension with different costs., da: Den modellerer åbning og forlængelse med forskellige omkostninger.}
+      - id: no_parameters
+        text: {es: No requiere parámetros., en: It needs no parameters., da: Den kræver ingen parametre.}
+      - id: proves_indels
+        text: {es: Demuestra dónde ocurrieron indels históricos., en: It proves where historical indels occurred., da: Den beviser hvor historiske indels opstod.}
+    correct_option_ids: [separate_open_extend]
+    explanation: {es: Favorece un gap largo frente a muchos eventos independientes cuando corresponde al modelo., en: It can favor one long gap over many independent events when consistent with the model., da: Den kan favorisere ét langt gap frem for mange uafhængige hændelser.}
+    linked_objectives: [m04.o6]
+
+  - id: dm847.m04.q08
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt: {es: ¿Qué mide un E-value?, en: What does an E-value measure?, da: Hvad måler en E-value?}
+    options:
+      - id: expected_chance_hits
+        text: {es: Número esperado de hits de igual o mayor puntuación por azar en la búsqueda., en: Expected number of chance hits with equal or better score in the search., da: Forventet antal tilfældige hits med samme eller bedre score i søgningen.}
+      - id: function_probability
+        text: {es: Probabilidad de función idéntica., en: Probability of identical function., da: Sandsynlighed for identisk funktion.}
+      - id: percent_identity
+        text: {es: Porcentaje de identidad., en: Percent identity., da: Procent identitet.}
+    correct_option_ids: [expected_chance_hits]
+    explanation: {es: Depende del modelo y del tamaño efectivo del espacio de búsqueda., en: It depends on the model and effective search-space size., da: Den afhænger af modellen og den effektive søgestørrelse.}
+    linked_objectives: [m04.o7]
+
+  - id: dm847.m04.q09
+    activity_type: true_false
+    difficulty: advanced
+    prompt: {es: Un hit con E-value pequeño demuestra relevancia biológica., en: A hit with a small E-value proves biological relevance., da: Et hit med lille E-value beviser biologisk relevans.}
+    correct_answer: false
+    explanation: {es: Reduce compatibilidad con azar bajo el modelo, pero función y relevancia requieren cobertura, contexto, dominios y validación., en: It reduces compatibility with chance under the model, but function and relevance require coverage, context, domains, and validation., da: Det reducerer kompatibilitet med tilfældighed under modellen, men funktion kræver kontekst og validering.}
+    linked_objectives: [m04.o7, m04.o8]
+
+  - id: dm847.m04.q10
+    activity_type: multiple_choice
+    difficulty: advanced
+    prompt: {es: ¿Qué puede inflar coincidencias no informativas?, en: What can inflate uninformative matches?, da: Hvad kan inflatere ikke-informative matches?}
+    options:
+      - id: low_complexity_bias
+        text: {es: Complejidad baja y sesgo composicional., en: Low complexity and compositional bias., da: Lav kompleksitet og kompositionsbias.}
+      - id: explicit_version
+        text: {es: Registrar una versión explícita., en: Recording an explicit version., da: Registrering af eksplicit version.}
+      - id: independent_validation
+        text: {es: Validación independiente., en: Independent validation., da: Uafhængig validering.}
+    correct_option_ids: [low_complexity_bias]
+    explanation: {es: Repeticiones y composición extrema pueden producir alineamientos altos bajo un fondo mal especificado., en: Repeats and extreme composition can yield high scores under a misspecified background., da: Repeats og ekstrem sammensætning kan give høje scorer under en forkert baggrund.}
+    linked_objectives: [m04.o8]
+
+assessment_items:
+  - id: dm847.m04.a01
+    activity_type: scoring_model_design
+    difficulty: intermediate
+    prompt:
+      es: >-
+        Diseña un modelo de puntuación para comparar regiones reguladoras de ADN de especies moderadamente próximas.
+        Declara alfabeto, fondo, coincidencias, sustituciones, gaps, orientación, enmascaramiento y validación.
+      en: >-
+        Design a scoring model for comparing regulatory DNA regions from moderately related species.
+        State alphabet, background, matches, substitutions, gaps, orientation, masking, and validation.
+      da: >-
+        Design en scoringsmodel til sammenligning af regulatoriske DNA-regioner fra moderat beslægtede arter.
+        Angiv alfabet, baggrund, matches, substitutioner, gaps, orientering, maskering og validering.
+    accepted_answer_elements:
+      - sequence and orientation contract
+      - background matched to composition or local model
+      - transition/transversion or empirical substitution reasoning
+      - affine or justified gap model
+      - reverse-complement handling
+      - low-complexity/repeat policy with recorded masking
+      - calibration using known positives and negatives
+      - significance and multiple-search interpretation
+    rubric:
+      - {criterion: biological_and_probabilistic_model, points: 4}
+      - {criterion: complete_scoring_contract, points: 2}
+      - {criterion: bias_and_quality_controls, points: 2}
+      - {criterion: validation_plan, points: 2}
+    linked_objectives: [m04.o1, m04.o3, m04.o4, m04.o6, m04.o8]
+
+  - id: dm847.m04.a02
+    activity_type: search_result_audit
+    difficulty: advanced
+    prompt:
+      es: >-
+        Audita un informe que sólo presenta «83 % de similitud, E=2e-20» para asignar función a una proteína.
+        Especifica información faltante, inferencia permitida y validaciones necesarias.
+      en: >-
+        Audit a report presenting only “83% similarity, E=2e-20” to assign protein function.
+        Specify missing information, allowed inference, and required validation.
+      da: >-
+        Auditér en rapport der kun viser “83 % lighed, E=2e-20” for at tildele proteinfunktion.
+        Angiv manglende information, tilladt slutning og nødvendig validering.
+    accepted_answer_elements:
+      - identity versus similarity and matrix defined
+      - aligned length, coverage, gaps, domains, and low complexity reported
+      - query/database versions and search parameters recorded
+      - taxonomic and paralogy context considered
+      - strong sequence relationship may support homology candidacy
+      - exact function, substrate, location, or orthology require additional evidence
+      - reciprocal/domain/phylogenetic and experimental validation proposed
+    rubric:
+      - {criterion: missing_metrics_and_provenance, points: 3}
+      - {criterion: proportionate_evolutionary_inference, points: 3}
+      - {criterion: functional_limitations, points: 2}
+      - {criterion: validation_strategy, points: 2}
+    linked_objectives: [m04.o2, m04.o5, m04.o7, m04.o8]
+
+  - id: dm847.m04.a03
+    activity_type: oral_explanation
+    difficulty: advanced
+    prompt:
+      es: >-
+        Explica oralmente cómo un score alto puede coexistir con una conclusión biológica débil.
+        Incluye modelo nulo, longitud, base de datos, complejidad, cobertura y evidencia funcional.
+      en: >-
+        Explain orally how a high score can coexist with a weak biological conclusion.
+        Include null model, length, database, complexity, coverage, and functional evidence.
+      da: >-
+        Forklar mundtligt hvordan en høj score kan sameksistere med en svag biologisk konklusion.
+        Medtag nulmodel, længde, database, kompleksitet, coverage og funktionel evidens.
+    accepted_answer_elements:
+      - score is conditional on scoring and null models
+      - short or low-complexity regions may score highly
+      - search-space size changes expected chance hits
+      - partial coverage may represent only one domain
+      - homology does not guarantee identical function
+      - biological interpretation requires independent context and validation
+    rubric:
+      - {criterion: statistical_mechanism, points: 3}
+      - {criterion: sequence_specific_limitations, points: 3}
+      - {criterion: biological_evidence_boundary, points: 2}
+      - {criterion: oral_structure_and_precision, points: 2}
+    linked_objectives: [m04.o4, m04.o7, m04.o8]
+
+flashcards:
+  source_file: ../flashcards/dm847_m04_flashcards.yaml
+  expected_count: 24
+
+glossary:
+  - id: term.sequence_alphabet
+    term: {es: alfabeto de secuencia, en: sequence alphabet, da: sekvensalfabet}
+    definition: {es: Conjunto de símbolos válidos y su interpretación para una clase de secuencia., en: Set of valid symbols and their interpretation for a sequence class., da: Sæt af gyldige symboler og deres fortolkning for en sekvenstype.}
+    related_terms: [term.ambiguity_code]
+  - id: term.sequence_identity
+    term: {es: identidad de secuencia, en: sequence identity, da: sekvensidentitet}
+    definition: {es: Proporción de posiciones comparadas con símbolos exactamente iguales bajo un denominador declarado., en: Proportion of compared positions with exactly matching symbols under a declared denominator., da: Andel sammenlignede positioner med eksakt samme symbol under en deklareret nævner.}
+    related_terms: [term.sequence_similarity, term.homology]
+  - id: term.sequence_similarity
+    term: {es: similitud de secuencia, en: sequence similarity, da: sekvenslighed}
+    definition: {es: Medida que puede reconocer coincidencias y sustituciones favorables según un esquema., en: Measure recognizing matches and favorable substitutions under a scheme., da: Mål der kan anerkende matches og favorable substitutioner under et skema.}
+    related_terms: [term.sequence_identity]
+  - id: term.homology
+    term: {es: homología, en: homology, da: homologi}
+    definition: {es: Relación de ascendencia evolutiva común entre entidades., en: Relationship of common evolutionary ancestry between entities., da: Relation af fælles evolutionær afstamning mellem enheder.}
+    related_terms: [term.orthology, term.paralogy]
+  - id: term.background_model
+    term: {es: modelo de fondo, en: background model, da: baggrundsmodel}
+    definition: {es: Distribución nula que describe símbolos o patrones esperados sin la relación buscada., en: Null distribution describing expected symbols or patterns without the target relationship., da: Nulfordeling der beskriver forventede symboler eller mønstre uden målrelationen.}
+    related_terms: [term.log_odds]
+  - id: term.log_odds
+    term: {es: log-odds, en: log-odds, da: log-odds}
+    definition: {es: Logaritmo del cociente de probabilidades o verosimilitudes bajo dos modelos., en: Logarithm of a probability or likelihood ratio under two models., da: Logaritmen af et sandsynligheds- eller likelihood-forhold under to modeller.}
+    related_terms: [term.background_model]
+  - id: term.substitution_matrix
+    term: {es: matriz de sustitución, en: substitution matrix, da: substitutionsmatrix}
+    definition: {es: Tabla de puntuaciones para pares de símbolos basada en un modelo o datos evolutivos., en: Score table for symbol pairs based on a model or evolutionary data., da: Scoretabel for symbolpar baseret på en model eller evolutionære data.}
+    related_terms: [term.blosum, term.pam]
+  - id: term.affine_gap
+    term: {es: penalización afín de gap, en: affine gap penalty, da: affin gap-straf}
+    definition: {es: Modelo que separa coste de abrir y extender un gap., en: Model separating the costs of opening and extending a gap., da: Model der adskiller omkostning ved åbning og forlængelse af et gap.}
+    related_terms: [term.alignment]
+  - id: term.raw_score
+    term: {es: puntuación bruta, en: raw score, da: rå score}
+    definition: {es: Suma no normalizada de contribuciones de sustitución y gaps bajo parámetros concretos., en: Unnormalized sum of substitution and gap contributions under specific parameters., da: Ikke-normaliseret sum af substitutions- og gapbidrag under bestemte parametre.}
+    related_terms: [term.bit_score]
+  - id: term.bit_score
+    term: {es: bit score, en: bit score, da: bit score}
+    definition: {es: Puntuación normalizada usando parámetros estadísticos, expresada en bits., en: Score normalized using statistical parameters and expressed in bits., da: Score normaliseret med statistiske parametre og udtrykt i bits.}
+    related_terms: [term.raw_score]
+  - id: term.e_value
+    term: {es: E-value, en: E-value, da: E-value}
+    definition: {es: Número esperado de resultados de igual o mayor puntuación por azar en un espacio de búsqueda., en: Expected number of chance results with equal or better score in a search space., da: Forventet antal tilfældige resultater med samme eller bedre score i et søgerum.}
+    related_terms: [term.p_value]
+  - id: term.low_complexity
+    term: {es: complejidad baja, en: low complexity, da: lav kompleksitet}
+    definition: {es: Región dominada por pocos símbolos o patrones repetidos que puede generar coincidencias no informativas., en: Region dominated by few symbols or repeated patterns that can generate uninformative matches., da: Region domineret af få symboler eller gentagne mønstre som kan skabe ikke-informative matches.}
+    related_terms: [term.compositional_bias]
+
+hidden_guided_support:
+  visibility: hidden_from_standard_reader
+  canonical_explanation:
+    es: >-
+      Toda comparación de secuencias requiere cinco contratos: qué entidad y versión representa cada registro;
+      qué posiciones y orientación se comparan; qué modelo define coincidencias, sustituciones y gaps;
+      qué modelo nulo describe coincidencias por azar; y qué evidencia biológica puede sostenerse. Identidad es una
+      proporción descriptiva, similitud depende de puntuación y homología es una hipótesis evolutiva. Un score alto
+      sólo es interpretable junto con longitud, cobertura, composición, tamaño de búsqueda y contexto funcional.
+    en: >-
+      Every sequence comparison needs five contracts: which entity and version each record represents;
+      which positions and orientation are compared; which model defines matches, substitutions, and gaps;
+      which null describes chance matches; and which biological inference is supportable. Identity is descriptive,
+      similarity depends on scoring, and homology is evolutionary. A high score requires length, coverage, composition,
+      search size, and functional context.
+    da: >-
+      Enhver sekvenssammenligning kræver kontrakter for identitet/version, position/orientering, scoring,
+      nulmodel og biologisk inferens. Identitet er deskriptiv, lighed afhænger af scoring, og homologi er evolutionær.
+  misconceptions:
+    - id: m04.mc01
+      claim: {es: Una secuencia FASTA está completamente identificada por su cabecera libre., en: A FASTA sequence is fully identified by its free-text header., da: En FASTA-sekvens er fuldt identificeret af sin fritekstheader.}
+      correction: {es: La cabecera depende del recurso; se necesitan namespace, accesión, versión y procedencia., en: Header meaning is resource-specific; namespace, accession, version, and provenance are needed., da: Headerens betydning er ressourcespecifik; namespace, accession, version og proveniens kræves.}
+    - id: m04.mc02
+      claim: {es: Homología se expresa como porcentaje., en: Homology is expressed as a percentage., da: Homologi udtrykkes som procent.}
+      correction: {es: El porcentaje describe identidad o similitud; homología es una relación de ascendencia común., en: Percentage describes identity or similarity; homology is common ancestry., da: Procent beskriver identitet eller lighed; homologi er fælles afstamning.}
+    - id: m04.mc03
+      claim: {es: Un fondo uniforme es siempre neutral., en: A uniform background is always neutral., da: En uniform baggrund er altid neutral.}
+      correction: {es: Composición biológica real puede ser muy sesgada; el fondo debe corresponder al contexto., en: Biological composition may be strongly biased; background should match context., da: Biologisk sammensætning kan være stærkt skæv; baggrunden bør matche konteksten.}
+    - id: m04.mc04
+      claim: {es: Log-odds positivo es probabilidad de homología., en: Positive log-odds is probability of homology., da: Positiv log-odds er sandsynlighed for homologi.}
+      correction: {es: Es evidencia relativa entre modelos, no probabilidad posterior sin un modelo bayesiano completo., en: It is relative evidence between models, not a posterior probability without a full Bayesian model., da: Det er relativ evidens mellem modeller, ikke posterior sandsynlighed uden fuld Bayes-model.}
+    - id: m04.mc05
+      claim: {es: BLOSUM62 es siempre la mejor matriz., en: BLOSUM62 is always the best matrix., da: BLOSUM62 er altid den bedste matrix.}
+      correction: {es: La elección depende de distancia, composición, región y objetivo de sensibilidad/especificidad., en: Choice depends on distance, composition, region, and sensitivity-specificity goal., da: Valget afhænger af afstand, sammensætning, region og sensitivitet/specificitet.}
+    - id: m04.mc06
+      claim: {es: Un gap observado demuestra un indel histórico exacto., en: An observed gap proves one exact historical indel., da: Et observeret gap beviser én eksakt historisk indel.}
+      correction: {es: El gap es una hipótesis del alineamiento y puede tener múltiples explicaciones evolutivas., en: A gap is an alignment hypothesis with multiple evolutionary explanations., da: Et gap er en alignmenthypotese med flere evolutionære forklaringer.}
+    - id: m04.mc07
+      claim: {es: E-value pequeño demuestra función., en: A small E-value proves function., da: En lille E-value beviser funktion.}
+      correction: {es: Indica pocos hits esperados por azar bajo el modelo; función requiere contexto y validación., en: It indicates few expected chance hits under the model; function needs context and validation., da: Den angiver få forventede tilfældige hits under modellen; funktion kræver kontekst og validering.}
+    - id: m04.mc08
+      claim: {es: Enmascarar complejidad baja no tiene coste., en: Masking low complexity has no cost., da: Maskering af lav kompleksitet har ingen omkostning.}
+      correction: {es: Reduce falsos positivos pero puede ocultar regiones reales y cambia el espacio analizado., en: It reduces false positives but may hide real regions and changes the analyzed space., da: Det reducerer falske positiver men kan skjule ægte regioner og ændrer analyserummet.}
+  socratic_questions:
+    - ¿Qué entidad, versión y orientación representa esta cadena?
+    - What denominator produced this identity percentage?
+    - Hvilken nulmodel gør dette match overraskende?
+    - ¿Qué distancia y composición representa la matriz elegida?
+    - How would the result change with another gap model?
+    - Hvad er alignmentets længde og coverage?
+    - ¿Cómo cambia el E-value con el tamaño de base?
+    - Which biological claim remains valid if the score is statistically significant but covers one short domain?
+  grading_criteria:
+    - records sequence identity, version, alphabet, orientation, and quality
+    - distinguishes descriptive similarity from evolutionary and functional claims
+    - states denominators, scoring parameters, and background model
+    - interprets log-odds and search statistics correctly
+    - audits length, coverage, composition, low complexity, and search size
+    - proposes validation proportional to the functional claim
+  response_constraints:
+    - never express homology as a percentage
+    - never interpret E-value as probability of function
+    - never compare raw scores across different matrices or gap schemes without calibration
+    - always request aligned length and coverage alongside identity
+    - do not reveal objective-answer keys during active assessment
+  retrieval_fragments:
+    - id: dm847.m04.h01
+      topic: sequence_contract
+      text: {es: Una secuencia requiere entidad, namespace, versión, alfabeto, orientación y procedencia., en: A sequence requires entity, namespace, version, alphabet, orientation, and provenance., da: En sekvens kræver enhed, namespace, version, alfabet, orientering og proveniens.}
+    - id: dm847.m04.h02
+      topic: identity_homology
+      text: {es: Identidad es porcentaje descriptivo; homología es una relación de ascendencia., en: Identity is a descriptive percentage; homology is an ancestry relation., da: Identitet er en deskriptiv procent; homologi er en afstamningsrelation.}
+    - id: dm847.m04.h03
+      topic: kmer_windows
+      text: {es: Una secuencia lineal de longitud n contiene n-k+1 ventanas de k-mer., en: A linear length-n sequence contains n-k+1 k-mer windows., da: En lineær sekvens med længde n har n-k+1 k-mer-vinduer.}
+    - id: dm847.m04.h04
+      topic: log_odds
+      text: {es: Log-odds compara datos bajo un modelo relacionado y uno nulo y convierte productos en sumas., en: Log-odds compares related and null models and converts products into sums., da: Log-odds sammenligner relateret model og nulmodel og omdanner produkter til summer.}
+    - id: dm847.m04.h05
+      topic: substitution_matrix
+      text: {es: Una matriz de sustitución combina frecuencias observadas, fondo y distancia evolutiva implícita., en: A substitution matrix combines observed frequencies, background, and implicit evolutionary distance., da: En substitutionsmatrix kombinerer observerede frekvenser, baggrund og implicit evolutionær afstand.}
+    - id: dm847.m04.h06
+      topic: affine_gap
+      text: {es: Penalización afín separa apertura y extensión de gap., en: Affine gap penalty separates gap opening and extension., da: Affin gap-straf adskiller gapåbning og forlængelse.}
+    - id: dm847.m04.h07
+      topic: e_value
+      text: {es: E-value es número esperado de hits aleatorios de igual o mayor puntuación en el espacio de búsqueda., en: E-value is the expected number of chance hits with equal or better score in the search space., da: E-value er forventet antal tilfældige hits med samme eller bedre score i søgerummet.}
+    - id: dm847.m04.h08
+      topic: score_limits
+      text: {es: Score alto requiere interpretar longitud, cobertura, composición y tamaño de base., en: A high score requires interpretation of length, coverage, composition, and database size., da: En høj score kræver fortolkning af længde, coverage, sammensætning og databasestørrelse.}
+    - id: dm847.m04.h09
+      topic: low_complexity
+      text: {es: Complejidad baja puede producir coincidencias altas pero no informativas., en: Low complexity can produce high but uninformative matches., da: Lav kompleksitet kan producere høje men ikke-informative matches.}
+    - id: dm847.m04.h10
+      topic: evidence_boundary
+      text: {es: Relación de secuencia apoya homología candidata; función exacta requiere evidencia adicional., en: Sequence relationship supports candidate homology; exact function requires additional evidence., da: Sekvensrelation støtter kandidathomologi; eksakt funktion kræver mere evidens.}
+
+sources:
+  - id: sdu.dm847.official.2025
+    role: official_sequence_analysis_scoring_and_statistics_scope
+  - id: compeau_pevzner.bioinformatics_algorithms.vol1
+    role: sequence_patterns_scoring_and_algorithmic_reasoning
+  - id: probabilistic_sequence_analysis
+    role: log_odds_background_models_and_significance
+  - id: standard_sequence_formats
+    role: fasta_fastq_alphabets_and_quality_metadata
+
+limitations:
+  - Exact score calibration and extreme-value derivations are deferred until alignment and database-search modules.
+  - Matrix recommendations depend on software implementation and empirical benchmark data.
+  - Examples use simplified independence assumptions that may not hold for real sequences.
