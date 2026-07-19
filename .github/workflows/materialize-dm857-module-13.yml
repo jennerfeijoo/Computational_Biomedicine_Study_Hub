@@ -1,8 +1,8 @@
 name: Materialize DM857 module 13
 
 on:
-  push:
-    branches: [feat/dm857-modules-13-15]
+  pull_request:
+    branches: [main]
     paths:
       - ".github/dm857_source/**"
       - ".github/workflows/materialize-dm857-module-13.yml"
