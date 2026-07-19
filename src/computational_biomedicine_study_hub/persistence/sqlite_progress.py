@@ -219,6 +219,7 @@ class SQLiteProgressRepository:
         course_code: str | None = None,
         module_id: str | None = None,
         item_id: str | None = None,
+        session_id: str | None = None,
         limit: int | None = None,
     ) -> tuple[AttemptRecord, ...]:
         if limit is not None and limit < 1:
@@ -229,6 +230,7 @@ class SQLiteProgressRepository:
             ("course_code", course_code),
             ("module_id", module_id),
             ("item_id", item_id),
+            ("session_id", session_id),
         ):
             if value is not None:
                 clauses.append(f"{column} = ?")
@@ -375,16 +377,26 @@ class SQLiteProgressRepository:
         *,
         course_code: str,
         module_id: str,
+        scope: str | None = None,
     ) -> AssessmentSession | None:
+        scope_clause = " AND scope = ?" if scope is not None else ""
+        parameters: tuple[object, ...] = (
+            (course_code, module_id, scope) if scope is not None else (course_code, module_id)
+        )
         with self._connect() as connection:
             row = connection.execute(
-                """
+                (
+                    """
                 SELECT * FROM assessment_sessions
                 WHERE course_code = ? AND module_id = ? AND completed_at IS NULL
+                """
+                    + scope_clause
+                    + """
                 ORDER BY started_at DESC, session_id DESC
                 LIMIT 1
-                """,
-                (course_code, module_id),
+                """
+                ),
+                parameters,
             ).fetchone()
         return None if row is None else self._session_from_row(row)
 

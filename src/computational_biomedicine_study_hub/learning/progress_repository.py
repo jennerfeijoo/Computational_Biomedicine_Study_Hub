@@ -30,6 +30,7 @@ class ProgressRepository(Protocol):
         course_code: str | None = None,
         module_id: str | None = None,
         item_id: str | None = None,
+        session_id: str | None = None,
         limit: int | None = None,
     ) -> tuple[AttemptRecord, ...]:
         """Return newest attempts matching language-independent identifiers."""
@@ -56,6 +57,7 @@ class ProgressRepository(Protocol):
         *,
         course_code: str,
         module_id: str,
+        scope: str | None = None,
     ) -> AssessmentSession | None:
         """Return the latest unfinished session for a module."""
 

@@ -46,6 +46,8 @@ class LearningPageCopyKey(StrEnum):
     SYNONYMS = "synonyms"
     OPEN_MODULE = "open_module"
     NEW_CONCEPTS = "new_concepts"
+    MODULE_PROGRESS = "module_progress"
+    CONTINUE = "continue"
 
 
 _ES = {
@@ -93,6 +95,10 @@ _ES = {
     LearningPageCopyKey.SYNONYMS: "Sinónimos",
     LearningPageCopyKey.OPEN_MODULE: "Abrir módulo de origen",
     LearningPageCopyKey.NEW_CONCEPTS: "Añadir conceptos nuevos",
+    LearningPageCopyKey.MODULE_PROGRESS: (
+        "{percent} % correctas · {pending} pendientes · {attempts} intentos"
+    ),
+    LearningPageCopyKey.CONTINUE: "Continuar",
 }
 
 _EN = {
@@ -136,6 +142,10 @@ _EN = {
     LearningPageCopyKey.SYNONYMS: "Synonyms",
     LearningPageCopyKey.OPEN_MODULE: "Open source module",
     LearningPageCopyKey.NEW_CONCEPTS: "Add new concepts",
+    LearningPageCopyKey.MODULE_PROGRESS: (
+        "{percent}% correct · {pending} pending · {attempts} attempts"
+    ),
+    LearningPageCopyKey.CONTINUE: "Continue",
 }
 
 _DA = {
@@ -181,6 +191,10 @@ _DA = {
     LearningPageCopyKey.SYNONYMS: "Synonymer",
     LearningPageCopyKey.OPEN_MODULE: "Åbn kildemodul",
     LearningPageCopyKey.NEW_CONCEPTS: "Tilføj nye begreber",
+    LearningPageCopyKey.MODULE_PROGRESS: (
+        "{percent} % korrekte · {pending} ventende · {attempts} forsøg"
+    ),
+    LearningPageCopyKey.CONTINUE: "Fortsæt",
 }
 
 _COPY = {

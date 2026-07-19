@@ -2,6 +2,11 @@
 
 from __future__ import annotations
 
+import random
+import uuid
+from dataclasses import replace
+from datetime import UTC, datetime
+
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtWidgets import (
     QFrame,
@@ -22,7 +27,23 @@ from ...i18n import (
     UiCopyKey,
     ui_text,
 )
-from ...learning.guided_practice import GuidedPracticeSessionGenerator
+from ...learning.guided_practice import (
+    GuidedPracticeSession,
+    GuidedPracticeSessionGenerator,
+)
+from ...learning.progress import (
+    AssessmentScope,
+    AssessmentSession,
+    AttemptOutcome,
+    AttemptRecord,
+    LearningItemKind,
+    MasteryState,
+    PracticeProgress,
+    ReviewSchedule,
+)
+from ...learning.progress_repository import ProgressRepository
+from ...learning.spaced_repetition import ReviewRating, reschedule
+from ..activities.copy import ActivityCopyKey, activity_text
 from .guided_practice_styles import GUIDED_PRACTICE_STYLESHEET
 
 _ACTIVITY_KEYS = {
@@ -93,6 +114,7 @@ class GuidedPracticeCard(QFrame):
         )
         self._answer_editor.setMinimumHeight(125)
         self._answer_editor.setTabChangesFocus(False)
+        self._answer_editor.setAccessibleName(answer_label.text())
         if exercise.starter_code:
             self._answer_editor.setPlainText(exercise.starter_code)
         layout.addWidget(self._answer_editor)
@@ -158,6 +180,11 @@ class GuidedPracticeCard(QFrame):
         self._solved_button.setCheckable(True)
         self._solved_button.clicked.connect(self.mark_solved)
 
+        self._partial_button = QPushButton(activity_text(locale, ActivityCopyKey.PARTIAL))
+        self._partial_button.setObjectName("guidedPracticePartialButton")
+        self._partial_button.setCheckable(True)
+        self._partial_button.clicked.connect(self.mark_partial)
+
         self._review_button = QPushButton(ui_text(locale, UiCopyKey.PRACTICE_REVIEW))
         self._review_button.setObjectName("guidedPracticeReviewButton")
         self._review_button.setCheckable(True)
@@ -165,6 +192,7 @@ class GuidedPracticeCard(QFrame):
 
         assessment_layout.addWidget(assessment_label)
         assessment_layout.addWidget(self._solved_button)
+        assessment_layout.addWidget(self._partial_button)
         assessment_layout.addWidget(self._review_button)
         assessment_layout.addStretch(1)
         solution_layout.addWidget(self._assessment_actions)
@@ -206,6 +234,10 @@ class GuidedPracticeCard(QFrame):
     def assessment_state(self) -> str:
         """Return the student's current self-assessment state."""
         return self._assessment_state
+
+    def set_answer_text(self, text: str) -> None:
+        """Set the learner workspace text for restoration and accessible tests."""
+        self._answer_editor.setPlainText(text)
 
     @Slot()
     def show_next_hint(self) -> None:
@@ -251,11 +283,26 @@ class GuidedPracticeCard(QFrame):
         """Record that the student wants to revisit the exercise."""
         self._set_assessment("review")
 
+    @Slot()
+    def mark_partial(self) -> None:
+        """Record that the response is only partially complete."""
+        self._set_assessment("partial")
+
+    def restore_progress(self, response_text: str, state: str) -> None:
+        """Restore persisted response and self-assessment without emitting a new attempt."""
+        self._answer_editor.setPlainText(response_text)
+        self.reveal_solution()
+        self._assessment_state = state
+        self._solved_button.setChecked(state == "solved")
+        self._partial_button.setChecked(state == "partial")
+        self._review_button.setChecked(state == "review")
+
     def _set_assessment(self, state: str) -> None:
         if not self.solution_revealed:
             return
         self._assessment_state = state
         self._solved_button.setChecked(state == "solved")
+        self._partial_button.setChecked(state == "partial")
         self._review_button.setChecked(state == "review")
         self.self_assessed.emit(self.exercise_id, state)
 
@@ -276,12 +323,27 @@ class GuidedPracticeWidget(QWidget):
         exercise_count: int = 4,
         generator: GuidedPracticeSessionGenerator | None = None,
         locale: AppLocale = DEFAULT_LOCALE,
+        repository: ProgressRepository | None = None,
+        course_code: str = "",
+        module_id: str = "",
+        content_version: str = "",
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("guidedPracticeWidget")
         self.setStyleSheet(GUIDED_PRACTICE_STYLESHEET)
         self._locale = locale
+        self._bank = bank
+        self._exercise_count = exercise_count
+        self._repository = repository
+        self._course_code = course_code
+        self._module_id = module_id
+        self._content_version = content_version
+        self._persistent_session: AssessmentSession | None = None
+        if repository is not None and not all((course_code, module_id, content_version)):
+            raise ValueError(
+                "Persistent guided practice requires course, module, and content version."
+            )
 
         self._generator = generator or GuidedPracticeSessionGenerator(
             bank,
@@ -334,7 +396,8 @@ class GuidedPracticeWidget(QWidget):
         self._cards_layout.setSpacing(12)
         layout.addWidget(self._cards_container)
 
-        self.new_session()
+        if not self._restore_session():
+            self.new_session()
 
     @property
     def current_exercise_ids(self) -> tuple[str, ...]:
@@ -354,7 +417,33 @@ class GuidedPracticeWidget(QWidget):
     @Slot()
     def new_session(self) -> None:
         """Replace the current session with a new non-identical random sample."""
-        session = self._generator.new_session()
+        if (
+            self._repository is not None
+            and self._persistent_session is not None
+            and not self._persistent_session.is_complete
+        ):
+            self._repository.save_assessment_session(
+                replace(self._persistent_session, completed_at=datetime.now(UTC))
+            )
+        if self._repository is None:
+            session = self._generator.new_session()
+        else:
+            seed = random.SystemRandom().randrange(0, 2**63)
+            session = self._session_for_seed(seed)
+            self._persistent_session = AssessmentSession(
+                session_id=str(uuid.uuid4()),
+                scope=AssessmentScope.PRACTICE_MODULE,
+                course_code=self._course_code,
+                module_id=self._module_id,
+                item_ids=session.exercise_ids,
+                seed=seed,
+                locale=self._locale.value,
+                started_at=datetime.now(UTC),
+            )
+            self._repository.save_assessment_session(self._persistent_session)
+        self._render_session(session)
+
+    def _render_session(self, session: GuidedPracticeSession) -> None:
         self._results.clear()
         self._current_exercise_ids = session.exercise_ids
         self._exercise_cards.clear()
@@ -362,6 +451,18 @@ class GuidedPracticeWidget(QWidget):
 
         for number, exercise in enumerate(session.exercises, start=1):
             card = GuidedPracticeCard(number, exercise, locale=self._locale)
+            if self._repository is not None:
+                progress = self._repository.get_practice_progress(
+                    self._course_code,
+                    self._module_id,
+                    exercise.exercise_id,
+                )
+                if progress is not None:
+                    card.restore_progress(
+                        progress.response_text,
+                        progress.last_outcome.value,
+                    )
+                    self._results[exercise.exercise_id] = progress.last_outcome.value
             card.self_assessed.connect(self._record_self_assessment)
             self._exercise_cards.append(card)
             self._cards_layout.addWidget(card)
@@ -379,10 +480,111 @@ class GuidedPracticeWidget(QWidget):
     @Slot(str, str)
     def _record_self_assessment(self, exercise_id: str, state: str) -> None:
         self._results[exercise_id] = state
+        if self._repository is not None and self._persistent_session is not None:
+            self._persist_self_assessment(exercise_id, AttemptOutcome(state))
         self._update_progress()
+
+    def _persist_self_assessment(
+        self,
+        exercise_id: str,
+        outcome: AttemptOutcome,
+    ) -> None:
+        assert self._repository is not None
+        assert self._persistent_session is not None
+        exercise = next(value for value in self._bank if value.exercise_id == exercise_id)
+        card = next(value for value in self._exercise_cards if value.exercise_id == exercise_id)
+        previous = self._repository.get_practice_progress(
+            self._course_code,
+            self._module_id,
+            exercise_id,
+        )
+        now = datetime.now(UTC)
+        attempt_count = 1 if previous is None else previous.attempt_count + 1
+        mastery = (
+            MasteryState.REVIEWING if outcome is AttemptOutcome.SOLVED else MasteryState.LEARNING
+        )
+        self._repository.record_attempt(
+            AttemptRecord(
+                attempt_id=str(uuid.uuid4()),
+                course_code=self._course_code,
+                module_id=self._module_id,
+                item_id=exercise_id,
+                item_kind=LearningItemKind.PRACTICE,
+                activity_type=exercise.activity_type,
+                outcome=outcome,
+                locale=self._locale.value,
+                content_version=self._content_version,
+                created_at=now,
+                response_text=card.answer_text,
+                session_id=self._persistent_session.session_id,
+            )
+        )
+        self._repository.save_practice_progress(
+            PracticeProgress(
+                course_code=self._course_code,
+                module_id=self._module_id,
+                exercise_id=exercise_id,
+                mastery_state=mastery,
+                attempt_count=attempt_count,
+                last_outcome=outcome,
+                updated_at=now,
+                response_text=card.answer_text,
+            )
+        )
+        initial = ReviewSchedule(
+            course_code=self._course_code,
+            module_id=self._module_id,
+            item_id=exercise_id,
+            item_kind=LearningItemKind.PRACTICE,
+            mastery_state=MasteryState.NEW,
+            repetitions=0,
+            interval_days=0,
+            easiness=2.5,
+            due_at=now,
+        )
+        if outcome is AttemptOutcome.SOLVED:
+            schedule = reschedule(initial, ReviewRating.GOOD, reviewed_at=now)
+        else:
+            schedule = replace(
+                initial,
+                mastery_state=MasteryState.LEARNING,
+                easiness=2.35 if outcome is AttemptOutcome.PARTIAL else 2.3,
+            )
+        self._repository.save_review_schedule(schedule)
+        if exercise_id not in self._persistent_session.answered_item_ids:
+            self._persistent_session = replace(
+                self._persistent_session,
+                answered_item_ids=(self._persistent_session.answered_item_ids + (exercise_id,)),
+            )
+            self._repository.save_assessment_session(self._persistent_session)
+
+    def _restore_session(self) -> bool:
+        if self._repository is None:
+            return False
+        persistent = self._repository.latest_open_assessment_session(
+            course_code=self._course_code,
+            module_id=self._module_id,
+            scope=AssessmentScope.PRACTICE_MODULE.value,
+        )
+        if persistent is None:
+            return False
+        session = self._session_for_seed(persistent.seed)
+        if session.exercise_ids != persistent.item_ids:
+            return False
+        self._persistent_session = persistent
+        self._render_session(session)
+        return True
+
+    def _session_for_seed(self, seed: int) -> GuidedPracticeSession:
+        return GuidedPracticeSessionGenerator(
+            self._bank,
+            exercise_count=self._exercise_count,
+            rng=random.Random(seed),
+        ).new_session()
 
     def _update_progress(self) -> None:
         solved = sum(state == "solved" for state in self._results.values())
+        partial = sum(state == "partial" for state in self._results.values())
         review = sum(state == "review" for state in self._results.values())
         assessed = len(self._results)
         total = self._generator.exercise_count
@@ -391,7 +593,7 @@ class GuidedPracticeWidget(QWidget):
                 self._locale,
                 UiCopyKey.PRACTICE_PROGRESS,
                 solved=solved,
-                review=review,
+                review=review + partial,
                 assessed=assessed,
                 total=total,
             )

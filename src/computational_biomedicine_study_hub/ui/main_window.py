@@ -176,7 +176,11 @@ class MainWindow(QMainWindow):
         }
 
         for course in self._courses:
-            pages[course.route] = course.page_factory(locale)
+            pages[course.route] = (
+                DM857Page(locale, progress_repository=self._progress)
+                if course.code == "DM857"
+                else course.page_factory(locale)
+            )
             self._descriptors[course.route] = PageDescriptor(
                 route=course.route,
                 title=f"{course.code} — {course.title_for(locale)}",

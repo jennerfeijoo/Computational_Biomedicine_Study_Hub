@@ -152,6 +152,7 @@ class NavigationSidebar(QWidget):
             button.setObjectName("navigationButton")
             button.setCheckable(True)
             button.setToolTip(entry.label)
+            button.setAccessibleName(entry.label)
             button.clicked.connect(
                 lambda checked=False, route=entry.route: self.route_selected.emit(route)
             )

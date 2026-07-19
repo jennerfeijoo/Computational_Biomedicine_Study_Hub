@@ -2,6 +2,11 @@
 
 from __future__ import annotations
 
+import random
+import uuid
+from dataclasses import replace
+from datetime import UTC, datetime
+
 from PySide6.QtCore import Signal, Slot
 from PySide6.QtWidgets import (
     QButtonGroup,
@@ -17,10 +22,23 @@ from PySide6.QtWidgets import (
 from ...content.models import AssessmentItem
 from ...i18n import DEFAULT_LOCALE, AppLocale, UiCopyKey, ui_text
 from ...learning.objective_assessment import (
+    ObjectiveAnswerFeedback,
+    ObjectiveAssessmentSession,
     ObjectiveSessionGenerator,
     ObjectiveSessionQuestion,
     grade_objective_answer,
 )
+from ...learning.progress import (
+    AssessmentScope,
+    AssessmentSession,
+    AttemptOutcome,
+    AttemptRecord,
+    LearningItemKind,
+    MasteryState,
+    ReviewSchedule,
+)
+from ...learning.progress_repository import ProgressRepository
+from ...learning.spaced_repetition import ReviewRating, reschedule
 from .objective_assessment_styles import OBJECTIVE_ASSESSMENT_STYLESHEET
 
 
@@ -28,6 +46,7 @@ class ObjectiveQuestionCard(QFrame):
     """Render one selectable localized question with authored feedback."""
 
     answered = Signal(str, bool)
+    answer_recorded = Signal(str, str, bool)
 
     def __init__(
         self,
@@ -142,6 +161,23 @@ class ObjectiveQuestionCard(QFrame):
             return
 
         feedback = grade_objective_answer(self._question, selected_option_id)
+        self._apply_feedback(feedback)
+        self.answered.emit(self.item_id, feedback.is_correct)
+        self.answer_recorded.emit(
+            self.item_id,
+            feedback.selected_option_id,
+            feedback.is_correct,
+        )
+
+    def restore_answer(self, option_id: str) -> bool:
+        """Restore a persisted selection without emitting a second attempt."""
+        if self._answered or not self.choose_option(option_id):
+            return False
+        feedback = grade_objective_answer(self._question, option_id)
+        self._apply_feedback(feedback)
+        return True
+
+    def _apply_feedback(self, feedback: ObjectiveAnswerFeedback) -> None:
         if feedback.is_correct:
             message = ui_text(
                 self._locale,
@@ -163,7 +199,6 @@ class ObjectiveQuestionCard(QFrame):
             button.setEnabled(False)
         self._check_button.setEnabled(False)
         self._show_feedback(message, state)
-        self.answered.emit(self.item_id, feedback.is_correct)
 
     def _show_feedback(self, text: str, state: str) -> None:
         self._feedback.setText(text)
@@ -183,12 +218,27 @@ class ObjectiveAssessmentWidget(QWidget):
         question_count: int = 6,
         generator: ObjectiveSessionGenerator | None = None,
         locale: AppLocale = DEFAULT_LOCALE,
+        repository: ProgressRepository | None = None,
+        course_code: str = "",
+        module_id: str = "",
+        content_version: str = "",
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("objectiveAssessmentWidget")
         self.setStyleSheet(OBJECTIVE_ASSESSMENT_STYLESHEET)
         self._locale = locale
+        self._bank = bank
+        self._question_count = question_count
+        self._repository = repository
+        self._course_code = course_code
+        self._module_id = module_id
+        self._content_version = content_version
+        self._persistent_session: AssessmentSession | None = None
+        if repository is not None and not all((course_code, module_id, content_version)):
+            raise ValueError(
+                "Persistent objective assessment requires course, module, and content version."
+            )
 
         self._generator = generator or ObjectiveSessionGenerator(
             bank,
@@ -241,7 +291,8 @@ class ObjectiveAssessmentWidget(QWidget):
         self._cards_layout.setSpacing(12)
         layout.addWidget(self._cards_container)
 
-        self.new_session()
+        if not self._restore_session():
+            self.new_session()
 
     @property
     def current_item_ids(self) -> tuple[str, ...]:
@@ -261,7 +312,38 @@ class ObjectiveAssessmentWidget(QWidget):
     @Slot()
     def new_session(self) -> None:
         """Replace the current session with a new non-identical random sample."""
-        session = self._generator.new_session()
+        if (
+            self._repository is not None
+            and self._persistent_session is not None
+            and not self._persistent_session.is_complete
+        ):
+            self._repository.save_assessment_session(
+                replace(self._persistent_session, completed_at=datetime.now(UTC))
+            )
+        if self._repository is None:
+            session = self._generator.new_session()
+        else:
+            seed = random.SystemRandom().randrange(0, 2**63)
+            session = self._session_for_seed(seed)
+            self._persistent_session = AssessmentSession(
+                session_id=str(uuid.uuid4()),
+                scope=AssessmentScope.OBJECTIVE_MODULE,
+                course_code=self._course_code,
+                module_id=self._module_id,
+                item_ids=session.item_ids,
+                seed=seed,
+                locale=self._locale.value,
+                started_at=datetime.now(UTC),
+            )
+            self._repository.save_assessment_session(self._persistent_session)
+        self._render_session(session)
+
+    def _render_session(
+        self,
+        session: ObjectiveAssessmentSession,
+        *,
+        restored_attempts: dict[str, AttemptRecord] | None = None,
+    ) -> None:
         self._results.clear()
         self._current_item_ids = session.item_ids
         self._question_cards.clear()
@@ -269,7 +351,19 @@ class ObjectiveAssessmentWidget(QWidget):
 
         for number, question in enumerate(session.questions, start=1):
             card = ObjectiveQuestionCard(number, question, locale=self._locale)
-            card.answered.connect(self._record_result)
+            restored = (
+                restored_attempts.get(question.item.item_id)
+                if restored_attempts is not None
+                else None
+            )
+            if (
+                restored is not None
+                and restored.selected_option_ids
+                and restored.is_correct is not None
+                and card.restore_answer(restored.selected_option_ids[0])
+            ):
+                self._results[question.item.item_id] = restored.is_correct
+            card.answer_recorded.connect(self._record_persistent_result)
             self._question_cards.append(card)
             self._cards_layout.addWidget(card)
 
@@ -287,6 +381,95 @@ class ObjectiveAssessmentWidget(QWidget):
     def _record_result(self, item_id: str, is_correct: bool) -> None:
         self._results[item_id] = is_correct
         self._update_score()
+
+    @Slot(str, str, bool)
+    def _record_persistent_result(
+        self,
+        item_id: str,
+        option_id: str,
+        is_correct: bool,
+    ) -> None:
+        self._record_result(item_id, is_correct)
+        if self._repository is None or self._persistent_session is None:
+            return
+        item = next(value for value in self._bank if value.item_id == item_id)
+        now = datetime.now(UTC)
+        self._repository.record_attempt(
+            AttemptRecord(
+                attempt_id=str(uuid.uuid4()),
+                course_code=self._course_code,
+                module_id=self._module_id,
+                item_id=item_id,
+                item_kind=LearningItemKind.ASSESSMENT,
+                activity_type=item.activity_type,
+                outcome=AttemptOutcome.SOLVED if is_correct else AttemptOutcome.REVIEW,
+                locale=self._locale.value,
+                content_version=self._content_version,
+                created_at=now,
+                selected_option_ids=(option_id,),
+                is_correct=is_correct,
+                score=float(is_correct),
+                session_id=self._persistent_session.session_id,
+            )
+        )
+        initial = ReviewSchedule(
+            course_code=self._course_code,
+            module_id=self._module_id,
+            item_id=item_id,
+            item_kind=LearningItemKind.ASSESSMENT,
+            mastery_state=MasteryState.NEW,
+            repetitions=0,
+            interval_days=0,
+            easiness=2.5,
+            due_at=now,
+        )
+        self._repository.save_review_schedule(
+            reschedule(
+                initial,
+                ReviewRating.GOOD if is_correct else ReviewRating.AGAIN,
+                reviewed_at=now,
+            )
+            if is_correct
+            else replace(initial, mastery_state=MasteryState.LEARNING, easiness=2.3)
+        )
+        if item_id not in self._persistent_session.answered_item_ids:
+            answered = self._persistent_session.answered_item_ids + (item_id,)
+            self._persistent_session = replace(
+                self._persistent_session,
+                answered_item_ids=answered,
+                correct_count=self._persistent_session.correct_count + int(is_correct),
+            )
+            self._repository.save_assessment_session(self._persistent_session)
+
+    def _restore_session(self) -> bool:
+        if self._repository is None:
+            return False
+        persistent = self._repository.latest_open_assessment_session(
+            course_code=self._course_code,
+            module_id=self._module_id,
+            scope=AssessmentScope.OBJECTIVE_MODULE.value,
+        )
+        if persistent is None:
+            return False
+        session = self._session_for_seed(persistent.seed)
+        if session.item_ids != persistent.item_ids:
+            return False
+        attempts = self._repository.list_attempts(
+            session_id=persistent.session_id,
+        )
+        latest_by_item: dict[str, AttemptRecord] = {}
+        for attempt in attempts:
+            latest_by_item.setdefault(attempt.item_id, attempt)
+        self._persistent_session = persistent
+        self._render_session(session, restored_attempts=latest_by_item)
+        return True
+
+    def _session_for_seed(self, seed: int) -> ObjectiveAssessmentSession:
+        return ObjectiveSessionGenerator(
+            self._bank,
+            question_count=self._question_count,
+            rng=random.Random(seed),
+        ).new_session()
 
     def _update_score(self) -> None:
         answered = len(self._results)

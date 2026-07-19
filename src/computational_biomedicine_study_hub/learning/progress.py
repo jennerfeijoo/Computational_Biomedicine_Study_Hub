@@ -68,6 +68,8 @@ class AssessmentScope(StrEnum):
     COMPLETE_MODULE = "complete_module"
     COURSE = "course"
     MIXED = "mixed"
+    OBJECTIVE_MODULE = "objective_module"
+    PRACTICE_MODULE = "practice_module"
 
 
 @dataclass(frozen=True, slots=True)

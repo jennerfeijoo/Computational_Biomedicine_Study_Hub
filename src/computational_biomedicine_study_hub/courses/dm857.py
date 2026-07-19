@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (
     QFrame,
     QHBoxLayout,
     QLabel,
+    QPushButton,
     QStackedWidget,
     QVBoxLayout,
     QWidget,
@@ -16,6 +17,8 @@ from PySide6.QtWidgets import (
 from ..content.bundles import ModuleBundle
 from ..content.dm857 import BUNDLES, LOCALIZED_BUNDLES
 from ..i18n import DEFAULT_LOCALE, AppLocale, MessageKey, Translator
+from ..learning.progress_repository import ProgressRepository
+from ..ui.learning_page_copy import LearningPageCopyKey, learning_text
 from ..ui.pages.module_reader_page import ModuleReaderPage
 from .models import CourseRegistration
 
@@ -23,10 +26,16 @@ from .models import CourseRegistration
 class DM857Page(QWidget):
     """Construct each completed localized module reader once, when first selected."""
 
-    def __init__(self, locale: AppLocale = DEFAULT_LOCALE) -> None:
+    def __init__(
+        self,
+        locale: AppLocale = DEFAULT_LOCALE,
+        *,
+        progress_repository: ProgressRepository | None = None,
+    ) -> None:
         super().__init__()
         self.setObjectName("dm857CoursePage")
         self._translator = Translator(locale)
+        self._progress_repository = progress_repository
         self._bundles: tuple[ModuleBundle, ...] = (
             BUNDLES
             if locale == DEFAULT_LOCALE
@@ -35,11 +44,19 @@ class DM857Page(QWidget):
 
         self._module_selector = QComboBox()
         self._module_selector.setObjectName("courseModuleSelector")
+        self._module_selector.setAccessibleName(learning_text(locale, LearningPageCopyKey.MODULE))
         self._module_stack = QStackedWidget()
         self._module_stack.setObjectName("courseModuleStack")
         self._module_title = QLabel()
         self._module_title.setObjectName("moduleContextTitle")
         self._module_title.setWordWrap(True)
+        self._progress_summary = QLabel()
+        self._progress_summary.setObjectName("courseProgressSummary")
+        self._progress_summary.setWordWrap(True)
+        self._continue_button = QPushButton(learning_text(locale, LearningPageCopyKey.CONTINUE))
+        self._continue_button.setObjectName("continueCourseButton")
+        self._continue_button.setAccessibleName(self._continue_button.text())
+        self._continue_button.clicked.connect(self.continue_learning)
         self._reader_cache: dict[int, ModuleReaderPage] = {}
 
         for number, bundle in enumerate(self._bundles, start=1):
@@ -61,6 +78,8 @@ class DM857Page(QWidget):
         context_layout.addWidget(course_code)
         context_layout.addWidget(self._module_selector)
         context_layout.addWidget(self._module_title, 1)
+        context_layout.addWidget(self._progress_summary)
+        context_layout.addWidget(self._continue_button)
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
@@ -110,6 +129,36 @@ class DM857Page(QWidget):
         index = self._module_selector.findData(module_id)
         return self.select_module(index)
 
+    @Slot()
+    def continue_learning(self) -> None:
+        """Open the module containing the most recent persisted activity."""
+        if self._progress_repository is None:
+            self.select_module(self.current_module_index)
+            return
+        candidates = tuple(
+            (
+                index,
+                self._progress_repository.module_progress(
+                    bundle.module.course_code,
+                    bundle.module.module_id,
+                ),
+            )
+            for index, bundle in enumerate(self._bundles)
+        )
+        recent = tuple(
+            candidate for candidate in candidates if candidate[1].last_activity_at is not None
+        )
+        if recent:
+            index, _ = max(
+                recent,
+                key=lambda candidate: (
+                    candidate[1].last_activity_at.timestamp()
+                    if candidate[1].last_activity_at is not None
+                    else 0.0
+                ),
+            )
+            self.select_module(index)
+
     @Slot(int)
     def _activate_module(self, index: int) -> None:
         if not 0 <= index < self.module_count:
@@ -117,6 +166,22 @@ class DM857Page(QWidget):
         reader = self._reader_for_index(index)
         self._module_stack.setCurrentWidget(reader)
         self._module_title.setText(reader.module.title)
+        self._update_progress(reader.module.course_code, reader.module.module_id)
+
+    def _update_progress(self, course_code: str, module_id: str) -> None:
+        if self._progress_repository is None:
+            self._progress_summary.clear()
+            return
+        progress = self._progress_repository.module_progress(course_code, module_id)
+        self._progress_summary.setText(
+            learning_text(
+                self._translator.locale,
+                LearningPageCopyKey.MODULE_PROGRESS,
+                percent=round(progress.success_ratio * 100),
+                pending=progress.pending_review_count,
+                attempts=progress.attempt_count,
+            )
+        )
 
     def _reader_for_index(self, index: int) -> ModuleReaderPage:
         if not 0 <= index < self.module_count:
@@ -131,6 +196,8 @@ class DM857Page(QWidget):
             objective_question_bank=bundle.objective_question_bank,
             show_context_bar=False,
             translator=self._translator,
+            progress_repository=self._progress_repository,
+            content_version=bundle.content_version,
         )
         reader.setProperty("contentVersion", bundle.content_version)
 

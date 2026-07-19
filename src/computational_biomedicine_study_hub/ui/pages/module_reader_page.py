@@ -19,6 +19,7 @@ from PySide6.QtWidgets import (
 
 from ...content.models import AssessmentItem, ConceptBlock, LearningModule, WorkedExample
 from ...i18n import MessageKey, Translator, UiCopyKey, ui_text
+from ...learning.progress_repository import ProgressRepository
 from ..widgets import GuidedPracticeWidget, ObjectiveAssessmentWidget
 
 _ACTIVITY_KEYS = {
@@ -51,12 +52,16 @@ class ModuleReaderPage(QWidget):
         objective_question_bank: tuple[AssessmentItem, ...] = (),
         show_context_bar: bool = True,
         translator: Translator | None = None,
+        progress_repository: ProgressRepository | None = None,
+        content_version: str = "",
     ) -> None:
         super().__init__(parent)
         self.setObjectName("moduleReaderPage")
         self._module = module
         self._objective_question_bank = objective_question_bank
         self._translator = translator or Translator()
+        self._progress_repository = progress_repository
+        self._content_version = content_version
         self._section_cache: dict[int, QWidget] = {}
         self._tab_builders: tuple[tuple[MessageKey, Callable[[], QWidget]], ...] = (
             (MessageKey.MODULE_TAB_OVERVIEW, self._build_overview_tab),
@@ -74,6 +79,7 @@ class ModuleReaderPage(QWidget):
 
         self._tabs = QTabWidget()
         self._tabs.setObjectName("moduleTabs")
+        self._tabs.setAccessibleName(self._module.title)
         self._tabs.setDocumentMode(True)
         self._tabs.setUsesScrollButtons(True)
         for index, (key, _) in enumerate(self._tab_builders):
@@ -244,6 +250,10 @@ class ModuleReaderPage(QWidget):
             GuidedPracticeWidget(
                 self._module.practice_exercises,
                 locale=self._translator.locale,
+                repository=self._progress_repository,
+                course_code=self._module.course_code,
+                module_id=self._module.module_id,
+                content_version=self._content_version,
             )
         )
         layout.addStretch(1)
@@ -269,6 +279,10 @@ class ModuleReaderPage(QWidget):
                 ObjectiveAssessmentWidget(
                     self._objective_question_bank,
                     locale=self._translator.locale,
+                    repository=self._progress_repository,
+                    course_code=self._module.course_code,
+                    module_id=self._module.module_id,
+                    content_version=self._content_version,
                 )
             )
 
