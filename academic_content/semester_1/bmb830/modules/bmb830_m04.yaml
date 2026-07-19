@@ -1,0 +1,262 @@
+schema_version: 1.0.0
+course_code: BMB830
+module_id: bmb830.m04
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Estadística descriptiva y visualización biológica honesta
+    en: Descriptive statistics and honest biological visualization
+    da: Deskriptiv statistik og ærlig biologisk visualisering
+  summary:
+    es: >-
+      Selección e interpretación de resúmenes y gráficos según tipo de variable, distribución,
+      diseño y pregunta. Se cubren frecuencias, proporciones, media, mediana, cuantiles, varianza,
+      desviación estándar, IQR, asimetría, transformaciones, outliers, estratificación, escalas,
+      agregación, incertidumbre y principios de comunicación gráfica reproducible.
+    en: >-
+      Selection and interpretation of summaries and plots according to variable type, distribution,
+      design, and question. Frequencies, proportions, mean, median, quantiles, variance, standard deviation,
+      IQR, skewness, transformations, outliers, stratification, scales, aggregation, uncertainty, and
+      reproducible graphical communication are covered.
+    da: >-
+      Valg og fortolkning af summaries og plots efter variabeltype, fordeling, design og spørgsmål.
+      Frekvenser, proportioner, center, spredning, skævhed, transformationer, outliers og ærlig visualisering behandles.
+  estimated_study_hours: 11
+  difficulty: foundational_intermediate
+
+alignment:
+  official_learning_outcomes: [bmb830.lo01, bmb830.lo04, bmb830.lo05]
+  prerequisite_modules: [bmb830.m02, bmb830.m03]
+  later_modules: [bmb830.m05, bmb830.m06, bmb830.m07, bmb830.m08, bmb830.m09, bmb830.m10]
+
+objectives:
+  - {id: bmb830.m04.o01, text: {es: Elegir resúmenes según tipo de variable y distribución, en: Choose summaries according to variable type and distribution, da: Vælge summaries efter variabeltype og fordeling}}
+  - {id: bmb830.m04.o02, text: {es: Interpretar media, mediana, cuantiles, SD e IQR, en: Interpret mean, median, quantiles, SD, and IQR, da: Fortolke mean, median, kvantiler, SD og IQR}}
+  - {id: bmb830.m04.o03, text: {es: Describir forma, asimetría, multimodalidad y valores extremos, en: Describe shape, skewness, multimodality, and extremes, da: Beskrive form, skævhed, multimodalitet og ekstreme værdier}}
+  - {id: bmb830.m04.o04, text: {es: Seleccionar gráficos para variables categóricas y numéricas, en: Select plots for categorical and numerical variables, da: Vælge plots til kategoriske og numeriske variable}}
+  - {id: bmb830.m04.o05, text: {es: Mostrar tamaño muestral y datos individuales cuando sea viable, en: Show sample size and individual data when feasible, da: Vise sample size og individuelle data når muligt}}
+  - {id: bmb830.m04.o06, text: {es: Detectar escalas, truncamientos y agregaciones engañosas, en: Detect misleading scales, truncation, and aggregation, da: Finde misvisende skalaer, truncation og aggregation}}
+  - {id: bmb830.m04.o07, text: {es: Relacionar visualización con calidad y diseño, en: Connect visualization to quality and design, da: Forbinde visualisering med kvalitet og design}}
+  - {id: bmb830.m04.o08, text: {es: Crear gráficos reproducibles con etiquetas, unidades y captions, en: Create reproducible plots with labels, units, and captions, da: Skabe reproducerbare plots med labels, enheder og captions}}
+
+concepts:
+  - id: bmb830.m04.c01
+    title: {es: Resumir variables categóricas, en: Summarizing categorical variables, da: Summary af kategoriske variable}
+    body:
+      es: >-
+        Las variables categóricas se resumen con conteos y proporciones, siempre declarando denominador y valores ausentes.
+        Una proporción sin n puede ocultar inestabilidad. Para dos variables se usan tablas de contingencia y proporciones por fila
+        o columna según la pregunta. Las categorías ordinales conservan orden, pero las distancias entre niveles no son necesariamente iguales.
+      en: >-
+        Categorical variables are summarized with counts and proportions, always declaring denominators and missingness.
+        A proportion without n may hide instability. Two variables use contingency tables and row or column proportions depending on the question.
+      da: >-
+        Kategoriske variable opsummeres med antal og proportioner med deklareret denominator og missingness.
+    key_points:
+      - {es: Porcentajes requieren denominador explícito, en: Percentages require an explicit denominator, da: Procenter kræver eksplicit denominator}
+  - id: bmb830.m04.c02
+    title: {es: Centro y dispersión, en: Center and spread, da: Center og spredning}
+    body:
+      es: >-
+        La media usa todos los valores y responde a una suma o balance; es sensible a extremos. La mediana divide el orden y es robusta.
+        La SD describe dispersión alrededor de la media en unidades originales; el IQR cubre el 50% central y acompaña a la mediana.
+        No existe un resumen universal: debe corresponder a la forma y al estimando descriptivo.
+      en: >-
+        The mean uses all values and reflects a balance; it is sensitive to extremes. The median splits the ordered data and is robust.
+        SD describes spread around the mean in original units; IQR covers the central 50% and pairs with the median.
+      da: >-
+        Mean bruger alle værdier og er følsom for ekstremer. Median er robust. SD beskriver spredning omkring mean; IQR det centrale 50%.
+    key_points:
+      - {es: SD no es error estándar, en: SD is not standard error, da: SD er ikke standard error}
+  - id: bmb830.m04.c03
+    title: {es: Forma, asimetría y transformaciones, en: Shape, skewness, and transformations, da: Form, skævhed og transformationer}
+    body:
+      es: >-
+        Histogramas, densidades, ECDF y boxplots revelan aspectos distintos. Una distribución puede ser simétrica, sesgada,
+        multimodal, truncada o con colas pesadas. La transformación log puede hacer comparaciones multiplicativas más claras y estabilizar
+        escala, pero cambia la interpretación: diferencias logarítmicas corresponden a razones en escala original.
+      en: >-
+        Histograms, densities, ECDFs, and boxplots reveal different features. A distribution may be symmetric, skewed, multimodal,
+        truncated, or heavy-tailed. Log transformation may clarify multiplicative comparisons but changes interpretation.
+      da: >-
+        Histogram, density, ECDF og boxplot viser forskellige aspekter. Log-transformation ændrer fortolkningen til multiplicative forskelle.
+    key_points:
+      - {es: Transformar no corrige automáticamente sesgo de diseño, en: Transformation does not repair design bias, da: Transformation reparerer ikke designbias}
+  - id: bmb830.m04.c04
+    title: {es: Valores extremos e influencia descriptiva, en: Extreme values and descriptive influence, da: Ekstreme værdier og deskriptiv indflydelse}
+    body:
+      es: >-
+        Un valor extremo puede ser error, variación biológica real o señal de subpoblación. Se inspecciona procedencia, unidad, instrumento,
+        contexto y efecto sobre resúmenes. Comparar resultados con y sin el punto puede ser un análisis de sensibilidad, pero eliminarlo requiere
+        una regla independiente del resultado y evidencia documentada.
+      en: >-
+        An extreme value may be error, true biological variation, or subgroup signal. Inspect provenance, units, instrument, context,
+        and influence. With-versus-without comparison may be sensitivity analysis; deletion requires outcome-independent rules and evidence.
+      da: >-
+        En ekstrem værdi kan være fejl, reel biologisk variation eller subgruppesignal. Sletning kræver uafhængig regel og evidens.
+    key_points:
+      - {es: Boxplot flags no equivalen a errores, en: Boxplot flags are not error labels, da: Boxplot-flags er ikke fejlmærker}
+  - id: bmb830.m04.c05
+    title: {es: Gráficos por pregunta, en: Plots by question, da: Plots efter spørgsmål}
+    body:
+      es: >-
+        Barras muestran conteos o proporciones categóricas; histogramas y ECDF distribuciones numéricas; boxplots o violines comparan grupos;
+        scatterplots muestran pares numéricos; líneas conectadas representan trayectorias temporales. Un barplot de medias oculta distribución,
+        n y dependencia. Para muestras pequeñas, puntos individuales y conexiones por sujeto son informativos.
+      en: >-
+        Bars show categorical counts or proportions; histograms and ECDFs numerical distributions; boxplots or violins group comparisons;
+        scatterplots paired numerical variables; connected lines trajectories. Mean bar plots hide distribution, n, and dependence.
+      da: >-
+        Barplots viser kategoriske antal; histogram og ECDF fordelinger; scatterplots parrede numeriske variable; linjer tidsforløb.
+    key_points:
+      - {es: El gráfico debe representar la unidad de análisis, en: The plot should represent the analysis unit, da: Plottet bør repræsentere analyseenheden}
+  - id: bmb830.m04.c06
+    title: {es: Escalas y percepción, en: Scales and perception, da: Skalaer og perception}
+    body:
+      es: >-
+        Truncar el eje y en barras altera la comparación de longitudes y puede exagerar diferencias; en líneas o scatterplots puede ser válido si
+        se declara y el objetivo es variación local. Escalas logarítmicas deben etiquetarse y no aceptar cero sin una decisión. Área, volumen y color
+        se perciben con menor precisión que posición, por lo que deben usarse con cautela.
+      en: >-
+        Truncating the y-axis in bar charts distorts length comparison and may exaggerate differences; in lines or scatterplots it may be valid if declared.
+        Log scales require clear labeling and a zero policy. Area, volume, and color are perceived less precisely than position.
+      da: >-
+        Trunceret y-akse i barplots kan overdrive forskelle. Log-skalaer kræver tydelig label og håndtering af nul.
+    key_points:
+      - {es: La estética no sustituye precisión perceptual, en: Aesthetics do not replace perceptual accuracy, da: Æstetik erstatter ikke perceptuel præcision}
+  - id: bmb830.m04.c07
+    title: {es: Agregación, estratificación y paradoja de Simpson, en: Aggregation, stratification, and Simpson's paradox, da: Aggregation, stratifikation og Simpsons paradoks}
+    body:
+      es: >-
+        Una tendencia agregada puede diferir o invertirse dentro de estratos si un tercer factor distribuye tamaños o riesgos de manera desigual.
+        Estratificar por variables de diseño, sitio, sexo, lote o tiempo puede revelar heterogeneidad y confusión, pero demasiadas capas reducen legibilidad.
+        El gráfico debe mostrar tanto estructura relevante como denominadores.
+      en: >-
+        An aggregate trend may differ or reverse within strata if a third factor unequally distributes sizes or risks. Stratification by design variables,
+        site, sex, batch, or time can reveal heterogeneity and confounding, but excessive layers reduce readability.
+      da: >-
+        En aggregeret trend kan vende inden for strata. Stratifikation kan afsløre heterogenitet og confounding.
+    key_points:
+      - {es: Agregar puede ocultar la estructura que genera la asociación, en: Aggregation can hide the structure generating an association, da: Aggregation kan skjule strukturen bag en association}
+  - id: bmb830.m04.c08
+    title: {es: Gráficos reproducibles y captions, en: Reproducible plots and captions, da: Reproducerbare plots og captions}
+    body:
+      es: >-
+        Un gráfico reproducible se genera desde código y datos versionados. Incluye título informativo, ejes con unidades, leyenda necesaria,
+        n o denominadores, definición de barras o intervalos, tratamiento de ausentes y caption que declara población y transformación.
+        El archivo debe exportarse con dimensiones y resolución controladas.
+      en: >-
+        A reproducible plot is generated from versioned code and data. It includes informative title, axes with units, necessary legend,
+        n or denominators, interval definition, missing-value treatment, and a caption declaring population and transformation.
+      da: >-
+        Et reproducerbart plot genereres fra versioneret kode og data og inkluderer enheder, n, intervaldefinition og caption.
+    key_points:
+      - {es: Un caption debe permitir interpretar sin adivinar, en: A caption should prevent guesswork, da: En caption bør forhindre gætteri}
+
+worked_examples:
+  - id: bmb830.m04.e01
+    title: {es: Media engañosa en distribución sesgada, en: Misleading mean in a skewed distribution, da: Misvisende mean i skæv fordeling}
+    problem: {es: Tiempos de estancia incluyen muchos valores bajos y pocos extremadamente altos., en: Lengths of stay include many low values and a few extreme values., da: Opholdstider har mange lave og få meget høje værdier.}
+    reasoning: {es: La media refleja carga total, pero no al paciente típico. Deben mostrarse mediana, IQR, media y distribución según la pregunta., en: Mean reflects total burden but not a typical patient. Show median, IQR, mean, and distribution according to the question., da: Mean afspejler total belastning men ikke typisk patient; vis median, IQR, mean og fordeling.}
+    answer: {es: No elegir media o mediana por regla fija; declarar qué aspecto resume cada una., en: Do not choose mean or median by rote; state what each summarizes., da: Vælg ikke mekanisk mean eller median; angiv hvad hver opsummerer.}
+  - id: bmb830.m04.e02
+    title: {es: Barras de medias frente a puntos, en: Mean bars versus points, da: Mean-bars versus punkter}
+    problem: {es: Dos grupos de n=6 tienen igual media pero distribuciones muy diferentes., en: Two n=6 groups have equal means but very different distributions., da: To grupper med n=6 har samme mean men meget forskellige fordelinger.}
+    reasoning: {es: Un barplot idéntico oculta dispersión y bimodalidad. Puntos individuales, resumen e intervalos revelan estructura., en: Identical bars hide spread and bimodality. Individual points plus summary and intervals reveal structure., da: Identiske bars skjuler spredning og multimodalitet; individuelle punkter viser strukturen.}
+    answer: {es: Mostrar datos individuales y definir el resumen superpuesto., en: Show individual data and define the overlaid summary., da: Vis individuelle data og definér det overlagte summary.}
+  - id: bmb830.m04.e03
+    title: {es: Tendencia agregada invertida, en: Reversed aggregate trend, da: Omvendt aggregeret trend}
+    problem: {es: La tasa global parece mayor en un tratamiento, pero dentro de cada centro es menor., en: Overall rate appears higher under treatment, but is lower within each center., da: Samlet rate ser højere ud under behandling, men lavere i hvert center.}
+    reasoning: {es: Los centros tienen riesgos basales y asignaciones distintas. Debe mostrarse estratificación y modelarse centro., en: Centers differ in baseline risk and allocation. Show stratification and model center., da: Centre har forskellige baseline-risici og tildeling; vis strata og modellér center.}
+    answer: {es: La agregación confunde tratamiento con composición por centro., en: Aggregation confounds treatment with center composition., da: Aggregation confounder behandling med centersammensætning.}
+
+guided_practice:
+  - {id: bmb830.m04.p01, type: summary_selection, prompt: {es: Elige y justifica resúmenes para seis distribuciones biológicas., en: Choose and justify summaries for six biological distributions., da: Vælg og begrund summaries for seks biologiske fordelinger.}, expected_elements: [question_alignment, center, spread, shape]}
+  - {id: bmb830.m04.p02, type: plot_selection, prompt: {es: Selecciona un gráfico para diez combinaciones de variables y diseños., en: Select a plot for ten variable and design combinations., da: Vælg et plot til ti kombinationer af variable og design.}, expected_elements: [variable_types, analysis_unit, dependence]}
+  - {id: bmb830.m04.p03, type: misleading_plot, prompt: {es: Audita ejes, escalas, denominadores y agregación en cinco figuras., en: Audit axes, scales, denominators, and aggregation in five figures., da: Auditér akser, skalaer, denominatorer og aggregation i fem figurer.}, expected_elements: [perceptual_issue, scientific_consequence, correction]}
+  - {id: bmb830.m04.p04, type: outlier_review, prompt: {es: Investiga cuatro valores extremos y propone análisis de sensibilidad., en: Investigate four extreme values and propose sensitivity analysis., da: Undersøg fire ekstreme værdier og foreslå følsomhedsanalyse.}, expected_elements: [provenance, influence, prespecified_rule]}
+  - {id: bmb830.m04.p05, type: ggplot_design, prompt: {es: Produce una figura reproducible con puntos, resumen, unidades y caption., en: Produce a reproducible figure with points, summary, units, and caption., da: Lav en reproducerbar figur med punkter, summary, enheder og caption.}, expected_elements: [code, labels, n, interval_definition]}
+  - {id: bmb830.m04.p06, type: stratification, prompt: {es: Detecta y explica una inversión por estratos., en: Detect and explain a stratum-specific reversal., da: Find og forklar en inversion mellem strata.}, expected_elements: [contingency_table, stratified_plot, cautious_interpretation]}
+
+objective_bank:
+  - {id: bmb830.m04.q01, type: multiple_choice, prompt: {es: ¿Qué resumen es robusto a extremos?, en: Which summary is robust to extremes?, da: Hvilket summary er robust over for ekstremer?}, options: [{id: a, text: {es: mediana, en: median, da: median}}, {id: b, text: {es: media, en: mean, da: mean}}, {id: c, text: {es: suma, en: sum, da: sum}}], correct_option_ids: [a], explanation: {es: La mediana depende del orden, no de la magnitud extrema., en: The median depends on order rather than extreme magnitude., da: Median afhænger af orden, ikke ekstrem størrelse.}}
+  - {id: bmb830.m04.q02, type: true_false, prompt: {es: SD y error estándar miden lo mismo., en: SD and standard error measure the same thing., da: SD og standard error måler det samme.}, correct: false, explanation: {es: SD describe variabilidad de observaciones; SE incertidumbre de un estimador., en: SD describes observation variability; SE estimator uncertainty., da: SD beskriver variation i observationer; SE usikkerhed i estimator.}}
+  - {id: bmb830.m04.q03, type: multiple_choice, prompt: {es: ¿Qué muestra mejor la distribución acumulada sin bins?, en: What best shows a cumulative distribution without bins?, da: Hvad viser bedst en kumulativ fordeling uden bins?}, options: [{id: a, text: {es: ECDF, en: ECDF, da: ECDF}}, {id: b, text: {es: pie chart, en: pie chart, da: pie chart}}, {id: c, text: {es: tabla de nombres, en: name table, da: navnetabel}}], correct_option_ids: [a], explanation: {es: La ECDF muestra proporción ≤ cada valor., en: ECDF shows the proportion at or below each value., da: ECDF viser proportionen ved eller under hver værdi.}}
+  - {id: bmb830.m04.q04, type: true_false, prompt: {es: Un punto fuera de los bigotes de un boxplot es necesariamente un error., en: A point beyond boxplot whiskers is necessarily an error., da: Et punkt uden for boxplot-whiskers er nødvendigvis en fejl.}, correct: false, explanation: {es: Es una regla gráfica, no una validación de procedencia., en: It is a plotting rule, not provenance validation., da: Det er en grafisk regel, ikke provenance-validering.}}
+  - {id: bmb830.m04.q05, type: multiple_choice, prompt: {es: ¿Qué oculta un barplot de medias?, en: What does a mean bar plot hide?, da: Hvad skjuler et mean-barplot?}, options: [{id: a, text: {es: distribución y n, en: distribution and n, da: fordeling og n}}, {id: b, text: {es: el color del fondo, en: background color, da: baggrundsfarve}}, {id: c, text: {es: el nombre del archivo, en: file name, da: filnavn}}], correct_option_ids: [a], explanation: {es: Barras no muestran observaciones ni forma., en: Bars do not show observations or shape., da: Bars viser ikke observationer eller form.}}
+  - {id: bmb830.m04.q06, type: true_false, prompt: {es: Un eje y truncado siempre es inválido., en: A truncated y-axis is always invalid., da: En trunkeret y-akse er altid ugyldig.}, correct: false, explanation: {es: Depende del gráfico y pregunta; debe declararse y no distorsionar longitud de barras., en: It depends on plot and question; declare it and avoid distorting bar lengths., da: Det afhænger af plot og spørgsmål; deklarér det og undgå forvrængning af bars.}}
+  - {id: bmb830.m04.q07, type: multiple_choice, prompt: {es: Diferencia logarítmica corresponde aproximadamente a qué en escala original?, en: A log difference corresponds approximately to what on the original scale?, da: Hvad svarer en log-forskel omtrent til på original skala?}, options: [{id: a, text: {es: razón, en: ratio, da: ratio}}, {id: b, text: {es: suma constante, en: constant sum, da: konstant sum}}, {id: c, text: {es: categoría, en: category, da: kategori}}], correct_option_ids: [a], explanation: {es: Exponenciar una diferencia log produce una razón., en: Exponentiating a log difference yields a ratio., da: Eksponentiering af log-forskel giver en ratio.}}
+  - {id: bmb830.m04.q08, type: true_false, prompt: {es: Una proporción debe presentarse con denominador., en: A proportion should be shown with its denominator., da: En proportion bør vises med denominator.}, correct: true, explanation: {es: n determina estabilidad y significado., en: n determines stability and meaning., da: n bestemmer stabilitet og betydning.}}
+  - {id: bmb830.m04.q09, type: multiple_choice, prompt: {es: ¿Qué fenómeno puede invertir una asociación agregada?, en: What phenomenon can reverse an aggregate association?, da: Hvilket fænomen kan vende en aggregeret association?}, options: [{id: a, text: {es: paradoja de Simpson, en: Simpson's paradox, da: Simpsons paradoks}}, {id: b, text: {es: coerción de texto, en: text coercion, da: tekst-coercion}}, {id: c, text: {es: redondeo de color, en: color rounding, da: farveafrunding}}], correct_option_ids: [a], explanation: {es: La composición desigual por estratos puede invertir la tendencia., en: Unequal stratum composition can reverse the trend., da: Ulig strata-sammensætning kan vende trenden.}}
+  - {id: bmb830.m04.q10, type: true_false, prompt: {es: Un gráfico reproducible necesita código y datos identificables., en: A reproducible plot needs identifiable code and data., da: Et reproducerbart plot kræver identificerbar kode og data.}, correct: true, explanation: {es: Debe poder regenerarse con decisiones visibles., en: It should be regenerable with visible decisions., da: Det bør kunne regenereres med synlige beslutninger.}}
+
+open_assessment:
+  - id: bmb830.m04.a01
+    prompt: {es: Diseña una figura descriptiva completa para un conjunto biológico., en: Design a complete descriptive figure for a biological dataset., da: Design en komplet deskriptiv figur til et biologisk datasæt.}
+    rubric: [{criterion: question_and_unit, points: 2}, {criterion: plot_and_summary_choice, points: 3}, {criterion: labels_units_n, points: 3}, {criterion: caption_and_limitations, points: 2}]
+  - id: bmb830.m04.a02
+    prompt: {es: Critica y corrige una figura potencialmente engañosa., en: Critique and correct a potentially misleading figure., da: Kritikér og ret en potentielt misvisende figur.}
+    rubric: [{criterion: visual_issue, points: 3}, {criterion: scientific_consequence, points: 3}, {criterion: corrected_design, points: 3}, {criterion: explanation, points: 1}]
+  - id: bmb830.m04.a03
+    prompt: {es: Compara resúmenes robustos y no robustos en una distribución sesgada., en: Compare robust and non-robust summaries in a skewed distribution., da: Sammenlign robuste og ikke-robuste summaries i en skæv fordeling.}
+    rubric: [{criterion: correct_calculation, points: 3}, {criterion: distribution_description, points: 3}, {criterion: interpretation, points: 3}, {criterion: sensitivity, points: 1}]
+
+glossary:
+  - {id: bmb830.term.mean, term: {es: media, en: mean, da: mean}, definition: {es: Suma dividida por n., en: Sum divided by n., da: Sum divideret med n.}}
+  - {id: bmb830.term.median, term: {es: mediana, en: median, da: median}, definition: {es: Valor central de los datos ordenados., en: Middle value of ordered data., da: Midterværdi i sorterede data.}}
+  - {id: bmb830.term.standard_deviation, term: {es: desviación estándar, en: standard deviation, da: standardafvigelse}, definition: {es: Escala de dispersión alrededor de la media., en: Scale of spread around the mean., da: Skala for spredning omkring mean.}}
+  - {id: bmb830.term.iqr, term: {es: rango intercuartílico, en: interquartile range, da: interkvartilafstand}, definition: {es: Diferencia Q3-Q1., en: Difference Q3-Q1., da: Forskellen Q3-Q1.}}
+  - {id: bmb830.term.ecdf, term: {es: función de distribución empírica, en: empirical cumulative distribution function, da: empirisk fordelingsfunktion}, definition: {es: Proporción observada menor o igual a cada valor., en: Observed proportion at or below each value., da: Observeret proportion ved eller under hver værdi.}}
+  - {id: bmb830.term.skewness, term: {es: asimetría, en: skewness, da: skævhed}, definition: {es: Falta de simetría de una distribución., en: Lack of symmetry in a distribution., da: Manglende symmetri i en fordeling.}}
+  - {id: bmb830.term.outlier, term: {es: valor extremo, en: outlier, da: outlier}, definition: {es: Observación inusual respecto a un patrón o regla., en: Observation unusual relative to a pattern or rule., da: Observation usædvanlig i forhold til et mønster eller en regel.}}
+  - {id: bmb830.term.log_scale, term: {es: escala logarítmica, en: logarithmic scale, da: logaritmisk skala}, definition: {es: Escala donde distancias iguales representan razones iguales., en: Scale where equal distances represent equal ratios., da: Skala hvor lige afstande repræsenterer lige ratios.}}
+  - {id: bmb830.term.stratification, term: {es: estratificación, en: stratification, da: stratifikation}, definition: {es: Separación del análisis por niveles de una variable., en: Separating analysis by levels of a variable., da: Opdeling af analyse efter niveauer af en variabel.}}
+  - {id: bmb830.term.simpson, term: {es: paradoja de Simpson, en: Simpson's paradox, da: Simpsons paradoks}, definition: {es: Cambio o inversión de asociación entre análisis agregado y estratificado., en: Change or reversal between aggregate and stratified association., da: Ændring eller inversion mellem aggregeret og stratificeret association.}}
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      Pregunta primero qué variable, unidad y comparación se quieren mostrar. Después selecciona resumen y gráfico.
+      Exige distribución, n, unidades, escala, missingness y dependencia antes de interpretar.
+    en: >-
+      First ask which variable, unit, and comparison should be shown. Then select summary and plot.
+      Require distribution, n, units, scale, missingness, and dependence before interpretation.
+    da: >-
+      Spørg først hvilken variabel, enhed og sammenligning der skal vises. Vælg derefter summary og plot.
+  misconceptions:
+    - mean_is_always_best
+    - median_is_always_best
+    - SD_equals_SE
+    - boxplot_outlier_equals_error
+    - barplot_of_means_is_complete
+    - aggregate_trend_applies_to_each_stratum
+  socratic_questions:
+    - What aspect does the chosen summary represent?
+    - What does one point or bar represent?
+    - Are denominators and sample sizes visible?
+    - Could aggregation hide subgroup structure?
+    - Does the axis or transformation change interpretation?
+  grading_criteria:
+    - align plot with variable type and study unit
+    - describe center, spread, and shape
+    - disclose n, units, scales, and uncertainty
+    - avoid unjustified deletion of extremes
+    - recognize aggregation and stratification issues
+  retrieval_fragments:
+    - {id: bmb830.m04.r01, topic: summaries, text: {es: Media y SD resumen balance y dispersión; mediana e IQR resumen orden y centro robusto., en: Mean and SD summarize balance and spread; median and IQR summarize order and robust center., da: Mean og SD opsummerer balance og spredning; median og IQR robust center.}}
+    - {id: bmb830.m04.r02, topic: plotting, text: {es: Muestra observaciones individuales cuando n y legibilidad lo permitan., en: Show individual observations when n and readability permit., da: Vis individuelle observationer når n og læsbarhed tillader det.}}
+    - {id: bmb830.m04.r03, topic: outlier, text: {es: Un extremo se investiga y se somete a sensibilidad; no se elimina por regla gráfica., en: Investigate an extreme and assess sensitivity; do not delete it by plotting rule., da: Undersøg en ekstrem værdi og lav følsomhedsanalyse; slet ikke efter grafisk regel.}}
+    - {id: bmb830.m04.r04, topic: scale, text: {es: Escalas y transformaciones deben declararse porque cambian percepción e interpretación., en: Scales and transformations must be declared because they change perception and interpretation., da: Skalaer og transformationer skal deklareres fordi de ændrer perception og fortolkning.}}
+    - {id: bmb830.m04.r05, topic: aggregation, text: {es: Una tendencia agregada puede ocultar o invertir tendencias por estrato., en: An aggregate trend may hide or reverse stratum-specific trends., da: En aggregeret trend kan skjule eller vende trends i strata.}}
+
+source_map:
+  - {section: descriptive_statistics, source: repository.biostatistics.yachay}
+  - {section: exploratory_data_analysis, source: cetinkaya_hardin.ims.2e}
+  - {section: visualization_workflow, source: r4ds.2e}
+
+limitations:
+  - Formal graphical perception theory is introduced only at a practical level.
+  - Distribution summaries do not replace inferential modeling.
+  - Danish text requires final native-language review before release.
