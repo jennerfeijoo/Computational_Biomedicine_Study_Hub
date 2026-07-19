@@ -48,6 +48,13 @@ class LearningPageCopyKey(StrEnum):
     NEW_CONCEPTS = "new_concepts"
     MODULE_PROGRESS = "module_progress"
     CONTINUE = "continue"
+    ASSESSMENT_CATEGORY = "assessment_category"
+    OBJECTIVE_ASSESSMENTS = "objective_assessments"
+    OPEN_RESPONSES = "open_responses"
+    CUMULATIVE_ASSESSMENTS = "cumulative_assessments"
+    SAVE_DRAFTS = "save_drafts"
+    DRAFTS_SAVED = "drafts_saved"
+    CUMULATIVE_UNAVAILABLE = "cumulative_unavailable"
 
 
 _ES = {
@@ -99,6 +106,15 @@ _ES = {
         "{percent} % correctas · {pending} pendientes · {attempts} intentos"
     ),
     LearningPageCopyKey.CONTINUE: "Continuar",
+    LearningPageCopyKey.ASSESSMENT_CATEGORY: "Categoría",
+    LearningPageCopyKey.OBJECTIVE_ASSESSMENTS: "Evaluaciones objetivas",
+    LearningPageCopyKey.OPEN_RESPONSES: "Preguntas abiertas",
+    LearningPageCopyKey.CUMULATIVE_ASSESSMENTS: "Evaluación acumulativa",
+    LearningPageCopyKey.SAVE_DRAFTS: "Guardar borradores",
+    LearningPageCopyKey.DRAFTS_SAVED: "Borradores guardados localmente.",
+    LearningPageCopyKey.CUMULATIVE_UNAVAILABLE: (
+        "Esta asignatura no contiene todavía una evaluación acumulativa canónica."
+    ),
 }
 
 _EN = {
@@ -146,6 +162,15 @@ _EN = {
         "{percent}% correct · {pending} pending · {attempts} attempts"
     ),
     LearningPageCopyKey.CONTINUE: "Continue",
+    LearningPageCopyKey.ASSESSMENT_CATEGORY: "Category",
+    LearningPageCopyKey.OBJECTIVE_ASSESSMENTS: "Objective assessments",
+    LearningPageCopyKey.OPEN_RESPONSES: "Open responses",
+    LearningPageCopyKey.CUMULATIVE_ASSESSMENTS: "Cumulative assessment",
+    LearningPageCopyKey.SAVE_DRAFTS: "Save drafts",
+    LearningPageCopyKey.DRAFTS_SAVED: "Drafts saved locally.",
+    LearningPageCopyKey.CUMULATIVE_UNAVAILABLE: (
+        "This course does not yet contain a canonical cumulative assessment."
+    ),
 }
 
 _DA = {
@@ -195,6 +220,15 @@ _DA = {
         "{percent} % korrekte · {pending} ventende · {attempts} forsøg"
     ),
     LearningPageCopyKey.CONTINUE: "Fortsæt",
+    LearningPageCopyKey.ASSESSMENT_CATEGORY: "Kategori",
+    LearningPageCopyKey.OBJECTIVE_ASSESSMENTS: "Objektive evalueringer",
+    LearningPageCopyKey.OPEN_RESPONSES: "Åbne svar",
+    LearningPageCopyKey.CUMULATIVE_ASSESSMENTS: "Kumulativ evaluering",
+    LearningPageCopyKey.SAVE_DRAFTS: "Gem kladder",
+    LearningPageCopyKey.DRAFTS_SAVED: "Kladder er gemt lokalt.",
+    LearningPageCopyKey.CUMULATIVE_UNAVAILABLE: (
+        "Dette kursus indeholder endnu ikke en kanonisk kumulativ evaluering."
+    ),
 }
 
 _COPY = {

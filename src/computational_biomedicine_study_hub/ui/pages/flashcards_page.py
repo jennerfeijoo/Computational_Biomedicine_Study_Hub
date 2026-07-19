@@ -1,17 +1,21 @@
-"""Model-backed flashcards with persistent spaced repetition."""
+"""Full-semester flashcard study with persistent spaced repetition."""
 
 from __future__ import annotations
 
 import random
 from datetime import UTC, datetime
 
-from PySide6.QtCore import Slot
+from PySide6.QtCore import QEasingCurve, QEvent, QObject, QPropertyAnimation, Qt, Signal, Slot
+from PySide6.QtGui import QKeySequence, QMouseEvent, QShortcut
 from PySide6.QtWidgets import (
+    QCheckBox,
     QComboBox,
     QFrame,
+    QGraphicsOpacityEffect,
     QHBoxLayout,
     QLabel,
     QPushButton,
+    QTextBrowser,
     QVBoxLayout,
     QWidget,
 )
@@ -27,10 +31,35 @@ from ...learning.progress import (
 from ...learning.progress_repository import ProgressRepository
 from ...learning.spaced_repetition import ReviewRating, reschedule
 from ..learning_page_copy import LearningPageCopyKey, learning_text
+from ..study_state import StudyLocation
+
+
+class FlipCardFrame(QFrame):
+    activated = Signal()
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.setAccessibleName("Interactive flashcard")
+
+    def mouseReleaseEvent(self, event: QMouseEvent) -> None:  # noqa: N802
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.activated.emit()
+        super().mouseReleaseEvent(event)
+
+
+def _copy(locale: AppLocale, es: str, en: str, da: str) -> str:
+    return {
+        AppLocale.SPANISH_SPAIN: es,
+        AppLocale.ENGLISH: en,
+        AppLocale.DANISH_DENMARK: da,
+    }[locale]
 
 
 class FlashcardsPage(QWidget):
-    """Study compact cards generated from authored concepts and misconceptions."""
+    """Study authored cards using stable IDs and an inspectable SM-2 variant."""
+
+    module_requested = Signal(str, str)
 
     def __init__(
         self,
@@ -49,64 +78,137 @@ class FlashcardsPage(QWidget):
         self._rng = rng or random.Random()
         self._cards: list[StudyFlashcard] = []
         self._current_index = 0
+        self._animation: QPropertyAnimation | None = None
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(10)
+
         filters = QHBoxLayout()
         self.course_selector = QComboBox()
         self.course_selector.setObjectName("flashcardCourseSelector")
-        self.course_selector.setAccessibleName(learning_text(locale, LearningPageCopyKey.COURSE))
         for course_code in catalog.course_codes:
             self.course_selector.addItem(course_code, course_code)
         self.module_selector = QComboBox()
         self.module_selector.setObjectName("flashcardModuleSelector")
-        self.module_selector.setAccessibleName(learning_text(locale, LearningPageCopyKey.MODULE))
-        self.shuffle_button = QPushButton(learning_text(locale, LearningPageCopyKey.SHUFFLE))
-        self.shuffle_button.setObjectName("shuffleFlashcardsButton")
-        self.shuffle_button.clicked.connect(self.shuffle)
+        self.type_selector = QComboBox()
+        self.type_selector.setObjectName("flashcardTypeSelector")
+        self.type_selector.addItem(
+            _copy(locale, "Todos los tipos", "All card types", "Alle korttyper"),
+            None,
+        )
+        card_types = sorted({card.card_type for card in catalog.flashcards()})
+        for card_type in card_types:
+            self.type_selector.addItem(card_type.replace("_", " ").title(), card_type)
         filters.addWidget(self.course_selector)
         filters.addWidget(self.module_selector, 1)
-        filters.addWidget(self.shuffle_button)
+        filters.addWidget(self.type_selector)
         layout.addLayout(filters)
+
+        filter_flags = QHBoxLayout()
+        self.due_only = QCheckBox(_copy(locale, "Pendientes", "Due", "Forfaldne"))
+        self.new_only = QCheckBox(_copy(locale, "Nuevas", "New", "Nye"))
+        self.difficult_only = QCheckBox(_copy(locale, "Difíciles", "Difficult", "Vanskelige"))
+        self.favorite_only = QCheckBox(_copy(locale, "Favoritas", "Favorites", "Favoritter"))
+        self.mixed_session = QCheckBox(
+            _copy(locale, "Sesión mixta", "Mixed session", "Blandet session")
+        )
+        for checkbox in (
+            self.due_only,
+            self.new_only,
+            self.difficult_only,
+            self.favorite_only,
+            self.mixed_session,
+        ):
+            checkbox.setMinimumHeight(32)
+            filter_flags.addWidget(checkbox)
+            checkbox.toggled.connect(self._refresh_deck)
+        filter_flags.addStretch(1)
+        layout.addLayout(filter_flags)
 
         self.stats_label = QLabel()
         self.stats_label.setObjectName("flashcardStats")
-        layout.addWidget(self.stats_label)
+        self.progress_label = QLabel()
+        self.progress_label.setObjectName("flashcardPosition")
+        header = QHBoxLayout()
+        header.addWidget(self.stats_label)
+        header.addStretch(1)
+        header.addWidget(self.progress_label)
+        layout.addLayout(header)
 
-        card = QFrame()
-        card.setObjectName("flashcardStudyCard")
-        card_layout = QVBoxLayout(card)
-        self.front_label = QLabel()
+        self.card_frame = FlipCardFrame()
+        self.card_frame.setObjectName("flashcardStudyCard")
+        self.card_frame.setMinimumHeight(300)
+        self.card_frame.activated.connect(self.flip)
+        card_layout = QVBoxLayout(self.card_frame)
+        card_layout.setContentsMargins(24, 24, 24, 24)
+        self.front_label = QTextBrowser()
         self.front_label.setObjectName("flashcardFront")
-        self.front_label.setWordWrap(True)
         self.front_label.setAccessibleName("Flashcard front")
-        card_layout.addWidget(self.front_label)
-        self.reveal_button = QPushButton(learning_text(locale, LearningPageCopyKey.REVEAL))
-        self.reveal_button.setObjectName("revealFlashcardButton")
-        self.reveal_button.clicked.connect(self.reveal)
-        card_layout.addWidget(self.reveal_button)
-        self.back_label = QLabel()
+        self.front_label.setOpenExternalLinks(False)
+        self.front_label.viewport().installEventFilter(self)
+        self.back_label = QTextBrowser()
         self.back_label.setObjectName("flashcardBack")
-        self.back_label.setWordWrap(True)
         self.back_label.setAccessibleName("Flashcard back")
+        self.back_label.setOpenExternalLinks(False)
+        self.back_label.viewport().installEventFilter(self)
         self.back_label.hide()
-        card_layout.addWidget(self.back_label)
+        card_layout.addWidget(self.front_label, 1)
+        card_layout.addWidget(self.back_label, 1)
+        layout.addWidget(self.card_frame, 1)
+
+        navigation = QHBoxLayout()
+        self.previous_button = QPushButton(_copy(locale, "Anterior", "Previous", "Forrige"))
+        self.next_button = QPushButton(_copy(locale, "Siguiente", "Next", "Næste"))
+        self.reveal_button = QPushButton(_copy(locale, "Voltear", "Flip", "Vend kort"))
+        self.favorite_button = QPushButton()
+        self.reset_button = QPushButton(
+            _copy(locale, "Reiniciar sesión", "Reset session", "Nulstil session")
+        )
+        self.back_to_module_button = QPushButton(
+            _copy(locale, "Volver al módulo", "Back to module", "Tilbage til modul")
+        )
+        self.previous_button.setObjectName("previousFlashcardButton")
+        self.next_button.setObjectName("nextFlashcardButton")
+        self.reveal_button.setObjectName("revealFlashcardButton")
+        self.favorite_button.setObjectName("favoriteFlashcardButton")
+        self.reset_button.setObjectName("resetFlashcardSessionButton")
+        self.back_to_module_button.setObjectName("backToFlashcardModuleButton")
+        self.previous_button.clicked.connect(self.previous_card)
+        self.next_button.clicked.connect(self.next_card)
+        self.reveal_button.clicked.connect(self.flip)
+        self.favorite_button.clicked.connect(self.toggle_favorite)
+        self.reset_button.clicked.connect(self.reset_session)
+        self.back_to_module_button.clicked.connect(self.open_module)
+        for button in (
+            self.previous_button,
+            self.next_button,
+            self.reveal_button,
+            self.favorite_button,
+            self.reset_button,
+            self.back_to_module_button,
+        ):
+            button.setMinimumHeight(38)
+            navigation.addWidget(button)
+        layout.addLayout(navigation)
+
         self.rating_panel = QWidget()
         rating_layout = QHBoxLayout(self.rating_panel)
         rating_layout.setContentsMargins(0, 0, 0, 0)
-        for key, rating in (
-            (LearningPageCopyKey.AGAIN, ReviewRating.AGAIN),
-            (LearningPageCopyKey.HARD, ReviewRating.HARD),
-            (LearningPageCopyKey.GOOD, ReviewRating.GOOD),
-            (LearningPageCopyKey.EASY, ReviewRating.EASY),
+        for shortcut, key, rating in (
+            ("1", LearningPageCopyKey.AGAIN, ReviewRating.AGAIN),
+            ("2", LearningPageCopyKey.HARD, ReviewRating.HARD),
+            ("3", LearningPageCopyKey.GOOD, ReviewRating.GOOD),
+            ("4", LearningPageCopyKey.EASY, ReviewRating.EASY),
         ):
-            button = QPushButton(learning_text(locale, key))
+            button = QPushButton(f"{shortcut} · {learning_text(locale, key)}")
             button.setObjectName(f"flashcardRating_{rating.name.casefold()}")
+            button.setMinimumHeight(52)
+            button.setToolTip(shortcut)
             button.clicked.connect(lambda checked=False, value=rating: self.rate(value))
             rating_layout.addWidget(button)
         self.rating_panel.hide()
-        card_layout.addWidget(self.rating_panel)
-        layout.addWidget(card, 1)
+        layout.addWidget(self.rating_panel)
 
         self.empty_label = QLabel(learning_text(locale, LearningPageCopyKey.FLASHCARD_EMPTY))
         self.empty_label.setObjectName("flashcardEmptyState")
@@ -116,7 +218,18 @@ class FlashcardsPage(QWidget):
 
         self.course_selector.currentIndexChanged.connect(self._refresh_modules)
         self.module_selector.currentIndexChanged.connect(self._refresh_deck)
+        self.type_selector.currentIndexChanged.connect(self._refresh_deck)
+        self._install_shortcuts()
         self._refresh_modules()
+
+    def eventFilter(self, watched: QObject, event: QEvent) -> bool:  # noqa: N802
+        if (
+            watched in {self.front_label.viewport(), self.back_label.viewport()}
+            and event.type() == QEvent.Type.MouseButtonRelease
+        ):
+            self.flip()
+            return True
+        return super().eventFilter(watched, event)
 
     @property
     def current_card(self) -> StudyFlashcard | None:
@@ -128,14 +241,42 @@ class FlashcardsPage(QWidget):
     def card_count(self) -> int:
         return len(self._cards)
 
+    def select_context(self, course_code: str, module_id: str) -> bool:
+        """Filter the deck by stable course and module identities."""
+        course_index = self.course_selector.findData(course_code.upper())
+        if course_index < 0:
+            return False
+        self.course_selector.setCurrentIndex(course_index)
+        module_index = self.module_selector.findData(module_id)
+        if module_index < 0:
+            return False
+        self.module_selector.setCurrentIndex(module_index)
+        return True
+
+    def _install_shortcuts(self) -> None:
+        shortcuts = (
+            ("Space", self.flip),
+            ("Return", self.flip),
+            ("Left", self.previous_card),
+            ("Right", self.next_card),
+            ("1", lambda: self.rate(ReviewRating.AGAIN)),
+            ("2", lambda: self.rate(ReviewRating.HARD)),
+            ("3", lambda: self.rate(ReviewRating.GOOD)),
+            ("4", lambda: self.rate(ReviewRating.EASY)),
+        )
+        self._shortcuts: list[QShortcut] = []
+        for sequence, callback in shortcuts:
+            shortcut = QShortcut(QKeySequence(sequence), self)
+            shortcut.activated.connect(callback)
+            self._shortcuts.append(shortcut)
+
     @Slot()
     def _refresh_modules(self) -> None:
         course_code = self.course_selector.currentData()
         self.module_selector.blockSignals(True)
         self.module_selector.clear()
         self.module_selector.addItem(
-            learning_text(self._locale, LearningPageCopyKey.ALL_MODULES),
-            None,
+            learning_text(self._locale, LearningPageCopyKey.ALL_MODULES), None
         )
         if isinstance(course_code, str):
             for record in self._catalog.modules(course_code):
@@ -147,31 +288,103 @@ class FlashcardsPage(QWidget):
     def _refresh_deck(self) -> None:
         course_value = self.course_selector.currentData()
         module_value = self.module_selector.currentData()
+        type_value = self.type_selector.currentData()
         course_code = course_value if isinstance(course_value, str) else None
         module_id = module_value if isinstance(module_value, str) else None
-        self._cards = list(
-            self._catalog.flashcards(
-                course_code=course_code,
-                module_id=module_id,
+        cards = list(self._catalog.flashcards(course_code=course_code, module_id=module_id))
+        now = datetime.now(UTC)
+        progress = {
+            item.card_id: item
+            for item in self._repository.list_flashcard_progress(
+                course_code=course_code, module_id=module_id
             )
-        )
+        }
+        if isinstance(type_value, str):
+            cards = [card for card in cards if card.card_type == type_value]
+        if self.due_only.isChecked():
+            cards = [
+                card
+                for card in cards
+                if (item := progress.get(card.card_id)) is not None and item.due_at <= now
+            ]
+        if self.new_only.isChecked():
+            cards = [
+                card
+                for card in cards
+                if (item := progress.get(card.card_id)) is None or item.total_reviews == 0
+            ]
+        if self.difficult_only.isChecked():
+            cards = [
+                card
+                for card in cards
+                if card.difficulty in {"advanced", "difficult", "hard"}
+                or (
+                    (item := progress.get(card.card_id)) is not None
+                    and (
+                        item.last_rating in {"AGAIN", "HARD"}
+                        or item.mastery_state is MasteryState.LEARNING
+                    )
+                )
+            ]
+        if self.favorite_only.isChecked():
+            cards = [
+                card
+                for card in cards
+                if (item := progress.get(card.card_id)) is not None and item.bookmarked
+            ]
+        if self.mixed_session.isChecked():
+            self._rng.shuffle(cards)
+        self._cards = cards
         self._current_index = 0
         self._show_current()
         self._update_stats(course_code=course_code, module_id=module_id)
 
     @Slot()
-    def shuffle(self) -> None:
-        self._rng.shuffle(self._cards)
+    def reset_session(self) -> None:
         self._current_index = 0
+        if self.mixed_session.isChecked():
+            self._rng.shuffle(self._cards)
+        self._show_current()
+
+    @Slot()
+    def previous_card(self) -> None:
+        if not self._cards:
+            return
+        self._current_index = (self._current_index - 1) % len(self._cards)
+        self._show_current()
+
+    @Slot()
+    def next_card(self) -> None:
+        if not self._cards:
+            return
+        self._current_index = (self._current_index + 1) % len(self._cards)
         self._show_current()
 
     @Slot()
     def reveal(self) -> None:
+        if self.back_label.isHidden():
+            self.flip()
+
+    @Slot()
+    def flip(self) -> None:
         if self.current_card is None:
             return
-        self.back_label.show()
-        self.rating_panel.show()
-        self.reveal_button.setEnabled(False)
+        show_back = self.back_label.isHidden()
+        self.front_label.setVisible(not show_back)
+        self.back_label.setVisible(show_back)
+        self.rating_panel.setVisible(show_back)
+        self._animate_card()
+
+    def _animate_card(self) -> None:
+        effect = QGraphicsOpacityEffect(self.card_frame)
+        self.card_frame.setGraphicsEffect(effect)
+        animation = QPropertyAnimation(effect, b"opacity", self)
+        animation.setDuration(140)
+        animation.setStartValue(0.35)
+        animation.setEndValue(1.0)
+        animation.setEasingCurve(QEasingCurve.Type.OutCubic)
+        self._animation = animation
+        animation.start()
 
     def rate(self, rating: ReviewRating) -> None:
         card = self.current_card
@@ -179,21 +392,19 @@ class FlashcardsPage(QWidget):
             return
         now = datetime.now(UTC)
         previous = self._repository.get_flashcard_progress(
-            card.course_code,
-            card.module_id,
-            card.card_id,
+            card.course_code, card.module_id, card.card_id
         )
         schedule = ReviewSchedule(
             course_code=card.course_code,
             module_id=card.module_id,
             item_id=card.card_id,
             item_kind=LearningItemKind.FLASHCARD,
-            mastery_state=(previous.mastery_state if previous is not None else MasteryState.NEW),
-            repetitions=previous.repetitions if previous is not None else 0,
-            interval_days=previous.interval_days if previous is not None else 0,
-            easiness=previous.easiness if previous is not None else 2.5,
-            due_at=previous.due_at if previous is not None else now,
-            last_reviewed_at=(previous.last_reviewed_at if previous is not None else None),
+            mastery_state=previous.mastery_state if previous else MasteryState.NEW,
+            repetitions=previous.repetitions if previous else 0,
+            interval_days=previous.interval_days if previous else 0,
+            easiness=previous.easiness if previous else 2.5,
+            due_at=previous.due_at if previous else now,
+            last_reviewed_at=previous.last_reviewed_at if previous else None,
         )
         updated = reschedule(schedule, rating, reviewed_at=now)
         self._repository.save_review_schedule(updated)
@@ -208,53 +419,160 @@ class FlashcardsPage(QWidget):
                 easiness=updated.easiness,
                 due_at=updated.due_at,
                 last_reviewed_at=updated.last_reviewed_at,
+                first_seen_at=previous.first_seen_at if previous else now,
+                lapse_count=(previous.lapse_count if previous else 0)
+                + int(rating is ReviewRating.AGAIN),
+                last_rating=rating.name,
+                total_reviews=(previous.total_reviews if previous else 0) + 1,
+                bookmarked=previous.bookmarked if previous else False,
             )
         )
-        self._current_index = (self._current_index + 1) % len(self._cards)
-        self._show_current()
-        course_value = self.course_selector.currentData()
-        module_value = self.module_selector.currentData()
+        self.next_card()
         self._update_stats(
-            course_code=course_value if isinstance(course_value, str) else None,
-            module_id=module_value if isinstance(module_value, str) else None,
+            course_code=card.course_code,
+            module_id=(
+                self.module_selector.currentData()
+                if isinstance(self.module_selector.currentData(), str)
+                else None
+            ),
         )
+
+    @Slot()
+    def toggle_favorite(self) -> None:
+        card = self.current_card
+        if card is None:
+            return
+        now = datetime.now(UTC)
+        previous = self._repository.get_flashcard_progress(
+            card.course_code, card.module_id, card.card_id
+        )
+        self._repository.save_flashcard_progress(
+            FlashcardProgress(
+                course_code=card.course_code,
+                module_id=card.module_id,
+                card_id=card.card_id,
+                mastery_state=previous.mastery_state if previous else MasteryState.NEW,
+                repetitions=previous.repetitions if previous else 0,
+                interval_days=previous.interval_days if previous else 0,
+                easiness=previous.easiness if previous else 2.5,
+                due_at=previous.due_at if previous else now,
+                last_reviewed_at=previous.last_reviewed_at if previous else None,
+                first_seen_at=previous.first_seen_at if previous else now,
+                lapse_count=previous.lapse_count if previous else 0,
+                last_rating=previous.last_rating if previous else "",
+                total_reviews=previous.total_reviews if previous else 0,
+                bookmarked=not previous.bookmarked if previous else True,
+            )
+        )
+        self._update_favorite_button()
+        if self.favorite_only.isChecked():
+            self._refresh_deck()
+
+    @Slot()
+    def open_module(self) -> None:
+        card = self.current_card
+        if card is not None:
+            self.module_requested.emit(card.course_code, card.module_id)
+
+    def capture_state(self) -> StudyLocation:
+        card = self.current_card
+        return StudyLocation(
+            route="flashcards",
+            course_code=card.course_code if card else "",
+            module_id=card.module_id if card else "",
+            card_id=card.card_id if card else "",
+            logical_position=self._current_index,
+            filters={
+                "type": str(self.type_selector.currentData() or ""),
+                "due": str(self.due_only.isChecked()),
+                "new": str(self.new_only.isChecked()),
+                "difficult": str(self.difficult_only.isChecked()),
+                "favorite": str(self.favorite_only.isChecked()),
+                "mixed": str(self.mixed_session.isChecked()),
+            },
+        )
+
+    def restore_state(self, state: StudyLocation) -> None:
+        course_index = self.course_selector.findData(state.course_code)
+        if course_index >= 0:
+            self.course_selector.setCurrentIndex(course_index)
+        module_index = self.module_selector.findData(state.module_id)
+        if module_index >= 0:
+            self.module_selector.setCurrentIndex(module_index)
+        type_index = self.type_selector.findData(state.filters.get("type") or None)
+        if type_index >= 0:
+            self.type_selector.setCurrentIndex(type_index)
+        for key, checkbox in (
+            ("due", self.due_only),
+            ("new", self.new_only),
+            ("difficult", self.difficult_only),
+            ("favorite", self.favorite_only),
+            ("mixed", self.mixed_session),
+        ):
+            checkbox.setChecked(state.filters.get(key) == "True")
+        card_index = next(
+            (index for index, card in enumerate(self._cards) if card.card_id == state.card_id),
+            -1,
+        )
+        if card_index >= 0:
+            self._current_index = card_index
+            self._show_current()
 
     def _show_current(self) -> None:
         card = self.current_card
         is_empty = card is None
         self.empty_label.setVisible(is_empty)
-        self.front_label.setVisible(not is_empty)
-        self.reveal_button.setVisible(not is_empty)
-        self.back_label.hide()
+        self.card_frame.setVisible(not is_empty)
         self.rating_panel.hide()
-        self.reveal_button.setEnabled(not is_empty)
+        self.front_label.setVisible(not is_empty)
+        self.back_label.hide()
+        for button in (
+            self.previous_button,
+            self.next_button,
+            self.reveal_button,
+            self.favorite_button,
+            self.reset_button,
+            self.back_to_module_button,
+        ):
+            button.setEnabled(not is_empty)
         if card is None:
             self.front_label.clear()
             self.back_label.clear()
+            self.progress_label.setText("0 / 0")
             return
-        self.front_label.setText(card.front)
-        self.back_label.setText(card.back)
+        self.front_label.setMarkdown(card.front)
+        self.back_label.setMarkdown(card.back)
+        self.progress_label.setText(f"{self._current_index + 1} / {len(self._cards)}")
+        self._update_favorite_button()
+        self.card_frame.setFocus()
 
-    def _update_stats(
-        self,
-        *,
-        course_code: str | None,
-        module_id: str | None,
-    ) -> None:
+    def _update_favorite_button(self) -> None:
+        card = self.current_card
+        progress = (
+            self._repository.get_flashcard_progress(card.course_code, card.module_id, card.card_id)
+            if card is not None
+            else None
+        )
+        favorite = progress.bookmarked if progress else False
+        self.favorite_button.setText(
+            ("★ " if favorite else "☆ ") + _copy(self._locale, "Favorita", "Favorite", "Favorit")
+        )
+        self.favorite_button.setAccessibleName(self.favorite_button.text())
+
+    def _update_stats(self, *, course_code: str | None, module_id: str | None) -> None:
         now = datetime.now(UTC)
         progress = self._repository.list_flashcard_progress(
-            course_code=course_code,
-            module_id=module_id,
+            course_code=course_code, module_id=module_id
         )
         self.stats_label.setText(
             learning_text(
                 self._locale,
                 LearningPageCopyKey.FLASHCARD_STATS,
-                reviewed=len(progress),
+                reviewed=sum(item.total_reviews > 0 for item in progress),
                 mastered=sum(item.mastery_state is MasteryState.MASTERED for item in progress),
-                due=sum(item.due_at <= now for item in progress),
+                due=sum(item.due_at <= now and item.total_reviews > 0 for item in progress),
             )
         )
 
 
-__all__ = ["FlashcardsPage"]
+__all__ = ["FlashcardsPage", "FlipCardFrame"]

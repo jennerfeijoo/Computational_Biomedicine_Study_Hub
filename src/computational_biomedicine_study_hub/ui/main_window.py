@@ -28,11 +28,13 @@ from .header import PageHeader
 from .language_styles import LANGUAGE_STYLESHEET
 from .navigation import NavigationSidebar
 from .pages.assessments_page import AssessmentsPage
+from .pages.course_study_page import CourseStudyPage
 from .pages.flashcards_page import FlashcardsPage
 from .pages.glossary_page import GlossaryPage
 from .pages.home_page import HomePage
 from .pages.ollama_settings_page import OllamaSettingsPage
 from .pages.review_page import ReviewPage
+from .pages.study_lab_page import StudyLabPage
 from .routes import (
     PageDescriptor,
     RouteId,
@@ -40,6 +42,7 @@ from .routes import (
     localized_page_descriptors,
     route_value,
 )
+from .study_state import StudyLocation
 from .styles import APPLICATION_STYLESHEET
 
 
@@ -148,8 +151,30 @@ class MainWindow(QMainWindow):
         catalog = AcademicCatalog(locale=locale)
         home_page = HomePage(self._courses, self._translator)
         home_page.course_selected.connect(self.navigate)
-        glossary_page = GlossaryPage(catalog, locale=locale)
+        glossary_page = GlossaryPage(
+            catalog,
+            locale=locale,
+            repository=self._progress,
+        )
         glossary_page.module_requested.connect(self._open_catalog_module)
+        glossary_page.flashcards_requested.connect(self._open_module_flashcards)
+        glossary_page.assessments_requested.connect(self._open_module_assessments)
+        flashcards_page = FlashcardsPage(
+            catalog,
+            self._progress,
+            locale=locale,
+        )
+        flashcards_page.module_requested.connect(self._open_catalog_module)
+        assessments_page = AssessmentsPage(
+            catalog,
+            self._progress,
+            locale=locale,
+        )
+        study_lab_page = StudyLabPage(
+            catalog,
+            self._settings,
+        )
+        assessments_page.open_feedback_requested.connect(self._open_feedback_lab)
 
         pages: dict[str, QWidget] = {
             RouteId.HOME.value: home_page,
@@ -158,17 +183,10 @@ class MainWindow(QMainWindow):
                 self._progress,
                 locale=locale,
             ),
-            RouteId.ASSESSMENTS.value: AssessmentsPage(
-                catalog,
-                self._progress,
-                locale=locale,
-            ),
-            RouteId.FLASHCARDS.value: FlashcardsPage(
-                catalog,
-                self._progress,
-                locale=locale,
-            ),
+            RouteId.ASSESSMENTS.value: assessments_page,
+            RouteId.FLASHCARDS.value: flashcards_page,
             RouteId.GLOSSARY.value: glossary_page,
+            RouteId.STUDY_LAB.value: study_lab_page,
             RouteId.SETTINGS.value: OllamaSettingsPage(
                 settings=self._settings,
                 locale=locale,
@@ -176,11 +194,18 @@ class MainWindow(QMainWindow):
         }
 
         for course in self._courses:
-            pages[course.route] = (
-                DM857Page(locale, progress_repository=self._progress)
-                if course.code == "DM857"
-                else course.page_factory(locale)
-            )
+            if course.code == "DM857":
+                course_page: QWidget = DM857Page(locale, progress_repository=self._progress)
+            else:
+                generic_page = CourseStudyPage(
+                    course.code,
+                    catalog,
+                    locale=locale,
+                    progress_repository=self._progress,
+                )
+                generic_page.cumulative_requested.connect(self._open_cumulative_assessment)
+                course_page = generic_page
+            pages[course.route] = course_page
             self._descriptors[course.route] = PageDescriptor(
                 route=course.route,
                 title=f"{course.code} — {course.title_for(locale)}",
@@ -195,7 +220,7 @@ class MainWindow(QMainWindow):
     def _apply_locale(self, locale_code: str) -> None:
         """Rebuild visible pages immediately while preserving study location."""
         route = route_value(self.current_route)
-        dm857_state = self._capture_dm857_state(route)
+        study_state = self._capture_study_state(route)
 
         self._header.set_locale(locale_code)
         self._navigation.retranslate(self._translator)
@@ -204,33 +229,30 @@ class MainWindow(QMainWindow):
         self._register_pages()
         self._set_window_title()
         self.navigate(route)
-        self._restore_dm857_state(route, dm857_state)
+        self._restore_study_state(route, study_state)
 
-    def _capture_dm857_state(self, route: str) -> tuple[int, int] | None:
-        dm857_route = next(
-            (course.route for course in self._courses if course.code == "DM857"),
-            "",
-        )
-        if route != dm857_route:
-            return None
+    def _capture_study_state(self, route: str) -> StudyLocation | None:
         page = self._pages.get(route)
-        if not isinstance(page, DM857Page):
+        if isinstance(page, FlashcardsPage):
+            return page.capture_state()
+        if not isinstance(page, (DM857Page, CourseStudyPage)):
             return None
-        return page.current_module_index, page.reader.current_section_index
+        return page.capture_state(route)
 
-    def _restore_dm857_state(
+    def _restore_study_state(
         self,
         route: str,
-        state: tuple[int, int] | None,
+        state: StudyLocation | None,
     ) -> None:
         if state is None:
             return
         page = self._pages.get(route)
-        if not isinstance(page, DM857Page):
+        if isinstance(page, FlashcardsPage):
+            page.restore_state(state)
             return
-        module_index, section_index = state
-        page.select_module(module_index)
-        page.reader.select_section_index(section_index)
+        if not isinstance(page, (DM857Page, CourseStudyPage)):
+            return
+        page.restore_state(state)
 
     def _clear_pages(self) -> None:
         self._pages.clear()
@@ -257,8 +279,53 @@ class MainWindow(QMainWindow):
             return
         self.navigate(course.route)
         page = self._pages.get(course.route)
-        if isinstance(page, DM857Page):
+        if isinstance(page, (DM857Page, CourseStudyPage)):
             page.select_module_id(module_id)
+
+    @Slot(str, str, str, str, str)
+    def _open_feedback_lab(
+        self,
+        course_code: str,
+        module_id: str,
+        item_id: str,
+        response_text: str,
+        confidence: str,
+    ) -> None:
+        page = self._pages.get(RouteId.STUDY_LAB.value)
+        if not isinstance(page, StudyLabPage):
+            return
+        page.prefill_open_response_evaluation(
+            course_code=course_code,
+            module_id=module_id,
+            item_id=item_id,
+            response_text=response_text,
+            confidence=confidence,
+        )
+        self.navigate(RouteId.STUDY_LAB)
+
+    @Slot(str)
+    def _open_cumulative_assessment(self, course_code: str) -> None:
+        page = self._pages.get(RouteId.ASSESSMENTS.value)
+        if not isinstance(page, AssessmentsPage):
+            return
+        page.show_cumulative_assessment(course_code)
+        self.navigate(RouteId.ASSESSMENTS)
+
+    @Slot(str, str)
+    def _open_module_flashcards(self, course_code: str, module_id: str) -> None:
+        page = self._pages.get(RouteId.FLASHCARDS.value)
+        if not isinstance(page, FlashcardsPage):
+            return
+        page.select_context(course_code, module_id)
+        self.navigate(RouteId.FLASHCARDS)
+
+    @Slot(str, str)
+    def _open_module_assessments(self, course_code: str, module_id: str) -> None:
+        page = self._pages.get(RouteId.ASSESSMENTS.value)
+        if not isinstance(page, AssessmentsPage):
+            return
+        page.show_module_assessments(course_code, module_id)
+        self.navigate(RouteId.ASSESSMENTS)
 
     def _stored_route(self) -> str:
         value = str(

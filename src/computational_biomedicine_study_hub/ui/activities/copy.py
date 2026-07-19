@@ -24,6 +24,11 @@ class ActivityCopyKey(StrEnum):
     MOVE_UP = "move_up"
     MOVE_DOWN = "move_down"
     MATCH_WITH = "match_with"
+    CONFIDENCE = "confidence"
+    CONFIDENCE_LOW = "confidence_low"
+    CONFIDENCE_MEDIUM = "confidence_medium"
+    CONFIDENCE_HIGH = "confidence_high"
+    LOCAL_FEEDBACK = "local_feedback"
 
 
 _COPY: dict[AppLocale, dict[ActivityCopyKey, str]] = {
@@ -44,6 +49,11 @@ _COPY: dict[AppLocale, dict[ActivityCopyKey, str]] = {
         ActivityCopyKey.MOVE_UP: "Subir",
         ActivityCopyKey.MOVE_DOWN: "Bajar",
         ActivityCopyKey.MATCH_WITH: "Relacionar con…",
+        ActivityCopyKey.CONFIDENCE: "Confianza",
+        ActivityCopyKey.CONFIDENCE_LOW: "Baja",
+        ActivityCopyKey.CONFIDENCE_MEDIUM: "Media",
+        ActivityCopyKey.CONFIDENCE_HIGH: "Alta",
+        ActivityCopyKey.LOCAL_FEEDBACK: "Pedir retroalimentación local",
     },
     AppLocale.ENGLISH: {
         ActivityCopyKey.SUBMIT: "Check",
@@ -62,6 +72,11 @@ _COPY: dict[AppLocale, dict[ActivityCopyKey, str]] = {
         ActivityCopyKey.MOVE_UP: "Move up",
         ActivityCopyKey.MOVE_DOWN: "Move down",
         ActivityCopyKey.MATCH_WITH: "Match with…",
+        ActivityCopyKey.CONFIDENCE: "Confidence",
+        ActivityCopyKey.CONFIDENCE_LOW: "Low",
+        ActivityCopyKey.CONFIDENCE_MEDIUM: "Medium",
+        ActivityCopyKey.CONFIDENCE_HIGH: "High",
+        ActivityCopyKey.LOCAL_FEEDBACK: "Request local feedback",
     },
     AppLocale.DANISH_DENMARK: {
         ActivityCopyKey.SUBMIT: "Kontrollér",
@@ -80,6 +95,11 @@ _COPY: dict[AppLocale, dict[ActivityCopyKey, str]] = {
         ActivityCopyKey.MOVE_UP: "Flyt op",
         ActivityCopyKey.MOVE_DOWN: "Flyt ned",
         ActivityCopyKey.MATCH_WITH: "Match med…",
+        ActivityCopyKey.CONFIDENCE: "Sikkerhed",
+        ActivityCopyKey.CONFIDENCE_LOW: "Lav",
+        ActivityCopyKey.CONFIDENCE_MEDIUM: "Mellem",
+        ActivityCopyKey.CONFIDENCE_HIGH: "Høj",
+        ActivityCopyKey.LOCAL_FEEDBACK: "Bed om lokal feedback",
     },
 }
 

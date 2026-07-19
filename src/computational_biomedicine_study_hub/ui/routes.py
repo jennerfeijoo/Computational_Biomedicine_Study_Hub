@@ -15,6 +15,7 @@ class RouteId(StrEnum):
     REVIEW = "review"
     ASSESSMENTS = "assessments"
     FLASHCARDS = "flashcards"
+    STUDY_LAB = "study_lab"
     GLOSSARY = "glossary"
     SETTINGS = "settings"
 
@@ -48,6 +49,10 @@ _DESCRIPTOR_KEYS = {
     RouteId.FLASHCARDS: (
         MessageKey.PAGE_FLASHCARDS_TITLE,
         MessageKey.PAGE_FLASHCARDS_SUBTITLE,
+    ),
+    RouteId.STUDY_LAB: (
+        MessageKey.PAGE_STUDY_LAB_TITLE,
+        MessageKey.PAGE_STUDY_LAB_SUBTITLE,
     ),
     RouteId.GLOSSARY: (MessageKey.PAGE_GLOSSARY_TITLE, MessageKey.PAGE_GLOSSARY_SUBTITLE),
     RouteId.SETTINGS: (MessageKey.PAGE_SETTINGS_TITLE, MessageKey.PAGE_SETTINGS_SUBTITLE),

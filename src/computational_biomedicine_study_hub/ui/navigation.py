@@ -73,6 +73,11 @@ def build_navigation(
                 learning,
             ),
             NavigationEntry(
+                RouteId.STUDY_LAB.value,
+                active_translator.text(MessageKey.NAV_STUDY_LAB),
+                learning,
+            ),
+            NavigationEntry(
                 RouteId.GLOSSARY.value,
                 active_translator.text(MessageKey.NAV_GLOSSARY),
                 active_translator.text(MessageKey.NAV_RESOURCES),

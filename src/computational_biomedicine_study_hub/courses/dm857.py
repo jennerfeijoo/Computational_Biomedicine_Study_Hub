@@ -17,9 +17,11 @@ from PySide6.QtWidgets import (
 from ..content.bundles import ModuleBundle
 from ..content.dm857 import BUNDLES, LOCALIZED_BUNDLES
 from ..i18n import DEFAULT_LOCALE, AppLocale, MessageKey, Translator
+from ..learning.academic_catalog import AcademicCatalog, CatalogModule
 from ..learning.progress_repository import ProgressRepository
 from ..ui.learning_page_copy import LearningPageCopyKey, learning_text
 from ..ui.pages.module_reader_page import ModuleReaderPage
+from ..ui.study_state import StudyLocation
 from .models import CourseRegistration
 
 
@@ -36,11 +38,15 @@ class DM857Page(QWidget):
         self.setObjectName("dm857CoursePage")
         self._translator = Translator(locale)
         self._progress_repository = progress_repository
-        self._bundles: tuple[ModuleBundle, ...] = (
+        legacy_bundles: tuple[ModuleBundle, ...] = (
             BUNDLES
             if locale == DEFAULT_LOCALE
             else tuple(bundle.materialize(locale) for bundle in LOCALIZED_BUNDLES)
         )
+        existing_ids = {bundle.module.module_id for bundle in legacy_bundles}
+        yaml_records = AcademicCatalog(locale=locale).modules("DM857")
+        additions = tuple(record for record in yaml_records if record.module_id not in existing_ids)
+        self._bundles: tuple[ModuleBundle | CatalogModule, ...] = legacy_bundles + additions
 
         self._module_selector = QComboBox()
         self._module_selector.setObjectName("courseModuleSelector")
@@ -128,6 +134,27 @@ class DM857Page(QWidget):
         """Select a module using its stable language-independent identity."""
         index = self._module_selector.findData(module_id)
         return self.select_module(index)
+
+    def capture_state(self, route: str = "") -> StudyLocation:
+        """Capture a serializable location independent of localized labels."""
+        bundle = self._bundles[self.current_module_index]
+        return StudyLocation(
+            route=route,
+            course_code="DM857",
+            module_id=bundle.module.module_id,
+            tab_index=self.reader.current_section_index,
+            logical_position=self.current_module_index,
+        )
+
+    def restore_state(self, state: StudyLocation) -> None:
+        """Restore a previously captured course/module/tab location."""
+        if state.course_code and state.course_code.upper() != "DM857":
+            return
+        if state.module_id:
+            self.select_module_id(state.module_id)
+        elif 0 <= state.logical_position < self.module_count:
+            self.select_module(state.logical_position)
+        self.reader.select_section_index(state.tab_index)
 
     @Slot()
     def continue_learning(self) -> None:

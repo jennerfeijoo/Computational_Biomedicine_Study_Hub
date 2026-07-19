@@ -421,6 +421,8 @@ class OrderingActivityWidget(ActivityWidget):
 class OpenResponseActivityWidget(ActivityWidget):
     """Honest open response with reference, rubric, and three-way self-assessment."""
 
+    feedback_requested = Signal(str)
+
     def __init__(
         self,
         item: AssessmentItem,
@@ -439,6 +441,24 @@ class OpenResponseActivityWidget(ActivityWidget):
         self.answer_editor.setAccessibleName(answer_label.text())
         self.answer_editor.setMinimumHeight(120)
         layout.addWidget(self.answer_editor)
+        confidence_row = QHBoxLayout()
+        confidence_row.addWidget(QLabel(activity_text(locale, ActivityCopyKey.CONFIDENCE)))
+        self.confidence_selector = QComboBox()
+        self.confidence_selector.setObjectName("openResponseConfidence")
+        for key, value in (
+            (ActivityCopyKey.CONFIDENCE_LOW, "low"),
+            (ActivityCopyKey.CONFIDENCE_MEDIUM, "medium"),
+            (ActivityCopyKey.CONFIDENCE_HIGH, "high"),
+        ):
+            self.confidence_selector.addItem(activity_text(locale, key), value)
+        self.confidence_selector.setCurrentIndex(1)
+        confidence_row.addWidget(self.confidence_selector)
+        confidence_row.addStretch(1)
+        layout.addLayout(confidence_row)
+        feedback = QPushButton(activity_text(locale, ActivityCopyKey.LOCAL_FEEDBACK))
+        feedback.setObjectName("requestLocalFeedbackButton")
+        feedback.clicked.connect(self.request_feedback)
+        layout.addWidget(feedback)
         reveal = QPushButton(activity_text(locale, ActivityCopyKey.REVEAL_REFERENCE))
         reveal.setObjectName("revealReferenceButton")
         reveal.clicked.connect(self.reveal_reference)
@@ -484,6 +504,16 @@ class OpenResponseActivityWidget(ActivityWidget):
     @Slot()
     def reveal_reference(self) -> None:
         self._reference_panel.show()
+
+    @property
+    def confidence(self) -> str:
+        return str(self.confidence_selector.currentData())
+
+    @Slot()
+    def request_feedback(self) -> None:
+        answer = self.answer_editor.toPlainText().strip()
+        if answer:
+            self.feedback_requested.emit(answer)
 
     def self_assess(self, outcome: AttemptOutcome) -> None:
         if not self.reference_visible:

@@ -20,6 +20,7 @@ class MessageKey(StrEnum):
     NAV_REVIEW = "nav.review"
     NAV_ASSESSMENTS = "nav.assessments"
     NAV_FLASHCARDS = "nav.flashcards"
+    NAV_STUDY_LAB = "nav.study_lab"
     NAV_GLOSSARY = "nav.glossary"
     NAV_SETTINGS = "nav.settings"
 
@@ -31,6 +32,8 @@ class MessageKey(StrEnum):
     PAGE_ASSESSMENTS_SUBTITLE = "page.assessments.subtitle"
     PAGE_FLASHCARDS_TITLE = "page.flashcards.title"
     PAGE_FLASHCARDS_SUBTITLE = "page.flashcards.subtitle"
+    PAGE_STUDY_LAB_TITLE = "page.study_lab.title"
+    PAGE_STUDY_LAB_SUBTITLE = "page.study_lab.subtitle"
     PAGE_GLOSSARY_TITLE = "page.glossary.title"
     PAGE_GLOSSARY_SUBTITLE = "page.glossary.subtitle"
     PAGE_SETTINGS_TITLE = "page.settings.title"

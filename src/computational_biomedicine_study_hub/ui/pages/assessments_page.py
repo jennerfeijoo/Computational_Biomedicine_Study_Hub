@@ -5,11 +5,12 @@ from __future__ import annotations
 import json
 import random
 import uuid
+from collections.abc import Mapping
 from dataclasses import replace
 from datetime import UTC, datetime
 from functools import partial
 
-from PySide6.QtCore import Slot
+from PySide6.QtCore import Signal, Slot
 from PySide6.QtWidgets import (
     QComboBox,
     QFrame,
@@ -17,10 +18,12 @@ from PySide6.QtWidgets import (
     QLabel,
     QPushButton,
     QScrollArea,
+    QTextBrowser,
     QVBoxLayout,
     QWidget,
 )
 
+from ...academic.localization import localize_value
 from ...content.models import AssessmentItem
 from ...i18n import DEFAULT_LOCALE, AppLocale
 from ...learning.academic_catalog import AcademicCatalog, CatalogModule
@@ -33,6 +36,8 @@ from ...learning.progress import (
     AttemptRecord,
     LearningItemKind,
     MasteryState,
+    OpenResponseAttempt,
+    OpenResponseDraft,
     ReviewSchedule,
 )
 from ...learning.progress_repository import ProgressRepository
@@ -40,6 +45,7 @@ from ...learning.spaced_repetition import ReviewRating, reschedule
 from ..activities import (
     ActivityRendererRegistry,
     ActivityWidget,
+    OpenResponseActivityWidget,
     create_default_activity_registry,
 )
 from ..learning_page_copy import LearningPageCopyKey, learning_text
@@ -47,6 +53,8 @@ from ..learning_page_copy import LearningPageCopyKey, learning_text
 
 class AssessmentsPage(QWidget):
     """Compose authored module assessments into persistent interactive sessions."""
+
+    open_feedback_requested = Signal(str, str, str, str, str)
 
     def __init__(
         self,
@@ -93,6 +101,16 @@ class AssessmentsPage(QWidget):
             (LearningPageCopyKey.MIXED_ASSESSMENT, AssessmentScope.MIXED),
         ):
             self.mode_selector.addItem(learning_text(locale, key), scope.value)
+        self.category_selector = self._combo(
+            "assessmentCategorySelector",
+            learning_text(locale, LearningPageCopyKey.ASSESSMENT_CATEGORY),
+        )
+        for key, value in (
+            (LearningPageCopyKey.OBJECTIVE_ASSESSMENTS, "objective"),
+            (LearningPageCopyKey.OPEN_RESPONSES, "open"),
+            (LearningPageCopyKey.CUMULATIVE_ASSESSMENTS, "cumulative"),
+        ):
+            self.category_selector.addItem(learning_text(locale, key), value)
         self.type_selector = self._combo(
             "assessmentTypeSelector",
             learning_text(locale, LearningPageCopyKey.TYPE),
@@ -107,12 +125,19 @@ class AssessmentsPage(QWidget):
         self.start_button.setObjectName("startAssessmentButton")
         self.start_button.setAccessibleName(self.start_button.text())
         self.start_button.clicked.connect(self.start_session)
+        self.save_drafts_button = QPushButton(
+            learning_text(locale, LearningPageCopyKey.SAVE_DRAFTS)
+        )
+        self.save_drafts_button.setObjectName("saveOpenResponseDraftsButton")
+        self.save_drafts_button.clicked.connect(self.save_drafts)
         for widget in (
             self.course_selector,
             self.module_selector,
             self.mode_selector,
+            self.category_selector,
             self.type_selector,
             self.start_button,
+            self.save_drafts_button,
         ):
             filter_layout.addWidget(widget)
         layout.addWidget(filters)
@@ -134,7 +159,9 @@ class AssessmentsPage(QWidget):
         layout.addWidget(scroll, 1)
 
         self.course_selector.currentIndexChanged.connect(self._refresh_modules)
+        self.category_selector.currentIndexChanged.connect(self._category_changed)
         self._refresh_modules()
+        self._category_changed()
         if not self._restore_latest_open_session():
             self._show_empty(LearningPageCopyKey.ASSESSMENT_EMPTY)
 
@@ -146,8 +173,36 @@ class AssessmentsPage(QWidget):
     def session(self) -> AssessmentSession | None:
         return self._session
 
+    def show_cumulative_assessment(self, course_code: str) -> bool:
+        """Select and render a course cumulative by stable course identity."""
+        course_index = self.course_selector.findData(course_code.upper())
+        category_index = self.category_selector.findData("cumulative")
+        if course_index < 0 or category_index < 0:
+            return False
+        self.course_selector.setCurrentIndex(course_index)
+        self.category_selector.setCurrentIndex(category_index)
+        self.start_session()
+        return self._catalog.source_course(course_code).cumulative_assessment is not None
+
+    def show_module_assessments(self, course_code: str, module_id: str) -> bool:
+        """Select objective assessment practice for one stable module identity."""
+        course_index = self.course_selector.findData(course_code.upper())
+        category_index = self.category_selector.findData("objective")
+        if course_index < 0 or category_index < 0:
+            return False
+        self.course_selector.setCurrentIndex(course_index)
+        module_index = self.module_selector.findData(module_id)
+        if module_index < 0:
+            return False
+        self.module_selector.setCurrentIndex(module_index)
+        self.category_selector.setCurrentIndex(category_index)
+        return True
+
     @Slot()
     def start_session(self) -> None:
+        if self.category_selector.currentData() == "cumulative":
+            self._render_cumulative()
+            return
         scope = AssessmentScope(str(self.mode_selector.currentData()))
         records = self._records_for_scope(scope)
         activity_value = self.type_selector.currentData()
@@ -204,7 +259,13 @@ class AssessmentsPage(QWidget):
         else:
             records = self._catalog.modules()
         return tuple(
-            (record, item) for record in records for item in record.module.assessment_items
+            (record, item)
+            for record in records
+            for item in (
+                record.assessment_items
+                if self.category_selector.currentData() == "open"
+                else record.objective_question_bank
+            )
         )
 
     def _render_session(
@@ -223,6 +284,18 @@ class AssessmentsPage(QWidget):
             widget.setProperty("moduleId", record.module_id)
             widget.setProperty("contentVersion", record.bundle.content_version)
             widget.submitted.connect(partial(self._record_submission, record, item))
+            if isinstance(widget, OpenResponseActivityWidget):
+                draft = self._repository.get_open_response_draft(
+                    record.course_code,
+                    record.module_id,
+                    item.item_id,
+                    self._locale.value,
+                )
+                if draft is not None:
+                    widget.answer_editor.setPlainText(draft.response_text)
+                widget.feedback_requested.connect(
+                    partial(self._request_open_feedback, record, item, widget)
+                )
             if item_id in session.answered_item_ids:
                 widget.setProperty("answerPersisted", True)
             self._rendered.append(widget)
@@ -263,6 +336,34 @@ class AssessmentsPage(QWidget):
                 session_id=self._session.session_id,
             )
         )
+        open_widget = next(
+            (
+                candidate
+                for candidate in self._rendered
+                if candidate.item_id == item.item_id
+                and isinstance(candidate, OpenResponseActivityWidget)
+            ),
+            None,
+        )
+        if open_widget is not None:
+            previous = self._repository.list_open_response_attempts(
+                course_code=record.course_code,
+                module_id=record.module_id,
+                item_id=item.item_id,
+            )
+            self._repository.record_open_response_attempt(
+                OpenResponseAttempt(
+                    attempt_id=str(uuid.uuid4()),
+                    item_id=item.item_id,
+                    course_code=record.course_code,
+                    module_id=record.module_id,
+                    locale=self._locale.value,
+                    confidence=open_widget.confidence,
+                    response_text=submission.response_text,
+                    version=len(previous) + 1,
+                    created_at=datetime.now(UTC),
+                )
+            )
         self._schedule_review(record, item, submission)
 
         if item.item_id not in self._session.answered_item_ids:
@@ -310,13 +411,16 @@ class AssessmentsPage(QWidget):
         )
 
     def _restore_latest_open_session(self) -> bool:
+        identities = {
+            (record.course_code, record.module_id) for record in self._catalog.modules()
+        } | {(course_code, "") for course_code in self._catalog.course_codes}
         candidates = tuple(
             session
-            for record in self._catalog.modules()
+            for course_code, module_id in identities
             if (
                 session := self._repository.latest_open_assessment_session(
-                    course_code=record.course_code,
-                    module_id=record.module_id,
+                    course_code=course_code,
+                    module_id=module_id,
                 )
             )
             is not None
@@ -327,11 +431,20 @@ class AssessmentsPage(QWidget):
         records = tuple(
             (record, item)
             for record in self._catalog.modules()
-            for item in record.module.assessment_items
+            for item in record.assessment_items + record.objective_question_bank
             if item.item_id in session.item_ids
         )
         if len(records) != len(session.item_ids):
             return False
+        open_item_ids = {
+            item.item_id for record in self._catalog.modules() for item in record.assessment_items
+        }
+        category = (
+            "open" if all(item.item_id in open_item_ids for _, item in records) else "objective"
+        )
+        category_index = self.category_selector.findData(category)
+        if category_index >= 0:
+            self.category_selector.setCurrentIndex(category_index)
         course_index = self.course_selector.findData(session.course_code)
         if course_index >= 0:
             self.course_selector.setCurrentIndex(course_index)
@@ -343,6 +456,107 @@ class AssessmentsPage(QWidget):
             self.mode_selector.setCurrentIndex(mode_index)
         self._render_session(session, records)
         return True
+
+    @Slot()
+    def save_drafts(self) -> None:
+        saved = 0
+        now = datetime.now(UTC)
+        for widget in self._rendered:
+            if not isinstance(widget, OpenResponseActivityWidget):
+                continue
+            record = self._context_by_item_id[widget.item_id]
+            self._repository.save_open_response_draft(
+                OpenResponseDraft(
+                    course_code=record.course_code,
+                    module_id=record.module_id,
+                    item_id=widget.item_id,
+                    locale=self._locale.value,
+                    response_text=widget.answer_editor.toPlainText(),
+                    updated_at=now,
+                )
+            )
+            saved += 1
+        if saved:
+            self.progress_label.setText(
+                learning_text(self._locale, LearningPageCopyKey.DRAFTS_SAVED)
+            )
+
+    def _request_open_feedback(
+        self,
+        record: CatalogModule,
+        item: AssessmentItem,
+        widget: OpenResponseActivityWidget,
+        answer: str,
+    ) -> None:
+        self._repository.save_open_response_draft(
+            OpenResponseDraft(
+                course_code=record.course_code,
+                module_id=record.module_id,
+                item_id=item.item_id,
+                locale=self._locale.value,
+                response_text=answer,
+                updated_at=datetime.now(UTC),
+            )
+        )
+        previous = self._repository.list_open_response_attempts(
+            course_code=record.course_code,
+            module_id=record.module_id,
+            item_id=item.item_id,
+        )
+        self._repository.record_open_response_attempt(
+            OpenResponseAttempt(
+                attempt_id=str(uuid.uuid4()),
+                item_id=item.item_id,
+                course_code=record.course_code,
+                module_id=record.module_id,
+                locale=self._locale.value,
+                confidence=widget.confidence,
+                response_text=answer,
+                version=len(previous) + 1,
+                created_at=datetime.now(UTC),
+            )
+        )
+        self.open_feedback_requested.emit(
+            record.course_code,
+            record.module_id,
+            item.item_id,
+            answer,
+            widget.confidence,
+        )
+
+    @Slot()
+    def _category_changed(self) -> None:
+        category = self.category_selector.currentData()
+        is_cumulative = category == "cumulative"
+        self.module_selector.setEnabled(not is_cumulative)
+        self.mode_selector.setEnabled(not is_cumulative)
+        self.type_selector.setEnabled(not is_cumulative)
+        self.save_drafts_button.setVisible(category == "open")
+
+    def _render_cumulative(self) -> None:
+        self._clear_body()
+        self._session = None
+        course_code = str(self.course_selector.currentData())
+        if not course_code:
+            self._show_empty(LearningPageCopyKey.CUMULATIVE_UNAVAILABLE)
+            return
+        cumulative = self._catalog.source_course(course_code).cumulative_assessment
+        if cumulative is None:
+            self._show_empty(LearningPageCopyKey.CUMULATIVE_UNAVAILABLE)
+            return
+        visible = _learner_visible(
+            localize_value(cumulative.raw, self._locale.value.split("_", 1)[0])
+        )
+        browser = QTextBrowser()
+        browser.setObjectName("cumulativeAssessmentContent")
+        browser.setAccessibleName(cumulative.title.resolve(self._locale.value.split("_", 1)[0]))
+        browser.setMarkdown(
+            _cumulative_markdown(
+                cumulative.title.resolve(self._locale.value.split("_", 1)[0]),
+                visible,
+            )
+        )
+        self._body_layout.addWidget(browser)
 
     @Slot()
     def _refresh_modules(self) -> None:
@@ -396,6 +610,81 @@ class AssessmentsPage(QWidget):
         combo.setAccessibleName(accessible_name)
         combo.setMinimumWidth(150)
         return combo
+
+
+_HIDDEN_CUMULATIVE_KEYS = {
+    "answer_key",
+    "canonical_answer",
+    "canonical_explanation",
+    "correct_answer",
+    "correct_answers",
+    "grading_guide",
+    "hidden_examiner_support",
+    "hidden_grading_guide",
+    "hidden_support",
+    "model_answer",
+    "solution",
+    "solutions",
+}
+
+
+def _learner_visible(value: object) -> object:
+    """Remove grading-only branches before cumulative content reaches a widget."""
+    if isinstance(value, Mapping):
+        return {
+            str(key): _learner_visible(item)
+            for key, item in value.items()
+            if str(key).casefold() not in _HIDDEN_CUMULATIVE_KEYS
+            and not str(key).casefold().startswith("hidden_")
+        }
+    if isinstance(value, list):
+        return [_learner_visible(item) for item in value]
+    return value
+
+
+def _cumulative_markdown(title: str, value: object) -> str:
+    lines = [f"# {title}"]
+    if not isinstance(value, Mapping):
+        return "\n\n".join((*lines, str(value)))
+    ignored_metadata = {
+        "schema_version",
+        "course_code",
+        "assessment_id",
+        "content_version",
+        "status",
+    }
+    for key, section in value.items():
+        if str(key) in ignored_metadata:
+            continue
+        lines.extend(("", f"## {_humanize(str(key))}", "", _markdown_value(section)))
+    return "\n".join(lines)
+
+
+def _markdown_value(value: object, *, depth: int = 0) -> str:
+    if isinstance(value, Mapping):
+        lines: list[str] = []
+        for key, item in value.items():
+            label = _humanize(str(key))
+            if isinstance(item, (Mapping, list)):
+                heading = min(6, depth + 3)
+                lines.extend((f"{'#' * heading} {label}", _markdown_value(item, depth=depth + 1)))
+            else:
+                lines.append(f"- **{label}:** {item}")
+        return "\n\n".join(lines)
+    if isinstance(value, list):
+        return "\n".join(
+            (
+                f"- {_markdown_value(item, depth=depth + 1)}"
+                if not isinstance(item, Mapping)
+                else f"-\n{_markdown_value(item, depth=depth + 1)}"
+            )
+            for item in value
+        )
+    return str(value)
+
+
+def _humanize(value: str) -> str:
+    return value.replace("_", " ").strip().capitalize()
 
 
 __all__ = ["AssessmentsPage"]

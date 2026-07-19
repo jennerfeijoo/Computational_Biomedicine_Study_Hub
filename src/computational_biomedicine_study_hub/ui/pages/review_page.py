@@ -8,6 +8,8 @@ from PySide6.QtCore import Qt, Slot
 from PySide6.QtWidgets import (
     QCheckBox,
     QComboBox,
+    QFrame,
+    QGridLayout,
     QHBoxLayout,
     QLabel,
     QListWidget,
@@ -25,6 +27,12 @@ from ...learning.progress import (
     ReviewSchedule,
 )
 from ...learning.progress_repository import ProgressRepository
+from ...learning.recommendations import (
+    RecommendationCategory,
+    RecommendationReason,
+    ReviewRecommendation,
+    build_review_recommendations,
+)
 from ...learning.spaced_repetition import ReviewRating, reschedule
 from ..learning_page_copy import LearningPageCopyKey, learning_text
 
@@ -52,6 +60,7 @@ class ReviewPage(QWidget):
         filters = QHBoxLayout()
         self.mix_courses = QCheckBox(learning_text(locale, LearningPageCopyKey.MIX_COURSES))
         self.mix_courses.setObjectName("reviewMixCourses")
+        self.mix_courses.setChecked(True)
         self.course_selector = QComboBox()
         self.course_selector.setObjectName("reviewCourseSelector")
         for course_code in catalog.course_codes:
@@ -97,6 +106,25 @@ class ReviewPage(QWidget):
         summary.addWidget(self.mastery_label)
         summary.addStretch(1)
         layout.addLayout(summary)
+
+        self._recommendation_labels: dict[RecommendationCategory, QLabel] = {}
+        recommendation_grid = QGridLayout()
+        for index, category in enumerate(RecommendationCategory):
+            frame = QFrame()
+            frame.setObjectName(f"reviewBlock_{category.value}")
+            frame.setFrameShape(QFrame.Shape.StyledPanel)
+            block_layout = QVBoxLayout(frame)
+            title = QLabel(_category_title(locale, category))
+            title.setObjectName("sectionHeading")
+            content = QLabel()
+            content.setObjectName(f"reviewReasons_{category.value}")
+            content.setWordWrap(True)
+            content.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
+            block_layout.addWidget(title)
+            block_layout.addWidget(content)
+            self._recommendation_labels[category] = content
+            recommendation_grid.addWidget(frame, index // 3, index % 3)
+        layout.addLayout(recommendation_grid)
 
         self.queue_list = QListWidget()
         self.queue_list.setObjectName("reviewQueue")
@@ -209,6 +237,7 @@ class ReviewPage(QWidget):
         )
         self._update_mastery(course_code, module_id)
         self._update_history(course_code, module_id)
+        self._update_recommendations()
 
     @Slot()
     def add_new_concepts(self) -> None:
@@ -308,6 +337,113 @@ class ReviewPage(QWidget):
                 for attempt in attempts
             )
         )
+
+    def _update_recommendations(self) -> None:
+        recommendations = build_review_recommendations(
+            self._catalog,
+            self._repository,
+            now=datetime.now(UTC),
+        )
+        for category, label in self._recommendation_labels.items():
+            values = tuple(
+                _recommendation_text(self._locale, item)
+                for item in recommendations
+                if item.category is category
+            )
+            label.setText("\n".join(f"• {value}" for value in values[:3]) or "—")
+
+
+_CATEGORY_TITLES = {
+    AppLocale.SPANISH_SPAIN: {
+        RecommendationCategory.TODAY: "Para hoy",
+        RecommendationCategory.REINFORCE: "Necesita refuerzo",
+        RecommendationCategory.FAILED_QUESTIONS: "Preguntas falladas",
+        RecommendationCategory.PENDING_CARDS: "Tarjetas pendientes",
+        RecommendationCategory.CONTINUE: "Continuar donde lo dejaste",
+        RecommendationCategory.COURSE_PROGRESS: "Progreso por asignatura",
+    },
+    AppLocale.ENGLISH: {
+        RecommendationCategory.TODAY: "For today",
+        RecommendationCategory.REINFORCE: "Needs reinforcement",
+        RecommendationCategory.FAILED_QUESTIONS: "Failed questions",
+        RecommendationCategory.PENDING_CARDS: "Pending cards",
+        RecommendationCategory.CONTINUE: "Continue where you left off",
+        RecommendationCategory.COURSE_PROGRESS: "Progress by course",
+    },
+    AppLocale.DANISH_DENMARK: {
+        RecommendationCategory.TODAY: "Til i dag",
+        RecommendationCategory.REINFORCE: "Kræver styrkelse",
+        RecommendationCategory.FAILED_QUESTIONS: "Forkerte spørgsmål",
+        RecommendationCategory.PENDING_CARDS: "Ventende kort",
+        RecommendationCategory.CONTINUE: "Fortsæt hvor du slap",
+        RecommendationCategory.COURSE_PROGRESS: "Fremskridt pr. kursus",
+    },
+}
+
+
+def _category_title(locale: AppLocale, category: RecommendationCategory) -> str:
+    return _CATEGORY_TITLES[locale][category]
+
+
+def _recommendation_text(locale: AppLocale, item: ReviewRecommendation) -> str:
+    templates = {
+        AppLocale.SPANISH_SPAIN: {
+            RecommendationReason.DUE_ITEM: "{course} {module}: {item} está vencido.",
+            RecommendationReason.REPEATED_FAILURE: (
+                "{course} {module}: {count} respuestas incorrectas registradas."
+            ),
+            RecommendationReason.FAILED_QUESTION: ("{course} {module}: vuelve a intentar {item}."),
+            RecommendationReason.DUE_CARDS: (
+                "{count} tarjetas de {course} {module} están vencidas."
+            ),
+            RecommendationReason.LAST_ACTIVITY: (
+                "Tu última actividad fue {course} {module}, {item}."
+            ),
+            RecommendationReason.COURSE_MASTERY: (
+                "{course}: {percent}% correctas en {count} intentos."
+            ),
+            RecommendationReason.UNSTUDIED_MODULE: (
+                "{course} {module} todavía no tiene actividad."
+            ),
+        },
+        AppLocale.ENGLISH: {
+            RecommendationReason.DUE_ITEM: "{course} {module}: {item} is due.",
+            RecommendationReason.REPEATED_FAILURE: (
+                "{course} {module}: {count} recorded incorrect answers."
+            ),
+            RecommendationReason.FAILED_QUESTION: "Retry {item} in {course} {module}.",
+            RecommendationReason.DUE_CARDS: ("{count} cards in {course} {module} are due."),
+            RecommendationReason.LAST_ACTIVITY: (
+                "Your latest activity was {course} {module}, {item}."
+            ),
+            RecommendationReason.COURSE_MASTERY: (
+                "{course}: {percent}% correct across {count} attempts."
+            ),
+            RecommendationReason.UNSTUDIED_MODULE: ("{course} {module} has no activity yet."),
+        },
+        AppLocale.DANISH_DENMARK: {
+            RecommendationReason.DUE_ITEM: "{course} {module}: {item} er forfalden.",
+            RecommendationReason.REPEATED_FAILURE: (
+                "{course} {module}: {count} registrerede forkerte svar."
+            ),
+            RecommendationReason.FAILED_QUESTION: ("Prøv {item} igen i {course} {module}."),
+            RecommendationReason.DUE_CARDS: ("{count} kort i {course} {module} er forfaldne."),
+            RecommendationReason.LAST_ACTIVITY: (
+                "Din seneste aktivitet var {course} {module}, {item}."
+            ),
+            RecommendationReason.COURSE_MASTERY: (
+                "{course}: {percent}% korrekte i {count} forsøg."
+            ),
+            RecommendationReason.UNSTUDIED_MODULE: ("{course} {module} har ingen aktivitet endnu."),
+        },
+    }
+    return templates[locale][item.reason].format(
+        course=item.course_code,
+        module=item.module_id,
+        item=item.item_id,
+        count=item.count,
+        percent=item.percent,
+    )
 
 
 __all__ = ["ReviewPage"]

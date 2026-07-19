@@ -18,6 +18,8 @@ from PySide6.QtWidgets import (
 
 from ...i18n import DEFAULT_LOCALE, AppLocale
 from ...learning.academic_catalog import AcademicCatalog, GlossaryEntry
+from ...learning.progress import LearningItemKind
+from ...learning.progress_repository import ProgressRepository
 from ..learning_page_copy import LearningPageCopyKey, learning_text
 
 
@@ -25,18 +27,22 @@ class GlossaryPage(QWidget):
     """Aggregate terms directly from academic concept models."""
 
     module_requested = Signal(str, str)
+    flashcards_requested = Signal(str, str)
+    assessments_requested = Signal(str, str)
 
     def __init__(
         self,
         catalog: AcademicCatalog,
         *,
         locale: AppLocale = DEFAULT_LOCALE,
+        repository: ProgressRepository | None = None,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("glossaryPage")
         self._catalog = catalog
         self._locale = locale
+        self._repository = repository
         self._entries: tuple[GlossaryEntry, ...] = ()
         self._selected: GlossaryEntry | None = None
 
@@ -97,6 +103,30 @@ class GlossaryPage(QWidget):
         self.open_button.setObjectName("openGlossarySourceButton")
         self.open_button.clicked.connect(self.open_source_module)
         detail_layout.addWidget(self.open_button)
+        actions = QHBoxLayout()
+        self.favorite_button = QPushButton()
+        self.favorite_button.setObjectName("favoriteGlossaryTermButton")
+        self.favorite_button.clicked.connect(self.toggle_favorite)
+        self.cards_button = QPushButton(
+            _copy(
+                locale, "Abrir tarjetas relacionadas", "Open related cards", "Åbn relaterede kort"
+            )
+        )
+        self.cards_button.setObjectName("openGlossaryCardsButton")
+        self.cards_button.clicked.connect(self.open_related_cards)
+        self.questions_button = QPushButton(
+            _copy(
+                locale,
+                "Abrir preguntas relacionadas",
+                "Open related questions",
+                "Åbn relaterede spørgsmål",
+            )
+        )
+        self.questions_button.setObjectName("openGlossaryQuestionsButton")
+        self.questions_button.clicked.connect(self.open_related_questions)
+        for button in (self.favorite_button, self.cards_button, self.questions_button):
+            actions.addWidget(button)
+        detail_layout.addLayout(actions)
         detail_layout.addStretch(1)
         splitter.addWidget(detail)
         splitter.setSizes([320, 640])
@@ -165,6 +195,8 @@ class GlossaryPage(QWidget):
             ):
                 label.clear()
             self.open_button.setEnabled(False)
+            for button in (self.favorite_button, self.cards_button, self.questions_button):
+                button.setEnabled(False)
             return
         entry = self._entries[row]
         self._selected = entry
@@ -174,6 +206,10 @@ class GlossaryPage(QWidget):
         self.related_label.setText(" · ".join(entry.related_terms) or "—")
         self.synonyms_label.setText(" · ".join(entry.synonyms) or "—")
         self.open_button.setEnabled(True)
+        self.cards_button.setEnabled(True)
+        self.questions_button.setEnabled(True)
+        self.favorite_button.setEnabled(self._repository is not None)
+        self._update_favorite_button()
 
     @Slot()
     def open_source_module(self) -> None:
@@ -183,10 +219,64 @@ class GlossaryPage(QWidget):
                 self._selected.module_id,
             )
 
+    @Slot()
+    def toggle_favorite(self) -> None:
+        if self._selected is None or self._repository is None:
+            return
+        bookmarked = self._repository.is_bookmarked(
+            item_id=self._selected.term_id,
+            item_kind=LearningItemKind.CONCEPT.value,
+        )
+        self._repository.set_bookmark(
+            item_id=self._selected.term_id,
+            item_kind=LearningItemKind.CONCEPT.value,
+            course_code=self._selected.course_code,
+            module_id=self._selected.module_id,
+            bookmarked=not bookmarked,
+        )
+        self._update_favorite_button()
+
+    @Slot()
+    def open_related_cards(self) -> None:
+        if self._selected is not None:
+            self.flashcards_requested.emit(
+                self._selected.course_code,
+                self._selected.module_id,
+            )
+
+    @Slot()
+    def open_related_questions(self) -> None:
+        if self._selected is not None:
+            self.assessments_requested.emit(
+                self._selected.course_code,
+                self._selected.module_id,
+            )
+
+    def _update_favorite_button(self) -> None:
+        favorite = (
+            self._selected is not None
+            and self._repository is not None
+            and self._repository.is_bookmarked(
+                item_id=self._selected.term_id,
+                item_kind=LearningItemKind.CONCEPT.value,
+            )
+        )
+        self.favorite_button.setText(
+            ("★ " if favorite else "☆ ") + _copy(self._locale, "Favorito", "Favorite", "Favorit")
+        )
+
     def _heading(self, key: LearningPageCopyKey) -> QLabel:
         label = QLabel(learning_text(self._locale, key))
         label.setObjectName("contentSubheading")
         return label
+
+
+def _copy(locale: AppLocale, es: str, en: str, da: str) -> str:
+    return {
+        AppLocale.SPANISH_SPAIN: es,
+        AppLocale.ENGLISH: en,
+        AppLocale.DANISH_DENMARK: da,
+    }[locale]
 
 
 __all__ = ["GlossaryPage"]
