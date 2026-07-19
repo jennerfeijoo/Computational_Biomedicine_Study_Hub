@@ -1,0 +1,365 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m11
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title: {es: Tipos abstractos de datos, contratos e invariantes, en: Abstract data types, contracts, and invariants, da: Abstrakte datatyper, kontrakter og invarianter}
+  summary:
+    es: >-
+      Separación entre comportamiento observable y representación interna mediante tipos abstractos
+      de datos. Incluye interfaces, contratos, invariantes de representación, encapsulación, pilas,
+      colas, colas de prioridad, mapas y conjuntos como abstracciones, composición, complejidad y
+      pruebas de comportamiento y propiedades.
+    en: >-
+      Separation of observable behavior from internal representation through abstract data types.
+      Covers interfaces, contracts, representation invariants, encapsulation, stacks, queues,
+      priority queues, maps and sets as abstractions, composition, complexity, and behavioral testing.
+    da: >-
+      Adskillelse af observerbar adfærd fra intern repræsentation gennem abstrakte datatyper.
+      Modulet dækker interfaces, kontrakter, repræsentationsinvarianter, indkapsling, stakke,
+      køer, prioritetskøer, maps og mængder, komposition, kompleksitet og adfærdstest.
+  prerequisites: [dm857.m04, dm857.m06, dm857.m07, dm857.m10]
+  official_learning_outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo05, dm857.lo07, dm857.lo08]
+  estimated_study_hours: 20
+  difficulty: advanced
+
+objectives:
+  - {id: m11.o1, bloom_level: understand, statement: {es: Distinguir interfaz, contrato, implementación y representación., en: Distinguish interface, contract, implementation, and representation., da: Skelne mellem interface, kontrakt, implementering og repræsentation.}, evidence: conceptual_comparison}
+  - {id: m11.o2, bloom_level: create, statement: {es: Definir invariantes de representación verificables y preservarlos tras operaciones públicas., en: Define verifiable representation invariants and preserve them after public operations., da: Definere verificerbare repræsentationsinvarianter og bevare dem efter offentlige operationer.}, evidence: invariant_specification}
+  - {id: m11.o3, bloom_level: apply, statement: {es: Implementar y usar una pila LIFO con comportamiento de vacío explícito., en: Implement and use a LIFO stack with explicit empty behavior., da: Implementere og bruge en LIFO-stak med eksplicit adfærd ved tom tilstand.}, evidence: stack_implementation}
+  - {id: m11.o4, bloom_level: apply, statement: {es: Implementar y usar una cola FIFO eficiente., en: Implement and use an efficient FIFO queue., da: Implementere og bruge en effektiv FIFO-kø.}, evidence: queue_implementation}
+  - {id: m11.o5, bloom_level: analyze, statement: {es: Modelar prioridades con un min-heap y desempate estable., en: Model priorities using a min-heap and stable tie-breaking., da: Modellere prioriteter med en min-heap og stabil afgørelse ved ligheder.}, evidence: priority_queue_design}
+  - {id: m11.o6, bloom_level: evaluate, statement: {es: Seleccionar entre secuencia, mapa, conjunto, pila, cola y cola de prioridad según operaciones e invariantes., en: Select among sequence, map, set, stack, queue, and priority queue from operations and invariants., da: Vælge mellem sekvens, map, mængde, stak, kø og prioritetskø ud fra operationer og invarianter.}, evidence: adt_selection}
+  - {id: m11.o7, bloom_level: create, statement: {es: Componer abstracciones sin exponer detalles internos ni crear dependencias indebidas., en: Compose abstractions without exposing internals or creating improper dependencies., da: Sammensætte abstraktioner uden at afsløre interne detaljer eller skabe unødige afhængigheder.}, evidence: compositional_design}
+  - {id: m11.o8, bloom_level: create, statement: {es: Diseñar pruebas de contrato, propiedades, independencia y complejidad observable., en: Design contract, property, independence, and observable-complexity tests., da: Designe kontrakt-, egenskabs-, uafhængigheds- og kompleksitetstest.}, evidence: behavioral_test_suite}
+
+concepts:
+  - id: adt-interface-contract-representation
+    title: {es: Abstracción, interfaz, contrato y representación, en: Abstraction, interface, contract, and representation, da: Abstraktion, interface, kontrakt og repræsentation}
+    body:
+      es: >-
+        Un tipo abstracto de datos se define por sus valores válidos y operaciones observables, no por
+        una estructura concreta. La interfaz enumera operaciones; el contrato especifica entradas,
+        resultados, errores, efectos y, cuando importa, complejidad; la representación almacena el estado.
+        Dos implementaciones son sustituibles si cumplen el mismo contrato observable. El cliente no debe
+        depender de índices, listas internas ni marcas privadas que no formen parte de la interfaz.
+      en: >-
+        An abstract data type is defined by valid values and observable operations rather than one
+        concrete structure. The interface lists operations; the contract defines inputs, results, errors,
+        effects, and relevant complexity; representation stores state. Implementations are substitutable
+        when they satisfy the same observable contract.
+      da: >-
+        En abstrakt datatype defineres af gyldige værdier og observerbare operationer. Interfacet
+        oplister operationer, kontrakten beskriver adfærd, og repræsentationen lagrer tilstand.
+    linked_objectives: [m11.o1, m11.o6, m11.o7]
+  - id: representation-invariants-and-encapsulation
+    title: {es: Invariantes de representación y encapsulación, en: Representation invariants and encapsulation, da: Repræsentationsinvarianter og indkapsling}
+    body:
+      es: >-
+        Una invariante describe condiciones que el estado interno debe cumplir después de construir el
+        objeto y después de cada operación pública. Puede incluir límites de tamaño, coherencia entre
+        índices, ausencia de duplicados o relación entre contadores y almacenamiento. Una operación puede
+        atravesar estados intermedios, pero debe restaurar la invariante antes de devolver control. La
+        encapsulación reduce el número de lugares capaces de romperla. Las aserciones internas ayudan a
+        detectar defectos, pero no sustituyen validación de entradas externas.
+      en: >-
+        A representation invariant states conditions internal state must satisfy after construction and
+        after every public operation. Operations may pass through intermediate states but must restore the
+        invariant before returning. Encapsulation reduces the number of places that can break it.
+      da: >-
+        En repræsentationsinvariant beskriver betingelser, som intern tilstand skal opfylde efter
+        konstruktion og efter hver offentlig operation. Indkapsling begrænser brud på invarianten.
+    linked_objectives: [m11.o2, m11.o7, m11.o8]
+  - id: stack-adt
+    title: {es: Pila LIFO, en: LIFO stack, da: LIFO-stak}
+    body:
+      es: >-
+        Una pila expone `push`, `pop`, `peek`, `is_empty` y normalmente `len`. La última entrada es la
+        primera salida. Una lista de Python implementa eficientemente el extremo final con `append` y
+        `pop`. El contrato debe definir el caso vacío; lanzar una excepción específica suele ser preferible
+        a retornar un valor ambiguo. Las pilas modelan deshacer, validación de delimitadores, evaluación
+        de expresiones, retroceso y DFS iterativo.
+      en: >-
+        A stack exposes `push`, `pop`, `peek`, `is_empty`, and often `len`. The last inserted item is
+        removed first. A Python list efficiently supports the end via `append` and `pop`. Empty behavior
+        belongs in the contract. Stacks model undo, delimiter validation, backtracking, and iterative DFS.
+      da: >-
+        En stak eksponerer `push`, `pop`, `peek` og `is_empty`. Sidst ind er først ud. Det tomme tilfælde
+        hører til kontrakten.
+    linked_objectives: [m11.o3, m11.o6]
+  - id: queue-adt
+    title: {es: Cola FIFO, en: FIFO queue, da: FIFO-kø}
+    body:
+      es: >-
+        Una cola expone `enqueue`, `dequeue`, `front`, `is_empty` y `len`. El primer elemento insertado
+        es el primero en salir. `collections.deque` permite `append` y `popleft` con coste amortizado
+        constante, mientras `list.pop(0)` desplaza elementos. Una cola acotada necesita una política de
+        capacidad: rechazar, bloquear, sobrescribir o expandir son comportamientos distintos.
+      en: >-
+        A queue exposes `enqueue`, `dequeue`, `front`, `is_empty`, and `len`. First inserted is first
+        removed. `deque` supports amortized constant append and popleft, while `list.pop(0)` shifts items.
+        A bounded queue requires an explicit capacity policy.
+      da: >-
+        En FIFO-kø fjerner det først indsatte element først. `deque` giver effektiv append og popleft.
+        En begrænset kø kræver en eksplicit kapacitetspolitik.
+    linked_objectives: [m11.o4, m11.o6]
+  - id: priority-queue-and-heap
+    title: {es: Cola de prioridad, montículo y desempate, en: Priority queue, heap, and tie-breaking, da: Prioritetskø, heap og afgørelse ved ligheder}
+    body:
+      es: >-
+        Una cola de prioridad retorna el elemento con prioridad extrema, no necesariamente el más antiguo.
+        `heapq` implementa un min-heap: inserción y extracción son O(log n), consulta del mínimo O(1).
+        El arreglo interno sólo satisface la propiedad de heap, no está totalmente ordenado. Con prioridades
+        iguales, una tupla `(prioridad, contador, elemento)` evita comparar objetos no ordenables y conserva
+        orden de llegada. Actualizar prioridad requiere una política explícita para entradas obsoletas.
+      en: >-
+        A priority queue returns the item with extreme priority, not necessarily the oldest. `heapq` is a
+        min-heap: insertion and removal are O(log n), minimum lookup O(1). Heap layout is not fully sorted.
+        `(priority, counter, item)` provides stable tie-breaking and avoids comparing non-orderable items.
+      da: >-
+        En prioritetskø returnerer ekstrem prioritet. `heapq` er en min-heap, ikke en fuldt sorteret liste.
+        En tæller giver stabil afgørelse ved ens prioriteter.
+    linked_objectives: [m11.o5, m11.o6, m11.o8]
+  - id: maps-and-sets-as-adts
+    title: {es: Mapas y conjuntos como abstracciones, en: Maps and sets as abstractions, da: Maps og mængder som abstraktioner}
+    body:
+      es: >-
+        Un mapa abstracto define asociación clave-valor, consulta, inserción, actualización y eliminación.
+        Un conjunto abstracto define unicidad, pertenencia y álgebra de conjuntos. `dict` y `set` son
+        implementaciones concretas, pero un contrato podría implementarse con listas, árboles o tablas
+        hash. La elección cambia rendimiento y orden observable sin alterar la semántica esencial.
+      en: >-
+        A map ADT defines key-value association, lookup, insertion, update, and removal. A set ADT defines
+        uniqueness, membership, and set algebra. `dict` and `set` are concrete implementations; lists,
+        trees, or hash tables could satisfy related contracts with different performance.
+      da: >-
+        Et map-ADT definerer nøgle-værdi-operationer, og et mængde-ADT definerer entydighed og medlemskab.
+        `dict` og `set` er konkrete implementeringer.
+    linked_objectives: [m11.o1, m11.o6]
+  - id: composition-and-client-independence
+    title: {es: Composición e independencia del cliente, en: Composition and client independence, da: Komposition og klientuafhængighed}
+    body:
+      es: >-
+        Las abstracciones se componen cuando una implementación utiliza otra sólo a través de su interfaz.
+        Un recorrido BFS puede depender de una cola, no de `deque` directamente; un planificador puede
+        depender de una cola de prioridad, no del arreglo del heap. Esta separación facilita sustitución,
+        pruebas y evolución. Devolver la colección interna permite al cliente romper invariantes; se prefieren
+        iteradores, copias controladas o métodos de consulta.
+      en: >-
+        Abstractions compose when one implementation uses another only through its interface. BFS can
+        depend on a queue, and a scheduler on a priority queue, without exposing concrete internals.
+        Returning internal collections lets clients violate invariants; prefer iterators, controlled copies,
+        or query methods.
+      da: >-
+        Abstraktioner komponeres gennem interfaces. Interne samlinger bør ikke eksponeres, fordi klienten
+        ellers kan bryde invarianter.
+    linked_objectives: [m11.o7]
+  - id: behavioral-property-and-complexity-testing
+    title: {es: Pruebas de comportamiento, propiedades y complejidad, en: Behavioral, property, and complexity testing, da: Adfærds-, egenskabs- og kompleksitetstest}
+    body:
+      es: >-
+        Las pruebas de un ADT deben observar el contrato, no la representación. Para una pila, una secuencia
+        de `push` seguida de `pop` debe invertir el orden; para una cola debe conservarlo. Deben cubrir vacío,
+        un elemento, repetición, capacidad, independencia entre instancias y errores. Las propiedades permiten
+        generar secuencias amplias. La complejidad se valida por diseño y medición prudente, no con umbrales
+        temporales frágiles dependientes del equipo.
+      en: >-
+        ADT tests should observe contracts rather than representation. Push then pop reverses order in a
+        stack; enqueue then dequeue preserves order in a queue. Cover empty, singleton, repetition, capacity,
+        instance independence, and errors. Complexity follows design and cautious measurement, not brittle timing.
+      da: >-
+        ADT-test skal observere kontrakten, ikke repræsentationen. Test tomt tilfælde, ét element, rækkefølge,
+        kapacitet, instansuafhængighed og fejl.
+    linked_objectives: [m11.o2, m11.o8]
+
+worked_examples:
+  - id: dm857.m11.e01
+    title: {es: Implementar una pila sin exponer su lista, en: Implement a stack without exposing its list, da: Implementér en stak uden at eksponere listen}
+    problem: {es: Crear una pila con push, pop, peek, is_empty y len; el vacío debe producir IndexError., en: Create a stack with push, pop, peek, is_empty, and len; empty access must raise IndexError., da: Opret en stak med push, pop, peek, is_empty og len; tom adgang skal give IndexError.}
+    assumptions: [None may be a valid stored value, internal list must not be returned]
+    reasoning:
+      es: [Usar el final de una lista., Centralizar la comprobación de vacío., No devolver la lista interna.]
+      en: [Use the end of a list., Centralize empty checks., Do not return the internal list.]
+      da: [Brug slutningen af en liste., Centralisér tom-kontrol., Returnér ikke den interne liste.]
+    code: |-
+      class Stack:
+          def __init__(self):
+              self._items = []
+
+          def push(self, item):
+              self._items.append(item)
+
+          def pop(self):
+              if not self._items:
+                  raise IndexError("pop from empty stack")
+              return self._items.pop()
+
+          def peek(self):
+              if not self._items:
+                  raise IndexError("peek from empty stack")
+              return self._items[-1]
+
+          def is_empty(self):
+              return not self._items
+
+          def __len__(self):
+              return len(self._items)
+    expected_output: push A then B; pop returns B, then A
+    validation: [empty pop, empty peek, None as data, independent instances]
+    explanation: {es: La lista es un detalle reemplazable; el contrato observable permanece estable., en: The list is a replaceable detail; observable behavior remains stable., da: Listen er en udskiftelig detalje; kontrakten forbliver stabil.}
+    linked_objectives: [m11.o1, m11.o2, m11.o3, m11.o8]
+  - id: dm857.m11.e02
+    title: {es: Cola FIFO eficiente con deque, en: Efficient FIFO queue with deque, da: Effektiv FIFO-kø med deque}
+    problem: {es: Implementar una cola cuyo frente no dependa de desplazamientos lineales., en: Implement a queue whose front removal avoids linear shifting., da: Implementér en kø uden lineær flytning ved fjernelse forrest.}
+    assumptions: [unbounded queue, empty dequeue raises IndexError]
+    reasoning:
+      es: [Usar append para entrada., Usar popleft para salida., Mantener el caso vacío en el contrato.]
+      en: [Use append for enqueue., Use popleft for dequeue., Keep empty behavior in the contract.]
+      da: [Brug append for enqueue., Brug popleft for dequeue., Definér tom adfærd.]
+    code: |-
+      from collections import deque
+
+      class Queue:
+          def __init__(self):
+              self._items = deque()
+
+          def enqueue(self, item):
+              self._items.append(item)
+
+          def dequeue(self):
+              if not self._items:
+                  raise IndexError("dequeue from empty queue")
+              return self._items.popleft()
+
+          def __len__(self):
+              return len(self._items)
+    expected_output: enqueue A then B; dequeue returns A, then B
+    validation: [empty queue, one element, repeated values, long alternating sequence]
+    explanation: {es: El contrato FIFO no exige una lista; deque satisface mejor las operaciones requeridas., en: FIFO does not require a list; deque better satisfies the required operations., da: FIFO kræver ikke en liste; deque passer bedre til operationerne.}
+    linked_objectives: [m11.o4, m11.o6, m11.o8]
+  - id: dm857.m11.e03
+    title: {es: Prioridad estable con heapq, en: Stable priority with heapq, da: Stabil prioritet med heapq}
+    problem: {es: Procesar primero menor prioridad numérica y conservar orden de llegada cuando hay empate., en: Process lower numeric priority first and preserve arrival order on ties., da: Behandl lavere numerisk prioritet først og bevar ankomstorden ved lighed.}
+    assumptions: [items themselves may not be orderable]
+    reasoning:
+      es: [Añadir un contador creciente., Insertar tuplas prioridad-contador-elemento., Extraer y descartar metadatos.]
+      en: [Add an increasing counter., Push priority-counter-item tuples., Pop and discard metadata.]
+      da: [Tilføj en stigende tæller., Indsæt prioritets-tæller-element-tupler., Fjern metadata ved udtagning.]
+    code: |-
+      import heapq
+      from itertools import count
+
+      class StablePriorityQueue:
+          def __init__(self):
+              self._heap = []
+              self._counter = count()
+
+          def push(self, priority, item):
+              heapq.heappush(self._heap, (priority, next(self._counter), item))
+
+          def pop(self):
+              if not self._heap:
+                  raise IndexError("pop from empty priority queue")
+              _, _, item = heapq.heappop(self._heap)
+              return item
+    expected_output: tied items leave in arrival order
+    validation: [distinct priorities, ties, non-orderable item objects, empty pop]
+    explanation: {es: El contador separa prioridad de comparabilidad del objeto y documenta la política de empate., en: The counter separates priority from item comparability and documents tie policy., da: Tælleren adskiller prioritet fra elementets sammenlignelighed og dokumenterer lighedspolitikken.}
+    linked_objectives: [m11.o5, m11.o8]
+
+practice_exercises:
+  - {id: dm857.m11.p01, activity_type: concept_comparison, difficulty: foundational, prompt: {es: Distingue interfaz, contrato y representación para una pila., en: Distinguish interface, contract, and representation for a stack., da: Skeln mellem interface, kontrakt og repræsentation for en stak.}, reference_solution: {es: Interfaz: operaciones; contrato: resultados, errores y efectos; representación: lista, arreglo u otra estructura interna., en: Interface: operations; contract: results, errors, and effects; representation: list, array, or another internal structure., da: Interface er operationer, kontrakt er adfærd, og repræsentation er intern lagring.}, linked_objectives: [m11.o1]}
+  - {id: dm857.m11.p02, activity_type: code_tracing, difficulty: foundational, prompt: {es: Traza push A, push B, peek, pop, pop en una pila., en: Trace push A, push B, peek, pop, pop on a stack., da: Gennemgå push A, push B, peek, pop, pop på en stak.}, reference_solution: {es: peek devuelve B sin eliminar; los pop devuelven B y A., en: peek returns B without removal; pops return B then A., da: peek returnerer B uden fjernelse; pop returnerer B og A.}, linked_objectives: [m11.o3]}
+  - {id: dm857.m11.p03, activity_type: debugging, difficulty: intermediate, prompt: {es: Explica por qué `dequeue = items.pop()` viola FIFO., en: Explain why `dequeue = items.pop()` violates FIFO., da: Forklar hvorfor `dequeue = items.pop()` bryder FIFO.}, reference_solution: {es: pop sin índice elimina el último elemento y produce LIFO. Una cola retira el elemento más antiguo., en: pop without an index removes the newest item and yields LIFO. A queue removes the oldest item., da: pop uden indeks fjerner nyeste element og giver LIFO; en kø fjerner det ældste.}, linked_objectives: [m11.o4]}
+  - {id: dm857.m11.p04, activity_type: invariant_design, difficulty: intermediate, prompt: {es: Define invariantes para una pila acotada de capacidad k., en: Define invariants for a bounded stack of capacity k., da: Definér invarianter for en begrænset stak med kapacitet k.}, reference_solution: {es: Capacidad k no negativa; 0 <= tamaño <= k; almacenamiento contiene exactamente tamaño elementos; push lleno y pop vacío siguen políticas documentadas., en: Non-negative capacity k; 0 <= size <= k; storage contains exactly size items; full push and empty pop follow documented policies., da: k er ikke-negativ, 0 <= størrelse <= k, og lagringen matcher størrelsen.}, linked_objectives: [m11.o2, m11.o8]}
+  - {id: dm857.m11.p05, activity_type: data_structure_selection, difficulty: advanced, prompt: {es: Elige entre pila, cola y cola de prioridad para deshacer, BFS y planificación por urgencia., en: Choose among stack, queue, and priority queue for undo, BFS, and urgency scheduling., da: Vælg mellem stak, kø og prioritetskø til undo, BFS og planlægning efter hast.}, reference_solution: {es: Pila para deshacer, cola FIFO para BFS y cola de prioridad para urgencia; cada elección refleja el orden de extracción requerido., en: Stack for undo, FIFO queue for BFS, priority queue for urgency; each reflects required removal order., da: Stak til undo, FIFO-kø til BFS og prioritetskø til hast.}, linked_objectives: [m11.o6]}
+  - {id: dm857.m11.p06, activity_type: test_design, difficulty: advanced, prompt: {es: Diseña pruebas de sustitución para dos implementaciones de la misma cola., en: Design substitution tests for two implementations of the same queue., da: Design substitutionstest for to implementeringer af samme kø.}, reference_solution: {es: Ejecutar la misma secuencia de operaciones y comparar resultados, errores, tamaño, independencia y política de capacidad, sin inspeccionar atributos internos., en: Run identical operation sequences and compare results, errors, size, independence, and capacity policy without inspecting internals., da: Kør samme operationssekvens og sammenlign observerbar adfærd uden at inspicere intern tilstand.}, linked_objectives: [m11.o1, m11.o8]}
+
+objective_bank:
+  - {id: dm857.m11.q01, activity_type: multiple_choice, prompt: {es: ¿Qué define principalmente un ADT?, en: What primarily defines an ADT?, da: Hvad definerer primært et ADT?}, options: [{id: behavior, text: {es: Operaciones y comportamiento observable., en: Operations and observable behavior., da: Operationer og observerbar adfærd.}}, {id: list, text: {es: Una lista interna concreta., en: One concrete internal list., da: Én konkret intern liste.}}, {id: ui, text: {es: La interfaz gráfica., en: The graphical interface., da: Den grafiske grænseflade.}}], correct_option_ids: [behavior]}
+  - {id: dm857.m11.q02, activity_type: true_false, prompt: {es: Dos implementaciones pueden ser sustituibles aunque usen estructuras internas distintas., en: Two implementations may be substitutable despite different internals., da: To implementeringer kan være udskiftelige trods forskellig intern struktur.}, correct_answer: true}
+  - {id: dm857.m11.q03, activity_type: multiple_choice, prompt: {es: ¿Qué política representa una pila?, en: Which policy does a stack represent?, da: Hvilken politik repræsenterer en stak?}, options: [{id: lifo, text: {es: LIFO, en: LIFO, da: LIFO}}, {id: fifo, text: {es: FIFO, en: FIFO, da: FIFO}}, {id: priority, text: {es: Prioridad mínima, en: Minimum priority, da: Minimumsprioritet}}], correct_option_ids: [lifo]}
+  - {id: dm857.m11.q04, activity_type: multiple_choice, prompt: {es: ¿Qué operación de deque retira el frente?, en: Which deque operation removes the front?, da: Hvilken deque-operation fjerner forrest?}, options: [{id: popleft, text: {es: popleft, en: popleft, da: popleft}}, {id: pop, text: {es: pop, en: pop, da: pop}}, {id: append, text: {es: append, en: append, da: append}}], correct_option_ids: [popleft]}
+  - {id: dm857.m11.q05, activity_type: true_false, prompt: {es: El arreglo interno de un heap está totalmente ordenado., en: The internal heap array is fully sorted., da: Heap-arrayet er fuldt sorteret.}, correct_answer: false}
+  - {id: dm857.m11.q06, activity_type: multiple_choice, prompt: {es: ¿Por qué se añade un contador a una entrada de heap?, en: Why add a counter to a heap entry?, da: Hvorfor tilføjes en tæller til en heap-post?}, options: [{id: ties, text: {es: Para desempate estable y evitar comparar objetos., en: For stable tie-breaking and avoiding item comparison., da: Til stabil afgørelse og undgåelse af elementsammenligning.}}, {id: capacity, text: {es: Para limitar capacidad., en: To limit capacity., da: Til at begrænse kapacitet.}}, {id: sorting, text: {es: Para ordenar todo el heap., en: To fully sort the heap., da: Til at sortere hele heapen.}}], correct_option_ids: [ties]}
+  - {id: dm857.m11.q07, activity_type: true_false, prompt: {es: Una invariante sólo debe cumplirse al construir el objeto., en: An invariant only needs to hold at construction., da: En invariant behøver kun gælde ved konstruktion.}, correct_answer: false}
+  - {id: dm857.m11.q08, activity_type: multiple_choice, prompt: {es: ¿Qué prueba depende menos de la representación?, en: Which test depends least on representation?, da: Hvilken test afhænger mindst af repræsentationen?}, options: [{id: behavior, text: {es: Verificar orden de salidas tras operaciones públicas., en: Verify output order after public operations., da: Kontrollér outputrækkefølge efter offentlige operationer.}}, {id: private_list, text: {es: Inspeccionar el nombre de la lista privada., en: Inspect the private list name., da: Inspicér navnet på den private liste.}}, {id: memory_address, text: {es: Comparar direcciones internas., en: Compare internal addresses., da: Sammenlign interne adresser.}}], correct_option_ids: [behavior]}
+  - {id: dm857.m11.q09, activity_type: true_false, prompt: {es: Retornar directamente la lista interna puede permitir que el cliente rompa invariantes., en: Returning the internal list directly may let clients break invariants., da: Direkte returnering af den interne liste kan lade klienten bryde invarianter.}, correct_answer: true}
+  - {id: dm857.m11.q10, activity_type: multiple_choice, prompt: {es: ¿Qué abstracción requiere extracción por urgencia?, en: Which abstraction supports removal by urgency?, da: Hvilken abstraktion understøtter fjernelse efter hast?}, options: [{id: priority_queue, text: {es: Cola de prioridad, en: Priority queue, da: Prioritetskø}}, {id: plain_stack, text: {es: Pila simple, en: Plain stack, da: Simpel stak}}, {id: tuple, text: {es: Tupla aislada, en: Isolated tuple, da: Isoleret tuple}}], correct_option_ids: [priority_queue]}
+
+assessment_items:
+  - id: dm857.m11.a01
+    activity_type: adt_design
+    difficulty: advanced
+    prompt: {es: Diseña un ADT BufferAcotado con capacidad fija, inserción, extracción, consulta de tamaño y política explícita al llenarse y vaciarse. Incluye invariantes y pruebas., en: Design a fixed-capacity BoundedBuffer ADT with insertion, removal, size, and explicit full/empty policies. Include invariants and tests., da: Design et ADT for en begrænset buffer med kapacitet, indsættelse, fjernelse, størrelse og eksplicit fuld/tom-politik.}
+    accepted_answer_elements: [public interface, full and empty behavior, capacity invariant, ordering policy, no internal exposure, boundary tests]
+    rubric: [{criterion: contract, points: 3}, {criterion: invariants, points: 3}, {criterion: representation_independence, points: 2}, {criterion: tests, points: 2}]
+  - id: dm857.m11.a02
+    activity_type: implementation_review
+    difficulty: advanced
+    prompt: {es: Revisa una cola basada en lista con pop(0), una basada en dos pilas y una basada en deque. Compara contrato, complejidad y riesgo de errores sin asumir que una única representación es siempre mejor., en: Review queues based on list pop(0), two stacks, and deque. Compare contract, complexity, and error risk without assuming one representation is always best., da: Gennemgå køer baseret på list pop(0), to stakke og deque og sammenlign kontrakt, kompleksitet og fejlrisiko.}
+    accepted_answer_elements: [same FIFO semantics, complexity per operation, amortized reasoning for two stacks, simplicity tradeoff, suitable tests]
+    rubric: [{criterion: semantic_equivalence, points: 2}, {criterion: complexity_analysis, points: 4}, {criterion: tradeoff_reasoning, points: 2}, {criterion: tests, points: 2}]
+  - id: dm857.m11.a03
+    activity_type: oral_explanation
+    difficulty: advanced
+    prompt: {es: Explica por qué probar atributos privados puede hacer frágil una suite incluso cuando la implementación sigue siendo correcta., en: Explain why testing private attributes may make a suite fragile even when implementation remains correct., da: Forklar hvorfor test af private attributter kan gøre en suite skrøbelig, selv når implementeringen er korrekt.}
+    accepted_answer_elements: [contract versus representation, legitimate internal replacement, observable behavior, examples of stable tests]
+    rubric: [{criterion: abstraction_reasoning, points: 4}, {criterion: example, points: 2}, {criterion: alternative_testing_strategy, points: 2}, {criterion: clarity, points: 2}]
+
+flashcards: {source_file: ../flashcards/dm857_m11_flashcards.yaml, expected_count: 24}
+
+glossary:
+  - {id: term.adt, term: {es: tipo abstracto de datos, en: abstract data type, da: abstrakt datatype}, definition: {es: Modelo definido por valores y operaciones observables., en: Model defined by valid values and observable operations., da: Model defineret af gyldige værdier og observerbare operationer.}}
+  - {id: term.interface, term: {es: interfaz, en: interface, da: interface}, definition: {es: Conjunto de operaciones disponibles para el cliente., en: Set of operations available to clients., da: Mængde operationer tilgængelige for klienten.}}
+  - {id: term.representation_invariant, term: {es: invariante de representación, en: representation invariant, da: repræsentationsinvariant}, definition: {es: Propiedad que el estado interno debe preservar., en: Property internal state must preserve., da: Egenskab som intern tilstand skal bevare.}}
+  - {id: term.stack, term: {es: pila, en: stack, da: stak}, definition: {es: ADT con política LIFO., en: ADT with LIFO policy., da: ADT med LIFO-politik.}}
+  - {id: term.queue, term: {es: cola, en: queue, da: kø}, definition: {es: ADT con política FIFO., en: ADT with FIFO policy., da: ADT med FIFO-politik.}}
+  - {id: term.priority_queue, term: {es: cola de prioridad, en: priority queue, da: prioritetskø}, definition: {es: ADT que extrae según prioridad., en: ADT removing items according to priority., da: ADT der fjerner elementer efter prioritet.}}
+  - {id: term.heap, term: {es: montículo, en: heap, da: heap}, definition: {es: Estructura que mantiene una propiedad parcial de prioridad., en: Structure maintaining a partial priority property., da: Struktur der bevarer en delvis prioritetsegenskab.}}
+  - {id: term.encapsulation, term: {es: encapsulación, en: encapsulation, da: indkapsling}, definition: {es: Restricción del acceso directo al estado interno., en: Restriction of direct access to internal state., da: Begrænsning af direkte adgang til intern tilstand.}}
+  - {id: term.substitutability, term: {es: sustituibilidad, en: substitutability, da: udskiftelighed}, definition: {es: Capacidad de reemplazar una implementación sin cambiar comportamiento cliente válido., en: Ability to replace an implementation without changing valid client behavior., da: Evne til at erstatte en implementering uden at ændre gyldig klientadfærd.}}
+
+hidden_guided_support:
+  visibility: hidden_from_standard_reader
+  canonical_explanation:
+    es: >-
+      El tutor debe separar siempre qué promete la abstracción de cómo está implementada. Antes de
+      discutir código debe pedir operaciones, política de errores, invariantes y complejidad relevante.
+      Una solución no es correcta sólo porque produce algunos valores; debe conservar comportamiento
+      bajo secuencias de operaciones y permitir sustitución sin que el cliente conozca la representación.
+    en: >-
+      Always separate what the abstraction promises from how it is implemented. Before code, require
+      operations, error policy, invariants, and relevant complexity. Correctness must hold across operation
+      sequences and allow substitution without exposing representation.
+    da: >-
+      Adskil altid abstraktionens løfter fra implementeringen. Kræv operationer, fejlpolitik, invarianter
+      og relevant kompleksitet før kode.
+  misconceptions:
+    - {id: m11.mc01, claim: {es: Un ADT es una clase concreta., en: An ADT is one concrete class., da: Et ADT er én konkret klasse.}, correction: {es: Es una especificación abstracta que puede tener varias implementaciones., en: It is an abstract specification with potentially many implementations., da: Det er en abstrakt specifikation med mulige flere implementeringer.}}
+    - {id: m11.mc02, claim: {es: Un heap está completamente ordenado., en: A heap is fully sorted., da: En heap er fuldt sorteret.}, correction: {es: Sólo mantiene una propiedad parcial suficiente para acceder al extremo de prioridad., en: It maintains only a partial property sufficient for priority access., da: Den bevarer kun en delvis egenskab for prioritetsadgang.}}
+    - {id: m11.mc03, claim: {es: Probar atributos privados garantiza más calidad., en: Testing private attributes always improves quality., da: Test af private attributter forbedrer altid kvalitet.}, correction: {es: Puede acoplar las pruebas a detalles reemplazables y bloquear refactorizaciones correctas., en: It may couple tests to replaceable details and block correct refactoring., da: Det kan koble test til udskiftelige detaljer og blokere korrekt refaktorering.}}
+  socratic_questions:
+    - ¿Qué comportamiento debe observar el cliente y qué detalles deben permanecer ocultos?
+    - ¿Qué estados son válidos después de cada operación pública?
+    - ¿Qué política de extracción requiere el problema: LIFO, FIFO o prioridad?
+    - ¿Qué ocurre exactamente al operar sobre vacío o capacidad completa?
+    - ¿Cómo probarías dos implementaciones sin inspeccionar su representación?
+  grading_guidance:
+    do_not_accept: [interface without error policy, exposed mutable internals, claims based only on one happy-path sequence, complexity claims disconnected from representation]
+    strong_answer_features: [observable contract, checkable invariants, boundary behavior, substitutability tests, time and space tradeoffs]
+  retrieval_fragments:
+    - {id: m11.r01, topics: [adt, contract, representation], text: {es: Un ADT describe comportamiento; la representación es una decisión interna reemplazable., en: An ADT describes behavior; representation is an internal replaceable decision., da: Et ADT beskriver adfærd; repræsentationen er en intern udskiftelig beslutning.}}
+    - {id: m11.r02, topics: [stack, queue, priority], text: {es: Pila extrae lo más reciente, cola lo más antiguo y cola de prioridad el elemento extremo según una política explícita., en: A stack removes the newest, a queue the oldest, and a priority queue the extreme item under an explicit policy., da: En stak fjerner nyeste, en kø ældste og en prioritetskø efter eksplicit prioritet.}}
+
+sources:
+  - {id: source.official_dm857, role: curriculum_alignment, note: Official outcome on designing and implementing abstract data types.}
+  - {id: source.guttag_python_2021, role: conceptual_reference, note: Abstraction, classes, data structures, and complexity.}
+  - {id: source.think_python_2024, role: pedagogical_reference, note: Interfaces, classes, mutable state, and testing.}
+
+limitations:
+  - Concurrency, blocking queues, and thread safety are outside this module.
+  - Heap decrease-key and indexed priority queues are treated conceptually rather than fully implemented.
+  - Complexity guarantees refer to standard Python implementations and must not be generalized without assumptions.
