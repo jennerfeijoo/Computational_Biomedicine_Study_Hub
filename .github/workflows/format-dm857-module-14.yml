@@ -11,6 +11,8 @@ permissions:
 jobs:
   format:
     runs-on: ubuntu-latest
+    env:
+      QT_QPA_PLATFORM: offscreen
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -22,8 +24,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install Ruff
-        run: python -m pip install "ruff>=0.5,<1"
+      - name: Install tools and project
+        run: |
+          python -m pip install "ruff>=0.5,<1"
+          python -m pip install -e ".[dev]"
 
       - name: Format module 14 files
         run: |
@@ -40,3 +44,15 @@ jobs:
           git add src/computational_biomedicine_study_hub/content/dm857/__init__.py src/computational_biomedicine_study_hub/content/dm857/module_14_testing_debugging_quality.py tests/test_dm857_module_14_content.py tests/test_dm857_module_14_registration.py tests/test_dm857_module_catalog.py tests/test_module_bundles.py
           git commit -m "Format DM857 module 14"
           git push origin HEAD:agent/complete-dm857-module-14
+
+      - name: Capture targeted pytest diagnostics
+        continue-on-error: true
+        run: |
+          pytest tests/test_dm857_module_14_content.py tests/test_dm857_module_14_registration.py tests/test_dm857_module_catalog.py tests/test_module_bundles.py -vv > module14-pytest.log 2>&1
+
+      - name: Upload targeted diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dm857-module-14-pytest
+          path: module14-pytest.log
