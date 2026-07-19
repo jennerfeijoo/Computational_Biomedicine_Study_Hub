@@ -1,0 +1,883 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m03
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Diseño de bases de datos de biología de sistemas e interoperabilidad
+    en: Systems-biology database design and interoperable biological resources
+    da: Databasedesign til systembiologi og interoperable biologiske ressourcer
+  summary:
+    es: >-
+      Diseño de bases de datos para integrar genes, transcritos, proteínas, muestras, mediciones, interacciones,
+      rutas y procedencia. Cubre modelado conceptual, claves, cardinalidades, normalización, integridad referencial,
+      esquemas relacionales, grafos de propiedades, temporalidad, versionado, consultas, rendimiento,
+      interoperabilidad y validación de datos. La arquitectura se deriva de preguntas y contratos de uso.
+    en: >-
+      Database design for integrating genes, transcripts, proteins, samples, measurements, interactions,
+      pathways, and provenance. It covers conceptual modeling, keys, cardinalities, normalization, referential integrity,
+      relational schemas, property graphs, temporal data, versioning, queries, performance, interoperability,
+      and data validation. Architecture is derived from questions and use contracts.
+    da: >-
+      Databasedesign til integration af gener, transkripter, proteiner, prøver, målinger, interaktioner,
+      pathways og proveniens. Modulet dækker konceptuel modellering, nøgler, kardinaliteter, normalisering,
+      referentiel integritet, relationelle skemaer, property graphs, temporalitet, versionering, queries,
+      performance, interoperabilitet og datavalidering.
+  prerequisites: [dm847.m02, dm857.m07, dm857.m11]
+  official_learning_outcomes: [dm847.lo03]
+  estimated_study_hours: 20
+  difficulty: intermediate
+
+objectives:
+  - id: m03.o1
+    bloom_level: analyze
+    statement:
+      es: Traducir preguntas de biología de sistemas en entidades, atributos, relaciones y consultas verificables.
+      en: Translate systems-biology questions into entities, attributes, relations, and verifiable queries.
+      da: Oversætte systembiologiske spørgsmål til enheder, attributter, relationer og verificerbare queries.
+    evidence: query_driven_conceptual_model
+  - id: m03.o2
+    bloom_level: apply
+    statement:
+      es: Definir claves primarias, claves externas, unicidad y cardinalidades sin depender de etiquetas ambiguas.
+      en: Define primary keys, foreign keys, uniqueness, and cardinalities without relying on ambiguous labels.
+      da: Definere primærnøgler, fremmednøgler, entydighed og kardinaliteter uden tvetydige labels.
+    evidence: key_constraint_design
+  - id: m03.o3
+    bloom_level: analyze
+    statement:
+      es: Normalizar un esquema relacional y justificar desnormalización cuando exista una necesidad medida.
+      en: Normalize a relational schema and justify denormalization when a measured need exists.
+      da: Normalisere et relationelt skema og begrunde denormalisering ved et målt behov.
+    evidence: normalization_analysis
+  - id: m03.o4
+    bloom_level: evaluate
+    statement:
+      es: Comparar bases relacionales, grafos de propiedades y representaciones RDF según consultas, integridad y escala.
+      en: Compare relational databases, property graphs, and RDF representations by queries, integrity, and scale.
+      da: Sammenligne relationelle databaser, property graphs og RDF efter queries, integritet og skala.
+    evidence: architecture_selection_argument
+  - id: m03.o5
+    bloom_level: apply
+    statement:
+      es: Representar relaciones muchos-a-muchos, evidencia, dirección, contexto y confianza sin colapsar información.
+      en: Represent many-to-many relations, evidence, direction, context, and confidence without collapsing information.
+      da: Repræsentere mange-til-mange-relationer, evidens, retning, kontekst og confidence uden informationstab.
+    evidence: interaction_model_design
+  - id: m03.o6
+    bloom_level: apply
+    statement:
+      es: Modelar versiones, intervalos de validez, datos históricos y procedencia de cada transformación.
+      en: Model versions, validity intervals, historical data, and provenance for each transformation.
+      da: Modellere versioner, gyldighedsintervaller, historiske data og proveniens for hver transformation.
+    evidence: temporal_provenance_schema
+  - id: m03.o7
+    bloom_level: analyze
+    statement:
+      es: Diseñar índices y consultas a partir de patrones reales de acceso sin confundir índice con fuente de verdad.
+      en: Design indexes and queries from real access patterns without confusing an index with the source of truth.
+      da: Designe indeks og queries ud fra reelle adgangsmønstre uden at forveksle indeks med sandhedskilden.
+    evidence: query_and_index_plan
+  - id: m03.o8
+    bloom_level: evaluate
+    statement:
+      es: Validar integridad, interoperabilidad, calidad, privacidad y reproducibilidad de un recurso biológico.
+      en: Validate integrity, interoperability, quality, privacy, and reproducibility of a biological resource.
+      da: Validere integritet, interoperabilitet, kvalitet, privatliv og reproducerbarhed i en biologisk ressource.
+    evidence: database_quality_audit
+
+concepts:
+  - id: dm847.m03.c01
+    title:
+      es: Diseño dirigido por preguntas y contratos
+      en: Query- and contract-driven design
+      da: Query- og kontraktdrevet design
+    body:
+      es: >-
+        Una base de datos se diseña para responder preguntas y preservar invariantes, no para copiar el formato de un archivo.
+        Primero se definen usuarios, consultas, frecuencia, latencia, volumen, sensibilidad y nivel de consistencia. Después se
+        identifican entidades y relaciones. «Encontrar genes diferencialmente expresados en una ruta para una condición» requiere
+        muestra, condición, medición, contraste, gen, pertenencia a ruta y procedencia. Diseñar desde columnas disponibles suele
+        ocultar entidades y producir tablas difíciles de validar.
+      en: >-
+        A database is designed to answer questions and preserve invariants, not to copy a file format. First define users,
+        queries, frequency, latency, volume, sensitivity, and consistency requirements. Then identify entities and relations.
+        “Find differentially expressed genes in a pathway for a condition” requires sample, condition, measurement, contrast,
+        gene, pathway membership, and provenance. Designing from available columns often hides entities and impairs validation.
+      da: >-
+        En database designes til spørgsmål og invarianter, ikke til at kopiere et filformat. Definér først brugere,
+        queries, frekvens, latency, volumen, følsomhed og konsistens. Identificér derefter enheder og relationer.
+    key_points:
+      - {es: Las consultas previstas forman parte de los requisitos., en: Expected queries are part of requirements., da: Forventede queries er del af kravene.}
+      - {es: El esquema representa entidades, no la apariencia de un CSV., en: A schema represents entities, not a CSV's appearance., da: Et skema repræsenterer enheder, ikke udseendet af en CSV.}
+      - {es: Cada requisito debe corresponder a una prueba de aceptación., en: Each requirement should map to an acceptance test., da: Hvert krav bør matche en accepttest.}
+    linked_objectives: [m03.o1, m03.o8]
+
+  - id: dm847.m03.c02
+    title:
+      es: Entidades, atributos, claves y cardinalidades
+      en: Entities, attributes, keys, and cardinalities
+      da: Enheder, attributter, nøgler og kardinaliteter
+    body:
+      es: >-
+        Una entidad tiene identidad propia; un atributo describe una entidad. La clave primaria identifica una fila de manera
+        estable y una clave externa referencia otra entidad. Claves naturales pueden cambiar o ser largas; claves sustitutas
+        simplifican referencias, pero no eliminan restricciones de unicidad sobre identificadores del dominio. Las cardinalidades
+        uno-a-uno, uno-a-muchos y muchos-a-muchos deben corresponder a reglas biológicas y temporales. Un gen puede tener varios
+        transcritos, y una ruta contiene muchos genes mientras un gen puede pertenecer a muchas rutas.
+      en: >-
+        An entity has identity; an attribute describes it. A primary key stably identifies a row, and a foreign key references
+        another entity. Natural keys may change or be long; surrogate keys simplify references but do not remove uniqueness
+        constraints on domain identifiers. One-to-one, one-to-many, and many-to-many cardinalities should match biological and
+        temporal rules. A gene may have many transcripts, and pathways and genes are many-to-many.
+      da: >-
+        En enhed har identitet; en attribut beskriver den. En primærnøgle identificerer en række, og en fremmednøgle refererer
+        en anden enhed. Surrogatnøgler fjerner ikke behovet for unikhed på domæne-ID'er. Kardinaliteter skal matche biologiske regler.
+    key_points:
+      - {es: Una clave sustituta no resuelve duplicados semánticos., en: A surrogate key does not solve semantic duplicates., da: En surrogatnøgle løser ikke semantiske dubletter.}
+      - {es: Cardinalidad es una restricción del dominio, no sólo del diagrama., en: Cardinality is a domain constraint, not merely a diagram feature., da: Kardinalitet er en domænerestriktion, ikke blot et diagramtræk.}
+      - {es: Las claves externas hacen verificables las dependencias., en: Foreign keys make dependencies verifiable., da: Fremmednøgler gør afhængigheder verificerbare.}
+    linked_objectives: [m03.o1, m03.o2, m03.o5]
+
+  - id: dm847.m03.c03
+    title:
+      es: Normalización e integridad relacional
+      en: Normalization and relational integrity
+      da: Normalisering og relationel integritet
+    body:
+      es: >-
+        La normalización separa hechos para reducir redundancia y anomalías. En primera forma normal, cada campo contiene valores
+        atómicos según el modelo. Segunda y tercera forma normal eliminan dependencias parciales y transitivas respecto de claves.
+        Repetir nombre de gen y descripción en cada medición permite inconsistencias; debe almacenarse la identidad del gen una vez
+        y referenciarla. La integridad incluye `NOT NULL`, `UNIQUE`, `CHECK`, claves externas y transacciones. Normalizar no significa
+        fragmentar sin criterio; el objetivo es que cada tabla represente un tipo coherente de hecho.
+      en: >-
+        Normalization separates facts to reduce redundancy and anomalies. In first normal form, fields contain atomic values
+        under the model. Second and third normal forms remove partial and transitive dependencies on keys. Repeating gene name
+        and description in every measurement permits inconsistency; store gene identity once and reference it. Integrity includes
+        `NOT NULL`, `UNIQUE`, `CHECK`, foreign keys, and transactions. Normalization does not mean arbitrary fragmentation;
+        each table should represent a coherent fact type.
+      da: >-
+        Normalisering adskiller fakta for at reducere redundans og anomalier. Gentagelse af gennavn og beskrivelse i hver måling
+        giver inkonsistens; gem genet én gang og referér det. Integritet omfatter `NOT NULL`, `UNIQUE`, `CHECK`, fremmednøgler og transaktioner.
+    key_points:
+      - {es: Redundancia controlada no es igual a duplicación accidental., en: Controlled redundancy is not accidental duplication., da: Kontrolleret redundans er ikke utilsigtet duplikation.}
+      - {es: Restricciones previenen estados imposibles., en: Constraints prevent impossible states., da: Restriktioner forhindrer umulige tilstande.}
+      - {es: La desnormalización requiere una razón y mecanismo de sincronización., en: Denormalization requires a reason and synchronization mechanism., da: Denormalisering kræver en grund og synkroniseringsmekanisme.}
+    linked_objectives: [m03.o2, m03.o3, m03.o8]
+
+  - id: dm847.m03.c04
+    title:
+      es: Relaciones muchos-a-muchos y entidades asociativas
+      en: Many-to-many relations and associative entities
+      da: Mange-til-mange-relationer og associative enheder
+    body:
+      es: >-
+        Una relación muchos-a-muchos se representa en un esquema relacional mediante una tabla asociativa. Esta tabla puede ser
+        una entidad con atributos propios: una interacción proteína-proteína necesita dirección cuando aplique, método, organismo,
+        tejido, publicación, evidencia, puntuación y versión. Guardar una lista de socios en una celda impide integridad, consulta y
+        procedencia granular. La clave puede combinar participantes y contexto, o usar una identidad propia con restricciones únicas.
+      en: >-
+        A many-to-many relation is represented in a relational schema through an associative table. This table may itself be an entity
+        with attributes: a protein-protein interaction may need direction, method, organism, tissue, publication, evidence, score, and version.
+        Storing a partner list in one cell prevents granular integrity, querying, and provenance. A key may combine participants and context
+        or use its own identity plus uniqueness constraints.
+      da: >-
+        En mange-til-mange-relation repræsenteres relationelt med en associativ tabel. Tabellen kan have egne attributter som retning,
+        metode, organisme, væv, publikation, evidens, score og version. En liste i én celle hindrer granular integritet og query.
+    key_points:
+      - {es: Una relación puede ser una entidad con identidad y evidencia propias., en: A relation may be an entity with its own identity and evidence., da: En relation kan være en enhed med egen identitet og evidens.}
+      - {es: El contexto evita fusionar observaciones incompatibles., en: Context prevents merging incompatible observations., da: Kontekst forhindrer fusion af inkompatible observationer.}
+      - {es: Dirección y simetría deben declararse., en: Direction and symmetry should be declared., da: Retning og symmetri bør deklareres.}
+    linked_objectives: [m03.o2, m03.o5, m03.o6]
+
+  - id: dm847.m03.c05
+    title:
+      es: Relacional, property graph y RDF
+      en: Relational, property graph, and RDF models
+      da: Relationelle modeller, property graphs og RDF
+    body:
+      es: >-
+        Una base relacional ofrece esquema, restricciones, transacciones y consultas tabulares potentes. Un property graph representa
+        nodos y aristas con propiedades y facilita recorridos de vecindad y caminos. RDF expresa triples con identificadores globales y
+        semántica web, útil para interoperabilidad y razonamiento, aunque requiere diseño cuidadoso de ontologías y consultas SPARQL.
+        Ningún modelo es universalmente superior. Puede mantenerse una fuente relacional normalizada y construir una proyección de grafo
+        derivada para análisis, siempre que procedencia y sincronización sean explícitas.
+      en: >-
+        A relational database offers schema, constraints, transactions, and powerful tabular queries. A property graph represents nodes
+        and edges with properties and facilitates neighborhood and path traversal. RDF expresses globally identified triples and web semantics,
+        supporting interoperability and reasoning, though ontology and SPARQL design require care. No model is universally superior.
+        A normalized relational source may feed a derived graph projection if provenance and synchronization are explicit.
+      da: >-
+        En relationel database giver skema, restriktioner, transaktioner og tabulære queries. En property graph bruger noder og kanter
+        med egenskaber og letter traversal. RDF bruger globalt identificerede triples og websemantik. Ingen model er universelt bedst.
+    key_points:
+      - {es: Selecciona por consultas, invariantes y operación., en: Select by queries, invariants, and operations., da: Vælg ud fra queries, invarianter og operationer.}
+      - {es: Una proyección de grafo puede ser derivada y reconstruible., en: A graph projection can be derived and rebuildable., da: En grafprojektion kan være afledt og genopbyggelig.}
+      - {es: Flexibilidad de esquema no elimina la necesidad de contratos., en: Schema flexibility does not remove the need for contracts., da: Skemafleksibilitet fjerner ikke behovet for kontrakter.}
+    linked_objectives: [m03.o4, m03.o7, m03.o8]
+
+  - id: dm847.m03.c06
+    title:
+      es: Temporalidad, versiones y datos históricos
+      en: Temporality, versions, and historical data
+      da: Temporalitet, versioner og historiske data
+    body:
+      es: >-
+        Los recursos biológicos cambian: anotaciones se revisan, términos se deprecian y relaciones adquieren nueva evidencia. Sobrescribir
+        filas destruye la capacidad de reproducir análisis previos. Un modelo temporal puede registrar `valid_from`, `valid_to`, versión de fuente,
+        fecha de ingesta y estado. Debe distinguir tiempo válido en el dominio de tiempo de transacción en la base. Los snapshots facilitan
+        reproducibilidad, mientras tablas de historia permiten comparar cambios y explicar por qué un resultado difiere entre versiones.
+      en: >-
+        Biological resources change: annotations are revised, terms deprecated, and relations gain evidence. Overwriting rows destroys
+        the ability to reproduce earlier analyses. A temporal model may record `valid_from`, `valid_to`, source version, ingestion time, and status.
+        Domain-valid time should be distinguished from database transaction time. Snapshots aid reproducibility, while history tables explain changes.
+      da: >-
+        Biologiske ressourcer ændres. Overskrivning af rækker ødelægger muligheden for at reproducere tidligere analyser.
+        En temporal model kan gemme `valid_from`, `valid_to`, kildeversion, ingestionstid og status samt skelne valid time fra transaction time.
+    key_points:
+      - {es: No sobrescribas historia necesaria para reproducibilidad., en: Do not overwrite history needed for reproducibility., da: Overskriv ikke historik der kræves til reproducerbarhed.}
+      - {es: Tiempo de validez y tiempo de carga son distintos., en: Valid time and ingestion time are distinct., da: Gyldighedstid og ingestionstid er forskellige.}
+      - {es: Un snapshot debe tener identificador y manifiesto., en: A snapshot should have an identifier and manifest., da: Et snapshot bør have identifikator og manifest.}
+    linked_objectives: [m03.o6, m03.o8]
+
+  - id: dm847.m03.c07
+    title:
+      es: Consultas, índices y planes de ejecución
+      en: Queries, indexes, and execution plans
+      da: Queries, indeks og eksekveringsplaner
+    body:
+      es: >-
+        Un índice acelera acceso a costa de almacenamiento y mantenimiento. Debe corresponder a filtros, joins y ordenamientos frecuentes.
+        Indexar cada columna puede empeorar escrituras sin beneficiar consultas. Índices compuestos dependen del orden de columnas. El plan de
+        ejecución permite verificar escaneos, joins y estimaciones. El rendimiento se mide con consultas y volúmenes representativos. Un índice
+        es una estructura derivada; la tabla o grafo validado sigue siendo la fuente de verdad y el índice debe poder reconstruirse.
+      en: >-
+        An index accelerates access at the cost of storage and maintenance. It should match frequent filters, joins, and ordering.
+        Indexing every column may harm writes without helping queries. Composite indexes depend on column order. Execution plans reveal scans,
+        joins, and estimates. Performance should be measured on representative queries and volumes. An index is derived and rebuildable;
+        the validated table or graph remains the source of truth.
+      da: >-
+        Et indeks accelererer adgang men koster lagring og vedligeholdelse. Det bør matche hyppige filtre, joins og sortering.
+        Eksekveringsplaner viser scans og joins. Indekset er afledt og bør kunne genopbygges.
+    key_points:
+      - {es: Mide antes de añadir o eliminar índices., en: Measure before adding or removing indexes., da: Mål før indeks tilføjes eller fjernes.}
+      - {es: El orden de un índice compuesto importa., en: Composite-index order matters., da: Rækkefølgen i et sammensat indeks betyder noget.}
+      - {es: Optimización no debe cambiar la semántica de la consulta., en: Optimization must not change query semantics., da: Optimering må ikke ændre query-semantik.}
+    linked_objectives: [m03.o7]
+
+  - id: dm847.m03.c08
+    title:
+      es: Interoperabilidad, calidad y gobernanza
+      en: Interoperability, quality, and governance
+      da: Interoperabilitet, kvalitet og governance
+    body:
+      es: >-
+        Interoperabilidad requiere esquemas documentados, identificadores resolubles, unidades, vocabularios, formatos y políticas de versión.
+        Calidad incluye completitud, validez, consistencia, unicidad, actualidad y adecuación al uso. Las reglas deben ejecutarse durante ingesta
+        y publicación, con cuarentena para registros defectuosos. Datos humanos requieren minimización, separación de identificadores, control de
+        acceso y trazabilidad. Un recurso puede ser técnicamente correcto y aún ser científicamente inútil si carece de contexto o evidencia.
+      en: >-
+        Interoperability requires documented schemas, resolvable identifiers, units, vocabularies, formats, and version policies.
+        Quality includes completeness, validity, consistency, uniqueness, timeliness, and fitness for use. Rules should run during ingestion
+        and publication, with quarantine for defective records. Human data require minimization, identifier separation, access control, and audit.
+        A technically correct resource may still be scientifically useless without context or evidence.
+      da: >-
+        Interoperabilitet kræver dokumenterede skemaer, resolvable ID'er, enheder, vokabularer, formater og versionspolitikker.
+        Kvalitet omfatter komplethed, validitet, konsistens, entydighed, aktualitet og fitness-for-use. Menneskedata kræver adgangskontrol og audit.
+    key_points:
+      - {es: Calidad se evalúa respecto de un uso definido., en: Quality is evaluated relative to a defined use., da: Kvalitet vurderes i forhold til en defineret brug.}
+      - {es: Registros inválidos deben quedar visibles para auditoría., en: Invalid records should remain visible for audit., da: Ugyldige poster bør forblive synlige til audit.}
+      - {es: Privacidad y procedencia forman parte de la arquitectura., en: Privacy and provenance are architectural concerns., da: Privatliv og proveniens er arkitekturhensyn.}
+    linked_objectives: [m03.o6, m03.o8]
+
+worked_examples:
+  - id: dm847.m03.e01
+    title:
+      es: Normalizar una tabla de expresión plana
+      en: Normalize a flat expression table
+      da: Normalisér en flad ekspressionstabel
+    problem:
+      es: >-
+        Una tabla repite `sample_id`, diagnóstico, sexo, `gene_symbol`, descripción del gen, valor, unidad y método en cada fila.
+        Diseña un esquema normalizado.
+      en: >-
+        A table repeats `sample_id`, diagnosis, sex, `gene_symbol`, gene description, value, unit, and method in every row.
+        Design a normalized schema.
+      da: >-
+        En tabel gentager `sample_id`, diagnose, køn, `gene_symbol`, genbeskrivelse, værdi, enhed og metode i hver række.
+        Design et normaliseret skema.
+    reasoning:
+      es:
+        - Separar muestra y sus atributos estables.
+        - Separar gen con identificador estable y versión, no sólo símbolo.
+        - Representar ensayo o actividad de medición con método y versión.
+        - Crear medición que referencia muestra, gen y ensayo y contiene valor y unidad.
+      en:
+        - Separate sample and stable sample attributes.
+        - Separate gene using stable versioned identifier, not symbol alone.
+        - Represent assay or measurement activity with method and version.
+        - Create measurement referencing sample, gene, and assay and containing value and unit.
+      da:
+        - Adskil prøve og stabile prøveattributter.
+        - Adskil gen med stabilt versions-ID.
+        - Repræsentér assay eller måleaktivitet med metode/version.
+        - Opret måling med referencer til prøve, gen og assay samt værdi/enhed.
+    expected_schema:
+      - sample(sample_id, diagnosis_id, sex_code, ...)
+      - gene(gene_id, namespace, accession, version, symbol, description)
+      - assay(assay_id, method_id, software_version, parameters, ...)
+      - measurement(measurement_id, sample_id, gene_id, assay_id, value, unit_id)
+    explanation:
+      es: El esquema elimina repetición, preserva identidad y permite imponer claves externas y unidades válidas.
+      en: The schema removes repetition, preserves identity, and permits foreign-key and unit constraints.
+      da: Skemaet fjerner gentagelse, bevarer identitet og muliggør fremmednøgler og enhedsrestriktioner.
+    linked_objectives: [m03.o1, m03.o2, m03.o3]
+
+  - id: dm847.m03.e02
+    title:
+      es: Modelar una interacción con evidencia contextual
+      en: Model an interaction with contextual evidence
+      da: Modellér en interaktion med kontekstuel evidens
+    problem:
+      es: >-
+        Una base guarda pares proteína A–B pero pierde método, organismo y publicación. Rediseña la relación.
+      en: >-
+        A database stores protein A–B pairs but loses method, organism, and publication. Redesign the relation.
+      da: >-
+        En database gemmer protein A–B-par men mister metode, organisme og publikation. Redesign relationen.
+    reasoning:
+      es:
+        - Tratar la observación de interacción como entidad.
+        - Referenciar participantes versionados y declarar si el orden es relevante.
+        - Añadir método, sistema biológico, tejido/célula, condición, publicación y código de evidencia.
+        - Separar observación primaria de interacción consolidada o inferida.
+      en:
+        - Treat the interaction observation as an entity.
+        - Reference versioned participants and declare whether order matters.
+        - Add method, biological system, tissue/cell, condition, publication, and evidence code.
+        - Separate primary observation from consolidated or inferred interaction.
+      da:
+        - Behandl interaktionsobservationen som en enhed.
+        - Referér versionsdeltagere og deklarér retning.
+        - Tilføj metode, biologisk system, væv/celle, betingelse, publikation og evidenskode.
+        - Adskil primær observation fra konsolideret interaktion.
+    expected_answer:
+      es: Una tabla `interaction_observation` enlaza participantes, contexto, actividad experimental, evidencia y procedencia.
+      en: An `interaction_observation` table links participants, context, experimental activity, evidence, and provenance.
+      da: En `interaction_observation`-tabel forbinder deltagere, kontekst, eksperimentel aktivitet, evidens og proveniens.
+    linked_objectives: [m03.o2, m03.o5, m03.o6]
+
+  - id: dm847.m03.e03
+    title:
+      es: Elegir entre esquema relacional y proyección de grafo
+      en: Choose between a relational schema and graph projection
+      da: Vælg mellem relationelt skema og grafprojektion
+    problem:
+      es: >-
+        Un recurso necesita ingesta transaccional validada y también recorridos de hasta cuatro pasos entre genes, proteínas y rutas.
+        Propón una arquitectura.
+      en: >-
+        A resource needs validated transactional ingestion and also traversals up to four steps among genes, proteins, and pathways.
+        Propose an architecture.
+      da: >-
+        En ressource kræver valideret transaktionel ingestion og traversal op til fire trin mellem gener, proteiner og pathways.
+        Foreslå en arkitektur.
+    reasoning:
+      es:
+        - Usar modelo relacional normalizado para identidad, restricciones, ingesta y procedencia.
+        - Construir una proyección de grafo derivada con nodos y relaciones necesarios para recorridos.
+        - Versionar la proyección y enlazar cada arista con registros de origen.
+        - Medir si las consultas justifican duplicación y mantenimiento.
+      en:
+        - Use a normalized relational model for identity, constraints, ingestion, and provenance.
+        - Build a derived graph projection for traversal queries.
+        - Version the projection and link every edge to source records.
+        - Measure whether query needs justify duplication and maintenance.
+      da:
+        - Brug en normaliseret relationel model til identitet, restriktioner, ingestion og proveniens.
+        - Byg en afledt grafprojektion til traversal.
+        - Versionér projektionen og link kanter til kildeposter.
+        - Mål om queries retfærdiggør duplikation og vedligeholdelse.
+    expected_answer:
+      es: Arquitectura híbrida con fuente relacional y grafo derivado reconstruible.
+      en: A hybrid architecture with a relational source and rebuildable derived graph.
+      da: En hybrid arkitektur med relationel kilde og genopbyggelig afledt graf.
+    linked_objectives: [m03.o4, m03.o6, m03.o7]
+
+practice_exercises:
+  - id: dm847.m03.p01
+    activity_type: conceptual_modeling
+    difficulty: foundational
+    prompt:
+      es: Identifica entidades y relaciones para «muestras de pacientes se analizan con ensayos que producen mediciones de genes».
+      en: Identify entities and relations for “patient samples are analyzed by assays producing gene measurements.”
+      da: Identificér enheder og relationer for “patientprøver analyseres med assays der producerer genmålinger.”
+    reference_solution:
+      es: Paciente, muestra, ensayo/actividad, gen y medición; muestra collected-from paciente; medición generated-by ensayo, measured-in muestra y about gen.
+      en: Patient, sample, assay/activity, gene, and measurement; sample collected-from patient; measurement generated-by assay, measured-in sample, and about gene.
+      da: Patient, prøve, assay/aktivitet, gen og måling; prøve collected-from patient; måling generated-by assay, measured-in prøve og about gen.
+    linked_objectives: [m03.o1, m03.o5]
+
+  - id: dm847.m03.p02
+    activity_type: key_design
+    difficulty: intermediate
+    prompt:
+      es: Propón claves y restricciones para genes versionados procedentes de varios namespaces.
+      en: Propose keys and constraints for versioned genes from multiple namespaces.
+      da: Foreslå nøgler og restriktioner for versionsgener fra flere namespaces.
+    accepted_answer_elements:
+      - surrogate internal gene_record_id may be used
+      - unique constraint on namespace, accession, and version
+      - organism or taxon associated and validated
+      - symbol is not primary key
+      - deprecation and replacement relation modeled
+      - source release recorded
+    linked_objectives: [m03.o2, m03.o6]
+
+  - id: dm847.m03.p03
+    activity_type: normalization
+    difficulty: intermediate
+    prompt:
+      es: Corrige una tabla donde una celda `pathway_genes` contiene identificadores separados por comas.
+      en: Correct a table where one `pathway_genes` cell contains comma-separated identifiers.
+      da: Ret en tabel hvor én `pathway_genes`-celle indeholder komma-separerede ID'er.
+    reference_solution:
+      es: Crear `pathway`, `gene` y una tabla asociativa `pathway_gene(pathway_id, gene_id, source, evidence, version)`.
+      en: Create `pathway`, `gene`, and an associative `pathway_gene(pathway_id, gene_id, source, evidence, version)` table.
+      da: Opret `pathway`, `gene` og en associativ `pathway_gene(pathway_id, gene_id, source, evidence, version)`-tabel.
+    linked_objectives: [m03.o2, m03.o3, m03.o5]
+
+  - id: dm847.m03.p04
+    activity_type: architecture_selection
+    difficulty: intermediate
+    prompt:
+      es: Elige modelo principal para transacciones de muestras con restricciones fuertes y explica cuándo añadirías un grafo derivado.
+      en: Choose the primary model for sample transactions with strong constraints and explain when you would add a derived graph.
+      da: Vælg primær model til prøvetransaktioner med stærke restriktioner og forklar hvornår en afledt graf tilføjes.
+    reference_solution:
+      es: >-
+        Relacional para transacciones, integridad y auditoría. Añadir grafo derivado si recorridos de vecindad o caminos son frecuentes,
+        difíciles de expresar o lentos en SQL, y si existe un mecanismo reproducible de sincronización y procedencia.
+      en: >-
+        Relational for transactions, integrity, and audit. Add a derived graph when neighborhood/path traversals are frequent,
+        difficult, or slow in SQL and when reproducible synchronization and provenance exist.
+      da: >-
+        Relationel model til transaktioner, integritet og audit. Tilføj graf når traversal er hyppig eller vanskelig i SQL,
+        og når reproducerbar synkronisering og proveniens findes.
+    linked_objectives: [m03.o4, m03.o7]
+
+  - id: dm847.m03.p05
+    activity_type: temporal_modeling
+    difficulty: advanced
+    prompt:
+      es: Diseña cómo conservar una anotación que cambia de «candidate» a «validated» y luego se depreca.
+      en: Design how to preserve an annotation changing from “candidate” to “validated” and later becoming deprecated.
+      da: Design hvordan en annotation bevares når den går fra “candidate” til “validated” og senere deprecieres.
+    accepted_answer_elements:
+      - immutable annotation versions or history rows
+      - valid_from and valid_to or explicit release identifiers
+      - status field with controlled vocabulary
+      - provenance and evidence for each transition
+      - replacement identifier when deprecated
+      - queries can reconstruct state at a chosen date or release
+    linked_objectives: [m03.o6, m03.o8]
+
+  - id: dm847.m03.p06
+    activity_type: data_quality_audit
+    difficulty: advanced
+    prompt:
+      es: Diseña validaciones de ingesta para una tabla de mediciones ómicas.
+      en: Design ingestion validations for an omics-measurement table.
+      da: Design ingestionvalideringer for en omics-måletabel.
+    accepted_answer_elements:
+      - identifiers resolve in expected namespaces and releases
+      - sample and feature foreign keys exist
+      - value is numeric and finite where required
+      - unit or scale is declared
+      - duplicate key policy is explicit
+      - missingness is distinguished from zero
+      - assay and transformation provenance are present
+      - invalid records are quarantined with reasons
+    linked_objectives: [m03.o2, m03.o8]
+
+objective_question_bank:
+  - id: dm847.m03.q01
+    activity_type: multiple_choice
+    difficulty: foundational
+    prompt: {es: ¿Cuál debe ser el punto de partida del diseño?, en: What should begin database design?, da: Hvad bør starte databasedesign?}
+    options:
+      - id: questions_contracts
+        text: {es: Preguntas, usuarios, invariantes y contratos de uso., en: Questions, users, invariants, and use contracts., da: Spørgsmål, brugere, invarianter og brugskontrakter.}
+      - id: csv_columns
+        text: {es: Copiar directamente las columnas de un CSV., en: Directly copying CSV columns., da: Direkte kopiering af CSV-kolonner.}
+      - id: random_tables
+        text: {es: Crear tablas al azar., en: Creating random tables., da: Oprettelse af tilfældige tabeller.}
+    correct_option_ids: [questions_contracts]
+    explanation: {es: El esquema se deriva de entidades, consultas e invariantes, no del formato accidental de entrada., en: Schema derives from entities, queries, and invariants, not accidental input format., da: Skemaet afledes af enheder, queries og invarianter, ikke tilfældigt inputformat.}
+    linked_objectives: [m03.o1]
+
+  - id: dm847.m03.q02
+    activity_type: true_false
+    difficulty: foundational
+    prompt: {es: Una clave sustituta elimina la necesidad de una restricción única sobre la accesión versionada., en: A surrogate key removes the need for uniqueness on a versioned accession., da: En surrogatnøgle fjerner behovet for unikhed på en versionsaccession.}
+    correct_answer: false
+    explanation: {es: Sin unicidad del dominio pueden existir filas semánticamente duplicadas con claves internas distintas., en: Without domain uniqueness, semantically duplicate rows may have different internal keys., da: Uden domæneunikhed kan semantiske dubletter få forskellige interne nøgler.}
+    linked_objectives: [m03.o2]
+
+  - id: dm847.m03.q03
+    activity_type: multiple_choice
+    difficulty: foundational
+    prompt: {es: ¿Cómo se representa relacionalmente una relación muchos-a-muchos?, en: How is a many-to-many relation represented relationally?, da: Hvordan repræsenteres en mange-til-mange-relation relationelt?}
+    options:
+      - id: associative_table
+        text: {es: Con una tabla asociativa con claves externas y atributos de relación., en: With an associative table containing foreign keys and relation attributes., da: Med en associativ tabel med fremmednøgler og relationsattributter.}
+      - id: comma_cell
+        text: {es: Con una lista separada por comas en una celda., en: With a comma-separated list in one cell., da: Med en komma-separeret liste i én celle.}
+      - id: duplicate_columns
+        text: {es: Añadiendo columnas indefinidas para cada socio., en: By adding indefinite columns for each partner., da: Ved at tilføje udefinerede kolonner for hver partner.}
+    correct_option_ids: [associative_table]
+    explanation: {es: La tabla asociativa permite integridad, consulta y atributos como evidencia o versión., en: The associative table supports integrity, querying, and attributes such as evidence or version., da: Den associative tabel understøtter integritet, query og attributter som evidens og version.}
+    linked_objectives: [m03.o5]
+
+  - id: dm847.m03.q04
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt: {es: ¿Qué anomalía reduce la normalización?, en: Which anomaly does normalization reduce?, da: Hvilken anomali reducerer normalisering?}
+    options:
+      - id: inconsistent_updates
+        text: {es: Actualizaciones inconsistentes de un mismo hecho repetido., en: Inconsistent updates of one repeated fact., da: Inkonsistente opdateringer af samme gentagne fakta.}
+      - id: all_queries
+        text: {es: Elimina toda consulta compleja., en: It eliminates every complex query., da: Den eliminerer alle komplekse queries.}
+      - id: all_storage
+        text: {es: Elimina todo uso de almacenamiento., en: It eliminates all storage use., da: Den eliminerer al lagring.}
+    correct_option_ids: [inconsistent_updates]
+    explanation: {es: Separar hechos evita que una descripción se actualice en unas filas y no en otras., en: Separating facts prevents a description from being updated in some rows but not others., da: Adskillelse af fakta forhindrer at en beskrivelse opdateres i nogle rækker men ikke andre.}
+    linked_objectives: [m03.o3]
+
+  - id: dm847.m03.q05
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt: {es: ¿Cuándo es razonable desnormalizar?, en: When is denormalization reasonable?, da: Hvornår er denormalisering rimelig?}
+    options:
+      - id: measured_bottleneck
+        text: {es: Cuando un cuello medido justifica redundancia controlada y existe sincronización., en: When a measured bottleneck justifies controlled redundancy and synchronization exists., da: Når en målt flaskehals retfærdiggør kontrolleret redundans og synkronisering findes.}
+      - id: before_requirements
+        text: {es: Antes de conocer consultas o volumen., en: Before knowing queries or volume., da: Før queries eller volumen kendes.}
+      - id: to_hide_errors
+        text: {es: Para ocultar problemas de integridad., en: To hide integrity problems., da: For at skjule integritetsproblemer.}
+    correct_option_ids: [measured_bottleneck]
+    explanation: {es: Desnormalización es una optimización con costes de consistencia que deben controlarse., en: Denormalization is an optimization with consistency costs that must be controlled., da: Denormalisering er en optimering med konsistensomkostninger der skal kontrolleres.}
+    linked_objectives: [m03.o3, m03.o7]
+
+  - id: dm847.m03.q06
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt: {es: ¿Qué modelo suele favorecer transacciones e integridad estricta?, en: Which model commonly favors transactions and strict integrity?, da: Hvilken model favoriserer typisk transaktioner og streng integritet?}
+    options:
+      - id: relational
+        text: {es: Relacional., en: Relational., da: Relationel.}
+      - id: image
+        text: {es: Una imagen sin esquema., en: An image without schema., da: Et billede uden skema.}
+      - id: plain_text
+        text: {es: Texto libre no validado., en: Unvalidated free text., da: Uvalideret fritekst.}
+    correct_option_ids: [relational]
+    explanation: {es: Esquemas, claves, restricciones y transacciones son fortalezas clásicas del modelo relacional., en: Schemas, keys, constraints, and transactions are classic relational strengths., da: Skemaer, nøgler, restriktioner og transaktioner er klassiske relationelle styrker.}
+    linked_objectives: [m03.o4]
+
+  - id: dm847.m03.q07
+    activity_type: true_false
+    difficulty: intermediate
+    prompt: {es: Un grafo flexible puede prescindir de contratos y validación., en: A flexible graph can dispense with contracts and validation., da: En fleksibel graf kan undvære kontrakter og validering.}
+    correct_answer: false
+    explanation: {es: Flexibilidad sin tipos, restricciones y procedencia produce ambigüedad y relaciones incompatibles., en: Flexibility without types, constraints, and provenance produces ambiguity and incompatible relations., da: Fleksibilitet uden typer, restriktioner og proveniens giver tvetydighed og inkompatible relationer.}
+    linked_objectives: [m03.o4, m03.o8]
+
+  - id: dm847.m03.q08
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt: {es: ¿Por qué no debe sobrescribirse una anotación antigua?, en: Why should an old annotation not simply be overwritten?, da: Hvorfor bør en gammel annotation ikke blot overskrives?}
+    options:
+      - id: reproducibility_history
+        text: {es: Para reproducir análisis anteriores y explicar cambios entre versiones., en: To reproduce earlier analyses and explain changes between versions., da: For at reproducere tidligere analyser og forklare versionsændringer.}
+      - id: file_size_only
+        text: {es: Sólo porque aumenta el tamaño del archivo., en: Only because file size increases., da: Kun fordi filstørrelsen øges.}
+      - id: no_reason
+        text: {es: No existe ninguna razón., en: There is no reason., da: Der er ingen grund.}
+    correct_option_ids: [reproducibility_history]
+    explanation: {es: La historia permite reconstruir el estado de conocimiento utilizado en un análisis., en: History reconstructs the knowledge state used in an analysis., da: Historik rekonstruerer den videnstilstand som en analyse brugte.}
+    linked_objectives: [m03.o6]
+
+  - id: dm847.m03.q09
+    activity_type: multiple_choice
+    difficulty: advanced
+    prompt: {es: ¿Qué debe orientar la selección de un índice?, en: What should guide index selection?, da: Hvad bør styre valg af indeks?}
+    options:
+      - id: measured_queries
+        text: {es: Filtros, joins, ordenamientos y volúmenes representativos medidos., en: Measured representative filters, joins, ordering, and volumes., da: Målte repræsentative filtre, joins, sortering og volumener.}
+      - id: every_column
+        text: {es: Crear siempre un índice para cada columna., en: Always indexing every column., da: Altid indeksere hver kolonne.}
+      - id: column_color
+        text: {es: El color visual de la columna., en: The visual color of the column., da: Kolonnens visuelle farve.}
+    correct_option_ids: [measured_queries]
+    explanation: {es: Índices tienen costes y deben corresponder a patrones reales de acceso., en: Indexes have costs and should match real access patterns., da: Indeks har omkostninger og bør matche reelle adgangsmønstre.}
+    linked_objectives: [m03.o7]
+
+  - id: dm847.m03.q10
+    activity_type: true_false
+    difficulty: advanced
+    prompt: {es: Un recurso técnicamente válido puede ser científicamente no reutilizable si carece de contexto y procedencia., en: A technically valid resource may be scientifically non-reusable if it lacks context and provenance., da: En teknisk gyldig ressource kan være videnskabeligt ikke-genbrugelig uden kontekst og proveniens.}
+    correct_answer: true
+    explanation: {es: Sintaxis correcta no garantiza significado, adecuación al uso ni capacidad de interpretar resultados., en: Correct syntax does not guarantee meaning, fitness for use, or interpretability., da: Korrekt syntaks garanterer ikke betydning, fitness-for-use eller fortolkelighed.}
+    linked_objectives: [m03.o8]
+
+assessment_items:
+  - id: dm847.m03.a01
+    activity_type: database_schema_design
+    difficulty: intermediate
+    prompt:
+      es: >-
+        Diseña un esquema para pacientes, muestras, ensayos, genes, transcritos, mediciones y rutas.
+        Incluye claves, cardinalidades, tablas asociativas, restricciones y cinco consultas de aceptación.
+      en: >-
+        Design a schema for patients, samples, assays, genes, transcripts, measurements, and pathways.
+        Include keys, cardinalities, associative tables, constraints, and five acceptance queries.
+      da: >-
+        Design et skema for patienter, prøver, assays, gener, transkripter, målinger og pathways.
+        Medtag nøgler, kardinaliteter, associative tabeller, restriktioner og fem acceptqueries.
+    accepted_answer_elements:
+      - stable internal and domain identifiers
+      - patient-to-sample one-to-many with privacy-aware separation
+      - gene-to-transcript one-to-many with versioning
+      - sample-gene-assay measurement entity
+      - pathway-gene many-to-many associative entity with evidence
+      - foreign keys, uniqueness, checks, and missingness policy
+      - queries cover retrieval, aggregation, provenance, history, and invalid-state detection
+    rubric:
+      - {criterion: conceptual_model_and_cardinality, points: 3}
+      - {criterion: keys_and_integrity, points: 3}
+      - {criterion: evidence_version_and_provenance, points: 2}
+      - {criterion: acceptance_queries, points: 2}
+    linked_objectives: [m03.o1, m03.o2, m03.o3, m03.o5, m03.o6]
+
+  - id: dm847.m03.a02
+    activity_type: architecture_decision_record
+    difficulty: advanced
+    prompt:
+      es: >-
+        Compara una arquitectura relacional, una de property graph y una híbrida para un recurso de interacciones y rutas.
+        Emite una decisión con requisitos, alternativas, riesgos, métricas y estrategia de migración.
+      en: >-
+        Compare relational, property-graph, and hybrid architectures for an interaction and pathway resource.
+        Produce a decision with requirements, alternatives, risks, metrics, and migration strategy.
+      da: >-
+        Sammenlign relationel, property-graph og hybrid arkitektur for en interaktions- og pathwayressource.
+        Lav en beslutning med krav, alternativer, risici, metrikker og migrationsstrategi.
+    accepted_answer_elements:
+      - workload and integrity requirements stated first
+      - relational strengths in constraints and transactions
+      - graph strengths in traversal and path queries
+      - RDF considered when global semantics and interoperability matter
+      - hybrid duplication and synchronization costs acknowledged
+      - representative benchmark and correctness tests proposed
+      - rollback and provenance strategy included
+    rubric:
+      - {criterion: requirement_driven_comparison, points: 3}
+      - {criterion: technical_and_semantic_tradeoffs, points: 3}
+      - {criterion: measurement_plan, points: 2}
+      - {criterion: migration_and_risk_control, points: 2}
+    linked_objectives: [m03.o4, m03.o7, m03.o8]
+
+  - id: dm847.m03.a03
+    activity_type: database_audit
+    difficulty: advanced
+    prompt:
+      es: >-
+        Audita una base que usa símbolos como claves, sobrescribe anotaciones, almacena listas en celdas,
+        no conserva unidades y expone datos humanos sin trazabilidad. Prioriza correcciones y justifica el orden.
+      en: >-
+        Audit a database using symbols as keys, overwriting annotations, storing lists in cells,
+        omitting units, and exposing human data without audit trails. Prioritize corrections and justify the order.
+      da: >-
+        Auditér en database der bruger symboler som nøgler, overskriver annotationer, gemmer lister i celler,
+        mangler enheder og eksponerer menneskedata uden auditspor. Prioritér rettelser og begrund rækkefølgen.
+    accepted_answer_elements:
+      - immediately restrict and audit human-data access
+      - introduce stable namespaced versioned identifiers
+      - preserve history and provenance instead of overwriting
+      - normalize multivalued fields into associative tables
+      - require units and scale for measurements
+      - add validation, quarantine, migration tests, and rollback
+      - quantify downstream impact and communicate breaking changes
+    rubric:
+      - {criterion: risk_prioritization, points: 3}
+      - {criterion: semantic_and_integrity_corrections, points: 3}
+      - {criterion: migration_and_validation, points: 2}
+      - {criterion: governance_and_communication, points: 2}
+    linked_objectives: [m03.o2, m03.o3, m03.o6, m03.o8]
+
+flashcards:
+  source_file: ../flashcards/dm847_m03_flashcards.yaml
+  expected_count: 24
+
+glossary:
+  - id: term.primary_key
+    term: {es: clave primaria, en: primary key, da: primærnøgle}
+    definition: {es: Atributo o conjunto que identifica de manera única una fila., en: Attribute or set uniquely identifying a row., da: Attribut eller sæt der entydigt identificerer en række.}
+    related_terms: [term.foreign_key]
+  - id: term.foreign_key
+    term: {es: clave externa, en: foreign key, da: fremmednøgle}
+    definition: {es: Restricción que referencia una clave de otra tabla., en: Constraint referencing a key in another table., da: Restriktion der refererer en nøgle i en anden tabel.}
+    related_terms: [term.primary_key]
+  - id: term.cardinality
+    term: {es: cardinalidad, en: cardinality, da: kardinalitet}
+    definition: {es: Número permitido de entidades relacionadas en cada extremo de una relación., en: Allowed number of related entities at each relation end., da: Tilladt antal relaterede enheder i hver ende af en relation.}
+    related_terms: [term.associative_table]
+  - id: term.normalization
+    term: {es: normalización, en: normalization, da: normalisering}
+    definition: {es: Organización de hechos para reducir redundancia y anomalías., en: Organization of facts to reduce redundancy and anomalies., da: Organisering af fakta for at reducere redundans og anomalier.}
+    related_terms: [term.denormalization]
+  - id: term.denormalization
+    term: {es: desnormalización, en: denormalization, da: denormalisering}
+    definition: {es: Introducción deliberada de redundancia para un objetivo medido de rendimiento o acceso., en: Deliberate redundancy for a measured performance or access objective., da: Bevidst redundans til et målt performance- eller adgangsmål.}
+    related_terms: [term.normalization]
+  - id: term.associative_table
+    term: {es: tabla asociativa, en: associative table, da: associativ tabel}
+    definition: {es: Tabla que representa una relación muchos-a-muchos y sus atributos., en: Table representing a many-to-many relation and its attributes., da: Tabel der repræsenterer en mange-til-mange-relation og dens attributter.}
+    related_terms: [term.cardinality]
+  - id: term.property_graph
+    term: {es: grafo de propiedades, en: property graph, da: property graph}
+    definition: {es: Modelo de nodos y aristas que pueden contener propiedades., en: Model of nodes and edges that may carry properties., da: Model med noder og kanter der kan have egenskaber.}
+    related_terms: [term.rdf]
+  - id: term.rdf
+    term: {es: RDF, en: RDF, da: RDF}
+    definition: {es: Modelo de datos basado en triples sujeto-predicado-objeto con identificadores globales., en: Data model based on subject-predicate-object triples with global identifiers., da: Datamodel baseret på subjekt-prædikat-objekt-triples med globale ID'er.}
+    related_terms: [term.property_graph]
+  - id: term.valid_time
+    term: {es: tiempo válido, en: valid time, da: valid time}
+    definition: {es: Periodo durante el cual un hecho se considera verdadero en el dominio., en: Period during which a fact is considered true in the domain., da: Periode hvor et fakta anses som sandt i domænet.}
+    related_terms: [term.transaction_time]
+  - id: term.transaction_time
+    term: {es: tiempo de transacción, en: transaction time, da: transaction time}
+    definition: {es: Momento durante el cual un registro existe en la base de datos., en: Time during which a record exists in the database., da: Tid hvor en post eksisterer i databasen.}
+    related_terms: [term.valid_time]
+  - id: term.index
+    term: {es: índice de base de datos, en: database index, da: databaseindeks}
+    definition: {es: Estructura derivada que acelera determinados accesos a costa de almacenamiento y mantenimiento., en: Derived structure accelerating selected access at storage and maintenance cost., da: Afledt struktur der accelererer udvalgt adgang mod lagrings- og vedligeholdelsesomkostning.}
+    related_terms: [term.execution_plan]
+  - id: term.data_quality
+    term: {es: calidad de datos, en: data quality, da: datakvalitet}
+    definition: {es: Adecuación de datos a un uso respecto de validez, completitud, consistencia, unicidad y actualidad., en: Fitness of data for use regarding validity, completeness, consistency, uniqueness, and timeliness., da: Datas fitness-for-use med hensyn til validitet, komplethed, konsistens, entydighed og aktualitet.}
+    related_terms: [term.provenance]
+
+hidden_guided_support:
+  visibility: hidden_from_standard_reader
+  canonical_explanation:
+    es: >-
+      El diseño correcto separa identidad, hechos y observaciones. Una muestra no es una cadena de texto repetida en una tabla,
+      sino una entidad referenciada por mediciones. Una interacción no es sólo un par de IDs, sino una observación con contexto,
+      método y evidencia. La normalización conserva una fuente coherente; las proyecciones y los índices son estructuras derivadas
+      reconstruibles. La selección entre relacional, grafo y RDF depende de consultas, restricciones e interoperabilidad. Versiones,
+      historia y procedencia deben incorporarse desde el inicio porque no pueden recuperarse de forma fiable después de perderse.
+    en: >-
+      Correct design separates identity, facts, and observations. A sample is not repeated text in a table but an entity referenced by measurements.
+      An interaction is not merely an ID pair but an observation with context, method, and evidence. Normalization preserves a coherent source;
+      projections and indexes are rebuildable derived structures. Relational, graph, and RDF choices depend on queries, constraints, and interoperability.
+      Versions, history, and provenance belong in the initial design because they cannot be reliably reconstructed after loss.
+    da: >-
+      Korrekt design adskiller identitet, fakta og observationer. En prøve er en enhed refereret af målinger, og en interaktion er en observation
+      med kontekst, metode og evidens. Normalisering bevarer en konsistent kilde; projektioner og indeks er genopbyggelige afledte strukturer.
+  misconceptions:
+    - id: m03.mc01
+      claim: {es: El esquema debe copiar el CSV de entrada., en: The schema should copy the input CSV., da: Skemaet bør kopiere input-CSV'en.}
+      correction: {es: Debe representar entidades, relaciones, consultas e invariantes; el CSV es sólo una forma de intercambio., en: It should represent entities, relations, queries, and invariants; CSV is only an exchange form., da: Det bør repræsentere enheder, relationer, queries og invarianter; CSV er kun et udvekslingsformat.}
+    - id: m03.mc02
+      claim: {es: Una clave sustituta evita duplicados del dominio., en: A surrogate key prevents domain duplicates., da: En surrogatnøgle forhindrer domænedubletter.}
+      correction: {es: Se necesita además una restricción única sobre el identificador del dominio., en: A uniqueness constraint on the domain identifier is also required., da: En unikhedsrestriktion på domæne-ID er også nødvendig.}
+    - id: m03.mc03
+      claim: {es: Guardar listas en celdas simplifica relaciones muchos-a-muchos., en: Storing lists in cells simplifies many-to-many relations., da: Lister i celler forenkler mange-til-mange-relationer.}
+      correction: {es: Impide integridad, joins, procedencia y atributos por relación; debe usarse una tabla asociativa., en: It prevents integrity, joins, provenance, and relation attributes; use an associative table., da: Det hindrer integritet, joins, proveniens og relationsattributter; brug en associativ tabel.}
+    - id: m03.mc04
+      claim: {es: Un grafo no necesita esquema., en: A graph does not need a schema., da: En graf behøver ikke et skema.}
+      correction: {es: Aunque sea flexible, necesita tipos, restricciones, dirección, cardinalidad y procedencia., en: Even when flexible, it needs types, constraints, direction, cardinality, and provenance., da: Selv fleksible grafer kræver typer, restriktioner, retning, kardinalitet og proveniens.}
+    - id: m03.mc05
+      claim: {es: Sobrescribir anotaciones mantiene la base limpia., en: Overwriting annotations keeps the database clean., da: Overskrivning af annotationer holder databasen ren.}
+      correction: {es: Destruye historia y reproducibilidad; deben conservarse versiones o intervalos de validez., en: It destroys history and reproducibility; preserve versions or validity intervals., da: Det ødelægger historik og reproducerbarhed; bevar versioner eller gyldighedsintervaller.}
+    - id: m03.mc06
+      claim: {es: Más índices siempre significa más rendimiento., en: More indexes always mean better performance., da: Flere indeks betyder altid bedre performance.}
+      correction: {es: Índices consumen almacenamiento y ralentizan escrituras; deben justificarse con cargas medidas., en: Indexes consume storage and slow writes; measured workloads should justify them., da: Indeks bruger lagring og gør writes langsommere; målte workloads skal begrunde dem.}
+    - id: m03.mc07
+      claim: {es: Si los datos cumplen el esquema, su calidad científica está garantizada., en: Schema-valid data are scientifically guaranteed., da: Skemavalide data er videnskabeligt garanterede.}
+      correction: {es: Validez estructural no garantiza evidencia, contexto, actualidad ni adecuación al uso., en: Structural validity does not guarantee evidence, context, timeliness, or fitness for use., da: Strukturel validitet garanterer ikke evidens, kontekst, aktualitet eller fitness-for-use.}
+  socratic_questions:
+    - ¿Qué pregunta concreta debe responder esta relación?
+    - Which facts change independently and therefore belong in separate tables?
+    - Hvilken domæneunikhed mangler ud over den interne nøgle?
+    - ¿La relación tiene atributos, evidencia o tiempo propios?
+    - What state must be reconstructed for a previous database release?
+    - Hvilke queries og volumener retfærdiggør dette indeks?
+    - ¿Qué estructura es fuente de verdad y cuál es una proyección derivada?
+    - Which invalid states can constraints prevent before application code runs?
+  grading_criteria:
+    - derives schema from questions and biological entities
+    - uses stable identifiers, keys, cardinalities, and constraints correctly
+    - normalizes facts while recognizing justified derived projections
+    - preserves evidence, context, versions, history, and provenance
+    - compares architectures using measured workload and integrity needs
+    - includes migration, validation, privacy, and audit considerations
+  response_constraints:
+    - do not recommend symbols or labels as primary biological identifiers
+    - do not store multivalued relations as undocumented delimited strings
+    - do not overwrite history required for reproducibility
+    - do not propose denormalization without a measured requirement and synchronization plan
+    - do not reveal objective-answer keys during active assessment
+  retrieval_fragments:
+    - id: dm847.m03.h01
+      topic: query_driven_design
+      text: {es: El esquema se deriva de preguntas, entidades e invariantes, no del formato del archivo., en: Schema derives from questions, entities, and invariants, not file format., da: Skemaet afledes af spørgsmål, enheder og invarianter, ikke filformat.}
+    - id: dm847.m03.h02
+      topic: keys
+      text: {es: Clave sustituta y unicidad de dominio cumplen funciones distintas., en: Surrogate key and domain uniqueness serve different purposes., da: Surrogatnøgle og domæneunikhed har forskellige funktioner.}
+    - id: dm847.m03.h03
+      topic: normalization
+      text: {es: Normalizar separa hechos que cambian independientemente y reduce anomalías., en: Normalization separates independently changing facts and reduces anomalies., da: Normalisering adskiller uafhængigt ændrende fakta og reducerer anomalier.}
+    - id: dm847.m03.h04
+      topic: many_to_many
+      text: {es: Relaciones muchos-a-muchos se representan con entidades asociativas y atributos propios., en: Many-to-many relations use associative entities with their own attributes., da: Mange-til-mange-relationer bruger associative enheder med egne attributter.}
+    - id: dm847.m03.h05
+      topic: architecture
+      text: {es: Relacional prioriza restricciones y transacciones; grafos priorizan recorridos; RDF prioriza semántica global., en: Relational favors constraints and transactions; graphs favor traversal; RDF favors global semantics., da: Relationel favoriserer restriktioner/transaktioner; grafer traversal; RDF global semantik.}
+    - id: dm847.m03.h06
+      topic: temporal_data
+      text: {es: Versiones e intervalos de validez permiten reconstruir estados históricos., en: Versions and validity intervals reconstruct historical states., da: Versioner og gyldighedsintervaller rekonstruerer historiske tilstande.}
+    - id: dm847.m03.h07
+      topic: indexes
+      text: {es: Un índice es derivado, costoso de mantener y debe responder a consultas medidas., en: An index is derived, costly to maintain, and should answer measured queries., da: Et indeks er afledt, dyrt at vedligeholde og bør svare på målte queries.}
+    - id: dm847.m03.h08
+      topic: data_quality
+      text: {es: Calidad incluye validez, completitud, consistencia, unicidad, actualidad y adecuación al uso., en: Quality includes validity, completeness, consistency, uniqueness, timeliness, and fitness for use., da: Kvalitet omfatter validitet, komplethed, konsistens, entydighed, aktualitet og fitness-for-use.}
+    - id: dm847.m03.h09
+      topic: source_of_truth
+      text: {es: Proyecciones e índices deben poder reconstruirse desde una fuente validada y versionada., en: Projections and indexes should be rebuildable from a validated versioned source., da: Projektioner og indeks bør kunne genopbygges fra en valideret versionskilde.}
+    - id: dm847.m03.h10
+      topic: governance
+      text: {es: Privacidad, trazabilidad y control de acceso deben formar parte del esquema y operaciones., en: Privacy, auditability, and access control belong in schema and operations., da: Privatliv, audit og adgangskontrol hører til i skema og operationer.}
+
+sources:
+  - id: sdu.dm847.official.2025
+    role: official_systems_biology_database_outcome
+  - id: relational_database_design
+    role: entities_keys_normalization_integrity_and_transactions
+  - id: graph_data_modeling
+    role: property_graph_traversal_and_projection_design
+  - id: semantic_web_practice
+    role: rdf_global_identifiers_and_interoperability
+  - id: fair_guiding_principles
+    role: metadata_interoperability_reuse_and_governance
+
+limitations:
+  - SQL, SPARQL, and graph-query syntax are introduced in later implementation-oriented material rather than exhaustively here.
+  - Performance recommendations depend on database engine, hardware, data distribution, and workload and must be measured.
+  - Privacy and retention requirements depend on jurisdiction and institutional governance.
