@@ -1,0 +1,510 @@
+schema_version: 1.0.0
+course_code: BMB831
+assessment_id: bmb831.cumulative.01
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Evaluación acumulativa de BMB831: informe ómico individual
+    en: BMB831 cumulative assessment: individual omics report
+    da: BMB831 kumulativ evaluering: individuel omics-rapport
+  official_format_reference:
+    en: Mandatory tutorial participation and an individual report according to the active course description.
+  note:
+    es: >-
+      Los proyectos, rúbricas, checklists y preguntas de defensa incluidos aquí son materiales de preparación
+      académica. No sustituyen las instrucciones oficiales, el enunciado vigente, los criterios del examinador
+      ni los requisitos formales publicados por la asignatura.
+    en: >-
+      The projects, rubrics, checklists, and defense questions provided here are academic preparation materials.
+      They do not replace the official assignment, active examiner criteria, or formal course requirements.
+    da: >-
+      Projekter, rubrikker, checklister og forsvarsspørgsmål her er akademiske forberedelsesmaterialer og
+      erstatter ikke den officielle opgave eller gældende kursuskrav.
+  covered_modules:
+    - bmb831.m01
+    - bmb831.m02
+    - bmb831.m03
+    - bmb831.m04
+    - bmb831.m05
+    - bmb831.m06
+    - bmb831.m07
+    - bmb831.m08
+    - bmb831.m09
+    - bmb831.m10
+    - bmb831.m11
+    - bmb831.m12
+  covered_outcomes:
+    - bmb831.lo01
+    - bmb831.lo02
+    - bmb831.lo03
+    - bmb831.lo04
+    - bmb831.lo05
+    - bmb831.lo06
+    - bmb831.lo07
+
+report_requirements:
+  purpose:
+    es: Demostrar capacidad para convertir una pregunta biológica compleja en un análisis ómico reproducible, estadísticamente defendible e interpretado con límites adecuados.
+    en: Demonstrate the ability to turn a complex biological question into a reproducible, statistically defensible, appropriately limited omics analysis.
+    da: Demonstrere evnen til at omsætte et komplekst biologisk spørgsmål til en reproducerbar, statistisk forsvarlig og passende begrænset omics-analyse.
+  mandatory_components:
+    - id: question_estimand
+      description:
+        es: Pregunta, población, unidad independiente, contraste, outcome, tiempo, contexto y estimando.
+        en: Question, population, independent unit, contrast, outcome, time, context, and estimand.
+        da: Spørgsmål, population, uafhængig enhed, kontrast, outcome, tid, kontekst og estimand.
+    - id: data_provenance
+      description:
+        es: Fuente, versión, licencia, checksum, fechas, identificadores, anotaciones y criterios de elegibilidad.
+        en: Source, version, license, checksum, dates, identifiers, annotations, and eligibility criteria.
+        da: Kilde, version, licens, checksum, datoer, identifikatorer, annotationer og eligibility-kriterier.
+    - id: data_contract
+      description:
+        es: Entidades, claves, dimensiones, tipos, unidades, escalas, missingness, sample map y condiciones válidas.
+        en: Entities, keys, dimensions, types, units, scales, missingness, sample map, and validity conditions.
+        da: Enheder, nøgler, dimensioner, typer, enheder, skalaer, missingness, sample-map og gyldighedsbetingelser.
+    - id: quality_control
+      description:
+        es: QC específico del assay a nivel muestra, característica y matriz, con reglas y registro de exclusiones.
+        en: Assay-specific QC at sample, feature, and matrix levels, with exclusion rules and records.
+        da: Assay-specifik QC på sample-, feature- og matrixniveau med eksklusionsregler og registrering.
+    - id: preprocessing
+      description:
+        es: Filtrado, normalización, transformación, imputación o batch handling justificados por mecanismo y objetivo.
+        en: Filtering, normalization, transformation, imputation, or batch handling justified by mechanism and objective.
+        da: Filtrering, normalisering, transformation, imputation eller batch-håndtering begrundet af mekanisme og mål.
+    - id: statistical_model
+      description:
+        es: Modelo, matriz de diseño, contrastes, multiplicidad, diagnósticos y escala de efecto.
+        en: Model, design matrix, contrasts, multiplicity, diagnostics, and effect scale.
+        da: Model, designmatrix, kontraster, multiplicitet, diagnostik og effektskala.
+    - id: multivariate_or_predictive_component
+      description:
+        es: Cuando corresponda, reducción dimensional, clustering o predicción con validación y límites explícitos.
+        en: Where relevant, dimension reduction, clustering, or prediction with explicit validation and limitations.
+        da: Hvor relevant, dimensionsreduktion, clustering eller prædiktion med eksplicit validering og begrænsninger.
+    - id: functional_interpretation
+      description:
+        es: Anotación, universo, mapping, enriquecimiento o integración funcional con versiones y alcance prudente.
+        en: Annotation, universe, mapping, enrichment, or functional integration with versions and cautious scope.
+        da: Annotation, univers, mapping, enrichment eller funktionel integration med versioner og forsigtigt omfang.
+    - id: sensitivity_stability
+      description:
+        es: Alternativas plausibles para decisiones de alto impacto, estabilidad de resultados y consecuencias.
+        en: Plausible alternatives for high-impact decisions, result stability, and consequences.
+        da: Plausible alternativer for beslutninger med stor påvirkning, resultatstabilitet og konsekvenser.
+    - id: reproducibility
+      description:
+        es: Proyecto ejecutable desde una sesión limpia, con entorno, configuración, semillas, logs y productos regenerables.
+        en: Project executable from a clean session, with environment, configuration, seeds, logs, and regenerable products.
+        da: Projekt der kan køres fra en ren session med miljø, konfiguration, seeds, logs og regenererbare produkter.
+    - id: interpretation_limitations
+      description:
+        es: Separación de observación, inferencia, interpretación y mecanismo; limitaciones con consecuencias concretas.
+        en: Separation of observation, inference, interpretation, and mechanism; limitations with concrete consequences.
+        da: Adskillelse af observation, inferens, fortolkning og mekanisme; begrænsninger med konkrete konsekvenser.
+
+project_tracks:
+  - id: bmb831.track.bulk_transcriptomics
+    title:
+      es: Transcriptómica bulk y expresión diferencial
+      en: Bulk transcriptomics and differential expression
+      da: Bulk-transkriptomik og differential expression
+    core_question:
+      es: ¿Qué cambios de expresión están asociados con un contraste biológico después de controlar diseño y variación técnica?
+      en: Which expression changes are associated with a biological contrast after accounting for design and technical variation?
+      da: Hvilke ekspressionsændringer er associeret med en biologisk kontrast efter kontrol for design og teknisk variation?
+    required_elements:
+      - count and metadata validation
+      - sample and gene quality control
+      - filtering and normalization assumptions
+      - negative-binomial or justified alternative model
+      - identifiable design and explicit contrasts
+      - effect sizes, uncertainty, FDR, and shrinkage
+      - stable identifiers and versioned annotation
+      - functional interpretation with a valid universe
+    required_sensitivity:
+      - outlier inclusion or exclusion
+      - filtering threshold
+      - design covariates or batch adjustment
+      - normalization or effect-shrinkage choice
+    linked_modules: [bmb831.m01, bmb831.m02, bmb831.m03, bmb831.m04, bmb831.m07, bmb831.m08, bmb831.m10]
+  - id: bmb831.track.quantitative_proteomics
+    title:
+      es: Proteómica cuantitativa y abundancia diferencial
+      en: Quantitative proteomics and differential abundance
+      da: Kvantitativ proteomik og differential abundance
+    core_question:
+      es: ¿Qué proteínas o modificaciones muestran diferencias reproducibles bajo una cadena de identificación e inferencia explícita?
+      en: Which proteins or modifications show reproducible differences under an explicit identification and inference chain?
+      da: Hvilke proteiner eller modifikationer viser reproducerbare forskelle under en eksplicit identifikations- og inferenskæde?
+    required_elements:
+      - PSM, peptide, and protein-level evidence
+      - target-decoy and reported-level FDR
+      - shared-peptide and protein-group policy
+      - platform-specific LFQ or TMT quality control
+      - missingness mechanism and sensitivity
+      - normalization, pairing, batch, and differential model
+      - PTM localization or isoform limitations where relevant
+      - functional annotation with detectable-protein universe
+    required_sensitivity:
+      - imputation versus non-imputation
+      - shared-peptide policy
+      - normalization and batch handling
+      - protein-level aggregation method
+    linked_modules: [bmb831.m01, bmb831.m02, bmb831.m03, bmb831.m04, bmb831.m07, bmb831.m09, bmb831.m10]
+  - id: bmb831.track.multi_omics_integration
+    title:
+      es: Integración multi-ómica y valor incremental
+      en: Multi-omics integration and incremental value
+      da: Multi-omics-integration og inkrementel værdi
+    core_question:
+      es: ¿La integración de modalidades aporta estructura o rendimiento reproducible más allá de análisis unimodales?
+      en: Does integrating modalities provide reproducible structure or performance beyond unimodal analyses?
+      da: Giver integration af modaliteter reproducerbar struktur eller performance ud over unimodale analyser?
+    required_elements:
+      - verifiable sample map and assay availability
+      - scale and identifier harmonization
+      - justified early, intermediate, or late integration
+      - missing-modality strategy
+      - latent-factor or supervised-model interpretation
+      - leakage-resistant validation
+      - fair unimodal and simple-combination baselines
+      - stability, calibration, cost, and incremental value
+    required_sensitivity:
+      - complete-case population
+      - modality scaling or weighting
+      - number of factors or selected features
+      - alternative integration strategy
+    linked_modules: [bmb831.m05, bmb831.m06, bmb831.m07, bmb831.m08, bmb831.m09, bmb831.m10, bmb831.m11]
+  - id: bmb831.track.workflow_comparison
+    title:
+      es: Comparación crítica de dos pipelines ómicos
+      en: Critical comparison of two omics workflows
+      da: Kritisk sammenligning af to omics-workflows
+    core_question:
+      es: ¿Cómo cambian resultados, supuestos y afirmaciones cuando el mismo problema se analiza con dos workflows razonables?
+      en: How do results, assumptions, and claims change when the same problem is analyzed with two reasonable workflows?
+      da: Hvordan ændres resultater, antagelser og påstande når samme problem analyseres med to rimelige workflows?
+    required_elements:
+      - common biological question and estimand
+      - identical eligible dataset or explicit differences
+      - matched contrasts and output scales
+      - fair parameter and tuning budgets
+      - technical, statistical, and biological comparison
+      - overlap and discordance of selected features
+      - sensitivity and reproducibility audit
+      - explanation of which workflow is preferable for which purpose
+    required_sensitivity:
+      - preprocessing choice
+      - model family or regularization
+      - annotation database or universe
+      - exclusion and missingness policy
+    linked_modules: [bmb831.m01, bmb831.m02, bmb831.m03, bmb831.m04, bmb831.m06, bmb831.m10, bmb831.m12]
+
+report_structure:
+  recommended_sections:
+    - id: abstract
+      purpose: concise_question_methods_results_limits
+    - id: biological_context
+      purpose: question_estimand_and_prior_evidence
+    - id: data_and_design
+      purpose: provenance_units_eligibility_and_dependencies
+    - id: methods
+      purpose: qc_preprocessing_models_validation_and_software
+    - id: results
+      purpose: quality_primary_results_diagnostics_sensitivity_and_functional_context
+    - id: discussion
+      purpose: evidence_chain_alternatives_limitations_and_testable_hypotheses
+    - id: reproducibility_statement
+      purpose: inputs_environment_execution_and_artifact_locations
+  minimum_figures:
+    - study design or analytical workflow
+    - assay-specific quality-control overview
+    - sample-level structure with biological and technical metadata
+    - primary effect or predictive result with uncertainty
+    - diagnostic, validation, or sensitivity figure
+    - functional or integrative summary with appropriate caveats
+  minimum_tables:
+    - sample and eligibility flow table
+    - data dictionary or assay summary
+    - primary results with stable identifiers, effects, uncertainty, and multiplicity
+    - sensitivity and alternative-method summary
+  prohibited_shortcuts:
+    - presenting a significant feature list without design and QC evidence
+    - treating reads, cells, spectra, or peptides as independent biological replicates
+    - selecting preprocessing or model variants from final significance alone
+    - using test data for feature selection, tuning, or threshold choice
+    - reporting gene symbols as stable unique keys without mapping documentation
+    - treating pathway enrichment as proof of activation or mechanism
+    - hiding exclusions, failed mappings, missing modalities, or negative results
+    - copying protected figures, tables, exercises, or passages
+
+report_rubric:
+  total_points: 100
+  criteria:
+    - id: question_estimand_design
+      points: 12
+      excellent:
+        es: Pregunta verificable, estimando completo, unidad independiente correcta, diseño identificable y alcance explícito.
+        en: Verifiable question, complete estimand, correct independent unit, identifiable design, and explicit scope.
+        da: Verificerbart spørgsmål, komplet estimand, korrekt uafhængig enhed, identificerbart design og eksplicit omfang.
+    - id: data_provenance_contract
+      points: 10
+      excellent:
+        es: Fuentes, versiones, licencias, checksums, IDs, escalas, relaciones y elegibilidad totalmente trazables.
+        en: Fully traceable sources, versions, licenses, checksums, IDs, scales, relations, and eligibility.
+        da: Fuldt sporbare kilder, versioner, licenser, checksums, ID'er, skalaer, relationer og eligibility.
+    - id: quality_control
+      points: 10
+      excellent:
+        es: QC específico del assay, multiescala y conectado con decisiones, reglas y sensibilidad.
+        en: Assay-specific multiscale QC linked to decisions, rules, and sensitivity analysis.
+        da: Assay-specifik flerskala-QC forbundet med beslutninger, regler og følsomhedsanalyse.
+    - id: preprocessing
+      points: 10
+      excellent:
+        es: Filtrado, normalización, transformación, missingness y batch justificados por mecanismo y auditados.
+        en: Filtering, normalization, transformation, missingness, and batch handling justified by mechanism and audited.
+        da: Filtrering, normalisering, transformation, missingness og batch-håndtering begrundet af mekanisme og auditeret.
+    - id: statistical_modeling
+      points: 14
+      excellent:
+        es: Familia, link, diseño, contrastes, dependencia y multiplicidad alineados con el estimando y diagnosticados.
+        en: Family, link, design, contrasts, dependence, and multiplicity aligned with the estimand and diagnosed.
+        da: Familie, link, design, kontraster, afhængighed og multiplicitet tilpasset estimandet og diagnosticeret.
+    - id: multivariate_validation
+      points: 10
+      excellent:
+        es: Análisis multivariante o predictivo correctamente escalado, sin fuga, estable y validado frente a baselines.
+        en: Multivariate or predictive analysis correctly scaled, leakage-free, stable, and validated against baselines.
+        da: Multivariat eller prædiktiv analyse korrekt skaleret, uden leakage, stabil og valideret mod baselines.
+    - id: results_visualization
+      points: 10
+      excellent:
+        es: Figuras y tablas regenerables, honestas y suficientes para efecto, incertidumbre, n, escala y diagnóstico.
+        en: Regenerable, honest figures and tables sufficient for effect, uncertainty, n, scale, and diagnostics.
+        da: Regenererbare og ærlige figurer og tabeller tilstrækkelige for effekt, usikkerhed, n, skala og diagnostik.
+    - id: biological_interpretation
+      points: 10
+      excellent:
+        es: Mapping, universo, anotación y evidencia funcional versionados; observación e hipótesis claramente separadas.
+        en: Versioned mapping, universe, annotation, and functional evidence; observation and hypothesis clearly separated.
+        da: Versioneret mapping, univers, annotation og funktionel evidens; observation og hypotese klart adskilt.
+    - id: sensitivity_limitations
+      points: 8
+      excellent:
+        es: Decisiones críticas evaluadas mediante alternativas plausibles y limitaciones con consecuencias concretas.
+        en: Critical decisions evaluated through plausible alternatives and limitations with concrete consequences.
+        da: Kritiske beslutninger evalueret gennem plausible alternativer og begrænsninger med konkrete konsekvenser.
+    - id: reproducibility_communication
+      points: 6
+      excellent:
+        es: Ejecución limpia, entorno y productos trazables, redacción precisa, concisa y sin sobreafirmaciones.
+        en: Clean execution, traceable environment and products, precise concise writing without overclaims.
+        da: Ren kørsel, sporbart miljø og produkter, præcis kortfattet skrivning uden overpåstande.
+
+reproducibility_checklist:
+  inputs:
+    - raw inputs are immutable and checksummed
+    - source, license, version, and download date are recorded
+    - sample and feature identifiers have declared namespaces
+    - genome builds and annotation versions are recorded where relevant
+  project_structure:
+    - project uses relative paths or versioned configuration
+    - raw, derived, results, reports, and logs are separated
+    - functions and analysis orchestration are separated
+    - no hidden workspace objects are required
+  environment:
+    - R version and package versions are recorded
+    - external tools and databases are versioned
+    - seeds are recorded for stochastic steps
+    - system-specific dependencies are documented
+  execution:
+    - clean-session execution rebuilds all derived outputs
+    - intermediate invariants are checked
+    - failures and warnings are logged
+    - figures and tables are generated directly from analysis objects
+  audit:
+    - exclusions and mapping losses are counted
+    - preprocessing parameters are reported
+    - primary and sensitivity outputs are preserved
+    - final claims map to specific figures, tables, or estimates
+
+scientific_review_cases:
+  - id: bmb831.review.complete_confounding
+    stem:
+      es: Casos y controles fueron procesados en lotes completamente distintos; tras corrección, PCA los separa menos.
+      en: Cases and controls were processed in fully separate batches; after correction, PCA separates them less.
+      da: Cases og kontroller blev behandlet i helt separate batches; efter korrektion separerer PCA dem mindre.
+    expected_analysis:
+      - identify complete confounding and non-identifiability
+      - reject claims that correction recovers the biological effect
+      - explain that reduced PCA separation is not validation
+      - recommend redesign, crossed samples, or independent replication
+  - id: bmb831.review.global_feature_selection
+    stem:
+      es: Los 100 genes más asociados se seleccionaron con todo el dataset y después se evaluó el clasificador por CV.
+      en: The 100 most associated genes were selected on the full dataset and the classifier was then evaluated by CV.
+      da: De 100 mest associerede gener blev valgt på hele datasættet, hvorefter klassifikatoren blev evalueret med CV.
+    expected_analysis:
+      - identify feature-selection leakage
+      - repeat selection inside each training fold
+      - use grouped or nested resampling as required
+      - revise optimistic performance and signature-stability claims
+  - id: bmb831.review.proteomics_imputation
+    stem:
+      es: Todos los valores ausentes se imputaron con mínimos y se observó separación perfecta entre grupos.
+      en: All missing values were minimum-imputed and perfect group separation was observed.
+      da: Alle manglende værdier blev minimumimputeret og perfekt gruppeseparation blev observeret.
+    expected_analysis:
+      - inspect missingness by abundance, sample, group, and batch
+      - recognize possible imputation-induced separation
+      - compare non-imputed or model-based alternatives
+      - propagate missingness uncertainty and limit conclusions
+  - id: bmb831.review.enrichment_universe
+    stem:
+      es: Una vía es significativa sólo cuando se usa todo el genoma y no con las proteínas detectables.
+      en: A pathway is significant only when the whole genome is used, not the detectable proteins.
+      da: En pathway er kun signifikant når hele genomet bruges, ikke de detekterbare proteiner.
+    expected_analysis:
+      - prefer an eligible detectable universe for the proteomics question
+      - identify universe sensitivity and possible detectability bias
+      - report the result as fragile
+      - avoid pathway-activation claims
+  - id: bmb831.review.multiomics_complete_case
+    stem:
+      es: La integración multi-ómica excluye 40% de pacientes porque carecen de proteómica, principalmente los casos graves.
+      en: Multi-omics integration excludes 40% of patients lacking proteomics, mainly severe cases.
+      da: Multi-omics-integration ekskluderer 40% af patienter uden proteomik, primært alvorlige cases.
+    expected_analysis:
+      - identify selection and population shift
+      - compare included and excluded patients
+      - consider late integration or missing-modality methods
+      - redefine the estimand or restrict generalization
+  - id: bmb831.review.negative_result
+    stem:
+      es: Un efecto no significativo con IC amplio se describe como evidencia de que no existe diferencia.
+      en: A nonsignificant effect with a wide CI is described as evidence that no difference exists.
+      da: En ikke-signifikant effekt med bredt CI beskrives som evidens for at ingen forskel findes.
+    expected_analysis:
+      - distinguish absence of evidence from evidence of absence
+      - inspect biologically relevant effects within the interval
+      - define a relevance or equivalence margin
+      - report imprecision rather than absence
+
+review_and_defense_bank:
+  note:
+    es: Preguntas para autoevaluación, tutoría y preparación de revisión científica; no definen el formato oficial del examen.
+    en: Questions for self-assessment, tutoring, and scientific-review preparation; they do not define the official examination format.
+    da: Spørgsmål til selvevaluering, tutorial og videnskabelig review-forberedelse; de definerer ikke det officielle eksamensformat.
+  questions:
+    - id: bmb831.defense.q01
+      prompt:
+        es: Defina el estimando principal de su informe y explique por qué el modelo lo estima.
+        en: Define the primary estimand of your report and explain why the model estimates it.
+        da: Definér rapportens primære estimand og forklar hvorfor modellen estimerer det.
+      expected_elements: [population, unit, contrast, outcome, scale, model_link]
+    - id: bmb831.defense.q02
+      prompt:
+        es: ¿Cuál es la unidad independiente y qué observaciones no deben tratarse como réplicas?
+        en: What is the independent unit, and which observations should not be treated as replicates?
+        da: Hvad er den uafhængige enhed, og hvilke observationer bør ikke behandles som replikater?
+      expected_elements: [hierarchy, pseudoreplication, effective_n, analysis_consequence]
+    - id: bmb831.defense.q03
+      prompt:
+        es: ¿Qué evidencia llevó a excluir o conservar la muestra más extrema?
+        en: What evidence led you to exclude or retain the most extreme sample?
+        da: Hvilken evidens førte til at ekskludere eller bevare den mest ekstreme sample?
+      expected_elements: [multiple_qc_metrics, technical_cause, rule, sensitivity]
+    - id: bmb831.defense.q04
+      prompt:
+        es: ¿Qué supuesto central hace su normalización y cómo lo evaluó?
+        en: What central assumption does your normalization make, and how did you assess it?
+        da: Hvilken central antagelse gør normaliseringen, og hvordan blev den vurderet?
+      expected_elements: [reference_scale, composition, controls, alternative]
+    - id: bmb831.defense.q05
+      prompt:
+        es: ¿Qué información se perdería usando otro identificador o mapping?
+        en: What information would be lost under another identifier or mapping policy?
+        da: Hvilken information ville gå tabt med en anden identifikator- eller mappingpolitik?
+      expected_elements: [namespace, cardinality, no_matches, duplicates, downstream_bias]
+    - id: bmb831.defense.q06
+      prompt:
+        es: Explique la matriz de diseño y demuestre que el contraste es estimable.
+        en: Explain the design matrix and show that the contrast is estimable.
+        da: Forklar designmatrixen og vis at kontrasten er estimerbar.
+      expected_elements: [columns, reference, blocking, interaction, rank, contrast]
+    - id: bmb831.defense.q07
+      prompt:
+        es: ¿Cómo se interpretan efecto, intervalo y FDR conjuntamente?
+        en: How are effect, interval, and FDR interpreted jointly?
+        da: Hvordan fortolkes effekt, interval og FDR samlet?
+      expected_elements: [magnitude, precision, multiplicity, relevance, selection]
+    - id: bmb831.defense.q08
+      prompt:
+        es: ¿Qué parte del pipeline podría causar leakage y cómo se evitó?
+        en: Which pipeline component could cause leakage, and how was it prevented?
+        da: Hvilken pipeline-komponent kunne give leakage, og hvordan blev det forhindret?
+      expected_elements: [data_learned_steps, training_fold, nested_cv, grouped_split]
+    - id: bmb831.defense.q09
+      prompt:
+        es: ¿Qué demuestra y qué no demuestra la PCA o embedding principal?
+        en: What does the primary PCA or embedding demonstrate and not demonstrate?
+        da: Hvad demonstrerer og demonstrerer den primære PCA eller embedding ikke?
+      expected_elements: [representation, variance_or_neighborhood, technical_metadata, no_prediction_or_causality]
+    - id: bmb831.defense.q10
+      prompt:
+        es: ¿Por qué su universo de enriquecimiento es el adecuado?
+        en: Why is your enrichment universe appropriate?
+        da: Hvorfor er enrichment-universet passende?
+      expected_elements: [measurable_eligible, species_namespace, mapping, version, sensitivity]
+    - id: bmb831.defense.q11
+      prompt:
+        es: ¿Cuál es el miembro o leading edge que realmente impulsa la interpretación funcional?
+        en: Which member or leading edge actually drives the functional interpretation?
+        da: Hvilket medlem eller leading edge driver faktisk den funktionelle fortolkning?
+      expected_elements: [drivers, direction, effect, uncertainty, redundancy]
+    - id: bmb831.defense.q12
+      prompt:
+        es: ¿Qué baseline utilizó y qué valor incremental demostró el método avanzado?
+        en: Which baseline did you use, and what incremental value did the advanced method demonstrate?
+        da: Hvilken baseline brugte du, og hvilken inkrementel værdi demonstrerede den avancerede metode?
+      expected_elements: [fair_comparison, same_splits, performance, calibration, cost]
+    - id: bmb831.defense.q13
+      prompt:
+        es: ¿Qué decisión cambió más el resultado en sensibilidad?
+        en: Which decision changed the result most in sensitivity analysis?
+        da: Hvilken beslutning ændrede resultatet mest i følsomhedsanalysen?
+      expected_elements: [decision, alternatives, effect_on_claim, robustness, reporting]
+    - id: bmb831.defense.q14
+      prompt:
+        es: Señale el eslabón más débil de la cadena de evidencia.
+        en: Identify the weakest link in the evidence chain.
+        da: Identificér det svageste led i evidenskæden.
+      expected_elements: [measurement_or_design_or_model, consequence, uncertainty, corrective_evidence]
+    - id: bmb831.defense.q15
+      prompt:
+        es: ¿Qué experimento o dataset independiente pondría a prueba su hipótesis biológica?
+        en: What experiment or independent dataset would test your biological hypothesis?
+        da: Hvilket eksperiment eller uafhængigt datasæt ville teste den biologiske hypotese?
+      expected_elements: [falsifiable_prediction, independent_unit, measurement, expected_result, alternative]
+    - id: bmb831.defense.q16
+      prompt:
+        es: Reformule su conclusión principal sin exceder la evidencia.
+        en: Restate your primary conclusion without exceeding the evidence.
+        da: Omformulér hovedkonklusionen uden at overstige evidensen.
+      expected_elements: [population, association_or_prediction, effect, uncertainty, limitations, no_unjustified_causality]
+
+completion_criteria:
+  content_complete_when:
+    - all seven official learning outcomes are represented in the report plan and rubric
+    - all figures and tables are reproducibly generated
+    - all IDs, versions, mappings, exclusions, and assay scales are traceable
+    - the primary estimand has a corresponding model, contrast, result, and conclusion
+    - multiplicity and selection are explicitly addressed
+    - at least two high-impact analytical decisions receive sensitivity analysis
+    - conclusions distinguish observation, inference, interpretation, and mechanism
+    - no claim exceeds the validation population, measurement, or design
