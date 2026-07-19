@@ -1,0 +1,487 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m07
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm857.m07.f01
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué representa un diccionario en Python?
+      en: What does a Python dictionary represent?
+      da: Hvad repræsenterer en Python-ordbog?
+    back:
+      es: >-
+        Una colección mutable de asociaciones clave-valor. Cada clave es única, hashable y permite
+        recuperar, insertar o actualizar su valor asociado. Conviene usarla cuando los datos se consultan
+        por identidad o etiqueta y no por posición.
+      en: >-
+        A mutable collection of key-value mappings. Each key is unique and hashable and supports retrieval,
+        insertion, or update of its associated value. It is appropriate for lookup by identity or label.
+      da: >-
+        En muterbar samling af nøgle-værdi-relationer. Hver nøgle er unik og hashbar og bruges til opslag,
+        indsættelse eller opdatering af den tilknyttede værdi.
+    linked_objectives: [m07.o1, m07.o8]
+    tags: [dictionary, mapping]
+
+  - id: dm857.m07.f02
+    mode: conceptual
+    card_type: mechanism
+    difficulty: foundational
+    front:
+      es: ¿Por qué una lista no puede usarse como clave de diccionario?
+      en: Why can a list not be used as a dictionary key?
+      da: Hvorfor kan en liste ikke bruges som nøgle i en ordbog?
+    back:
+      es: >-
+        Porque es mutable y no es hashable. Una clave necesita un hash estable mientras permanece en el
+        diccionario; si su contenido pudiera cambiar, la estructura no podría localizarla de manera fiable.
+      en: >-
+        Because a list is mutable and unhashable. A key needs a stable hash while stored; changing its
+        contents would make reliable lookup impossible.
+      da: >-
+        Fordi en liste er muterbar og ikke hashbar. En nøgle kræver en stabil hash under lagring.
+    linked_objectives: [m07.o1]
+    tags: [hashability, keys]
+
+  - id: dm857.m07.f03
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: Compara `d[key]` y `d.get(key, default)`.
+      en: Compare `d[key]` and `d.get(key, default)`.
+      da: Sammenlign `d[key]` og `d.get(key, default)`.
+    back:
+      es: >-
+        `d[key]` exige que la clave exista y produce `KeyError` si falta. `get` retorna un valor alternativo
+        sin modificar el diccionario. El acceso estricto es adecuado cuando la ausencia indica un error;
+        el tolerante exige un contrato de ausencia no ambiguo.
+      en: >-
+        `d[key]` requires the key and raises `KeyError` when absent. `get` returns an alternative without
+        mutation. Strict access fits required data; tolerant access needs an unambiguous absence contract.
+      da: >-
+        `d[key]` kræver nøglen og giver `KeyError` ved fravær. `get` returnerer et alternativ uden mutation.
+    linked_objectives: [m07.o2]
+    tags: [access, missing-data]
+
+  - id: dm857.m07.f04
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: foundational
+    front:
+      es: Corrige la afirmación: «`key in d` busca `key` entre los valores».
+      en: Correct: “`key in d` searches among dictionary values.”
+      da: Ret udsagnet: “`key in d` søger blandt ordbogens værdier.”
+    back:
+      es: >-
+        `key in d` comprueba las claves. Para buscar entre valores se usaría `key in d.values()`, aunque una
+        búsqueda frecuente por valor suele indicar que el modelo necesita otro índice.
+      en: >-
+        `key in d` checks keys. Values can be checked with `key in d.values()`, although frequent value lookup
+        may indicate that another index is needed.
+      da: >-
+        `key in d` tester nøgler. Værdier kan testes med `key in d.values()`.
+    linked_objectives: [m07.o2, m07.o8]
+    tags: [membership, dictionary]
+
+  - id: dm857.m07.f05
+    mode: practical
+    card_type: code_tracing
+    difficulty: foundational
+    front:
+      es: ¿Cuál es el resultado de `d = {'a': 1}; d['b'] = 2; d['a'] += 3`?
+      en: What is the result of `d = {'a': 1}; d['b'] = 2; d['a'] += 3`?
+      da: Hvad er resultatet af `d = {'a': 1}; d['b'] = 2; d['a'] += 3`?
+    back:
+      es: >-
+        `{'a': 4, 'b': 2}`. La primera asignación a `b` inserta una entrada nueva; la operación sobre `a`
+        recupera el valor existente, suma 3 y lo reemplaza.
+      en: >-
+        `{'a': 4, 'b': 2}`. Assignment to `b` inserts; updating `a` retrieves 1, adds 3, and replaces it.
+      da: >-
+        `{'a': 4, 'b': 2}`. `b` indsættes, mens værdien for `a` opdateres.
+    linked_objectives: [m07.o1, m07.o2]
+    tags: [tracing, update]
+
+  - id: dm857.m07.f06
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front:
+      es: ¿En qué se diferencian `del d[key]`, `d.pop(key)` y `d.pop(key, default)`?
+      en: How do `del d[key]`, `d.pop(key)`, and `d.pop(key, default)` differ?
+      da: Hvordan adskiller `del d[key]`, `d.pop(key)` og `d.pop(key, default)` sig?
+    back:
+      es: >-
+        `del` elimina sin retornar y exige presencia. `pop(key)` elimina, retorna y exige presencia.
+        `pop(key, default)` retorna el valor eliminado o el predeterminado cuando la clave falta.
+      en: >-
+        `del` removes without returning and requires presence. `pop(key)` removes and returns and requires
+        presence. `pop(key, default)` returns the removed value or the default when absent.
+      da: >-
+        `del` fjerner uden returværdi. `pop` fjerner og returnerer; med default tolereres fravær.
+    linked_objectives: [m07.o2]
+    tags: [deletion, contracts]
+
+  - id: dm857.m07.f07
+    mode: conceptual
+    card_type: mechanism
+    difficulty: intermediate
+    front:
+      es: ¿Qué significa que `keys()`, `values()` e `items()` sean vistas dinámicas?
+      en: What does it mean that `keys()`, `values()`, and `items()` are dynamic views?
+      da: Hvad betyder det, at `keys()`, `values()` og `items()` er dynamiske views?
+    back:
+      es: >-
+        Reflejan cambios posteriores del diccionario en lugar de ser copias independientes. Son eficientes para
+        recorrer, pero modificar el tamaño del diccionario durante el recorrido directo es inseguro.
+      en: >-
+        They reflect later dictionary changes rather than being independent copies. They are efficient for
+        traversal, but changing dictionary size during direct traversal is unsafe.
+      da: >-
+        De afspejler senere ændringer i ordbogen. Det er usikkert at ændre størrelsen under direkte gennemløb.
+    linked_objectives: [m07.o3]
+    tags: [views, traversal]
+
+  - id: dm857.m07.f08
+    mode: practical
+    card_type: debugging
+    difficulty: intermediate
+    front:
+      es: ¿Cómo corriges un bucle que elimina claves dentro de `for key in d:`?
+      en: How do you fix a loop that deletes keys inside `for key in d:`?
+      da: Hvordan retter du en løkke, der sletter nøgler i `for key in d:`?
+    back:
+      es: >-
+        Recorre una copia fija, por ejemplo `for key in list(d):`, o construye un diccionario filtrado nuevo.
+        La primera opción muta el original; la segunda separa entrada y salida y suele ser más fácil de verificar.
+      en: >-
+        Traverse a fixed copy such as `for key in list(d):`, or build a new filtered dictionary. The first
+        mutates the original; the second separates input and output.
+      da: >-
+        Gennemløb en kopi som `list(d)`, eller byg en ny filtreret ordbog.
+    linked_objectives: [m07.o2, m07.o3, m07.o8]
+    tags: [debugging, mutation]
+
+  - id: dm857.m07.f09
+    mode: practical
+    card_type: pattern
+    difficulty: foundational
+    front:
+      es: ¿Cuál es el patrón básico para una tabla de frecuencias con diccionario?
+      en: What is the basic dictionary frequency-table pattern?
+      da: Hvad er det grundlæggende mønster for en frekvenstabel med ordbog?
+    back:
+      es: >-
+        Normalizar la categoría y ejecutar `counts[key] = counts.get(key, 0) + 1`. El valor inicial cero
+        representa que la categoría todavía no ha sido observada.
+      en: >-
+        Normalize the category, then run `counts[key] = counts.get(key, 0) + 1`. The zero default represents
+        no previous observations.
+      da: >-
+        Normalisér kategorien og brug `counts[key] = counts.get(key, 0) + 1`.
+    linked_objectives: [m07.o4]
+    tags: [frequency, aggregation]
+
+  - id: dm857.m07.f10
+    mode: conceptual
+    card_type: invariant
+    difficulty: intermediate
+    front:
+      es: ¿Qué invariante valida una tabla de frecuencias?
+      en: What invariant validates a frequency table?
+      da: Hvilken invariant validerer en frekvenstabel?
+    back:
+      es: >-
+        La suma de todos los conteos debe coincidir con el número de observaciones aceptadas. Si también
+        se registran rechazadas, aceptadas más rechazadas debe coincidir con el total de entradas.
+      en: >-
+        The sum of all counts must equal the number of accepted observations. If rejected records are tracked,
+        accepted plus rejected must equal total input.
+      da: >-
+        Summen af alle antal skal svare til accepterede observationer; accepterede plus afviste skal svare til inputtotalen.
+    linked_objectives: [m07.o4]
+    tags: [invariant, testing]
+
+  - id: dm857.m07.f11
+    mode: conceptual
+    card_type: reasoning
+    difficulty: intermediate
+    front:
+      es: ¿Por qué la normalización debe ocurrir antes de usar una etiqueta como clave?
+      en: Why should normalization happen before using a label as a key?
+      da: Hvorfor skal normalisering ske før en etiket bruges som nøgle?
+    back:
+      es: >-
+        Porque variantes equivalentes como espacios externos o diferencias de mayúsculas producirían claves
+        distintas y fragmentarían conteos o grupos. La regla de normalización debe estar justificada por el dominio.
+      en: >-
+        Equivalent variants would otherwise become different keys and fragment counts or groups. The normalization
+        rule must be justified by domain semantics.
+      da: >-
+        Ellers bliver ækvivalente varianter til forskellige nøgler og fragmenterer optællingen.
+    linked_objectives: [m07.o4, m07.o5]
+    tags: [normalization, keys]
+
+  - id: dm857.m07.f12
+    mode: practical
+    card_type: pipeline_design
+    difficulty: intermediate
+    front:
+      es: ¿Cómo agrupas registros por categoría conservando el orden dentro de cada grupo?
+      en: How do you group records by category while preserving within-group order?
+      da: Hvordan grupperer du poster efter kategori og bevarer rækkefølgen i hver gruppe?
+    back:
+      es: >-
+        Usa un diccionario cuyas claves sean categorías normalizadas y cuyos valores sean listas. Crea la lista
+        al encontrar una categoría nueva y añade cada registro en el orden de entrada.
+      en: >-
+        Use a dictionary mapping normalized categories to lists. Create the list for a new category and append
+        records in input order.
+      da: >-
+        Brug en ordbog fra normaliserede kategorier til lister, og tilføj poster i inputrækkefølge.
+    linked_objectives: [m07.o4, m07.o5]
+    tags: [grouping, lists]
+
+  - id: dm857.m07.f13
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué representa un conjunto en Python?
+      en: What does a Python set represent?
+      da: Hvad repræsenterer en Python-mængde?
+    back:
+      es: >-
+        Una colección mutable de elementos únicos y hashables. Representa pertenencia y unicidad, no posición,
+        frecuencia ni orden original.
+      en: >-
+        A mutable collection of unique hashable elements. It represents membership and uniqueness, not position,
+        frequency, or original order.
+      da: >-
+        En muterbar samling af unikke hashbare elementer. Den repræsenterer medlemskab og entydighed.
+    linked_objectives: [m07.o6, m07.o8]
+    tags: [set, uniqueness]
+
+  - id: dm857.m07.f14
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front:
+      es: Corrige: «Un conjunto es una lista más rápida».
+      en: Correct: “A set is just a faster list.”
+      da: Ret: “En mængde er bare en hurtigere liste.”
+    back:
+      es: >-
+        Cambiar a conjunto modifica el significado: elimina duplicados, no representa posiciones y no conserva
+        el orden original como evidencia. Solo es apropiado cuando la pregunta depende de pertenencia o unicidad.
+      en: >-
+        Switching to a set changes semantics: duplicates and positions are lost, and original order is not evidence.
+        It is appropriate only when the question depends on membership or uniqueness.
+      da: >-
+        En mængde ændrer semantikken ved at fjerne dubletter og positioner.
+    linked_objectives: [m07.o6, m07.o8]
+    tags: [set, information-loss]
+
+  - id: dm857.m07.f15
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: Compara `remove` y `discard` en conjuntos.
+      en: Compare `remove` and `discard` for sets.
+      da: Sammenlign `remove` og `discard` for mængder.
+    back:
+      es: >-
+        Ambos eliminan un elemento. `remove` produce `KeyError` si falta; `discard` no falla. La elección depende
+        de si la ausencia debe tratarse como violación del contrato o como caso esperado.
+      en: >-
+        Both remove an element. `remove` raises `KeyError` when absent; `discard` does not. Choice depends on the
+        absence contract.
+      da: >-
+        Begge fjerner et element. `remove` giver `KeyError` ved fravær; `discard` gør ikke.
+    linked_objectives: [m07.o6]
+    tags: [set-methods, contracts]
+
+  - id: dm857.m07.f16
+    mode: conceptual
+    card_type: method_mapping
+    difficulty: foundational
+    front:
+      es: Relaciona operaciones: unión, intersección, diferencia y diferencia simétrica.
+      en: Match union, intersection, difference, and symmetric difference to their meanings.
+      da: Knyt union, snit, differens og symmetrisk differens til deres betydning.
+    back:
+      es: >-
+        Unión: en al menos uno. Intersección: en ambos. Diferencia `A-B`: en A y no en B. Diferencia simétrica:
+        en exactamente uno de los dos.
+      en: >-
+        Union: in at least one. Intersection: in both. Difference `A-B`: in A and not B. Symmetric difference:
+        in exactly one of the two.
+      da: >-
+        Union: i mindst én. Snit: i begge. Differens `A-B`: i A og ikke B. Symmetrisk differens: i præcis én.
+    linked_objectives: [m07.o7]
+    tags: [set-algebra]
+
+  - id: dm857.m07.f17
+    mode: practical
+    card_type: code_tracing
+    difficulty: intermediate
+    front:
+      es: Para `A={1,2,3}` y `B={3,4}`, calcula `A&B`, `A-B` y `A^B`.
+      en: For `A={1,2,3}` and `B={3,4}`, compute `A&B`, `A-B`, and `A^B`.
+      da: For `A={1,2,3}` og `B={3,4}`, beregn `A&B`, `A-B` og `A^B`.
+    back:
+      es: >-
+        `A & B = {3}`, `A - B = {1, 2}` y `A ^ B = {1, 2, 4}`. La diferencia es direccional.
+      en: >-
+        `A & B = {3}`, `A - B = {1, 2}`, and `A ^ B = {1, 2, 4}`. Difference is directional.
+      da: >-
+        `A & B = {3}`, `A - B = {1, 2}` og `A ^ B = {1, 2, 4}`.
+    linked_objectives: [m07.o7]
+    tags: [tracing, set-algebra]
+
+  - id: dm857.m07.f18
+    mode: conceptual
+    card_type: invariant
+    difficulty: advanced
+    front:
+      es: ¿Qué relaciones deben cumplir «comunes», «solo A» y «solo B»?
+      en: What relationships should “common,” “A only,” and “B only” satisfy?
+      da: Hvilke relationer skal “fælles”, “kun A” og “kun B” opfylde?
+    back:
+      es: >-
+        Deben ser disjuntos por pares; su unión debe reconstruir `A | B`; comunes debe ser subconjunto de A y B;
+        solo A no debe intersectar B y solo B no debe intersectar A.
+      en: >-
+        They should be pairwise disjoint; their union reconstructs `A | B`; common is a subset of both;
+        A-only is disjoint from B and B-only from A.
+      da: >-
+        De skal være parvist disjunkte, og deres union skal rekonstruere `A | B`.
+    linked_objectives: [m07.o7]
+    tags: [invariant, set-testing]
+
+  - id: dm857.m07.f19
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front:
+      es: ¿Cuándo elegir lista, tupla, diccionario o conjunto?
+      en: When should you choose a list, tuple, dictionary, or set?
+      da: Hvornår vælger du liste, tuple, ordbog eller mængde?
+    back:
+      es: >-
+        Lista para orden, multiplicidad y mutación; tupla para un registro ordenado y estable; diccionario para
+        asociación por clave; conjunto para unicidad y pertenencia. La elección debe seguir el contrato del problema.
+      en: >-
+        List for order, multiplicity, and mutation; tuple for an ordered stable record; dictionary for key-based
+        association; set for uniqueness and membership.
+      da: >-
+        Liste til rækkefølge og multiplicitet; tuple til stabil post; ordbog til nøgleopslag; mængde til entydighed.
+    linked_objectives: [m07.o8]
+    tags: [structure-selection]
+
+  - id: dm857.m07.f20
+    mode: practical
+    card_type: method_selection
+    difficulty: intermediate
+    front:
+      es: ¿Qué estructura usarías para identificadores únicos con varias visitas cronológicas por persona?
+      en: What structure would you use for unique identifiers with multiple chronological visits per person?
+      da: Hvilken struktur bruges til unikke id'er med flere kronologiske besøg pr. person?
+    back:
+      es: >-
+        Un diccionario por identificador cuyos valores contengan listas de visitas. El diccionario resuelve identidad;
+        la lista conserva orden y multiplicidad. Un conjunto perdería visitas repetidas y cronología.
+      en: >-
+        A dictionary keyed by identifier whose values contain visit lists. The dictionary solves identity; the list
+        preserves order and multiplicity.
+      da: >-
+        En ordbog efter id med lister af besøg som værdier.
+    linked_objectives: [m07.o5, m07.o8]
+    tags: [nested-structures, design]
+
+  - id: dm857.m07.f21
+    mode: practical
+    card_type: validation
+    difficulty: intermediate
+    front:
+      es: ¿Qué debe validar un esquema para un diccionario anidado?
+      en: What should a schema validate for a nested dictionary?
+      da: Hvad skal et skema validere for en indlejret ordbog?
+    back:
+      es: >-
+        Claves obligatorias, tipos esperados, campos opcionales, dominios permitidos, estructura de colecciones internas,
+        política de valores ausentes o desconocidos y contexto para localizar errores.
+      en: >-
+        Required keys, expected types, optional fields, allowed domains, inner collection shape, missing/unknown-value
+        policy, and diagnostic context.
+      da: >-
+        Obligatoriske nøgler, typer, valgfrie felter, tilladte domæner, indre struktur og fraværspolitik.
+    linked_objectives: [m07.o5]
+    tags: [schema, validation]
+
+  - id: dm857.m07.f22
+    mode: practical
+    card_type: test_design
+    difficulty: advanced
+    front:
+      es: ¿Qué casos mínimos probarías para una función de agrupación?
+      en: What minimum cases would you test for a grouping function?
+      da: Hvilke minimumstilfælde tester du for en grupperingsfunktion?
+    back:
+      es: >-
+        Entrada vacía; una categoría; categorías repetidas; variantes que deben normalizarse juntas; etiqueta vacía o inválida;
+        valores inválidos; conservación del orden interno; y la invariante aceptadas más rechazadas igual al total.
+      en: >-
+        Empty input; one category; repeated categories; variants that normalize together; empty or invalid label;
+        invalid values; within-group order; and accepted-plus-rejected total invariant.
+      da: >-
+        Tomt input, én kategori, gentagelser, normaliseringsvarianter, ugyldige værdier, rækkefølge og totalinvariant.
+    linked_objectives: [m07.o4, m07.o5]
+    tags: [testing, grouping]
+
+  - id: dm857.m07.f23
+    mode: integrative
+    card_type: oral_defense
+    difficulty: advanced
+    front:
+      es: ¿Cómo defenderías que convertir una lista a conjunto es correcto en un análisis?
+      en: How would you defend converting a list to a set in an analysis?
+      da: Hvordan forsvarer du konvertering af en liste til en mængde i en analyse?
+    back:
+      es: >-
+        Debes demostrar que la pregunta depende solo de presencia o unicidad y que orden y multiplicidad no contienen
+        información necesaria. También debes documentar la pérdida y probar que el resultado responde al contrato.
+      en: >-
+        Show that the question depends only on presence or uniqueness and that order and multiplicity are not required.
+        Document the information loss and test the resulting contract.
+      da: >-
+        Vis at kun medlemskab eller entydighed er relevant, og dokumentér tabet af rækkefølge og multiplicitet.
+    linked_objectives: [m07.o6, m07.o8]
+    tags: [oral-defense, information-loss]
+
+  - id: dm857.m07.f24
+    mode: integrative
+    card_type: synthesis
+    difficulty: advanced
+    front:
+      es: Resume el criterio central para elegir una estructura de datos.
+      en: Summarize the central criterion for selecting a data structure.
+      da: Opsummér hovedkriteriet for valg af datastruktur.
+    back:
+      es: >-
+        Comenzar por la semántica: identidad, posición, orden, multiplicidad, mutabilidad, acceso y comparación requeridos.
+        Después elegir la estructura que preserve exactamente esa información con una interfaz clara y pruebas de invariantes.
+      en: >-
+        Begin with semantics: required identity, position, order, multiplicity, mutability, access, and comparison. Then
+        choose the structure that preserves exactly that information with a clear interface and invariant tests.
+      da: >-
+        Begynd med semantikken og vælg derefter den struktur, der bevarer præcis den nødvendige information.
+    linked_objectives: [m07.o8]
+    tags: [synthesis, design]
