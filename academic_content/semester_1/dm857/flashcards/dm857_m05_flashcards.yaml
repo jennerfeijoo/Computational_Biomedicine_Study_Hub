@@ -1,0 +1,471 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m05
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm857.m05.f01
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front: {es: ¿Qué es una cadena en Python?, en: What is a Python string?, da: Hvad er en streng i Python?}
+    back:
+      es: >-
+        Una secuencia ordenada e inmutable de caracteres Unicode. Admite longitud, índices, slices,
+        pertenencia e iteración. Las transformaciones crean otro objeto; no cambian caracteres en el mismo objeto.
+      en: >-
+        An ordered, immutable sequence of Unicode characters. It supports length, indexing, slicing,
+        membership, and iteration. Transformations create another object rather than modify characters in place.
+      da: >-
+        En ordnet, uforanderlig sekvens af Unicode-tegn. Den understøtter længde, indeks, slices,
+        medlemskab og iteration. Transformationer skaber et nyt objekt.
+    linked_objectives: [m05.o1]
+    linked_concepts: [string-sequence-immutability]
+    tags: [string, sequence, immutability]
+    reverse_allowed: true
+
+  - id: dm857.m05.f02
+    mode: conceptual
+    card_type: mechanism
+    difficulty: foundational
+    front: {es: ¿Por qué `text.upper()` puede no tener efecto visible?, en: Why may `text.upper()` appear to have no effect?, da: Hvorfor kan `text.upper()` se ud til ikke at have effekt?}
+    back:
+      es: >-
+        Porque retorna una cadena nueva y no muta `text`. Debe asignarse, retornarse o utilizarse directamente:
+        `text = text.upper()`. Ignorar el valor retornado descarta la transformación.
+      en: >-
+        Because it returns a new string and does not mutate `text`. The result must be assigned, returned,
+        or used directly, for example `text = text.upper()`.
+      da: >-
+        Fordi metoden returnerer en ny streng og ikke muterer `text`. Resultatet skal gemmes, returneres eller bruges direkte.
+    linked_objectives: [m05.o1, m05.o4]
+    linked_concepts: [string-sequence-immutability]
+    tags: [method, return_value, immutability]
+    reverse_allowed: false
+
+  - id: dm857.m05.f03
+    mode: practical
+    card_type: code_tracing
+    difficulty: foundational
+    front: {es: Para `text='ABCDE'`, ¿qué producen `text[-2]` y `text[1:4]`?, en: For `text='ABCDE'`, what do `text[-2]` and `text[1:4]` produce?, da: For `text='ABCDE'`, hvad giver `text[-2]` og `text[1:4]`?}
+    back:
+      es: >-
+        `text[-2]` produce `D`. `text[1:4]` produce `BCD`: incluye la posición 1 y excluye la 4.
+      en: >-
+        `text[-2]` produces `D`. `text[1:4]` produces `BCD`: it includes position 1 and excludes 4.
+      da: >-
+        `text[-2]` giver `D`. `text[1:4]` giver `BCD`: position 1 inkluderes og 4 udelukkes.
+    linked_objectives: [m05.o2]
+    linked_concepts: [indices-slices-boundaries]
+    tags: [index, slice, trace]
+    reverse_allowed: false
+
+  - id: dm857.m05.f04
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front: {es: ¿Cómo difieren un índice fuera de rango y un slice fuera de rango?, en: How do an out-of-range index and slice differ?, da: Hvordan adskiller ugyldigt indeks og ugyldigt slice sig?}
+    back:
+      es: >-
+        Un índice individual fuera de rango genera `IndexError`. Un slice ajusta sus límites al rango disponible
+        y puede producir una cadena vacía sin error. Esta diferencia debe incluirse en el diseño de pruebas.
+      en: >-
+        An out-of-range individual index raises `IndexError`. A slice clips its bounds to the available range
+        and may produce an empty string without error.
+      da: >-
+        Et enkelt ugyldigt indeks giver `IndexError`. Et slice beskærer grænserne og kan give tom streng uden fejl.
+    linked_objectives: [m05.o2, m05.o8]
+    linked_concepts: [indices-slices-boundaries]
+    tags: [boundary, IndexError, slice]
+    reverse_allowed: true
+
+  - id: dm857.m05.f05
+    mode: practical
+    card_type: code_tracing
+    difficulty: foundational
+    front: {es: ¿Qué produce `text[::-1]` y por qué?, en: What does `text[::-1]` produce and why?, da: Hvad giver `text[::-1]`, og hvorfor?}
+    back:
+      es: >-
+        Una cadena nueva con los caracteres en orden inverso. El paso `-1` recorre desde el final hacia el inicio.
+        No modifica la cadena original.
+      en: >-
+        A new string with characters in reverse order. Step `-1` traverses from the end toward the beginning.
+        The original string is unchanged.
+      da: >-
+        En ny streng med tegn i omvendt rækkefølge. Step `-1` gennemløber fra slutningen mod begyndelsen.
+    linked_objectives: [m05.o2, m05.o4]
+    linked_concepts: [indices-slices-boundaries, string-sequence-immutability]
+    tags: [slice, reverse, step]
+    reverse_allowed: false
+
+  - id: dm857.m05.f06
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: Compara `in`, `find` e `index` para búsqueda textual., en: Compare `in`, `find`, and `index` for text search., da: Sammenlign `in`, `find` og `index` til tekstsøgning.}
+    back:
+      es: >-
+        `pattern in text` retorna booleano. `text.find(pattern)` retorna la primera posición o `-1`.
+        `text.index(pattern)` retorna la posición o genera `ValueError`. La elección depende del contrato de ausencia.
+      en: >-
+        `pattern in text` returns a Boolean. `find` returns the first position or `-1`. `index` returns the
+        position or raises `ValueError`. Choice depends on the absence contract.
+      da: >-
+        `in` returnerer boolesk værdi. `find` returnerer position eller `-1`. `index` returnerer position eller rejser `ValueError`.
+    linked_objectives: [m05.o3]
+    linked_concepts: [traversal-search-count]
+    tags: [search, find, index]
+    reverse_allowed: true
+
+  - id: dm857.m05.f07
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front: {es: Corrige: “`str.count` cuenta todos los patrones, incluso los solapados”., en: Correct: “`str.count` counts all patterns, including overlapping ones.”, da: Ret: “`str.count` tæller alle mønstre, også overlappende.”}
+    back:
+      es: >-
+        `str.count` cuenta coincidencias no solapadas. En `BANANA`, `count('ANA')` produce 1, aunque existen
+        inicios en posiciones 1 y 3. Para solapamientos hay que examinar cada posición inicial posible.
+      en: >-
+        `str.count` counts non-overlapping occurrences. In `BANANA`, `count('ANA')` is 1 even though matches
+        start at positions 1 and 3. Overlapping search must examine every possible start.
+      da: >-
+        `str.count` tæller ikke-overlappende forekomster. Overlap kræver eksplicit søgning fra hver mulig startposition.
+    linked_objectives: [m05.o3]
+    linked_concepts: [traversal-search-count]
+    tags: [count, overlap, pattern]
+    reverse_allowed: false
+
+  - id: dm857.m05.f08
+    mode: practical
+    card_type: algorithm_design
+    difficulty: intermediate
+    front: {es: ¿Cómo contarías coincidencias solapadas de un patrón?, en: How would you count overlapping pattern matches?, da: Hvordan tælles overlappende mønstermatch?}
+    back:
+      es: >-
+        Recorre `i` desde 0 hasta `len(text)-len(pattern)` incluido y compara
+        `text[i:i+len(pattern)] == pattern`. Avanza una posición cada vez. Rechaza el patrón vacío o define su semántica.
+      en: >-
+        Iterate `i` from 0 through `len(text)-len(pattern)` and compare
+        `text[i:i+len(pattern)] == pattern`. Advance one position at a time. Reject or define empty-pattern semantics.
+      da: >-
+        Gennemløb hver mulig startposition og sammenlign et slice med mønsteret. Flyt én position ad gangen.
+    linked_objectives: [m05.o2, m05.o3]
+    linked_concepts: [traversal-search-count]
+    tags: [algorithm, overlap, slicing]
+    reverse_allowed: false
+
+  - id: dm857.m05.f09
+    mode: conceptual
+    card_type: definition
+    difficulty: intermediate
+    front: {es: ¿Qué significa normalizar texto?, en: What does text normalization mean?, da: Hvad betyder tekstnormalisering?}
+    back:
+      es: >-
+        Transformar representaciones que el contrato considera equivalentes hacia una forma canónica.
+        La regla puede tratar espacios, caja, signos o composición Unicode, pero debe conservar información relevante.
+      en: >-
+        Transforming representations considered equivalent by the contract into a canonical form. The rule may address
+        whitespace, case, punctuation, or Unicode composition, but must preserve relevant information.
+      da: >-
+        At transformere repræsentationer, som kontrakten anser for ækvivalente, til en kanonisk form uden at miste relevant information.
+    linked_objectives: [m05.o5, m05.o7]
+    linked_concepts: [normalization-purpose]
+    tags: [normalization, equivalence, canonical]
+    reverse_allowed: true
+
+  - id: dm857.m05.f10
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front: {es: Corrige: “Convertir todo a minúsculas siempre mejora la calidad”., en: Correct: “Lowercasing everything always improves quality.”, da: Ret: “At konvertere alt til små bogstaver forbedrer altid kvaliteten.”}
+    back:
+      es: >-
+        Solo es correcto cuando la caja es irrelevante según el propósito. Puede destruir información en identificadores,
+        códigos, nombres de genes o campos cuyo contrato diferencia mayúsculas y minúsculas. La regla debe documentarse.
+      en: >-
+        It is correct only when case is irrelevant by purpose. It can destroy information in identifiers, codes,
+        gene names, or any field whose contract distinguishes case.
+      da: >-
+        Det er kun korrekt når store/små bogstaver er irrelevante. Det kan ødelægge information i identifikatorer og koder.
+    linked_objectives: [m05.o5]
+    linked_concepts: [normalization-purpose]
+    tags: [case, information_loss, contract]
+    reverse_allowed: false
+
+  - id: dm857.m05.f11
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: ¿Cómo difieren `lower` y `casefold`?, en: How do `lower` and `casefold` differ?, da: Hvordan adskiller `lower` og `casefold` sig?}
+    back:
+      es: >-
+        Ambos producen otra cadena. `lower` aplica minúsculas convencionales; `casefold` es una transformación Unicode
+        más agresiva diseñada para comparaciones sin sensibilidad a caja. Ninguna sustituye normalización Unicode de composición.
+      en: >-
+        Both return a new string. `lower` applies conventional lowercase conversion; `casefold` is a more aggressive
+        Unicode transformation for caseless comparison. Neither replaces Unicode composition normalization.
+      da: >-
+        Begge returnerer en ny streng. `casefold` er mere omfattende til Unicode-sammenligning. Ingen af dem erstatter Unicode-kompositionsnormalisering.
+    linked_objectives: [m05.o4, m05.o7]
+    linked_concepts: [normalization-purpose, unicode-equivalence]
+    tags: [lower, casefold, unicode]
+    reverse_allowed: true
+
+  - id: dm857.m05.f12
+    mode: practical
+    card_type: text_transformation
+    difficulty: intermediate
+    front: {es: ¿Qué hace `"_".join(text.strip().split()).casefold()`?, en: What does `"_".join(text.strip().split()).casefold()` do?, da: Hvad gør `"_".join(text.strip().split()).casefold()`?}
+    back:
+      es: >-
+        Elimina espacios extremos, separa por secuencias de espacios, colapsa esas secuencias al unir con `_`
+        y aplica comparación sin sensibilidad a caja. Es adecuada solo si esas diferencias son irrelevantes por contrato.
+      en: >-
+        It strips surrounding whitespace, splits on whitespace runs, collapses them by joining with `_`, and applies
+        caseless normalization. It is appropriate only when those differences are irrelevant by contract.
+      da: >-
+        Den fjerner mellemrum i enderne, opdeler efter mellemrum, samler med `_` og anvender `casefold`.
+    linked_objectives: [m05.o4, m05.o5]
+    linked_concepts: [normalization-purpose, split-join-partition-parsing]
+    tags: [strip, split, join]
+    reverse_allowed: false
+
+  - id: dm857.m05.f13
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: Compara `split` y `partition` para un separador esperado una vez., en: Compare `split` and `partition` for a separator expected once., da: Sammenlign `split` og `partition` for en separator der forventes én gang.}
+    back:
+      es: >-
+        `split` produce una lista con cantidad variable de campos. `partition` siempre produce tres partes:
+        antes, separador encontrado y después; si no existe, la parte del separador queda vacía. `partition` facilita
+        distinguir ausencia cuando se espera una única frontera.
+      en: >-
+        `split` produces a variable-length list. `partition` always returns before, separator, and after; when absent,
+        the separator field is empty. `partition` is useful for one expected boundary.
+      da: >-
+        `split` giver et variabelt antal felter. `partition` returnerer altid før, separator og efter og gør fravær let at opdage.
+    linked_objectives: [m05.o6]
+    linked_concepts: [split-join-partition-parsing]
+    tags: [split, partition, parser]
+    reverse_allowed: true
+
+  - id: dm857.m05.f14
+    mode: practical
+    card_type: parser_design
+    difficulty: intermediate
+    front: {es: ¿Qué debe validarse antes de desempaquetar `a, b = text.split(':')`?, en: What should be validated before unpacking `a, b = text.split(':')`?, da: Hvad skal valideres før `a, b = text.split(':')` pakkes ud?}
+    back:
+      es: >-
+        Que el contrato admita exactamente dos campos o un separador; después, si los campos obligatorios no están
+        vacíos tras `strip`; finalmente, que cada campo cumpla su contenido esperado. Así se evitan errores ambiguos.
+      en: >-
+        Validate that the contract permits exactly two fields or one delimiter, then required non-empty fields after
+        stripping, and finally field content. This avoids ambiguous unpacking failures.
+      da: >-
+        Validér præcis to felter eller én separator, derefter obligatoriske ikke-tomme felter og til sidst feltindhold.
+    linked_objectives: [m05.o5, m05.o6, m05.o8]
+    linked_concepts: [split-join-partition-parsing]
+    tags: [unpacking, validation, delimiter]
+    reverse_allowed: false
+
+  - id: dm857.m05.f15
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: Distingue “separador ausente” de “campo vacío”., en: Distinguish “missing separator” from “empty field.”, da: Skeln mellem “manglende separator” og “tomt felt”.}
+    back:
+      es: >-
+        `AB` no contiene estructura `A:B`; `A:` sí contiene el separador pero el segundo campo está vacío.
+        Son estados diferentes y pueden tener políticas distintas. Un parser robusto no los colapsa accidentalmente.
+      en: >-
+        `AB` lacks the `A:B` structure; `A:` contains the separator but has an empty second field. They are distinct
+        states and may have different policies.
+      da: >-
+        `AB` mangler strukturen; `A:` har separator men et tomt andet felt. De er forskellige tilstande.
+    linked_objectives: [m05.o6, m05.o8]
+    linked_concepts: [split-join-partition-parsing]
+    tags: [missing, empty, parser]
+    reverse_allowed: true
+
+  - id: dm857.m05.f16
+    mode: conceptual
+    card_type: mechanism
+    difficulty: intermediate
+    front: {es: ¿Qué expresan `isalpha`, `isdigit` e `isalnum`?, en: What do `isalpha`, `isdigit`, and `isalnum` express?, da: Hvad udtrykker `isalpha`, `isdigit` og `isalnum`?}
+    back:
+      es: >-
+        Predicados sobre todos los caracteres de una cadena no vacía: letras, dígitos o caracteres alfanuméricos,
+        respectivamente. No significan necesariamente ASCII y suelen retornar `False` para la cadena vacía.
+      en: >-
+        Predicates over every character of a non-empty string: letters, digits, or alphanumeric characters.
+        They are not limited to ASCII and usually return `False` for the empty string.
+      da: >-
+        Prædikater over alle tegn i en ikke-tom streng: bogstaver, cifre eller alfanumeriske tegn. De er ikke kun ASCII.
+    linked_objectives: [m05.o5, m05.o7]
+    linked_concepts: [textual-validation-predicates]
+    tags: [predicate, validation, unicode]
+    reverse_allowed: true
+
+  - id: dm857.m05.f17
+    mode: practical
+    card_type: validation_design
+    difficulty: intermediate
+    front: {es: Diseña una regla para un código `AA-999`., en: Design a rule for a code shaped `AA-999`., da: Design en regel for en kode formet `AA-999`.}
+    back:
+      es: >-
+        Exige longitud 6, guion en posición 2, dos primeros caracteres alfabéticos y tres últimos dígitos:
+        `len(code)==6 and code[:2].isalpha() and code[2]=='-' and code[3:].isdigit()`.
+        Debe definirse si se aceptan letras Unicode o solo ASCII.
+      en: >-
+        Require length 6, hyphen at position 2, two alphabetic characters, and three digits. Also define whether
+        Unicode letters or ASCII only are allowed.
+      da: >-
+        Kræv længde 6, bindestreg i position 2, to bogstaver og tre cifre. Definér om Unicode-bogstaver eller kun ASCII accepteres.
+    linked_objectives: [m05.o2, m05.o5, m05.o8]
+    linked_concepts: [textual-validation-predicates]
+    tags: [identifier, validation, boundary]
+    reverse_allowed: false
+
+  - id: dm857.m05.f18
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: advanced
+    front: {es: Corrige: “Si dos textos se ven iguales, `==` siempre será verdadero”., en: Correct: “If two texts look identical, `==` is always true.”, da: Ret: “Hvis to tekster ser ens ud, er `==` altid sand.”}
+    back:
+      es: >-
+        La apariencia no garantiza la misma secuencia Unicode. Un carácter puede estar precompuesto o formado por
+        base y marca combinante. La igualdad compara la secuencia interna. Si la equivalencia visual importa, debe
+        aplicarse una forma Unicode documentada como NFC antes de comparar.
+      en: >-
+        Appearance does not guarantee the same Unicode sequence. A character may be precomposed or use a base plus
+        combining mark. Equality compares internal sequences. Apply documented normalization such as NFC when needed.
+      da: >-
+        Udseende garanterer ikke samme Unicode-sekvens. Brug en dokumenteret normaliseringsform som NFC når relevant.
+    linked_objectives: [m05.o7]
+    linked_concepts: [unicode-equivalence]
+    tags: [unicode, equality, normalization]
+    reverse_allowed: false
+
+  - id: dm857.m05.f19
+    mode: conceptual
+    card_type: comparison
+    difficulty: advanced
+    front: {es: ¿Por qué `len(text)` no siempre equivale al número de caracteres visibles percibidos?, en: Why does `len(text)` not always equal the number of user-perceived visible characters?, da: Hvorfor er `len(text)` ikke altid antallet af synlige tegn som brugeren oplever?}
+    back:
+      es: >-
+        Python cuenta puntos de código. Un grafema visible puede contener varios puntos de código, por ejemplo una letra
+        más una marca combinante. Para límites de interfaz o edición visual puede requerirse segmentación de grafemas.
+      en: >-
+        Python counts code points. One visible grapheme may contain multiple code points, such as a letter plus a combining
+        mark. User-interface limits may require grapheme segmentation.
+      da: >-
+        Python tæller kodepunkter. Ét synligt grafem kan bestå af flere kodepunkter, så visuelle grænser kan kræve grafemsegmentering.
+    linked_objectives: [m05.o1, m05.o7]
+    linked_concepts: [unicode-equivalence]
+    tags: [len, code_point, grapheme]
+    reverse_allowed: false
+
+  - id: dm857.m05.f20
+    mode: practical
+    card_type: test_design
+    difficulty: intermediate
+    front: {es: ¿Qué pruebas mínimas requiere un parser `cohort:sample`?, en: What minimal tests does a `cohort:sample` parser need?, da: Hvilke minimale test kræver en `cohort:sample`-parser?}
+    back:
+      es: >-
+        Caso válido; separador ausente; separador adicional; cohorte vacía; muestra vacía; espacios extremos;
+        preservación de caja; y al menos un caso Unicode si se permite. Cada prueba debe comprobar retorno o error exacto.
+      en: >-
+        Valid input; missing delimiter; extra delimiter; empty cohort; empty sample; surrounding whitespace; case preservation;
+        and at least one Unicode case if allowed. Assert exact return or error behavior.
+      da: >-
+        Gyldigt input, manglende og ekstra separator, tomme felter, mellemrum, bevaret case og Unicode hvis tilladt.
+    linked_objectives: [m05.o6, m05.o8]
+    linked_concepts: [split-join-partition-parsing]
+    tags: [testing, parser, edge_case]
+    reverse_allowed: false
+
+  - id: dm857.m05.f21
+    mode: practical
+    card_type: formatting
+    difficulty: intermediate
+    front: {es: ¿Formatear `value` con `f'{value:.2f}'` cambia el valor numérico?, en: Does formatting `value` with `f'{value:.2f}'` change the numeric value?, da: Ændrer `f'{value:.2f}'` den numeriske værdi?}
+    back:
+      es: >-
+        No. Produce una cadena redondeada para representación. El objeto numérico original conserva su valor. Si el texto
+        se analiza de nuevo, la precisión perdida por el formato no puede recuperarse.
+      en: >-
+        No. It produces a rounded string representation. The original numeric object retains its value. If parsed again,
+        precision discarded by formatting cannot be recovered.
+      da: >-
+        Nej. Det skaber en afrundet strengrepræsentation. Den oprindelige numeriske værdi ændres ikke, men tabt præcision kan ikke genskabes.
+    linked_objectives: [m05.o6]
+    linked_concepts: [formatting-and-round-trip]
+    tags: [formatting, precision, representation]
+    reverse_allowed: false
+
+  - id: dm857.m05.f22
+    mode: conceptual
+    card_type: comparison
+    difficulty: advanced
+    front: {es: Distingue una representación para humanos de un formato de intercambio., en: Distinguish human-readable representation from interchange format., da: Skeln mellem menneskelæselig repræsentation og udvekslingsformat.}
+    back:
+      es: >-
+        Una representación humana prioriza legibilidad y puede incluir redondeo, unidades o etiquetas localizadas.
+        Un formato de intercambio prioriza estructura estable, ausencia de ambigüedad, precisión y parsing reproducible.
+        No deben asumirse equivalentes.
+      en: >-
+        Human-readable output prioritizes readability and may include rounding, units, or localized labels. An interchange
+        format prioritizes stable structure, precision, unambiguous parsing, and reproducibility.
+      da: >-
+        Menneskelæseligt output prioriterer læsbarhed; udvekslingsformat prioriterer stabil struktur, præcision og entydig parsing.
+    linked_objectives: [m05.o6]
+    linked_concepts: [formatting-and-round-trip]
+    tags: [format, interchange, reproducibility]
+    reverse_allowed: true
+
+  - id: dm857.m05.f23
+    mode: integrative
+    card_type: pipeline_design
+    difficulty: advanced
+    front: {es: Diseña las etapas de un pipeline textual reproducible., en: Design stages for a reproducible text pipeline., da: Design trinene i en reproducerbar tekstpipeline.}
+    back:
+      es: >-
+        1) recibir texto y registrar procedencia; 2) validar estructura; 3) separar campos; 4) aplicar normalización
+        específica por campo; 5) convertir tipos; 6) validar dominio; 7) retornar datos estructurados; 8) registrar errores
+        sin alterar silenciosamente la entrada. Cada etapa debe tener contrato y pruebas.
+      en: >-
+        Receive text with provenance; validate structure; split fields; apply field-specific normalization; convert types;
+        validate domain; return structured data; record errors without silent alteration. Each stage needs contracts and tests.
+      da: >-
+        Modtag tekst med proveniens; validér struktur; opdel felter; normalisér pr. felt; konvertér typer; validér domæne;
+        returnér struktur; registrér fejl. Hvert trin kræver kontrakt og test.
+    linked_objectives: [m05.o5, m05.o6, m05.o8]
+    linked_concepts: [normalization-purpose, split-join-partition-parsing, textual-validation-predicates]
+    tags: [pipeline, provenance, validation]
+    reverse_allowed: false
+
+  - id: dm857.m05.f24
+    mode: integrative
+    card_type: design_review
+    difficulty: advanced
+    front: {es: ¿Qué revisarías antes de aprobar un parser textual?, en: What would you review before approving a text parser?, da: Hvad ville du gennemgå før en tekstparser godkendes?}
+    back:
+      es: >-
+        Gramática y delimitadores; distinción entre estructura ausente y campos vacíos; política de espacios, caja y Unicode;
+        conversiones y errores; preservación de información; comportamiento con texto vacío, campos extra y caracteres no ASCII;
+        retorno estructurado; mensajes reproducibles; y pruebas de round-trip cuando corresponda.
+      en: >-
+        Grammar and delimiters; missing structure versus empty fields; whitespace, case, and Unicode policy; conversions and
+        errors; information preservation; empty, extra-field, and non-ASCII behavior; structured return; reproducible messages;
+        and round-trip tests where appropriate.
+      da: >-
+        Grammatik og separatorer; manglende struktur kontra tomme felter; mellemrum, case og Unicode; konvertering og fejl;
+        informationsbevarelse; tomme og ekstra felter; struktureret retur og round-trip-test.
+    linked_objectives: [m05.o5, m05.o6, m05.o7, m05.o8]
+    linked_concepts: [split-join-partition-parsing, unicode-equivalence, formatting-and-round-trip]
+    tags: [review, parser, quality]
+    reverse_allowed: false
