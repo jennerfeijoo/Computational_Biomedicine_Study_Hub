@@ -1,0 +1,535 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m01
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm847.m01.f01
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué es un gen y qué error evita esta definición?
+      en: What is a gene, and which misconception does this definition avoid?
+      da: Hvad er et gen, og hvilken misforståelse undgår definitionen?
+    back:
+      es: >-
+        Un gen es una región genómica cuya actividad produce uno o más productos funcionales, ARN o polipéptidos.
+        Esta definición evita equiparar un gen con «un fragmento de ADN que produce exactamente una proteína»:
+        existen genes de ARN, transcritos alternativos y productos diferentes desde un mismo locus.
+      en: >-
+        A gene is a genomic region whose activity produces one or more functional products, RNA or polypeptides.
+        This avoids equating a gene with “a DNA fragment producing exactly one protein”: RNA genes,
+        alternative transcripts, and multiple products from one locus exist.
+      da: >-
+        Et gen er en genomisk region, hvis aktivitet producerer et eller flere funktionelle produkter, RNA eller polypeptider.
+        Definitionen undgår idéen om at ét gen altid giver præcis ét protein.
+    linked_objectives: [m01.o1]
+    tags: [gene, annotation, evidence]
+
+  - id: dm847.m01.f02
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: Distingue gen, locus, transcrito y proteína.
+      en: Distinguish gene, locus, transcript, and protein.
+      da: Skeln mellem gen, locus, transkript og protein.
+    back:
+      es: >-
+        Locus es una posición o región del genoma; gen es una unidad funcional anotada en esa región;
+        transcrito es una molécula de ARN producida desde una plantilla; proteína es un producto traducido y procesado.
+        Un locus puede contener un gen con varios transcritos, y no todo transcrito codifica proteína.
+      en: >-
+        A locus is a genomic position or region; a gene is a functional unit annotated there;
+        a transcript is an RNA molecule made from a template; a protein is a translated and processed product.
+        One locus may yield several transcripts, and not every transcript encodes protein.
+      da: >-
+        Et locus er en genomisk position eller region; et gen er en funktionel enhed dér;
+        et transkript er et RNA-produkt; et protein er et translateret og processeret produkt.
+    linked_objectives: [m01.o1, m01.o3]
+    tags: [gene, locus, transcript, protein]
+
+  - id: dm847.m01.f03
+    mode: practical
+    card_type: sequence_transformation
+    difficulty: foundational
+    front:
+      es: Obtén la reverso-complementaria 5'→3' de 5'-AGTCCT-3'.
+      en: Obtain the 5'→3' reverse complement of 5'-AGTCCT-3'.
+      da: Find 5'→3' reverse complement af 5'-AGTCCT-3'.
+    back:
+      es: >-
+        5'-AGGACT-3'. Primero se complementa A↔T y G↔C, obteniendo 3'-TCAGGA-5';
+        después se reescribe en orientación 5'→3'. Complementar sin invertir no representa la hebra opuesta
+        en la convención habitual.
+      en: >-
+        5'-AGGACT-3'. Complement A↔T and G↔C to obtain 3'-TCAGGA-5', then rewrite 5'→3'.
+        Complementing without reversing does not represent the opposite strand in standard orientation.
+      da: >-
+        5'-AGGACT-3'. Komplementér først til 3'-TCAGGA-5' og skriv derefter strengen 5'→3'.
+    linked_objectives: [m01.o2]
+    tags: [orientation, reverse_complement, sequence]
+
+  - id: dm847.m01.f04
+    mode: conceptual
+    card_type: mechanism
+    difficulty: foundational
+    front:
+      es: ¿Por qué las hebras de ADN se describen como antiparalelas?
+      en: Why are DNA strands described as antiparallel?
+      da: Hvorfor beskrives DNA-strenge som antiparallelle?
+    back:
+      es: >-
+        Sus esqueletos azúcar-fosfato tienen orientaciones opuestas: una hebra recorre 5'→3' y la complementaria 3'→5'.
+        Esta geometría determina cómo polimerasas leen plantillas y sintetizan nuevas cadenas.
+      en: >-
+        Their sugar-phosphate backbones run in opposite directions: one strand is 5'→3' and its complement 3'→5'.
+        This geometry determines how polymerases read templates and synthesize new strands.
+      da: >-
+        Sukker-fosfat-rygraderne løber i modsatte retninger, 5'→3' og 3'→5'.
+        Geometrien bestemmer polymerasers læsning og syntese.
+    linked_objectives: [m01.o2]
+    tags: [dna, directionality, polymerase]
+
+  - id: dm847.m01.f05
+    mode: practical
+    card_type: sequence_transformation
+    difficulty: foundational
+    front:
+      es: La plantilla es 3'-TACGGA-5'. ¿Cuál es el ARN 5'→3'?
+      en: The template is 3'-TACGGA-5'. What is the 5'→3' RNA?
+      da: Template er 3'-TACGGA-5'. Hvad er RNA 5'→3'?
+    back:
+      es: 5'-AUGCCU-3'. La ARN polimerasa lee la plantilla 3'→5' y sintetiza ARN complementario 5'→3', usando U frente a A.
+      en: 5'-AUGCCU-3'. RNA polymerase reads the template 3'→5' and synthesizes complementary RNA 5'→3', using U opposite A.
+      da: 5'-AUGCCU-3'. RNA-polymerase læser template 3'→5' og syntetiserer RNA 5'→3'.
+    linked_objectives: [m01.o2, m01.o3]
+    tags: [transcription, template, rna]
+
+  - id: dm847.m01.f06
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: ¿Cómo se relacionan hebra plantilla, hebra codificante y ARN?
+      en: How are template strand, coding strand, and RNA related?
+      da: Hvordan hænger template-streng, kodende streng og RNA sammen?
+    back:
+      es: >-
+        El ARN es complementario y antiparalelo a la hebra plantilla. La hebra codificante tiene la misma
+        secuencia 5'→3' que el ARN, salvo que contiene T donde el ARN contiene U. Esta relación debe evaluarse
+        siempre con orientación explícita.
+      en: >-
+        RNA is complementary and antiparallel to the template strand. The coding strand has the same 5'→3'
+        sequence as RNA except T replaces U. Orientation must always be explicit.
+      da: >-
+        RNA er komplementært og antiparallelt til template-strengen. Den kodende streng svarer til RNA 5'→3'
+        bortset fra T i stedet for U.
+    linked_objectives: [m01.o2, m01.o3]
+    tags: [template_strand, coding_strand, rna]
+
+  - id: dm847.m01.f07
+    mode: conceptual
+    card_type: mechanism
+    difficulty: intermediate
+    front:
+      es: ¿Qué determina la abundancia de un ARN en una muestra?
+      en: What determines RNA abundance in a sample?
+      da: Hvad bestemmer RNA-mængden i en prøve?
+    back:
+      es: >-
+        El equilibrio entre síntesis, procesamiento, transporte y degradación, además de composición celular
+        y momento de muestreo. Por ello, una abundancia alta no identifica por sí sola el mecanismo que cambió
+        ni demuestra actividad proteica.
+      en: >-
+        The balance among synthesis, processing, transport, and degradation, plus cell composition and sampling time.
+        High abundance alone does not identify the altered mechanism or demonstrate protein activity.
+      da: >-
+        Balancen mellem syntese, processering, transport og nedbrydning samt cellesammensætning og prøvetidspunkt.
+        Høj mængde alene identificerer ikke mekanismen eller proteinaktivitet.
+    linked_objectives: [m01.o3, m01.o4, m01.o8]
+    tags: [rna_abundance, interpretation, regulation]
+
+  - id: dm847.m01.f08
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front:
+      es: Corrige: «Más ARNm significa necesariamente más proteína activa».
+      en: Correct: “More mRNA necessarily means more active protein.”
+      da: Ret: “Mere mRNA betyder nødvendigvis mere aktivt protein.”
+    back:
+      es: >-
+        La traducción, vida media proteica, plegamiento, modificaciones, localización, ensamblaje e inhibición
+        cambian cantidad y actividad. El ARNm aporta una capa de evidencia, no una medición directa de proteína funcional.
+      en: >-
+        Translation, protein half-life, folding, modifications, localization, assembly, and inhibition alter abundance
+        and activity. mRNA is one evidence layer, not a direct measurement of functional protein.
+      da: >-
+        Translation, proteinhalveringstid, foldning, modifikation, lokalisering, samling og hæmning ændrer mængde og aktivitet.
+        mRNA er ét evidenslag, ikke direkte mål for funktionelt protein.
+    linked_objectives: [m01.o3, m01.o4]
+    tags: [mrna, protein, misconception]
+
+  - id: dm847.m01.f09
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front:
+      es: Compara regulación transcripcional y postranscripcional.
+      en: Compare transcriptional and post-transcriptional regulation.
+      da: Sammenlign transkriptionel og post-transkriptionel regulering.
+    back:
+      es: >-
+        La regulación transcripcional cambia inicio o progreso de síntesis de ARN mediante promotores,
+        factores y cromatina. La postranscripcional actúa sobre splicing, edición, estabilidad, exportación,
+        localización o degradación del ARN ya producido. Ambas pueden cambiar la abundancia final.
+      en: >-
+        Transcriptional regulation changes RNA initiation or production through promoters, factors, and chromatin.
+        Post-transcriptional regulation acts on splicing, editing, stability, export, localization, or degradation
+        of existing RNA. Both can alter final abundance.
+      da: >-
+        Transkriptionel regulering ændrer RNA-syntese via promotorer, faktorer og kromatin.
+        Post-transkriptionel regulering påvirker splejsning, stabilitet, eksport, lokalisering eller nedbrydning.
+    linked_objectives: [m01.o4]
+    tags: [gene_regulation, transcription, rna_processing]
+
+  - id: dm847.m01.f10
+    mode: practical
+    card_type: evidence_interpretation
+    difficulty: intermediate
+    front:
+      es: ChIP-seq muestra unión de un factor cerca de un promotor. ¿Qué conclusión mínima es válida?
+      en: ChIP-seq shows factor binding near a promoter. What is the minimal valid conclusion?
+      da: ChIP-seq viser faktor-binding nær en promotor. Hvad er den minimale gyldige konklusion?
+    back:
+      es: >-
+        El factor o un complejo asociado ocupa esa región bajo las condiciones medidas, sujeto a controles
+        y resolución del ensayo. No demuestra por sí solo activación, represión ni causalidad; hacen falta
+        perturbación y respuesta funcional.
+      en: >-
+        The factor or an associated complex occupies that region under the measured conditions, subject to assay controls
+        and resolution. It does not alone prove activation, repression, or causality; perturbation and response are needed.
+      da: >-
+        Faktoren eller et associeret kompleks optager regionen under de målte betingelser. Det beviser ikke alene aktivering,
+        repression eller kausalitet; perturbation og respons kræves.
+    linked_objectives: [m01.o4, m01.o8]
+    tags: [chip_seq, occupancy, causality]
+
+  - id: dm847.m01.f11
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué significa «epigenético» en este módulo y qué no implica necesariamente?
+      en: What does “epigenetic” mean in this module, and what does it not necessarily imply?
+      da: Hvad betyder “epigenetisk” i dette modul, og hvad indebærer det ikke nødvendigvis?
+    back:
+      es: >-
+        Se refiere a estados regulatorios relativamente persistentes que no requieren cambiar la secuencia de ADN.
+        No implica automáticamente herencia transgeneracional, permanencia absoluta, represión génica ni independencia
+        de la secuencia y del contexto celular.
+      en: >-
+        It refers to relatively persistent regulatory states not requiring DNA-sequence change. It does not automatically
+        imply transgenerational inheritance, absolute permanence, gene repression, or independence from sequence and cell context.
+      da: >-
+        Det henviser til relativt persistente regulatoriske tilstande uden nødvendigt skift i DNA-sekvens.
+        Det indebærer ikke automatisk transgenerationel arv, permanent repression eller uafhængighed af kontekst.
+    linked_objectives: [m01.o5]
+    tags: [epigenetics, definition, context]
+
+  - id: dm847.m01.f12
+    mode: practical
+    card_type: claim_audit
+    difficulty: advanced
+    front:
+      es: Casos tienen mayor metilación y menor ARN que controles. ¿Por qué no basta para afirmar causalidad?
+      en: Cases have higher methylation and lower RNA than controls. Why is that insufficient for causality?
+      da: Cases har højere methylering og lavere RNA end kontroller. Hvorfor er det utilstrækkeligt til kausalitet?
+    back:
+      es: >-
+        Porque puede existir causalidad inversa, confusión, distinta composición celular, diferencias técnicas
+        o una tercera vía reguladora. Deben precisarse ubicación, temporalidad y tipo celular, y añadirse perturbación,
+        replicación y evidencia funcional para resolver dirección causal.
+      en: >-
+        Reverse causation, confounding, cell-composition differences, technical effects, or a third regulatory pathway
+        may explain the association. Location, timing, and cell type must be specified, with perturbation, replication,
+        and functional evidence to resolve causal direction.
+      da: >-
+        Omvendt kausalitet, confounding, ændret cellesammensætning, tekniske effekter eller en tredje mekanisme kan forklare associationen.
+        Placering, tid og celletype samt perturbation og replikation er nødvendige.
+    linked_objectives: [m01.o5, m01.o8]
+    tags: [methylation, causality, study_design]
+
+  - id: dm847.m01.f13
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué es un operón?
+      en: What is an operon?
+      da: Hvad er et operon?
+    back:
+      es: >-
+        Una unidad reguladora, especialmente común en bacterias, en la que varios genes pueden compartir promotor
+        y transcribirse como un ARN policistrónico. Los productos pueden participar en una función relacionada,
+        pero la pertenencia debe respaldarse con evidencia, no sólo proximidad.
+      en: >-
+        A regulatory unit, especially common in bacteria, in which several genes may share a promoter and be transcribed
+        as one polycistronic RNA. Products may serve a related function, but membership requires evidence beyond proximity.
+      da: >-
+        En regulatorisk enhed, især i bakterier, hvor flere gener kan dele promotor og transkriberes som ét polycistronisk RNA.
+        Medlemskab kræver mere evidens end nærhed.
+    linked_objectives: [m01.o6]
+    tags: [operon, bacteria, polycistronic]
+
+  - id: dm847.m01.f14
+    mode: practical
+    card_type: evidence_ranking
+    difficulty: intermediate
+    front:
+      es: Ordena de evidencia más indirecta a más directa para un operón: misma orientación, corta distancia, coexpresión, ARN que abarca uniones.
+      en: Rank from more indirect to more direct operon evidence: same orientation, short distance, co-expression, RNA spanning junctions.
+      da: Rangér fra mere indirekte til mere direkte operonevidens: samme orientering, kort afstand, coekspression, RNA over junctions.
+    back:
+      es: >-
+        Orientación y distancia son rasgos genómicos indirectos; coexpresión añade evidencia funcional contextual;
+        un ARN validado que abarca uniones aporta evidencia más directa de transcripción conjunta. Ninguna capa aislada
+        resuelve todas las condiciones o promotores alternativos.
+      en: >-
+        Orientation and distance are indirect genomic features; co-expression adds contextual functional evidence;
+        validated RNA spanning junctions is more direct evidence of joint transcription. No single layer resolves every condition
+        or alternative promoter.
+      da: >-
+        Orientering og afstand er indirekte genomiske træk; coekspression giver funktionel kontekst;
+        valideret RNA over junctions er mere direkte evidens for fælles transkription.
+    linked_objectives: [m01.o6, m01.o8]
+    tags: [operon_prediction, evidence, transcript]
+
+  - id: dm847.m01.f15
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front:
+      es: Compara transformación, conjugación y transducción.
+      en: Compare transformation, conjugation, and transduction.
+      da: Sammenlign transformation, konjugation og transduktion.
+    back:
+      es: >-
+        Transformación: captación de ADN libre. Conjugación: transferencia mediante contacto y maquinaria conjugativa,
+        a menudo plasmídica. Transducción: transferencia mediada por fagos. Las tres pueden contribuir a transferencia
+        horizontal, pero difieren en fuente, vehículo y restricciones biológicas.
+      en: >-
+        Transformation: uptake of free DNA. Conjugation: transfer through contact and conjugative machinery, often plasmid-based.
+        Transduction: phage-mediated transfer. All can contribute to horizontal transfer but differ in source, vehicle, and constraints.
+      da: >-
+        Transformation er optagelse af frit DNA; konjugation bruger kontakt og konjugativt maskineri;
+        transduktion er fagmedieret. Alle kan bidrage til horisontal overførsel.
+    linked_objectives: [m01.o6, m01.o7]
+    tags: [horizontal_transfer, transformation, conjugation, transduction]
+
+  - id: dm847.m01.f16
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: Distingue ciclo lítico y lisogenia.
+      en: Distinguish the lytic cycle and lysogeny.
+      da: Skeln mellem lytisk cyklus og lysogeni.
+    back:
+      es: >-
+        En el ciclo lítico se producen partículas y se liberan, frecuentemente mediante lisis. En lisogenia,
+        el genoma del fago persiste con el hospedador, a menudo integrado como profago, y puede inducirse después.
+        No todos los fagos ni todas las infecciones siguen exactamente estos modelos canónicos.
+      en: >-
+        In the lytic cycle, particles are produced and released, often through lysis. During lysogeny,
+        the phage genome persists with the host, often integrated as a prophage, and may later be induced.
+        Not all phages or infections follow these canonical models exactly.
+      da: >-
+        I den lytiske cyklus produceres og frigives partikler, ofte ved lysis. Under lysogeni persisterer faggenomet
+        med værten, ofte som profag, og kan senere induceres.
+    linked_objectives: [m01.o7]
+    tags: [phage, lytic, lysogeny]
+
+  - id: dm847.m01.f17
+    mode: practical
+    card_type: claim_audit
+    difficulty: intermediate
+    front:
+      es: Se detecta una región con genes similares a integrasa y cápside. ¿Qué conclusión es proporcionada?
+      en: A region contains integrase- and capsid-like genes. What is a proportionate conclusion?
+      da: En region indeholder integrase- og kapsidlignende gener. Hvad er en proportional konklusion?
+    back:
+      es: >-
+        Es una región candidata de origen fágico o profago que merece análisis de límites, completitud, organización,
+        señales de integración y comparación. No puede afirmarse todavía que produzca partículas, sea inducible
+        o confiera un fenotipo.
+      en: >-
+        It is a candidate phage-derived or prophage region requiring boundary, completeness, organization,
+        integration-signal, and comparative analysis. Particle production, inducibility, or phenotype cannot yet be claimed.
+      da: >-
+        Det er en kandidatregion af fagoprindelse eller profag, som kræver analyse af grænser, komplethed og integration.
+        Partikelproduktion, inducerbarhed eller fænotype kan endnu ikke påstås.
+    linked_objectives: [m01.o7, m01.o8]
+    tags: [prophage, annotation, evidence]
+
+  - id: dm847.m01.f18
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front:
+      es: Corrige: «Un ORF largo demuestra un gen funcional».
+      en: Correct: “A long ORF proves a functional gene.”
+      da: Ret: “En lang ORF beviser et funktionelt gen.”
+    back:
+      es: >-
+        Un ORF largo es evidencia de potencial codificante, pero puede aparecer por azar o pertenecer a una región no expresada.
+        Se requieren contexto genómico, transcripción, traducción, conservación, dominios y/o perturbación funcional según la conclusión.
+      en: >-
+        A long ORF supports coding potential but may arise by chance or occur in an unexpressed region.
+        Genomic context, transcription, translation, conservation, domains, and/or functional perturbation are needed depending on the claim.
+      da: >-
+        En lang ORF støtter kodningspotentiale, men kan opstå tilfældigt eller ligge i en ikke-udtrykt region.
+        Genomisk kontekst og flere evidenslag kræves.
+    linked_objectives: [m01.o1, m01.o3, m01.o8]
+    tags: [orf, gene_prediction, misconception]
+
+  - id: dm847.m01.f19
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front:
+      es: ¿Por qué «código genético degenerado» no significa «ambiguo»?
+      en: Why does “degenerate genetic code” not mean “ambiguous”?
+      da: Hvorfor betyder “degenereret genetisk kode” ikke “tvetydig”?
+    back:
+      es: >-
+        Degenerado significa que distintos codones pueden especificar el mismo aminoácido. No ambiguo significa que,
+        en un código y contexto dados, un codón concreto normalmente especifica una sola incorporación. Son relaciones
+        muchos-a-uno, no uno-a-muchos.
+      en: >-
+        Degenerate means different codons can specify the same amino acid. Unambiguous means that, within a given code
+        and context, one codon normally specifies one incorporation. It is many-to-one, not one-to-many.
+      da: >-
+        Degenereret betyder at flere kodoner kan kode samme aminosyre. Ikke-tvetydig betyder at ét bestemt kodon
+        normalt angiver én inkorporering. Forholdet er mange-til-én.
+    linked_objectives: [m01.o3]
+    tags: [genetic_code, codon, translation]
+
+  - id: dm847.m01.f20
+    mode: practical
+    card_type: method_selection
+    difficulty: advanced
+    front:
+      es: ¿Qué combinación de evidencias usarías para probar que un factor regula directamente un gen?
+      en: Which evidence combination would you use to show that a factor directly regulates a gene?
+      da: Hvilken evidenskombination vil du bruge til at vise at en faktor regulerer et gen direkte?
+    back:
+      es: >-
+        Ocupación física en la región, perturbación específica del factor o sitio, cambio reproducible en transcripción
+        con temporalidad compatible, rescate o control de especificidad y exclusión de cambios globales. Ninguna técnica
+        aislada suele demostrar simultáneamente unión, necesidad, suficiencia y consecuencia.
+      en: >-
+        Physical occupancy, specific perturbation of the factor or site, reproducible transcriptional response with
+        compatible timing, rescue or specificity controls, and exclusion of global effects. One assay rarely demonstrates
+        binding, necessity, sufficiency, and consequence together.
+      da: >-
+        Fysisk binding, specifik perturbation, reproducerbar transkriptionsrespons med passende timing,
+        rescue eller specificitetskontrol og udelukkelse af globale effekter.
+    linked_objectives: [m01.o4, m01.o8]
+    tags: [regulation, causality, experimental_design]
+
+  - id: dm847.m01.f21
+    mode: integrative
+    card_type: evidence_hierarchy
+    difficulty: advanced
+    front:
+      es: Construye una jerarquía de evidencia desde «secuencia parecida» hasta «función demostrada».
+      en: Build an evidence hierarchy from “similar sequence” to “demonstrated function.”
+      da: Byg et evidenshierarki fra “lignende sekvens” til “demonstreret funktion.”
+    back:
+      es: >-
+        Similitud y dominios → conservación y contexto → transcripción → traducción/proteómica → localización o interacción →
+        perturbación con fenotipo → rescate y mecanismo bioquímico. El orden no es universal, pero cada capa reduce
+        explicaciones alternativas. La conclusión debe limitarse a la capa más sólida alcanzada.
+      en: >-
+        Similarity and domains → conservation and context → transcription → translation/proteomics → localization or interaction →
+        perturbation with phenotype → rescue and biochemical mechanism. The order is not universal, but each layer reduces
+        alternatives. Conclusions should stop at the strongest supported layer.
+      da: >-
+        Lighed og domæner → konservering og kontekst → transkription → translation/proteomik → lokalisering eller interaktion →
+        perturbation med fænotype → rescue og biokemisk mekanisme. Konklusionen begrænses til det stærkeste evidenslag.
+    linked_objectives: [m01.o8]
+    tags: [evidence, function, annotation]
+
+  - id: dm847.m01.f22
+    mode: integrative
+    card_type: scenario_analysis
+    difficulty: advanced
+    front:
+      es: Un mismo locus muestra dos transcritos en tejidos distintos. ¿Qué preguntas debes hacer antes de compararlos?
+      en: One locus shows two transcripts in different tissues. What should you ask before comparing them?
+      da: Ét locus viser to transkripter i forskellige væv. Hvilke spørgsmål skal stilles før sammenligning?
+    back:
+      es: >-
+        ¿Mismo ensamblaje y anotación? ¿Misma orientación y límites? ¿Diferente inicio, terminación o splicing?
+        ¿Qué composición celular y profundidad tiene cada muestra? ¿La cuantificación distingue isoformas?
+        ¿Hay replicación y evidencia de proteína? Estas preguntas separan biología de artefactos de referencia y medición.
+      en: >-
+        Same assembly and annotation? Same orientation and boundaries? Alternative start, termination, or splicing?
+        What cell composition and depth? Can quantification distinguish isoforms? Is there replication and protein evidence?
+        These questions separate biology from reference and measurement artifacts.
+      da: >-
+        Samme assembly og annotation? Samme orientering og grænser? Alternativ start, stop eller splejsning?
+        Hvilken cellesammensætning og dybde? Kan kvantificeringen skelne isoformer? Findes replikation og proteinevidens?
+    linked_objectives: [m01.o1, m01.o3, m01.o8]
+    tags: [isoforms, transcriptomics, interpretation]
+
+  - id: dm847.m01.f23
+    mode: integrative
+    card_type: oral_defense
+    difficulty: advanced
+    front:
+      es: Responde en 45 segundos: «¿Por qué el dogma central no es una cadena determinista simple?»
+      en: Answer in 45 seconds: “Why is the central dogma not a simple deterministic chain?”
+      da: Svar på 45 sekunder: “Hvorfor er det centrale dogme ikke en simpel deterministisk kæde?”
+    back:
+      es: >-
+        Describe direcciones frecuentes de transferencia de información, pero cada etapa está regulada y puede ramificarse:
+        un locus produce isoformas, ARN se procesa y degrada, traducción varía, proteínas se modifican, localizan y ensamblan.
+        Además, la función depende del contexto celular. Por eso secuencia, ARN y proteína son capas relacionadas, no equivalentes.
+      en: >-
+        It describes common directions of information transfer, but every stage is regulated and may branch: one locus yields isoforms,
+        RNA is processed and degraded, translation varies, and proteins are modified, localized, and assembled. Function also depends on
+        cellular context. Sequence, RNA, and protein are related layers, not equivalents.
+      da: >-
+        Det beskriver almindelige informationsretninger, men hvert trin reguleres og kan forgrenes: isoformer, RNA-processering,
+        varierende translation samt proteinmodifikation, lokalisering og samling. Lagene er relaterede, ikke ækvivalente.
+    linked_objectives: [m01.o3, m01.o4, m01.o8]
+    tags: [central_dogma, oral_exam, integration]
+
+  - id: dm847.m01.f24
+    mode: integrative
+    card_type: transfer
+    difficulty: advanced
+    front:
+      es: ¿Cómo prepara este módulo el análisis algorítmico de secuencias de DM847?
+      en: How does this module prepare algorithmic sequence analysis in DM847?
+      da: Hvordan forbereder dette modul algoritmisk sekvensanalyse i DM847?
+    back:
+      es: >-
+        Define qué representa una secuencia, por qué importan orientación, alfabeto, marco, coordenadas y versión,
+        y qué evidencia permite interpretar coincidencias. Esto evita implementar correctamente un algoritmo sobre
+        una pregunta biológica mal formulada. Los módulos posteriores añaden puntuación, alineamiento, HMM e índices.
+      en: >-
+        It defines what a sequence represents and why orientation, alphabet, frame, coordinates, and version matter,
+        as well as what evidence permits interpreting matches. This prevents correctly implementing an algorithm for
+        a poorly formulated biological question. Later modules add scoring, alignment, HMMs, and indexes.
+      da: >-
+        Modulet definerer hvad en sekvens repræsenterer, og hvorfor orientering, alfabet, ramme, koordinater og version betyder noget.
+        Det forhindrer korrekt algoritmeimplementering på et forkert biologisk spørgsmål. Senere tilføjes scoring, alignment, HMM og indeks.
+    linked_objectives: [m01.o1, m01.o2, m01.o8]
+    tags: [transfer, algorithms, sequence_analysis]
