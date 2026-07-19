@@ -1,0 +1,303 @@
+specification_version: 1.0.0
+purpose: >-
+  Define academically coherent memory-card content for every module in the four
+  semester-one courses. Cards support retrieval practice, conceptual understanding,
+  practical reasoning, transfer, and cumulative examination preparation.
+
+scope:
+  courses: [dm857, dm847, bmb830, bmb831]
+  required_locales: [es, en, da]
+  all_modules_required: true
+  no_placeholder_cards: true
+
+minimum_card_counts:
+  standard_module: 24
+  integrative_or_exam_module: 30
+  rationale: >-
+    Each module must include enough variation to test definitions, mechanisms,
+    assumptions, interpretation, practical decisions, misconceptions, and transfer.
+
+required_distribution_per_standard_module:
+  definition_and_terminology: 3
+  mechanism_or_model: 3
+  assumptions_and_conditions: 3
+  interpretation_of_output: 3
+  misconception_correction: 3
+  practical_problem_solving: 4
+  code_formula_or_workflow: 3
+  cross_concept_transfer: 2
+  total: 24
+
+required_distribution_per_integrative_module:
+  definition_and_terminology: 3
+  mechanism_or_model: 3
+  assumptions_and_conditions: 3
+  interpretation_of_output: 4
+  misconception_correction: 3
+  practical_problem_solving: 5
+  code_formula_or_workflow: 4
+  cross_concept_transfer: 3
+  oral_or_report_defense: 2
+  total: 30
+
+card_modes:
+  conceptual:
+    description: Retrieve, explain, compare, or connect scientific concepts.
+    examples:
+      - define a concept precisely
+      - explain a mechanism in causal order
+      - distinguish related methods
+      - state assumptions and consequences of violation
+      - correct a plausible misconception
+  practical:
+    description: Apply knowledge to a concrete input, output, decision, or workflow.
+    examples:
+      - predict code output
+      - choose a method and justify it
+      - interpret a result table or diagnostic
+      - identify an invalid inference
+      - order workflow steps
+      - complete a short calculation
+      - diagnose a pipeline failure
+  integrative:
+    description: Connect multiple concepts, modules, or courses.
+    examples:
+      - connect an algorithm to its biological question
+      - connect a statistical assumption to a visualization or diagnostic
+      - compare Python and R workflow choices
+      - defend a project decision and discuss alternatives
+
+card_types:
+  definition:
+    front_pattern: Ask for a precise definition and scope.
+    back_requirements:
+      - concise definition
+      - boundary or exclusion
+      - one relevant example
+  mechanism:
+    front_pattern: Ask how or why a process, model, or algorithm works.
+    back_requirements:
+      - ordered explanation
+      - entities or variables involved
+      - resulting output
+      - major limitation
+  comparison:
+    front_pattern: Ask the learner to distinguish two or more related concepts.
+    back_requirements:
+      - common purpose
+      - decisive differences
+      - selection criterion
+      - common confusion
+  formula:
+    front_pattern: Ask for a formula, its components, and interpretation.
+    back_requirements:
+      - formula
+      - definition of symbols
+      - assumptions or domain
+      - interpretation rather than memorization alone
+  method_assumption:
+    front_pattern: Ask which assumptions a method needs and how to assess them.
+    back_requirements:
+      - assumptions
+      - diagnostics
+      - consequence of violation
+      - reasonable alternative or remedy
+  output_interpretation:
+    front_pattern: Present a small output, graph description, or result and ask for interpretation.
+    back_requirements:
+      - direct reading
+      - uncertainty or limitation
+      - prohibited overclaim
+      - next validation step
+  misconception_correction:
+    front_pattern: Present a plausible but incorrect statement.
+    back_requirements:
+      - explicit verdict
+      - corrected statement
+      - reason for the confusion
+      - counterexample when useful
+  code_tracing:
+    front_pattern: Present a short deterministic code fragment and ask for output or state changes.
+    back_requirements:
+      - exact output or state
+      - stepwise trace
+      - relevant language rule
+  code_completion:
+    front_pattern: Present a focused gap in code with enough context to solve it.
+    back_requirements:
+      - minimal correct completion
+      - explanation
+      - one common incorrect completion
+  debugging:
+    front_pattern: Present a defect, symptom, or failing result.
+    back_requirements:
+      - root cause
+      - corrected approach
+      - validation test
+      - prevention strategy
+  workflow_step:
+    front_pattern: Ask for ordering, purpose, or dependency of workflow stages.
+    back_requirements:
+      - correct sequence
+      - purpose of each relevant stage
+      - invalid shortcut to avoid
+  method_selection:
+    front_pattern: Present a data or biological scenario and ask which method is appropriate.
+    back_requirements:
+      - selected method
+      - decisive evidence
+      - assumptions
+      - rejected alternative and reason
+  calculation:
+    front_pattern: Ask for a short calculation that can be done without extensive computation.
+    back_requirements:
+      - setup
+      - intermediate reasoning
+      - result with units or scale
+      - interpretation
+  oral_defense:
+    front_pattern: Ask the learner to defend a design, method, or interpretation aloud.
+    back_requirements:
+      - minimum answer elements
+      - strong-answer indicators
+      - likely follow-up question
+      - limitation that must be acknowledged
+
+card_schema:
+  required_fields:
+    - id
+    - module_id
+    - mode
+    - card_type
+    - difficulty
+    - front
+    - back
+    - linked_objectives
+    - linked_concepts
+    - tags
+  optional_fields:
+    - prompt_context
+    - code
+    - data_snippet
+    - formula
+    - accepted_answer_elements
+    - common_wrong_answer
+    - misconception_target
+    - hint
+    - follow_up
+    - reverse_allowed
+    - source_anchors
+  localized_fields:
+    - front
+    - back
+    - prompt_context
+    - accepted_answer_elements
+    - common_wrong_answer
+    - hint
+    - follow_up
+  language_neutral_fields:
+    - id
+    - module_id
+    - mode
+    - card_type
+    - difficulty
+    - code
+    - formula
+    - linked_objectives
+    - linked_concepts
+    - tags
+    - reverse_allowed
+    - source_anchors
+
+id_convention:
+  format: "{module_id}.fNN"
+  rules:
+    - IDs are identical in ES, EN, and DA.
+    - IDs never depend on visible text.
+    - Card numbering is stable after release; retired cards remain reserved.
+
+difficulty_levels:
+  foundational:
+    expectation: Recall or apply one central idea with limited distractors.
+  intermediate:
+    expectation: Connect two ideas or interpret a realistic result.
+  advanced:
+    expectation: Evaluate assumptions, alternatives, limitations, or transfer to a new context.
+
+front_quality_rules:
+  - Ask one primary question unless the card is explicitly integrative.
+  - Avoid vague prompts such as "Explain this topic".
+  - Include enough context to make the expected scope clear.
+  - Do not reveal the answer through wording or option structure.
+  - Use realistic but compact data or code when practical reasoning is tested.
+  - Avoid trivia that does not support a course outcome.
+
+back_quality_rules:
+  - Start with the direct answer.
+  - Explain why the answer is correct.
+  - State assumptions, limitations, or failure modes when relevant.
+  - Include units, data scale, or biological interpretation where applicable.
+  - Separate statistical evidence from biological interpretation.
+  - For code, include an exact trace or validation check.
+  - For workflows, explain why order matters.
+  - Do not reproduce textbook passages or proprietary exercises.
+
+coherence_rules:
+  within_module:
+    - Cards collectively cover every module objective.
+    - Conceptual and practical cards must refer to the same canonical terminology.
+    - No two cards may test the same fact with only superficial rewording.
+    - Difficulty should progress from foundational to advanced.
+    - Practical cards must use methods already introduced in the module or prerequisites.
+  across_modules:
+    - Repeated concepts use shared glossary IDs.
+    - Later cards may revisit earlier concepts at a higher level of integration.
+    - Contradictory simplifications are prohibited.
+    - Cross-course cards explicitly identify the concepts being connected.
+  across_locales:
+    - Scientific claims, numerical values, answer scope, and difficulty are equivalent.
+    - Standard English software terms may be retained when translation would reduce precision.
+    - Danish and Spanish wording should be natural, not mechanically literal.
+
+answering_and_scoring_guidance:
+  objective_cards:
+    - Use stable answer IDs where options are present.
+    - Randomizing option order must not change correctness.
+  open_retrieval_cards:
+    - Do not use exact-string grading.
+    - Store accepted answer elements for self-check or rubric-based review.
+    - The learner may reveal the structured answer and rate recall quality.
+  calculation_cards:
+    - Allow documented tolerance for rounded numerical answers.
+    - Units and interpretation remain required even when the number is correct.
+  code_cards:
+    - Evaluate deterministic outputs only when runtime conditions are explicit.
+    - Never execute untrusted code in the main application process.
+
+review_behavior_metadata:
+  required_runtime_fields:
+    - last_reviewed_at
+    - next_review_at
+    - interval_days
+    - ease_or_stability
+    - lapse_count
+    - review_count
+  learner_ratings:
+    - again
+    - hard
+    - good
+    - easy
+  content_rule: >-
+    Scheduling metadata belongs to learner progress storage, not the canonical card files.
+
+module_completion_gate:
+  - Required card count is met.
+  - Required category distribution is met.
+  - Every official or module objective has at least two cards.
+  - At least one conceptual and one practical card cover each major concept.
+  - At least three cards target documented misconceptions.
+  - At least three cards require interpretation rather than recall.
+  - At least two cards connect to prerequisite or subsequent modules.
+  - All cards are complete in ES, EN, and DA.
+  - IDs and linked references validate.
+  - An academic review confirms accuracy, non-duplication, and appropriate difficulty.
