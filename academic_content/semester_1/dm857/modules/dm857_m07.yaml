@@ -1,0 +1,796 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m07
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Diccionarios, conjuntos, agregación y selección de estructuras
+    en: Dictionaries, sets, aggregation, and structure selection
+    da: Ordbøger, mængder, aggregering og valg af datastruktur
+  summary:
+    es: >-
+      Uso razonado de diccionarios y conjuntos para representar asociaciones, indexar por identidad,
+      contar, agrupar, eliminar duplicados y comparar colecciones. Incluye acceso seguro, claves
+      hashables, recorridos, estructuras anidadas, operaciones de conjuntos, contratos de ausencia,
+      selección entre lista, tupla, diccionario y conjunto, y pruebas de invariantes.
+    en: >-
+      Reasoned use of dictionaries and sets to represent associations, index by identity, count,
+      group, deduplicate, and compare collections. It includes safe access, hashable keys,
+      traversal, nested structures, set operations, absence contracts, selection among lists,
+      tuples, dictionaries, and sets, and invariant testing.
+    da: >-
+      Begrundet brug af ordbøger og mængder til relationer, opslag efter identitet, optælling,
+      gruppering, deduplikering og sammenligning af samlinger. Modulet omfatter sikker adgang,
+      hashbare nøgler, gennemløb, indlejrede strukturer, mængdeoperationer, fraværskontrakter,
+      valg mellem liste, tuple, ordbog og mængde samt test af invarianter.
+  prerequisites: [dm857.m01, dm857.m02, dm857.m03, dm857.m04, dm857.m05, dm857.m06]
+  official_learning_outcomes: [dm857.lo02, dm857.lo03, dm857.lo05, dm857.lo07]
+  estimated_study_hours: 18
+  difficulty: intermediate
+
+objectives:
+  - id: m07.o1
+    bloom_level: apply
+    statement:
+      es: Crear diccionarios con claves únicas, hashables y semánticamente estables.
+      en: Create dictionaries with unique, hashable, semantically stable keys.
+      da: Oprette ordbøger med unikke, hashbare og semantisk stabile nøgler.
+    evidence: mapping_design
+  - id: m07.o2
+    bloom_level: analyze
+    statement:
+      es: Elegir entre acceso estricto, acceso tolerante y contratos explícitos de ausencia.
+      en: Choose among strict access, tolerant access, and explicit absence contracts.
+      da: Vælge mellem streng adgang, tolerant adgang og eksplicitte fraværskontrakter.
+    evidence: missing_key_analysis
+  - id: m07.o3
+    bloom_level: apply
+    statement:
+      es: Recorrer claves, valores y pares sin depender de un orden accidental.
+      en: Traverse keys, values, and pairs without relying on accidental order.
+      da: Gennemløbe nøgler, værdier og par uden at afhænge af tilfældig rækkefølge.
+    evidence: mapping_traversal
+  - id: m07.o4
+    bloom_level: create
+    statement:
+      es: Construir tablas de frecuencia y agrupaciones normalizadas.
+      en: Build normalized frequency tables and groupings.
+      da: Bygge normaliserede frekvenstabeller og grupperinger.
+    evidence: aggregation_pipeline
+  - id: m07.o5
+    bloom_level: analyze
+    statement:
+      es: Diseñar y validar diccionarios anidados mediante un esquema explícito.
+      en: Design and validate nested dictionaries using an explicit schema.
+      da: Designe og validere indlejrede ordbøger med et eksplicit skema.
+    evidence: nested_schema_validation
+  - id: m07.o6
+    bloom_level: apply
+    statement:
+      es: Usar conjuntos para unicidad, pertenencia y comparación de colecciones.
+      en: Use sets for uniqueness, membership, and collection comparison.
+      da: Bruge mængder til entydighed, medlemskab og sammenligning af samlinger.
+    evidence: set_operation
+  - id: m07.o7
+    bloom_level: evaluate
+    statement:
+      es: Interpretar unión, intersección, diferencia y diferencia simétrica según el problema.
+      en: Interpret union, intersection, difference, and symmetric difference in context.
+      da: Fortolke union, snit, differens og symmetrisk differens i kontekst.
+    evidence: set_semantics_explanation
+  - id: m07.o8
+    bloom_level: evaluate
+    statement:
+      es: Elegir entre lista, tupla, diccionario y conjunto usando requisitos de orden, identidad, multiplicidad y mutabilidad.
+      en: Choose among list, tuple, dictionary, and set using requirements for order, identity, multiplicity, and mutability.
+      da: Vælge mellem liste, tuple, ordbog og mængde ud fra krav til rækkefølge, identitet, multiplicitet og muterbarhed.
+    evidence: structure_selection_defense
+
+concepts:
+  - id: mapping-model-and-keys
+    title:
+      es: Diccionarios como asociaciones
+      en: Dictionaries as associations
+      da: Ordbøger som relationer
+    body:
+      es: >-
+        Un diccionario asocia cada clave con un valor. Las claves son únicas y deben ser hashables:
+        cadenas, números y tuplas inmutables suelen ser válidos, mientras una lista no lo es. Asignar
+        una clave existente reemplaza su valor. La estructura es adecuada cuando el dato se recupera
+        por identidad o etiqueta y no por posición. La elección de clave debe ser estable y no depender
+        de una propiedad que pueda cambiar durante la vida del registro.
+      en: >-
+        A dictionary maps each key to one value. Keys are unique and must be hashable: strings,
+        numbers, and immutable tuples commonly work, whereas a list does not. Assigning an existing
+        key replaces its value. Dictionaries fit retrieval by identity or label rather than position.
+        A key should remain stable throughout the record lifetime.
+      da: >-
+        En ordbog knytter hver nøgle til én værdi. Nøgler er unikke og skal være hashbare. Strenge,
+        tal og uforanderlige tupler fungerer ofte, mens lister ikke gør. Tildeling til en eksisterende
+        nøgle erstatter værdien. Strukturen er egnet til opslag efter identitet frem for position.
+    linked_objectives: [m07.o1, m07.o8]
+
+  - id: strict-and-tolerant-access
+    title:
+      es: Acceso estricto, tolerante y contratos de ausencia
+      en: Strict access, tolerant access, and absence contracts
+      da: Streng adgang, tolerant adgang og fraværskontrakter
+    body:
+      es: >-
+        `d[key]` exige que la clave exista y produce `KeyError` si falta. `d.get(key, default)` expresa
+        una alternativa sin modificar el diccionario. El operador `in` comprueba claves, no valores.
+        El valor predeterminado debe distinguirse de un valor legítimo: si `None` puede ser un dato válido,
+        usarlo también como señal de ausencia crea ambigüedad. El contrato debe indicar si la ausencia es
+        error, caso esperado o dato que requiere imputación posterior.
+      en: >-
+        `d[key]` requires the key and raises `KeyError` when absent. `d.get(key, default)` supplies an
+        alternative without modifying the dictionary. `in` tests keys, not values. A default must be
+        distinguishable from legitimate data; using `None` for both a valid value and absence is ambiguous.
+      da: >-
+        `d[key]` kræver nøglen og giver `KeyError`, hvis den mangler. `d.get(key, default)` giver et
+        alternativ uden at ændre ordbogen. `in` tester nøgler. Fravær skal defineres i kontrakten.
+    linked_objectives: [m07.o2]
+
+  - id: mutation-views-and-safe-traversal
+    title:
+      es: Mutación, vistas y recorrido seguro
+      en: Mutation, views, and safe traversal
+      da: Mutation, views og sikkert gennemløb
+    body:
+      es: >-
+        La asignación inserta o actualiza; `del` exige una clave existente y `pop` elimina y retorna.
+        `keys()`, `values()` e `items()` producen vistas dinámicas. Cambiar el tamaño del diccionario
+        durante un recorrido directo puede producir `RuntimeError` o lógica incompleta. Para eliminar
+        múltiples entradas se recorre una copia de las claves o se construye un diccionario nuevo.
+        Cuando se necesita un orden reproducible, debe ordenarse explícitamente la salida.
+      en: >-
+        Assignment inserts or updates; `del` requires an existing key, and `pop` removes and returns.
+        `keys()`, `values()`, and `items()` are dynamic views. Changing dictionary size during direct
+        traversal may raise `RuntimeError` or produce incomplete logic. Traverse a key copy or build a
+        new dictionary. Sort explicitly when reproducible output order is required.
+      da: >-
+        Tildeling indsætter eller opdaterer; `del` kræver en eksisterende nøgle, og `pop` fjerner og
+        returnerer. Views er dynamiske. Ændr ikke ordbogens størrelse under direkte gennemløb.
+    linked_objectives: [m07.o2, m07.o3]
+
+  - id: frequencies-and-grouping
+    title:
+      es: Frecuencias, normalización y agrupación
+      en: Frequencies, normalization, and grouping
+      da: Frekvenser, normalisering og gruppering
+    body:
+      es: >-
+        Una tabla de frecuencia usa cada categoría como clave y su conteo como valor. El patrón
+        `counts[key] = counts.get(key, 0) + 1` expresa acumulación. Para agrupar, cada clave puede
+        almacenar una lista; el grupo se crea antes de añadir. La normalización debe ocurrir antes
+        de construir la clave para evitar que variantes equivalentes se conviertan en categorías distintas.
+        El resultado debe documentar cómo trata valores vacíos, desconocidos y mayúsculas.
+      en: >-
+        A frequency table uses each category as a key and its count as the value. The pattern
+        `counts[key] = counts.get(key, 0) + 1` expresses accumulation. Grouping often maps each key to
+        a list. Normalize before creating the key so equivalent variants do not fragment categories.
+      da: >-
+        En frekvenstabel bruger kategori som nøgle og antal som værdi. Ved gruppering kan hver nøgle
+        gemme en liste. Normalisér før nøglen oprettes, så ækvivalente kategorier ikke fragmenteres.
+    linked_objectives: [m07.o4]
+
+  - id: nested-records-and-schema
+    title:
+      es: Registros anidados y esquema
+      en: Nested records and schema
+      da: Indlejrede poster og skema
+    body:
+      es: >-
+        Un diccionario puede contener diccionarios, listas y valores escalares. Esta flexibilidad exige
+        un esquema explícito: claves obligatorias, tipos esperados, campos opcionales y comportamiento
+        ante datos desconocidos. Encadenar accesos directos vuelve frágil el código. La validación debe
+        ocurrir en la frontera antes del cálculo y debe conservar contexto suficiente para localizar el
+        registro y el campo defectuoso.
+      en: >-
+        A dictionary may contain dictionaries, lists, and scalars. This flexibility requires an explicit
+        schema: required keys, expected types, optional fields, and behavior for unknown data. Long chains
+        of direct access are fragile. Validate at the boundary and preserve enough context to locate the
+        defective record and field.
+      da: >-
+        En ordbog kan indeholde andre ordbøger, lister og skalarer. Fleksibiliteten kræver et eksplicit
+        skema og validering ved grænsen før beregning.
+    linked_objectives: [m07.o5]
+
+  - id: set-semantics
+    title:
+      es: Conjuntos, unicidad y pertenencia
+      en: Sets, uniqueness, and membership
+      da: Mængder, entydighed og medlemskab
+    body:
+      es: >-
+        Un conjunto almacena elementos únicos y hashables. No representa posiciones ni duplicados y
+        no debe usarse cuando la multiplicidad sea información. `set(values)` elimina duplicados;
+        `add` inserta, `discard` elimina sin error si falta y `remove` exige presencia. La pertenencia
+        expresa la intención de consulta con claridad, pero la conversión a conjunto pierde el orden
+        original y la frecuencia de aparición.
+      en: >-
+        A set stores unique hashable elements. It represents neither position nor duplicates and should
+        not be used when multiplicity matters. `set(values)` deduplicates; `add` inserts, `discard`
+        removes without error, and `remove` requires presence. Converting to a set loses original order
+        and frequency.
+      da: >-
+        En mængde gemmer unikke hashbare elementer. Den repræsenterer hverken position eller dubletter.
+        Konvertering til en mængde mister rækkefølge og frekvens.
+    linked_objectives: [m07.o6, m07.o8]
+
+  - id: set-algebra
+    title:
+      es: Álgebra de conjuntos y significado direccional
+      en: Set algebra and directional meaning
+      da: Mængdealgebra og retningsbestemt betydning
+    body:
+      es: >-
+        La unión `A | B` reúne elementos presentes en cualquiera; la intersección `A & B` conserva los
+        comunes; la diferencia `A - B` conserva los presentes en A y ausentes en B; la diferencia simétrica
+        `A ^ B` conserva los exclusivos de una sola colección. La diferencia es direccional. Los operadores
+        de subconjunto permiten expresar cobertura, pero una conclusión correcta depende de definir qué
+        representa cada conjunto.
+      en: >-
+        Union `A | B` contains elements from either set; intersection `A & B` contains common elements;
+        difference `A - B` contains elements in A but not B; symmetric difference `A ^ B` contains elements
+        exclusive to one set. Difference is directional, and interpretation depends on set meaning.
+      da: >-
+        Union samler elementer, snit bevarer fælles elementer, differens er retningsbestemt, og symmetrisk
+        differens bevarer elementer, der kun findes i én mængde.
+    linked_objectives: [m07.o7]
+
+  - id: choosing-a-data-structure
+    title:
+      es: Selección de estructura por contrato
+      en: Structure selection by contract
+      da: Valg af struktur ud fra kontrakt
+    body:
+      es: >-
+        Una lista conserva orden y multiplicidad y admite mutación; una tupla comunica un registro ordenado
+        y estable; un diccionario relaciona claves con valores; un conjunto representa unicidad y pertenencia.
+        La elección debe comenzar por las preguntas del problema: ¿se necesita posición?, ¿clave?, ¿duplicados?,
+        ¿orden reproducible?, ¿actualización?, ¿comparación por pertenencia? Convertir entre estructuras puede ser
+        útil, pero cada conversión puede perder información.
+      en: >-
+        A list preserves order and multiplicity and supports mutation; a tuple communicates an ordered stable
+        record; a dictionary maps keys to values; a set represents uniqueness and membership. Selection begins
+        from problem requirements, and conversions may lose information.
+      da: >-
+        Lister bevarer rækkefølge og multiplicitet, tupler kommunikerer stabile poster, ordbøger knytter nøgler
+        til værdier, og mængder repræsenterer entydighed. Valget skal følge problemets kontrakt.
+    linked_objectives: [m07.o8]
+
+worked_examples:
+  - id: dm857.m07.e01
+    title:
+      es: Construir una tabla de frecuencias normalizada
+      en: Build a normalized frequency table
+      da: Byg en normaliseret frekvenstabel
+    problem:
+      es: Contar etiquetas sintéticas ignorando espacios externos y diferencias entre mayúsculas y minúsculas.
+      en: Count synthetic labels while ignoring outer whitespace and case differences.
+      da: Tæl syntetiske etiketter uden hensyn til ydre whitespace og forskel på store og små bogstaver.
+    assumptions:
+      - every input element is a string
+      - empty normalized labels are excluded and reported separately
+    reasoning:
+      es:
+        - Normalizar cada etiqueta antes de usarla como clave.
+        - Separar el conteo de entradas vacías.
+        - Incrementar mediante un valor predeterminado de cero.
+      en:
+        - Normalize each label before using it as a key.
+        - Count empty normalized inputs separately.
+        - Increment from a default value of zero.
+      da:
+        - Normalisér hver etiket før den bruges som nøgle.
+        - Tæl tomme værdier separat.
+        - Forøg fra standardværdien nul.
+    code: |-
+      labels = ["Control", " case ", "CONTROL", "", "Case"]
+      counts = {}
+      empty_count = 0
+
+      for raw in labels:
+          key = raw.strip().casefold()
+          if not key:
+              empty_count += 1
+              continue
+          counts[key] = counts.get(key, 0) + 1
+
+      print(counts)
+      print(empty_count)
+    expected_output: |-
+      {'control': 2, 'case': 2}
+      1
+    validation:
+      - equivalent labels share one key
+      - empty input is not silently merged with a valid category
+      - total counted plus empty_count equals input length
+    explanation:
+      es: La normalización precede al conteo y el invariante conserva el número total de observaciones.
+      en: Normalization precedes counting, and the invariant preserves the total number of observations.
+      da: Normalisering sker før optælling, og invarianten bevarer det samlede antal observationer.
+    limitations:
+      - casefolding may be inappropriate when case has domain meaning
+    linked_objectives: [m07.o2, m07.o3, m07.o4]
+
+  - id: dm857.m07.e02
+    title:
+      es: Comparar dos colecciones mediante conjuntos
+      en: Compare two collections using sets
+      da: Sammenlign to samlinger med mængder
+    problem:
+      es: Identificar elementos comunes, exclusivos del primer lote y presentes en exactamente uno de dos lotes sintéticos.
+      en: Identify common elements, elements exclusive to the first synthetic batch, and elements present in exactly one batch.
+      da: Identificér fælles elementer, elementer kun i første syntetiske batch og elementer i præcis én batch.
+    assumptions:
+      - only presence matters
+      - duplicate multiplicity is irrelevant
+    code: |-
+      batch_a = {"G1", "G2", "G3"}
+      batch_b = {"G2", "G3", "G4"}
+
+      common = batch_a & batch_b
+      only_a = batch_a - batch_b
+      exclusive = batch_a ^ batch_b
+
+      print(sorted(common))
+      print(sorted(only_a))
+      print(sorted(exclusive))
+    expected_output: |-
+      ['G2', 'G3']
+      ['G1']
+      ['G1', 'G4']
+    validation:
+      - common is a subset of each input
+      - only_a is disjoint from batch_b
+      - exclusive equals the union minus the intersection
+    explanation:
+      es: La ordenación se aplica solo al presentar; las operaciones dependen de pertenencia, no de posición.
+      en: Sorting is only for presentation; operations depend on membership, not position.
+      da: Sortering bruges kun til præsentation; operationerne afhænger af medlemskab.
+    limitations:
+      - duplicate counts are intentionally discarded
+    linked_objectives: [m07.o6, m07.o7]
+
+  - id: dm857.m07.e03
+    title:
+      es: Validar un registro anidado antes de resumirlo
+      en: Validate a nested record before summarizing it
+      da: Validér en indlejret post før opsummering
+    problem:
+      es: Validar que un registro sintético contenga `sample_id`, una lista `values` no vacía y un estado permitido antes de calcular la media.
+      en: Validate that a synthetic record contains `sample_id`, a non-empty `values` list, and an allowed status before computing a mean.
+      da: Validér at en syntetisk post indeholder `sample_id`, en ikke-tom liste `values` og en tilladt status før gennemsnit beregnes.
+    code: |-
+      record = {"sample_id": "S01", "values": [2.0, 4.0], "status": "valid"}
+      required = {"sample_id", "values", "status"}
+      allowed_status = {"valid", "review"}
+
+      missing = required - record.keys()
+      if missing:
+          raise ValueError(f"missing keys: {sorted(missing)}")
+      if not isinstance(record["values"], list) or not record["values"]:
+          raise ValueError("values must be a non-empty list")
+      if record["status"] not in allowed_status:
+          raise ValueError("unsupported status")
+
+      mean_value = sum(record["values"]) / len(record["values"])
+      print(record["sample_id"], mean_value)
+    expected_output: S01 3.0
+    validation:
+      - missing keys are reported before calculation
+      - empty values never cause division by zero
+      - unsupported status is rejected
+    explanation:
+      es: El esquema convierte una estructura flexible en un contrato verificable.
+      en: The schema turns a flexible structure into a verifiable contract.
+      da: Skemaet gør en fleksibel struktur til en verificerbar kontrakt.
+    limitations:
+      - numeric element types require additional validation in production code
+    linked_objectives: [m07.o2, m07.o5, m07.o8]
+
+practice_exercises:
+  - id: dm857.m07.p01
+    activity_type: code_tracing
+    difficulty: foundational
+    prompt:
+      es: Predice `d` después de `d = {'a': 1}; d['b'] = 2; d['a'] = 3`.
+      en: Predict `d` after `d = {'a': 1}; d['b'] = 2; d['a'] = 3`.
+      da: Forudsig `d` efter `d = {'a': 1}; d['b'] = 2; d['a'] = 3`.
+    reference_solution: "{'a': 3, 'b': 2}"
+    explanation:
+      es: Una clave existente se actualiza; no se duplica.
+      en: An existing key is updated rather than duplicated.
+      da: En eksisterende nøgle opdateres og duplikeres ikke.
+    linked_objectives: [m07.o1]
+
+  - id: dm857.m07.p02
+    activity_type: debugging
+    difficulty: foundational
+    prompt:
+      es: Explica por qué `data[[1, 2]] = 'x'` falla y propone una clave válida equivalente.
+      en: Explain why `data[[1, 2]] = 'x'` fails and propose an equivalent valid key.
+      da: Forklar hvorfor `data[[1, 2]] = 'x'` fejler, og foreslå en tilsvarende gyldig nøgle.
+    reference_solution:
+      es: La lista no es hashable; puede usarse la tupla `(1, 2)` si sus componentes representan una identidad estable.
+      en: A list is not hashable; tuple `(1, 2)` can be used if its components define stable identity.
+      da: En liste er ikke hashbar; tuplen `(1, 2)` kan bruges ved stabil identitet.
+    linked_objectives: [m07.o1]
+
+  - id: dm857.m07.p03
+    activity_type: data_interpretation
+    difficulty: intermediate
+    prompt:
+      es: Un diccionario devuelve `None` con `get`, pero `None` también es un valor válido. Diseña un contrato no ambiguo.
+      en: A dictionary returns `None` with `get`, but `None` is also a valid value. Design an unambiguous contract.
+      da: En ordbog returnerer `None` med `get`, men `None` er også en gyldig værdi. Design en entydig kontrakt.
+    reference_solution:
+      es: Comprobar primero `key in d`, usar acceso estricto o emplear un objeto centinela único.
+      en: Check `key in d`, use strict access, or use a unique sentinel object.
+      da: Kontrollér `key in d`, brug streng adgang eller et unikt sentinelobjekt.
+    linked_objectives: [m07.o2]
+
+  - id: dm857.m07.p04
+    activity_type: pipeline_design
+    difficulty: intermediate
+    prompt:
+      es: Diseña un pipeline para normalizar etiquetas, agrupar registros por etiqueta y conservar el orden interno de cada grupo.
+      en: Design a pipeline to normalize labels, group records by label, and preserve within-group order.
+      da: Design en pipeline til at normalisere etiketter, gruppere poster og bevare rækkefølgen i hver gruppe.
+    accepted_answer_elements:
+      - normalization occurs before key creation
+      - dictionary maps normalized labels to lists
+      - records are appended in input order
+      - empty or invalid labels follow an explicit policy
+    linked_objectives: [m07.o4, m07.o5, m07.o8]
+
+  - id: dm857.m07.p05
+    activity_type: method_selection
+    difficulty: intermediate
+    prompt:
+      es: Elige una estructura para cada caso: historial cronológico con duplicados, registro fijo de coordenadas, búsqueda por identificador y conjunto de permisos únicos.
+      en: Choose a structure for: chronological history with duplicates, fixed coordinate record, lookup by identifier, and unique permissions.
+      da: Vælg struktur til kronologisk historik med dubletter, fast koordinatpost, opslag efter id og unikke tilladelser.
+    reference_solution:
+      es: Lista, tupla, diccionario y conjunto, respectivamente.
+      en: List, tuple, dictionary, and set, respectively.
+      da: Liste, tuple, ordbog og mængde.
+    explanation:
+      es: La estructura sigue orden, estabilidad, identidad y unicidad.
+      en: Structure follows order, stability, identity, and uniqueness requirements.
+      da: Strukturen følger krav til rækkefølge, stabilitet, identitet og entydighed.
+    linked_objectives: [m07.o8]
+
+  - id: dm857.m07.p06
+    activity_type: test_design
+    difficulty: advanced
+    prompt:
+      es: Diseña pruebas para una función que compare dos conjuntos y retorne comunes, solo izquierda y solo derecha.
+      en: Design tests for a function returning common, left-only, and right-only elements.
+      da: Design test til en funktion, der returnerer fælles, kun venstre og kun højre elementer.
+    accepted_answer_elements:
+      - both inputs empty
+      - identical inputs
+      - disjoint inputs
+      - partial overlap
+      - duplicate source values before conversion
+      - invariants for disjointness and union reconstruction
+    linked_objectives: [m07.o6, m07.o7]
+
+objective_bank:
+  - id: dm857.m07.q01
+    activity_type: multiple_choice
+    difficulty: foundational
+    prompt: {es: ¿Qué requisito debe cumplir una clave de diccionario?, en: What requirement must a dictionary key satisfy?, da: Hvilket krav skal en ordbogsnøgle opfylde?}
+    options:
+      - id: hashable
+        text: {es: Ser hashable., en: Be hashable., da: Være hashbar.}
+      - id: mutable
+        text: {es: Ser mutable., en: Be mutable., da: Være muterbar.}
+      - id: numeric
+        text: {es: Ser numérica., en: Be numeric., da: Være numerisk.}
+    correct_option_ids: [hashable]
+    explanation: {es: La tabla hash necesita una identidad estable., en: Hash lookup requires stable identity., da: Hashopslag kræver stabil identitet.}
+  - id: dm857.m07.q02
+    activity_type: true_false
+    difficulty: foundational
+    prompt: {es: '`key in d` comprueba si `key` aparece entre las claves.', en: '`key in d` checks whether `key` is among the keys.', da: '`key in d` kontrollerer om `key` findes blandt nøglerne.'}
+    correct_answer: true
+    explanation: {es: La pertenencia directa opera sobre claves., en: Direct membership operates on keys., da: Direkte medlemskab gælder nøgler.}
+  - id: dm857.m07.q03
+    activity_type: multiple_choice
+    difficulty: foundational
+    prompt: {es: ¿Qué hace `d.get('x', 0)` cuando falta `x`?, en: What does `d.get('x', 0)` do when `x` is absent?, da: Hvad gør `d.get('x', 0)`, når `x` mangler?}
+    options:
+      - id: returns_zero
+        text: {es: Retorna 0 sin insertar la clave., en: Returns 0 without inserting the key., da: Returnerer 0 uden at indsætte nøglen.}
+      - id: inserts_zero
+        text: {es: Inserta la clave con 0., en: Inserts the key with 0., da: Indsætter nøglen med 0.}
+      - id: raises_keyerror
+        text: {es: Produce KeyError., en: Raises KeyError., da: Giver KeyError.}
+    correct_option_ids: [returns_zero]
+    explanation: {es: `get` no modifica el diccionario., en: `get` does not mutate the dictionary., da: `get` ændrer ikke ordbogen.}
+  - id: dm857.m07.q04
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt: {es: ¿Qué operación obtiene elementos comunes?, en: Which operation obtains common elements?, da: Hvilken operation finder fælles elementer?}
+    options:
+      - id: intersection
+        text: {es: `A & B`, en: `A & B`, da: `A & B`}
+      - id: union
+        text: {es: `A | B`, en: `A | B`, da: `A | B`}
+      - id: difference
+        text: {es: `A - B`, en: `A - B`, da: `A - B`}
+    correct_option_ids: [intersection]
+    explanation: {es: La intersección conserva miembros presentes en ambos., en: Intersection preserves members present in both., da: Snit bevarer medlemmer i begge.}
+  - id: dm857.m07.q05
+    activity_type: true_false
+    difficulty: intermediate
+    prompt: {es: Convertir una lista a conjunto conserva la multiplicidad., en: Converting a list to a set preserves multiplicity., da: Konvertering af en liste til en mængde bevarer multiplicitet.}
+    correct_answer: false
+    explanation: {es: Los duplicados se eliminan., en: Duplicates are removed., da: Dubletter fjernes.}
+  - id: dm857.m07.q06
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt: {es: ¿Cuál es la mejor estructura para buscar un registro por identificador único?, en: Which structure best supports lookup by unique identifier?, da: Hvilken struktur er bedst til opslag efter unikt id?}
+    options:
+      - id: dictionary
+        text: {es: Diccionario., en: Dictionary., da: Ordbog.}
+      - id: tuple
+        text: {es: Tupla., en: Tuple., da: Tuple.}
+      - id: set
+        text: {es: Conjunto sin valores asociados., en: Set without associated values., da: Mængde uden tilknyttede værdier.}
+    correct_option_ids: [dictionary]
+    explanation: {es: El identificador funciona como clave., en: The identifier acts as the key., da: Id'et fungerer som nøgle.}
+  - id: dm857.m07.q07
+    activity_type: true_false
+    difficulty: intermediate
+    prompt: {es: `A - B` siempre es igual a `B - A`., en: `A - B` always equals `B - A`., da: `A - B` er altid lig `B - A`.}
+    correct_answer: false
+    explanation: {es: La diferencia es direccional., en: Difference is directional., da: Differens er retningsbestemt.}
+  - id: dm857.m07.q08
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt: {es: ¿Qué práctica evita modificar el tamaño del diccionario durante el recorrido?, en: What practice avoids changing dictionary size during traversal?, da: Hvilken praksis undgår ændring af ordbogens størrelse under gennemløb?}
+    options:
+      - id: key_copy
+        text: {es: Recorrer `list(d)` o construir un resultado nuevo., en: Traverse `list(d)` or build a new result., da: Gennemløb `list(d)` eller byg et nyt resultat.}
+      - id: direct_delete
+        text: {es: Eliminar directamente dentro de `for key in d`., en: Delete directly inside `for key in d`., da: Slet direkte i `for key in d`.}
+      - id: use_values
+        text: {es: Recorrer valores y eliminar claves., en: Traverse values and delete keys., da: Gennemløb værdier og slet nøgler.}
+    correct_option_ids: [key_copy]
+    explanation: {es: La copia fija el conjunto de claves recorrido., en: The copy fixes the traversed key set., da: Kopien fastlægger det gennemløbne nøglesæt.}
+  - id: dm857.m07.q09
+    activity_type: multiple_choice
+    difficulty: advanced
+    prompt: {es: ¿Qué invariante debe cumplir una tabla de frecuencias?, en: What invariant should a frequency table satisfy?, da: Hvilken invariant bør en frekvenstabel opfylde?}
+    options:
+      - id: count_total
+        text: {es: La suma de conteos coincide con las observaciones aceptadas., en: Sum of counts equals accepted observations., da: Summen af antal svarer til accepterede observationer.}
+      - id: sorted_keys
+        text: {es: Las claves siempre están ordenadas., en: Keys are always sorted., da: Nøgler er altid sorterede.}
+      - id: unique_counts
+        text: {es: Todos los conteos son distintos., en: All counts are distinct., da: Alle antal er forskellige.}
+    correct_option_ids: [count_total]
+    explanation: {es: El total detecta pérdidas o dobles conteos., en: The total detects losses or double counting., da: Totalen afslører tab eller dobbelttælling.}
+  - id: dm857.m07.q10
+    activity_type: multiple_choice
+    difficulty: advanced
+    prompt: {es: ¿Cuándo no debe reemplazarse una lista por un conjunto?, en: When should a list not be replaced by a set?, da: Hvornår bør en liste ikke erstattes af en mængde?}
+    options:
+      - id: multiplicity_matters
+        text: {es: Cuando importan orden o duplicados., en: When order or duplicates matter., da: Når rækkefølge eller dubletter er vigtige.}
+      - id: membership_only
+        text: {es: Cuando solo importa pertenencia., en: When only membership matters., da: Når kun medlemskab betyder noget.}
+      - id: deduplication
+        text: {es: Cuando se desea eliminar duplicados., en: When deduplication is desired., da: Når dubletter skal fjernes.}
+    correct_option_ids: [multiplicity_matters]
+    explanation: {es: El conjunto elimina precisamente esa información., en: A set discards exactly that information., da: En mængde kasserer netop denne information.}
+
+assessment_items:
+  - id: dm857.m07.a01
+    activity_type: pipeline_design
+    difficulty: intermediate
+    prompt:
+      es: >-
+        Diseña un pipeline que reciba registros sintéticos con una etiqueta y un valor, normalice la etiqueta,
+        agrupe valores por etiqueta y produzca conteo, media y número de entradas rechazadas. Define el contrato
+        de entrada y pruebas de invariantes.
+      en: >-
+        Design a pipeline that receives synthetic records with a label and value, normalizes the label,
+        groups values by label, and reports count, mean, and rejected entries. Define the input contract
+        and invariant tests.
+      da: >-
+        Design en pipeline der modtager syntetiske poster med etiket og værdi, normaliserer etiketten,
+        grupperer værdier og rapporterer antal, gennemsnit og afviste poster. Definér kontrakt og invarianter.
+    accepted_answer_elements:
+      - explicit schema and validation policy
+      - normalization before dictionary key creation
+      - dictionary of lists or dictionary of running summaries
+      - empty-group and invalid-value handling
+      - accepted plus rejected equals input count
+    rubric:
+      - {criterion: data_contract, points: 2}
+      - {criterion: correct_grouping_and_summary, points: 4}
+      - {criterion: invalid_data_policy, points: 2}
+      - {criterion: invariant_tests, points: 2}
+    linked_objectives: [m07.o2, m07.o4, m07.o5, m07.o8]
+
+  - id: dm857.m07.a02
+    activity_type: debugging
+    difficulty: advanced
+    prompt:
+      es: >-
+        Un programa elimina claves dentro de `for key in data:` y falla de forma intermitente. Diagnostica
+        el problema, propone dos correcciones y compara sus efectos sobre memoria y legibilidad.
+      en: >-
+        A program deletes keys inside `for key in data:` and fails intermittently. Diagnose the issue,
+        propose two corrections, and compare their memory and readability effects.
+      da: >-
+        Et program sletter nøgler i `for key in data:` og fejler periodisk. Diagnostisér problemet,
+        foreslå to rettelser og sammenlign hukommelse og læsbarhed.
+    accepted_answer_elements:
+      - dictionary size changes during direct traversal
+      - traverse a key copy and delete
+      - build a filtered dictionary
+      - trade-off between mutation and new allocation
+    rubric:
+      - {criterion: diagnosis, points: 3}
+      - {criterion: two_valid_corrections, points: 3}
+      - {criterion: tradeoff_analysis, points: 3}
+      - {criterion: test_case, points: 1}
+    linked_objectives: [m07.o2, m07.o3, m07.o8]
+
+  - id: dm857.m07.a03
+    activity_type: oral_explanation
+    difficulty: advanced
+    prompt:
+      es: >-
+        Defiende la elección entre lista, diccionario y conjunto para representar una cohorte con identificadores,
+        visitas repetidas y estados únicos por visita. Explica qué información perdería cada simplificación.
+      en: >-
+        Defend the choice among list, dictionary, and set for representing a cohort with identifiers,
+        repeated visits, and unique states per visit. Explain what each simplification would lose.
+      da: >-
+        Forsvar valget mellem liste, ordbog og mængde til en kohorte med id'er, gentagne besøg og unikke
+        tilstande pr. besøg. Forklar hvilket informationsindhold hver forenkling mister.
+    accepted_answer_elements:
+      - identifiers suggest dictionary indexing
+      - repeated visits require ordered multiplicity, often a list
+      - unique states may be represented by a set
+      - nested composite structure is justified
+      - loss of order, multiplicity, or value association is explained
+    rubric:
+      - {criterion: requirement_analysis, points: 3}
+      - {criterion: justified_composite_structure, points: 4}
+      - {criterion: information_loss_analysis, points: 2}
+      - {criterion: clarity, points: 1}
+    linked_objectives: [m07.o5, m07.o6, m07.o8]
+
+flashcards:
+  source_file: ../flashcards/dm857_m07_flashcards.yaml
+  expected_count: 24
+
+glossary:
+  - id: term.dictionary
+    term: {es: diccionario, en: dictionary, da: ordbog}
+    definition: {es: Colección mutable de asociaciones clave-valor., en: Mutable collection of key-value mappings., da: Muterbar samling af nøgle-værdi-relationer.}
+  - id: term.key
+    term: {es: clave, en: key, da: nøgle}
+    definition: {es: Objeto hashable que identifica una entrada., en: Hashable object identifying an entry., da: Hashbart objekt der identificerer en post.}
+  - id: term.hashable
+    term: {es: hashable, en: hashable, da: hashbar}
+    definition: {es: Objeto con hash estable apto para claves o miembros de conjuntos., en: Object with a stable hash suitable for keys or set members., da: Objekt med stabil hash egnet som nøgle eller mængdemedlem.}
+  - id: term.mapping
+    term: {es: mapeo, en: mapping, da: mapping}
+    definition: {es: Relación que asocia claves con valores., en: Relation associating keys with values., da: Relation der knytter nøgler til værdier.}
+  - id: term.sentinel
+    term: {es: centinela, en: sentinel, da: sentinel}
+    definition: {es: Objeto único usado para representar un estado especial sin ambigüedad., en: Unique object representing a special state without ambiguity., da: Unikt objekt der repræsenterer en særlig tilstand entydigt.}
+  - id: term.frequency_table
+    term: {es: tabla de frecuencias, en: frequency table, da: frekvenstabel}
+    definition: {es: Asociación entre categorías y conteos., en: Mapping from categories to counts., da: Mapping fra kategorier til antal.}
+  - id: term.grouping
+    term: {es: agrupación, en: grouping, da: gruppering}
+    definition: {es: Organización de elementos bajo una clave compartida., en: Organization of elements under a shared key., da: Organisering af elementer under en fælles nøgle.}
+  - id: term.set
+    term: {es: conjunto, en: set, da: mængde}
+    definition: {es: Colección mutable de elementos únicos y hashables., en: Mutable collection of unique hashable elements., da: Muterbar samling af unikke hashbare elementer.}
+  - id: term.intersection
+    term: {es: intersección, en: intersection, da: snit}
+    definition: {es: Elementos presentes en ambos conjuntos., en: Elements present in both sets., da: Elementer der findes i begge mængder.}
+  - id: term.symmetric_difference
+    term: {es: diferencia simétrica, en: symmetric difference, da: symmetrisk differens}
+    definition: {es: Elementos presentes en exactamente uno de dos conjuntos., en: Elements present in exactly one of two sets., da: Elementer der findes i præcis én af to mængder.}
+
+hidden_guided_support:
+  visibility: hidden_from_standard_reader
+  canonical_explanation:
+    es: >-
+      El núcleo del módulo es representar explícitamente la relación entre la pregunta y la estructura.
+      Los diccionarios resuelven identidad y asociación; los conjuntos resuelven unicidad y pertenencia.
+      La corrección requiere definir ausencia, normalización, multiplicidad y orden antes de programar.
+      Las invariantes de conteo, cobertura y disjunción proporcionan evidencia verificable.
+    en: >-
+      The core idea is to connect problem requirements to structure. Dictionaries solve identity and
+      association; sets solve uniqueness and membership. Correctness requires defining absence,
+      normalization, multiplicity, and order before programming. Count, coverage, and disjointness
+      invariants provide verifiable evidence.
+    da: >-
+      Modulets kerne er koblingen mellem problemkrav og datastruktur. Ordbøger løser identitet og relation,
+      mens mængder løser entydighed og medlemskab. Fravær, normalisering, multiplicitet og rækkefølge skal
+      defineres før implementering.
+  misconceptions:
+    - id: m07.mc01
+      incorrect: "A dictionary key can be any Python object."
+      correction: "Keys must be hashable; mutable lists and dictionaries are not valid keys."
+    - id: m07.mc02
+      incorrect: "get inserts the default when a key is absent."
+      correction: "get returns the default without mutating the dictionary."
+    - id: m07.mc03
+      incorrect: "A set is simply a faster list."
+      correction: "A set changes semantics by discarding order and multiplicity."
+    - id: m07.mc04
+      incorrect: "A - B and B - A are interchangeable."
+      correction: "Set difference is directional."
+    - id: m07.mc05
+      incorrect: "Insertion order should be treated as the scientific meaning of a dictionary."
+      correction: "Order must be made explicit when it matters to output or interpretation."
+  socratic_questions:
+    - What information identifies one record independently of position?
+    - Is absence an error, an expected case, or a valid stored value?
+    - Does the problem preserve duplicate counts or only membership?
+    - Which invariant would reveal lost or duplicated observations?
+    - What information is lost when converting the current structure?
+  grading_criteria:
+    - Correctness of keys, values, and absence contract.
+    - Preservation of required order and multiplicity.
+    - Correct interpretation of set operations.
+    - Explicit validation of nested record shape.
+    - Tests covering empty, missing, duplicate, and overlapping cases.
+  response_constraints:
+    - Do not recommend a set when duplicate counts or chronological order are required.
+    - Do not treat `None` as unambiguous absence without checking the contract.
+    - Require normalization rules to be justified by the data semantics.
+    - Distinguish insertion/update from access and deletion.
+    - Ask for invariants when reviewing frequency or grouping code.
+  retrieval_fragments:
+    - id: m07.r01
+      topic: dictionary_access
+      content: "Use strict access when absence is an error; use tolerant access only with an explicit, non-ambiguous absence contract."
+    - id: m07.r02
+      topic: frequency_invariant
+      content: "For accepted observations, the sum of category counts must equal the number of accepted input records."
+    - id: m07.r03
+      topic: set_information_loss
+      content: "Converting to a set removes duplicates and should not be used when multiplicity or original order is evidence."
+    - id: m07.r04
+      topic: structure_selection
+      content: "Choose structure from requirements for order, identity, multiplicity, mutation, and membership—not from habit."
+
+source_map:
+  - section: official_learning_outcomes
+    source: official_sdu_course_description
+  - section: concepts_and_examples
+    source: original_synthesis_informed_by_python_language_reference_and_course_material
+  - section: assessment_and_flashcards
+    source: original_authored_material
+
+limitations:
+  - Examples use synthetic labels and records and do not define biomedical data standards.
+  - Performance statements are qualitative and do not replace profiling with representative data.
+  - Dictionary insertion order is a language property, but scientific output ordering remains an explicit design choice.
+
+academic_quality_checklist:
+  trilingual_semantic_parity: reviewed
+  objective_concept_alignment: reviewed
+  worked_example_outputs: manually_verified
+  boundary_and_empty_cases: included
+  misconceptions_addressed: included
+  biomedical_claims: synthetic_only
+  copyright_status: original_synthesis
