@@ -1,0 +1,163 @@
+array objects. shape, ndim, size, and dtype are contractual properties; axis identifies '
+ 'the reduced dimension and reshape is valid only when element count is preserved. Views may '
+ 'share memory, so mutation can propagate to the original array. Vectorization expresses '
+ 'operations over complete arrays and broadcasting aligns dimensions from the right. A '
+ 'compatible operation may still be scientifically wrong when samples, variables, or units are '
+ 'oriented incorrectly. pandas organizes data as index-aligned Series and DataFrame objects. '
+ 'loc selects labels and iloc positions; indexes may represent identity and alignment may '
+ 'introduce missing values. NaN, None, and pd.NA require an explicit policy. dropna and fillna '
+ 'change the analyzed population. groupby changes granularity and merge may multiply rows when '
+ 'keys are not unique, so cardinality and counts must be checked. Matplotlib supports '
+ 'reproducible figures through explicit figure and axes objects. Plot type, axes, units, '
+ 'limits, and legend should match the question without exaggerating differences. Scientific '
+ 'validation combines plots with numeric checks of shape, range, dtypes, missingness, counts, '
+ 'and equivalence to simple implementations. Biomedical examples in this module are '
+ 'programming and data-analysis exercises; they are not laboratory protocols, diagnostic '
+ 'criteria, or clinical recommendations.',
+ 'Biblioteker udvider Python gennem moduler og pakker der eksponerer en API. Korrekt brug '
+ 'kræver kendskab til det importerede namespace, læsning af signaturer og dokumentation, '
+ 'kontrol af accepterede typer og returformer samt registrering af versioner. Et virtuelt '
+ 'miljø isolerer afhængigheder, så andre projekter ikke lydløst ændrer adfærd. '
+ 'Reproducerbarhed omfatter Python-version, direkte og transitive pakker, platform, tilfældige '
+ 'seeds, inputdata og parametre. NumPy repræsenterer numeriske data med homogene '
+ 'ndarray-objekter. shape, ndim, size og dtype er kontraktlige egenskaber; axis angiver '
+ 'reduktionsdimensionen, og reshape er kun gyldig når antallet af elementer bevares. Views kan '
+ 'dele hukommelse, så mutation kan påvirke originalen. Vektorisering udtrykker operationer '
+ 'over hele arrays, og broadcasting justerer dimensioner fra højre. En kompatibel operation '
+ 'kan stadig være videnskabeligt forkert hvis prøver, variable eller enheder er orienteret '
+ 'forkert. pandas organiserer data i Series og DataFrame justeret efter indeks. loc vælger '
+ 'etiketter og iloc positioner; indeks kan repræsentere identitet og justering kan introducere '
+ 'manglende værdier. NaN, None og pd.NA kræver en eksplicit politik. groupby ændrer '
+ 'granularitet, og merge kan mangedoble rækker ved ikke-entydige nøgler. Matplotlib '
+ 'understøtter reproducerbare figurer med eksplicitte figure- og axes-objekter. Validering '
+ 'kombinerer plots med numeriske kontroller af form, interval, datatyper, manglende værdier og '
+ 'antal. Biomedicinske eksempler er programmerings- og dataanalyseøvelser; de er ikke '
+ 'laboratorieprotokoller, diagnostiske kriterier eller kliniske anbefalinger.'),
+        (('Un import vincula nombres dentro de un espacio de nombres.',
+  'An import binds names inside a namespace.',
+  'En import binder navne i et namespace.'),
+ ('La API pública documentada es el contrato estable esperado.',
+  'The documented public API is the expected stable contract.',
+  'Den dokumenterede offentlige API er den forventede stabile kontrakt.'),
+ ('Un entorno virtual aísla dependencias por proyecto.',
+  'A virtual environment isolates dependencies per project.',
+  'Et virtuelt miljø isolerer afhængigheder pr. projekt.'),
+ ('La reproducibilidad incluye versiones, datos y parámetros.',
+  'Reproducibility includes versions, data, and parameters.',
+  'Reproducerbarhed omfatter versioner, data og parametre.'),
+ ('shape, ndim, size y dtype describen un ndarray.',
+  'shape, ndim, size, and dtype describe an ndarray.',
+  'shape, ndim, size og dtype beskriver et ndarray.'),
+ ('axis determina la dimensión reducida.',
+  'axis determines the reduced dimension.',
+  'axis bestemmer reduktionsdimensionen.'),
+ ('Una vista puede compartir memoria con el array original.',
+  'A view may share memory with the original array.',
+  'Et view kan dele hukommelse med det oprindelige array.'),
+ ('Broadcasting alinea dimensiones desde la derecha.',
+  'Broadcasting aligns dimensions from the right.',
+  'Broadcasting justerer dimensioner fra højre.'),
+ ('Compatibilidad de formas no garantiza corrección semántica.',
+  'Shape compatibility does not guarantee semantic correctness.',
+  'Formkompatibilitet garanterer ikke semantisk korrekthed.'),
+ ('loc usa etiquetas e iloc posiciones.',
+  'loc uses labels and iloc positions.',
+  'loc bruger etiketter og iloc positioner.'),
+ ('La alineación por índice puede introducir ausencias.',
+  'Index alignment may introduce missingness.',
+  'Indeksjustering kan introducere manglende værdier.'),
+ ('merge debe validar cardinalidad y conteos.',
+  'merge should validate cardinality and counts.',
+  'merge bør validere kardinalitet og antal.'),
+ ('Una figura necesita ejes, unidades y límites honestos.',
+  'A figure needs honest axes, units, and limits.',
+  'En figur behøver ærlige akser, enheder og grænser.'),
+ ('Los gráficos deben acompañarse de controles numéricos.',
+  'Plots should be paired with numeric checks.',
+  'Plots bør ledsages af numeriske kontroller.')),
+        (('Suponer que import * mejora la claridad.',
+  'Assuming import * improves clarity.',
+  'At antage at import * forbedrer klarhed.'),
+ ('Confundir el entorno global con el entorno del proyecto.',
+  'Confusing the global environment with the project environment.',
+  'At forveksle globalt miljø med projektmiljø.'),
+ ('Creer que fijar ninguna versión es reproducible.',
+  'Believing no version constraints are reproducible.',
+  'At tro at ingen versionsbegrænsninger er reproducerbare.'),
+ ('Ignorar dtype porque los valores se ven correctos.',
+  'Ignoring dtype because values look correct.',
+  'At ignorere dtype fordi værdierne ser korrekte ud.'),
+ ('Confundir axis=0 y axis=1.',
+  'Confusing axis=0 and axis=1.',
+  'At forveksle axis=0 og axis=1.'),
+ ('Suponer que reshape copia siempre los datos.',
+  'Assuming reshape always copies data.',
+  'At antage at reshape altid kopierer data.'),
+ ('Aceptar cualquier broadcasting que no lance error.',
+  'Accepting any broadcasting that raises no error.',
+  'At acceptere broadcasting blot fordi der ikke opstår fejl.'),
+ ('Usar loc e iloc como sinónimos.',
+  'Using loc and iloc as synonyms.',
+  'At bruge loc og iloc som synonymer.'),
+ ('Tratar NaN como cero.', 'Treating NaN as zero.', 'At behandle NaN som nul.'),
+ ('Hacer merge sin revisar claves duplicadas.',
+  'Merging without checking duplicate keys.',
+  'At merge uden at kontrollere dublerede nøgler.'),
+ ('Creer que una figura sustituye la validación numérica.',
+  'Believing a figure replaces numeric validation.',
+  'At tro at en figur erstatter numerisk validering.'),
+ ('Usar ejes truncados para magnificar diferencias.',
+  'Using truncated axes to magnify differences.',
+  'At bruge afkortede akser til at forstørre forskelle.')),
+        (('¿Qué nombre introduce exactamente este import?',
+  'Which exact name does this import introduce?',
+  'Hvilket præcist navn introducerer denne import?'),
+ ('¿Qué versión y entorno produjeron el resultado?',
+  'Which version and environment produced the result?',
+  'Hvilken version og hvilket miljø producerede resultatet?'),
+ ('¿Qué shape y dtype esperas antes de calcular?',
+  'Which shape and dtype do you expect before computing?',
+  'Hvilken shape og dtype forventer du før beregning?'),
+ ('¿Qué eje representa muestras y cuál variables?',
+  'Which axis represents samples and which variables?',
+  'Hvilken akse repræsenterer prøver og hvilken variable?'),
+ ('¿Las formas son compatibles por intención o por accidente?',
+  'Are the shapes compatible by intent or accident?',
+  'Er formerne kompatible med vilje eller ved et tilfælde?'),
+ ('¿Esta selección usa etiquetas o posiciones?',
+  'Does this selection use labels or positions?',
+  'Bruger denne udvælgelse etiketter eller positioner?'),
+ ('¿Qué significa un valor ausente en este conjunto?',
+  'What does a missing value mean in this dataset?',
+  'Hvad betyder en manglende værdi i dette datasæt?'),
+ ('¿Las claves del merge son únicas en ambos lados?',
+  'Are merge keys unique on both sides?',
+  'Er merge-nøglerne entydige på begge sider?'),
+ ('¿Cómo cambió el número de filas tras la transformación?',
+  'How did row count change after the transformation?',
+  'Hvordan ændrede antallet af rækker sig efter transformationen?'),
+ ('¿Qué tipo de gráfico responde a la pregunta?',
+  'Which plot type answers the question?',
+  'Hvilken plottype besvarer spørgsmålet?'),
+ ('¿Las unidades y límites de los ejes están explícitos?',
+  'Are axis units and limits explicit?',
+  'Er akseenheder og grænser eksplicitte?'),
+ ('¿Qué control simple podría detectar un resultado erróneo?',
+  'Which simple check could detect a wrong result?',
+  'Hvilken enkel kontrol kunne opdage et forkert resultat?')),
+        (('Usa imports explícitos y legibles.',
+  'Uses explicit readable imports.',
+  'Bruger eksplicitte læsbare imports.'),
+ ('Registra entorno y versiones.',
+  'Records environment and versions.',
+  'Registrerer miljø og versioner.'),
+ ('Comprueba shape y dtype.', 'Checks shape and dtype.', 'Kontrollerer shape og dtype.'),
+ ('Interpreta axis correctamente.', 'Interprets axis correctly.', 'Fortolker axis korrekt.'),
+ ('Justifica broadcasting.', 'Justifies broadcasting.', 'Begrunder broadcasting.'),
+ ('Distingue loc e iloc.', 'Distinguishes loc and iloc.', 'Skelner mellem loc og iloc.'),
+ ('Define una política de ausencias.',
+  'Defines a missing-data policy.',
+  'Definerer en politik for manglende data.'),
+ ('Valida cardinalidad de joins.',
+  'Validates join cardinality.',
+  'Validerer
