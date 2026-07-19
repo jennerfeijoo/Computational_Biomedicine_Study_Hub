@@ -57,8 +57,7 @@ def test_module_14_objective_bank_has_stable_locale_independent_identity() -> No
     assert len(LOCALIZED_OBJECTIVE_QUESTION_BANK_14) == 30
     assert len({item.item_id for item in LOCALIZED_OBJECTIVE_QUESTION_BANK_14}) == 30
     assert all(
-        item.item_id.startswith("dm857.m14.bank.")
-        for item in LOCALIZED_OBJECTIVE_QUESTION_BANK_14
+        item.item_id.startswith("dm857.m14.bank.") for item in LOCALIZED_OBJECTIVE_QUESTION_BANK_14
     )
     assert all(
         item.activity_type in {ActivityType.MULTIPLE_CHOICE, ActivityType.TRUE_FALSE}

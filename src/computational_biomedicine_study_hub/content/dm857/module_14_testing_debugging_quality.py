@@ -573,7 +573,13 @@ _PRACTICES = (
             "Distinguish failure, error, and defect in a testing workflow.",
             "Skeln mellem failure, error og defect i et testworkflow.",
         ),
-        (("Relaciona observación y causa.", "Relate observation and cause.", "Knyt observation og årsag."),),
+        (
+            (
+                "Relaciona observación y causa.",
+                "Relate observation and cause.",
+                "Knyt observation og årsag.",
+            ),
+        ),
         (
             "Un fallo es una conducta observada incorrecta; un error puede describir un estado o acción humana incorrecta; un defecto es la causa incorporada al artefacto.",
             "A failure is observed incorrect behavior; an error may describe an incorrect human action or state; a defect is the cause embedded in the artifact.",
@@ -594,7 +600,13 @@ _PRACTICES = (
             "Trace which cases a three-row @pytest.mark.parametrize executes.",
             "Gennemgå hvilke cases en @pytest.mark.parametrize med tre rækker udfører.",
         ),
-        (("Cada fila crea una invocación.", "Each row creates one invocation.", "Hver række skaber ét kald."),),
+        (
+            (
+                "Cada fila crea una invocación.",
+                "Each row creates one invocation.",
+                "Hver række skaber ét kald.",
+            ),
+        ),
         (
             "La función de prueba se ejecuta tres veces, una por conjunto de argumentos, y cada caso se informa de forma independiente.",
             "The test function runs three times, once per argument set, and each case is reported independently.",
@@ -615,7 +627,13 @@ _PRACTICES = (
             "A test passes although the incorrect function never executes. Diagnose it.",
             "En test består selv om den forkerte funktion aldrig udføres. Diagnosticér.",
         ),
-        (("Revisa acción y aserción.", "Inspect action and assertion.", "Undersøg handling og assertion."),),
+        (
+            (
+                "Revisa acción y aserción.",
+                "Inspect action and assertion.",
+                "Undersøg handling og assertion.",
+            ),
+        ),
         (
             "La prueba puede limitarse a comprobar datos preparados o una constante. Debe ejecutar la unidad real y verificar un resultado que cambie si la implementación falla.",
             "The test may only check prepared data or a constant. It should execute the real unit and verify a result that changes when the implementation is wrong.",
@@ -653,7 +671,13 @@ _PRACTICES = (
             "Complete a parametrized test for boundary values.",
             "Færdiggør en parametriseret test for grænseværdier.",
         ),
-        (("Incluye el decorador y una aserción.", "Include the decorator and an assertion.", "Medtag decorator og assertion."),),
+        (
+            (
+                "Incluye el decorador y una aserción.",
+                "Include the decorator and an assertion.",
+                "Medtag decorator og assertion.",
+            ),
+        ),
         (
             "@pytest.mark.parametrize(('value', 'expected'), [(0, False), (1, True)])\ndef test_is_positive(value, expected):\n    assert is_positive(value) is expected",
             "@pytest.mark.parametrize(('value', 'expected'), [(0, False), (1, True)])\ndef test_is_positive(value, expected):\n    assert is_positive(value) is expected",
@@ -674,7 +698,13 @@ _PRACTICES = (
             "A suite has 99% coverage but fails on empty inputs. Interpret it.",
             "En suite har 99 % coverage men fejler på tomme input. Fortolk.",
         ),
-        (("Cobertura mide ejecución, no calidad del contrato.", "Coverage measures execution, not contract quality.", "Coverage måler udførelse, ikke kontraktkvalitet."),),
+        (
+            (
+                "Cobertura mide ejecución, no calidad del contrato.",
+                "Coverage measures execution, not contract quality.",
+                "Coverage måler udførelse, ikke kontraktkvalitet.",
+            ),
+        ),
         (
             "La cobertura alta no garantiza casos frontera ni aserciones significativas. Debe añadirse el caso vacío y revisar qué conductas están realmente verificadas.",
             "High coverage does not guarantee boundary cases or meaningful assertions. Add the empty case and review which behaviors are actually verified.",
@@ -695,7 +725,13 @@ _PRACTICES = (
             "Order a debugging workflow: reproduce, reduce, hypothesize, inspect, fix, regression-test.",
             "Ordén et fejlsøgningsworkflow: reproducer, reducer, formulér hypotese, undersøg, ret, regressionstest.",
         ),
-        (("La corrección sigue a la evidencia.", "The fix follows evidence.", "Rettelsen følger evidensen."),),
+        (
+            (
+                "La corrección sigue a la evidencia.",
+                "The fix follows evidence.",
+                "Rettelsen følger evidensen.",
+            ),
+        ),
         (
             "Reproducir → reducir → formular hipótesis → inspeccionar → corregir → añadir prueba de regresión.",
             "Reproduce → reduce → form a hypothesis → inspect → fix → add a regression test.",
@@ -716,7 +752,13 @@ _PRACTICES = (
             "Design tests for a function that loads, validates, and summarizes a table.",
             "Design tests for en funktion der indlæser, validerer og opsummerer en tabel.",
         ),
-        (("Separa responsabilidades y niveles.", "Separate responsibilities and levels.", "Adskil ansvar og niveauer."),),
+        (
+            (
+                "Separa responsabilidades y niveles.",
+                "Separate responsibilities and levels.",
+                "Adskil ansvar og niveauer.",
+            ),
+        ),
         (
             "Probar validadores puros con casos parametrizados; probar carga con archivos temporales; comprobar errores de esquema; integrar con una tabla pequeña; validar conteos, tipos y ausencia de estado compartido.",
             "Test pure validators with parametrized cases; test loading with temporary files; check schema errors; integrate with a small table; validate counts, types, and absence of shared state.",
@@ -737,7 +779,13 @@ _PRACTICES = (
             "Explain why mocking everything can reduce confidence.",
             "Forklar hvorfor mocking af alt kan reducere tilliden.",
         ),
-        (("Compara aislamiento y realidad.", "Compare isolation and reality.", "Sammenlign isolation og virkelighed."),),
+        (
+            (
+                "Compara aislamiento y realidad.",
+                "Compare isolation and reality.",
+                "Sammenlign isolation og virkelighed.",
+            ),
+        ),
         (
             "Los mocks aíslan dependencias, pero una prueba puede terminar verificando sólo interacciones artificiales. Deben usarse en límites variables y combinarse con pruebas que integren componentes reales.",
             "Mocks isolate dependencies, but a test may end up checking only artificial interactions. Use them at variable boundaries and combine them with tests integrating real components.",
@@ -758,7 +806,13 @@ _PRACTICES = (
             "A test depends on execution order. Propose a fix.",
             "En test afhænger af udførelsesrækkefølgen. Foreslå en rettelse.",
         ),
-        (("Busca estado global mutable.", "Look for mutable global state.", "Søg efter mutabel global tilstand."),),
+        (
+            (
+                "Busca estado global mutable.",
+                "Look for mutable global state.",
+                "Søg efter mutabel global tilstand.",
+            ),
+        ),
         (
             "Crear estado nuevo por prueba, restaurar recursos modificados, evitar mutación global y usar fixtures con alcance function. Ejecutar la prueba sola y en orden aleatorio para confirmar aislamiento.",
             "Create fresh state per test, restore modified resources, avoid global mutation, and use function-scoped fixtures. Run the test alone and in randomized order to confirm isolation.",
@@ -800,7 +854,13 @@ _PRACTICES = (
             "Design a property strategy for reverse complement.",
             "Design en egenskabsstrategi for omvendt komplement.",
         ),
-        (("Incluye dominio y oráculo alternativo.", "Include domain and an alternative oracle.", "Medtag domæne og alternativt orakel."),),
+        (
+            (
+                "Incluye dominio y oráculo alternativo.",
+                "Include domain and an alternative oracle.",
+                "Medtag domæne og alternativt orakel.",
+            ),
+        ),
         (
             "Generar cadenas A/C/G/T de longitudes variadas; comprobar doble aplicación, conservación de longitud y alfabeto; conservar ejemplos conocidos; comparar algunos casos con una implementación simple independiente.",
             "Generate A/C/G/T strings of varied lengths; check double application, length and alphabet preservation; retain known examples; compare selected cases with an independent simple implementation.",
@@ -865,9 +925,23 @@ LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY = LocalizedLearningModule(
                 "Den beskytter tidligere rettet adfærd mod at dukke op igen.",
             ),
             options=(
-                ("fixed", ("Un fallo previamente corregido", "A previously fixed failure", "En tidligere rettet fejl")),
+                (
+                    "fixed",
+                    (
+                        "Un fallo previamente corregido",
+                        "A previously fixed failure",
+                        "En tidligere rettet fejl",
+                    ),
+                ),
                 ("style", ("Sólo el estilo visual", "Only visual style", "Kun visuel stil")),
-                ("speed", ("Toda degradación de velocidad", "Every speed degradation", "Enhver hastighedsforringelse")),
+                (
+                    "speed",
+                    (
+                        "Toda degradación de velocidad",
+                        "Every speed degradation",
+                        "Enhver hastighedsforringelse",
+                    ),
+                ),
             ),
             correct_option_ids=("fixed",),
         ),
@@ -929,9 +1003,30 @@ LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY = LocalizedLearningModule(
                 "Intermitterende fejl kræver kontrol af ikke-determinisme; rækkefølgefejl kræver isolation; en exception kræver læsning af traceback.",
             ),
             options=(
-                ("flaky-seed", ("Intermitente → fijar semilla y entorno", "Flaky → fix seed and environment", "Intermitterende → fastsæt seed og miljø")),
-                ("order-state", ("Depende del orden → revisar estado compartido", "Order-dependent → inspect shared state", "Rækkefølgeafhængig → undersøg delt tilstand")),
-                ("exception-trace", ("Excepción → leer traceback", "Exception → read traceback", "Exception → læs traceback")),
+                (
+                    "flaky-seed",
+                    (
+                        "Intermitente → fijar semilla y entorno",
+                        "Flaky → fix seed and environment",
+                        "Intermitterende → fastsæt seed og miljø",
+                    ),
+                ),
+                (
+                    "order-state",
+                    (
+                        "Depende del orden → revisar estado compartido",
+                        "Order-dependent → inspect shared state",
+                        "Rækkefølgeafhængig → undersøg delt tilstand",
+                    ),
+                ),
+                (
+                    "exception-trace",
+                    (
+                        "Excepción → leer traceback",
+                        "Exception → read traceback",
+                        "Exception → læs traceback",
+                    ),
+                ),
             ),
             correct_option_ids=("flaky-seed", "order-state", "exception-trace"),
         ),
@@ -1145,8 +1240,18 @@ LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY = LocalizedLearningModule(
             ),
             options=(
                 ("twice", ("rc(rc(s)) == s", "rc(rc(s)) == s", "rc(rc(s)) == s")),
-                ("empty", ("Siempre devuelve vacío", "Always returns empty", "Returnerer altid tom streng")),
-                ("longer", ("Siempre aumenta longitud", "Always increases length", "Øger altid længden")),
+                (
+                    "empty",
+                    (
+                        "Siempre devuelve vacío",
+                        "Always returns empty",
+                        "Returnerer altid tom streng",
+                    ),
+                ),
+                (
+                    "longer",
+                    ("Siempre aumenta longitud", "Always increases length", "Øger altid længden"),
+                ),
             ),
             correct_option_ids=("twice",),
         ),
@@ -1158,71 +1263,295 @@ LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY = LocalizedLearningModule(
             "Automatiserede tests omsætter adfærdskontrakter til eksekverbare kontroller. En test forbereder input og afhængigheder, udfører adfærd og verificerer observerbare resultater. Den beviser ikke universel korrekthed, men reducerer regressioner og dokumenterer forventninger. pytest finder testfunktioner og forbedrer assert-diagnostik. Arrange–Act–Assert holder forberedelse, udførelse og kontrol synligt adskilt. Parametrisering anvender samme kontrakt på typiske cases, grænser, tomme og ugyldige input uden duplikeret struktur. Fixtures håndterer genbrugelige data og ressourcer; function-scope fremmer isolation, mens bredere scopes kræver dokumentation for at tilstand ikke deles farligt. pytest.raises bør kun omslutte kaldet der forventes at give en exception. Advarsler og logs kan også være en del af kontrakten. Fejlsøgning kræver reproduktion, bevarelse af traceback, reduktion af casen, formulering af hypotese og inspektion af tilstand før kode ændres. En komplet rettelse tilføjer en regressionstest og fjerner midlertidig diagnostik. logging adskiller observerbarhed fra funktionelt output gennem niveauer og kontekst og bør ikke eksponere følsomme data. Design for testbarhed adskiller ren beregning fra I/O, injicerer variable afhængigheder og gør ikke-determinisme eksplicit. Egenskabsbaserede tests genererer flere input og kontrollerer implementeringsuafhængige invarianter som bevarelse af længde eller dobbelt omvendt komplement. Disse egenskaber supplerer konkrete eksempler, integrationstests og regressioner. Code coverage viser hvilke linjer der blev udført, ikke om tilstrækkelige kontrakter blev testet. Biomedicinske eksempler er undervisningsøvelser i programmering og kvalitetskontrol; de er ikke laboratorieprotokoller, klinisk validering eller diagnostiske anbefalinger.",
         ),
         (
-            ("Una prueba protege un contrato observable.", "A test protects an observable contract.", "En test beskytter en observerbar kontrakt."),
-            ("Arrange–Act–Assert separa responsabilidades.", "Arrange–Act–Assert separates responsibilities.", "Arrange–Act–Assert adskiller ansvar."),
-            ("La parametrización reutiliza estructura para una conducta.", "Parametrization reuses structure for one behavior.", "Parametrisering genbruger struktur for én adfærd."),
-            ("Las fixtures deben conservar aislamiento.", "Fixtures should preserve isolation.", "Fixtures bør bevare isolation."),
-            ("pytest.raises debe tener alcance estrecho.", "pytest.raises should have narrow scope.", "pytest.raises bør have smalt scope."),
-            ("Los límites deben elegirse por el contrato.", "Boundaries should follow the contract.", "Grænser bør følge kontrakten."),
-            ("El traceback contiene evidencia causal.", "The traceback contains causal evidence.", "Traceback indeholder kausal evidens."),
-            ("Una corrección requiere una prueba de regresión.", "A fix requires a regression test.", "En rettelse kræver en regressionstest."),
-            ("Logging y resultado funcional son canales distintos.", "Logging and functional output are separate channels.", "Logging og funktionelt output er separate kanaler."),
-            ("La inyección controla dependencias variables.", "Injection controls variable dependencies.", "Injektion kontrollerer variable afhængigheder."),
-            ("Las propiedades comprueban invariantes generales.", "Properties check general invariants.", "Egenskaber kontrollerer generelle invarianter."),
-            ("La cobertura no equivale a corrección.", "Coverage does not equal correctness.", "Coverage er ikke det samme som korrekthed."),
-            ("Las pruebas unitarias e integradas responden preguntas distintas.", "Unit and integration tests answer different questions.", "Enheds- og integrationstests besvarer forskellige spørgsmål."),
-            ("Las pruebas deben ser repetibles y diagnósticas.", "Tests should be repeatable and diagnostic.", "Tests bør være gentagelige og diagnostiske."),
+            (
+                "Una prueba protege un contrato observable.",
+                "A test protects an observable contract.",
+                "En test beskytter en observerbar kontrakt.",
+            ),
+            (
+                "Arrange–Act–Assert separa responsabilidades.",
+                "Arrange–Act–Assert separates responsibilities.",
+                "Arrange–Act–Assert adskiller ansvar.",
+            ),
+            (
+                "La parametrización reutiliza estructura para una conducta.",
+                "Parametrization reuses structure for one behavior.",
+                "Parametrisering genbruger struktur for én adfærd.",
+            ),
+            (
+                "Las fixtures deben conservar aislamiento.",
+                "Fixtures should preserve isolation.",
+                "Fixtures bør bevare isolation.",
+            ),
+            (
+                "pytest.raises debe tener alcance estrecho.",
+                "pytest.raises should have narrow scope.",
+                "pytest.raises bør have smalt scope.",
+            ),
+            (
+                "Los límites deben elegirse por el contrato.",
+                "Boundaries should follow the contract.",
+                "Grænser bør følge kontrakten.",
+            ),
+            (
+                "El traceback contiene evidencia causal.",
+                "The traceback contains causal evidence.",
+                "Traceback indeholder kausal evidens.",
+            ),
+            (
+                "Una corrección requiere una prueba de regresión.",
+                "A fix requires a regression test.",
+                "En rettelse kræver en regressionstest.",
+            ),
+            (
+                "Logging y resultado funcional son canales distintos.",
+                "Logging and functional output are separate channels.",
+                "Logging og funktionelt output er separate kanaler.",
+            ),
+            (
+                "La inyección controla dependencias variables.",
+                "Injection controls variable dependencies.",
+                "Injektion kontrollerer variable afhængigheder.",
+            ),
+            (
+                "Las propiedades comprueban invariantes generales.",
+                "Properties check general invariants.",
+                "Egenskaber kontrollerer generelle invarianter.",
+            ),
+            (
+                "La cobertura no equivale a corrección.",
+                "Coverage does not equal correctness.",
+                "Coverage er ikke det samme som korrekthed.",
+            ),
+            (
+                "Las pruebas unitarias e integradas responden preguntas distintas.",
+                "Unit and integration tests answer different questions.",
+                "Enheds- og integrationstests besvarer forskellige spørgsmål.",
+            ),
+            (
+                "Las pruebas deben ser repetibles y diagnósticas.",
+                "Tests should be repeatable and diagnostic.",
+                "Tests bør være gentagelige og diagnostiske.",
+            ),
         ),
         (
-            ("Creer que una prueba que pasa demuestra corrección total.", "Believing a passing test proves total correctness.", "At tro at en bestået test beviser total korrekthed."),
-            ("Confundir cobertura con calidad de pruebas.", "Confusing coverage with test quality.", "At forveksle coverage med testkvalitet."),
-            ("Parametrizar conductas no relacionadas.", "Parametrizing unrelated behaviors.", "At parametrisere urelateret adfærd."),
-            ("Compartir estado mutable entre pruebas.", "Sharing mutable state between tests.", "At dele mutabel tilstand mellem tests."),
-            ("Usar raises alrededor de demasiadas operaciones.", "Wrapping too many operations in raises.", "At omslutte for mange operationer i raises."),
-            ("Corregir sin reproducir el fallo.", "Fixing without reproducing the failure.", "At rette uden at reproducere fejlen."),
-            ("Cambiar varias causas a la vez.", "Changing several causes at once.", "At ændre flere årsager på én gang."),
-            ("Usar print como sistema de logging.", "Using print as a logging system.", "At bruge print som loggingsystem."),
-            ("Mockear toda dependencia real.", "Mocking every real dependency.", "At mocke enhver reel afhængighed."),
-            ("Ocultar el no determinismo dentro de funciones.", "Hiding nondeterminism inside functions.", "At skjule ikke-determinisme inde i funktioner."),
-            ("Formular propiedades que repiten la implementación.", "Writing properties that repeat the implementation.", "At formulere egenskaber der gentager implementeringen."),
-            ("Aceptar pruebas flaky como normales.", "Accepting flaky tests as normal.", "At acceptere flaky tests som normale."),
+            (
+                "Creer que una prueba que pasa demuestra corrección total.",
+                "Believing a passing test proves total correctness.",
+                "At tro at en bestået test beviser total korrekthed.",
+            ),
+            (
+                "Confundir cobertura con calidad de pruebas.",
+                "Confusing coverage with test quality.",
+                "At forveksle coverage med testkvalitet.",
+            ),
+            (
+                "Parametrizar conductas no relacionadas.",
+                "Parametrizing unrelated behaviors.",
+                "At parametrisere urelateret adfærd.",
+            ),
+            (
+                "Compartir estado mutable entre pruebas.",
+                "Sharing mutable state between tests.",
+                "At dele mutabel tilstand mellem tests.",
+            ),
+            (
+                "Usar raises alrededor de demasiadas operaciones.",
+                "Wrapping too many operations in raises.",
+                "At omslutte for mange operationer i raises.",
+            ),
+            (
+                "Corregir sin reproducir el fallo.",
+                "Fixing without reproducing the failure.",
+                "At rette uden at reproducere fejlen.",
+            ),
+            (
+                "Cambiar varias causas a la vez.",
+                "Changing several causes at once.",
+                "At ændre flere årsager på én gang.",
+            ),
+            (
+                "Usar print como sistema de logging.",
+                "Using print as a logging system.",
+                "At bruge print som loggingsystem.",
+            ),
+            (
+                "Mockear toda dependencia real.",
+                "Mocking every real dependency.",
+                "At mocke enhver reel afhængighed.",
+            ),
+            (
+                "Ocultar el no determinismo dentro de funciones.",
+                "Hiding nondeterminism inside functions.",
+                "At skjule ikke-determinisme inde i funktioner.",
+            ),
+            (
+                "Formular propiedades que repiten la implementación.",
+                "Writing properties that repeat the implementation.",
+                "At formulere egenskaber der gentager implementeringen.",
+            ),
+            (
+                "Aceptar pruebas flaky como normales.",
+                "Accepting flaky tests as normal.",
+                "At acceptere flaky tests som normale.",
+            ),
         ),
         (
-            ("¿Qué contrato protege esta prueba?", "Which contract does this test protect?", "Hvilken kontrakt beskytter denne test?"),
-            ("¿Puede la prueba fallar si la implementación es incorrecta?", "Can the test fail when the implementation is wrong?", "Kan testen fejle når implementeringen er forkert?"),
-            ("¿Qué caso frontera falta?", "Which boundary case is missing?", "Hvilket grænsetilfælde mangler?"),
+            (
+                "¿Qué contrato protege esta prueba?",
+                "Which contract does this test protect?",
+                "Hvilken kontrakt beskytter denne test?",
+            ),
+            (
+                "¿Puede la prueba fallar si la implementación es incorrecta?",
+                "Can the test fail when the implementation is wrong?",
+                "Kan testen fejle når implementeringen er forkert?",
+            ),
+            (
+                "¿Qué caso frontera falta?",
+                "Which boundary case is missing?",
+                "Hvilket grænsetilfælde mangler?",
+            ),
             ("¿Existe estado compartido?", "Is there shared state?", "Findes der delt tilstand?"),
-            ("¿El bloque raises es más amplio de lo necesario?", "Is the raises block wider than necessary?", "Er raises-blokken bredere end nødvendigt?"),
-            ("¿Cuál es la primera línea relevante del traceback?", "What is the first relevant traceback line?", "Hvad er den første relevante traceback-linje?"),
-            ("¿Qué hipótesis explica el fallo?", "Which hypothesis explains the failure?", "Hvilken hypotese forklarer fejlen?"),
-            ("¿Cómo reducirías el caso?", "How would you reduce the case?", "Hvordan ville du reducere casen?"),
-            ("¿Qué información debería registrar el log?", "Which information should the log record?", "Hvilke oplysninger bør loggen registrere?"),
-            ("¿Qué dependencia debe inyectarse?", "Which dependency should be injected?", "Hvilken afhængighed bør injiceres?"),
-            ("¿Qué invariante es independiente de la implementación?", "Which invariant is independent of implementation?", "Hvilken invariant er uafhængig af implementeringen?"),
-            ("¿Qué prueba de regresión conservará la corrección?", "Which regression test will preserve the fix?", "Hvilken regressionstest vil bevare rettelsen?"),
+            (
+                "¿El bloque raises es más amplio de lo necesario?",
+                "Is the raises block wider than necessary?",
+                "Er raises-blokken bredere end nødvendigt?",
+            ),
+            (
+                "¿Cuál es la primera línea relevante del traceback?",
+                "What is the first relevant traceback line?",
+                "Hvad er den første relevante traceback-linje?",
+            ),
+            (
+                "¿Qué hipótesis explica el fallo?",
+                "Which hypothesis explains the failure?",
+                "Hvilken hypotese forklarer fejlen?",
+            ),
+            (
+                "¿Cómo reducirías el caso?",
+                "How would you reduce the case?",
+                "Hvordan ville du reducere casen?",
+            ),
+            (
+                "¿Qué información debería registrar el log?",
+                "Which information should the log record?",
+                "Hvilke oplysninger bør loggen registrere?",
+            ),
+            (
+                "¿Qué dependencia debe inyectarse?",
+                "Which dependency should be injected?",
+                "Hvilken afhængighed bør injiceres?",
+            ),
+            (
+                "¿Qué invariante es independiente de la implementación?",
+                "Which invariant is independent of implementation?",
+                "Hvilken invariant er uafhængig af implementeringen?",
+            ),
+            (
+                "¿Qué prueba de regresión conservará la corrección?",
+                "Which regression test will preserve the fix?",
+                "Hvilken regressionstest vil bevare rettelsen?",
+            ),
         ),
         (
-            ("Identifica el contrato verificable.", "Identifies the verifiable contract.", "Identificerer den verificerbare kontrakt."),
-            ("Separa preparación, acción y aserción.", "Separates setup, action, and assertion.", "Adskiller forberedelse, handling og assertion."),
-            ("Incluye casos normales y frontera.", "Includes normal and boundary cases.", "Medtager normale cases og grænsetilfælde."),
-            ("Mantiene aislamiento y determinismo.", "Maintains isolation and determinism.", "Bevarer isolation og determinisme."),
-            ("Comprueba errores esperados con alcance preciso.", "Checks expected errors with precise scope.", "Kontrollerer forventede fejl med præcist scope."),
-            ("Usa evidencia del traceback y estado.", "Uses traceback and state evidence.", "Bruger evidens fra traceback og tilstand."),
-            ("Propone una corrección ligada a la causa.", "Proposes a fix tied to the cause.", "Foreslår en rettelse knyttet til årsagen."),
-            ("Añade una prueba de regresión.", "Adds a regression test.", "Tilføjer en regressionstest."),
-            ("Distingue logging de salida funcional.", "Distinguishes logging from functional output.", "Skelner logging fra funktionelt output."),
-            ("Formula propiedades independientes.", "Formulates independent properties.", "Formulerer uafhængige egenskaber."),
+            (
+                "Identifica el contrato verificable.",
+                "Identifies the verifiable contract.",
+                "Identificerer den verificerbare kontrakt.",
+            ),
+            (
+                "Separa preparación, acción y aserción.",
+                "Separates setup, action, and assertion.",
+                "Adskiller forberedelse, handling og assertion.",
+            ),
+            (
+                "Incluye casos normales y frontera.",
+                "Includes normal and boundary cases.",
+                "Medtager normale cases og grænsetilfælde.",
+            ),
+            (
+                "Mantiene aislamiento y determinismo.",
+                "Maintains isolation and determinism.",
+                "Bevarer isolation og determinisme.",
+            ),
+            (
+                "Comprueba errores esperados con alcance preciso.",
+                "Checks expected errors with precise scope.",
+                "Kontrollerer forventede fejl med præcist scope.",
+            ),
+            (
+                "Usa evidencia del traceback y estado.",
+                "Uses traceback and state evidence.",
+                "Bruger evidens fra traceback og tilstand.",
+            ),
+            (
+                "Propone una corrección ligada a la causa.",
+                "Proposes a fix tied to the cause.",
+                "Foreslår en rettelse knyttet til årsagen.",
+            ),
+            (
+                "Añade una prueba de regresión.",
+                "Adds a regression test.",
+                "Tilføjer en regressionstest.",
+            ),
+            (
+                "Distingue logging de salida funcional.",
+                "Distinguishes logging from functional output.",
+                "Skelner logging fra funktionelt output.",
+            ),
+            (
+                "Formula propiedades independientes.",
+                "Formulates independent properties.",
+                "Formulerer uafhængige egenskaber.",
+            ),
         ),
         (
-            ("No afirmar que las pruebas demuestran corrección universal.", "Do not claim tests prove universal correctness.", "Påstå ikke at tests beviser universel korrekthed."),
-            ("No ocultar pruebas flaky mediante reintentos.", "Do not hide flaky tests with retries.", "Skjul ikke flaky tests med genkørsler."),
-            ("No recomendar estado global mutable para facilitar pruebas.", "Do not recommend mutable global state to ease testing.", "Anbefal ikke mutabel global tilstand for at lette tests."),
-            ("No registrar datos biomédicos sensibles.", "Do not log sensitive biomedical data.", "Log ikke følsomme biomedicinske data."),
-            ("No tratar cobertura como métrica suficiente.", "Do not treat coverage as a sufficient metric.", "Behandl ikke coverage som en tilstrækkelig metrik."),
-            ("No confundir mock con evidencia de integración real.", "Do not confuse mocks with evidence of real integration.", "Forveksl ikke mocks med evidens for reel integration."),
-            ("No inventar resultados de ejecución.", "Do not invent execution results.", "Opfind ikke udførelsesresultater."),
-            ("Distinguir ejercicios didácticos de validación clínica.", "Distinguish teaching exercises from clinical validation.", "Skeln mellem undervisningsøvelser og klinisk validering."),
-            ("Responder en el idioma activo con terminología técnica precisa.", "Answer in the active language with precise technical terminology.", "Svar på det aktive sprog med præcis teknisk terminologi."),
+            (
+                "No afirmar que las pruebas demuestran corrección universal.",
+                "Do not claim tests prove universal correctness.",
+                "Påstå ikke at tests beviser universel korrekthed.",
+            ),
+            (
+                "No ocultar pruebas flaky mediante reintentos.",
+                "Do not hide flaky tests with retries.",
+                "Skjul ikke flaky tests med genkørsler.",
+            ),
+            (
+                "No recomendar estado global mutable para facilitar pruebas.",
+                "Do not recommend mutable global state to ease testing.",
+                "Anbefal ikke mutabel global tilstand for at lette tests.",
+            ),
+            (
+                "No registrar datos biomédicos sensibles.",
+                "Do not log sensitive biomedical data.",
+                "Log ikke følsomme biomedicinske data.",
+            ),
+            (
+                "No tratar cobertura como métrica suficiente.",
+                "Do not treat coverage as a sufficient metric.",
+                "Behandl ikke coverage som en tilstrækkelig metrik.",
+            ),
+            (
+                "No confundir mock con evidencia de integración real.",
+                "Do not confuse mocks with evidence of real integration.",
+                "Forveksl ikke mocks med evidens for reel integration.",
+            ),
+            (
+                "No inventar resultados de ejecución.",
+                "Do not invent execution results.",
+                "Opfind ikke udførelsesresultater.",
+            ),
+            (
+                "Distinguir ejercicios didácticos de validación clínica.",
+                "Distinguish teaching exercises from clinical validation.",
+                "Skeln mellem undervisningsøvelser og klinisk validering.",
+            ),
+            (
+                "Responder en el idioma activo con terminología técnica precisa.",
+                "Answer in the active language with precise technical terminology.",
+                "Svar på det aktive sprog med præcis teknisk terminologi.",
+            ),
         ),
         (
             "pytest official documentation on test discovery, fixtures, parametrization, exceptions, logging, and warnings.",
@@ -1239,185 +1568,526 @@ _BANK_MCQS = (
         "001",
         ("¿Qué verifica una prueba?", "What does a test verify?", "Hvad verificerer en test?"),
         (
-            ("behavior", ("Comportamiento observable", "Observable behavior", "Observerbar adfærd")),
-            ("intent", ("La intención privada del autor", "The author's private intent", "Forfatterens private hensigt")),
+            (
+                "behavior",
+                ("Comportamiento observable", "Observable behavior", "Observerbar adfærd"),
+            ),
+            (
+                "intent",
+                (
+                    "La intención privada del autor",
+                    "The author's private intent",
+                    "Forfatterens private hensigt",
+                ),
+            ),
             ("future", ("Todos los casos futuros", "All future cases", "Alle fremtidige cases")),
         ),
         "behavior",
-        ("Una prueba ejecuta y observa un contrato concreto.", "A test executes and observes a concrete contract.", "En test udfører og observerer en konkret kontrakt."),
+        (
+            "Una prueba ejecuta y observa un contrato concreto.",
+            "A test executes and observes a concrete contract.",
+            "En test udfører og observerer en konkret kontrakt.",
+        ),
     ),
     (
         "002",
-        ("¿Qué patrón separa preparación, acción y comprobación?", "Which pattern separates setup, action, and assertion?", "Hvilket mønster adskiller forberedelse, handling og assertion?"),
+        (
+            "¿Qué patrón separa preparación, acción y comprobación?",
+            "Which pattern separates setup, action, and assertion?",
+            "Hvilket mønster adskiller forberedelse, handling og assertion?",
+        ),
         (
             ("aaa", ("Arrange–Act–Assert", "Arrange–Act–Assert", "Arrange–Act–Assert")),
             ("mvc", ("Model–View–Controller", "Model–View–Controller", "Model–View–Controller")),
             ("fifo", ("FIFO", "FIFO", "FIFO")),
         ),
         "aaa",
-        ("AAA estructura una prueba legible.", "AAA structures a readable test.", "AAA strukturerer en læsbar test."),
+        (
+            "AAA estructura una prueba legible.",
+            "AAA structures a readable test.",
+            "AAA strukturerer en læsbar test.",
+        ),
     ),
     (
         "003",
-        ("¿Qué descubre pytest por convención?", "What does pytest discover by convention?", "Hvad finder pytest efter konvention?"),
+        (
+            "¿Qué descubre pytest por convención?",
+            "What does pytest discover by convention?",
+            "Hvad finder pytest efter konvention?",
+        ),
         (
             ("test", ("Funciones test_*", "test_* functions", "test_*-funktioner")),
             ("main", ("Sólo main()", "Only main()", "Kun main()")),
-            ("private", ("Sólo funciones privadas", "Only private functions", "Kun private funktioner")),
+            (
+                "private",
+                ("Sólo funciones privadas", "Only private functions", "Kun private funktioner"),
+            ),
         ),
         "test",
-        ("pytest usa convenciones de nombres para descubrir pruebas.", "pytest uses naming conventions for discovery.", "pytest bruger navnekonventioner til discovery."),
+        (
+            "pytest usa convenciones de nombres para descubrir pruebas.",
+            "pytest uses naming conventions for discovery.",
+            "pytest bruger navnekonventioner til discovery.",
+        ),
     ),
     (
         "004",
-        ("¿Qué scope crea una fixture por prueba?", "Which scope creates a fixture per test?", "Hvilket scope opretter en fixture pr. test?"),
+        (
+            "¿Qué scope crea una fixture por prueba?",
+            "Which scope creates a fixture per test?",
+            "Hvilket scope opretter en fixture pr. test?",
+        ),
         (
             ("function", ("function", "function", "function")),
             ("session", ("session", "session", "session")),
             ("module", ("module", "module", "module")),
         ),
         "function",
-        ("function maximiza aislamiento por defecto.", "function maximizes isolation by default.", "function maksimerer isolation som standard."),
+        (
+            "function maximiza aislamiento por defecto.",
+            "function maximizes isolation by default.",
+            "function maksimerer isolation som standard.",
+        ),
     ),
     (
         "005",
-        ("¿Qué fixture ofrece una ruta temporal?", "Which fixture provides a temporary path?", "Hvilken fixture giver en midlertidig sti?"),
+        (
+            "¿Qué fixture ofrece una ruta temporal?",
+            "Which fixture provides a temporary path?",
+            "Hvilken fixture giver en midlertidig sti?",
+        ),
         (
             ("tmp", ("tmp_path", "tmp_path", "tmp_path")),
             ("capsys", ("capsys", "capsys", "capsys")),
             ("monkey", ("monkeypatch", "monkeypatch", "monkeypatch")),
         ),
         "tmp",
-        ("tmp_path entrega un Path temporal aislado.", "tmp_path provides an isolated temporary Path.", "tmp_path giver en isoleret midlertidig Path."),
+        (
+            "tmp_path entrega un Path temporal aislado.",
+            "tmp_path provides an isolated temporary Path.",
+            "tmp_path giver en isoleret midlertidig Path.",
+        ),
     ),
     (
         "006",
-        ("¿Qué herramienta ejecuta el mismo test con varios datos?", "Which tool runs the same test with several data sets?", "Hvilket værktøj kører samme test med flere datasæt?"),
+        (
+            "¿Qué herramienta ejecuta el mismo test con varios datos?",
+            "Which tool runs the same test with several data sets?",
+            "Hvilket værktøj kører samme test med flere datasæt?",
+        ),
         (
             ("param", ("parametrize", "parametrize", "parametrize")),
             ("skip", ("skip", "skip", "skip")),
             ("xfail", ("xfail", "xfail", "xfail")),
         ),
         "param",
-        ("parametrize genera una invocación por fila.", "parametrize creates one invocation per row.", "parametrize skaber ét kald pr. række."),
+        (
+            "parametrize genera una invocación por fila.",
+            "parametrize creates one invocation per row.",
+            "parametrize skaber ét kald pr. række.",
+        ),
     ),
     (
         "007",
-        ("¿Cómo se comprueba ValueError?", "How is ValueError checked?", "Hvordan kontrolleres ValueError?"),
         (
-            ("raises", ("pytest.raises(ValueError)", "pytest.raises(ValueError)", "pytest.raises(ValueError)")),
+            "¿Cómo se comprueba ValueError?",
+            "How is ValueError checked?",
+            "Hvordan kontrolleres ValueError?",
+        ),
+        (
+            (
+                "raises",
+                (
+                    "pytest.raises(ValueError)",
+                    "pytest.raises(ValueError)",
+                    "pytest.raises(ValueError)",
+                ),
+            ),
             ("print", ("print(ValueError)", "print(ValueError)", "print(ValueError)")),
             ("pass", ("pass", "pass", "pass")),
         ),
         "raises",
-        ("raises verifica una excepción esperada.", "raises checks an expected exception.", "raises kontrollerer en forventet exception."),
+        (
+            "raises verifica una excepción esperada.",
+            "raises checks an expected exception.",
+            "raises kontrollerer en forventet exception.",
+        ),
     ),
     (
         "008",
-        ("¿Qué indica un test dependiente del orden?", "What does an order-dependent test indicate?", "Hvad viser en rækkefølgeafhængig test?"),
+        (
+            "¿Qué indica un test dependiente del orden?",
+            "What does an order-dependent test indicate?",
+            "Hvad viser en rækkefølgeafhængig test?",
+        ),
         (
             ("shared", ("Estado compartido", "Shared state", "Delt tilstand")),
             ("quality", ("Aislamiento perfecto", "Perfect isolation", "Perfekt isolation")),
             ("speed", ("Sólo lentitud", "Only slowness", "Kun langsomhed")),
         ),
         "shared",
-        ("La dependencia del orden suele revelar estado mutable compartido.", "Order dependence often reveals shared mutable state.", "Rækkefølgeafhængighed afslører ofte delt mutabel tilstand."),
+        (
+            "La dependencia del orden suele revelar estado mutable compartido.",
+            "Order dependence often reveals shared mutable state.",
+            "Rækkefølgeafhængighed afslører ofte delt mutabel tilstand.",
+        ),
     ),
     (
         "009",
-        ("¿Qué se consulta primero ante una excepción?", "What should be inspected first after an exception?", "Hvad bør undersøges først efter en exception?"),
+        (
+            "¿Qué se consulta primero ante una excepción?",
+            "What should be inspected first after an exception?",
+            "Hvad bør undersøges først efter en exception?",
+        ),
         (
             ("trace", ("Traceback", "Traceback", "Traceback")),
             ("theme", ("Tema visual", "Visual theme", "Visuelt tema")),
             ("coverage", ("Porcentaje de cobertura", "Coverage percentage", "Coverage-procent")),
         ),
         "trace",
-        ("El traceback localiza la ruta y el punto del fallo.", "The traceback locates the path and point of failure.", "Traceback lokaliserer fejlens vej og punkt."),
+        (
+            "El traceback localiza la ruta y el punto del fallo.",
+            "The traceback locates the path and point of failure.",
+            "Traceback lokaliserer fejlens vej og punkt.",
+        ),
     ),
     (
         "010",
-        ("¿Qué nivel describe detalle diagnóstico?", "Which level describes diagnostic detail?", "Hvilket niveau beskriver diagnostiske detaljer?"),
+        (
+            "¿Qué nivel describe detalle diagnóstico?",
+            "Which level describes diagnostic detail?",
+            "Hvilket niveau beskriver diagnostiske detaljer?",
+        ),
         (
             ("debug", ("DEBUG", "DEBUG", "DEBUG")),
             ("warning", ("WARNING", "WARNING", "WARNING")),
             ("critical", ("CRITICAL exclusivamente", "CRITICAL exclusively", "Kun CRITICAL")),
         ),
         "debug",
-        ("DEBUG se usa para detalle de diagnóstico.", "DEBUG is used for diagnostic detail.", "DEBUG bruges til diagnostiske detaljer."),
+        (
+            "DEBUG se usa para detalle de diagnóstico.",
+            "DEBUG is used for diagnostic detail.",
+            "DEBUG bruges til diagnostiske detaljer.",
+        ),
     ),
     (
         "011",
-        ("¿Qué mejora la testabilidad?", "What improves testability?", "Hvad forbedrer testbarhed?"),
+        (
+            "¿Qué mejora la testabilidad?",
+            "What improves testability?",
+            "Hvad forbedrer testbarhed?",
+        ),
         (
             ("inject", ("Inyectar dependencias", "Inject dependencies", "Injicér afhængigheder")),
             ("global", ("Aumentar estado global", "Increase global state", "Øg global tilstand")),
             ("random", ("Ocultar aleatoriedad", "Hide randomness", "Skjul tilfældighed")),
         ),
         "inject",
-        ("La inyección permite sustituir dependencias variables.", "Injection allows variable dependencies to be replaced.", "Injektion gør det muligt at erstatte variable afhængigheder."),
+        (
+            "La inyección permite sustituir dependencias variables.",
+            "Injection allows variable dependencies to be replaced.",
+            "Injektion gør det muligt at erstatte variable afhængigheder.",
+        ),
     ),
     (
         "012",
-        ("¿Qué es una propiedad de doble complemento inverso?", "What is the double reverse-complement property?", "Hvad er egenskaben for dobbelt omvendt komplement?"),
+        (
+            "¿Qué es una propiedad de doble complemento inverso?",
+            "What is the double reverse-complement property?",
+            "Hvad er egenskaben for dobbelt omvendt komplement?",
+        ),
         (
             ("same", ("rc(rc(s)) == s", "rc(rc(s)) == s", "rc(rc(s)) == s")),
             ("empty", ("rc(s) siempre vacío", "rc(s) always empty", "rc(s) altid tom")),
-            ("double", ("La longitud siempre se duplica", "Length always doubles", "Længden fordobles altid")),
+            (
+                "double",
+                (
+                    "La longitud siempre se duplica",
+                    "Length always doubles",
+                    "Længden fordobles altid",
+                ),
+            ),
         ),
         "same",
-        ("La operación es una involución sobre secuencias válidas.", "The operation is an involution on valid sequences.", "Operationen er en involution på gyldige sekvenser."),
+        (
+            "La operación es una involución sobre secuencias válidas.",
+            "The operation is an involution on valid sequences.",
+            "Operationen er en involution på gyldige sekvenser.",
+        ),
     ),
     (
         "013",
-        ("¿Qué prueba combina componentes reales?", "Which test combines real components?", "Hvilken test kombinerer reelle komponenter?"),
+        (
+            "¿Qué prueba combina componentes reales?",
+            "Which test combines real components?",
+            "Hvilken test kombinerer reelle komponenter?",
+        ),
         (
             ("integration", ("Prueba de integración", "Integration test", "Integrationstest")),
             ("lint", ("Lint", "Lint", "Lint")),
             ("format", ("Formateo", "Formatting", "Formatering")),
         ),
         "integration",
-        ("La integración verifica interacción entre componentes.", "Integration checks interaction between components.", "Integration kontrollerer samspil mellem komponenter."),
+        (
+            "La integración verifica interacción entre componentes.",
+            "Integration checks interaction between components.",
+            "Integration kontrollerer samspil mellem komponenter.",
+        ),
     ),
     (
         "014",
-        ("¿Qué debe seguir a una corrección?", "What should follow a fix?", "Hvad bør følge en rettelse?"),
+        (
+            "¿Qué debe seguir a una corrección?",
+            "What should follow a fix?",
+            "Hvad bør følge en rettelse?",
+        ),
         (
             ("regression", ("Prueba de regresión", "Regression test", "Regressionstest")),
             ("delete", ("Eliminar todas las pruebas", "Delete all tests", "Slet alle tests")),
             ("retry", ("Sólo reintentar", "Only retry", "Kun genkør")),
         ),
         "regression",
-        ("La regresión conserva el defecto como caso verificable.", "The regression keeps the defect as a verifiable case.", "Regressionen bevarer fejlen som en verificerbar case."),
+        (
+            "La regresión conserva el defecto como caso verificable.",
+            "The regression keeps the defect as a verifiable case.",
+            "Regressionen bevarer fejlen som en verificerbar case.",
+        ),
     ),
     (
         "015",
-        ("¿Qué mide cobertura de líneas?", "What does line coverage measure?", "Hvad måler line coverage?"),
+        (
+            "¿Qué mide cobertura de líneas?",
+            "What does line coverage measure?",
+            "Hvad måler line coverage?",
+        ),
         (
             ("executed", ("Líneas ejecutadas", "Executed lines", "Udførte linjer")),
-            ("correct", ("Corrección matemática", "Mathematical correctness", "Matematisk korrekthed")),
+            (
+                "correct",
+                ("Corrección matemática", "Mathematical correctness", "Matematisk korrekthed"),
+            ),
             ("requirements", ("Todos los requisitos", "All requirements", "Alle krav")),
         ),
         "executed",
-        ("La cobertura describe ejecución, no suficiencia semántica.", "Coverage describes execution, not semantic sufficiency.", "Coverage beskriver udførelse, ikke semantisk tilstrækkelighed."),
+        (
+            "La cobertura describe ejecución, no suficiencia semántica.",
+            "Coverage describes execution, not semantic sufficiency.",
+            "Coverage beskriver udførelse, ikke semantisk tilstrækkelighed.",
+        ),
     ),
 )
 
 _BANK_TFS = (
-    ("016", ("Una prueba puede pasar por una razón incorrecta.", "A test can pass for the wrong reason.", "En test kan bestå af den forkerte grund."), True, ("Debe verificarse que ejecuta y observa el contrato real.", "Check that it executes and observes the real contract.", "Kontrollér at den udfører og observerer den reelle kontrakt.")),
-    ("017", ("Cada prueba debe depender de la anterior.", "Each test should depend on the previous one.", "Hver test bør afhænge af den foregående."), False, ("Las pruebas deben ser independientes.", "Tests should be independent.", "Tests bør være uafhængige.")),
-    ("018", ("Una fixture puede encargarse de limpieza.", "A fixture can handle cleanup.", "En fixture kan håndtere oprydning."), True, ("yield permite preparar y limpiar recursos.", "yield supports setup and cleanup.", "yield understøtter opsætning og oprydning.")),
-    ("019", ("Session scope siempre es mejor que function scope.", "Session scope is always better than function scope.", "Session-scope er altid bedre end function-scope."), False, ("El alcance depende del coste y del aislamiento requerido.", "Scope depends on cost and required isolation.", "Scope afhænger af omkostning og nødvendig isolation.")),
-    ("020", ("Parametrización elimina la necesidad de casos frontera.", "Parametrization removes the need for boundary cases.", "Parametrisering fjerner behovet for grænsetilfælde."), False, ("Los casos aún deben seleccionarse según el contrato.", "Cases still need to be selected from the contract.", "Cases skal stadig vælges ud fra kontrakten.")),
-    ("021", ("pytest.raises debe envolver sólo la operación esperada.", "pytest.raises should wrap only the expected operation.", "pytest.raises bør kun omslutte den forventede operation."), True, ("Un bloque estrecho evita falsos positivos.", "A narrow block avoids false positives.", "En smal blok undgår falske positiver.")),
-    ("022", ("Un traceback es irrelevante después de reproducir el fallo.", "A traceback is irrelevant after reproducing the failure.", "Et traceback er irrelevant efter reproduktion af fejlen."), False, ("Contiene la ruta de llamadas y el punto de excepción.", "It contains the call path and exception point.", "Det indeholder kaldestien og exception-punktet.")),
-    ("023", ("Depurar implica comprobar hipótesis.", "Debugging involves testing hypotheses.", "Fejlsøgning indebærer kontrol af hypoteser."), True, ("Los cambios deben responder a evidencia.", "Changes should respond to evidence.", "Ændringer bør reagere på evidens.")),
-    ("024", ("Una prueba flaky debe ignorarse permanentemente.", "A flaky test should be ignored permanently.", "En flaky test bør ignoreres permanent."), False, ("Debe diagnosticarse su fuente de no determinismo.", "Its source of nondeterminism should be diagnosed.", "Kilden til ikke-determinisme bør diagnosticeres.")),
-    ("025", ("Una biblioteca debe configurar siempre el logging raíz.", "A library should always configure root logging.", "Et bibliotek bør altid konfigurere root-logging."), False, ("La aplicación consumidora decide la configuración global.", "The consuming application decides global configuration.", "Den forbrugende applikation beslutter global konfiguration.")),
-    ("026", ("Los logs pueden exponer datos sensibles si ayudan a depurar.", "Logs may expose sensitive data if debugging benefits.", "Logs må eksponere følsomme data hvis det hjælper fejlsøgning."), False, ("La observabilidad debe minimizar y proteger datos.", "Observability should minimize and protect data.", "Observerbarhed bør minimere og beskytte data.")),
-    ("027", ("Separar E/S de cálculo mejora testabilidad.", "Separating I/O from computation improves testability.", "Adskillelse af I/O fra beregning forbedrer testbarhed."), True, ("El cálculo puro se prueba con entradas controladas.", "Pure computation is tested with controlled inputs.", "Ren beregning testes med kontrollerede input.")),
-    ("028", ("Las propiedades sustituyen todos los ejemplos concretos.", "Properties replace all concrete examples.", "Egenskaber erstatter alle konkrete eksempler."), False, ("Complementan ejemplos y regresiones.", "They complement examples and regressions.", "De supplerer eksempler og regressioner.")),
-    ("029", ("Una propiedad debe ser independiente de la implementación.", "A property should be independent of implementation.", "En egenskab bør være uafhængig af implementeringen."), True, ("Así puede detectar implementaciones plausibles pero incorrectas.", "That allows it to detect plausible but wrong implementations.", "Så kan den opdage plausible men forkerte implementeringer.")),
-    ("030", ("Cobertura alta garantiza aserciones significativas.", "High coverage guarantees meaningful assertions.", "Høj coverage garanterer meningsfulde assertions."), False, ("Las líneas pueden ejecutarse sin verificar resultados útiles.", "Lines may execute without useful result checks.", "Linjer kan udføres uden nyttige resultatkontroller.")),
+    (
+        "016",
+        (
+            "Una prueba puede pasar por una razón incorrecta.",
+            "A test can pass for the wrong reason.",
+            "En test kan bestå af den forkerte grund.",
+        ),
+        True,
+        (
+            "Debe verificarse que ejecuta y observa el contrato real.",
+            "Check that it executes and observes the real contract.",
+            "Kontrollér at den udfører og observerer den reelle kontrakt.",
+        ),
+    ),
+    (
+        "017",
+        (
+            "Cada prueba debe depender de la anterior.",
+            "Each test should depend on the previous one.",
+            "Hver test bør afhænge af den foregående.",
+        ),
+        False,
+        (
+            "Las pruebas deben ser independientes.",
+            "Tests should be independent.",
+            "Tests bør være uafhængige.",
+        ),
+    ),
+    (
+        "018",
+        (
+            "Una fixture puede encargarse de limpieza.",
+            "A fixture can handle cleanup.",
+            "En fixture kan håndtere oprydning.",
+        ),
+        True,
+        (
+            "yield permite preparar y limpiar recursos.",
+            "yield supports setup and cleanup.",
+            "yield understøtter opsætning og oprydning.",
+        ),
+    ),
+    (
+        "019",
+        (
+            "Session scope siempre es mejor que function scope.",
+            "Session scope is always better than function scope.",
+            "Session-scope er altid bedre end function-scope.",
+        ),
+        False,
+        (
+            "El alcance depende del coste y del aislamiento requerido.",
+            "Scope depends on cost and required isolation.",
+            "Scope afhænger af omkostning og nødvendig isolation.",
+        ),
+    ),
+    (
+        "020",
+        (
+            "Parametrización elimina la necesidad de casos frontera.",
+            "Parametrization removes the need for boundary cases.",
+            "Parametrisering fjerner behovet for grænsetilfælde.",
+        ),
+        False,
+        (
+            "Los casos aún deben seleccionarse según el contrato.",
+            "Cases still need to be selected from the contract.",
+            "Cases skal stadig vælges ud fra kontrakten.",
+        ),
+    ),
+    (
+        "021",
+        (
+            "pytest.raises debe envolver sólo la operación esperada.",
+            "pytest.raises should wrap only the expected operation.",
+            "pytest.raises bør kun omslutte den forventede operation.",
+        ),
+        True,
+        (
+            "Un bloque estrecho evita falsos positivos.",
+            "A narrow block avoids false positives.",
+            "En smal blok undgår falske positiver.",
+        ),
+    ),
+    (
+        "022",
+        (
+            "Un traceback es irrelevante después de reproducir el fallo.",
+            "A traceback is irrelevant after reproducing the failure.",
+            "Et traceback er irrelevant efter reproduktion af fejlen.",
+        ),
+        False,
+        (
+            "Contiene la ruta de llamadas y el punto de excepción.",
+            "It contains the call path and exception point.",
+            "Det indeholder kaldestien og exception-punktet.",
+        ),
+    ),
+    (
+        "023",
+        (
+            "Depurar implica comprobar hipótesis.",
+            "Debugging involves testing hypotheses.",
+            "Fejlsøgning indebærer kontrol af hypoteser.",
+        ),
+        True,
+        (
+            "Los cambios deben responder a evidencia.",
+            "Changes should respond to evidence.",
+            "Ændringer bør reagere på evidens.",
+        ),
+    ),
+    (
+        "024",
+        (
+            "Una prueba flaky debe ignorarse permanentemente.",
+            "A flaky test should be ignored permanently.",
+            "En flaky test bør ignoreres permanent.",
+        ),
+        False,
+        (
+            "Debe diagnosticarse su fuente de no determinismo.",
+            "Its source of nondeterminism should be diagnosed.",
+            "Kilden til ikke-determinisme bør diagnosticeres.",
+        ),
+    ),
+    (
+        "025",
+        (
+            "Una biblioteca debe configurar siempre el logging raíz.",
+            "A library should always configure root logging.",
+            "Et bibliotek bør altid konfigurere root-logging.",
+        ),
+        False,
+        (
+            "La aplicación consumidora decide la configuración global.",
+            "The consuming application decides global configuration.",
+            "Den forbrugende applikation beslutter global konfiguration.",
+        ),
+    ),
+    (
+        "026",
+        (
+            "Los logs pueden exponer datos sensibles si ayudan a depurar.",
+            "Logs may expose sensitive data if debugging benefits.",
+            "Logs må eksponere følsomme data hvis det hjælper fejlsøgning.",
+        ),
+        False,
+        (
+            "La observabilidad debe minimizar y proteger datos.",
+            "Observability should minimize and protect data.",
+            "Observerbarhed bør minimere og beskytte data.",
+        ),
+    ),
+    (
+        "027",
+        (
+            "Separar E/S de cálculo mejora testabilidad.",
+            "Separating I/O from computation improves testability.",
+            "Adskillelse af I/O fra beregning forbedrer testbarhed.",
+        ),
+        True,
+        (
+            "El cálculo puro se prueba con entradas controladas.",
+            "Pure computation is tested with controlled inputs.",
+            "Ren beregning testes med kontrollerede input.",
+        ),
+    ),
+    (
+        "028",
+        (
+            "Las propiedades sustituyen todos los ejemplos concretos.",
+            "Properties replace all concrete examples.",
+            "Egenskaber erstatter alle konkrete eksempler.",
+        ),
+        False,
+        (
+            "Complementan ejemplos y regresiones.",
+            "They complement examples and regressions.",
+            "De supplerer eksempler og regressioner.",
+        ),
+    ),
+    (
+        "029",
+        (
+            "Una propiedad debe ser independiente de la implementación.",
+            "A property should be independent of implementation.",
+            "En egenskab bør være uafhængig af implementeringen.",
+        ),
+        True,
+        (
+            "Así puede detectar implementaciones plausibles pero incorrectas.",
+            "That allows it to detect plausible but wrong implementations.",
+            "Så kan den opdage plausible men forkerte implementeringer.",
+        ),
+    ),
+    (
+        "030",
+        (
+            "Cobertura alta garantiza aserciones significativas.",
+            "High coverage guarantees meaningful assertions.",
+            "Høj coverage garanterer meningsfulde assertions.",
+        ),
+        False,
+        (
+            "Las líneas pueden ejecutarse sin verificar resultados útiles.",
+            "Lines may execute without useful result checks.",
+            "Linjer kan udføres uden nyttige resultatkontroller.",
+        ),
+    ),
 )
 
 LOCALIZED_OBJECTIVE_QUESTION_BANK_14 = tuple(
