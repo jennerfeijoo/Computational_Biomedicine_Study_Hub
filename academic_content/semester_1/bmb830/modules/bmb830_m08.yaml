@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Modelos lineales, ANOVA, diagnósticos e interpretación biológica
-    en: Linear models, ANOVA, diagnostics, and biological interpretation
-    da: Lineære modeller, ANOVA, diagnostik og biologisk fortolkning
+    es: "Modelos lineales, ANOVA, diagnósticos e interpretación biológica"
+    en: "Linear models, ANOVA, diagnostics, and biological interpretation"
+    da: "Lineære modeller, ANOVA, diagnostik og biologisk fortolkning"
   summary:
     es: >-
       Formulación de modelos lineales para outcomes continuos, interpretación de coeficientes,
@@ -32,18 +32,18 @@ alignment:
   later_modules: [bmb830.m09, bmb830.m10, bmb831.m04]
 
 objectives:
-  - {id: bmb830.m08.o01, text: {es: Formular un modelo lineal desde una pregunta y estimando, en: Formulate a linear model from a question and estimand, da: Formulere en lineær model fra spørgsmål og estimand}}
-  - {id: bmb830.m08.o02, text: {es: Interpretar intercepto y pendientes condicionalmente, en: Interpret intercept and slopes conditionally, da: Fortolke intercept og slopes betinget}}
-  - {id: bmb830.m08.o03, text: {es: Codificar e interpretar predictores categóricos y contrastes, en: Encode and interpret categorical predictors and contrasts, da: Kode og fortolke kategoriske predictors og kontraster}}
-  - {id: bmb830.m08.o04, text: {es: Explicar ANOVA como comparación dentro del modelo lineal, en: Explain ANOVA as comparison within the linear model, da: Forklare ANOVA som sammenligning i lineær model}}
-  - {id: bmb830.m08.o05, text: {es: Interpretar interacciones y evitar efectos principales aislados, en: Interpret interactions and avoid isolated main effects, da: Fortolke interaktioner og undgå isolerede hovedeffekter}}
-  - {id: bmb830.m08.o06, text: {es: Evaluar residuos y supuestos del modelo, en: Evaluate residuals and model assumptions, da: Evaluere residualer og modelantagelser}}
-  - {id: bmb830.m08.o07, text: {es: Detectar leverage, influencia y colinealidad, en: Detect leverage, influence, and collinearity, da: Finde leverage, influence og collinearitet}}
-  - {id: bmb830.m08.o08, text: {es: Comunicar asociaciones ajustadas, predicciones y limitaciones, en: Communicate adjusted associations, predictions, and limitations, da: Kommunikere justerede associationer, prædiktioner og begrænsninger}}
+  - {id: bmb830.m08.o01, text: {"es": "Formular un modelo lineal desde una pregunta y estimando", "en": "Formulate a linear model from a question and estimand", "da": "Formulere en lineær model fra spørgsmål og estimand"}}
+  - {id: bmb830.m08.o02, text: {"es": "Interpretar intercepto y pendientes condicionalmente", "en": "Interpret intercept and slopes conditionally", "da": "Fortolke intercept og slopes betinget"}}
+  - {id: bmb830.m08.o03, text: {"es": "Codificar e interpretar predictores categóricos y contrastes", "en": "Encode and interpret categorical predictors and contrasts", "da": "Kode og fortolke kategoriske predictors og kontraster"}}
+  - {id: bmb830.m08.o04, text: {"es": "Explicar ANOVA como comparación dentro del modelo lineal", "en": "Explain ANOVA as comparison within the linear model", "da": "Forklare ANOVA som sammenligning i lineær model"}}
+  - {id: bmb830.m08.o05, text: {"es": "Interpretar interacciones y evitar efectos principales aislados", "en": "Interpret interactions and avoid isolated main effects", "da": "Fortolke interaktioner og undgå isolerede hovedeffekter"}}
+  - {id: bmb830.m08.o06, text: {"es": "Evaluar residuos y supuestos del modelo", "en": "Evaluate residuals and model assumptions", "da": "Evaluere residualer og modelantagelser"}}
+  - {id: bmb830.m08.o07, text: {"es": "Detectar leverage, influencia y colinealidad", "en": "Detect leverage, influence, and collinearity", "da": "Finde leverage, influence og collinearitet"}}
+  - {id: bmb830.m08.o08, text: {"es": "Comunicar asociaciones ajustadas, predicciones y limitaciones", "en": "Communicate adjusted associations, predictions, and limitations", "da": "Kommunikere justerede associationer, prædiktioner og begrænsninger"}}
 
 concepts:
   - id: bmb830.m08.c01
-    title: {es: Estructura del modelo lineal, en: Linear-model structure, da: Lineær modelstruktur}
+    title: {"es": "Estructura del modelo lineal", "en": "Linear-model structure", "da": "Lineær modelstruktur"}
     body:
       es: >-
         El modelo E[Y|X]=β0+β1X1+...+βpXp describe la media condicional del outcome. El término de error representa
@@ -55,9 +55,9 @@ concepts:
       da: >-
         E[Y|X] beskriver det betingede mean. Fejlleddet er variation omkring modellen, ikke menneskelig fejl.
     key_points:
-      - {es: Linealidad se refiere a parámetros y media condicional, en: Linearity concerns parameters and the conditional mean, da: Linearitet vedrører parametre og betinget mean}
+      - {"es": "Linealidad se refiere a parámetros y media condicional", "en": "Linearity concerns parameters and the conditional mean", "da": "Linearitet vedrører parametre og betinget mean"}
   - id: bmb830.m08.c02
-    title: {es: Coeficientes condicionales, en: Conditional coefficients, da: Betingede koefficienter}
+    title: {"es": "Coeficientes condicionales", "en": "Conditional coefficients", "da": "Betingede koefficienter"}
     body:
       es: >-
         β1 es el cambio esperado en Y por una unidad de X1 manteniendo constantes los demás predictores del modelo.
@@ -69,9 +69,9 @@ concepts:
       da: >-
         β1 er forventet ændring i Y per enhed X1 med andre predictors holdt konstante. Centering kan gøre interceptet fortolkeligt.
     key_points:
-      - {es: “Ajustado por” no implica control causal válido, en: “Adjusted for” does not imply valid causal control, da: “Justeret for” indebærer ikke gyldig kausal kontrol}
+      - {"es": "“Ajustado por” no implica control causal válido", "en": "“Adjusted for” does not imply valid causal control", "da": "“Justeret for” indebærer ikke gyldig kausal kontrol"}
   - id: bmb830.m08.c03
-    title: {es: Factores y contrastes, en: Factors and contrasts, da: Faktorer og kontraster}
+    title: {"es": "Factores y contrastes", "en": "Factors and contrasts", "da": "Faktorer og kontraster"}
     body:
       es: >-
         Un factor con k niveles se representa mediante k−1 columnas bajo treatment coding, comparando cada nivel con una referencia.
@@ -83,9 +83,9 @@ concepts:
       da: >-
         En faktor med k niveauer bruger k−1 kolonner under treatment coding. Reference ændrer koefficienter, ikke fitted values.
     key_points:
-      - {es: La referencia determina la pregunta de cada coeficiente, en: Reference determines each coefficient's comparison, da: Referencen bestemmer koefficientens sammenligning}
+      - {"es": "La referencia determina la pregunta de cada coeficiente", "en": "Reference determines each coefficient's comparison", "da": "Referencen bestemmer koefficientens sammenligning"}
   - id: bmb830.m08.c04
-    title: {es: ANOVA dentro del modelo lineal, en: ANOVA within the linear model, da: ANOVA i den lineære model}
+    title: {"es": "ANOVA dentro del modelo lineal", "en": "ANOVA within the linear model", "da": "ANOVA i den lineære model"}
     body:
       es: >-
         ANOVA compara variación explicada por términos del modelo con variación residual. Una ANOVA de un factor es una regresión
@@ -97,9 +97,9 @@ concepts:
       da: >-
         ANOVA sammenligner forklaret og residual variation. One-way ANOVA er regression med kategorisk predictor.
     key_points:
-      - {es: El F global precede comparaciones específicas, en: The global F test precedes specific comparisons, da: Global F-test kommer før specifikke sammenligninger}
+      - {"es": "El F global precede comparaciones específicas", "en": "The global F test precedes specific comparisons", "da": "Global F-test kommer før specifikke sammenligninger"}
   - id: bmb830.m08.c05
-    title: {es: Interacciones, en: Interactions, da: Interaktioner}
+    title: {"es": "Interacciones", "en": "Interactions", "da": "Interaktioner"}
     body:
       es: >-
         Una interacción X1:X2 indica que la asociación de X1 con Y depende de X2. En `y ~ x1*x2`, R incluye x1, x2 e interacción.
@@ -111,9 +111,9 @@ concepts:
       da: >-
         En interaktion betyder at associationen mellem X1 og Y afhænger af X2. Hovedeffekten gælder ved X2=0 eller reference.
     key_points:
-      - {es: La interacción depende de escala, en: Interaction depends on scale, da: Interaktion afhænger af skala}
+      - {"es": "La interacción depende de escala", "en": "Interaction depends on scale", "da": "Interaktion afhænger af skala"}
   - id: bmb830.m08.c06
-    title: {es: Residuos y diagnósticos, en: Residuals and diagnostics, da: Residualer og diagnostik}
+    title: {"es": "Residuos y diagnósticos", "en": "Residuals and diagnostics", "da": "Residualer og diagnostik"}
     body:
       es: >-
         Residuo=observado−ajustado. Residuals vs fitted evalúa curvatura y varianza; QQ plot forma de residuos; scale-location
@@ -125,9 +125,9 @@ concepts:
       da: >-
         Residual=observeret−fitted. Diagnostiske plots vurderer kurvatur, varians, form og influence.
     key_points:
-      - {es: Un test de normalidad no sustituye gráficos y contexto, en: A normality test does not replace plots and context, da: En normalitetstest erstatter ikke plots og kontekst}
+      - {"es": "Un test de normalidad no sustituye gráficos y contexto", "en": "A normality test does not replace plots and context", "da": "En normalitetstest erstatter ikke plots og kontekst"}
   - id: bmb830.m08.c07
-    title: {es: Independencia y heterocedasticidad, en: Independence and heteroscedasticity, da: Uafhængighed og heteroskedasticitet}
+    title: {"es": "Independencia y heterocedasticidad", "en": "Independence and heteroscedasticity", "da": "Uafhængighed og heteroskedasticitet"}
     body:
       es: >-
         La independencia proviene del diseño; no se verifica sólo con un gráfico. Repeticiones, familias, centros o tiempo pueden inducir correlación.
@@ -139,9 +139,9 @@ concepts:
       da: >-
         Uafhængighed kommer fra designet. Heteroskedasticitet betyder varierende betinget varians og kan gøre klassiske SE ugyldige.
     key_points:
-      - {es: SE robusto no corrige confusión ni forma media incorrecta, en: Robust SE does not fix confounding or wrong mean structure, da: Robust SE retter ikke confounding eller forkert mean-struktur}
+      - {"es": "SE robusto no corrige confusión ni forma media incorrecta", "en": "Robust SE does not fix confounding or wrong mean structure", "da": "Robust SE retter ikke confounding eller forkert mean-struktur"}
   - id: bmb830.m08.c08
-    title: {es: Leverage, influencia y colinealidad, en: Leverage, influence, and collinearity, da: Leverage, influence og collinearitet}
+    title: {"es": "Leverage, influencia y colinealidad", "en": "Leverage, influence, and collinearity", "da": "Leverage, influence og collinearitet"}
     body:
       es: >-
         Leverage mide cuán inusual es una combinación de predictores; un residuo grande mide discrepancia en outcome. Influencia combina ambos y
@@ -153,67 +153,67 @@ concepts:
       da: >-
         Leverage måler usædvanlige predictor-kombinationer; influence kombinerer leverage og residual. Collinearitet gør koefficienter ustabile.
     key_points:
-      - {es: Un punto influyente se investiga, no se elimina automáticamente, en: An influential point is investigated, not automatically removed, da: Et influential punkt undersøges og slettes ikke automatisk}
+      - {"es": "Un punto influyente se investiga, no se elimina automáticamente", "en": "An influential point is investigated, not automatically removed", "da": "Et influential punkt undersøges og slettes ikke automatisk"}
 
 worked_examples:
   - id: bmb830.m08.e01
-    title: {es: Interpretación ajustada, en: Adjusted interpretation, da: Justeret fortolkning}
+    title: {"es": "Interpretación ajustada", "en": "Adjusted interpretation", "da": "Justeret fortolkning"}
     model: "lm(marker ~ age + treatment, data = df)"
-    output: {es: β_age=0.8; β_treatmentB=-3.2., en: β_age=0.8; β_treatmentB=-3.2., da: β_age=0,8; β_treatmentB=-3,2.}
-    explanation: {es: Por año de edad, el marcador aumenta 0.8 unidades manteniendo tratamiento; B difiere -3.2 respecto a referencia a igual edad., en: Per year, marker increases 0.8 holding treatment; B differs by -3.2 from reference at equal age., da: Per år stiger markøren 0,8 med behandling holdt konstant; B adskiller sig -3,2 fra reference ved samme alder.}
+    output: {"es": "β_age=0.8; β_treatmentB=-3.2.", "en": "β_age=0.8; β_treatmentB=-3.2.", "da": "β_age=0,8; β_treatmentB=-3,2."}
+    explanation: {"es": "Por año de edad, el marcador aumenta 0.8 unidades manteniendo tratamiento; B difiere -3.2 respecto a referencia a igual edad.", "en": "Per year, marker increases 0.8 holding treatment; B differs by -3.2 from reference at equal age.", "da": "Per år stiger markøren 0,8 med behandling holdt konstant; B adskiller sig -3,2 fra reference ved samme alder."}
   - id: bmb830.m08.e02
-    title: {es: Interacción tratamiento por sexo, en: Treatment-by-sex interaction, da: Behandling-køn-interaktion}
+    title: {"es": "Interacción tratamiento por sexo", "en": "Treatment-by-sex interaction", "da": "Behandling-køn-interaktion"}
     model: "lm(y ~ treatment * sex, data = df)"
-    output: {es: Interacción B:female=5., en: Interaction B:female=5., da: Interaktion B:female=5.}
-    explanation: {es: La diferencia B−A en mujeres es 5 unidades mayor que la diferencia B−A en el sexo de referencia., en: The B−A difference in women is 5 units larger than the B−A difference in the reference sex., da: B−A-forskellen hos kvinder er 5 enheder større end i referencekønnet.}
+    output: {"es": "Interacción B:female=5.", "en": "Interaction B:female=5.", "da": "Interaktion B:female=5."}
+    explanation: {"es": "La diferencia B−A en mujeres es 5 unidades mayor que la diferencia B−A en el sexo de referencia.", "en": "The B−A difference in women is 5 units larger than the B−A difference in the reference sex.", "da": "B−A-forskellen hos kvinder er 5 enheder større end i referencekønnet."}
   - id: bmb830.m08.e03
-    title: {es: Heterocedasticidad por rango, en: Range-dependent heteroscedasticity, da: Range-afhængig heteroskedasticitet}
-    problem: {es: Residuos forman embudo al crecer fitted., en: Residuals form a funnel as fitted values increase., da: Residualer danner en tragt når fitted stiger.}
-    reasoning: {es: La varianza aumenta con la media; SE clásicos y bandas pueden ser inadecuados. Evaluar transformación, modelo de varianza o SE robustos., en: Variance grows with mean; classical SEs and bands may be inadequate. Assess transformation, variance model, or robust SEs., da: Varians vokser med mean; vurder transformation, variansmodel eller robuste SE.}
-    answer: {es: No basta declarar “ANOVA robusta”; justificar alternativa y revisar estructura media., en: Do not merely label the analysis robust; justify the alternative and recheck mean structure., da: Begrund alternativ og kontrollér mean-struktur.}
+    title: {"es": "Heterocedasticidad por rango", "en": "Range-dependent heteroscedasticity", "da": "Range-afhængig heteroskedasticitet"}
+    problem: {"es": "Residuos forman embudo al crecer fitted.", "en": "Residuals form a funnel as fitted values increase.", "da": "Residualer danner en tragt når fitted stiger."}
+    reasoning: {"es": "La varianza aumenta con la media; SE clásicos y bandas pueden ser inadecuados. Evaluar transformación, modelo de varianza o SE robustos.", "en": "Variance grows with mean; classical SEs and bands may be inadequate. Assess transformation, variance model, or robust SEs.", "da": "Varians vokser med mean; vurder transformation, variansmodel eller robuste SE."}
+    answer: {"es": "No basta declarar “ANOVA robusta”; justificar alternativa y revisar estructura media.", "en": "Do not merely label the analysis robust; justify the alternative and recheck mean structure.", "da": "Begrund alternativ og kontrollér mean-struktur."}
 
 guided_practice:
-  - {id: bmb830.m08.p01, type: formula_translation, prompt: {es: Traduce ocho preguntas biológicas a fórmulas `lm()`., en: Translate eight biological questions into `lm()` formulas., da: Omsæt otte biologiske spørgsmål til `lm()`-formler.}, expected_elements: [outcome, predictors, interaction, blocking]}
-  - {id: bmb830.m08.p02, type: coefficient_interpretation, prompt: {es: Interpreta coeficientes con variables centradas, factores e interacciones., en: Interpret coefficients with centered variables, factors, and interactions., da: Fortolk koefficienter med centered variable, faktorer og interaktioner.}, expected_elements: [units, reference, conditioning, no_causal_overclaim]}
-  - {id: bmb830.m08.p03, type: anova_contrasts, prompt: {es: Ejecuta F global y contrastes planificados para cuatro grupos., en: Run a global F test and planned contrasts for four groups., da: Udfør global F-test og planlagte kontraster for fire grupper.}, expected_elements: [global_question, contrast_matrix, multiplicity]}
-  - {id: bmb830.m08.p04, type: diagnostics, prompt: {es: Diagnostica cuatro patrones residuales y propone respuestas., en: Diagnose four residual patterns and propose responses., da: Diagnosticér fire residualmønstre og foreslå løsninger.}, expected_elements: [curvature, heteroscedasticity, tails, dependence]}
-  - {id: bmb830.m08.p05, type: influence, prompt: {es: Evalúa leverage, Cook's distance y sensibilidad del ajuste., en: Evaluate leverage, Cook's distance, and fit sensitivity., da: Evaluer leverage, Cook's distance og følsomhed af fit.}, expected_elements: [data_verification, with_without, no_automatic_deletion]}
-  - {id: bmb830.m08.p06, type: publication_critique, prompt: {es: Critica una regresión ajustada presentada como causal., en: Critique an adjusted regression presented as causal., da: Kritikér en justeret regression præsenteret som kausal.}, expected_elements: [design, confounding, mediator_or_collider, corrected_claim]}
+  - {id: bmb830.m08.p01, type: formula_translation, prompt: {"es": "Traduce ocho preguntas biológicas a fórmulas `lm()`.", "en": "Translate eight biological questions into `lm()` formulas.", "da": "Omsæt otte biologiske spørgsmål til `lm()`-formler."}, expected_elements: [outcome, predictors, interaction, blocking]}
+  - {id: bmb830.m08.p02, type: coefficient_interpretation, prompt: {"es": "Interpreta coeficientes con variables centradas, factores e interacciones.", "en": "Interpret coefficients with centered variables, factors, and interactions.", "da": "Fortolk koefficienter med centered variable, faktorer og interaktioner."}, expected_elements: [units, reference, conditioning, no_causal_overclaim]}
+  - {id: bmb830.m08.p03, type: anova_contrasts, prompt: {"es": "Ejecuta F global y contrastes planificados para cuatro grupos.", "en": "Run a global F test and planned contrasts for four groups.", "da": "Udfør global F-test og planlagte kontraster for fire grupper."}, expected_elements: [global_question, contrast_matrix, multiplicity]}
+  - {id: bmb830.m08.p04, type: diagnostics, prompt: {"es": "Diagnostica cuatro patrones residuales y propone respuestas.", "en": "Diagnose four residual patterns and propose responses.", "da": "Diagnosticér fire residualmønstre og foreslå løsninger."}, expected_elements: [curvature, heteroscedasticity, tails, dependence]}
+  - {id: bmb830.m08.p05, type: influence, prompt: {"es": "Evalúa leverage, Cook's distance y sensibilidad del ajuste.", "en": "Evaluate leverage, Cook's distance, and fit sensitivity.", "da": "Evaluer leverage, Cook's distance og følsomhed af fit."}, expected_elements: [data_verification, with_without, no_automatic_deletion]}
+  - {id: bmb830.m08.p06, type: publication_critique, prompt: {"es": "Critica una regresión ajustada presentada como causal.", "en": "Critique an adjusted regression presented as causal.", "da": "Kritikér en justeret regression præsenteret som kausal."}, expected_elements: [design, confounding, mediator_or_collider, corrected_claim]}
 
 objective_bank:
-  - {id: bmb830.m08.q01, type: multiple_choice, prompt: {es: ¿Qué representa β1 en regresión múltiple?, en: What does β1 represent in multiple regression?, da: Hvad repræsenterer β1 i multipel regression?}, options: [{id: a, text: {es: Cambio esperado por unidad de X1 manteniendo otros predictores, en: Expected change per X1 unit holding other predictors, da: Forventet ændring per X1-enhed med andre predictors konstante}}, {id: b, text: {es: Correlación marginal universal, en: Universal marginal correlation, da: Universel marginal korrelation}}, {id: c, text: {es: Causalidad automática, en: Automatic causality, da: Automatisk kausalitet}}], correct_option_ids: [a], explanation: {es: Es una asociación condicional al modelo., en: It is model-conditional association., da: Det er en modelbetinget association.}}
-  - {id: bmb830.m08.q02, type: true_false, prompt: {es: Cambiar referencia de un factor cambia fitted values., en: Changing a factor reference changes fitted values., da: Ændring af faktorreference ændrer fitted values.}, correct: false, explanation: {es: Cambia parametrización, no predicciones del mismo modelo., en: It changes parameterization, not predictions from the same model., da: Det ændrer parametrisering, ikke prædiktioner.}}
-  - {id: bmb830.m08.q03, type: multiple_choice, prompt: {es: ¿Qué evalúa F global para factor de cuatro niveles?, en: What does the global F test evaluate for a four-level factor?, da: Hvad evaluerer global F-test for en faktor med fire niveauer?}, options: [{id: a, text: {es: Todos los contrastes del factor son cero, en: All factor contrasts are zero, da: Alle faktor-kontraster er nul}}, {id: b, text: {es: Cada par es distinto, en: Every pair differs, da: Hvert par er forskelligt}}, {id: c, text: {es: Normalidad perfecta, en: Perfect normality, da: Perfekt normalitet}}], correct_option_ids: [a], explanation: {es: Es una prueba conjunta., en: It is a joint test., da: Det er en fælles test.}}
-  - {id: bmb830.m08.q04, type: true_false, prompt: {es: Una interacción significativa implica que efectos principales se interpretan universalmente., en: A significant interaction means main effects are universally interpreted., da: En signifikant interaktion betyder at hovedeffekter fortolkes universelt.}, correct: false, explanation: {es: Los efectos principales aplican a referencia o cero del otro predictor., en: Main effects apply at reference or zero of the other predictor., da: Hovedeffekter gælder ved reference eller nul for den anden predictor.}}
-  - {id: bmb830.m08.q05, type: multiple_choice, prompt: {es: ¿Qué muestra curvatura en residuals vs fitted?, en: What does curvature in residuals versus fitted suggest?, da: Hvad antyder kurvatur i residuals versus fitted?}, options: [{id: a, text: {es: Estructura media no lineal, en: Nonlinear mean structure, da: Ikke-lineær mean-struktur}}, {id: b, text: {es: Clave duplicada, en: Duplicate key, da: Duplikeret nøgle}}, {id: c, text: {es: Independencia garantizada, en: Guaranteed independence, da: Garanteret uafhængighed}}], correct_option_ids: [a], explanation: {es: La forma media está mal especificada., en: The mean structure may be misspecified., da: Mean-strukturen kan være forkert specificeret.}}
-  - {id: bmb830.m08.q06, type: true_false, prompt: {es: Independencia puede verificarse completamente con QQ plot., en: Independence can be fully verified with a QQ plot., da: Uafhængighed kan verificeres fuldt med QQ-plot.}, correct: false, explanation: {es: Surge principalmente del diseño y estructura temporal o jerárquica., en: It mainly comes from design and temporal or hierarchical structure., da: Den kommer primært fra design og tidslig eller hierarkisk struktur.}}
-  - {id: bmb830.m08.q07, type: multiple_choice, prompt: {es: ¿Qué combina leverage alto y residuo grande?, en: What combines high leverage and a large residual?, da: Hvad kombinerer høj leverage og stor residual?}, options: [{id: a, text: {es: potencial influencia, en: potential influence, da: potentiel influence}}, {id: b, text: {es: normalidad, en: normality, da: normalitet}}, {id: c, text: {es: randomización, en: randomization, da: randomisering}}], correct_option_ids: [a], explanation: {es: Puede cambiar sustancialmente el ajuste., en: It may substantially change the fit., da: Det kan ændre fittet væsentligt.}}
-  - {id: bmb830.m08.q08, type: true_false, prompt: {es: Cook's distance alta obliga a eliminar una observación., en: High Cook's distance requires deleting an observation., da: Høj Cook's distance kræver sletning af observationen.}, correct: false, explanation: {es: Indica investigación y sensibilidad, no eliminación automática., en: It triggers investigation and sensitivity, not automatic deletion., da: Det kræver undersøgelse og følsomhed, ikke automatisk sletning.}}
-  - {id: bmb830.m08.q09, type: multiple_choice, prompt: {es: Efecto principal de x1 en `y~x1*x2` se interpreta cuando..., en: The x1 main effect in `y~x1*x2` applies when..., da: x1-hovedeffekten i `y~x1*x2` gælder når...}, options: [{id: a, text: {es: x2=0 o referencia, en: x2=0 or reference, da: x2=0 eller reference}}, {id: b, text: {es: x2 toma todos los valores a la vez, en: x2 takes all values simultaneously, da: x2 tager alle værdier samtidigt}}, {id: c, text: {es: no hay datos, en: no data exist, da: ingen data findes}}], correct_option_ids: [a], explanation: {es: La interacción condiciona el efecto., en: The interaction conditions the effect., da: Interaktionen betinger effekten.}}
-  - {id: bmb830.m08.q10, type: true_false, prompt: {es: Una regresión ajustada es causal por definición., en: An adjusted regression is causal by definition., da: En justeret regression er kausal per definition.}, correct: false, explanation: {es: La causalidad depende de diseño y supuestos causales, no de incluir covariables., en: Causality depends on design and causal assumptions, not covariate inclusion., da: Kausalitet afhænger af design og kausale antagelser, ikke kovariater alene.}}
+  - {id: bmb830.m08.q01, type: multiple_choice, prompt: {"es": "¿Qué representa β1 en regresión múltiple?", "en": "What does β1 represent in multiple regression?", "da": "Hvad repræsenterer β1 i multipel regression?"}, options: [{id: a, text: {"es": "Cambio esperado por unidad de X1 manteniendo otros predictores", "en": "Expected change per X1 unit holding other predictors", "da": "Forventet ændring per X1-enhed med andre predictors konstante"}}, {id: b, text: {"es": "Correlación marginal universal", "en": "Universal marginal correlation", "da": "Universel marginal korrelation"}}, {id: c, text: {"es": "Causalidad automática", "en": "Automatic causality", "da": "Automatisk kausalitet"}}], correct_option_ids: [a], explanation: {"es": "Es una asociación condicional al modelo.", "en": "It is model-conditional association.", "da": "Det er en modelbetinget association."}}
+  - {id: bmb830.m08.q02, type: true_false, prompt: {"es": "Cambiar referencia de un factor cambia fitted values.", "en": "Changing a factor reference changes fitted values.", "da": "Ændring af faktorreference ændrer fitted values."}, correct: false, explanation: {"es": "Cambia parametrización, no predicciones del mismo modelo.", "en": "It changes parameterization, not predictions from the same model.", "da": "Det ændrer parametrisering, ikke prædiktioner."}}
+  - {id: bmb830.m08.q03, type: multiple_choice, prompt: {"es": "¿Qué evalúa F global para factor de cuatro niveles?", "en": "What does the global F test evaluate for a four-level factor?", "da": "Hvad evaluerer global F-test for en faktor med fire niveauer?"}, options: [{id: a, text: {"es": "Todos los contrastes del factor son cero", "en": "All factor contrasts are zero", "da": "Alle faktor-kontraster er nul"}}, {id: b, text: {"es": "Cada par es distinto", "en": "Every pair differs", "da": "Hvert par er forskelligt"}}, {id: c, text: {"es": "Normalidad perfecta", "en": "Perfect normality", "da": "Perfekt normalitet"}}], correct_option_ids: [a], explanation: {"es": "Es una prueba conjunta.", "en": "It is a joint test.", "da": "Det er en fælles test."}}
+  - {id: bmb830.m08.q04, type: true_false, prompt: {"es": "Una interacción significativa implica que efectos principales se interpretan universalmente.", "en": "A significant interaction means main effects are universally interpreted.", "da": "En signifikant interaktion betyder at hovedeffekter fortolkes universelt."}, correct: false, explanation: {"es": "Los efectos principales aplican a referencia o cero del otro predictor.", "en": "Main effects apply at reference or zero of the other predictor.", "da": "Hovedeffekter gælder ved reference eller nul for den anden predictor."}}
+  - {id: bmb830.m08.q05, type: multiple_choice, prompt: {"es": "¿Qué muestra curvatura en residuals vs fitted?", "en": "What does curvature in residuals versus fitted suggest?", "da": "Hvad antyder kurvatur i residuals versus fitted?"}, options: [{id: a, text: {"es": "Estructura media no lineal", "en": "Nonlinear mean structure", "da": "Ikke-lineær mean-struktur"}}, {id: b, text: {"es": "Clave duplicada", "en": "Duplicate key", "da": "Duplikeret nøgle"}}, {id: c, text: {"es": "Independencia garantizada", "en": "Guaranteed independence", "da": "Garanteret uafhængighed"}}], correct_option_ids: [a], explanation: {"es": "La forma media está mal especificada.", "en": "The mean structure may be misspecified.", "da": "Mean-strukturen kan være forkert specificeret."}}
+  - {id: bmb830.m08.q06, type: true_false, prompt: {"es": "Independencia puede verificarse completamente con QQ plot.", "en": "Independence can be fully verified with a QQ plot.", "da": "Uafhængighed kan verificeres fuldt med QQ-plot."}, correct: false, explanation: {"es": "Surge principalmente del diseño y estructura temporal o jerárquica.", "en": "It mainly comes from design and temporal or hierarchical structure.", "da": "Den kommer primært fra design og tidslig eller hierarkisk struktur."}}
+  - {id: bmb830.m08.q07, type: multiple_choice, prompt: {"es": "¿Qué combina leverage alto y residuo grande?", "en": "What combines high leverage and a large residual?", "da": "Hvad kombinerer høj leverage og stor residual?"}, options: [{id: a, text: {"es": "potencial influencia", "en": "potential influence", "da": "potentiel influence"}}, {id: b, text: {"es": "normalidad", "en": "normality", "da": "normalitet"}}, {id: c, text: {"es": "randomización", "en": "randomization", "da": "randomisering"}}], correct_option_ids: [a], explanation: {"es": "Puede cambiar sustancialmente el ajuste.", "en": "It may substantially change the fit.", "da": "Det kan ændre fittet væsentligt."}}
+  - {id: bmb830.m08.q08, type: true_false, prompt: {"es": "Cook's distance alta obliga a eliminar una observación.", "en": "High Cook's distance requires deleting an observation.", "da": "Høj Cook's distance kræver sletning af observationen."}, correct: false, explanation: {"es": "Indica investigación y sensibilidad, no eliminación automática.", "en": "It triggers investigation and sensitivity, not automatic deletion.", "da": "Det kræver undersøgelse og følsomhed, ikke automatisk sletning."}}
+  - {id: bmb830.m08.q09, type: multiple_choice, prompt: {"es": "Efecto principal de x1 en `y~x1*x2` se interpreta cuando...", "en": "The x1 main effect in `y~x1*x2` applies when...", "da": "x1-hovedeffekten i `y~x1*x2` gælder når..."}, options: [{id: a, text: {"es": "x2=0 o referencia", "en": "x2=0 or reference", "da": "x2=0 eller reference"}}, {id: b, text: {"es": "x2 toma todos los valores a la vez", "en": "x2 takes all values simultaneously", "da": "x2 tager alle værdier samtidigt"}}, {id: c, text: {"es": "no hay datos", "en": "no data exist", "da": "ingen data findes"}}], correct_option_ids: [a], explanation: {"es": "La interacción condiciona el efecto.", "en": "The interaction conditions the effect.", "da": "Interaktionen betinger effekten."}}
+  - {id: bmb830.m08.q10, type: true_false, prompt: {"es": "Una regresión ajustada es causal por definición.", "en": "An adjusted regression is causal by definition.", "da": "En justeret regression er kausal per definition."}, correct: false, explanation: {"es": "La causalidad depende de diseño y supuestos causales, no de incluir covariables.", "en": "Causality depends on design and causal assumptions, not covariate inclusion.", "da": "Kausalitet afhænger af design og kausale antagelser, ikke kovariater alene."}}
 
 open_assessment:
   - id: bmb830.m08.a01
-    prompt: {es: Ajusta e interpreta un modelo lineal con factor, covariable e interacción., en: Fit and interpret a linear model with factor, covariate, and interaction., da: Fit og fortolk en lineær model med faktor, kovariat og interaktion.}
+    prompt: {"es": "Ajusta e interpreta un modelo lineal con factor, covariable e interacción.", "en": "Fit and interpret a linear model with factor, covariate, and interaction.", "da": "Fit og fortolk en lineær model med faktor, kovariat og interaktion."}
     rubric: [{criterion: formula_and_coding, points: 2}, {criterion: coefficient_interpretation, points: 3}, {criterion: contrasts_predictions, points: 3}, {criterion: limitations, points: 2}]
   - id: bmb830.m08.a02
-    prompt: {es: Realiza diagnóstico completo y propone una revisión del modelo., en: Perform complete diagnostics and propose a model revision., da: Udfør komplet diagnostik og foreslå modelrevision.}
+    prompt: {"es": "Realiza diagnóstico completo y propone una revisión del modelo.", "en": "Perform complete diagnostics and propose a model revision.", "da": "Udfør komplet diagnostik og foreslå modelrevision."}
     rubric: [{criterion: diagnostic_patterns, points: 4}, {criterion: design_dependence, points: 2}, {criterion: justified_response, points: 3}, {criterion: sensitivity, points: 1}]
   - id: bmb830.m08.a03
-    prompt: {es: Compara ANOVA, contrastes planificados y pruebas pares post hoc., en: Compare ANOVA, planned contrasts, and post-hoc pairwise tests., da: Sammenlign ANOVA, planlagte kontraster og post-hoc parvise tests.}
+    prompt: {"es": "Compara ANOVA, contrastes planificados y pruebas pares post hoc.", "en": "Compare ANOVA, planned contrasts, and post-hoc pairwise tests.", "da": "Sammenlign ANOVA, planlagte kontraster og post-hoc parvise tests."}
     rubric: [{criterion: global_vs_specific, points: 3}, {criterion: contrast_alignment, points: 3}, {criterion: multiplicity, points: 2}, {criterion: biological_interpretation, points: 2}]
 
 glossary:
-  - {id: bmb830.term.linear_model, term: {es: modelo lineal, en: linear model, da: lineær model}, definition: {es: Modelo de media condicional lineal en parámetros., en: Conditional-mean model linear in parameters., da: Betinget mean-model lineær i parametre.}}
-  - {id: bmb830.term.design_matrix, term: {es: matriz de diseño, en: design matrix, da: designmatrix}, definition: {es: Matriz que codifica predictores y contrastes del modelo., en: Matrix encoding model predictors and contrasts., da: Matrix der koder predictors og kontraster.}}
-  - {id: bmb830.term.intercept, term: {es: intercepto, en: intercept, da: intercept}, definition: {es: Media esperada en valores de referencia y cero., en: Expected mean at reference and zero predictor values., da: Forventet mean ved reference- og nulværdier.}}
-  - {id: bmb830.term.contrast, term: {es: contraste, en: contrast, da: kontrast}, definition: {es: Combinación lineal de parámetros que expresa una comparación., en: Linear combination of parameters expressing a comparison., da: Lineær kombination af parametre der udtrykker en sammenligning.}}
-  - {id: bmb830.term.interaction, term: {es: interacción, en: interaction, da: interaktion}, definition: {es: Dependencia del efecto o asociación de un predictor respecto a otro., en: Dependence of one predictor's association on another., da: Afhængighed af en predictors association af en anden.}}
-  - {id: bmb830.term.residual, term: {es: residuo, en: residual, da: residual}, definition: {es: Diferencia entre valor observado y ajustado., en: Difference between observed and fitted value., da: Forskellen mellem observeret og fitted værdi.}}
-  - {id: bmb830.term.homoscedasticity, term: {es: homocedasticidad, en: homoscedasticity, da: homoskedasticitet}, definition: {es: Varianza condicional constante de errores., en: Constant conditional error variance., da: Konstant betinget fejlvarians.}}
-  - {id: bmb830.term.leverage, term: {es: leverage, en: leverage, da: leverage}, definition: {es: Grado de excepcionalidad de una combinación de predictores., en: Unusualness of a predictor combination., da: Hvor usædvanlig en predictor-kombination er.}}
-  - {id: bmb830.term.influence, term: {es: influencia, en: influence, da: influence}, definition: {es: Cambio potencial del ajuste causado por una observación., en: Potential change in fit caused by one observation., da: Potentiel ændring af fit fra en observation.}}
-  - {id: bmb830.term.collinearity, term: {es: colinealidad, en: collinearity, da: collinearitet}, definition: {es: Dependencia fuerte entre predictores que dificulta separar coeficientes., en: Strong predictor dependence that impairs coefficient separation., da: Stærk afhængighed mellem predictors der gør koefficienter svære at adskille.}}
+  - {id: bmb830.term.linear_model, term: {"es": "modelo lineal", "en": "linear model", "da": "lineær model"}, definition: {"es": "Modelo de media condicional lineal en parámetros.", "en": "Conditional-mean model linear in parameters.", "da": "Betinget mean-model lineær i parametre."}}
+  - {id: bmb830.term.design_matrix, term: {"es": "matriz de diseño", "en": "design matrix", "da": "designmatrix"}, definition: {"es": "Matriz que codifica predictores y contrastes del modelo.", "en": "Matrix encoding model predictors and contrasts.", "da": "Matrix der koder predictors og kontraster."}}
+  - {id: bmb830.term.intercept, term: {"es": "intercepto", "en": "intercept", "da": "intercept"}, definition: {"es": "Media esperada en valores de referencia y cero.", "en": "Expected mean at reference and zero predictor values.", "da": "Forventet mean ved reference- og nulværdier."}}
+  - {id: bmb830.term.contrast, term: {"es": "contraste", "en": "contrast", "da": "kontrast"}, definition: {"es": "Combinación lineal de parámetros que expresa una comparación.", "en": "Linear combination of parameters expressing a comparison.", "da": "Lineær kombination af parametre der udtrykker en sammenligning."}}
+  - {id: bmb830.term.interaction, term: {"es": "interacción", "en": "interaction", "da": "interaktion"}, definition: {"es": "Dependencia del efecto o asociación de un predictor respecto a otro.", "en": "Dependence of one predictor's association on another.", "da": "Afhængighed af en predictors association af en anden."}}
+  - {id: bmb830.term.residual, term: {"es": "residuo", "en": "residual", "da": "residual"}, definition: {"es": "Diferencia entre valor observado y ajustado.", "en": "Difference between observed and fitted value.", "da": "Forskellen mellem observeret og fitted værdi."}}
+  - {id: bmb830.term.homoscedasticity, term: {"es": "homocedasticidad", "en": "homoscedasticity", "da": "homoskedasticitet"}, definition: {"es": "Varianza condicional constante de errores.", "en": "Constant conditional error variance.", "da": "Konstant betinget fejlvarians."}}
+  - {id: bmb830.term.leverage, term: {"es": "leverage", "en": "leverage", "da": "leverage"}, definition: {"es": "Grado de excepcionalidad de una combinación de predictores.", "en": "Unusualness of a predictor combination.", "da": "Hvor usædvanlig en predictor-kombination er."}}
+  - {id: bmb830.term.influence, term: {"es": "influencia", "en": "influence", "da": "influence"}, definition: {"es": "Cambio potencial del ajuste causado por una observación.", "en": "Potential change in fit caused by one observation.", "da": "Potentiel ændring af fit fra en observation."}}
+  - {id: bmb830.term.collinearity, term: {"es": "colinealidad", "en": "collinearity", "da": "collinearitet"}, definition: {"es": "Dependencia fuerte entre predictores que dificulta separar coeficientes.", "en": "Strong predictor dependence that impairs coefficient separation.", "da": "Stærk afhængighed mellem predictors der gør koefficienter svære at adskille."}}
 
 hidden_tutor_support:
   canonical_explanation:
@@ -246,11 +246,11 @@ hidden_tutor_support:
     - diagnose assumptions using plots and design
     - avoid automatic causal claims or deletion
   retrieval_fragments:
-    - {id: bmb830.m08.r01, topic: coefficient, text: {es: Un coeficiente múltiple es un cambio condicional manteniendo otros predictores del modelo., en: A multiple-regression coefficient is a conditional change holding other modeled predictors constant., da: En multipel regressionskoefficient er en betinget ændring med andre predictors konstante.}}
-    - {id: bmb830.m08.r02, topic: factor, text: {es: La referencia cambia la parametrización, no los fitted values., en: Reference level changes parameterization, not fitted values., da: Referencen ændrer parametrisering, ikke fitted values.}}
-    - {id: bmb830.m08.r03, topic: interaction, text: {es: Con interacción, efectos principales se interpretan en cero o referencia del otro predictor., en: With interaction, main effects apply at zero or reference of the other predictor., da: Med interaktion gælder hovedeffekter ved nul eller reference for den anden predictor.}}
-    - {id: bmb830.m08.r04, topic: diagnostics, text: {es: Diagnósticos evalúan forma media, varianza, colas e influencia; independencia proviene del diseño., en: Diagnostics assess mean shape, variance, tails, and influence; independence comes from design., da: Diagnostik vurderer mean-form, varians, tails og influence; uafhængighed kommer fra design.}}
-    - {id: bmb830.m08.r05, topic: causality, text: {es: Ajustar covariables no convierte un estudio observacional en experimento., en: Covariate adjustment does not turn an observational study into an experiment., da: Kovariatjustering gør ikke et observationelt studie til et eksperiment.}}
+    - {id: bmb830.m08.r01, topic: coefficient, text: {"es": "Un coeficiente múltiple es un cambio condicional manteniendo otros predictores del modelo.", "en": "A multiple-regression coefficient is a conditional change holding other modeled predictors constant.", "da": "En multipel regressionskoefficient er en betinget ændring med andre predictors konstante."}}
+    - {id: bmb830.m08.r02, topic: factor, text: {"es": "La referencia cambia la parametrización, no los fitted values.", "en": "Reference level changes parameterization, not fitted values.", "da": "Referencen ændrer parametrisering, ikke fitted values."}}
+    - {id: bmb830.m08.r03, topic: interaction, text: {"es": "Con interacción, efectos principales se interpretan en cero o referencia del otro predictor.", "en": "With interaction, main effects apply at zero or reference of the other predictor.", "da": "Med interaktion gælder hovedeffekter ved nul eller reference for den anden predictor."}}
+    - {id: bmb830.m08.r04, topic: diagnostics, text: {"es": "Diagnósticos evalúan forma media, varianza, colas e influencia; independencia proviene del diseño.", "en": "Diagnostics assess mean shape, variance, tails, and influence; independence comes from design.", "da": "Diagnostik vurderer mean-form, varians, tails og influence; uafhængighed kommer fra design."}}
+    - {id: bmb830.m08.r05, topic: causality, text: {"es": "Ajustar covariables no convierte un estudio observacional en experimento.", "en": "Covariate adjustment does not turn an observational study into an experiment.", "da": "Kovariatjustering gør ikke et observationelt studie til et eksperiment."}}
 
 source_map:
   - {section: linear_models_and_anova, source: repository.biostatistics.yachay}

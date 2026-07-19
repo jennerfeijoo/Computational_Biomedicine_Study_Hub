@@ -6,11 +6,11 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Evaluación acumulativa de BMB830: análisis reproducible, crítica y examen oral
-    en: BMB830 cumulative assessment: reproducible analysis, appraisal, and oral examination
-    da: BMB830 kumulativ evaluering: reproducerbar analyse, kritik og mundtlig eksamen
+    es: "Evaluación acumulativa de BMB830: análisis reproducible, crítica y examen oral"
+    en: "BMB830 cumulative assessment: reproducible analysis, appraisal, and oral examination"
+    da: "BMB830 kumulativ evaluering: reproducerbar analyse, kritik og mundtlig eksamen"
   official_format_reference:
-    en: Mandatory tutorial participation and oral examination according to the active course description.
+    en: "Mandatory tutorial participation and oral examination according to the active course description."
   note:
     es: >-
       Los tiempos, casos y rúbricas siguientes son herramientas de preparación y estructuración académica.
@@ -25,62 +25,62 @@ metadata:
 
 analysis_portfolio:
   purpose:
-    es: Demostrar capacidad de transformar un problema biológico en un análisis estadístico reproducible y defendible.
-    en: Demonstrate the ability to transform a biological problem into a reproducible and defensible statistical analysis.
-    da: Demonstrere evnen til at omsætte et biologisk problem til en reproducerbar og forsvarlig statistisk analyse.
+    es: "Demostrar capacidad de transformar un problema biológico en un análisis estadístico reproducible y defendible."
+    en: "Demonstrate the ability to transform a biological problem into a reproducible and defensible statistical analysis."
+    da: "Demonstrere evnen til at omsætte et biologisk problem til en reproducerbar og forsvarlig statistisk analyse."
   mandatory_components:
     - id: question_estimand
       description:
-        es: Pregunta biológica, población, unidad, contraste, outcome, tiempo y estimando.
-        en: Biological question, population, unit, contrast, outcome, time, and estimand.
-        da: Biologisk spørgsmål, population, enhed, kontrast, outcome, tidspunkt og estimand.
+        es: "Pregunta biológica, población, unidad, contraste, outcome, tiempo y estimando."
+        en: "Biological question, population, unit, contrast, outcome, time, and estimand."
+        da: "Biologisk spørgsmål, population, enhed, kontrast, outcome, tidspunkt og estimand."
     - id: provenance_schema
       description:
-        es: Fuente, versión, diccionario, claves, unidades, razones de ausencia y criterios de inclusión.
-        en: Source, version, dictionary, keys, units, missingness reasons, and inclusion criteria.
-        da: Kilde, version, dataordbog, nøgler, enheder, missingness-årsager og inklusionskriterier.
+        es: "Fuente, versión, diccionario, claves, unidades, razones de ausencia y criterios de inclusión."
+        en: "Source, version, dictionary, keys, units, missingness reasons, and inclusion criteria."
+        da: "Kilde, version, dataordbog, nøgler, enheder, missingness-årsager og inklusionskriterier."
     - id: quality_report
       description:
-        es: Conteos, duplicados, rangos, unidades, missingness, exclusiones y log de cambios.
-        en: Counts, duplicates, ranges, units, missingness, exclusions, and change log.
-        da: Antal, duplikater, intervaller, enheder, missingness, eksklusioner og ændringslog.
+        es: "Conteos, duplicados, rangos, unidades, missingness, exclusiones y log de cambios."
+        en: "Counts, duplicates, ranges, units, missingness, exclusions, and change log."
+        da: "Antal, duplikater, intervaller, enheder, missingness, eksklusioner og ændringslog."
     - id: descriptive_analysis
       description:
-        es: Resúmenes y figuras que muestran distribución, n, unidades, grupos y dependencia.
-        en: Summaries and figures displaying distribution, n, units, groups, and dependence.
-        da: Summaries og figurer der viser fordeling, n, enheder, grupper og afhængighed.
+        es: "Resúmenes y figuras que muestran distribución, n, unidades, grupos y dependencia."
+        en: "Summaries and figures displaying distribution, n, units, groups, and dependence."
+        da: "Summaries og figurer der viser fordeling, n, enheder, grupper og afhængighed."
     - id: inferential_model
       description:
-        es: Método alineado con estimando, diseño, escala y dependencia, con efecto e intervalo.
-        en: Method aligned with estimand, design, scale, and dependence, including effect and interval.
-        da: Metode tilpasset estimand, design, skala og afhængighed med effekt og interval.
+        es: "Método alineado con estimando, diseño, escala y dependencia, con efecto e intervalo."
+        en: "Method aligned with estimand, design, scale, and dependence, including effect and interval."
+        da: "Metode tilpasset estimand, design, skala og afhængighed med effekt og interval."
     - id: diagnostics
       description:
-        es: Diagnósticos de modelo, influencia, calidad de ajuste y violaciones relevantes.
-        en: Model diagnostics, influence, fit quality, and relevant violations.
-        da: Modeldiagnostik, influence, fitkvalitet og relevante brud.
+        es: "Diagnósticos de modelo, influencia, calidad de ajuste y violaciones relevantes."
+        en: "Model diagnostics, influence, fit quality, and relevant violations."
+        da: "Modeldiagnostik, influence, fitkvalitet og relevante brud."
     - id: sensitivity
       description:
-        es: Al menos dos decisiones plausibles evaluadas sin selección por significancia.
-        en: At least two plausible decisions evaluated without significance-driven selection.
-        da: Mindst to plausible beslutninger evalueret uden signifikansdrevet selection.
+        es: "Al menos dos decisiones plausibles evaluadas sin selección por significancia."
+        en: "At least two plausible decisions evaluated without significance-driven selection."
+        da: "Mindst to plausible beslutninger evalueret uden signifikansdrevet selection."
     - id: conclusions
       description:
-        es: Afirmaciones alineadas con efecto, incertidumbre, diseño, multiplicidad y alcance.
-        en: Claims aligned with effect, uncertainty, design, multiplicity, and scope.
-        da: Påstande tilpasset effekt, usikkerhed, design, multiplicitet og område.
+        es: "Afirmaciones alineadas con efecto, incertidumbre, diseño, multiplicidad y alcance."
+        en: "Claims aligned with effect, uncertainty, design, multiplicity, and scope."
+        da: "Påstande tilpasset effekt, usikkerhed, design, multiplicitet og område."
     - id: reproducibility
       description:
-        es: Ejecución limpia, rutas relativas, paquetes y versiones, semillas y productos regenerables.
-        en: Clean execution, relative paths, package versions, seeds, and regenerable products.
-        da: Ren kørsel, relative stier, pakkeversioner, seeds og regenererbare produkter.
+        es: "Ejecución limpia, rutas relativas, paquetes y versiones, semillas y productos regenerables."
+        en: "Clean execution, relative paths, package versions, seeds, and regenerable products."
+        da: "Ren kørsel, relative stier, pakkeversioner, seeds og regenererbare produkter."
 
 portfolio_tracks:
   - id: bmb830.track.two_group_biomarker
     title:
-      es: Comparación de biomarcador entre grupos
-      en: Between-group biomarker comparison
-      da: Biomarkørsammenligning mellem grupper
+      es: "Comparación de biomarcador entre grupos"
+      en: "Between-group biomarker comparison"
+      da: "Biomarkørsammenligning mellem grupper"
     required_features:
       - baseline or important covariate
       - continuous outcome
@@ -90,9 +90,9 @@ portfolio_tracks:
     oral_links: [bmb830.m01, bmb830.m03, bmb830.m04, bmb830.m06, bmb830.m07, bmb830.m08]
   - id: bmb830.track.diagnostic_table
     title:
-      es: Rendimiento descriptivo de una prueba biomédica
-      en: Descriptive performance of a biomedical test
-      da: Deskriptiv performance af en biomedicinsk test
+      es: "Rendimiento descriptivo de una prueba biomédica"
+      en: "Descriptive performance of a biomedical test"
+      da: "Deskriptiv performance af en biomedicinsk test"
     required_features:
       - two-by-two table with explicit denominator
       - sensitivity, specificity, PPV, and NPV
@@ -102,9 +102,9 @@ portfolio_tracks:
     oral_links: [bmb830.m01, bmb830.m04, bmb830.m05, bmb830.m06, bmb830.m10]
   - id: bmb830.track.count_rate
     title:
-      es: Conteos o tasas biológicas
-      en: Biological counts or rates
-      da: Biologiske counts eller rater
+      es: "Conteos o tasas biológicas"
+      en: "Biological counts or rates"
+      da: "Biologiske counts eller rater"
     required_features:
       - explicit exposure or denominator
       - Poisson or binomial assumptions
@@ -114,9 +114,9 @@ portfolio_tracks:
     oral_links: [bmb830.m01, bmb830.m03, bmb830.m05, bmb830.m06, bmb830.m07]
   - id: bmb830.track.multivariate_exploration
     title:
-      es: Exploración multivariante de muestras biológicas
-      en: Multivariate exploration of biological samples
-      da: Multivariat udforskning af biologiske samples
+      es: "Exploración multivariante de muestras biológicas"
+      en: "Multivariate exploration of biological samples"
+      da: "Multivariat udforskning af biologiske samples"
     required_features:
       - declared matrix orientation and independent unit
       - scaling and transformation comparison
@@ -131,58 +131,58 @@ portfolio_rubric:
     - id: question_estimand_design
       points: 15
       excellent:
-        es: Pregunta verificable, estimando completo, unidad correcta y alcance explícito.
-        en: Verifiable question, complete estimand, correct unit, and explicit scope.
-        da: Verificerbart spørgsmål, komplet estimand, korrekt enhed og eksplicit område.
+        es: "Pregunta verificable, estimando completo, unidad correcta y alcance explícito."
+        en: "Verifiable question, complete estimand, correct unit, and explicit scope."
+        da: "Verificerbart spørgsmål, komplet estimand, korrekt enhed og eksplicit område."
     - id: data_quality_provenance
       points: 15
       excellent:
-        es: Esquema, claves, unidades, ausencia, exclusiones y transformaciones totalmente trazables.
-        en: Fully traceable schema, keys, units, missingness, exclusions, and transformations.
-        da: Fuldt sporbare schema, nøgler, enheder, missingness, eksklusioner og transformationer.
+        es: "Esquema, claves, unidades, ausencia, exclusiones y transformaciones totalmente trazables."
+        en: "Fully traceable schema, keys, units, missingness, exclusions, and transformations."
+        da: "Fuldt sporbare schema, nøgler, enheder, missingness, eksklusioner og transformationer."
     - id: reproducible_R
       points: 15
       excellent:
-        es: Proyecto ejecutable desde sesión limpia que regenera todos los productos.
-        en: Clean-session project regenerating every product.
-        da: Projekt der kører fra ren session og genskaber alle produkter.
+        es: "Proyecto ejecutable desde sesión limpia que regenera todos los productos."
+        en: "Clean-session project regenerating every product."
+        da: "Projekt der kører fra ren session og genskaber alle produkter."
     - id: descriptive_visualization
       points: 10
       excellent:
-        es: Resúmenes y figuras honestos, con n, unidades, distribución y dependencia visibles.
-        en: Honest summaries and figures with visible n, units, distribution, and dependence.
-        da: Ærlige summaries og figurer med synlig n, enheder, fordeling og afhængighed.
+        es: "Resúmenes y figuras honestos, con n, unidades, distribución y dependencia visibles."
+        en: "Honest summaries and figures with visible n, units, distribution, and dependence."
+        da: "Ærlige summaries og figurer med synlig n, enheder, fordeling og afhængighed."
     - id: statistical_model
       points: 15
       excellent:
-        es: Modelo y contrastes alineados con estimando, diseño y mecanismo generador.
-        en: Model and contrasts aligned with estimand, design, and generating mechanism.
-        da: Model og kontraster tilpasset estimand, design og genererende mekanisme.
+        es: "Modelo y contrastes alineados con estimando, diseño y mecanismo generador."
+        en: "Model and contrasts aligned with estimand, design, and generating mechanism."
+        da: "Model og kontraster tilpasset estimand, design og genererende mekanisme."
     - id: inference_diagnostics
       points: 15
       excellent:
-        es: Efecto, IC, p cuando corresponde, diagnósticos e influencia interpretados conjuntamente.
-        en: Effect, CI, p-value where relevant, diagnostics, and influence interpreted jointly.
-        da: Effekt, CI, p-værdi hvor relevant, diagnostik og influence fortolket samlet.
+        es: "Efecto, IC, p cuando corresponde, diagnósticos e influencia interpretados conjuntamente."
+        en: "Effect, CI, p-value where relevant, diagnostics, and influence interpreted jointly."
+        da: "Effekt, CI, p-værdi hvor relevant, diagnostik og influence fortolket samlet."
     - id: sensitivity_limitations
       points: 10
       excellent:
-        es: Sensibilidad predefinida y limitaciones con consecuencias concretas.
-        en: Prespecified sensitivity and limitations with concrete consequences.
-        da: Prædefineret følsomhed og begrænsninger med konkrete konsekvenser.
+        es: "Sensibilidad predefinida y limitaciones con consecuencias concretas."
+        en: "Prespecified sensitivity and limitations with concrete consequences."
+        da: "Prædefineret følsomhed og begrænsninger med konkrete konsekvenser."
     - id: communication
       points: 5
       excellent:
-        es: Narrativa precisa, concisa y sin afirmaciones que excedan evidencia.
-        en: Precise, concise narrative without claims exceeding evidence.
-        da: Præcis og kortfattet narrativ uden påstande der overstiger evidensen.
+        es: "Narrativa precisa, concisa y sin afirmaciones que excedan evidencia."
+        en: "Precise, concise narrative without claims exceeding evidence."
+        da: "Præcis og kortfattet narrativ uden påstande der overstiger evidensen."
 
 publication_appraisal_cases:
   - id: bmb830.appraisal.pseudoreplication
     stem:
-      es: Un artículo analiza miles de células como independientes aunque provienen de diez pacientes.
-      en: A paper analyzes thousands of cells as independent although they come from ten patients.
-      da: En artikel analyserer tusinder af celler som uafhængige selv om de kommer fra ti patienter.
+      es: "Un artículo analiza miles de células como independientes aunque provienen de diez pacientes."
+      en: "A paper analyzes thousands of cells as independent although they come from ten patients."
+      da: "En artikel analyserer tusinder af celler som uafhængige selv om de kommer fra ti patienter."
     expected_analysis:
       - identify patient as higher-level independent unit
       - explain underestimated uncertainty
@@ -190,9 +190,9 @@ publication_appraisal_cases:
       - revise claims and effective sample size
   - id: bmb830.appraisal.multiplicity
     stem:
-      es: Se reporta un outcome significativo de 24 analizados sin ajuste ni preregistro.
-      en: One significant outcome is reported among 24 analyzed without adjustment or preregistration.
-      da: Ét signifikant outcome rapporteres blandt 24 analyserede uden korrektion eller preregistrering.
+      es: "Se reporta un outcome significativo de 24 analizados sin ajuste ni preregistro."
+      en: "One significant outcome is reported among 24 analyzed without adjustment or preregistration."
+      da: "Ét signifikant outcome rapporteres blandt 24 analyserede uden korrektion eller preregistrering."
     expected_analysis:
       - define the test family
       - quantify false-positive opportunity
@@ -200,9 +200,9 @@ publication_appraisal_cases:
       - request all outcomes and effect intervals
   - id: bmb830.appraisal.nonsignificance
     stem:
-      es: p=0.31 e IC amplio se interpreta como demostración de ausencia.
-      en: p=0.31 with a wide CI is interpreted as proof of absence.
-      da: p=0,31 med bredt CI fortolkes som bevis for fravær.
+      es: "p=0.31 e IC amplio se interpreta como demostración de ausencia."
+      en: "p=0.31 with a wide CI is interpreted as proof of absence."
+      da: "p=0,31 med bredt CI fortolkes som bevis for fravær."
     expected_analysis:
       - explain p-value limitation
       - inspect compatible effects in the interval
@@ -210,9 +210,9 @@ publication_appraisal_cases:
       - define a relevance margin if absence is the target
   - id: bmb830.appraisal.batch_pca
     stem:
-      es: Un PCA separa casos y controles, pero grupo y lote coinciden exactamente.
-      en: PCA separates cases and controls, but group and batch coincide exactly.
-      da: PCA adskiller cases og kontroller, men gruppe og batch falder præcist sammen.
+      es: "Un PCA separa casos y controles, pero grupo y lote coinciden exactamente."
+      en: "PCA separates cases and controls, but group and batch coincide exactly."
+      da: "PCA adskiller cases og kontroller, men gruppe og batch falder præcist sammen."
     expected_analysis:
       - identify complete confounding
       - reject causal biological attribution
@@ -248,99 +248,99 @@ oral_practice:
 oral_question_bank:
   - id: bmb830.oral.01
     prompt:
-      es: Diferencia unidad experimental, observacional y de análisis usando un ejemplo con animales y tejidos.
-      en: Distinguish experimental, observational, and analysis units using an animal-and-tissue example.
-      da: Skeln forsøgs-, observations- og analyseenhed med et eksempel med dyr og væv.
+      es: "Diferencia unidad experimental, observacional y de análisis usando un ejemplo con animales y tejidos."
+      en: "Distinguish experimental, observational, and analysis units using an animal-and-tissue example."
+      da: "Skeln forsøgs-, observations- og analyseenhed med et eksempel med dyr og væv."
     expected_elements: [assignment_level, nested_measurements, independence]
   - id: bmb830.oral.02
     prompt:
-      es: Explica por qué un factor convertido directamente a numeric puede ser incorrecto.
-      en: Explain why direct numeric conversion of a factor may be wrong.
-      da: Forklar hvorfor direkte numeric-konvertering af en faktor kan være forkert.
+      es: "Explica por qué un factor convertido directamente a numeric puede ser incorrecto."
+      en: "Explain why direct numeric conversion of a factor may be wrong."
+      da: "Forklar hvorfor direkte numeric-konvertering af en faktor kan være forkert."
     expected_elements: [level_codes, character_intermediate, validation]
   - id: bmb830.oral.03
     prompt:
-      es: Audita un join que duplica el número de filas.
-      en: Audit a join that doubles the row count.
-      da: Auditér et join der fordobler rækkeantallet.
+      es: "Audita un join que duplica el número de filas."
+      en: "Audit a join that doubles the row count."
+      da: "Auditér et join der fordobler rækkeantallet."
     expected_elements: [granularity, key_cardinality, unmatched_and_duplicates]
   - id: bmb830.oral.04
     prompt:
-      es: Elige entre media/SD y mediana/IQR para una distribución sesgada y justifica.
-      en: Choose between mean/SD and median/IQR for a skewed distribution and justify.
-      da: Vælg mellem mean/SD og median/IQR for en skæv fordeling og begrund.
+      es: "Elige entre media/SD y mediana/IQR para una distribución sesgada y justifica."
+      en: "Choose between mean/SD and median/IQR for a skewed distribution and justify."
+      da: "Vælg mellem mean/SD og median/IQR for en skæv fordeling og begrund."
     expected_elements: [target_summary, robustness, distribution_display]
   - id: bmb830.oral.05
     prompt:
-      es: Explica por qué sensibilidad no es valor predictivo positivo.
-      en: Explain why sensitivity is not positive predictive value.
-      da: Forklar hvorfor sensitivitet ikke er positiv prædiktiv værdi.
+      es: "Explica por qué sensibilidad no es valor predictivo positivo."
+      en: "Explain why sensitivity is not positive predictive value."
+      da: "Forklar hvorfor sensitivitet ikke er positiv prædiktiv værdi."
     expected_elements: [conditioning_direction, prevalence, Bayes]
   - id: bmb830.oral.06
     prompt:
-      es: Diferencia SD, SE y anchura de un intervalo.
-      en: Distinguish SD, SE, and interval width.
-      da: Skeln SD, SE og intervalbredde.
+      es: "Diferencia SD, SE y anchura de un intervalo."
+      en: "Distinguish SD, SE, and interval width."
+      da: "Skeln SD, SE og intervalbredde."
     expected_elements: [individual_variability, estimator_uncertainty, confidence_level]
   - id: bmb830.oral.07
     prompt:
-      es: Interpreta correctamente un IC95% frecuentista.
-      en: Correctly interpret a frequentist 95% CI.
-      da: Fortolk korrekt et frequentistisk 95% CI.
+      es: "Interpreta correctamente un IC95% frecuentista."
+      en: "Correctly interpret a frequentist 95% CI."
+      da: "Fortolk korrekt et frequentistisk 95% CI."
     expected_elements: [repeated_coverage, fixed_parameter, assumptions]
   - id: bmb830.oral.08
     prompt:
-      es: Explica qué significa y qué no significa p=0.03.
-      en: Explain what p=0.03 means and does not mean.
-      da: Forklar hvad p=0,03 betyder og ikke betyder.
+      es: "Explica qué significa y qué no significa p=0.03."
+      en: "Explain what p=0.03 means and does not mean."
+      da: "Forklar hvad p=0,03 betyder og ikke betyder."
     expected_elements: [conditional_null_probability, not_H0_probability, effect_and_interval]
   - id: bmb830.oral.09
     prompt:
-      es: Interpreta un coeficiente de interacción en un modelo lineal.
-      en: Interpret an interaction coefficient in a linear model.
-      da: Fortolk en interaktionskoefficient i en lineær model.
+      es: "Interpreta un coeficiente de interacción en un modelo lineal."
+      en: "Interpret an interaction coefficient in a linear model."
+      da: "Fortolk en interaktionskoefficient i en lineær model."
     expected_elements: [reference_or_zero, difference_in_differences, visualization]
   - id: bmb830.oral.10
     prompt:
-      es: Diagnostica un patrón de embudo en residuos.
-      en: Diagnose a funnel pattern in residuals.
-      da: Diagnosticér et tragtmønster i residualer.
+      es: "Diagnostica un patrón de embudo en residuos."
+      en: "Diagnose a funnel pattern in residuals."
+      da: "Diagnosticér et tragtmønster i residualer."
     expected_elements: [heteroscedasticity, consequence_for_SE, justified_responses]
   - id: bmb830.oral.11
     prompt:
-      es: Diferencia scores, loadings y varianza explicada en PCA.
-      en: Distinguish scores, loadings, and explained variance in PCA.
-      da: Skeln scores, loadings og forklaret varians i PCA.
+      es: "Diferencia scores, loadings y varianza explicada en PCA."
+      en: "Distinguish scores, loadings, and explained variance in PCA."
+      da: "Skeln scores, loadings og forklaret varians i PCA."
     expected_elements: [samples, variable_contributions, variance_not_accuracy]
   - id: bmb830.oral.12
     prompt:
-      es: Explica por qué un cluster estable aún no es un subtipo validado.
-      en: Explain why a stable cluster is not yet a validated subtype.
-      da: Forklar hvorfor en stabil cluster endnu ikke er en valideret subtype.
+      es: "Explica por qué un cluster estable aún no es un subtipo validado."
+      en: "Explain why a stable cluster is not yet a validated subtype."
+      da: "Forklar hvorfor en stabil cluster endnu ikke er en valideret subtype."
     expected_elements: [exploratory_status, external_replication, external_validity]
   - id: bmb830.oral.13
     prompt:
-      es: Propón un bootstrap válido para pacientes con múltiples mediciones.
-      en: Propose a valid bootstrap for patients with repeated measurements.
-      da: Foreslå en gyldig bootstrap for patienter med gentagne målinger.
+      es: "Propón un bootstrap válido para pacientes con múltiples mediciones."
+      en: "Propose a valid bootstrap for patients with repeated measurements."
+      da: "Foreslå en gyldig bootstrap for patienter med gentagne målinger."
     expected_elements: [patient_cluster_resampling, preserve_measurements, full_estimator]
   - id: bmb830.oral.14
     prompt:
-      es: Distingue una afirmación asociativa de una causal y una predictiva.
-      en: Distinguish associative, causal, and predictive claims.
-      da: Skeln associative, kausale og prædiktive påstande.
+      es: "Distingue una afirmación asociativa de una causal y una predictiva."
+      en: "Distinguish associative, causal, and predictive claims."
+      da: "Skeln associative, kausale og prædiktive påstande."
     expected_elements: [design_requirements, new_data_requirement, wording]
   - id: bmb830.oral.15
     prompt:
-      es: Diseña un análisis de sensibilidad que no dependa de obtener significancia.
-      en: Design a sensitivity analysis that does not depend on obtaining significance.
-      da: Design en følsomhedsanalyse der ikke afhænger af at opnå signifikans.
+      es: "Diseña un análisis de sensibilidad que no dependa de obtener significancia."
+      en: "Design a sensitivity analysis that does not depend on obtaining significance."
+      da: "Design en følsomhedsanalyse der ikke afhænger af at opnå signifikans."
     expected_elements: [plausible_prespecified_choices, fixed_estimand, comparison_of_conclusions]
   - id: bmb830.oral.16
     prompt:
-      es: Indica qué información falta antes de recomendar una prueba estadística.
-      en: State what information is missing before recommending a statistical test.
-      da: Angiv hvilken information der mangler før anbefaling af en statistisk test.
+      es: "Indica qué información falta antes de recomendar una prueba estadística."
+      en: "State what information is missing before recommending a statistical test."
+      da: "Angiv hvilken information der mangler før anbefaling af en statistisk test."
     expected_elements: [question_estimand, design_unit, variable_type, dependence, distribution]
 
 quality_checks:

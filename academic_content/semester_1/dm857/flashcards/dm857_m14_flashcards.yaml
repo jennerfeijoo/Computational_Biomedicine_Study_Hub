@@ -10,167 +10,167 @@ cards:
     mode: conceptual
     card_type: definition
     difficulty: foundational
-    front: {es: ¿Qué verifica una prueba automatizada?, en: What does an automated test verify?, da: Hvad verificerer en automatiseret test?}
-    back: {es: Un comportamiento observable bajo un estado y entradas controlados. No demuestra corrección universal; protege un contrato concreto., en: Observable behavior under controlled state and inputs. It does not prove universal correctness; it protects a specific contract., da: Observerbar adfærd under kontrolleret tilstand og input. Den beskytter en specifik kontrakt, ikke universel korrekthed.}
+    front: {"es": "¿Qué verifica una prueba automatizada?", "en": "What does an automated test verify?", "da": "Hvad verificerer en automatiseret test?"}
+    back: {"es": "Un comportamiento observable bajo un estado y entradas controlados. No demuestra corrección universal; protege un contrato concreto.", "en": "Observable behavior under controlled state and inputs. It does not prove universal correctness; it protects a specific contract.", "da": "Observerbar adfærd under kontrolleret tilstand og input. Den beskytter en specifik kontrakt, ikke universel korrekthed."}
     linked_objectives: [m14.o1]
   - id: dm857.m14.f02
     mode: conceptual
     card_type: structure
     difficulty: foundational
-    front: {es: ¿Qué significa Arrange-Act-Assert?, en: What does Arrange-Act-Assert mean?, da: Hvad betyder Arrange-Act-Assert?}
-    back: {es: Arrange prepara datos y dependencias; Act ejecuta la conducta; Assert comprueba el resultado o efecto esperado., en: Arrange prepares inputs and dependencies; Act executes behavior; Assert checks the expected result or effect., da: Arrange forbereder data og afhængigheder; Act udfører adfærd; Assert kontrollerer resultat eller effekt.}
+    front: {"es": "¿Qué significa Arrange-Act-Assert?", "en": "What does Arrange-Act-Assert mean?", "da": "Hvad betyder Arrange-Act-Assert?"}
+    back: {"es": "Arrange prepara datos y dependencias; Act ejecuta la conducta; Assert comprueba el resultado o efecto esperado.", "en": "Arrange prepares inputs and dependencies; Act executes behavior; Assert checks the expected result or effect.", "da": "Arrange forbereder data og afhængigheder; Act udfører adfærd; Assert kontrollerer resultat eller effekt."}
     linked_objectives: [m14.o2]
   - id: dm857.m14.f03
     mode: practical
     card_type: naming
     difficulty: foundational
-    front: {es: ¿Qué debe comunicar el nombre de una prueba?, en: What should a test name communicate?, da: Hvad bør navnet på en test kommunikere?}
-    back: {es: La conducta y condición esperadas, no sólo el nombre de la función. Por ejemplo, `test_pop_empty_stack_raises_index_error`., en: The expected behavior and condition, not only the function name. For example, `test_pop_empty_stack_raises_index_error`., da: Den forventede adfærd og betingelse, ikke kun funktionsnavnet.}
+    front: {"es": "¿Qué debe comunicar el nombre de una prueba?", "en": "What should a test name communicate?", "da": "Hvad bør navnet på en test kommunikere?"}
+    back: {"es": "La conducta y condición esperadas, no sólo el nombre de la función. Por ejemplo, `test_pop_empty_stack_raises_index_error`.", "en": "The expected behavior and condition, not only the function name. For example, `test_pop_empty_stack_raises_index_error`.", "da": "Den forventede adfærd og betingelse, ikke kun funktionsnavnet."}
     linked_objectives: [m14.o2]
   - id: dm857.m14.f04
     mode: conceptual
     card_type: regression
     difficulty: foundational
-    front: {es: ¿Qué es una prueba de regresión?, en: What is a regression test?, da: Hvad er en regressionstest?}
-    back: {es: Una prueba creada a partir de un bug corregido para impedir que reaparezca., en: A test created from a fixed bug to prevent recurrence., da: En test oprettet fra en rettet fejl for at forhindre genkomst.}
+    front: {"es": "¿Qué es una prueba de regresión?", "en": "What is a regression test?", "da": "Hvad er en regressionstest?"}
+    back: {"es": "Una prueba creada a partir de un bug corregido para impedir que reaparezca.", "en": "A test created from a fixed bug to prevent recurrence.", "da": "En test oprettet fra en rettet fejl for at forhindre genkomst."}
     linked_objectives: [m14.o1, m14.o5]
   - id: dm857.m14.f05
     mode: conceptual
     card_type: misconception
     difficulty: intermediate
-    front: {es: ¿100 % de cobertura demuestra que el programa es correcto?, en: Does 100% coverage prove correctness?, da: Beviser 100 % dækning korrekthed?}
-    back: {es: No. Sólo indica que ciertas líneas o ramas se ejecutaron. Las aserciones pueden ser débiles o faltar casos semánticos., en: No. It only indicates that certain lines or branches executed. Assertions may be weak and semantic cases missing., da: Nej. Det viser kun udført kode; assertions kan være svage og semantiske cases mangle.}
+    front: {"es": "¿100 % de cobertura demuestra que el programa es correcto?", "en": "Does 100% coverage prove correctness?", "da": "Beviser 100 % dækning korrekthed?"}
+    back: {"es": "No. Sólo indica que ciertas líneas o ramas se ejecutaron. Las aserciones pueden ser débiles o faltar casos semánticos.", "en": "No. It only indicates that certain lines or branches executed. Assertions may be weak and semantic cases missing.", "da": "Nej. Det viser kun udført kode; assertions kan være svage og semantiske cases mangle."}
     linked_objectives: [m14.o1, m14.o8]
   - id: dm857.m14.f06
     mode: conceptual
     card_type: fixture
     difficulty: intermediate
-    front: {es: ¿Qué aporta una fixture?, en: What does a fixture provide?, da: Hvad leverer en fixture?}
-    back: {es: Datos, objetos o recursos reutilizables con un ciclo de vida administrado y, cuando es necesario, limpieza., en: Reusable data, objects, or resources with managed lifecycle and cleanup when needed., da: Genbrugelige data, objekter eller ressourcer med styret livscyklus og eventuel oprydning.}
+    front: {"es": "¿Qué aporta una fixture?", "en": "What does a fixture provide?", "da": "Hvad leverer en fixture?"}
+    back: {"es": "Datos, objetos o recursos reutilizables con un ciclo de vida administrado y, cuando es necesario, limpieza.", "en": "Reusable data, objects, or resources with managed lifecycle and cleanup when needed.", "da": "Genbrugelige data, objekter eller ressourcer med styret livscyklus og eventuel oprydning."}
     linked_objectives: [m14.o3]
   - id: dm857.m14.f07
     mode: practical
     card_type: isolation
     difficulty: intermediate
-    front: {es: ¿Por qué el alcance function suele ser el más seguro para fixtures mutables?, en: Why is function scope often safest for mutable fixtures?, da: Hvorfor er function-scope ofte sikrest for muterbare fixtures?}
-    back: {es: Crea una instancia nueva por prueba y reduce contaminación y dependencia del orden., en: It creates a fresh instance per test and reduces contamination and order dependence., da: Det opretter en ny instans pr. test og reducerer forurening og rækkefølgeafhængighed.}
+    front: {"es": "¿Por qué el alcance function suele ser el más seguro para fixtures mutables?", "en": "Why is function scope often safest for mutable fixtures?", "da": "Hvorfor er function-scope ofte sikrest for muterbare fixtures?"}
+    back: {"es": "Crea una instancia nueva por prueba y reduce contaminación y dependencia del orden.", "en": "It creates a fresh instance per test and reduces contamination and order dependence.", "da": "Det opretter en ny instans pr. test og reducerer forurening og rækkefølgeafhængighed."}
     linked_objectives: [m14.o3]
   - id: dm857.m14.f08
     mode: practical
     card_type: cleanup
     difficulty: intermediate
-    front: {es: ¿Cuándo usar `yield` en una fixture?, en: When should `yield` be used in a fixture?, da: Hvornår bør `yield` bruges i en fixture?}
-    back: {es: Cuando el recurso necesita una fase de limpieza posterior a la prueba; el código después de `yield` realiza teardown., en: When a resource needs post-test cleanup; code after `yield` performs teardown., da: Når en ressource kræver oprydning efter testen; kode efter `yield` udfører teardown.}
+    front: {"es": "¿Cuándo usar `yield` en una fixture?", "en": "When should `yield` be used in a fixture?", "da": "Hvornår bør `yield` bruges i en fixture?"}
+    back: {"es": "Cuando el recurso necesita una fase de limpieza posterior a la prueba; el código después de `yield` realiza teardown.", "en": "When a resource needs post-test cleanup; code after `yield` performs teardown.", "da": "Når en ressource kræver oprydning efter testen; kode efter `yield` udfører teardown."}
     linked_objectives: [m14.o3]
   - id: dm857.m14.f09
     mode: conceptual
     card_type: parametrization
     difficulty: intermediate
-    front: {es: ¿Cuándo parametrizar pruebas?, en: When should tests be parametrized?, da: Hvornår bør test parametriseres?}
-    back: {es: Cuando el mismo contrato debe ejecutarse sobre varios casos comparables. No para mezclar conductas o problemas independientes., en: When the same contract should run over comparable cases. Not for mixing unrelated behaviors or problems., da: Når samme kontrakt skal køres på sammenlignelige cases, ikke for at blande uafhængige problemer.}
+    front: {"es": "¿Cuándo parametrizar pruebas?", "en": "When should tests be parametrized?", "da": "Hvornår bør test parametriseres?"}
+    back: {"es": "Cuando el mismo contrato debe ejecutarse sobre varios casos comparables. No para mezclar conductas o problemas independientes.", "en": "When the same contract should run over comparable cases. Not for mixing unrelated behaviors or problems.", "da": "Når samme kontrakt skal køres på sammenlignelige cases, ikke for at blande uafhængige problemer."}
     linked_objectives: [m14.o3]
   - id: dm857.m14.f10
     mode: practical
     card_type: exception_testing
     difficulty: intermediate
-    front: {es: Regla para usar `pytest.raises`., en: Rule for using `pytest.raises`., da: Regel for brug af `pytest.raises`.}
-    back: {es: El contexto debe envolver únicamente la llamada que debe lanzar la excepción; preparación y aserciones adicionales van fuera., en: The context should wrap only the call expected to raise; setup and additional assertions stay outside., da: Konteksten bør kun omslutte det kald, der forventes at rejse exception.}
+    front: {"es": "Regla para usar `pytest.raises`.", "en": "Rule for using `pytest.raises`.", "da": "Regel for brug af `pytest.raises`."}
+    back: {"es": "El contexto debe envolver únicamente la llamada que debe lanzar la excepción; preparación y aserciones adicionales van fuera.", "en": "The context should wrap only the call expected to raise; setup and additional assertions stay outside.", "da": "Konteksten bør kun omslutte det kald, der forventes at rejse exception."}
     linked_objectives: [m14.o4]
   - id: dm857.m14.f11
     mode: practical
     card_type: boundary_testing
     difficulty: intermediate
-    front: {es: ¿Qué valores deben probarse alrededor de un límite inclusivo?, en: Which values should be tested around an inclusive boundary?, da: Hvilke værdier bør testes omkring en inklusiv grænse?}
-    back: {es: El valor exacto y valores inmediatamente por debajo y por encima, además de un caso típico de cada región., en: The exact value and values immediately below and above, plus a typical case from each region., da: Den præcise værdi og værdier lige under og over samt et typisk tilfælde fra hver region.}
+    front: {"es": "¿Qué valores deben probarse alrededor de un límite inclusivo?", "en": "Which values should be tested around an inclusive boundary?", "da": "Hvilke værdier bør testes omkring en inklusiv grænse?"}
+    back: {"es": "El valor exacto y valores inmediatamente por debajo y por encima, además de un caso típico de cada región.", "en": "The exact value and values immediately below and above, plus a typical case from each region.", "da": "Den præcise værdi og værdier lige under og over samt et typisk tilfælde fra hver region."}
     linked_objectives: [m14.o4]
   - id: dm857.m14.f12
     mode: conceptual
     card_type: debugging_workflow
     difficulty: intermediate
-    front: {es: Primeros pasos de una depuración sistemática., en: First steps of systematic debugging., da: Første trin i systematisk fejlsøgning.}
-    back: {es: Reproducir de forma estable, conservar el traceback y reducir el caso sin perder la causa., en: Reproduce reliably, preserve the traceback, and reduce the case without losing the cause., da: Reproducer stabilt, bevar traceback og reducer casen uden at miste årsagen.}
+    front: {"es": "Primeros pasos de una depuración sistemática.", "en": "First steps of systematic debugging.", "da": "Første trin i systematisk fejlsøgning."}
+    back: {"es": "Reproducir de forma estable, conservar el traceback y reducir el caso sin perder la causa.", "en": "Reproduce reliably, preserve the traceback, and reduce the case without losing the cause.", "da": "Reproducer stabilt, bevar traceback og reducer casen uden at miste årsagen."}
     linked_objectives: [m14.o5]
   - id: dm857.m14.f13
     mode: practical
     card_type: hypothesis_testing
     difficulty: advanced
-    front: {es: ¿Cómo comprobar una hipótesis de depuración?, en: How should a debugging hypothesis be tested?, da: Hvordan testes en fejlsøgningshypotese?}
-    back: {es: Formular una predicción observable, inspeccionar sólo el estado relevante, cambiar una causa a la vez y comparar el resultado con la predicción., en: Form an observable prediction, inspect only relevant state, change one cause at a time, and compare with the prediction., da: Formulér en observerbar forudsigelse, undersøg relevant tilstand, ændr én årsag og sammenlign.}
+    front: {"es": "¿Cómo comprobar una hipótesis de depuración?", "en": "How should a debugging hypothesis be tested?", "da": "Hvordan testes en fejlsøgningshypotese?"}
+    back: {"es": "Formular una predicción observable, inspeccionar sólo el estado relevante, cambiar una causa a la vez y comparar el resultado con la predicción.", "en": "Form an observable prediction, inspect only relevant state, change one cause at a time, and compare with the prediction.", "da": "Formulér en observerbar forudsigelse, undersøg relevant tilstand, ændr én årsag og sammenlign."}
     linked_objectives: [m14.o5]
   - id: dm857.m14.f14
     mode: practical
     card_type: traceback
     difficulty: advanced
-    front: {es: ¿Por qué el lugar donde se detecta una excepción puede no ser la causa?, en: Why may the exception detection point not be the cause?, da: Hvorfor er stedet hvor en exception opdages ikke nødvendigvis årsagen?}
-    back: {es: Un dato o estado incorrecto puede originarse antes y sólo volverse inválido al usarse. El traceback se sigue hacia las llamadas propias para rastrear el origen., en: Incorrect data or state may originate earlier and only fail when used. Trace through project calls to find the origin., da: Forkert data eller tilstand kan opstå tidligere og først fejle ved brug. Følg traceback gennem projektkald.}
+    front: {"es": "¿Por qué el lugar donde se detecta una excepción puede no ser la causa?", "en": "Why may the exception detection point not be the cause?", "da": "Hvorfor er stedet hvor en exception opdages ikke nødvendigvis årsagen?"}
+    back: {"es": "Un dato o estado incorrecto puede originarse antes y sólo volverse inválido al usarse. El traceback se sigue hacia las llamadas propias para rastrear el origen.", "en": "Incorrect data or state may originate earlier and only fail when used. Trace through project calls to find the origin.", "da": "Forkert data eller tilstand kan opstå tidligere og først fejle ved brug. Følg traceback gennem projektkald."}
     linked_objectives: [m14.o5]
   - id: dm857.m14.f15
     mode: conceptual
     card_type: logging_levels
     difficulty: intermediate
-    front: {es: Significado típico de DEBUG, INFO, WARNING y ERROR., en: Typical meaning of DEBUG, INFO, WARNING, and ERROR., da: Typisk betydning af DEBUG, INFO, WARNING og ERROR.}
-    back: {es: DEBUG detalle diagnóstico; INFO hito normal; WARNING situación recuperable anómala; ERROR operación fallida., en: DEBUG diagnostic detail; INFO normal milestone; WARNING anomalous but recoverable condition; ERROR failed operation., da: DEBUG diagnostik, INFO normal milepæl, WARNING håndterbar anomali, ERROR mislykket operation.}
+    front: {"es": "Significado típico de DEBUG, INFO, WARNING y ERROR.", "en": "Typical meaning of DEBUG, INFO, WARNING, and ERROR.", "da": "Typisk betydning af DEBUG, INFO, WARNING og ERROR."}
+    back: {"es": "DEBUG detalle diagnóstico; INFO hito normal; WARNING situación recuperable anómala; ERROR operación fallida.", "en": "DEBUG diagnostic detail; INFO normal milestone; WARNING anomalous but recoverable condition; ERROR failed operation.", "da": "DEBUG diagnostik, INFO normal milepæl, WARNING håndterbar anomali, ERROR mislykket operation."}
     linked_objectives: [m14.o6]
   - id: dm857.m14.f16
     mode: conceptual
     card_type: logging_design
     difficulty: advanced
-    front: {es: ¿Por qué una biblioteca no debería configurar globalmente logging al importarse?, en: Why should a library not globally configure logging on import?, da: Hvorfor bør et bibliotek ikke konfigurere logging globalt ved import?}
-    back: {es: Porque invade la política de la aplicación cliente, cambia handlers/niveles y puede duplicar o desviar mensajes. La aplicación configura; la biblioteca emite., en: Because it overrides client application policy, changes handlers/levels, and may duplicate or redirect messages. Applications configure; libraries emit., da: Fordi det overtager klientens politik og kan ændre handlers og niveauer. Applikationen konfigurerer; biblioteket udsender.}
+    front: {"es": "¿Por qué una biblioteca no debería configurar globalmente logging al importarse?", "en": "Why should a library not globally configure logging on import?", "da": "Hvorfor bør et bibliotek ikke konfigurere logging globalt ved import?"}
+    back: {"es": "Porque invade la política de la aplicación cliente, cambia handlers/niveles y puede duplicar o desviar mensajes. La aplicación configura; la biblioteca emite.", "en": "Because it overrides client application policy, changes handlers/levels, and may duplicate or redirect messages. Applications configure; libraries emit.", "da": "Fordi det overtager klientens politik og kan ændre handlers og niveauer. Applikationen konfigurerer; biblioteket udsender."}
     linked_objectives: [m14.o6]
   - id: dm857.m14.f17
     mode: practical
     card_type: privacy
     difficulty: advanced
-    front: {es: ¿Qué no debería incluir un log biomédico?, en: What should a biomedical log avoid?, da: Hvad bør en biomedicinsk log undgå?}
-    back: {es: Identificadores personales, valores clínicos sensibles, secretos, tokens o contenido completo innecesario. Se prefieren conteos, etapas e ids técnicos no sensibles., en: Personal identifiers, sensitive clinical values, secrets, tokens, or unnecessary full content. Prefer counts, stages, and non-sensitive technical ids., da: Personidentifikatorer, følsomme kliniske værdier, hemmeligheder, tokens eller unødigt fuldt indhold.}
+    front: {"es": "¿Qué no debería incluir un log biomédico?", "en": "What should a biomedical log avoid?", "da": "Hvad bør en biomedicinsk log undgå?"}
+    back: {"es": "Identificadores personales, valores clínicos sensibles, secretos, tokens o contenido completo innecesario. Se prefieren conteos, etapas e ids técnicos no sensibles.", "en": "Personal identifiers, sensitive clinical values, secrets, tokens, or unnecessary full content. Prefer counts, stages, and non-sensitive technical ids.", "da": "Personidentifikatorer, følsomme kliniske værdier, hemmeligheder, tokens eller unødigt fuldt indhold."}
     linked_objectives: [m14.o6]
   - id: dm857.m14.f18
     mode: conceptual
     card_type: testability
     difficulty: advanced
-    front: {es: ¿Qué mejora la testabilidad de una función?, en: What improves a function's testability?, da: Hvad forbedrer en funktions testbarhed?}
-    back: {es: Responsabilidad pequeña, dependencias explícitas, núcleo puro, E/S separada, entradas controlables y resultados observables., en: Small responsibility, explicit dependencies, pure core, separated I/O, controllable inputs, and observable results., da: Lille ansvar, eksplicitte afhængigheder, ren kerne, adskilt I/O, kontrollerbare input og observerbare resultater.}
+    front: {"es": "¿Qué mejora la testabilidad de una función?", "en": "What improves a function's testability?", "da": "Hvad forbedrer en funktions testbarhed?"}
+    back: {"es": "Responsabilidad pequeña, dependencias explícitas, núcleo puro, E/S separada, entradas controlables y resultados observables.", "en": "Small responsibility, explicit dependencies, pure core, separated I/O, controllable inputs, and observable results.", "da": "Lille ansvar, eksplicitte afhængigheder, ren kerne, adskilt I/O, kontrollerbare input og observerbare resultater."}
     linked_objectives: [m14.o7]
   - id: dm857.m14.f19
     mode: practical
     card_type: dependency_injection
     difficulty: advanced
-    front: {es: Ejemplos de dependencias que conviene inyectar., en: Examples of dependencies worth injecting., da: Eksempler på afhængigheder der bør injiceres.}
-    back: {es: Reloj, generador aleatorio, sistema de archivos, cliente de red, configuración y repositorio de datos., en: Clock, random generator, filesystem, network client, configuration, and data repository., da: Ur, tilfældighedsgenerator, filsystem, netværksklient, konfiguration og datarepository.}
+    front: {"es": "Ejemplos de dependencias que conviene inyectar.", "en": "Examples of dependencies worth injecting.", "da": "Eksempler på afhængigheder der bør injiceres."}
+    back: {"es": "Reloj, generador aleatorio, sistema de archivos, cliente de red, configuración y repositorio de datos.", "en": "Clock, random generator, filesystem, network client, configuration, and data repository.", "da": "Ur, tilfældighedsgenerator, filsystem, netværksklient, konfiguration og datarepository."}
     linked_objectives: [m14.o7]
   - id: dm857.m14.f20
     mode: conceptual
     card_type: property_testing
     difficulty: advanced
-    front: {es: Diferencia entre prueba de ejemplo y prueba de propiedad., en: Difference between example and property tests., da: Forskel mellem eksempeltest og egenskabstest.}
-    back: {es: La primera verifica entradas concretas; la segunda verifica una relación general sobre muchos datos generados dentro de un dominio., en: The first checks concrete inputs; the second checks a general relation over many generated inputs within a domain., da: Den første tester konkrete input; den anden en generel relation over mange genererede input.}
+    front: {"es": "Diferencia entre prueba de ejemplo y prueba de propiedad.", "en": "Difference between example and property tests.", "da": "Forskel mellem eksempeltest og egenskabstest."}
+    back: {"es": "La primera verifica entradas concretas; la segunda verifica una relación general sobre muchos datos generados dentro de un dominio.", "en": "The first checks concrete inputs; the second checks a general relation over many generated inputs within a domain.", "da": "Den første tester konkrete input; den anden en generel relation over mange genererede input."}
     linked_objectives: [m14.o8]
   - id: dm857.m14.f21
     mode: practical
     card_type: property_example
     difficulty: advanced
-    front: {es: Propiedades para una función de ordenamiento., en: Properties for a sorting function., da: Egenskaber for en sorteringsfunktion.}
-    back: {es: Resultado no decreciente, mismo multiconjunto de elementos, misma longitud, idempotencia y ausencia de mutación si el contrato lo exige., en: Nondecreasing result, same multiset, same length, idempotence, and no input mutation if required., da: Ikke-faldende resultat, samme multiset, samme længde, idempotens og ingen mutation hvis krævet.}
+    front: {"es": "Propiedades para una función de ordenamiento.", "en": "Properties for a sorting function.", "da": "Egenskaber for en sorteringsfunktion."}
+    back: {"es": "Resultado no decreciente, mismo multiconjunto de elementos, misma longitud, idempotencia y ausencia de mutación si el contrato lo exige.", "en": "Nondecreasing result, same multiset, same length, idempotence, and no input mutation if required.", "da": "Ikke-faldende resultat, samme multiset, samme længde, idempotens og ingen mutation hvis krævet."}
     linked_objectives: [m14.o8]
   - id: dm857.m14.f22
     mode: integrative
     card_type: flaky_test
     difficulty: advanced
-    front: {es: Causas frecuentes de una prueba inestable., en: Common causes of a flaky test., da: Almindelige årsager til en ustabil test.}
-    back: {es: Tiempo real, aleatoriedad no controlada, red, concurrencia, orden de pruebas, estado global, archivos compartidos y umbrales temporales estrechos., en: Real time, uncontrolled randomness, network, concurrency, test order, global state, shared files, and tight timing thresholds., da: Realtid, ukontrolleret tilfældighed, netværk, samtidighed, testrækkefølge, global tilstand, delte filer og snævre tidsgrænser.}
+    front: {"es": "Causas frecuentes de una prueba inestable.", "en": "Common causes of a flaky test.", "da": "Almindelige årsager til en ustabil test."}
+    back: {"es": "Tiempo real, aleatoriedad no controlada, red, concurrencia, orden de pruebas, estado global, archivos compartidos y umbrales temporales estrechos.", "en": "Real time, uncontrolled randomness, network, concurrency, test order, global state, shared files, and tight timing thresholds.", "da": "Realtid, ukontrolleret tilfældighed, netværk, samtidighed, testrækkefølge, global tilstand, delte filer og snævre tidsgrænser."}
     linked_objectives: [m14.o3, m14.o7]
   - id: dm857.m14.f23
     mode: integrative
     card_type: mutation_testing
     difficulty: advanced
-    front: {es: ¿Qué pregunta responde una prueba de mutación?, en: What question does mutation testing answer?, da: Hvilket spørgsmål besvarer mutationstest?}
-    back: {es: Si la suite detectaría pequeños cambios artificiales que alteran la lógica. Mutantes supervivientes pueden revelar aserciones débiles o casos ausentes., en: Whether the suite detects small artificial logic changes. Surviving mutants may reveal weak assertions or missing cases., da: Om suiten opdager små kunstige logikændringer. Overlevende mutanter kan afsløre svage assertions eller manglende cases.}
+    front: {"es": "¿Qué pregunta responde una prueba de mutación?", "en": "What question does mutation testing answer?", "da": "Hvilket spørgsmål besvarer mutationstest?"}
+    back: {"es": "Si la suite detectaría pequeños cambios artificiales que alteran la lógica. Mutantes supervivientes pueden revelar aserciones débiles o casos ausentes.", "en": "Whether the suite detects small artificial logic changes. Surviving mutants may reveal weak assertions or missing cases.", "da": "Om suiten opdager små kunstige logikændringer. Overlevende mutanter kan afsløre svage assertions eller manglende cases."}
     linked_objectives: [m14.o1, m14.o8]
   - id: dm857.m14.f24
     mode: integrative
     card_type: synthesis
     difficulty: advanced
-    front: {es: Flujo completo desde bug hasta corrección confiable., en: Complete workflow from bug to trustworthy fix., da: Fuldt workflow fra bug til pålidelig rettelse.}
-    back: {es: Reproducir; guardar traceback y entorno; reducir; escribir prueba que falle; formular hipótesis; obtener evidencia; corregir una causa; ejecutar suite y casos vecinos; añadir regresión permanente; revisar logs y documentación., en: Reproduce; capture traceback and environment; reduce; write a failing test; hypothesize; gather evidence; fix one cause; run suite and neighboring cases; keep a regression; review logs and documentation., da: Reproducer, gem traceback og miljø, reducer, skriv fejletest, formulér hypotese, indsamle evidens, ret én årsag, kør suite og behold regression.}
+    front: {"es": "Flujo completo desde bug hasta corrección confiable.", "en": "Complete workflow from bug to trustworthy fix.", "da": "Fuldt workflow fra bug til pålidelig rettelse."}
+    back: {"es": "Reproducir; guardar traceback y entorno; reducir; escribir prueba que falle; formular hipótesis; obtener evidencia; corregir una causa; ejecutar suite y casos vecinos; añadir regresión permanente; revisar logs y documentación.", "en": "Reproduce; capture traceback and environment; reduce; write a failing test; hypothesize; gather evidence; fix one cause; run suite and neighboring cases; keep a regression; review logs and documentation.", "da": "Reproducer, gem traceback og miljø, reducer, skriv fejletest, formulér hypotese, indsamle evidens, ret én årsag, kør suite og behold regression."}
     linked_objectives: [m14.o1, m14.o2, m14.o4, m14.o5, m14.o6, m14.o7, m14.o8]

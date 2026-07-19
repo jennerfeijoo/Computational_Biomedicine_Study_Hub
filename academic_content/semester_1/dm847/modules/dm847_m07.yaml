@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Árboles de sufijos, arrays de sufijos, índices de k-mers y búsqueda exacta
-    en: Suffix trees, suffix arrays, k-mer indexes, and exact pattern search
-    da: Suffikstræer, suffiksarrays, k-mer-indekser og eksakt mønstersøgning
+    es: "Árboles de sufijos, arrays de sufijos, índices de k-mers y búsqueda exacta"
+    en: "Suffix trees, suffix arrays, k-mer indexes, and exact pattern search"
+    da: "Suffikstræer, suffiksarrays, k-mer-indekser og eksakt mønstersøgning"
   summary:
     es: >-
       Diseño y análisis de estructuras para búsqueda exacta de patrones en secuencias. Se
@@ -33,18 +33,18 @@ alignment:
   later_modules: [dm847.m08, dm847.m11]
 
 objectives:
-  - {id: dm847.m07.o01, text: {es: Formular búsqueda exacta y derivar el coste del algoritmo ingenuo, en: Formulate exact search and derive naive-search cost, da: Formulere eksakt søgning og udlede omkostningen ved naiv søgning}}
-  - {id: dm847.m07.o02, text: {es: Construir un trie de patrones y explicar su utilidad para consultas múltiples, en: Build a pattern trie and explain its use for multiple queries, da: Bygge en pattern-trie og forklare brugen ved flere forespørgsler}}
-  - {id: dm847.m07.o03, text: {es: Explicar cómo un árbol de sufijos comprime el trie de todos los sufijos, en: Explain how a suffix tree compresses the trie of all suffixes, da: Forklare hvordan et suffikstræ komprimerer alle suffiksers trie}}
-  - {id: dm847.m07.o04, text: {es: Construir y consultar un array de sufijos mediante búsqueda binaria, en: Build and query a suffix array with binary search, da: Bygge og forespørge et suffiksarray med binær søgning}}
-  - {id: dm847.m07.o05, text: {es: Interpretar el array LCP y usarlo para repeticiones y prefijos compartidos, en: Interpret the LCP array and use it for repeats and shared prefixes, da: Fortolke LCP-arrayet og bruge det til gentagelser og fælles præfikser}}
-  - {id: dm847.m07.o06, text: {es: Diseñar un índice de k-mers y analizar sensibilidad, memoria y tamaño de cubeta, en: Design a k-mer index and analyze sensitivity, memory, and bucket size, da: Designe et k-mer-indeks og analysere følsomhed, hukommelse og bucket-størrelse}}
-  - {id: dm847.m07.o07, text: {es: Comparar estructuras según número de consultas, tamaño del texto y repetitividad, en: Compare structures by query count, text size, and repetitiveness, da: Sammenligne strukturer efter antal forespørgsler, tekststørrelse og repetitivitet}}
-  - {id: dm847.m07.o08, text: {es: Validar índices contra búsqueda exhaustiva y casos frontera, en: Validate indexes against exhaustive search and boundary cases, da: Validere indekser mod udtømmende søgning og grænsetilfælde}}
+  - {id: dm847.m07.o01, text: {"es": "Formular búsqueda exacta y derivar el coste del algoritmo ingenuo", "en": "Formulate exact search and derive naive-search cost", "da": "Formulere eksakt søgning og udlede omkostningen ved naiv søgning"}}
+  - {id: dm847.m07.o02, text: {"es": "Construir un trie de patrones y explicar su utilidad para consultas múltiples", "en": "Build a pattern trie and explain its use for multiple queries", "da": "Bygge en pattern-trie og forklare brugen ved flere forespørgsler"}}
+  - {id: dm847.m07.o03, text: {"es": "Explicar cómo un árbol de sufijos comprime el trie de todos los sufijos", "en": "Explain how a suffix tree compresses the trie of all suffixes", "da": "Forklare hvordan et suffikstræ komprimerer alle suffiksers trie"}}
+  - {id: dm847.m07.o04, text: {"es": "Construir y consultar un array de sufijos mediante búsqueda binaria", "en": "Build and query a suffix array with binary search", "da": "Bygge og forespørge et suffiksarray med binær søgning"}}
+  - {id: dm847.m07.o05, text: {"es": "Interpretar el array LCP y usarlo para repeticiones y prefijos compartidos", "en": "Interpret the LCP array and use it for repeats and shared prefixes", "da": "Fortolke LCP-arrayet og bruge det til gentagelser og fælles præfikser"}}
+  - {id: dm847.m07.o06, text: {"es": "Diseñar un índice de k-mers y analizar sensibilidad, memoria y tamaño de cubeta", "en": "Design a k-mer index and analyze sensitivity, memory, and bucket size", "da": "Designe et k-mer-indeks og analysere følsomhed, hukommelse og bucket-størrelse"}}
+  - {id: dm847.m07.o07, text: {"es": "Comparar estructuras según número de consultas, tamaño del texto y repetitividad", "en": "Compare structures by query count, text size, and repetitiveness", "da": "Sammenligne strukturer efter antal forespørgsler, tekststørrelse og repetitivitet"}}
+  - {id: dm847.m07.o08, text: {"es": "Validar índices contra búsqueda exhaustiva y casos frontera", "en": "Validate indexes against exhaustive search and boundary cases", "da": "Validere indekser mod udtømmende søgning og grænsetilfælde"}}
 
 concepts:
   - id: dm847.m07.c01
-    title: {es: Problema de búsqueda exacta, en: Exact pattern-search problem, da: Eksakt mønstersøgningsproblem}
+    title: {"es": "Problema de búsqueda exacta", "en": "Exact pattern-search problem", "da": "Eksakt mønstersøgningsproblem"}
     body:
       es: >-
         Dado un texto T de longitud n y un patrón P de longitud m, se buscan todas las posiciones
@@ -62,10 +62,10 @@ concepts:
         koster O(nm) i værste fald. Kontrakten skal definere overlap, tvetydige symboler og
         cirkulære sekvenser.
     key_points:
-      - {es: La salida es un conjunto ordenado de posiciones, en: Output is an ordered set of positions, da: Output er et ordnet sæt positioner}
-      - {es: Un patrón vacío necesita una política explícita, en: An empty pattern needs an explicit policy, da: Et tomt mønster kræver en eksplicit politik}
+      - {"es": "La salida es un conjunto ordenado de posiciones", "en": "Output is an ordered set of positions", "da": "Output er et ordnet sæt positioner"}
+      - {"es": "Un patrón vacío necesita una política explícita", "en": "An empty pattern needs an explicit policy", "da": "Et tomt mønster kræver en eksplicit politik"}
   - id: dm847.m07.c02
-    title: {es: Tries de patrones, en: Pattern tries, da: Pattern-tries}
+    title: {"es": "Tries de patrones", "en": "Pattern tries", "da": "Pattern-tries"}
     body:
       es: >-
         Un trie comparte prefijos entre patrones. Cada arista representa un símbolo y un nodo
@@ -81,9 +81,9 @@ concepts:
         En trie deler præfikser mellem mønstre. Kanter repræsenterer symboler og terminale
         noder markerer mønsterslutninger. Hukommelsen afhænger af antal forskellige præfikser.
     key_points:
-      - {es: Los patrones que son prefijos de otros requieren marcas terminales internas, en: Patterns that prefix others require internal terminal marks, da: Mønstre der er præfikser for andre kræver interne terminalmarkeringer}
+      - {"es": "Los patrones que son prefijos de otros requieren marcas terminales internas", "en": "Patterns that prefix others require internal terminal marks", "da": "Mønstre der er præfikser for andre kræver interne terminalmarkeringer"}
   - id: dm847.m07.c03
-    title: {es: Trie de sufijos y sentinela, en: Suffix trie and sentinel, da: Suffiks-trie og sentinel}
+    title: {"es": "Trie de sufijos y sentinela", "en": "Suffix trie and sentinel", "da": "Suffiks-trie og sentinel"}
     body:
       es: >-
         Insertar todos los sufijos de T crea un índice de todas las subcadenas, pero puede usar
@@ -98,9 +98,9 @@ concepts:
         Alle suffikser i en trie kan kræve O(n²) noder. En unik sentinel sikrer, at intet
         suffiks er præfiks for et andet, og må ikke fortolkes biologisk.
     key_points:
-      - {es: El sentinela aparece exactamente una vez, en: The sentinel appears exactly once, da: Sentinellen forekommer præcis én gang}
+      - {"es": "El sentinela aparece exactamente una vez", "en": "The sentinel appears exactly once", "da": "Sentinellen forekommer præcis én gang"}
   - id: dm847.m07.c04
-    title: {es: Árbol de sufijos comprimido, en: Compressed suffix tree, da: Komprimeret suffikstræ}
+    title: {"es": "Árbol de sufijos comprimido", "en": "Compressed suffix tree", "da": "Komprimeret suffikstræ"}
     body:
       es: >-
         Un árbol de sufijos comprime cadenas de nodos con un solo hijo en aristas etiquetadas
@@ -117,9 +117,9 @@ concepts:
         Et suffikstræ komprimerer en-barns-stier til kanter mærket med tekstintervaller og har
         O(n) noder. Etiketter bør gemmes som start-slut-referencer.
     key_points:
-      - {es: Tamaño lineal no implica construcción lineal en una implementación ingenua, en: Linear size does not imply linear construction in a naive implementation, da: Lineær størrelse betyder ikke lineær konstruktion i en naiv implementering}
+      - {"es": "Tamaño lineal no implica construcción lineal en una implementación ingenua", "en": "Linear size does not imply linear construction in a naive implementation", "da": "Lineær størrelse betyder ikke lineær konstruktion i en naiv implementering"}
   - id: dm847.m07.c05
-    title: {es: Array de sufijos y búsqueda binaria, en: Suffix array and binary search, da: Suffiksarray og binær søgning}
+    title: {"es": "Array de sufijos y búsqueda binaria", "en": "Suffix array and binary search", "da": "Suffiksarray og binær søgning"}
     body:
       es: >-
         Un array de sufijos almacena las posiciones iniciales de los sufijos en orden
@@ -136,9 +136,9 @@ concepts:
         Et suffiksarray gemmer startpositioner i leksikografisk orden. To binære søgninger
         afgrænser alle suffikser med mønsteret som præfiks. Det bruger O(n) heltal.
     key_points:
-      - {es: El intervalo de coincidencias es contiguo en orden lexicográfico, en: Matching suffixes form a contiguous lexicographic interval, da: Matchende suffikser danner et sammenhængende interval}
+      - {"es": "El intervalo de coincidencias es contiguo en orden lexicográfico", "en": "Matching suffixes form a contiguous lexicographic interval", "da": "Matchende suffikser danner et sammenhængende interval"}
   - id: dm847.m07.c06
-    title: {es: LCP y repetición, en: LCP and repeats, da: LCP og gentagelser}
+    title: {"es": "LCP y repetición", "en": "LCP and repeats", "da": "LCP og gentagelser"}
     body:
       es: >-
         LCP[i] registra la longitud del prefijo común entre sufijos adyacentes en el array.
@@ -155,9 +155,9 @@ concepts:
         LCP[i] er længden af fælles præfiks mellem nabo-suffikser. Maksimum identificerer en
         lang gentagelse, og LCP-intervaller beskriver grupper med fælles præfikser.
     key_points:
-      - {es: Repetición larga no equivale automáticamente a relevancia biológica, en: A long repeat is not automatically biologically relevant, da: En lang gentagelse er ikke automatisk biologisk relevant}
+      - {"es": "Repetición larga no equivale automáticamente a relevancia biológica", "en": "A long repeat is not automatically biologically relevant", "da": "En lang gentagelse er ikke automatisk biologisk relevant"}
   - id: dm847.m07.c07
-    title: {es: Índices de k-mers, en: k-mer indexes, da: k-mer-indekser}
+    title: {"es": "Índices de k-mers", "en": "k-mer indexes", "da": "k-mer-indekser"}
     body:
       es: >-
         Un índice de k-mers asocia cada palabra de longitud k con sus posiciones. Para un patrón
@@ -174,9 +174,9 @@ concepts:
         Et k-mer-indeks knytter hvert ord af længde k til positioner. Lille k giver store
         buckets; stor k øger hukommelse og er mindre nyttig for korte eller fejlbehæftede mønstre.
     key_points:
-      - {es: Semilla encontrada no es coincidencia completa, en: A seed hit is not a full match, da: Et seed-hit er ikke et fuldt match}
+      - {"es": "Semilla encontrada no es coincidencia completa", "en": "A seed hit is not a full match", "da": "Et seed-hit er ikke et fuldt match"}
   - id: dm847.m07.c08
-    title: {es: Selección, complejidad y validación, en: Selection, complexity, and validation, da: Valg, kompleksitet og validering}
+    title: {"es": "Selección, complejidad y validación", "en": "Selection, complexity, and validation", "da": "Valg, kompleksitet og validering"}
     body:
       es: >-
         Para pocas consultas, la búsqueda directa puede ser suficiente. Para muchas consultas
@@ -194,12 +194,12 @@ concepts:
         Ved få forespørgsler kan direkte søgning være nok. Ved mange forespørgsler kan
         præprocessering betale sig. Valider mod udtømmende søgning på tilfældige og repetitive tekster.
     key_points:
-      - {es: Medir incluye construcción, consulta y memoria, en: Measurement includes construction, query, and memory, da: Måling omfatter konstruktion, forespørgsel og hukommelse}
+      - {"es": "Medir incluye construcción, consulta y memoria", "en": "Measurement includes construction, query, and memory", "da": "Måling omfatter konstruktion, forespørgsel og hukommelse"}
 
 worked_examples:
   - id: dm847.m07.e01
-    title: {es: Array de sufijos de banana$, en: Suffix array of banana$, da: Suffiksarray for banana$}
-    scenario: {es: Ordenar conceptualmente los sufijos de banana$ y localizar ana., en: Conceptually sort the suffixes of banana$ and locate ana., da: Sortér suffikserne af banana$ og find ana.}
+    title: {"es": "Array de sufijos de banana$", "en": "Suffix array of banana$", "da": "Suffiksarray for banana$"}
+    scenario: {"es": "Ordenar conceptualmente los sufijos de banana$ y localizar ana.", "en": "Conceptually sort the suffixes of banana$ and locate ana.", "da": "Sortér suffikserne af banana$ og find ana."}
     solution_outline:
       es: >-
         Listar posiciones 0..6, ordenar por el sufijo referenciado y obtener [6,5,3,1,0,4,2].
@@ -212,8 +212,8 @@ worked_examples:
         Sortér suffiksreferencer til [6,5,3,1,0,4,2]. Grænserne for ana giver start 3 og 1.
     validation: [sentinel_unique, suffixes_sorted, matches_naive]
   - id: dm847.m07.e02
-    title: {es: Elección de k para un índice, en: Choosing k for an index, da: Valg af k til et indeks}
-    scenario: {es: Comparar k=4 y k=12 para patrones de 20 nt en un genoma repetitivo., en: Compare k=4 and k=12 for 20-nt patterns in a repetitive genome., da: Sammenlign k=4 og k=12 for 20-nt mønstre i et repetitivt genom.}
+    title: {"es": "Elección de k para un índice", "en": "Choosing k for an index", "da": "Valg af k til et indeks"}
+    scenario: {"es": "Comparar k=4 y k=12 para patrones de 20 nt en un genoma repetitivo.", "en": "Compare k=4 and k=12 for 20-nt patterns in a repetitive genome.", "da": "Sammenlign k=4 og k=12 for 20-nt mønstre i et repetitivt genom."}
     solution_outline:
       es: >-
         k=4 tiene como máximo 256 palabras canónicas y genera cubetas grandes; k=12 discrimina
@@ -227,8 +227,8 @@ worked_examples:
         k=4 giver store buckets; k=12 er mere selektiv men bruger flere nøgler og er følsom for seed-fejl.
     validation: [all_true_hits_recovered_for_exact_queries, candidate_counts_reported, memory_measured]
   - id: dm847.m07.e03
-    title: {es: Repetición más larga con LCP, en: Longest repeat with LCP, da: Længste gentagelse med LCP}
-    scenario: {es: Identificar la repetición más larga y sus posiciones a partir de SA y LCP., en: Identify the longest repeat and positions from SA and LCP., da: Identificér den længste gentagelse fra SA og LCP.}
+    title: {"es": "Repetición más larga con LCP", "en": "Longest repeat with LCP", "da": "Længste gentagelse med LCP"}
+    scenario: {"es": "Identificar la repetición más larga y sus posiciones a partir de SA y LCP.", "en": "Identify the longest repeat and positions from SA and LCP.", "da": "Identificér den længste gentagelse fra SA og LCP."}
     solution_outline:
       es: >-
         Encontrar el máximo de LCP, recuperar el prefijo de esa longitud en los dos sufijos
@@ -243,70 +243,70 @@ worked_examples:
     validation: [substring_occurs_at_reported_positions, ties_preserved, no_overclaim]
 
 practice_exercises:
-  - {id: dm847.m07.p01, activity_type: code_tracing, difficulty: foundational, prompt: {es: Traza búsqueda ingenua de ATA en ATATATA conservando solapamientos., en: Trace naive search for ATA in ATATATA while preserving overlaps., da: Gennemgå naiv søgning efter ATA i ATATATA med overlap.}, expected_elements: [positions_0_2_4, boundary_n_minus_m, overlap_policy]}
-  - {id: dm847.m07.p02, activity_type: construction, difficulty: intermediate, prompt: {es: Construye un trie para AT, ATA, AG y marca terminales internos., en: Build a trie for AT, ATA, AG and mark internal terminals., da: Byg en trie for AT, ATA, AG og markér interne terminaler.}, expected_elements: [shared_A_prefix, terminal_AT, terminal_ATA, terminal_AG]}
-  - {id: dm847.m07.p03, activity_type: algorithm_design, difficulty: intermediate, prompt: {es: Diseña las dos búsquedas binarias que delimitan un patrón en un array de sufijos., en: Design the two binary searches delimiting a pattern in a suffix array., da: Design de to binære søgninger, der afgrænser et mønster.}, expected_elements: [lower_bound, upper_bound, prefix_comparator, empty_interval]}
-  - {id: dm847.m07.p04, activity_type: debugging, difficulty: advanced, prompt: {es: Corrige un constructor que materializa todos los sufijos y excede memoria., en: Fix a constructor that materializes all suffix strings and exceeds memory., da: Ret en konstruktion der materialiserer alle suffiksstrenge.}, expected_elements: [store_positions, compare_by_text, prefix_doubling_or_library_method, memory_evidence]}
-  - {id: dm847.m07.p05, activity_type: data_interpretation, difficulty: advanced, prompt: {es: Interpreta un histograma de tamaños de cubeta para tres valores de k., en: Interpret a bucket-size histogram for three k values., da: Fortolk et histogram over bucket-størrelser for tre k-værdier.}, expected_elements: [repetitiveness, candidate_verification_cost, memory_tradeoff]}
-  - {id: dm847.m07.p06, activity_type: oral_explanation, difficulty: advanced, prompt: {es: Defiende cuándo elegirías array de sufijos en lugar de índice de k-mers., en: Defend when you would choose a suffix array over a k-mer index., da: Forsvar hvornår du vælger et suffiksarray frem for et k-mer-indeks.}, expected_elements: [query_types, memory, exactness, preprocessing, pattern_length]}
+  - {id: dm847.m07.p01, activity_type: code_tracing, difficulty: foundational, prompt: {"es": "Traza búsqueda ingenua de ATA en ATATATA conservando solapamientos.", "en": "Trace naive search for ATA in ATATATA while preserving overlaps.", "da": "Gennemgå naiv søgning efter ATA i ATATATA med overlap."}, expected_elements: [positions_0_2_4, boundary_n_minus_m, overlap_policy]}
+  - {id: dm847.m07.p02, activity_type: construction, difficulty: intermediate, prompt: {"es": "Construye un trie para AT, ATA, AG y marca terminales internos.", "en": "Build a trie for AT, ATA, AG and mark internal terminals.", "da": "Byg en trie for AT, ATA, AG og markér interne terminaler."}, expected_elements: [shared_A_prefix, terminal_AT, terminal_ATA, terminal_AG]}
+  - {id: dm847.m07.p03, activity_type: algorithm_design, difficulty: intermediate, prompt: {"es": "Diseña las dos búsquedas binarias que delimitan un patrón en un array de sufijos.", "en": "Design the two binary searches delimiting a pattern in a suffix array.", "da": "Design de to binære søgninger, der afgrænser et mønster."}, expected_elements: [lower_bound, upper_bound, prefix_comparator, empty_interval]}
+  - {id: dm847.m07.p04, activity_type: debugging, difficulty: advanced, prompt: {"es": "Corrige un constructor que materializa todos los sufijos y excede memoria.", "en": "Fix a constructor that materializes all suffix strings and exceeds memory.", "da": "Ret en konstruktion der materialiserer alle suffiksstrenge."}, expected_elements: [store_positions, compare_by_text, prefix_doubling_or_library_method, memory_evidence]}
+  - {id: dm847.m07.p05, activity_type: data_interpretation, difficulty: advanced, prompt: {"es": "Interpreta un histograma de tamaños de cubeta para tres valores de k.", "en": "Interpret a bucket-size histogram for three k values.", "da": "Fortolk et histogram over bucket-størrelser for tre k-værdier."}, expected_elements: [repetitiveness, candidate_verification_cost, memory_tradeoff]}
+  - {id: dm847.m07.p06, activity_type: oral_explanation, difficulty: advanced, prompt: {"es": "Defiende cuándo elegirías array de sufijos en lugar de índice de k-mers.", "en": "Defend when you would choose a suffix array over a k-mer index.", "da": "Forsvar hvornår du vælger et suffiksarray frem for et k-mer-indeks."}, expected_elements: [query_types, memory, exactness, preprocessing, pattern_length]}
 
 objective_bank:
   - id: dm847.m07.q01
     type: multiple_choice
-    prompt: {es: ¿Cuál es el peor coste de búsqueda ingenua?, en: What is worst-case naive-search cost?, da: Hvad er værste omkostning for naiv søgning?}
+    prompt: {"es": "¿Cuál es el peor coste de búsqueda ingenua?", "en": "What is worst-case naive-search cost?", "da": "Hvad er værste omkostning for naiv søgning?"}
     options: [{id: a, es: O(nm), en: O(nm), da: O(nm)}, {id: b, es: O(log n), en: O(log n), da: O(log n)}, {id: c, es: O(n+m) siempre, en: Always O(n+m), da: Altid O(n+m)}, {id: d, es: O(1), en: O(1), da: O(1)}]
     correct_option_ids: [a]
   - id: dm847.m07.q02
     type: true_false
-    prompt: {es: Un patrón que es prefijo de otro puede terminar en un nodo interno del trie., en: A pattern that prefixes another may end at an internal trie node., da: Et mønster der er præfiks for et andet kan slutte i en intern node.}
+    prompt: {"es": "Un patrón que es prefijo de otro puede terminar en un nodo interno del trie.", "en": "A pattern that prefixes another may end at an internal trie node.", "da": "Et mønster der er præfiks for et andet kan slutte i en intern node."}
     correct: true
   - id: dm847.m07.q03
     type: multiple_choice
-    prompt: {es: ¿Por qué se añade un sentinela único?, en: Why add a unique sentinel?, da: Hvorfor tilføjes en unik sentinel?}
+    prompt: {"es": "¿Por qué se añade un sentinela único?", "en": "Why add a unique sentinel?", "da": "Hvorfor tilføjes en unik sentinel?"}
     options: [{id: a, es: Para distinguir todos los sufijos y sus finales, en: To distinguish every suffix and its ending, da: For at skelne alle suffikser og deres slutninger}, {id: b, es: Para tolerar errores, en: To tolerate errors, da: For at tolerere fejl}, {id: c, es: Para traducir ADN, en: To translate DNA, da: For at oversætte DNA}, {id: d, es: Para ordenar por longitud, en: To sort by length, da: For at sortere efter længde}]
     correct_option_ids: [a]
   - id: dm847.m07.q04
     type: true_false
-    prompt: {es: Que un árbol de sufijos tenga tamaño O(n) garantiza que cualquier construcción sea O(n)., en: Linear suffix-tree size guarantees every construction is O(n)., da: Lineær størrelse garanterer at enhver konstruktion er O(n).}
+    prompt: {"es": "Que un árbol de sufijos tenga tamaño O(n) garantiza que cualquier construcción sea O(n).", "en": "Linear suffix-tree size guarantees every construction is O(n).", "da": "Lineær størrelse garanterer at enhver konstruktion er O(n)."}
     correct: false
   - id: dm847.m07.q05
     type: multiple_choice
-    prompt: {es: ¿Qué almacena un array de sufijos?, en: What does a suffix array store?, da: Hvad gemmer et suffiksarray?}
+    prompt: {"es": "¿Qué almacena un array de sufijos?", "en": "What does a suffix array store?", "da": "Hvad gemmer et suffiksarray?"}
     options: [{id: a, es: Posiciones iniciales de sufijos en orden lexicográfico, en: Suffix start positions in lexicographic order, da: Suffiksers startpositioner i leksikografisk orden}, {id: b, es: Todos los sufijos copiados obligatoriamente, en: Necessarily all copied suffix strings, da: Nødvendigvis alle kopierede suffiksstrenge}, {id: c, es: Sólo k-mers únicos, en: Only unique k-mers, da: Kun unikke k-mers}, {id: d, es: Probabilidades de sustitución, en: Substitution probabilities, da: Substitutionssandsynligheder}]
     correct_option_ids: [a]
   - id: dm847.m07.q06
     type: multiple_choice
-    prompt: {es: ¿Qué representa LCP[i] en la convención habitual?, en: What does LCP[i] commonly represent?, da: Hvad repræsenterer LCP[i] typisk?}
+    prompt: {"es": "¿Qué representa LCP[i] en la convención habitual?", "en": "What does LCP[i] commonly represent?", "da": "Hvad repræsenterer LCP[i] typisk?"}
     options: [{id: a, es: Longitud del prefijo común de sufijos adyacentes, en: Common-prefix length of adjacent suffixes, da: Længden af fælles præfiks for nabosuffikser}, {id: b, es: Longitud total del genoma, en: Total genome length, da: Genomets totale længde}, {id: c, es: Número de patrones, en: Number of patterns, da: Antal mønstre}, {id: d, es: Distancia de Hamming, en: Hamming distance, da: Hamming-afstand}]
     correct_option_ids: [a]
   - id: dm847.m07.q07
     type: true_false
-    prompt: {es: Una coincidencia de semilla k-mer debe verificarse contra el patrón completo., en: A k-mer seed hit should be verified against the full pattern., da: Et k-mer seed-hit bør verificeres mod hele mønsteret.}
+    prompt: {"es": "Una coincidencia de semilla k-mer debe verificarse contra el patrón completo.", "en": "A k-mer seed hit should be verified against the full pattern.", "da": "Et k-mer seed-hit bør verificeres mod hele mønsteret."}
     correct: true
   - id: dm847.m07.q08
     type: multiple_choice
-    prompt: {es: ¿Qué efecto suele tener aumentar k?, en: What effect does increasing k usually have?, da: Hvilken effekt har større k typisk?}
+    prompt: {"es": "¿Qué efecto suele tener aumentar k?", "en": "What effect does increasing k usually have?", "da": "Hvilken effekt har større k typisk?"}
     options: [{id: a, es: Menos candidatos por semilla y más claves posibles, en: Fewer candidates per seed and more possible keys, da: Færre kandidater pr. seed og flere mulige nøgler}, {id: b, es: Siempre menos memoria, en: Always less memory, da: Altid mindre hukommelse}, {id: c, es: Tolerancia automática a errores, en: Automatic error tolerance, da: Automatisk fejltolerance}, {id: d, es: Elimina la verificación, en: Eliminates verification, da: Fjerner verifikation}]
     correct_option_ids: [a]
   - id: dm847.m07.q09
     type: multiple_choice
-    prompt: {es: ¿Cuál es el mejor oráculo para validar un índice exacto pequeño?, en: What is the best oracle for validating a small exact index?, da: Hvad er det bedste orakel til validering af et lille eksakt indeks?}
+    prompt: {"es": "¿Cuál es el mejor oráculo para validar un índice exacto pequeño?", "en": "What is the best oracle for validating a small exact index?", "da": "Hvad er det bedste orakel til validering af et lille eksakt indeks?"}
     options: [{id: a, es: Búsqueda exhaustiva simple, en: Simple exhaustive search, da: Simpel udtømmende søgning}, {id: b, es: El mismo índice, en: The same index, da: Det samme indeks}, {id: c, es: Sólo tiempo de ejecución, en: Runtime only, da: Kun køretid}, {id: d, es: Una figura, en: A figure, da: En figur}]
     correct_option_ids: [a]
   - id: dm847.m07.q10
     type: true_false
-    prompt: {es: La repetición más larga encontrada demuestra por sí sola una función reguladora., en: The longest detected repeat alone proves regulatory function., da: Den længste gentagelse beviser alene regulatorisk funktion.}
+    prompt: {"es": "La repetición más larga encontrada demuestra por sí sola una función reguladora.", "en": "The longest detected repeat alone proves regulatory function.", "da": "Den længste gentagelse beviser alene regulatorisk funktion."}
     correct: false
 
 open_assessment:
   - id: dm847.m07.a01
-    prompt: {es: Deriva y compara el coste de búsqueda ingenua, array de sufijos e índice de k-mers para Q consultas., en: Derive and compare costs of naive search, suffix array, and k-mer index for Q queries., da: Udled og sammenlign omkostninger for naiv søgning, suffiksarray og k-mer-indeks ved Q forespørgsler.}
+    prompt: {"es": "Deriva y compara el coste de búsqueda ingenua, array de sufijos e índice de k-mers para Q consultas.", "en": "Derive and compare costs of naive search, suffix array, and k-mer index for Q queries.", "da": "Udled og sammenlign omkostninger for naiv søgning, suffiksarray og k-mer-indeks ved Q forespørgsler."}
     rubric: [{criterion: preprocessing_query_separation, weight: 0.30}, {criterion: correct_asymptotic_reasoning, weight: 0.30}, {criterion: memory_and_repetitiveness, weight: 0.20}, {criterion: justified_selection, weight: 0.20}]
   - id: dm847.m07.a02
-    prompt: {es: Diseña pruebas de propiedades para un array de sufijos y su búsqueda., en: Design property tests for a suffix array and its search., da: Design egenskabstests for et suffiksarray og dets søgning.}
+    prompt: {"es": "Diseña pruebas de propiedades para un array de sufijos y su búsqueda.", "en": "Design property tests for a suffix array and its search.", "da": "Design egenskabstests for et suffiksarray og dets søgning."}
     rubric: [{criterion: permutation_and_order_invariants, weight: 0.30}, {criterion: oracle_comparison, weight: 0.30}, {criterion: edge_and_adversarial_cases, weight: 0.25}, {criterion: reproducibility, weight: 0.15}]
   - id: dm847.m07.a03
-    prompt: {es: Selecciona un índice para millones de consultas exactas sobre un genoma fijo y defiende la decisión., en: Select an index for millions of exact queries on a fixed genome and defend the decision., da: Vælg et indeks til millioner af eksakte forespørgsler på et fast genom.}
+    prompt: {"es": "Selecciona un índice para millones de consultas exactas sobre un genoma fijo y defiende la decisión.", "en": "Select an index for millions of exact queries on a fixed genome and defend the decision.", "da": "Vælg et indeks til millioner af eksakte forespørgsler på et fast genom."}
     rubric: [{criterion: requirements, weight: 0.20}, {criterion: construction_amortization, weight: 0.25}, {criterion: memory_and_query_behavior, weight: 0.30}, {criterion: validation_plan, weight: 0.25}]
 
 glossary:
@@ -338,9 +338,9 @@ hidden_support:
       Indekser bytter præprocessering og hukommelse for hurtigere forespørgsler. Suffiksarrays
       giver et binært søgeinterval; k-mer-indekser giver kandidater via seeds, som skal verificeres.
   misconceptions:
-    - {id: dm847.m07.mc01, false_belief: {es: Un seed hit es una coincidencia completa, en: A seed hit is a full match, da: Et seed-hit er et fuldt match}, correction: {es: Sólo es un candidato que debe verificarse, en: It is only a candidate requiring verification, da: Det er kun en kandidat der skal verificeres}}
-    - {id: dm847.m07.mc02, false_belief: {es: Tamaño lineal garantiza construcción lineal, en: Linear size guarantees linear construction, da: Lineær størrelse garanterer lineær konstruktion}, correction: {es: La complejidad de construcción depende del algoritmo, en: Construction complexity depends on the algorithm, da: Konstruktionskompleksitet afhænger af algoritmen}}
-    - {id: dm847.m07.mc03, false_belief: {es: Mayor k siempre es mejor, en: Larger k is always better, da: Større k er altid bedre}, correction: {es: Hay compromisos con memoria, patrones cortos y errores, en: Memory, short patterns, and errors create trade-offs, da: Hukommelse, korte mønstre og fejl giver kompromiser}}
+    - {id: dm847.m07.mc01, false_belief: {"es": "Un seed hit es una coincidencia completa", "en": "A seed hit is a full match", "da": "Et seed-hit er et fuldt match"}, correction: {"es": "Sólo es un candidato que debe verificarse", "en": "It is only a candidate requiring verification", "da": "Det er kun en kandidat der skal verificeres"}}
+    - {id: dm847.m07.mc02, false_belief: {"es": "Tamaño lineal garantiza construcción lineal", "en": "Linear size guarantees linear construction", "da": "Lineær størrelse garanterer lineær konstruktion"}, correction: {"es": "La complejidad de construcción depende del algoritmo", "en": "Construction complexity depends on the algorithm", "da": "Konstruktionskompleksitet afhænger af algoritmen"}}
+    - {id: dm847.m07.mc03, false_belief: {"es": "Mayor k siempre es mejor", "en": "Larger k is always better", "da": "Større k er altid bedre"}, correction: {"es": "Hay compromisos con memoria, patrones cortos y errores", "en": "Memory, short patterns, and errors create trade-offs", "da": "Hukommelse, korte mønstre og fejl giver kompromiser"}}
   socratic_questions:
     - ¿Cuántas consultas justifican el coste de construir el índice?
     - ¿Cómo se representan las etiquetas sin copiar subcadenas?

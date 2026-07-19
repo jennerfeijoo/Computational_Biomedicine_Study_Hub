@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Diccionarios, conjuntos, agregación y selección de estructuras
-    en: Dictionaries, sets, aggregation, and structure selection
-    da: Ordbøger, mængder, aggregering og valg af datastruktur
+    es: "Diccionarios, conjuntos, agregación y selección de estructuras"
+    en: "Dictionaries, sets, aggregation, and structure selection"
+    da: "Ordbøger, mængder, aggregering og valg af datastruktur"
   summary:
     es: >-
       Uso razonado de diccionarios y conjuntos para representar asociaciones, indexar por identidad,
@@ -34,66 +34,66 @@ objectives:
   - id: m07.o1
     bloom_level: apply
     statement:
-      es: Crear diccionarios con claves únicas, hashables y semánticamente estables.
-      en: Create dictionaries with unique, hashable, semantically stable keys.
-      da: Oprette ordbøger med unikke, hashbare og semantisk stabile nøgler.
+      es: "Crear diccionarios con claves únicas, hashables y semánticamente estables."
+      en: "Create dictionaries with unique, hashable, semantically stable keys."
+      da: "Oprette ordbøger med unikke, hashbare og semantisk stabile nøgler."
     evidence: mapping_design
   - id: m07.o2
     bloom_level: analyze
     statement:
-      es: Elegir entre acceso estricto, acceso tolerante y contratos explícitos de ausencia.
-      en: Choose among strict access, tolerant access, and explicit absence contracts.
-      da: Vælge mellem streng adgang, tolerant adgang og eksplicitte fraværskontrakter.
+      es: "Elegir entre acceso estricto, acceso tolerante y contratos explícitos de ausencia."
+      en: "Choose among strict access, tolerant access, and explicit absence contracts."
+      da: "Vælge mellem streng adgang, tolerant adgang og eksplicitte fraværskontrakter."
     evidence: missing_key_analysis
   - id: m07.o3
     bloom_level: apply
     statement:
-      es: Recorrer claves, valores y pares sin depender de un orden accidental.
-      en: Traverse keys, values, and pairs without relying on accidental order.
-      da: Gennemløbe nøgler, værdier og par uden at afhænge af tilfældig rækkefølge.
+      es: "Recorrer claves, valores y pares sin depender de un orden accidental."
+      en: "Traverse keys, values, and pairs without relying on accidental order."
+      da: "Gennemløbe nøgler, værdier og par uden at afhænge af tilfældig rækkefølge."
     evidence: mapping_traversal
   - id: m07.o4
     bloom_level: create
     statement:
-      es: Construir tablas de frecuencia y agrupaciones normalizadas.
-      en: Build normalized frequency tables and groupings.
-      da: Bygge normaliserede frekvenstabeller og grupperinger.
+      es: "Construir tablas de frecuencia y agrupaciones normalizadas."
+      en: "Build normalized frequency tables and groupings."
+      da: "Bygge normaliserede frekvenstabeller og grupperinger."
     evidence: aggregation_pipeline
   - id: m07.o5
     bloom_level: analyze
     statement:
-      es: Diseñar y validar diccionarios anidados mediante un esquema explícito.
-      en: Design and validate nested dictionaries using an explicit schema.
-      da: Designe og validere indlejrede ordbøger med et eksplicit skema.
+      es: "Diseñar y validar diccionarios anidados mediante un esquema explícito."
+      en: "Design and validate nested dictionaries using an explicit schema."
+      da: "Designe og validere indlejrede ordbøger med et eksplicit skema."
     evidence: nested_schema_validation
   - id: m07.o6
     bloom_level: apply
     statement:
-      es: Usar conjuntos para unicidad, pertenencia y comparación de colecciones.
-      en: Use sets for uniqueness, membership, and collection comparison.
-      da: Bruge mængder til entydighed, medlemskab og sammenligning af samlinger.
+      es: "Usar conjuntos para unicidad, pertenencia y comparación de colecciones."
+      en: "Use sets for uniqueness, membership, and collection comparison."
+      da: "Bruge mængder til entydighed, medlemskab og sammenligning af samlinger."
     evidence: set_operation
   - id: m07.o7
     bloom_level: evaluate
     statement:
-      es: Interpretar unión, intersección, diferencia y diferencia simétrica según el problema.
-      en: Interpret union, intersection, difference, and symmetric difference in context.
-      da: Fortolke union, snit, differens og symmetrisk differens i kontekst.
+      es: "Interpretar unión, intersección, diferencia y diferencia simétrica según el problema."
+      en: "Interpret union, intersection, difference, and symmetric difference in context."
+      da: "Fortolke union, snit, differens og symmetrisk differens i kontekst."
     evidence: set_semantics_explanation
   - id: m07.o8
     bloom_level: evaluate
     statement:
-      es: Elegir entre lista, tupla, diccionario y conjunto usando requisitos de orden, identidad, multiplicidad y mutabilidad.
-      en: Choose among list, tuple, dictionary, and set using requirements for order, identity, multiplicity, and mutability.
-      da: Vælge mellem liste, tuple, ordbog og mængde ud fra krav til rækkefølge, identitet, multiplicitet og muterbarhed.
+      es: "Elegir entre lista, tupla, diccionario y conjunto usando requisitos de orden, identidad, multiplicidad y mutabilidad."
+      en: "Choose among list, tuple, dictionary, and set using requirements for order, identity, multiplicity, and mutability."
+      da: "Vælge mellem liste, tuple, ordbog og mængde ud fra krav til rækkefølge, identitet, multiplicitet og muterbarhed."
     evidence: structure_selection_defense
 
 concepts:
   - id: mapping-model-and-keys
     title:
-      es: Diccionarios como asociaciones
-      en: Dictionaries as associations
-      da: Ordbøger som relationer
+      es: "Diccionarios como asociaciones"
+      en: "Dictionaries as associations"
+      da: "Ordbøger som relationer"
     body:
       es: >-
         Un diccionario asocia cada clave con un valor. Las claves son únicas y deben ser hashables:
@@ -114,9 +114,9 @@ concepts:
 
   - id: strict-and-tolerant-access
     title:
-      es: Acceso estricto, tolerante y contratos de ausencia
-      en: Strict access, tolerant access, and absence contracts
-      da: Streng adgang, tolerant adgang og fraværskontrakter
+      es: "Acceso estricto, tolerante y contratos de ausencia"
+      en: "Strict access, tolerant access, and absence contracts"
+      da: "Streng adgang, tolerant adgang og fraværskontrakter"
     body:
       es: >-
         `d[key]` exige que la clave exista y produce `KeyError` si falta. `d.get(key, default)` expresa
@@ -135,9 +135,9 @@ concepts:
 
   - id: mutation-views-and-safe-traversal
     title:
-      es: Mutación, vistas y recorrido seguro
-      en: Mutation, views, and safe traversal
-      da: Mutation, views og sikkert gennemløb
+      es: "Mutación, vistas y recorrido seguro"
+      en: "Mutation, views, and safe traversal"
+      da: "Mutation, views og sikkert gennemløb"
     body:
       es: >-
         La asignación inserta o actualiza; `del` exige una clave existente y `pop` elimina y retorna.
@@ -157,9 +157,9 @@ concepts:
 
   - id: frequencies-and-grouping
     title:
-      es: Frecuencias, normalización y agrupación
-      en: Frequencies, normalization, and grouping
-      da: Frekvenser, normalisering og gruppering
+      es: "Frecuencias, normalización y agrupación"
+      en: "Frequencies, normalization, and grouping"
+      da: "Frekvenser, normalisering og gruppering"
     body:
       es: >-
         Una tabla de frecuencia usa cada categoría como clave y su conteo como valor. El patrón
@@ -178,9 +178,9 @@ concepts:
 
   - id: nested-records-and-schema
     title:
-      es: Registros anidados y esquema
-      en: Nested records and schema
-      da: Indlejrede poster og skema
+      es: "Registros anidados y esquema"
+      en: "Nested records and schema"
+      da: "Indlejrede poster og skema"
     body:
       es: >-
         Un diccionario puede contener diccionarios, listas y valores escalares. Esta flexibilidad exige
@@ -200,9 +200,9 @@ concepts:
 
   - id: set-semantics
     title:
-      es: Conjuntos, unicidad y pertenencia
-      en: Sets, uniqueness, and membership
-      da: Mængder, entydighed og medlemskab
+      es: "Conjuntos, unicidad y pertenencia"
+      en: "Sets, uniqueness, and membership"
+      da: "Mængder, entydighed og medlemskab"
     body:
       es: >-
         Un conjunto almacena elementos únicos y hashables. No representa posiciones ni duplicados y
@@ -222,9 +222,9 @@ concepts:
 
   - id: set-algebra
     title:
-      es: Álgebra de conjuntos y significado direccional
-      en: Set algebra and directional meaning
-      da: Mængdealgebra og retningsbestemt betydning
+      es: "Álgebra de conjuntos y significado direccional"
+      en: "Set algebra and directional meaning"
+      da: "Mængdealgebra og retningsbestemt betydning"
     body:
       es: >-
         La unión `A | B` reúne elementos presentes en cualquiera; la intersección `A & B` conserva los
@@ -243,9 +243,9 @@ concepts:
 
   - id: choosing-a-data-structure
     title:
-      es: Selección de estructura por contrato
-      en: Structure selection by contract
-      da: Valg af struktur ud fra kontrakt
+      es: "Selección de estructura por contrato"
+      en: "Structure selection by contract"
+      da: "Valg af struktur ud fra kontrakt"
     body:
       es: >-
         Una lista conserva orden y multiplicidad y admite mutación; una tupla comunica un registro ordenado
@@ -265,13 +265,13 @@ concepts:
 worked_examples:
   - id: dm857.m07.e01
     title:
-      es: Construir una tabla de frecuencias normalizada
-      en: Build a normalized frequency table
-      da: Byg en normaliseret frekvenstabel
+      es: "Construir una tabla de frecuencias normalizada"
+      en: "Build a normalized frequency table"
+      da: "Byg en normaliseret frekvenstabel"
     problem:
-      es: Contar etiquetas sintéticas ignorando espacios externos y diferencias entre mayúsculas y minúsculas.
-      en: Count synthetic labels while ignoring outer whitespace and case differences.
-      da: Tæl syntetiske etiketter uden hensyn til ydre whitespace og forskel på store og små bogstaver.
+      es: "Contar etiquetas sintéticas ignorando espacios externos y diferencias entre mayúsculas y minúsculas."
+      en: "Count synthetic labels while ignoring outer whitespace and case differences."
+      da: "Tæl syntetiske etiketter uden hensyn til ydre whitespace og forskel på store og små bogstaver."
     assumptions:
       - every input element is a string
       - empty normalized labels are excluded and reported separately
@@ -310,22 +310,22 @@ worked_examples:
       - empty input is not silently merged with a valid category
       - total counted plus empty_count equals input length
     explanation:
-      es: La normalización precede al conteo y el invariante conserva el número total de observaciones.
-      en: Normalization precedes counting, and the invariant preserves the total number of observations.
-      da: Normalisering sker før optælling, og invarianten bevarer det samlede antal observationer.
+      es: "La normalización precede al conteo y el invariante conserva el número total de observaciones."
+      en: "Normalization precedes counting, and the invariant preserves the total number of observations."
+      da: "Normalisering sker før optælling, og invarianten bevarer det samlede antal observationer."
     limitations:
       - casefolding may be inappropriate when case has domain meaning
     linked_objectives: [m07.o2, m07.o3, m07.o4]
 
   - id: dm857.m07.e02
     title:
-      es: Comparar dos colecciones mediante conjuntos
-      en: Compare two collections using sets
-      da: Sammenlign to samlinger med mængder
+      es: "Comparar dos colecciones mediante conjuntos"
+      en: "Compare two collections using sets"
+      da: "Sammenlign to samlinger med mængder"
     problem:
-      es: Identificar elementos comunes, exclusivos del primer lote y presentes en exactamente uno de dos lotes sintéticos.
-      en: Identify common elements, elements exclusive to the first synthetic batch, and elements present in exactly one batch.
-      da: Identificér fælles elementer, elementer kun i første syntetiske batch og elementer i præcis én batch.
+      es: "Identificar elementos comunes, exclusivos del primer lote y presentes en exactamente uno de dos lotes sintéticos."
+      en: "Identify common elements, elements exclusive to the first synthetic batch, and elements present in exactly one batch."
+      da: "Identificér fælles elementer, elementer kun i første syntetiske batch og elementer i præcis én batch."
     assumptions:
       - only presence matters
       - duplicate multiplicity is irrelevant
@@ -349,22 +349,22 @@ worked_examples:
       - only_a is disjoint from batch_b
       - exclusive equals the union minus the intersection
     explanation:
-      es: La ordenación se aplica solo al presentar; las operaciones dependen de pertenencia, no de posición.
-      en: Sorting is only for presentation; operations depend on membership, not position.
-      da: Sortering bruges kun til præsentation; operationerne afhænger af medlemskab.
+      es: "La ordenación se aplica solo al presentar; las operaciones dependen de pertenencia, no de posición."
+      en: "Sorting is only for presentation; operations depend on membership, not position."
+      da: "Sortering bruges kun til præsentation; operationerne afhænger af medlemskab."
     limitations:
       - duplicate counts are intentionally discarded
     linked_objectives: [m07.o6, m07.o7]
 
   - id: dm857.m07.e03
     title:
-      es: Validar un registro anidado antes de resumirlo
-      en: Validate a nested record before summarizing it
-      da: Validér en indlejret post før opsummering
+      es: "Validar un registro anidado antes de resumirlo"
+      en: "Validate a nested record before summarizing it"
+      da: "Validér en indlejret post før opsummering"
     problem:
-      es: Validar que un registro sintético contenga `sample_id`, una lista `values` no vacía y un estado permitido antes de calcular la media.
-      en: Validate that a synthetic record contains `sample_id`, a non-empty `values` list, and an allowed status before computing a mean.
-      da: Validér at en syntetisk post indeholder `sample_id`, en ikke-tom liste `values` og en tilladt status før gennemsnit beregnes.
+      es: "Validar que un registro sintético contenga `sample_id`, una lista `values` no vacía y un estado permitido antes de calcular la media."
+      en: "Validate that a synthetic record contains `sample_id`, a non-empty `values` list, and an allowed status before computing a mean."
+      da: "Validér at en syntetisk post indeholder `sample_id`, en ikke-tom liste `values` og en tilladt status før gennemsnit beregnes."
     code: |-
       record = {"sample_id": "S01", "values": [2.0, 4.0], "status": "valid"}
       required = {"sample_id", "values", "status"}
@@ -386,9 +386,9 @@ worked_examples:
       - empty values never cause division by zero
       - unsupported status is rejected
     explanation:
-      es: El esquema convierte una estructura flexible en un contrato verificable.
-      en: The schema turns a flexible structure into a verifiable contract.
-      da: Skemaet gør en fleksibel struktur til en verificerbar kontrakt.
+      es: "El esquema convierte una estructura flexible en un contrato verificable."
+      en: "The schema turns a flexible structure into a verifiable contract."
+      da: "Skemaet gør en fleksibel struktur til en verificerbar kontrakt."
     limitations:
       - numeric element types require additional validation in production code
     linked_objectives: [m07.o2, m07.o5, m07.o8]
@@ -398,49 +398,49 @@ practice_exercises:
     activity_type: code_tracing
     difficulty: foundational
     prompt:
-      es: Predice `d` después de `d = {'a': 1}; d['b'] = 2; d['a'] = 3`.
-      en: Predict `d` after `d = {'a': 1}; d['b'] = 2; d['a'] = 3`.
-      da: Forudsig `d` efter `d = {'a': 1}; d['b'] = 2; d['a'] = 3`.
+      es: "Predice `d` después de `d = {'a': 1}; d['b'] = 2; d['a'] = 3`."
+      en: "Predict `d` after `d = {'a': 1}; d['b'] = 2; d['a'] = 3`."
+      da: "Forudsig `d` efter `d = {'a': 1}; d['b'] = 2; d['a'] = 3`."
     reference_solution: "{'a': 3, 'b': 2}"
     explanation:
-      es: Una clave existente se actualiza; no se duplica.
-      en: An existing key is updated rather than duplicated.
-      da: En eksisterende nøgle opdateres og duplikeres ikke.
+      es: "Una clave existente se actualiza; no se duplica."
+      en: "An existing key is updated rather than duplicated."
+      da: "En eksisterende nøgle opdateres og duplikeres ikke."
     linked_objectives: [m07.o1]
 
   - id: dm857.m07.p02
     activity_type: debugging
     difficulty: foundational
     prompt:
-      es: Explica por qué `data[[1, 2]] = 'x'` falla y propone una clave válida equivalente.
-      en: Explain why `data[[1, 2]] = 'x'` fails and propose an equivalent valid key.
-      da: Forklar hvorfor `data[[1, 2]] = 'x'` fejler, og foreslå en tilsvarende gyldig nøgle.
+      es: "Explica por qué `data[[1, 2]] = 'x'` falla y propone una clave válida equivalente."
+      en: "Explain why `data[[1, 2]] = 'x'` fails and propose an equivalent valid key."
+      da: "Forklar hvorfor `data[[1, 2]] = 'x'` fejler, og foreslå en tilsvarende gyldig nøgle."
     reference_solution:
-      es: La lista no es hashable; puede usarse la tupla `(1, 2)` si sus componentes representan una identidad estable.
-      en: A list is not hashable; tuple `(1, 2)` can be used if its components define stable identity.
-      da: En liste er ikke hashbar; tuplen `(1, 2)` kan bruges ved stabil identitet.
+      es: "La lista no es hashable; puede usarse la tupla `(1, 2)` si sus componentes representan una identidad estable."
+      en: "A list is not hashable; tuple `(1, 2)` can be used if its components define stable identity."
+      da: "En liste er ikke hashbar; tuplen `(1, 2)` kan bruges ved stabil identitet."
     linked_objectives: [m07.o1]
 
   - id: dm857.m07.p03
     activity_type: data_interpretation
     difficulty: intermediate
     prompt:
-      es: Un diccionario devuelve `None` con `get`, pero `None` también es un valor válido. Diseña un contrato no ambiguo.
-      en: A dictionary returns `None` with `get`, but `None` is also a valid value. Design an unambiguous contract.
-      da: En ordbog returnerer `None` med `get`, men `None` er også en gyldig værdi. Design en entydig kontrakt.
+      es: "Un diccionario devuelve `None` con `get`, pero `None` también es un valor válido. Diseña un contrato no ambiguo."
+      en: "A dictionary returns `None` with `get`, but `None` is also a valid value. Design an unambiguous contract."
+      da: "En ordbog returnerer `None` med `get`, men `None` er også en gyldig værdi. Design en entydig kontrakt."
     reference_solution:
-      es: Comprobar primero `key in d`, usar acceso estricto o emplear un objeto centinela único.
-      en: Check `key in d`, use strict access, or use a unique sentinel object.
-      da: Kontrollér `key in d`, brug streng adgang eller et unikt sentinelobjekt.
+      es: "Comprobar primero `key in d`, usar acceso estricto o emplear un objeto centinela único."
+      en: "Check `key in d`, use strict access, or use a unique sentinel object."
+      da: "Kontrollér `key in d`, brug streng adgang eller et unikt sentinelobjekt."
     linked_objectives: [m07.o2]
 
   - id: dm857.m07.p04
     activity_type: pipeline_design
     difficulty: intermediate
     prompt:
-      es: Diseña un pipeline para normalizar etiquetas, agrupar registros por etiqueta y conservar el orden interno de cada grupo.
-      en: Design a pipeline to normalize labels, group records by label, and preserve within-group order.
-      da: Design en pipeline til at normalisere etiketter, gruppere poster og bevare rækkefølgen i hver gruppe.
+      es: "Diseña un pipeline para normalizar etiquetas, agrupar registros por etiqueta y conservar el orden interno de cada grupo."
+      en: "Design a pipeline to normalize labels, group records by label, and preserve within-group order."
+      da: "Design en pipeline til at normalisere etiketter, gruppere poster og bevare rækkefølgen i hver gruppe."
     accepted_answer_elements:
       - normalization occurs before key creation
       - dictionary maps normalized labels to lists
@@ -452,26 +452,26 @@ practice_exercises:
     activity_type: method_selection
     difficulty: intermediate
     prompt:
-      es: Elige una estructura para cada caso: historial cronológico con duplicados, registro fijo de coordenadas, búsqueda por identificador y conjunto de permisos únicos.
-      en: Choose a structure for: chronological history with duplicates, fixed coordinate record, lookup by identifier, and unique permissions.
-      da: Vælg struktur til kronologisk historik med dubletter, fast koordinatpost, opslag efter id og unikke tilladelser.
+      es: "Elige una estructura para cada caso: historial cronológico con duplicados, registro fijo de coordenadas, búsqueda por identificador y conjunto de permisos únicos."
+      en: "Choose a structure for: chronological history with duplicates, fixed coordinate record, lookup by identifier, and unique permissions."
+      da: "Vælg struktur til kronologisk historik med dubletter, fast koordinatpost, opslag efter id og unikke tilladelser."
     reference_solution:
-      es: Lista, tupla, diccionario y conjunto, respectivamente.
-      en: List, tuple, dictionary, and set, respectively.
-      da: Liste, tuple, ordbog og mængde.
+      es: "Lista, tupla, diccionario y conjunto, respectivamente."
+      en: "List, tuple, dictionary, and set, respectively."
+      da: "Liste, tuple, ordbog og mængde."
     explanation:
-      es: La estructura sigue orden, estabilidad, identidad y unicidad.
-      en: Structure follows order, stability, identity, and uniqueness requirements.
-      da: Strukturen følger krav til rækkefølge, stabilitet, identitet og entydighed.
+      es: "La estructura sigue orden, estabilidad, identidad y unicidad."
+      en: "Structure follows order, stability, identity, and uniqueness requirements."
+      da: "Strukturen følger krav til rækkefølge, stabilitet, identitet og entydighed."
     linked_objectives: [m07.o8]
 
   - id: dm857.m07.p06
     activity_type: test_design
     difficulty: advanced
     prompt:
-      es: Diseña pruebas para una función que compare dos conjuntos y retorne comunes, solo izquierda y solo derecha.
-      en: Design tests for a function returning common, left-only, and right-only elements.
-      da: Design test til en funktion, der returnerer fælles, kun venstre og kun højre elementer.
+      es: "Diseña pruebas para una función que compare dos conjuntos y retorne comunes, solo izquierda y solo derecha."
+      en: "Design tests for a function returning common, left-only, and right-only elements."
+      da: "Design test til en funktion, der returnerer fælles, kun venstre og kun højre elementer."
     accepted_answer_elements:
       - both inputs empty
       - identical inputs
@@ -485,112 +485,112 @@ objective_bank:
   - id: dm857.m07.q01
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué requisito debe cumplir una clave de diccionario?, en: What requirement must a dictionary key satisfy?, da: Hvilket krav skal en ordbogsnøgle opfylde?}
+    prompt: {"es": "¿Qué requisito debe cumplir una clave de diccionario?", "en": "What requirement must a dictionary key satisfy?", "da": "Hvilket krav skal en ordbogsnøgle opfylde?"}
     options:
       - id: hashable
-        text: {es: Ser hashable., en: Be hashable., da: Være hashbar.}
+        text: {"es": "Ser hashable.", "en": "Be hashable.", "da": "Være hashbar."}
       - id: mutable
-        text: {es: Ser mutable., en: Be mutable., da: Være muterbar.}
+        text: {"es": "Ser mutable.", "en": "Be mutable.", "da": "Være muterbar."}
       - id: numeric
-        text: {es: Ser numérica., en: Be numeric., da: Være numerisk.}
+        text: {"es": "Ser numérica.", "en": "Be numeric.", "da": "Være numerisk."}
     correct_option_ids: [hashable]
-    explanation: {es: La tabla hash necesita una identidad estable., en: Hash lookup requires stable identity., da: Hashopslag kræver stabil identitet.}
+    explanation: {"es": "La tabla hash necesita una identidad estable.", "en": "Hash lookup requires stable identity.", "da": "Hashopslag kræver stabil identitet."}
   - id: dm857.m07.q02
     activity_type: true_false
     difficulty: foundational
-    prompt: {es: '`key in d` comprueba si `key` aparece entre las claves.', en: '`key in d` checks whether `key` is among the keys.', da: '`key in d` kontrollerer om `key` findes blandt nøglerne.'}
+    prompt: {"es": "'`key in d` comprueba si `key` aparece entre las claves.'", "en": "'`key in d` checks whether `key` is among the keys.'", "da": "'`key in d` kontrollerer om `key` findes blandt nøglerne.'"}
     correct_answer: true
-    explanation: {es: La pertenencia directa opera sobre claves., en: Direct membership operates on keys., da: Direkte medlemskab gælder nøgler.}
+    explanation: {"es": "La pertenencia directa opera sobre claves.", "en": "Direct membership operates on keys.", "da": "Direkte medlemskab gælder nøgler."}
   - id: dm857.m07.q03
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué hace `d.get('x', 0)` cuando falta `x`?, en: What does `d.get('x', 0)` do when `x` is absent?, da: Hvad gør `d.get('x', 0)`, når `x` mangler?}
+    prompt: {"es": "¿Qué hace `d.get('x', 0)` cuando falta `x`?", "en": "What does `d.get('x', 0)` do when `x` is absent?", "da": "Hvad gør `d.get('x', 0)`, når `x` mangler?"}
     options:
       - id: returns_zero
-        text: {es: Retorna 0 sin insertar la clave., en: Returns 0 without inserting the key., da: Returnerer 0 uden at indsætte nøglen.}
+        text: {"es": "Retorna 0 sin insertar la clave.", "en": "Returns 0 without inserting the key.", "da": "Returnerer 0 uden at indsætte nøglen."}
       - id: inserts_zero
-        text: {es: Inserta la clave con 0., en: Inserts the key with 0., da: Indsætter nøglen med 0.}
+        text: {"es": "Inserta la clave con 0.", "en": "Inserts the key with 0.", "da": "Indsætter nøglen med 0."}
       - id: raises_keyerror
-        text: {es: Produce KeyError., en: Raises KeyError., da: Giver KeyError.}
+        text: {"es": "Produce KeyError.", "en": "Raises KeyError.", "da": "Giver KeyError."}
     correct_option_ids: [returns_zero]
-    explanation: {es: `get` no modifica el diccionario., en: `get` does not mutate the dictionary., da: `get` ændrer ikke ordbogen.}
+    explanation: {"es": "`get` no modifica el diccionario.", "en": "`get` does not mutate the dictionary.", "da": "`get` ændrer ikke ordbogen."}
   - id: dm857.m07.q04
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué operación obtiene elementos comunes?, en: Which operation obtains common elements?, da: Hvilken operation finder fælles elementer?}
+    prompt: {"es": "¿Qué operación obtiene elementos comunes?", "en": "Which operation obtains common elements?", "da": "Hvilken operation finder fælles elementer?"}
     options:
       - id: intersection
-        text: {es: `A & B`, en: `A & B`, da: `A & B`}
+        text: {"es": "`A & B`", "en": "`A & B`", "da": "`A & B`"}
       - id: union
-        text: {es: `A | B`, en: `A | B`, da: `A | B`}
+        text: {"es": "`A | B`", "en": "`A | B`", "da": "`A | B`"}
       - id: difference
-        text: {es: `A - B`, en: `A - B`, da: `A - B`}
+        text: {"es": "`A - B`", "en": "`A - B`", "da": "`A - B`"}
     correct_option_ids: [intersection]
-    explanation: {es: La intersección conserva miembros presentes en ambos., en: Intersection preserves members present in both., da: Snit bevarer medlemmer i begge.}
+    explanation: {"es": "La intersección conserva miembros presentes en ambos.", "en": "Intersection preserves members present in both.", "da": "Snit bevarer medlemmer i begge."}
   - id: dm857.m07.q05
     activity_type: true_false
     difficulty: intermediate
-    prompt: {es: Convertir una lista a conjunto conserva la multiplicidad., en: Converting a list to a set preserves multiplicity., da: Konvertering af en liste til en mængde bevarer multiplicitet.}
+    prompt: {"es": "Convertir una lista a conjunto conserva la multiplicidad.", "en": "Converting a list to a set preserves multiplicity.", "da": "Konvertering af en liste til en mængde bevarer multiplicitet."}
     correct_answer: false
-    explanation: {es: Los duplicados se eliminan., en: Duplicates are removed., da: Dubletter fjernes.}
+    explanation: {"es": "Los duplicados se eliminan.", "en": "Duplicates are removed.", "da": "Dubletter fjernes."}
   - id: dm857.m07.q06
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Cuál es la mejor estructura para buscar un registro por identificador único?, en: Which structure best supports lookup by unique identifier?, da: Hvilken struktur er bedst til opslag efter unikt id?}
+    prompt: {"es": "¿Cuál es la mejor estructura para buscar un registro por identificador único?", "en": "Which structure best supports lookup by unique identifier?", "da": "Hvilken struktur er bedst til opslag efter unikt id?"}
     options:
       - id: dictionary
-        text: {es: Diccionario., en: Dictionary., da: Ordbog.}
+        text: {"es": "Diccionario.", "en": "Dictionary.", "da": "Ordbog."}
       - id: tuple
-        text: {es: Tupla., en: Tuple., da: Tuple.}
+        text: {"es": "Tupla.", "en": "Tuple.", "da": "Tuple."}
       - id: set
-        text: {es: Conjunto sin valores asociados., en: Set without associated values., da: Mængde uden tilknyttede værdier.}
+        text: {"es": "Conjunto sin valores asociados.", "en": "Set without associated values.", "da": "Mængde uden tilknyttede værdier."}
     correct_option_ids: [dictionary]
-    explanation: {es: El identificador funciona como clave., en: The identifier acts as the key., da: Id'et fungerer som nøgle.}
+    explanation: {"es": "El identificador funciona como clave.", "en": "The identifier acts as the key.", "da": "Id'et fungerer som nøgle."}
   - id: dm857.m07.q07
     activity_type: true_false
     difficulty: intermediate
-    prompt: {es: `A - B` siempre es igual a `B - A`., en: `A - B` always equals `B - A`., da: `A - B` er altid lig `B - A`.}
+    prompt: {"es": "`A - B` siempre es igual a `B - A`.", "en": "`A - B` always equals `B - A`.", "da": "`A - B` er altid lig `B - A`."}
     correct_answer: false
-    explanation: {es: La diferencia es direccional., en: Difference is directional., da: Differens er retningsbestemt.}
+    explanation: {"es": "La diferencia es direccional.", "en": "Difference is directional.", "da": "Differens er retningsbestemt."}
   - id: dm857.m07.q08
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué práctica evita modificar el tamaño del diccionario durante el recorrido?, en: What practice avoids changing dictionary size during traversal?, da: Hvilken praksis undgår ændring af ordbogens størrelse under gennemløb?}
+    prompt: {"es": "¿Qué práctica evita modificar el tamaño del diccionario durante el recorrido?", "en": "What practice avoids changing dictionary size during traversal?", "da": "Hvilken praksis undgår ændring af ordbogens størrelse under gennemløb?"}
     options:
       - id: key_copy
-        text: {es: Recorrer `list(d)` o construir un resultado nuevo., en: Traverse `list(d)` or build a new result., da: Gennemløb `list(d)` eller byg et nyt resultat.}
+        text: {"es": "Recorrer `list(d)` o construir un resultado nuevo.", "en": "Traverse `list(d)` or build a new result.", "da": "Gennemløb `list(d)` eller byg et nyt resultat."}
       - id: direct_delete
-        text: {es: Eliminar directamente dentro de `for key in d`., en: Delete directly inside `for key in d`., da: Slet direkte i `for key in d`.}
+        text: {"es": "Eliminar directamente dentro de `for key in d`.", "en": "Delete directly inside `for key in d`.", "da": "Slet direkte i `for key in d`."}
       - id: use_values
-        text: {es: Recorrer valores y eliminar claves., en: Traverse values and delete keys., da: Gennemløb værdier og slet nøgler.}
+        text: {"es": "Recorrer valores y eliminar claves.", "en": "Traverse values and delete keys.", "da": "Gennemløb værdier og slet nøgler."}
     correct_option_ids: [key_copy]
-    explanation: {es: La copia fija el conjunto de claves recorrido., en: The copy fixes the traversed key set., da: Kopien fastlægger det gennemløbne nøglesæt.}
+    explanation: {"es": "La copia fija el conjunto de claves recorrido.", "en": "The copy fixes the traversed key set.", "da": "Kopien fastlægger det gennemløbne nøglesæt."}
   - id: dm857.m07.q09
     activity_type: multiple_choice
     difficulty: advanced
-    prompt: {es: ¿Qué invariante debe cumplir una tabla de frecuencias?, en: What invariant should a frequency table satisfy?, da: Hvilken invariant bør en frekvenstabel opfylde?}
+    prompt: {"es": "¿Qué invariante debe cumplir una tabla de frecuencias?", "en": "What invariant should a frequency table satisfy?", "da": "Hvilken invariant bør en frekvenstabel opfylde?"}
     options:
       - id: count_total
-        text: {es: La suma de conteos coincide con las observaciones aceptadas., en: Sum of counts equals accepted observations., da: Summen af antal svarer til accepterede observationer.}
+        text: {"es": "La suma de conteos coincide con las observaciones aceptadas.", "en": "Sum of counts equals accepted observations.", "da": "Summen af antal svarer til accepterede observationer."}
       - id: sorted_keys
-        text: {es: Las claves siempre están ordenadas., en: Keys are always sorted., da: Nøgler er altid sorterede.}
+        text: {"es": "Las claves siempre están ordenadas.", "en": "Keys are always sorted.", "da": "Nøgler er altid sorterede."}
       - id: unique_counts
-        text: {es: Todos los conteos son distintos., en: All counts are distinct., da: Alle antal er forskellige.}
+        text: {"es": "Todos los conteos son distintos.", "en": "All counts are distinct.", "da": "Alle antal er forskellige."}
     correct_option_ids: [count_total]
-    explanation: {es: El total detecta pérdidas o dobles conteos., en: The total detects losses or double counting., da: Totalen afslører tab eller dobbelttælling.}
+    explanation: {"es": "El total detecta pérdidas o dobles conteos.", "en": "The total detects losses or double counting.", "da": "Totalen afslører tab eller dobbelttælling."}
   - id: dm857.m07.q10
     activity_type: multiple_choice
     difficulty: advanced
-    prompt: {es: ¿Cuándo no debe reemplazarse una lista por un conjunto?, en: When should a list not be replaced by a set?, da: Hvornår bør en liste ikke erstattes af en mængde?}
+    prompt: {"es": "¿Cuándo no debe reemplazarse una lista por un conjunto?", "en": "When should a list not be replaced by a set?", "da": "Hvornår bør en liste ikke erstattes af en mængde?"}
     options:
       - id: multiplicity_matters
-        text: {es: Cuando importan orden o duplicados., en: When order or duplicates matter., da: Når rækkefølge eller dubletter er vigtige.}
+        text: {"es": "Cuando importan orden o duplicados.", "en": "When order or duplicates matter.", "da": "Når rækkefølge eller dubletter er vigtige."}
       - id: membership_only
-        text: {es: Cuando solo importa pertenencia., en: When only membership matters., da: Når kun medlemskab betyder noget.}
+        text: {"es": "Cuando solo importa pertenencia.", "en": "When only membership matters.", "da": "Når kun medlemskab betyder noget."}
       - id: deduplication
-        text: {es: Cuando se desea eliminar duplicados., en: When deduplication is desired., da: Når dubletter skal fjernes.}
+        text: {"es": "Cuando se desea eliminar duplicados.", "en": "When deduplication is desired.", "da": "Når dubletter skal fjernes."}
     correct_option_ids: [multiplicity_matters]
-    explanation: {es: El conjunto elimina precisamente esa información., en: A set discards exactly that information., da: En mængde kasserer netop denne information.}
+    explanation: {"es": "El conjunto elimina precisamente esa información.", "en": "A set discards exactly that information.", "da": "En mængde kasserer netop denne information."}
 
 assessment_items:
   - id: dm857.m07.a01
@@ -626,13 +626,13 @@ assessment_items:
     difficulty: advanced
     prompt:
       es: >-
-        Un programa elimina claves dentro de `for key in data:` y falla de forma intermitente. Diagnostica
+        Un programa elimina claves dentro de `for key in data:"` y falla de forma intermitente. Diagnostica"
         el problema, propone dos correcciones y compara sus efectos sobre memoria y legibilidad.
       en: >-
-        A program deletes keys inside `for key in data:` and fails intermittently. Diagnose the issue,
+        A program deletes keys inside `for key in data:"` and fails intermittently. Diagnose the issue,"
         propose two corrections, and compare their memory and readability effects.
       da: >-
-        Et program sletter nøgler i `for key in data:` og fejler periodisk. Diagnostisér problemet,
+        Et program sletter nøgler i `for key in data:"` og fejler periodisk. Diagnostisér problemet,"
         foreslå to rettelser og sammenlign hukommelse og læsbarhed.
     accepted_answer_elements:
       - dictionary size changes during direct traversal
@@ -678,35 +678,35 @@ flashcards:
 
 glossary:
   - id: term.dictionary
-    term: {es: diccionario, en: dictionary, da: ordbog}
-    definition: {es: Colección mutable de asociaciones clave-valor., en: Mutable collection of key-value mappings., da: Muterbar samling af nøgle-værdi-relationer.}
+    term: {"es": "diccionario", "en": "dictionary", "da": "ordbog"}
+    definition: {"es": "Colección mutable de asociaciones clave-valor.", "en": "Mutable collection of key-value mappings.", "da": "Muterbar samling af nøgle-værdi-relationer."}
   - id: term.key
-    term: {es: clave, en: key, da: nøgle}
-    definition: {es: Objeto hashable que identifica una entrada., en: Hashable object identifying an entry., da: Hashbart objekt der identificerer en post.}
+    term: {"es": "clave", "en": "key", "da": "nøgle"}
+    definition: {"es": "Objeto hashable que identifica una entrada.", "en": "Hashable object identifying an entry.", "da": "Hashbart objekt der identificerer en post."}
   - id: term.hashable
-    term: {es: hashable, en: hashable, da: hashbar}
-    definition: {es: Objeto con hash estable apto para claves o miembros de conjuntos., en: Object with a stable hash suitable for keys or set members., da: Objekt med stabil hash egnet som nøgle eller mængdemedlem.}
+    term: {"es": "hashable", "en": "hashable", "da": "hashbar"}
+    definition: {"es": "Objeto con hash estable apto para claves o miembros de conjuntos.", "en": "Object with a stable hash suitable for keys or set members.", "da": "Objekt med stabil hash egnet som nøgle eller mængdemedlem."}
   - id: term.mapping
-    term: {es: mapeo, en: mapping, da: mapping}
-    definition: {es: Relación que asocia claves con valores., en: Relation associating keys with values., da: Relation der knytter nøgler til værdier.}
+    term: {"es": "mapeo", "en": "mapping", "da": "mapping"}
+    definition: {"es": "Relación que asocia claves con valores.", "en": "Relation associating keys with values.", "da": "Relation der knytter nøgler til værdier."}
   - id: term.sentinel
-    term: {es: centinela, en: sentinel, da: sentinel}
-    definition: {es: Objeto único usado para representar un estado especial sin ambigüedad., en: Unique object representing a special state without ambiguity., da: Unikt objekt der repræsenterer en særlig tilstand entydigt.}
+    term: {"es": "centinela", "en": "sentinel", "da": "sentinel"}
+    definition: {"es": "Objeto único usado para representar un estado especial sin ambigüedad.", "en": "Unique object representing a special state without ambiguity.", "da": "Unikt objekt der repræsenterer en særlig tilstand entydigt."}
   - id: term.frequency_table
-    term: {es: tabla de frecuencias, en: frequency table, da: frekvenstabel}
-    definition: {es: Asociación entre categorías y conteos., en: Mapping from categories to counts., da: Mapping fra kategorier til antal.}
+    term: {"es": "tabla de frecuencias", "en": "frequency table", "da": "frekvenstabel"}
+    definition: {"es": "Asociación entre categorías y conteos.", "en": "Mapping from categories to counts.", "da": "Mapping fra kategorier til antal."}
   - id: term.grouping
-    term: {es: agrupación, en: grouping, da: gruppering}
-    definition: {es: Organización de elementos bajo una clave compartida., en: Organization of elements under a shared key., da: Organisering af elementer under en fælles nøgle.}
+    term: {"es": "agrupación", "en": "grouping", "da": "gruppering"}
+    definition: {"es": "Organización de elementos bajo una clave compartida.", "en": "Organization of elements under a shared key.", "da": "Organisering af elementer under en fælles nøgle."}
   - id: term.set
-    term: {es: conjunto, en: set, da: mængde}
-    definition: {es: Colección mutable de elementos únicos y hashables., en: Mutable collection of unique hashable elements., da: Muterbar samling af unikke hashbare elementer.}
+    term: {"es": "conjunto", "en": "set", "da": "mængde"}
+    definition: {"es": "Colección mutable de elementos únicos y hashables.", "en": "Mutable collection of unique hashable elements.", "da": "Muterbar samling af unikke hashbare elementer."}
   - id: term.intersection
-    term: {es: intersección, en: intersection, da: snit}
-    definition: {es: Elementos presentes en ambos conjuntos., en: Elements present in both sets., da: Elementer der findes i begge mængder.}
+    term: {"es": "intersección", "en": "intersection", "da": "snit"}
+    definition: {"es": "Elementos presentes en ambos conjuntos.", "en": "Elements present in both sets.", "da": "Elementer der findes i begge mængder."}
   - id: term.symmetric_difference
-    term: {es: diferencia simétrica, en: symmetric difference, da: symmetrisk differens}
-    definition: {es: Elementos presentes en exactamente uno de dos conjuntos., en: Elements present in exactly one of two sets., da: Elementer der findes i præcis én af to mængder.}
+    term: {"es": "diferencia simétrica", "en": "symmetric difference", "da": "symmetrisk differens"}
+    definition: {"es": "Elementos presentes en exactamente uno de dos conjuntos.", "en": "Elements present in exactly one of two sets.", "da": "Elementer der findes i præcis én af to mængder."}
 
 hidden_guided_support:
   visibility: hidden_from_standard_reader

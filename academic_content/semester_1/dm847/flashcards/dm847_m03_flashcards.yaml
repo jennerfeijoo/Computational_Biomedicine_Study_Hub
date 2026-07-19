@@ -11,9 +11,9 @@ cards:
     card_type: design_principle
     difficulty: foundational
     front:
-      es: ¿Cuál es el principio inicial del diseño de una base biológica?
-      en: What is the first principle of biological database design?
-      da: Hvad er det første princip i biologisk databasedesign?
+      es: "¿Cuál es el principio inicial del diseño de una base biológica?"
+      en: "What is the first principle of biological database design?"
+      da: "Hvad er det første princip i biologisk databasedesign?"
     back:
       es: >-
         Diseñar desde preguntas, usuarios, entidades, invariantes y requisitos operativos; no copiar la forma accidental
@@ -31,9 +31,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: Distingue entidad y atributo con un ejemplo.
-      en: Distinguish an entity and an attribute using an example.
-      da: Skeln mellem en enhed og en attribut med et eksempel.
+      es: "Distingue entidad y atributo con un ejemplo."
+      en: "Distinguish an entity and an attribute using an example."
+      da: "Skeln mellem en enhed og en attribut med et eksempel."
     back:
       es: >-
         Una muestra es una entidad con identidad propia; fecha de extracción, tejido y estado de conservación son atributos.
@@ -51,9 +51,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: ¿Qué diferencia hay entre clave primaria, clave natural y clave sustituta?
-      en: What is the difference among primary, natural, and surrogate keys?
-      da: Hvad er forskellen mellem primærnøgle, naturlig nøgle og surrogatnøgle?
+      es: "¿Qué diferencia hay entre clave primaria, clave natural y clave sustituta?"
+      en: "What is the difference among primary, natural, and surrogate keys?"
+      da: "Hvad er forskellen mellem primærnøgle, naturlig nøgle og surrogatnøgle?"
     back:
       es: >-
         Clave primaria es la restricción que identifica una fila. Una clave natural proviene del dominio, como namespace+accesión+versión.
@@ -72,9 +72,9 @@ cards:
     card_type: key_design
     difficulty: intermediate
     front:
-      es: Diseña una clave natural para una secuencia de referencia versionada.
-      en: Design a natural key for a versioned reference sequence.
-      da: Design en naturlig nøgle for en versionsreferencesekvens.
+      es: "Diseña una clave natural para una secuencia de referencia versionada."
+      en: "Design a natural key for a versioned reference sequence."
+      da: "Design en naturlig nøgle for en versionsreferencesekvens."
     back:
       es: >-
         Como mínimo: namespace, accesión y versión; según el recurso también organismo o ensamblaje. La clave interna puede ser sustituta,
@@ -92,9 +92,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es cardinalidad en un modelo de datos?
-      en: What is cardinality in a data model?
-      da: Hvad er kardinalitet i en datamodel?
+      es: "¿Qué es cardinalidad en un modelo de datos?"
+      en: "What is cardinality in a data model?"
+      da: "Hvad er kardinalitet i en datamodel?"
     back:
       es: >-
         Es el número mínimo y máximo de entidades que pueden relacionarse en cada extremo: uno-a-uno, uno-a-muchos o muchos-a-muchos.
@@ -112,9 +112,9 @@ cards:
     card_type: cardinality_analysis
     difficulty: intermediate
     front:
-      es: ¿Qué cardinalidades esperas entre paciente, muestra, gen y transcrito?
-      en: Which cardinalities do you expect among patient, sample, gene, and transcript?
-      da: Hvilke kardinaliteter forventes mellem patient, prøve, gen og transkript?
+      es: "¿Qué cardinalidades esperas entre paciente, muestra, gen y transcrito?"
+      en: "Which cardinalities do you expect among patient, sample, gene, and transcript?"
+      da: "Hvilke kardinaliteter forventes mellem patient, prøve, gen og transkript?"
     back:
       es: >-
         Paciente→muestra suele ser uno-a-muchos; muestra→paciente normalmente muchos-a-uno bajo un episodio de origen definido;
@@ -133,9 +133,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué problema resuelve la normalización?
-      en: What problem does normalization solve?
-      da: Hvilket problem løser normalisering?
+      es: "¿Qué problema resuelve la normalización?"
+      en: "What problem does normalization solve?"
+      da: "Hvilket problem løser normalisering?"
     back:
       es: >-
         Reduce redundancia no controlada y anomalías de inserción, actualización y eliminación al separar hechos que cambian independientemente.
@@ -153,9 +153,9 @@ cards:
     card_type: normalization
     difficulty: intermediate
     front:
-      es: ¿Por qué repetir descripción de gen en cada medición es defectuoso?
-      en: Why is repeating a gene description in every measurement defective?
-      da: Hvorfor er gentagelse af genbeskrivelse i hver måling defekt?
+      es: "¿Por qué repetir descripción de gen en cada medición es defectuoso?"
+      en: "Why is repeating a gene description in every measurement defective?"
+      da: "Hvorfor er gentagelse af genbeskrivelse i hver måling defekt?"
     back:
       es: >-
         La descripción puede actualizarse en unas filas y no en otras, generando versiones incompatibles del mismo hecho.
@@ -173,9 +173,9 @@ cards:
     card_type: misconception_correction
     difficulty: intermediate
     front:
-      es: Corrige: «Normalizar significa dividir todo en tantas tablas como sea posible».
-      en: Correct: “Normalization means splitting everything into as many tables as possible.”
-      da: Ret: “Normalisering betyder at splitte alt i så mange tabeller som muligt.”
+      es: "Corrige: «Normalizar significa dividir todo en tantas tablas como sea posible»."
+      en: "Correct: “Normalization means splitting everything into as many tables as possible.”"
+      da: "Ret: “Normalisering betyder at splitte alt i så mange tabeller som muligt.”"
     back:
       es: >-
         Normalizar significa representar dependencias funcionales y hechos independientes de forma coherente. Una fragmentación sin semántica
@@ -193,9 +193,9 @@ cards:
     card_type: relation_modeling
     difficulty: foundational
     front:
-      es: ¿Cómo debe modelarse una relación muchos-a-muchos?
-      en: How should a many-to-many relation be modeled?
-      da: Hvordan bør en mange-til-mange-relation modelleres?
+      es: "¿Cómo debe modelarse una relación muchos-a-muchos?"
+      en: "How should a many-to-many relation be modeled?"
+      da: "Hvordan bør en mange-til-mange-relation modelleres?"
     back:
       es: >-
         Med una entidad o tabla asociativa que contiene claves externas a ambos participantes y, cuando corresponda,
@@ -213,9 +213,9 @@ cards:
     card_type: interaction_modeling
     difficulty: advanced
     front:
-      es: ¿Qué campos necesita una observación proteína–proteína para ser interpretable?
-      en: Which fields make a protein–protein interaction observation interpretable?
-      da: Hvilke felter gør en protein-protein-interaktionsobservation fortolkelig?
+      es: "¿Qué campos necesita una observación proteína–proteína para ser interpretable?"
+      en: "Which fields make a protein–protein interaction observation interpretable?"
+      da: "Hvilke felter gør en protein-protein-interaktionsobservation fortolkelig?"
     back:
       es: >-
         Participantes versionados, dirección o simetría, organismo, tejido/célula, condición, método, publicación o fuente,
@@ -233,9 +233,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: Compara modelo relacional, property graph y RDF.
-      en: Compare relational, property-graph, and RDF models.
-      da: Sammenlign relationelle modeller, property graphs og RDF.
+      es: "Compara modelo relacional, property graph y RDF."
+      en: "Compare relational, property-graph, and RDF models."
+      da: "Sammenlign relationelle modeller, property graphs og RDF."
     back:
       es: >-
         Relacional: esquemas, restricciones, transacciones y agregación tabular. Property graph: nodos/aristas con propiedades y recorridos eficientes.
@@ -253,9 +253,9 @@ cards:
     card_type: architecture_selection
     difficulty: advanced
     front:
-      es: ¿Cuándo es apropiada una arquitectura híbrida relacional+grafo?
-      en: When is a relational-plus-graph hybrid appropriate?
-      da: Hvornår er en relationel+graf-hybrid passende?
+      es: "¿Cuándo es apropiada una arquitectura híbrida relacional+grafo?"
+      en: "When is a relational-plus-graph hybrid appropriate?"
+      da: "Hvornår er en relationel+graf-hybrid passende?"
     back:
       es: >-
         Cuando se necesita una fuente transaccional con restricciones fuertes y también consultas frecuentes de vecindad o caminos.
@@ -274,9 +274,9 @@ cards:
     card_type: temporal_modeling
     difficulty: intermediate
     front:
-      es: Distingue tiempo válido y tiempo de transacción.
-      en: Distinguish valid time and transaction time.
-      da: Skeln mellem valid time og transaction time.
+      es: "Distingue tiempo válido y tiempo de transacción."
+      en: "Distinguish valid time and transaction time."
+      da: "Skeln mellem valid time og transaction time."
     back:
       es: >-
         Tiempo válido indica cuándo el hecho se considera verdadero en el dominio. Tiempo de transacción indica cuándo el registro estuvo almacenado
@@ -294,9 +294,9 @@ cards:
     card_type: history_design
     difficulty: advanced
     front:
-      es: ¿Cómo conservarías una anotación que cambia de candidata a validada y luego se depreca?
-      en: How would you preserve an annotation changing from candidate to validated and then deprecated?
-      da: Hvordan bevarer du en annotation der ændres fra kandidat til valideret og derefter deprecieres?
+      es: "¿Cómo conservarías una anotación que cambia de candidata a validada y luego se depreca?"
+      en: "How would you preserve an annotation changing from candidate to validated and then deprecated?"
+      da: "Hvordan bevarer du en annotation der ændres fra kandidat til valideret og derefter deprecieres?"
     back:
       es: >-
         Crear versiones o filas históricas inmutables con estado controlado, `valid_from/valid_to`, versión de fuente, evidencia y procedencia de cada transición.
@@ -314,9 +314,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es un índice de base de datos?
-      en: What is a database index?
-      da: Hvad er et databaseindeks?
+      es: "¿Qué es un índice de base de datos?"
+      en: "What is a database index?"
+      da: "Hvad er et databaseindeks?"
     back:
       es: >-
         Una estructura derivada que acelera ciertos filtros, joins u ordenamientos a costa de almacenamiento, mantenimiento y escrituras más costosas.
@@ -334,9 +334,9 @@ cards:
     card_type: index_selection
     difficulty: intermediate
     front:
-      es: ¿Cómo decides si crear un índice compuesto `(sample_id, gene_id)`?
-      en: How do you decide whether to create a composite `(sample_id, gene_id)` index?
-      da: Hvordan beslutter du om et sammensat `(sample_id, gene_id)`-indeks skal oprettes?
+      es: "¿Cómo decides si crear un índice compuesto `(sample_id, gene_id)`?"
+      en: "How do you decide whether to create a composite `(sample_id, gene_id)` index?"
+      da: "Hvordan beslutter du om et sammensat `(sample_id, gene_id)`-indeks skal oprettes?"
     back:
       es: >-
         Examinar consultas reales: filtros por muestra, joins y búsquedas de gen dentro de muestra; revisar selectividad, orden de columnas y plan de ejecución;
@@ -354,9 +354,9 @@ cards:
     card_type: misconception_correction
     difficulty: intermediate
     front:
-      es: Corrige: «Más índices siempre mejora el rendimiento».
-      en: Correct: “More indexes always improve performance.”
-      da: Ret: “Flere indeks forbedrer altid performance.”
+      es: "Corrige: «Más índices siempre mejora el rendimiento»."
+      en: "Correct: “More indexes always improve performance.”"
+      da: "Ret: “Flere indeks forbedrer altid performance.”"
     back:
       es: >-
         Cada índice consume almacenamiento y debe actualizarse en inserciones, cambios y borrados. Índices redundantes pueden empeorar escrituras
@@ -374,9 +374,9 @@ cards:
     card_type: data_quality
     difficulty: intermediate
     front:
-      es: ¿Qué dimensiones mínimas componen calidad de datos?
-      en: Which minimum dimensions constitute data quality?
-      da: Hvilke minimumsdimensioner udgør datakvalitet?
+      es: "¿Qué dimensiones mínimas componen calidad de datos?"
+      en: "Which minimum dimensions constitute data quality?"
+      da: "Hvilke minimumsdimensioner udgør datakvalitet?"
     back:
       es: >-
         Validez, completitud, consistencia, unicidad, actualidad y adecuación al uso. También pueden incluir exactitud, trazabilidad y representatividad.
@@ -394,9 +394,9 @@ cards:
     card_type: ingestion_validation
     difficulty: advanced
     front:
-      es: Diseña cinco validaciones de ingesta para mediciones ómicas.
-      en: Design five ingestion validations for omics measurements.
-      da: Design fem ingestionvalideringer for omicsmålinger.
+      es: "Diseña cinco validaciones de ingesta para mediciones ómicas."
+      en: "Design five ingestion validations for omics measurements."
+      da: "Design fem ingestionvalideringer for omicsmålinger."
     back:
       es: >-
         Resolver muestra y feature en namespaces/versiones esperados; verificar valor numérico finito; declarar unidad o escala;
@@ -417,9 +417,9 @@ cards:
     card_type: scenario_analysis
     difficulty: advanced
     front:
-      es: ¿Por qué una interacción debe modelarse como observación y no sólo como arista A—B?
-      en: Why should an interaction be modeled as an observation rather than only an A—B edge?
-      da: Hvorfor bør en interaktion modelleres som en observation og ikke kun en A—B-kant?
+      es: "¿Por qué una interacción debe modelarse como observación y no sólo como arista A—B?"
+      en: "Why should an interaction be modeled as an observation rather than only an A—B edge?"
+      da: "Hvorfor bør en interaktion modelleres som en observation og ikke kun en A—B-kant?"
     back:
       es: >-
         Porque diferentes métodos, especies, tejidos, condiciones y publicaciones pueden producir observaciones incompatibles o complementarias.
@@ -438,9 +438,9 @@ cards:
     card_type: oral_defense
     difficulty: advanced
     front:
-      es: Responde en 45 segundos: «¿Por qué una base flexible sigue necesitando esquema?»
-      en: Answer in 45 seconds: “Why does a flexible database still need a schema?”
-      da: Svar på 45 sekunder: “Hvorfor kræver en fleksibel database stadig et skema?”
+      es: "Responde en 45 segundos: «¿Por qué una base flexible sigue necesitando esquema?»"
+      en: "Answer in 45 seconds: “Why does a flexible database still need a schema?”"
+      da: "Svar på 45 sekunder: “Hvorfor kræver en fleksibel database stadig et skema?”"
     back:
       es: >-
         Porque flexibilidad de almacenamiento no define significado. Se necesitan tipos de entidad y relación, cardinalidades, identificadores,
@@ -460,9 +460,9 @@ cards:
     card_type: risk_prioritization
     difficulty: advanced
     front:
-      es: Prioriza: símbolos como claves, datos humanos sin control, listas en celdas y anotaciones sobrescritas.
-      en: Prioritize: symbols as keys, uncontrolled human data, lists in cells, and overwritten annotations.
-      da: Prioritér: symboler som nøgler, ukontrollerede menneskedata, lister i celler og overskrevne annotationer.
+      es: "Prioriza: símbolos como claves, datos humanos sin control, listas en celdas y anotaciones sobrescritas."
+      en: "Prioritize: symbols as keys, uncontrolled human data, lists in cells, and overwritten annotations."
+      da: "Prioritér: symboler som nøgler, ukontrollerede menneskedata, lister i celler og overskrevne annotationer."
     back:
       es: >-
         Primero restringir y auditar datos humanos por riesgo ético y legal. Después detener sobrescritura para no perder más historia.
@@ -482,9 +482,9 @@ cards:
     card_type: transfer
     difficulty: advanced
     front:
-      es: ¿Cómo conecta este módulo con análisis de secuencias y redes posteriores?
-      en: How does this module connect to later sequence and network analysis?
-      da: Hvordan forbinder dette modul til senere sekvens- og netværksanalyse?
+      es: "¿Cómo conecta este módulo con análisis de secuencias y redes posteriores?"
+      en: "How does this module connect to later sequence and network analysis?"
+      da: "Hvordan forbinder dette modul til senere sekvens- og netværksanalyse?"
     back:
       es: >-
         Proporciona identidades versionadas, esquemas de relaciones, evidencia y procedencia para almacenar secuencias, alineamientos,

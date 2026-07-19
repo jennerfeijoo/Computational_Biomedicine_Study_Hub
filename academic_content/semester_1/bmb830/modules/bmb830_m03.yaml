@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Importación, limpieza, valores ausentes, reshaping y validación
-    en: Data import, cleaning, missingness, reshaping, and validation
-    da: Dataimport, rensning, manglende værdier, reshaping og validering
+    es: "Importación, limpieza, valores ausentes, reshaping y validación"
+    en: "Data import, cleaning, missingness, reshaping, and validation"
+    da: "Dataimport, rensning, manglende værdier, reshaping og validering"
   summary:
     es: >-
       Flujo reproducible para importar datos biológicos, declarar un esquema, preservar identificadores,
@@ -32,18 +32,18 @@ alignment:
   later_modules: [bmb830.m04, bmb830.m06, bmb830.m07, bmb830.m08, bmb830.m09, bmb830.m10, bmb831.m02]
 
 objectives:
-  - {id: bmb830.m03.o01, text: {es: Importar datos preservando tipos e identificadores, en: Import data while preserving types and identifiers, da: Importere data med bevarede typer og identifikatorer}}
-  - {id: bmb830.m03.o02, text: {es: Definir y verificar un esquema de datos, en: Define and verify a data schema, da: Definere og verificere et dataschema}}
-  - {id: bmb830.m03.o03, text: {es: Detectar duplicados y violaciones de claves, en: Detect duplicates and key violations, da: Finde duplikater og nøglebrud}}
-  - {id: bmb830.m03.o04, text: {es: Distinguir NA, censura, límite de detección y ausencia estructural, en: Distinguish NA, censoring, detection limits, and structural absence, da: Skelne NA, censurering, detektionsgrænse og strukturelt fravær}}
-  - {id: bmb830.m03.o05, text: {es: Validar rangos, unidades, fechas y coherencia entre variables, en: Validate ranges, units, dates, and cross-variable consistency, da: Validere intervaller, enheder, datoer og konsistens mellem variable}}
-  - {id: bmb830.m03.o06, text: {es: Transformar datos long y wide sin perder semántica, en: Reshape long and wide data without losing semantics, da: Reshape long og wide data uden at miste semantik}}
-  - {id: bmb830.m03.o07, text: {es: Ejecutar joins declarando cardinalidad y unidades no emparejadas, en: Perform joins with declared cardinality and unmatched units, da: Udføre joins med deklareret kardinalitet og unmatched enheder}}
-  - {id: bmb830.m03.o08, text: {es: Documentar cada cambio en un registro de calidad, en: Document each change in a quality log, da: Dokumentere hver ændring i en kvalitetslog}}
+  - {id: bmb830.m03.o01, text: {"es": "Importar datos preservando tipos e identificadores", "en": "Import data while preserving types and identifiers", "da": "Importere data med bevarede typer og identifikatorer"}}
+  - {id: bmb830.m03.o02, text: {"es": "Definir y verificar un esquema de datos", "en": "Define and verify a data schema", "da": "Definere og verificere et dataschema"}}
+  - {id: bmb830.m03.o03, text: {"es": "Detectar duplicados y violaciones de claves", "en": "Detect duplicates and key violations", "da": "Finde duplikater og nøglebrud"}}
+  - {id: bmb830.m03.o04, text: {"es": "Distinguir NA, censura, límite de detección y ausencia estructural", "en": "Distinguish NA, censoring, detection limits, and structural absence", "da": "Skelne NA, censurering, detektionsgrænse og strukturelt fravær"}}
+  - {id: bmb830.m03.o05, text: {"es": "Validar rangos, unidades, fechas y coherencia entre variables", "en": "Validate ranges, units, dates, and cross-variable consistency", "da": "Validere intervaller, enheder, datoer og konsistens mellem variable"}}
+  - {id: bmb830.m03.o06, text: {"es": "Transformar datos long y wide sin perder semántica", "en": "Reshape long and wide data without losing semantics", "da": "Reshape long og wide data uden at miste semantik"}}
+  - {id: bmb830.m03.o07, text: {"es": "Ejecutar joins declarando cardinalidad y unidades no emparejadas", "en": "Perform joins with declared cardinality and unmatched units", "da": "Udføre joins med deklareret kardinalitet og unmatched enheder"}}
+  - {id: bmb830.m03.o08, text: {"es": "Documentar cada cambio en un registro de calidad", "en": "Document each change in a quality log", "da": "Dokumentere hver ændring i en kvalitetslog"}}
 
 concepts:
   - id: bmb830.m03.c01
-    title: {es: Importación y esquema explícito, en: Import and explicit schema, da: Import og eksplicit schema}
+    title: {"es": "Importación y esquema explícito", "en": "Import and explicit schema", "da": "Import og eksplicit schema"}
     body:
       es: >-
         Un esquema declara nombre, significado, tipo esperado, unidad, valores permitidos, clave y política de ausencia.
@@ -56,9 +56,9 @@ concepts:
       da: >-
         Et schema deklarerer navn, betydning, type, enhed, tilladte værdier, nøgle og missingness-politik.
     key_points:
-      - {es: Los identificadores suelen importarse como texto, en: Identifiers are usually imported as text, da: Identifikatorer importeres normalt som tekst}
+      - {"es": "Los identificadores suelen importarse como texto", "en": "Identifiers are usually imported as text", "da": "Identifikatorer importeres normalt som tekst"}
   - id: bmb830.m03.c02
-    title: {es: Claves, duplicados y granularidad, en: Keys, duplicates, and granularity, da: Nøgler, duplikater og granularitet}
+    title: {"es": "Claves, duplicados y granularidad", "en": "Keys, duplicates, and granularity", "da": "Nøgler, duplikater og granularitet"}
     body:
       es: >-
         Una clave identifica de forma única la unidad representada por una fila. Puede ser simple o compuesta, por ejemplo
@@ -70,9 +70,9 @@ concepts:
       da: >-
         En nøgle identificerer rækkens enhed. Gentagne nøgler med forskellige værdier kræver undersøgelse.
     key_points:
-      - {es: `distinct()` no sustituye una auditoría de claves, en: `distinct()` does not replace a key audit, da: `distinct()` erstatter ikke en nøgleaudit}
+      - {"es": "`distinct()` no sustituye una auditoría de claves", "en": "`distinct()` does not replace a key audit", "da": "`distinct()` erstatter ikke en nøgleaudit"}
   - id: bmb830.m03.c03
-    title: {es: Valores ausentes y mecanismos, en: Missing values and mechanisms, da: Manglende værdier og mekanismer}
+    title: {"es": "Valores ausentes y mecanismos", "en": "Missing values and mechanisms", "da": "Manglende værdier og mekanismer"}
     body:
       es: >-
         `NA` indica que el valor no está disponible, pero no explica por qué. Puede faltar por azar de registro, depender de
@@ -85,9 +85,9 @@ concepts:
         `NA` forklarer ikke årsagen. Missingness kan være tilfældig, afhænge af observerede eller uobserverede værdier,
         være strukturel eller censureret.
     key_points:
-      - {es: Ausente no significa cero, en: Missing does not mean zero, da: Manglende betyder ikke nul}
+      - {"es": "Ausente no significa cero", "en": "Missing does not mean zero", "da": "Manglende betyder ikke nul"}
   - id: bmb830.m03.c04
-    title: {es: Límite de detección y censura, en: Detection limit and censoring, da: Detektionsgrænse og censurering}
+    title: {"es": "Límite de detección y censura", "en": "Detection limit and censoring", "da": "Detektionsgrænse og censurering"}
     body:
       es: >-
         “Por debajo del límite de detección” contiene información de intervalo: el valor es menor que un umbral, no necesariamente
@@ -99,9 +99,9 @@ concepts:
       da: >-
         Under detektionsgrænsen betyder et interval, ikke nul eller nødvendigvis halvdelen af grænsen.
     key_points:
-      - {es: Censura y ausencia requieren modelos distintos, en: Censoring and missingness require different models, da: Censurering og missingness kræver forskellige modeller}
+      - {"es": "Censura y ausencia requieren modelos distintos", "en": "Censoring and missingness require different models", "da": "Censurering og missingness kræver forskellige modeller"}
   - id: bmb830.m03.c05
-    title: {es: Validación semántica y coherencia, en: Semantic and consistency validation, da: Semantisk validering og konsistens}
+    title: {"es": "Validación semántica y coherencia", "en": "Semantic and consistency validation", "da": "Semantisk validering og konsistens"}
     body:
       es: >-
         Las reglas incluyen rangos físicos, categorías permitidas, unidades, orden temporal, relaciones entre variables y conteos
@@ -113,9 +113,9 @@ concepts:
       da: >-
         Regler omfatter fysiske intervaller, kategorier, enheder, tidsorden og relationer mellem variable.
     key_points:
-      - {es: Un outlier estadístico puede ser biológicamente real, en: A statistical outlier may be biologically real, da: En statistisk outlier kan være biologisk reel}
+      - {"es": "Un outlier estadístico puede ser biológicamente real", "en": "A statistical outlier may be biologically real", "da": "En statistisk outlier kan være biologisk reel"}
   - id: bmb830.m03.c06
-    title: {es: Formatos long y wide, en: Long and wide formats, da: Long og wide formater}
+    title: {"es": "Formatos long y wide", "en": "Long and wide formats", "da": "Long og wide formater"}
     body:
       es: >-
         En formato long, cada fila representa una observación de una variable identificada; facilita agrupación, visualización y
@@ -127,9 +127,9 @@ concepts:
       da: >-
         Long format har én måling per række; wide har målinger i kolonner. Reshaping kræver unikke nøgler.
     key_points:
-      - {es: Reshaping no debe agregar inadvertidamente, en: Reshaping should not aggregate inadvertently, da: Reshaping må ikke aggregere utilsigtet}
+      - {"es": "Reshaping no debe agregar inadvertidamente", "en": "Reshaping should not aggregate inadvertently", "da": "Reshaping må ikke aggregere utilsigtet"}
   - id: bmb830.m03.c07
-    title: {es: Joins y cardinalidad, en: Joins and cardinality, da: Joins og kardinalitet}
+    title: {"es": "Joins y cardinalidad", "en": "Joins and cardinality", "da": "Joins og kardinalitet"}
     body:
       es: >-
         Un join combina tablas por claves. Uno-a-uno conserva filas esperadas; uno-a-muchos duplica información de la tabla izquierda
@@ -141,9 +141,9 @@ concepts:
       da: >-
         Et join kombinerer tabeller via nøgler. Many-to-many kan multiplicere rækker eksplosivt og skal være eksplicit forventet.
     key_points:
-      - {es: Un join exitoso sintácticamente puede ser incorrecto científicamente, en: A syntactically successful join may be scientifically wrong, da: Et syntaktisk vellykket join kan være videnskabeligt forkert}
+      - {"es": "Un join exitoso sintácticamente puede ser incorrecto científicamente", "en": "A syntactically successful join may be scientifically wrong", "da": "Et syntaktisk vellykket join kan være videnskabeligt forkert"}
   - id: bmb830.m03.c08
-    title: {es: Registro de calidad y datos derivados, en: Quality log and derived data, da: Kvalitetslog og afledte data}
+    title: {"es": "Registro de calidad y datos derivados", "en": "Quality log and derived data", "da": "Kvalitetslog og afledte data"}
     body:
       es: >-
         Cada transformación registra entrada, salida, fecha, código, regla, número afectado y motivo. Los datos crudos se conservan
@@ -155,67 +155,67 @@ concepts:
       da: >-
         Hver transformation registrerer input, output, dato, kode, regel, antal påvirkede og begrundelse. Rådata forbliver uændrede.
     key_points:
-      - {es: La limpieza es parte del método científico, en: Cleaning is part of the scientific method, da: Datarensning er en del af den videnskabelige metode}
+      - {"es": "La limpieza es parte del método científico", "en": "Cleaning is part of the scientific method", "da": "Datarensning er en del af den videnskabelige metode"}
 
 worked_examples:
   - id: bmb830.m03.e01
-    title: {es: IDs con ceros iniciales, en: Zero-padded identifiers, da: Identifikatorer med indledende nuller}
-    problem: {es: IDs `0012` y `0120` se importan como números., en: IDs `0012` and `0120` are imported as numbers., da: ID'er `0012` og `0120` importeres som tal.}
-    reasoning: {es: Se pierde formato y puede cambiar la clave. El esquema debe declarar character y validar patrón y longitud., en: Formatting is lost and keys may change. The schema should declare character and validate pattern and length., da: Format og nøgle kan gå tabt. Schema skal deklarere character og validere mønster.}
-    answer: {es: Reimportar como texto desde el archivo original; no reconstruir sin evidencia., en: Reimport as text from the original file; do not reconstruct without evidence., da: Genimportér som tekst fra originalfilen; rekonstruér ikke uden evidens.}
+    title: {"es": "IDs con ceros iniciales", "en": "Zero-padded identifiers", "da": "Identifikatorer med indledende nuller"}
+    problem: {"es": "IDs `0012` y `0120` se importan como números.", "en": "IDs `0012` and `0120` are imported as numbers.", "da": "ID'er `0012` og `0120` importeres som tal."}
+    reasoning: {"es": "Se pierde formato y puede cambiar la clave. El esquema debe declarar character y validar patrón y longitud.", "en": "Formatting is lost and keys may change. The schema should declare character and validate pattern and length.", "da": "Format og nøgle kan gå tabt. Schema skal deklarere character og validere mønster."}
+    answer: {"es": "Reimportar como texto desde el archivo original; no reconstruir sin evidencia.", "en": "Reimport as text from the original file; do not reconstruct without evidence.", "da": "Genimportér som tekst fra originalfilen; rekonstruér ikke uden evidens."}
   - id: bmb830.m03.e02
-    title: {es: Join muchos-a-muchos accidental, en: Accidental many-to-many join, da: Utilsigtet many-to-many join}
-    problem: {es: Dos tablas contienen varias filas por paciente y se unen sólo por `patient_id`., en: Two tables contain multiple rows per patient and are joined only by `patient_id`., da: To tabeller har flere rækker per patient og joines kun på `patient_id`.}
-    reasoning: {es: Cada visita se combina con cada analito o visita de la otra tabla. Deben añadirse claves temporales o resumir a la granularidad requerida., en: Each visit combines with every matching row. Add temporal keys or aggregate to intended granularity., da: Hver række kombineres med alle matches. Tilføj tidsnøgle eller aggregér til korrekt granularitet.}
-    answer: {es: Declarar clave compuesta y comprobar conteos antes/después., en: Declare a composite key and check counts before/after., da: Deklarér en sammensat nøgle og kontrollér antal før/efter.}
+    title: {"es": "Join muchos-a-muchos accidental", "en": "Accidental many-to-many join", "da": "Utilsigtet many-to-many join"}
+    problem: {"es": "Dos tablas contienen varias filas por paciente y se unen sólo por `patient_id`.", "en": "Two tables contain multiple rows per patient and are joined only by `patient_id`.", "da": "To tabeller har flere rækker per patient og joines kun på `patient_id`."}
+    reasoning: {"es": "Cada visita se combina con cada analito o visita de la otra tabla. Deben añadirse claves temporales o resumir a la granularidad requerida.", "en": "Each visit combines with every matching row. Add temporal keys or aggregate to intended granularity.", "da": "Hver række kombineres med alle matches. Tilføj tidsnøgle eller aggregér til korrekt granularitet."}
+    answer: {"es": "Declarar clave compuesta y comprobar conteos antes/después.", "en": "Declare a composite key and check counts before/after.", "da": "Deklarér en sammensat nøgle og kontrollér antal før/efter."}
   - id: bmb830.m03.e03
-    title: {es: Valores bajo límite de detección, en: Values below detection limit, da: Værdier under detektionsgrænsen}
-    problem: {es: La tabla usa `0` para valores no detectados., en: The table uses `0` for undetected values., da: Tabellen bruger `0` for ikke-detekterede værdier.}
-    reasoning: {es: Cero real y censura quedan mezclados. Se necesita indicador de censura y límite por ensayo o lote., en: True zero and censoring are mixed. A censoring indicator and assay-specific limit are needed., da: Sandt nul og censurering blandes. Der kræves censorindikator og assay-specifik grænse.}
-    answer: {es: No analizar como ceros sin reconstruir la semántica desde metadatos., en: Do not analyze as zeros without reconstructing semantics from metadata., da: Analysér ikke som nuller uden semantik fra metadata.}
+    title: {"es": "Valores bajo límite de detección", "en": "Values below detection limit", "da": "Værdier under detektionsgrænsen"}
+    problem: {"es": "La tabla usa `0` para valores no detectados.", "en": "The table uses `0` for undetected values.", "da": "Tabellen bruger `0` for ikke-detekterede værdier."}
+    reasoning: {"es": "Cero real y censura quedan mezclados. Se necesita indicador de censura y límite por ensayo o lote.", "en": "True zero and censoring are mixed. A censoring indicator and assay-specific limit are needed.", "da": "Sandt nul og censurering blandes. Der kræves censorindikator og assay-specifik grænse."}
+    answer: {"es": "No analizar como ceros sin reconstruir la semántica desde metadatos.", "en": "Do not analyze as zeros without reconstructing semantics from metadata.", "da": "Analysér ikke som nuller uden semantik fra metadata."}
 
 guided_practice:
-  - {id: bmb830.m03.p01, type: schema_design, prompt: {es: Construye un diccionario de datos para 15 variables clínicas y moleculares., en: Build a data dictionary for 15 clinical and molecular variables., da: Byg en dataordbog for 15 kliniske og molekylære variable.}, expected_elements: [meaning, type, unit, role, allowed_values, missing_policy]}
-  - {id: bmb830.m03.p02, type: key_audit, prompt: {es: Determina la clave correcta y explica cinco duplicados., en: Determine the correct key and explain five duplicates., da: Bestem korrekt nøgle og forklar fem duplikater.}, expected_elements: [granularity, composite_key, conflict_resolution]}
-  - {id: bmb830.m03.p03, type: missingness_audit, prompt: {es: Separa ausentes, no aplicables, censurados y ceros reales., en: Separate missing, not applicable, censored, and true zero values., da: Adskil missing, ikke relevant, censureret og sandt nul.}, expected_elements: [reason_code, value_field, censor_limit]}
-  - {id: bmb830.m03.p04, type: validation_rules, prompt: {es: Escribe reglas de rango, unidad, fecha y coherencia cruzada., en: Write range, unit, date, and cross-variable consistency rules., da: Skriv regler for interval, enhed, dato og krydsvariabel konsistens.}, expected_elements: [flag_not_silent_fix, severity, evidence]}
-  - {id: bmb830.m03.p05, type: reshape, prompt: {es: Convierte una tabla de visitas wide a long y vuelve sin pérdida., en: Convert a wide visit table to long and back without loss., da: Konvertér en wide besøgstabel til long og tilbage uden tab.}, expected_elements: [unique_keys, parsed_names, round_trip_check]}
-  - {id: bmb830.m03.p06, type: join_audit, prompt: {es: Audita un join con aumento inesperado de filas., en: Audit a join with unexpected row growth., da: Auditér et join med uventet rækkevækst.}, expected_elements: [cardinality, duplicate_keys, unmatched_rows, corrected_join]}
+  - {id: bmb830.m03.p01, type: schema_design, prompt: {"es": "Construye un diccionario de datos para 15 variables clínicas y moleculares.", "en": "Build a data dictionary for 15 clinical and molecular variables.", "da": "Byg en dataordbog for 15 kliniske og molekylære variable."}, expected_elements: [meaning, type, unit, role, allowed_values, missing_policy]}
+  - {id: bmb830.m03.p02, type: key_audit, prompt: {"es": "Determina la clave correcta y explica cinco duplicados.", "en": "Determine the correct key and explain five duplicates.", "da": "Bestem korrekt nøgle og forklar fem duplikater."}, expected_elements: [granularity, composite_key, conflict_resolution]}
+  - {id: bmb830.m03.p03, type: missingness_audit, prompt: {"es": "Separa ausentes, no aplicables, censurados y ceros reales.", "en": "Separate missing, not applicable, censored, and true zero values.", "da": "Adskil missing, ikke relevant, censureret og sandt nul."}, expected_elements: [reason_code, value_field, censor_limit]}
+  - {id: bmb830.m03.p04, type: validation_rules, prompt: {"es": "Escribe reglas de rango, unidad, fecha y coherencia cruzada.", "en": "Write range, unit, date, and cross-variable consistency rules.", "da": "Skriv regler for interval, enhed, dato og krydsvariabel konsistens."}, expected_elements: [flag_not_silent_fix, severity, evidence]}
+  - {id: bmb830.m03.p05, type: reshape, prompt: {"es": "Convierte una tabla de visitas wide a long y vuelve sin pérdida.", "en": "Convert a wide visit table to long and back without loss.", "da": "Konvertér en wide besøgstabel til long og tilbage uden tab."}, expected_elements: [unique_keys, parsed_names, round_trip_check]}
+  - {id: bmb830.m03.p06, type: join_audit, prompt: {"es": "Audita un join con aumento inesperado de filas.", "en": "Audit a join with unexpected row growth.", "da": "Auditér et join med uventet rækkevækst."}, expected_elements: [cardinality, duplicate_keys, unmatched_rows, corrected_join]}
 
 objective_bank:
-  - {id: bmb830.m03.q01, type: multiple_choice, prompt: {es: ¿Cómo importar normalmente un ID `0012`?, en: How should ID `0012` normally be imported?, da: Hvordan bør ID `0012` normalt importeres?}, options: [{id: a, text: {es: numeric, en: numeric, da: numeric}}, {id: b, text: {es: character, en: character, da: character}}, {id: c, text: {es: logical, en: logical, da: logical}}], correct_option_ids: [b], explanation: {es: El cero inicial es parte de la etiqueta., en: The leading zero is part of the label., da: Det indledende nul er del af etiketten.}}
-  - {id: bmb830.m03.q02, type: true_false, prompt: {es: Toda fila duplicada debe eliminarse automáticamente., en: Every duplicate row should be automatically removed., da: Hver duplikatrække bør automatisk slettes.}, correct: false, explanation: {es: Primero debe explicarse granularidad y origen., en: Granularity and origin must be explained first., da: Granularitet og oprindelse skal forklares først.}}
-  - {id: bmb830.m03.q03, type: multiple_choice, prompt: {es: ¿Qué representa “<5” en una medición?, en: What does “<5” represent in a measurement?, da: Hvad repræsenterer “<5” i en måling?}, options: [{id: a, text: {es: Cero exacto, en: Exact zero, da: Eksakt nul}}, {id: b, text: {es: Censura por debajo de un límite, en: Left censoring below a limit, da: Venstrecensurering under en grænse}}, {id: c, text: {es: Dato ausente, en: Missing date, da: Manglende dato}}], correct_option_ids: [b], explanation: {es: Se conoce un intervalo, no el valor exacto., en: An interval is known, not the exact value., da: Et interval er kendt, ikke den eksakte værdi.}}
-  - {id: bmb830.m03.q04, type: true_false, prompt: {es: `NA` y cero tienen el mismo significado., en: `NA` and zero have the same meaning., da: `NA` og nul betyder det samme.}, correct: false, explanation: {es: Ausencia y cantidad cero son estados distintos., en: Missingness and zero quantity are distinct states., da: Manglende og nul er forskellige tilstande.}}
-  - {id: bmb830.m03.q05, type: multiple_choice, prompt: {es: ¿Qué puede causar un join muchos-a-muchos?, en: What can a many-to-many join cause?, da: Hvad kan et many-to-many join forårsage?}, options: [{id: a, text: {es: Multiplicación de filas, en: Row multiplication, da: Multiplikation af rækker}}, {id: b, text: {es: Eliminación automática de NA, en: Automatic NA removal, da: Automatisk fjernelse af NA}}, {id: c, text: {es: Normalización estadística, en: Statistical normalization, da: Statistisk normalisering}}], correct_option_ids: [a], explanation: {es: Cada coincidencia puede combinarse con múltiples coincidencias., en: Each match may combine with multiple matches., da: Hvert match kan kombineres med flere matches.}}
-  - {id: bmb830.m03.q06, type: true_false, prompt: {es: Un outlier debe corregirse al valor medio., en: An outlier should be corrected to the mean., da: En outlier bør korrigeres til gennemsnittet.}, correct: false, explanation: {es: Puede ser real; debe investigarse y documentarse., en: It may be real; investigate and document it., da: Den kan være reel; undersøg og dokumentér.}}
-  - {id: bmb830.m03.q07, type: multiple_choice, prompt: {es: ¿Qué formato suele favorecer medidas repetidas y ggplot?, en: Which format often supports repeated measures and ggplot?, da: Hvilket format understøtter ofte gentagne målinger og ggplot?}, options: [{id: a, text: {es: long, en: long, da: long}}, {id: b, text: {es: imagen, en: image, da: billede}}, {id: c, text: {es: binario sin esquema, en: schema-free binary, da: binær uden schema}}], correct_option_ids: [a], explanation: {es: Una fila por medición facilita agrupación y mapeo estético., en: One row per measurement supports grouping and aesthetics., da: Én række per måling understøtter grouping og aesthetics.}}
-  - {id: bmb830.m03.q08, type: true_false, prompt: {es: Cambiar unidades sin registrar el factor de conversión preserva trazabilidad., en: Changing units without recording the conversion factor preserves traceability., da: Enhedsændring uden registreret faktor bevarer sporbarhed.}, correct: false, explanation: {es: Deben registrarse unidad original, nueva y fórmula., en: Original unit, new unit, and formula must be recorded., da: Original enhed, ny enhed og formel skal registreres.}}
-  - {id: bmb830.m03.q09, type: multiple_choice, prompt: {es: ¿Qué debe hacer una regla de calidad ante un valor imposible?, en: What should a quality rule do with an impossible value?, da: Hvad bør en kvalitetsregel gøre ved en umulig værdi?}, options: [{id: a, text: {es: Marcarlo y conservar evidencia, en: Flag it and preserve evidence, da: Flagge og bevare evidens}}, {id: b, text: {es: Reemplazarlo siempre por la media, en: Always replace it by the mean, da: Altid erstatte med gennemsnittet}}, {id: c, text: {es: Ocultarlo, en: Hide it, da: Skjule det}}], correct_option_ids: [a], explanation: {es: La corrección requiere una fuente justificable., en: Correction requires a justifiable source., da: Korrektion kræver en begrundet kilde.}}
-  - {id: bmb830.m03.q10, type: true_false, prompt: {es: Los datos derivados deben poder regenerarse desde crudos y código., en: Derived data should be regenerable from raw data and code., da: Afledte data bør kunne regenereres fra rådata og kode.}, correct: true, explanation: {es: Es un requisito de reproducibilidad y auditoría., en: This supports reproducibility and audit., da: Det understøtter reproducerbarhed og audit.}}
+  - {id: bmb830.m03.q01, type: multiple_choice, prompt: {"es": "¿Cómo importar normalmente un ID `0012`?", "en": "How should ID `0012` normally be imported?", "da": "Hvordan bør ID `0012` normalt importeres?"}, options: [{id: a, text: {"es": "numeric", "en": "numeric", "da": "numeric"}}, {id: b, text: {"es": "character", "en": "character", "da": "character"}}, {id: c, text: {"es": "logical", "en": "logical", "da": "logical"}}], correct_option_ids: [b], explanation: {"es": "El cero inicial es parte de la etiqueta.", "en": "The leading zero is part of the label.", "da": "Det indledende nul er del af etiketten."}}
+  - {id: bmb830.m03.q02, type: true_false, prompt: {"es": "Toda fila duplicada debe eliminarse automáticamente.", "en": "Every duplicate row should be automatically removed.", "da": "Hver duplikatrække bør automatisk slettes."}, correct: false, explanation: {"es": "Primero debe explicarse granularidad y origen.", "en": "Granularity and origin must be explained first.", "da": "Granularitet og oprindelse skal forklares først."}}
+  - {id: bmb830.m03.q03, type: multiple_choice, prompt: {"es": "¿Qué representa “<5” en una medición?", "en": "What does “<5” represent in a measurement?", "da": "Hvad repræsenterer “<5” i en måling?"}, options: [{id: a, text: {"es": "Cero exacto", "en": "Exact zero", "da": "Eksakt nul"}}, {id: b, text: {"es": "Censura por debajo de un límite", "en": "Left censoring below a limit", "da": "Venstrecensurering under en grænse"}}, {id: c, text: {"es": "Dato ausente", "en": "Missing date", "da": "Manglende dato"}}], correct_option_ids: [b], explanation: {"es": "Se conoce un intervalo, no el valor exacto.", "en": "An interval is known, not the exact value.", "da": "Et interval er kendt, ikke den eksakte værdi."}}
+  - {id: bmb830.m03.q04, type: true_false, prompt: {"es": "`NA` y cero tienen el mismo significado.", "en": "`NA` and zero have the same meaning.", "da": "`NA` og nul betyder det samme."}, correct: false, explanation: {"es": "Ausencia y cantidad cero son estados distintos.", "en": "Missingness and zero quantity are distinct states.", "da": "Manglende og nul er forskellige tilstande."}}
+  - {id: bmb830.m03.q05, type: multiple_choice, prompt: {"es": "¿Qué puede causar un join muchos-a-muchos?", "en": "What can a many-to-many join cause?", "da": "Hvad kan et many-to-many join forårsage?"}, options: [{id: a, text: {"es": "Multiplicación de filas", "en": "Row multiplication", "da": "Multiplikation af rækker"}}, {id: b, text: {"es": "Eliminación automática de NA", "en": "Automatic NA removal", "da": "Automatisk fjernelse af NA"}}, {id: c, text: {"es": "Normalización estadística", "en": "Statistical normalization", "da": "Statistisk normalisering"}}], correct_option_ids: [a], explanation: {"es": "Cada coincidencia puede combinarse con múltiples coincidencias.", "en": "Each match may combine with multiple matches.", "da": "Hvert match kan kombineres med flere matches."}}
+  - {id: bmb830.m03.q06, type: true_false, prompt: {"es": "Un outlier debe corregirse al valor medio.", "en": "An outlier should be corrected to the mean.", "da": "En outlier bør korrigeres til gennemsnittet."}, correct: false, explanation: {"es": "Puede ser real; debe investigarse y documentarse.", "en": "It may be real; investigate and document it.", "da": "Den kan være reel; undersøg og dokumentér."}}
+  - {id: bmb830.m03.q07, type: multiple_choice, prompt: {"es": "¿Qué formato suele favorecer medidas repetidas y ggplot?", "en": "Which format often supports repeated measures and ggplot?", "da": "Hvilket format understøtter ofte gentagne målinger og ggplot?"}, options: [{id: a, text: {"es": "long", "en": "long", "da": "long"}}, {id: b, text: {"es": "imagen", "en": "image", "da": "billede"}}, {id: c, text: {"es": "binario sin esquema", "en": "schema-free binary", "da": "binær uden schema"}}], correct_option_ids: [a], explanation: {"es": "Una fila por medición facilita agrupación y mapeo estético.", "en": "One row per measurement supports grouping and aesthetics.", "da": "Én række per måling understøtter grouping og aesthetics."}}
+  - {id: bmb830.m03.q08, type: true_false, prompt: {"es": "Cambiar unidades sin registrar el factor de conversión preserva trazabilidad.", "en": "Changing units without recording the conversion factor preserves traceability.", "da": "Enhedsændring uden registreret faktor bevarer sporbarhed."}, correct: false, explanation: {"es": "Deben registrarse unidad original, nueva y fórmula.", "en": "Original unit, new unit, and formula must be recorded.", "da": "Original enhed, ny enhed og formel skal registreres."}}
+  - {id: bmb830.m03.q09, type: multiple_choice, prompt: {"es": "¿Qué debe hacer una regla de calidad ante un valor imposible?", "en": "What should a quality rule do with an impossible value?", "da": "Hvad bør en kvalitetsregel gøre ved en umulig værdi?"}, options: [{id: a, text: {"es": "Marcarlo y conservar evidencia", "en": "Flag it and preserve evidence", "da": "Flagge og bevare evidens"}}, {id: b, text: {"es": "Reemplazarlo siempre por la media", "en": "Always replace it by the mean", "da": "Altid erstatte med gennemsnittet"}}, {id: c, text: {"es": "Ocultarlo", "en": "Hide it", "da": "Skjule det"}}], correct_option_ids: [a], explanation: {"es": "La corrección requiere una fuente justificable.", "en": "Correction requires a justifiable source.", "da": "Korrektion kræver en begrundet kilde."}}
+  - {id: bmb830.m03.q10, type: true_false, prompt: {"es": "Los datos derivados deben poder regenerarse desde crudos y código.", "en": "Derived data should be regenerable from raw data and code.", "da": "Afledte data bør kunne regenereres fra rådata og kode."}, correct: true, explanation: {"es": "Es un requisito de reproducibilidad y auditoría.", "en": "This supports reproducibility and audit.", "da": "Det understøtter reproducerbarhed og audit."}}
 
 open_assessment:
   - id: bmb830.m03.a01
-    prompt: {es: Diseña y aplica un plan de calidad para una tabla biológica., en: Design and apply a quality plan for a biological table., da: Design og anvend en kvalitetsplan for en biologisk tabel.}
+    prompt: {"es": "Diseña y aplica un plan de calidad para una tabla biológica.", "en": "Design and apply a quality plan for a biological table.", "da": "Design og anvend en kvalitetsplan for en biologisk tabel."}
     rubric: [{criterion: schema_and_keys, points: 3}, {criterion: missingness_and_censoring, points: 3}, {criterion: validation_rules, points: 2}, {criterion: traceable_log, points: 2}]
   - id: bmb830.m03.a02
-    prompt: {es: Corrige un pipeline de joins y reshaping que altera la granularidad., en: Correct a join and reshaping pipeline that changes granularity., da: Ret et join- og reshaping-pipeline der ændrer granularitet.}
+    prompt: {"es": "Corrige un pipeline de joins y reshaping que altera la granularidad.", "en": "Correct a join and reshaping pipeline that changes granularity.", "da": "Ret et join- og reshaping-pipeline der ændrer granularitet."}
     rubric: [{criterion: intended_granularity, points: 3}, {criterion: cardinality_diagnosis, points: 3}, {criterion: corrected_pipeline, points: 2}, {criterion: round_trip_validation, points: 2}]
   - id: bmb830.m03.a03
-    prompt: {es: Propón un manejo defendible de valores bajo límite de detección., en: Propose a defensible handling strategy for below-detection values., da: Foreslå en forsvarlig strategi for værdier under detektionsgrænsen.}
+    prompt: {"es": "Propón un manejo defendible de valores bajo límite de detección.", "en": "Propose a defensible handling strategy for below-detection values.", "da": "Foreslå en forsvarlig strategi for værdier under detektionsgrænsen."}
     rubric: [{criterion: censoring_recognition, points: 3}, {criterion: preserved_metadata, points: 2}, {criterion: method_assumptions, points: 3}, {criterion: sensitivity_analysis, points: 2}]
 
 glossary:
-  - {id: bmb830.term.schema, term: {es: esquema de datos, en: data schema, da: dataschema}, definition: {es: Especificación de campos, tipos, unidades, claves y reglas., en: Specification of fields, types, units, keys, and rules., da: Specifikation af felter, typer, enheder, nøgler og regler.}}
-  - {id: bmb830.term.key, term: {es: clave, en: key, da: nøgle}, definition: {es: Campo o combinación que identifica una unidad de forma única., en: Field or combination uniquely identifying a unit., da: Felt eller kombination der unikt identificerer en enhed.}}
-  - {id: bmb830.term.granularity, term: {es: granularidad, en: granularity, da: granularitet}, definition: {es: Nivel de detalle representado por una fila., en: Level of detail represented by one row., da: Detaljeniveau repræsenteret af én række.}}
-  - {id: bmb830.term.censoring, term: {es: censura, en: censoring, da: censurering}, definition: {es: Conocimiento parcial de que un valor está por encima o debajo de un límite., en: Partial knowledge that a value lies above or below a limit., da: Delvis viden om at en værdi ligger over eller under en grænse.}}
-  - {id: bmb830.term.structural_missing, term: {es: ausencia estructural, en: structural missingness, da: strukturelt fravær}, definition: {es: Valor no definido porque la medición no aplica., en: Undefined value because the measurement does not apply., da: Udefineret værdi fordi målingen ikke gælder.}}
-  - {id: bmb830.term.long_format, term: {es: formato long, en: long format, da: long format}, definition: {es: Una fila por medición y columnas para identificadores y variable., en: One row per measurement with identifier and variable columns., da: Én række per måling med identifikator- og variabelkolonner.}}
-  - {id: bmb830.term.wide_format, term: {es: formato wide, en: wide format, da: wide format}, definition: {es: Mediciones distintas distribuidas en columnas., en: Distinct measurements distributed across columns., da: Forskellige målinger fordelt på kolonner.}}
-  - {id: bmb830.term.cardinality, term: {es: cardinalidad de join, en: join cardinality, da: join-kardinalitet}, definition: {es: Relación uno-a-uno, uno-a-muchos o muchos-a-muchos entre claves., en: One-to-one, one-to-many, or many-to-many relationship between keys., da: One-to-one, one-to-many eller many-to-many relation mellem nøgler.}}
-  - {id: bmb830.term.quality_flag, term: {es: indicador de calidad, en: quality flag, da: kvalitetsflag}, definition: {es: Marca que señala una posible violación sin destruir el dato original., en: Marker indicating a possible violation without destroying original data., da: Markør der angiver muligt brud uden at ødelægge originaldata.}}
-  - {id: bmb830.term.derived_data, term: {es: dato derivado, en: derived data, da: afledte data}, definition: {es: Resultado regenerable de transformaciones documentadas., en: Regenerable result of documented transformations., da: Regenererbart resultat af dokumenterede transformationer.}}
+  - {id: bmb830.term.schema, term: {"es": "esquema de datos", "en": "data schema", "da": "dataschema"}, definition: {"es": "Especificación de campos, tipos, unidades, claves y reglas.", "en": "Specification of fields, types, units, keys, and rules.", "da": "Specifikation af felter, typer, enheder, nøgler og regler."}}
+  - {id: bmb830.term.key, term: {"es": "clave", "en": "key", "da": "nøgle"}, definition: {"es": "Campo o combinación que identifica una unidad de forma única.", "en": "Field or combination uniquely identifying a unit.", "da": "Felt eller kombination der unikt identificerer en enhed."}}
+  - {id: bmb830.term.granularity, term: {"es": "granularidad", "en": "granularity", "da": "granularitet"}, definition: {"es": "Nivel de detalle representado por una fila.", "en": "Level of detail represented by one row.", "da": "Detaljeniveau repræsenteret af én række."}}
+  - {id: bmb830.term.censoring, term: {"es": "censura", "en": "censoring", "da": "censurering"}, definition: {"es": "Conocimiento parcial de que un valor está por encima o debajo de un límite.", "en": "Partial knowledge that a value lies above or below a limit.", "da": "Delvis viden om at en værdi ligger over eller under en grænse."}}
+  - {id: bmb830.term.structural_missing, term: {"es": "ausencia estructural", "en": "structural missingness", "da": "strukturelt fravær"}, definition: {"es": "Valor no definido porque la medición no aplica.", "en": "Undefined value because the measurement does not apply.", "da": "Udefineret værdi fordi målingen ikke gælder."}}
+  - {id: bmb830.term.long_format, term: {"es": "formato long", "en": "long format", "da": "long format"}, definition: {"es": "Una fila por medición y columnas para identificadores y variable.", "en": "One row per measurement with identifier and variable columns.", "da": "Én række per måling med identifikator- og variabelkolonner."}}
+  - {id: bmb830.term.wide_format, term: {"es": "formato wide", "en": "wide format", "da": "wide format"}, definition: {"es": "Mediciones distintas distribuidas en columnas.", "en": "Distinct measurements distributed across columns.", "da": "Forskellige målinger fordelt på kolonner."}}
+  - {id: bmb830.term.cardinality, term: {"es": "cardinalidad de join", "en": "join cardinality", "da": "join-kardinalitet"}, definition: {"es": "Relación uno-a-uno, uno-a-muchos o muchos-a-muchos entre claves.", "en": "One-to-one, one-to-many, or many-to-many relationship between keys.", "da": "One-to-one, one-to-many eller many-to-many relation mellem nøgler."}}
+  - {id: bmb830.term.quality_flag, term: {"es": "indicador de calidad", "en": "quality flag", "da": "kvalitetsflag"}, definition: {"es": "Marca que señala una posible violación sin destruir el dato original.", "en": "Marker indicating a possible violation without destroying original data.", "da": "Markør der angiver muligt brud uden at ødelægge originaldata."}}
+  - {id: bmb830.term.derived_data, term: {"es": "dato derivado", "en": "derived data", "da": "afledte data"}, definition: {"es": "Resultado regenerable de transformaciones documentadas.", "en": "Regenerable result of documented transformations.", "da": "Regenererbart resultat af dokumenterede transformationer."}}
 
 hidden_tutor_support:
   canonical_explanation:
@@ -247,11 +247,11 @@ hidden_tutor_support:
     - validate joins and reshaping
     - produce a traceable quality log
   retrieval_fragments:
-    - {id: bmb830.m03.r01, topic: schema, text: {es: Un esquema declara tipo, unidad, valores permitidos, clave y política de ausencia., en: A schema declares type, unit, allowed values, key, and missingness policy., da: Et schema deklarerer type, enhed, tilladte værdier, nøgle og missingness-politik.}}
-    - {id: bmb830.m03.r02, topic: censoring, text: {es: Bajo límite de detección es censura, no cero ni NA genérico., en: Below detection limit is censoring, not zero or generic NA., da: Under detektionsgrænsen er censurering, ikke nul eller generisk NA.}}
-    - {id: bmb830.m03.r03, topic: join, text: {es: Verifica cardinalidad, duplicados, no emparejados y conteos en todo join., en: Check cardinality, duplicates, unmatched keys, and counts for every join., da: Kontrollér kardinalitet, duplikater, unmatched nøgler og antal for hvert join.}}
-    - {id: bmb830.m03.r04, topic: outlier, text: {es: Un valor extremo se investiga; no se elimina sólo por ser extremo., en: An extreme value is investigated, not deleted merely for being extreme., da: En ekstrem værdi undersøges og slettes ikke kun fordi den er ekstrem.}}
-    - {id: bmb830.m03.r05, topic: traceability, text: {es: Datos crudos inmutables y derivados regenerables preservan trazabilidad., en: Immutable raw data and regenerable derived data preserve traceability., da: Uændrede rådata og regenererbare afledte data bevarer sporbarhed.}}
+    - {id: bmb830.m03.r01, topic: schema, text: {"es": "Un esquema declara tipo, unidad, valores permitidos, clave y política de ausencia.", "en": "A schema declares type, unit, allowed values, key, and missingness policy.", "da": "Et schema deklarerer type, enhed, tilladte værdier, nøgle og missingness-politik."}}
+    - {id: bmb830.m03.r02, topic: censoring, text: {"es": "Bajo límite de detección es censura, no cero ni NA genérico.", "en": "Below detection limit is censoring, not zero or generic NA.", "da": "Under detektionsgrænsen er censurering, ikke nul eller generisk NA."}}
+    - {id: bmb830.m03.r03, topic: join, text: {"es": "Verifica cardinalidad, duplicados, no emparejados y conteos en todo join.", "en": "Check cardinality, duplicates, unmatched keys, and counts for every join.", "da": "Kontrollér kardinalitet, duplikater, unmatched nøgler og antal for hvert join."}}
+    - {id: bmb830.m03.r04, topic: outlier, text: {"es": "Un valor extremo se investiga; no se elimina sólo por ser extremo.", "en": "An extreme value is investigated, not deleted merely for being extreme.", "da": "En ekstrem værdi undersøges og slettes ikke kun fordi den er ekstrem."}}
+    - {id: bmb830.m03.r05, topic: traceability, text: {"es": "Datos crudos inmutables y derivados regenerables preservan trazabilidad.", "en": "Immutable raw data and regenerable derived data preserve traceability.", "da": "Uændrede rådata og regenererbare afledte data bevarer sporbarhed."}}
 
 source_map:
   - {section: data_types_and_quality, source: repository.biostatistics.yachay}

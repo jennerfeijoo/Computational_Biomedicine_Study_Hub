@@ -11,9 +11,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es un gen y qué error evita esta definición?
-      en: What is a gene, and which misconception does this definition avoid?
-      da: Hvad er et gen, og hvilken misforståelse undgår definitionen?
+      es: "¿Qué es un gen y qué error evita esta definición?"
+      en: "What is a gene, and which misconception does this definition avoid?"
+      da: "Hvad er et gen, og hvilken misforståelse undgår definitionen?"
     back:
       es: >-
         Un gen es una región genómica cuya actividad produce uno o más productos funcionales, ARN o polipéptidos.
@@ -34,9 +34,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: Distingue gen, locus, transcrito y proteína.
-      en: Distinguish gene, locus, transcript, and protein.
-      da: Skeln mellem gen, locus, transkript og protein.
+      es: "Distingue gen, locus, transcrito y proteína."
+      en: "Distinguish gene, locus, transcript, and protein."
+      da: "Skeln mellem gen, locus, transkript og protein."
     back:
       es: >-
         Locus es una posición o región del genoma; gen es una unidad funcional anotada en esa región;
@@ -57,9 +57,9 @@ cards:
     card_type: sequence_transformation
     difficulty: foundational
     front:
-      es: Obtén la reverso-complementaria 5'→3' de 5'-AGTCCT-3'.
-      en: Obtain the 5'→3' reverse complement of 5'-AGTCCT-3'.
-      da: Find 5'→3' reverse complement af 5'-AGTCCT-3'.
+      es: "Obtén la reverso-complementaria 5'→3' de 5'-AGTCCT-3'."
+      en: "Obtain the 5'→3' reverse complement of 5'-AGTCCT-3'."
+      da: "Find 5'→3' reverse complement af 5'-AGTCCT-3'."
     back:
       es: >-
         5'-AGGACT-3'. Primero se complementa A↔T y G↔C, obteniendo 3'-TCAGGA-5';
@@ -78,9 +78,9 @@ cards:
     card_type: mechanism
     difficulty: foundational
     front:
-      es: ¿Por qué las hebras de ADN se describen como antiparalelas?
-      en: Why are DNA strands described as antiparallel?
-      da: Hvorfor beskrives DNA-strenge som antiparallelle?
+      es: "¿Por qué las hebras de ADN se describen como antiparalelas?"
+      en: "Why are DNA strands described as antiparallel?"
+      da: "Hvorfor beskrives DNA-strenge som antiparallelle?"
     back:
       es: >-
         Sus esqueletos azúcar-fosfato tienen orientaciones opuestas: una hebra recorre 5'→3' y la complementaria 3'→5'.
@@ -99,13 +99,13 @@ cards:
     card_type: sequence_transformation
     difficulty: foundational
     front:
-      es: La plantilla es 3'-TACGGA-5'. ¿Cuál es el ARN 5'→3'?
-      en: The template is 3'-TACGGA-5'. What is the 5'→3' RNA?
-      da: Template er 3'-TACGGA-5'. Hvad er RNA 5'→3'?
+      es: "La plantilla es 3'-TACGGA-5'. ¿Cuál es el ARN 5'→3'?"
+      en: "The template is 3'-TACGGA-5'. What is the 5'→3' RNA?"
+      da: "Template er 3'-TACGGA-5'. Hvad er RNA 5'→3'?"
     back:
-      es: 5'-AUGCCU-3'. La ARN polimerasa lee la plantilla 3'→5' y sintetiza ARN complementario 5'→3', usando U frente a A.
-      en: 5'-AUGCCU-3'. RNA polymerase reads the template 3'→5' and synthesizes complementary RNA 5'→3', using U opposite A.
-      da: 5'-AUGCCU-3'. RNA-polymerase læser template 3'→5' og syntetiserer RNA 5'→3'.
+      es: "5'-AUGCCU-3'. La ARN polimerasa lee la plantilla 3'→5' y sintetiza ARN complementario 5'→3', usando U frente a A."
+      en: "5'-AUGCCU-3'. RNA polymerase reads the template 3'→5' and synthesizes complementary RNA 5'→3', using U opposite A."
+      da: "5'-AUGCCU-3'. RNA-polymerase læser template 3'→5' og syntetiserer RNA 5'→3'."
     linked_objectives: [m01.o2, m01.o3]
     tags: [transcription, template, rna]
 
@@ -114,9 +114,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: ¿Cómo se relacionan hebra plantilla, hebra codificante y ARN?
-      en: How are template strand, coding strand, and RNA related?
-      da: Hvordan hænger template-streng, kodende streng og RNA sammen?
+      es: "¿Cómo se relacionan hebra plantilla, hebra codificante y ARN?"
+      en: "How are template strand, coding strand, and RNA related?"
+      da: "Hvordan hænger template-streng, kodende streng og RNA sammen?"
     back:
       es: >-
         El ARN es complementario y antiparalelo a la hebra plantilla. La hebra codificante tiene la misma
@@ -136,9 +136,9 @@ cards:
     card_type: mechanism
     difficulty: intermediate
     front:
-      es: ¿Qué determina la abundancia de un ARN en una muestra?
-      en: What determines RNA abundance in a sample?
-      da: Hvad bestemmer RNA-mængden i en prøve?
+      es: "¿Qué determina la abundancia de un ARN en una muestra?"
+      en: "What determines RNA abundance in a sample?"
+      da: "Hvad bestemmer RNA-mængden i en prøve?"
     back:
       es: >-
         El equilibrio entre síntesis, procesamiento, transporte y degradación, además de composición celular
@@ -158,9 +158,9 @@ cards:
     card_type: misconception_correction
     difficulty: intermediate
     front:
-      es: Corrige: «Más ARNm significa necesariamente más proteína activa».
-      en: Correct: “More mRNA necessarily means more active protein.”
-      da: Ret: “Mere mRNA betyder nødvendigvis mere aktivt protein.”
+      es: "Corrige: «Más ARNm significa necesariamente más proteína activa»."
+      en: "Correct: “More mRNA necessarily means more active protein.”"
+      da: "Ret: “Mere mRNA betyder nødvendigvis mere aktivt protein.”"
     back:
       es: >-
         La traducción, vida media proteica, plegamiento, modificaciones, localización, ensamblaje e inhibición
@@ -179,9 +179,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: Compara regulación transcripcional y postranscripcional.
-      en: Compare transcriptional and post-transcriptional regulation.
-      da: Sammenlign transkriptionel og post-transkriptionel regulering.
+      es: "Compara regulación transcripcional y postranscripcional."
+      en: "Compare transcriptional and post-transcriptional regulation."
+      da: "Sammenlign transkriptionel og post-transkriptionel regulering."
     back:
       es: >-
         La regulación transcripcional cambia inicio o progreso de síntesis de ARN mediante promotores,
@@ -202,9 +202,9 @@ cards:
     card_type: evidence_interpretation
     difficulty: intermediate
     front:
-      es: ChIP-seq muestra unión de un factor cerca de un promotor. ¿Qué conclusión mínima es válida?
-      en: ChIP-seq shows factor binding near a promoter. What is the minimal valid conclusion?
-      da: ChIP-seq viser faktor-binding nær en promotor. Hvad er den minimale gyldige konklusion?
+      es: "ChIP-seq muestra unión de un factor cerca de un promotor. ¿Qué conclusión mínima es válida?"
+      en: "ChIP-seq shows factor binding near a promoter. What is the minimal valid conclusion?"
+      da: "ChIP-seq viser faktor-binding nær en promotor. Hvad er den minimale gyldige konklusion?"
     back:
       es: >-
         El factor o un complejo asociado ocupa esa región bajo las condiciones medidas, sujeto a controles
@@ -224,9 +224,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué significa «epigenético» en este módulo y qué no implica necesariamente?
-      en: What does “epigenetic” mean in this module, and what does it not necessarily imply?
-      da: Hvad betyder “epigenetisk” i dette modul, og hvad indebærer det ikke nødvendigvis?
+      es: "¿Qué significa «epigenético» en este módulo y qué no implica necesariamente?"
+      en: "What does “epigenetic” mean in this module, and what does it not necessarily imply?"
+      da: "Hvad betyder “epigenetisk” i dette modul, og hvad indebærer det ikke nødvendigvis?"
     back:
       es: >-
         Se refiere a estados regulatorios relativamente persistentes que no requieren cambiar la secuencia de ADN.
@@ -246,9 +246,9 @@ cards:
     card_type: claim_audit
     difficulty: advanced
     front:
-      es: Casos tienen mayor metilación y menor ARN que controles. ¿Por qué no basta para afirmar causalidad?
-      en: Cases have higher methylation and lower RNA than controls. Why is that insufficient for causality?
-      da: Cases har højere methylering og lavere RNA end kontroller. Hvorfor er det utilstrækkeligt til kausalitet?
+      es: "Casos tienen mayor metilación y menor ARN que controles. ¿Por qué no basta para afirmar causalidad?"
+      en: "Cases have higher methylation and lower RNA than controls. Why is that insufficient for causality?"
+      da: "Cases har højere methylering og lavere RNA end kontroller. Hvorfor er det utilstrækkeligt til kausalitet?"
     back:
       es: >-
         Porque puede existir causalidad inversa, confusión, distinta composición celular, diferencias técnicas
@@ -269,9 +269,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es un operón?
-      en: What is an operon?
-      da: Hvad er et operon?
+      es: "¿Qué es un operón?"
+      en: "What is an operon?"
+      da: "Hvad er et operon?"
     back:
       es: >-
         Una unidad reguladora, especialmente común en bacterias, en la que varios genes pueden compartir promotor
@@ -291,9 +291,9 @@ cards:
     card_type: evidence_ranking
     difficulty: intermediate
     front:
-      es: Ordena de evidencia más indirecta a más directa para un operón: misma orientación, corta distancia, coexpresión, ARN que abarca uniones.
-      en: Rank from more indirect to more direct operon evidence: same orientation, short distance, co-expression, RNA spanning junctions.
-      da: Rangér fra mere indirekte til mere direkte operonevidens: samme orientering, kort afstand, coekspression, RNA over junctions.
+      es: "Ordena de evidencia más indirecta a más directa para un operón: misma orientación, corta distancia, coexpresión, ARN que abarca uniones."
+      en: "Rank from more indirect to more direct operon evidence: same orientation, short distance, co-expression, RNA spanning junctions."
+      da: "Rangér fra mere indirekte til mere direkte operonevidens: samme orientering, kort afstand, coekspression, RNA over junctions."
     back:
       es: >-
         Orientación y distancia son rasgos genómicos indirectos; coexpresión añade evidencia funcional contextual;
@@ -314,9 +314,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: Compara transformación, conjugación y transducción.
-      en: Compare transformation, conjugation, and transduction.
-      da: Sammenlign transformation, konjugation og transduktion.
+      es: "Compara transformación, conjugación y transducción."
+      en: "Compare transformation, conjugation, and transduction."
+      da: "Sammenlign transformation, konjugation og transduktion."
     back:
       es: >-
         Transformación: captación de ADN libre. Conjugación: transferencia mediante contacto y maquinaria conjugativa,
@@ -336,9 +336,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: Distingue ciclo lítico y lisogenia.
-      en: Distinguish the lytic cycle and lysogeny.
-      da: Skeln mellem lytisk cyklus og lysogeni.
+      es: "Distingue ciclo lítico y lisogenia."
+      en: "Distinguish the lytic cycle and lysogeny."
+      da: "Skeln mellem lytisk cyklus og lysogeni."
     back:
       es: >-
         En el ciclo lítico se producen partículas y se liberan, frecuentemente mediante lisis. En lisogenia,
@@ -359,9 +359,9 @@ cards:
     card_type: claim_audit
     difficulty: intermediate
     front:
-      es: Se detecta una región con genes similares a integrasa y cápside. ¿Qué conclusión es proporcionada?
-      en: A region contains integrase- and capsid-like genes. What is a proportionate conclusion?
-      da: En region indeholder integrase- og kapsidlignende gener. Hvad er en proportional konklusion?
+      es: "Se detecta una región con genes similares a integrasa y cápside. ¿Qué conclusión es proporcionada?"
+      en: "A region contains integrase- and capsid-like genes. What is a proportionate conclusion?"
+      da: "En region indeholder integrase- og kapsidlignende gener. Hvad er en proportional konklusion?"
     back:
       es: >-
         Es una región candidata de origen fágico o profago que merece análisis de límites, completitud, organización,
@@ -381,9 +381,9 @@ cards:
     card_type: misconception_correction
     difficulty: intermediate
     front:
-      es: Corrige: «Un ORF largo demuestra un gen funcional».
-      en: Correct: “A long ORF proves a functional gene.”
-      da: Ret: “En lang ORF beviser et funktionelt gen.”
+      es: "Corrige: «Un ORF largo demuestra un gen funcional»."
+      en: "Correct: “A long ORF proves a functional gene.”"
+      da: "Ret: “En lang ORF beviser et funktionelt gen.”"
     back:
       es: >-
         Un ORF largo es evidencia de potencial codificante, pero puede aparecer por azar o pertenecer a una región no expresada.
@@ -402,9 +402,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: ¿Por qué «código genético degenerado» no significa «ambiguo»?
-      en: Why does “degenerate genetic code” not mean “ambiguous”?
-      da: Hvorfor betyder “degenereret genetisk kode” ikke “tvetydig”?
+      es: "¿Por qué «código genético degenerado» no significa «ambiguo»?"
+      en: "Why does “degenerate genetic code” not mean “ambiguous”?"
+      da: "Hvorfor betyder “degenereret genetisk kode” ikke “tvetydig”?"
     back:
       es: >-
         Degenerado significa que distintos codones pueden especificar el mismo aminoácido. No ambiguo significa que,
@@ -424,9 +424,9 @@ cards:
     card_type: method_selection
     difficulty: advanced
     front:
-      es: ¿Qué combinación de evidencias usarías para probar que un factor regula directamente un gen?
-      en: Which evidence combination would you use to show that a factor directly regulates a gene?
-      da: Hvilken evidenskombination vil du bruge til at vise at en faktor regulerer et gen direkte?
+      es: "¿Qué combinación de evidencias usarías para probar que un factor regula directamente un gen?"
+      en: "Which evidence combination would you use to show that a factor directly regulates a gene?"
+      da: "Hvilken evidenskombination vil du bruge til at vise at en faktor regulerer et gen direkte?"
     back:
       es: >-
         Ocupación física en la región, perturbación específica del factor o sitio, cambio reproducible en transcripción
@@ -447,9 +447,9 @@ cards:
     card_type: evidence_hierarchy
     difficulty: advanced
     front:
-      es: Construye una jerarquía de evidencia desde «secuencia parecida» hasta «función demostrada».
-      en: Build an evidence hierarchy from “similar sequence” to “demonstrated function.”
-      da: Byg et evidenshierarki fra “lignende sekvens” til “demonstreret funktion.”
+      es: "Construye una jerarquía de evidencia desde «secuencia parecida» hasta «función demostrada»."
+      en: "Build an evidence hierarchy from “similar sequence” to “demonstrated function.”"
+      da: "Byg et evidenshierarki fra “lignende sekvens” til “demonstreret funktion.”"
     back:
       es: >-
         Similitud y dominios → conservación y contexto → transcripción → traducción/proteómica → localización o interacción →
@@ -470,9 +470,9 @@ cards:
     card_type: scenario_analysis
     difficulty: advanced
     front:
-      es: Un mismo locus muestra dos transcritos en tejidos distintos. ¿Qué preguntas debes hacer antes de compararlos?
-      en: One locus shows two transcripts in different tissues. What should you ask before comparing them?
-      da: Ét locus viser to transkripter i forskellige væv. Hvilke spørgsmål skal stilles før sammenligning?
+      es: "Un mismo locus muestra dos transcritos en tejidos distintos. ¿Qué preguntas debes hacer antes de compararlos?"
+      en: "One locus shows two transcripts in different tissues. What should you ask before comparing them?"
+      da: "Ét locus viser to transkripter i forskellige væv. Hvilke spørgsmål skal stilles før sammenligning?"
     back:
       es: >-
         ¿Mismo ensamblaje y anotación? ¿Misma orientación y límites? ¿Diferente inicio, terminación o splicing?
@@ -493,9 +493,9 @@ cards:
     card_type: oral_defense
     difficulty: advanced
     front:
-      es: Responde en 45 segundos: «¿Por qué el dogma central no es una cadena determinista simple?»
-      en: Answer in 45 seconds: “Why is the central dogma not a simple deterministic chain?”
-      da: Svar på 45 sekunder: “Hvorfor er det centrale dogme ikke en simpel deterministisk kæde?”
+      es: "Responde en 45 segundos: «¿Por qué el dogma central no es una cadena determinista simple?»"
+      en: "Answer in 45 seconds: “Why is the central dogma not a simple deterministic chain?”"
+      da: "Svar på 45 sekunder: “Hvorfor er det centrale dogme ikke en simpel deterministisk kæde?”"
     back:
       es: >-
         Describe direcciones frecuentes de transferencia de información, pero cada etapa está regulada y puede ramificarse:
@@ -516,9 +516,9 @@ cards:
     card_type: transfer
     difficulty: advanced
     front:
-      es: ¿Cómo prepara este módulo el análisis algorítmico de secuencias de DM847?
-      en: How does this module prepare algorithmic sequence analysis in DM847?
-      da: Hvordan forbereder dette modul algoritmisk sekvensanalyse i DM847?
+      es: "¿Cómo prepara este módulo el análisis algorítmico de secuencias de DM847?"
+      en: "How does this module prepare algorithmic sequence analysis in DM847?"
+      da: "Hvordan forbereder dette modul algoritmisk sekvensanalyse i DM847?"
     back:
       es: >-
         Define qué representa una secuencia, por qué importan orientación, alfabeto, marco, coordenadas y versión,

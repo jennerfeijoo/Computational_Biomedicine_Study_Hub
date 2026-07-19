@@ -12,7 +12,8 @@ authors = [
   { name = "Jenner Feijoo" }
 ]
 dependencies = [
-  "PySide6>=6.7,<7"
+  "PySide6>=6.7,<7",
+  "PyYAML>=6.0,<7"
 ]
 
 [project.optional-dependencies]
@@ -20,7 +21,8 @@ dev = [
   "mypy>=1.10,<2",
   "pytest>=8.2,<9",
   "pytest-qt>=4.4,<5",
-  "ruff>=0.5,<1"
+  "ruff>=0.5,<1",
+  "types-PyYAML>=6.0,<7"
 ]
 
 [project.scripts]

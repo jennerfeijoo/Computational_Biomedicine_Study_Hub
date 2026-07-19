@@ -10,167 +10,167 @@ cards:
     mode: conceptual
     card_type: definition
     difficulty: foundational
-    front: {es: ¿Qué define un tipo abstracto de datos?, en: What defines an abstract data type?, da: Hvad definerer en abstrakt datatype?}
-    back: {es: Sus valores válidos, operaciones observables, resultados, errores y efectos; no una representación interna concreta., en: Its valid values, observable operations, results, errors, and effects; not one concrete internal representation., da: Dens gyldige værdier, observerbare operationer, resultater, fejl og effekter; ikke én konkret intern repræsentation.}
+    front: {"es": "¿Qué define un tipo abstracto de datos?", "en": "What defines an abstract data type?", "da": "Hvad definerer en abstrakt datatype?"}
+    back: {"es": "Sus valores válidos, operaciones observables, resultados, errores y efectos; no una representación interna concreta.", "en": "Its valid values, observable operations, results, errors, and effects; not one concrete internal representation.", "da": "Dens gyldige værdier, observerbare operationer, resultater, fejl og effekter; ikke én konkret intern repræsentation."}
     linked_objectives: [m11.o1]
   - id: dm857.m11.f02
     mode: conceptual
     card_type: comparison
     difficulty: foundational
-    front: {es: Interfaz frente a contrato., en: Interface versus contract., da: Interface versus kontrakt.}
-    back: {es: La interfaz enumera operaciones disponibles; el contrato especifica precondiciones, resultados, errores, efectos y garantías relevantes., en: The interface lists available operations; the contract specifies preconditions, results, errors, effects, and relevant guarantees., da: Interfacet oplister operationer; kontrakten angiver forudsætninger, resultater, fejl, effekter og garantier.}
+    front: {"es": "Interfaz frente a contrato.", "en": "Interface versus contract.", "da": "Interface versus kontrakt."}
+    back: {"es": "La interfaz enumera operaciones disponibles; el contrato especifica precondiciones, resultados, errores, efectos y garantías relevantes.", "en": "The interface lists available operations; the contract specifies preconditions, results, errors, effects, and relevant guarantees.", "da": "Interfacet oplister operationer; kontrakten angiver forudsætninger, resultater, fejl, effekter og garantier."}
     linked_objectives: [m11.o1]
   - id: dm857.m11.f03
     mode: conceptual
     card_type: invariant
     difficulty: intermediate
-    front: {es: ¿Qué es una invariante de representación?, en: What is a representation invariant?, da: Hvad er en repræsentationsinvariant?}
-    back: {es: Una propiedad verificable que el estado interno debe cumplir tras la construcción y después de cada operación pública., en: A verifiable property internal state must satisfy after construction and after every public operation., da: En verificerbar egenskab som intern tilstand skal opfylde efter konstruktion og hver offentlig operation.}
+    front: {"es": "¿Qué es una invariante de representación?", "en": "What is a representation invariant?", "da": "Hvad er en repræsentationsinvariant?"}
+    back: {"es": "Una propiedad verificable que el estado interno debe cumplir tras la construcción y después de cada operación pública.", "en": "A verifiable property internal state must satisfy after construction and after every public operation.", "da": "En verificerbar egenskab som intern tilstand skal opfylde efter konstruktion og hver offentlig operation."}
     linked_objectives: [m11.o2]
   - id: dm857.m11.f04
     mode: conceptual
     card_type: misconception
     difficulty: intermediate
-    front: {es: ¿Un ADT es necesariamente una clase?, en: Is an ADT necessarily a class?, da: Er et ADT nødvendigvis en klasse?}
-    back: {es: No. Es una especificación abstracta. Puede implementarse con una clase, funciones y estado encapsulado u otras técnicas., en: No. It is an abstract specification. A class is one possible implementation mechanism., da: Nej. Det er en abstrakt specifikation. En klasse er blot én mulig implementering.}
+    front: {"es": "¿Un ADT es necesariamente una clase?", "en": "Is an ADT necessarily a class?", "da": "Er et ADT nødvendigvis en klasse?"}
+    back: {"es": "No. Es una especificación abstracta. Puede implementarse con una clase, funciones y estado encapsulado u otras técnicas.", "en": "No. It is an abstract specification. A class is one possible implementation mechanism.", "da": "Nej. Det er en abstrakt specifikation. En klasse er blot én mulig implementering."}
     linked_objectives: [m11.o1]
   - id: dm857.m11.f05
     mode: conceptual
     card_type: policy
     difficulty: foundational
-    front: {es: ¿Qué política de extracción usa una pila?, en: What removal policy does a stack use?, da: Hvilken udtagningspolitik bruger en stak?}
-    back: {es: LIFO: el último elemento insertado es el primero en salir., en: LIFO: the last inserted item is the first removed., da: LIFO: det sidst indsatte element fjernes først.}
+    front: {"es": "¿Qué política de extracción usa una pila?", "en": "What removal policy does a stack use?", "da": "Hvilken udtagningspolitik bruger en stak?"}
+    back: {"es": "LIFO: el último elemento insertado es el primero en salir.", "en": "LIFO: the last inserted item is the first removed.", "da": "LIFO: det sidst indsatte element fjernes først."}
     linked_objectives: [m11.o3]
   - id: dm857.m11.f06
     mode: practical
     card_type: operation_semantics
     difficulty: foundational
-    front: {es: Diferencia entre `pop` y `peek` en una pila., en: Difference between `pop` and `peek` on a stack., da: Forskel mellem `pop` og `peek` på en stak.}
-    back: {es: Ambos consultan el elemento superior, pero `pop` lo elimina y retorna; `peek` sólo lo retorna., en: Both inspect the top item, but `pop` removes and returns it, while `peek` only returns it., da: Begge ser øverste element; `pop` fjerner og returnerer, mens `peek` kun returnerer.}
+    front: {"es": "Diferencia entre `pop` y `peek` en una pila.", "en": "Difference between `pop` and `peek` on a stack.", "da": "Forskel mellem `pop` og `peek` på en stak."}
+    back: {"es": "Ambos consultan el elemento superior, pero `pop` lo elimina y retorna; `peek` sólo lo retorna.", "en": "Both inspect the top item, but `pop` removes and returns it, while `peek` only returns it.", "da": "Begge ser øverste element; `pop` fjerner og returnerer, mens `peek` kun returnerer."}
     linked_objectives: [m11.o3]
   - id: dm857.m11.f07
     mode: practical
     card_type: contract
     difficulty: intermediate
-    front: {es: ¿Por qué no conviene retornar None al extraer de una pila vacía si None puede almacenarse?, en: Why avoid returning None for empty pop when None is valid data?, da: Hvorfor undgå None ved tom pop, hvis None er gyldige data?}
-    back: {es: Porque el resultado sería ambiguo. Una excepción específica distingue vacío de un elemento real con valor None., en: Because the result would be ambiguous. A specific exception distinguishes emptiness from a stored None value., da: Fordi resultatet bliver tvetydigt. En specifik exception skelner tomhed fra en lagret None-værdi.}
+    front: {"es": "¿Por qué no conviene retornar None al extraer de una pila vacía si None puede almacenarse?", "en": "Why avoid returning None for empty pop when None is valid data?", "da": "Hvorfor undgå None ved tom pop, hvis None er gyldige data?"}
+    back: {"es": "Porque el resultado sería ambiguo. Una excepción específica distingue vacío de un elemento real con valor None.", "en": "Because the result would be ambiguous. A specific exception distinguishes emptiness from a stored None value.", "da": "Fordi resultatet bliver tvetydigt. En specifik exception skelner tomhed fra en lagret None-værdi."}
     linked_objectives: [m11.o3, m11.o8]
   - id: dm857.m11.f08
     mode: conceptual
     card_type: policy
     difficulty: foundational
-    front: {es: ¿Qué política de extracción usa una cola?, en: What removal policy does a queue use?, da: Hvilken udtagningspolitik bruger en kø?}
-    back: {es: FIFO: el primer elemento insertado es el primero en salir., en: FIFO: the first inserted item is the first removed., da: FIFO: det først indsatte element fjernes først.}
+    front: {"es": "¿Qué política de extracción usa una cola?", "en": "What removal policy does a queue use?", "da": "Hvilken udtagningspolitik bruger en kø?"}
+    back: {"es": "FIFO: el primer elemento insertado es el primero en salir.", "en": "FIFO: the first inserted item is the first removed.", "da": "FIFO: det først indsatte element fjernes først."}
     linked_objectives: [m11.o4]
   - id: dm857.m11.f09
     mode: practical
     card_type: data_structure_selection
     difficulty: intermediate
-    front: {es: ¿Por qué `deque` es preferible a `list.pop(0)` para una cola?, en: Why is `deque` preferable to `list.pop(0)` for a queue?, da: Hvorfor er `deque` bedre end `list.pop(0)` til en kø?}
-    back: {es: `popleft` tiene coste amortizado constante, mientras quitar el primer elemento de una lista desplaza el resto y cuesta O(n)., en: `popleft` is amortized O(1), whereas removing the first list item shifts the rest and costs O(n)., da: `popleft` er amortiseret O(1), mens fjernelse forrest i en liste flytter resten og koster O(n).}
+    front: {"es": "¿Por qué `deque` es preferible a `list.pop(0)` para una cola?", "en": "Why is `deque` preferable to `list.pop(0)` for a queue?", "da": "Hvorfor er `deque` bedre end `list.pop(0)` til en kø?"}
+    back: {"es": "`popleft` tiene coste amortizado constante, mientras quitar el primer elemento de una lista desplaza el resto y cuesta O(n).", "en": "`popleft` is amortized O(1), whereas removing the first list item shifts the rest and costs O(n).", "da": "`popleft` er amortiseret O(1), mens fjernelse forrest i en liste flytter resten og koster O(n)."}
     linked_objectives: [m11.o4, m11.o6]
   - id: dm857.m11.f10
     mode: conceptual
     card_type: policy
     difficulty: intermediate
-    front: {es: ¿Qué diferencia una cola de prioridad de una cola FIFO?, en: What distinguishes a priority queue from a FIFO queue?, da: Hvad adskiller en prioritetskø fra en FIFO-kø?}
-    back: {es: La cola de prioridad extrae según una prioridad definida; FIFO extrae por orden temporal de llegada., en: A priority queue removes according to defined priority; FIFO removes according to arrival order., da: En prioritetskø fjerner efter prioritet; FIFO efter ankomsttid.}
+    front: {"es": "¿Qué diferencia una cola de prioridad de una cola FIFO?", "en": "What distinguishes a priority queue from a FIFO queue?", "da": "Hvad adskiller en prioritetskø fra en FIFO-kø?"}
+    back: {"es": "La cola de prioridad extrae según una prioridad definida; FIFO extrae por orden temporal de llegada.", "en": "A priority queue removes according to defined priority; FIFO removes according to arrival order.", "da": "En prioritetskø fjerner efter prioritet; FIFO efter ankomsttid."}
     linked_objectives: [m11.o5, m11.o6]
   - id: dm857.m11.f11
     mode: conceptual
     card_type: complexity
     difficulty: intermediate
-    front: {es: Costes principales de un min-heap estándar., en: Main costs of a standard min-heap., da: Vigtigste omkostninger for en standard min-heap.}
-    back: {es: Consultar el mínimo O(1); insertar O(log n); extraer el mínimo O(log n)., en: Read minimum O(1); insert O(log n); remove minimum O(log n)., da: Læs minimum O(1), indsæt O(log n), fjern minimum O(log n).}
+    front: {"es": "Costes principales de un min-heap estándar.", "en": "Main costs of a standard min-heap.", "da": "Vigtigste omkostninger for en standard min-heap."}
+    back: {"es": "Consultar el mínimo O(1); insertar O(log n); extraer el mínimo O(log n).", "en": "Read minimum O(1); insert O(log n); remove minimum O(log n).", "da": "Læs minimum O(1), indsæt O(log n), fjern minimum O(log n)."}
     linked_objectives: [m11.o5]
   - id: dm857.m11.f12
     mode: conceptual
     card_type: misconception
     difficulty: intermediate
-    front: {es: ¿El arreglo interno de `heapq` está completamente ordenado?, en: Is the internal `heapq` array fully sorted?, da: Er det interne `heapq`-array fuldt sorteret?}
-    back: {es: No. Sólo satisface la propiedad de heap: cada padre no es mayor que sus hijos en un min-heap., en: No. It only satisfies the heap property: each parent is no greater than its children in a min-heap., da: Nej. Det opfylder kun heap-egenskaben: hver forælder er ikke større end sine børn.}
+    front: {"es": "¿El arreglo interno de `heapq` está completamente ordenado?", "en": "Is the internal `heapq` array fully sorted?", "da": "Er det interne `heapq`-array fuldt sorteret?"}
+    back: {"es": "No. Sólo satisface la propiedad de heap: cada padre no es mayor que sus hijos en un min-heap.", "en": "No. It only satisfies the heap property: each parent is no greater than its children in a min-heap.", "da": "Nej. Det opfylder kun heap-egenskaben: hver forælder er ikke større end sine børn."}
     linked_objectives: [m11.o5]
   - id: dm857.m11.f13
     mode: practical
     card_type: debugging
     difficulty: advanced
-    front: {es: ¿Por qué puede fallar un heap de tuplas `(prioridad, objeto)` cuando hay empates?, en: Why may a heap of `(priority, object)` tuples fail on ties?, da: Hvorfor kan en heap af `(prioritet, objekt)` fejle ved ligheder?}
-    back: {es: Si las prioridades coinciden, Python intenta comparar los objetos. Si no son ordenables, produce TypeError. Un contador intermedio evita esa comparación., en: When priorities tie, Python compares the objects. Non-orderable objects raise TypeError. An intermediate counter avoids that comparison., da: Ved ens prioriteter sammenligner Python objekterne. Ikke-ordnede objekter giver TypeError; en tæller undgår det.}
+    front: {"es": "¿Por qué puede fallar un heap de tuplas `(prioridad, objeto)` cuando hay empates?", "en": "Why may a heap of `(priority, object)` tuples fail on ties?", "da": "Hvorfor kan en heap af `(prioritet, objekt)` fejle ved ligheder?"}
+    back: {"es": "Si las prioridades coinciden, Python intenta comparar los objetos. Si no son ordenables, produce TypeError. Un contador intermedio evita esa comparación.", "en": "When priorities tie, Python compares the objects. Non-orderable objects raise TypeError. An intermediate counter avoids that comparison.", "da": "Ved ens prioriteter sammenligner Python objekterne. Ikke-ordnede objekter giver TypeError; en tæller undgår det."}
     linked_objectives: [m11.o5]
   - id: dm857.m11.f14
     mode: practical
     card_type: stable_ordering
     difficulty: advanced
-    front: {es: ¿Cómo implementar desempate estable en una cola de prioridad?, en: How can stable tie-breaking be implemented in a priority queue?, da: Hvordan implementeres stabil afgørelse i en prioritetskø?}
-    back: {es: Insertar tuplas `(prioridad, contador_creciente, elemento)`. El contador conserva orden de llegada entre prioridades iguales., en: Insert `(priority, increasing_counter, item)` tuples. The counter preserves arrival order among equal priorities., da: Indsæt `(prioritet, stigende_tæller, element)`. Tælleren bevarer ankomstorden ved ens prioriteter.}
+    front: {"es": "¿Cómo implementar desempate estable en una cola de prioridad?", "en": "How can stable tie-breaking be implemented in a priority queue?", "da": "Hvordan implementeres stabil afgørelse i en prioritetskø?"}
+    back: {"es": "Insertar tuplas `(prioridad, contador_creciente, elemento)`. El contador conserva orden de llegada entre prioridades iguales.", "en": "Insert `(priority, increasing_counter, item)` tuples. The counter preserves arrival order among equal priorities.", "da": "Indsæt `(prioritet, stigende_tæller, element)`. Tælleren bevarer ankomstorden ved ens prioriteter."}
     linked_objectives: [m11.o5]
   - id: dm857.m11.f15
     mode: conceptual
     card_type: encapsulation
     difficulty: intermediate
-    front: {es: ¿Por qué no devolver la lista interna de una pila?, en: Why not return a stack's internal list?, da: Hvorfor ikke returnere en staks interne liste?}
-    back: {es: El cliente podría mutarla sin pasar por operaciones públicas y romper invariantes. Es mejor ofrecer iteración, una copia o métodos de consulta., en: Clients could mutate it outside public operations and break invariants. Prefer iteration, a copy, or query methods., da: Klienten kan mutere den uden om offentlige operationer og bryde invarianter. Brug iterator, kopi eller forespørgselsmetoder.}
+    front: {"es": "¿Por qué no devolver la lista interna de una pila?", "en": "Why not return a stack's internal list?", "da": "Hvorfor ikke returnere en staks interne liste?"}
+    back: {"es": "El cliente podría mutarla sin pasar por operaciones públicas y romper invariantes. Es mejor ofrecer iteración, una copia o métodos de consulta.", "en": "Clients could mutate it outside public operations and break invariants. Prefer iteration, a copy, or query methods.", "da": "Klienten kan mutere den uden om offentlige operationer og bryde invarianter. Brug iterator, kopi eller forespørgselsmetoder."}
     linked_objectives: [m11.o2, m11.o7]
   - id: dm857.m11.f16
     mode: conceptual
     card_type: substitutability
     difficulty: advanced
-    front: {es: ¿Cuándo son sustituibles dos implementaciones de un ADT?, en: When are two ADT implementations substitutable?, da: Hvornår er to ADT-implementeringer udskiftelige?}
-    back: {es: Cuando cualquier cliente válido observa los mismos resultados, errores y efectos bajo el contrato, aunque cambien representación y rendimiento interno., en: When every valid client observes the same results, errors, and effects under the contract, despite internal representation differences., da: Når enhver gyldig klient observerer samme resultater, fejl og effekter under kontrakten.}
+    front: {"es": "¿Cuándo son sustituibles dos implementaciones de un ADT?", "en": "When are two ADT implementations substitutable?", "da": "Hvornår er to ADT-implementeringer udskiftelige?"}
+    back: {"es": "Cuando cualquier cliente válido observa los mismos resultados, errores y efectos bajo el contrato, aunque cambien representación y rendimiento interno.", "en": "When every valid client observes the same results, errors, and effects under the contract, despite internal representation differences.", "da": "Når enhver gyldig klient observerer samme resultater, fejl og effekter under kontrakten."}
     linked_objectives: [m11.o1, m11.o7]
   - id: dm857.m11.f17
     mode: practical
     card_type: property_test
     difficulty: intermediate
-    front: {es: Propiedad útil para probar una pila., en: Useful property for testing a stack., da: Nyttig egenskab til test af en stak.}
-    back: {es: Insertar una secuencia y extraer todos los elementos debe producir la secuencia inversa, sin perder ni duplicar elementos., en: Push a sequence and pop everything; the result must be the reverse sequence with no loss or duplication., da: Indsæt en sekvens og pop alt; resultatet skal være den omvendte sekvens uden tab eller dubletter.}
+    front: {"es": "Propiedad útil para probar una pila.", "en": "Useful property for testing a stack.", "da": "Nyttig egenskab til test af en stak."}
+    back: {"es": "Insertar una secuencia y extraer todos los elementos debe producir la secuencia inversa, sin perder ni duplicar elementos.", "en": "Push a sequence and pop everything; the result must be the reverse sequence with no loss or duplication.", "da": "Indsæt en sekvens og pop alt; resultatet skal være den omvendte sekvens uden tab eller dubletter."}
     linked_objectives: [m11.o3, m11.o8]
   - id: dm857.m11.f18
     mode: practical
     card_type: property_test
     difficulty: intermediate
-    front: {es: Propiedad útil para probar una cola., en: Useful property for testing a queue., da: Nyttig egenskab til test af en kø.}
-    back: {es: Encolar una secuencia y desencolar todo debe preservar exactamente el orden de entrada., en: Enqueue a sequence and dequeue everything; the output must exactly preserve input order., da: Enqueue en sekvens og dequeue alt; output skal præcist bevare inputrækkefølgen.}
+    front: {"es": "Propiedad útil para probar una cola.", "en": "Useful property for testing a queue.", "da": "Nyttig egenskab til test af en kø."}
+    back: {"es": "Encolar una secuencia y desencolar todo debe preservar exactamente el orden de entrada.", "en": "Enqueue a sequence and dequeue everything; the output must exactly preserve input order.", "da": "Enqueue en sekvens og dequeue alt; output skal præcist bevare inputrækkefølgen."}
     linked_objectives: [m11.o4, m11.o8]
   - id: dm857.m11.f19
     mode: practical
     card_type: invariant_design
     difficulty: advanced
-    front: {es: Invariantes para una cola circular acotada., en: Invariants for a bounded circular queue., da: Invarianter for en begrænset cirkulær kø.}
-    back: {es: Capacidad positiva; 0 <= tamaño <= capacidad; índices dentro del rango; posiciones ocupadas coherentes con tamaño; frente y final actualizados módulo capacidad., en: Positive capacity; 0 <= size <= capacity; indices in range; occupied positions consistent with size; front and rear updated modulo capacity., da: Positiv kapacitet, 0 <= størrelse <= kapacitet, indeks i intervallet og konsistent modulær opdatering.}
+    front: {"es": "Invariantes para una cola circular acotada.", "en": "Invariants for a bounded circular queue.", "da": "Invarianter for en begrænset cirkulær kø."}
+    back: {"es": "Capacidad positiva; 0 <= tamaño <= capacidad; índices dentro del rango; posiciones ocupadas coherentes con tamaño; frente y final actualizados módulo capacidad.", "en": "Positive capacity; 0 <= size <= capacity; indices in range; occupied positions consistent with size; front and rear updated modulo capacity.", "da": "Positiv kapacitet, 0 <= størrelse <= kapacitet, indeks i intervallet og konsistent modulær opdatering."}
     linked_objectives: [m11.o2, m11.o8]
   - id: dm857.m11.f20
     mode: integrative
     card_type: method_selection
     difficulty: advanced
-    front: {es: Estructura para deshacer, BFS y planificación por urgencia., en: Structure for undo, BFS, and urgency scheduling., da: Struktur til undo, BFS og planlægning efter hast.}
-    back: {es: Pila para deshacer; cola FIFO para BFS; cola de prioridad para urgencia. La elección depende del orden de extracción., en: Stack for undo; FIFO queue for BFS; priority queue for urgency. Selection follows removal order., da: Stak til undo, FIFO-kø til BFS og prioritetskø til hast. Valget følger udtagningsorden.}
+    front: {"es": "Estructura para deshacer, BFS y planificación por urgencia.", "en": "Structure for undo, BFS, and urgency scheduling.", "da": "Struktur til undo, BFS og planlægning efter hast."}
+    back: {"es": "Pila para deshacer; cola FIFO para BFS; cola de prioridad para urgencia. La elección depende del orden de extracción.", "en": "Stack for undo; FIFO queue for BFS; priority queue for urgency. Selection follows removal order.", "da": "Stak til undo, FIFO-kø til BFS og prioritetskø til hast. Valget følger udtagningsorden."}
     linked_objectives: [m11.o6]
   - id: dm857.m11.f21
     mode: integrative
     card_type: design_review
     difficulty: advanced
-    front: {es: ¿Qué problema tiene una API que expone `items` y además ofrece `push` y `pop`?, en: What is wrong with an API exposing `items` while also offering `push` and `pop`?, da: Hvad er problemet ved et API der eksponerer `items` og samtidig tilbyder `push` og `pop`?}
-    back: {es: El cliente puede modificar `items` directamente, eludir validación y romper la semántica de la abstracción. La interfaz deja de controlar el estado., en: Clients can mutate `items` directly, bypass validation, and break the abstraction's semantics. The interface no longer controls state., da: Klienten kan mutere `items` direkte, omgå validering og bryde abstraktionens semantik.}
+    front: {"es": "¿Qué problema tiene una API que expone `items` y además ofrece `push` y `pop`?", "en": "What is wrong with an API exposing `items` while also offering `push` and `pop`?", "da": "Hvad er problemet ved et API der eksponerer `items` og samtidig tilbyder `push` og `pop`?"}
+    back: {"es": "El cliente puede modificar `items` directamente, eludir validación y romper la semántica de la abstracción. La interfaz deja de controlar el estado.", "en": "Clients can mutate `items` directly, bypass validation, and break the abstraction's semantics. The interface no longer controls state.", "da": "Klienten kan mutere `items` direkte, omgå validering og bryde abstraktionens semantik."}
     linked_objectives: [m11.o2, m11.o7]
   - id: dm857.m11.f22
     mode: integrative
     card_type: oral_defense
     difficulty: advanced
-    front: {es: Defiende por qué las pruebas deben ignorar la representación interna., en: Defend why tests should ignore internal representation., da: Begrund hvorfor test bør ignorere intern repræsentation.}
-    back: {es: Porque la representación es reemplazable. Las pruebas estables verifican operaciones, resultados, errores, propiedades e invariantes observables; inspeccionar privados acopla la suite a detalles no contractuales., en: Because representation is replaceable. Stable tests verify operations, results, errors, properties, and observable invariants; private inspection couples tests to non-contractual details., da: Fordi repræsentationen er udskiftelig. Stabile test verificerer observerbar adfærd, ikke private detaljer.}
+    front: {"es": "Defiende por qué las pruebas deben ignorar la representación interna.", "en": "Defend why tests should ignore internal representation.", "da": "Begrund hvorfor test bør ignorere intern repræsentation."}
+    back: {"es": "Porque la representación es reemplazable. Las pruebas estables verifican operaciones, resultados, errores, propiedades e invariantes observables; inspeccionar privados acopla la suite a detalles no contractuales.", "en": "Because representation is replaceable. Stable tests verify operations, results, errors, properties, and observable invariants; private inspection couples tests to non-contractual details.", "da": "Fordi repræsentationen er udskiftelig. Stabile test verificerer observerbar adfærd, ikke private detaljer."}
     linked_objectives: [m11.o1, m11.o8]
   - id: dm857.m11.f23
     mode: integrative
     card_type: complexity_reasoning
     difficulty: advanced
-    front: {es: ¿Por qué no basta medir una sola ejecución para afirmar complejidad?, en: Why is one timing run insufficient to claim complexity?, da: Hvorfor er én tidsmåling utilstrækkelig til at påstå kompleksitet?}
-    back: {es: El tiempo depende de tamaño, distribución, equipo, calentamiento y ruido. La complejidad se deriva del algoritmo y se apoya con mediciones sobre tamaños crecientes y condiciones controladas., en: Runtime depends on size, distribution, hardware, warm-up, and noise. Complexity follows algorithmic analysis and may be supported by controlled scaling measurements., da: Tid afhænger af størrelse, data, hardware og støj. Kompleksitet kræver algoritmisk analyse og kontrolleret skalering.}
+    front: {"es": "¿Por qué no basta medir una sola ejecución para afirmar complejidad?", "en": "Why is one timing run insufficient to claim complexity?", "da": "Hvorfor er én tidsmåling utilstrækkelig til at påstå kompleksitet?"}
+    back: {"es": "El tiempo depende de tamaño, distribución, equipo, calentamiento y ruido. La complejidad se deriva del algoritmo y se apoya con mediciones sobre tamaños crecientes y condiciones controladas.", "en": "Runtime depends on size, distribution, hardware, warm-up, and noise. Complexity follows algorithmic analysis and may be supported by controlled scaling measurements.", "da": "Tid afhænger af størrelse, data, hardware og støj. Kompleksitet kræver algoritmisk analyse og kontrolleret skalering."}
     linked_objectives: [m11.o8]
   - id: dm857.m11.f24
     mode: integrative
     card_type: synthesis
     difficulty: advanced
-    front: {es: Flujo mínimo para diseñar un ADT verificable., en: Minimal workflow for designing a verifiable ADT., da: Minimal arbejdsgang til design af et verificerbart ADT.}
-    back: {es: Identificar operaciones y clientes; definir contrato y errores; fijar invariantes; elegir representación; implementar sin exponer internos; probar secuencias, límites, independencia y sustitución; analizar complejidad., en: Identify operations and clients; define contract and errors; state invariants; choose representation; implement without exposing internals; test sequences, boundaries, independence, and substitution; analyze complexity., da: Identificér operationer, definér kontrakt og fejl, fastlæg invarianter, vælg repræsentation, implementér, test og analysér kompleksitet.}
+    front: {"es": "Flujo mínimo para diseñar un ADT verificable.", "en": "Minimal workflow for designing a verifiable ADT.", "da": "Minimal arbejdsgang til design af et verificerbart ADT."}
+    back: {"es": "Identificar operaciones y clientes; definir contrato y errores; fijar invariantes; elegir representación; implementar sin exponer internos; probar secuencias, límites, independencia y sustitución; analizar complejidad.", "en": "Identify operations and clients; define contract and errors; state invariants; choose representation; implement without exposing internals; test sequences, boundaries, independence, and substitution; analyze complexity.", "da": "Identificér operationer, definér kontrakt og fejl, fastlæg invarianter, vælg repræsentation, implementér, test og analysér kompleksitet."}
     linked_objectives: [m11.o1, m11.o2, m11.o6, m11.o7, m11.o8]

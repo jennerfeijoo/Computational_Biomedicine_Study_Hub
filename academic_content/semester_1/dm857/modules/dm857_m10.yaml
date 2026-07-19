@@ -5,7 +5,7 @@ content_version: 1.0.0
 status: academically_reviewed_draft
 
 metadata:
-  title: {es: Estructuras jerárquicas, árboles y recorridos, en: Hierarchical structures, trees, and traversals, da: Hierarkiske strukturer, træer og gennemløb}
+  title: {"es": "Estructuras jerárquicas, árboles y recorridos", "en": "Hierarchical structures, trees, and traversals", "da": "Hierarkiske strukturer, træer og gennemløb"}
   summary:
     es: >-
       Formalización de jerarquías mediante árboles: vocabulario estructural, representaciones,
@@ -25,18 +25,18 @@ metadata:
   difficulty: intermediate_to_advanced
 
 objectives:
-  - {id: m10.o1, bloom_level: understand, statement: {es: Describir árboles con terminología estructural precisa., en: Describe trees using precise structural terminology., da: Beskrive træer med præcis strukturel terminologi.}, evidence: structural_description}
-  - {id: m10.o2, bloom_level: create, statement: {es: Representar jerarquías mediante estructuras anidadas y objetos., en: Represent hierarchies using nested structures and objects., da: Repræsentere hierarkier med indlejrede strukturer og objekter.}, evidence: representation_design}
-  - {id: m10.o3, bloom_level: apply, statement: {es: Implementar recorridos preorden, inorden y postorden., en: Implement preorder, inorder, and postorder traversals., da: Implementere preorder-, inorder- og postorder-gennemløb.}, evidence: depth_first_traversal}
-  - {id: m10.o4, bloom_level: apply, statement: {es: Implementar búsqueda en profundidad y por niveles., en: Implement depth-first and level-order search., da: Implementere dybdeførst og niveauvis søgning.}, evidence: search_implementation}
-  - {id: m10.o5, bloom_level: analyze, statement: {es: Calcular tamaño, altura, profundidad y número de hojas con definiciones coherentes., en: Compute size, height, depth, and leaf count using coherent definitions., da: Beregne størrelse, højde, dybde og antal blade med konsistente definitioner.}, evidence: tree_metric_analysis}
-  - {id: m10.o6, bloom_level: evaluate, statement: {es: Distinguir árboles generales, binarios y binarios de búsqueda., en: Distinguish general, binary, and binary-search trees., da: Skelne mellem generelle, binære og binære søgetræer.}, evidence: property_comparison}
-  - {id: m10.o7, bloom_level: analyze, statement: {es: Analizar tiempo y espacio de recorridos según forma y representación., en: Analyze traversal time and space according to shape and representation., da: Analysere tids- og pladsforbrug efter form og repræsentation.}, evidence: complexity_argument}
-  - {id: m10.o8, bloom_level: create, statement: {es: Diseñar invariantes y pruebas para árboles vacíos, degenerados, equilibrados y con etiquetas repetidas., en: Design invariants and tests for empty, degenerate, balanced, and duplicate-label trees., da: Designe invarianter og test for tomme, degenererede, balancerede træer og gentagne etiketter.}, evidence: tree_test_suite}
+  - {id: m10.o1, bloom_level: understand, statement: {"es": "Describir árboles con terminología estructural precisa.", "en": "Describe trees using precise structural terminology.", "da": "Beskrive træer med præcis strukturel terminologi."}, evidence: structural_description}
+  - {id: m10.o2, bloom_level: create, statement: {"es": "Representar jerarquías mediante estructuras anidadas y objetos.", "en": "Represent hierarchies using nested structures and objects.", "da": "Repræsentere hierarkier med indlejrede strukturer og objekter."}, evidence: representation_design}
+  - {id: m10.o3, bloom_level: apply, statement: {"es": "Implementar recorridos preorden, inorden y postorden.", "en": "Implement preorder, inorder, and postorder traversals.", "da": "Implementere preorder-, inorder- og postorder-gennemløb."}, evidence: depth_first_traversal}
+  - {id: m10.o4, bloom_level: apply, statement: {"es": "Implementar búsqueda en profundidad y por niveles.", "en": "Implement depth-first and level-order search.", "da": "Implementere dybdeførst og niveauvis søgning."}, evidence: search_implementation}
+  - {id: m10.o5, bloom_level: analyze, statement: {"es": "Calcular tamaño, altura, profundidad y número de hojas con definiciones coherentes.", "en": "Compute size, height, depth, and leaf count using coherent definitions.", "da": "Beregne størrelse, højde, dybde og antal blade med konsistente definitioner."}, evidence: tree_metric_analysis}
+  - {id: m10.o6, bloom_level: evaluate, statement: {"es": "Distinguir árboles generales, binarios y binarios de búsqueda.", "en": "Distinguish general, binary, and binary-search trees.", "da": "Skelne mellem generelle, binære og binære søgetræer."}, evidence: property_comparison}
+  - {id: m10.o7, bloom_level: analyze, statement: {"es": "Analizar tiempo y espacio de recorridos según forma y representación.", "en": "Analyze traversal time and space according to shape and representation.", "da": "Analysere tids- og pladsforbrug efter form og repræsentation."}, evidence: complexity_argument}
+  - {id: m10.o8, bloom_level: create, statement: {"es": "Diseñar invariantes y pruebas para árboles vacíos, degenerados, equilibrados y con etiquetas repetidas.", "en": "Design invariants and tests for empty, degenerate, balanced, and duplicate-label trees.", "da": "Designe invarianter og test for tomme, degenererede, balancerede træer og gentagne etiketter."}, evidence: tree_test_suite}
 
 concepts:
   - id: tree-vocabulary-and-invariants
-    title: {es: Vocabulario e invariantes estructurales, en: Vocabulary and structural invariants, da: Ordforråd og strukturelle invarianter}
+    title: {"es": "Vocabulario e invariantes estructurales", "en": "Vocabulary and structural invariants", "da": "Ordforråd og strukturelle invarianter"}
     body:
       es: >-
         Un árbol organiza nodos mediante relaciones padre-hijo. La raíz no tiene padre; una hoja no
@@ -54,7 +54,7 @@ concepts:
         ingen børn, og hver ikke-rod-node har én forælder. Gentagne etiketter betyder ikke samme node.
     linked_objectives: [m10.o1, m10.o8]
   - id: representations-and-validation
-    title: {es: Representación, identidad y validación, en: Representation, identity, and validation, da: Repræsentation, identitet og validering}
+    title: {"es": "Representación, identidad y validación", "en": "Representation, identity, and validation", "da": "Repræsentation, identitet og validering"}
     body:
       es: >-
         Una jerarquía puede representarse mediante diccionarios anidados, listas de hijos, tablas
@@ -71,7 +71,7 @@ concepts:
         Repræsentationen bestemmer validering og navigation.
     linked_objectives: [m10.o2, m10.o8]
   - id: general-binary-and-search-trees
-    title: {es: Árbol general, binario y binario de búsqueda, en: General, binary, and binary-search trees, da: Generelle, binære og binære søgetræer}
+    title: {"es": "Árbol general, binario y binario de búsqueda", "en": "General, binary, and binary-search trees", "da": "Generelle, binære og binære søgetræer"}
     body:
       es: >-
         Un árbol general permite un número variable de hijos. Un árbol binario permite como máximo un
@@ -89,7 +89,7 @@ concepts:
         Et binært søgetræ tilføjer en ordensinvariant og kræver en politik for dubletter.
     linked_objectives: [m10.o1, m10.o6, m10.o7]
   - id: depth-first-traversals
-    title: {es: Recorridos en profundidad, en: Depth-first traversals, da: Dybdeførst gennemløb}
+    title: {"es": "Recorridos en profundidad", "en": "Depth-first traversals", "da": "Dybdeførst gennemløb"}
     body:
       es: >-
         En un árbol binario, preorden procesa nodo-izquierda-derecha; inorden procesa
@@ -106,7 +106,7 @@ concepts:
         venstre-højre-node. Iterative versioner kræver korrekt stakrækkefølge.
     linked_objectives: [m10.o3, m10.o7]
   - id: breadth-first-traversal
-    title: {es: Recorrido por niveles y cola FIFO, en: Level-order traversal and FIFO queue, da: Niveaugennemløb og FIFO-kø}
+    title: {"es": "Recorrido por niveles y cola FIFO", "en": "Level-order traversal and FIFO queue", "da": "Niveaugennemløb og FIFO-kø"}
     body:
       es: >-
         El recorrido por niveles procesa nodos según su distancia a la raíz. Utiliza una cola FIFO:
@@ -122,7 +122,7 @@ concepts:
         flytning ved fjernelse forrest.
     linked_objectives: [m10.o4, m10.o7]
   - id: tree-metrics
-    title: {es: Tamaño, hojas, profundidad y altura, en: Size, leaves, depth, and height, da: Størrelse, blade, dybde og højde}
+    title: {"es": "Tamaño, hojas, profundidad y altura", "en": "Size, leaves, depth, and height", "da": "Størrelse, blade, dybde og højde"}
     body:
       es: >-
         El tamaño es el número de nodos. Una hoja carece de hijos. La profundidad es relativa a una raíz
@@ -138,7 +138,7 @@ concepts:
         Højden af det tomme træ skal fremgå af kontrakten.
     linked_objectives: [m10.o5, m10.o8]
   - id: search-and-identity
-    title: {es: Búsqueda, identidad y resultados, en: Search, identity, and results, da: Søgning, identitet og resultater}
+    title: {"es": "Búsqueda, identidad y resultados", "en": "Search, identity, and results", "da": "Søgning, identitet og resultater"}
     body:
       es: >-
         Una búsqueda debe especificar si retorna un nodo, una ruta, una profundidad, todos los nodos
@@ -155,7 +155,7 @@ concepts:
         af DFS eller BFS.
     linked_objectives: [m10.o4, m10.o8]
   - id: complexity-and-shape
-    title: {es: Complejidad, forma y uso de memoria, en: Complexity, shape, and memory use, da: Kompleksitet, form og hukommelse}
+    title: {"es": "Complejidad, forma y uso de memoria", "en": "Complexity, shape, and memory use", "da": "Kompleksitet, form og hukommelse"}
     body:
       es: >-
         Un recorrido completo visita cada nodo una vez y suele costar O(n). El espacio auxiliar depende
@@ -173,8 +173,8 @@ concepts:
 
 worked_examples:
   - id: dm857.m10.e01
-    title: {es: Calcular tamaño y altura de un árbol general, en: Compute size and height of a general tree, da: Beregn størrelse og højde af et generelt træ}
-    problem: {es: Implementar tamaño y altura para nodos con una lista `children`, usando altura -1 para árbol vacío., en: Implement size and height for nodes with a `children` list, using height -1 for an empty tree., da: Implementér størrelse og højde for noder med `children`, med højde -1 for tomt træ.}
+    title: {"es": "Calcular tamaño y altura de un árbol general", "en": "Compute size and height of a general tree", "da": "Beregn størrelse og højde af et generelt træ"}
+    problem: {"es": "Implementar tamaño y altura para nodos con una lista `children`, usando altura -1 para árbol vacío.", "en": "Implement size and height for nodes with a `children` list, using height -1 for an empty tree.", "da": "Implementér størrelse og højde for noder med `children`, med højde -1 for tomt træ."}
     assumptions: [the structure is acyclic, every child is a node, leaf height is zero]
     reasoning:
       es: [El vacío fija la convención., El tamaño suma uno y los tamaños de hijos., La altura suma uno al máximo de alturas de hijos.]
@@ -194,11 +194,11 @@ worked_examples:
           return 1 + max(tree_height(child) for child in node.children)
     expected_output: a leaf has size 1 and height 0
     validation: [empty tree, one-node tree, chain, branching tree]
-    explanation: {es: Las definiciones se mantienen consistentes al contar aristas para altura., en: The definitions remain consistent by counting edges for height., da: Definitionerne er konsistente ved at tælle arister for højde.}
+    explanation: {"es": "Las definiciones se mantienen consistentes al contar aristas para altura.", "en": "The definitions remain consistent by counting edges for height.", "da": "Definitionerne er konsistente ved at tælle arister for højde."}
     linked_objectives: [m10.o5, m10.o8]
   - id: dm857.m10.e02
-    title: {es: Recorridos de un árbol binario, en: Traverse a binary tree, da: Gennemløb et binært træ}
-    problem: {es: Producir preorden, inorden y postorden sin modificar el árbol., en: Produce preorder, inorder, and postorder without mutating the tree., da: Producer preorder, inorder og postorder uden mutation.}
+    title: {"es": "Recorridos de un árbol binario", "en": "Traverse a binary tree", "da": "Gennemløb et binært træ"}
+    problem: {"es": "Producir preorden, inorden y postorden sin modificar el árbol.", "en": "Produce preorder, inorder, and postorder without mutating the tree.", "da": "Producer preorder, inorder og postorder uden mutation."}
     assumptions: [None denotes an empty subtree]
     reasoning:
       es: [Definir el vacío como lista vacía., Cambiar únicamente el momento en que se añade el valor actual., Concatenar resultados de subárboles.]
@@ -215,11 +215,11 @@ worked_examples:
           return [] if node is None else postorder(node.left) + postorder(node.right) + [node.value]
     expected_output: traversal order depends on node processing position
     validation: [empty tree, one node, left-only, right-only, complete tree]
-    explanation: {es: Las tres funciones comparten estructura recursiva y difieren sólo en la combinación., en: The functions share recursive structure and differ only in combination order., da: Funktionerne deler rekursiv struktur og adskiller sig kun i kombinationsrækkefølge.}
+    explanation: {"es": "Las tres funciones comparten estructura recursiva y difieren sólo en la combinación.", "en": "The functions share recursive structure and differ only in combination order.", "da": "Funktionerne deler rekursiv struktur og adskiller sig kun i kombinationsrækkefølge."}
     linked_objectives: [m10.o3]
   - id: dm857.m10.e03
-    title: {es: Encontrar la coincidencia más cercana a la raíz, en: Find the match closest to the root, da: Find nærmeste match til roden}
-    problem: {es: Buscar por niveles y retornar el primer nodo cuyo predicado sea verdadero., en: Search level by level and return the first node satisfying a predicate., da: Søg niveauvis og returnér første node, der opfylder et prædikat.}
+    title: {"es": "Encontrar la coincidencia más cercana a la raíz", "en": "Find the match closest to the root", "da": "Find nærmeste match til roden"}
+    problem: {"es": "Buscar por niveles y retornar el primer nodo cuyo predicado sea verdadero.", "en": "Search level by level and return the first node satisfying a predicate.", "da": "Søg niveauvis og returnér første node, der opfylder et prædikat."}
     assumptions: [the tree is finite and acyclic]
     reasoning:
       es: [Usar una cola FIFO., Evaluar al retirar el nodo., Añadir hijos después para conservar niveles.]
@@ -240,62 +240,62 @@ worked_examples:
           return None
     expected_output: the shallowest matching node under child order
     validation: [empty tree, root match, repeated labels at different depths, no match]
-    explanation: {es: BFS impone prioridad por profundidad; el orden entre nodos del mismo nivel sigue el orden de hijos., en: BFS prioritizes depth; ties within a level follow child order., da: BFS prioriterer dybde; rækkefølge på samme niveau følger børnenes orden.}
+    explanation: {"es": "BFS impone prioridad por profundidad; el orden entre nodos del mismo nivel sigue el orden de hijos.", "en": "BFS prioritizes depth; ties within a level follow child order.", "da": "BFS prioriterer dybde; rækkefølge på samme niveau følger børnenes orden."}
     linked_objectives: [m10.o4, m10.o8]
 
 practice_exercises:
-  - {id: dm857.m10.p01, activity_type: terminology_mapping, difficulty: foundational, prompt: {es: Para un árbol dado, identifica raíz, hojas, nodos internos, ancestros y descendientes., en: For a given tree, identify root, leaves, internal nodes, ancestors, and descendants., da: Identificér rod, blade, interne noder, forfædre og efterkommere.}, reference_solution: {es: La respuesta debe usar relaciones estructurales, no el valor de las etiquetas., en: The answer must use structural relations rather than label values., da: Svaret skal bruge strukturelle relationer, ikke etiketværdier.}, linked_objectives: [m10.o1]}
-  - {id: dm857.m10.p02, activity_type: code_tracing, difficulty: intermediate, prompt: {es: Traza preorden, inorden y postorden para raíz A, hijo izquierdo B e hijo derecho C., en: Trace preorder, inorder, and postorder for root A with left B and right C., da: Gennemgå preorder, inorder og postorder for rod A med venstre B og højre C.}, reference_solution: {es: Preorden A B C; inorden B A C; postorden B C A., en: Preorder A B C; inorder B A C; postorder B C A., da: Preorder A B C; inorder B A C; postorder B C A.}, linked_objectives: [m10.o3]}
-  - {id: dm857.m10.p03, activity_type: debugging, difficulty: intermediate, prompt: {es: Corrige un BFS implementado con una pila y explica el cambio semántico., en: Correct a BFS implemented with a stack and explain the semantic change., da: Ret en BFS implementeret med en stak og forklar den semantiske ændring.}, reference_solution: {es: Sustituir LIFO por una cola FIFO; una pila produce profundidad, no niveles., en: Replace LIFO with a FIFO queue; a stack produces depth-first behavior, not levels., da: Erstat LIFO med FIFO; en stak giver dybdeførst adfærd.}, linked_objectives: [m10.o4]}
-  - {id: dm857.m10.p04, activity_type: boundary_analysis, difficulty: intermediate, prompt: {es: Compara las convenciones de altura del árbol vacío -1 y 0 y muestra su efecto en una hoja., en: Compare empty-tree height conventions -1 and 0 and show their effect on a leaf., da: Sammenlign konventionerne -1 og 0 for tomt træs højde og vis effekten på et blad.}, reference_solution: {es: Con vacío -1, una hoja tiene 0 al contar aristas; con vacío 0, una hoja suele tener 1 al contar nodos., en: With empty -1, a leaf has height 0 when counting edges; with empty 0, a leaf commonly has height 1 when counting nodes., da: Med tomt træ -1 har et blad højde 0 ved kanttælling; med 0 ofte højde 1 ved nodetælling.}, linked_objectives: [m10.o5]}
-  - {id: dm857.m10.p05, activity_type: complexity_analysis, difficulty: advanced, prompt: {es: Compara memoria auxiliar de DFS y BFS en una cadena y en un árbol muy ancho., en: Compare auxiliary memory for DFS and BFS in a chain and in a very wide tree., da: Sammenlign ekstra hukommelse for DFS og BFS i en kæde og et meget bredt træ.}, reference_solution: {es: DFS usa O(h); en una cadena h=n. BFS usa O(w); en un árbol ancho w puede ser grande aunque la altura sea pequeña., en: DFS uses O(h), which is O(n) for a chain. BFS uses O(w), which may be large for a wide shallow tree., da: DFS bruger O(h), BFS O(w); kæder og brede træer fremhæver forskellige risici.}, linked_objectives: [m10.o7]}
-  - {id: dm857.m10.p06, activity_type: test_design, difficulty: advanced, prompt: {es: Diseña una suite para una función que busca por etiqueta cuando puede haber etiquetas repetidas., en: Design a test suite for label search when labels may repeat., da: Design en testsuite til etiketsøgning med gentagne etiketter.}, reference_solution: {es: Probar vacío, raíz, ausencia, repeticiones a igual y distinta profundidad, y documentar si retorna primer DFS, primer BFS o todos., en: Test empty, root, absence, duplicates at equal and different depths, and document whether the function returns first DFS, first BFS, or all matches., da: Test tomt træ, rod, fravær og dubletter og dokumentér søgeordenen.}, linked_objectives: [m10.o4, m10.o8]}
+  - {id: dm857.m10.p01, activity_type: terminology_mapping, difficulty: foundational, prompt: {"es": "Para un árbol dado, identifica raíz, hojas, nodos internos, ancestros y descendientes.", "en": "For a given tree, identify root, leaves, internal nodes, ancestors, and descendants.", "da": "Identificér rod, blade, interne noder, forfædre og efterkommere."}, reference_solution: {"es": "La respuesta debe usar relaciones estructurales, no el valor de las etiquetas.", "en": "The answer must use structural relations rather than label values.", "da": "Svaret skal bruge strukturelle relationer, ikke etiketværdier."}, linked_objectives: [m10.o1]}
+  - {id: dm857.m10.p02, activity_type: code_tracing, difficulty: intermediate, prompt: {"es": "Traza preorden, inorden y postorden para raíz A, hijo izquierdo B e hijo derecho C.", "en": "Trace preorder, inorder, and postorder for root A with left B and right C.", "da": "Gennemgå preorder, inorder og postorder for rod A med venstre B og højre C."}, reference_solution: {"es": "Preorden A B C; inorden B A C; postorden B C A.", "en": "Preorder A B C; inorder B A C; postorder B C A.", "da": "Preorder A B C; inorder B A C; postorder B C A."}, linked_objectives: [m10.o3]}
+  - {id: dm857.m10.p03, activity_type: debugging, difficulty: intermediate, prompt: {"es": "Corrige un BFS implementado con una pila y explica el cambio semántico.", "en": "Correct a BFS implemented with a stack and explain the semantic change.", "da": "Ret en BFS implementeret med en stak og forklar den semantiske ændring."}, reference_solution: {"es": "Sustituir LIFO por una cola FIFO; una pila produce profundidad, no niveles.", "en": "Replace LIFO with a FIFO queue; a stack produces depth-first behavior, not levels.", "da": "Erstat LIFO med FIFO; en stak giver dybdeførst adfærd."}, linked_objectives: [m10.o4]}
+  - {id: dm857.m10.p04, activity_type: boundary_analysis, difficulty: intermediate, prompt: {"es": "Compara las convenciones de altura del árbol vacío -1 y 0 y muestra su efecto en una hoja.", "en": "Compare empty-tree height conventions -1 and 0 and show their effect on a leaf.", "da": "Sammenlign konventionerne -1 og 0 for tomt træs højde og vis effekten på et blad."}, reference_solution: {"es": "Con vacío -1, una hoja tiene 0 al contar aristas; con vacío 0, una hoja suele tener 1 al contar nodos.", "en": "With empty -1, a leaf has height 0 when counting edges; with empty 0, a leaf commonly has height 1 when counting nodes.", "da": "Med tomt træ -1 har et blad højde 0 ved kanttælling; med 0 ofte højde 1 ved nodetælling."}, linked_objectives: [m10.o5]}
+  - {id: dm857.m10.p05, activity_type: complexity_analysis, difficulty: advanced, prompt: {"es": "Compara memoria auxiliar de DFS y BFS en una cadena y en un árbol muy ancho.", "en": "Compare auxiliary memory for DFS and BFS in a chain and in a very wide tree.", "da": "Sammenlign ekstra hukommelse for DFS og BFS i en kæde og et meget bredt træ."}, reference_solution: {"es": "DFS usa O(h); en una cadena h=n. BFS usa O(w); en un árbol ancho w puede ser grande aunque la altura sea pequeña.", "en": "DFS uses O(h), which is O(n) for a chain. BFS uses O(w), which may be large for a wide shallow tree.", "da": "DFS bruger O(h), BFS O(w); kæder og brede træer fremhæver forskellige risici."}, linked_objectives: [m10.o7]}
+  - {id: dm857.m10.p06, activity_type: test_design, difficulty: advanced, prompt: {"es": "Diseña una suite para una función que busca por etiqueta cuando puede haber etiquetas repetidas.", "en": "Design a test suite for label search when labels may repeat.", "da": "Design en testsuite til etiketsøgning med gentagne etiketter."}, reference_solution: {"es": "Probar vacío, raíz, ausencia, repeticiones a igual y distinta profundidad, y documentar si retorna primer DFS, primer BFS o todos.", "en": "Test empty, root, absence, duplicates at equal and different depths, and document whether the function returns first DFS, first BFS, or all matches.", "da": "Test tomt træ, rod, fravær og dubletter og dokumentér søgeordenen."}, linked_objectives: [m10.o4, m10.o8]}
 
 objective_bank:
-  - {id: dm857.m10.q01, activity_type: multiple_choice, prompt: {es: ¿Qué nodo no tiene padre?, en: Which node has no parent?, da: Hvilken node har ingen forælder?}, options: [{id: root, text: {es: Raíz, en: Root, da: Rod}}, {id: leaf, text: {es: Hoja, en: Leaf, da: Blad}}, {id: internal, text: {es: Nodo interno, en: Internal node, da: Intern node}}], correct_option_ids: [root]}
-  - {id: dm857.m10.q02, activity_type: true_false, prompt: {es: Todo árbol binario está equilibrado., en: Every binary tree is balanced., da: Ethvert binært træ er balanceret.}, correct_answer: false}
-  - {id: dm857.m10.q03, activity_type: multiple_choice, prompt: {es: ¿Qué orden usa postorden?, en: Which order does postorder use?, da: Hvilken rækkefølge bruger postorder?}, options: [{id: lrn, text: {es: izquierda-derecha-nodo, en: left-right-node, da: venstre-højre-node}}, {id: nlr, text: {es: nodo-izquierda-derecha, en: node-left-right, da: node-venstre-højre}}, {id: lnr, text: {es: izquierda-nodo-derecha, en: left-node-right, da: venstre-node-højre}}], correct_option_ids: [lrn]}
-  - {id: dm857.m10.q04, activity_type: multiple_choice, prompt: {es: ¿Qué estructura usa BFS?, en: Which structure does BFS use?, da: Hvilken struktur bruger BFS?}, options: [{id: queue, text: {es: Cola FIFO, en: FIFO queue, da: FIFO-kø}}, {id: stack, text: {es: Pila LIFO, en: LIFO stack, da: LIFO-stak}}, {id: set, text: {es: Conjunto únicamente, en: Set only, da: Kun mængde}}], correct_option_ids: [queue]}
-  - {id: dm857.m10.q05, activity_type: true_false, prompt: {es: Dos nodos con la misma etiqueta deben ser el mismo nodo., en: Two nodes with the same label must be the same node., da: To noder med samme etiket skal være samme node.}, correct_answer: false}
-  - {id: dm857.m10.q06, activity_type: multiple_choice, prompt: {es: ¿Cuál es el coste típico de visitar todos los n nodos una vez?, en: What is the typical cost of visiting all n nodes once?, da: Hvad er den typiske omkostning ved at besøge alle n noder én gang?}, options: [{id: linear, text: {es: O(n), en: O(n), da: O(n)}}, {id: constant, text: {es: O(1), en: O(1), da: O(1)}}, {id: quadratic, text: {es: Siempre O(n²), en: Always O(n²), da: Altid O(n²)}}], correct_option_ids: [linear]}
-  - {id: dm857.m10.q07, activity_type: true_false, prompt: {es: En un árbol degenerado la altura puede ser proporcional a n., en: In a degenerate tree, height may be proportional to n., da: I et degenereret træ kan højden være proportional med n.}, correct_answer: true}
-  - {id: dm857.m10.q08, activity_type: multiple_choice, prompt: {es: ¿Qué recorrido encuentra primero una coincidencia de menor profundidad?, en: Which traversal first finds a shallowest match?, da: Hvilket gennemløb finder først et match med mindst dybde?}, options: [{id: bfs, text: {es: BFS, en: BFS, da: BFS}}, {id: postorder, text: {es: Postorden, en: Postorder, da: Postorder}}, {id: arbitrary, text: {es: Cualquier DFS siempre, en: Any DFS always, da: Enhver DFS altid}}], correct_option_ids: [bfs]}
-  - {id: dm857.m10.q09, activity_type: multiple_choice, prompt: {es: ¿Qué representa None en una representación binaria común?, en: What does None commonly represent in a binary-tree representation?, da: Hvad repræsenterer None ofte i et binært træ?}, options: [{id: empty_subtree, text: {es: Subárbol vacío, en: Empty subtree, da: Tomt deltræ}}, {id: duplicate, text: {es: Clave duplicada, en: Duplicate key, da: Dubletnøgle}}, {id: root, text: {es: Raíz obligatoria, en: Required root, da: Obligatorisk rod}}], correct_option_ids: [empty_subtree]}
-  - {id: dm857.m10.q10, activity_type: true_false, prompt: {es: `list.pop(0)` es la mejor representación general de una cola eficiente., en: `list.pop(0)` is the generally preferred efficient queue representation., da: `list.pop(0)` er generelt den foretrukne effektive køimplementering.}, correct_answer: false}
+  - {id: dm857.m10.q01, activity_type: multiple_choice, prompt: {"es": "¿Qué nodo no tiene padre?", "en": "Which node has no parent?", "da": "Hvilken node har ingen forælder?"}, options: [{id: root, text: {"es": "Raíz", "en": "Root", "da": "Rod"}}, {id: leaf, text: {"es": "Hoja", "en": "Leaf", "da": "Blad"}}, {id: internal, text: {"es": "Nodo interno", "en": "Internal node", "da": "Intern node"}}], correct_option_ids: [root]}
+  - {id: dm857.m10.q02, activity_type: true_false, prompt: {"es": "Todo árbol binario está equilibrado.", "en": "Every binary tree is balanced.", "da": "Ethvert binært træ er balanceret."}, correct_answer: false}
+  - {id: dm857.m10.q03, activity_type: multiple_choice, prompt: {"es": "¿Qué orden usa postorden?", "en": "Which order does postorder use?", "da": "Hvilken rækkefølge bruger postorder?"}, options: [{id: lrn, text: {"es": "izquierda-derecha-nodo", "en": "left-right-node", "da": "venstre-højre-node"}}, {id: nlr, text: {"es": "nodo-izquierda-derecha", "en": "node-left-right", "da": "node-venstre-højre"}}, {id: lnr, text: {"es": "izquierda-nodo-derecha", "en": "left-node-right", "da": "venstre-node-højre"}}], correct_option_ids: [lrn]}
+  - {id: dm857.m10.q04, activity_type: multiple_choice, prompt: {"es": "¿Qué estructura usa BFS?", "en": "Which structure does BFS use?", "da": "Hvilken struktur bruger BFS?"}, options: [{id: queue, text: {"es": "Cola FIFO", "en": "FIFO queue", "da": "FIFO-kø"}}, {id: stack, text: {"es": "Pila LIFO", "en": "LIFO stack", "da": "LIFO-stak"}}, {id: set, text: {"es": "Conjunto únicamente", "en": "Set only", "da": "Kun mængde"}}], correct_option_ids: [queue]}
+  - {id: dm857.m10.q05, activity_type: true_false, prompt: {"es": "Dos nodos con la misma etiqueta deben ser el mismo nodo.", "en": "Two nodes with the same label must be the same node.", "da": "To noder med samme etiket skal være samme node."}, correct_answer: false}
+  - {id: dm857.m10.q06, activity_type: multiple_choice, prompt: {"es": "¿Cuál es el coste típico de visitar todos los n nodos una vez?", "en": "What is the typical cost of visiting all n nodes once?", "da": "Hvad er den typiske omkostning ved at besøge alle n noder én gang?"}, options: [{id: linear, text: {"es": "O(n)", "en": "O(n)", "da": "O(n)"}}, {id: constant, text: {"es": "O(1)", "en": "O(1)", "da": "O(1)"}}, {id: quadratic, text: {"es": "Siempre O(n²)", "en": "Always O(n²)", "da": "Altid O(n²)"}}], correct_option_ids: [linear]}
+  - {id: dm857.m10.q07, activity_type: true_false, prompt: {"es": "En un árbol degenerado la altura puede ser proporcional a n.", "en": "In a degenerate tree, height may be proportional to n.", "da": "I et degenereret træ kan højden være proportional med n."}, correct_answer: true}
+  - {id: dm857.m10.q08, activity_type: multiple_choice, prompt: {"es": "¿Qué recorrido encuentra primero una coincidencia de menor profundidad?", "en": "Which traversal first finds a shallowest match?", "da": "Hvilket gennemløb finder først et match med mindst dybde?"}, options: [{id: bfs, text: {"es": "BFS", "en": "BFS", "da": "BFS"}}, {id: postorder, text: {"es": "Postorden", "en": "Postorder", "da": "Postorder"}}, {id: arbitrary, text: {"es": "Cualquier DFS siempre", "en": "Any DFS always", "da": "Enhver DFS altid"}}], correct_option_ids: [bfs]}
+  - {id: dm857.m10.q09, activity_type: multiple_choice, prompt: {"es": "¿Qué representa None en una representación binaria común?", "en": "What does None commonly represent in a binary-tree representation?", "da": "Hvad repræsenterer None ofte i et binært træ?"}, options: [{id: empty_subtree, text: {"es": "Subárbol vacío", "en": "Empty subtree", "da": "Tomt deltræ"}}, {id: duplicate, text: {"es": "Clave duplicada", "en": "Duplicate key", "da": "Dubletnøgle"}}, {id: root, text: {"es": "Raíz obligatoria", "en": "Required root", "da": "Obligatorisk rod"}}], correct_option_ids: [empty_subtree]}
+  - {id: dm857.m10.q10, activity_type: true_false, prompt: {"es": "`list.pop(0)` es la mejor representación general de una cola eficiente.", "en": "`list.pop(0)` is the generally preferred efficient queue representation.", "da": "`list.pop(0)` er generelt den foretrukne effektive køimplementering."}, correct_answer: false}
 
 assessment_items:
   - id: dm857.m10.a01
     activity_type: algorithm_design
     difficulty: advanced
-    prompt: {es: Diseña una API para un árbol general que permita insertar, buscar, calcular métricas y recorrer sin exponer la lista interna de hijos. Incluye invariantes y errores., en: Design an API for a general tree supporting insertion, search, metrics, and traversal without exposing the internal child list. Include invariants and errors., da: Design et API til et generelt træ med indsættelse, søgning, mål og gennemløb uden at eksponere den interne børneliste.}
+    prompt: {"es": "Diseña una API para un árbol general que permita insertar, buscar, calcular métricas y recorrer sin exponer la lista interna de hijos. Incluye invariantes y errores.", "en": "Design an API for a general tree supporting insertion, search, metrics, and traversal without exposing the internal child list. Include invariants and errors.", "da": "Design et API til et generelt træ med indsættelse, søgning, mål og gennemløb uden at eksponere den interne børneliste."}
     accepted_answer_elements: [node identity policy, cycle prevention, parent uniqueness, empty-tree contract, traversal result contract, defensive tests]
     rubric: [{criterion: interface_and_contract, points: 3}, {criterion: invariants, points: 3}, {criterion: algorithms, points: 2}, {criterion: tests_and_errors, points: 2}]
   - id: dm857.m10.a02
     activity_type: data_interpretation
     difficulty: advanced
-    prompt: {es: Dado un árbol con etiquetas repetidas y dos resultados de búsqueda distintos, determina cuál proviene de DFS y cuál de BFS y justifica usando el orden de exploración., en: Given a tree with repeated labels and two different search results, determine which comes from DFS and which from BFS and justify using exploration order., da: Givet et træ med gentagne etiketter og to søgeresultater, afgør hvilket der kommer fra DFS og BFS og begrund.}
+    prompt: {"es": "Dado un árbol con etiquetas repetidas y dos resultados de búsqueda distintos, determina cuál proviene de DFS y cuál de BFS y justifica usando el orden de exploración.", "en": "Given a tree with repeated labels and two different search results, determine which comes from DFS and which from BFS and justify using exploration order.", "da": "Givet et træ med gentagne etiketter og to søgeresultater, afgør hvilket der kommer fra DFS og BFS og begrund."}
     accepted_answer_elements: [explicit traversal order, depth comparison, tie policy, recognition of label ambiguity]
     rubric: [{criterion: traversal_reasoning, points: 4}, {criterion: ambiguity_analysis, points: 2}, {criterion: correct_conclusion, points: 2}, {criterion: clarity, points: 2}]
   - id: dm857.m10.a03
     activity_type: oral_explanation
     difficulty: advanced
-    prompt: {es: Explica por qué decir que una búsqueda en un árbol es O(log n) puede ser incorrecto sin especificar tipo, propiedad y forma del árbol., en: Explain why saying tree search is O(log n) may be wrong without specifying tree type, property, and shape., da: Forklar hvorfor træ-søgning ikke uden videre kan kaldes O(log n).}
+    prompt: {"es": "Explica por qué decir que una búsqueda en un árbol es O(log n) puede ser incorrecto sin especificar tipo, propiedad y forma del árbol.", "en": "Explain why saying tree search is O(log n) may be wrong without specifying tree type, property, and shape.", "da": "Forklar hvorfor træ-søgning ikke uden videre kan kaldes O(log n)."}
     accepted_answer_elements: [general versus search tree, balance assumption, degenerate counterexample, distinction between worst and average case]
     rubric: [{criterion: assumptions, points: 4}, {criterion: counterexample, points: 2}, {criterion: complexity_precision, points: 2}, {criterion: communication, points: 2}]
 
 flashcards: {source_file: ../flashcards/dm857_m10_flashcards.yaml, expected_count: 24}
 
 glossary:
-  - {id: term.tree, term: {es: árbol, en: tree, da: træ}, definition: {es: Estructura jerárquica acíclica de nodos conectados., en: Acyclic hierarchical structure of connected nodes., da: Acyklisk hierarkisk struktur af forbundne noder.}}
-  - {id: term.root, term: {es: raíz, en: root, da: rod}, definition: {es: Nodo sin padre., en: Node with no parent., da: Node uden forælder.}}
-  - {id: term.leaf, term: {es: hoja, en: leaf, da: blad}, definition: {es: Nodo sin hijos., en: Node with no children., da: Node uden børn.}}
-  - {id: term.depth, term: {es: profundidad, en: depth, da: dybde}, definition: {es: Distancia desde la raíz bajo una convención definida., en: Distance from the root under a stated convention., da: Afstand fra roden under en angivet konvention.}}
-  - {id: term.height, term: {es: altura, en: height, da: højde}, definition: {es: Máxima distancia desde un nodo hasta una hoja., en: Maximum distance from a node to a leaf., da: Maksimal afstand fra en node til et blad.}}
-  - {id: term.preorder, term: {es: preorden, en: preorder, da: preorder}, definition: {es: Recorrido que procesa el nodo antes de sus subárboles., en: Traversal processing the node before its subtrees., da: Gennemløb der behandler noden før deltræerne.}}
-  - {id: term.postorder, term: {es: postorden, en: postorder, da: postorder}, definition: {es: Recorrido que procesa el nodo después de sus subárboles., en: Traversal processing the node after its subtrees., da: Gennemløb der behandler noden efter deltræerne.}}
-  - {id: term.bfs, term: {es: búsqueda en anchura, en: breadth-first search, da: breddeførst søgning}, definition: {es: Exploración por niveles mediante cola FIFO., en: Level-wise exploration using a FIFO queue., da: Niveauvis udforskning med FIFO-kø.}}
-  - {id: term.dfs, term: {es: búsqueda en profundidad, en: depth-first search, da: dybdeførst søgning}, definition: {es: Exploración que completa un subárbol antes del siguiente., en: Exploration completing one subtree before the next., da: Udforskning der afslutter ét deltræ før det næste.}}
-  - {id: term.degenerate_tree, term: {es: árbol degenerado, en: degenerate tree, da: degenereret træ}, definition: {es: Árbol cuya forma se aproxima a una cadena., en: Tree whose shape approaches a chain., da: Træ hvis form nærmer sig en kæde.}}
+  - {id: term.tree, term: {"es": "árbol", "en": "tree", "da": "træ"}, definition: {"es": "Estructura jerárquica acíclica de nodos conectados.", "en": "Acyclic hierarchical structure of connected nodes.", "da": "Acyklisk hierarkisk struktur af forbundne noder."}}
+  - {id: term.root, term: {"es": "raíz", "en": "root", "da": "rod"}, definition: {"es": "Nodo sin padre.", "en": "Node with no parent.", "da": "Node uden forælder."}}
+  - {id: term.leaf, term: {"es": "hoja", "en": "leaf", "da": "blad"}, definition: {"es": "Nodo sin hijos.", "en": "Node with no children.", "da": "Node uden børn."}}
+  - {id: term.depth, term: {"es": "profundidad", "en": "depth", "da": "dybde"}, definition: {"es": "Distancia desde la raíz bajo una convención definida.", "en": "Distance from the root under a stated convention.", "da": "Afstand fra roden under en angivet konvention."}}
+  - {id: term.height, term: {"es": "altura", "en": "height", "da": "højde"}, definition: {"es": "Máxima distancia desde un nodo hasta una hoja.", "en": "Maximum distance from a node to a leaf.", "da": "Maksimal afstand fra en node til et blad."}}
+  - {id: term.preorder, term: {"es": "preorden", "en": "preorder", "da": "preorder"}, definition: {"es": "Recorrido que procesa el nodo antes de sus subárboles.", "en": "Traversal processing the node before its subtrees.", "da": "Gennemløb der behandler noden før deltræerne."}}
+  - {id: term.postorder, term: {"es": "postorden", "en": "postorder", "da": "postorder"}, definition: {"es": "Recorrido que procesa el nodo después de sus subárboles.", "en": "Traversal processing the node after its subtrees.", "da": "Gennemløb der behandler noden efter deltræerne."}}
+  - {id: term.bfs, term: {"es": "búsqueda en anchura", "en": "breadth-first search", "da": "breddeførst søgning"}, definition: {"es": "Exploración por niveles mediante cola FIFO.", "en": "Level-wise exploration using a FIFO queue.", "da": "Niveauvis udforskning med FIFO-kø."}}
+  - {id: term.dfs, term: {"es": "búsqueda en profundidad", "en": "depth-first search", "da": "dybdeførst søgning"}, definition: {"es": "Exploración que completa un subárbol antes del siguiente.", "en": "Exploration completing one subtree before the next.", "da": "Udforskning der afslutter ét deltræ før det næste."}}
+  - {id: term.degenerate_tree, term: {"es": "árbol degenerado", "en": "degenerate tree", "da": "degenereret træ"}, definition: {"es": "Árbol cuya forma se aproxima a una cadena.", "en": "Tree whose shape approaches a chain.", "da": "Træ hvis form nærmer sig en kæde."}}
 
 hidden_guided_support:
   visibility: hidden_from_standard_reader
@@ -313,9 +313,9 @@ hidden_guided_support:
       Ræsonnering om træer starter med repræsentation og definitioner. Kræv invariant, tomt tilfælde,
       degenereret eksempel og gennemgang før påstande om korrekthed eller kompleksitet.
   misconceptions:
-    - {id: m10.mc01, claim: {es: Todo árbol binario es un árbol de búsqueda., en: Every binary tree is a search tree., da: Ethvert binært træ er et søgetræ.}, correction: {es: Un árbol de búsqueda necesita una invariante de orden adicional., en: A search tree needs an additional ordering invariant., da: Et søgetræ kræver en ekstra ordensinvariant.}}
-    - {id: m10.mc02, claim: {es: La altura siempre es el número de nodos., en: Height always counts nodes., da: Højde tæller altid noder.}, correction: {es: La convención debe declararse; con frecuencia se cuentan aristas., en: The convention must be stated; edges are commonly counted., da: Konventionen skal angives; ofte tælles kanter.}}
-    - {id: m10.mc03, claim: {es: DFS y BFS siempre encuentran el mismo primer nodo., en: DFS and BFS always find the same first node., da: DFS og BFS finder altid samme første node.}, correction: {es: Sus órdenes de exploración difieren, especialmente con coincidencias repetidas., en: Their exploration orders differ, especially with repeated matches., da: Deres rækkefølger er forskellige, især ved gentagne match.}}
+    - {id: m10.mc01, claim: {"es": "Todo árbol binario es un árbol de búsqueda.", "en": "Every binary tree is a search tree.", "da": "Ethvert binært træ er et søgetræ."}, correction: {"es": "Un árbol de búsqueda necesita una invariante de orden adicional.", "en": "A search tree needs an additional ordering invariant.", "da": "Et søgetræ kræver en ekstra ordensinvariant."}}
+    - {id: m10.mc02, claim: {"es": "La altura siempre es el número de nodos.", "en": "Height always counts nodes.", "da": "Højde tæller altid noder."}, correction: {"es": "La convención debe declararse; con frecuencia se cuentan aristas.", "en": "The convention must be stated; edges are commonly counted.", "da": "Konventionen skal angives; ofte tælles kanter."}}
+    - {id: m10.mc03, claim: {"es": "DFS y BFS siempre encuentran el mismo primer nodo.", "en": "DFS and BFS always find the same first node.", "da": "DFS og BFS finder altid samme første node."}, correction: {"es": "Sus órdenes de exploración difieren, especialmente con coincidencias repetidas.", "en": "Their exploration orders differ, especially with repeated matches.", "da": "Deres rækkefølger er forskellige, især ved gentagne match."}}
   socratic_questions:
     - ¿Qué representa exactamente un nodo y cómo se distingue su identidad de su etiqueta?
     - ¿Cuál es la convención para altura del árbol vacío y de una hoja?
@@ -326,8 +326,8 @@ hidden_guided_support:
     do_not_accept: [undefined height convention, claims of O(log n) without balance/order assumptions, search by duplicate label without result policy, tests omitting empty tree]
     strong_answer_features: [explicit representation, invariant preservation, traversal trace, empty and degenerate cases, time and auxiliary-space analysis]
   retrieval_fragments:
-    - {id: m10.r01, topics: [tree, height, convention], text: {es: La altura sólo es interpretable después de declarar si se cuentan aristas o nodos y cómo se trata el vacío., en: Height is interpretable only after stating whether edges or nodes are counted and how emptiness is handled., da: Højde kræver en erklæret konvention for kanter eller noder og tomt træ.}}
-    - {id: m10.r02, topics: [dfs, bfs, search], text: {es: DFS prioriza profundidad; BFS prioriza distancia a la raíz. Con etiquetas repetidas pueden retornar nodos distintos., en: DFS prioritizes depth; BFS prioritizes distance from the root. Duplicate labels may yield different nodes., da: DFS prioriterer dybde; BFS afstand fra roden.}}
+    - {id: m10.r01, topics: [tree, height, convention], text: {"es": "La altura sólo es interpretable después de declarar si se cuentan aristas o nodos y cómo se trata el vacío.", "en": "Height is interpretable only after stating whether edges or nodes are counted and how emptiness is handled.", "da": "Højde kræver en erklæret konvention for kanter eller noder og tomt træ."}}
+    - {id: m10.r02, topics: [dfs, bfs, search], text: {"es": "DFS prioriza profundidad; BFS prioriza distancia a la raíz. Con etiquetas repetidas pueden retornar nodos distintos.", "en": "DFS prioritizes depth; BFS prioritizes distance from the root. Duplicate labels may yield different nodes.", "da": "DFS prioriterer dybde; BFS afstand fra roden."}}
 
 sources:
   - {id: source.official_dm857, role: curriculum_alignment, note: Official outcome on basic tree structures and algorithms.}

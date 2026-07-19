@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Información molecular, dogma central, regulación, epigenética, bacterias y fagos
-    en: Molecular information, central dogma, regulation, epigenetics, bacteria, and phages
-    da: Molekylær information, det centrale dogme, regulering, epigenetik, bakterier og fager
+    es: "Información molecular, dogma central, regulación, epigenética, bacterias y fagos"
+    en: "Molecular information, central dogma, regulation, epigenetics, bacteria, and phages"
+    da: "Molekylær information, det centrale dogme, regulering, epigenetik, bakterier og fager"
   summary:
     es: >-
       Base biológica para bioinformática: organización del genoma, replicación, transcripción,
@@ -34,66 +34,66 @@ objectives:
   - id: m01.o1
     bloom_level: understand
     statement:
-      es: Distinguir gen, transcrito, región reguladora, elemento repetitivo, cromosoma y genoma.
-      en: Distinguish gene, transcript, regulatory region, repetitive element, chromosome, and genome.
-      da: Skelne mellem gen, transkript, regulatorisk region, repetitivt element, kromosom og genom.
+      es: "Distinguir gen, transcrito, región reguladora, elemento repetitivo, cromosoma y genoma."
+      en: "Distinguish gene, transcript, regulatory region, repetitive element, chromosome, and genome."
+      da: "Skelne mellem gen, transkript, regulatorisk region, repetitivt element, kromosom og genom."
     evidence: annotated_genomic_region_explanation
   - id: m01.o2
     bloom_level: analyze
     statement:
-      es: Razonar sobre orientación, complementariedad y direccionalidad en replicación y transcripción.
-      en: Reason about orientation, complementarity, and directionality in replication and transcription.
-      da: Ræsonnere om orientering, komplementaritet og retning i replikation og transkription.
+      es: "Razonar sobre orientación, complementariedad y direccionalidad en replicación y transcripción."
+      en: "Reason about orientation, complementarity, and directionality in replication and transcription."
+      da: "Ræsonnere om orientering, komplementaritet og retning i replikation og transkription."
     evidence: strand_and_transcript_trace
   - id: m01.o3
     bloom_level: understand
     statement:
-      es: Explicar cómo transcripción, procesamiento de ARN y traducción conectan información genética y productos funcionales.
-      en: Explain how transcription, RNA processing, and translation connect genetic information to functional products.
-      da: Forklare hvordan transkription, RNA-processering og translation forbinder genetisk information med funktionelle produkter.
+      es: "Explicar cómo transcripción, procesamiento de ARN y traducción conectan información genética y productos funcionales."
+      en: "Explain how transcription, RNA processing, and translation connect genetic information to functional products."
+      da: "Forklare hvordan transkription, RNA-processering og translation forbinder genetisk information med funktionelle produkter."
     evidence: central_information_flow_explanation
   - id: m01.o4
     bloom_level: analyze
     statement:
-      es: Comparar regulación transcripcional, postranscripcional, traduccional y postraduccional.
-      en: Compare transcriptional, post-transcriptional, translational, and post-translational regulation.
-      da: Sammenligne transkriptionel, post-transkriptionel, translationel og post-translationel regulering.
+      es: "Comparar regulación transcripcional, postranscripcional, traduccional y postraduccional."
+      en: "Compare transcriptional, post-transcriptional, translational, and post-translational regulation."
+      da: "Sammenligne transkriptionel, post-transkriptionel, translationel og post-translationel regulering."
     evidence: regulatory_level_classification
   - id: m01.o5
     bloom_level: analyze
     statement:
-      es: Interpretar cromatina y modificación epigenética del ADN sin confundir asociación, memoria celular y causalidad.
-      en: Interpret chromatin and epigenetic DNA modification without conflating association, cellular memory, and causality.
-      da: Fortolke kromatin og epigenetisk DNA-modifikation uden at sammenblande association, cellulær hukommelse og kausalitet.
+      es: "Interpretar cromatina y modificación epigenética del ADN sin confundir asociación, memoria celular y causalidad."
+      en: "Interpret chromatin and epigenetic DNA modification without conflating association, cellular memory, and causality."
+      da: "Fortolke kromatin og epigenetisk DNA-modifikation uden at sammenblande association, cellulær hukommelse og kausalitet."
     evidence: epigenetic_claim_audit
   - id: m01.o6
     bloom_level: apply
     statement:
-      es: Explicar organización génica bacteriana, operones y acoplamiento entre transcripción y traducción.
-      en: Explain bacterial gene organization, operons, and transcription-translation coupling.
-      da: Forklare bakteriel genorganisation, operoner og kobling mellem transkription og translation.
+      es: "Explicar organización génica bacteriana, operones y acoplamiento entre transcripción y traducción."
+      en: "Explain bacterial gene organization, operons, and transcription-translation coupling."
+      da: "Forklare bakteriel genorganisation, operoner og kobling mellem transkription og translation."
     evidence: operon_scenario_analysis
   - id: m01.o7
     bloom_level: analyze
     statement:
-      es: Distinguir ciclos lítico y lisogénico de fagos y sus consecuencias genómicas.
-      en: Distinguish lytic and lysogenic phage cycles and their genomic consequences.
-      da: Skelne mellem lytiske og lysogene fagcyklusser og deres genomiske konsekvenser.
+      es: "Distinguir ciclos lítico y lisogénico de fagos y sus consecuencias genómicas."
+      en: "Distinguish lytic and lysogenic phage cycles and their genomic consequences."
+      da: "Skelne mellem lytiske og lysogene fagcyklusser og deres genomiske konsekvenser."
     evidence: phage_cycle_comparison
   - id: m01.o8
     bloom_level: evaluate
     statement:
-      es: Evaluar qué inferencias biológicas son y no son justificables a partir de una secuencia o medición molecular aislada.
-      en: Evaluate which biological inferences are and are not justified by an isolated sequence or molecular measurement.
-      da: Vurdere hvilke biologiske slutninger der kan og ikke kan begrundes ud fra en isoleret sekvens eller molekylær måling.
+      es: "Evaluar qué inferencias biológicas son y no son justificables a partir de una secuencia o medición molecular aislada."
+      en: "Evaluate which biological inferences are and are not justified by an isolated sequence or molecular measurement."
+      da: "Vurdere hvilke biologiske slutninger der kan og ikke kan begrundes ud fra en isoleret sekvens eller molekylær måling."
     evidence: evidence_boundary_argument
 
 concepts:
   - id: dm847.m01.c01
     title:
-      es: Genes, genomas y unidades de información
-      en: Genes, genomes, and information units
-      da: Gener, genomer og informationsenheder
+      es: "Genes, genomas y unidades de información"
+      en: "Genes, genomes, and information units"
+      da: "Gener, genomer og informationsenheder"
     body:
       es: >-
         Un gen es una región genómica cuya actividad produce uno o más productos funcionales,
@@ -114,16 +114,16 @@ concepts:
         regulatoriske regioner, replikationsorigins, centromerer, telomerer, repeats, transposoner og
         intergeniske områder. Gengrænser afhænger af organisme, annotation, alternative transkripter og evidens.
     key_points:
-      - {es: Un gen no es sinónimo de una única proteína., en: A gene is not synonymous with one protein., da: Et gen er ikke synonymt med ét protein.}
-      - {es: La anotación es una hipótesis respaldada por evidencia., en: Annotation is an evidence-backed hypothesis., da: Annotation er en evidensunderstøttet hypotese.}
-      - {es: Coordenadas, ensamblaje y versión forman parte de la identidad de una región., en: Coordinates, assembly, and version are part of a region's identity., da: Koordinater, assembly og version er del af en regions identitet.}
+      - {"es": "Un gen no es sinónimo de una única proteína.", "en": "A gene is not synonymous with one protein.", "da": "Et gen er ikke synonymt med ét protein."}
+      - {"es": "La anotación es una hipótesis respaldada por evidencia.", "en": "Annotation is an evidence-backed hypothesis.", "da": "Annotation er en evidensunderstøttet hypotese."}
+      - {"es": "Coordenadas, ensamblaje y versión forman parte de la identidad de una región.", "en": "Coordinates, assembly, and version are part of a region's identity.", "da": "Koordinater, assembly og version er del af en regions identitet."}
     linked_objectives: [m01.o1, m01.o8]
 
   - id: dm847.m01.c02
     title:
-      es: Replicación, complementariedad y orientación
-      en: Replication, complementarity, and orientation
-      da: Replikation, komplementaritet og orientering
+      es: "Replicación, complementariedad y orientación"
+      en: "Replication, complementarity, and orientation"
+      da: "Replikation, komplementaritet og orientering"
     body:
       es: >-
         Las dos hebras de ADN son antiparalelas. Las polimerasas sintetizan una nueva cadena en dirección
@@ -143,16 +143,16 @@ concepts:
         Replikation er semikonservativ og kræver primere, origins samt forskellige mekanismer for leading og lagging strand.
         Komplement og reverse complement er ikke det samme. Skade, sekventeringsfejl og variant er forskellige begreber.
     key_points:
-      - {es: La síntesis de ácidos nucleicos ocurre 5'→3'., en: Nucleic-acid synthesis proceeds 5'→3'., da: Nukleinsyresyntese foregår 5'→3'.}
-      - {es: La orientación debe declararse en cualquier análisis de secuencia., en: Orientation must be declared in sequence analysis., da: Orientering skal angives i sekvensanalyse.}
-      - {es: Un error observado no demuestra una mutación biológica., en: An observed mismatch does not prove a biological mutation., da: En observeret mismatch beviser ikke en biologisk mutation.}
+      - {"es": "La síntesis de ácidos nucleicos ocurre 5'→3'.", "en": "Nucleic-acid synthesis proceeds 5'→3'.", "da": "Nukleinsyresyntese foregår 5'→3'."}
+      - {"es": "La orientación debe declararse en cualquier análisis de secuencia.", "en": "Orientation must be declared in sequence analysis.", "da": "Orientering skal angives i sekvensanalyse."}
+      - {"es": "Un error observado no demuestra una mutación biológica.", "en": "An observed mismatch does not prove a biological mutation.", "da": "En observeret mismatch beviser ikke en biologisk mutation."}
     linked_objectives: [m01.o2, m01.o8]
 
   - id: dm847.m01.c03
     title:
-      es: Transcripción, transcritos y procesamiento de ARN
-      en: Transcription, transcripts, and RNA processing
-      da: Transkription, transkripter og RNA-processering
+      es: "Transcripción, transcritos y procesamiento de ARN"
+      en: "Transcription, transcripts, and RNA processing"
+      da: "Transkription, transkripter og RNA-processering"
     body:
       es: >-
         La ARN polimerasa sintetiza ARN complementario a la hebra plantilla. La hebra codificante comparte
@@ -171,16 +171,16 @@ concepts:
         bortset fra T/U. Eukaryote pre-mRNA'er kan få 5'-cap, splejsning og poly(A)-hale, og alternativ splejsning
         kan skabe forskellige isoformer. RNA-mængde afspejler syntese, processering og nedbrydning.
     key_points:
-      - {es: Hebra plantilla y hebra codificante tienen funciones distintas., en: Template and coding strands have distinct roles., da: Template- og kodende streng har forskellige roller.}
-      - {es: Un locus puede producir múltiples transcritos., en: One locus may produce multiple transcripts., da: Et locus kan producere flere transkripter.}
-      - {es: Expresión de ARN no equivale automáticamente a función proteica., en: RNA expression does not automatically equal protein function., da: RNA-ekspression er ikke automatisk lig proteinfunktion.}
+      - {"es": "Hebra plantilla y hebra codificante tienen funciones distintas.", "en": "Template and coding strands have distinct roles.", "da": "Template- og kodende streng har forskellige roller."}
+      - {"es": "Un locus puede producir múltiples transcritos.", "en": "One locus may produce multiple transcripts.", "da": "Et locus kan producere flere transkripter."}
+      - {"es": "Expresión de ARN no equivale automáticamente a función proteica.", "en": "RNA expression does not automatically equal protein function.", "da": "RNA-ekspression er ikke automatisk lig proteinfunktion."}
     linked_objectives: [m01.o2, m01.o3, m01.o4, m01.o8]
 
   - id: dm847.m01.c04
     title:
-      es: Traducción, código genético y destino proteico
-      en: Translation, genetic code, and protein fate
-      da: Translation, genetisk kode og proteiners skæbne
+      es: "Traducción, código genético y destino proteico"
+      en: "Translation, genetic code, and protein fate"
+      da: "Translation, genetisk kode og proteiners skæbne"
     body:
       es: >-
         El ribosoma lee codones del ARNm en un marco de lectura y utiliza tRNA para incorporar aminoácidos.
@@ -198,16 +198,16 @@ concepts:
         men et bestemt kodon er normalt ikke tvetydigt. Initiering og terminering afhænger af kontekst. Foldning,
         modifikation, lokalisering, samling og nedbrydning bestemmer proteinets mængde og funktion.
     key_points:
-      - {es: El marco de lectura cambia la interpretación de toda la secuencia., en: Reading frame changes the interpretation of the entire sequence., da: Læserammen ændrer fortolkningen af hele sekvensen.}
-      - {es: Degeneración no significa ambigüedad., en: Degeneracy does not mean ambiguity., da: Degeneration betyder ikke tvetydighed.}
-      - {es: La proteína funcional depende de procesos posteriores a la traducción., en: Functional protein depends on post-translational processes., da: Funktionelt protein afhænger af processer efter translation.}
+      - {"es": "El marco de lectura cambia la interpretación de toda la secuencia.", "en": "Reading frame changes the interpretation of the entire sequence.", "da": "Læserammen ændrer fortolkningen af hele sekvensen."}
+      - {"es": "Degeneración no significa ambigüedad.", "en": "Degeneracy does not mean ambiguity.", "da": "Degeneration betyder ikke tvetydighed."}
+      - {"es": "La proteína funcional depende de procesos posteriores a la traducción.", "en": "Functional protein depends on post-translational processes.", "da": "Funktionelt protein afhænger af processer efter translation."}
     linked_objectives: [m01.o3, m01.o4, m01.o8]
 
   - id: dm847.m01.c05
     title:
-      es: Regulación génica multinivel
-      en: Multilevel gene regulation
-      da: Genregulering på flere niveauer
+      es: "Regulación génica multinivel"
+      en: "Multilevel gene regulation"
+      da: "Genregulering på flere niveauer"
     body:
       es: >-
         La regulación puede modificar accesibilidad del ADN, inicio de transcripción, elongación, splicing,
@@ -226,16 +226,16 @@ concepts:
         translation, proteinmodifikation eller nedbrydning. Promotorer, enhancere, silencere, transkriptionsfaktorer
         og kromatinkomplekser virker celle- og kontekstafhængigt. Binding alene beviser ikke funktionel regulering.
     key_points:
-      - {es: Regulación no se limita al inicio de transcripción., en: Regulation is not limited to transcription initiation., da: Regulering er ikke begrænset til transkriptionsstart.}
-      - {es: Ocupación molecular y efecto funcional son evidencias distintas., en: Molecular occupancy and functional effect are distinct evidence., da: Molekylær binding og funktionel effekt er forskellig evidens.}
-      - {es: El tipo celular forma parte del modelo regulador., en: Cell type is part of the regulatory model., da: Celletype er del af den regulatoriske model.}
+      - {"es": "Regulación no se limita al inicio de transcripción.", "en": "Regulation is not limited to transcription initiation.", "da": "Regulering er ikke begrænset til transkriptionsstart."}
+      - {"es": "Ocupación molecular y efecto funcional son evidencias distintas.", "en": "Molecular occupancy and functional effect are distinct evidence.", "da": "Molekylær binding og funktionel effekt er forskellig evidens."}
+      - {"es": "El tipo celular forma parte del modelo regulador.", "en": "Cell type is part of the regulatory model.", "da": "Celletype er del af den regulatoriske model."}
     linked_objectives: [m01.o4, m01.o8]
 
   - id: dm847.m01.c06
     title:
-      es: Cromatina y modificación epigenética del ADN
-      en: Chromatin and epigenetic DNA modification
-      da: Kromatin og epigenetisk DNA-modifikation
+      es: "Cromatina y modificación epigenética del ADN"
+      en: "Chromatin and epigenetic DNA modification"
+      da: "Kromatin og epigenetisk DNA-modifikation"
     body:
       es: >-
         En eucariotas, el ADN se organiza con histonas y otras proteínas en cromatina. Accesibilidad,
@@ -256,16 +256,16 @@ concepts:
         men effekten afhænger af placering og celletype. Epigenetisk betyder ikke nødvendigvis transgenerationel arv,
         og differentiel methylering kan være årsag, konsekvens eller korrelat.
     key_points:
-      - {es: Epigenética no significa que el ADN carezca de importancia., en: Epigenetics does not mean DNA sequence is irrelevant., da: Epigenetik betyder ikke at DNA-sekvens er irrelevant.}
-      - {es: La ubicación genómica cambia la interpretación de una modificación., en: Genomic location changes modification interpretation., da: Genomisk placering ændrer fortolkningen af en modifikation.}
-      - {es: Asociación epigenética no establece dirección causal., en: Epigenetic association does not establish causal direction., da: Epigenetisk association fastlægger ikke kausal retning.}
+      - {"es": "Epigenética no significa que el ADN carezca de importancia.", "en": "Epigenetics does not mean DNA sequence is irrelevant.", "da": "Epigenetik betyder ikke at DNA-sekvens er irrelevant."}
+      - {"es": "La ubicación genómica cambia la interpretación de una modificación.", "en": "Genomic location changes modification interpretation.", "da": "Genomisk placering ændrer fortolkningen af en modifikation."}
+      - {"es": "Asociación epigenética no establece dirección causal.", "en": "Epigenetic association does not establish causal direction.", "da": "Epigenetisk association fastlægger ikke kausal retning."}
     linked_objectives: [m01.o5, m01.o8]
 
   - id: dm847.m01.c07
     title:
-      es: Genética bacteriana, operones y transferencia horizontal
-      en: Bacterial genetics, operons, and horizontal transfer
-      da: Bakteriegenetik, operoner og horisontal overførsel
+      es: "Genética bacteriana, operones y transferencia horizontal"
+      en: "Bacterial genetics, operons, and horizontal transfer"
+      da: "Bakteriegenetik, operoner og horisontal overførsel"
     body:
       es: >-
         Los genomas bacterianos suelen ser compactos y pueden organizar genes relacionados en operones,
@@ -285,16 +285,16 @@ concepts:
         et polycistronisk RNA. Transkription og translation kan være koblet. Plasmider og horisontal overførsel gennem
         transformation, konjugation eller transduktion kan hurtigt ændre genindhold. Operonprædiktion kræver flere evidenstyper.
     key_points:
-      - {es: Un operón produce típicamente un ARN policistrónico., en: An operon typically produces a polycistronic RNA., da: Et operon producerer typisk et polycistronisk RNA.}
-      - {es: Proximidad génica no prueba corregulación., en: Gene proximity does not prove co-regulation., da: Gennærhed beviser ikke coregulering.}
-      - {es: Transferencia horizontal y herencia vertical son procesos distintos., en: Horizontal transfer and vertical inheritance are distinct., da: Horisontal overførsel og vertikal arv er forskellige.}
+      - {"es": "Un operón produce típicamente un ARN policistrónico.", "en": "An operon typically produces a polycistronic RNA.", "da": "Et operon producerer typisk et polycistronisk RNA."}
+      - {"es": "Proximidad génica no prueba corregulación.", "en": "Gene proximity does not prove co-regulation.", "da": "Gennærhed beviser ikke coregulering."}
+      - {"es": "Transferencia horizontal y herencia vertical son procesos distintos.", "en": "Horizontal transfer and vertical inheritance are distinct.", "da": "Horisontal overførsel og vertikal arv er forskellige."}
     linked_objectives: [m01.o6, m01.o8]
 
   - id: dm847.m01.c08
     title:
-      es: Fagos, integración y cambio genómico
-      en: Phages, integration, and genomic change
-      da: Fager, integration og genomisk ændring
+      es: "Fagos, integración y cambio genómico"
+      en: "Phages, integration, and genomic change"
+      da: "Fager, integration og genomisk ændring"
     body:
       es: >-
         Los bacteriófagos infectan bacterias. En un ciclo lítico, la infección dirige producción de partículas
@@ -314,21 +314,21 @@ concepts:
         Under lysogeni kan faggenomet integreres som profag og replikeres med værten. Profager kan tilføre gener,
         men en faglignende region er ikke automatisk komplet, inducerbar eller funktionel.
     key_points:
-      - {es: Lisogenia y latencia no son términos universales intercambiables., en: Lysogeny and latency are not universally interchangeable., da: Lysogeni og latens er ikke universelt udskiftelige.}
-      - {es: Un profago es ADN de fago asociado establemente al genoma hospedador., en: A prophage is phage DNA stably associated with the host genome., da: En profag er fag-DNA stabilt associeret med værtsgenomet.}
-      - {es: Similitud de secuencia no demuestra infectividad., en: Sequence similarity does not prove infectivity., da: Sekvenslighed beviser ikke infektivitet.}
+      - {"es": "Lisogenia y latencia no son términos universales intercambiables.", "en": "Lysogeny and latency are not universally interchangeable.", "da": "Lysogeni og latens er ikke universelt udskiftelige."}
+      - {"es": "Un profago es ADN de fago asociado establemente al genoma hospedador.", "en": "A prophage is phage DNA stably associated with the host genome.", "da": "En profag er fag-DNA stabilt associeret med værtsgenomet."}
+      - {"es": "Similitud de secuencia no demuestra infectividad.", "en": "Sequence similarity does not prove infectivity.", "da": "Sekvenslighed beviser ikke infektivitet."}
     linked_objectives: [m01.o7, m01.o8]
 
 worked_examples:
   - id: dm847.m01.e01
     title:
-      es: Derivar un transcrito desde la hebra plantilla
-      en: Derive a transcript from a template strand
-      da: Afled et transkript fra template-strengen
+      es: "Derivar un transcrito desde la hebra plantilla"
+      en: "Derive a transcript from a template strand"
+      da: "Afled et transkript fra template-strengen"
     problem:
-      es: La hebra plantilla se presenta 3'-TAC GGA TTT CCG-5'. Escribe el ARN 5'→3' y explica cada transformación.
-      en: The template strand is 3'-TAC GGA TTT CCG-5'. Write the RNA 5'→3' and explain each transformation.
-      da: Template-strengen er 3'-TAC GGA TTT CCG-5'. Skriv RNA 5'→3' og forklar transformationerne.
+      es: "La hebra plantilla se presenta 3'-TAC GGA TTT CCG-5'. Escribe el ARN 5'→3' y explica cada transformación."
+      en: "The template strand is 3'-TAC GGA TTT CCG-5'. Write the RNA 5'→3' and explain each transformation."
+      da: "Template-strengen er 3'-TAC GGA TTT CCG-5'. Skriv RNA 5'→3' og forklar transformationerne."
     reasoning:
       es:
         - La plantilla ya está orientada 3'→5', compatible con lectura de la polimerasa.
@@ -344,9 +344,9 @@ worked_examples:
         - Skriv produktet 5'→3'.
     expected_answer: 5'-AUG CCU AAA GGC-3'
     explanation:
-      es: La hebra codificante correspondiente sería 5'-ATG CCT AAA GGC-3'; coincide con el ARN salvo T por U.
-      en: The corresponding coding strand is 5'-ATG CCT AAA GGC-3'; it matches the RNA except T replaces U.
-      da: Den tilsvarende kodende streng er 5'-ATG CCT AAA GGC-3' og svarer til RNA bortset fra T/U.
+      es: "La hebra codificante correspondiente sería 5'-ATG CCT AAA GGC-3'; coincide con el ARN salvo T por U."
+      en: "The corresponding coding strand is 5'-ATG CCT AAA GGC-3'; it matches the RNA except T replaces U."
+      da: "Den tilsvarende kodende streng er 5'-ATG CCT AAA GGC-3' og svarer til RNA bortset fra T/U."
     limitations:
       - the sequence is synthetic
       - no promoter, transcript boundary, or translation-initiation context is implied
@@ -354,9 +354,9 @@ worked_examples:
 
   - id: dm847.m01.e02
     title:
-      es: Auditar una afirmación epigenética
-      en: Audit an epigenetic claim
-      da: Auditér en epigenetisk påstand
+      es: "Auditar una afirmación epigenética"
+      en: "Audit an epigenetic claim"
+      da: "Auditér en epigenetisk påstand"
     problem:
       es: >-
         Un estudio observacional encuentra mayor metilación cerca de un gen y menor ARN en muestras enfermas.
@@ -384,16 +384,16 @@ worked_examples:
         - Skeln association fra sygdomsmekanisme.
         - Foreslå målrettet perturbation og uafhængig replikation.
     expected_answer:
-      es: La evidencia apoya una asociación contextual, no la dirección causal afirmada.
-      en: The evidence supports a contextual association, not the claimed causal direction.
-      da: Evidensen støtter en kontekstuel association, ikke den påståede kausale retning.
+      es: "La evidencia apoya una asociación contextual, no la dirección causal afirmada."
+      en: "The evidence supports a contextual association, not the claimed causal direction."
+      da: "Evidensen støtter en kontekstuel association, ikke den påståede kausale retning."
     linked_objectives: [m01.o5, m01.o8]
 
   - id: dm847.m01.e03
     title:
-      es: Integrar evidencia para un operón candidato
-      en: Integrate evidence for a candidate operon
-      da: Integrér evidens for et kandidatoperon
+      es: "Integrar evidencia para un operón candidato"
+      en: "Integrate evidence for a candidate operon"
+      da: "Integrér evidens for et kandidatoperon"
     problem:
       es: >-
         Tres genes bacterianos consecutivos tienen la misma orientación, distancias intergénicas de 18 y 22 nt,
@@ -421,9 +421,9 @@ worked_examples:
         - Direkte evidens for et transkript over junctions mangler.
         - Interne terminatorer og alternative promotorer bør undersøges.
     expected_answer:
-      es: Es un operón candidato bien respaldado, no una demostración definitiva.
-      en: It is a well-supported candidate operon, not a definitive demonstration.
-      da: Det er et velunderstøttet kandidatoperon, ikke et endeligt bevis.
+      es: "Es un operón candidato bien respaldado, no una demostración definitiva."
+      en: "It is a well-supported candidate operon, not a definitive demonstration."
+      da: "Det er et velunderstøttet kandidatoperon, ikke et endeligt bevis."
     linked_objectives: [m01.o6, m01.o8]
 
 practice_exercises:
@@ -431,27 +431,27 @@ practice_exercises:
     activity_type: strand_orientation
     difficulty: foundational
     prompt:
-      es: Escribe la reverso-complementaria 5'→3' de 5'-AGTCCT-3' y explica por qué complementar sin invertir es insuficiente.
-      en: Write the 5'→3' reverse complement of 5'-AGTCCT-3' and explain why complementing without reversing is insufficient.
-      da: Skriv 5'→3' reverse complement af 5'-AGTCCT-3' og forklar hvorfor komplement uden vending er utilstrækkeligt.
+      es: "Escribe la reverso-complementaria 5'→3' de 5'-AGTCCT-3' y explica por qué complementar sin invertir es insuficiente."
+      en: "Write the 5'→3' reverse complement of 5'-AGTCCT-3' and explain why complementing without reversing is insufficient."
+      da: "Skriv 5'→3' reverse complement af 5'-AGTCCT-3' og forklar hvorfor komplement uden vending er utilstrækkeligt."
     reference_solution: 5'-AGGACT-3'
     explanation:
-      es: La misma molécula vista desde la hebra opuesta exige complementar y cambiar el orden para conservar escritura 5'→3'.
-      en: Viewing the same molecule from the opposite strand requires complementing and reversing to retain 5'→3' notation.
-      da: Den modsatte streng kræver både komplementering og vending for 5'→3'-notation.
+      es: "La misma molécula vista desde la hebra opuesta exige complementar y cambiar el orden para conservar escritura 5'→3'."
+      en: "Viewing the same molecule from the opposite strand requires complementing and reversing to retain 5'→3' notation."
+      da: "Den modsatte streng kræver både komplementering og vending for 5'→3'-notation."
     linked_objectives: [m01.o2]
 
   - id: dm847.m01.p02
     activity_type: concept_classification
     difficulty: foundational
     prompt:
-      es: Clasifica cada elemento como producto funcional, región reguladora, estructura cromosómica o elemento móvil: tRNA, enhancer, telómero, transposón.
-      en: Classify each as functional product, regulatory region, chromosome structure, or mobile element: tRNA, enhancer, telomere, transposon.
-      da: Klassificér tRNA, enhancer, telomer og transposon som funktionelt produkt, regulatorisk region, kromosomstruktur eller mobilt element.
+      es: "Clasifica cada elemento como producto funcional, región reguladora, estructura cromosómica o elemento móvil: tRNA, enhancer, telómero, transposón."
+      en: "Classify each as functional product, regulatory region, chromosome structure, or mobile element: tRNA, enhancer, telomere, transposon."
+      da: "Klassificér tRNA, enhancer, telomer og transposon som funktionelt produkt, regulatorisk region, kromosomstruktur eller mobilt element."
     reference_solution:
-      es: tRNA producto funcional; enhancer región reguladora; telómero estructura cromosómica; transposón elemento móvil.
-      en: tRNA functional product; enhancer regulatory region; telomere chromosome structure; transposon mobile element.
-      da: tRNA funktionelt produkt; enhancer regulatorisk region; telomer kromosomstruktur; transposon mobilt element.
+      es: "tRNA producto funcional; enhancer región reguladora; telómero estructura cromosómica; transposón elemento móvil."
+      en: "tRNA functional product; enhancer regulatory region; telomere chromosome structure; transposon mobile element."
+      da: "tRNA funktionelt produkt; enhancer regulatorisk region; telomer kromosomstruktur; transposon mobilt element."
     linked_objectives: [m01.o1]
 
   - id: dm847.m01.p03
@@ -479,22 +479,22 @@ practice_exercises:
     activity_type: pipeline_ordering
     difficulty: intermediate
     prompt:
-      es: Ordena un análisis de isoformas: control de calidad, alineamiento o cuantificación, definición de referencia, contraste, interpretación y validación independiente.
-      en: Order an isoform-analysis workflow: quality control, alignment or quantification, reference definition, contrast, interpretation, and independent validation.
-      da: Ordén et isoformworkflow: kvalitetskontrol, alignment eller kvantificering, referencedefinition, kontrast, fortolkning og uafhængig validering.
+      es: "Ordena un análisis de isoformas: control de calidad, alineamiento o cuantificación, definición de referencia, contraste, interpretación y validación independiente."
+      en: "Order an isoform-analysis workflow: quality control, alignment or quantification, reference definition, contrast, interpretation, and independent validation."
+      da: "Ordén et isoformworkflow: kvalitetskontrol, alignment eller kvantificering, referencedefinition, kontrast, fortolkning og uafhængig validering."
     reference_solution:
-      es: Definir referencia y pregunta; control de calidad; alineamiento/cuantiﬁcación; contraste; interpretación; validación independiente.
-      en: Define reference and question; quality control; alignment/quantification; contrast; interpretation; independent validation.
-      da: Definér reference og spørgsmål; kvalitetskontrol; alignment/kvantificering; kontrast; fortolkning; uafhængig validering.
+      es: "Definir referencia y pregunta; control de calidad; alineamiento/cuantiﬁcación; contraste; interpretación; validación independiente."
+      en: "Define reference and question; quality control; alignment/quantification; contrast; interpretation; independent validation."
+      da: "Definér reference og spørgsmål; kvalitetskontrol; alignment/kvantificering; kontrast; fortolkning; uafhængig validering."
     linked_objectives: [m01.o3, m01.o8]
 
   - id: dm847.m01.p05
     activity_type: comparison
     difficulty: intermediate
     prompt:
-      es: Compara transformación, conjugación y transducción por fuente del ADN, mecanismo de entrada y papel de fagos.
-      en: Compare transformation, conjugation, and transduction by DNA source, entry mechanism, and phage involvement.
-      da: Sammenlign transformation, konjugation og transduktion efter DNA-kilde, indgangsmekanisme og fagrolle.
+      es: "Compara transformación, conjugación y transducción por fuente del ADN, mecanismo de entrada y papel de fagos."
+      en: "Compare transformation, conjugation, and transduction by DNA source, entry mechanism, and phage involvement."
+      da: "Sammenlign transformation, konjugation og transduktion efter DNA-kilde, indgangsmekanisme og fagrolle."
     reference_solution:
       es: >-
         Transformación incorpora ADN libre; conjugación transfiere ADN mediante contacto y maquinaria conjugativa;
@@ -533,127 +533,127 @@ objective_question_bank:
   - id: dm847.m01.q01
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué describe mejor un gen?, en: Which best describes a gene?, da: Hvad beskriver bedst et gen?}
+    prompt: {"es": "¿Qué describe mejor un gen?", "en": "Which best describes a gene?", "da": "Hvad beskriver bedst et gen?"}
     options:
       - id: functional_region
-        text: {es: Región genómica cuya actividad produce uno o más productos funcionales., en: A genomic region whose activity produces one or more functional products., da: En genomisk region hvis aktivitet producerer et eller flere funktionelle produkter.}
+        text: {"es": "Región genómica cuya actividad produce uno o más productos funcionales.", "en": "A genomic region whose activity produces one or more functional products.", "da": "En genomisk region hvis aktivitet producerer et eller flere funktionelle produkter."}
       - id: every_dna_segment
-        text: {es: Cualquier segmento de ADN con más de 100 bases., en: Any DNA segment longer than 100 bases., da: Ethvert DNA-segment længere end 100 baser.}
+        text: {"es": "Cualquier segmento de ADN con más de 100 bases.", "en": "Any DNA segment longer than 100 bases.", "da": "Ethvert DNA-segment længere end 100 baser."}
       - id: one_protein_only
-        text: {es: Una región que siempre produce exactamente una proteína., en: A region that always produces exactly one protein., da: En region der altid producerer præcis ét protein.}
+        text: {"es": "Una región que siempre produce exactamente una proteína.", "en": "A region that always produces exactly one protein.", "da": "En region der altid producerer præcis ét protein."}
     correct_option_ids: [functional_region]
-    explanation: {es: Los genes pueden producir ARN funcional y múltiples isoformas; longitud y una proteína única no los definen., en: Genes may produce functional RNA and multiple isoforms; length and one-protein output do not define them., da: Gener kan producere funktionelt RNA og flere isoformer; længde og ét protein definerer dem ikke.}
+    explanation: {"es": "Los genes pueden producir ARN funcional y múltiples isoformas; longitud y una proteína única no los definen.", "en": "Genes may produce functional RNA and multiple isoforms; length and one-protein output do not define them.", "da": "Gener kan producere funktionelt RNA og flere isoformer; længde og ét protein definerer dem ikke."}
     linked_objectives: [m01.o1]
 
   - id: dm847.m01.q02
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿En qué dirección sintetizan las polimerasas una nueva cadena?, en: In which direction do polymerases synthesize a new strand?, da: I hvilken retning syntetiserer polymeraser en ny streng?}
+    prompt: {"es": "¿En qué dirección sintetizan las polimerasas una nueva cadena?", "en": "In which direction do polymerases synthesize a new strand?", "da": "I hvilken retning syntetiserer polymeraser en ny streng?"}
     options:
-      - {id: five_to_three, text: {es: 5'→3', en: 5'→3', da: 5'→3'}}
-      - {id: three_to_five, text: {es: 3'→5', en: 3'→5', da: 3'→5'}}
-      - {id: either_direction, text: {es: En cualquier dirección., en: In either direction., da: I begge retninger.}}
+      - {id: five_to_three, text: {"es": "5'→3'", "en": "5'→3'", "da": "5'→3'"}}
+      - {id: three_to_five, text: {"es": "3'→5'", "en": "3'→5'", "da": "3'→5'"}}
+      - {id: either_direction, text: {"es": "En cualquier dirección.", "en": "In either direction.", "da": "I begge retninger."}}
     correct_option_ids: [five_to_three]
-    explanation: {es: La cadena nueva se extiende 5'→3' mientras la plantilla se lee 3'→5'., en: The new strand extends 5'→3' while the template is read 3'→5'., da: Den nye streng forlænges 5'→3', mens template læses 3'→5'.}
+    explanation: {"es": "La cadena nueva se extiende 5'→3' mientras la plantilla se lee 3'→5'.", "en": "The new strand extends 5'→3' while the template is read 3'→5'.", "da": "Den nye streng forlænges 5'→3', mens template læses 3'→5'."}
     linked_objectives: [m01.o2]
 
   - id: dm847.m01.q03
     activity_type: true_false
     difficulty: foundational
-    prompt: {es: La hebra codificante tiene la misma secuencia que el ARN, salvo T por U., en: The coding strand matches RNA except T is replaced by U., da: Den kodende streng svarer til RNA bortset fra T/U.}
+    prompt: {"es": "La hebra codificante tiene la misma secuencia que el ARN, salvo T por U.", "en": "The coding strand matches RNA except T is replaced by U.", "da": "Den kodende streng svarer til RNA bortset fra T/U."}
     correct_answer: true
-    explanation: {es: La hebra plantilla es la complementaria utilizada por la ARN polimerasa., en: The template strand is the complementary strand used by RNA polymerase., da: Template-strengen er den komplementære streng brugt af RNA-polymerase.}
+    explanation: {"es": "La hebra plantilla es la complementaria utilizada por la ARN polimerasa.", "en": "The template strand is the complementary strand used by RNA polymerase.", "da": "Template-strengen er den komplementære streng brugt af RNA-polymerase."}
     linked_objectives: [m01.o2, m01.o3]
 
   - id: dm847.m01.q04
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué demuestra por sí sola la unión de un factor cerca de un promotor?, en: What does factor binding near a promoter prove by itself?, da: Hvad beviser faktor-binding nær en promotor alene?}
+    prompt: {"es": "¿Qué demuestra por sí sola la unión de un factor cerca de un promotor?", "en": "What does factor binding near a promoter prove by itself?", "da": "Hvad beviser faktor-binding nær en promotor alene?"}
     options:
       - id: occupancy_only
-        text: {es: Ocupación o asociación en las condiciones medidas., en: Occupancy or association under the measured conditions., da: Binding eller association under de målte betingelser.}
+        text: {"es": "Ocupación o asociación en las condiciones medidas.", "en": "Occupancy or association under the measured conditions.", "da": "Binding eller association under de målte betingelser."}
       - id: causal_activation
-        text: {es: Activación causal del gen., en: Causal activation of the gene., da: Kausal aktivering af genet.}
+        text: {"es": "Activación causal del gen.", "en": "Causal activation of the gene.", "da": "Kausal aktivering af genet."}
       - id: disease_cause
-        text: {es: Causa directa de enfermedad., en: Direct cause of disease., da: Direkte sygdomsårsag.}
+        text: {"es": "Causa directa de enfermedad.", "en": "Direct cause of disease.", "da": "Direkte sygdomsårsag."}
     correct_option_ids: [occupancy_only]
-    explanation: {es: La función reguladora requiere evidencia de perturbación y respuesta además de ocupación., en: Regulatory function requires perturbation and response evidence in addition to occupancy., da: Regulatorisk funktion kræver perturbations- og responsevidens ud over binding.}
+    explanation: {"es": "La función reguladora requiere evidencia de perturbación y respuesta además de ocupación.", "en": "Regulatory function requires perturbation and response evidence in addition to occupancy.", "da": "Regulatorisk funktion kræver perturbations- og responsevidens ud over binding."}
     linked_objectives: [m01.o4, m01.o8]
 
   - id: dm847.m01.q05
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Cuál es una interpretación correcta de mayor metilación en casos que en controles?, en: Which is a correct interpretation of higher methylation in cases than controls?, da: Hvilken fortolkning er korrekt ved højere methylering i cases end kontroller?}
+    prompt: {"es": "¿Cuál es una interpretación correcta de mayor metilación en casos que en controles?", "en": "Which is a correct interpretation of higher methylation in cases than controls?", "da": "Hvilken fortolkning er korrekt ved højere methylering i cases end kontroller?"}
     options:
       - id: association
-        text: {es: Existe una asociación que requiere contexto celular y análisis causal adicional., en: There is an association requiring cell-context and further causal analysis., da: Der er en association som kræver cellekontekst og yderligere kausalanalyse.}
+        text: {"es": "Existe una asociación que requiere contexto celular y análisis causal adicional.", "en": "There is an association requiring cell-context and further causal analysis.", "da": "Der er en association som kræver cellekontekst og yderligere kausalanalyse."}
       - id: proven_cause
-        text: {es: La metilación está demostrada como causa de la enfermedad., en: Methylation is proven to cause the disease., da: Methylering er bevist som sygdomsårsag.}
+        text: {"es": "La metilación está demostrada como causa de la enfermedad.", "en": "Methylation is proven to cause the disease.", "da": "Methylering er bevist som sygdomsårsag."}
       - id: sequence_mutation
-        text: {es: La secuencia de ADN necesariamente cambió., en: The DNA sequence necessarily changed., da: DNA-sekvensen ændrede sig nødvendigvis.}
+        text: {"es": "La secuencia de ADN necesariamente cambió.", "en": "The DNA sequence necessarily changed.", "da": "DNA-sekvensen ændrede sig nødvendigvis."}
     correct_option_ids: [association]
-    explanation: {es: Diferencia observacional no establece dirección causal ni implica cambio de secuencia., en: An observational difference establishes neither causal direction nor sequence change., da: En observationsforskel fastlægger hverken kausal retning eller sekvensændring.}
+    explanation: {"es": "Diferencia observacional no establece dirección causal ni implica cambio de secuencia.", "en": "An observational difference establishes neither causal direction nor sequence change.", "da": "En observationsforskel fastlægger hverken kausal retning eller sekvensændring."}
     linked_objectives: [m01.o5, m01.o8]
 
   - id: dm847.m01.q06
     activity_type: true_false
     difficulty: foundational
-    prompt: {es: En bacterias, la transcripción y la traducción pueden estar acopladas., en: In bacteria, transcription and translation may be coupled., da: I bakterier kan transkription og translation være koblet.}
+    prompt: {"es": "En bacterias, la transcripción y la traducción pueden estar acopladas.", "en": "In bacteria, transcription and translation may be coupled.", "da": "I bakterier kan transkription og translation være koblet."}
     correct_answer: true
-    explanation: {es: La ausencia de envoltura nuclear permite que ribosomas traduzcan ARN mientras se transcribe., en: Without a nuclear envelope, ribosomes may translate RNA while it is being transcribed., da: Uden kernemembran kan ribosomer translere RNA mens det transkriberes.}
+    explanation: {"es": "La ausencia de envoltura nuclear permite que ribosomas traduzcan ARN mientras se transcribe.", "en": "Without a nuclear envelope, ribosomes may translate RNA while it is being transcribed.", "da": "Uden kernemembran kan ribosomer translere RNA mens det transkriberes."}
     linked_objectives: [m01.o6]
 
   - id: dm847.m01.q07
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué evidencia fortalece más directamente que genes vecinos formen un operón?, en: Which evidence most directly strengthens that neighboring genes form an operon?, da: Hvilken evidens styrker mest direkte at nabogener danner et operon?}
+    prompt: {"es": "¿Qué evidencia fortalece más directamente que genes vecinos formen un operón?", "en": "Which evidence most directly strengthens that neighboring genes form an operon?", "da": "Hvilken evidens styrker mest direkte at nabogener danner et operon?"}
     options:
       - id: spanning_transcript
-        text: {es: Un transcrito validado que abarca las uniones intergénicas., en: A validated transcript spanning the intergenic junctions., da: Et valideret transkript der spænder over de intergeniske junctions.}
+        text: {"es": "Un transcrito validado que abarca las uniones intergénicas.", "en": "A validated transcript spanning the intergenic junctions.", "da": "Et valideret transkript der spænder over de intergeniske junctions."}
       - id: same_chromosome
-        text: {es: Estar en el mismo cromosoma., en: Being on the same chromosome., da: At være på samme kromosom.}
+        text: {"es": "Estar en el mismo cromosoma.", "en": "Being on the same chromosome.", "da": "At være på samme kromosom."}
       - id: similar_length
-        text: {es: Tener longitudes similares., en: Having similar lengths., da: At have lignende længder.}
+        text: {"es": "Tener longitudes similares.", "en": "Having similar lengths.", "da": "At have lignende længder."}
     correct_option_ids: [spanning_transcript]
-    explanation: {es: La evidencia de un ARN continuo apoya transcripción conjunta de forma más directa., en: Evidence for one continuous RNA more directly supports joint transcription., da: Evidens for ét kontinuerligt RNA støtter fælles transkription mere direkte.}
+    explanation: {"es": "La evidencia de un ARN continuo apoya transcripción conjunta de forma más directa.", "en": "Evidence for one continuous RNA more directly supports joint transcription.", "da": "Evidens for ét kontinuerligt RNA støtter fælles transkription mere direkte."}
     linked_objectives: [m01.o6]
 
   - id: dm847.m01.q08
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué caracteriza la lisogenia?, en: What characterizes lysogeny?, da: Hvad kendetegner lysogeni?}
+    prompt: {"es": "¿Qué caracteriza la lisogenia?", "en": "What characterizes lysogeny?", "da": "Hvad kendetegner lysogeni?"}
     options:
       - id: stable_phage_genome
-        text: {es: Persistencia estable del genoma de fago con el hospedador, a menudo como profago., en: Stable persistence of the phage genome with the host, often as a prophage., da: Stabil persistens af faggenomet med værten, ofte som profag.}
+        text: {"es": "Persistencia estable del genoma de fago con el hospedador, a menudo como profago.", "en": "Stable persistence of the phage genome with the host, often as a prophage.", "da": "Stabil persistens af faggenomet med værten, ofte som profag."}
       - id: immediate_lysis
-        text: {es: Lisis inmediata obligatoria tras toda infección., en: Mandatory immediate lysis after every infection., da: Obligatorisk øjeblikkelig lysis efter enhver infektion.}
+        text: {"es": "Lisis inmediata obligatoria tras toda infección.", "en": "Mandatory immediate lysis after every infection.", "da": "Obligatorisk øjeblikkelig lysis efter enhver infektion."}
       - id: no_genetic_material
-        text: {es: Ausencia de material genético viral., en: Absence of viral genetic material., da: Fravær af viralt genetisk materiale.}
+        text: {"es": "Ausencia de material genético viral.", "en": "Absence of viral genetic material.", "da": "Fravær af viralt genetisk materiale."}
     correct_option_ids: [stable_phage_genome]
-    explanation: {es: La lisogenia mantiene material genético de fago y puede pasar a producción lítica tras inducción., en: Lysogeny maintains phage genetic material and may switch to lytic production after induction., da: Lysogeni bevarer faggenetisk materiale og kan skifte til lytisk produktion efter induktion.}
+    explanation: {"es": "La lisogenia mantiene material genético de fago y puede pasar a producción lítica tras inducción.", "en": "Lysogeny maintains phage genetic material and may switch to lytic production after induction.", "da": "Lysogeni bevarer faggenetisk materiale og kan skifte til lytisk produktion efter induktion."}
     linked_objectives: [m01.o7]
 
   - id: dm847.m01.q09
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Por qué ARN abundante no implica necesariamente proteína activa abundante?, en: Why does abundant RNA not necessarily imply abundant active protein?, da: Hvorfor betyder meget RNA ikke nødvendigvis meget aktivt protein?}
+    prompt: {"es": "¿Por qué ARN abundante no implica necesariamente proteína activa abundante?", "en": "Why does abundant RNA not necessarily imply abundant active protein?", "da": "Hvorfor betyder meget RNA ikke nødvendigvis meget aktivt protein?"}
     options:
       - id: multiple_layers
-        text: {es: Traducción, degradación, plegamiento, modificación y localización añaden regulación., en: Translation, degradation, folding, modification, and localization add regulation., da: Translation, nedbrydning, foldning, modifikation og lokalisering tilføjer regulering.}
+        text: {"es": "Traducción, degradación, plegamiento, modificación y localización añaden regulación.", "en": "Translation, degradation, folding, modification, and localization add regulation.", "da": "Translation, nedbrydning, foldning, modifikation og lokalisering tilføjer regulering."}
       - id: rna_never_translated
-        text: {es: Ningún ARN puede traducirse., en: No RNA can be translated., da: Intet RNA kan translateres.}
+        text: {"es": "Ningún ARN puede traducirse.", "en": "No RNA can be translated.", "da": "Intet RNA kan translateres."}
       - id: proteins_are_dna
-        text: {es: Las proteínas son ADN., en: Proteins are DNA., da: Proteiner er DNA.}
+        text: {"es": "Las proteínas son ADN.", "en": "Proteins are DNA.", "da": "Proteiner er DNA."}
     correct_option_ids: [multiple_layers]
-    explanation: {es: La relación ARN-proteína es modulada por varias etapas y escalas temporales., en: The RNA-protein relationship is modulated by multiple stages and timescales., da: RNA-protein-forholdet moduleres af flere trin og tidsskalaer.}
+    explanation: {"es": "La relación ARN-proteína es modulada por varias etapas y escalas temporales.", "en": "The RNA-protein relationship is modulated by multiple stages and timescales.", "da": "RNA-protein-forholdet moduleres af flere trin og tidsskalaer."}
     linked_objectives: [m01.o3, m01.o4]
 
   - id: dm847.m01.q10
     activity_type: true_false
     difficulty: advanced
-    prompt: {es: Detectar una región similar a fago demuestra que puede producir partículas infecciosas., en: Detecting a phage-like region proves it can produce infectious particles., da: Påvisning af en faglignende region beviser at den kan producere infektiøse partikler.}
+    prompt: {"es": "Detectar una región similar a fago demuestra que puede producir partículas infecciosas.", "en": "Detecting a phage-like region proves it can produce infectious particles.", "da": "Påvisning af en faglignende region beviser at den kan producere infektiøse partikler."}
     correct_answer: false
-    explanation: {es: Puede ser incompleta, degradada o no inducible; la funcionalidad requiere evidencia adicional., en: It may be incomplete, degraded, or non-inducible; functionality requires additional evidence., da: Regionen kan være ufuldstændig, degraderet eller ikke-inducerbar; funktion kræver mere evidens.}
+    explanation: {"es": "Puede ser incompleta, degradada o no inducible; la funcionalidad requiere evidencia adicional.", "en": "It may be incomplete, degraded, or non-inducible; functionality requires additional evidence.", "da": "Regionen kan være ufuldstændig, degraderet eller ikke-inducerbar; funktion kræver mere evidens."}
     linked_objectives: [m01.o7, m01.o8]
 
 assessment_items:
@@ -743,52 +743,52 @@ flashcards:
 
 glossary:
   - id: term.gene
-    term: {es: gen, en: gene, da: gen}
-    definition: {es: Región genómica cuya actividad produce uno o más productos funcionales., en: Genomic region whose activity produces one or more functional products., da: Genomisk region hvis aktivitet producerer et eller flere funktionelle produkter.}
+    term: {"es": "gen", "en": "gene", "da": "gen"}
+    definition: {"es": "Región genómica cuya actividad produce uno o más productos funcionales.", "en": "Genomic region whose activity produces one or more functional products.", "da": "Genomisk region hvis aktivitet producerer et eller flere funktionelle produkter."}
     related_terms: [term.transcript, term.locus]
   - id: term.genome
-    term: {es: genoma, en: genome, da: genom}
-    definition: {es: Conjunto de material genético de una entidad biológica., en: Complete genetic material of a biological entity., da: Det samlede genetiske materiale i en biologisk enhed.}
+    term: {"es": "genoma", "en": "genome", "da": "genom"}
+    definition: {"es": "Conjunto de material genético de una entidad biológica.", "en": "Complete genetic material of a biological entity.", "da": "Det samlede genetiske materiale i en biologisk enhed."}
     related_terms: [term.chromosome]
   - id: term.template_strand
-    term: {es: hebra plantilla, en: template strand, da: template-streng}
-    definition: {es: Hebra leída por una polimerasa para sintetizar una cadena complementaria., en: Strand read by a polymerase to synthesize a complementary strand., da: Streng læst af en polymerase for at syntetisere en komplementær streng.}
+    term: {"es": "hebra plantilla", "en": "template strand", "da": "template-streng"}
+    definition: {"es": "Hebra leída por una polimerasa para sintetizar una cadena complementaria.", "en": "Strand read by a polymerase to synthesize a complementary strand.", "da": "Streng læst af en polymerase for at syntetisere en komplementær streng."}
     related_terms: [term.coding_strand, term.reverse_complement]
   - id: term.reverse_complement
-    term: {es: reverso-complementaria, en: reverse complement, da: reverse complement}
-    definition: {es: Secuencia obtenida al invertir el orden y complementar cada base., en: Sequence obtained by reversing order and complementing each base., da: Sekvens opnået ved at vende rækkefølgen og komplementere hver base.}
+    term: {"es": "reverso-complementaria", "en": "reverse complement", "da": "reverse complement"}
+    definition: {"es": "Secuencia obtenida al invertir el orden y complementar cada base.", "en": "Sequence obtained by reversing order and complementing each base.", "da": "Sekvens opnået ved at vende rækkefølgen og komplementere hver base."}
     related_terms: [term.template_strand]
   - id: term.transcript
-    term: {es: transcrito, en: transcript, da: transkript}
-    definition: {es: Molécula de ARN producida desde una plantilla de ADN o ARN., en: RNA molecule produced from a DNA or RNA template., da: RNA-molekyle produceret fra en DNA- eller RNA-template.}
+    term: {"es": "transcrito", "en": "transcript", "da": "transkript"}
+    definition: {"es": "Molécula de ARN producida desde una plantilla de ADN o ARN.", "en": "RNA molecule produced from a DNA or RNA template.", "da": "RNA-molekyle produceret fra en DNA- eller RNA-template."}
     related_terms: [term.isoform]
   - id: term.isoform
-    term: {es: isoforma, en: isoform, da: isoform}
-    definition: {es: Variante molecular producida desde un mismo locus mediante procesamiento o inicio alternativo., en: Molecular variant produced from one locus through alternative processing or initiation., da: Molekylær variant produceret fra ét locus gennem alternativ processering eller initiering.}
+    term: {"es": "isoforma", "en": "isoform", "da": "isoform"}
+    definition: {"es": "Variante molecular producida desde un mismo locus mediante procesamiento o inicio alternativo.", "en": "Molecular variant produced from one locus through alternative processing or initiation.", "da": "Molekylær variant produceret fra ét locus gennem alternativ processering eller initiering."}
     related_terms: [term.transcript]
   - id: term.reading_frame
-    term: {es: marco de lectura, en: reading frame, da: læseramme}
-    definition: {es: Partición de una secuencia en codones consecutivos desde una posición y orientación determinadas., en: Partition of a sequence into consecutive codons from a defined position and orientation., da: Opdeling af en sekvens i kodoner fra en bestemt position og orientering.}
+    term: {"es": "marco de lectura", "en": "reading frame", "da": "læseramme"}
+    definition: {"es": "Partición de una secuencia en codones consecutivos desde una posición y orientación determinadas.", "en": "Partition of a sequence into consecutive codons from a defined position and orientation.", "da": "Opdeling af en sekvens i kodoner fra en bestemt position og orientering."}
     related_terms: [term.orf]
   - id: term.orf
-    term: {es: marco abierto de lectura, en: open reading frame, da: åben læseramme}
-    definition: {es: Tramo de un marco sin codones de terminación internos entre límites definidos., en: Segment of a reading frame without internal stop codons between defined boundaries., da: Segment af en læseramme uden interne stopkodoner mellem definerede grænser.}
+    term: {"es": "marco abierto de lectura", "en": "open reading frame", "da": "åben læseramme"}
+    definition: {"es": "Tramo de un marco sin codones de terminación internos entre límites definidos.", "en": "Segment of a reading frame without internal stop codons between defined boundaries.", "da": "Segment af en læseramme uden interne stopkodoner mellem definerede grænser."}
     related_terms: [term.reading_frame]
   - id: term.epigenetic_state
-    term: {es: estado epigenético, en: epigenetic state, da: epigenetisk tilstand}
-    definition: {es: Estado regulador relativamente persistente sin cambio necesario de secuencia de ADN., en: Relatively persistent regulatory state without a required DNA-sequence change., da: Relativt persistent regulatorisk tilstand uden nødvendigt skift i DNA-sekvens.}
+    term: {"es": "estado epigenético", "en": "epigenetic state", "da": "epigenetisk tilstand"}
+    definition: {"es": "Estado regulador relativamente persistente sin cambio necesario de secuencia de ADN.", "en": "Relatively persistent regulatory state without a required DNA-sequence change.", "da": "Relativt persistent regulatorisk tilstand uden nødvendigt skift i DNA-sekvens."}
     related_terms: [term.chromatin]
   - id: term.operon
-    term: {es: operón, en: operon, da: operon}
-    definition: {es: Unidad reguladora bacteriana donde genes relacionados pueden transcribirse conjuntamente., en: Bacterial regulatory unit in which related genes may be transcribed together., da: Bakteriel regulatorisk enhed hvor relaterede gener kan transkriberes sammen.}
+    term: {"es": "operón", "en": "operon", "da": "operon"}
+    definition: {"es": "Unidad reguladora bacteriana donde genes relacionados pueden transcribirse conjuntamente.", "en": "Bacterial regulatory unit in which related genes may be transcribed together.", "da": "Bakteriel regulatorisk enhed hvor relaterede gener kan transkriberes sammen."}
     related_terms: [term.polycistronic_rna]
   - id: term.prophage
-    term: {es: profago, en: prophage, da: profag}
-    definition: {es: Genoma de fago mantenido de forma estable con el genoma bacteriano durante lisogenia., en: Phage genome maintained stably with the bacterial genome during lysogeny., da: Faggenom stabilt vedligeholdt med bakteriegenomet under lysogeni.}
+    term: {"es": "profago", "en": "prophage", "da": "profag"}
+    definition: {"es": "Genoma de fago mantenido de forma estable con el genoma bacteriano durante lisogenia.", "en": "Phage genome maintained stably with the bacterial genome during lysogeny.", "da": "Faggenom stabilt vedligeholdt med bakteriegenomet under lysogeni."}
     related_terms: [term.lysogeny]
   - id: term.horizontal_transfer
-    term: {es: transferencia horizontal, en: horizontal gene transfer, da: horisontal genoverførsel}
-    definition: {es: Movimiento de material genético entre organismos fuera de la transmisión progenitor-descendiente., en: Movement of genetic material between organisms outside parent-offspring transmission., da: Bevægelse af genetisk materiale mellem organismer uden for forælder-afkom-overførsel.}
+    term: {"es": "transferencia horizontal", "en": "horizontal gene transfer", "da": "horisontal genoverførsel"}
+    definition: {"es": "Movimiento de material genético entre organismos fuera de la transmisión progenitor-descendiente.", "en": "Movement of genetic material between organisms outside parent-offspring transmission.", "da": "Bevægelse af genetisk materiale mellem organismer uden for forælder-afkom-overførsel."}
     related_terms: [term.transformation, term.transduction]
 
 hidden_guided_support:
@@ -813,26 +813,26 @@ hidden_guided_support:
       er ikke en simpel DNA=RNA=protein-lighed. Slutninger skal være proportionale med evidensen.
   misconceptions:
     - id: m01.mc01
-      claim: {es: Todo ADN es un gen., en: All DNA is a gene., da: Alt DNA er et gen.}
-      correction: {es: El genoma contiene muchas regiones no génicas con funciones estructurales, reguladoras o móviles., en: Genomes contain many non-gene regions with structural, regulatory, or mobile roles., da: Genomer indeholder mange ikke-genregioner med strukturelle, regulatoriske eller mobile roller.}
+      claim: {"es": "Todo ADN es un gen.", "en": "All DNA is a gene.", "da": "Alt DNA er et gen."}
+      correction: {"es": "El genoma contiene muchas regiones no génicas con funciones estructurales, reguladoras o móviles.", "en": "Genomes contain many non-gene regions with structural, regulatory, or mobile roles.", "da": "Genomer indeholder mange ikke-genregioner med strukturelle, regulatoriske eller mobile roller."}
     - id: m01.mc02
-      claim: {es: Un gen produce exactamente una proteína., en: One gene produces exactly one protein., da: Ét gen producerer præcis ét protein.}
-      correction: {es: Puede producir ARN funcional, múltiples transcritos y diferentes productos proteicos., en: It may produce functional RNA, multiple transcripts, and different protein products., da: Det kan producere funktionelt RNA, flere transkripter og forskellige proteinprodukter.}
+      claim: {"es": "Un gen produce exactamente una proteína.", "en": "One gene produces exactly one protein.", "da": "Ét gen producerer præcis ét protein."}
+      correction: {"es": "Puede producir ARN funcional, múltiples transcritos y diferentes productos proteicos.", "en": "It may produce functional RNA, multiple transcripts, and different protein products.", "da": "Det kan producere funktionelt RNA, flere transkripter og forskellige proteinprodukter."}
     - id: m01.mc03
-      claim: {es: Complementar una secuencia ya produce su reverso-complementaria., en: Complementing a sequence already gives its reverse complement., da: Komplementering alene giver reverse complement.}
-      correction: {es: También debe invertirse el orden para escribir la hebra opuesta 5'→3'., en: Order must also be reversed to write the opposite strand 5'→3'., da: Rækkefølgen skal også vendes for at skrive den modsatte streng 5'→3'.}
+      claim: {"es": "Complementar una secuencia ya produce su reverso-complementaria.", "en": "Complementing a sequence already gives its reverse complement.", "da": "Komplementering alene giver reverse complement."}
+      correction: {"es": "También debe invertirse el orden para escribir la hebra opuesta 5'→3'.", "en": "Order must also be reversed to write the opposite strand 5'→3'.", "da": "Rækkefølgen skal også vendes for at skrive den modsatte streng 5'→3'."}
     - id: m01.mc04
-      claim: {es: Más ARN siempre significa más proteína activa., en: More RNA always means more active protein., da: Mere RNA betyder altid mere aktivt protein.}
-      correction: {es: Traducción, degradación, plegamiento, modificación y localización modulan la relación., en: Translation, degradation, folding, modification, and localization modulate the relationship., da: Translation, nedbrydning, foldning, modifikation og lokalisering modulerer forholdet.}
+      claim: {"es": "Más ARN siempre significa más proteína activa.", "en": "More RNA always means more active protein.", "da": "Mere RNA betyder altid mere aktivt protein."}
+      correction: {"es": "Traducción, degradación, plegamiento, modificación y localización modulan la relación.", "en": "Translation, degradation, folding, modification, and localization modulate the relationship.", "da": "Translation, nedbrydning, foldning, modifikation og lokalisering modulerer forholdet."}
     - id: m01.mc05
-      claim: {es: Una diferencia epigenética demuestra causalidad., en: An epigenetic difference proves causality., da: En epigenetisk forskel beviser kausalitet.}
-      correction: {es: Puede ser causa, consecuencia, confusión o cambio de composición celular., en: It may be cause, consequence, confounding, or a cell-composition shift., da: Den kan være årsag, konsekvens, confounding eller ændret cellesammensætning.}
+      claim: {"es": "Una diferencia epigenética demuestra causalidad.", "en": "An epigenetic difference proves causality.", "da": "En epigenetisk forskel beviser kausalitet."}
+      correction: {"es": "Puede ser causa, consecuencia, confusión o cambio de composición celular.", "en": "It may be cause, consequence, confounding, or a cell-composition shift.", "da": "Den kan være årsag, konsekvens, confounding eller ændret cellesammensætning."}
     - id: m01.mc06
-      claim: {es: Genes vecinos siempre forman un operón., en: Neighboring genes always form an operon., da: Nabogener danner altid et operon.}
-      correction: {es: Se requiere integrar orientación, distancia, señales regulatorias y evidencia de transcrito., en: Orientation, distance, regulatory signals, and transcript evidence must be integrated., da: Orientering, afstand, regulatoriske signaler og transkriptevidens skal integreres.}
+      claim: {"es": "Genes vecinos siempre forman un operón.", "en": "Neighboring genes always form an operon.", "da": "Nabogener danner altid et operon."}
+      correction: {"es": "Se requiere integrar orientación, distancia, señales regulatorias y evidencia de transcrito.", "en": "Orientation, distance, regulatory signals, and transcript evidence must be integrated.", "da": "Orientering, afstand, regulatoriske signaler og transkriptevidens skal integreres."}
     - id: m01.mc07
-      claim: {es: Una región similar a fago es necesariamente un fago activo., en: A phage-like region is necessarily an active phage., da: En faglignende region er nødvendigvis en aktiv fag.}
-      correction: {es: Puede ser incompleta, degradada o no inducible., en: It may be incomplete, degraded, or non-inducible., da: Den kan være ufuldstændig, degraderet eller ikke-inducerbar.}
+      claim: {"es": "Una región similar a fago es necesariamente un fago activo.", "en": "A phage-like region is necessarily an active phage.", "da": "En faglignende region er nødvendigvis en aktiv fag."}
+      correction: {"es": "Puede ser incompleta, degradada o no inducible.", "en": "It may be incomplete, degraded, or non-inducible.", "da": "Den kan være ufuldstændig, degraderet eller ikke-inducerbar."}
   socratic_questions:
     - ¿Qué entidad exacta representan estas coordenadas y en qué versión del ensamblaje?
     - Which strand is being shown, and in what orientation?
@@ -858,34 +858,34 @@ hidden_guided_support:
   retrieval_fragments:
     - id: dm847.m01.h01
       topic: gene_definition
-      text: {es: Un gen se define por productos funcionales y evidencia contextual, no sólo por longitud u ORF., en: A gene is defined by functional products and contextual evidence, not merely length or an ORF., da: Et gen defineres af funktionelle produkter og kontekstuel evidens, ikke blot længde eller ORF.}
+      text: {"es": "Un gen se define por productos funcionales y evidencia contextual, no sólo por longitud u ORF.", "en": "A gene is defined by functional products and contextual evidence, not merely length or an ORF.", "da": "Et gen defineres af funktionelle produkter og kontekstuel evidens, ikke blot længde eller ORF."}
     - id: dm847.m01.h02
       topic: strand_orientation
-      text: {es: Reverso-complementar exige invertir orden y complementar bases., en: Reverse complementation requires reversing order and complementing bases., da: Reverse complement kræver vending af rækkefølge og komplementering af baser.}
+      text: {"es": "Reverso-complementar exige invertir orden y complementar bases.", "en": "Reverse complementation requires reversing order and complementing bases.", "da": "Reverse complement kræver vending af rækkefølge og komplementering af baser."}
     - id: dm847.m01.h03
       topic: transcript_interpretation
-      text: {es: Abundancia de ARN integra síntesis, procesamiento y degradación., en: RNA abundance integrates synthesis, processing, and degradation., da: RNA-mængde integrerer syntese, processering og nedbrydning.}
+      text: {"es": "Abundancia de ARN integra síntesis, procesamiento y degradación.", "en": "RNA abundance integrates synthesis, processing, and degradation.", "da": "RNA-mængde integrerer syntese, processering og nedbrydning."}
     - id: dm847.m01.h04
       topic: protein_interpretation
-      text: {es: Cantidad y actividad proteica dependen de etapas posteriores a la transcripción., en: Protein abundance and activity depend on post-transcriptional stages., da: Proteinmængde og aktivitet afhænger af post-transkriptionelle trin.}
+      text: {"es": "Cantidad y actividad proteica dependen de etapas posteriores a la transcripción.", "en": "Protein abundance and activity depend on post-transcriptional stages.", "da": "Proteinmængde og aktivitet afhænger af post-transkriptionelle trin."}
     - id: dm847.m01.h05
       topic: regulatory_evidence
-      text: {es: Ocupación, perturbación y respuesta son capas de evidencia diferentes., en: Occupancy, perturbation, and response are distinct evidence layers., da: Binding, perturbation og respons er forskellige evidenslag.}
+      text: {"es": "Ocupación, perturbación y respuesta son capas de evidencia diferentes.", "en": "Occupancy, perturbation, and response are distinct evidence layers.", "da": "Binding, perturbation og respons er forskellige evidenslag."}
     - id: dm847.m01.h06
       topic: epigenetic_causality
-      text: {es: Una marca epigenética puede ser causa, consecuencia o correlato., en: An epigenetic mark may be cause, consequence, or correlate., da: Et epigenetisk mærke kan være årsag, konsekvens eller korrelat.}
+      text: {"es": "Una marca epigenética puede ser causa, consecuencia o correlato.", "en": "An epigenetic mark may be cause, consequence, or correlate.", "da": "Et epigenetisk mærke kan være årsag, konsekvens eller korrelat."}
     - id: dm847.m01.h07
       topic: operon_prediction
-      text: {es: Proximidad y orientación apoyan un operón, pero un transcrito conjunto aporta evidencia más directa., en: Proximity and orientation support an operon, but a joint transcript is more direct evidence., da: Nærhed og orientering støtter et operon, men et fælles transkript er mere direkte evidens.}
+      text: {"es": "Proximidad y orientación apoyan un operón, pero un transcrito conjunto aporta evidencia más directa.", "en": "Proximity and orientation support an operon, but a joint transcript is more direct evidence.", "da": "Nærhed og orientering støtter et operon, men et fælles transkript er mere direkte evidens."}
     - id: dm847.m01.h08
       topic: horizontal_transfer
-      text: {es: Transformación, conjugación y transducción difieren por fuente y mecanismo de transferencia., en: Transformation, conjugation, and transduction differ by source and transfer mechanism., da: Transformation, konjugation og transduktion adskiller sig i kilde og overførselsmekanisme.}
+      text: {"es": "Transformación, conjugación y transducción difieren por fuente y mecanismo de transferencia.", "en": "Transformation, conjugation, and transduction differ by source and transfer mechanism.", "da": "Transformation, konjugation og transduktion adskiller sig i kilde og overførselsmekanisme."}
     - id: dm847.m01.h09
       topic: prophage_annotation
-      text: {es: Una región similar a fago no demuestra completitud, inducibilidad ni infectividad., en: A phage-like region does not demonstrate completeness, inducibility, or infectivity., da: En faglignende region beviser ikke komplethed, inducerbarhed eller infektivitet.}
+      text: {"es": "Una región similar a fago no demuestra completitud, inducibilidad ni infectividad.", "en": "A phage-like region does not demonstrate completeness, inducibility, or infectivity.", "da": "En faglignende region beviser ikke komplethed, inducerbarhed eller infektivitet."}
     - id: dm847.m01.h10
       topic: evidence_rule
-      text: {es: Formula la conclusión más específica que todas las evidencias independientes puedan sostener., en: State the most specific conclusion that all independent evidence can support., da: Formulér den mest specifikke konklusion som al uafhængig evidens kan støtte.}
+      text: {"es": "Formula la conclusión más específica que todas las evidencias independientes puedan sostener.", "en": "State the most specific conclusion that all independent evidence can support.", "da": "Formulér den mest specifikke konklusion som al uafhængig evidens kan støtte."}
 
 sources:
   - id: sdu.dm847.official.2025

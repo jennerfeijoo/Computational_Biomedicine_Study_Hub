@@ -11,9 +11,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué condiciones debe cumplir un alineamiento por pares válido?
-      en: Which conditions must a valid pairwise alignment satisfy?
-      da: Hvilke betingelser skal et gyldigt parvist alignment opfylde?
+      es: "¿Qué condiciones debe cumplir un alineamiento por pares válido?"
+      en: "Which conditions must a valid pairwise alignment satisfy?"
+      da: "Hvilke betingelser skal et gyldigt parvist alignment opfylde?"
     back:
       es: >-
         Debe preservar el orden de los símbolos de cada secuencia, usar columnas símbolo-símbolo o símbolo-gap,
@@ -34,9 +34,9 @@ cards:
     card_type: misconception_correction
     difficulty: foundational
     front:
-      es: Corrige: «El alineamiento óptimo es la historia evolutiva verdadera».
-      en: Correct: “The optimum alignment is the true evolutionary history.”
-      da: Ret: “Optimumalignmentet er den sande evolutionære historie.”
+      es: "Corrige: «El alineamiento óptimo es la historia evolutiva verdadera»."
+      en: "Correct: “The optimum alignment is the true evolutionary history.”"
+      da: "Ret: “Optimumalignmentet er den sande evolutionære historie.”"
     back:
       es: >-
         Es el alineamiento con mayor puntuación dentro de un modelo concreto de sustituciones, gaps y cobertura.
@@ -57,9 +57,9 @@ cards:
     card_type: state_interpretation
     difficulty: foundational
     front:
-      es: ¿Qué representa F[i,j] en programación dinámica de alineamiento?
-      en: What does F[i,j] represent in alignment dynamic programming?
-      da: Hvad repræsenterer F[i,j] i dynamisk programmering til alignment?
+      es: "¿Qué representa F[i,j] en programación dinámica de alineamiento?"
+      en: "What does F[i,j] represent in alignment dynamic programming?"
+      da: "Hvad repræsenterer F[i,j] i dynamisk programmering til alignment?"
     back:
       es: >-
         El mejor score para alinear los prefijos de longitud i y j bajo la variante y el modelo definidos.
@@ -79,9 +79,9 @@ cards:
     card_type: recurrence_recall
     difficulty: foundational
     front:
-      es: Escribe la recurrencia global con gap lineal y explica sus tres transiciones.
-      en: Write the global linear-gap recurrence and explain its three transitions.
-      da: Skriv den globale recurrence med lineær gap-straf og forklar de tre transitions.
+      es: "Escribe la recurrencia global con gap lineal y explica sus tres transiciones."
+      en: "Write the global linear-gap recurrence and explain its three transitions."
+      da: "Skriv den globale recurrence med lineær gap-straf og forklar de tre transitions."
     back:
       es: >-
         F[i,j]=max(F[i-1,j-1]+s(x_i,y_j), F[i-1,j]+g, F[i,j-1]+g).
@@ -102,9 +102,9 @@ cards:
     card_type: initialization
     difficulty: foundational
     front:
-      es: ¿Cómo se inicializa Needleman–Wunsch con gap lineal g?
-      en: How is Needleman–Wunsch initialized with linear gap g?
-      da: Hvordan initialiseres Needleman–Wunsch med lineær gap-straf g?
+      es: "¿Cómo se inicializa Needleman–Wunsch con gap lineal g?"
+      en: "How is Needleman–Wunsch initialized with linear gap g?"
+      da: "Hvordan initialiseres Needleman–Wunsch med lineær gap-straf g?"
     back:
       es: >-
         F[0,0]=0; F[i,0]=i·g y F[0,j]=j·g. Los bordes representan alinear un prefijo completo
@@ -124,9 +124,9 @@ cards:
     card_type: endpoint
     difficulty: foundational
     front:
-      es: ¿Dónde comienza y termina el traceback global estándar?
-      en: Where does standard global traceback start and end?
-      da: Hvor starter og slutter standard global traceback?
+      es: "¿Dónde comienza y termina el traceback global estándar?"
+      en: "Where does standard global traceback start and end?"
+      da: "Hvor starter og slutter standard global traceback?"
     back:
       es: >-
         Comienza en F[m,n], porque ambas secuencias completas deben quedar cubiertas, y termina en F[0,0].
@@ -144,9 +144,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: ¿Qué cambia Smith–Waterman respecto de Needleman–Wunsch?
-      en: What changes in Smith–Waterman relative to Needleman–Wunsch?
-      da: Hvad ændres i Smith–Waterman i forhold til Needleman–Wunsch?
+      es: "¿Qué cambia Smith–Waterman respecto de Needleman–Wunsch?"
+      en: "What changes in Smith–Waterman relative to Needleman–Wunsch?"
+      da: "Hvad ændres i Smith–Waterman i forhold til Needleman–Wunsch?"
     back:
       es: >-
         Los bordes se fijan en cero, la recurrencia incluye cero como opción, el score óptimo es el máximo de toda la matriz
@@ -165,9 +165,9 @@ cards:
     card_type: mechanism
     difficulty: intermediate
     front:
-      es: ¿Por qué el reinicio en cero produce alineamiento local?
-      en: Why does resetting to zero produce local alignment?
-      da: Hvorfor giver nul-reset lokal alignment?
+      es: "¿Por qué el reinicio en cero produce alineamiento local?"
+      en: "Why does resetting to zero produce local alignment?"
+      da: "Hvorfor giver nul-reset lokal alignment?"
     back:
       es: >-
         Porque cualquier prefijo acumulado con score negativo se reemplaza por comenzar una nueva región.
@@ -187,9 +187,9 @@ cards:
     card_type: variant_selection
     difficulty: intermediate
     front:
-      es: ¿Cuándo elegir global, local o semiglobal?
-      en: When should global, local, or semiglobal alignment be chosen?
-      da: Hvornår vælges global, lokal eller semiglobal alignment?
+      es: "¿Cuándo elegir global, local o semiglobal?"
+      en: "When should global, local, or semiglobal alignment be chosen?"
+      da: "Hvornår vælges global, lokal eller semiglobal alignment?"
     back:
       es: >-
         Global cuando ambas secuencias deben explicarse completas y tienen relación global comparable.
@@ -210,9 +210,9 @@ cards:
     card_type: scenario_selection
     difficulty: intermediate
     front:
-      es: Elige variante: proteína completa, dominio compartido, read dentro de referencia y solapamiento de reads.
-      en: Choose variants for: full protein, shared domain, read within reference, and read overlap.
-      da: Vælg varianter for: helt protein, delt domæne, read i reference og read-overlap.
+      es: "Elige variante: proteína completa, dominio compartido, read dentro de referencia y solapamiento de reads."
+      en: "Choose variants for: full protein, shared domain, read within reference, and read overlap."
+      da: "Vælg varianter for: helt protein, delt domæne, read i reference og read-overlap."
     back:
       es: >-
         Proteínas completas comparables: global. Dominio compartido: local. Read completo dentro de referencia larga:
@@ -233,9 +233,9 @@ cards:
     card_type: traceback
     difficulty: foundational
     front:
-      es: ¿Qué columna produce cada movimiento de traceback?
-      en: Which alignment column does each traceback move produce?
-      da: Hvilken alignmentkolonne producerer hvert traceback-move?
+      es: "¿Qué columna produce cada movimiento de traceback?"
+      en: "Which alignment column does each traceback move produce?"
+      da: "Hvilken alignmentkolonne producerer hvert traceback-move?"
     back:
       es: >-
         Diagonal produce símbolo-símbolo. Un movimiento vertical consume un símbolo de una secuencia y coloca gap en la otra;
@@ -253,9 +253,9 @@ cards:
     card_type: validation_invariant
     difficulty: intermediate
     front:
-      es: ¿Qué tres invariantes debes comprobar tras traceback?
-      en: Which three invariants should be checked after traceback?
-      da: Hvilke tre invarianter bør kontrolleres efter traceback?
+      es: "¿Qué tres invariantes debes comprobar tras traceback?"
+      en: "Which three invariants should be checked after traceback?"
+      da: "Hvilke tre invarianter bør kontrolleres efter traceback?"
     back:
       es: >-
         Al retirar gaps se recuperan las secuencias o subregiones consumidas; ambos renglones del alineamiento tienen igual longitud;
@@ -274,9 +274,9 @@ cards:
     card_type: tie_handling
     difficulty: intermediate
     front:
-      es: ¿Qué significa que diagonal y arriba empaten en una celda?
-      en: What does a tie between diagonal and up mean in one cell?
-      da: Hvad betyder et tie mellem diagonal og op i en celle?
+      es: "¿Qué significa que diagonal y arriba empaten en una celda?"
+      en: "What does a tie between diagonal and up mean in one cell?"
+      da: "Hvad betyder et tie mellem diagonal og op i en celle?"
     back:
       es: >-
         Ambas transiciones producen el mismo score óptimo para esos prefijos. Existen varias rutas óptimas posibles,
@@ -297,9 +297,9 @@ cards:
     card_type: reporting
     difficulty: advanced
     front:
-      es: ¿Cómo debe reportarse un tie-break determinista?
-      en: How should a deterministic tie-break be reported?
-      da: Hvordan bør en deterministisk tie-break rapporteres?
+      es: "¿Cómo debe reportarse un tie-break determinista?"
+      en: "How should a deterministic tie-break be reported?"
+      da: "Hvordan bør en deterministisk tie-break rapporteres?"
     back:
       es: >-
         Como una decisión de implementación, no como evidencia de que esa ruta sea biológicamente preferida.
@@ -319,9 +319,9 @@ cards:
     card_type: mechanism
     difficulty: intermediate
     front:
-      es: ¿Por qué una penalización afín necesita varios estados?
-      en: Why does an affine gap penalty require multiple states?
-      da: Hvorfor kræver en affin gap-straf flere tilstande?
+      es: "¿Por qué una penalización afín necesita varios estados?"
+      en: "Why does an affine gap penalty require multiple states?"
+      da: "Hvorfor kræver en affin gap-straf flere tilstande?"
     back:
       es: >-
         Porque el coste de la siguiente columna depende de si se abre un gap nuevo o se extiende uno existente,
@@ -342,9 +342,9 @@ cards:
     card_type: state_comparison
     difficulty: intermediate
     front:
-      es: Define M, X e Y en un alineamiento con gaps afines.
-      en: Define M, X, and Y in affine-gap alignment.
-      da: Definér M, X og Y i alignment med affine gaps.
+      es: "Define M, X e Y en un alineamiento con gaps afines."
+      en: "Define M, X, and Y in affine-gap alignment."
+      da: "Definér M, X og Y i alignment med affine gaps."
     back:
       es: >-
         M[i,j] termina alineando x_i con y_j. X[i,j] termina con un gap en una secuencia
@@ -365,9 +365,9 @@ cards:
     card_type: convention
     difficulty: advanced
     front:
-      es: ¿Qué convención de gap afín debe declararse explícitamente?
-      en: Which affine-gap convention must be stated explicitly?
-      da: Hvilken affin-gap-konvention skal deklareres eksplicit?
+      es: "¿Qué convención de gap afín debe declararse explícitamente?"
+      en: "Which affine-gap convention must be stated explicitly?"
+      da: "Hvilken affin-gap-konvention skal deklareres eksplicit?"
     back:
       es: >-
         Si un gap de longitud k cuesta open+k·extend o open+(k-1)·extend; es decir,
@@ -388,9 +388,9 @@ cards:
     card_type: complexity
     difficulty: foundational
     front:
-      es: ¿Cuál es la complejidad de la matriz completa para longitudes m y n?
-      en: What is the complexity of the full matrix for lengths m and n?
-      da: Hvad er kompleksiteten af den fulde matrix for længder m og n?
+      es: "¿Cuál es la complejidad de la matriz completa para longitudes m y n?"
+      en: "What is the complexity of the full matrix for lengths m and n?"
+      da: "Hvad er kompleksiteten af den fulde matrix for længder m og n?"
     back:
       es: >-
         O(mn) tiempo porque se calculan m·n estados con trabajo constante por transición en el modelo básico,
@@ -410,9 +410,9 @@ cards:
     card_type: memory_optimization
     difficulty: intermediate
     front:
-      es: ¿Qué se conserva y qué se pierde al usar sólo dos filas?
-      en: What is preserved and lost when only two rows are used?
-      da: Hvad bevares og mistes når kun to rækker bruges?
+      es: "¿Qué se conserva y qué se pierde al usar sólo dos filas?"
+      en: "What is preserved and lost when only two rows are used?"
+      da: "Hvad bevares og mistes når kun to rækker bruges?"
     back:
       es: >-
         Se conserva el score óptimo porque cada fila depende sólo de la anterior y de la celda izquierda actual.
@@ -432,9 +432,9 @@ cards:
     card_type: algorithm
     difficulty: advanced
     front:
-      es: ¿Qué aporta Hirschberg al alineamiento global?
-      en: What does Hirschberg contribute to global alignment?
-      da: Hvad bidrager Hirschberg med til global alignment?
+      es: "¿Qué aporta Hirschberg al alineamiento global?"
+      en: "What does Hirschberg contribute to global alignment?"
+      da: "Hvad bidrager Hirschberg med til global alignment?"
     back:
       es: >-
         Reconstruye un alineamiento global óptimo con O(mn) tiempo y O(min(m,n)) memoria mediante divide-and-conquer.
@@ -454,9 +454,9 @@ cards:
     card_type: assumption_audit
     difficulty: advanced
     front:
-      es: ¿Cuándo es válido usar banding y cómo puede fallar?
-      en: When is banding valid, and how can it fail?
-      da: Hvornår er banding gyldigt, og hvordan kan det fejle?
+      es: "¿Cuándo es válido usar banding y cómo puede fallar?"
+      en: "When is banding valid, and how can it fail?"
+      da: "Hvornår er banding gyldigt, og hvordan kan det fejle?"
     back:
       es: >-
         Es válido cuando existe una cota justificada que garantiza o hace muy probable que una ruta óptima permanezca
@@ -476,9 +476,9 @@ cards:
     card_type: test_design
     difficulty: advanced
     front:
-      es: ¿Qué casos forman una suite mínima robusta para global y local?
-      en: Which cases form a robust minimum test suite for global and local alignment?
-      da: Hvilke cases udgør en robust minimal testsuite for global og lokal alignment?
+      es: "¿Qué casos forman una suite mínima robusta para global y local?"
+      en: "Which cases form a robust minimum test suite for global and local alignment?"
+      da: "Hvilke cases udgør en robust minimal testsuite for global og lokal alignment?"
     back:
       es: >-
         Ambas vacías; una vacía; un símbolo igual y distinto; secuencias idénticas; caso donde gap supera mismatch;
@@ -499,9 +499,9 @@ cards:
     card_type: oral_defense
     difficulty: advanced
     front:
-      es: Responde en 45 segundos: «¿Por qué dos implementaciones correctas pueden devolver alineamientos distintos?»
-      en: Answer in 45 seconds: “Why can two correct implementations return different alignments?”
-      da: Svar på 45 sekunder: “Hvorfor kan to korrekte implementeringer returnere forskellige alignments?”
+      es: "Responde en 45 segundos: «¿Por qué dos implementaciones correctas pueden devolver alineamientos distintos?»"
+      en: "Answer in 45 seconds: “Why can two correct implementations return different alignments?”"
+      da: "Svar på 45 sekunder: “Hvorfor kan to korrekte implementeringer returnere forskellige alignments?”"
     back:
       es: >-
         Puede haber múltiples alineamientos con el mismo score óptimo. Cada implementación puede resolver empates en distinto orden
@@ -522,9 +522,9 @@ cards:
     card_type: transfer
     difficulty: advanced
     front:
-      es: ¿Cómo conecta alineamiento dinámico con HMM y búsqueda de secuencias?
-      en: How does dynamic alignment connect to HMMs and sequence search?
-      da: Hvordan forbinder dynamisk alignment til HMM'er og sekvenssøgning?
+      es: "¿Cómo conecta alineamiento dinámico con HMM y búsqueda de secuencias?"
+      en: "How does dynamic alignment connect to HMMs and sequence search?"
+      da: "Hvordan forbinder dynamisk alignment til HMM'er og sekvenssøgning?"
     back:
       es: >-
         Ambos usan estados, recurrencias y acumulación de scores. Viterbi en un HMM busca la ruta de estados más probable,

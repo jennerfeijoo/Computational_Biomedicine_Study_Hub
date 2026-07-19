@@ -11,9 +11,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es una iteración?
-      en: What is an iteration?
-      da: Hvad er en iteration?
+      es: "¿Qué es una iteración?"
+      en: "What is an iteration?"
+      da: "Hvad er en iteration?"
     back:
       es: >-
         Una iteración es una ejecución del cuerpo de un bucle. Durante ella, el programa parte de un
@@ -33,9 +33,9 @@ cards:
     card_type: mechanism
     difficulty: foundational
     front:
-      es: ¿Cuáles son los cuatro componentes esenciales de un bucle `while` bien diseñado?
-      en: What are the four essential components of a well-designed `while` loop?
-      da: Hvad er de fire væsentlige dele af en veldesignet `while`-løkke?
+      es: "¿Cuáles son los cuatro componentes esenciales de un bucle `while` bien diseñado?"
+      en: "What are the four essential components of a well-designed `while` loop?"
+      da: "Hvad er de fire væsentlige dele af en veldesignet `while`-løkke?"
     back:
       es: >-
         Inicialización, condición de continuación, cuerpo de trabajo y actualización. La inicialización
@@ -55,9 +55,9 @@ cards:
     card_type: misconception_correction
     difficulty: foundational
     front:
-      es: Corrige: “El cuerpo de un `while` se ejecuta al menos una vez”.
-      en: Correct: “A `while` body executes at least once.”
-      da: Ret: “En `while`-krop udføres mindst én gang.”
+      es: "Corrige: “El cuerpo de un `while` se ejecuta al menos una vez”."
+      en: "Correct: “A `while` body executes at least once.”"
+      da: "Ret: “En `while`-krop udføres mindst én gang.”"
     back:
       es: >-
         `while` comprueba su condición antes de ejecutar el cuerpo. Si la condición es falsa desde el
@@ -76,9 +76,9 @@ cards:
     card_type: definition
     difficulty: intermediate
     front:
-      es: ¿Qué es una medida de progreso en un bucle?
-      en: What is a loop progress measure?
-      da: Hvad er et fremdriftsmål i en løkke?
+      es: "¿Qué es una medida de progreso en un bucle?"
+      en: "What is a loop progress measure?"
+      da: "Hvad er et fremdriftsmål i en løkke?"
     back:
       es: >-
         Es una cantidad acotada que cambia de manera predecible en cada iteración y se acerca a una
@@ -98,9 +98,9 @@ cards:
     card_type: definition
     difficulty: intermediate
     front:
-      es: ¿Qué es un invariante de bucle?
-      en: What is a loop invariant?
-      da: Hvad er en løkkeinvariant?
+      es: "¿Qué es un invariante de bucle?"
+      en: "What is a loop invariant?"
+      da: "Hvad er en løkkeinvariant?"
     back:
       es: >-
         Es una propiedad que debe ser verdadera antes de la primera iteración y conservarse después de
@@ -120,9 +120,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: ¿En qué se diferencian terminación y corrección parcial?
-      en: How do termination and partial correctness differ?
-      da: Hvordan adskiller afslutning og delvis korrekthed sig?
+      es: "¿En qué se diferencian terminación y corrección parcial?"
+      en: "How do termination and partial correctness differ?"
+      da: "Hvordan adskiller afslutning og delvis korrekthed sig?"
     back:
       es: >-
         La terminación demuestra que el bucle finalmente se detiene. La corrección parcial demuestra que,
@@ -142,9 +142,9 @@ cards:
     card_type: code_pattern
     difficulty: foundational
     front:
-      es: ¿Qué valores produce `range(5)`?
-      en: What values does `range(5)` produce?
-      da: Hvilke værdier producerer `range(5)`?
+      es: "¿Qué valores produce `range(5)`?"
+      en: "What values does `range(5)` produce?"
+      da: "Hvilke værdier producerer `range(5)`?"
     back:
       es: >-
         Produce `0, 1, 2, 3, 4`. El límite final 5 se excluye, por lo que hay exactamente cinco valores.
@@ -161,9 +161,9 @@ cards:
     card_type: formula
     difficulty: foundational
     front:
-      es: ¿Qué incluyen y excluyen `start` y `stop` en `range(start, stop, step)`?
-      en: What do `start` and `stop` include or exclude in `range(start, stop, step)`?
-      da: Hvad inkluderes og ekskluderes af `start` og `stop` i `range(start, stop, step)`?
+      es: "¿Qué incluyen y excluyen `start` y `stop` en `range(start, stop, step)`?"
+      en: "What do `start` and `stop` include or exclude in `range(start, stop, step)`?"
+      da: "Hvad inkluderes og ekskluderes af `start` og `stop` i `range(start, stop, step)`?"
     back:
       es: >-
         `start` se incluye y `stop` se excluye. `step` determina el cambio entre valores y no puede ser cero.
@@ -182,9 +182,9 @@ cards:
     card_type: misconception_correction
     difficulty: intermediate
     front:
-      es: Corrige: “`range(2, 10, 2)` produce también 10”.
-      en: Correct: “`range(2, 10, 2)` also produces 10.”
-      da: Ret: “`range(2, 10, 2)` producerer også 10.”
+      es: "Corrige: “`range(2, 10, 2)` produce también 10”."
+      en: "Correct: “`range(2, 10, 2)` also produces 10.”"
+      da: "Ret: “`range(2, 10, 2)` producerer også 10.”"
     back:
       es: >-
         Produce `2, 4, 6, 8`. El valor `stop` es exclusivo. Para incluir 10 con paso 2 podría usarse
@@ -202,9 +202,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es un contador?
-      en: What is a counter?
-      da: Hvad er en tæller?
+      es: "¿Qué es un contador?"
+      en: "What is a counter?"
+      da: "Hvad er en tæller?"
     back:
       es: >-
         Es una variable que registra cuántas veces ocurrió un evento. Suele inicializarse en cero y
@@ -223,9 +223,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es un acumulador?
-      en: What is an accumulator?
-      da: Hvad er en akkumulator?
+      es: "¿Qué es un acumulador?"
+      en: "What is an accumulator?"
+      da: "Hvad er en akkumulator?"
     back:
       es: >-
         Es una variable que combina los valores procesados hasta el momento, por ejemplo mediante suma
@@ -244,9 +244,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: Distingue contador, acumulador, indicador y variable de mejor valor.
-      en: Distinguish counter, accumulator, flag, and best-value variable.
-      da: Skeln mellem tæller, akkumulator, flag og bedste-værdi-variabel.
+      es: "Distingue contador, acumulador, indicador y variable de mejor valor."
+      en: "Distinguish counter, accumulator, flag, and best-value variable."
+      da: "Skeln mellem tæller, akkumulator, flag og bedste-værdi-variabel."
     back:
       es: >-
         El contador registra cantidad de eventos. El acumulador combina valores. El indicador booleano
@@ -267,15 +267,15 @@ cards:
     card_type: output_interpretation
     difficulty: intermediate
     front:
-      es: Traza `i = 0; total = 0; while i < 3: total += i; i += 1`.
-      en: Trace `i = 0; total = 0; while i < 3: total += i; i += 1`.
-      da: Gennemgå `i = 0; total = 0; while i < 3: total += i; i += 1`.
+      es: "Traza `i = 0; total = 0; while i < 3: total += i; i += 1`."
+      en: "Trace `i = 0; total = 0; while i < 3: total += i; i += 1`."
+      da: "Gennemgå `i = 0; total = 0; while i < 3: total += i; i += 1`."
     back:
       es: >-
-        Después de cada iteración: `(i=1, total=0)`, `(i=2, total=1)`, `(i=3, total=3)`. Entonces
+        Después de cada iteración: "`(i=1, total=0)`, `(i=2, total=1)`, `(i=3, total=3)`. Entonces"
         `i < 3` es falso y el bucle termina. El total final es `0 + 1 + 2 = 3`.
       en: >-
-        After each iteration: `(i=1, total=0)`, `(i=2, total=1)`, `(i=3, total=3)`. Then `i < 3`
+        After each iteration: "`(i=1, total=0)`, `(i=2, total=1)`, `(i=3, total=3)`. Then `i < 3`"
         is false. Final total is `0 + 1 + 2 = 3`.
       da: >-
         Tilstandene er `(1,0)`, `(2,1)`, `(3,3)`, hvorefter løkken stopper.
@@ -288,9 +288,9 @@ cards:
     card_type: debugging
     difficulty: foundational
     front:
-      es: ¿Por qué `i = 0; while i < 5: print(i)` es infinito?
-      en: Why is `i = 0; while i < 5: print(i)` infinite?
-      da: Hvorfor er `i = 0; while i < 5: print(i)` uendelig?
+      es: "¿Por qué `i = 0; while i < 5: print(i)` es infinito?"
+      en: "Why is `i = 0; while i < 5: print(i)` infinite?"
+      da: "Hvorfor er `i = 0; while i < 5: print(i)` uendelig?"
     back:
       es: >-
         La condición depende de `i`, pero el cuerpo nunca modifica `i`. Por tanto, `i` permanece en cero
@@ -309,9 +309,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es un valor centinela?
-      en: What is a sentinel value?
-      da: Hvad er en stopværdi?
+      es: "¿Qué es un valor centinela?"
+      en: "What is a sentinel value?"
+      da: "Hvad er en stopværdi?"
     back:
       es: >-
         Es un valor reservado que indica el final de una secuencia de entrada cuando no se conoce su
@@ -331,9 +331,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: ¿Cuál es la diferencia entre `break` y `continue`?
-      en: What is the difference between `break` and `continue`?
-      da: Hvad er forskellen mellem `break` og `continue`?
+      es: "¿Cuál es la diferencia entre `break` y `continue`?"
+      en: "What is the difference between `break` and `continue`?"
+      da: "Hvad er forskellen mellem `break` og `continue`?"
     back:
       es: >-
         `break` termina inmediatamente el bucle más cercano. `continue` omite el resto de la iteración
@@ -353,9 +353,9 @@ cards:
     card_type: workflow_step
     difficulty: intermediate
     front:
-      es: ¿En qué orden debe procesarse un centinela para evitar contaminar la suma?
-      en: In what order should a sentinel be handled to avoid contaminating a sum?
-      da: I hvilken rækkefølge skal en stopværdi håndteres for ikke at forurene en sum?
+      es: "¿En qué orden debe procesarse un centinela para evitar contaminar la suma?"
+      en: "In what order should a sentinel be handled to avoid contaminating a sum?"
+      da: "I hvilken rækkefølge skal en stopværdi håndteres for ikke at forurene en sum?"
     back:
       es: >-
         Leer el valor, comprobar inmediatamente si es el centinela y salir si corresponde. Solo después
@@ -374,9 +374,9 @@ cards:
     card_type: formula
     difficulty: intermediate
     front:
-      es: Dos bucles anidados recorren `n` y `m` valores. ¿Cuántas veces se ejecuta el cuerpo interior?
-      en: Two nested loops traverse `n` and `m` values. How many times does the inner body execute?
-      da: To indlejrede løkker gennemløber `n` og `m` værdier. Hvor mange gange udføres den indre krop?
+      es: "Dos bucles anidados recorren `n` y `m` valores. ¿Cuántas veces se ejecuta el cuerpo interior?"
+      en: "Two nested loops traverse `n` and `m` values. How many times does the inner body execute?"
+      da: "To indlejrede løkker gennemløber `n` og `m` værdier. Hvor mange gange udføres den indre krop?"
     back:
       es: >-
         Si los límites son independientes, el cuerpo interior se ejecuta `n·m` veces. Cada una de las
@@ -396,9 +396,9 @@ cards:
     card_type: misconception_correction
     difficulty: advanced
     front:
-      es: Corrige: “Dos bucles anidados siempre realizan `n²` iteraciones”.
-      en: Correct: “Two nested loops always perform `n²` iterations.”
-      da: Ret: “To indlejrede løkker udfører altid `n²` iterationer.”
+      es: "Corrige: “Dos bucles anidados siempre realizan `n²` iteraciones”."
+      en: "Correct: “Two nested loops always perform `n²` iterations.”"
+      da: "Ret: “To indlejrede løkker udfører altid `n²` iterationer.”"
     back:
       es: >-
         Solo ocurre cuando ambos límites son independientes y tienen tamaño `n`. Si los tamaños son `n`
@@ -418,9 +418,9 @@ cards:
     card_type: method_selection
     difficulty: intermediate
     front:
-      es: ¿Cuándo elegir `for` y cuándo `while`?
-      en: When should you choose `for` and when `while`?
-      da: Hvornår bør du vælge `for`, og hvornår `while`?
+      es: "¿Cuándo elegir `for` y cuándo `while`?"
+      en: "When should you choose `for` and when `while`?"
+      da: "Hvornår bør du vælge `for`, og hvornår `while`?"
     back:
       es: >-
         `for` es preferible cuando se recorre una colección o un número acotado de valores. `while` es
@@ -440,9 +440,9 @@ cards:
     card_type: test_design
     difficulty: intermediate
     front:
-      es: ¿Qué casos mínimos deben probarse en un bucle acotado?
-      en: What minimum cases should be tested for a bounded loop?
-      da: Hvilke minimumstilfælde bør testes for en afgrænset løkke?
+      es: "¿Qué casos mínimos deben probarse en un bucle acotado?"
+      en: "What minimum cases should be tested for a bounded loop?"
+      da: "Hvilke minimumstilfælde bør testes for en afgrænset løkke?"
     back:
       es: >-
         Un caso de cero iteraciones, uno de una iteración, un caso normal con varias iteraciones, el valor
@@ -462,9 +462,9 @@ cards:
     card_type: debugging
     difficulty: intermediate
     front:
-      es: ¿Qué error hay en sumar de 1 a `n` con la condición `while i < n` si `n` debe incluirse?
-      en: What is wrong with summing 1 through `n` using `while i < n` when `n` must be included?
-      da: Hvad er fejlen ved at summere 1 til `n` med `while i < n`, når `n` skal inkluderes?
+      es: "¿Qué error hay en sumar de 1 a `n` con la condición `while i < n` si `n` debe incluirse?"
+      en: "What is wrong with summing 1 through `n` using `while i < n` when `n` must be included?"
+      da: "Hvad er fejlen ved at summere 1 til `n` med `while i < n`, når `n` skal inkluderes?"
     back:
       es: >-
         Es un error lógico de uno en uno: el bucle se detiene antes de procesar `n`. Debe utilizarse
@@ -474,7 +474,7 @@ cards:
         It is an off-by-one logic error: the loop stops before processing `n`. Use `i <= n` or an equivalent
         `for`. Test `n=1` is revealing because the incorrect result is often zero instead of one.
       da: >-
-        Det er en grænsefejl: `n` behandles ikke. Brug `i <= n` eller en tilsvarende `for`-løkke.
+        Det er en grænsefejl: "`n` behandles ikke. Brug `i <= n` eller en tilsvarende `for`-løkke."
     linked_objectives: [m03.o2, m03.o3, m03.o8]
     linked_concepts: [for-loop-and-range, termination-progress-and-invariants]
     tags: [off-by-one, debugging]
@@ -484,9 +484,9 @@ cards:
     card_type: oral_or_report_defense
     difficulty: advanced
     front:
-      es: ¿Cómo defenderías que un bucle termina?
-      en: How would you defend that a loop terminates?
-      da: Hvordan ville du forsvare, at en løkke afslutter?
+      es: "¿Cómo defenderías que un bucle termina?"
+      en: "How would you defend that a loop terminates?"
+      da: "Hvordan ville du forsvare, at en løkke afslutter?"
     back:
       es: >-
         Identificaría una medida de progreso, demostraría que cambia en cada iteración en la dirección
@@ -508,9 +508,9 @@ cards:
     card_type: oral_or_report_defense
     difficulty: advanced
     front:
-      es: ¿Cómo defenderías la corrección de un acumulador dentro de un bucle?
-      en: How would you defend the correctness of an accumulator in a loop?
-      da: Hvordan ville du forsvare korrektheden af en akkumulator i en løkke?
+      es: "¿Cómo defenderías la corrección de un acumulador dentro de un bucle?"
+      en: "How would you defend the correctness of an accumulator in a loop?"
+      da: "Hvordan ville du forsvare korrektheden af en akkumulator i en løkke?"
     back:
       es: >-
         Declararía un invariante preciso, por ejemplo: después de procesar los primeros `k` elementos,

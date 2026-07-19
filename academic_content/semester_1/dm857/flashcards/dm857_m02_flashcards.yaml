@@ -11,9 +11,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es un valor booleano y cuáles son sus dos valores posibles en Python?
-      en: What is a Boolean value and what are its two possible values in Python?
-      da: Hvad er en boolesk værdi, og hvilke to værdier kan den have i Python?
+      es: "¿Qué es un valor booleano y cuáles son sus dos valores posibles en Python?"
+      en: "What is a Boolean value and what are its two possible values in Python?"
+      da: "Hvad er en boolesk værdi, og hvilke to værdier kan den have i Python?"
     back:
       es: >-
         Un valor booleano pertenece al tipo `bool` y representa una verdad lógica. Sus únicos valores
@@ -36,9 +36,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es un predicado en programación?
-      en: What is a predicate in programming?
-      da: Hvad er et prædikat i programmering?
+      es: "¿Qué es un predicado en programación?"
+      en: "What is a predicate in programming?"
+      da: "Hvad er et prædikat i programmering?"
     back:
       es: >-
         Un predicado es una expresión que se evalúa como `True` o `False`. Por ejemplo,
@@ -60,9 +60,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: ¿Cuál es la diferencia entre `=` y `==`?
-      en: What is the difference between `=` and `==`?
-      da: Hvad er forskellen mellem `=` og `==`?
+      es: "¿Cuál es la diferencia entre `=` y `==`?"
+      en: "What is the difference between `=` and `==`?"
+      da: "Hvad er forskellen mellem `=` og `==`?"
     back:
       es: >-
         `=` realiza una asignación: evalúa una expresión y vincula un nombre con el resultado. `==`
@@ -83,9 +83,9 @@ cards:
     card_type: formula
     difficulty: foundational
     front:
-      es: ¿Qué comparadores incluye Python y cuáles incluyen el límite?
-      en: Which comparison operators does Python provide, and which include the boundary?
-      da: Hvilke sammenligningsoperatorer har Python, og hvilke inkluderer grænsen?
+      es: "¿Qué comparadores incluye Python y cuáles incluyen el límite?"
+      en: "Which comparison operators does Python provide, and which include the boundary?"
+      da: "Hvilke sammenligningsoperatorer har Python, og hvilke inkluderer grænsen?"
     back:
       es: >-
         Los comparadores básicos son `==`, `!=`, `<`, `<=`, `>` y `>=`. Los operadores `<=` y `>=`
@@ -105,9 +105,9 @@ cards:
     card_type: code_pattern
     difficulty: foundational
     front:
-      es: ¿Cómo se expresa claramente que `x` está entre `a` y `b`, incluyendo ambos límites?
-      en: How can you clearly express that `x` lies between `a` and `b`, including both boundaries?
-      da: Hvordan udtrykkes det klart, at `x` ligger mellem `a` og `b`, inklusive begge grænser?
+      es: "¿Cómo se expresa claramente que `x` está entre `a` y `b`, incluyendo ambos límites?"
+      en: "How can you clearly express that `x` lies between `a` and `b`, including both boundaries?"
+      da: "Hvordan udtrykkes det klart, at `x` ligger mellem `a` og `b`, inklusive begge grænser?"
     back:
       es: >-
         Se utiliza la comparación encadenada `a <= x <= b`. Es equivalente a
@@ -126,9 +126,9 @@ cards:
     card_type: mechanism
     difficulty: foundational
     front:
-      es: ¿Qué significan `and`, `or` y `not`?
-      en: What do `and`, `or`, and `not` mean?
-      da: Hvad betyder `and`, `or` og `not`?
+      es: "¿Qué significan `and`, `or` y `not`?"
+      en: "What do `and`, `or`, and `not` mean?"
+      da: "Hvad betyder `and`, `or` og `not`?"
     back:
       es: >-
         `A and B` es verdadero solo cuando ambos operandos son verdaderos. `A or B` es verdadero cuando
@@ -148,9 +148,9 @@ cards:
     card_type: formula
     difficulty: intermediate
     front:
-      es: ¿Cuál es la precedencia de `not`, `and` y `or`?
-      en: What is the precedence of `not`, `and`, and `or`?
-      da: Hvad er præcedensen for `not`, `and` og `or`?
+      es: "¿Cuál es la precedencia de `not`, `and` y `or`?"
+      en: "What is the precedence of `not`, `and`, and `or`?"
+      da: "Hvad er præcedensen for `not`, `and` og `or`?"
     back:
       es: >-
         La precedencia es `not`, después `and` y finalmente `or`. Por ello,
@@ -170,9 +170,9 @@ cards:
     card_type: formula
     difficulty: intermediate
     front:
-      es: Aplica las leyes de De Morgan a `not (A and B)` y `not (A or B)`.
-      en: Apply De Morgan's laws to `not (A and B)` and `not (A or B)`.
-      da: Anvend De Morgans love på `not (A and B)` og `not (A or B)`.
+      es: "Aplica las leyes de De Morgan a `not (A and B)` y `not (A or B)`."
+      en: "Apply De Morgan's laws to `not (A and B)` and `not (A or B)`."
+      da: "Anvend De Morgans love på `not (A and B)` og `not (A or B)`."
     back:
       es: >-
         `not (A and B)` equivale a `(not A) or (not B)`. `not (A or B)` equivale a
@@ -192,9 +192,9 @@ cards:
     card_type: mechanism
     difficulty: intermediate
     front:
-      es: ¿Cómo funciona el cortocircuito en `A and B`?
-      en: How does short-circuiting work in `A and B`?
-      da: Hvordan fungerer kortslutning i `A and B`?
+      es: "¿Cómo funciona el cortocircuito en `A and B`?"
+      en: "How does short-circuiting work in `A and B`?"
+      da: "Hvordan fungerer kortslutning i `A and B`?"
     back:
       es: >-
         Python evalúa `A` primero. Si `A` es falsa, el resultado completo ya es falso y `B` no se
@@ -214,9 +214,9 @@ cards:
     card_type: mechanism
     difficulty: intermediate
     front:
-      es: ¿Cómo funciona el cortocircuito en `A or B`?
-      en: How does short-circuiting work in `A or B`?
-      da: Hvordan fungerer kortslutning i `A or B`?
+      es: "¿Cómo funciona el cortocircuito en `A or B`?"
+      en: "How does short-circuiting work in `A or B`?"
+      da: "Hvordan fungerer kortslutning i `A or B`?"
     back:
       es: >-
         Python evalúa `A` primero. Si `A` es verdadera, el resultado completo ya es verdadero y `B`
@@ -236,9 +236,9 @@ cards:
     card_type: code_pattern
     difficulty: intermediate
     front:
-      es: Escribe una condición segura que compruebe si `n / d > 2` sin dividir cuando `d` es cero.
-      en: Write a safe condition that checks whether `n / d > 2` without dividing when `d` is zero.
-      da: Skriv en sikker betingelse, der kontrollerer `n / d > 2` uden at dividere, når `d` er nul.
+      es: "Escribe una condición segura que compruebe si `n / d > 2` sin dividir cuando `d` es cero."
+      en: "Write a safe condition that checks whether `n / d > 2` without dividing when `d` is zero."
+      da: "Skriv en sikker betingelse, der kontrollerer `n / d > 2` uden at dividere, når `d` er nul."
     back:
       es: >-
         `d != 0 and n / d > 2`. La condición guardián aparece primero. Si `d == 0`, el primer operando
@@ -257,9 +257,9 @@ cards:
     card_type: workflow_step
     difficulty: foundational
     front:
-      es: ¿Cómo selecciona una cadena `if`–`elif`–`else` la rama que ejecuta?
-      en: How does an `if`–`elif`–`else` chain select the branch to execute?
-      da: Hvordan vælger en `if`–`elif`–`else`-kæde den gren, der udføres?
+      es: "¿Cómo selecciona una cadena `if`–`elif`–`else` la rama que ejecuta?"
+      en: "How does an `if`–`elif`–`else` chain select the branch to execute?"
+      da: "Hvordan vælger en `if`–`elif`–`else`-kæde den gren, der udføres?"
     back:
       es: >-
         Las condiciones se evalúan de arriba hacia abajo. Se ejecuta la primera rama cuya condición sea
@@ -279,9 +279,9 @@ cards:
     card_type: misconception_correction
     difficulty: intermediate
     front:
-      es: Corrige: “En una cadena `if`–`elif`, todas las condiciones verdaderas ejecutan su bloque”.
-      en: Correct: “In an `if`–`elif` chain, every true condition executes its block.”
-      da: Ret: “I en `if`–`elif`-kæde udfører alle sande betingelser deres blok.”
+      es: "Corrige: “En una cadena `if`–`elif`, todas las condiciones verdaderas ejecutan su bloque”."
+      en: "Correct: “In an `if`–`elif` chain, every true condition executes its block.”"
+      da: "Ret: “I en `if`–`elif`-kæde udfører alle sande betingelser deres blok.”"
     back:
       es: >-
         Solo se ejecuta la primera rama verdadera. Una condición posterior puede ser verdadera en sentido
@@ -301,14 +301,14 @@ cards:
     card_type: method_assumption
     difficulty: intermediate
     front:
-      es: ¿Por qué se colocan normalmente las reglas específicas antes que las generales?
-      en: Why are specific rules usually placed before general rules?
-      da: Hvorfor placeres specifikke regler normalt før generelle regler?
+      es: "¿Por qué se colocan normalmente las reglas específicas antes que las generales?"
+      en: "Why are specific rules usually placed before general rules?"
+      da: "Hvorfor placeres specifikke regler normalt før generelle regler?"
     back:
       es: >-
         Una regla general puede ser verdadera para los mismos casos que una regla específica. Como la
         primera rama verdadera detiene la cadena, una regla general temprana puede volver inalcanzable la
-        específica. Ejemplo: `score >= 60` debe aparecer después de `score >= 90` si 90 define otra categoría.
+        específica. Ejemplo: "`score >= 60` debe aparecer después de `score >= 90` si 90 define otra categoría."
       en: >-
         A general rule may also be true for cases covered by a specific rule. Since the first true branch
         stops the chain, an early general rule can make the specific rule unreachable.
@@ -323,9 +323,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: ¿Cuándo es preferible una condición compuesta y cuándo un condicional anidado?
-      en: When is a compound condition preferable, and when is a nested conditional preferable?
-      da: Hvornår er en sammensat betingelse bedst, og hvornår er en indlejret betingelse bedst?
+      es: "¿Cuándo es preferible una condición compuesta y cuándo un condicional anidado?"
+      en: "When is a compound condition preferable, and when is a nested conditional preferable?"
+      da: "Hvornår er en sammensat betingelse bedst, og hvornår er en indlejret betingelse bedst?"
     back:
       es: >-
         Una condición compuesta es adecuada cuando varios requisitos forman una sola regla, como
@@ -346,9 +346,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es una condición guardián?
-      en: What is a guard condition?
-      da: Hvad er en beskyttelsesbetingelse?
+      es: "¿Qué es una condición guardián?"
+      en: "What is a guard condition?"
+      da: "Hvad er en beskyttelsesbetingelse?"
     back:
       es: >-
         Es un predicado evaluado antes de una operación o bloque para comprobar que su ejecución sea
@@ -368,9 +368,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es una prueba de límite?
-      en: What is a boundary test?
-      da: Hvad er en grænsetest?
+      es: "¿Qué es una prueba de límite?"
+      en: "What is a boundary test?"
+      da: "Hvad er en grænsetest?"
     back:
       es: >-
         Es una prueba diseñada alrededor de un valor donde cambia la categoría o el comportamiento.
@@ -390,9 +390,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: ¿En qué se diferencian cobertura de ramas y cobertura de límites?
-      en: How do branch coverage and boundary coverage differ?
-      da: Hvordan adskiller grendækning og grænsedækning sig?
+      es: "¿En qué se diferencian cobertura de ramas y cobertura de límites?"
+      en: "How do branch coverage and boundary coverage differ?"
+      da: "Hvordan adskiller grendækning og grænsedækning sig?"
     back:
       es: >-
         La cobertura de ramas demuestra que cada rama relevante se ejecutó al menos una vez. La cobertura
@@ -413,9 +413,9 @@ cards:
     card_type: output_interpretation
     difficulty: intermediate
     front:
-      es: Predice `result` para `x = 4`, `y = 9` y `result = x > 3 and y < 5 or x == 4`.
-      en: Predict `result` for `x = 4`, `y = 9`, and `result = x > 3 and y < 5 or x == 4`.
-      da: Forudsig `result` for `x = 4`, `y = 9` og `result = x > 3 and y < 5 or x == 4`.
+      es: "Predice `result` para `x = 4`, `y = 9` y `result = x > 3 and y < 5 or x == 4`."
+      en: "Predict `result` for `x = 4`, `y = 9`, and `result = x > 3 and y < 5 or x == 4`."
+      da: "Forudsig `result` for `x = 4`, `y = 9` og `result = x > 3 and y < 5 or x == 4`."
     back:
       es: >-
         `x > 3` es `True`; `y < 5` es `False`; `x == 4` es `True`. Como `and` tiene mayor
@@ -434,9 +434,9 @@ cards:
     card_type: debugging
     difficulty: intermediate
     front:
-      es: ¿Por qué `value >= 0 or value <= 100` no valida correctamente el intervalo 0–100?
-      en: Why does `value >= 0 or value <= 100` fail to validate the interval 0–100?
-      da: Hvorfor validerer `value >= 0 or value <= 100` ikke intervallet 0–100 korrekt?
+      es: "¿Por qué `value >= 0 or value <= 100` no valida correctamente el intervalo 0–100?"
+      en: "Why does `value >= 0 or value <= 100` fail to validate the interval 0–100?"
+      da: "Hvorfor validerer `value >= 0 or value <= 100` ikke intervallet 0–100 korrekt?"
     back:
       es: >-
         Casi todo número cumple al menos una parte: un número negativo suele ser `<= 100`, y uno mayor
@@ -456,9 +456,9 @@ cards:
     card_type: method_selection
     difficulty: intermediate
     front:
-      es: Una regla exige concentración suficiente y pureza dentro de un intervalo. ¿Se combinan con `and` u `or`?
-      en: A rule requires sufficient concentration and purity within an interval. Should the conditions use `and` or `or`?
-      da: En regel kræver tilstrækkelig koncentration og renhed i et interval. Skal betingelserne bruge `and` eller `or`?
+      es: "Una regla exige concentración suficiente y pureza dentro de un intervalo. ¿Se combinan con `and` u `or`?"
+      en: "A rule requires sufficient concentration and purity within an interval. Should the conditions use `and` or `or`?"
+      da: "En regel kræver tilstrækkelig koncentration og renhed i et interval. Skal betingelserne bruge `and` eller `or`?"
     back:
       es: >-
         Se utiliza `and` porque ambos requisitos son necesarios. `or` aceptaría la muestra cuando solo uno
@@ -478,9 +478,9 @@ cards:
     card_type: workflow_step
     difficulty: intermediate
     front:
-      es: ¿Qué orden debe seguir una clasificación con entradas inválidas, categorías específicas y un caso residual?
-      en: What order should a classification follow when it has invalid input, specific categories, and a residual case?
-      da: Hvilken rækkefølge bør en klassifikation følge med ugyldige input, specifikke kategorier og et resttilfælde?
+      es: "¿Qué orden debe seguir una clasificación con entradas inválidas, categorías específicas y un caso residual?"
+      en: "What order should a classification follow when it has invalid input, specific categories, and a residual case?"
+      da: "Hvilken rækkefølge bør en klassifikation følge med ugyldige input, specifikke kategorier og et resttilfælde?"
     back:
       es: >-
         Primero se valida el dominio y se rechazan valores imposibles. Después se evalúan las categorías
@@ -500,9 +500,9 @@ cards:
     card_type: misconception_correction
     difficulty: advanced
     front:
-      es: Corrige: “Si dos expresiones condicionales son lógicamente equivalentes, son igualmente buenas”.
-      en: Correct: “If two conditional expressions are logically equivalent, they are equally good.”
-      da: Ret: “Hvis to betingede udtryk er logisk ækvivalente, er de lige gode.”
+      es: "Corrige: “Si dos expresiones condicionales son lógicamente equivalentes, son igualmente buenas”."
+      en: "Correct: “If two conditional expressions are logically equivalent, they are equally good.”"
+      da: "Ret: “Hvis to betingede udtryk er logisk ækvivalente, er de lige gode.”"
     back:
       es: >-
         La equivalencia lógica conserva resultados para las mismas entradas, pero no garantiza igual
@@ -523,9 +523,9 @@ cards:
     card_type: oral_or_report_defense
     difficulty: advanced
     front:
-      es: ¿Cómo defenderías que una estructura condicional implementa correctamente una regla verbal?
-      en: How would you defend that a conditional structure correctly implements a verbal rule?
-      da: Hvordan ville du forsvare, at en betinget struktur implementerer en verbal regel korrekt?
+      es: "¿Cómo defenderías que una estructura condicional implementa correctamente una regla verbal?"
+      en: "How would you defend that a conditional structure correctly implements a verbal rule?"
+      da: "Hvordan ville du forsvare, at en betinget struktur implementerer en verbal regel korrekt?"
     back:
       es: >-
         Presentaría una tabla de decisión que traduzca cada regla a predicados, demostraría que las ramas

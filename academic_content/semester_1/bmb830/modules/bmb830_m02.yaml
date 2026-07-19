@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Fundamentos de R, vectores, data frames, funciones y scripts reproducibles
-    en: R foundations, vectors, data frames, functions, and reproducible scripts
-    da: R-grundlag, vektorer, data frames, funktioner og reproducerbare scripts
+    es: "Fundamentos de R, vectores, data frames, funciones y scripts reproducibles"
+    en: "R foundations, vectors, data frames, functions, and reproducible scripts"
+    da: "R-grundlag, vektorer, data frames, funktioner og reproducerbare scripts"
   summary:
     es: >-
       Introducción práctica a objetos, tipos, vectores, factores, matrices, listas, data frames,
@@ -32,18 +32,18 @@ alignment:
   later_modules: [bmb830.m03, bmb830.m04, bmb830.m05, bmb830.m06, bmb830.m07, bmb830.m08, bmb830.m09, bmb830.m10]
 
 objectives:
-  - {id: bmb830.m02.o01, text: {es: Crear e inspeccionar objetos de R, en: Create and inspect R objects, da: Oprette og inspicere R-objekter}}
-  - {id: bmb830.m02.o02, text: {es: Distinguir tipos atómicos, clases y estructuras, en: Distinguish atomic types, classes, and structures, da: Skelne atomare typer, klasser og strukturer}}
-  - {id: bmb830.m02.o03, text: {es: Indexar vectores y tablas de forma segura, en: Index vectors and tables safely, da: Indeksere vektorer og tabeller sikkert}}
-  - {id: bmb830.m02.o04, text: {es: Explicar coerción, reciclaje y propagación de NA, en: Explain coercion, recycling, and NA propagation, da: Forklare coercion, recycling og NA-propagation}}
-  - {id: bmb830.m02.o05, text: {es: Usar factores sin perder niveles o semántica, en: Use factors without losing levels or meaning, da: Bruge faktorer uden at miste niveauer eller betydning}}
-  - {id: bmb830.m02.o06, text: {es: Escribir funciones con contratos y validación, en: Write functions with contracts and validation, da: Skrive funktioner med kontrakter og validering}}
-  - {id: bmb830.m02.o07, text: {es: Organizar un script reproducible con rutas relativas, en: Organize a reproducible script with relative paths, da: Organisere et reproducerbart script med relative stier}}
-  - {id: bmb830.m02.o08, text: {es: Diagnosticar errores de sintaxis, objetos, tipos y dimensiones, en: Diagnose syntax, object, type, and dimension errors, da: Diagnosticere syntaks-, objekt-, type- og dimensionsfejl}}
+  - {id: bmb830.m02.o01, text: {"es": "Crear e inspeccionar objetos de R", "en": "Create and inspect R objects", "da": "Oprette og inspicere R-objekter"}}
+  - {id: bmb830.m02.o02, text: {"es": "Distinguir tipos atómicos, clases y estructuras", "en": "Distinguish atomic types, classes, and structures", "da": "Skelne atomare typer, klasser og strukturer"}}
+  - {id: bmb830.m02.o03, text: {"es": "Indexar vectores y tablas de forma segura", "en": "Index vectors and tables safely", "da": "Indeksere vektorer og tabeller sikkert"}}
+  - {id: bmb830.m02.o04, text: {"es": "Explicar coerción, reciclaje y propagación de NA", "en": "Explain coercion, recycling, and NA propagation", "da": "Forklare coercion, recycling og NA-propagation"}}
+  - {id: bmb830.m02.o05, text: {"es": "Usar factores sin perder niveles o semántica", "en": "Use factors without losing levels or meaning", "da": "Bruge faktorer uden at miste niveauer eller betydning"}}
+  - {id: bmb830.m02.o06, text: {"es": "Escribir funciones con contratos y validación", "en": "Write functions with contracts and validation", "da": "Skrive funktioner med kontrakter og validering"}}
+  - {id: bmb830.m02.o07, text: {"es": "Organizar un script reproducible con rutas relativas", "en": "Organize a reproducible script with relative paths", "da": "Organisere et reproducerbart script med relative stier"}}
+  - {id: bmb830.m02.o08, text: {"es": "Diagnosticar errores de sintaxis, objetos, tipos y dimensiones", "en": "Diagnose syntax, object, type, and dimension errors", "da": "Diagnosticere syntaks-, objekt-, type- og dimensionsfejl"}}
 
 concepts:
   - id: bmb830.m02.c01
-    title: {es: Objetos, nombres y asignación, en: Objects, names, and assignment, da: Objekter, navne og assignment}
+    title: {"es": "Objetos, nombres y asignación", "en": "Objects, names, and assignment", "da": "Objekter, navne og assignment"}
     body:
       es: >-
         R vincula nombres con objetos. `<-` comunica asignación; la reasignación cambia el vínculo, no el valor histórico.
@@ -56,9 +56,9 @@ concepts:
       da: >-
         R binder navne til objekter. Reproducerbar analyse må ikke afhænge af objekter fra en tidligere interaktiv session.
     key_points:
-      - {es: Reiniciar R debe ser una prueba de reproducibilidad, en: Restarting R should be a reproducibility test, da: Genstart af R bør være en reproducerbarhedstest}
+      - {"es": "Reiniciar R debe ser una prueba de reproducibilidad", "en": "Restarting R should be a reproducibility test", "da": "Genstart af R bør være en reproducerbarhedstest"}
   - id: bmb830.m02.c02
-    title: {es: Vectores atómicos y coerción, en: Atomic vectors and coercion, da: Atomare vektorer og coercion}
+    title: {"es": "Vectores atómicos y coerción", "en": "Atomic vectors and coercion", "da": "Atomare vektorer og coercion"}
     body:
       es: >-
         Un vector atómico tiene un solo tipo. Combinar logical, integer, double y character puede promover valores
@@ -70,9 +70,9 @@ concepts:
       da: >-
         En atomar vektor har én type. Kombinerede typer kan promoveres til en fælles type; eksplicit coercion skal kontrolleres.
     key_points:
-      - {es: La coerción silenciosa puede cambiar el significado, en: Silent coercion can change meaning, da: Stille coercion kan ændre betydning}
+      - {"es": "La coerción silenciosa puede cambiar el significado", "en": "Silent coercion can change meaning", "da": "Stille coercion kan ændre betydning"}
   - id: bmb830.m02.c03
-    title: {es: Indexación y subsetting, en: Indexing and subsetting, da: Indeksering og subsetting}
+    title: {"es": "Indexación y subsetting", "en": "Indexing and subsetting", "da": "Indeksering og subsetting"}
     body:
       es: >-
         Los índices positivos seleccionan, los negativos excluyen y los lógicos filtran por posición. Mezclar índices
@@ -84,9 +84,9 @@ concepts:
       da: >-
         Positive indeks vælger, negative udelukker, og logiske indeks filtrerer. NA i logiske filtre kræver eksplicit håndtering.
     key_points:
-      - {es: Longitud y nombres deben comprobarse antes de asignar, en: Length and names should be checked before assignment, da: Længde og navne bør kontrolleres før assignment}
+      - {"es": "Longitud y nombres deben comprobarse antes de asignar", "en": "Length and names should be checked before assignment", "da": "Længde og navne bør kontrolleres før assignment"}
   - id: bmb830.m02.c04
-    title: {es: Reciclaje, vectorización y NA, en: Recycling, vectorization, and NA, da: Recycling, vectorisering og NA}
+    title: {"es": "Reciclaje, vectorización y NA", "en": "Recycling, vectorization, and NA", "da": "Recycling, vectorisering og NA"}
     body:
       es: >-
         Las operaciones vectorizadas actúan elemento a elemento. Si las longitudes difieren, R puede reciclar el vector
@@ -98,9 +98,9 @@ concepts:
       da: >-
         Vectoriserede operationer virker elementvist. Recycling kan være stille og stadig forkert. Brug `is.na()` til NA.
     key_points:
-      - {es: `na.rm=TRUE` cambia el estimando efectivo y debe justificarse, en: `na.rm=TRUE` changes the effective estimand and needs justification, da: `na.rm=TRUE` ændrer det effektive estimand og kræver begrundelse}
+      - {"es": "`na.rm=TRUE` cambia el estimando efectivo y debe justificarse", "en": "`na.rm=TRUE` changes the effective estimand and needs justification", "da": "`na.rm=TRUE` ændrer det effektive estimand og kræver begrundelse"}
   - id: bmb830.m02.c05
-    title: {es: Factores, listas y data frames, en: Factors, lists, and data frames, da: Faktorer, lister og data frames}
+    title: {"es": "Factores, listas y data frames", "en": "Factors, lists, and data frames", "da": "Faktorer, lister og data frames"}
     body:
       es: >-
         Un factor almacena códigos enteros y niveles categóricos. Convertir factor directamente a numeric puede devolver
@@ -112,9 +112,9 @@ concepts:
       da: >-
         En faktor lagrer heltalskoder og kategoriniveauer. Direkte numeric-konvertering kan returnere niveaukoder.
     key_points:
-      - {es: Los niveles sin observaciones pueden afectar modelos y tablas, en: Unused levels can affect models and tables, da: Ubrugte niveauer kan påvirke modeller og tabeller}
+      - {"es": "Los niveles sin observaciones pueden afectar modelos y tablas", "en": "Unused levels can affect models and tables", "da": "Ubrugte niveauer kan påvirke modeller og tabeller"}
   - id: bmb830.m02.c06
-    title: {es: Funciones y contratos, en: Functions and contracts, da: Funktioner og kontrakter}
+    title: {"es": "Funciones y contratos", "en": "Functions and contracts", "da": "Funktioner og kontrakter"}
     body:
       es: >-
         Una función debe declarar entradas, salida, supuestos y errores. La validación temprana con `stopifnot()` o mensajes
@@ -126,9 +126,9 @@ concepts:
       da: >-
         En funktion bør deklarere input, output, antagelser og fejl. Små funktioner er lettere at teste.
     key_points:
-      - {es: Una función analítica debe devolver datos, no sólo imprimirlos, en: An analytical function should return data, not only print it, da: En analytisk funktion bør returnere data, ikke kun printe}
+      - {"es": "Una función analítica debe devolver datos, no sólo imprimirlos", "en": "An analytical function should return data, not only print it", "da": "En analytisk funktion bør returnere data, ikke kun printe"}
   - id: bmb830.m02.c07
-    title: {es: Scripts, proyectos y reproducibilidad, en: Scripts, projects, and reproducibility, da: Scripts, projekter og reproducerbarhed}
+    title: {"es": "Scripts, proyectos y reproducibilidad", "en": "Scripts, projects, and reproducibility", "da": "Scripts, projekter og reproducerbarhed"}
     body:
       es: >-
         Un proyecto separa datos crudos, datos derivados, scripts, funciones, figuras y reportes. Las rutas relativas permiten
@@ -140,67 +140,67 @@ concepts:
       da: >-
         Et projekt adskiller rådata, afledte data, scripts, funktioner, figurer og rapporter. Relative stier understøtter portabilitet.
     key_points:
-      - {es: La consola es para explorar; el script es el registro reproducible, en: The console is for exploration; the script is the reproducible record, da: Konsollen er til udforskning; scriptet er den reproducerbare registrering}
+      - {"es": "La consola es para explorar; el script es el registro reproducible", "en": "The console is for exploration; the script is the reproducible record", "da": "Konsollen er til udforskning; scriptet er den reproducerbare registrering"}
 
 worked_examples:
   - id: bmb830.m02.e01
-    title: {es: Coerción de un vector, en: Vector coercion, da: Vektor-coercion}
+    title: {"es": "Coerción de un vector", "en": "Vector coercion", "da": "Vektor-coercion"}
     code: "x <- c(1, 2, \"3\")\ntypeof(x)\nx + 1"
-    expected_output: {es: `x` es character y la suma produce error., en: `x` is character and addition errors., da: `x` er character og addition giver fejl.}
-    explanation: {es: `c()` encuentra un tipo común; character domina en esta combinación., en: `c()` finds a common type; character dominates here., da: `c()` finder en fælles type; character dominerer her.}
+    expected_output: {"es": "`x` es character y la suma produce error.", "en": "`x` is character and addition errors.", "da": "`x` er character og addition giver fejl."}
+    explanation: {"es": "`c()` encuentra un tipo común; character domina en esta combinación.", "en": "`c()` finds a common type; character dominates here.", "da": "`c()` finder en fælles type; character dominerer her."}
   - id: bmb830.m02.e02
-    title: {es: Factor numérico mal convertido, en: Misconverted numeric factor, da: Forkert konverteret numerisk faktor}
+    title: {"es": "Factor numérico mal convertido", "en": "Misconverted numeric factor", "da": "Forkert konverteret numerisk faktor"}
     code: "f <- factor(c(\"10\", \"20\", \"10\"))\nas.numeric(f)\nas.numeric(as.character(f))"
-    expected_output: {es: La primera conversión da códigos 1/2; la segunda recupera 10/20., en: The first returns level codes 1/2; the second recovers 10/20., da: Første giver niveaukoder 1/2; anden giver 10/20.}
-    explanation: {es: Un factor no almacena directamente los valores numéricos mostrados., en: A factor does not directly store the displayed numeric values., da: En faktor lagrer ikke direkte de viste numeriske værdier.}
+    expected_output: {"es": "La primera conversión da códigos 1/2; la segunda recupera 10/20.", "en": "The first returns level codes 1/2; the second recovers 10/20.", "da": "Første giver niveaukoder 1/2; anden giver 10/20."}
+    explanation: {"es": "Un factor no almacena directamente los valores numéricos mostrados.", "en": "A factor does not directly store the displayed numeric values.", "da": "En faktor lagrer ikke direkte de viste numeriske værdier."}
   - id: bmb830.m02.e03
-    title: {es: Función segura de cambio porcentual, en: Safe percent-change function, da: Sikker procentændringsfunktion}
+    title: {"es": "Función segura de cambio porcentual", "en": "Safe percent-change function", "da": "Sikker procentændringsfunktion"}
     code: "percent_change <- function(before, after) {\n  stopifnot(length(before) == length(after), all(before != 0, na.rm = TRUE))\n  100 * (after - before) / before\n}"
-    expected_output: {es: Vector de cambios porcentuales o error ante longitudes incompatibles o denominador cero., en: Percent changes or an error for incompatible lengths or zero denominators., da: Procentændringer eller fejl ved inkompatible længder eller nulnævnere.}
-    explanation: {es: El contrato valida condiciones que de otro modo producirían reciclaje o infinitos., en: The contract validates conditions that could otherwise cause recycling or infinities., da: Kontrakten validerer betingelser der ellers kunne give recycling eller uendelighed.}
+    expected_output: {"es": "Vector de cambios porcentuales o error ante longitudes incompatibles o denominador cero.", "en": "Percent changes or an error for incompatible lengths or zero denominators.", "da": "Procentændringer eller fejl ved inkompatible længder eller nulnævnere."}
+    explanation: {"es": "El contrato valida condiciones que de otro modo producirían reciclaje o infinitos.", "en": "The contract validates conditions that could otherwise cause recycling or infinities.", "da": "Kontrakten validerer betingelser der ellers kunne give recycling eller uendelighed."}
 
 guided_practice:
-  - {id: bmb830.m02.p01, type: code_tracing, prompt: {es: Predice tipo y resultado de seis expresiones con coerción., en: Predict type and result for six coercion expressions., da: Forudsig type og resultat for seks coercion-udtryk.}, expected_elements: [common_type, warnings, NA_generation]}
-  - {id: bmb830.m02.p02, type: indexing, prompt: {es: Extrae filas válidas y columnas seleccionadas usando índices lógicos y nombres., en: Extract valid rows and selected columns using logical and name indices., da: Udtræk gyldige rækker og valgte kolonner med logiske og navneindeks.}, expected_elements: [is_na_handling, table_preservation, no_partial_matching]}
-  - {id: bmb830.m02.p03, type: debugging, prompt: {es: Corrige un script que depende de objetos globales y rutas absolutas., en: Fix a script that depends on global objects and absolute paths., da: Ret et script der afhænger af globale objekter og absolutte stier.}, expected_elements: [explicit_import, relative_paths, object_creation_order]}
-  - {id: bmb830.m02.p04, type: function_design, prompt: {es: Escribe una función que calcule media y SD por grupo con validación., en: Write a function computing mean and SD by group with validation., da: Skriv en funktion der beregner mean og SD per gruppe med validering.}, expected_elements: [input_contract, NA_policy, returned_table]}
-  - {id: bmb830.m02.p05, type: factor_audit, prompt: {es: Detecta niveles ausentes, orden incorrecto y conversiones inseguras en un factor., en: Detect unused levels, incorrect order, and unsafe conversions in a factor., da: Find ubrugte niveauer, forkert orden og usikre konverteringer i en faktor.}, expected_elements: [levels, ordered_status, safe_conversion]}
-  - {id: bmb830.m02.p06, type: project_design, prompt: {es: Propón una estructura de proyecto R para un análisis biológico reproducible., en: Propose an R project structure for a reproducible biological analysis., da: Foreslå en R-projektstruktur til en reproducerbar biologisk analyse.}, expected_elements: [raw_derived_separation, scripts, figures, report, environment_record]}
+  - {id: bmb830.m02.p01, type: code_tracing, prompt: {"es": "Predice tipo y resultado de seis expresiones con coerción.", "en": "Predict type and result for six coercion expressions.", "da": "Forudsig type og resultat for seks coercion-udtryk."}, expected_elements: [common_type, warnings, NA_generation]}
+  - {id: bmb830.m02.p02, type: indexing, prompt: {"es": "Extrae filas válidas y columnas seleccionadas usando índices lógicos y nombres.", "en": "Extract valid rows and selected columns using logical and name indices.", "da": "Udtræk gyldige rækker og valgte kolonner med logiske og navneindeks."}, expected_elements: [is_na_handling, table_preservation, no_partial_matching]}
+  - {id: bmb830.m02.p03, type: debugging, prompt: {"es": "Corrige un script que depende de objetos globales y rutas absolutas.", "en": "Fix a script that depends on global objects and absolute paths.", "da": "Ret et script der afhænger af globale objekter og absolutte stier."}, expected_elements: [explicit_import, relative_paths, object_creation_order]}
+  - {id: bmb830.m02.p04, type: function_design, prompt: {"es": "Escribe una función que calcule media y SD por grupo con validación.", "en": "Write a function computing mean and SD by group with validation.", "da": "Skriv en funktion der beregner mean og SD per gruppe med validering."}, expected_elements: [input_contract, NA_policy, returned_table]}
+  - {id: bmb830.m02.p05, type: factor_audit, prompt: {"es": "Detecta niveles ausentes, orden incorrecto y conversiones inseguras en un factor.", "en": "Detect unused levels, incorrect order, and unsafe conversions in a factor.", "da": "Find ubrugte niveauer, forkert orden og usikre konverteringer i en faktor."}, expected_elements: [levels, ordered_status, safe_conversion]}
+  - {id: bmb830.m02.p06, type: project_design, prompt: {"es": "Propón una estructura de proyecto R para un análisis biológico reproducible.", "en": "Propose an R project structure for a reproducible biological analysis.", "da": "Foreslå en R-projektstruktur til en reproducerbar biologisk analyse."}, expected_elements: [raw_derived_separation, scripts, figures, report, environment_record]}
 
 objective_bank:
-  - {id: bmb830.m02.q01, type: multiple_choice, prompt: {es: ¿Qué devuelve `typeof(c(1, "2"))`?, en: What does `typeof(c(1, "2"))` return?, da: Hvad returnerer `typeof(c(1, "2"))`?}, options: [{id: a, text: {es: double, en: double, da: double}}, {id: b, text: {es: character, en: character, da: character}}, {id: c, text: {es: list, en: list, da: list}}], correct_option_ids: [b], explanation: {es: El vector atómico usa un tipo común., en: The atomic vector uses one common type., da: Den atomare vektor bruger én fælles type.}}
-  - {id: bmb830.m02.q02, type: true_false, prompt: {es: `x == NA` es la forma correcta de detectar ausentes., en: `x == NA` correctly detects missing values., da: `x == NA` finder korrekt manglende værdier.}, correct: false, explanation: {es: Debe usarse `is.na(x)`., en: Use `is.na(x)`., da: Brug `is.na(x)`.}}
-  - {id: bmb830.m02.q03, type: multiple_choice, prompt: {es: ¿Qué extrae `df[["age"]]`?, en: What does `df[["age"]]` extract?, da: Hvad udtrækker `df[["age"]]`?}, options: [{id: a, text: {es: Un vector columna, en: A column vector, da: En kolonnevektor}}, {id: b, text: {es: Siempre un data frame, en: Always a data frame, da: Altid et data frame}}, {id: c, text: {es: Una fila, en: A row, da: En række}}], correct_option_ids: [a], explanation: {es: `[[` extrae el componente., en: `[[` extracts the component., da: `[[` udtrækker komponenten.}}
-  - {id: bmb830.m02.q04, type: true_false, prompt: {es: El reciclaje exacto de longitudes siempre es conceptualmente correcto., en: Exact length recycling is always conceptually correct., da: Eksakt length recycling er altid konceptuelt korrekt.}, correct: false, explanation: {es: Puede ser silencioso y no corresponder al diseño., en: It may be silent yet unrelated to the intended design., da: Det kan være stille og stadig ikke svare til designet.}}
-  - {id: bmb830.m02.q05, type: multiple_choice, prompt: {es: Conversión segura de factor numérico., en: Safe conversion of numeric-looking factor., da: Sikker konvertering af numerisk faktor.}, options: [{id: a, text: {es: `as.numeric(f)`, en: `as.numeric(f)`, da: `as.numeric(f)`}}, {id: b, text: {es: `as.numeric(as.character(f))` con validación, en: `as.numeric(as.character(f))` with validation, da: `as.numeric(as.character(f))` med validering}}, {id: c, text: {es: `length(f)`, en: `length(f)`, da: `length(f)`}}], correct_option_ids: [b], explanation: {es: Evita devolver códigos de nivel., en: It avoids returning level codes., da: Det undgår niveaukoder.}}
-  - {id: bmb830.m02.q06, type: true_false, prompt: {es: Un data frame es conceptualmente una lista de columnas de igual longitud., en: A data frame is conceptually a list of equal-length columns., da: Et data frame er konceptuelt en liste af kolonner med samme længde.}, correct: true, explanation: {es: Esa estructura permite tipos distintos entre columnas., en: This permits different types across columns., da: Det tillader forskellige typer mellem kolonner.}}
-  - {id: bmb830.m02.q07, type: multiple_choice, prompt: {es: ¿Qué mejora más la portabilidad?, en: What most improves portability?, da: Hvad forbedrer mest portabilitet?}, options: [{id: a, text: {es: Rutas absolutas personales, en: Personal absolute paths, da: Personlige absolutte stier}}, {id: b, text: {es: Rutas relativas al proyecto, en: Project-relative paths, da: Projektrelative stier}}, {id: c, text: {es: Objetos en el Environment, en: Objects in the Environment, da: Objekter i Environment}}], correct_option_ids: [b], explanation: {es: Las rutas relativas no dependen del usuario o disco., en: Relative paths do not depend on user or drive., da: Relative stier afhænger ikke af bruger eller drev.}}
-  - {id: bmb830.m02.q08, type: true_false, prompt: {es: Un script reproducible puede depender de ejecutar líneas manualmente en orden no documentado., en: A reproducible script may depend on undocumented manual execution order., da: Et reproducerbart script kan afhænge af udokumenteret manuel rækkefølge.}, correct: false, explanation: {es: Debe ejecutarse desde una sesión limpia., en: It should run from a clean session., da: Det bør kunne køre fra en ren session.}}
-  - {id: bmb830.m02.q09, type: multiple_choice, prompt: {es: ¿Qué debería hacer una función analítica?, en: What should an analytical function do?, da: Hvad bør en analytisk funktion gøre?}, options: [{id: a, text: {es: Sólo imprimir, en: Only print, da: Kun printe}}, {id: b, text: {es: Devolver un objeto validable, en: Return a testable object, da: Returnere et testbart objekt}}, {id: c, text: {es: Cambiar variables globales, en: Change global variables, da: Ændre globale variable}}], correct_option_ids: [b], explanation: {es: Los objetos retornados pueden reutilizarse y probarse., en: Returned objects can be reused and tested., da: Returnerede objekter kan genbruges og testes.}}
-  - {id: bmb830.m02.q10, type: true_false, prompt: {es: `na.rm=TRUE` es una decisión puramente técnica sin efecto interpretativo., en: `na.rm=TRUE` is purely technical with no interpretive effect., da: `na.rm=TRUE` er rent teknisk uden fortolkningsmæssig effekt.}, correct: false, explanation: {es: Cambia qué observaciones contribuyen al resumen., en: It changes which observations contribute to the summary., da: Det ændrer hvilke observationer der bidrager.}}
+  - {id: bmb830.m02.q01, type: multiple_choice, prompt: {"es": "¿Qué devuelve `typeof(c(1, \"2\"))`?", "en": "What does `typeof(c(1, \"2\"))` return?", "da": "Hvad returnerer `typeof(c(1, \"2\"))`?"}, options: [{id: a, text: {"es": "double", "en": "double", "da": "double"}}, {id: b, text: {"es": "character", "en": "character", "da": "character"}}, {id: c, text: {"es": "list", "en": "list", "da": "list"}}], correct_option_ids: [b], explanation: {"es": "El vector atómico usa un tipo común.", "en": "The atomic vector uses one common type.", "da": "Den atomare vektor bruger én fælles type."}}
+  - {id: bmb830.m02.q02, type: true_false, prompt: {"es": "`x == NA` es la forma correcta de detectar ausentes.", "en": "`x == NA` correctly detects missing values.", "da": "`x == NA` finder korrekt manglende værdier."}, correct: false, explanation: {"es": "Debe usarse `is.na(x)`.", "en": "Use `is.na(x)`.", "da": "Brug `is.na(x)`."}}
+  - {id: bmb830.m02.q03, type: multiple_choice, prompt: {"es": "¿Qué extrae `df[[\"age\"]]`?", "en": "What does `df[[\"age\"]]` extract?", "da": "Hvad udtrækker `df[[\"age\"]]`?"}, options: [{id: a, text: {"es": "Un vector columna", "en": "A column vector", "da": "En kolonnevektor"}}, {id: b, text: {"es": "Siempre un data frame", "en": "Always a data frame", "da": "Altid et data frame"}}, {id: c, text: {"es": "Una fila", "en": "A row", "da": "En række"}}], correct_option_ids: [a], explanation: {"es": "`[[` extrae el componente.", "en": "`[[` extracts the component.", "da": "`[[` udtrækker komponenten."}}
+  - {id: bmb830.m02.q04, type: true_false, prompt: {"es": "El reciclaje exacto de longitudes siempre es conceptualmente correcto.", "en": "Exact length recycling is always conceptually correct.", "da": "Eksakt length recycling er altid konceptuelt korrekt."}, correct: false, explanation: {"es": "Puede ser silencioso y no corresponder al diseño.", "en": "It may be silent yet unrelated to the intended design.", "da": "Det kan være stille og stadig ikke svare til designet."}}
+  - {id: bmb830.m02.q05, type: multiple_choice, prompt: {"es": "Conversión segura de factor numérico.", "en": "Safe conversion of numeric-looking factor.", "da": "Sikker konvertering af numerisk faktor."}, options: [{id: a, text: {"es": "`as.numeric(f)`", "en": "`as.numeric(f)`", "da": "`as.numeric(f)`"}}, {id: b, text: {"es": "`as.numeric(as.character(f))` con validación", "en": "`as.numeric(as.character(f))` with validation", "da": "`as.numeric(as.character(f))` med validering"}}, {id: c, text: {"es": "`length(f)`", "en": "`length(f)`", "da": "`length(f)`"}}], correct_option_ids: [b], explanation: {"es": "Evita devolver códigos de nivel.", "en": "It avoids returning level codes.", "da": "Det undgår niveaukoder."}}
+  - {id: bmb830.m02.q06, type: true_false, prompt: {"es": "Un data frame es conceptualmente una lista de columnas de igual longitud.", "en": "A data frame is conceptually a list of equal-length columns.", "da": "Et data frame er konceptuelt en liste af kolonner med samme længde."}, correct: true, explanation: {"es": "Esa estructura permite tipos distintos entre columnas.", "en": "This permits different types across columns.", "da": "Det tillader forskellige typer mellem kolonner."}}
+  - {id: bmb830.m02.q07, type: multiple_choice, prompt: {"es": "¿Qué mejora más la portabilidad?", "en": "What most improves portability?", "da": "Hvad forbedrer mest portabilitet?"}, options: [{id: a, text: {"es": "Rutas absolutas personales", "en": "Personal absolute paths", "da": "Personlige absolutte stier"}}, {id: b, text: {"es": "Rutas relativas al proyecto", "en": "Project-relative paths", "da": "Projektrelative stier"}}, {id: c, text: {"es": "Objetos en el Environment", "en": "Objects in the Environment", "da": "Objekter i Environment"}}], correct_option_ids: [b], explanation: {"es": "Las rutas relativas no dependen del usuario o disco.", "en": "Relative paths do not depend on user or drive.", "da": "Relative stier afhænger ikke af bruger eller drev."}}
+  - {id: bmb830.m02.q08, type: true_false, prompt: {"es": "Un script reproducible puede depender de ejecutar líneas manualmente en orden no documentado.", "en": "A reproducible script may depend on undocumented manual execution order.", "da": "Et reproducerbart script kan afhænge af udokumenteret manuel rækkefølge."}, correct: false, explanation: {"es": "Debe ejecutarse desde una sesión limpia.", "en": "It should run from a clean session.", "da": "Det bør kunne køre fra en ren session."}}
+  - {id: bmb830.m02.q09, type: multiple_choice, prompt: {"es": "¿Qué debería hacer una función analítica?", "en": "What should an analytical function do?", "da": "Hvad bør en analytisk funktion gøre?"}, options: [{id: a, text: {"es": "Sólo imprimir", "en": "Only print", "da": "Kun printe"}}, {id: b, text: {"es": "Devolver un objeto validable", "en": "Return a testable object", "da": "Returnere et testbart objekt"}}, {id: c, text: {"es": "Cambiar variables globales", "en": "Change global variables", "da": "Ændre globale variable"}}], correct_option_ids: [b], explanation: {"es": "Los objetos retornados pueden reutilizarse y probarse.", "en": "Returned objects can be reused and tested.", "da": "Returnerede objekter kan genbruges og testes."}}
+  - {id: bmb830.m02.q10, type: true_false, prompt: {"es": "`na.rm=TRUE` es una decisión puramente técnica sin efecto interpretativo.", "en": "`na.rm=TRUE` is purely technical with no interpretive effect.", "da": "`na.rm=TRUE` er rent teknisk uden fortolkningsmæssig effekt."}, correct: false, explanation: {"es": "Cambia qué observaciones contribuyen al resumen.", "en": "It changes which observations contribute to the summary.", "da": "Det ændrer hvilke observationer der bidrager."}}
 
 open_assessment:
   - id: bmb830.m02.a01
-    prompt: {es: Depura y documenta un script R no reproducible., en: Debug and document a non-reproducible R script., da: Fejlsøg og dokumentér et ikke-reproducerbart R-script.}
+    prompt: {"es": "Depura y documenta un script R no reproducible.", "en": "Debug and document a non-reproducible R script.", "da": "Fejlsøg og dokumentér et ikke-reproducerbart R-script."}
     rubric: [{criterion: clean_session_execution, points: 3}, {criterion: paths_and_inputs, points: 3}, {criterion: type_and_dimension_safety, points: 2}, {criterion: documentation, points: 2}]
   - id: bmb830.m02.a02
-    prompt: {es: Diseña una función R con contrato, validación y casos de prueba., en: Design an R function with contract, validation, and test cases., da: Design en R-funktion med kontrakt, validering og testcases.}
+    prompt: {"es": "Diseña una función R con contrato, validación y casos de prueba.", "en": "Design an R function with contract, validation, and test cases.", "da": "Design en R-funktion med kontrakt, validering og testcases."}
     rubric: [{criterion: contract, points: 3}, {criterion: implementation, points: 3}, {criterion: edge_cases, points: 2}, {criterion: returned_object, points: 2}]
   - id: bmb830.m02.a03
-    prompt: {es: Explica y corrige errores de coerción, factores y reciclaje en un análisis., en: Explain and correct coercion, factor, and recycling errors in an analysis., da: Forklar og ret coercion-, faktor- og recycling-fejl i en analyse.}
+    prompt: {"es": "Explica y corrige errores de coerción, factores y reciclaje en un análisis.", "en": "Explain and correct coercion, factor, and recycling errors in an analysis.", "da": "Forklar og ret coercion-, faktor- og recycling-fejl i en analyse."}
     rubric: [{criterion: error_mechanism, points: 4}, {criterion: corrected_code, points: 3}, {criterion: validation_evidence, points: 3}]
 
 glossary:
-  - {id: bmb830.term.atomic_vector, term: {es: vector atómico, en: atomic vector, da: atomar vektor}, definition: {es: Vector cuyos elementos comparten tipo., en: Vector whose elements share one type., da: Vektor hvis elementer deler én type.}}
-  - {id: bmb830.term.coercion, term: {es: coerción, en: coercion, da: coercion}, definition: {es: Conversión a un tipo común o solicitado., en: Conversion to a common or requested type., da: Konvertering til en fælles eller ønsket type.}}
-  - {id: bmb830.term.recycling, term: {es: reciclaje, en: recycling, da: recycling}, definition: {es: Reutilización del vector corto en una operación vectorizada., en: Reuse of the shorter vector in a vectorized operation., da: Genbrug af den kortere vektor i en vectoriseret operation.}}
-  - {id: bmb830.term.factor, term: {es: factor, en: factor, da: faktor}, definition: {es: Representación categórica mediante códigos y niveles., en: Categorical representation using codes and levels., da: Kategorisk repræsentation med koder og niveauer.}}
-  - {id: bmb830.term.data_frame, term: {es: data frame, en: data frame, da: data frame}, definition: {es: Lista nombrada de columnas de igual longitud., en: Named list of equal-length columns., da: Navngivet liste af kolonner med samme længde.}}
-  - {id: bmb830.term.vectorization, term: {es: vectorización, en: vectorization, da: vectorisering}, definition: {es: Operación aplicada a múltiples elementos sin bucle explícito de usuario., en: Operation applied across elements without an explicit user loop., da: Operation anvendt på elementer uden eksplicit brugerløkke.}}
-  - {id: bmb830.term.na, term: {es: NA, en: NA, da: NA}, definition: {es: Marcador de valor ausente en R., en: R marker for a missing value., da: R-markør for en manglende værdi.}}
-  - {id: bmb830.term.function_contract, term: {es: contrato de función, en: function contract, da: funktionskontrakt}, definition: {es: Especificación de entradas, salida, supuestos y errores., en: Specification of inputs, output, assumptions, and errors., da: Specifikation af input, output, antagelser og fejl.}}
-  - {id: bmb830.term.relative_path, term: {es: ruta relativa, en: relative path, da: relativ sti}, definition: {es: Ruta definida respecto al proyecto o directorio de trabajo controlado., en: Path defined relative to a project or controlled working directory., da: Sti defineret relativt til et projekt eller kontrolleret arbejdsbibliotek.}}
-  - {id: bmb830.term.clean_session, term: {es: sesión limpia, en: clean session, da: ren session}, definition: {es: Sesión sin objetos heredados de ejecuciones previas., en: Session without objects inherited from earlier runs., da: Session uden objekter fra tidligere kørsler.}}
+  - {id: bmb830.term.atomic_vector, term: {"es": "vector atómico", "en": "atomic vector", "da": "atomar vektor"}, definition: {"es": "Vector cuyos elementos comparten tipo.", "en": "Vector whose elements share one type.", "da": "Vektor hvis elementer deler én type."}}
+  - {id: bmb830.term.coercion, term: {"es": "coerción", "en": "coercion", "da": "coercion"}, definition: {"es": "Conversión a un tipo común o solicitado.", "en": "Conversion to a common or requested type.", "da": "Konvertering til en fælles eller ønsket type."}}
+  - {id: bmb830.term.recycling, term: {"es": "reciclaje", "en": "recycling", "da": "recycling"}, definition: {"es": "Reutilización del vector corto en una operación vectorizada.", "en": "Reuse of the shorter vector in a vectorized operation.", "da": "Genbrug af den kortere vektor i en vectoriseret operation."}}
+  - {id: bmb830.term.factor, term: {"es": "factor", "en": "factor", "da": "faktor"}, definition: {"es": "Representación categórica mediante códigos y niveles.", "en": "Categorical representation using codes and levels.", "da": "Kategorisk repræsentation med koder og niveauer."}}
+  - {id: bmb830.term.data_frame, term: {"es": "data frame", "en": "data frame", "da": "data frame"}, definition: {"es": "Lista nombrada de columnas de igual longitud.", "en": "Named list of equal-length columns.", "da": "Navngivet liste af kolonner med samme længde."}}
+  - {id: bmb830.term.vectorization, term: {"es": "vectorización", "en": "vectorization", "da": "vectorisering"}, definition: {"es": "Operación aplicada a múltiples elementos sin bucle explícito de usuario.", "en": "Operation applied across elements without an explicit user loop.", "da": "Operation anvendt på elementer uden eksplicit brugerløkke."}}
+  - {id: bmb830.term.na, term: {"es": "NA", "en": "NA", "da": "NA"}, definition: {"es": "Marcador de valor ausente en R.", "en": "R marker for a missing value.", "da": "R-markør for en manglende værdi."}}
+  - {id: bmb830.term.function_contract, term: {"es": "contrato de función", "en": "function contract", "da": "funktionskontrakt"}, definition: {"es": "Especificación de entradas, salida, supuestos y errores.", "en": "Specification of inputs, output, assumptions, and errors.", "da": "Specifikation af input, output, antagelser og fejl."}}
+  - {id: bmb830.term.relative_path, term: {"es": "ruta relativa", "en": "relative path", "da": "relativ sti"}, definition: {"es": "Ruta definida respecto al proyecto o directorio de trabajo controlado.", "en": "Path defined relative to a project or controlled working directory.", "da": "Sti defineret relativt til et projekt eller kontrolleret arbejdsbibliotek."}}
+  - {id: bmb830.term.clean_session, term: {"es": "sesión limpia", "en": "clean session", "da": "ren session"}, definition: {"es": "Sesión sin objetos heredados de ejecuciones previas.", "en": "Session without objects inherited from earlier runs.", "da": "Session uden objekter fra tidligere kørsler."}}
 
 hidden_tutor_support:
   canonical_explanation:
@@ -232,11 +232,11 @@ hidden_tutor_support:
     - write validated functions
     - produce clean-session reproducibility
   retrieval_fragments:
-    - {id: bmb830.m02.r01, topic: coercion, text: {es: Un vector atómico adopta un tipo común; combinar números y texto produce character., en: An atomic vector adopts one common type; mixing numbers and text yields character., da: En atomar vektor får én fælles type; tal og tekst giver character.}}
-    - {id: bmb830.m02.r02, topic: na, text: {es: Detecta ausentes con `is.na()`, no con `== NA`., en: Detect missing values with `is.na()`, not `== NA`., da: Find manglende værdier med `is.na()`, ikke `== NA`.}}
-    - {id: bmb830.m02.r03, topic: factor, text: {es: `as.numeric(factor)` devuelve códigos de nivel; valida una conversión a través de character., en: `as.numeric(factor)` returns level codes; validate conversion through character., da: `as.numeric(factor)` returnerer niveaukoder; valider konvertering via character.}}
-    - {id: bmb830.m02.r04, topic: reproducibility, text: {es: Un script reproducible crea todos sus objetos desde entradas declaradas., en: A reproducible script creates all objects from declared inputs., da: Et reproducerbart script skaber alle objekter fra deklarerede input.}}
-    - {id: bmb830.m02.r05, topic: function, text: {es: Una función analítica declara contrato, valida y devuelve un objeto., en: An analytical function declares a contract, validates, and returns an object., da: En analytisk funktion deklarerer kontrakt, validerer og returnerer et objekt.}}
+    - {id: bmb830.m02.r01, topic: coercion, text: {"es": "Un vector atómico adopta un tipo común; combinar números y texto produce character.", "en": "An atomic vector adopts one common type; mixing numbers and text yields character.", "da": "En atomar vektor får én fælles type; tal og tekst giver character."}}
+    - {id: bmb830.m02.r02, topic: na, text: {"es": "Detecta ausentes con `is.na()`, no con `== NA`.", "en": "Detect missing values with `is.na()`, not `== NA`.", "da": "Find manglende værdier med `is.na()`, ikke `== NA`."}}
+    - {id: bmb830.m02.r03, topic: factor, text: {"es": "`as.numeric(factor)` devuelve códigos de nivel; valida una conversión a través de character.", "en": "`as.numeric(factor)` returns level codes; validate conversion through character.", "da": "`as.numeric(factor)` returnerer niveaukoder; valider konvertering via character."}}
+    - {id: bmb830.m02.r04, topic: reproducibility, text: {"es": "Un script reproducible crea todos sus objetos desde entradas declaradas.", "en": "A reproducible script creates all objects from declared inputs.", "da": "Et reproducerbart script skaber alle objekter fra deklarerede input."}}
+    - {id: bmb830.m02.r05, topic: function, text: {"es": "Una función analítica declara contrato, valida y devuelve un objeto.", "en": "An analytical function declares a contract, validates, and returns an object.", "da": "En analytisk funktion deklarerer kontrakt, validerer og returnerer et objekt."}}
 
 source_map:
   - {section: R_objects_and_functions, source: r4ds.2e}

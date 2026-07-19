@@ -8,240 +8,240 @@ cards:
   - id: bmb831.m11.f01
     type: sample_mapping
     front:
-      es: ¿Qué información mínima debe contener un sample map multi-ómico?
-      en: What minimum information should a multi-omics sample map contain?
-      da: Hvilken minimumsinformation bør et multi-omics sample-map indeholde?
+      es: "¿Qué información mínima debe contener un sample map multi-ómico?"
+      en: "What minimum information should a multi-omics sample map contain?"
+      da: "Hvilken minimumsinformation bør et multi-omics sample-map indeholde?"
     back:
-      es: Participante, muestra o espécimen, tiempo, modalidad, aliquot, lote, réplica, columna del assay y estado de disponibilidad.
-      en: Participant, specimen, time, modality, aliquot, batch, replicate, assay column, and availability status.
-      da: Deltager, specimen, tidspunkt, modalitet, aliquot, batch, replikat, assay-kolonne og tilgængelighedsstatus.
+      es: "Participante, muestra o espécimen, tiempo, modalidad, aliquot, lote, réplica, columna del assay y estado de disponibilidad."
+      en: "Participant, specimen, time, modality, aliquot, batch, replicate, assay column, and availability status."
+      da: "Deltager, specimen, tidspunkt, modalitet, aliquot, batch, replikat, assay-kolonne og tilgængelighedsstatus."
   - id: bmb831.m11.f02
     type: misconception
     front:
-      es: Corrige: dos columnas con nombres parecidos corresponden necesariamente a la misma muestra.
-      en: Correct: two columns with similar names necessarily correspond to the same sample.
-      da: Ret: to kolonner med lignende navne svarer nødvendigvis til samme sample.
+      es: "Corrige: dos columnas con nombres parecidos corresponden necesariamente a la misma muestra."
+      en: "Correct: two columns with similar names necessarily correspond to the same sample."
+      da: "Ret: to kolonner med lignende navne svarer nødvendigvis til samme sample."
     back:
-      es: La identidad debe verificarse mediante claves, metadata, tiempo, specimen y procedencia; los nombres no bastan.
-      en: Identity must be verified through keys, metadata, time, specimen, and provenance; names alone are insufficient.
-      da: Identitet skal verificeres med nøgler, metadata, tidspunkt, specimen og provenance; navne alene er utilstrækkelige.
+      es: "La identidad debe verificarse mediante claves, metadata, tiempo, specimen y procedencia; los nombres no bastan."
+      en: "Identity must be verified through keys, metadata, time, specimen, and provenance; names alone are insufficient."
+      da: "Identitet skal verificeres med nøgler, metadata, tidspunkt, specimen og provenance; navne alene er utilstrækkelige."
   - id: bmb831.m11.f03
     type: population
     front:
-      es: ¿Cómo puede cambiar la población al usar sólo muestras completas?
-      en: How can the population change when only complete samples are used?
-      da: Hvordan kan populationen ændres når kun komplette samples bruges?
+      es: "¿Cómo puede cambiar la población al usar sólo muestras completas?"
+      en: "How can the population change when only complete samples are used?"
+      da: "Hvordan kan populationen ændres når kun komplette samples bruges?"
     back:
-      es: Si la disponibilidad de una modalidad depende de gravedad, sitio o calidad, la intersección excluye sistemáticamente ciertos perfiles.
-      en: If modality availability depends on severity, site, or quality, the intersection systematically excludes some profiles.
-      da: Hvis modalitetstilgængelighed afhænger af sværhedsgrad, site eller kvalitet, ekskluderer intersection systematisk bestemte profiler.
+      es: "Si la disponibilidad de una modalidad depende de gravedad, sitio o calidad, la intersección excluye sistemáticamente ciertos perfiles."
+      en: "If modality availability depends on severity, site, or quality, the intersection systematically excludes some profiles."
+      da: "Hvis modalitetstilgængelighed afhænger af sværhedsgrad, site eller kvalitet, ekskluderer intersection systematisk bestemte profiler."
   - id: bmb831.m11.f04
     type: entity_mapping
     front:
-      es: ¿Por qué un gen y su proteína no son la misma entidad analítica?
-      en: Why are a gene and its protein not the same analytical entity?
-      da: Hvorfor er et gen og dets protein ikke samme analytiske enhed?
+      es: "¿Por qué un gen y su proteína no son la misma entidad analítica?"
+      en: "Why are a gene and its protein not the same analytical entity?"
+      da: "Hvorfor er et gen og dets protein ikke samme analytiske enhed?"
     back:
-      es: Existen transcritos, isoformas, procesamiento, degradación, traducción y mapeos uno-a-muchos entre niveles moleculares.
-      en: Transcripts, isoforms, processing, degradation, translation, and one-to-many mappings separate molecular levels.
-      da: Transkripter, isoformer, processering, nedbrydning, translation og en-til-mange-mappings adskiller molekylære niveauer.
+      es: "Existen transcritos, isoformas, procesamiento, degradación, traducción y mapeos uno-a-muchos entre niveles moleculares."
+      en: "Transcripts, isoforms, processing, degradation, translation, and one-to-many mappings separate molecular levels."
+      da: "Transkripter, isoformer, processering, nedbrydning, translation og en-til-mange-mappings adskiller molekylære niveauer."
   - id: bmb831.m11.f05
     type: scaling
     front:
-      es: ¿Por qué una modalidad puede dominar una concatenación temprana?
-      en: Why can one modality dominate early concatenation?
-      da: Hvorfor kan én modalitet dominere tidlig concatenation?
+      es: "¿Por qué una modalidad puede dominar una concatenación temprana?"
+      en: "Why can one modality dominate early concatenation?"
+      da: "Hvorfor kan én modalitet dominere tidlig concatenation?"
     back:
-      es: Por tener muchas más variables, mayor varianza, otra escala o menor regularización efectiva.
-      en: Because it has many more variables, larger variance, a different scale, or weaker effective regularization.
-      da: Fordi den har langt flere variable, større varians, en anden skala eller svagere effektiv regularisering.
+      es: "Por tener muchas más variables, mayor varianza, otra escala o menor regularización efectiva."
+      en: "Because it has many more variables, larger variance, a different scale, or weaker effective regularization."
+      da: "Fordi den har langt flere variable, større varians, en anden skala eller svagere effektiv regularisering."
   - id: bmb831.m11.f06
     type: early_integration
     front:
-      es: Define integración temprana.
-      en: Define early integration.
-      da: Definér tidlig integration.
+      es: "Define integración temprana."
+      en: "Define early integration."
+      da: "Definér tidlig integration."
     back:
-      es: Concatenar o combinar features de las modalidades antes de ajustar el modelo principal.
-      en: Concatenate or combine modality features before fitting the main model.
-      da: Concatenate eller kombinere modalitetsfeatures før hovedmodellen fittes.
+      es: "Concatenar o combinar features de las modalidades antes de ajustar el modelo principal."
+      en: "Concatenate or combine modality features before fitting the main model."
+      da: "Concatenate eller kombinere modalitetsfeatures før hovedmodellen fittes."
   - id: bmb831.m11.f07
     type: intermediate_integration
     front:
-      es: Define integración intermedia.
-      en: Define intermediate integration.
-      da: Definér intermediær integration.
+      es: "Define integración intermedia."
+      en: "Define intermediate integration."
+      da: "Definér intermediær integration."
     back:
-      es: Aprender una representación conjunta o factores compartidos manteniendo información de cada vista.
-      en: Learn a joint representation or shared factors while retaining view-specific information.
-      da: Lære en fælles repræsentation eller delte faktorer med bevaret view-specifik information.
+      es: "Aprender una representación conjunta o factores compartidos manteniendo información de cada vista."
+      en: "Learn a joint representation or shared factors while retaining view-specific information."
+      da: "Lære en fælles repræsentation eller delte faktorer med bevaret view-specifik information."
   - id: bmb831.m11.f08
     type: late_integration
     front:
-      es: Define integración tardía.
-      en: Define late integration.
-      da: Definér sen integration.
+      es: "Define integración tardía."
+      en: "Define late integration."
+      da: "Definér sen integration."
     back:
-      es: Ajustar modelos o análisis por modalidad y combinar posteriormente predicciones, scores o evidencia.
-      en: Fit modality-specific models or analyses and later combine predictions, scores, or evidence.
-      da: Fitte modalitetsspecifikke modeller eller analyser og senere kombinere prædiktioner, scores eller evidens.
+      es: "Ajustar modelos o análisis por modalidad y combinar posteriormente predicciones, scores o evidencia."
+      en: "Fit modality-specific models or analyses and later combine predictions, scores, or evidence."
+      da: "Fitte modalitetsspecifikke modeller eller analyser og senere kombinere prædiktioner, scores eller evidens."
   - id: bmb831.m11.f09
     type: method_selection
     front:
-      es: ¿Cuándo resulta atractiva la integración tardía?
-      en: When is late integration attractive?
-      da: Hvornår er sen integration attraktiv?
+      es: "¿Cuándo resulta atractiva la integración tardía?"
+      en: "When is late integration attractive?"
+      da: "Hvornår er sen integration attraktiv?"
     back:
-      es: Cuando las modalidades requieren modelos distintos, existe cobertura incompleta o se necesitan predicciones utilizables con assays variables.
-      en: When modalities need different models, coverage is incomplete, or predictions must work with variable assay availability.
-      da: Når modaliteter kræver forskellige modeller, dækningen er ufuldstændig, eller prædiktioner skal fungere med variabel assay-tilgængelighed.
+      es: "Cuando las modalidades requieren modelos distintos, existe cobertura incompleta o se necesitan predicciones utilizables con assays variables."
+      en: "When modalities need different models, coverage is incomplete, or predictions must work with variable assay availability."
+      da: "Når modaliteter kræver forskellige modeller, dækningen er ufuldstændig, eller prædiktioner skal fungere med variabel assay-tilgængelighed."
   - id: bmb831.m11.f10
     type: latent_factor
     front:
-      es: ¿Qué puede representar un factor latente multi-view?
-      en: What can a multi-view latent factor represent?
-      da: Hvad kan en multi-view latent faktor repræsentere?
+      es: "¿Qué puede representar un factor latente multi-view?"
+      en: "What can a multi-view latent factor represent?"
+      da: "Hvad kan en multi-view latent faktor repræsentere?"
     back:
-      es: Variación biológica compartida, señal específica de una modalidad, batch o una mezcla de estas fuentes.
-      en: Shared biological variation, modality-specific signal, batch, or a mixture of these sources.
-      da: Delt biologisk variation, modalitetsspecifikt signal, batch eller en blanding af disse kilder.
+      es: "Variación biológica compartida, señal específica de una modalidad, batch o una mezcla de estas fuentes."
+      en: "Shared biological variation, modality-specific signal, batch, or a mixture of these sources."
+      da: "Delt biologisk variation, modalitetsspecifikt signal, batch eller en blanding af disse kilder."
   - id: bmb831.m11.f11
     type: factor_interpretation
     front:
-      es: Evidencia necesaria para interpretar un factor latente.
-      en: Evidence needed to interpret a latent factor.
-      da: Evidens nødvendig for at fortolke en latent faktor.
+      es: "Evidencia necesaria para interpretar un factor latente."
+      en: "Evidence needed to interpret a latent factor."
+      da: "Evidens nødvendig for at fortolke en latent faktor."
     back:
-      es: Varianza por vista, loadings, asociación con metadata, estabilidad, sensibilidad y evidencia funcional externa.
-      en: Variance by view, loadings, metadata association, stability, sensitivity, and external functional evidence.
-      da: Varians per view, loadings, metadataassociation, stabilitet, følsomhed og ekstern funktionel evidens.
+      es: "Varianza por vista, loadings, asociación con metadata, estabilidad, sensibilidad y evidencia funcional externa."
+      en: "Variance by view, loadings, metadata association, stability, sensitivity, and external functional evidence."
+      da: "Varians per view, loadings, metadataassociation, stabilitet, følsomhed og ekstern funktionel evidens."
   - id: bmb831.m11.f12
     type: misconception
     front:
-      es: Corrige: un factor latente con genes de inmunidad demuestra un mecanismo inmune causal.
-      en: Correct: a latent factor containing immune genes proves a causal immune mechanism.
-      da: Ret: en latent faktor med immungener beviser en kausal immunmekanisme.
+      es: "Corrige: un factor latente con genes de inmunidad demuestra un mecanismo inmune causal."
+      en: "Correct: a latent factor containing immune genes proves a causal immune mechanism."
+      da: "Ret: en latent faktor med immungener beviser en kausal immunmekanisme."
     back:
-      es: Es una estructura estadística compatible con esa interpretación, pero puede reflejar composición celular, batch o correlación no causal.
-      en: It is a statistical structure compatible with that interpretation but may reflect cell composition, batch, or noncausal correlation.
-      da: Det er en statistisk struktur kompatibel med fortolkningen, men kan afspejle cellesammensætning, batch eller ikke-kausal korrelation.
+      es: "Es una estructura estadística compatible con esa interpretación, pero puede reflejar composición celular, batch o correlación no causal."
+      en: "It is a statistical structure compatible with that interpretation but may reflect cell composition, batch, or noncausal correlation."
+      da: "Det er en statistisk struktur kompatibel med fortolkningen, men kan afspejle cellesammensætning, batch eller ikke-kausal korrelation."
   - id: bmb831.m11.f13
     type: leakage
     front:
-      es: ¿Qué pasos multi-ómicos deben ocurrir dentro del training fold?
-      en: Which multi-omics steps must occur inside the training fold?
-      da: Hvilke multi-omics-trin skal foregå inde i training-foldet?
+      es: "¿Qué pasos multi-ómicos deben ocurrir dentro del training fold?"
+      en: "Which multi-omics steps must occur inside the training fold?"
+      da: "Hvilke multi-omics-trin skal foregå inde i training-foldet?"
     back:
-      es: Escalado, imputación, selección, reducción dimensional, ajuste de factores, integración supervisada y tuning.
-      en: Scaling, imputation, selection, dimension reduction, factor fitting, supervised integration, and tuning.
-      da: Skalering, imputation, selection, dimensionsreduktion, faktorfitting, superviseret integration og tuning.
+      es: "Escalado, imputación, selección, reducción dimensional, ajuste de factores, integración supervisada y tuning."
+      en: "Scaling, imputation, selection, dimension reduction, factor fitting, supervised integration, and tuning."
+      da: "Skalering, imputation, selection, dimensionsreduktion, faktorfitting, superviseret integration og tuning."
   - id: bmb831.m11.f14
     type: missing_modality
     front:
-      es: Tres estrategias ante modalidades ausentes.
-      en: Three strategies for missing modalities.
-      da: Tre strategier ved manglende modaliteter.
+      es: "Tres estrategias ante modalidades ausentes."
+      en: "Three strategies for missing modalities."
+      da: "Tre strategier ved manglende modaliteter."
     back:
-      es: Análisis complete-case, imputación/modelado de modalidad ausente e integración tardía con modelos disponibles.
-      en: Complete-case analysis, missing-modality imputation/modeling, and late integration using available models.
-      da: Complete-case-analyse, imputation/modellering af manglende modalitet og sen integration med tilgængelige modeller.
+      es: "Análisis complete-case, imputación/modelado de modalidad ausente e integración tardía con modelos disponibles."
+      en: "Complete-case analysis, missing-modality imputation/modeling, and late integration using available models."
+      da: "Complete-case-analyse, imputation/modellering af manglende modalitet og sen integration med tilgængelige modeller."
   - id: bmb831.m11.f15
     type: missing_modality
     front:
-      es: Riesgo principal del análisis complete-case multi-ómico.
-      en: Main risk of multi-omics complete-case analysis.
-      da: Hovedrisiko ved multi-omics complete-case-analyse.
+      es: "Riesgo principal del análisis complete-case multi-ómico."
+      en: "Main risk of multi-omics complete-case analysis."
+      da: "Hovedrisiko ved multi-omics complete-case-analyse."
     back:
-      es: Cambiar la población y el estimando cuando la ausencia de assays no es aleatoria.
-      en: Changing the population and estimand when assay absence is nonrandom.
-      da: Ændre population og estimand når assay-fravær ikke er tilfældigt.
+      es: "Cambiar la población y el estimando cuando la ausencia de assays no es aleatoria."
+      en: "Changing the population and estimand when assay absence is nonrandom."
+      da: "Ændre population og estimand når assay-fravær ikke er tilfældigt."
   - id: bmb831.m11.f16
     type: baseline
     front:
-      es: ¿Cuál es el baseline mínimo para demostrar valor multi-ómico?
-      en: What is the minimum baseline for demonstrating multi-omics value?
-      da: Hvad er minimumsbaseline for at demonstrere multi-omics-værdi?
+      es: "¿Cuál es el baseline mínimo para demostrar valor multi-ómico?"
+      en: "What is the minimum baseline for demonstrating multi-omics value?"
+      da: "Hvad er minimumsbaseline for at demonstrere multi-omics-værdi?"
     back:
-      es: El mejor modelo unimodal razonable y una combinación simple, evaluados con los mismos splits, tuning y métricas.
-      en: The best reasonable unimodal model and a simple combination, evaluated with the same splits, tuning, and metrics.
-      da: Den bedste rimelige unimodale model og en simpel kombination, evalueret med samme splits, tuning og metrikker.
+      es: "El mejor modelo unimodal razonable y una combinación simple, evaluados con los mismos splits, tuning y métricas."
+      en: "The best reasonable unimodal model and a simple combination, evaluated with the same splits, tuning, and metrics."
+      da: "Den bedste rimelige unimodale model og en simpel kombination, evalueret med samme splits, tuning og metrikker."
   - id: bmb831.m11.f17
     type: incremental_value
     front:
-      es: Define valor incremental.
-      en: Define incremental value.
-      da: Definér inkrementel værdi.
+      es: "Define valor incremental."
+      en: "Define incremental value."
+      da: "Definér inkrementel værdi."
     back:
-      es: Mejora reproducible sobre un baseline en rendimiento, calibración, utilidad o conocimiento, considerando coste y complejidad.
-      en: Reproducible improvement over a baseline in performance, calibration, utility, or knowledge, accounting for cost and complexity.
-      da: Reproducerbar forbedring over en baseline i performance, kalibrering, nytte eller viden under hensyn til omkostning og kompleksitet.
+      es: "Mejora reproducible sobre un baseline en rendimiento, calibración, utilidad o conocimiento, considerando coste y complejidad."
+      en: "Reproducible improvement over a baseline in performance, calibration, utility, or knowledge, accounting for cost and complexity."
+      da: "Reproducerbar forbedring over en baseline i performance, kalibrering, nytte eller viden under hensyn til omkostning og kompleksitet."
   - id: bmb831.m11.f18
     type: misconception
     front:
-      es: Corrige: integrar más modalidades siempre mejora predicción.
-      en: Correct: integrating more modalities always improves prediction.
-      da: Ret: integration af flere modaliteter forbedrer altid prædiktion.
+      es: "Corrige: integrar más modalidades siempre mejora predicción."
+      en: "Correct: integrating more modalities always improves prediction."
+      da: "Ret: integration af flere modaliteter forbedrer altid prædiktion."
     back:
-      es: Puede añadir ruido, dimensionalidad, missingness, coste y sobreajuste sin aportar señal independiente.
-      en: It may add noise, dimensionality, missingness, cost, and overfitting without independent signal.
-      da: Det kan tilføje støj, dimensionalitet, missingness, omkostning og overfitting uden uafhængigt signal.
+      es: "Puede añadir ruido, dimensionalidad, missingness, coste y sobreajuste sin aportar señal independiente."
+      en: "It may add noise, dimensionality, missingness, cost, and overfitting without independent signal."
+      da: "Det kan tilføje støj, dimensionalitet, missingness, omkostning og overfitting uden uafhængigt signal."
   - id: bmb831.m11.f19
     type: stability
     front:
-      es: Dimensiones de estabilidad en integración multi-ómica.
-      en: Stability dimensions in multi-omics integration.
-      da: Stabilitetsdimensioner i multi-omics-integration.
+      es: "Dimensiones de estabilidad en integración multi-ómica."
+      en: "Stability dimensions in multi-omics integration."
+      da: "Stabilitetsdimensioner i multi-omics-integration."
     back:
-      es: Matching de muestras, factores, loadings, selección, rendimiento, calibración y conclusiones biológicas.
-      en: Sample matching, factors, loadings, selection, performance, calibration, and biological conclusions.
-      da: Sample-matching, faktorer, loadings, selection, performance, kalibrering og biologiske konklusioner.
+      es: "Matching de muestras, factores, loadings, selección, rendimiento, calibración y conclusiones biológicas."
+      en: "Sample matching, factors, loadings, selection, performance, calibration, and biological conclusions."
+      da: "Sample-matching, faktorer, loadings, selection, performance, kalibrering og biologiske konklusioner."
   - id: bmb831.m11.f20
     type: sensitivity
     front:
-      es: Cinco análisis de sensibilidad multi-ómicos.
-      en: Five multi-omics sensitivity analyses.
-      da: Fem multi-omics-følsomhedsanalyser.
+      es: "Cinco análisis de sensibilidad multi-ómicos."
+      en: "Five multi-omics sensitivity analyses."
+      da: "Fem multi-omics-følsomhedsanalyser."
     back:
-      es: Escalado por vista, política de mapping, muestras completas, número de factores y método de integración.
-      en: View scaling, mapping policy, complete samples, number of factors, and integration method.
-      da: View-skalering, mappingpolitik, komplette samples, antal faktorer og integrationsmetode.
+      es: "Escalado por vista, política de mapping, muestras completas, número de factores y método de integración."
+      en: "View scaling, mapping policy, complete samples, number of factors, and integration method."
+      da: "View-skalering, mappingpolitik, komplette samples, antal faktorer og integrationsmetode."
   - id: bmb831.m11.f21
     type: practice
     front:
-      es: Multi-ómico AUC 0.81 y mejor unimodal 0.82 en los mismos outer folds. Conclusión.
-      en: Multi-omics AUC is 0.81 and best unimodal AUC is 0.82 in the same outer folds. Conclusion.
-      da: Multi-omics AUC er 0.81 og bedste unimodale AUC er 0.82 i samme outer folds. Konklusion.
+      es: "Multi-ómico AUC 0.81 y mejor unimodal 0.82 en los mismos outer folds. Conclusión."
+      en: "Multi-omics AUC is 0.81 and best unimodal AUC is 0.82 in the same outer folds. Conclusion."
+      da: "Multi-omics AUC er 0.81 og bedste unimodale AUC er 0.82 i samme outer folds. Konklusion."
     back:
-      es: No se demuestra valor predictivo incremental; deben considerarse incertidumbre, calibración, coste y otros objetivos.
-      en: No incremental predictive value is demonstrated; uncertainty, calibration, cost, and other objectives should be considered.
-      da: Ingen inkrementel prædiktiv værdi er demonstreret; usikkerhed, kalibrering, omkostning og andre mål bør vurderes.
+      es: "No se demuestra valor predictivo incremental; deben considerarse incertidumbre, calibración, coste y otros objetivos."
+      en: "No incremental predictive value is demonstrated; uncertainty, calibration, cost, and other objectives should be considered."
+      da: "Ingen inkrementel prædiktiv værdi er demonstreret; usikkerhed, kalibrering, omkostning og andre mål bør vurderes."
   - id: bmb831.m11.f22
     type: practice
     front:
-      es: Transcriptómica tiene 20 000 features y proteómica 500. Riesgo de concatenación directa.
-      en: Transcriptomics has 20,000 features and proteomics 500. Risk of direct concatenation.
-      da: Transkriptomik har 20.000 features og proteomik 500. Risiko ved direkte concatenation.
+      es: "Transcriptómica tiene 20 000 features y proteómica 500. Riesgo de concatenación directa."
+      en: "Transcriptomics has 20,000 features and proteomics 500. Risk of direct concatenation."
+      da: "Transkriptomik har 20.000 features og proteomik 500. Risiko ved direkte concatenation."
     back:
-      es: Transcriptómica puede dominar por dimensión y varianza; se requiere balance por vista, reducción o método multi-view.
-      en: Transcriptomics may dominate through dimension and variance; view balancing, reduction, or a multi-view method is needed.
-      da: Transkriptomik kan dominere via dimension og varians; view-balancering, reduktion eller multi-view-metode kræves.
+      es: "Transcriptómica puede dominar por dimensión y varianza; se requiere balance por vista, reducción o método multi-view."
+      en: "Transcriptomics may dominate through dimension and variance; view balancing, reduction, or a multi-view method is needed."
+      da: "Transkriptomik kan dominere via dimension og varians; view-balancering, reduktion eller multi-view-metode kræves."
   - id: bmb831.m11.f23
     type: oral
     front:
-      es: Orden para defender una integración multi-ómica.
-      en: Order for defending a multi-omics integration.
-      da: Rækkefølge for at forsvare en multi-omics-integration.
+      es: "Orden para defender una integración multi-ómica."
+      en: "Order for defending a multi-omics integration."
+      da: "Rækkefølge for at forsvare en multi-omics-integration."
     back:
-      es: Pregunta→unidad/sample map→modalidades/escalas→estrategia→preprocessing→validación→baselines→estabilidad→interpretación→coste y límites.
-      en: Question→unit/sample map→modalities/scales→strategy→preprocessing→validation→baselines→stability→interpretation→cost and limits.
-      da: Spørgsmål→enhed/sample-map→modaliteter/skalaer→strategi→preprocessing→validering→baselines→stabilitet→fortolkning→omkostning og grænser.
+      es: "Pregunta→unidad/sample map→modalidades/escalas→estrategia→preprocessing→validación→baselines→estabilidad→interpretación→coste y límites."
+      en: "Question→unit/sample map→modalities/scales→strategy→preprocessing→validation→baselines→stability→interpretation→cost and limits."
+      da: "Spørgsmål→enhed/sample-map→modaliteter/skalaer→strategi→preprocessing→validering→baselines→stabilitet→fortolkning→omkostning og grænser."
   - id: bmb831.m11.f24
     type: integration
     front:
-      es: ¿Qué diferencia una integración útil de una integración decorativa?
-      en: What distinguishes useful integration from decorative integration?
-      da: Hvad adskiller nyttig integration fra dekorativ integration?
+      es: "¿Qué diferencia una integración útil de una integración decorativa?"
+      en: "What distinguishes useful integration from decorative integration?"
+      da: "Hvad adskiller nyttig integration fra dekorativ integration?"
     back:
-      es: Una pregunta común, alineación válida, método justificado, evaluación independiente y valor añadido o comprensión que no aporta una modalidad sola.
-      en: A common question, valid alignment, justified method, independent evaluation, and added value or insight unavailable from one modality alone.
-      da: Et fælles spørgsmål, gyldig alignment, begrundet metode, uafhængig evaluering og merværdi eller indsigt som én modalitet alene ikke giver.
+      es: "Una pregunta común, alineación válida, método justificado, evaluación independiente y valor añadido o comprensión que no aporta una modalidad sola."
+      en: "A common question, valid alignment, justified method, independent evaluation, and added value or insight unavailable from one modality alone."
+      da: "Et fælles spørgsmål, gyldig alignment, begrundet metode, uafhængig evaluering og merværdi eller indsigt som én modalitet alene ikke giver."

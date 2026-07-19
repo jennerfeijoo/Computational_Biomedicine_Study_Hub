@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Recursión, pila de llamadas, terminación y coste
-    en: Recursion, call stack, termination, and cost
-    da: Rekursion, kaldstak, terminering og omkostning
+    es: "Recursión, pila de llamadas, terminación y coste"
+    en: "Recursion, call stack, termination, and cost"
+    da: "Rekursion, kaldstak, terminering og omkostning"
   summary:
     es: >-
       Diseño y análisis de soluciones recursivas mediante contrato, casos base, medida de progreso,
@@ -34,66 +34,66 @@ objectives:
   - id: m09.o1
     bloom_level: analyze
     statement:
-      es: Identificar una relación estructural válida entre problema y subproblema.
-      en: Identify a valid structural relationship between a problem and its subproblem.
-      da: Identificere en gyldig strukturel relation mellem problem og delproblem.
+      es: "Identificar una relación estructural válida entre problema y subproblema."
+      en: "Identify a valid structural relationship between a problem and its subproblem."
+      da: "Identificere en gyldig strukturel relation mellem problem og delproblem."
     evidence: recursive_structure_analysis
   - id: m09.o2
     bloom_level: create
     statement:
-      es: Diseñar casos base completos, alcanzables y compatibles con el tipo de retorno.
-      en: Design complete, reachable base cases compatible with the return type.
-      da: Designe komplette, opnåelige basistilfælde, der passer til returtypen.
+      es: "Diseñar casos base completos, alcanzables y compatibles con el tipo de retorno."
+      en: "Design complete, reachable base cases compatible with the return type."
+      da: "Designe komplette, opnåelige basistilfælde, der passer til returtypen."
     evidence: base_case_design
   - id: m09.o3
     bloom_level: evaluate
     statement:
-      es: Justificar la terminación mediante una medida de progreso bien fundada.
-      en: Justify termination using a well-founded progress measure.
-      da: Begrunde terminering med et velfunderet fremskridtsmål.
+      es: "Justificar la terminación mediante una medida de progreso bien fundada."
+      en: "Justify termination using a well-founded progress measure."
+      da: "Begrunde terminering med et velfunderet fremskridtsmål."
     evidence: termination_argument
   - id: m09.o4
     bloom_level: analyze
     statement:
-      es: Trazar marcos, parámetros, retornos, descenso y desenrollado en la pila de llamadas.
-      en: Trace frames, parameters, returns, descent, and unwinding on the call stack.
-      da: Gennemgå frames, parametre, returværdier, nedstigning og afvikling på kaldstakken.
+      es: "Trazar marcos, parámetros, retornos, descenso y desenrollado en la pila de llamadas."
+      en: "Trace frames, parameters, returns, descent, and unwinding on the call stack."
+      da: "Gennemgå frames, parametre, returværdier, nedstigning og afvikling på kaldstakken."
     evidence: call_stack_trace
   - id: m09.o5
     bloom_level: apply
     statement:
-      es: Implementar recursión sobre enteros, cadenas y secuencias sin recomputación accidental.
-      en: Implement recursion over integers, strings, and sequences without accidental recomputation.
-      da: Implementere rekursion over heltal, strenge og sekvenser uden utilsigtet genberegning.
+      es: "Implementar recursión sobre enteros, cadenas y secuencias sin recomputación accidental."
+      en: "Implement recursion over integers, strings, and sequences without accidental recomputation."
+      da: "Implementere rekursion over heltal, strenge og sekvenser uden utilsigtet genberegning."
     evidence: recursive_implementation
   - id: m09.o6
     bloom_level: create
     statement:
-      es: Procesar estructuras anidadas de profundidad variable mediante descomposición recursiva.
-      en: Process variable-depth nested structures through recursive decomposition.
-      da: Behandle indlejrede strukturer med variabel dybde gennem rekursiv dekomponering.
+      es: "Procesar estructuras anidadas de profundidad variable mediante descomposición recursiva."
+      en: "Process variable-depth nested structures through recursive decomposition."
+      da: "Behandle indlejrede strukturer med variabel dybde gennem rekursiv dekomponering."
     evidence: nested_structure_solution
   - id: m09.o7
     bloom_level: evaluate
     statement:
-      es: Comparar soluciones recursivas e iterativas por claridad, memoria, profundidad y coste.
-      en: Compare recursive and iterative solutions by clarity, memory, depth, and cost.
-      da: Sammenligne rekursive og iterative løsninger efter klarhed, hukommelse, dybde og omkostning.
+      es: "Comparar soluciones recursivas e iterativas por claridad, memoria, profundidad y coste."
+      en: "Compare recursive and iterative solutions by clarity, memory, depth, and cost."
+      da: "Sammenligne rekursive og iterative løsninger efter klarhed, hukommelse, dybde og omkostning."
     evidence: paradigm_comparison
   - id: m09.o8
     bloom_level: analyze
     statement:
-      es: Detectar subproblemas repetidos y explicar cuándo la memoización cambia el coste.
-      en: Detect repeated subproblems and explain when memoization changes cost.
-      da: Identificere gentagne delproblemer og forklare hvornår memoization ændrer omkostningen.
+      es: "Detectar subproblemas repetidos y explicar cuándo la memoización cambia el coste."
+      en: "Detect repeated subproblems and explain when memoization changes cost."
+      da: "Identificere gentagne delproblemer og forklare hvornår memoization ændrer omkostningen."
     evidence: complexity_and_memoization_analysis
 
 concepts:
   - id: recursive-contract
     title:
-      es: Contrato recursivo y estructura del subproblema
-      en: Recursive contract and subproblem structure
-      da: Rekursiv kontrakt og delproblemstruktur
+      es: "Contrato recursivo y estructura del subproblema"
+      en: "Recursive contract and subproblem structure"
+      da: "Rekursiv kontrakt og delproblemstruktur"
     body:
       es: >-
         Una función recursiva se llama directa o indirectamente para resolver una instancia de la misma
@@ -113,9 +113,9 @@ concepts:
 
   - id: base-cases-and-domain-boundaries
     title:
-      es: Casos base y fronteras del dominio
-      en: Base cases and domain boundaries
-      da: Basistilfælde og domænegrænser
+      es: "Casos base y fronteras del dominio"
+      en: "Base cases and domain boundaries"
+      da: "Basistilfælde og domænegrænser"
     body:
       es: >-
         Un caso base resuelve directamente una instancia que no necesita más descomposición. Debe ser
@@ -133,9 +133,9 @@ concepts:
 
   - id: progress-measure-and-termination
     title:
-      es: Medida de progreso y terminación
-      en: Progress measure and termination
-      da: Fremskridtsmål og terminering
+      es: "Medida de progreso y terminación"
+      en: "Progress measure and termination"
+      da: "Fremskridtsmål og terminering"
     body:
       es: >-
         Cada llamada recursiva debe reducir una medida bien fundada: un entero no negativo, la longitud restante,
@@ -153,9 +153,9 @@ concepts:
 
   - id: call-stack-descent-and-unwinding
     title:
-      es: Pila de llamadas, descenso y desenrollado
-      en: Call stack, descent, and unwinding
-      da: Kaldstak, nedstigning og afvikling
+      es: "Pila de llamadas, descenso y desenrollado"
+      en: "Call stack, descent, and unwinding"
+      da: "Kaldstak, nedstigning og afvikling"
     body:
       es: >-
         Cada llamada crea un marco con parámetros, variables locales y punto de retorno. Los marcos se apilan durante
@@ -172,9 +172,9 @@ concepts:
 
   - id: recursion-over-sequences
     title:
-      es: Recursión sobre números y secuencias
-      en: Recursion over numbers and sequences
-      da: Rekursion over tal og sekvenser
+      es: "Recursión sobre números y secuencias"
+      en: "Recursion over numbers and sequences"
+      da: "Rekursion over tal og sekvenser"
     body:
       es: >-
         Un problema numérico suele reducir `n`; una secuencia puede descomponerse en cabeza y resto, índice actual o
@@ -192,9 +192,9 @@ concepts:
 
   - id: nested-structures-and-type-boundaries
     title:
-      es: Estructuras anidadas y fronteras de tipo
-      en: Nested structures and type boundaries
-      da: Indlejrede strukturer og typegrænser
+      es: "Estructuras anidadas y fronteras de tipo"
+      en: "Nested structures and type boundaries"
+      da: "Indlejrede strukturer og typegrænser"
     body:
       es: >-
         Las estructuras de profundidad variable no siempre pueden procesarse con un número fijo de bucles. Una función
@@ -212,9 +212,9 @@ concepts:
 
   - id: recursion-versus-iteration
     title:
-      es: Recursión frente a iteración
-      en: Recursion versus iteration
-      da: Rekursion versus iteration
+      es: "Recursión frente a iteración"
+      en: "Recursion versus iteration"
+      da: "Rekursion versus iteration"
     body:
       es: >-
         Recursión e iteración pueden expresar muchas de las mismas repeticiones. La recursión suele reflejar con claridad
@@ -232,9 +232,9 @@ concepts:
 
   - id: cost-repeated-subproblems-and-memoization
     title:
-      es: Coste, subproblemas repetidos y memoización
-      en: Cost, repeated subproblems, and memoization
-      da: Omkostning, gentagne delproblemer og memoization
+      es: "Coste, subproblemas repetidos y memoización"
+      en: "Cost, repeated subproblems, and memoization"
+      da: "Omkostning, gentagne delproblemer og memoization"
     body:
       es: >-
         El árbol de llamadas revela cuántas veces se resuelve cada subproblema. Si distintas ramas vuelven a calcular la
@@ -253,13 +253,13 @@ concepts:
 worked_examples:
   - id: dm857.m09.e01
     title:
-      es: Sumar una secuencia mediante índice recursivo
-      en: Sum a sequence using a recursive index
-      da: Summér en sekvens med rekursivt indeks
+      es: "Sumar una secuencia mediante índice recursivo"
+      en: "Sum a sequence using a recursive index"
+      da: "Summér en sekvens med rekursivt indeks"
     problem:
-      es: Implementar una suma recursiva sin crear slices en cada llamada.
-      en: Implement a recursive sum without creating slices at every call.
-      da: Implementér en rekursiv sum uden at oprette slices ved hvert kald.
+      es: "Implementar una suma recursiva sin crear slices en cada llamada."
+      en: "Implement a recursive sum without creating slices at every call."
+      da: "Implementér en rekursiv sum uden at oprette slices ved hvert kald."
     assumptions:
       - values is a finite sequence of numbers
       - index starts within 0 through len(values)
@@ -290,22 +290,22 @@ worked_examples:
       - positive and negative values combine correctly
       - the progress measure len(values) - index decreases by one
     explanation:
-      es: El índice evita copias y el valor neutro 0.0 hace compatible el caso vacío con la suma.
-      en: The index avoids copies, and neutral value 0.0 makes the empty case compatible with addition.
-      da: Indekset undgår kopier, og den neutrale værdi 0.0 passer til summen.
+      es: "El índice evita copias y el valor neutro 0.0 hace compatible el caso vacío con la suma."
+      en: "The index avoids copies, and neutral value 0.0 makes the empty case compatible with addition."
+      da: "Indekset undgår kopier, og den neutrale værdi 0.0 passer til summen."
     limitations:
       - very long inputs may exceed Python's recursion limit
     linked_objectives: [m09.o2, m09.o3, m09.o4, m09.o5]
 
   - id: dm857.m09.e02
     title:
-      es: Aplanar listas anidadas de números
-      en: Flatten nested lists of numbers
-      da: Udflad indlejrede lister af tal
+      es: "Aplanar listas anidadas de números"
+      en: "Flatten nested lists of numbers"
+      da: "Udflad indlejrede lister af tal"
     problem:
-      es: Convertir una estructura sintética de profundidad variable en una lista plana sin descomponer cadenas.
-      en: Convert a synthetic variable-depth structure into a flat list without decomposing strings.
-      da: Konvertér en syntetisk struktur med variabel dybde til en flad liste uden at dekomponere strenge.
+      es: "Convertir una estructura sintética de profundidad variable en una lista plana sin descomponer cadenas."
+      en: "Convert a synthetic variable-depth structure into a flat list without decomposing strings."
+      da: "Konvertér en syntetisk struktur med variabel dybde til en flad liste uden at dekomponere strenge."
     assumptions:
       - valid containers are lists only
       - valid atomic elements are int or float
@@ -328,22 +328,22 @@ worked_examples:
       - strings and unsupported objects raise TypeError
       - input is not mutated
     explanation:
-      es: El contrato define con precisión qué es átomo y qué es contenedor; cada lista se descompone en elementos más pequeños.
-      en: The contract precisely defines atoms and containers; each list decomposes into smaller elements.
-      da: Kontrakten definerer atom og container præcist; hver liste dekomponeres i mindre elementer.
+      es: "El contrato define con precisión qué es átomo y qué es contenedor; cada lista se descompone en elementos más pequeños."
+      en: "The contract precisely defines atoms and containers; each list decomposes into smaller elements."
+      da: "Kontrakten definerer atom og container præcist; hver liste dekomponeres i mindre elementer."
     limitations:
       - cyclic lists are outside the contract and would not terminate
     linked_objectives: [m09.o1, m09.o2, m09.o3, m09.o6]
 
   - id: dm857.m09.e03
     title:
-      es: Detectar y eliminar subproblemas repetidos
-      en: Detect and eliminate repeated subproblems
-      da: Identificér og fjern gentagne delproblemer
+      es: "Detectar y eliminar subproblemas repetidos"
+      en: "Detect and eliminate repeated subproblems"
+      da: "Identificér og fjern gentagne delproblemer"
     problem:
-      es: Comparar Fibonacci ingenuo y memoizado para explicar el árbol de llamadas.
-      en: Compare naive and memoized Fibonacci to explain the call tree.
-      da: Sammenlign naiv og memoized Fibonacci for at forklare kaldstræet.
+      es: "Comparar Fibonacci ingenuo y memoizado para explicar el árbol de llamadas."
+      en: "Compare naive and memoized Fibonacci to explain the call tree."
+      da: "Sammenlign naiv og memoized Fibonacci for at forklare kaldstræet."
     code: |-
       def fib(n: int) -> int:
           if n < 0:
@@ -367,9 +367,9 @@ worked_examples:
       - memoized results equal naive results for small n
       - each n is computed at most once in the memoized version
     explanation:
-      es: La memoización colapsa un árbol con subproblemas repetidos en un conjunto lineal de estados distintos.
-      en: Memoization collapses a repeated-subproblem call tree into a linear set of distinct states.
-      da: Memoization reducerer et kaldstræ med gentagelser til et lineært sæt af forskellige tilstande.
+      es: "La memoización colapsa un árbol con subproblemas repetidos en un conjunto lineal de estados distintos."
+      en: "Memoization collapses a repeated-subproblem call tree into a linear set of distinct states."
+      da: "Memoization reducerer et kaldstræ med gentagelser til et lineært sæt af forskellige tilstande."
     limitations:
       - iterative Fibonacci remains simpler and avoids recursion depth for this one-dimensional problem
     linked_objectives: [m09.o2, m09.o3, m09.o7, m09.o8]
@@ -379,48 +379,48 @@ practice_exercises:
     activity_type: code_tracing
     difficulty: foundational
     prompt:
-      es: Traza `countdown(3)` si imprime `n` antes de llamar a `countdown(n-1)` y el caso base es `n == 0`.
-      en: Trace `countdown(3)` when it prints `n` before calling `countdown(n-1)` and the base case is `n == 0`.
-      da: Gennemgå `countdown(3)`, når `n` udskrives før `countdown(n-1)`, og basistilfældet er `n == 0`.
+      es: "Traza `countdown(3)` si imprime `n` antes de llamar a `countdown(n-1)` y el caso base es `n == 0`."
+      en: "Trace `countdown(3)` when it prints `n` before calling `countdown(n-1)` and the base case is `n == 0`."
+      da: "Gennemgå `countdown(3)`, når `n` udskrives før `countdown(n-1)`, og basistilfældet er `n == 0`."
     reference_solution:
-      es: Se imprime `3, 2, 1`; el caso 0 detiene el descenso.
-      en: It prints `3, 2, 1`; case 0 stops descent.
-      da: Den udskriver `3, 2, 1`; tilfældet 0 stopper nedstigningen.
+      es: "Se imprime `3, 2, 1`; el caso 0 detiene el descenso."
+      en: "It prints `3, 2, 1`; case 0 stops descent."
+      da: "Den udskriver `3, 2, 1`; tilfældet 0 stopper nedstigningen."
     linked_objectives: [m09.o2, m09.o4]
 
   - id: dm857.m09.p02
     activity_type: code_tracing
     difficulty: intermediate
     prompt:
-      es: ¿Qué orden imprime la misma función si imprime después de la llamada recursiva?
-      en: What order does the same function print when printing after the recursive call?
-      da: Hvilken rækkefølge udskrives, hvis udskriften sker efter det rekursive kald?
+      es: "¿Qué orden imprime la misma función si imprime después de la llamada recursiva?"
+      en: "What order does the same function print when printing after the recursive call?"
+      da: "Hvilken rækkefølge udskrives, hvis udskriften sker efter det rekursive kald?"
     reference_solution:
-      es: `1, 2, 3`, durante el desenrollado.
-      en: `1, 2, 3`, during unwinding.
-      da: `1, 2, 3` under afviklingen.
+      es: "`1, 2, 3`, durante el desenrollado."
+      en: "`1, 2, 3`, during unwinding."
+      da: "`1, 2, 3` under afviklingen."
     linked_objectives: [m09.o4]
 
   - id: dm857.m09.p03
     activity_type: debugging
     difficulty: intermediate
     prompt:
-      es: Diagnostica `return f(n + 1)` para un dominio de enteros no negativos cuyo caso base es `n == 0`.
-      en: Diagnose `return f(n + 1)` for non-negative integers with base case `n == 0`.
-      da: Diagnostisér `return f(n + 1)` for ikke-negative heltal med basistilfældet `n == 0`.
+      es: "Diagnostica `return f(n + 1)` para un dominio de enteros no negativos cuyo caso base es `n == 0`."
+      en: "Diagnose `return f(n + 1)` for non-negative integers with base case `n == 0`."
+      da: "Diagnostisér `return f(n + 1)` for ikke-negative heltal med basistilfældet `n == 0`."
     reference_solution:
-      es: La medida `n` aumenta y se aleja del caso base; debe reducirse mediante `n - 1` o redefinirse el contrato.
-      en: Measure `n` increases away from the base case; use `n - 1` or redefine the contract.
-      da: Målet `n` vokser væk fra basistilfældet; brug `n - 1` eller redefinér kontrakten.
+      es: "La medida `n` aumenta y se aleja del caso base; debe reducirse mediante `n - 1` o redefinirse el contrato."
+      en: "Measure `n` increases away from the base case; use `n - 1` or redefine the contract."
+      da: "Målet `n` vokser væk fra basistilfældet; brug `n - 1` eller redefinér kontrakten."
     linked_objectives: [m09.o3]
 
   - id: dm857.m09.p04
     activity_type: refactoring
     difficulty: intermediate
     prompt:
-      es: Reescribe una suma recursiva basada en `values[1:]` para usar un índice y explica el cambio de coste.
-      en: Rewrite a recursive sum based on `values[1:]` to use an index and explain the cost change.
-      da: Omskriv en rekursiv sum med `values[1:]` til et indeks og forklar omkostningsændringen.
+      es: "Reescribe una suma recursiva basada en `values[1:]` para usar un índice y explica el cambio de coste."
+      en: "Rewrite a recursive sum based on `values[1:]` to use an index and explain the cost change."
+      da: "Omskriv en rekursiv sum med `values[1:]` til et indeks og forklar omkostningsændringen."
     accepted_answer_elements:
       - index parameter
       - base case at len(values)
@@ -432,9 +432,9 @@ practice_exercises:
     activity_type: method_selection
     difficulty: advanced
     prompt:
-      es: Elige recursión o iteración para factorial, recorrer un árbol, procesar una lista plana enorme y aplanar una estructura de profundidad variable. Justifica.
-      en: Choose recursion or iteration for factorial, tree traversal, a huge flat list, and flattening variable-depth structure. Justify.
-      da: Vælg rekursion eller iteration til fakultet, trægennemløb, en meget stor flad liste og udfladning af variabel dybde. Begrund.
+      es: "Elige recursión o iteración para factorial, recorrer un árbol, procesar una lista plana enorme y aplanar una estructura de profundidad variable. Justifica."
+      en: "Choose recursion or iteration for factorial, tree traversal, a huge flat list, and flattening variable-depth structure. Justify."
+      da: "Vælg rekursion eller iteration til fakultet, trægennemløb, en meget stor flad liste og udfladning af variabel dybde. Begrund."
     accepted_answer_elements:
       - either paradigm can express factorial, iteration avoids depth
       - recursion naturally mirrors tree traversal
@@ -446,9 +446,9 @@ practice_exercises:
     activity_type: test_design
     difficulty: advanced
     prompt:
-      es: Diseña pruebas para una función recursiva que calcula la profundidad máxima de listas anidadas.
-      en: Design tests for a recursive function computing maximum nested-list depth.
-      da: Design test til en rekursiv funktion, der beregner maksimal dybde af indlejrede lister.
+      es: "Diseña pruebas para una función recursiva que calcula la profundidad máxima de listas anidadas."
+      en: "Design tests for a recursive function computing maximum nested-list depth."
+      da: "Design test til en rekursiv funktion, der beregner maksimal dybde af indlejrede lister."
     accepted_answer_elements:
       - atomic value according to contract
       - empty list
@@ -464,112 +464,112 @@ objective_bank:
   - id: dm857.m09.q01
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué caracteriza un caso base?, en: What characterizes a base case?, da: Hvad karakteriserer et basistilfælde?}
+    prompt: {"es": "¿Qué caracteriza un caso base?", "en": "What characterizes a base case?", "da": "Hvad karakteriserer et basistilfælde?"}
     options:
       - id: direct_solution
-        text: {es: Resuelve directamente una instancia mínima., en: It directly solves a minimal instance., da: Det løser en minimal instans direkte.}
+        text: {"es": "Resuelve directamente una instancia mínima.", "en": "It directly solves a minimal instance.", "da": "Det løser en minimal instans direkte."}
       - id: recursive_call
-        text: {es: Siempre realiza otra llamada., en: It always makes another call., da: Det foretager altid endnu et kald.}
+        text: {"es": "Siempre realiza otra llamada.", "en": "It always makes another call.", "da": "Det foretager altid endnu et kald."}
       - id: global_state
-        text: {es: Modifica estado global., en: It modifies global state., da: Det ændrer global tilstand.}
+        text: {"es": "Modifica estado global.", "en": "It modifies global state.", "da": "Det ændrer global tilstand."}
     correct_option_ids: [direct_solution]
-    explanation: {es: El caso base detiene la descomposición., en: The base case stops decomposition., da: Basistilfældet stopper dekomponeringen.}
+    explanation: {"es": "El caso base detiene la descomposición.", "en": "The base case stops decomposition.", "da": "Basistilfældet stopper dekomponeringen."}
   - id: dm857.m09.q02
     activity_type: true_false
     difficulty: foundational
-    prompt: {es: Cada llamada recursiva comparte las mismas variables locales., en: Every recursive call shares the same local variables., da: Hvert rekursivt kald deler de samme lokale variable.}
+    prompt: {"es": "Cada llamada recursiva comparte las mismas variables locales.", "en": "Every recursive call shares the same local variables.", "da": "Hvert rekursivt kald deler de samme lokale variable."}
     correct_answer: false
-    explanation: {es: Cada llamada tiene su propio marco., en: Each call has its own frame., da: Hvert kald har sin egen frame.}
+    explanation: {"es": "Cada llamada tiene su propio marco.", "en": "Each call has its own frame.", "da": "Hvert kald har sin egen frame."}
   - id: dm857.m09.q03
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué demuestra una medida de progreso decreciente y acotada?, en: What does a decreasing bounded progress measure support?, da: Hvad understøtter et faldende afgrænset fremskridtsmål?}
+    prompt: {"es": "¿Qué demuestra una medida de progreso decreciente y acotada?", "en": "What does a decreasing bounded progress measure support?", "da": "Hvad understøtter et faldende afgrænset fremskridtsmål?"}
     options:
       - id: termination
-        text: {es: Terminación., en: Termination., da: Terminering.}
+        text: {"es": "Terminación.", "en": "Termination.", "da": "Terminering."}
       - id: syntax
-        text: {es: Corrección sintáctica., en: Syntactic correctness., da: Syntaktisk korrekthed.}
+        text: {"es": "Corrección sintáctica.", "en": "Syntactic correctness.", "da": "Syntaktisk korrekthed."}
       - id: output_format
-        text: {es: Formato de salida., en: Output format., da: Outputformat.}
+        text: {"es": "Formato de salida.", "en": "Output format.", "da": "Outputformat."}
     correct_option_ids: [termination]
-    explanation: {es: La medida no puede reducirse indefinidamente., en: The measure cannot decrease indefinitely., da: Målet kan ikke falde uendeligt.}
+    explanation: {"es": "La medida no puede reducirse indefinidamente.", "en": "The measure cannot decrease indefinitely.", "da": "Målet kan ikke falde uendeligt."}
   - id: dm857.m09.q04
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿En qué orden se desenrolla la pila?, en: In what order does the stack unwind?, da: I hvilken rækkefølge afvikles stakken?}
+    prompt: {"es": "¿En qué orden se desenrolla la pila?", "en": "In what order does the stack unwind?", "da": "I hvilken rækkefølge afvikles stakken?"}
     options:
       - id: lifo
-        text: {es: Último en entrar, primero en salir., en: Last in, first out., da: Sidst ind, først ud.}
+        text: {"es": "Último en entrar, primero en salir.", "en": "Last in, first out.", "da": "Sidst ind, først ud."}
       - id: fifo
-        text: {es: Primero en entrar, primero en salir., en: First in, first out., da: Først ind, først ud.}
+        text: {"es": "Primero en entrar, primero en salir.", "en": "First in, first out.", "da": "Først ind, først ud."}
       - id: random
-        text: {es: Aleatorio., en: Random., da: Tilfældigt.}
+        text: {"es": "Aleatorio.", "en": "Random.", "da": "Tilfældigt."}
     correct_option_ids: [lifo]
-    explanation: {es: El marco más reciente retorna primero., en: The most recent frame returns first., da: Den seneste frame returnerer først.}
+    explanation: {"es": "El marco más reciente retorna primero.", "en": "The most recent frame returns first.", "da": "Den seneste frame returnerer først."}
   - id: dm857.m09.q05
     activity_type: true_false
     difficulty: intermediate
-    prompt: {es: Usar slicing en cada llamada puede añadir coste de copia., en: Slicing at every call may add copying cost., da: Slicing ved hvert kald kan tilføje kopieringsomkostning.}
+    prompt: {"es": "Usar slicing en cada llamada puede añadir coste de copia.", "en": "Slicing at every call may add copying cost.", "da": "Slicing ved hvert kald kan tilføje kopieringsomkostning."}
     correct_answer: true
-    explanation: {es: Cada slice crea una secuencia nueva., en: Each slice creates a new sequence., da: Hvert slice opretter en ny sekvens.}
+    explanation: {"es": "Cada slice crea una secuencia nueva.", "en": "Each slice creates a new sequence.", "da": "Hvert slice opretter en ny sekvens."}
   - id: dm857.m09.q06
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Cuál es un riesgo de tratar cadenas como contenedores recursivos genéricos?, en: What is a risk of treating strings as generic recursive containers?, da: Hvad er en risiko ved at behandle strenge som generiske rekursive containere?}
+    prompt: {"es": "¿Cuál es un riesgo de tratar cadenas como contenedores recursivos genéricos?", "en": "What is a risk of treating strings as generic recursive containers?", "da": "Hvad er en risiko ved at behandle strenge som generiske rekursive containere?"}
     options:
       - id: character_recursion
-        text: {es: Descomponerlas carácter por carácter sin intención., en: Unintentionally recurse character by character., da: Utilsigtet rekursion tegn for tegn.}
+        text: {"es": "Descomponerlas carácter por carácter sin intención.", "en": "Unintentionally recurse character by character.", "da": "Utilsigtet rekursion tegn for tegn."}
       - id: no_iteration
-        text: {es: Las cadenas no son iterables., en: Strings are not iterable., da: Strenge er ikke iterable.}
+        text: {"es": "Las cadenas no son iterables.", "en": "Strings are not iterable.", "da": "Strenge er ikke iterable."}
       - id: automatic_cache
-        text: {es: Se memorizan automáticamente., en: They are automatically memoized., da: De memoizes automatisk.}
+        text: {"es": "Se memorizan automáticamente.", "en": "They are automatically memoized.", "da": "De memoizes automatisk."}
     correct_option_ids: [character_recursion]
-    explanation: {es: El contrato debe definir tipos atómicos y contenedores., en: The contract must define atomic and container types., da: Kontrakten skal definere atom- og containertyper.}
+    explanation: {"es": "El contrato debe definir tipos atómicos y contenedores.", "en": "The contract must define atomic and container types.", "da": "Kontrakten skal definere atom- og containertyper."}
   - id: dm857.m09.q07
     activity_type: true_false
     difficulty: intermediate
-    prompt: {es: Python elimina automáticamente el coste de una recursión de cola profunda., en: Python automatically eliminates the cost of deep tail recursion., da: Python eliminerer automatisk omkostningen ved dyb tail recursion.}
+    prompt: {"es": "Python elimina automáticamente el coste de una recursión de cola profunda.", "en": "Python automatically eliminates the cost of deep tail recursion.", "da": "Python eliminerer automatisk omkostningen ved dyb tail recursion."}
     correct_answer: false
-    explanation: {es: Python conserva marcos y tiene un límite de recursión., en: Python retains frames and has a recursion limit., da: Python bevarer frames og har en rekursionsgrænse.}
+    explanation: {"es": "Python conserva marcos y tiene un límite de recursión.", "en": "Python retains frames and has a recursion limit.", "da": "Python bevarer frames og har en rekursionsgrænse."}
   - id: dm857.m09.q08
     activity_type: multiple_choice
     difficulty: advanced
-    prompt: {es: ¿Qué indica un árbol de llamadas con las mismas entradas repetidas?, en: What does a call tree with repeated identical inputs indicate?, da: Hvad indikerer et kaldstræ med gentagne identiske input?}
+    prompt: {"es": "¿Qué indica un árbol de llamadas con las mismas entradas repetidas?", "en": "What does a call tree with repeated identical inputs indicate?", "da": "Hvad indikerer et kaldstræ med gentagne identiske input?"}
     options:
       - id: memoization_candidate
-        text: {es: Posible beneficio de memoización., en: Potential benefit from memoization., da: Mulig gevinst ved memoization.}
+        text: {"es": "Posible beneficio de memoización.", "en": "Potential benefit from memoization.", "da": "Mulig gevinst ved memoization."}
       - id: guaranteed_constant
-        text: {es: Coste constante garantizado., en: Guaranteed constant cost., da: Garanteret konstant omkostning.}
+        text: {"es": "Coste constante garantizado.", "en": "Guaranteed constant cost.", "da": "Garanteret konstant omkostning."}
       - id: syntax_error
-        text: {es: Error sintáctico., en: Syntax error., da: Syntaksfejl.}
+        text: {"es": "Error sintáctico.", "en": "Syntax error.", "da": "Syntaksfejl."}
     correct_option_ids: [memoization_candidate]
-    explanation: {es: Los resultados pueden reutilizarse por entrada., en: Results may be reused by input., da: Resultater kan genbruges efter input.}
+    explanation: {"es": "Los resultados pueden reutilizarse por entrada.", "en": "Results may be reused by input.", "da": "Resultater kan genbruges efter input."}
   - id: dm857.m09.q09
     activity_type: multiple_choice
     difficulty: advanced
-    prompt: {es: ¿Cuándo es segura la memoización?, en: When is memoization safe?, da: Hvornår er memoization sikker?}
+    prompt: {"es": "¿Cuándo es segura la memoización?", "en": "When is memoization safe?", "da": "Hvornår er memoization sikker?"}
     options:
       - id: deterministic_by_key
-        text: {es: Cuando el resultado depende solo de la clave almacenada., en: When the result depends only on the cached key., da: Når resultatet kun afhænger af den cachede nøgle.}
+        text: {"es": "Cuando el resultado depende solo de la clave almacenada.", "en": "When the result depends only on the cached key.", "da": "Når resultatet kun afhænger af den cachede nøgle."}
       - id: mutable_global
-        text: {es: Cuando depende de estado global mutable no incluido., en: When it depends on omitted mutable global state., da: Når det afhænger af udeladt muterbar global tilstand.}
+        text: {"es": "Cuando depende de estado global mutable no incluido.", "en": "When it depends on omitted mutable global state.", "da": "Når det afhænger af udeladt muterbar global tilstand."}
       - id: random_each_call
-        text: {es: Cuando debe cambiar aleatoriamente en cada llamada., en: When it must change randomly each call., da: Når det skal ændre sig tilfældigt ved hvert kald.}
+        text: {"es": "Cuando debe cambiar aleatoriamente en cada llamada.", "en": "When it must change randomly each call.", "da": "Når det skal ændre sig tilfældigt ved hvert kald."}
     correct_option_ids: [deterministic_by_key]
-    explanation: {es: La caché presupone igual entrada, igual resultado., en: The cache assumes equal input gives equal output., da: Cachen antager samme input giver samme output.}
+    explanation: {"es": "La caché presupone igual entrada, igual resultado.", "en": "The cache assumes equal input gives equal output.", "da": "Cachen antager samme input giver samme output."}
   - id: dm857.m09.q10
     activity_type: multiple_choice
     difficulty: advanced
-    prompt: {es: ¿Qué prueba es esencial además de ejemplos correctos?, en: What test is essential beyond correct examples?, da: Hvilken test er essentiel ud over korrekte eksempler?}
+    prompt: {"es": "¿Qué prueba es esencial además de ejemplos correctos?", "en": "What test is essential beyond correct examples?", "da": "Hvilken test er essentiel ud over korrekte eksempler?"}
     options:
       - id: boundary_and_depth
-        text: {es: Casos base, dominio inválido y profundidad extrema., en: Base cases, invalid domain, and extreme depth., da: Basistilfælde, ugyldigt domæne og ekstrem dybde.}
+        text: {"es": "Casos base, dominio inválido y profundidad extrema.", "en": "Base cases, invalid domain, and extreme depth.", "da": "Basistilfælde, ugyldigt domæne og ekstrem dybde."}
       - id: only_typical
-        text: {es: Solo una entrada típica., en: Only one typical input., da: Kun ét typisk input.}
+        text: {"es": "Solo una entrada típica.", "en": "Only one typical input.", "da": "Kun ét typisk input."}
       - id: print_trace
-        text: {es: Solo imprimir el trazado., en: Only print the trace., da: Kun udskrivning af trace.}
+        text: {"es": "Solo imprimir el trazado.", "en": "Only print the trace.", "da": "Kun udskrivning af trace."}
     correct_option_ids: [boundary_and_depth]
-    explanation: {es: La recursión falla especialmente en fronteras y profundidad., en: Recursion often fails at boundaries and depth., da: Rekursion fejler ofte ved grænser og dybde.}
+    explanation: {"es": "La recursión falla especialmente en fronteras y profundidad.", "en": "Recursion often fails at boundaries and depth.", "da": "Rekursion fejler ofte ved grænser og dybde."}
 
 assessment_items:
   - id: dm857.m09.a01
@@ -657,35 +657,35 @@ flashcards:
 
 glossary:
   - id: term.recursion
-    term: {es: recursión, en: recursion, da: rekursion}
-    definition: {es: Resolución de un problema mediante instancias más pequeñas de la misma forma., en: Solving a problem through smaller instances of the same form., da: Løsning af et problem gennem mindre instanser af samme form.}
+    term: {"es": "recursión", "en": "recursion", "da": "rekursion"}
+    definition: {"es": "Resolución de un problema mediante instancias más pequeñas de la misma forma.", "en": "Solving a problem through smaller instances of the same form.", "da": "Løsning af et problem gennem mindre instanser af samme form."}
   - id: term.base_case
-    term: {es: caso base, en: base case, da: basistilfælde}
-    definition: {es: Instancia resuelta directamente sin nueva llamada recursiva., en: Instance solved directly without another recursive call., da: Instans løst direkte uden nyt rekursivt kald.}
+    term: {"es": "caso base", "en": "base case", "da": "basistilfælde"}
+    definition: {"es": "Instancia resuelta directamente sin nueva llamada recursiva.", "en": "Instance solved directly without another recursive call.", "da": "Instans løst direkte uden nyt rekursivt kald."}
   - id: term.progress_measure
-    term: {es: medida de progreso, en: progress measure, da: fremskridtsmål}
-    definition: {es: Cantidad bien fundada que disminuye hacia un caso base., en: Well-founded quantity decreasing toward a base case., da: Velfunderet størrelse der falder mod et basistilfælde.}
+    term: {"es": "medida de progreso", "en": "progress measure", "da": "fremskridtsmål"}
+    definition: {"es": "Cantidad bien fundada que disminuye hacia un caso base.", "en": "Well-founded quantity decreasing toward a base case.", "da": "Velfunderet størrelse der falder mod et basistilfælde."}
   - id: term.call_frame
-    term: {es: marco de llamada, en: call frame, da: call frame}
-    definition: {es: Estado local de una llamada activa., en: Local state of an active function call., da: Lokal tilstand for et aktivt funktionskald.}
+    term: {"es": "marco de llamada", "en": "call frame", "da": "call frame"}
+    definition: {"es": "Estado local de una llamada activa.", "en": "Local state of an active function call.", "da": "Lokal tilstand for et aktivt funktionskald."}
   - id: term.call_stack
-    term: {es: pila de llamadas, en: call stack, da: kaldstak}
-    definition: {es: Estructura LIFO de marcos activos., en: LIFO structure of active call frames., da: LIFO-struktur af aktive call frames.}
+    term: {"es": "pila de llamadas", "en": "call stack", "da": "kaldstak"}
+    definition: {"es": "Estructura LIFO de marcos activos.", "en": "LIFO structure of active call frames.", "da": "LIFO-struktur af aktive call frames."}
   - id: term.unwinding
-    term: {es: desenrollado, en: unwinding, da: afvikling}
-    definition: {es: Retorno de marcos en orden inverso tras alcanzar un caso base., en: Return of frames in reverse order after a base case., da: Retur af frames i omvendt rækkefølge efter basistilfældet.}
+    term: {"es": "desenrollado", "en": "unwinding", "da": "afvikling"}
+    definition: {"es": "Retorno de marcos en orden inverso tras alcanzar un caso base.", "en": "Return of frames in reverse order after a base case.", "da": "Retur af frames i omvendt rækkefølge efter basistilfældet."}
   - id: term.recursion_depth
-    term: {es: profundidad de recursión, en: recursion depth, da: rekursionsdybde}
-    definition: {es: Número de marcos recursivos activos simultáneamente., en: Number of simultaneously active recursive frames., da: Antal samtidige aktive rekursive frames.}
+    term: {"es": "profundidad de recursión", "en": "recursion depth", "da": "rekursionsdybde"}
+    definition: {"es": "Número de marcos recursivos activos simultáneamente.", "en": "Number of simultaneously active recursive frames.", "da": "Antal samtidige aktive rekursive frames."}
   - id: term.call_tree
-    term: {es: árbol de llamadas, en: call tree, da: kaldstræ}
-    definition: {es: Representación de llamadas y subproblemas generados., en: Representation of generated calls and subproblems., da: Repræsentation af genererede kald og delproblemer.}
+    term: {"es": "árbol de llamadas", "en": "call tree", "da": "kaldstræ"}
+    definition: {"es": "Representación de llamadas y subproblemas generados.", "en": "Representation of generated calls and subproblems.", "da": "Repræsentation af genererede kald og delproblemer."}
   - id: term.memoization
-    term: {es: memoización, en: memoization, da: memoization}
-    definition: {es: Almacenamiento de resultados para reutilizar subproblemas idénticos., en: Caching results for reuse of identical subproblems., da: Lagring af resultater til genbrug af identiske delproblemer.}
+    term: {"es": "memoización", "en": "memoization", "da": "memoization"}
+    definition: {"es": "Almacenamiento de resultados para reutilizar subproblemas idénticos.", "en": "Caching results for reuse of identical subproblems.", "da": "Lagring af resultater til genbrug af identiske delproblemer."}
   - id: term.tail_recursion
-    term: {es: recursión de cola, en: tail recursion, da: tail recursion}
-    definition: {es: Forma en la que la llamada recursiva es la última operación lógica., en: Form where the recursive call is the final logical operation., da: Form hvor det rekursive kald er den sidste logiske operation.}
+    term: {"es": "recursión de cola", "en": "tail recursion", "da": "tail recursion"}
+    definition: {"es": "Forma en la que la llamada recursiva es la última operación lógica.", "en": "Form where the recursive call is the final logical operation.", "da": "Form hvor det rekursive kald er den sidste logiske operation."}
 
 hidden_guided_support:
   visibility: hidden_from_standard_reader

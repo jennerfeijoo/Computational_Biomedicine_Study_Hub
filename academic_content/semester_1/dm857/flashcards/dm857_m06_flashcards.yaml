@@ -10,7 +10,7 @@ cards:
     mode: conceptual
     card_type: comparison
     difficulty: foundational
-    front: {es: ¿Qué comparten listas y tuplas y en qué difieren?, en: What do lists and tuples share and how do they differ?, da: Hvad deler lister og tupler, og hvordan adskiller de sig?}
+    front: {"es": "¿Qué comparten listas y tuplas y en qué difieren?", "en": "What do lists and tuples share and how do they differ?", "da": "Hvad deler lister og tupler, og hvordan adskiller de sig?"}
     back:
       es: >-
         Ambas son secuencias ordenadas con `len`, índices, slices, pertenencia e iteración. Las listas son mutables;
@@ -30,7 +30,7 @@ cards:
     mode: conceptual
     card_type: definition
     difficulty: foundational
-    front: {es: ¿Qué es mutación?, en: What is mutation?, da: Hvad er mutation?}
+    front: {"es": "¿Qué es mutación?", "en": "What is mutation?", "da": "Hvad er mutation?"}
     back:
       es: >-
         Es un cambio en el contenido o estado de un objeto existente sin reemplazar su identidad. `items.append(x)`
@@ -49,7 +49,7 @@ cards:
     mode: conceptual
     card_type: comparison
     difficulty: foundational
-    front: {es: Distingue mutación y reasignación., en: Distinguish mutation and reassignment., da: Skeln mellem mutation og gentildeling.}
+    front: {"es": "Distingue mutación y reasignación.", "en": "Distinguish mutation and reassignment.", "da": "Skeln mellem mutation og gentildeling."}
     back:
       es: >-
         Mutación cambia el objeto existente, como `a.append(3)`. Reasignación cambia el objeto al que apunta un nombre,
@@ -68,7 +68,7 @@ cards:
     mode: practical
     card_type: code_tracing
     difficulty: foundational
-    front: {es: Traza `a=[1,2]`; `b=a`; `b.append(3)`., en: Trace `a=[1,2]`; `b=a`; `b.append(3)`., da: Gennemgå `a=[1,2]`; `b=a`; `b.append(3)`.}
+    front: {"es": "Traza `a=[1,2]`; `b=a`; `b.append(3)`.", "en": "Trace `a=[1,2]`; `b=a`; `b.append(3)`.", "da": "Gennemgå `a=[1,2]`; `b=a`; `b.append(3)`."}
     back:
       es: >-
         `a` y `b` referencian la misma lista. Tras `append`, ambos observan `[1,2,3]`. No se creó una copia;
@@ -87,7 +87,7 @@ cards:
     mode: conceptual
     card_type: comparison
     difficulty: intermediate
-    front: {es: ¿Qué diferencia `==` de `is`?, en: What distinguishes `==` from `is`?, da: Hvad skelner `==` fra `is`?}
+    front: {"es": "¿Qué diferencia `==` de `is`?", "en": "What distinguishes `==` from `is`?", "da": "Hvad skelner `==` fra `is`?"}
     back:
       es: >-
         `==` compara valores según la semántica del tipo. `is` pregunta si dos expresiones referencian exactamente
@@ -106,7 +106,7 @@ cards:
     mode: conceptual
     card_type: definition
     difficulty: intermediate
-    front: {es: ¿Qué es una copia superficial?, en: What is a shallow copy?, da: Hvad er en overfladisk kopi?}
+    front: {"es": "¿Qué es una copia superficial?", "en": "What is a shallow copy?", "da": "Hvad er en overfladisk kopi?"}
     back:
       es: >-
         Una colección exterior nueva cuyos elementos son referencias a los mismos objetos que contenía la original.
@@ -125,12 +125,13 @@ cards:
     mode: practical
     card_type: code_tracing
     difficulty: intermediate
-    front: {es: >-
+    front:
+      es: >-
         `a=[[1],[2]]`; `b=a[:]`; `b[0].append(9)`. ¿Qué observan `a` y `b`?
       en: >-
         `a=[[1],[2]]`; `b=a[:]`; `b[0].append(9)`. What do `a` and `b` show?
       da: >-
-        `a=[[1],[2]]`; `b=a[:]`; `b[0].append(9)`. Hvad viser `a` og `b`?}
+        `a=[[1],[2]]`; `b=a[:]`; `b[0].append(9)`. Hvad viser `a` og `b`?
     back:
       es: >-
         Ambas muestran `[[1,9],[2]]`. Las listas exteriores son distintas, pero `a[0] is b[0]` es `True`.
@@ -148,7 +149,7 @@ cards:
     mode: conceptual
     card_type: misconception_correction
     difficulty: intermediate
-    front: {es: Corrige: “`[[0]*3]*4` crea cuatro filas independientes”., en: Correct: “`[[0]*3]*4` creates four independent rows.”, da: Ret: “`[[0]*3]*4` skaber fire uafhængige rækker.”}
+    front: {"es": "Corrige: “`[[0]*3]*4` crea cuatro filas independientes”.", "en": "Correct: “`[[0]*3]*4` creates four independent rows.”", "da": "Ret: “`[[0]*3]*4` skaber fire uafhængige rækker.”"}
     back:
       es: >-
         Crea cuatro referencias a la misma fila. Mutar `matrix[0][0]` modifica la fila observada en las cuatro posiciones.
@@ -167,7 +168,7 @@ cards:
     mode: conceptual
     card_type: comparison
     difficulty: foundational
-    front: {es: Distingue `append` y `extend`., en: Distinguish `append` and `extend`., da: Skeln mellem `append` og `extend`.}
+    front: {"es": "Distingue `append` y `extend`.", "en": "Distinguish `append` and `extend`.", "da": "Skeln mellem `append` og `extend`."}
     back:
       es: >-
         `append(x)` añade `x` como un solo elemento. `extend(iterable)` añade cada elemento del iterable.
@@ -185,7 +186,7 @@ cards:
     mode: practical
     card_type: debugging
     difficulty: foundational
-    front: {es: ¿Por qué `items = items.append(x)` suele romper el programa?, en: Why does `items = items.append(x)` usually break the program?, da: Hvorfor ødelægger `items = items.append(x)` ofte programmet?}
+    front: {"es": "¿Por qué `items = items.append(x)` suele romper el programa?", "en": "Why does `items = items.append(x)` usually break the program?", "da": "Hvorfor ødelægger `items = items.append(x)` ofte programmet?"}
     back:
       es: >-
         `append` muta la lista y retorna `None`. La asignación reemplaza el enlace `items` por `None`. La forma correcta
@@ -204,7 +205,7 @@ cards:
     mode: conceptual
     card_type: comparison
     difficulty: intermediate
-    front: {es: Compara `sorted(items)` e `items.sort()`., en: Compare `sorted(items)` and `items.sort()`., da: Sammenlign `sorted(items)` og `items.sort()`.}
+    front: {"es": "Compara `sorted(items)` e `items.sort()`.", "en": "Compare `sorted(items)` and `items.sort()`.", "da": "Sammenlign `sorted(items)` og `items.sort()`."}
     back:
       es: >-
         `sorted(items)` acepta cualquier iterable y retorna una lista nueva. `items.sort()` ordena la lista en el mismo
@@ -223,7 +224,7 @@ cards:
     mode: conceptual
     card_type: mechanism
     difficulty: intermediate
-    front: {es: ¿Por qué mutar una lista mientras se recorre puede omitir elementos?, en: Why can mutating a list during traversal skip elements?, da: Hvorfor kan mutation af en liste under gennemløb springe elementer over?}
+    front: {"es": "¿Por qué mutar una lista mientras se recorre puede omitir elementos?", "en": "Why can mutating a list during traversal skip elements?", "da": "Hvorfor kan mutation af en liste under gennemløb springe elementer over?"}
     back:
       es: >-
         Eliminar o insertar cambia posiciones y longitud mientras el iterador avanza. Tras eliminar, el siguiente elemento
@@ -242,10 +243,10 @@ cards:
     mode: practical
     card_type: refactoring
     difficulty: intermediate
-    front: {es: ¿Cómo eliminarías negativos sin mutar la lista recorrida?, en: How would you remove negatives without mutating the traversed list?, da: Hvordan fjernes negative værdier uden at mutere den gennemløbne liste?}
+    front: {"es": "¿Cómo eliminarías negativos sin mutar la lista recorrida?", "en": "How would you remove negatives without mutating the traversed list?", "da": "Hvordan fjernes negative værdier uden at mutere den gennemløbne liste?"}
     back:
       es: >-
-        Construye otra lista: `result = [value for value in values if value >= 0]` o un bucle con `append` sobre
+        Construye otra lista: "`result = [value for value in values if value >= 0]` o un bucle con `append` sobre"
         `result`. La entrada queda intacta y el resultado es verificable de forma independiente.
       en: >-
         Build another list using a comprehension or a loop appending to `result`. The input remains unchanged and the
@@ -261,7 +262,7 @@ cards:
     mode: conceptual
     card_type: mechanism
     difficulty: intermediate
-    front: {es: ¿Qué hace `zip` con secuencias de longitudes distintas?, en: What does `zip` do with sequences of unequal length?, da: Hvad gør `zip` med sekvenser af forskellig længde?}
+    front: {"es": "¿Qué hace `zip` con secuencias de longitudes distintas?", "en": "What does `zip` do with sequences of unequal length?", "da": "Hvad gør `zip` med sekvenser af forskellig længde?"}
     back:
       es: >-
         Se detiene cuando termina la secuencia más corta y descarta silenciosamente los elementos restantes de las más
@@ -280,7 +281,7 @@ cards:
     mode: conceptual
     card_type: misconception_correction
     difficulty: intermediate
-    front: {es: Corrige: “Inicializar `maximum=0` es una forma general de buscar máximos”., en: Correct: “Initializing `maximum=0` is a general way to find maxima.”, da: Ret: “At initialisere `maximum=0` er en generel måde at finde maksimum.”}
+    front: {"es": "Corrige: “Inicializar `maximum=0` es una forma general de buscar máximos”.", "en": "Correct: “Initializing `maximum=0` is a general way to find maxima.”", "da": "Ret: “At initialisere `maximum=0` er en generel måde at finde maksimum.”"}
     back:
       es: >-
         Falla si todos los valores son negativos. Para entrada no vacía, inicializa con el primer elemento o usa `max`.
@@ -299,7 +300,7 @@ cards:
     mode: conceptual
     card_type: contract_design
     difficulty: intermediate
-    front: {es: ¿Qué debe definir una función `mean(values)` para entrada vacía?, en: What must `mean(values)` define for empty input?, da: Hvad skal `mean(values)` definere for tomt input?}
+    front: {"es": "¿Qué debe definir una función `mean(values)` para entrada vacía?", "en": "What must `mean(values)` define for empty input?", "da": "Hvad skal `mean(values)` definere for tomt input?"}
     back:
       es: >-
         Una política explícita: por ejemplo generar `ValueError`, retornar `None` o aceptar un `default`. No existe media
@@ -318,11 +319,11 @@ cards:
     mode: practical
     card_type: search_design
     difficulty: intermediate
-    front: {es: ¿Qué puede retornar una búsqueda y cómo eliges?, en: What may a search return and how do you choose?, da: Hvad kan en søgning returnere, og hvordan vælges?}
+    front: {"es": "¿Qué puede retornar una búsqueda y cómo eliges?", "en": "What may a search return and how do you choose?", "da": "Hvad kan en søgning returnere, og hvordan vælges?"}
     back:
       es: >-
         Puede retornar booleano, índice, valor, `None` o generar excepción. Elige según lo que necesite el llamador y si la
-        ausencia es esperada. Evita sentinels ambiguos: `-1` puede confundirse con índice negativo si no se documenta.
+        ausencia es esperada. Evita sentinels ambiguos: "`-1` puede confundirse con índice negativo si no se documenta."
       en: >-
         It may return a Boolean, index, value, `None`, or raise an exception. Choose according to caller needs and whether
         absence is expected. Avoid ambiguous sentinels such as undocumented `-1`.
@@ -337,7 +338,7 @@ cards:
     mode: conceptual
     card_type: definition
     difficulty: intermediate
-    front: {es: ¿Qué significa que una estructura de filas sea rectangular?, en: What does it mean for rows to form a rectangular structure?, da: Hvad betyder det at rækker danner en rektangulær struktur?}
+    front: {"es": "¿Qué significa que una estructura de filas sea rectangular?", "en": "What does it mean for rows to form a rectangular structure?", "da": "Hvad betyder det at rækker danner en rektangulær struktur?"}
     back:
       es: >-
         Todas las filas tienen la misma longitud y existe una interpretación coherente de filas y columnas. Una lista de
@@ -356,7 +357,7 @@ cards:
     mode: practical
     card_type: test_design
     difficulty: intermediate
-    front: {es: ¿Qué pruebas necesita `is_rectangular(rows)`?, en: What tests does `is_rectangular(rows)` need?, da: Hvilke test kræver `is_rectangular(rows)`?}
+    front: {"es": "¿Qué pruebas necesita `is_rectangular(rows)`?", "en": "What tests does `is_rectangular(rows)` need?", "da": "Hvilke test kræver `is_rectangular(rows)`?"}
     back:
       es: >-
         Varias filas iguales; una fila; filas de longitud distinta; lista exterior vacía; filas vacías; elemento que no sea
@@ -375,7 +376,7 @@ cards:
     mode: conceptual
     card_type: mechanism
     difficulty: intermediate
-    front: {es: ¿Qué retorna realmente `return minimum, maximum`?, en: What does `return minimum, maximum` actually return?, da: Hvad returnerer `return minimum, maximum` egentlig?}
+    front: {"es": "¿Qué retorna realmente `return minimum, maximum`?", "en": "What does `return minimum, maximum` actually return?", "da": "Hvad returnerer `return minimum, maximum` egentlig?"}
     back:
       es: >-
         Una sola tupla de dos elementos. El llamador puede desempaquetarla con `low, high = function(...)`. La coma
@@ -394,7 +395,7 @@ cards:
     mode: conceptual
     card_type: method_selection
     difficulty: advanced
-    front: {es: ¿Cuándo es insuficiente una tupla posicional?, en: When is a positional tuple insufficient?, da: Hvornår er en positionel tuple utilstrækkelig?}
+    front: {"es": "¿Cuándo es insuficiente una tupla posicional?", "en": "When is a positional tuple insufficient?", "da": "Hvornår er en positionel tuple utilstrækkelig?"}
     back:
       es: >-
         Cuando el resultado tiene muchos campos, una interfaz pública o duradera, campos opcionales, validación compleja o
@@ -413,7 +414,7 @@ cards:
     mode: practical
     card_type: test_design
     difficulty: advanced
-    front: {es: ¿Cómo pruebas que una función no muta su entrada?, en: How do you test that a function does not mutate its input?, da: Hvordan testes at en funktion ikke muterer input?}
+    front: {"es": "¿Cómo pruebas que una función no muta su entrada?", "en": "How do you test that a function does not mutate its input?", "da": "Hvordan testes at en funktion ikke muterer input?"}
     back:
       es: >-
         Crea una entrada y una copia independiente del valor esperado antes de llamar. Ejecuta la función y afirma que la
@@ -434,7 +435,7 @@ cards:
     mode: integrative
     card_type: oral_defense
     difficulty: advanced
-    front: {es: Defiende construir una lista nueva frente a mutar la entrada., en: Defend building a new list instead of mutating input., da: Forsvar at bygge en ny liste frem for at mutere input.}
+    front: {"es": "Defiende construir una lista nueva frente a mutar la entrada.", "en": "Defend building a new list instead of mutating input.", "da": "Forsvar at bygge en ny liste frem for at mutere input."}
     back:
       es: >-
         Reduce efectos secundarios, aliasing y dependencia del orden de llamadas; facilita pruebas y composición. El coste es
@@ -454,7 +455,7 @@ cards:
     mode: integrative
     card_type: design_review
     difficulty: advanced
-    front: {es: ¿Qué revisarías antes de aprobar una función que procesa secuencias?, en: What would you review before approving a sequence-processing function?, da: Hvad ville du gennemgå før en sekvensfunktion godkendes?}
+    front: {"es": "¿Qué revisarías antes de aprobar una función que procesa secuencias?", "en": "What would you review before approving a sequence-processing function?", "da": "Hvad ville du gennemgå før en sekvensfunktion godkendes?"}
     back:
       es: >-
         Tipos y forma de entrada; política de mutación; aliasing y copias; tratamiento de entrada vacía y ausencia;

@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Iteración controlada e invariantes de bucle
-    en: Controlled iteration and loop invariants
-    da: Kontrolleret iteration og løkkeinvarianter
+    es: "Iteración controlada e invariantes de bucle"
+    en: "Controlled iteration and loop invariants"
+    da: "Kontrolleret iteration og løkkeinvarianter"
   summary:
     es: >-
       Estudio de la repetición finita y verificable mediante `while`, `for` y `range`; contadores,
@@ -31,66 +31,66 @@ objectives:
   - id: m03.o1
     bloom_level: understand
     statement:
-      es: Explicar la iteración como una secuencia de transiciones de estado gobernada por una regla de continuación.
-      en: Explain iteration as a sequence of state transitions governed by a continuation rule.
-      da: Forklare iteration som en række tilstandsovergange styret af en fortsættelsesregel.
+      es: "Explicar la iteración como una secuencia de transiciones de estado gobernada por una regla de continuación."
+      en: "Explain iteration as a sequence of state transitions governed by a continuation rule."
+      da: "Forklare iteration som en række tilstandsovergange styret af en fortsættelsesregel."
     evidence: loop_state_explanation
   - id: m03.o2
     bloom_level: create
     statement:
-      es: Diseñar bucles `while` con inicialización, condición, actualización y terminación demostrables.
-      en: Design `while` loops with demonstrable initialization, condition, update, and termination.
-      da: Designe `while`-løkker med påviselig initialisering, betingelse, opdatering og afslutning.
+      es: "Diseñar bucles `while` con inicialización, condición, actualización y terminación demostrables."
+      en: "Design `while` loops with demonstrable initialization, condition, update, and termination."
+      da: "Designe `while`-løkker med påviselig initialisering, betingelse, opdatering og afslutning."
     evidence: while_loop_design
   - id: m03.o3
     bloom_level: apply
     statement:
-      es: Utilizar `for` y `range` para expresar repeticiones acotadas sin errores de uno en uno.
-      en: Use `for` and `range` to express bounded repetition without off-by-one errors.
-      da: Bruge `for` og `range` til afgrænset gentagelse uden én-for-meget- eller én-for-lidt-fejl.
+      es: "Utilizar `for` y `range` para expresar repeticiones acotadas sin errores de uno en uno."
+      en: "Use `for` and `range` to express bounded repetition without off-by-one errors."
+      da: "Bruge `for` og `range` til afgrænset gentagelse uden én-for-meget- eller én-for-lidt-fejl."
     evidence: bounded_iteration
   - id: m03.o4
     bloom_level: apply
     statement:
-      es: Distinguir y aplicar contadores, acumuladores, indicadores y variables de mejor valor.
-      en: Distinguish and apply counters, accumulators, flags, and best-value variables.
-      da: Skelne mellem og anvende tællere, akkumulatorer, flag og variable for bedste værdi.
+      es: "Distinguir y aplicar contadores, acumuladores, indicadores y variables de mejor valor."
+      en: "Distinguish and apply counters, accumulators, flags, and best-value variables."
+      da: "Skelne mellem og anvende tællere, akkumulatorer, flag og variable for bedste værdi."
     evidence: loop_state_pattern
   - id: m03.o5
     bloom_level: analyze
     statement:
-      es: Trazar manualmente un bucle registrando condición, estado, salida y número de iteración.
-      en: Trace a loop manually by recording condition, state, output, and iteration number.
-      da: Gennemgå en løkke manuelt ved at registrere betingelse, tilstand, output og iterationsnummer.
+      es: "Trazar manualmente un bucle registrando condición, estado, salida y número de iteración."
+      en: "Trace a loop manually by recording condition, state, output, and iteration number."
+      da: "Gennemgå en løkke manuelt ved at registrere betingelse, tilstand, output og iterationsnummer."
     evidence: loop_trace_table
   - id: m03.o6
     bloom_level: evaluate
     statement:
-      es: Justificar el uso de `break`, `continue` y valores centinela sin ocultar la lógica de terminación.
-      en: Justify `break`, `continue`, and sentinel values without hiding termination logic.
-      da: Begrunde brugen af `break`, `continue` og stopværdier uden at skjule afslutningslogikken.
+      es: "Justificar el uso de `break`, `continue` y valores centinela sin ocultar la lógica de terminación."
+      en: "Justify `break`, `continue`, and sentinel values without hiding termination logic."
+      da: "Begrunde brugen af `break`, `continue` og stopværdier uden at skjule afslutningslogikken."
     evidence: design_justification
   - id: m03.o7
     bloom_level: analyze
     statement:
-      es: Analizar bucles anidados y relacionar sus límites con el número total de operaciones.
-      en: Analyze nested loops and relate their bounds to total operations.
-      da: Analysere indlejrede løkker og knytte deres grænser til det samlede antal operationer.
+      es: "Analizar bucles anidados y relacionar sus límites con el número total de operaciones."
+      en: "Analyze nested loops and relate their bounds to total operations."
+      da: "Analysere indlejrede løkker og knytte deres grænser til det samlede antal operationer."
     evidence: iteration_count_analysis
   - id: m03.o8
     bloom_level: create
     statement:
-      es: Diseñar pruebas normales, límite y adversas para verificar cobertura, terminación y resultados acumulados.
-      en: Design normal, boundary, and adversarial tests for coverage, termination, and accumulated results.
-      da: Designe normale, grænse- og udfordrende test for dækning, afslutning og akkumulerede resultater.
+      es: "Diseñar pruebas normales, límite y adversas para verificar cobertura, terminación y resultados acumulados."
+      en: "Design normal, boundary, and adversarial tests for coverage, termination, and accumulated results."
+      da: "Designe normale, grænse- og udfordrende test for dækning, afslutning og akkumulerede resultater."
     evidence: loop_test_set
 
 concepts:
   - id: iteration-as-state-transition
     title:
-      es: Iteración como transición de estado
-      en: Iteration as state transition
-      da: Iteration som tilstandsovergang
+      es: "Iteración como transición de estado"
+      en: "Iteration as state transition"
+      da: "Iteration som tilstandsovergang"
     body:
       es: >-
         Un bucle observa un estado, evalúa una regla de continuación, ejecuta un cuerpo y produce un
@@ -110,9 +110,9 @@ concepts:
 
   - id: while-loop-anatomy
     title:
-      es: Anatomía de un bucle `while`
-      en: Anatomy of a `while` loop
-      da: Anatomi af en `while`-løkke
+      es: "Anatomía de un bucle `while`"
+      en: "Anatomy of a `while` loop"
+      da: "Anatomi af en `while`-løkke"
     body:
       es: >-
         `while` repite su cuerpo mientras la condición sea verdadera. Antes del bucle se inicializan
@@ -132,9 +132,9 @@ concepts:
 
   - id: termination-progress-and-invariants
     title:
-      es: Terminación, progreso e invariantes
-      en: Termination, progress, and invariants
-      da: Afslutning, fremdrift og invarianter
+      es: "Terminación, progreso e invariantes"
+      en: "Termination, progress, and invariants"
+      da: "Afslutning, fremdrift og invarianter"
     body:
       es: >-
         Para argumentar terminación se identifica una medida de progreso acotada que cambia de forma
@@ -158,9 +158,9 @@ concepts:
 
   - id: for-loop-and-range
     title:
-      es: `for`, `range` y repetición acotada
-      en: `for`, `range`, and bounded repetition
-      da: `for`, `range` og afgrænset gentagelse
+      es: "`for`, `range` y repetición acotada"
+      en: "`for`, `range`, and bounded repetition"
+      da: "`for`, `range` og afgrænset gentagelse"
     body:
       es: >-
         `for` recorre una secuencia de valores. `range(stop)` produce enteros desde 0 hasta `stop - 1`;
@@ -179,9 +179,9 @@ concepts:
 
   - id: counters-accumulators-flags-and-extrema
     title:
-      es: Contadores, acumuladores, indicadores y extremos
-      en: Counters, accumulators, flags, and extrema
-      da: Tællere, akkumulatorer, flag og ekstrema
+      es: "Contadores, acumuladores, indicadores y extremos"
+      en: "Counters, accumulators, flags, and extrema"
+      da: "Tællere, akkumulatorer, flag og ekstrema"
     body:
       es: >-
         Un contador registra cuántas veces ocurre algo y suele empezar en cero. Un acumulador combina
@@ -201,9 +201,9 @@ concepts:
 
   - id: sentinels-break-and-continue
     title:
-      es: Centinelas, `break` y `continue`
-      en: Sentinels, `break`, and `continue`
-      da: Stopværdier, `break` og `continue`
+      es: "Centinelas, `break` y `continue`"
+      en: "Sentinels, `break`, and `continue`"
+      da: "Stopværdier, `break` og `continue`"
     body:
       es: >-
         Un valor centinela señala el final de una entrada cuando no se conoce previamente la cantidad de
@@ -222,9 +222,9 @@ concepts:
 
   - id: nested-loops-and-operation-counts
     title:
-      es: Bucles anidados y conteo de operaciones
-      en: Nested loops and operation counts
-      da: Indlejrede løkker og antal operationer
+      es: "Bucles anidados y conteo de operaciones"
+      en: "Nested loops and operation counts"
+      da: "Indlejrede løkker og antal operationer"
     body:
       es: >-
         En bucle anidado, el cuerpo interior se ejecuta para cada iteración exterior. Si ambos recorren
@@ -244,9 +244,9 @@ concepts:
 worked_examples:
   - id: dm857.m03.e01
     title:
-      es: Sumar lecturas hasta alcanzar un objetivo sintético
-      en: Accumulate reads until reaching a synthetic target
-      da: Akkumulér reads indtil et syntetisk mål nås
+      es: "Sumar lecturas hasta alcanzar un objetivo sintético"
+      en: "Accumulate reads until reaching a synthetic target"
+      da: "Akkumulér reads indtil et syntetisk mål nås"
     problem:
       es: >-
         Procesar lotes de 12_000 lecturas hasta alcanzar al menos 50_000. Registrar cuántos lotes se
@@ -310,13 +310,13 @@ worked_examples:
 
   - id: dm857.m03.e02
     title:
-      es: Calcular una media con contador y acumulador
-      en: Calculate a mean using a counter and accumulator
-      da: Beregn et gennemsnit med tæller og akkumulator
+      es: "Calcular una media con contador y acumulador"
+      en: "Calculate a mean using a counter and accumulator"
+      da: "Beregn et gennemsnit med tæller og akkumulator"
     problem:
-      es: Calcular la media de las mediciones sintéticas `[2.1, 2.4, 2.0, 2.5]` mediante un bucle `for`.
-      en: Calculate the mean of synthetic measurements `[2.1, 2.4, 2.0, 2.5]` using a `for` loop.
-      da: Beregn gennemsnittet af syntetiske målinger `[2.1, 2.4, 2.0, 2.5]` med en `for`-løkke.
+      es: "Calcular la media de las mediciones sintéticas `[2.1, 2.4, 2.0, 2.5]` mediante un bucle `for`."
+      en: "Calculate the mean of synthetic measurements `[2.1, 2.4, 2.0, 2.5]` using a `for` loop."
+      da: "Beregn gennemsnittet af syntetiske målinger `[2.1, 2.4, 2.0, 2.5]` med en `for`-løkke."
     assumptions:
       - the collection is non-empty
       - all elements are numeric
@@ -352,9 +352,9 @@ worked_examples:
       - total == sum(values)
       - mean_value == sum(values) / len(values)
     explanation:
-      es: Después de `k` iteraciones, `count == k` y `total` contiene la suma de los primeros `k` valores.
-      en: After `k` iterations, `count == k` and `total` contains the sum of the first `k` values.
-      da: Efter `k` iterationer er `count == k`, og `total` er summen af de første `k` værdier.
+      es: "Después de `k` iteraciones, `count == k` y `total` contiene la suma de los primeros `k` valores."
+      en: "After `k` iterations, `count == k` and `total` contains the sum of the first `k` values."
+      da: "Efter `k` iterationer er `count == k`, og `total` er summen af de første `k` værdier."
     limitations:
       - empty input requires a separate policy
       - floating-point equality may require tolerance in broader cases
@@ -362,9 +362,9 @@ worked_examples:
 
   - id: dm857.m03.e03
     title:
-      es: Leer valores hasta un centinela sin acumularlo
-      en: Read values until a sentinel without accumulating it
-      da: Læs værdier indtil en stopværdi uden at akkumulere den
+      es: "Leer valores hasta un centinela sin acumularlo"
+      en: "Read values until a sentinel without accumulating it"
+      da: "Læs værdier indtil en stopværdi uden at akkumulere den"
     problem:
       es: >-
         Procesar valores enteros hasta recibir `-1`. El centinela finaliza la entrada y no debe incluirse
@@ -426,60 +426,60 @@ practice_exercises:
     activity_type: code_tracing
     difficulty: foundational
     prompt:
-      es: Traza `i = 0; total = 0; while i < 3: total += i; i += 1`.
-      en: Trace `i = 0; total = 0; while i < 3: total += i; i += 1`.
-      da: Gennemgå `i = 0; total = 0; while i < 3: total += i; i += 1`.
+      es: "Traza `i = 0; total = 0; while i < 3: total += i; i += 1`."
+      en: "Trace `i = 0; total = 0; while i < 3: total += i; i += 1`."
+      da: "Gennemgå `i = 0; total = 0; while i < 3: total += i; i += 1`."
     reference_solution:
-      es: Estados tras cada iteración: `(i=1,total=0)`, `(i=2,total=1)`, `(i=3,total=3)`; después la condición es falsa.
-      en: States after iterations: `(i=1,total=0)`, `(i=2,total=1)`, `(i=3,total=3)`; then the condition is false.
-      da: Tilstande: `(i=1,total=0)`, `(i=2,total=1)`, `(i=3,total=3)`; derefter er betingelsen falsk.
+      es: "Estados tras cada iteración: `(i=1,total=0)`, `(i=2,total=1)`, `(i=3,total=3)`; después la condición es falsa."
+      en: "States after iterations: `(i=1,total=0)`, `(i=2,total=1)`, `(i=3,total=3)`; then the condition is false."
+      da: "Tilstande: `(i=1,total=0)`, `(i=2,total=1)`, `(i=3,total=3)`; derefter er betingelsen falsk."
     explanation:
-      es: El valor de `i` se añade antes de incrementarlo.
-      en: The value of `i` is added before it is incremented.
-      da: Værdien af `i` tilføjes før den øges.
+      es: "El valor de `i` se añade antes de incrementarlo."
+      en: "The value of `i` is added before it is incremented."
+      da: "Værdien af `i` tilføjes før den øges."
     linked_objectives: [m03.o2, m03.o5]
 
   - id: dm857.m03.p02
     activity_type: debugging
     difficulty: foundational
     prompt:
-      es: Diagnostica el bucle infinito `i = 0; while i < 5: print(i)` y corrígelo.
-      en: Diagnose the infinite loop `i = 0; while i < 5: print(i)` and correct it.
-      da: Diagnosticér den uendelige løkke `i = 0; while i < 5: print(i)` og ret den.
+      es: "Diagnostica el bucle infinito `i = 0; while i < 5: print(i)` y corrígelo."
+      en: "Diagnose the infinite loop `i = 0; while i < 5: print(i)` and correct it."
+      da: "Diagnosticér den uendelige løkke `i = 0; while i < 5: print(i)` og ret den."
     reference_solution: |-
       i = 0
       while i < 5:
           print(i)
           i += 1
     explanation:
-      es: La condición depende de `i`, pero el estado original nunca actualiza `i`; no existe progreso hacia el límite.
-      en: The condition depends on `i`, but the original state never updates `i`; there is no progress toward the bound.
-      da: Betingelsen afhænger af `i`, men `i` opdateres ikke, så der er ingen fremdrift.
+      es: "La condición depende de `i`, pero el estado original nunca actualiza `i`; no existe progreso hacia el límite."
+      en: "The condition depends on `i`, but the original state never updates `i`; there is no progress toward the bound."
+      da: "Betingelsen afhænger af `i`, men `i` opdateres ikke, så der er ingen fremdrift."
     linked_objectives: [m03.o2, m03.o8]
 
   - id: dm857.m03.p03
     activity_type: fill_in_the_blank
     difficulty: foundational
     prompt:
-      es: Completa `range` para producir exactamente `2, 4, 6, 8`.
-      en: Complete `range` to produce exactly `2, 4, 6, 8`.
-      da: Fuldfør `range`, så den producerer præcis `2, 4, 6, 8`.
+      es: "Completa `range` para producir exactamente `2, 4, 6, 8`."
+      en: "Complete `range` to produce exactly `2, 4, 6, 8`."
+      da: "Fuldfør `range`, så den producerer præcis `2, 4, 6, 8`."
     starter_code: "for value in range(___, ___, ___):"
     accepted_answer_elements: [2, 10, 2]
     reference_solution: "for value in range(2, 10, 2):"
     explanation:
-      es: El límite final es exclusivo; por eso se utiliza 10 para incluir 8.
-      en: The stop is exclusive, so 10 is used to include 8.
-      da: Stopgrænsen er eksklusiv, så 10 bruges for at inkludere 8.
+      es: "El límite final es exclusivo; por eso se utiliza 10 para incluir 8."
+      en: "The stop is exclusive, so 10 is used to include 8."
+      da: "Stopgrænsen er eksklusiv, så 10 bruges for at inkludere 8."
     linked_objectives: [m03.o3]
 
   - id: dm857.m03.p04
     activity_type: method_selection
     difficulty: intermediate
     prompt:
-      es: Elige entre `while` y `for` para: a) procesar exactamente 20 archivos; b) leer hasta un centinela; c) repetir hasta convergencia.
-      en: Choose `while` or `for` for: a) exactly 20 files; b) input until a sentinel; c) repetition until convergence.
-      da: Vælg `while` eller `for` til: a) præcis 20 filer; b) input indtil stopværdi; c) gentagelse indtil konvergens.
+      es: "Elige entre `while` y `for` para: a) procesar exactamente 20 archivos; b) leer hasta un centinela; c) repetir hasta convergencia."
+      en: "Choose `while` or `for` for: a) exactly 20 files; b) input until a sentinel; c) repetition until convergence."
+      da: "Vælg `while` eller `for` til: a) præcis 20 filer; b) input indtil stopværdi; c) gentagelse indtil konvergens."
     reference_solution:
       es: >-
         a) `for`, porque el número está acotado. b) `while`, porque la longitud es desconocida. c) `while`, porque la salida depende de una condición dinámica, además de un límite máximo de seguridad.
@@ -493,9 +493,9 @@ practice_exercises:
     activity_type: invariant_explanation
     difficulty: intermediate
     prompt:
-      es: Formula un invariante para un bucle que cuenta cuántos valores positivos se han procesado.
-      en: State an invariant for a loop counting how many processed values are positive.
-      da: Formulér en invariant for en løkke, der tæller positive behandlede værdier.
+      es: "Formula un invariante para un bucle que cuenta cuántos valores positivos se han procesado."
+      en: "State an invariant for a loop counting how many processed values are positive."
+      da: "Formulér en invariant for en løkke, der tæller positive behandlede værdier."
     reference_solution:
       es: >-
         Después de procesar los primeros `k` valores, `positive_count` es exactamente el número de valores positivos entre esos `k` elementos.
@@ -509,22 +509,22 @@ practice_exercises:
     activity_type: operation_count
     difficulty: intermediate
     prompt:
-      es: ¿Cuántas veces se ejecuta el cuerpo interior de `for i in range(4): for j in range(3): ...`?
-      en: How many times does the inner body execute in `for i in range(4): for j in range(3): ...`?
-      da: Hvor mange gange udføres den indre krop i `for i in range(4): for j in range(3): ...`?
+      es: "¿Cuántas veces se ejecuta el cuerpo interior de `for i in range(4): for j in range(3): ...`?"
+      en: "How many times does the inner body execute in `for i in range(4): for j in range(3): ...`?"
+      da: "Hvor mange gange udføres den indre krop i `for i in range(4): for j in range(3): ...`?"
     reference_solution:
-      es: 12 veces, porque cada una de las 4 iteraciones exteriores ejecuta 3 interiores.
-      en: 12 times, because each of 4 outer iterations executes 3 inner iterations.
-      da: 12 gange, fordi hver af 4 ydre iterationer udfører 3 indre iterationer.
+      es: "12 veces, porque cada una de las 4 iteraciones exteriores ejecuta 3 interiores."
+      en: "12 times, because each of 4 outer iterations executes 3 inner iterations."
+      da: "12 gange, fordi hver af 4 ydre iterationer udfører 3 indre iterationer."
     linked_objectives: [m03.o7]
 
   - id: dm857.m03.p07
     activity_type: test_design
     difficulty: intermediate
     prompt:
-      es: Diseña pruebas para una función conceptual que suma enteros desde 1 hasta `n` mediante un bucle.
-      en: Design tests for a conceptual loop that sums integers from 1 through `n`.
-      da: Design test for en løkke, der summerer heltal fra 1 til `n`.
+      es: "Diseña pruebas para una función conceptual que suma enteros desde 1 hasta `n` mediante un bucle."
+      en: "Design tests for a conceptual loop that sums integers from 1 through `n`."
+      da: "Design test for en løkke, der summerer heltal fra 1 til `n`."
     reference_solution:
       es: >-
         Probar `n=0` si la especificación lo permite, `n=1`, un caso pequeño como `n=5` con esperado 15, y un valor inválido negativo. Verificar terminación y resultado esperado.
@@ -539,229 +539,229 @@ objective_question_bank:
     activity_type: multiple_choice
     difficulty: foundational
     prompt:
-      es: ¿Cuándo puede ejecutarse cero veces el cuerpo de un `while`?
-      en: When can a `while` body execute zero times?
-      da: Hvornår kan en `while`-krop udføres nul gange?
+      es: "¿Cuándo puede ejecutarse cero veces el cuerpo de un `while`?"
+      en: "When can a `while` body execute zero times?"
+      da: "Hvornår kan en `while`-krop udføres nul gange?"
     options:
       - id: initially_false
         text:
-          es: Cuando la condición es falsa antes de la primera iteración.
-          en: When the condition is false before the first iteration.
-          da: Når betingelsen er falsk før første iteration.
+          es: "Cuando la condición es falsa antes de la primera iteración."
+          en: "When the condition is false before the first iteration."
+          da: "Når betingelsen er falsk før første iteration."
       - id: never
-        text: {es: Nunca, en: Never, da: Aldrig}
+        text: {"es": "Nunca", "en": "Never", "da": "Aldrig"}
       - id: only_break
         text:
-          es: Solo cuando contiene `break`.
-          en: Only when it contains `break`.
-          da: Kun når den indeholder `break`.
+          es: "Solo cuando contiene `break`."
+          en: "Only when it contains `break`."
+          da: "Kun når den indeholder `break`."
     correct_option_ids: [initially_false]
     explanation:
-      es: `while` comprueba la condición antes de ejecutar el cuerpo.
-      en: `while` checks the condition before executing the body.
-      da: `while` kontrollerer betingelsen før kroppen.
+      es: "`while` comprueba la condición antes de ejecutar el cuerpo."
+      en: "`while` checks the condition before executing the body."
+      da: "`while` kontrollerer betingelsen før kroppen."
     linked_objectives: [m03.o2]
 
   - id: dm857.m03.q02
     activity_type: multiple_choice
     difficulty: foundational
     prompt:
-      es: ¿Qué valores produce `range(2, 6)`?
-      en: Which values does `range(2, 6)` produce?
-      da: Hvilke værdier producerer `range(2, 6)`?
+      es: "¿Qué valores produce `range(2, 6)`?"
+      en: "Which values does `range(2, 6)` produce?"
+      da: "Hvilke værdier producerer `range(2, 6)`?"
     options:
       - id: correct
-        text: {es: "2, 3, 4, 5", en: "2, 3, 4, 5", da: "2, 3, 4, 5"}
+        text: {"es": "\"2, 3, 4, 5\"", "en": "\"2, 3, 4, 5\"", "da": "\"2, 3, 4, 5\""}
       - id: includes_stop
-        text: {es: "2, 3, 4, 5, 6", en: "2, 3, 4, 5, 6", da: "2, 3, 4, 5, 6"}
+        text: {"es": "\"2, 3, 4, 5, 6\"", "en": "\"2, 3, 4, 5, 6\"", "da": "\"2, 3, 4, 5, 6\""}
       - id: starts_zero
-        text: {es: "0, 1, 2, 3, 4, 5", en: "0, 1, 2, 3, 4, 5", da: "0, 1, 2, 3, 4, 5"}
+        text: {"es": "\"0, 1, 2, 3, 4, 5\"", "en": "\"0, 1, 2, 3, 4, 5\"", "da": "\"0, 1, 2, 3, 4, 5\""}
     correct_option_ids: [correct]
     explanation:
-      es: `start` se incluye y `stop` se excluye.
-      en: `start` is included and `stop` is excluded.
-      da: `start` inkluderes, og `stop` ekskluderes.
+      es: "`start` se incluye y `stop` se excluye."
+      en: "`start` is included and `stop` is excluded."
+      da: "`start` inkluderes, og `stop` ekskluderes."
     linked_objectives: [m03.o3]
 
   - id: dm857.m03.q03
     activity_type: multiple_choice
     difficulty: foundational
     prompt:
-      es: ¿Qué variable representa normalmente una suma parcial?
-      en: Which variable pattern normally represents a partial sum?
-      da: Hvilket variabelmønster repræsenterer normalt en delsum?
+      es: "¿Qué variable representa normalmente una suma parcial?"
+      en: "Which variable pattern normally represents a partial sum?"
+      da: "Hvilket variabelmønster repræsenterer normalt en delsum?"
     options:
       - id: accumulator
-        text: {es: Acumulador, en: Accumulator, da: Akkumulator}
+        text: {"es": "Acumulador", "en": "Accumulator", "da": "Akkumulator"}
       - id: flag
-        text: {es: Indicador booleano, en: Boolean flag, da: Boolesk flag}
+        text: {"es": "Indicador booleano", "en": "Boolean flag", "da": "Boolesk flag"}
       - id: sentinel
-        text: {es: Centinela, en: Sentinel, da: Stopværdi}
+        text: {"es": "Centinela", "en": "Sentinel", "da": "Stopværdi"}
     correct_option_ids: [accumulator]
     explanation:
-      es: Un acumulador combina los valores procesados hasta el momento.
-      en: An accumulator combines values processed so far.
-      da: En akkumulator kombinerer de hidtil behandlede værdier.
+      es: "Un acumulador combina los valores procesados hasta el momento."
+      en: "An accumulator combines values processed so far."
+      da: "En akkumulator kombinerer de hidtil behandlede værdier."
     linked_objectives: [m03.o4]
 
   - id: dm857.m03.q04
     activity_type: true_false
     difficulty: foundational
     prompt:
-      es: Un bucle que termina siempre produce necesariamente el resultado correcto.
-      en: A loop that always terminates necessarily produces the correct result.
-      da: En løkke, der altid afslutter, producerer nødvendigvis det korrekte resultat.
+      es: "Un bucle que termina siempre produce necesariamente el resultado correcto."
+      en: "A loop that always terminates necessarily produces the correct result."
+      da: "En løkke, der altid afslutter, producerer nødvendigvis det korrekte resultat."
     options:
       - id: true
-        text: {es: Verdadero, en: True, da: Sandt}
+        text: {"es": "Verdadero", "en": "True", "da": "Sandt"}
       - id: false
-        text: {es: Falso, en: False, da: Falsk}
+        text: {"es": "Falso", "en": "False", "da": "Falsk"}
     correct_option_ids: [false]
     explanation:
-      es: Terminación y corrección son propiedades distintas; el estado final también debe satisfacer la especificación.
-      en: Termination and correctness are distinct; the final state must also satisfy the specification.
-      da: Afslutning og korrekthed er forskellige egenskaber.
+      es: "Terminación y corrección son propiedades distintas; el estado final también debe satisfacer la especificación."
+      en: "Termination and correctness are distinct; the final state must also satisfy the specification."
+      da: "Afslutning og korrekthed er forskellige egenskaber."
     linked_objectives: [m03.o1, m03.o2]
 
   - id: dm857.m03.q05
     activity_type: multiple_choice
     difficulty: intermediate
     prompt:
-      es: ¿Cuál es una medida de progreso válida para `while i < n` con `i += 1` y `n` fijo?
-      en: What is a valid progress measure for `while i < n` with `i += 1` and fixed `n`?
-      da: Hvad er et gyldigt fremdriftsmål for `while i < n` med `i += 1` og fast `n`?
+      es: "¿Cuál es una medida de progreso válida para `while i < n` con `i += 1` y `n` fijo?"
+      en: "What is a valid progress measure for `while i < n` with `i += 1` and fixed `n`?"
+      da: "Hvad er et gyldigt fremdriftsmål for `while i < n` med `i += 1` og fast `n`?"
     options:
       - id: distance
-        text: {es: "n - i", en: "n - i", da: "n - i"}
+        text: {"es": "\"n - i\"", "en": "\"n - i\"", "da": "\"n - i\""}
       - id: constant_n
-        text: {es: "n", en: "n", da: "n"}
+        text: {"es": "\"n\"", "en": "\"n\"", "da": "\"n\""}
       - id: unrelated
-        text: {es: Una cadena no modificada, en: An unchanged string, da: En uændret tekststreng}
+        text: {"es": "Una cadena no modificada", "en": "An unchanged string", "da": "En uændret tekststreng"}
     correct_option_ids: [distance]
     explanation:
-      es: `n - i` disminuye en cada iteración y está acotado inferiormente por cero.
-      en: `n - i` decreases each iteration and is bounded below by zero.
-      da: `n - i` mindskes hver iteration og er nedad begrænset af nul.
+      es: "`n - i` disminuye en cada iteración y está acotado inferiormente por cero."
+      en: "`n - i` decreases each iteration and is bounded below by zero."
+      da: "`n - i` mindskes hver iteration og er nedad begrænset af nul."
     linked_objectives: [m03.o2]
 
   - id: dm857.m03.q06
     activity_type: multiple_choice
     difficulty: intermediate
     prompt:
-      es: ¿Qué hace `continue`?
-      en: What does `continue` do?
-      da: Hvad gør `continue`?
+      es: "¿Qué hace `continue`?"
+      en: "What does `continue` do?"
+      da: "Hvad gør `continue`?"
     options:
       - id: skip_iteration_remainder
         text:
-          es: Omite el resto de la iteración actual y continúa con la siguiente.
-          en: Skips the remainder of the current iteration and continues with the next.
-          da: Springer resten af den aktuelle iteration over og fortsætter med den næste.
+          es: "Omite el resto de la iteración actual y continúa con la siguiente."
+          en: "Skips the remainder of the current iteration and continues with the next."
+          da: "Springer resten af den aktuelle iteration over og fortsætter med den næste."
       - id: exit_loop
-        text: {es: Termina el bucle, en: Exits the loop, da: Afslutter løkken}
+        text: {"es": "Termina el bucle", "en": "Exits the loop", "da": "Afslutter løkken"}
       - id: restart_program
-        text: {es: Reinicia el programa, en: Restarts the program, da: Genstarter programmet}
+        text: {"es": "Reinicia el programa", "en": "Restarts the program", "da": "Genstarter programmet"}
     correct_option_ids: [skip_iteration_remainder]
     explanation:
-      es: `break` termina el bucle; `continue` solo omite el resto de la iteración actual.
-      en: `break` exits the loop; `continue` only skips the current remainder.
-      da: `break` afslutter løkken; `continue` springer kun resten af iterationen over.
+      es: "`break` termina el bucle; `continue` solo omite el resto de la iteración actual."
+      en: "`break` exits the loop; `continue` only skips the current remainder."
+      da: "`break` afslutter løkken; `continue` springer kun resten af iterationen over."
     linked_objectives: [m03.o6]
 
   - id: dm857.m03.q07
     activity_type: multiple_choice
     difficulty: intermediate
     prompt:
-      es: Dos bucles independientes recorren `n` y `m` valores. ¿Cuántas veces se ejecuta el cuerpo interior?
-      en: Two nested loops traverse `n` and `m` values. How many times does the inner body execute?
-      da: To indlejrede løkker gennemløber `n` og `m` værdier. Hvor mange gange udføres den indre krop?
+      es: "Dos bucles independientes recorren `n` y `m` valores. ¿Cuántas veces se ejecuta el cuerpo interior?"
+      en: "Two nested loops traverse `n` and `m` values. How many times does the inner body execute?"
+      da: "To indlejrede løkker gennemløber `n` og `m` værdier. Hvor mange gange udføres den indre krop?"
     options:
       - id: product
-        text: {es: "n·m", en: "n·m", da: "n·m"}
+        text: {"es": "\"n·m\"", "en": "\"n·m\"", "da": "\"n·m\""}
       - id: sum
-        text: {es: "n+m", en: "n+m", da: "n+m"}
+        text: {"es": "\"n+m\"", "en": "\"n+m\"", "da": "\"n+m\""}
       - id: max
-        text: {es: "max(n,m)", en: "max(n,m)", da: "max(n,m)"}
+        text: {"es": "\"max(n,m)\"", "en": "\"max(n,m)\"", "da": "\"max(n,m)\""}
     correct_option_ids: [product]
     explanation:
-      es: Cada iteración exterior ejecuta las `m` iteraciones interiores.
-      en: Each outer iteration executes all `m` inner iterations.
-      da: Hver ydre iteration udfører alle `m` indre iterationer.
+      es: "Cada iteración exterior ejecuta las `m` iteraciones interiores."
+      en: "Each outer iteration executes all `m` inner iterations."
+      da: "Hver ydre iteration udfører alle `m` indre iterationer."
     linked_objectives: [m03.o7]
 
   - id: dm857.m03.q08
     activity_type: multiple_select
     difficulty: intermediate
     prompt:
-      es: ¿Qué pruebas son relevantes para un bucle? Selecciona todas.
-      en: Which tests are relevant for a loop? Select all.
-      da: Hvilke test er relevante for en løkke? Vælg alle.
+      es: "¿Qué pruebas son relevantes para un bucle? Selecciona todas."
+      en: "Which tests are relevant for a loop? Select all."
+      da: "Hvilke test er relevante for en løkke? Vælg alle."
     options:
       - id: zero_iterations
-        text: {es: Caso de cero iteraciones, en: Zero-iteration case, da: Tilfælde med nul iterationer}
+        text: {"es": "Caso de cero iteraciones", "en": "Zero-iteration case", "da": "Tilfælde med nul iterationer"}
       - id: one_iteration
-        text: {es: Caso de una iteración, en: One-iteration case, da: Tilfælde med én iteration}
+        text: {"es": "Caso de una iteración", "en": "One-iteration case", "da": "Tilfælde med én iteration"}
       - id: boundary
-        text: {es: Límite de terminación, en: Termination boundary, da: Afslutningsgrænse}
+        text: {"es": "Límite de terminación", "en": "Termination boundary", "da": "Afslutningsgrænse"}
       - id: invalid
-        text: {es: Entrada inválida, en: Invalid input, da: Ugyldigt input}
+        text: {"es": "Entrada inválida", "en": "Invalid input", "da": "Ugyldigt input"}
     correct_option_ids: [zero_iterations, one_iteration, boundary, invalid]
     explanation:
-      es: Estos casos revelan errores de inicialización, límites, actualización y validación.
-      en: These cases reveal initialization, boundary, update, and validation errors.
-      da: Disse tilfælde afslører fejl i initialisering, grænser, opdatering og validering.
+      es: "Estos casos revelan errores de inicialización, límites, actualización y validación."
+      en: "These cases reveal initialization, boundary, update, and validation errors."
+      da: "Disse tilfælde afslører fejl i initialisering, grænser, opdatering og validering."
     linked_objectives: [m03.o8]
 
   - id: dm857.m03.q09
     activity_type: cloze_choice
     difficulty: intermediate
     template:
-      es: En `range(start, stop, step)`, `start` se [[blank01]] y `stop` se [[blank02]].
-      en: In `range(start, stop, step)`, `start` is [[blank01]] and `stop` is [[blank02]].
-      da: I `range(start, stop, step)` bliver `start` [[blank01]], og `stop` bliver [[blank02]].
+      es: "En `range(start, stop, step)`, `start` se [[blank01]] y `stop` se [[blank02]]."
+      en: "In `range(start, stop, step)`, `start` is [[blank01]] and `stop` is [[blank02]]."
+      da: "I `range(start, stop, step)` bliver `start` [[blank01]], og `stop` bliver [[blank02]]."
     blanks:
       - id: blank01
         options:
           - id: included
-            text: {es: incluido, en: included, da: inkluderet}
+            text: {"es": "incluido", "en": "included", "da": "inkluderet"}
           - id: excluded
-            text: {es: excluido, en: excluded, da: ekskluderet}
+            text: {"es": "excluido", "en": "excluded", "da": "ekskluderet"}
         correct_option_id: included
       - id: blank02
         options:
           - id: excluded
-            text: {es: excluido, en: excluded, da: ekskluderet}
+            text: {"es": "excluido", "en": "excluded", "da": "ekskluderet"}
           - id: included
-            text: {es: incluido, en: included, da: inkluderet}
+            text: {"es": "incluido", "en": "included", "da": "inkluderet"}
         correct_option_id: excluded
     explanation:
-      es: Esta convención permite que `range(n)` contenga exactamente `n` enteros.
-      en: This convention allows `range(n)` to contain exactly `n` integers.
-      da: Denne konvention gør, at `range(n)` indeholder præcis `n` heltal.
+      es: "Esta convención permite que `range(n)` contenga exactamente `n` enteros."
+      en: "This convention allows `range(n)` to contain exactly `n` integers."
+      da: "Denne konvention gør, at `range(n)` indeholder præcis `n` heltal."
     linked_objectives: [m03.o3]
 
   - id: dm857.m03.q10
     activity_type: multiple_choice
     difficulty: advanced
     prompt:
-      es: ¿Cuál es el problema principal de incluir muchas sentencias `break` en rutas diferentes?
-      en: What is the main problem with many `break` statements on different paths?
-      da: Hvad er hovedproblemet ved mange `break`-sætninger på forskellige stier?
+      es: "¿Cuál es el problema principal de incluir muchas sentencias `break` en rutas diferentes?"
+      en: "What is the main problem with many `break` statements on different paths?"
+      da: "Hvad er hovedproblemet ved mange `break`-sætninger på forskellige stier?"
     options:
       - id: obscured_termination
         text:
-          es: Puede ocultar la lógica de terminación y dificultar las pruebas.
-          en: It can obscure termination logic and make testing harder.
-          da: Det kan skjule afslutningslogikken og gøre test vanskeligere.
+          es: "Puede ocultar la lógica de terminación y dificultar las pruebas."
+          en: "It can obscure termination logic and make testing harder."
+          da: "Det kan skjule afslutningslogikken og gøre test vanskeligere."
       - id: syntax_error
-        text: {es: Siempre produce error de sintaxis, en: It always causes a syntax error, da: Det giver altid syntaksfejl}
+        text: {"es": "Siempre produce error de sintaxis", "en": "It always causes a syntax error", "da": "Det giver altid syntaksfejl"}
       - id: no_effect
-        text: {es: No tiene ningún efecto, en: It has no effect, da: Det har ingen effekt}
+        text: {"es": "No tiene ningún efecto", "en": "It has no effect", "da": "Det har ingen effekt"}
     correct_option_ids: [obscured_termination]
     explanation:
-      es: `break` es válido, pero múltiples salidas dispersas reducen la visibilidad del flujo y la evidencia de terminación.
-      en: `break` is valid, but scattered exits reduce flow visibility and termination evidence.
-      da: `break` er gyldig, men spredte udgange reducerer overblikket over flow og afslutning.
+      es: "`break` es válido, pero múltiples salidas dispersas reducen la visibilidad del flujo y la evidencia de terminación."
+      en: "`break` is valid, but scattered exits reduce flow visibility and termination evidence."
+      da: "`break` er gyldig, men spredte udgange reducerer overblikket over flow og afslutning."
     linked_objectives: [m03.o6, m03.o8]
 
 assessment_items:
@@ -795,9 +795,9 @@ assessment_items:
       - criterion: tests_and_edge_cases
         points: 2
     explanation:
-      es: La dificultad principal es inicializar el máximo sin inventar un valor que pueda sesgar el resultado.
-      en: The main difficulty is initializing the maximum without inventing a value that biases the result.
-      da: Hovedudfordringen er at initialisere maksimum uden en opdigtet værdi, der skævvrider resultatet.
+      es: "La dificultad principal es inicializar el máximo sin inventar un valor que pueda sesgar el resultado."
+      en: "The main difficulty is initializing the maximum without inventing a value that biases the result."
+      da: "Hovedudfordringen er at initialisere maksimum uden en opdigtet værdi, der skævvrider resultatet."
     linked_objectives: [m03.o2, m03.o4, m03.o5, m03.o6, m03.o8]
 
   - id: dm857.m03.a02
@@ -829,9 +829,9 @@ assessment_items:
       - criterion: explanation_and_error_classification
         points: 2
     explanation:
-      es: El límite exclusivo contradice la frase “hasta `n` incluido”.
-      en: The exclusive bound contradicts “through `n` inclusive.”
-      da: Den eksklusive grænse modsiger “til og med `n`”.
+      es: "El límite exclusivo contradice la frase “hasta `n` incluido”."
+      en: "The exclusive bound contradicts “through `n` inclusive.”"
+      da: "Den eksklusive grænse modsiger “til og med `n`”."
     linked_objectives: [m03.o2, m03.o3, m03.o5, m03.o8]
 
   - id: dm857.m03.a03
@@ -863,9 +863,9 @@ assessment_items:
       - criterion: test_evidence
         points: 2
     explanation:
-      es: La explicación debe separar por qué el proceso termina de por qué el resultado es el primero correcto.
-      en: The explanation must separate why the process terminates from why the result is the correct first match.
-      da: Forklaringen skal adskille, hvorfor processen afslutter, fra hvorfor resultatet er det første korrekte match.
+      es: "La explicación debe separar por qué el proceso termina de por qué el resultado es el primero correcto."
+      en: "The explanation must separate why the process terminates from why the result is the correct first match."
+      da: "Forklaringen skal adskille, hvorfor processen afslutter, fra hvorfor resultatet er det første korrekte match."
     linked_objectives: [m03.o1, m03.o2, m03.o5, m03.o8]
 
 flashcards:
@@ -874,74 +874,74 @@ flashcards:
 
 glossary:
   - id: term.iteration
-    term: {es: iteración, en: iteration, da: iteration}
+    term: {"es": "iteración", "en": "iteration", "da": "iteration"}
     definition:
-      es: Una ejecución del cuerpo de un bucle.
-      en: One execution of a loop body.
-      da: Én udførelse af en løkkekrop.
+      es: "Una ejecución del cuerpo de un bucle."
+      en: "One execution of a loop body."
+      da: "Én udførelse af en løkkekrop."
     related_terms: [term.loop, term.state_transition]
   - id: term.loop
-    term: {es: bucle, en: loop, da: løkke}
+    term: {"es": "bucle", "en": "loop", "da": "løkke"}
     definition:
-      es: Estructura que repite un bloque bajo una regla de control.
-      en: Structure that repeats a block under a control rule.
-      da: Struktur der gentager en blok under en kontrolregel.
+      es: "Estructura que repite un bloque bajo una regla de control."
+      en: "Structure that repeats a block under a control rule."
+      da: "Struktur der gentager en blok under en kontrolregel."
     related_terms: [term.iteration, term.termination]
   - id: term.invariant
-    term: {es: invariante, en: invariant, da: invariant}
+    term: {"es": "invariante", "en": "invariant", "da": "invariant"}
     definition:
-      es: Propiedad que permanece verdadera antes y después de cada iteración.
-      en: Property that remains true before and after each iteration.
-      da: Egenskab der forbliver sand før og efter hver iteration.
+      es: "Propiedad que permanece verdadera antes y después de cada iteración."
+      en: "Property that remains true before and after each iteration."
+      da: "Egenskab der forbliver sand før og efter hver iteration."
     related_terms: [term.partial_correctness]
   - id: term.progress_measure
-    term: {es: medida de progreso, en: progress measure, da: fremdriftsmål}
+    term: {"es": "medida de progreso", "en": "progress measure", "da": "fremdriftsmål"}
     definition:
-      es: Cantidad acotada que cambia previsiblemente hacia la terminación.
-      en: Bounded quantity that changes predictably toward termination.
-      da: Afgrænset størrelse der ændres forudsigeligt mod afslutning.
+      es: "Cantidad acotada que cambia previsiblemente hacia la terminación."
+      en: "Bounded quantity that changes predictably toward termination."
+      da: "Afgrænset størrelse der ændres forudsigeligt mod afslutning."
     related_terms: [term.termination]
   - id: term.accumulator
-    term: {es: acumulador, en: accumulator, da: akkumulator}
+    term: {"es": "acumulador", "en": "accumulator", "da": "akkumulator"}
     definition:
-      es: Variable que combina los valores procesados hasta el momento.
-      en: Variable that combines values processed so far.
-      da: Variabel der kombinerer hidtil behandlede værdier.
+      es: "Variable que combina los valores procesados hasta el momento."
+      en: "Variable that combines values processed so far."
+      da: "Variabel der kombinerer hidtil behandlede værdier."
     related_terms: [term.counter]
   - id: term.counter
-    term: {es: contador, en: counter, da: tæller}
+    term: {"es": "contador", "en": "counter", "da": "tæller"}
     definition:
-      es: Variable que registra cuántas veces ocurrió un evento.
-      en: Variable that records how many times an event occurred.
-      da: Variabel der registrerer, hvor mange gange en hændelse forekom.
+      es: "Variable que registra cuántas veces ocurrió un evento."
+      en: "Variable that records how many times an event occurred."
+      da: "Variabel der registrerer, hvor mange gange en hændelse forekom."
     related_terms: [term.accumulator]
   - id: term.sentinel
-    term: {es: centinela, en: sentinel, da: stopværdi}
+    term: {"es": "centinela", "en": "sentinel", "da": "stopværdi"}
     definition:
-      es: Valor reservado que marca el final de una secuencia de entrada.
-      en: Reserved value that marks the end of an input sequence.
-      da: Reserveret værdi der markerer afslutningen på en inputsekvens.
+      es: "Valor reservado que marca el final de una secuencia de entrada."
+      en: "Reserved value that marks the end of an input sequence."
+      da: "Reserveret værdi der markerer afslutningen på en inputsekvens."
     related_terms: [term.break]
   - id: term.break
-    term: {es: break, en: break, da: break}
+    term: {"es": "break", "en": "break", "da": "break"}
     definition:
-      es: Sentencia que termina inmediatamente el bucle más cercano.
-      en: Statement that immediately exits the nearest loop.
-      da: Sætning der straks afslutter den nærmeste løkke.
+      es: "Sentencia que termina inmediatamente el bucle más cercano."
+      en: "Statement that immediately exits the nearest loop."
+      da: "Sætning der straks afslutter den nærmeste løkke."
     related_terms: [term.continue, term.sentinel]
   - id: term.continue
-    term: {es: continue, en: continue, da: continue}
+    term: {"es": "continue", "en": "continue", "da": "continue"}
     definition:
-      es: Sentencia que omite el resto de la iteración actual.
-      en: Statement that skips the remainder of the current iteration.
-      da: Sætning der springer resten af den aktuelle iteration over.
+      es: "Sentencia que omite el resto de la iteración actual."
+      en: "Statement that skips the remainder of the current iteration."
+      da: "Sætning der springer resten af den aktuelle iteration over."
     related_terms: [term.break]
   - id: term.off_by_one
-    term: {es: error de uno en uno, en: off-by-one error, da: én-for-meget-eller-én-for-lidt-fejl}
+    term: {"es": "error de uno en uno", "en": "off-by-one error", "da": "én-for-meget-eller-én-for-lidt-fejl"}
     definition:
-      es: Error de límite que ejecuta una iteración de más o de menos.
-      en: Boundary error that executes one iteration too many or too few.
-      da: Grænsefejl der udfører én iteration for meget eller for lidt.
+      es: "Error de límite que ejecuta una iteración de más o de menos."
+      en: "Boundary error that executes one iteration too many or too few."
+      da: "Grænsefejl der udfører én iteration for meget eller for lidt."
     related_terms: [term.boundary_test]
 
 hidden_guided_support:
@@ -974,7 +974,7 @@ hidden_guided_support:
       content: An invariant states what is true after any number of completed iterations.
     - id: dm857.m03.t05
       topic: range
-      content: `range` includes start, excludes stop, and uses a non-zero step.
+      content: "`range` includes start, excludes stop, and uses a non-zero step."
     - id: dm857.m03.t06
       topic: accumulator
       content: Accumulators require an identity-compatible initialization and a precise invariant.
@@ -993,14 +993,14 @@ hidden_guided_support:
   common_misconceptions:
     - misconception: A `while` body always runs at least once.
       correction: The condition is checked first, so zero iterations are possible.
-    - misconception: `range(start, stop)` includes `stop`.
-      correction: `stop` is exclusive.
+    - misconception: "`range(start, stop)` includes `stop`."
+      correction: "`stop` is exclusive."
     - misconception: A loop that terminates is correct.
       correction: Termination and correctness require separate evidence.
     - misconception: A sentinel can be accumulated and removed later without consequence.
       correction: Checking before update is clearer and avoids contaminated state.
-    - misconception: `continue` exits the loop.
-      correction: `continue` skips only the current iteration remainder.
+    - misconception: "`continue` exits the loop."
+      correction: "`continue` skips only the current iteration remainder."
     - misconception: Nested loops always imply exactly `n²` work.
       correction: Bounds may differ or depend on the outer index.
   socratic_questions:
@@ -1019,7 +1019,7 @@ hidden_guided_support:
     - invariant is precise and preserved
     - final state satisfies the intended postcondition
     - tests cover zero, one, boundary, invalid, and representative cases
-    - `break` and `continue` are justified and do not obscure flow
+    - "`break` and `continue` are justified and do not obscure flow"
   response_constraints:
     - Ask for a trace table before revealing a complete repair to a loop bug.
     - Do not accept “it seems to stop” as a termination argument.

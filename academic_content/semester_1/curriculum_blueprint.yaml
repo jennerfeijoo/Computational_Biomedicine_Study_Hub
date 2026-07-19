@@ -33,9 +33,9 @@ cross_course_design:
 courses:
   dm857:
     title:
-      es: Introducción a la programación
-      en: Introduction to Programming
-      da: Introduktion til programmering
+      es: "Introducción a la programación"
+      en: "Introduction to Programming"
+      da: "Introduktion til programmering"
     ects: 10
     official_assessment: group_project_report_presentation_and_individual_oral_defense
     official_learning_outcomes:
@@ -134,9 +134,9 @@ courses:
 
   dm847:
     title:
-      es: Introducción a la bioinformática
-      en: Introduction to Bioinformatics
-      da: Introduktion til bioinformatik
+      es: "Introducción a la bioinformática"
+      en: "Introduction to Bioinformatics"
+      da: "Introduktion til bioinformatik"
     ects: 10
     official_assessment: written_project_and_30_minute_oral_exam
     official_learning_outcomes:
@@ -228,9 +228,9 @@ courses:
 
   bmb830:
     title:
-      es: Bioestadística en R I
-      en: Biostatistics in R I
-      da: Biostatistik i R I
+      es: "Bioestadística en R I"
+      en: "Biostatistics in R I"
+      da: "Biostatistik i R I"
     ects: 5
     official_assessment: tutorial_prerequisite_and_oral_examination
     official_learning_outcomes:
@@ -286,9 +286,9 @@ courses:
 
   bmb831:
     title:
-      es: Bioestadística en R II
-      en: Biostatistics in R II
-      da: Biostatistik i R II
+      es: "Bioestadística en R II"
+      en: "Biostatistics in R II"
+      da: "Biostatistik i R II"
     ects: 5
     official_assessment: tutorial_participation_and_individual_report
     official_learning_outcomes:

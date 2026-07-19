@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Listas, tuplas, mutabilidad y procesamiento de secuencias
-    en: Lists, tuples, mutability, and sequence processing
-    da: Lister, tupler, muterbarhed og sekvensbehandling
+    es: "Listas, tuplas, mutabilidad y procesamiento de secuencias"
+    en: "Lists, tuples, mutability, and sequence processing"
+    da: "Lister, tupler, muterbarhed og sekvensbehandling"
   summary:
     es: >-
       Uso de listas y tuplas para representar colecciones ordenadas: acceso, slicing, mutabilidad,
@@ -31,66 +31,66 @@ objectives:
   - id: m06.o1
     bloom_level: apply
     statement:
-      es: Crear, acceder y segmentar listas y tuplas mediante índices y slices.
-      en: Create, access, and slice lists and tuples using indices and slices.
-      da: Oprette, tilgå og slice lister og tupler med indeks og slices.
+      es: "Crear, acceder y segmentar listas y tuplas mediante índices y slices."
+      en: "Create, access, and slice lists and tuples using indices and slices."
+      da: "Oprette, tilgå og slice lister og tupler med indeks og slices."
     evidence: sequence_access_trace
   - id: m06.o2
     bloom_level: analyze
     statement:
-      es: Distinguir mutación, reasignación, identidad y aliasing mediante trazado de objetos.
-      en: Distinguish mutation, reassignment, identity, and aliasing through object tracing.
-      da: Skelne mellem mutation, gentildeling, identitet og aliasing gennem objektsporing.
+      es: "Distinguir mutación, reasignación, identidad y aliasing mediante trazado de objetos."
+      en: "Distinguish mutation, reassignment, identity, and aliasing through object tracing."
+      da: "Skelne mellem mutation, gentildeling, identitet og aliasing gennem objektsporing."
     evidence: aliasing_trace
   - id: m06.o3
     bloom_level: apply
     statement:
-      es: Utilizar métodos de listas comprendiendo sus efectos y valores de retorno.
-      en: Use list methods while understanding their effects and return values.
-      da: Bruge listemetoder med forståelse for deres effekter og returværdier.
+      es: "Utilizar métodos de listas comprendiendo sus efectos y valores de retorno."
+      en: "Use list methods while understanding their effects and return values."
+      da: "Bruge listemetoder med forståelse for deres effekter og returværdier."
     evidence: list_method_application
   - id: m06.o4
     bloom_level: create
     statement:
-      es: Recorrer secuencias y construir resultados nuevos sin mutaciones accidentales.
-      en: Traverse sequences and construct new results without accidental mutation.
-      da: Gennemløbe sekvenser og konstruere nye resultater uden utilsigtet mutation.
+      es: "Recorrer secuencias y construir resultados nuevos sin mutaciones accidentales."
+      en: "Traverse sequences and construct new results without accidental mutation."
+      da: "Gennemløbe sekvenser og konstruere nye resultater uden utilsigtet mutation."
     evidence: transformation_function
   - id: m06.o5
     bloom_level: apply
     statement:
-      es: Implementar búsqueda, conteo, suma, mínimo, máximo y media con política explícita para entrada vacía.
-      en: Implement search, counting, sum, minimum, maximum, and mean with an explicit empty-input policy.
-      da: Implementere søgning, optælling, sum, minimum, maksimum og middelværdi med eksplicit politik for tomt input.
+      es: "Implementar búsqueda, conteo, suma, mínimo, máximo y media con política explícita para entrada vacía."
+      en: "Implement search, counting, sum, minimum, maximum, and mean with an explicit empty-input policy."
+      da: "Implementere søgning, optælling, sum, minimum, maksimum og middelværdi med eksplicit politik for tomt input."
     evidence: aggregation_design
   - id: m06.o6
     bloom_level: analyze
     statement:
-      es: Razonar sobre listas anidadas, copias superficiales y estructuras rectangulares o irregulares.
-      en: Reason about nested lists, shallow copies, and rectangular or ragged structures.
-      da: Ræsonnere om indlejrede lister, overfladiske kopier og rektangulære eller ujævne strukturer.
+      es: "Razonar sobre listas anidadas, copias superficiales y estructuras rectangulares o irregulares."
+      en: "Reason about nested lists, shallow copies, and rectangular or ragged structures."
+      da: "Ræsonnere om indlejrede lister, overfladiske kopier og rektangulære eller ujævne strukturer."
     evidence: nested_structure_analysis
   - id: m06.o7
     bloom_level: apply
     statement:
-      es: Utilizar tuplas y desempaquetado para registros pequeños y retornos múltiples coherentes.
-      en: Use tuples and unpacking for small records and coherent multiple return values.
-      da: Bruge tupler og udpakning til små poster og sammenhængende flere returværdier.
+      es: "Utilizar tuplas y desempaquetado para registros pequeños y retornos múltiples coherentes."
+      en: "Use tuples and unpacking for small records and coherent multiple return values."
+      da: "Bruge tupler og udpakning til små poster og sammenhængende flere returværdier."
     evidence: tuple_record_design
   - id: m06.o8
     bloom_level: create
     statement:
-      es: Diseñar pruebas para colecciones vacías, aliasing, copias, mutación durante recorrido y dimensiones irregulares.
-      en: Design tests for empty collections, aliasing, copies, mutation during traversal, and irregular dimensions.
-      da: Designe test for tomme samlinger, aliasing, kopier, mutation under gennemløb og uregelmæssige dimensioner.
+      es: "Diseñar pruebas para colecciones vacías, aliasing, copias, mutación durante recorrido y dimensiones irregulares."
+      en: "Design tests for empty collections, aliasing, copies, mutation during traversal, and irregular dimensions."
+      da: "Designe test for tomme samlinger, aliasing, kopier, mutation under gennemløb og uregelmæssige dimensioner."
     evidence: sequence_test_set
 
 concepts:
   - id: ordered-sequences
     title:
-      es: Secuencias ordenadas, índices y slices
-      en: Ordered sequences, indices, and slices
-      da: Ordnede sekvenser, indeks og slices
+      es: "Secuencias ordenadas, índices y slices"
+      en: "Ordered sequences, indices, and slices"
+      da: "Ordnede sekvenser, indeks og slices"
     body:
       es: >-
         Listas y tuplas preservan orden y admiten `len`, índices, slices, pertenencia e iteración. El índice
@@ -108,9 +108,9 @@ concepts:
 
   - id: mutation-reassignment-aliasing
     title:
-      es: Mutación, reasignación, identidad y aliasing
-      en: Mutation, reassignment, identity, and aliasing
-      da: Mutation, gentildeling, identitet og aliasing
+      es: "Mutación, reasignación, identidad y aliasing"
+      en: "Mutation, reassignment, identity, and aliasing"
+      da: "Mutation, gentildeling, identitet og aliasing"
     body:
       es: >-
         Mutar cambia el contenido de un objeto existente; reasignar cambia qué objeto referencia un nombre. Si
@@ -129,9 +129,9 @@ concepts:
 
   - id: shallow-copy-nesting
     title:
-      es: Copias superficiales y objetos anidados
-      en: Shallow copies and nested objects
-      da: Overfladiske kopier og indlejrede objekter
+      es: "Copias superficiales y objetos anidados"
+      en: "Shallow copies and nested objects"
+      da: "Overfladiske kopier og indlejrede objekter"
     body:
       es: >-
         `a[:]`, `list(a)` y `a.copy()` crean una lista exterior nueva, pero no duplican recursivamente los
@@ -149,9 +149,9 @@ concepts:
 
   - id: list-methods-effects
     title:
-      es: Métodos de listas, efectos y retornos
-      en: List methods, effects, and returns
-      da: Listemetoder, effekter og returværdier
+      es: "Métodos de listas, efectos y retornos"
+      en: "List methods, effects, and returns"
+      da: "Listemetoder, effekter og returværdier"
     body:
       es: >-
         `append` añade un objeto como un elemento; `extend` incorpora los elementos de un iterable. `insert` añade
@@ -170,9 +170,9 @@ concepts:
 
   - id: traversal-construction-zip
     title:
-      es: Recorrido, construcción, `enumerate` y `zip`
-      en: Traversal, construction, `enumerate`, and `zip`
-      da: Gennemløb, konstruktion, `enumerate` og `zip`
+      es: "Recorrido, construcción, `enumerate` y `zip`"
+      en: "Traversal, construction, `enumerate`, and `zip`"
+      da: "Gennemløb, konstruktion, `enumerate` og `zip`"
     body:
       es: >-
         Se recorren valores directamente cuando no se necesitan posiciones; `enumerate` añade índice y `zip` recorre
@@ -190,9 +190,9 @@ concepts:
 
   - id: aggregation-empty-policy
     title:
-      es: Agregación y política para colecciones vacías
-      en: Aggregation and empty-collection policy
-      da: Aggregering og politik for tomme samlinger
+      es: "Agregación y política para colecciones vacías"
+      en: "Aggregation and empty-collection policy"
+      da: "Aggregering og politik for tomme samlinger"
     body:
       es: >-
         `sum` y `len` permiten calcular una media solo si la colección no está vacía. `min` y `max` generan
@@ -210,9 +210,9 @@ concepts:
 
   - id: nested-lists-shape
     title:
-      es: Listas anidadas, forma y matrices rectangulares
-      en: Nested lists, shape, and rectangular matrices
-      da: Indlejrede lister, form og rektangulære matricer
+      es: "Listas anidadas, forma y matrices rectangulares"
+      en: "Nested lists, shape, and rectangular matrices"
+      da: "Indlejrede lister, form og rektangulære matricer"
     body:
       es: >-
         Una lista de listas no es automáticamente una matriz: las filas pueden tener longitudes diferentes. Una operación
@@ -230,9 +230,9 @@ concepts:
 
   - id: tuples-unpacking-records
     title:
-      es: Tuplas, desempaquetado y registros pequeños
-      en: Tuples, unpacking, and small records
-      da: Tupler, udpakning og små poster
+      es: "Tuplas, desempaquetado y registros pequeños"
+      en: "Tuples, unpacking, and small records"
+      da: "Tupler, udpakning og små poster"
     body:
       es: >-
         Una tupla representa una colección ordenada e inmutable y es útil para resultados pequeños con estructura fija.
@@ -251,13 +251,13 @@ concepts:
 worked_examples:
   - id: dm857.m06.e01
     title:
-      es: Transformar valores sin modificar la entrada
-      en: Transform values without mutating the input
-      da: Transformér værdier uden at mutere input
+      es: "Transformar valores sin modificar la entrada"
+      en: "Transform values without mutating the input"
+      da: "Transformér værdier uden at mutere input"
     problem:
-      es: Convertir mediciones sintéticas no negativas a una escala multiplicada por un factor, preservando la lista original.
-      en: Scale synthetic non-negative measurements by a factor while preserving the original list.
-      da: Skalér syntetiske ikke-negative målinger med en faktor og bevar den oprindelige liste.
+      es: "Convertir mediciones sintéticas no negativas a una escala multiplicada por un factor, preservando la lista original."
+      en: "Scale synthetic non-negative measurements by a factor while preserving the original list."
+      da: "Skalér syntetiske ikke-negative målinger med en faktor og bevar den oprindelige liste."
     assumptions:
       - values is a sequence of numbers
       - factor is numeric
@@ -294,22 +294,22 @@ worked_examples:
       - empty input returns an empty list
       - negative input raises ValueError
     explanation:
-      es: Construir una salida nueva elimina aliasing accidental y hace explícito el contrato sin mutación.
-      en: Building a new output removes accidental aliasing and makes the non-mutating contract explicit.
-      da: En ny outputliste fjerner utilsigtet aliasing og gør kontrakten uden mutation tydelig.
+      es: "Construir una salida nueva elimina aliasing accidental y hace explícito el contrato sin mutación."
+      en: "Building a new output removes accidental aliasing and makes the non-mutating contract explicit."
+      da: "En ny outputliste fjerner utilsigtet aliasing og gør kontrakten uden mutation tydelig."
     limitations:
       - the rule about negative values is synthetic and purpose-specific
     linked_objectives: [m06.o2, m06.o4, m06.o8]
 
   - id: dm857.m06.e02
     title:
-      es: Demostrar una copia superficial
-      en: Demonstrate a shallow copy
-      da: Demonstrér en overfladisk kopi
+      es: "Demostrar una copia superficial"
+      en: "Demonstrate a shallow copy"
+      da: "Demonstrér en overfladisk kopi"
     problem:
-      es: Explicar por qué copiar una lista exterior no independiza sus listas internas.
-      en: Explain why copying an outer list does not make its inner lists independent.
-      da: Forklar hvorfor kopiering af en ydre liste ikke gør de indre lister uafhængige.
+      es: "Explicar por qué copiar una lista exterior no independiza sus listas internas."
+      en: "Explain why copying an outer list does not make its inner lists independent."
+      da: "Forklar hvorfor kopiering af en ydre liste ikke gør de indre lister uafhængige."
     assumptions:
       - rows is a list containing mutable lists
     reasoning:
@@ -339,22 +339,22 @@ worked_examples:
       - first inner list has shared identity
       - mutation is visible through both structures
     explanation:
-      es: El slice duplica referencias de elementos; no clona recursivamente los objetos internos.
-      en: The slice duplicates element references rather than recursively cloning inner objects.
-      da: Slicet kopierer elementreferencer og kloner ikke indre objekter rekursivt.
+      es: "El slice duplica referencias de elementos; no clona recursivamente los objetos internos."
+      en: "The slice duplicates element references rather than recursively cloning inner objects."
+      da: "Slicet kopierer elementreferencer og kloner ikke indre objekter rekursivt."
     limitations:
       - deep copying is not automatically the correct semantic choice
     linked_objectives: [m06.o2, m06.o6, m06.o8]
 
   - id: dm857.m06.e03
     title:
-      es: Resumir una secuencia con política vacía explícita
-      en: Summarize a sequence with an explicit empty policy
-      da: Opsummér en sekvens med eksplicit tom-politik
+      es: "Resumir una secuencia con política vacía explícita"
+      en: "Summarize a sequence with an explicit empty policy"
+      da: "Opsummér en sekvens med eksplicit tom-politik"
     problem:
-      es: Retornar cantidad, mínimo, máximo y media; generar error para entrada vacía.
-      en: Return count, minimum, maximum, and mean; raise an error for empty input.
-      da: Returnér antal, minimum, maksimum og middelværdi; rejs fejl ved tomt input.
+      es: "Retornar cantidad, mínimo, máximo y media; generar error para entrada vacía."
+      en: "Return count, minimum, maximum, and mean; raise an error for empty input."
+      da: "Returnér antal, minimum, maksimum og middelværdi; rejs fejl ved tomt input."
     assumptions:
       - values contains comparable numeric elements
       - all values use compatible units
@@ -387,9 +387,9 @@ worked_examples:
       - all-negative values are handled correctly
       - empty input raises ValueError
     explanation:
-      es: La validación evita errores ambiguos y el retorno estructurado permite pruebas directas.
-      en: Validation prevents ambiguous failures and the structured return enables direct testing.
-      da: Validering undgår tvetydige fejl, og struktureret retur muliggør direkte test.
+      es: "La validación evita errores ambiguos y el retorno estructurado permite pruebas directas."
+      en: "Validation prevents ambiguous failures and the structured return enables direct testing."
+      da: "Validering undgår tvetydige fejl, og struktureret retur muliggør direkte test."
     limitations:
       - the tuple relies on documented positional meaning
     linked_objectives: [m06.o5, m06.o7, m06.o8]
@@ -399,65 +399,65 @@ practice_exercises:
     activity_type: code_tracing
     difficulty: foundational
     prompt:
-      es: Traza `a=[1,2]`, `b=a`, `b.append(3)`, `b=[9]`. Indica el valor final de `a` y `b`.
-      en: Trace `a=[1,2]`, `b=a`, `b.append(3)`, `b=[9]`. State final `a` and `b`.
-      da: Gennemgå `a=[1,2]`, `b=a`, `b.append(3)`, `b=[9]`. Angiv endelig `a` og `b`.
+      es: "Traza `a=[1,2]`, `b=a`, `b.append(3)`, `b=[9]`. Indica el valor final de `a` y `b`."
+      en: "Trace `a=[1,2]`, `b=a`, `b.append(3)`, `b=[9]`. State final `a` and `b`."
+      da: "Gennemgå `a=[1,2]`, `b=a`, `b.append(3)`, `b=[9]`. Angiv endelig `a` og `b`."
     reference_solution:
-      es: Tras `append`, ambos observan `[1,2,3]`; la reasignación final hace `b=[9]` y deja `a=[1,2,3]`.
-      en: After `append`, both observe `[1,2,3]`; final reassignment makes `b=[9]` while `a` remains `[1,2,3]`.
-      da: Efter `append` ser begge `[1,2,3]`; sidste gentildeling giver `b=[9]`, mens `a` forbliver `[1,2,3]`.
+      es: "Tras `append`, ambos observan `[1,2,3]`; la reasignación final hace `b=[9]` y deja `a=[1,2,3]`."
+      en: "After `append`, both observe `[1,2,3]`; final reassignment makes `b=[9]` while `a` remains `[1,2,3]`."
+      da: "Efter `append` ser begge `[1,2,3]`; sidste gentildeling giver `b=[9]`, mens `a` forbliver `[1,2,3]`."
     linked_objectives: [m06.o2]
 
   - id: dm857.m06.p02
     activity_type: debugging
     difficulty: foundational
     prompt:
-      es: Corrige `items = items.append(value)` y explica el error.
-      en: Correct `items = items.append(value)` and explain the error.
-      da: Ret `items = items.append(value)` og forklar fejlen.
+      es: "Corrige `items = items.append(value)` y explica el error."
+      en: "Correct `items = items.append(value)` and explain the error."
+      da: "Ret `items = items.append(value)` og forklar fejlen."
     reference_solution:
-      es: Usar `items.append(value)` sin asignación; `append` muta la lista y retorna `None`.
-      en: Use `items.append(value)` without assignment; `append` mutates the list and returns `None`.
-      da: Brug `items.append(value)` uden tildeling; `append` muterer og returnerer `None`.
+      es: "Usar `items.append(value)` sin asignación; `append` muta la lista y retorna `None`."
+      en: "Use `items.append(value)` without assignment; `append` mutates the list and returns `None`."
+      da: "Brug `items.append(value)` uden tildeling; `append` muterer og returnerer `None`."
     linked_objectives: [m06.o3]
 
   - id: dm857.m06.p03
     activity_type: comparison
     difficulty: intermediate
     prompt:
-      es: Explica la diferencia entre `append([2,3])` y `extend([2,3])` sobre `[1]`.
-      en: Explain the difference between `append([2,3])` and `extend([2,3])` on `[1]`.
-      da: Forklar forskellen mellem `append([2,3])` og `extend([2,3])` på `[1]`.
+      es: "Explica la diferencia entre `append([2,3])` y `extend([2,3])` sobre `[1]`."
+      en: "Explain the difference between `append([2,3])` and `extend([2,3])` on `[1]`."
+      da: "Forklar forskellen mellem `append([2,3])` og `extend([2,3])` på `[1]`."
     reference_solution:
-      es: `append` produce `[1,[2,3]]`; `extend` produce `[1,2,3]`.
-      en: `append` produces `[1,[2,3]]`; `extend` produces `[1,2,3]`.
-      da: `append` giver `[1,[2,3]]`; `extend` giver `[1,2,3]`.
+      es: "`append` produce `[1,[2,3]]`; `extend` produce `[1,2,3]`."
+      en: "`append` produces `[1,[2,3]]`; `extend` produces `[1,2,3]`."
+      da: "`append` giver `[1,[2,3]]`; `extend` giver `[1,2,3]`."
     linked_objectives: [m06.o3]
 
   - id: dm857.m06.p04
     activity_type: refactoring
     difficulty: intermediate
     prompt:
-      es: Reescribe un bucle que elimina números negativos de la misma lista mientras la recorre.
-      en: Rewrite a loop that removes negative numbers from the same list while traversing it.
-      da: Omskriv en løkke der fjerner negative tal fra samme liste under gennemløb.
+      es: "Reescribe un bucle que elimina números negativos de la misma lista mientras la recorre."
+      en: "Rewrite a loop that removes negative numbers from the same list while traversing it."
+      da: "Omskriv en løkke der fjerner negative tal fra samme liste under gennemløb."
     reference_solution:
-      es: Construir otra lista con los valores que cumplen `value >= 0`, o filtrar mediante una comprensión documentada.
-      en: Build another list containing values satisfying `value >= 0`, or use a documented comprehension.
-      da: Byg en ny liste med værdier der opfylder `value >= 0`, eller brug en dokumenteret comprehension.
+      es: "Construir otra lista con los valores que cumplen `value >= 0`, o filtrar mediante una comprensión documentada."
+      en: "Build another list containing values satisfying `value >= 0`, or use a documented comprehension."
+      da: "Byg en ny liste med værdier der opfylder `value >= 0`, eller brug en dokumenteret comprehension."
     explanation:
-      es: Eliminar desplaza índices y puede saltar elementos consecutivos.
-      en: Removal shifts indices and may skip consecutive elements.
-      da: Fjernelse forskyder indeks og kan springe elementer over.
+      es: "Eliminar desplaza índices y puede saltar elementos consecutivos."
+      en: "Removal shifts indices and may skip consecutive elements."
+      da: "Fjernelse forskyder indeks og kan springe elementer over."
     linked_objectives: [m06.o4, m06.o8]
 
   - id: dm857.m06.p05
     activity_type: matrix_validation
     difficulty: intermediate
     prompt:
-      es: Diseña una función que determine si una lista de filas es rectangular, incluyendo la matriz vacía.
-      en: Design a function that determines whether a list of rows is rectangular, including the empty matrix.
-      da: Design en funktion der afgør om en liste af rækker er rektangulær, inklusive tom matrix.
+      es: "Diseña una función que determine si una lista de filas es rectangular, incluyendo la matriz vacía."
+      en: "Design a function that determines whether a list of rows is rectangular, including the empty matrix."
+      da: "Design en funktion der afgør om en liste af rækker er rektangulær, inklusive tom matrix."
     accepted_answer_elements:
       - explicit policy for empty outer list
       - all rows must be sequences with equal length
@@ -469,9 +469,9 @@ practice_exercises:
     activity_type: oral_explanation
     difficulty: advanced
     prompt:
-      es: Explica cuándo una tupla es apropiada y cuándo conviene una estructura con campos nombrados.
-      en: Explain when a tuple is appropriate and when a named-field structure is preferable.
-      da: Forklar hvornår en tuple er passende, og hvornår en struktur med navngivne felter er bedre.
+      es: "Explica cuándo una tupla es apropiada y cuándo conviene una estructura con campos nombrados."
+      en: "Explain when a tuple is appropriate and when a named-field structure is preferable."
+      da: "Forklar hvornår en tuple er passende, og hvornår en struktur med navngivne felter er bedre."
     accepted_answer_elements:
       - tuple suits small fixed-order local results
       - positional meaning must remain clear
@@ -483,108 +483,108 @@ objective_bank:
   - id: dm857.m06.q01
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué crea `b = a` cuando `a` es una lista?, en: What does `b = a` create when `a` is a list?, da: Hvad skaber `b = a` når `a` er en liste?}
+    prompt: {"es": "¿Qué crea `b = a` cuando `a` es una lista?", "en": "What does `b = a` create when `a` is a list?", "da": "Hvad skaber `b = a` når `a` er en liste?"}
     options:
-      - {id: alias, text: {es: Otro nombre para el mismo objeto., en: Another name for the same object., da: Et andet navn for samme objekt.}}
-      - {id: deep, text: {es: Una copia profunda., en: A deep copy., da: En dyb kopi.}}
-      - {id: immutable, text: {es: Una versión inmutable., en: An immutable version., da: En uforanderlig version.}}
+      - {id: alias, text: {"es": "Otro nombre para el mismo objeto.", "en": "Another name for the same object.", "da": "Et andet navn for samme objekt."}}
+      - {id: deep, text: {"es": "Una copia profunda.", "en": "A deep copy.", "da": "En dyb kopi."}}
+      - {id: immutable, text: {"es": "Una versión inmutable.", "en": "An immutable version.", "da": "En uforanderlig version."}}
     correct_option_ids: [alias]
-    explanation: {es: La asignación copia la referencia, no el contenido., en: Assignment copies the reference, not the contents., da: Tildeling kopierer referencen, ikke indholdet.}
+    explanation: {"es": "La asignación copia la referencia, no el contenido.", "en": "Assignment copies the reference, not the contents.", "da": "Tildeling kopierer referencen, ikke indholdet."}
     linked_objectives: [m06.o2]
 
   - id: dm857.m06.q02
     activity_type: true_false
     difficulty: foundational
-    prompt: {es: Reasignar `a = [9]` modifica automáticamente la lista anterior., en: Reassigning `a = [9]` automatically mutates the previous list., da: Gentildeling `a = [9]` muterer automatisk den tidligere liste.}
+    prompt: {"es": "Reasignar `a = [9]` modifica automáticamente la lista anterior.", "en": "Reassigning `a = [9]` automatically mutates the previous list.", "da": "Gentildeling `a = [9]` muterer automatisk den tidligere liste."}
     correct_answer: false
-    explanation: {es: Cambia el enlace del nombre; no modifica el objeto anterior., en: It changes the name binding rather than the previous object., da: Det ændrer navnets binding og ikke det tidligere objekt.}
+    explanation: {"es": "Cambia el enlace del nombre; no modifica el objeto anterior.", "en": "It changes the name binding rather than the previous object.", "da": "Det ændrer navnets binding og ikke det tidligere objekt."}
     linked_objectives: [m06.o2]
 
   - id: dm857.m06.q03
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué retorna normalmente `list.append`?, en: What does `list.append` normally return?, da: Hvad returnerer `list.append` normalt?}
+    prompt: {"es": "¿Qué retorna normalmente `list.append`?", "en": "What does `list.append` normally return?", "da": "Hvad returnerer `list.append` normalt?"}
     options:
-      - {id: none, text: {es: `None`., en: `None`., da: `None`.}}
-      - {id: list, text: {es: La lista modificada., en: The modified list., da: Den ændrede liste.}}
-      - {id: item, text: {es: El elemento añadido., en: The added element., da: Det tilføjede element.}}
+      - {id: none, text: {"es": "`None`.", "en": "`None`.", "da": "`None`."}}
+      - {id: list, text: {"es": "La lista modificada.", "en": "The modified list.", "da": "Den ændrede liste."}}
+      - {id: item, text: {"es": "El elemento añadido.", "en": "The added element.", "da": "Det tilføjede element."}}
     correct_option_ids: [none]
-    explanation: {es: El método muta la lista y retorna `None`., en: The method mutates the list and returns `None`., da: Metoden muterer listen og returnerer `None`.}
+    explanation: {"es": "El método muta la lista y retorna `None`.", "en": "The method mutates the list and returns `None`.", "da": "Metoden muterer listen og returnerer `None`."}
     linked_objectives: [m06.o3]
 
   - id: dm857.m06.q04
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué diferencia `append` de `extend`?, en: What distinguishes `append` from `extend`?, da: Hvad skelner `append` fra `extend`?}
+    prompt: {"es": "¿Qué diferencia `append` de `extend`?", "en": "What distinguishes `append` from `extend`?", "da": "Hvad skelner `append` fra `extend`?"}
     options:
-      - {id: one_vs_many, text: {es: `append` añade un objeto; `extend` añade los elementos de un iterable., en: `append` adds one object; `extend` adds elements from an iterable., da: `append` tilføjer ét objekt; `extend` tilføjer elementer fra en iterable.}}
-      - {id: copy, text: {es: `append` copia profundamente y `extend` no., en: `append` deep-copies and `extend` does not., da: `append` dybkopierer og `extend` gør ikke.}}
+      - {id: one_vs_many, text: {"es": "`append` añade un objeto; `extend` añade los elementos de un iterable.", "en": "`append` adds one object; `extend` adds elements from an iterable.", "da": "`append` tilføjer ét objekt; `extend` tilføjer elementer fra en iterable."}}
+      - {id: copy, text: {"es": "`append` copia profundamente y `extend` no.", "en": "`append` deep-copies and `extend` does not.", "da": "`append` dybkopierer og `extend` gør ikke."}}
     correct_option_ids: [one_vs_many]
-    explanation: {es: El argumento completo de `append` se convierte en un solo elemento., en: The complete argument to `append` becomes one element., da: Hele argumentet til `append` bliver ét element.}
+    explanation: {"es": "El argumento completo de `append` se convierte en un solo elemento.", "en": "The complete argument to `append` becomes one element.", "da": "Hele argumentet til `append` bliver ét element."}
     linked_objectives: [m06.o3]
 
   - id: dm857.m06.q05
     activity_type: true_false
     difficulty: intermediate
-    prompt: {es: Una copia superficial de una lista anidada independiza todas las listas internas., en: A shallow copy of a nested list makes all inner lists independent., da: En overfladisk kopi af en indlejret liste gør alle indre lister uafhængige.}
+    prompt: {"es": "Una copia superficial de una lista anidada independiza todas las listas internas.", "en": "A shallow copy of a nested list makes all inner lists independent.", "da": "En overfladisk kopi af en indlejret liste gør alle indre lister uafhængige."}
     correct_answer: false
-    explanation: {es: Solo la lista exterior es nueva; los objetos internos siguen compartidos., en: Only the outer list is new; inner objects remain shared., da: Kun den ydre liste er ny; indre objekter deles stadig.}
+    explanation: {"es": "Solo la lista exterior es nueva; los objetos internos siguen compartidos.", "en": "Only the outer list is new; inner objects remain shared.", "da": "Kun den ydre liste er ny; indre objekter deles stadig."}
     linked_objectives: [m06.o2, m06.o6]
 
   - id: dm857.m06.q06
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Por qué es peligroso `[[0]*3]*4`?, en: Why is `[[0]*3]*4` dangerous?, da: Hvorfor er `[[0]*3]*4` farligt?}
+    prompt: {"es": "¿Por qué es peligroso `[[0]*3]*4`?", "en": "Why is `[[0]*3]*4` dangerous?", "da": "Hvorfor er `[[0]*3]*4` farligt?"}
     options:
-      - {id: shared_rows, text: {es: Las cuatro posiciones referencian la misma fila., en: All four positions reference the same row., da: Alle fire positioner refererer til samme række.}}
-      - {id: immutable, text: {es: Crea tuplas en lugar de listas., en: It creates tuples instead of lists., da: Det skaber tupler i stedet for lister.}}
-      - {id: syntax, text: {es: Es sintaxis inválida., en: It is invalid syntax., da: Det er ugyldig syntaks.}}
+      - {id: shared_rows, text: {"es": "Las cuatro posiciones referencian la misma fila.", "en": "All four positions reference the same row.", "da": "Alle fire positioner refererer til samme række."}}
+      - {id: immutable, text: {"es": "Crea tuplas en lugar de listas.", "en": "It creates tuples instead of lists.", "da": "Det skaber tupler i stedet for lister."}}
+      - {id: syntax, text: {"es": "Es sintaxis inválida.", "en": "It is invalid syntax.", "da": "Det er ugyldig syntaks."}}
     correct_option_ids: [shared_rows]
-    explanation: {es: Mutar una fila se observa en todas las posiciones., en: Mutating one row appears in every position., da: Mutation af én række ses i alle positioner.}
+    explanation: {"es": "Mutar una fila se observa en todas las posiciones.", "en": "Mutating one row appears in every position.", "da": "Mutation af én række ses i alle positioner."}
     linked_objectives: [m06.o6, m06.o8]
 
   - id: dm857.m06.q07
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué hace `zip(a, b)` si `a` y `b` tienen longitudes distintas?, en: What does `zip(a, b)` do when lengths differ?, da: Hvad gør `zip(a, b)` når længderne er forskellige?}
+    prompt: {"es": "¿Qué hace `zip(a, b)` si `a` y `b` tienen longitudes distintas?", "en": "What does `zip(a, b)` do when lengths differ?", "da": "Hvad gør `zip(a, b)` når længderne er forskellige?"}
     options:
-      - {id: shortest, text: {es: Se detiene con la secuencia más corta., en: It stops with the shortest sequence., da: Den stopper med den korteste sekvens.}}
-      - {id: error, text: {es: Siempre genera error., en: It always raises an error., da: Den giver altid fejl.}}
-      - {id: pad, text: {es: Rellena automáticamente con `None`., en: It automatically pads with `None`., da: Den udfylder automatisk med `None`.}}
+      - {id: shortest, text: {"es": "Se detiene con la secuencia más corta.", "en": "It stops with the shortest sequence.", "da": "Den stopper med den korteste sekvens."}}
+      - {id: error, text: {"es": "Siempre genera error.", "en": "It always raises an error.", "da": "Den giver altid fejl."}}
+      - {id: pad, text: {"es": "Rellena automáticamente con `None`.", "en": "It automatically pads with `None`.", "da": "Den udfylder automatisk med `None`."}}
     correct_option_ids: [shortest]
-    explanation: {es: La pérdida silenciosa de elementos debe considerarse en el contrato., en: Silent truncation must be considered in the contract., da: Stiltiende trunkering skal indgå i kontrakten.}
+    explanation: {"es": "La pérdida silenciosa de elementos debe considerarse en el contrato.", "en": "Silent truncation must be considered in the contract.", "da": "Stiltiende trunkering skal indgå i kontrakten."}
     linked_objectives: [m06.o4]
 
   - id: dm857.m06.q08
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué problema tiene `maximum = 0` al buscar el máximo?, en: What is wrong with `maximum = 0` when searching for a maximum?, da: Hvad er problemet med `maximum = 0` ved maksimumsøgning?}
+    prompt: {"es": "¿Qué problema tiene `maximum = 0` al buscar el máximo?", "en": "What is wrong with `maximum = 0` when searching for a maximum?", "da": "Hvad er problemet med `maximum = 0` ved maksimumsøgning?"}
     options:
-      - {id: negatives, text: {es: Falla si todos los valores son negativos., en: It fails when all values are negative., da: Det fejler når alle værdier er negative.}}
-      - {id: floats, text: {es: No permite números decimales., en: It prevents floating-point values., da: Det tillader ikke decimaltal.}}
-      - {id: alias, text: {es: Crea aliasing con la lista., en: It creates aliasing with the list., da: Det skaber aliasing med listen.}}
+      - {id: negatives, text: {"es": "Falla si todos los valores son negativos.", "en": "It fails when all values are negative.", "da": "Det fejler når alle værdier er negative."}}
+      - {id: floats, text: {"es": "No permite números decimales.", "en": "It prevents floating-point values.", "da": "Det tillader ikke decimaltal."}}
+      - {id: alias, text: {"es": "Crea aliasing con la lista.", "en": "It creates aliasing with the list.", "da": "Det skaber aliasing med listen."}}
     correct_option_ids: [negatives]
-    explanation: {es: El inicializador introduce un valor que quizá no pertenece a los datos., en: The initializer introduces a value that may not belong to the data., da: Initialiseringen introducerer en værdi der måske ikke tilhører data.}
+    explanation: {"es": "El inicializador introduce un valor que quizá no pertenece a los datos.", "en": "The initializer introduces a value that may not belong to the data.", "da": "Initialiseringen introducerer en værdi der måske ikke tilhører data."}
     linked_objectives: [m06.o5]
 
   - id: dm857.m06.q09
     activity_type: true_false
     difficulty: intermediate
-    prompt: {es: Una lista de listas siempre es una matriz rectangular., en: A list of lists is always a rectangular matrix., da: En liste af lister er altid en rektangulær matrix.}
+    prompt: {"es": "Una lista de listas siempre es una matriz rectangular.", "en": "A list of lists is always a rectangular matrix.", "da": "En liste af lister er altid en rektangulær matrix."}
     correct_answer: false
-    explanation: {es: Las filas pueden tener longitudes distintas o significados incompatibles., en: Rows may have different lengths or incompatible meanings., da: Rækker kan have forskellige længder eller uforenelige betydninger.}
+    explanation: {"es": "Las filas pueden tener longitudes distintas o significados incompatibles.", "en": "Rows may have different lengths or incompatible meanings.", "da": "Rækker kan have forskellige længder eller uforenelige betydninger."}
     linked_objectives: [m06.o6]
 
   - id: dm857.m06.q10
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué retorna una función con `return low, high`?, en: What does a function with `return low, high` return?, da: Hvad returnerer en funktion med `return low, high`?}
+    prompt: {"es": "¿Qué retorna una función con `return low, high`?", "en": "What does a function with `return low, high` return?", "da": "Hvad returnerer en funktion med `return low, high`?"}
     options:
-      - {id: tuple, text: {es: Una tupla de dos elementos., en: A two-element tuple., da: En tuple med to elementer.}}
-      - {id: two_objects, text: {es: Dos objetos independientes sin contenedor., en: Two independent objects without a container., da: To uafhængige objekter uden beholder.}}
-      - {id: list, text: {es: Una lista automática., en: An automatic list., da: En automatisk liste.}}
+      - {id: tuple, text: {"es": "Una tupla de dos elementos.", "en": "A two-element tuple.", "da": "En tuple med to elementer."}}
+      - {id: two_objects, text: {"es": "Dos objetos independientes sin contenedor.", "en": "Two independent objects without a container.", "da": "To uafhængige objekter uden beholder."}}
+      - {id: list, text: {"es": "Una lista automática.", "en": "An automatic list.", "da": "En automatisk liste."}}
     correct_option_ids: [tuple]
-    explanation: {es: La coma construye la tupla retornada., en: The comma constructs the returned tuple., da: Kommaet konstruerer den returnerede tuple.}
+    explanation: {"es": "La coma construye la tupla retornada.", "en": "The comma constructs the returned tuple.", "da": "Kommaet konstruerer den returnerede tuple."}
     linked_objectives: [m06.o7]
 
 assessment_items:
@@ -642,9 +642,9 @@ assessment_items:
     activity_type: oral_explanation
     difficulty: advanced
     prompt:
-      es: Defiende una política para retorno de búsqueda y entrada vacía en una biblioteca de funciones de secuencias.
-      en: Defend a search-return and empty-input policy for a sequence-function library.
-      da: Forsvar en politik for søgeretur og tomt input i et bibliotek af sekvensfunktioner.
+      es: "Defiende una política para retorno de búsqueda y entrada vacía en una biblioteca de funciones de secuencias."
+      en: "Defend a search-return and empty-input policy for a sequence-function library."
+      da: "Forsvar en politik for søgeretur og tomt input i et bibliotek af sekvensfunktioner."
     accepted_answer_elements:
       - consistent distinction among found value, index, Boolean, sentinel, and exception
       - empty aggregation policy separated from ordinary absence
@@ -664,44 +664,44 @@ flashcards:
 
 glossary:
   - id: term.list
-    term: {es: lista, en: list, da: liste}
-    definition: {es: Secuencia ordenada y mutable., en: Ordered mutable sequence., da: Ordnet muterbar sekvens.}
+    term: {"es": "lista", "en": "list", "da": "liste"}
+    definition: {"es": "Secuencia ordenada y mutable.", "en": "Ordered mutable sequence.", "da": "Ordnet muterbar sekvens."}
     related_terms: [term.tuple, term.mutation]
   - id: term.tuple
-    term: {es: tupla, en: tuple, da: tuple}
-    definition: {es: Secuencia ordenada e inmutable definida por comas., en: Ordered immutable sequence defined by commas., da: Ordnet uforanderlig sekvens defineret af kommaer.}
+    term: {"es": "tupla", "en": "tuple", "da": "tuple"}
+    definition: {"es": "Secuencia ordenada e inmutable definida por comas.", "en": "Ordered immutable sequence defined by commas.", "da": "Ordnet uforanderlig sekvens defineret af kommaer."}
     related_terms: [term.unpacking]
   - id: term.mutation
-    term: {es: mutación, en: mutation, da: mutation}
-    definition: {es: Cambio del contenido de un objeto existente., en: Change to an existing object's contents., da: Ændring af et eksisterende objekts indhold.}
+    term: {"es": "mutación", "en": "mutation", "da": "mutation"}
+    definition: {"es": "Cambio del contenido de un objeto existente.", "en": "Change to an existing object's contents.", "da": "Ændring af et eksisterende objekts indhold."}
     related_terms: [term.reassignment, term.aliasing]
   - id: term.reassignment
-    term: {es: reasignación, en: reassignment, da: gentildeling}
-    definition: {es: Cambio del objeto al que referencia un nombre., en: Change to which object a name references., da: Ændring af hvilket objekt et navn refererer til.}
+    term: {"es": "reasignación", "en": "reassignment", "da": "gentildeling"}
+    definition: {"es": "Cambio del objeto al que referencia un nombre.", "en": "Change to which object a name references.", "da": "Ændring af hvilket objekt et navn refererer til."}
     related_terms: [term.mutation]
   - id: term.aliasing
-    term: {es: aliasing, en: aliasing, da: aliasing}
-    definition: {es: Situación en la que varios nombres o posiciones referencian el mismo objeto mutable., en: Situation where multiple names or positions reference the same mutable object., da: Situation hvor flere navne eller positioner refererer til samme muterbare objekt.}
+    term: {"es": "aliasing", "en": "aliasing", "da": "aliasing"}
+    definition: {"es": "Situación en la que varios nombres o posiciones referencian el mismo objeto mutable.", "en": "Situation where multiple names or positions reference the same mutable object.", "da": "Situation hvor flere navne eller positioner refererer til samme muterbare objekt."}
     related_terms: [term.identity, term.shallow_copy]
   - id: term.identity
-    term: {es: identidad, en: identity, da: identitet}
-    definition: {es: Propiedad de ser exactamente el mismo objeto., en: Property of being the exact same object., da: Egenskab ved at være præcis samme objekt.}
+    term: {"es": "identidad", "en": "identity", "da": "identitet"}
+    definition: {"es": "Propiedad de ser exactamente el mismo objeto.", "en": "Property of being the exact same object.", "da": "Egenskab ved at være præcis samme objekt."}
     related_terms: [term.aliasing]
   - id: term.shallow_copy
-    term: {es: copia superficial, en: shallow copy, da: overfladisk kopi}
-    definition: {es: Nueva colección exterior que conserva referencias a los mismos elementos internos., en: New outer collection retaining references to the same inner elements., da: Ny ydre samling der bevarer referencer til samme indre elementer.}
+    term: {"es": "copia superficial", "en": "shallow copy", "da": "overfladisk kopi"}
+    definition: {"es": "Nueva colección exterior que conserva referencias a los mismos elementos internos.", "en": "New outer collection retaining references to the same inner elements.", "da": "Ny ydre samling der bevarer referencer til samme indre elementer."}
     related_terms: [term.aliasing]
   - id: term.aggregation
-    term: {es: agregación, en: aggregation, da: aggregering}
-    definition: {es: Reducción de una colección a uno o varios resúmenes., en: Reduction of a collection to one or more summaries., da: Reduktion af en samling til et eller flere resuméer.}
+    term: {"es": "agregación", "en": "aggregation", "da": "aggregering"}
+    definition: {"es": "Reducción de una colección a uno o varios resúmenes.", "en": "Reduction of a collection to one or more summaries.", "da": "Reduktion af en samling til et eller flere resuméer."}
     related_terms: [term.empty_policy]
   - id: term.ragged
-    term: {es: estructura irregular, en: ragged structure, da: ujævn struktur}
-    definition: {es: Colección de filas con longitudes diferentes., en: Collection of rows with different lengths., da: Samling af rækker med forskellige længder.}
+    term: {"es": "estructura irregular", "en": "ragged structure", "da": "ujævn struktur"}
+    definition: {"es": "Colección de filas con longitudes diferentes.", "en": "Collection of rows with different lengths.", "da": "Samling af rækker med forskellige længder."}
     related_terms: [term.rectangular]
   - id: term.unpacking
-    term: {es: desempaquetado, en: unpacking, da: udpakning}
-    definition: {es: Asignación de elementos de una secuencia a varios nombres según una estructura., en: Assignment of sequence elements to multiple names according to structure., da: Tildeling af sekvenselementer til flere navne efter struktur.}
+    term: {"es": "desempaquetado", "en": "unpacking", "da": "udpakning"}
+    definition: {"es": "Asignación de elementos de una secuencia a varios nombres según una estructura.", "en": "Assignment of sequence elements to multiple names according to structure.", "da": "Tildeling af sekvenselementer til flere navne efter struktur."}
     related_terms: [term.tuple]
 
 hidden_guided_support:
@@ -723,7 +723,7 @@ hidden_guided_support:
       bør erklære mutation, fravær og tomt input og validere form før matrixbehandling.
   misconceptions:
     - id: m06.mc01
-      claim: `a = b` copies a list
+      claim: "`a = b` copies a list"
       correction: it creates another reference to the same object
     - id: m06.mc02
       claim: list methods such as append return the modified list

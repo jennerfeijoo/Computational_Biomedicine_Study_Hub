@@ -6,52 +6,52 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Evaluación acumulativa de DM847: proyecto y defensa oral
-    en: DM847 cumulative assessment: project and oral defense
-    da: DM847 kumulativ evaluering: projekt og mundtligt forsvar
+    es: "Evaluación acumulativa de DM847: proyecto y defensa oral"
+    en: "DM847 cumulative assessment: project and oral defense"
+    da: "DM847 kumulativ evaluering: projekt og mundtligt forsvar"
   official_format_reference:
-    en: Written project assignment followed by a final oral examination.
+    en: "Written project assignment followed by a final oral examination."
   scope:
-    es: Integra los nueve resultados de aprendizaje mediante un proyecto reproducible y preguntas individuales de todo el programa.
-    en: Integrates all nine learning outcomes through a reproducible project and individual questions spanning the syllabus.
-    da: Integrerer alle ni læringsmål gennem et reproducerbart projekt og individuelle spørgsmål på tværs af pensum.
+    es: "Integra los nueve resultados de aprendizaje mediante un proyecto reproducible y preguntas individuales de todo el programa."
+    en: "Integrates all nine learning outcomes through a reproducible project and individual questions spanning the syllabus."
+    da: "Integrerer alle ni læringsmål gennem et reproducerbart projekt og individuelle spørgsmål på tværs af pensum."
   note:
-    es: La distribución temporal propuesta para la práctica oral es orientativa y no sustituye instrucciones oficiales del curso.
-    en: The proposed timing for oral practice is instructional and does not replace official course instructions.
-    da: Den foreslåede tidsfordeling til mundtlig træning er vejledende og erstatter ikke officielle kursusinstruktioner.
+    es: "La distribución temporal propuesta para la práctica oral es orientativa y no sustituye instrucciones oficiales del curso."
+    en: "The proposed timing for oral practice is instructional and does not replace official course instructions."
+    da: "Den foreslåede tidsfordeling til mundtlig træning er vejledende og erstatter ikke officielle kursusinstruktioner."
 
 project_requirements:
   mandatory_elements:
     - id: question
       description:
-        es: Pregunta biológica y especificación computacional verificables.
-        en: Verifiable biological question and computational specification.
-        da: Verificerbart biologisk spørgsmål og beregningsspecifikation.
+        es: "Pregunta biológica y especificación computacional verificables."
+        en: "Verifiable biological question and computational specification."
+        da: "Verificerbart biologisk spørgsmål og beregningsspecifikation."
     - id: provenance
       description:
-        es: Fuentes, licencias, identificadores, versiones, anotaciones y criterios de inclusión.
-        en: Sources, licenses, identifiers, versions, annotations, and inclusion criteria.
-        da: Kilder, licenser, identifikatorer, versioner, annotationer og inklusionskriterier.
+        es: "Fuentes, licencias, identificadores, versiones, anotaciones y criterios de inclusión."
+        en: "Sources, licenses, identifiers, versions, annotations, and inclusion criteria."
+        da: "Kilder, licenser, identifikatorer, versioner, annotationer og inklusionskriterier."
     - id: baseline
       description:
-        es: Baseline simple y al menos una alternativa metodológica razonable.
-        en: A simple baseline and at least one reasonable methodological alternative.
-        da: En simpel baseline og mindst ét rimeligt metodisk alternativ.
+        es: "Baseline simple y al menos una alternativa metodológica razonable."
+        en: "A simple baseline and at least one reasonable methodological alternative."
+        da: "En simpel baseline og mindst ét rimeligt metodisk alternativ."
     - id: implementation
       description:
-        es: Workflow reproducible con parámetros, entorno, semillas y métricas de transición.
-        en: Reproducible workflow with parameters, environment, seeds, and transition metrics.
-        da: Reproducerbart workflow med parametre, miljø, seeds og overgangsmetrikker.
+        es: "Workflow reproducible con parámetros, entorno, semillas y métricas de transición."
+        en: "Reproducible workflow with parameters, environment, seeds, and transition metrics."
+        da: "Reproducerbart workflow med parametre, miljø, seeds og overgangsmetrikker."
     - id: validation
       description:
-        es: Validación técnica, algorítmica, estadística y biológica proporcional a la pregunta.
-        en: Technical, algorithmic, statistical, and biological validation proportional to the question.
-        da: Teknisk, algoritmisk, statistisk og biologisk validering proportional med spørgsmålet.
+        es: "Validación técnica, algorítmica, estadística y biológica proporcional a la pregunta."
+        en: "Technical, algorithmic, statistical, and biological validation proportional to the question."
+        da: "Teknisk, algoritmisk, statistisk og biologisk validering proportional med spørgsmålet."
     - id: interpretation
       description:
-        es: Resultados, incertidumbre, sensibilidad, limitaciones y alcance de conclusiones.
-        en: Results, uncertainty, sensitivity, limitations, and claim scope.
-        da: Resultater, usikkerhed, følsomhed, begrænsninger og påstandens rækkevidde.
+        es: "Resultados, incertidumbre, sensibilidad, limitaciones y alcance de conclusiones."
+        en: "Results, uncertainty, sensitivity, limitations, and claim scope."
+        da: "Resultater, usikkerhed, følsomhed, begrænsninger og påstandens rækkevidde."
   prohibited_shortcuts:
     - Selecting methods solely because software is familiar.
     - Tuning parameters on final evaluation data.
@@ -63,13 +63,13 @@ project_requirements:
 project_tracks:
   - id: dm847.project.sequence_family
     title:
-      es: Detección y anotación de una familia de secuencias
-      en: Sequence-family detection and annotation
-      da: Detektion og annotation af en sekvensfamilie
+      es: "Detección y anotación de una familia de secuencias"
+      en: "Sequence-family detection and annotation"
+      da: "Detektion og annotation af en sekvensfamilie"
     core_question:
-      es: ¿Puede un modelo de familia distinguir miembros de no miembros difíciles en datos externos?
-      en: Can a family model distinguish members from difficult non-members in external data?
-      da: Kan en familiemodel skelne medlemmer fra vanskelige ikke-medlemmer i eksterne data?
+      es: "¿Puede un modelo de familia distinguir miembros de no miembros difíciles en datos externos?"
+      en: "Can a family model distinguish members from difficult non-members in external data?"
+      da: "Kan en familiemodel skelne medlemmer fra vanskelige ikke-medlemmer i eksterne data?"
     required_methods:
       - sequence representation and quality checks
       - pairwise alignment or similarity baseline
@@ -82,13 +82,13 @@ project_tracks:
     oral_connections: [dm847.m01, dm847.m04, dm847.m05, dm847.m06, dm847.m14]
   - id: dm847.project.index_search
     title:
-      es: Índice exacto y extensión tolerante a errores
-      en: Exact index and error-tolerant extension
-      da: Eksakt indeks og fejltolerant udvidelse
+      es: "Índice exacto y extensión tolerante a errores"
+      en: "Exact index and error-tolerant extension"
+      da: "Eksakt indeks og fejltolerant udvidelse"
     core_question:
-      es: ¿Qué compromiso tiempo-memoria ofrece un índice de secuencias para una carga de consultas definida?
-      en: What time-memory trade-off does a sequence index provide for a defined query workload?
-      da: Hvilket tid-hukommelseskompromis giver et sekvensindeks for en defineret workload?
+      es: "¿Qué compromiso tiempo-memoria ofrece un índice de secuencias para una carga de consultas definida?"
+      en: "What time-memory trade-off does a sequence index provide for a defined query workload?"
+      da: "Hvilket tid-hukommelseskompromis giver et sekvensindeks for en defineret workload?"
     required_methods:
       - exhaustive-search correctness oracle
       - suffix array or FM-index
@@ -101,13 +101,13 @@ project_tracks:
     oral_connections: [dm847.m04, dm847.m05, dm847.m07, dm847.m08, dm847.m11]
   - id: dm847.project.operon
     title:
-      es: Predicción de fronteras de operones entre especies
-      en: Cross-species operon-boundary prediction
-      da: Operongrænseprædiktion på tværs af arter
+      es: "Predicción de fronteras de operones entre especies"
+      en: "Cross-species operon-boundary prediction"
+      da: "Operongrænseprædiktion på tværs af arter"
     core_question:
-      es: ¿Qué señales de vecindad generalizan a genomas o clados no vistos?
-      en: Which neighborhood signals generalize to unseen genomes or clades?
-      da: Hvilke naboskabssignaler generaliserer til usete genomer eller klader?
+      es: "¿Qué señales de vecindad generalizan a genomas o clados no vistos?"
+      en: "Which neighborhood signals generalize to unseen genomes or clades?"
+      da: "Hvilke naboskabssignaler generaliserer til usete genomer eller klader?"
     required_methods:
       - provenance-aware bacterial annotation table
       - distance and orientation baseline
@@ -120,13 +120,13 @@ project_tracks:
     oral_connections: [dm847.m01, dm847.m02, dm847.m03, dm847.m09, dm847.m12]
   - id: dm847.project.motif_ngs
     title:
-      es: Motivos enriquecidos en regiones NGS
-      en: Motifs enriched in NGS-defined regions
-      da: Motiver beriget i NGS-definerede regioner
+      es: "Motivos enriquecidos en regiones NGS"
+      en: "Motifs enriched in NGS-defined regions"
+      da: "Motiver beriget i NGS-definerede regioner"
     core_question:
-      es: ¿Qué patrones de secuencia se reproducen en regiones enriquecidas bajo controles emparejados?
-      en: Which sequence patterns replicate in enriched regions under matched controls?
-      da: Hvilke sekvensmønstre reproduceres i berigede regioner under matchede kontroller?
+      es: "¿Qué patrones de secuencia se reproducen en regiones enriquecidas bajo controles emparejados?"
+      en: "Which sequence patterns replicate in enriched regions under matched controls?"
+      da: "Hvilke sekvensmønstre reproduceres i berigede regioner under matchede kontroller?"
     required_methods:
       - NGS quality and mapping audit
       - region or peak definition with assay-appropriate controls
@@ -139,13 +139,13 @@ project_tracks:
     oral_connections: [dm847.m04, dm847.m06, dm847.m10, dm847.m11, dm847.m13]
   - id: dm847.project.network_omics
     title:
-      es: Priorización de módulos en una red biológica
-      en: Module prioritization in a biological network
-      da: Prioritering af moduler i et biologisk netværk
+      es: "Priorización de módulos en una red biológica"
+      en: "Module prioritization in a biological network"
+      da: "Prioritering af moduler i et biologisk netværk"
     core_question:
-      es: ¿Añade una red versionada valor reproducible sobre un ranking ómico sin red?
-      en: Does a versioned network add reproducible value over a no-network omics ranking?
-      da: Tilfører et versioneret netværk reproducerbar værdi over en omics-ranking uden netværk?
+      es: "¿Añade una red versionada valor reproducible sobre un ranking ómico sin red?"
+      en: "Does a versioned network add reproducible value over a no-network omics ranking?"
+      da: "Tilfører et versioneret netværk reproducerbar værdi over en omics-ranking uden netværk?"
     required_methods:
       - leakage-free omics statistic or prediction pipeline
       - provenance-aware network construction
@@ -238,128 +238,128 @@ oral_question_bank:
   - id: dm847.oral.01
     outcomes: [dm847.lo01]
     question:
-      es: Explica por qué el dogma central no significa que cada gen codifique una proteína ni que el flujo regulatorio sea lineal.
-      en: Explain why the central dogma does not mean every gene encodes a protein or regulation is linear.
-      da: Forklar hvorfor det centrale dogme ikke betyder at hvert gen koder et protein eller at regulering er lineær.
+      es: "Explica por qué el dogma central no significa que cada gen codifique una proteína ni que el flujo regulatorio sea lineal."
+      en: "Explain why the central dogma does not mean every gene encodes a protein or regulation is linear."
+      da: "Forklar hvorfor det centrale dogme ikke betyder at hvert gen koder et protein eller at regulering er lineær."
     expected_elements: [noncoding_rna, regulation, processing, feedback, scope_of_dogma]
   - id: dm847.oral.02
     outcomes: [dm847.lo01, dm847.lo06]
     question:
-      es: Distingue operón, unidad de transcripción y regulón, e indica por qué dependen de la condición.
-      en: Distinguish operon, transcription unit, and regulon, and explain condition dependence.
-      da: Skeln mellem operon, transkriptionsenhed og regulon og forklar betingelsesafhængighed.
+      es: "Distingue operón, unidad de transcripción y regulón, e indica por qué dependen de la condición."
+      en: "Distinguish operon, transcription unit, and regulon, and explain condition dependence."
+      da: "Skeln mellem operon, transkriptionsenhed og regulon og forklar betingelsesafhængighed."
     expected_elements: [contiguity, actual_transcript, distributed_regulation, internal_promoters]
   - id: dm847.oral.03
     outcomes: [dm847.lo02]
     question:
-      es: ¿Por qué símbolo génico, accession, versión y concepto ontológico no deben usarse como el mismo identificador?
-      en: Why must gene symbol, accession, version, and ontology concept not be used as one identifier?
-      da: Hvorfor må gensymbol, accession, version og ontologibegreb ikke bruges som samme identifikator?
+      es: "¿Por qué símbolo génico, accession, versión y concepto ontológico no deben usarse como el mismo identificador?"
+      en: "Why must gene symbol, accession, version, and ontology concept not be used as one identifier?"
+      da: "Hvorfor må gensymbol, accession, version og ontologibegreb ikke bruges som samme identifikator?"
     expected_elements: [entity_types, namespace, versioning, ambiguity, provenance]
   - id: dm847.oral.04
     outcomes: [dm847.lo02, dm847.lo03]
     question:
-      es: Diseña la procedencia mínima de una afirmación derivada de una base integrada.
-      en: Design minimum provenance for a claim derived from an integrated database.
-      da: Design minimum provenance for en påstand afledt fra en integreret database.
+      es: "Diseña la procedencia mínima de una afirmación derivada de una base integrada."
+      en: "Design minimum provenance for a claim derived from an integrated database."
+      da: "Design minimum provenance for en påstand afledt fra en integreret database."
     expected_elements: [source_version, entity_mapping, transformation, evidence_code, timestamp]
   - id: dm847.oral.05
     outcomes: [dm847.lo03]
     question:
-      es: Compara una base relacional normalizada y un grafo para integrar genes, proteínas, muestras y vías.
-      en: Compare a normalized relational database and a graph for integrating genes, proteins, samples, and pathways.
-      da: Sammenlign en normaliseret relationel database og en graf til integration af gener, proteiner, samples og pathways.
+      es: "Compara una base relacional normalizada y un grafo para integrar genes, proteínas, muestras y vías."
+      en: "Compare a normalized relational database and a graph for integrating genes, proteins, samples, and pathways."
+      da: "Sammenlign en normaliseret relationel database og en graf til integration af gener, proteiner, samples og pathways."
     expected_elements: [constraints, joins, traversal, provenance, hybrid_design]
   - id: dm847.oral.06
     outcomes: [dm847.lo04]
     question:
-      es: ¿Qué diferencia score de alineamiento, identidad y significancia estadística?
-      en: What distinguishes alignment score, identity, and statistical significance?
-      da: Hvad adskiller alignment-score, identitet og statistisk signifikans?
+      es: "¿Qué diferencia score de alineamiento, identidad y significancia estadística?"
+      en: "What distinguishes alignment score, identity, and statistical significance?"
+      da: "Hvad adskiller alignment-score, identitet og statistisk signifikans?"
     expected_elements: [scoring_model, observed_matches, null_database_size, e_value_or_p_value]
   - id: dm847.oral.07
     outcomes: [dm847.lo04]
     question:
-      es: Deriva conceptualmente la recurrencia de alineamiento global y explica su inicialización.
-      en: Conceptually derive the global-alignment recurrence and explain initialization.
-      da: Udled konceptuelt rekurrensen for global alignment og forklar initialisering.
+      es: "Deriva conceptualmente la recurrencia de alineamiento global y explica su inicialización."
+      en: "Conceptually derive the global-alignment recurrence and explain initialization."
+      da: "Udled konceptuelt rekurrensen for global alignment og forklar initialisering."
     expected_elements: [subproblem, diagonal_up_left, gap_penalty, boundary_cost, traceback]
   - id: dm847.oral.08
     outcomes: [dm847.lo04]
     question:
-      es: Compara forward, Viterbi y posterior decoding en un HMM.
-      en: Compare forward, Viterbi, and posterior decoding in an HMM.
-      da: Sammenlign forward, Viterbi og posterior-dekodning i en HMM.
+      es: "Compara forward, Viterbi y posterior decoding en un HMM."
+      en: "Compare forward, Viterbi, and posterior decoding in an HMM."
+      da: "Sammenlign forward, Viterbi og posterior-dekodning i en HMM."
     expected_elements: [sum_over_paths, max_path, marginal_states, numerical_stability]
   - id: dm847.oral.09
     outcomes: [dm847.lo07]
     question:
-      es: Explica cómo un array de sufijos convierte búsqueda de patrón en búsqueda de intervalo.
-      en: Explain how a suffix array turns pattern search into interval search.
-      da: Forklar hvordan et suffix-array omdanner mønstersøgning til intervalsøgning.
+      es: "Explica cómo un array de sufijos convierte búsqueda de patrón en búsqueda de intervalo."
+      en: "Explain how a suffix array turns pattern search into interval search."
+      da: "Forklar hvordan et suffix-array omdanner mønstersøgning til intervalsøgning."
     expected_elements: [lexicographic_order, contiguous_prefix_interval, lower_upper_bound, complexity]
   - id: dm847.oral.10
     outcomes: [dm847.lo07]
     question:
-      es: Explica C, Occ y búsqueda hacia atrás en un FM-index.
-      en: Explain C, Occ, and backward search in an FM-index.
-      da: Forklar C, Occ og backward search i et FM-index.
+      es: "Explica C, Occ y búsqueda hacia atrás en un FM-index."
+      en: "Explain C, Occ, and backward search in an FM-index."
+      da: "Forklar C, Occ og backward search i et FM-index."
     expected_elements: [rank, interval_update, right_to_left, count_vs_locate]
   - id: dm847.oral.11
     outcomes: [dm847.lo08]
     question:
-      es: Compara OOPS, ZOOPS y TCM e indica qué ocurre si el modelo de ocurrencia es incorrecto.
-      en: Compare OOPS, ZOOPS, and TCM and explain consequences of a wrong occurrence model.
-      da: Sammenlign OOPS, ZOOPS og TCM og forklar konsekvenser af en forkert forekomstmodel.
+      es: "Compara OOPS, ZOOPS y TCM e indica qué ocurre si el modelo de ocurrencia es incorrecto."
+      en: "Compare OOPS, ZOOPS, and TCM and explain consequences of a wrong occurrence model."
+      da: "Sammenlign OOPS, ZOOPS og TCM og forklar konsekvenser af en forkert forekomstmodel."
     expected_elements: [one, zero_or_one, multiple, forced_sites, missed_sites]
   - id: dm847.oral.12
     outcomes: [dm847.lo08]
     question:
-      es: ¿Por qué EM puede aumentar verosimilitud sin encontrar un motivo biológicamente útil?
-      en: Why can EM increase likelihood without finding a biologically useful motif?
-      da: Hvorfor kan EM øge likelihood uden at finde et biologisk nyttigt motiv?
+      es: "¿Por qué EM puede aumentar verosimilitud sin encontrar un motivo biológicamente útil?"
+      en: "Why can EM increase likelihood without finding a biologically useful motif?"
+      da: "Hvorfor kan EM øge likelihood uden at finde et biologisk nyttigt motiv?"
     expected_elements: [local_optimum, background_pattern, initialization, validation]
   - id: dm847.oral.13
     outcomes: [dm847.lo04, dm847.lo07]
     question:
-      es: Separa las funciones de QC, mapeo, filtrado y peak calling en un pipeline NGS.
-      en: Separate the roles of QC, mapping, filtering, and peak calling in an NGS pipeline.
-      da: Adskil rollerne for QC, mapping, filtrering og peak calling i et NGS-pipeline.
+      es: "Separa las funciones de QC, mapeo, filtrado y peak calling en un pipeline NGS."
+      en: "Separate the roles of QC, mapping, filtering, and peak calling in an NGS pipeline."
+      da: "Adskil rollerne for QC, mapping, filtrering og peak calling i et NGS-pipeline."
     expected_elements: [raw_quality, placement, inclusion_rules, regional_enrichment, controls]
   - id: dm847.oral.14
     outcomes: [dm847.lo05]
     question:
-      es: ¿Por qué centralidad alta en una red integrada no demuestra esencialidad?
-      en: Why does high centrality in an integrated network not prove essentiality?
-      da: Hvorfor beviser høj centralitet i et integreret netværk ikke essentialitet?
+      es: "¿Por qué centralidad alta en una red integrada no demuestra esencialidad?"
+      en: "Why does high centrality in an integrated network not prove essentiality?"
+      da: "Hvorfor beviser høj centralitet i et integreret netværk ikke essentialitet?"
     expected_elements: [edge_definition, study_bias, incompleteness, independent_validation]
   - id: dm847.oral.15
     outcomes: [dm847.lo05]
     question:
-      es: Diseña un modelo nulo para probar si genes de una vía forman un módulo más denso de lo esperado.
-      en: Design a null model testing whether pathway genes form a denser-than-expected module.
-      da: Design en nulmodel der tester om pathway-gener danner et tættere modul end forventet.
+      es: "Diseña un modelo nulo para probar si genes de una vía forman un módulo más denso de lo esperado."
+      en: "Design a null model testing whether pathway genes form a denser-than-expected module."
+      da: "Design en nulmodel der tester om pathway-gener danner et tættere modul end forventet."
     expected_elements: [degree_preservation, constraints, repetitions, empirical_p, effect]
   - id: dm847.oral.16
     outcomes: [dm847.lo05]
     question:
-      es: ¿Por qué el universo y la unidad de permutación cambian una conclusión de enriquecimiento?
-      en: Why do the universe and permutation unit change an enrichment conclusion?
-      da: Hvorfor ændrer universet og permutationsenheden en enrichment-konklusion?
+      es: "¿Por qué el universo y la unidad de permutación cambian una conclusión de enriquecimiento?"
+      en: "Why do the universe and permutation unit change an enrichment conclusion?"
+      da: "Hvorfor ændrer universet og permutationsenheden en enrichment-konklusion?"
     expected_elements: [eligibility, null_hypothesis, exchangeability, correlation]
   - id: dm847.oral.17
     outcomes: [dm847.lo09]
     question:
-      es: Explica cómo ocurre fuga al seleccionar genes antes de cross-validation.
-      en: Explain leakage from selecting genes before cross-validation.
-      da: Forklar lækage ved genselektion før cross-validation.
+      es: "Explica cómo ocurre fuga al seleccionar genes antes de cross-validation."
+      en: "Explain leakage from selecting genes before cross-validation."
+      da: "Forklar lækage ved genselektion før cross-validation."
     expected_elements: [validation_labels_in_selection, optimistic_bias, nested_pipeline]
   - id: dm847.oral.18
     outcomes: [dm847.lo09]
     question:
-      es: Compara discriminación, calibración y utilidad para un clasificador ómico.
-      en: Compare discrimination, calibration, and utility for an omics classifier.
-      da: Sammenlign diskrimination, kalibrering og nytte for en omics-klassifikator.
+      es: "Compara discriminación, calibración y utilidad para un clasificador ómico."
+      en: "Compare discrimination, calibration, and utility for an omics classifier."
+      da: "Sammenlign diskrimination, kalibrering og nytte for en omics-klassifikator."
     expected_elements: [ranking, probability_accuracy, threshold_cost, external_validation]
 
 oral_rubric:

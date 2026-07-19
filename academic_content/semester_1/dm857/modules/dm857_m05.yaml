@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Cadenas, parsing y validación textual
-    en: Strings, parsing, and text validation
-    da: Strenge, parsing og tekstvalidering
+    es: "Cadenas, parsing y validación textual"
+    en: "Strings, parsing, and text validation"
+    da: "Strenge, parsing og tekstvalidering"
   summary:
     es: >-
       Estudio de cadenas como secuencias inmutables de caracteres: índices, slicing, recorridos,
@@ -31,66 +31,66 @@ objectives:
   - id: m05.o1
     bloom_level: understand
     statement:
-      es: Interpretar una cadena como secuencia indexada e inmutable de caracteres Unicode.
-      en: Interpret a string as an indexed, immutable sequence of Unicode characters.
-      da: Fortolke en streng som en indekseret, uforanderlig sekvens af Unicode-tegn.
+      es: "Interpretar una cadena como secuencia indexada e inmutable de caracteres Unicode."
+      en: "Interpret a string as an indexed, immutable sequence of Unicode characters."
+      da: "Fortolke en streng som en indekseret, uforanderlig sekvens af Unicode-tegn."
     evidence: sequence_explanation
   - id: m05.o2
     bloom_level: apply
     statement:
-      es: Aplicar índices positivos, negativos y slicing con límites correctos.
-      en: Apply positive and negative indices and slicing with correct bounds.
-      da: Anvende positive og negative indeks samt slicing med korrekte grænser.
+      es: "Aplicar índices positivos, negativos y slicing con límites correctos."
+      en: "Apply positive and negative indices and slicing with correct bounds."
+      da: "Anvende positive og negative indeks samt slicing med korrekte grænser."
     evidence: indexing_trace
   - id: m05.o3
     bloom_level: apply
     statement:
-      es: Recorrer, buscar y contar caracteres o patrones, distinguiendo coincidencias solapadas y no solapadas.
-      en: Traverse, search, and count characters or patterns, distinguishing overlapping and non-overlapping matches.
-      da: Gennemløbe, søge og tælle tegn eller mønstre og skelne mellem overlappende og ikke-overlappende match.
+      es: "Recorrer, buscar y contar caracteres o patrones, distinguiendo coincidencias solapadas y no solapadas."
+      en: "Traverse, search, and count characters or patterns, distinguishing overlapping and non-overlapping matches."
+      da: "Gennemløbe, søge og tælle tegn eller mønstre og skelne mellem overlappende og ikke-overlappende match."
     evidence: search_and_count_task
   - id: m05.o4
     bloom_level: analyze
     statement:
-      es: Utilizar métodos de cadenas comprendiendo que producen nuevos valores en lugar de mutar el original.
-      en: Use string methods while understanding that they create new values rather than mutate the original.
-      da: Bruge strengmetoder med forståelse for at de skaber nye værdier frem for at mutere originalen.
+      es: "Utilizar métodos de cadenas comprendiendo que producen nuevos valores en lugar de mutar el original."
+      en: "Use string methods while understanding that they create new values rather than mutate the original."
+      da: "Bruge strengmetoder med forståelse for at de skaber nye værdier frem for at mutere originalen."
     evidence: transformation_trace
   - id: m05.o5
     bloom_level: create
     statement:
-      es: Diseñar reglas explícitas de normalización y validación apropiadas para el propósito.
-      en: Design explicit normalization and validation rules appropriate to purpose.
-      da: Designe eksplicitte regler for normalisering og validering, der passer til formålet.
+      es: "Diseñar reglas explícitas de normalización y validación apropiadas para el propósito."
+      en: "Design explicit normalization and validation rules appropriate to purpose."
+      da: "Designe eksplicitte regler for normalisering og validering, der passer til formålet."
     evidence: text_rule_design
   - id: m05.o6
     bloom_level: apply
     statement:
-      es: Separar, unir, formatear y analizar campos sin asumir estructura no verificada.
-      en: Split, join, format, and parse fields without assuming unverified structure.
-      da: Opdele, sammenføje, formatere og parse felter uden at antage uverificeret struktur.
+      es: "Separar, unir, formatear y analizar campos sin asumir estructura no verificada."
+      en: "Split, join, format, and parse fields without assuming unverified structure."
+      da: "Opdele, sammenføje, formatere og parse felter uden at antage uverificeret struktur."
     evidence: defensive_parser
   - id: m05.o7
     bloom_level: evaluate
     statement:
-      es: Distinguir representación visible, caracteres Unicode y reglas de equivalencia textual.
-      en: Distinguish visible representation, Unicode characters, and textual equivalence rules.
-      da: Skelne mellem synlig repræsentation, Unicode-tegn og regler for tekstlig ækvivalens.
+      es: "Distinguir representación visible, caracteres Unicode y reglas de equivalencia textual."
+      en: "Distinguish visible representation, Unicode characters, and textual equivalence rules."
+      da: "Skelne mellem synlig repræsentation, Unicode-tegn og regler for tekstlig ækvivalens."
     evidence: unicode_analysis
   - id: m05.o8
     bloom_level: create
     statement:
-      es: Diseñar pruebas para cadenas vacías, delimitadores ausentes, campos vacíos, espacios y Unicode.
-      en: Design tests for empty strings, absent delimiters, empty fields, whitespace, and Unicode.
-      da: Designe test for tomme strenge, manglende separatorer, tomme felter, mellemrum og Unicode.
+      es: "Diseñar pruebas para cadenas vacías, delimitadores ausentes, campos vacíos, espacios y Unicode."
+      en: "Design tests for empty strings, absent delimiters, empty fields, whitespace, and Unicode."
+      da: "Designe test for tomme strenge, manglende separatorer, tomme felter, mellemrum og Unicode."
     evidence: text_test_set
 
 concepts:
   - id: string-sequence-immutability
     title:
-      es: Secuencia, longitud e inmutabilidad
-      en: Sequence, length, and immutability
-      da: Sekvens, længde og uforanderlighed
+      es: "Secuencia, longitud e inmutabilidad"
+      en: "Sequence, length, and immutability"
+      da: "Sekvens, længde og uforanderlighed"
     body:
       es: >-
         Una cadena es una secuencia ordenada de caracteres. `len` devuelve su longitud y cada posición puede
@@ -108,9 +108,9 @@ concepts:
 
   - id: indices-slices-boundaries
     title:
-      es: Índices, slicing y fronteras
-      en: Indices, slicing, and boundaries
-      da: Indeks, slicing og grænser
+      es: "Índices, slicing y fronteras"
+      en: "Indices, slicing, and boundaries"
+      da: "Indeks, slicing og grænser"
     body:
       es: >-
         El primer índice válido es 0 y el último positivo es `len(text)-1`; `-1` representa el último carácter.
@@ -129,9 +129,9 @@ concepts:
 
   - id: traversal-search-count
     title:
-      es: Recorrido, búsqueda y conteo
-      en: Traversal, search, and counting
-      da: Gennemløb, søgning og optælling
+      es: "Recorrido, búsqueda y conteo"
+      en: "Traversal, search, and counting"
+      da: "Gennemløb, søgning og optælling"
     body:
       es: >-
         Un `for` recorre caracteres directamente; `enumerate` añade posiciones cuando son necesarias. `in` comprueba
@@ -150,9 +150,9 @@ concepts:
 
   - id: normalization-purpose
     title:
-      es: Normalización dirigida por el propósito
-      en: Purpose-driven normalization
-      da: Formålsstyret normalisering
+      es: "Normalización dirigida por el propósito"
+      en: "Purpose-driven normalization"
+      da: "Formålsstyret normalisering"
     body:
       es: >-
         Normalizar significa transformar representaciones que deben considerarse equivalentes según una regla
@@ -171,9 +171,9 @@ concepts:
 
   - id: split-join-partition-parsing
     title:
-      es: `split`, `join`, `partition` y parsing defensivo
-      en: `split`, `join`, `partition`, and defensive parsing
-      da: `split`, `join`, `partition` og defensiv parsing
+      es: "`split`, `join`, `partition` y parsing defensivo"
+      en: "`split`, `join`, `partition`, and defensive parsing"
+      da: "`split`, `join`, `partition` og defensiv parsing"
     body:
       es: >-
         `split` divide una cadena en campos y puede producir campos vacíos. `separator.join(parts)` inserta el
@@ -192,9 +192,9 @@ concepts:
 
   - id: textual-validation-predicates
     title:
-      es: Predicados de validación textual
-      en: Text validation predicates
-      da: Prædikater til tekstvalidering
+      es: "Predicados de validación textual"
+      en: "Text validation predicates"
+      da: "Prædikater til tekstvalidering"
     body:
       es: >-
         Métodos como `isalpha`, `isdigit`, `isalnum` e `isspace` expresan propiedades de todos los caracteres y
@@ -212,9 +212,9 @@ concepts:
 
   - id: unicode-equivalence
     title:
-      es: Unicode, apariencia y equivalencia
-      en: Unicode, appearance, and equivalence
-      da: Unicode, udseende og ækvivalens
+      es: "Unicode, apariencia y equivalencia"
+      en: "Unicode, appearance, and equivalence"
+      da: "Unicode, udseende og ækvivalens"
     body:
       es: >-
         Dos textos visualmente similares pueden contener secuencias Unicode diferentes, y un carácter visible puede
@@ -234,9 +234,9 @@ concepts:
 
   - id: formatting-and-round-trip
     title:
-      es: Formato, representación y round-trip
-      en: Formatting, representation, and round trip
-      da: Formatering, repræsentation og round-trip
+      es: "Formato, representación y round-trip"
+      en: "Formatting, representation, and round trip"
+      da: "Formatering, repræsentation og round-trip"
     body:
       es: >-
         Las f-strings producen representaciones legibles y permiten controlar precisión, alineación y etiquetas. Formatear
@@ -255,13 +255,13 @@ concepts:
 worked_examples:
   - id: dm857.m05.e01
     title:
-      es: Normalizar una etiqueta administrativa sintética
-      en: Normalize a synthetic administrative label
-      da: Normalisér en syntetisk administrativ etiket
+      es: "Normalizar una etiqueta administrativa sintética"
+      en: "Normalize a synthetic administrative label"
+      da: "Normalisér en syntetisk administrativ etiket"
     problem:
-      es: Convertir etiquetas con espacios y diferencias de caja a una forma comparable con guiones bajos.
-      en: Convert labels with surrounding whitespace and case differences into an underscore-separated comparable form.
-      da: Konvertér etiketter med mellemrum og forskelle i store/små bogstaver til en sammenlignelig form med understregninger.
+      es: "Convertir etiquetas con espacios y diferencias de caja a una forma comparable con guiones bajos."
+      en: "Convert labels with surrounding whitespace and case differences into an underscore-separated comparable form."
+      da: "Konvertér etiketter med mellemrum og forskelle i store/små bogstaver til en sammenlignelig form med understregninger."
     assumptions:
       - case carries no meaning for this synthetic label
       - internal runs of whitespace are equivalent
@@ -293,22 +293,22 @@ worked_examples:
       - empty or whitespace-only input returns the empty string
       - non-ASCII case examples are tested separately
     explanation:
-      es: La regla es válida porque el propósito declara irrelevantes la caja y la cantidad de espacios.
-      en: The rule is valid because the purpose declares case and whitespace runs irrelevant.
-      da: Reglen er gyldig fordi formålet erklærer store/små bogstaver og antal mellemrum irrelevante.
+      es: "La regla es válida porque el propósito declara irrelevantes la caja y la cantidad de espacios."
+      en: "The rule is valid because the purpose declares case and whitespace runs irrelevant."
+      da: "Reglen er gyldig fordi formålet erklærer store/små bogstaver og antal mellemrum irrelevante."
     limitations:
       - it must not be used for case-sensitive scientific identifiers
     linked_objectives: [m05.o4, m05.o5, m05.o7, m05.o8]
 
   - id: dm857.m05.e02
     title:
-      es: Analizar un identificador compuesto de forma defensiva
-      en: Parse a compound identifier defensively
-      da: Parse en sammensat identifikator defensivt
+      es: "Analizar un identificador compuesto de forma defensiva"
+      en: "Parse a compound identifier defensively"
+      da: "Parse en sammensat identifikator defensivt"
     problem:
-      es: Analizar `cohort:sample` y rechazar separador ausente, campos vacíos o separadores adicionales.
-      en: Parse `cohort:sample` and reject an absent delimiter, empty fields, or additional delimiters.
-      da: Parse `cohort:sample` og afvis manglende separator, tomme felter eller ekstra separatorer.
+      es: "Analizar `cohort:sample` y rechazar separador ausente, campos vacíos o separadores adicionales."
+      en: "Parse `cohort:sample` and reject an absent delimiter, empty fields, or additional delimiters."
+      da: "Parse `cohort:sample` og afvis manglende separator, tomme felter eller ekstra separatorer."
     assumptions:
       - exactly one colon is required
       - both fields contain non-whitespace text
@@ -342,26 +342,26 @@ worked_examples:
       print(parse_identifier("A01 : S004"))
     expected_output: "('A01', 'S004')"
     validation:
-      - `A:S` succeeds
-      - `AS`, `:S`, `A:`, and `A:S:X` fail
+      - "`A:S` succeeds"
+      - "`AS`, `:S`, `A:`, and `A:S:X` fail"
       - case is preserved
     explanation:
-      es: Se distingue estructura ausente de campos vacíos y se evita desempaquetar antes de validar.
-      en: Missing structure is distinguished from empty fields, and unpacking occurs only after validation.
-      da: Manglende struktur skelnes fra tomme felter, og udpakning sker først efter validering.
+      es: "Se distingue estructura ausente de campos vacíos y se evita desempaquetar antes de validar."
+      en: "Missing structure is distinguished from empty fields, and unpacking occurs only after validation."
+      da: "Manglende struktur skelnes fra tomme felter, og udpakning sker først efter validering."
     limitations:
       - allowed character sets are not constrained in this introductory example
     linked_objectives: [m05.o5, m05.o6, m05.o8]
 
   - id: dm857.m05.e03
     title:
-      es: Contar coincidencias solapadas
-      en: Count overlapping matches
-      da: Tæl overlappende match
+      es: "Contar coincidencias solapadas"
+      en: "Count overlapping matches"
+      da: "Tæl overlappende match"
     problem:
-      es: Contar cuántas veces aparece `ANA` en `BANANA`, incluyendo solapamientos.
-      en: Count how many times `ANA` occurs in `BANANA`, including overlaps.
-      da: Tæl hvor mange gange `ANA` forekommer i `BANANA`, inklusive overlap.
+      es: "Contar cuántas veces aparece `ANA` en `BANANA`, incluyendo solapamientos."
+      en: "Count how many times `ANA` occurs in `BANANA`, including overlaps."
+      da: "Tæl hvor mange gange `ANA` forekommer i `BANANA`, inklusive overlap."
     assumptions:
       - comparison is case-sensitive
       - an empty pattern is rejected
@@ -389,13 +389,13 @@ worked_examples:
       print(count_overlapping("BANANA", "ANA"))
     expected_output: "2"
     validation:
-      - `BANANA`, `ANA` gives 2
+      - "`BANANA`, `ANA` gives 2"
       - pattern longer than text gives 0
       - empty pattern raises ValueError
     explanation:
-      es: `str.count` produciría 1 porque cuenta coincidencias no solapadas.
-      en: `str.count` would produce 1 because it counts non-overlapping matches.
-      da: `str.count` ville give 1, fordi den tæller ikke-overlappende match.
+      es: "`str.count` produciría 1 porque cuenta coincidencias no solapadas."
+      en: "`str.count` would produce 1 because it counts non-overlapping matches."
+      da: "`str.count` ville give 1, fordi den tæller ikke-overlappende match."
     limitations:
       - repeated slicing is sufficient for teaching but not optimized for massive text
     linked_objectives: [m05.o2, m05.o3, m05.o8]
@@ -405,42 +405,42 @@ practice_exercises:
     activity_type: code_tracing
     difficulty: foundational
     prompt:
-      es: Para `text='ABCDE'`, predice `text[-1]`, `text[1:4]`, `text[:2]` y `text[::-1]`.
-      en: For `text='ABCDE'`, predict `text[-1]`, `text[1:4]`, `text[:2]`, and `text[::-1]`.
-      da: For `text='ABCDE'`, forudsig `text[-1]`, `text[1:4]`, `text[:2]` og `text[::-1]`.
-    reference_solution: {es: "`E`, `BCD`, `AB`, `EDCBA`.", en: "`E`, `BCD`, `AB`, `EDCBA`.", da: "`E`, `BCD`, `AB`, `EDCBA`."}
+      es: "Para `text='ABCDE'`, predice `text[-1]`, `text[1:4]`, `text[:2]` y `text[::-1]`."
+      en: "For `text='ABCDE'`, predict `text[-1]`, `text[1:4]`, `text[:2]`, and `text[::-1]`."
+      da: "For `text='ABCDE'`, forudsig `text[-1]`, `text[1:4]`, `text[:2]` og `text[::-1]`."
+    reference_solution: {"es": "\"`E`, `BCD`, `AB`, `EDCBA`.\"", "en": "\"`E`, `BCD`, `AB`, `EDCBA`.\"", "da": "\"`E`, `BCD`, `AB`, `EDCBA`.\""}
     linked_objectives: [m05.o2]
 
   - id: dm857.m05.p02
     activity_type: debugging
     difficulty: foundational
     prompt:
-      es: Corrige `text[0] = text[0].upper()` respetando la inmutabilidad.
-      en: Correct `text[0] = text[0].upper()` while respecting immutability.
-      da: Ret `text[0] = text[0].upper()` med respekt for uforanderlighed.
-    reference_solution: {es: "`text = text[:1].upper() + text[1:]` o una transformación equivalente.", en: "`text = text[:1].upper() + text[1:]` or an equivalent transformation.", da: "`text = text[:1].upper() + text[1:]` eller tilsvarende."}
+      es: "Corrige `text[0] = text[0].upper()` respetando la inmutabilidad."
+      en: "Correct `text[0] = text[0].upper()` while respecting immutability."
+      da: "Ret `text[0] = text[0].upper()` med respekt for uforanderlighed."
+    reference_solution: {"es": "\"`text = text[:1].upper() + text[1:]` o una transformación equivalente.\"", "en": "\"`text = text[:1].upper() + text[1:]` or an equivalent transformation.\"", "da": "\"`text = text[:1].upper() + text[1:]` eller tilsvarende.\""}
     linked_objectives: [m05.o1, m05.o4]
 
   - id: dm857.m05.p03
     activity_type: comparison
     difficulty: intermediate
     prompt:
-      es: Compara `find`, `index` e `in` cuando un patrón está ausente.
-      en: Compare `find`, `index`, and `in` when a pattern is absent.
-      da: Sammenlign `find`, `index` og `in`, når et mønster mangler.
+      es: "Compara `find`, `index` e `in` cuando un patrón está ausente."
+      en: "Compare `find`, `index`, and `in` when a pattern is absent."
+      da: "Sammenlign `find`, `index` og `in`, når et mønster mangler."
     reference_solution:
-      es: `find` retorna `-1`, `index` genera `ValueError` e `in` retorna `False`; la elección depende del contrato.
-      en: `find` returns `-1`, `index` raises `ValueError`, and `in` returns `False`; choice depends on the contract.
-      da: `find` returnerer `-1`, `index` rejser `ValueError`, og `in` returnerer `False`; valget afhænger af kontrakten.
+      es: "`find` retorna `-1`, `index` genera `ValueError` e `in` retorna `False`; la elección depende del contrato."
+      en: "`find` returns `-1`, `index` raises `ValueError`, and `in` returns `False`; choice depends on the contract."
+      da: "`find` returnerer `-1`, `index` rejser `ValueError`, og `in` returnerer `False`; valget afhænger af kontrakten."
     linked_objectives: [m05.o3]
 
   - id: dm857.m05.p04
     activity_type: parser_design
     difficulty: intermediate
     prompt:
-      es: Diseña un parser para líneas `key=value` que distinga separador ausente, clave vacía y valor vacío permitido.
-      en: Design a parser for `key=value` lines that distinguishes an absent separator, an empty key, and an allowed empty value.
-      da: Design en parser til `key=value`-linjer der skelner mellem manglende separator, tom nøgle og tilladt tom værdi.
+      es: "Diseña un parser para líneas `key=value` que distinga separador ausente, clave vacía y valor vacío permitido."
+      en: "Design a parser for `key=value` lines that distinguishes an absent separator, an empty key, and an allowed empty value."
+      da: "Design en parser til `key=value`-linjer der skelner mellem manglende separator, tom nøgle og tilladt tom værdi."
     accepted_answer_elements:
       - explicit policy for exactly one first separator or partition-based parsing
       - empty key rejected after stripping
@@ -452,9 +452,9 @@ practice_exercises:
     activity_type: test_design
     difficulty: intermediate
     prompt:
-      es: Diseña pruebas para `normalize_label` incluyendo texto vacío, solo espacios, espacios internos y un ejemplo Unicode.
-      en: Design tests for `normalize_label`, including empty text, whitespace-only text, internal whitespace, and a Unicode example.
-      da: Design test for `normalize_label` inklusive tom tekst, kun mellemrum, interne mellemrum og et Unicode-eksempel.
+      es: "Diseña pruebas para `normalize_label` incluyendo texto vacío, solo espacios, espacios internos y un ejemplo Unicode."
+      en: "Design tests for `normalize_label`, including empty text, whitespace-only text, internal whitespace, and a Unicode example."
+      da: "Design test for `normalize_label` inklusive tom tekst, kun mellemrum, interne mellemrum og et Unicode-eksempel."
     accepted_answer_elements:
       - empty string
       - whitespace-only string
@@ -468,9 +468,9 @@ practice_exercises:
     activity_type: oral_explanation
     difficulty: advanced
     prompt:
-      es: Explica por qué dos cadenas visualmente iguales pueden no ser iguales y qué política debe definir un sistema.
-      en: Explain why two visually identical strings may not be equal and what policy a system should define.
-      da: Forklar hvorfor to visuelt identiske strenge kan være ulige, og hvilken politik et system bør definere.
+      es: "Explica por qué dos cadenas visualmente iguales pueden no ser iguales y qué política debe definir un sistema."
+      en: "Explain why two visually identical strings may not be equal and what policy a system should define."
+      da: "Forklar hvorfor to visuelt identiske strenge kan være ulige, og hvilken politik et system bør definere."
     accepted_answer_elements:
       - Unicode can encode visually similar text differently
       - casefold and normalization address different issues
@@ -482,108 +482,108 @@ objective_bank:
   - id: dm857.m05.q01
     activity_type: true_false
     difficulty: foundational
-    prompt: {es: Las cadenas de Python pueden modificarse carácter por carácter en el mismo objeto., en: Python strings can be modified character by character in the same object., da: Python-strenge kan ændres tegn for tegn i samme objekt.}
+    prompt: {"es": "Las cadenas de Python pueden modificarse carácter por carácter en el mismo objeto.", "en": "Python strings can be modified character by character in the same object.", "da": "Python-strenge kan ændres tegn for tegn i samme objekt."}
     correct_answer: false
-    explanation: {es: Las cadenas son inmutables; las transformaciones crean otra cadena., en: Strings are immutable; transformations create another string., da: Strenge er uforanderlige; transformationer skaber en ny streng.}
+    explanation: {"es": "Las cadenas son inmutables; las transformaciones crean otra cadena.", "en": "Strings are immutable; transformations create another string.", "da": "Strenge er uforanderlige; transformationer skaber en ny streng."}
     linked_objectives: [m05.o1, m05.o4]
 
   - id: dm857.m05.q02
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué carácter retorna `text[-1]`?, en: Which character does `text[-1]` return?, da: Hvilket tegn returnerer `text[-1]`?}
+    prompt: {"es": "¿Qué carácter retorna `text[-1]`?", "en": "Which character does `text[-1]` return?", "da": "Hvilket tegn returnerer `text[-1]`?"}
     options:
-      - {id: last, text: {es: El último., en: The last one., da: Det sidste.}}
-      - {id: first, text: {es: El primero., en: The first one., da: Det første.}}
-      - {id: error, text: {es: Siempre genera error., en: It always raises an error., da: Det giver altid fejl.}}
+      - {id: last, text: {"es": "El último.", "en": "The last one.", "da": "Det sidste."}}
+      - {id: first, text: {"es": "El primero.", "en": "The first one.", "da": "Det første."}}
+      - {id: error, text: {"es": "Siempre genera error.", "en": "It always raises an error.", "da": "Det giver altid fejl."}}
     correct_option_ids: [last]
-    explanation: {es: Los índices negativos cuentan desde el final., en: Negative indices count from the end., da: Negative indeks tæller fra slutningen.}
+    explanation: {"es": "Los índices negativos cuentan desde el final.", "en": "Negative indices count from the end.", "da": "Negative indeks tæller fra slutningen."}
     linked_objectives: [m05.o2]
 
   - id: dm857.m05.q03
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Incluye `text[2:5]` la posición 5?, en: Does `text[2:5]` include position 5?, da: Inkluderer `text[2:5]` position 5?}
+    prompt: {"es": "¿Incluye `text[2:5]` la posición 5?", "en": "Does `text[2:5]` include position 5?", "da": "Inkluderer `text[2:5]` position 5?"}
     options:
-      - {id: no, text: {es: No, `stop` es exclusivo., en: No, `stop` is exclusive., da: Nej, `stop` er eksklusiv.}}
-      - {id: yes, text: {es: Sí, ambos límites son inclusivos., en: Yes, both bounds are inclusive., da: Ja, begge grænser er inklusive.}}
+      - {id: no, text: {"es": "No, `stop` es exclusivo.", "en": "No, `stop` is exclusive.", "da": "Nej, `stop` er eksklusiv."}}
+      - {id: yes, text: {"es": "Sí, ambos límites son inclusivos.", "en": "Yes, both bounds are inclusive.", "da": "Ja, begge grænser er inklusive."}}
     correct_option_ids: [no]
-    explanation: {es: El slice contiene índices 2, 3 y 4., en: The slice contains indices 2, 3, and 4., da: Slicet indeholder indeks 2, 3 og 4.}
+    explanation: {"es": "El slice contiene índices 2, 3 y 4.", "en": "The slice contains indices 2, 3, and 4.", "da": "Slicet indeholder indeks 2, 3 og 4."}
     linked_objectives: [m05.o2]
 
   - id: dm857.m05.q04
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué ocurre cuando `find` no encuentra una subcadena?, en: What happens when `find` does not find a substring?, da: Hvad sker der når `find` ikke finder en delstreng?}
+    prompt: {"es": "¿Qué ocurre cuando `find` no encuentra una subcadena?", "en": "What happens when `find` does not find a substring?", "da": "Hvad sker der når `find` ikke finder en delstreng?"}
     options:
-      - {id: minus_one, text: {es: Retorna `-1`., en: It returns `-1`., da: Den returnerer `-1`.}}
-      - {id: value_error, text: {es: Genera `ValueError`., en: It raises `ValueError`., da: Den rejser `ValueError`.}}
-      - {id: none, text: {es: Retorna `None`., en: It returns `None`., da: Den returnerer `None`.}}
+      - {id: minus_one, text: {"es": "Retorna `-1`.", "en": "It returns `-1`.", "da": "Den returnerer `-1`."}}
+      - {id: value_error, text: {"es": "Genera `ValueError`.", "en": "It raises `ValueError`.", "da": "Den rejser `ValueError`."}}
+      - {id: none, text: {"es": "Retorna `None`.", "en": "It returns `None`.", "da": "Den returnerer `None`."}}
     correct_option_ids: [minus_one]
-    explanation: {es: `index` es el método que genera `ValueError` al fallar., en: `index` is the method that raises `ValueError` when absent., da: `index` rejser `ValueError` ved fravær.}
+    explanation: {"es": "`index` es el método que genera `ValueError` al fallar.", "en": "`index` is the method that raises `ValueError` when absent.", "da": "`index` rejser `ValueError` ved fravær."}
     linked_objectives: [m05.o3]
 
   - id: dm857.m05.q05
     activity_type: true_false
     difficulty: intermediate
-    prompt: {es: `str.count` cuenta coincidencias solapadas., en: `str.count` counts overlapping matches., da: `str.count` tæller overlappende match.}
+    prompt: {"es": "`str.count` cuenta coincidencias solapadas.", "en": "`str.count` counts overlapping matches.", "da": "`str.count` tæller overlappende match."}
     correct_answer: false
-    explanation: {es: Cuenta coincidencias no solapadas., en: It counts non-overlapping matches., da: Den tæller ikke-overlappende match.}
+    explanation: {"es": "Cuenta coincidencias no solapadas.", "en": "It counts non-overlapping matches.", "da": "Den tæller ikke-overlappende match."}
     linked_objectives: [m05.o3]
 
   - id: dm857.m05.q06
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Cuál es la mejor interpretación de `strip()`?, en: What is the best interpretation of `strip()`?, da: Hvad er den bedste fortolkning af `strip()`?}
+    prompt: {"es": "¿Cuál es la mejor interpretación de `strip()`?", "en": "What is the best interpretation of `strip()`?", "da": "Hvad er den bedste fortolkning af `strip()`?"}
     options:
-      - {id: ends, text: {es: Elimina caracteres especificados de los extremos., en: It removes specified characters from the ends., da: Den fjerner angivne tegn fra enderne.}}
-      - {id: all, text: {es: Elimina todos los espacios internos., en: It removes all internal spaces., da: Den fjerner alle interne mellemrum.}}
-      - {id: mutate, text: {es: Modifica la cadena original., en: It mutates the original string., da: Den muterer den oprindelige streng.}}
+      - {id: ends, text: {"es": "Elimina caracteres especificados de los extremos.", "en": "It removes specified characters from the ends.", "da": "Den fjerner angivne tegn fra enderne."}}
+      - {id: all, text: {"es": "Elimina todos los espacios internos.", "en": "It removes all internal spaces.", "da": "Den fjerner alle interne mellemrum."}}
+      - {id: mutate, text: {"es": "Modifica la cadena original.", "en": "It mutates the original string.", "da": "Den muterer den oprindelige streng."}}
     correct_option_ids: [ends]
-    explanation: {es: `strip` no elimina espacios internos y retorna una cadena nueva., en: `strip` does not remove internal whitespace and returns a new string., da: `strip` fjerner ikke interne mellemrum og returnerer en ny streng.}
+    explanation: {"es": "`strip` no elimina espacios internos y retorna una cadena nueva.", "en": "`strip` does not remove internal whitespace and returns a new string.", "da": "`strip` fjerner ikke interne mellemrum og returnerer en ny streng."}
     linked_objectives: [m05.o4, m05.o5]
 
   - id: dm857.m05.q07
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Por qué validar el número de campos antes de desempaquetar?, en: Why validate field count before unpacking?, da: Hvorfor validere feltantal før udpakning?}
+    prompt: {"es": "¿Por qué validar el número de campos antes de desempaquetar?", "en": "Why validate field count before unpacking?", "da": "Hvorfor validere feltantal før udpakning?"}
     options:
-      - {id: explicit, text: {es: Para distinguir estructura inválida y producir un error claro., en: To distinguish invalid structure and produce a clear error., da: For at skelne ugyldig struktur og give en klar fejl.}}
-      - {id: faster, text: {es: Solo para acelerar el programa., en: Only to make the program faster., da: Kun for at gøre programmet hurtigere.}}
-      - {id: mutate, text: {es: Para que `split` pueda modificar el texto., en: So `split` can mutate the text., da: Så `split` kan mutere teksten.}}
+      - {id: explicit, text: {"es": "Para distinguir estructura inválida y producir un error claro.", "en": "To distinguish invalid structure and produce a clear error.", "da": "For at skelne ugyldig struktur og give en klar fejl."}}
+      - {id: faster, text: {"es": "Solo para acelerar el programa.", "en": "Only to make the program faster.", "da": "Kun for at gøre programmet hurtigere."}}
+      - {id: mutate, text: {"es": "Para que `split` pueda modificar el texto.", "en": "So `split` can mutate the text.", "da": "Så `split` kan mutere teksten."}}
     correct_option_ids: [explicit]
-    explanation: {es: El parser debe expresar su contrato y no depender de un `ValueError` ambiguo., en: The parser should express its contract rather than rely on an ambiguous `ValueError`., da: Parseren bør udtrykke sin kontrakt frem for at stole på en tvetydig `ValueError`.}
+    explanation: {"es": "El parser debe expresar su contrato y no depender de un `ValueError` ambiguo.", "en": "The parser should express its contract rather than rely on an ambiguous `ValueError`.", "da": "Parseren bør udtrykke sin kontrakt frem for at stole på en tvetydig `ValueError`."}
     linked_objectives: [m05.o6, m05.o8]
 
   - id: dm857.m05.q08
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué hace `separator.join(parts)`?, en: What does `separator.join(parts)` do?, da: Hvad gør `separator.join(parts)`?}
+    prompt: {"es": "¿Qué hace `separator.join(parts)`?", "en": "What does `separator.join(parts)` do?", "da": "Hvad gør `separator.join(parts)`?"}
     options:
-      - {id: between, text: {es: Coloca el separador entre las cadenas de `parts`., en: It places the separator between the strings in `parts`., da: Den placerer separatoren mellem strengene i `parts`.}}
-      - {id: split, text: {es: Divide `separator` usando `parts`., en: It splits `separator` using `parts`., da: Den opdeler `separator` med `parts`.}}
-      - {id: append, text: {es: Añade el separador solo al final., en: It appends the separator only at the end., da: Den tilføjer kun separatoren til sidst.}}
+      - {id: between, text: {"es": "Coloca el separador entre las cadenas de `parts`.", "en": "It places the separator between the strings in `parts`.", "da": "Den placerer separatoren mellem strengene i `parts`."}}
+      - {id: split, text: {"es": "Divide `separator` usando `parts`.", "en": "It splits `separator` using `parts`.", "da": "Den opdeler `separator` med `parts`."}}
+      - {id: append, text: {"es": "Añade el separador solo al final.", "en": "It appends the separator only at the end.", "da": "Den tilføjer kun separatoren til sidst."}}
     correct_option_ids: [between]
-    explanation: {es: Todos los elementos deben ser cadenas., en: All elements must be strings., da: Alle elementer skal være strenge.}
+    explanation: {"es": "Todos los elementos deben ser cadenas.", "en": "All elements must be strings.", "da": "Alle elementer skal være strenge."}
     linked_objectives: [m05.o6]
 
   - id: dm857.m05.q09
     activity_type: true_false
     difficulty: advanced
-    prompt: {es: `casefold` y normalización Unicode NFC resuelven exactamente el mismo problema., en: `casefold` and Unicode NFC normalization solve exactly the same problem., da: `casefold` og Unicode NFC-normalisering løser præcis samme problem.}
+    prompt: {"es": "`casefold` y normalización Unicode NFC resuelven exactamente el mismo problema.", "en": "`casefold` and Unicode NFC normalization solve exactly the same problem.", "da": "`casefold` og Unicode NFC-normalisering løser præcis samme problem."}
     correct_answer: false
-    explanation: {es: `casefold` trata diferencias de caja; NFC trata formas de composición Unicode., en: `casefold` addresses case; NFC addresses Unicode composition forms., da: `casefold` behandler store/små bogstaver; NFC behandler Unicode-komposition.}
+    explanation: {"es": "`casefold` trata diferencias de caja; NFC trata formas de composición Unicode.", "en": "`casefold` addresses case; NFC addresses Unicode composition forms.", "da": "`casefold` behandler store/små bogstaver; NFC behandler Unicode-komposition."}
     linked_objectives: [m05.o7]
 
   - id: dm857.m05.q10
     activity_type: multiple_choice
     difficulty: advanced
-    prompt: {es: ¿Cuál es el mejor criterio para una normalización textual?, en: What is the best criterion for text normalization?, da: Hvad er det bedste kriterium for tekstnormalisering?}
+    prompt: {"es": "¿Cuál es el mejor criterio para una normalización textual?", "en": "What is the best criterion for text normalization?", "da": "Hvad er det bedste kriterium for tekstnormalisering?"}
     options:
-      - {id: purpose, text: {es: La equivalencia requerida por el propósito y el contrato., en: The equivalence required by purpose and contract., da: Den ækvivalens som formål og kontrakt kræver.}}
-      - {id: lowercase_all, text: {es: Convertir siempre todo a minúsculas., en: Always lowercase everything., da: Altid at konvertere alt til små bogstaver.}}
-      - {id: shortest, text: {es: Elegir siempre la cadena más corta., en: Always choose the shortest string., da: Altid at vælge den korteste streng.}}
+      - {id: purpose, text: {"es": "La equivalencia requerida por el propósito y el contrato.", "en": "The equivalence required by purpose and contract.", "da": "Den ækvivalens som formål og kontrakt kræver."}}
+      - {id: lowercase_all, text: {"es": "Convertir siempre todo a minúsculas.", "en": "Always lowercase everything.", "da": "Altid at konvertere alt til små bogstaver."}}
+      - {id: shortest, text: {"es": "Elegir siempre la cadena más corta.", "en": "Always choose the shortest string.", "da": "Altid at vælge den korteste streng."}}
     correct_option_ids: [purpose]
-    explanation: {es: La normalización solo es correcta respecto a una equivalencia documentada., en: Normalization is correct only relative to a documented equivalence rule., da: Normalisering er kun korrekt i forhold til en dokumenteret ækvivalensregel.}
+    explanation: {"es": "La normalización solo es correcta respecto a una equivalencia documentada.", "en": "Normalization is correct only relative to a documented equivalence rule.", "da": "Normalisering er kun korrekt i forhold til en dokumenteret ækvivalensregel."}
     linked_objectives: [m05.o5, m05.o7]
 
 assessment_items:
@@ -642,9 +642,9 @@ assessment_items:
     activity_type: oral_explanation
     difficulty: advanced
     prompt:
-      es: Explica y defiende una política de equivalencia textual para etiquetas humanas y otra para identificadores científicos.
-      en: Explain and defend one text-equivalence policy for human labels and another for scientific identifiers.
-      da: Forklar og forsvar én tekstlig ækvivalenspolitik for menneskelige etiketter og en anden for videnskabelige identifikatorer.
+      es: "Explica y defiende una política de equivalencia textual para etiquetas humanas y otra para identificadores científicos."
+      en: "Explain and defend one text-equivalence policy for human labels and another for scientific identifiers."
+      da: "Forklar og forsvar én tekstlig ækvivalenspolitik for menneskelige etiketter og en anden for videnskabelige identifikatorer."
     accepted_answer_elements:
       - human labels may allow whitespace normalization and case folding
       - scientific identifiers may require exact case and punctuation preservation
@@ -664,44 +664,44 @@ flashcards:
 
 glossary:
   - id: term.string
-    term: {es: cadena, en: string, da: streng}
-    definition: {es: Secuencia inmutable de caracteres Unicode., en: Immutable sequence of Unicode characters., da: Uforanderlig sekvens af Unicode-tegn.}
+    term: {"es": "cadena", "en": "string", "da": "streng"}
+    definition: {"es": "Secuencia inmutable de caracteres Unicode.", "en": "Immutable sequence of Unicode characters.", "da": "Uforanderlig sekvens af Unicode-tegn."}
     related_terms: [term.index, term.slice]
   - id: term.index
-    term: {es: índice, en: index, da: indeks}
-    definition: {es: Posición entera utilizada para acceder a un elemento., en: Integer position used to access an element., da: Heltalsposition brugt til at tilgå et element.}
+    term: {"es": "índice", "en": "index", "da": "indeks"}
+    definition: {"es": "Posición entera utilizada para acceder a un elemento.", "en": "Integer position used to access an element.", "da": "Heltalsposition brugt til at tilgå et element."}
     related_terms: [term.slice]
   - id: term.slice
-    term: {es: slice, en: slice, da: slice}
-    definition: {es: Selección de una subsecuencia mediante inicio, fin exclusivo y paso., en: Selection of a subsequence using start, exclusive stop, and step., da: Valg af delsekvens med start, eksklusivt stop og step.}
+    term: {"es": "slice", "en": "slice", "da": "slice"}
+    definition: {"es": "Selección de una subsecuencia mediante inicio, fin exclusivo y paso.", "en": "Selection of a subsequence using start, exclusive stop, and step.", "da": "Valg af delsekvens med start, eksklusivt stop og step."}
     related_terms: [term.index]
   - id: term.immutability
-    term: {es: inmutabilidad, en: immutability, da: uforanderlighed}
-    definition: {es: Propiedad que impide cambiar el contenido de un objeto existente., en: Property preventing changes to an existing object's contents., da: Egenskab der forhindrer ændring af et eksisterende objekts indhold.}
+    term: {"es": "inmutabilidad", "en": "immutability", "da": "uforanderlighed"}
+    definition: {"es": "Propiedad que impide cambiar el contenido de un objeto existente.", "en": "Property preventing changes to an existing object's contents.", "da": "Egenskab der forhindrer ændring af et eksisterende objekts indhold."}
     related_terms: [term.string]
   - id: term.normalization
-    term: {es: normalización, en: normalization, da: normalisering}
-    definition: {es: Transformación a una representación canónica definida por una regla de equivalencia., en: Transformation to a canonical representation defined by an equivalence rule., da: Transformation til en kanonisk repræsentation defineret af en ækvivalensregel.}
+    term: {"es": "normalización", "en": "normalization", "da": "normalisering"}
+    definition: {"es": "Transformación a una representación canónica definida por una regla de equivalencia.", "en": "Transformation to a canonical representation defined by an equivalence rule.", "da": "Transformation til en kanonisk repræsentation defineret af en ækvivalensregel."}
     related_terms: [term.casefold, term.unicode]
   - id: term.casefold
-    term: {es: case folding, en: case folding, da: case folding}
-    definition: {es: Transformación Unicode para comparación sin sensibilidad a caja., en: Unicode transformation for caseless comparison., da: Unicode-transformation til sammenligning uden hensyn til store/små bogstaver.}
+    term: {"es": "case folding", "en": "case folding", "da": "case folding"}
+    definition: {"es": "Transformación Unicode para comparación sin sensibilidad a caja.", "en": "Unicode transformation for caseless comparison.", "da": "Unicode-transformation til sammenligning uden hensyn til store/små bogstaver."}
     related_terms: [term.normalization]
   - id: term.parser
-    term: {es: parser, en: parser, da: parser}
-    definition: {es: Procedimiento que convierte texto estructurado en datos con significado., en: Procedure converting structured text into meaningful data., da: Procedure der konverterer struktureret tekst til meningsfulde data.}
+    term: {"es": "parser", "en": "parser", "da": "parser"}
+    definition: {"es": "Procedimiento que convierte texto estructurado en datos con significado.", "en": "Procedure converting structured text into meaningful data.", "da": "Procedure der konverterer struktureret tekst til meningsfulde data."}
     related_terms: [term.delimiter, term.validation]
   - id: term.delimiter
-    term: {es: delimitador, en: delimiter, da: separator}
-    definition: {es: Secuencia que marca fronteras entre campos., en: Sequence marking boundaries between fields., da: Sekvens der markerer grænser mellem felter.}
+    term: {"es": "delimitador", "en": "delimiter", "da": "separator"}
+    definition: {"es": "Secuencia que marca fronteras entre campos.", "en": "Sequence marking boundaries between fields.", "da": "Sekvens der markerer grænser mellem felter."}
     related_terms: [term.parser]
   - id: term.unicode
-    term: {es: Unicode, en: Unicode, da: Unicode}
-    definition: {es: Estándar para representar texto de múltiples sistemas de escritura., en: Standard for representing text from many writing systems., da: Standard til repræsentation af tekst fra mange skriftsystemer.}
+    term: {"es": "Unicode", "en": "Unicode", "da": "Unicode"}
+    definition: {"es": "Estándar para representar texto de múltiples sistemas de escritura.", "en": "Standard for representing text from many writing systems.", "da": "Standard til repræsentation af tekst fra mange skriftsystemer."}
     related_terms: [term.normalization]
   - id: term.round_trip
-    term: {es: round-trip, en: round trip, da: round-trip}
-    definition: {es: Capacidad de formatear y volver a analizar sin perder información necesaria., en: Ability to format and parse again without losing required information., da: Evne til at formatere og parse igen uden at miste nødvendig information.}
+    term: {"es": "round-trip", "en": "round trip", "da": "round-trip"}
+    definition: {"es": "Capacidad de formatear y volver a analizar sin perder información necesaria.", "en": "Ability to format and parse again without losing required information.", "da": "Evne til at formatere og parse igen uden at miste nødvendig information."}
     related_terms: [term.parser]
 
 hidden_guided_support:

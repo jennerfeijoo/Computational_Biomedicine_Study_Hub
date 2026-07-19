@@ -10,167 +10,167 @@ cards:
     mode: conceptual
     card_type: definition
     difficulty: foundational
-    front: {es: ¿Qué diferencia un módulo de un paquete en Python?, en: What distinguishes a Python module from a package?, da: Hvad adskiller et Python-modul fra en pakke?}
-    back: {es: Un módulo es una unidad importable, normalmente un archivo; un paquete organiza varios módulos bajo un espacio de nombres., en: A module is an importable unit, commonly one file; a package organizes modules under a namespace., da: Et modul er en importérbar enhed, ofte én fil; en pakke organiserer moduler under et namespace.}
+    front: {"es": "¿Qué diferencia un módulo de un paquete en Python?", "en": "What distinguishes a Python module from a package?", "da": "Hvad adskiller et Python-modul fra en pakke?"}
+    back: {"es": "Un módulo es una unidad importable, normalmente un archivo; un paquete organiza varios módulos bajo un espacio de nombres.", "en": "A module is an importable unit, commonly one file; a package organizes modules under a namespace.", "da": "Et modul er en importérbar enhed, ofte én fil; en pakke organiserer moduler under et namespace."}
     linked_objectives: [m13.o1]
   - id: dm857.m13.f02
     mode: conceptual
     card_type: import_design
     difficulty: foundational
-    front: {es: ¿Por qué evitar `from package import *`?, en: Why avoid `from package import *`?, da: Hvorfor undgå `from package import *`?}
-    back: {es: Oculta la procedencia de nombres, aumenta colisiones y dificulta saber qué API usa el programa., en: It obscures name provenance, increases collisions, and makes the used API harder to identify., da: Det skjuler navnenes oprindelse, øger kollisioner og gør den anvendte API uklar.}
+    front: {"es": "¿Por qué evitar `from package import *`?", "en": "Why avoid `from package import *`?", "da": "Hvorfor undgå `from package import *`?"}
+    back: {"es": "Oculta la procedencia de nombres, aumenta colisiones y dificulta saber qué API usa el programa.", "en": "It obscures name provenance, increases collisions, and makes the used API harder to identify.", "da": "Det skjuler navnenes oprindelse, øger kollisioner og gør den anvendte API uklar."}
     linked_objectives: [m13.o1]
   - id: dm857.m13.f03
     mode: conceptual
     card_type: api_contract
     difficulty: intermediate
-    front: {es: Elementos que deben revisarse antes de usar una función de biblioteca., en: What should be checked before using a library function?, da: Hvad bør kontrolleres før brug af en biblioteksfunktion?}
-    back: {es: Firma, tipos, shape, unidades, retorno, errores, mutación, valores predeterminados, versión y si pertenece a la API pública., en: Signature, types, shape, units, return, errors, mutation, defaults, version, and whether it is public API., da: Signatur, typer, shape, enheder, retur, fejl, mutation, standarder, version og offentlig API-status.}
+    front: {"es": "Elementos que deben revisarse antes de usar una función de biblioteca.", "en": "What should be checked before using a library function?", "da": "Hvad bør kontrolleres før brug af en biblioteksfunktion?"}
+    back: {"es": "Firma, tipos, shape, unidades, retorno, errores, mutación, valores predeterminados, versión y si pertenece a la API pública.", "en": "Signature, types, shape, units, return, errors, mutation, defaults, version, and whether it is public API.", "da": "Signatur, typer, shape, enheder, retur, fejl, mutation, standarder, version og offentlig API-status."}
     linked_objectives: [m13.o1, m13.o8]
   - id: dm857.m13.f04
     mode: practical
     card_type: reproducibility
     difficulty: intermediate
-    front: {es: ¿Qué aísla un entorno virtual?, en: What does a virtual environment isolate?, da: Hvad isolerer et virtuelt miljø?}
-    back: {es: El intérprete y las dependencias del proyecto respecto de otros proyectos y del entorno global., en: The project's interpreter and dependencies from other projects and the global environment., da: Projektets fortolker og afhængigheder fra andre projekter og det globale miljø.}
+    front: {"es": "¿Qué aísla un entorno virtual?", "en": "What does a virtual environment isolate?", "da": "Hvad isolerer et virtuelt miljø?"}
+    back: {"es": "El intérprete y las dependencias del proyecto respecto de otros proyectos y del entorno global.", "en": "The project's interpreter and dependencies from other projects and the global environment.", "da": "Projektets fortolker og afhængigheder fra andre projekter og det globale miljø."}
     linked_objectives: [m13.o2]
   - id: dm857.m13.f05
     mode: conceptual
     card_type: reproducibility
     difficulty: advanced
-    front: {es: ¿Por qué una semilla no garantiza determinismo total?, en: Why does a seed not guarantee complete determinism?, da: Hvorfor garanterer et seed ikke fuld determinisme?}
-    back: {es: Bibliotecas, algoritmos paralelos, hardware, versiones y fuentes aleatorias distintas pueden seguir produciendo variación., en: Libraries, parallel algorithms, hardware, versions, and separate random sources may still vary., da: Biblioteker, parallelle algoritmer, hardware, versioner og andre tilfældighedskilder kan stadig variere.}
+    front: {"es": "¿Por qué una semilla no garantiza determinismo total?", "en": "Why does a seed not guarantee complete determinism?", "da": "Hvorfor garanterer et seed ikke fuld determinisme?"}
+    back: {"es": "Bibliotecas, algoritmos paralelos, hardware, versiones y fuentes aleatorias distintas pueden seguir produciendo variación.", "en": "Libraries, parallel algorithms, hardware, versions, and separate random sources may still vary.", "da": "Biblioteker, parallelle algoritmer, hardware, versioner og andre tilfældighedskilder kan stadig variere."}
     linked_objectives: [m13.o2]
   - id: dm857.m13.f06
     mode: integrative
     card_type: manifest
     difficulty: advanced
-    front: {es: Componentes mínimos de un manifiesto reproducible., en: Minimal components of a reproducibility manifest., da: Minimale komponenter i et reproducerbarhedsmanifest.}
-    back: {es: Versión de código, Python y paquetes; identidad/checksum de datos; parámetros; seed; comando; plataforma relevante; timestamp; outputs y validaciones., en: Code, Python, and package versions; data identity/checksum; parameters; seed; command; relevant platform; timestamp; outputs and validations., da: Kode-, Python- og pakkeversioner, dataidentitet, parametre, seed, kommando, platform, tidspunkt, output og kontroller.}
+    front: {"es": "Componentes mínimos de un manifiesto reproducible.", "en": "Minimal components of a reproducibility manifest.", "da": "Minimale komponenter i et reproducerbarhedsmanifest."}
+    back: {"es": "Versión de código, Python y paquetes; identidad/checksum de datos; parámetros; seed; comando; plataforma relevante; timestamp; outputs y validaciones.", "en": "Code, Python, and package versions; data identity/checksum; parameters; seed; command; relevant platform; timestamp; outputs and validations.", "da": "Kode-, Python- og pakkeversioner, dataidentitet, parametre, seed, kommando, platform, tidspunkt, output og kontroller."}
     linked_objectives: [m13.o2, m13.o8]
   - id: dm857.m13.f07
     mode: conceptual
     card_type: ndarray_model
     difficulty: foundational
-    front: {es: ¿Qué describen `shape`, `ndim`, `size` y `dtype`?, en: What do `shape`, `ndim`, `size`, and `dtype` describe?, da: Hvad beskriver `shape`, `ndim`, `size` og `dtype`?}
-    back: {es: Dimensiones, número de dimensiones, total de elementos y representación del tipo de elementos., en: Dimensions, number of dimensions, total element count, and element-type representation., da: Dimensioner, antal dimensioner, samlet antal elementer og elementtypens repræsentation.}
+    front: {"es": "¿Qué describen `shape`, `ndim`, `size` y `dtype`?", "en": "What do `shape`, `ndim`, `size`, and `dtype` describe?", "da": "Hvad beskriver `shape`, `ndim`, `size` og `dtype`?"}
+    back: {"es": "Dimensiones, número de dimensiones, total de elementos y representación del tipo de elementos.", "en": "Dimensions, number of dimensions, total element count, and element-type representation.", "da": "Dimensioner, antal dimensioner, samlet antal elementer og elementtypens repræsentation."}
     linked_objectives: [m13.o3]
   - id: dm857.m13.f08
     mode: practical
     card_type: invariant
     difficulty: foundational
-    front: {es: Invariante de `reshape`., en: Invariant of `reshape`., da: Invariant for `reshape`.}
-    back: {es: Debe conservar el número total de elementos: el producto del nuevo shape debe ser igual a `size`., en: It preserves total element count: the product of the new shape must equal `size`., da: Det samlede antal elementer bevares: produktet af det nye shape skal være lig `size`.}
+    front: {"es": "Invariante de `reshape`.", "en": "Invariant of `reshape`.", "da": "Invariant for `reshape`."}
+    back: {"es": "Debe conservar el número total de elementos: el producto del nuevo shape debe ser igual a `size`.", "en": "It preserves total element count: the product of the new shape must equal `size`.", "da": "Det samlede antal elementer bevares: produktet af det nye shape skal være lig `size`."}
     linked_objectives: [m13.o3]
   - id: dm857.m13.f09
     mode: conceptual
     card_type: comparison
     difficulty: intermediate
-    front: {es: Vista frente a copia en NumPy., en: NumPy view versus copy., da: NumPy-view versus kopi.}
-    back: {es: Una vista puede compartir memoria con el original, por lo que mutarla puede afectarlo; una copia tiene almacenamiento independiente., en: A view may share memory with the original, so mutation may affect it; a copy has independent storage., da: Et view kan dele hukommelse med originalen; en kopi har uafhængig lagring.}
+    front: {"es": "Vista frente a copia en NumPy.", "en": "NumPy view versus copy.", "da": "NumPy-view versus kopi."}
+    back: {"es": "Una vista puede compartir memoria con el original, por lo que mutarla puede afectarlo; una copia tiene almacenamiento independiente.", "en": "A view may share memory with the original, so mutation may affect it; a copy has independent storage.", "da": "Et view kan dele hukommelse med originalen; en kopi har uafhængig lagring."}
     linked_objectives: [m13.o3]
   - id: dm857.m13.f10
     mode: conceptual
     card_type: dtype
     difficulty: intermediate
-    front: {es: Riesgo de crear un array con datos mixtos., en: Risk of creating an array from mixed data., da: Risiko ved at oprette et array fra blandede data.}
-    back: {es: NumPy puede promover el dtype, por ejemplo de números a texto u object, cambiando precisión, rendimiento y semántica., en: NumPy may promote dtype, for example from numbers to strings or object, changing precision, performance, and semantics., da: NumPy kan promovere dtype, fx fra tal til tekst eller object, og ændre præcision, ydelse og semantik.}
+    front: {"es": "Riesgo de crear un array con datos mixtos.", "en": "Risk of creating an array from mixed data.", "da": "Risiko ved at oprette et array fra blandede data."}
+    back: {"es": "NumPy puede promover el dtype, por ejemplo de números a texto u object, cambiando precisión, rendimiento y semántica.", "en": "NumPy may promote dtype, for example from numbers to strings or object, changing precision, performance, and semantics.", "da": "NumPy kan promovere dtype, fx fra tal til tekst eller object, og ændre præcision, ydelse og semantik."}
     linked_objectives: [m13.o3]
   - id: dm857.m13.f11
     mode: conceptual
     card_type: broadcasting_rule
     difficulty: intermediate
-    front: {es: Regla central de broadcasting., en: Core broadcasting rule., da: Central broadcasting-regel.}
-    back: {es: Las dimensiones se alinean desde la derecha; cada par debe ser igual o una de las dimensiones debe valer uno., en: Dimensions align from the right; each pair must match or one dimension must have size one., da: Dimensioner justeres fra højre; hvert par skal matche eller én dimension skal være én.}
+    front: {"es": "Regla central de broadcasting.", "en": "Core broadcasting rule.", "da": "Central broadcasting-regel."}
+    back: {"es": "Las dimensiones se alinean desde la derecha; cada par debe ser igual o una de las dimensiones debe valer uno.", "en": "Dimensions align from the right; each pair must match or one dimension must have size one.", "da": "Dimensioner justeres fra højre; hvert par skal matche eller én dimension skal være én."}
     linked_objectives: [m13.o4]
   - id: dm857.m13.f12
     mode: practical
     card_type: shape_tracing
     difficulty: advanced
-    front: {es: Shape de `(n,1) + (n,)`., en: Shape of `(n,1) + (n,)`., da: Shape for `(n,1) + (n,)`.}
-    back: {es: `(n,n)`. El vector se interpreta como `(1,n)` y ambas dimensiones se expanden. Puede ser válido mecánicamente y erróneo semánticamente., en: `(n,n)`. The vector behaves as `(1,n)`, so both dimensions expand. It may be mechanically valid but semantically wrong., da: `(n,n)`. Vektoren fortolkes som `(1,n)`, så begge dimensioner udvides.}
+    front: {"es": "Shape de `(n,1) + (n,)`.", "en": "Shape of `(n,1) + (n,)`.", "da": "Shape for `(n,1) + (n,)`."}
+    back: {"es": "`(n,n)`. El vector se interpreta como `(1,n)` y ambas dimensiones se expanden. Puede ser válido mecánicamente y erróneo semánticamente.", "en": "`(n,n)`. The vector behaves as `(1,n)`, so both dimensions expand. It may be mechanically valid but semantically wrong.", "da": "`(n,n)`. Vektoren fortolkes som `(1,n)`, så begge dimensioner udvides."}
     linked_objectives: [m13.o4, m13.o8]
   - id: dm857.m13.f13
     mode: conceptual
     card_type: axis_semantics
     difficulty: intermediate
-    front: {es: ¿Qué debe documentarse al usar `axis`?, en: What must be documented when using `axis`?, da: Hvad skal dokumenteres ved brug af `axis`?}
-    back: {es: Qué representa cada dimensión y cuál se reduce. En una matriz muestras × variables, `axis=0` resume entre muestras por variable., en: What each dimension represents and which one is reduced. For samples × variables, `axis=0` summarizes across samples per variable., da: Hvad hver dimension repræsenterer, og hvilken der reduceres. For prøver × variable opsummerer `axis=0` over prøver.}
+    front: {"es": "¿Qué debe documentarse al usar `axis`?", "en": "What must be documented when using `axis`?", "da": "Hvad skal dokumenteres ved brug af `axis`?"}
+    back: {"es": "Qué representa cada dimensión y cuál se reduce. En una matriz muestras × variables, `axis=0` resume entre muestras por variable.", "en": "What each dimension represents and which one is reduced. For samples × variables, `axis=0` summarizes across samples per variable.", "da": "Hvad hver dimension repræsenterer, og hvilken der reduceres. For prøver × variable opsummerer `axis=0` over prøver."}
     linked_objectives: [m13.o3, m13.o4]
   - id: dm857.m13.f14
     mode: conceptual
     card_type: pandas_model
     difficulty: foundational
-    front: {es: ¿Qué diferencia una Series de un DataFrame?, en: What distinguishes a Series from a DataFrame?, da: Hvad adskiller en Series fra et DataFrame?}
-    back: {es: Una Series es un vector etiquetado; un DataFrame es una tabla de columnas etiquetadas que comparten un índice., en: A Series is a labeled vector; a DataFrame is a table of labeled columns sharing an index., da: En Series er en etiketteret vektor; et DataFrame er en tabel af kolonner med fælles indeks.}
+    front: {"es": "¿Qué diferencia una Series de un DataFrame?", "en": "What distinguishes a Series from a DataFrame?", "da": "Hvad adskiller en Series fra et DataFrame?"}
+    back: {"es": "Una Series es un vector etiquetado; un DataFrame es una tabla de columnas etiquetadas que comparten un índice.", "en": "A Series is a labeled vector; a DataFrame is a table of labeled columns sharing an index.", "da": "En Series er en etiketteret vektor; et DataFrame er en tabel af kolonner med fælles indeks."}
     linked_objectives: [m13.o5]
   - id: dm857.m13.f15
     mode: conceptual
     card_type: comparison
     difficulty: foundational
-    front: {es: `loc` frente a `iloc`., en: `loc` versus `iloc`., da: `loc` versus `iloc`.}
-    back: {es: `loc` selecciona por etiquetas; `iloc` por posiciones enteras., en: `loc` selects by labels; `iloc` by integer positions., da: `loc` vælger efter etiketter; `iloc` efter heltalspositioner.}
+    front: {"es": "`loc` frente a `iloc`.", "en": "`loc` versus `iloc`.", "da": "`loc` versus `iloc`."}
+    back: {"es": "`loc` selecciona por etiquetas; `iloc` por posiciones enteras.", "en": "`loc` selects by labels; `iloc` by integer positions.", "da": "`loc` vælger efter etiketter; `iloc` efter heltalspositioner."}
     linked_objectives: [m13.o5]
   - id: dm857.m13.f16
     mode: practical
     card_type: alignment
     difficulty: advanced
-    front: {es: ¿Cómo puede la alineación por índice introducir NaN?, en: How can index alignment introduce NaN?, da: Hvordan kan indeksalignment indføre NaN?}
-    back: {es: Al asignar u operar Series con etiquetas diferentes, pandas empareja por etiqueta; las etiquetas sin pareja producen ausentes., en: When assigning or operating on Series with different labels, pandas matches by label; unmatched labels become missing., da: Ved operationer med forskellige etiketter matcher pandas efter etiket; umatchede etiketter bliver manglende.}
+    front: {"es": "¿Cómo puede la alineación por índice introducir NaN?", "en": "How can index alignment introduce NaN?", "da": "Hvordan kan indeksalignment indføre NaN?"}
+    back: {"es": "Al asignar u operar Series con etiquetas diferentes, pandas empareja por etiqueta; las etiquetas sin pareja producen ausentes.", "en": "When assigning or operating on Series with different labels, pandas matches by label; unmatched labels become missing.", "da": "Ved operationer med forskellige etiketter matcher pandas efter etiket; umatchede etiketter bliver manglende."}
     linked_objectives: [m13.o5, m13.o6]
   - id: dm857.m13.f17
     mode: conceptual
     card_type: missing_data
     difficulty: advanced
-    front: {es: ¿Por qué eliminar todos los valores ausentes no es una política neutral?, en: Why is dropping all missing values not a neutral policy?, da: Hvorfor er fjernelse af alle manglende værdier ikke en neutral politik?}
-    back: {es: Cambia tamaño y composición de la muestra y puede introducir sesgo. La decisión depende del mecanismo de ausencia, objetivo y análisis de sensibilidad., en: It changes sample size and composition and may introduce bias. The decision depends on missingness mechanism, purpose, and sensitivity analysis., da: Det ændrer stikprøvestørrelse og sammensætning og kan skabe bias; beslutningen afhænger af mekanisme og formål.}
+    front: {"es": "¿Por qué eliminar todos los valores ausentes no es una política neutral?", "en": "Why is dropping all missing values not a neutral policy?", "da": "Hvorfor er fjernelse af alle manglende værdier ikke en neutral politik?"}
+    back: {"es": "Cambia tamaño y composición de la muestra y puede introducir sesgo. La decisión depende del mecanismo de ausencia, objetivo y análisis de sensibilidad.", "en": "It changes sample size and composition and may introduce bias. The decision depends on missingness mechanism, purpose, and sensitivity analysis.", "da": "Det ændrer stikprøvestørrelse og sammensætning og kan skabe bias; beslutningen afhænger af mekanisme og formål."}
     linked_objectives: [m13.o6]
   - id: dm857.m13.f18
     mode: practical
     card_type: validation
     difficulty: advanced
-    front: {es: Controles antes y después de un join., en: Checks before and after a join., da: Kontroller før og efter et join.}
-    back: {es: Antes: claves, tipos, unicidad y cardinalidad esperada. Después: número de filas, duplicación, ausentes introducidos, grupos perdidos y cobertura de claves., en: Before: keys, types, uniqueness, expected cardinality. After: row count, duplication, introduced missingness, lost groups, and key coverage., da: Før: nøgler, typer, entydighed og forventet kardinalitet. Efter: rækkeantal, dubletter, manglende data og nøglekvalitet.}
+    front: {"es": "Controles antes y después de un join.", "en": "Checks before and after a join.", "da": "Kontroller før og efter et join."}
+    back: {"es": "Antes: claves, tipos, unicidad y cardinalidad esperada. Después: número de filas, duplicación, ausentes introducidos, grupos perdidos y cobertura de claves.", "en": "Before: keys, types, uniqueness, expected cardinality. After: row count, duplication, introduced missingness, lost groups, and key coverage.", "da": "Før: nøgler, typer, entydighed og forventet kardinalitet. Efter: rækkeantal, dubletter, manglende data og nøglekvalitet."}
     linked_objectives: [m13.o5, m13.o6, m13.o8]
   - id: dm857.m13.f19
     mode: conceptual
     card_type: visualization
     difficulty: intermediate
-    front: {es: Riesgo de truncar un eje en una gráfica de barras., en: Risk of truncating an axis in a bar chart., da: Risiko ved at afkorte en akse i et søjlediagram.}
-    back: {es: Puede exagerar visualmente diferencias relativas pequeñas. Debe justificarse, etiquetarse y, cuando sea pertinente, mostrarse la línea base., en: It may visually exaggerate small relative differences. It should be justified, labeled, and show the baseline when appropriate., da: Det kan visuelt overdrive små forskelle. Det skal begrundes og tydeligt mærkes.}
+    front: {"es": "Riesgo de truncar un eje en una gráfica de barras.", "en": "Risk of truncating an axis in a bar chart.", "da": "Risiko ved at afkorte en akse i et søjlediagram."}
+    back: {"es": "Puede exagerar visualmente diferencias relativas pequeñas. Debe justificarse, etiquetarse y, cuando sea pertinente, mostrarse la línea base.", "en": "It may visually exaggerate small relative differences. It should be justified, labeled, and show the baseline when appropriate.", "da": "Det kan visuelt overdrive små forskelle. Det skal begrundes og tydeligt mærkes."}
     linked_objectives: [m13.o7]
   - id: dm857.m13.f20
     mode: conceptual
     card_type: visualization
     difficulty: advanced
-    front: {es: ¿Qué información mínima debe acompañar una figura científica?, en: What minimum information should accompany a scientific figure?, da: Hvilken minimumsinformation bør ledsage en videnskabelig figur?}
-    back: {es: Variables y unidades, escala y transformaciones, definición de grupos, n, resumen/intervalo mostrado, tratamiento de ausentes y procedencia de datos., en: Variables and units, scale and transformations, group definitions, n, displayed summary/interval, missing-data handling, and data provenance., da: Variable og enheder, skala og transformationer, grupper, n, viste resuméer/intervaller, manglende-data-politik og datakilde.}
+    front: {"es": "¿Qué información mínima debe acompañar una figura científica?", "en": "What minimum information should accompany a scientific figure?", "da": "Hvilken minimumsinformation bør ledsage en videnskabelig figur?"}
+    back: {"es": "Variables y unidades, escala y transformaciones, definición de grupos, n, resumen/intervalo mostrado, tratamiento de ausentes y procedencia de datos.", "en": "Variables and units, scale and transformations, group definitions, n, displayed summary/interval, missing-data handling, and data provenance.", "da": "Variable og enheder, skala og transformationer, grupper, n, viste resuméer/intervaller, manglende-data-politik og datakilde."}
     linked_objectives: [m13.o7]
   - id: dm857.m13.f21
     mode: practical
     card_type: floating_point
     difficulty: intermediate
-    front: {es: ¿Cuándo usar `allclose` en lugar de igualdad exacta?, en: When should `allclose` be used instead of exact equality?, da: Hvornår bør `allclose` bruges i stedet for eksakt lighed?}
-    back: {es: Para resultados de punto flotante afectados por redondeo, usando tolerancias justificadas por escala y algoritmo., en: For floating-point results affected by rounding, with tolerances justified by scale and algorithm., da: Til floating-point-resultater påvirket af afrunding, med tolerancer begrundet af skala og algoritme.}
+    front: {"es": "¿Cuándo usar `allclose` en lugar de igualdad exacta?", "en": "When should `allclose` be used instead of exact equality?", "da": "Hvornår bør `allclose` bruges i stedet for eksakt lighed?"}
+    back: {"es": "Para resultados de punto flotante afectados por redondeo, usando tolerancias justificadas por escala y algoritmo.", "en": "For floating-point results affected by rounding, with tolerances justified by scale and algorithm.", "da": "Til floating-point-resultater påvirket af afrunding, med tolerancer begrundet af skala og algoritme."}
     linked_objectives: [m13.o8]
   - id: dm857.m13.f22
     mode: integrative
     card_type: validation_strategy
     difficulty: advanced
-    front: {es: ¿Cómo validar una vectorización nueva?, en: How should a new vectorization be validated?, da: Hvordan valideres en ny vektorisering?}
-    back: {es: Compararla con una implementación simple de referencia en casos pequeños, verificar shapes, dtype, unidades, rangos e identidades, y probar entradas frontera y aleatorias controladas., en: Compare it with a simple reference on small cases; check shapes, dtype, units, ranges, identities, and controlled boundary/random inputs., da: Sammenlign med en simpel reference på små cases og kontrollér shape, dtype, enheder, intervaller og grænser.}
+    front: {"es": "¿Cómo validar una vectorización nueva?", "en": "How should a new vectorization be validated?", "da": "Hvordan valideres en ny vektorisering?"}
+    back: {"es": "Compararla con una implementación simple de referencia en casos pequeños, verificar shapes, dtype, unidades, rangos e identidades, y probar entradas frontera y aleatorias controladas.", "en": "Compare it with a simple reference on small cases; check shapes, dtype, units, ranges, identities, and controlled boundary/random inputs.", "da": "Sammenlign med en simpel reference på små cases og kontrollér shape, dtype, enheder, intervaller og grænser."}
     linked_objectives: [m13.o4, m13.o8]
   - id: dm857.m13.f23
     mode: integrative
     card_type: debugging
     difficulty: advanced
-    front: {es: Un resultado plausible tiene el shape esperado. ¿Qué falta verificar?, en: A plausible result has the expected shape. What else must be checked?, da: Et plausibelt resultat har forventet shape. Hvad mangler at blive kontrolleret?}
-    back: {es: Dtype, orientación, unidades, rangos, valores finitos, índice/cardinalidad, conservación de totales e igualdad aproximada con una referencia., en: Dtype, orientation, units, ranges, finiteness, index/cardinality, conserved totals, and approximate agreement with a reference., da: Dtype, orientering, enheder, intervaller, endelighed, indeks/kardinalitet, bevarede totaler og referenceoverensstemmelse.}
+    front: {"es": "Un resultado plausible tiene el shape esperado. ¿Qué falta verificar?", "en": "A plausible result has the expected shape. What else must be checked?", "da": "Et plausibelt resultat har forventet shape. Hvad mangler at blive kontrolleret?"}
+    back: {"es": "Dtype, orientación, unidades, rangos, valores finitos, índice/cardinalidad, conservación de totales e igualdad aproximada con una referencia.", "en": "Dtype, orientation, units, ranges, finiteness, index/cardinality, conserved totals, and approximate agreement with a reference.", "da": "Dtype, orientering, enheder, intervaller, endelighed, indeks/kardinalitet, bevarede totaler og referenceoverensstemmelse."}
     linked_objectives: [m13.o8]
   - id: dm857.m13.f24
     mode: integrative
     card_type: synthesis
     difficulty: advanced
-    front: {es: Flujo mínimo para usar una biblioteca científica de forma verificable., en: Minimal workflow for verifiable scientific-library use., da: Minimal arbejdsgang til verificerbar brug af et videnskabeligt bibliotek.}
-    back: {es: Leer API y versión; crear ejemplo mínimo; fijar entorno; documentar shape/dtype/unidades; implementar; comparar con referencia; validar estructura y semántica; registrar datos, parámetros y outputs; reproducir en entorno limpio., en: Read API and version; build a minimal example; fix environment; document shape/dtype/units; implement; compare with a reference; validate structure and semantics; record data, parameters, and outputs; reproduce cleanly., da: Læs API og version, lav minimalt eksempel, fastlæg miljø, dokumentér shape/dtype/enheder, implementér, valider og reproducer rent.}
+    front: {"es": "Flujo mínimo para usar una biblioteca científica de forma verificable.", "en": "Minimal workflow for verifiable scientific-library use.", "da": "Minimal arbejdsgang til verificerbar brug af et videnskabeligt bibliotek."}
+    back: {"es": "Leer API y versión; crear ejemplo mínimo; fijar entorno; documentar shape/dtype/unidades; implementar; comparar con referencia; validar estructura y semántica; registrar datos, parámetros y outputs; reproducir en entorno limpio.", "en": "Read API and version; build a minimal example; fix environment; document shape/dtype/units; implement; compare with a reference; validate structure and semantics; record data, parameters, and outputs; reproduce cleanly.", "da": "Læs API og version, lav minimalt eksempel, fastlæg miljø, dokumentér shape/dtype/enheder, implementér, valider og reproducer rent."}
     linked_objectives: [m13.o1, m13.o2, m13.o3, m13.o4, m13.o5, m13.o6, m13.o7, m13.o8]

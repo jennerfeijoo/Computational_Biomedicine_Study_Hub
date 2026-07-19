@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Archivos, fronteras de datos, validación y excepciones
-    en: Files, data boundaries, validation, and exceptions
-    da: Filer, datagrænser, validering og undtagelser
+    es: "Archivos, fronteras de datos, validación y excepciones"
+    en: "Files, data boundaries, validation, and exceptions"
+    da: "Filer, datagrænser, validering og undtagelser"
   summary:
     es: >-
       Manejo reproducible de rutas y archivos de texto mediante `pathlib`, modos de apertura, codificación,
@@ -32,66 +32,66 @@ objectives:
   - id: m08.o1
     bloom_level: apply
     statement:
-      es: Construir y manipular rutas portables con `pathlib.Path`.
-      en: Construct and manipulate portable paths with `pathlib.Path`.
-      da: Konstruere og håndtere portable stier med `pathlib.Path`.
+      es: "Construir y manipular rutas portables con `pathlib.Path`."
+      en: "Construct and manipulate portable paths with `pathlib.Path`."
+      da: "Konstruere og håndtere portable stier med `pathlib.Path`."
     evidence: path_design
   - id: m08.o2
     bloom_level: apply
     statement:
-      es: Abrir archivos con modo, codificación y cierre coherentes con el contrato.
-      en: Open files with mode, encoding, and closure consistent with the contract.
-      da: Åbne filer med tilstand, kodning og lukning i overensstemmelse med kontrakten.
+      es: "Abrir archivos con modo, codificación y cierre coherentes con el contrato."
+      en: "Open files with mode, encoding, and closure consistent with the contract."
+      da: "Åbne filer med tilstand, kodning og lukning i overensstemmelse med kontrakten."
     evidence: file_opening_design
   - id: m08.o3
     bloom_level: evaluate
     statement:
-      es: Elegir entre lectura completa, lectura por líneas y herramientas CSV según tamaño y formato.
-      en: Choose among whole-file reading, line iteration, and CSV tools according to size and format.
-      da: Vælge mellem helfilslæsning, linjeiteration og CSV-værktøjer efter størrelse og format.
+      es: "Elegir entre lectura completa, lectura por líneas y herramientas CSV según tamaño y formato."
+      en: "Choose among whole-file reading, line iteration, and CSV tools according to size and format."
+      da: "Vælge mellem helfilslæsning, linjeiteration og CSV-værktøjer efter størrelse og format."
     evidence: reading_strategy_justification
   - id: m08.o4
     bloom_level: create
     statement:
-      es: Diseñar escritura reproducible separando cálculo, representación y persistencia.
-      en: Design reproducible writing by separating computation, representation, and persistence.
-      da: Designe reproducerbar skrivning ved at adskille beregning, repræsentation og persistens.
+      es: "Diseñar escritura reproducible separando cálculo, representación y persistencia."
+      en: "Design reproducible writing by separating computation, representation, and persistence."
+      da: "Designe reproducerbar skrivning ved at adskille beregning, repræsentation og persistens."
     evidence: output_pipeline
   - id: m08.o5
     bloom_level: analyze
     statement:
-      es: Distinguir validación estructural, conversión de tipos y validación semántica.
-      en: Distinguish structural validation, type conversion, and semantic validation.
-      da: Skelne mellem strukturel validering, typekonvertering og semantisk validering.
+      es: "Distinguir validación estructural, conversión de tipos y validación semántica."
+      en: "Distinguish structural validation, type conversion, and semantic validation."
+      da: "Skelne mellem strukturel validering, typekonvertering og semantisk validering."
     evidence: validation_layer_analysis
   - id: m08.o6
     bloom_level: apply
     statement:
-      es: Capturar únicamente excepciones específicas que el programa pueda manejar.
-      en: Catch only specific exceptions that the program can handle.
-      da: Fange kun specifikke undtagelser, som programmet kan håndtere.
+      es: "Capturar únicamente excepciones específicas que el programa pueda manejar."
+      en: "Catch only specific exceptions that the program can handle."
+      da: "Fange kun specifikke undtagelser, som programmet kan håndtere."
     evidence: exception_handler_design
   - id: m08.o7
     bloom_level: analyze
     statement:
-      es: Razonar sobre `try`, `except`, `else`, `finally`, `raise` y encadenamiento de excepciones.
-      en: Reason about `try`, `except`, `else`, `finally`, `raise`, and exception chaining.
-      da: Ræsonnere om `try`, `except`, `else`, `finally`, `raise` og exception chaining.
+      es: "Razonar sobre `try`, `except`, `else`, `finally`, `raise` y encadenamiento de excepciones."
+      en: "Reason about `try`, `except`, `else`, `finally`, `raise`, and exception chaining."
+      da: "Ræsonnere om `try`, `except`, `else`, `finally`, `raise` og exception chaining."
     evidence: exception_flow_trace
   - id: m08.o8
     bloom_level: create
     statement:
-      es: Diseñar pruebas para rutas ausentes, permisos, codificación, filas corruptas y escritura fallida.
-      en: Design tests for missing paths, permissions, encodings, corrupt rows, and failed writes.
-      da: Designe test for manglende stier, rettigheder, kodning, korrupte rækker og mislykket skrivning.
+      es: "Diseñar pruebas para rutas ausentes, permisos, codificación, filas corruptas y escritura fallida."
+      en: "Design tests for missing paths, permissions, encodings, corrupt rows, and failed writes."
+      da: "Designe test for manglende stier, rettigheder, kodning, korrupte rækker og mislykket skrivning."
     evidence: failure_test_plan
 
 concepts:
   - id: paths-and-execution-context
     title:
-      es: Rutas y contexto de ejecución
-      en: Paths and execution context
-      da: Stier og kørselskontekst
+      es: "Rutas y contexto de ejecución"
+      en: "Paths and execution context"
+      da: "Stier og kørselskontekst"
     body:
       es: >-
         Una ruta identifica una ubicación, pero no garantiza que exista, sea un archivo ni sea accesible.
@@ -110,9 +110,9 @@ concepts:
 
   - id: modes-encoding-and-context-managers
     title:
-      es: Modos, codificación y gestores de contexto
-      en: Modes, encodings, and context managers
-      da: Tilstande, kodning og context managers
+      es: "Modos, codificación y gestores de contexto"
+      en: "Modes, encodings, and context managers"
+      da: "Tilstande, kodning og context managers"
     body:
       es: >-
         `r` lee, `w` reemplaza o trunca, `a` añade y `x` exige que el archivo no exista. En texto debe
@@ -130,9 +130,9 @@ concepts:
 
   - id: reading-strategies-and-memory
     title:
-      es: Estrategias de lectura y uso de memoria
-      en: Reading strategies and memory use
-      da: Læsestrategier og hukommelsesbrug
+      es: "Estrategias de lectura y uso de memoria"
+      en: "Reading strategies and memory use"
+      da: "Læsestrategier og hukommelsesbrug"
     body:
       es: >-
         `read()` carga todo el contenido, apropiado solo cuando el tamaño conocido es manejable. Recorrer el
@@ -150,9 +150,9 @@ concepts:
 
   - id: delimited-data-and-csv
     title:
-      es: Datos delimitados y CSV
-      en: Delimited data and CSV
-      da: Afgrænsede data og CSV
+      es: "Datos delimitados y CSV"
+      en: "Delimited data and CSV"
+      da: "Afgrænsede data og CSV"
     body:
       es: >-
         CSV no es simplemente texto separado por comas: los campos pueden contener delimitadores, comillas y
@@ -170,9 +170,9 @@ concepts:
 
   - id: writing-representation-and-atomicity
     title:
-      es: Escritura, representación y protección del destino
-      en: Writing, representation, and destination protection
-      da: Skrivning, repræsentation og beskyttelse af destination
+      es: "Escritura, representación y protección del destino"
+      en: "Writing, representation, and destination protection"
+      da: "Skrivning, repræsentation og beskyttelse af destination"
     body:
       es: >-
         La lógica de cálculo debe producir valores estructurados y una capa separada convertirlos en texto o filas.
@@ -191,9 +191,9 @@ concepts:
 
   - id: validation-layers
     title:
-      es: Capas de validación
-      en: Validation layers
-      da: Valideringslag
+      es: "Capas de validación"
+      en: "Validation layers"
+      da: "Valideringslag"
     body:
       es: >-
         La validación estructural comprueba cabeceras, columnas, cantidad de campos y presencia. La conversión
@@ -212,9 +212,9 @@ concepts:
 
   - id: exception-specificity-and-propagation
     title:
-      es: Especificidad, manejo y propagación de excepciones
-      en: Exception specificity, handling, and propagation
-      da: Specificitet, håndtering og propagation af undtagelser
+      es: "Especificidad, manejo y propagación de excepciones"
+      en: "Exception specificity, handling, and propagation"
+      da: "Specificitet, håndtering og propagation af undtagelser"
     body:
       es: >-
         Una excepción interrumpe el flujo normal y busca un manejador compatible. `FileNotFoundError`,
@@ -232,9 +232,9 @@ concepts:
 
   - id: try-else-finally-raise-and-chaining
     title:
-      es: Flujo con `try`, `else`, `finally`, `raise` y encadenamiento
-      en: Flow with `try`, `else`, `finally`, `raise`, and chaining
-      da: Kontrolflow med `try`, `else`, `finally`, `raise` og chaining
+      es: "Flujo con `try`, `else`, `finally`, `raise` y encadenamiento"
+      en: "Flow with `try`, `else`, `finally`, `raise`, and chaining"
+      da: "Kontrolflow med `try`, `else`, `finally`, `raise` og chaining"
     body:
       es: >-
         El bloque `try` debe contener la operación que puede fallar, no código innecesario. `except` maneja tipos
@@ -253,13 +253,13 @@ concepts:
 worked_examples:
   - id: dm857.m08.e01
     title:
-      es: Leer mediciones sintéticas línea por línea con contexto
-      en: Read synthetic measurements line by line with context
-      da: Læs syntetiske målinger linje for linje med kontekst
+      es: "Leer mediciones sintéticas línea por línea con contexto"
+      en: "Read synthetic measurements line by line with context"
+      da: "Læs syntetiske målinger linje for linje med kontekst"
     problem:
-      es: Leer un archivo de una medición por línea, ignorar líneas vacías y reportar la línea exacta de una conversión inválida.
-      en: Read one synthetic measurement per line, skip empty lines, and report the exact line of invalid conversion.
-      da: Læs én syntetisk måling pr. linje, spring tomme linjer over og rapportér den præcise linje ved ugyldig konvertering.
+      es: "Leer un archivo de una medición por línea, ignorar líneas vacías y reportar la línea exacta de una conversión inválida."
+      en: "Read one synthetic measurement per line, skip empty lines, and report the exact line of invalid conversion."
+      da: "Læs én syntetisk måling pr. linje, spring tomme linjer over og rapportér den præcise linje ved ugyldig konvertering."
     assumptions:
       - input is UTF-8 text
       - each non-empty line should contain one floating-point value
@@ -288,22 +288,22 @@ worked_examples:
       - invalid text reports line number and original value
       - the file closes after success or failure
     explanation:
-      es: La lectura incremental, el contexto de línea y el encadenamiento conservan evidencia diagnóstica.
-      en: Incremental reading, line context, and exception chaining preserve diagnostic evidence.
-      da: Inkrementel læsning, linjekontekst og chaining bevarer diagnostisk evidens.
+      es: "La lectura incremental, el contexto de línea y el encadenamiento conservan evidencia diagnóstica."
+      en: "Incremental reading, line context, and exception chaining preserve diagnostic evidence."
+      da: "Inkrementel læsning, linjekontekst og chaining bevarer diagnostisk evidens."
     limitations:
       - semantic range validation is not included
     linked_objectives: [m08.o2, m08.o3, m08.o5, m08.o6, m08.o7]
 
   - id: dm857.m08.e02
     title:
-      es: Leer CSV sin dividir manualmente
-      en: Read CSV without manual splitting
-      da: Læs CSV uden manuel opdeling
+      es: "Leer CSV sin dividir manualmente"
+      en: "Read CSV without manual splitting"
+      da: "Læs CSV uden manuel opdeling"
     problem:
-      es: Leer registros sintéticos con cabecera `sample_id,value`, validar columnas y convertir el valor.
-      en: Read synthetic records with header `sample_id,value`, validate columns, and convert the value.
-      da: Læs syntetiske poster med header `sample_id,value`, validér kolonner og konvertér værdien.
+      es: "Leer registros sintéticos con cabecera `sample_id,value`, validar columnas y convertir el valor."
+      en: "Read synthetic records with header `sample_id,value`, validate columns, and convert the value."
+      da: "Læs syntetiske poster med header `sample_id,value`, validér kolonner og konvertér værdien."
     code: |-
       import csv
       from pathlib import Path
@@ -332,22 +332,22 @@ worked_examples:
       - missing headers fail before row analysis
       - row number refers to the physical CSV row including header
     explanation:
-      es: `DictReader` conserva el significado de las columnas y evita errores de desplazamiento por comillas.
-      en: `DictReader` preserves column meaning and avoids quote-related field shifts.
-      da: `DictReader` bevarer kolonnebetydning og undgår forskydning på grund af citationstegn.
+      es: "`DictReader` conserva el significado de las columnas y evita errores de desplazamiento por comillas."
+      en: "`DictReader` preserves column meaning and avoids quote-related field shifts."
+      da: "`DictReader` bevarer kolonnebetydning og undgår forskydning på grund af citationstegn."
     limitations:
       - duplicate sample identifiers require a separate policy
     linked_objectives: [m08.o3, m08.o5, m08.o6]
 
   - id: dm857.m08.e03
     title:
-      es: Separar cálculo y escritura de un resumen
-      en: Separate summary computation from writing
-      da: Adskil beregning og skrivning af et resumé
+      es: "Separar cálculo y escritura de un resumen"
+      en: "Separate summary computation from writing"
+      da: "Adskil beregning og skrivning af et resumé"
     problem:
-      es: Calcular un resumen en memoria y escribirlo a un archivo nuevo sin sobrescribir uno existente.
-      en: Compute a summary in memory and write it to a new file without overwriting an existing file.
-      da: Beregn et resumé i hukommelsen og skriv det til en ny fil uden at overskrive en eksisterende fil.
+      es: "Calcular un resumen en memoria y escribirlo a un archivo nuevo sin sobrescribir uno existente."
+      en: "Compute a summary in memory and write it to a new file without overwriting an existing file."
+      da: "Beregn et resumé i hukommelsen og skriv det til en ny fil uden at overskrive en eksisterende fil."
     code: |-
       from pathlib import Path
 
@@ -372,9 +372,9 @@ worked_examples:
       - an existing destination raises FileExistsError
       - calculation can be unit-tested without file access
     explanation:
-      es: La función pura de resumen se prueba de forma aislada; la función de escritura contiene el efecto secundario.
-      en: The pure summary function is tested independently; the writer contains the side effect.
-      da: Den rene resumefunktion testes isoleret, mens skrivefunktionen indeholder sideeffekten.
+      es: "La función pura de resumen se prueba de forma aislada; la función de escritura contiene el efecto secundario."
+      en: "The pure summary function is tested independently; the writer contains the side effect."
+      da: "Den rene resumefunktion testes isoleret, mens skrivefunktionen indeholder sideeffekten."
     limitations:
       - a temporary-file replacement strategy is preferable for critical outputs
     linked_objectives: [m08.o4, m08.o6, m08.o8]
@@ -384,61 +384,61 @@ practice_exercises:
     activity_type: code_tracing
     difficulty: foundational
     prompt:
-      es: ¿Qué ocurre al abrir un archivo existente con modo `w`?
-      en: What happens when an existing file is opened with mode `w`?
-      da: Hvad sker der, når en eksisterende fil åbnes med `w`?
+      es: "¿Qué ocurre al abrir un archivo existente con modo `w`?"
+      en: "What happens when an existing file is opened with mode `w`?"
+      da: "Hvad sker der, når en eksisterende fil åbnes med `w`?"
     reference_solution:
-      es: Se trunca antes de escribir; su contenido previo se pierde.
-      en: It is truncated before writing; previous content is lost.
-      da: Den afkortes før skrivning, og tidligere indhold går tabt.
+      es: "Se trunca antes de escribir; su contenido previo se pierde."
+      en: "It is truncated before writing; previous content is lost."
+      da: "Den afkortes før skrivning, og tidligere indhold går tabt."
     linked_objectives: [m08.o2]
 
   - id: dm857.m08.p02
     activity_type: method_selection
     difficulty: foundational
     prompt:
-      es: Elige entre `read()`, iteración por líneas y `csv.DictReader` para una nota corta, un archivo enorme de una observación por línea y un CSV con campos entrecomillados.
-      en: Choose among `read()`, line iteration, and `csv.DictReader` for a short note, a huge one-observation-per-line file, and quoted CSV.
-      da: Vælg mellem `read()`, linjeiteration og `csv.DictReader` til en kort note, en stor linjefil og CSV med citationstegn.
+      es: "Elige entre `read()`, iteración por líneas y `csv.DictReader` para una nota corta, un archivo enorme de una observación por línea y un CSV con campos entrecomillados."
+      en: "Choose among `read()`, line iteration, and `csv.DictReader` for a short note, a huge one-observation-per-line file, and quoted CSV."
+      da: "Vælg mellem `read()`, linjeiteration og `csv.DictReader` til en kort note, en stor linjefil og CSV med citationstegn."
     reference_solution:
-      es: `read()`, iteración por líneas y `csv.DictReader`, respectivamente.
-      en: `read()`, line iteration, and `csv.DictReader`, respectively.
-      da: `read()`, linjeiteration og `csv.DictReader`.
+      es: "`read()`, iteración por líneas y `csv.DictReader`, respectivamente."
+      en: "`read()`, line iteration, and `csv.DictReader`, respectively."
+      da: "`read()`, linjeiteration og `csv.DictReader`."
     linked_objectives: [m08.o3]
 
   - id: dm857.m08.p03
     activity_type: debugging
     difficulty: intermediate
     prompt:
-      es: Corrige un lector CSV que usa `line.strip().split(',')` y falla cuando un campo contiene una coma entre comillas.
-      en: Fix a CSV reader using `line.strip().split(',')` that fails when a quoted field contains a comma.
-      da: Ret en CSV-læser med `line.strip().split(',')`, som fejler ved komma i et citeret felt.
+      es: "Corrige un lector CSV que usa `line.strip().split(',')` y falla cuando un campo contiene una coma entre comillas."
+      en: "Fix a CSV reader using `line.strip().split(',')` that fails when a quoted field contains a comma."
+      da: "Ret en CSV-læser med `line.strip().split(',')`, som fejler ved komma i et citeret felt."
     reference_solution:
-      es: Usar `csv.reader` o `csv.DictReader` con `newline=''` y el dialecto correspondiente.
-      en: Use `csv.reader` or `csv.DictReader` with `newline=''` and the appropriate dialect.
-      da: Brug `csv.reader` eller `csv.DictReader` med `newline=''` og korrekt dialect.
+      es: "Usar `csv.reader` o `csv.DictReader` con `newline=''` y el dialecto correspondiente."
+      en: "Use `csv.reader` or `csv.DictReader` with `newline=''` and the appropriate dialect."
+      da: "Brug `csv.reader` eller `csv.DictReader` med `newline=''` og korrekt dialect."
     linked_objectives: [m08.o3, m08.o5]
 
   - id: dm857.m08.p04
     activity_type: error_classification
     difficulty: intermediate
     prompt:
-      es: Clasifica: archivo ausente, UTF-8 inválido, texto `abc` donde se esperaba float y valor `-4` fuera del dominio permitido.
-      en: Classify: missing file, invalid UTF-8, text `abc` where float was expected, and value `-4` outside the allowed domain.
-      da: Klassificér manglende fil, ugyldig UTF-8, teksten `abc` som float og værdien `-4` uden for domænet.
+      es: "Clasifica: archivo ausente, UTF-8 inválido, texto `abc` donde se esperaba float y valor `-4` fuera del dominio permitido."
+      en: "Classify: missing file, invalid UTF-8, text `abc` where float was expected, and value `-4` outside the allowed domain."
+      da: "Klassificér manglende fil, ugyldig UTF-8, teksten `abc` som float og værdien `-4` uden for domænet."
     reference_solution:
-      es: `FileNotFoundError`, `UnicodeDecodeError`, error de conversión `ValueError` y error semántico definido por el programa.
-      en: `FileNotFoundError`, `UnicodeDecodeError`, conversion `ValueError`, and a program-defined semantic error.
-      da: `FileNotFoundError`, `UnicodeDecodeError`, konverterings-`ValueError` og programdefineret semantisk fejl.
+      es: "`FileNotFoundError`, `UnicodeDecodeError`, error de conversión `ValueError` y error semántico definido por el programa."
+      en: "`FileNotFoundError`, `UnicodeDecodeError`, conversion `ValueError`, and a program-defined semantic error."
+      da: "`FileNotFoundError`, `UnicodeDecodeError`, konverterings-`ValueError` og programdefineret semantisk fejl."
     linked_objectives: [m08.o5, m08.o6]
 
   - id: dm857.m08.p05
     activity_type: refactoring
     difficulty: intermediate
     prompt:
-      es: Refactoriza una función que lee, calcula, imprime y escribe para separar funciones puras de efectos secundarios.
-      en: Refactor a function that reads, computes, prints, and writes to separate pure functions from side effects.
-      da: Refaktorér en funktion der læser, beregner, udskriver og skriver, så rene funktioner adskilles fra sideeffekter.
+      es: "Refactoriza una función que lee, calcula, imprime y escribe para separar funciones puras de efectos secundarios."
+      en: "Refactor a function that reads, computes, prints, and writes to separate pure functions from side effects."
+      da: "Refaktorér en funktion der læser, beregner, udskriver og skriver, så rene funktioner adskilles fra sideeffekter."
     accepted_answer_elements:
       - reader returns validated data
       - pure analyzer accepts data and returns a summary
@@ -450,9 +450,9 @@ practice_exercises:
     activity_type: test_design
     difficulty: advanced
     prompt:
-      es: Diseña pruebas de fallos para un importador de CSV y explica qué debe verificarse además del tipo de excepción.
-      en: Design failure tests for a CSV importer and explain what should be checked beyond exception type.
-      da: Design fejltest til en CSV-importør og forklar hvad der skal kontrolleres ud over exceptiontypen.
+      es: "Diseña pruebas de fallos para un importador de CSV y explica qué debe verificarse además del tipo de excepción."
+      en: "Design failure tests for a CSV importer and explain what should be checked beyond exception type."
+      da: "Design fejltest til en CSV-importør og forklar hvad der skal kontrolleres ud over exceptiontypen."
     accepted_answer_elements:
       - missing path
       - wrong encoding
@@ -468,112 +468,112 @@ objective_bank:
   - id: dm857.m08.q01
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué modo evita sobrescribir un archivo existente?, en: Which mode prevents overwriting an existing file?, da: Hvilken tilstand forhindrer overskrivning af en eksisterende fil?}
+    prompt: {"es": "¿Qué modo evita sobrescribir un archivo existente?", "en": "Which mode prevents overwriting an existing file?", "da": "Hvilken tilstand forhindrer overskrivning af en eksisterende fil?"}
     options:
       - id: x_mode
-        text: {es: `x`, en: `x`, da: `x`}
+        text: {"es": "`x`", "en": "`x`", "da": "`x`"}
       - id: w_mode
-        text: {es: `w`, en: `w`, da: `w`}
+        text: {"es": "`w`", "en": "`w`", "da": "`w`"}
       - id: a_mode
-        text: {es: `a`, en: `a`, da: `a`}
+        text: {"es": "`a`", "en": "`a`", "da": "`a`"}
     correct_option_ids: [x_mode]
-    explanation: {es: `x` exige que el destino no exista., en: `x` requires a non-existing destination., da: `x` kræver at destinationen ikke findes.}
+    explanation: {"es": "`x` exige que el destino no exista.", "en": "`x` requires a non-existing destination.", "da": "`x` kræver at destinationen ikke findes."}
   - id: dm857.m08.q02
     activity_type: true_false
     difficulty: foundational
-    prompt: {es: Un gestor `with` cierra el archivo aunque ocurra una excepción., en: A `with` context closes the file even when an exception occurs., da: En `with`-kontekst lukker filen, selv når en undtagelse opstår.}
+    prompt: {"es": "Un gestor `with` cierra el archivo aunque ocurra una excepción.", "en": "A `with` context closes the file even when an exception occurs.", "da": "En `with`-kontekst lukker filen, selv når en undtagelse opstår."}
     correct_answer: true
-    explanation: {es: El gestor administra la vida del recurso., en: The context manages resource lifetime., da: Konteksten styrer ressourcens levetid.}
+    explanation: {"es": "El gestor administra la vida del recurso.", "en": "The context manages resource lifetime.", "da": "Konteksten styrer ressourcens levetid."}
   - id: dm857.m08.q03
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué estrategia evita cargar todo un archivo grande?, en: Which strategy avoids loading a large file entirely?, da: Hvilken strategi undgår at indlæse en stor fil fuldstændigt?}
+    prompt: {"es": "¿Qué estrategia evita cargar todo un archivo grande?", "en": "Which strategy avoids loading a large file entirely?", "da": "Hvilken strategi undgår at indlæse en stor fil fuldstændigt?"}
     options:
       - id: line_iteration
-        text: {es: Iterar sobre el archivo., en: Iterate over the file., da: Iterér over filen.}
+        text: {"es": "Iterar sobre el archivo.", "en": "Iterate over the file.", "da": "Iterér over filen."}
       - id: read_all
-        text: {es: Usar `read()`., en: Use `read()`., da: Brug `read()`.}
+        text: {"es": "Usar `read()`.", "en": "Use `read()`.", "da": "Brug `read()`."}
       - id: list_read
-        text: {es: Convertir todas las líneas en lista primero., en: Convert all lines to a list first., da: Konvertér alle linjer til en liste først.}
+        text: {"es": "Convertir todas las líneas en lista primero.", "en": "Convert all lines to a list first.", "da": "Konvertér alle linjer til en liste først."}
     correct_option_ids: [line_iteration]
-    explanation: {es: La iteración procesa incrementalmente., en: Iteration processes incrementally., da: Iteration behandler inkrementelt.}
+    explanation: {"es": "La iteración procesa incrementalmente.", "en": "Iteration processes incrementally.", "da": "Iteration behandler inkrementelt."}
   - id: dm857.m08.q04
     activity_type: true_false
     difficulty: intermediate
-    prompt: {es: `writelines` añade automáticamente saltos entre cadenas., en: `writelines` automatically adds newlines between strings., da: `writelines` tilføjer automatisk linjeskift mellem strenge.}
+    prompt: {"es": "`writelines` añade automáticamente saltos entre cadenas.", "en": "`writelines` automatically adds newlines between strings.", "da": "`writelines` tilføjer automatisk linjeskift mellem strenge."}
     correct_answer: false
-    explanation: {es: Los separadores deben formar parte de las cadenas., en: Separators must be included in the strings., da: Separatorer skal være en del af strengene.}
+    explanation: {"es": "Los separadores deben formar parte de las cadenas.", "en": "Separators must be included in the strings.", "da": "Separatorer skal være en del af strengene."}
   - id: dm857.m08.q05
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué herramienta es apropiada para CSV con comillas?, en: Which tool is appropriate for quoted CSV?, da: Hvilket værktøj er passende til CSV med citationstegn?}
+    prompt: {"es": "¿Qué herramienta es apropiada para CSV con comillas?", "en": "Which tool is appropriate for quoted CSV?", "da": "Hvilket værktøj er passende til CSV med citationstegn?"}
     options:
       - id: csv_reader
-        text: {es: `csv.reader` o `csv.DictReader`., en: `csv.reader` or `csv.DictReader`., da: `csv.reader` eller `csv.DictReader`.}
+        text: {"es": "`csv.reader` o `csv.DictReader`.", "en": "`csv.reader` or `csv.DictReader`.", "da": "`csv.reader` eller `csv.DictReader`."}
       - id: split_comma
-        text: {es: `split(',')` siempre., en: Always `split(',')`., da: Altid `split(',')`.}
+        text: {"es": "`split(',')` siempre.", "en": "Always `split(',')`.", "da": "Altid `split(',')`."}
       - id: character_loop
-        text: {es: Un bucle por caracteres sin estado., en: A stateless character loop., da: En tilstandsløs tegnløkke.}
+        text: {"es": "Un bucle por caracteres sin estado.", "en": "A stateless character loop.", "da": "En tilstandsløs tegnløkke."}
     correct_option_ids: [csv_reader]
-    explanation: {es: La biblioteca gestiona dialecto y escapado., en: The library handles dialect and escaping., da: Biblioteket håndterer dialect og escaping.}
+    explanation: {"es": "La biblioteca gestiona dialecto y escapado.", "en": "The library handles dialect and escaping.", "da": "Biblioteket håndterer dialect og escaping."}
   - id: dm857.m08.q06
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Cuál es validación semántica?, en: Which is semantic validation?, da: Hvad er semantisk validering?}
+    prompt: {"es": "¿Cuál es validación semántica?", "en": "Which is semantic validation?", "da": "Hvad er semantisk validering?"}
     options:
       - id: range_check
-        text: {es: Comprobar que un valor esté en un rango permitido., en: Check that a value lies in an allowed range., da: Kontrollér at en værdi ligger i et tilladt interval.}
+        text: {"es": "Comprobar que un valor esté en un rango permitido.", "en": "Check that a value lies in an allowed range.", "da": "Kontrollér at en værdi ligger i et tilladt interval."}
       - id: header_check
-        text: {es: Comprobar que exista la cabecera., en: Check that a header exists., da: Kontrollér at en header findes.}
+        text: {"es": "Comprobar que exista la cabecera.", "en": "Check that a header exists.", "da": "Kontrollér at en header findes."}
       - id: float_conversion
-        text: {es: Convertir texto a `float`., en: Convert text to `float`., da: Konvertér tekst til `float`.}
+        text: {"es": "Convertir texto a `float`.", "en": "Convert text to `float`.", "da": "Konvertér tekst til `float`."}
     correct_option_ids: [range_check]
-    explanation: {es: El rango pertenece al significado del dato., en: The range belongs to data meaning., da: Intervallet tilhører dataens betydning.}
+    explanation: {"es": "El rango pertenece al significado del dato.", "en": "The range belongs to data meaning.", "da": "Intervallet tilhører dataens betydning."}
   - id: dm857.m08.q07
     activity_type: true_false
     difficulty: intermediate
-    prompt: {es: Capturar `Exception` ampliamente es la mejor forma de hacer robusto un importador., en: Broadly catching `Exception` is the best way to make an importer robust., da: Bred fangst af `Exception` er den bedste måde at gøre en importør robust.}
+    prompt: {"es": "Capturar `Exception` ampliamente es la mejor forma de hacer robusto un importador.", "en": "Broadly catching `Exception` is the best way to make an importer robust.", "da": "Bred fangst af `Exception` er den bedste måde at gøre en importør robust."}
     correct_answer: false
-    explanation: {es: Puede ocultar defectos inesperados y perder diagnóstico., en: It may hide unexpected defects and diagnostics., da: Det kan skjule uventede fejl og diagnostik.}
+    explanation: {"es": "Puede ocultar defectos inesperados y perder diagnóstico.", "en": "It may hide unexpected defects and diagnostics.", "da": "Det kan skjule uventede fejl og diagnostik."}
   - id: dm857.m08.q08
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Para qué sirve `else` en una estructura `try`?, en: What is `else` for in a `try` statement?, da: Hvad bruges `else` til i en `try`-struktur?}
+    prompt: {"es": "¿Para qué sirve `else` en una estructura `try`?", "en": "What is `else` for in a `try` statement?", "da": "Hvad bruges `else` til i en `try`-struktur?"}
     options:
       - id: success_path
-        text: {es: Ejecutar código solo si el `try` terminó sin excepción., en: Run code only when `try` completed without exception., da: Kør kode kun når `try` afsluttede uden undtagelse.}
+        text: {"es": "Ejecutar código solo si el `try` terminó sin excepción.", "en": "Run code only when `try` completed without exception.", "da": "Kør kode kun når `try` afsluttede uden undtagelse."}
       - id: cleanup
-        text: {es: Ejecutar siempre limpieza., en: Always run cleanup., da: Kør altid oprydning.}
+        text: {"es": "Ejecutar siempre limpieza.", "en": "Always run cleanup.", "da": "Kør altid oprydning."}
       - id: catch_all
-        text: {es: Capturar cualquier error., en: Catch any error., da: Fang enhver fejl.}
+        text: {"es": "Capturar cualquier error.", "en": "Catch any error.", "da": "Fang enhver fejl."}
     correct_option_ids: [success_path]
-    explanation: {es: `finally` es la sección que se ejecuta siempre., en: `finally` is the always-executed section., da: `finally` er sektionen der altid udføres.}
+    explanation: {"es": "`finally` es la sección que se ejecuta siempre.", "en": "`finally` is the always-executed section.", "da": "`finally` er sektionen der altid udføres."}
   - id: dm857.m08.q09
     activity_type: multiple_choice
     difficulty: advanced
-    prompt: {es: ¿Qué preserva `raise DomainError(...) from exc`?, en: What does `raise DomainError(...) from exc` preserve?, da: Hvad bevarer `raise DomainError(...) from exc`?}
+    prompt: {"es": "¿Qué preserva `raise DomainError(...) from exc`?", "en": "What does `raise DomainError(...) from exc` preserve?", "da": "Hvad bevarer `raise DomainError(...) from exc`?"}
     options:
       - id: causal_chain
-        text: {es: La cadena causal con la excepción original., en: The causal chain with the original exception., da: Den kausale kæde med den oprindelige undtagelse.}
+        text: {"es": "La cadena causal con la excepción original.", "en": "The causal chain with the original exception.", "da": "Den kausale kæde med den oprindelige undtagelse."}
       - id: file_contents
-        text: {es: El contenido del archivo., en: File contents., da: Filens indhold.}
+        text: {"es": "El contenido del archivo.", "en": "File contents.", "da": "Filens indhold."}
       - id: suppressed_error
-        text: {es: La eliminación completa del error original., en: Complete removal of the original error., da: Fuld fjernelse af den oprindelige fejl.}
+        text: {"es": "La eliminación completa del error original.", "en": "Complete removal of the original error.", "da": "Fuld fjernelse af den oprindelige fejl."}
     correct_option_ids: [causal_chain]
-    explanation: {es: El encadenamiento conserva el contexto de bajo nivel., en: Chaining retains low-level context., da: Chaining bevarer kontekst på lavt niveau.}
+    explanation: {"es": "El encadenamiento conserva el contexto de bajo nivel.", "en": "Chaining retains low-level context.", "da": "Chaining bevarer kontekst på lavt niveau."}
   - id: dm857.m08.q10
     activity_type: multiple_choice
     difficulty: advanced
-    prompt: {es: ¿Qué evidencia demuestra que un escritor no dejó una salida parcial?, en: What evidence shows that a writer did not leave partial output?, da: Hvilken evidens viser at en skriver ikke efterlod delvist output?}
+    prompt: {"es": "¿Qué evidencia demuestra que un escritor no dejó una salida parcial?", "en": "What evidence shows that a writer did not leave partial output?", "da": "Hvilken evidens viser at en skriver ikke efterlod delvist output?"}
     options:
       - id: failure_test
-        text: {es: Una prueba que induce fallo y verifica ausencia o integridad del destino., en: A test inducing failure and checking destination absence or integrity., da: En test der fremkalder fejl og kontrollerer destinationens fravær eller integritet.}
+        text: {"es": "Una prueba que induce fallo y verifica ausencia o integridad del destino.", "en": "A test inducing failure and checking destination absence or integrity.", "da": "En test der fremkalder fejl og kontrollerer destinationens fravær eller integritet."}
       - id: happy_path
-        text: {es: Solo una prueba de éxito., en: Only a success test., da: Kun en succes-test.}
+        text: {"es": "Solo una prueba de éxito.", "en": "Only a success test.", "da": "Kun en succes-test."}
       - id: print_message
-        text: {es: Un mensaje de impresión., en: A printed message., da: En udskrevet besked.}
+        text: {"es": "Un mensaje de impresión.", "en": "A printed message.", "da": "En udskrevet besked."}
     correct_option_ids: [failure_test]
-    explanation: {es: La propiedad debe observarse bajo el fallo relevante., en: The property must be observed under the relevant failure., da: Egenskaben skal observeres under den relevante fejl.}
+    explanation: {"es": "La propiedad debe observarse bajo el fallo relevante.", "en": "The property must be observed under the relevant failure.", "da": "Egenskaben skal observeres under den relevante fejl."}
 
 assessment_items:
   - id: dm857.m08.a01
@@ -663,35 +663,35 @@ flashcards:
 
 glossary:
   - id: term.path
-    term: {es: ruta, en: path, da: sti}
-    definition: {es: Representación de una ubicación en el sistema de archivos., en: Representation of a filesystem location., da: Repræsentation af en placering i filsystemet.}
+    term: {"es": "ruta", "en": "path", "da": "sti"}
+    definition: {"es": "Representación de una ubicación en el sistema de archivos.", "en": "Representation of a filesystem location.", "da": "Repræsentation af en placering i filsystemet."}
   - id: term.working_directory
-    term: {es: directorio de trabajo, en: working directory, da: arbejdsmappe}
-    definition: {es: Base usada para interpretar rutas relativas., en: Base used to interpret relative paths., da: Basis for fortolkning af relative stier.}
+    term: {"es": "directorio de trabajo", "en": "working directory", "da": "arbejdsmappe"}
+    definition: {"es": "Base usada para interpretar rutas relativas.", "en": "Base used to interpret relative paths.", "da": "Basis for fortolkning af relative stier."}
   - id: term.encoding
-    term: {es: codificación, en: encoding, da: kodning}
-    definition: {es: Regla que relaciona bytes con caracteres., en: Rule mapping bytes to characters., da: Regel der forbinder bytes med tegn.}
+    term: {"es": "codificación", "en": "encoding", "da": "kodning"}
+    definition: {"es": "Regla que relaciona bytes con caracteres.", "en": "Rule mapping bytes to characters.", "da": "Regel der forbinder bytes med tegn."}
   - id: term.context_manager
-    term: {es: gestor de contexto, en: context manager, da: context manager}
-    definition: {es: Objeto que administra entrada, salida y limpieza de un recurso., en: Object managing setup, exit, and cleanup of a resource., da: Objekt der styrer etablering, afslutning og oprydning af en ressource.}
+    term: {"es": "gestor de contexto", "en": "context manager", "da": "context manager"}
+    definition: {"es": "Objeto que administra entrada, salida y limpieza de un recurso.", "en": "Object managing setup, exit, and cleanup of a resource.", "da": "Objekt der styrer etablering, afslutning og oprydning af en ressource."}
   - id: term.csv_dialect
-    term: {es: dialecto CSV, en: CSV dialect, da: CSV-dialect}
-    definition: {es: Convenciones de delimitador, comillas, escape y nueva línea., en: Delimiter, quoting, escaping, and newline conventions., da: Konventioner for separator, citation, escaping og linjeskift.}
+    term: {"es": "dialecto CSV", "en": "CSV dialect", "da": "CSV-dialect"}
+    definition: {"es": "Convenciones de delimitador, comillas, escape y nueva línea.", "en": "Delimiter, quoting, escaping, and newline conventions.", "da": "Konventioner for separator, citation, escaping og linjeskift."}
   - id: term.structural_validation
-    term: {es: validación estructural, en: structural validation, da: strukturel validering}
-    definition: {es: Comprobación de forma, columnas y presencia., en: Checking shape, columns, and presence., da: Kontrol af form, kolonner og tilstedeværelse.}
+    term: {"es": "validación estructural", "en": "structural validation", "da": "strukturel validering"}
+    definition: {"es": "Comprobación de forma, columnas y presencia.", "en": "Checking shape, columns, and presence.", "da": "Kontrol af form, kolonner og tilstedeværelse."}
   - id: term.semantic_validation
-    term: {es: validación semántica, en: semantic validation, da: semantisk validering}
-    definition: {es: Comprobación del significado y dominio de valores., en: Checking value meaning and domain., da: Kontrol af værdiernes betydning og domæne.}
+    term: {"es": "validación semántica", "en": "semantic validation", "da": "semantisk validering"}
+    definition: {"es": "Comprobación del significado y dominio de valores.", "en": "Checking value meaning and domain.", "da": "Kontrol af værdiernes betydning og domæne."}
   - id: term.exception
-    term: {es: excepción, en: exception, da: undtagelse}
-    definition: {es: Objeto que representa una interrupción del flujo normal., en: Object representing interruption of normal control flow., da: Objekt der repræsenterer afbrydelse af normal kontrolstrøm.}
+    term: {"es": "excepción", "en": "exception", "da": "undtagelse"}
+    definition: {"es": "Objeto que representa una interrupción del flujo normal.", "en": "Object representing interruption of normal control flow.", "da": "Objekt der repræsenterer afbrydelse af normal kontrolstrøm."}
   - id: term.propagation
-    term: {es: propagación, en: propagation, da: propagation}
-    definition: {es: Búsqueda ascendente de un manejador compatible., en: Upward search for a compatible handler., da: Søgning op gennem kald for en kompatibel handler.}
+    term: {"es": "propagación", "en": "propagation", "da": "propagation"}
+    definition: {"es": "Búsqueda ascendente de un manejador compatible.", "en": "Upward search for a compatible handler.", "da": "Søgning op gennem kald for en kompatibel handler."}
   - id: term.exception_chaining
-    term: {es: encadenamiento de excepciones, en: exception chaining, da: exception chaining}
-    definition: {es: Conservación explícita de la causa original al traducir un error., en: Explicit preservation of the original cause while translating an error., da: Eksplicit bevarelse af oprindelig årsag ved oversættelse af en fejl.}
+    term: {"es": "encadenamiento de excepciones", "en": "exception chaining", "da": "exception chaining"}
+    definition: {"es": "Conservación explícita de la causa original al traducir un error.", "en": "Explicit preservation of the original cause while translating an error.", "da": "Eksplicit bevarelse af oprindelig årsag ved oversættelse af en fejl."}
 
 hidden_guided_support:
   visibility: hidden_from_standard_reader

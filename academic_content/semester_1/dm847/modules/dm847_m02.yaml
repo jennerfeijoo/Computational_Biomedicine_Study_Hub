@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Identificadores biomédicos, ontologías, procedencia y dependencias FAIR
-    en: Biomedical identifiers, ontologies, provenance, and FAIR data dependencies
-    da: Biomedicinske identifikatorer, ontologier, proveniens og FAIR-dataafhængigheder
+    es: "Identificadores biomédicos, ontologías, procedencia y dependencias FAIR"
+    en: "Biomedical identifiers, ontologies, provenance, and FAIR data dependencies"
+    da: "Biomedicinske identifikatorer, ontologier, proveniens og FAIR-dataafhængigheder"
   summary:
     es: >-
       Modelado semántico de datos biomédicos mediante identificadores persistentes, accesiones y versiones,
@@ -33,66 +33,66 @@ objectives:
   - id: m02.o1
     bloom_level: analyze
     statement:
-      es: Distinguir entidad biológica, registro de base de datos, identificador, accesión, versión, símbolo y etiqueta.
-      en: Distinguish biological entity, database record, identifier, accession, version, symbol, and label.
-      da: Skelne mellem biologisk enhed, databasepost, identifikator, accession, version, symbol og label.
+      es: "Distinguir entidad biológica, registro de base de datos, identificador, accesión, versión, símbolo y etiqueta."
+      en: "Distinguish biological entity, database record, identifier, accession, version, symbol, and label."
+      da: "Skelne mellem biologisk enhed, databasepost, identifikator, accession, version, symbol og label."
     evidence: identifier_layer_analysis
   - id: m02.o2
     bloom_level: apply
     statement:
-      es: Seleccionar identificadores persistentes y registrar ensamblaje, versión y espacio de nombres.
-      en: Select persistent identifiers and record assembly, version, and namespace.
-      da: Vælge persistente identifikatorer og registrere assembly, version og namespace.
+      es: "Seleccionar identificadores persistentes y registrar ensamblaje, versión y espacio de nombres."
+      en: "Select persistent identifiers and record assembly, version, and namespace."
+      da: "Vælge persistente identifikatorer og registrere assembly, version og namespace."
     evidence: identifier_selection_task
   - id: m02.o3
     bloom_level: understand
     statement:
-      es: Comparar vocabulario controlado, taxonomía, tesauro y ontología formal.
-      en: Compare controlled vocabulary, taxonomy, thesaurus, and formal ontology.
-      da: Sammenligne kontrolleret vokabular, taksonomi, tesaurus og formel ontologi.
+      es: "Comparar vocabulario controlado, taxonomía, tesauro y ontología formal."
+      en: "Compare controlled vocabulary, taxonomy, thesaurus, and formal ontology."
+      da: "Sammenligne kontrolleret vokabular, taksonomi, tesaurus og formel ontologi."
     evidence: semantic_resource_comparison
   - id: m02.o4
     bloom_level: apply
     statement:
-      es: Modelar clases, instancias, relaciones y restricciones para dependencias biomédicas.
-      en: Model classes, instances, relations, and constraints for biomedical dependencies.
-      da: Modellere klasser, instanser, relationer og restriktioner for biomedicinske afhængigheder.
+      es: "Modelar clases, instancias, relaciones y restricciones para dependencias biomédicas."
+      en: "Model classes, instances, relations, and constraints for biomedical dependencies."
+      da: "Modellere klasser, instanser, relationer og restriktioner for biomedicinske afhængigheder."
     evidence: ontology_fragment_design
   - id: m02.o5
     bloom_level: analyze
     statement:
-      es: Distinguir relaciones jerárquicas, mereológicas, causales, espaciales y de procedencia.
-      en: Distinguish hierarchical, mereological, causal, spatial, and provenance relations.
-      da: Skelne mellem hierarkiske, mereologiske, kausale, spatiale og proveniensrelationer.
+      es: "Distinguir relaciones jerárquicas, mereológicas, causales, espaciales y de procedencia."
+      en: "Distinguish hierarchical, mereological, causal, spatial, and provenance relations."
+      da: "Skelne mellem hierarkiske, mereologiske, kausale, spatiale og proveniensrelationer."
     evidence: relation_typing_analysis
   - id: m02.o6
     bloom_level: apply
     statement:
-      es: Representar procedencia, transformación, agente, tiempo, parámetros y evidencia de una afirmación.
-      en: Represent provenance, transformation, agent, time, parameters, and evidence for a claim.
-      da: Repræsentere proveniens, transformation, agent, tid, parametre og evidens for en påstand.
+      es: "Representar procedencia, transformación, agente, tiempo, parámetros y evidencia de una afirmación."
+      en: "Represent provenance, transformation, agent, time, parameters, and evidence for a claim."
+      da: "Repræsentere proveniens, transformation, agent, tid, parametre og evidens for en påstand."
     evidence: provenance_graph
   - id: m02.o7
     bloom_level: evaluate
     statement:
-      es: Auditar mapeos entre recursos y clasificar equivalencia exacta, estrecha, amplia o incierta.
-      en: Audit mappings between resources and classify exact, narrow, broad, or uncertain equivalence.
-      da: Auditere mapping mellem ressourcer og klassificere eksakt, snæver, bred eller usikker ækvivalens.
+      es: "Auditar mapeos entre recursos y clasificar equivalencia exacta, estrecha, amplia o incierta."
+      en: "Audit mappings between resources and classify exact, narrow, broad, or uncertain equivalence."
+      da: "Auditere mapping mellem ressourcer og klassificere eksakt, snæver, bred eller usikker ækvivalens."
     evidence: cross_reference_audit
   - id: m02.o8
     bloom_level: evaluate
     statement:
-      es: Evaluar encontrabilidad, accesibilidad, interoperabilidad y reutilización sin reducir FAIR a disponibilidad pública.
-      en: Evaluate findability, accessibility, interoperability, and reuse without reducing FAIR to public availability.
-      da: Vurdere findbarhed, tilgængelighed, interoperabilitet og genbrug uden at reducere FAIR til offentlig adgang.
+      es: "Evaluar encontrabilidad, accesibilidad, interoperabilidad y reutilización sin reducir FAIR a disponibilidad pública."
+      en: "Evaluate findability, accessibility, interoperability, and reuse without reducing FAIR to public availability."
+      da: "Vurdere findbarhed, tilgængelighed, interoperabilitet og genbrug uden at reducere FAIR til offentlig adgang."
     evidence: fair_maturity_assessment
 
 concepts:
   - id: dm847.m02.c01
     title:
-      es: Entidades, registros e identificadores
-      en: Entities, records, and identifiers
-      da: Enheder, poster og identifikatorer
+      es: "Entidades, registros e identificadores"
+      en: "Entities, records, and identifiers"
+      da: "Enheder, poster og identifikatorer"
     body:
       es: >-
         Una entidad biológica es aquello sobre lo que se afirma algo: una variante, muestra, gen, proteína,
@@ -111,16 +111,16 @@ concepts:
         En post er en repræsentation i en bestemt ressource. En identifikator navngiver en post eller enhed i et namespace;
         accession er ofte stabil, mens version skelner revisioner. Symboler kan ændres eller være tvetydige.
     key_points:
-      - {es: Entidad y registro no son lo mismo., en: Entity and record are not the same., da: Enhed og post er ikke det samme.}
-      - {es: Un identificador sólo es interpretable con su espacio de nombres., en: An identifier is interpretable only with its namespace., da: En identifikator kan kun fortolkes med sit namespace.}
-      - {es: Accesión estable no significa contenido inmutable., en: Stable accession does not mean immutable content., da: Stabil accession betyder ikke uforanderligt indhold.}
+      - {"es": "Entidad y registro no son lo mismo.", "en": "Entity and record are not the same.", "da": "Enhed og post er ikke det samme."}
+      - {"es": "Un identificador sólo es interpretable con su espacio de nombres.", "en": "An identifier is interpretable only with its namespace.", "da": "En identifikator kan kun fortolkes med sit namespace."}
+      - {"es": "Accesión estable no significa contenido inmutable.", "en": "Stable accession does not mean immutable content.", "da": "Stabil accession betyder ikke uforanderligt indhold."}
     linked_objectives: [m02.o1, m02.o2]
 
   - id: dm847.m02.c02
     title:
-      es: Versiones, ensamblajes y coordenadas
-      en: Versions, assemblies, and coordinates
-      da: Versioner, assemblies og koordinater
+      es: "Versiones, ensamblajes y coordenadas"
+      en: "Versions, assemblies, and coordinates"
+      da: "Versioner, assemblies og koordinater"
     body:
       es: >-
         Una coordenada genómica sólo tiene significado dentro de un ensamblaje, cromosoma o contig, sistema de
@@ -138,16 +138,16 @@ concepts:
         og orientering. Assemblyskift kan flytte, splitte eller fjerne en region. Reproducerbarhed kræver versions-ID,
         assembly, intervalkonvention, streng og lift-over-metode.
     key_points:
-      - {es: chr1:1000 no es un identificador completo., en: chr1:1000 is not a complete identifier., da: chr1:1000 er ikke en komplet identifikator.}
-      - {es: Los intervalos 0-based y 1-based no son intercambiables., en: Zero-based and one-based intervals are not interchangeable., da: Nulbaserede og étbaserede intervaller er ikke udskiftelige.}
-      - {es: Lift-over puede fallar o producir correspondencias parciales., en: Lift-over may fail or produce partial mappings., da: Lift-over kan fejle eller give delvise mappings.}
+      - {"es": "chr1:1000 no es un identificador completo.", "en": "chr1:1000 is not a complete identifier.", "da": "chr1:1000 er ikke en komplet identifikator."}
+      - {"es": "Los intervalos 0-based y 1-based no son intercambiables.", "en": "Zero-based and one-based intervals are not interchangeable.", "da": "Nulbaserede og étbaserede intervaller er ikke udskiftelige."}
+      - {"es": "Lift-over puede fallar o producir correspondencias parciales.", "en": "Lift-over may fail or produce partial mappings.", "da": "Lift-over kan fejle eller give delvise mappings."}
     linked_objectives: [m02.o1, m02.o2, m02.o7]
 
   - id: dm847.m02.c03
     title:
-      es: Vocabularios, taxonomías, tesauros y ontologías
-      en: Vocabularies, taxonomies, thesauri, and ontologies
-      da: Vokabularer, taksonomier, tesauri og ontologier
+      es: "Vocabularios, taxonomías, tesauros y ontologías"
+      en: "Vocabularies, taxonomies, thesauri, and ontologies"
+      da: "Vokabularer, taksonomier, tesauri og ontologier"
     body:
       es: >-
         Un vocabulario controlado restringe términos permitidos. Una taxonomía organiza categorías principalmente
@@ -164,16 +164,16 @@ concepts:
         En tesaurus tilføjer synonymer og associationer. En formel ontologi specificerer klasser, relationer,
         restriktioner og eventuelt aksiomer til inferens.
     key_points:
-      - {es: Sinónimo no implica identidad conceptual perfecta., en: Synonymy does not imply perfect conceptual identity., da: Synonymi betyder ikke perfekt konceptuel identitet.}
-      - {es: Una ontología modela significado además de etiquetas., en: An ontology models meaning beyond labels., da: En ontologi modellerer betydning ud over labels.}
-      - {es: La expresividad debe corresponder al uso., en: Expressivity should match intended use., da: Ekspressivitet bør matche brugen.}
+      - {"es": "Sinónimo no implica identidad conceptual perfecta.", "en": "Synonymy does not imply perfect conceptual identity.", "da": "Synonymi betyder ikke perfekt konceptuel identitet."}
+      - {"es": "Una ontología modela significado además de etiquetas.", "en": "An ontology models meaning beyond labels.", "da": "En ontologi modellerer betydning ud over labels."}
+      - {"es": "La expresividad debe corresponder al uso.", "en": "Expressivity should match intended use.", "da": "Ekspressivitet bør matche brugen."}
     linked_objectives: [m02.o3, m02.o4]
 
   - id: dm847.m02.c04
     title:
-      es: Clases, instancias y axiomas
-      en: Classes, instances, and axioms
-      da: Klasser, instanser og aksiomer
+      es: "Clases, instancias y axiomas"
+      en: "Classes, instances, and axioms"
+      da: "Klasser, instanser og aksiomer"
     body:
       es: >-
         Una clase representa un tipo general, como célula T; una instancia representa una entidad concreta,
@@ -190,16 +190,16 @@ concepts:
         En klasse repræsenterer en generel type, fx T-celle; en instans er en konkret enhed, fx én observeret celle.
         “Is-a” forbinder en subklasse med en bredere klasse. Restriktioner kan angive domæne, range, kardinalitet eller disjunktion.
     key_points:
-      - {es: Clase no es lo mismo que conjunto observado en un estudio., en: A class is not the same as an observed study group., da: En klasse er ikke det samme som en observeret studiegruppe.}
-      - {es: Los axiomas deben ser verdaderos para todas las instancias pretendidas., en: Axioms should hold for all intended instances., da: Aksiomer bør gælde for alle tilsigtede instanser.}
-      - {es: La inferencia depende de las relaciones y restricciones declaradas., en: Inference depends on declared relations and constraints., da: Inferens afhænger af deklarerede relationer og restriktioner.}
+      - {"es": "Clase no es lo mismo que conjunto observado en un estudio.", "en": "A class is not the same as an observed study group.", "da": "En klasse er ikke det samme som en observeret studiegruppe."}
+      - {"es": "Los axiomas deben ser verdaderos para todas las instancias pretendidas.", "en": "Axioms should hold for all intended instances.", "da": "Aksiomer bør gælde for alle tilsigtede instanser."}
+      - {"es": "La inferencia depende de las relaciones y restricciones declaradas.", "en": "Inference depends on declared relations and constraints.", "da": "Inferens afhænger af deklarerede relationer og restriktioner."}
     linked_objectives: [m02.o4, m02.o5]
 
   - id: dm847.m02.c05
     title:
-      es: Relaciones tipadas y errores de jerarquía
-      en: Typed relations and hierarchy errors
-      da: Typede relationer og hierarkifejl
+      es: "Relaciones tipadas y errores de jerarquía"
+      en: "Typed relations and hierarchy errors"
+      da: "Typede relationer og hierarkifejl"
     body:
       es: >-
         «Es-un» expresa clasificación: un hepatocito es una célula. «Parte-de» expresa mereología: un lóbulo es parte
@@ -215,16 +215,16 @@ concepts:
         “Is-a” udtrykker klassifikation; “part-of” udtrykker del-helhed. “Located-in”, “derived-from”, “regulates”,
         “interacts-with” og “measured-in” har forskellig semantik. Generiske kanter mister validering og inferens.
     key_points:
-      - {es: «Es-un» y «parte-de» no son intercambiables., en: “Is-a” and “part-of” are not interchangeable., da: “Is-a” og “part-of” er ikke udskiftelige.}
-      - {es: La dirección de una relación puede cambiar su significado., en: Relation direction can change meaning., da: Relationens retning kan ændre betydning.}
-      - {es: Correlación no debe codificarse como causalidad., en: Correlation should not be encoded as causation., da: Korrelation bør ikke kodes som kausalitet.}
+      - {"es": "«Es-un» y «parte-de» no son intercambiables.", "en": "“Is-a” and “part-of” are not interchangeable.", "da": "“Is-a” og “part-of” er ikke udskiftelige."}
+      - {"es": "La dirección de una relación puede cambiar su significado.", "en": "Relation direction can change meaning.", "da": "Relationens retning kan ændre betydning."}
+      - {"es": "Correlación no debe codificarse como causalidad.", "en": "Correlation should not be encoded as causation.", "da": "Korrelation bør ikke kodes som kausalitet."}
     linked_objectives: [m02.o4, m02.o5]
 
   - id: dm847.m02.c06
     title:
-      es: Procedencia, evidencia y linaje de transformaciones
-      en: Provenance, evidence, and transformation lineage
-      da: Proveniens, evidens og transformationslinje
+      es: "Procedencia, evidencia y linaje de transformaciones"
+      en: "Provenance, evidence, and transformation lineage"
+      da: "Proveniens, evidens og transformationslinje"
     body:
       es: >-
         Procedencia describe de dónde proviene una entidad o afirmación y cómo fue producida. Un registro útil identifica
@@ -241,16 +241,16 @@ concepts:
         Proveniens beskriver hvor en enhed eller påstand kommer fra, og hvordan den blev produceret. En nyttig post identificerer
         input, aktivitet, agent, software, version, parametre, tid og output. Evidens støtter en påstand, men er ikke identisk med proveniens.
     key_points:
-      - {es: Fuente, método y tipo de evidencia son campos distintos., en: Source, method, and evidence type are distinct fields., da: Kilde, metode og evidenstype er forskellige felter.}
-      - {es: Una salida derivada debe apuntar a sus entradas y parámetros., en: A derived output should point to its inputs and parameters., da: Et afledt output bør pege på input og parametre.}
-      - {es: Procedencia permite reproducir y asignar responsabilidad., en: Provenance supports reproduction and accountability., da: Proveniens støtter reproduktion og ansvarlighed.}
+      - {"es": "Fuente, método y tipo de evidencia son campos distintos.", "en": "Source, method, and evidence type are distinct fields.", "da": "Kilde, metode og evidenstype er forskellige felter."}
+      - {"es": "Una salida derivada debe apuntar a sus entradas y parámetros.", "en": "A derived output should point to its inputs and parameters.", "da": "Et afledt output bør pege på input og parametre."}
+      - {"es": "Procedencia permite reproducir y asignar responsabilidad.", "en": "Provenance supports reproduction and accountability.", "da": "Proveniens støtter reproduktion og ansvarlighed."}
     linked_objectives: [m02.o6]
 
   - id: dm847.m02.c07
     title:
-      es: Mapeos, equivalencia y deriva semántica
-      en: Mappings, equivalence, and semantic drift
-      da: Mapping, ækvivalens og semantisk drift
+      es: "Mapeos, equivalencia y deriva semántica"
+      en: "Mappings, equivalence, and semantic drift"
+      da: "Mapping, ækvivalens og semantisk drift"
     body:
       es: >-
         Un cross-reference indica conexión, no necesariamente equivalencia. Dos registros pueden describir la misma entidad,
@@ -266,16 +266,16 @@ concepts:
         En cross-reference viser forbindelse, ikke nødvendigvis ækvivalens. To poster kan beskrive samme enhed,
         en bredere enhed, en isoform eller historisk relaterede begreber. Mapping bør types og gemme evidens og version.
     key_points:
-      - {es: Cross-reference no equivale a same-as., en: A cross-reference is not equivalent to same-as., da: En cross-reference er ikke det samme som same-as.}
-      - {es: Los mapeos requieren versión y evidencia., en: Mappings require version and evidence., da: Mapping kræver version og evidens.}
-      - {es: La deprecación debe resolverse, no borrarse silenciosamente., en: Deprecation should be resolved, not silently erased., da: Deprecation bør løses, ikke skjules.}
+      - {"es": "Cross-reference no equivale a same-as.", "en": "A cross-reference is not equivalent to same-as.", "da": "En cross-reference er ikke det samme som same-as."}
+      - {"es": "Los mapeos requieren versión y evidencia.", "en": "Mappings require version and evidence.", "da": "Mapping kræver version og evidens."}
+      - {"es": "La deprecación debe resolverse, no borrarse silenciosamente.", "en": "Deprecation should be resolved, not silently erased.", "da": "Deprecation bør løses, ikke skjules."}
     linked_objectives: [m02.o2, m02.o7]
 
   - id: dm847.m02.c08
     title:
-      es: FAIR, acceso responsable y reutilización
-      en: FAIR, responsible access, and reuse
-      da: FAIR, ansvarlig adgang og genbrug
+      es: "FAIR, acceso responsable y reutilización"
+      en: "FAIR, responsible access, and reuse"
+      da: "FAIR, ansvarlig adgang og genbrug"
     body:
       es: >-
         FAIR significa encontrable, accesible, interoperable y reutilizable. Accesible no significa necesariamente abierto:
@@ -292,21 +292,21 @@ concepts:
         følsomme data kan kræve autentifikation og governance. Interoperabilitet kræver fælles formater, identifikatorer og semantik;
         genbrug kræver licens, proveniens, kvalitet og kontekst.
     key_points:
-      - {es: FAIR y abierto no son sinónimos., en: FAIR and open are not synonyms., da: FAIR og åben er ikke synonymer.}
-      - {es: Metadatos persistentes pueden ser públicos aunque los datos estén restringidos., en: Persistent metadata may be public while data are restricted., da: Persistente metadata kan være offentlige mens data er begrænsede.}
-      - {es: Reutilización exige contexto y licencia., en: Reuse requires context and license., da: Genbrug kræver kontekst og licens.}
+      - {"es": "FAIR y abierto no son sinónimos.", "en": "FAIR and open are not synonyms.", "da": "FAIR og åben er ikke synonymer."}
+      - {"es": "Metadatos persistentes pueden ser públicos aunque los datos estén restringidos.", "en": "Persistent metadata may be public while data are restricted.", "da": "Persistente metadata kan være offentlige mens data er begrænsede."}
+      - {"es": "Reutilización exige contexto y licencia.", "en": "Reuse requires context and license.", "da": "Genbrug kræver kontekst og licens."}
     linked_objectives: [m02.o6, m02.o8]
 
 worked_examples:
   - id: dm847.m02.e01
     title:
-      es: Auditar una lista de genes identificada sólo por símbolos
-      en: Audit a gene list identified only by symbols
-      da: Auditér en genliste identificeret kun med symboler
+      es: "Auditar una lista de genes identificada sólo por símbolos"
+      en: "Audit a gene list identified only by symbols"
+      da: "Auditér en genliste identificeret kun med symboler"
     problem:
-      es: Una tabla contiene `APC`, `CAT`, `DEC1` y `PARK2` sin organismo, namespace ni fecha. Explica los riesgos y propón una corrección.
-      en: A table contains `APC`, `CAT`, `DEC1`, and `PARK2` without organism, namespace, or date. Explain risks and propose a correction.
-      da: En tabel indeholder `APC`, `CAT`, `DEC1` og `PARK2` uden organisme, namespace eller dato. Forklar risici og foreslå rettelse.
+      es: "Una tabla contiene `APC`, `CAT`, `DEC1` y `PARK2` sin organismo, namespace ni fecha. Explica los riesgos y propón una corrección."
+      en: "A table contains `APC`, `CAT`, `DEC1`, and `PARK2` without organism, namespace, or date. Explain risks and propose a correction."
+      da: "En tabel indeholder `APC`, `CAT`, `DEC1` og `PARK2` uden organisme, namespace eller dato. Forklar risici og foreslå rettelse."
     reasoning:
       es:
         - Los símbolos pueden ser ambiguos entre organismos y recursos.
@@ -324,20 +324,20 @@ worked_examples:
         - Et symbol angiver ikke transkript, protein eller version.
         - Resolve hver række mod et autoritativt namespace og behold original label.
     expected_answer:
-      es: Añadir organismo, identificador estable con namespace, versión o fecha de resolución, estado de deprecación y regla de mapeo.
-      en: Add organism, stable namespaced identifier, version or resolution date, deprecation status, and mapping rule.
-      da: Tilføj organisme, stabil namespaced identifikator, version eller resolutionsdato, deprecationsstatus og mappingregel.
+      es: "Añadir organismo, identificador estable con namespace, versión o fecha de resolución, estado de deprecación y regla de mapeo."
+      en: "Add organism, stable namespaced identifier, version or resolution date, deprecation status, and mapping rule."
+      da: "Tilføj organisme, stabil namespaced identifikator, version eller resolutionsdato, deprecationsstatus og mappingregel."
     linked_objectives: [m02.o1, m02.o2, m02.o7]
 
   - id: dm847.m02.e02
     title:
-      es: Corregir una jerarquía biológica defectuosa
-      en: Correct a defective biological hierarchy
-      da: Ret et defekt biologisk hierarki
+      es: "Corregir una jerarquía biológica defectuosa"
+      en: "Correct a defective biological hierarchy"
+      da: "Ret et defekt biologisk hierarki"
     problem:
-      es: Un modelo afirma `núcleo is-a célula` y `hepatocito part-of célula`. Corrige las relaciones.
-      en: A model states `nucleus is-a cell` and `hepatocyte part-of cell`. Correct the relations.
-      da: En model siger `nucleus is-a cell` og `hepatocyte part-of cell`. Ret relationerne.
+      es: "Un modelo afirma `núcleo is-a célula` y `hepatocito part-of célula`. Corrige las relaciones."
+      en: "A model states `nucleus is-a cell` and `hepatocyte part-of cell`. Correct the relations."
+      da: "En model siger `nucleus is-a cell` og `hepatocyte part-of cell`. Ret relationerne."
     reasoning:
       es:
         - Un núcleo es una estructura subcelular, no una subclase de célula.
@@ -352,16 +352,16 @@ worked_examples:
         - En hepatocyt er en celletype.
         - Korrekt: nucleus part-of cell; hepatocyte is-a cell.
     expected_answer:
-      es: `núcleo part-of célula`; `hepatocito is-a célula`.
-      en: `nucleus part-of cell`; `hepatocyte is-a cell`.
-      da: `nucleus part-of cell`; `hepatocyte is-a cell`.
+      es: "`núcleo part-of célula`; `hepatocito is-a célula`."
+      en: "`nucleus part-of cell`; `hepatocyte is-a cell`."
+      da: "`nucleus part-of cell`; `hepatocyte is-a cell`."
     linked_objectives: [m02.o4, m02.o5]
 
   - id: dm847.m02.e03
     title:
-      es: Construir procedencia para una tabla diferencial
-      en: Build provenance for a differential-results table
-      da: Byg proveniens for en tabel med differentielle resultater
+      es: "Construir procedencia para una tabla diferencial"
+      en: "Build provenance for a differential-results table"
+      da: "Byg proveniens for en tabel med differentielle resultater"
     problem:
       es: >-
         Una tabla final contiene identificador, efecto y p ajustado. Diseña la cadena mínima de procedencia
@@ -388,9 +388,9 @@ worked_examples:
         - Registrér QC, kvantificering, normalisering, model og multipel testkorrektion.
         - Bevar software, versioner, parametre, agent, tid og vigtige mellemoutput.
     expected_answer:
-      es: Un grafo dirigido donde cada salida derivada apunta a actividad, entradas, parámetros y agente que la produjo.
-      en: A directed graph where each derived output points to the activity, inputs, parameters, and agent that produced it.
-      da: En rettet graf hvor hvert afledt output peger på aktivitet, input, parametre og agent.
+      es: "Un grafo dirigido donde cada salida derivada apunta a actividad, entradas, parámetros y agente que la produjo."
+      en: "A directed graph where each derived output points to the activity, inputs, parameters, and agent that produced it."
+      da: "En rettet graf hvor hvert afledt output peger på aktivitet, input, parametre og agent."
     linked_objectives: [m02.o6, m02.o8]
 
 practice_exercises:
@@ -398,9 +398,9 @@ practice_exercises:
     activity_type: identifier_audit
     difficulty: foundational
     prompt:
-      es: Indica qué campos faltan para reproducir `chr7:140453136 A>T`.
-      en: State which fields are missing to reproduce `chr7:140453136 A>T`.
-      da: Angiv hvilke felter der mangler for at reproducere `chr7:140453136 A>T`.
+      es: "Indica qué campos faltan para reproducir `chr7:140453136 A>T`."
+      en: "State which fields are missing to reproduce `chr7:140453136 A>T`."
+      da: "Angiv hvilke felter der mangler for at reproducere `chr7:140453136 A>T`."
     accepted_answer_elements:
       - reference assembly and version
       - coordinate convention
@@ -414,35 +414,35 @@ practice_exercises:
     activity_type: concept_classification
     difficulty: foundational
     prompt:
-      es: Clasifica `BRCA1`, `NM_007294.4`, «cáncer de mama» y una biopsia concreta como símbolo, accesión versionada, concepto e instancia.
-      en: Classify `BRCA1`, `NM_007294.4`, “breast cancer,” and one concrete biopsy as symbol, versioned accession, concept, and instance.
-      da: Klassificér `BRCA1`, `NM_007294.4`, “brystkræft” og en konkret biopsi som symbol, versionsaccession, koncept og instans.
+      es: "Clasifica `BRCA1`, `NM_007294.4`, «cáncer de mama» y una biopsia concreta como símbolo, accesión versionada, concepto e instancia."
+      en: "Classify `BRCA1`, `NM_007294.4`, “breast cancer,” and one concrete biopsy as symbol, versioned accession, concept, and instance."
+      da: "Klassificér `BRCA1`, `NM_007294.4`, “brystkræft” og en konkret biopsi som symbol, versionsaccession, koncept og instans."
     reference_solution:
-      es: BRCA1 símbolo; NM_007294.4 accesión versionada; cáncer de mama concepto/clase; biopsia concreta instancia.
-      en: BRCA1 symbol; NM_007294.4 versioned accession; breast cancer concept/class; concrete biopsy instance.
-      da: BRCA1 symbol; NM_007294.4 versionsaccession; brystkræft koncept/klasse; konkret biopsi instans.
+      es: "BRCA1 símbolo; NM_007294.4 accesión versionada; cáncer de mama concepto/clase; biopsia concreta instancia."
+      en: "BRCA1 symbol; NM_007294.4 versioned accession; breast cancer concept/class; concrete biopsy instance."
+      da: "BRCA1 symbol; NM_007294.4 versionsaccession; brystkræft koncept/klasse; konkret biopsi instans."
     linked_objectives: [m02.o1, m02.o4]
 
   - id: dm847.m02.p03
     activity_type: relation_typing
     difficulty: intermediate
     prompt:
-      es: Asigna la relación más precisa: mitocondria—célula; célula T—linfocito; muestra—paciente; resultado—archivo de entrada.
-      en: Assign the most precise relation: mitochondrion—cell; T cell—lymphocyte; sample—patient; result—input file.
-      da: Tildel den mest præcise relation: mitokondrie—celle; T-celle—lymfocyt; prøve—patient; resultat—inputfil.
+      es: "Asigna la relación más precisa: mitocondria—célula; célula T—linfocito; muestra—paciente; resultado—archivo de entrada."
+      en: "Assign the most precise relation: mitochondrion—cell; T cell—lymphocyte; sample—patient; result—input file."
+      da: "Tildel den mest præcise relation: mitokondrie—celle; T-celle—lymfocyt; prøve—patient; resultat—inputfil."
     reference_solution:
-      es: mitocondria part-of célula; célula T is-a linfocito; muestra derived-from/donated-by paciente según modelo; resultado derived-from archivo.
-      en: mitochondrion part-of cell; T cell is-a lymphocyte; sample derived-from/donated-by patient depending on model; result derived-from file.
-      da: mitokondrie part-of celle; T-celle is-a lymfocyt; prøve derived-from/donated-by patient; resultat derived-from fil.
+      es: "mitocondria part-of célula; célula T is-a linfocito; muestra derived-from/donated-by paciente según modelo; resultado derived-from archivo."
+      en: "mitochondrion part-of cell; T cell is-a lymphocyte; sample derived-from/donated-by patient depending on model; result derived-from file."
+      da: "mitokondrie part-of celle; T-celle is-a lymfocyt; prøve derived-from/donated-by patient; resultat derived-from fil."
     linked_objectives: [m02.o4, m02.o5]
 
   - id: dm847.m02.p04
     activity_type: mapping_audit
     difficulty: intermediate
     prompt:
-      es: Un recurso mapea una enfermedad rara a una categoría amplia de trastorno neurológico con `same-as`. Evalúa y corrige.
-      en: A resource maps a rare disease to a broad neurological-disorder category using `same-as`. Evaluate and correct it.
-      da: En ressource mapper en sjælden sygdom til en bred neurologisk kategori med `same-as`. Vurdér og ret.
+      es: "Un recurso mapea una enfermedad rara a una categoría amplia de trastorno neurológico con `same-as`. Evalúa y corrige."
+      en: "A resource maps a rare disease to a broad neurological-disorder category using `same-as`. Evaluate and correct it."
+      da: "En ressource mapper en sjælden sygdom til en bred neurologisk kategori med `same-as`. Vurdér og ret."
     accepted_answer_elements:
       - exact equivalence is too strong
       - use is-a or narrower-than depending on representation
@@ -454,9 +454,9 @@ practice_exercises:
     activity_type: fair_assessment
     difficulty: intermediate
     prompt:
-      es: Evalúa un archivo CSV público sin licencia, diccionario, identificadores persistentes ni procedencia según FAIR.
-      en: Evaluate a public CSV lacking license, data dictionary, persistent identifiers, and provenance under FAIR.
-      da: Vurdér en offentlig CSV uden licens, dataordbog, persistente ID'er eller proveniens efter FAIR.
+      es: "Evalúa un archivo CSV público sin licencia, diccionario, identificadores persistentes ni procedencia según FAIR."
+      en: "Evaluate a public CSV lacking license, data dictionary, persistent identifiers, and provenance under FAIR."
+      da: "Vurdér en offentlig CSV uden licens, dataordbog, persistente ID'er eller proveniens efter FAIR."
     reference_solution:
       es: >-
         Puede ser accesible y quizá encontrable por una página, pero presenta baja interoperabilidad y reutilización.
@@ -473,9 +473,9 @@ practice_exercises:
     activity_type: ontology_design
     difficulty: advanced
     prompt:
-      es: Diseña un fragmento para representar paciente, muestra, ensayo, medición y gen. Incluye clases, instancias y relaciones sin codificar correlación como causalidad.
-      en: Design a fragment representing patient, sample, assay, measurement, and gene. Include classes, instances, and relations without encoding correlation as causation.
-      da: Design et fragment for patient, prøve, assay, måling og gen. Medtag klasser, instanser og relationer uden at kode korrelation som kausalitet.
+      es: "Diseña un fragmento para representar paciente, muestra, ensayo, medición y gen. Incluye clases, instancias y relaciones sin codificar correlación como causalidad."
+      en: "Design a fragment representing patient, sample, assay, measurement, and gene. Include classes, instances, and relations without encoding correlation as causation."
+      da: "Design et fragment for patient, prøve, assay, måling og gen. Medtag klasser, instanser og relationer uden at kode korrelation som kausalitet."
     accepted_answer_elements:
       - patient, sample, assay, measurement, and gene are classes or typed entities
       - concrete records are instances with persistent IDs
@@ -489,124 +489,124 @@ objective_question_bank:
   - id: dm847.m02.q01
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué necesita un identificador para ser interpretable?, en: What does an identifier need to be interpretable?, da: Hvad kræver en identifikator for at kunne fortolkes?}
+    prompt: {"es": "¿Qué necesita un identificador para ser interpretable?", "en": "What does an identifier need to be interpretable?", "da": "Hvad kræver en identifikator for at kunne fortolkes?"}
     options:
       - id: namespace
-        text: {es: Un espacio de nombres y reglas de resolución., en: A namespace and resolution rules., da: Et namespace og resolutionsregler.}
+        text: {"es": "Un espacio de nombres y reglas de resolución.", "en": "A namespace and resolution rules.", "da": "Et namespace og resolutionsregler."}
       - id: color
-        text: {es: Un color de visualización., en: A display color., da: En visningsfarve.}
+        text: {"es": "Un color de visualización.", "en": "A display color.", "da": "En visningsfarve."}
       - id: random_prefix
-        text: {es: Un prefijo aleatorio no documentado., en: An undocumented random prefix., da: Et udokumenteret tilfældigt præfiks.}
+        text: {"es": "Un prefijo aleatorio no documentado.", "en": "An undocumented random prefix.", "da": "Et udokumenteret tilfældigt præfiks."}
     correct_option_ids: [namespace]
-    explanation: {es: La misma cadena puede significar cosas distintas en diferentes recursos., en: The same string may mean different things in different resources., da: Samme streng kan betyde forskellige ting i forskellige ressourcer.}
+    explanation: {"es": "La misma cadena puede significar cosas distintas en diferentes recursos.", "en": "The same string may mean different things in different resources.", "da": "Samme streng kan betyde forskellige ting i forskellige ressourcer."}
     linked_objectives: [m02.o1, m02.o2]
 
   - id: dm847.m02.q02
     activity_type: true_false
     difficulty: foundational
-    prompt: {es: Una accesión estable garantiza que el contenido nunca cambia., en: A stable accession guarantees that content never changes., da: En stabil accession garanterer at indhold aldrig ændres.}
+    prompt: {"es": "Una accesión estable garantiza que el contenido nunca cambia.", "en": "A stable accession guarantees that content never changes.", "da": "En stabil accession garanterer at indhold aldrig ændres."}
     correct_answer: false
-    explanation: {es: La accesión puede persistir mientras una versión distingue revisiones del registro o secuencia., en: The accession may persist while a version distinguishes record or sequence revisions., da: Accession kan bestå mens version skelner revisioner.}
+    explanation: {"es": "La accesión puede persistir mientras una versión distingue revisiones del registro o secuencia.", "en": "The accession may persist while a version distinguishes record or sequence revisions.", "da": "Accession kan bestå mens version skelner revisioner."}
     linked_objectives: [m02.o1, m02.o2]
 
   - id: dm847.m02.q03
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué relación corresponde a «hepatocito — célula»?, en: Which relation fits “hepatocyte — cell”?, da: Hvilken relation passer til “hepatocyt — celle”?}
+    prompt: {"es": "¿Qué relación corresponde a «hepatocito — célula»?", "en": "Which relation fits “hepatocyte — cell”?", "da": "Hvilken relation passer til “hepatocyt — celle”?"}
     options:
-      - {id: is_a, text: {es: is-a, en: is-a, da: is-a}}
-      - {id: part_of, text: {es: part-of, en: part-of, da: part-of}}
-      - {id: derived_from, text: {es: derived-from, en: derived-from, da: derived-from}}
+      - {id: is_a, text: {"es": "is-a", "en": "is-a", "da": "is-a"}}
+      - {id: part_of, text: {"es": "part-of", "en": "part-of", "da": "part-of"}}
+      - {id: derived_from, text: {"es": "derived-from", "en": "derived-from", "da": "derived-from"}}
     correct_option_ids: [is_a]
-    explanation: {es: Un hepatocito es un tipo de célula., en: A hepatocyte is a type of cell., da: En hepatocyt er en celletype.}
+    explanation: {"es": "Un hepatocito es un tipo de célula.", "en": "A hepatocyte is a type of cell.", "da": "En hepatocyt er en celletype."}
     linked_objectives: [m02.o4, m02.o5]
 
   - id: dm847.m02.q04
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Qué relación corresponde a «núcleo — célula»?, en: Which relation fits “nucleus — cell”?, da: Hvilken relation passer til “kerne — celle”?}
+    prompt: {"es": "¿Qué relación corresponde a «núcleo — célula»?", "en": "Which relation fits “nucleus — cell”?", "da": "Hvilken relation passer til “kerne — celle”?"}
     options:
-      - {id: part_of, text: {es: part-of, en: part-of, da: part-of}}
-      - {id: is_a, text: {es: is-a, en: is-a, da: is-a}}
-      - {id: causes, text: {es: causes, en: causes, da: causes}}
+      - {id: part_of, text: {"es": "part-of", "en": "part-of", "da": "part-of"}}
+      - {id: is_a, text: {"es": "is-a", "en": "is-a", "da": "is-a"}}
+      - {id: causes, text: {"es": "causes", "en": "causes", "da": "causes"}}
     correct_option_ids: [part_of]
-    explanation: {es: El núcleo es un componente de la célula, no un subtipo de célula., en: A nucleus is a component of a cell, not a subtype of cell., da: Kernen er en del af cellen, ikke en celletype.}
+    explanation: {"es": "El núcleo es un componente de la célula, no un subtipo de célula.", "en": "A nucleus is a component of a cell, not a subtype of cell.", "da": "Kernen er en del af cellen, ikke en celletype."}
     linked_objectives: [m02.o5]
 
   - id: dm847.m02.q05
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué diferencia principal tiene una ontología formal frente a un vocabulario controlado?, en: What mainly distinguishes a formal ontology from a controlled vocabulary?, da: Hvad adskiller primært en formel ontologi fra et kontrolleret vokabular?}
+    prompt: {"es": "¿Qué diferencia principal tiene una ontología formal frente a un vocabulario controlado?", "en": "What mainly distinguishes a formal ontology from a controlled vocabulary?", "da": "Hvad adskiller primært en formel ontologi fra et kontrolleret vokabular?"}
     options:
       - id: axioms_relations
-        text: {es: Relaciones y axiomas explícitos que permiten validación o inferencia., en: Explicit relations and axioms enabling validation or inference., da: Eksplicitte relationer og aksiomer der muliggør validering eller inferens.}
+        text: {"es": "Relaciones y axiomas explícitos que permiten validación o inferencia.", "en": "Explicit relations and axioms enabling validation or inference.", "da": "Eksplicitte relationer og aksiomer der muliggør validering eller inferens."}
       - id: more_words
-        text: {es: Contener siempre más palabras., en: Always containing more words., da: Altid at indeholde flere ord.}
+        text: {"es": "Contener siempre más palabras.", "en": "Always containing more words.", "da": "Altid at indeholde flere ord."}
       - id: public_access
-        text: {es: Ser necesariamente pública., en: Necessarily being public., da: Nødvendigvis at være offentlig.}
+        text: {"es": "Ser necesariamente pública.", "en": "Necessarily being public.", "da": "Nødvendigvis at være offentlig."}
     correct_option_ids: [axioms_relations]
-    explanation: {es: La ontología modela semántica formal, no sólo una lista permitida., en: An ontology models formal semantics, not merely an allowed list., da: En ontologi modellerer formel semantik, ikke blot en tilladt liste.}
+    explanation: {"es": "La ontología modela semántica formal, no sólo una lista permitida.", "en": "An ontology models formal semantics, not merely an allowed list.", "da": "En ontologi modellerer formel semantik, ikke blot en tilladt liste."}
     linked_objectives: [m02.o3, m02.o4]
 
   - id: dm847.m02.q06
     activity_type: true_false
     difficulty: intermediate
-    prompt: {es: Un cross-reference entre dos registros demuestra equivalencia exacta., en: A cross-reference between two records proves exact equivalence., da: En cross-reference mellem to poster beviser eksakt ækvivalens.}
+    prompt: {"es": "Un cross-reference entre dos registros demuestra equivalencia exacta.", "en": "A cross-reference between two records proves exact equivalence.", "da": "En cross-reference mellem to poster beviser eksakt ækvivalens."}
     correct_answer: false
-    explanation: {es: Puede expresar relación amplia, estrecha, histórica o incierta; el tipo debe auditarse., en: It may express broad, narrow, historical, or uncertain relation; mapping type must be audited., da: Den kan udtrykke bred, snæver, historisk eller usikker relation og skal auditeres.}
+    explanation: {"es": "Puede expresar relación amplia, estrecha, histórica o incierta; el tipo debe auditarse.", "en": "It may express broad, narrow, historical, or uncertain relation; mapping type must be audited.", "da": "Den kan udtrykke bred, snæver, historisk eller usikker relation og skal auditeres."}
     linked_objectives: [m02.o7]
 
   - id: dm847.m02.q07
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué pertenece a la procedencia de una tabla derivada?, en: What belongs to provenance for a derived table?, da: Hvad hører til proveniens for en afledt tabel?}
+    prompt: {"es": "¿Qué pertenece a la procedencia de una tabla derivada?", "en": "What belongs to provenance for a derived table?", "da": "Hvad hører til proveniens for en afledt tabel?"}
     options:
       - id: inputs_activity_agent
-        text: {es: Entradas, actividad, agente/software, parámetros, versiones y tiempo., en: Inputs, activity, agent/software, parameters, versions, and time., da: Input, aktivitet, agent/software, parametre, versioner og tid.}
+        text: {"es": "Entradas, actividad, agente/software, parámetros, versiones y tiempo.", "en": "Inputs, activity, agent/software, parameters, versions, and time.", "da": "Input, aktivitet, agent/software, parametre, versioner og tid."}
       - id: only_title
-        text: {es: Sólo el título del archivo., en: Only the file title., da: Kun filens titel.}
+        text: {"es": "Sólo el título del archivo.", "en": "Only the file title.", "da": "Kun filens titel."}
       - id: only_author
-        text: {es: Sólo el nombre del autor., en: Only the author's name., da: Kun forfatterens navn.}
+        text: {"es": "Sólo el nombre del autor.", "en": "Only the author's name.", "da": "Kun forfatterens navn."}
     correct_option_ids: [inputs_activity_agent]
-    explanation: {es: Procedencia debe reconstruir cómo se produjo la salida., en: Provenance should reconstruct how the output was produced., da: Proveniens bør rekonstruere hvordan output blev produceret.}
+    explanation: {"es": "Procedencia debe reconstruir cómo se produjo la salida.", "en": "Provenance should reconstruct how the output was produced.", "da": "Proveniens bør rekonstruere hvordan output blev produceret."}
     linked_objectives: [m02.o6]
 
   - id: dm847.m02.q08
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Cuál afirmación sobre FAIR es correcta?, en: Which statement about FAIR is correct?, da: Hvilken påstand om FAIR er korrekt?}
+    prompt: {"es": "¿Cuál afirmación sobre FAIR es correcta?", "en": "Which statement about FAIR is correct?", "da": "Hvilken påstand om FAIR er korrekt?"}
     options:
       - id: fair_not_open
-        text: {es: Datos restringidos pueden ser FAIR si tienen metadatos, acceso definido, semántica y condiciones de reutilización., en: Restricted data can be FAIR with metadata, defined access, semantics, and reuse conditions., da: Begrænsede data kan være FAIR med metadata, defineret adgang, semantik og genbrugsbetingelser.}
+        text: {"es": "Datos restringidos pueden ser FAIR si tienen metadatos, acceso definido, semántica y condiciones de reutilización.", "en": "Restricted data can be FAIR with metadata, defined access, semantics, and reuse conditions.", "da": "Begrænsede data kan være FAIR med metadata, defineret adgang, semantik og genbrugsbetingelser."}
       - id: fair_public_only
-        text: {es: FAIR significa que todo dato debe descargarse sin autenticación., en: FAIR means all data must be downloadable without authentication., da: FAIR betyder at alle data skal kunne downloades uden autentifikation.}
+        text: {"es": "FAIR significa que todo dato debe descargarse sin autenticación.", "en": "FAIR means all data must be downloadable without authentication.", "da": "FAIR betyder at alle data skal kunne downloades uden autentifikation."}
       - id: fair_csv_only
-        text: {es: Guardar como CSV hace automáticamente FAIR un conjunto., en: Saving as CSV automatically makes a dataset FAIR., da: CSV-format gør automatisk et datasæt FAIR.}
+        text: {"es": "Guardar como CSV hace automáticamente FAIR un conjunto.", "en": "Saving as CSV automatically makes a dataset FAIR.", "da": "CSV-format gør automatisk et datasæt FAIR."}
     correct_option_ids: [fair_not_open]
-    explanation: {es: Acceso puede estar regulado; FAIR exige rutas claras, metadatos e interoperabilidad., en: Access may be governed; FAIR requires clear routes, metadata, and interoperability., da: Adgang kan være reguleret; FAIR kræver klare adgangsveje, metadata og interoperabilitet.}
+    explanation: {"es": "Acceso puede estar regulado; FAIR exige rutas claras, metadatos e interoperabilidad.", "en": "Access may be governed; FAIR requires clear routes, metadata, and interoperability.", "da": "Adgang kan være reguleret; FAIR kræver klare adgangsveje, metadata og interoperabilitet."}
     linked_objectives: [m02.o8]
 
   - id: dm847.m02.q09
     activity_type: multiple_choice
     difficulty: advanced
-    prompt: {es: ¿Cuál es el mayor riesgo de reutilizar un mapeo antiguo sin versión?, en: What is the main risk of reusing an old unversioned mapping?, da: Hvad er hovedrisikoen ved at genbruge en gammel mapping uden version?}
+    prompt: {"es": "¿Cuál es el mayor riesgo de reutilizar un mapeo antiguo sin versión?", "en": "What is the main risk of reusing an old unversioned mapping?", "da": "Hvad er hovedrisikoen ved at genbruge en gammel mapping uden version?"}
     options:
       - id: semantic_drift
-        text: {es: Deriva semántica por términos fusionados, divididos, redefinidos o deprecados., en: Semantic drift from merged, split, redefined, or deprecated terms., da: Semantisk drift fra fusionerede, splittede, redefinerede eller deprecierede termer.}
+        text: {"es": "Deriva semántica por términos fusionados, divididos, redefinidos o deprecados.", "en": "Semantic drift from merged, split, redefined, or deprecated terms.", "da": "Semantisk drift fra fusionerede, splittede, redefinerede eller deprecierede termer."}
       - id: file_color
-        text: {es: Cambio de color del archivo., en: A change in file color., da: Ændring af filfarve.}
+        text: {"es": "Cambio de color del archivo.", "en": "A change in file color.", "da": "Ændring af filfarve."}
       - id: guaranteed_equivalence
-        text: {es: Garantía automática de equivalencia., en: Automatic guarantee of equivalence., da: Automatisk garanti for ækvivalens.}
+        text: {"es": "Garantía automática de equivalencia.", "en": "Automatic guarantee of equivalence.", "da": "Automatisk garanti for ækvivalens."}
     correct_option_ids: [semantic_drift]
-    explanation: {es: El significado y alcance de términos cambian con las versiones., en: Term meaning and scope change across versions., da: Termers betydning og omfang ændres mellem versioner.}
+    explanation: {"es": "El significado y alcance de términos cambian con las versiones.", "en": "Term meaning and scope change across versions.", "da": "Termers betydning og omfang ændres mellem versioner."}
     linked_objectives: [m02.o7]
 
   - id: dm847.m02.q10
     activity_type: true_false
     difficulty: advanced
-    prompt: {es: Codificar una asociación estadística como `causes` es válido si el p-valor es pequeño., en: Encoding a statistical association as `causes` is valid when the p-value is small., da: Det er gyldigt at kode en statistisk association som `causes`, hvis p-værdien er lille.}
+    prompt: {"es": "Codificar una asociación estadística como `causes` es válido si el p-valor es pequeño.", "en": "Encoding a statistical association as `causes` is valid when the p-value is small.", "da": "Det er gyldigt at kode en statistisk association som `causes`, hvis p-værdien er lille."}
     correct_answer: false
-    explanation: {es: Significancia estadística no establece una relación causal; debe usarse una relación de asociación con procedencia del análisis., en: Statistical significance does not establish causality; use an association relation with analysis provenance., da: Statistisk signifikans fastlægger ikke kausalitet; brug en associationsrelation med analyseproveniens.}
+    explanation: {"es": "Significancia estadística no establece una relación causal; debe usarse una relación de asociación con procedencia del análisis.", "en": "Statistical significance does not establish causality; use an association relation with analysis provenance.", "da": "Statistisk signifikans fastlægger ikke kausalitet; brug en associationsrelation med analyseproveniens."}
     linked_objectives: [m02.o5, m02.o6]
 
 assessment_items:
@@ -698,52 +698,52 @@ flashcards:
 
 glossary:
   - id: term.namespace
-    term: {es: espacio de nombres, en: namespace, da: namespace}
-    definition: {es: Contexto que define autoridad, reglas y unicidad de identificadores., en: Context defining identifier authority, rules, and uniqueness., da: Kontekst der definerer identifikatorautoritet, regler og entydighed.}
+    term: {"es": "espacio de nombres", "en": "namespace", "da": "namespace"}
+    definition: {"es": "Contexto que define autoridad, reglas y unicidad de identificadores.", "en": "Context defining identifier authority, rules, and uniqueness.", "da": "Kontekst der definerer identifikatorautoritet, regler og entydighed."}
     related_terms: [term.identifier]
   - id: term.accession
-    term: {es: accesión, en: accession, da: accession}
-    definition: {es: Identificador asignado por un recurso a un registro, a menudo estable entre revisiones., en: Identifier assigned by a resource to a record, often stable across revisions., da: Identifikator tildelt en post, ofte stabil mellem revisioner.}
+    term: {"es": "accesión", "en": "accession", "da": "accession"}
+    definition: {"es": "Identificador asignado por un recurso a un registro, a menudo estable entre revisiones.", "en": "Identifier assigned by a resource to a record, often stable across revisions.", "da": "Identifikator tildelt en post, ofte stabil mellem revisioner."}
     related_terms: [term.version]
   - id: term.version
-    term: {es: versión, en: version, da: version}
-    definition: {es: Marca que distingue revisiones de contenido o esquema., en: Marker distinguishing content or schema revisions., da: Markør der skelner revisioner af indhold eller skema.}
+    term: {"es": "versión", "en": "version", "da": "version"}
+    definition: {"es": "Marca que distingue revisiones de contenido o esquema.", "en": "Marker distinguishing content or schema revisions.", "da": "Markør der skelner revisioner af indhold eller skema."}
     related_terms: [term.accession]
   - id: term.controlled_vocabulary
-    term: {es: vocabulario controlado, en: controlled vocabulary, da: kontrolleret vokabular}
-    definition: {es: Conjunto regulado de términos permitidos y sus definiciones., en: Governed set of allowed terms and definitions., da: Styret sæt af tilladte termer og definitioner.}
+    term: {"es": "vocabulario controlado", "en": "controlled vocabulary", "da": "kontrolleret vokabular"}
+    definition: {"es": "Conjunto regulado de términos permitidos y sus definiciones.", "en": "Governed set of allowed terms and definitions.", "da": "Styret sæt af tilladte termer og definitioner."}
     related_terms: [term.ontology]
   - id: term.ontology
-    term: {es: ontología, en: ontology, da: ontologi}
-    definition: {es: Modelo explícito de clases, relaciones y restricciones de un dominio., en: Explicit model of domain classes, relations, and constraints., da: Eksplicit model af domænets klasser, relationer og restriktioner.}
+    term: {"es": "ontología", "en": "ontology", "da": "ontologi"}
+    definition: {"es": "Modelo explícito de clases, relaciones y restricciones de un dominio.", "en": "Explicit model of domain classes, relations, and constraints.", "da": "Eksplicit model af domænets klasser, relationer og restriktioner."}
     related_terms: [term.axiom]
   - id: term.axiom
-    term: {es: axioma, en: axiom, da: aksiom}
-    definition: {es: Afirmación formal usada para restringir o inferir conocimiento en un modelo., en: Formal statement used to constrain or infer knowledge in a model., da: Formel påstand brugt til at begrænse eller inferere viden i en model.}
+    term: {"es": "axioma", "en": "axiom", "da": "aksiom"}
+    definition: {"es": "Afirmación formal usada para restringir o inferir conocimiento en un modelo.", "en": "Formal statement used to constrain or infer knowledge in a model.", "da": "Formel påstand brugt til at begrænse eller inferere viden i en model."}
     related_terms: [term.ontology]
   - id: term.is_a
-    term: {es: relación es-un, en: is-a relation, da: is-a-relation}
-    definition: {es: Relación de subclasificación entre un tipo específico y otro más general., en: Subclassification relation between a specific and broader type., da: Subklassifikationsrelation mellem en specifik og bredere type.}
+    term: {"es": "relación es-un", "en": "is-a relation", "da": "is-a-relation"}
+    definition: {"es": "Relación de subclasificación entre un tipo específico y otro más general.", "en": "Subclassification relation between a specific and broader type.", "da": "Subklassifikationsrelation mellem en specifik og bredere type."}
     related_terms: [term.part_of]
   - id: term.part_of
-    term: {es: relación parte-de, en: part-of relation, da: part-of-relation}
-    definition: {es: Relación mereológica entre componente y totalidad., en: Mereological relation between component and whole., da: Mereologisk relation mellem del og helhed.}
+    term: {"es": "relación parte-de", "en": "part-of relation", "da": "part-of-relation"}
+    definition: {"es": "Relación mereológica entre componente y totalidad.", "en": "Mereological relation between component and whole.", "da": "Mereologisk relation mellem del og helhed."}
     related_terms: [term.is_a]
   - id: term.provenance
-    term: {es: procedencia, en: provenance, da: proveniens}
-    definition: {es: Registro del origen y proceso de producción de una entidad o afirmación., en: Record of the origin and production process of an entity or claim., da: Registrering af oprindelse og produktionsproces for en enhed eller påstand.}
+    term: {"es": "procedencia", "en": "provenance", "da": "proveniens"}
+    definition: {"es": "Registro del origen y proceso de producción de una entidad o afirmación.", "en": "Record of the origin and production process of an entity or claim.", "da": "Registrering af oprindelse og produktionsproces for en enhed eller påstand."}
     related_terms: [term.lineage]
   - id: term.evidence_code
-    term: {es: código de evidencia, en: evidence code, da: evidenskode}
-    definition: {es: Categoría estructurada que describe cómo se respalda una afirmación., en: Structured category describing how a claim is supported., da: Struktureret kategori der beskriver hvordan en påstand understøttes.}
+    term: {"es": "código de evidencia", "en": "evidence code", "da": "evidenskode"}
+    definition: {"es": "Categoría estructurada que describe cómo se respalda una afirmación.", "en": "Structured category describing how a claim is supported.", "da": "Struktureret kategori der beskriver hvordan en påstand understøttes."}
     related_terms: [term.provenance]
   - id: term.semantic_drift
-    term: {es: deriva semántica, en: semantic drift, da: semantisk drift}
-    definition: {es: Cambio de significado o alcance de un término o mapeo a través del tiempo., en: Change in meaning or scope of a term or mapping over time., da: Ændring i betydning eller omfang af en term eller mapping over tid.}
+    term: {"es": "deriva semántica", "en": "semantic drift", "da": "semantisk drift"}
+    definition: {"es": "Cambio de significado o alcance de un término o mapeo a través del tiempo.", "en": "Change in meaning or scope of a term or mapping over time.", "da": "Ændring i betydning eller omfang af en term eller mapping over tid."}
     related_terms: [term.version]
   - id: term.fair
-    term: {es: FAIR, en: FAIR, da: FAIR}
-    definition: {es: Principios para que datos sean encontrables, accesibles, interoperables y reutilizables., en: Principles making data findable, accessible, interoperable, and reusable., da: Principper der gør data findbare, tilgængelige, interoperable og genbrugelige.}
+    term: {"es": "FAIR", "en": "FAIR", "da": "FAIR"}
+    definition: {"es": "Principios para que datos sean encontrables, accesibles, interoperables y reutilizables.", "en": "Principles making data findable, accessible, interoperable, and reusable.", "da": "Principper der gør data findbare, tilgængelige, interoperable og genbrugelige."}
     related_terms: [term.provenance, term.namespace]
 
 hidden_guided_support:
@@ -768,26 +768,26 @@ hidden_guided_support:
       assembly, tid og proveniens. Ontologier giver typede relationer; FAIR kan omfatte reguleret adgang.
   misconceptions:
     - id: m02.mc01
-      claim: {es: Un símbolo génico es un identificador universal permanente., en: A gene symbol is a permanent universal identifier., da: Et gensymbol er en permanent universel identifikator.}
-      correction: {es: Puede cambiar, ser ambiguo o depender de organismo; debe resolverse a un namespace estable., en: It may change, be ambiguous, or organism-dependent and should resolve to a stable namespace., da: Det kan ændres eller være tvetydigt og bør resolves til et stabilt namespace.}
+      claim: {"es": "Un símbolo génico es un identificador universal permanente.", "en": "A gene symbol is a permanent universal identifier.", "da": "Et gensymbol er en permanent universel identifikator."}
+      correction: {"es": "Puede cambiar, ser ambiguo o depender de organismo; debe resolverse a un namespace estable.", "en": "It may change, be ambiguous, or organism-dependent and should resolve to a stable namespace.", "da": "Det kan ændres eller være tvetydigt og bør resolves til et stabilt namespace."}
     - id: m02.mc02
-      claim: {es: Una accesión estable nunca cambia de contenido., en: A stable accession never changes content., da: En stabil accession ændrer aldrig indhold.}
-      correction: {es: La versión distingue revisiones mientras la accesión base puede persistir., en: Version distinguishes revisions while the base accession may persist., da: Version skelner revisioner mens accession kan bestå.}
+      claim: {"es": "Una accesión estable nunca cambia de contenido.", "en": "A stable accession never changes content.", "da": "En stabil accession ændrer aldrig indhold."}
+      correction: {"es": "La versión distingue revisiones mientras la accesión base puede persistir.", "en": "Version distinguishes revisions while the base accession may persist.", "da": "Version skelner revisioner mens accession kan bestå."}
     - id: m02.mc03
-      claim: {es: Toda jerarquía es una ontología formal., en: Every hierarchy is a formal ontology., da: Ethvert hierarki er en formel ontologi.}
-      correction: {es: Una ontología formal declara semántica, relaciones y axiomas además de orden jerárquico., en: A formal ontology declares semantics, relations, and axioms beyond hierarchy., da: En formel ontologi deklarerer semantik, relationer og aksiomer ud over hierarki.}
+      claim: {"es": "Toda jerarquía es una ontología formal.", "en": "Every hierarchy is a formal ontology.", "da": "Ethvert hierarki er en formel ontologi."}
+      correction: {"es": "Una ontología formal declara semántica, relaciones y axiomas además de orden jerárquico.", "en": "A formal ontology declares semantics, relations, and axioms beyond hierarchy.", "da": "En formel ontologi deklarerer semantik, relationer og aksiomer ud over hierarki."}
     - id: m02.mc04
-      claim: {es: Parte-de y es-un son equivalentes., en: Part-of and is-a are equivalent., da: Part-of og is-a er ækvivalente.}
-      correction: {es: Una expresa composición y la otra clasificación., en: One expresses composition and the other classification., da: Den ene udtrykker komposition, den anden klassifikation.}
+      claim: {"es": "Parte-de y es-un son equivalentes.", "en": "Part-of and is-a are equivalent.", "da": "Part-of og is-a er ækvivalente."}
+      correction: {"es": "Una expresa composición y la otra clasificación.", "en": "One expresses composition and the other classification.", "da": "Den ene udtrykker komposition, den anden klassifikation."}
     - id: m02.mc05
-      claim: {es: Cross-reference significa identidad exacta., en: Cross-reference means exact identity., da: Cross-reference betyder eksakt identitet.}
-      correction: {es: Sólo indica una conexión cuyo tipo y evidencia deben revisarse., en: It indicates a connection whose type and evidence require review., da: Det angiver en forbindelse hvis type og evidens skal vurderes.}
+      claim: {"es": "Cross-reference significa identidad exacta.", "en": "Cross-reference means exact identity.", "da": "Cross-reference betyder eksakt identitet."}
+      correction: {"es": "Sólo indica una conexión cuyo tipo y evidencia deben revisarse.", "en": "It indicates a connection whose type and evidence require review.", "da": "Det angiver en forbindelse hvis type og evidens skal vurderes."}
     - id: m02.mc06
-      claim: {es: Procedencia es sólo citar una publicación., en: Provenance is only citing a publication., da: Proveniens er kun at citere en publikation.}
-      correction: {es: Incluye entradas, actividades, agentes, software, versiones, parámetros, tiempo y salidas., en: It includes inputs, activities, agents, software, versions, parameters, time, and outputs., da: Det omfatter input, aktiviteter, agenter, software, versioner, parametre, tid og output.}
+      claim: {"es": "Procedencia es sólo citar una publicación.", "en": "Provenance is only citing a publication.", "da": "Proveniens er kun at citere en publikation."}
+      correction: {"es": "Incluye entradas, actividades, agentes, software, versiones, parámetros, tiempo y salidas.", "en": "It includes inputs, activities, agents, software, versions, parameters, time, and outputs.", "da": "Det omfatter input, aktiviteter, agenter, software, versioner, parametre, tid og output."}
     - id: m02.mc07
-      claim: {es: FAIR significa datos completamente abiertos., en: FAIR means completely open data., da: FAIR betyder helt åbne data.}
-      correction: {es: Datos restringidos pueden ser FAIR con metadatos y acceso gobernado bien definidos., en: Restricted data may be FAIR with metadata and well-defined governed access., da: Begrænsede data kan være FAIR med metadata og veldefineret reguleret adgang.}
+      claim: {"es": "FAIR significa datos completamente abiertos.", "en": "FAIR means completely open data.", "da": "FAIR betyder helt åbne data."}
+      correction: {"es": "Datos restringidos pueden ser FAIR con metadatos y acceso gobernado bien definidos.", "en": "Restricted data may be FAIR with metadata and well-defined governed access.", "da": "Begrænsede data kan være FAIR med metadata og veldefineret reguleret adgang."}
   socratic_questions:
     - ¿Qué entidad real pretende identificar esta cadena?
     - Which namespace and version define this identifier?
@@ -813,34 +813,34 @@ hidden_guided_support:
   retrieval_fragments:
     - id: dm847.m02.h01
       topic: identifier_layers
-      text: {es: Entidad, registro, accesión, versión, símbolo y etiqueta son capas distintas., en: Entity, record, accession, version, symbol, and label are distinct layers., da: Enhed, post, accession, version, symbol og label er forskellige lag.}
+      text: {"es": "Entidad, registro, accesión, versión, símbolo y etiqueta son capas distintas.", "en": "Entity, record, accession, version, symbol, and label are distinct layers.", "da": "Enhed, post, accession, version, symbol og label er forskellige lag."}
     - id: dm847.m02.h02
       topic: namespace
-      text: {es: Un identificador sin namespace puede ser ambiguo., en: An identifier without a namespace may be ambiguous., da: En identifikator uden namespace kan være tvetydig.}
+      text: {"es": "Un identificador sin namespace puede ser ambiguo.", "en": "An identifier without a namespace may be ambiguous.", "da": "En identifikator uden namespace kan være tvetydig."}
     - id: dm847.m02.h03
       topic: genomic_coordinates
-      text: {es: Coordenadas requieren ensamblaje, contig, convención y orientación., en: Coordinates require assembly, contig, convention, and orientation., da: Koordinater kræver assembly, contig, konvention og orientering.}
+      text: {"es": "Coordenadas requieren ensamblaje, contig, convención y orientación.", "en": "Coordinates require assembly, contig, convention, and orientation.", "da": "Koordinater kræver assembly, contig, konvention og orientering."}
     - id: dm847.m02.h04
       topic: ontology
-      text: {es: Una ontología declara clases, relaciones y restricciones para representar significado., en: An ontology declares classes, relations, and constraints to represent meaning., da: En ontologi deklarerer klasser, relationer og restriktioner for at repræsentere betydning.}
+      text: {"es": "Una ontología declara clases, relaciones y restricciones para representar significado.", "en": "An ontology declares classes, relations, and constraints to represent meaning.", "da": "En ontologi deklarerer klasser, relationer og restriktioner for at repræsentere betydning."}
     - id: dm847.m02.h05
       topic: relation_typing
-      text: {es: Es-un clasifica; parte-de compone; derivado-de registra linaje., en: Is-a classifies; part-of composes; derived-from records lineage., da: Is-a klassificerer; part-of sammensætter; derived-from registrerer lineage.}
+      text: {"es": "Es-un clasifica; parte-de compone; derivado-de registra linaje.", "en": "Is-a classifies; part-of composes; derived-from records lineage.", "da": "Is-a klassificerer; part-of sammensætter; derived-from registrerer lineage."}
     - id: dm847.m02.h06
       topic: provenance
-      text: {es: Procedencia enlaza salida, actividad, entradas, parámetros, agente y tiempo., en: Provenance links output, activity, inputs, parameters, agent, and time., da: Proveniens forbinder output, aktivitet, input, parametre, agent og tid.}
+      text: {"es": "Procedencia enlaza salida, actividad, entradas, parámetros, agente y tiempo.", "en": "Provenance links output, activity, inputs, parameters, agent, and time.", "da": "Proveniens forbinder output, aktivitet, input, parametre, agent og tid."}
     - id: dm847.m02.h07
       topic: mapping
-      text: {es: Un mapeo debe tipar equivalencia y conservar evidencia y versión., en: A mapping should type equivalence and preserve evidence and version., da: En mapping bør type ækvivalens og bevare evidens og version.}
+      text: {"es": "Un mapeo debe tipar equivalencia y conservar evidencia y versión.", "en": "A mapping should type equivalence and preserve evidence and version.", "da": "En mapping bør type ækvivalens og bevare evidens og version."}
     - id: dm847.m02.h08
       topic: semantic_drift
-      text: {es: Términos fusionados, divididos o deprecados pueden invalidar mapeos antiguos., en: Merged, split, or deprecated terms can invalidate old mappings., da: Fusionerede, splittede eller deprecierede termer kan invalidere gamle mappings.}
+      text: {"es": "Términos fusionados, divididos o deprecados pueden invalidar mapeos antiguos.", "en": "Merged, split, or deprecated terms can invalidate old mappings.", "da": "Fusionerede, splittede eller deprecierede termer kan invalidere gamle mappings."}
     - id: dm847.m02.h09
       topic: fair_access
-      text: {es: Accesible puede significar acceso autenticado y gobernado, no necesariamente abierto., en: Accessible may mean authenticated governed access, not necessarily open., da: Tilgængelig kan betyde autentificeret reguleret adgang, ikke nødvendigvis åben.}
+      text: {"es": "Accesible puede significar acceso autenticado y gobernado, no necesariamente abierto.", "en": "Accessible may mean authenticated governed access, not necessarily open.", "da": "Tilgængelig kan betyde autentificeret reguleret adgang, ikke nødvendigvis åben."}
     - id: dm847.m02.h10
       topic: reuse
-      text: {es: Reutilización requiere licencia, contexto, calidad, procedencia y restricciones claras., en: Reuse requires license, context, quality, provenance, and clear constraints., da: Genbrug kræver licens, kontekst, kvalitet, proveniens og klare restriktioner.}
+      text: {"es": "Reutilización requiere licencia, contexto, calidad, procedencia y restricciones claras.", "en": "Reuse requires license, context, quality, provenance, and clear constraints.", "da": "Genbrug kræver licens, kontekst, kvalitet, proveniens og klare restriktioner."}
 
 sources:
   - id: sdu.dm847.official.2025

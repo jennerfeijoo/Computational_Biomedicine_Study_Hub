@@ -5,17 +5,17 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Bioestadística en R I
-    en: Biostatistics in R I
-    da: Biostatistik i R I
+    es: "Bioestadística en R I"
+    en: "Biostatistics in R I"
+    da: "Biostatistik i R I"
   ects: 5
   level: masters
   term: autumn
   teaching_language: English
   assessment:
-    es: Participación tutorial obligatoria y examen oral
-    en: Mandatory tutorial participation and oral examination
-    da: Obligatorisk tutorialdeltagelse og mundtlig eksamen
+    es: "Participación tutorial obligatoria y examen oral"
+    en: "Mandatory tutorial participation and oral examination"
+    da: "Obligatorisk tutorialdeltagelse og mundtlig eksamen"
   purpose:
     es: >-
       Desarrollar la capacidad de formular preguntas estadísticas a partir de problemas biológicos,
@@ -46,114 +46,114 @@ academic_preconditions:
 official_learning_outcomes:
   - id: bmb830.lo01
     statement:
-      es: Analizar de forma independiente conjuntos de datos biológicos.
-      en: Independently analyze biological datasets.
-      da: Selvstændigt analysere biologiske datasæt.
+      es: "Analizar de forma independiente conjuntos de datos biológicos."
+      en: "Independently analyze biological datasets."
+      da: "Selvstændigt analysere biologiske datasæt."
   - id: bmb830.lo02
     statement:
-      es: Trabajar con grandes cantidades de datos y aplicar análisis estadísticos estándar para identificar características relevantes.
-      en: Work with large data amounts and perform standard statistical analysis to identify relevant features.
-      da: Arbejde med store datamængder og udføre standardstatistiske analyser for at identificere relevante karakteristika.
+      es: "Trabajar con grandes cantidades de datos y aplicar análisis estadísticos estándar para identificar características relevantes."
+      en: "Work with large data amounts and perform standard statistical analysis to identify relevant features."
+      da: "Arbejde med store datamængder og udføre standardstatistiske analyser for at identificere relevante karakteristika."
   - id: bmb830.lo03
     statement:
-      es: Utilizar algoritmos estándar de análisis multivariante introductorio.
-      en: Use standard algorithms for introductory multivariate analysis.
-      da: Anvende standardalgoritmer til introducerende multivariat analyse.
+      es: "Utilizar algoritmos estándar de análisis multivariante introductorio."
+      en: "Use standard algorithms for introductory multivariate analysis."
+      da: "Anvende standardalgoritmer til introducerende multivariat analyse."
   - id: bmb830.lo04
     statement:
-      es: Diseñar scripts en R para visualización detallada.
-      en: Design R scripts for detailed visualization.
-      da: Designe R-scripts til detaljeret visualisering.
+      es: "Diseñar scripts en R para visualización detallada."
+      en: "Design R scripts for detailed visualization."
+      da: "Designe R-scripts til detaljeret visualisering."
   - id: bmb830.lo05
     statement:
-      es: Aplicar herramientas para interpretar datos biológicos.
-      en: Apply tools for biological data interpretation.
-      da: Anvende værktøjer til fortolkning af biologiske data.
+      es: "Aplicar herramientas para interpretar datos biológicos."
+      en: "Apply tools for biological data interpretation."
+      da: "Anvende værktøjer til fortolkning af biologiske data."
   - id: bmb830.lo06
     statement:
-      es: Discutir objetivamente métodos de análisis utilizados en publicaciones científicas.
-      en: Objectively discuss data-analysis methods used in scientific publications.
-      da: Objektivt diskutere dataanalysemetoder anvendt i videnskabelige publikationer.
+      es: "Discutir objetivamente métodos de análisis utilizados en publicaciones científicas."
+      en: "Objectively discuss data-analysis methods used in scientific publications."
+      da: "Objektivt diskutere dataanalysemetoder anvendt i videnskabelige publikationer."
 
 module_sequence:
   - id: bmb830.m01
     order: 1
     title:
-      es: Preguntas estadísticas, variables biológicas, unidades de estudio y procedencia
-      en: Statistical questions, biological variables, study units, and data provenance
-      da: Statistiske spørgsmål, biologiske variable, studieenheder og provenance
+      es: "Preguntas estadísticas, variables biológicas, unidades de estudio y procedencia"
+      en: "Statistical questions, biological variables, study units, and data provenance"
+      da: "Statistiske spørgsmål, biologiske variable, studieenheder og provenance"
     outcomes: [bmb830.lo01, bmb830.lo05, bmb830.lo06]
     prerequisites: []
   - id: bmb830.m02
     order: 2
     title:
-      es: Fundamentos de R, vectores, data frames, funciones y scripts reproducibles
-      en: R foundations, vectors, data frames, functions, and reproducible scripts
-      da: R-grundlag, vektorer, data frames, funktioner og reproducerbare scripts
+      es: "Fundamentos de R, vectores, data frames, funciones y scripts reproducibles"
+      en: "R foundations, vectors, data frames, functions, and reproducible scripts"
+      da: "R-grundlag, vektorer, data frames, funktioner og reproducerbare scripts"
     outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo04]
     prerequisites: [bmb830.m01, dm857.m04, dm857.m06]
   - id: bmb830.m03
     order: 3
     title:
-      es: Importación, limpieza, valores ausentes, reshaping y validación
-      en: Data import, cleaning, missingness, reshaping, and validation
-      da: Dataimport, rensning, manglende værdier, reshaping og validering
+      es: "Importación, limpieza, valores ausentes, reshaping y validación"
+      en: "Data import, cleaning, missingness, reshaping, and validation"
+      da: "Dataimport, rensning, manglende værdier, reshaping og validering"
     outcomes: [bmb830.lo01, bmb830.lo02]
     prerequisites: [bmb830.m01, bmb830.m02]
   - id: bmb830.m04
     order: 4
     title:
-      es: Estadística descriptiva y visualización biológica honesta
-      en: Descriptive statistics and honest biological visualization
-      da: Deskriptiv statistik og ærlig biologisk visualisering
+      es: "Estadística descriptiva y visualización biológica honesta"
+      en: "Descriptive statistics and honest biological visualization"
+      da: "Deskriptiv statistik og ærlig biologisk visualisering"
     outcomes: [bmb830.lo01, bmb830.lo04, bmb830.lo05]
     prerequisites: [bmb830.m02, bmb830.m03]
   - id: bmb830.m05
     order: 5
     title:
-      es: Probabilidad, variables aleatorias y distribuciones biológicas
-      en: Probability, random variables, and biological distributions
-      da: Sandsynlighed, stokastiske variable og biologiske fordelinger
+      es: "Probabilidad, variables aleatorias y distribuciones biológicas"
+      en: "Probability, random variables, and biological distributions"
+      da: "Sandsynlighed, stokastiske variable og biologiske fordelinger"
     outcomes: [bmb830.lo01, bmb830.lo05]
     prerequisites: [bmb830.m01, bmb830.m04]
   - id: bmb830.m06
     order: 6
     title:
-      es: Distribuciones muestrales, estimación, intervalos de confianza y bootstrap
-      en: Sampling distributions, estimation, confidence intervals, and bootstrap reasoning
-      da: Samplingfordelinger, estimation, konfidensintervaller og bootstrap-ræsonnering
+      es: "Distribuciones muestrales, estimación, intervalos de confianza y bootstrap"
+      en: "Sampling distributions, estimation, confidence intervals, and bootstrap reasoning"
+      da: "Samplingfordelinger, estimation, konfidensintervaller og bootstrap-ræsonnering"
     outcomes: [bmb830.lo01, bmb830.lo05, bmb830.lo06]
     prerequisites: [bmb830.m04, bmb830.m05]
   - id: bmb830.m07
     order: 7
     title:
-      es: Contraste de hipótesis, tamaños de efecto, multiplicidad y afirmaciones científicas
-      en: Hypothesis testing, effect sizes, multiplicity awareness, and scientific claims
-      da: Hypotesetest, effektstørrelser, multiplicitet og videnskabelige påstande
+      es: "Contraste de hipótesis, tamaños de efecto, multiplicidad y afirmaciones científicas"
+      en: "Hypothesis testing, effect sizes, multiplicity awareness, and scientific claims"
+      da: "Hypotesetest, effektstørrelser, multiplicitet og videnskabelige påstande"
     outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo05, bmb830.lo06]
     prerequisites: [bmb830.m05, bmb830.m06]
   - id: bmb830.m08
     order: 8
     title:
-      es: Modelos lineales, ANOVA, diagnósticos e interpretación biológica
-      en: Linear models, ANOVA, diagnostics, and biological interpretation
-      da: Lineære modeller, ANOVA, diagnostik og biologisk fortolkning
+      es: "Modelos lineales, ANOVA, diagnósticos e interpretación biológica"
+      en: "Linear models, ANOVA, diagnostics, and biological interpretation"
+      da: "Lineære modeller, ANOVA, diagnostik og biologisk fortolkning"
     outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo05, bmb830.lo06]
     prerequisites: [bmb830.m03, bmb830.m04, bmb830.m06, bmb830.m07]
   - id: bmb830.m09
     order: 9
     title:
-      es: Análisis multivariante introductorio con PCA, distancias y clustering
-      en: Introductory multivariate analysis with PCA, distances, and clustering
-      da: Introducerende multivariat analyse med PCA, afstande og clustering
+      es: "Análisis multivariante introductorio con PCA, distancias y clustering"
+      en: "Introductory multivariate analysis with PCA, distances, and clustering"
+      da: "Introducerende multivariat analyse med PCA, afstande og clustering"
     outcomes: [bmb830.lo02, bmb830.lo03, bmb830.lo04, bmb830.lo05]
     prerequisites: [bmb830.m03, bmb830.m04, bmb830.m05]
   - id: bmb830.m10
     order: 10
     title:
-      es: Análisis completo, evaluación de publicaciones y examen oral
-      en: End-to-end analysis, publication appraisal, and oral examination
-      da: End-to-end-analyse, publikationskritik og mundtlig eksamen
+      es: "Análisis completo, evaluación de publicaciones y examen oral"
+      en: "End-to-end analysis, publication appraisal, and oral examination"
+      da: "End-to-end-analyse, publikationskritik og mundtlig eksamen"
     outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo03, bmb830.lo04, bmb830.lo05, bmb830.lo06]
     prerequisites: [bmb830.m01, bmb830.m02, bmb830.m03, bmb830.m04, bmb830.m05, bmb830.m06, bmb830.m07, bmb830.m08, bmb830.m09]
 

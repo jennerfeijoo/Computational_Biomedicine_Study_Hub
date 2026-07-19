@@ -5,7 +5,7 @@ content_version: 1.0.0
 status: academically_reviewed_draft
 
 metadata:
-  title: {es: Bibliotecas, entornos y computación científica, en: Libraries, environments, and scientific computing, da: Biblioteker, miljøer og videnskabelig databehandling}
+  title: {"es": "Bibliotecas, entornos y computación científica", "en": "Libraries, environments, and scientific computing", "da": "Biblioteker, miljøer og videnskabelig databehandling"}
   summary:
     es: >-
       Uso verificable de módulos, paquetes y documentación; creación de entornos reproducibles;
@@ -27,18 +27,18 @@ metadata:
   difficulty: intermediate_to_advanced
 
 objectives:
-  - {id: m13.o1, bloom_level: understand, statement: {es: Explicar resolución de imports, módulos, paquetes y espacios de nombres., en: Explain import resolution, modules, packages, and namespaces., da: Forklare importopløsning, moduler, pakker og namespaces.}, evidence: import_explanation}
-  - {id: m13.o2, bloom_level: create, statement: {es: Crear un entorno reproducible y registrar versiones, semillas y datos relevantes., en: Create a reproducible environment and record relevant versions, seeds, and data., da: Oprette et reproducerbart miljø og registrere versioner, seeds og data.}, evidence: reproducibility_manifest}
-  - {id: m13.o3, bloom_level: apply, statement: {es: Construir e inspeccionar arrays NumPy con shape y dtype explícitos., en: Construct and inspect NumPy arrays with explicit shape and dtype., da: Konstruere og undersøge NumPy-arrays med eksplicit shape og dtype.}, evidence: ndarray_analysis}
-  - {id: m13.o4, bloom_level: analyze, statement: {es: Aplicar vectorización y broadcasting verificando orientación y semántica dimensional., en: Apply vectorization and broadcasting while verifying orientation and dimensional semantics., da: Anvende vektorisering og broadcasting med kontrol af orientering og dimensionel semantik.}, evidence: broadcasting_reasoning}
-  - {id: m13.o5, bloom_level: apply, statement: {es: Crear, seleccionar y transformar DataFrames de pandas de manera explícita., en: Create, select, and transform pandas DataFrames explicitly., da: Oprette, vælge og transformere pandas-DataFrames eksplicit.}, evidence: dataframe_pipeline}
-  - {id: m13.o6, bloom_level: evaluate, statement: {es: Tratar índices, tipos de columna y valores ausentes según un contrato de datos., en: Handle indexes, column types, and missing values according to a data contract., da: Håndtere indeks, kolonnetyper og manglende værdier efter en datakontrakt.}, evidence: tabular_validation}
-  - {id: m13.o7, bloom_level: create, statement: {es: Construir visualizaciones con codificaciones, escalas y etiquetas no distorsionantes., en: Build visualizations with non-distorting encodings, scales, and labels., da: Bygge visualiseringer med ikke-forvrængende kodninger, skalaer og etiketter.}, evidence: visualization_design}
-  - {id: m13.o8, bloom_level: create, statement: {es: Validar resultados mediante controles de forma, rango, unidades, identidad y equivalencia con una referencia., en: Validate results using shape, range, unit, identity, and reference-equivalence checks., da: Validere resultater gennem shape-, interval-, enheds-, identitets- og referencekontrol.}, evidence: scientific_validation_suite}
+  - {id: m13.o1, bloom_level: understand, statement: {"es": "Explicar resolución de imports, módulos, paquetes y espacios de nombres.", "en": "Explain import resolution, modules, packages, and namespaces.", "da": "Forklare importopløsning, moduler, pakker og namespaces."}, evidence: import_explanation}
+  - {id: m13.o2, bloom_level: create, statement: {"es": "Crear un entorno reproducible y registrar versiones, semillas y datos relevantes.", "en": "Create a reproducible environment and record relevant versions, seeds, and data.", "da": "Oprette et reproducerbart miljø og registrere versioner, seeds og data."}, evidence: reproducibility_manifest}
+  - {id: m13.o3, bloom_level: apply, statement: {"es": "Construir e inspeccionar arrays NumPy con shape y dtype explícitos.", "en": "Construct and inspect NumPy arrays with explicit shape and dtype.", "da": "Konstruere og undersøge NumPy-arrays med eksplicit shape og dtype."}, evidence: ndarray_analysis}
+  - {id: m13.o4, bloom_level: analyze, statement: {"es": "Aplicar vectorización y broadcasting verificando orientación y semántica dimensional.", "en": "Apply vectorization and broadcasting while verifying orientation and dimensional semantics.", "da": "Anvende vektorisering og broadcasting med kontrol af orientering og dimensionel semantik."}, evidence: broadcasting_reasoning}
+  - {id: m13.o5, bloom_level: apply, statement: {"es": "Crear, seleccionar y transformar DataFrames de pandas de manera explícita.", "en": "Create, select, and transform pandas DataFrames explicitly.", "da": "Oprette, vælge og transformere pandas-DataFrames eksplicit."}, evidence: dataframe_pipeline}
+  - {id: m13.o6, bloom_level: evaluate, statement: {"es": "Tratar índices, tipos de columna y valores ausentes según un contrato de datos.", "en": "Handle indexes, column types, and missing values according to a data contract.", "da": "Håndtere indeks, kolonnetyper og manglende værdier efter en datakontrakt."}, evidence: tabular_validation}
+  - {id: m13.o7, bloom_level: create, statement: {"es": "Construir visualizaciones con codificaciones, escalas y etiquetas no distorsionantes.", "en": "Build visualizations with non-distorting encodings, scales, and labels.", "da": "Bygge visualiseringer med ikke-forvrængende kodninger, skalaer og etiketter."}, evidence: visualization_design}
+  - {id: m13.o8, bloom_level: create, statement: {"es": "Validar resultados mediante controles de forma, rango, unidades, identidad y equivalencia con una referencia.", "en": "Validate results using shape, range, unit, identity, and reference-equivalence checks.", "da": "Validere resultater gennem shape-, interval-, enheds-, identitets- og referencekontrol."}, evidence: scientific_validation_suite}
 
 concepts:
   - id: imports-modules-packages-namespaces
-    title: {es: Imports, módulos, paquetes y espacios de nombres, en: Imports, modules, packages, and namespaces, da: Imports, moduler, pakker og namespaces}
+    title: {"es": "Imports, módulos, paquetes y espacios de nombres", "en": "Imports, modules, packages, and namespaces", "da": "Imports, moduler, pakker og namespaces"}
     body:
       es: >-
         Un módulo es una unidad Python importable; un paquete organiza módulos bajo un espacio de nombres.
@@ -55,7 +55,7 @@ concepts:
         Imports bør være eksplicitte og afhænge af dokumenteret offentlig API.
     linked_objectives: [m13.o1]
   - id: documentation-and-api-contracts
-    title: {es: Documentación y contratos de API, en: Documentation and API contracts, da: Dokumentation og API-kontrakter}
+    title: {"es": "Documentación y contratos de API", "en": "Documentation and API contracts", "da": "Dokumentation og API-kontrakter"}
     body:
       es: >-
         Usar una biblioteca exige comprobar firma, tipos aceptados, shape de entrada y retorno, errores,
@@ -72,7 +72,7 @@ concepts:
         Offentlig dokumenteret API foretrækkes.
     linked_objectives: [m13.o1, m13.o2, m13.o8]
   - id: environments-and-reproducibility
-    title: {es: Entornos y reproducibilidad computacional, en: Environments and computational reproducibility, da: Miljøer og beregningsmæssig reproducerbarhed}
+    title: {"es": "Entornos y reproducibilidad computacional", "en": "Environments and computational reproducibility", "da": "Miljøer og beregningsmæssig reproducerbarhed"}
     body:
       es: >-
         Un entorno virtual aísla dependencias por proyecto. La reproducibilidad requiere declarar versión
@@ -89,7 +89,7 @@ concepts:
         platform, seeds, inputdata og kommandoer. Et seed garanterer ikke altid fuld determinisme.
     linked_objectives: [m13.o2]
   - id: numpy-array-model
-    title: {es: Modelo de arrays NumPy, en: NumPy array model, da: NumPy-arraymodellen}
+    title: {"es": "Modelo de arrays NumPy", "en": "NumPy array model", "da": "NumPy-arraymodellen"}
     body:
       es: >-
         `ndarray` almacena datos homogéneos en n dimensiones. `shape` describe dimensiones, `ndim` su
@@ -106,7 +106,7 @@ concepts:
         strukturen. `reshape` bevarer size, og views kan dele hukommelse.
     linked_objectives: [m13.o3, m13.o8]
   - id: vectorization-and-broadcasting
-    title: {es: Vectorización y broadcasting, en: Vectorization and broadcasting, da: Vektorisering og broadcasting}
+    title: {"es": "Vectorización y broadcasting", "en": "Vectorization and broadcasting", "da": "Vektorisering og broadcasting"}
     body:
       es: >-
         Vectorizar expresa operaciones sobre arrays completos y evita bucles Python explícitos. Broadcasting
@@ -116,7 +116,7 @@ concepts:
         shape esperado y eje de reducción. Los resultados se comparan con un caso pequeño manual.
       en: >-
         Vectorization operates on whole arrays. Broadcasting aligns dimensions from the right; each pair
-        must match or have size one. Mechanical compatibility does not ensure semantic correctness: `(n,1)`
+        must match or have size one. Mechanical compatibility does not ensure semantic correctness: "`(n,1)`"
         with `(n,)` may create an unintended `(n,n)` result. Document orientation, units, expected shape,
         and reduction axis, then compare with a small manual case.
       da: >-
@@ -124,7 +124,7 @@ concepts:
         semantik; dokumentér orientering, enheder, forventet shape og axis.
     linked_objectives: [m13.o4, m13.o8]
   - id: pandas-series-dataframe-index
-    title: {es: Series, DataFrame e índice, en: Series, DataFrame, and index, da: Series, DataFrame og indeks}
+    title: {"es": "Series, DataFrame e índice", "en": "Series, DataFrame, and index", "da": "Series, DataFrame og indeks"}
     body:
       es: >-
         Una Series combina valores con índice; un DataFrame organiza columnas potencialmente heterogéneas
@@ -141,7 +141,7 @@ concepts:
         `iloc` positioner. Indeksalignment kan indføre manglende værdier.
     linked_objectives: [m13.o5, m13.o6]
   - id: tabular-types-missingness-and-transformation
-    title: {es: Tipos, valores ausentes y transformación tabular, en: Types, missingness, and tabular transformation, da: Typer, manglende værdier og tabeltransformation}
+    title: {"es": "Tipos, valores ausentes y transformación tabular", "en": "Types, missingness, and tabular transformation", "da": "Typer, manglende værdier og tabeltransformation"}
     body:
       es: >-
         Importar una tabla no garantiza tipos correctos. Una columna numérica con texto puede convertirse en
@@ -158,7 +158,7 @@ concepts:
         bør registrere filtrerede eller ændrede rækker.
     linked_objectives: [m13.o5, m13.o6, m13.o8]
   - id: visualization-contract
-    title: {es: Visualización como contrato de representación, en: Visualization as a representation contract, da: Visualisering som repræsentationskontrakt}
+    title: {"es": "Visualización como contrato de representación", "en": "Visualization as a representation contract", "da": "Visualisering som repræsentationskontrakt"}
     body:
       es: >-
         Una figura codifica variables mediante posición, longitud, color, forma o tamaño. La elección debe
@@ -175,7 +175,7 @@ concepts:
         og transformationer skal være tydelige og ikke forvrænge fortolkningen.
     linked_objectives: [m13.o7]
   - id: scientific-validation
-    title: {es: Validación de resultados científicos, en: Scientific result validation, da: Validering af videnskabelige resultater}
+    title: {"es": "Validación de resultados científicos", "en": "Scientific result validation", "da": "Validering af videnskabelige resultater"}
     body:
       es: >-
         La validación combina controles estructurales y semánticos: shape, dtype, cardinalidad, rango,
@@ -193,8 +193,8 @@ concepts:
 
 worked_examples:
   - id: dm857.m13.e01
-    title: {es: Estandarizar columnas sin broadcasting accidental, en: Standardize columns without accidental broadcasting, da: Standardisér kolonner uden utilsigtet broadcasting}
-    problem: {es: Estandarizar cada variable de una matriz muestras × variables y verificar shape, medias y desviaciones., en: Standardize each variable in a samples-by-variables matrix and verify shape, means, and deviations., da: Standardisér hver variabel i en matrix prøver × variable og verificér shape, middelværdi og spredning.}
+    title: {"es": "Estandarizar columnas sin broadcasting accidental", "en": "Standardize columns without accidental broadcasting", "da": "Standardisér kolonner uden utilsigtet broadcasting"}
+    problem: {"es": "Estandarizar cada variable de una matriz muestras × variables y verificar shape, medias y desviaciones.", "en": "Standardize each variable in a samples-by-variables matrix and verify shape, means, and deviations.", "da": "Standardisér hver variabel i en matrix prøver × variable og verificér shape, middelværdi og spredning."}
     assumptions: [rows are samples, columns are variables, no constant columns, no missing values]
     reasoning:
       es: [Calcular medias y desviaciones por axis 0., Conservar dimensión con shapes compatibles., Validar resultado con allclose.]
@@ -214,11 +214,11 @@ worked_examples:
       assert np.allclose(z.std(axis=0, ddof=0), 1.0)
     expected_output: same shape with approximately zero column means and unit column deviations
     validation: [constant column, one row, wrong orientation, nonfinite values]
-    explanation: {es: El eje expresa la semántica muestras-variables; las comprobaciones detectan una orientación equivocada., en: The axis expresses sample-variable semantics; checks expose wrong orientation., da: Axis udtrykker prøve-variabel-semantik, og kontroller opdager forkert orientering.}
+    explanation: {"es": "El eje expresa la semántica muestras-variables; las comprobaciones detectan una orientación equivocada.", "en": "The axis expresses sample-variable semantics; checks expose wrong orientation.", "da": "Axis udtrykker prøve-variabel-semantik, og kontroller opdager forkert orientering."}
     linked_objectives: [m13.o3, m13.o4, m13.o8]
   - id: dm857.m13.e02
-    title: {es: Validar una tabla antes de resumir, en: Validate a table before summarizing, da: Validér en tabel før opsummering}
-    problem: {es: Comprobar columnas, id único, grupos permitidos, valores numéricos y ausentes antes de calcular medias por grupo., en: Check columns, unique ids, allowed groups, numeric values, and missingness before group means., da: Kontrollér kolonner, unikke id'er, grupper, numeriske værdier og manglende data før gruppemiddel.}
+    title: {"es": "Validar una tabla antes de resumir", "en": "Validate a table before summarizing", "da": "Validér en tabel før opsummering"}
+    problem: {"es": "Comprobar columnas, id único, grupos permitidos, valores numéricos y ausentes antes de calcular medias por grupo.", "en": "Check columns, unique ids, allowed groups, numeric values, and missingness before group means.", "da": "Kontrollér kolonner, unikke id'er, grupper, numeriske værdier og manglende data før gruppemiddel."}
     assumptions: [required columns are sample_id, group, value]
     reasoning:
       es: [Validar esquema., Convertir con error explícito., Decidir política de ausentes., Agrupar sólo después.]
@@ -241,11 +241,11 @@ worked_examples:
       result = df.assign(value=values).groupby("group", observed=True)["value"].mean()
     expected_output: one mean per observed valid group
     validation: [missing column, duplicate id, unknown group, text value, missing value]
-    explanation: {es: La agregación es el último paso; antes se establece el contrato de la tabla., en: Aggregation is the final step after establishing the table contract., da: Aggregering sker først efter etablering af tabelkontrakten.}
+    explanation: {"es": "La agregación es el último paso; antes se establece el contrato de la tabla.", "en": "Aggregation is the final step after establishing the table contract.", "da": "Aggregering sker først efter etablering af tabelkontrakten."}
     linked_objectives: [m13.o5, m13.o6, m13.o8]
   - id: dm857.m13.e03
-    title: {es: Registrar un manifiesto reproducible, en: Record a reproducibility manifest, da: Registrér et reproducerbarhedsmanifest}
-    problem: {es: Definir la información mínima que acompaña una ejecución científica., en: Define the minimum information accompanying a scientific run., da: Definér minimumsinformation for en videnskabelig kørsel.}
+    title: {"es": "Registrar un manifiesto reproducible", "en": "Record a reproducibility manifest", "da": "Registrér et reproducerbarhedsmanifest"}
+    problem: {"es": "Definir la información mínima que acompaña una ejecución científica.", "en": "Define the minimum information accompanying a scientific run.", "da": "Definér minimumsinformation for en videnskabelig kørsel."}
     assumptions: [the project has declared dependencies and versioned input data]
     reasoning:
       es: [Registrar código y entorno., Identificar datos y parámetros., Capturar semilla y comando., Conservar resultados y validaciones.]
@@ -253,61 +253,61 @@ worked_examples:
       da: [Registrér kode og miljø., Identificér data og parametre., Gem seed, kommando, resultater og kontroller.]
     expected_output: manifest containing commit, Python and package versions, input checksums, parameters, seed, command, timestamp, and validation summary
     validation: [reproduction in clean environment, input checksum match, explicit nondeterminism note]
-    explanation: {es: Reproducibilidad no equivale a guardar sólo un notebook; requiere reconstruir dependencias, datos, parámetros y ejecución., en: Reproducibility is more than saving a notebook; dependencies, data, parameters, and execution must be reconstructable., da: Reproducerbarhed er mere end en notebook; afhængigheder, data, parametre og kørsel skal kunne rekonstrueres.}
+    explanation: {"es": "Reproducibilidad no equivale a guardar sólo un notebook; requiere reconstruir dependencias, datos, parámetros y ejecución.", "en": "Reproducibility is more than saving a notebook; dependencies, data, parameters, and execution must be reconstructable.", "da": "Reproducerbarhed er mere end en notebook; afhængigheder, data, parametre og kørsel skal kunne rekonstrueres."}
     linked_objectives: [m13.o2, m13.o8]
 
 practice_exercises:
-  - {id: dm857.m13.p01, activity_type: api_reading, difficulty: foundational, prompt: {es: A partir de una firma y docstring, identifica tipos de entrada, retorno, errores, mutación y versión., en: From a signature and docstring, identify input types, return, errors, mutation, and version., da: Identificér inputtyper, retur, fejl, mutation og version fra signatur og docstring.}, reference_solution: {es: La respuesta debe separar lo documentado de lo inferido y proponer un ejemplo mínimo de verificación., en: Separate documented facts from inference and propose a minimal verification example., da: Adskil dokumentation fra antagelser og foreslå et minimalt verifikationseksempel.}, linked_objectives: [m13.o1]}
-  - {id: dm857.m13.p02, activity_type: shape_tracing, difficulty: intermediate, prompt: {es: Predice el shape de `(n,1) + (n,)` y explica por qué puede ser indeseado., en: Predict the shape of `(n,1) + (n,)` and explain why it may be unintended., da: Forudsig shape for `(n,1) + (n,)` og forklar hvorfor det kan være utilsigtet.}, reference_solution: {es: Produce `(n,n)` por broadcasting; si se esperaba sumar elemento a elemento, ambos operandos deben tener shape compatible como `(n,)` o `(n,1)`., en: It produces `(n,n)` through broadcasting; elementwise pairing requires matching intended shapes., da: Det producerer `(n,n)` via broadcasting; elementvis parring kræver tilsigtede matchende shapes.}, linked_objectives: [m13.o4]}
-  - {id: dm857.m13.p03, activity_type: debugging, difficulty: intermediate, prompt: {es: Explica por qué modificar un slice de NumPy puede cambiar el array original y muestra cómo independizarlo., en: Explain why modifying a NumPy slice may change the original array and show how to separate it., da: Forklar hvorfor ændring af et NumPy-slice kan ændre originalen og hvordan det adskilles.}, reference_solution: {es: Muchos slices son vistas que comparten memoria; usar `.copy()` crea un array independiente., en: Many slices are views sharing memory; `.copy()` creates an independent array., da: Mange slices er views med delt hukommelse; `.copy()` skaber et uafhængigt array.}, linked_objectives: [m13.o3]}
-  - {id: dm857.m13.p04, activity_type: data_validation, difficulty: advanced, prompt: {es: Diseña un contrato de DataFrame para datos de muestras y una secuencia de validación antes de un join., en: Design a DataFrame contract for sample data and a validation sequence before a join., da: Design en DataFrame-kontrakt for prøvedata og validering før join.}, reference_solution: {es: Columnas, tipos, ids únicos, dominios, ausentes, cardinalidad esperada, unidades y validación posterior del join., en: Columns, types, unique ids, domains, missingness, expected cardinality, units, and post-join validation., da: Kolonner, typer, unikke id'er, domæner, manglende data, kardinalitet, enheder og kontrol efter join.}, linked_objectives: [m13.o5, m13.o6, m13.o8]}
-  - {id: dm857.m13.p05, activity_type: visualization_critique, difficulty: advanced, prompt: {es: Critica una barra con eje truncado, unidades ausentes y tamaño de muestra oculto., en: Critique a bar chart with a truncated axis, missing units, and hidden sample size., da: Kritiser et søjlediagram med afkortet akse, manglende enheder og skjult stikprøvestørrelse.}, reference_solution: {es: Puede exagerar diferencias, impide interpretación dimensional y oculta variabilidad/cardinalidad. Proponer escala justificada, unidades, puntos o intervalos y n por grupo., en: It may exaggerate differences, blocks dimensional interpretation, and hides variability/cardinality. Add justified scale, units, points or intervals, and group n., da: Det kan overdrive forskelle og skjule enheder, variation og n.}, linked_objectives: [m13.o7]}
-  - {id: dm857.m13.p06, activity_type: reproducibility_review, difficulty: advanced, prompt: {es: Evalúa un proyecto que sólo guarda `requirements.txt` sin datos, seed, comando ni versión de Python., en: Evaluate a project storing only `requirements.txt` without data, seed, command, or Python version., da: Evaluér et projekt med kun `requirements.txt` uden data, seed, kommando eller Python-version.}, reference_solution: {es: Las dependencias son necesarias pero insuficientes; faltan identificación de datos, parámetros, ejecución, entorno, aleatoriedad y validaciones., en: Dependencies are necessary but insufficient; data identity, parameters, execution, environment, randomness, and validations are missing., da: Afhængigheder er nødvendige men utilstrækkelige; data, parametre, kørsel, miljø, tilfældighed og kontroller mangler.}, linked_objectives: [m13.o2, m13.o8]}
+  - {id: dm857.m13.p01, activity_type: api_reading, difficulty: foundational, prompt: {"es": "A partir de una firma y docstring, identifica tipos de entrada, retorno, errores, mutación y versión.", "en": "From a signature and docstring, identify input types, return, errors, mutation, and version.", "da": "Identificér inputtyper, retur, fejl, mutation og version fra signatur og docstring."}, reference_solution: {"es": "La respuesta debe separar lo documentado de lo inferido y proponer un ejemplo mínimo de verificación.", "en": "Separate documented facts from inference and propose a minimal verification example.", "da": "Adskil dokumentation fra antagelser og foreslå et minimalt verifikationseksempel."}, linked_objectives: [m13.o1]}
+  - {id: dm857.m13.p02, activity_type: shape_tracing, difficulty: intermediate, prompt: {"es": "Predice el shape de `(n,1) + (n,)` y explica por qué puede ser indeseado.", "en": "Predict the shape of `(n,1) + (n,)` and explain why it may be unintended.", "da": "Forudsig shape for `(n,1) + (n,)` og forklar hvorfor det kan være utilsigtet."}, reference_solution: {"es": "Produce `(n,n)` por broadcasting; si se esperaba sumar elemento a elemento, ambos operandos deben tener shape compatible como `(n,)` o `(n,1)`.", "en": "It produces `(n,n)` through broadcasting; elementwise pairing requires matching intended shapes.", "da": "Det producerer `(n,n)` via broadcasting; elementvis parring kræver tilsigtede matchende shapes."}, linked_objectives: [m13.o4]}
+  - {id: dm857.m13.p03, activity_type: debugging, difficulty: intermediate, prompt: {"es": "Explica por qué modificar un slice de NumPy puede cambiar el array original y muestra cómo independizarlo.", "en": "Explain why modifying a NumPy slice may change the original array and show how to separate it.", "da": "Forklar hvorfor ændring af et NumPy-slice kan ændre originalen og hvordan det adskilles."}, reference_solution: {"es": "Muchos slices son vistas que comparten memoria; usar `.copy()` crea un array independiente.", "en": "Many slices are views sharing memory; `.copy()` creates an independent array.", "da": "Mange slices er views med delt hukommelse; `.copy()` skaber et uafhængigt array."}, linked_objectives: [m13.o3]}
+  - {id: dm857.m13.p04, activity_type: data_validation, difficulty: advanced, prompt: {"es": "Diseña un contrato de DataFrame para datos de muestras y una secuencia de validación antes de un join.", "en": "Design a DataFrame contract for sample data and a validation sequence before a join.", "da": "Design en DataFrame-kontrakt for prøvedata og validering før join."}, reference_solution: {"es": "Columnas, tipos, ids únicos, dominios, ausentes, cardinalidad esperada, unidades y validación posterior del join.", "en": "Columns, types, unique ids, domains, missingness, expected cardinality, units, and post-join validation.", "da": "Kolonner, typer, unikke id'er, domæner, manglende data, kardinalitet, enheder og kontrol efter join."}, linked_objectives: [m13.o5, m13.o6, m13.o8]}
+  - {id: dm857.m13.p05, activity_type: visualization_critique, difficulty: advanced, prompt: {"es": "Critica una barra con eje truncado, unidades ausentes y tamaño de muestra oculto.", "en": "Critique a bar chart with a truncated axis, missing units, and hidden sample size.", "da": "Kritiser et søjlediagram med afkortet akse, manglende enheder og skjult stikprøvestørrelse."}, reference_solution: {"es": "Puede exagerar diferencias, impide interpretación dimensional y oculta variabilidad/cardinalidad. Proponer escala justificada, unidades, puntos o intervalos y n por grupo.", "en": "It may exaggerate differences, blocks dimensional interpretation, and hides variability/cardinality. Add justified scale, units, points or intervals, and group n.", "da": "Det kan overdrive forskelle og skjule enheder, variation og n."}, linked_objectives: [m13.o7]}
+  - {id: dm857.m13.p06, activity_type: reproducibility_review, difficulty: advanced, prompt: {"es": "Evalúa un proyecto que sólo guarda `requirements.txt` sin datos, seed, comando ni versión de Python.", "en": "Evaluate a project storing only `requirements.txt` without data, seed, command, or Python version.", "da": "Evaluér et projekt med kun `requirements.txt` uden data, seed, kommando eller Python-version."}, reference_solution: {"es": "Las dependencias son necesarias pero insuficientes; faltan identificación de datos, parámetros, ejecución, entorno, aleatoriedad y validaciones.", "en": "Dependencies are necessary but insufficient; data identity, parameters, execution, environment, randomness, and validations are missing.", "da": "Afhængigheder er nødvendige men utilstrækkelige; data, parametre, kørsel, miljø, tilfældighed og kontroller mangler."}, linked_objectives: [m13.o2, m13.o8]}
 
 objective_bank:
-  - {id: dm857.m13.q01, activity_type: multiple_choice, prompt: {es: ¿Qué forma conserva mejor la procedencia de varios nombres?, en: Which form best preserves provenance when using several names?, da: Hvilken form bevarer bedst oprindelsen ved flere navne?}, options: [{id: module, text: {es: `import modulo`, en: `import module`, da: `import modul`}}, {id: wildcard, text: {es: `from modulo import *`, en: `from module import *`, da: `from modul import *`}}, {id: copy, text: {es: Copiar funciones al proyecto., en: Copy functions into the project., da: Kopiér funktioner ind i projektet.}}], correct_option_ids: [module]}
-  - {id: dm857.m13.q02, activity_type: true_false, prompt: {es: Una semilla garantiza determinismo en cualquier plataforma y biblioteca., en: A seed guarantees determinism across every platform and library., da: Et seed garanterer determinisme på alle platforme og biblioteker.}, correct_answer: false}
-  - {id: dm857.m13.q03, activity_type: multiple_choice, prompt: {es: ¿Qué atributo describe dimensiones de un ndarray?, en: Which attribute describes ndarray dimensions?, da: Hvilken attribut beskriver dimensionerne i et ndarray?}, options: [{id: shape, text: {es: shape, en: shape, da: shape}}, {id: dtype, text: {es: dtype, en: dtype, da: dtype}}, {id: size, text: {es: size solamente, en: size only, da: kun size}}], correct_option_ids: [shape]}
-  - {id: dm857.m13.q04, activity_type: true_false, prompt: {es: `reshape` puede cambiar libremente el número total de elementos., en: `reshape` may freely change total element count., da: `reshape` kan frit ændre det samlede antal elementer.}, correct_answer: false}
-  - {id: dm857.m13.q05, activity_type: multiple_choice, prompt: {es: ¿Desde qué lado alinea dimensiones broadcasting?, en: From which side does broadcasting align dimensions?, da: Fra hvilken side justerer broadcasting dimensioner?}, options: [{id: right, text: {es: Derecha, en: Right, da: Højre}}, {id: left, text: {es: Izquierda, en: Left, da: Venstre}}, {id: random, text: {es: Aleatoriamente, en: Randomly, da: Tilfældigt}}], correct_option_ids: [right]}
-  - {id: dm857.m13.q06, activity_type: true_false, prompt: {es: Que dos shapes sean compatibles garantiza que la operación tenga sentido científico., en: Compatible shapes guarantee scientific meaning., da: Kompatible shapes garanterer videnskabelig mening.}, correct_answer: false}
-  - {id: dm857.m13.q07, activity_type: multiple_choice, prompt: {es: ¿Qué selecciona `loc`?, en: What does `loc` select by?, da: Hvad vælger `loc` efter?}, options: [{id: labels, text: {es: Etiquetas, en: Labels, da: Etiketter}}, {id: positions, text: {es: Sólo posiciones, en: Positions only, da: Kun positioner}}, {id: dtype, text: {es: dtype, en: dtype, da: dtype}}], correct_option_ids: [labels]}
-  - {id: dm857.m13.q08, activity_type: true_false, prompt: {es: Asignar una Series a un DataFrame puede alinear por índice e introducir ausentes., en: Assigning a Series to a DataFrame may align by index and introduce missing values., da: Tildeling af en Series til et DataFrame kan alignere efter indeks og indføre manglende værdier.}, correct_answer: true}
-  - {id: dm857.m13.q09, activity_type: multiple_choice, prompt: {es: ¿Qué comparación es habitual para floats calculados?, en: Which comparison is common for computed floating-point values?, da: Hvilken sammenligning bruges ofte til beregnede floats?}, options: [{id: allclose, text: {es: `allclose` con tolerancia justificada, en: `allclose` with justified tolerance, da: `allclose` med begrundet tolerance}}, {id: identity, text: {es: `is`, en: `is`, da: `is`}}, {id: strings, text: {es: Convertir a texto, en: Convert to text, da: Konvertér til tekst}}], correct_option_ids: [allclose]}
-  - {id: dm857.m13.q10, activity_type: true_false, prompt: {es: Una visualización puede ser sintácticamente correcta y aun distorsionar la interpretación., en: A visualization can be syntactically correct yet distort interpretation., da: En visualisering kan være syntaktisk korrekt og stadig forvrænge fortolkningen.}, correct_answer: true}
+  - {id: dm857.m13.q01, activity_type: multiple_choice, prompt: {"es": "¿Qué forma conserva mejor la procedencia de varios nombres?", "en": "Which form best preserves provenance when using several names?", "da": "Hvilken form bevarer bedst oprindelsen ved flere navne?"}, options: [{id: module, text: {"es": "`import modulo`", "en": "`import module`", "da": "`import modul`"}}, {id: wildcard, text: {"es": "`from modulo import *`", "en": "`from module import *`", "da": "`from modul import *`"}}, {id: copy, text: {"es": "Copiar funciones al proyecto.", "en": "Copy functions into the project.", "da": "Kopiér funktioner ind i projektet."}}], correct_option_ids: [module]}
+  - {id: dm857.m13.q02, activity_type: true_false, prompt: {"es": "Una semilla garantiza determinismo en cualquier plataforma y biblioteca.", "en": "A seed guarantees determinism across every platform and library.", "da": "Et seed garanterer determinisme på alle platforme og biblioteker."}, correct_answer: false}
+  - {id: dm857.m13.q03, activity_type: multiple_choice, prompt: {"es": "¿Qué atributo describe dimensiones de un ndarray?", "en": "Which attribute describes ndarray dimensions?", "da": "Hvilken attribut beskriver dimensionerne i et ndarray?"}, options: [{id: shape, text: {"es": "shape", "en": "shape", "da": "shape"}}, {id: dtype, text: {"es": "dtype", "en": "dtype", "da": "dtype"}}, {id: size, text: {"es": "size solamente", "en": "size only", "da": "kun size"}}], correct_option_ids: [shape]}
+  - {id: dm857.m13.q04, activity_type: true_false, prompt: {"es": "`reshape` puede cambiar libremente el número total de elementos.", "en": "`reshape` may freely change total element count.", "da": "`reshape` kan frit ændre det samlede antal elementer."}, correct_answer: false}
+  - {id: dm857.m13.q05, activity_type: multiple_choice, prompt: {"es": "¿Desde qué lado alinea dimensiones broadcasting?", "en": "From which side does broadcasting align dimensions?", "da": "Fra hvilken side justerer broadcasting dimensioner?"}, options: [{id: right, text: {"es": "Derecha", "en": "Right", "da": "Højre"}}, {id: left, text: {"es": "Izquierda", "en": "Left", "da": "Venstre"}}, {id: random, text: {"es": "Aleatoriamente", "en": "Randomly", "da": "Tilfældigt"}}], correct_option_ids: [right]}
+  - {id: dm857.m13.q06, activity_type: true_false, prompt: {"es": "Que dos shapes sean compatibles garantiza que la operación tenga sentido científico.", "en": "Compatible shapes guarantee scientific meaning.", "da": "Kompatible shapes garanterer videnskabelig mening."}, correct_answer: false}
+  - {id: dm857.m13.q07, activity_type: multiple_choice, prompt: {"es": "¿Qué selecciona `loc`?", "en": "What does `loc` select by?", "da": "Hvad vælger `loc` efter?"}, options: [{id: labels, text: {"es": "Etiquetas", "en": "Labels", "da": "Etiketter"}}, {id: positions, text: {"es": "Sólo posiciones", "en": "Positions only", "da": "Kun positioner"}}, {id: dtype, text: {"es": "dtype", "en": "dtype", "da": "dtype"}}], correct_option_ids: [labels]}
+  - {id: dm857.m13.q08, activity_type: true_false, prompt: {"es": "Asignar una Series a un DataFrame puede alinear por índice e introducir ausentes.", "en": "Assigning a Series to a DataFrame may align by index and introduce missing values.", "da": "Tildeling af en Series til et DataFrame kan alignere efter indeks og indføre manglende værdier."}, correct_answer: true}
+  - {id: dm857.m13.q09, activity_type: multiple_choice, prompt: {"es": "¿Qué comparación es habitual para floats calculados?", "en": "Which comparison is common for computed floating-point values?", "da": "Hvilken sammenligning bruges ofte til beregnede floats?"}, options: [{id: allclose, text: {"es": "`allclose` con tolerancia justificada", "en": "`allclose` with justified tolerance", "da": "`allclose` med begrundet tolerance"}}, {id: identity, text: {"es": "`is`", "en": "`is`", "da": "`is`"}}, {id: strings, text: {"es": "Convertir a texto", "en": "Convert to text", "da": "Konvertér til tekst"}}], correct_option_ids: [allclose]}
+  - {id: dm857.m13.q10, activity_type: true_false, prompt: {"es": "Una visualización puede ser sintácticamente correcta y aun distorsionar la interpretación.", "en": "A visualization can be syntactically correct yet distort interpretation.", "da": "En visualisering kan være syntaktisk korrekt og stadig forvrænge fortolkningen."}, correct_answer: true}
 
 assessment_items:
   - id: dm857.m13.a01
     activity_type: scientific_pipeline_design
     difficulty: advanced
-    prompt: {es: Diseña un pipeline reproducible que lea una tabla, valide esquema, transforme valores, calcule un resumen NumPy/pandas, produzca una figura y escriba un manifiesto. Incluye controles antes y después de cada etapa., en: Design a reproducible pipeline reading a table, validating schema, transforming values, computing a NumPy/pandas summary, producing a figure, and writing a manifest. Include checks before and after every stage., da: Design en reproducerbar pipeline med tabelindlæsning, validering, transformation, beregning, figur og manifest samt kontroller ved hver fase.}
+    prompt: {"es": "Diseña un pipeline reproducible que lea una tabla, valide esquema, transforme valores, calcule un resumen NumPy/pandas, produzca una figura y escriba un manifiesto. Incluye controles antes y después de cada etapa.", "en": "Design a reproducible pipeline reading a table, validating schema, transforming values, computing a NumPy/pandas summary, producing a figure, and writing a manifest. Include checks before and after every stage.", "da": "Design en reproducerbar pipeline med tabelindlæsning, validering, transformation, beregning, figur og manifest samt kontroller ved hver fase."}
     accepted_answer_elements: [environment declaration, input identity, schema and missing policy, shape/unit checks, deterministic parameters, output validation, manifest]
     rubric: [{criterion: reproducibility, points: 2}, {criterion: data_contract, points: 3}, {criterion: computational_validation, points: 3}, {criterion: output_and_manifest, points: 2}]
   - id: dm857.m13.a02
     activity_type: debugging
     difficulty: advanced
-    prompt: {es: Un cálculo retorna shape `(100,100)` cuando se esperaba `(100,)`. Diagnostica un posible broadcasting accidental, diseña un caso mínimo y corrige sin usar reshape arbitrario., en: A calculation returns `(100,100)` instead of `(100,)`. Diagnose accidental broadcasting, design a minimal case, and correct it without arbitrary reshape., da: En beregning returnerer `(100,100)` i stedet for `(100,)`; diagnosticér broadcasting, lav et minimalt eksempel og ret uden vilkårlig reshape.}
-    accepted_answer_elements: [inspect operand shapes, right-alignment explanation, `(n,1)` versus `(n,)` counterexample, semantic correction, shape assertion]
+    prompt: {"es": "Un cálculo retorna shape `(100,100)` cuando se esperaba `(100,)`. Diagnostica un posible broadcasting accidental, diseña un caso mínimo y corrige sin usar reshape arbitrario.", "en": "A calculation returns `(100,100)` instead of `(100,)`. Diagnose accidental broadcasting, design a minimal case, and correct it without arbitrary reshape.", "da": "En beregning returnerer `(100,100)` i stedet for `(100,)`; diagnosticér broadcasting, lav et minimalt eksempel og ret uden vilkårlig reshape."}
+    accepted_answer_elements: ["inspect operand shapes", "right-alignment explanation", "`(n,1)` versus `(n,)` counterexample", "semantic correction", "shape assertion"]
     rubric: [{criterion: diagnosis, points: 3}, {criterion: minimal_reproduction, points: 2}, {criterion: semantic_correction, points: 3}, {criterion: validation, points: 2}]
   - id: dm857.m13.a03
     activity_type: oral_explanation
     difficulty: advanced
-    prompt: {es: Explica por qué un notebook que corre en tu equipo no constituye por sí solo un resultado reproducible., en: Explain why a notebook that runs on your machine is not by itself a reproducible result., da: Forklar hvorfor en notebook der kører på din maskine ikke alene er et reproducerbart resultat.}
+    prompt: {"es": "Explica por qué un notebook que corre en tu equipo no constituye por sí solo un resultado reproducible.", "en": "Explain why a notebook that runs on your machine is not by itself a reproducible result.", "da": "Forklar hvorfor en notebook der kører på din maskine ikke alene er et reproducerbart resultat."}
     accepted_answer_elements: [environment, data identity, execution order, hidden state, parameters/seeds, clean rerun, output validation]
     rubric: [{criterion: reproducibility_components, points: 4}, {criterion: hidden_state_analysis, points: 2}, {criterion: clean_reproduction_strategy, points: 2}, {criterion: clarity, points: 2}]
 
 flashcards: {source_file: ../flashcards/dm857_m13_flashcards.yaml, expected_count: 24}
 
 glossary:
-  - {id: term.module, term: {es: módulo, en: module, da: modul}, definition: {es: Unidad Python importable con su propio espacio de nombres., en: Importable Python unit with its own namespace., da: Importérbar Python-enhed med eget namespace.}}
-  - {id: term.package, term: {es: paquete, en: package, da: pakke}, definition: {es: Organización de módulos bajo un espacio de nombres., en: Organization of modules under a namespace., da: Organisering af moduler under et namespace.}}
-  - {id: term.virtual_environment, term: {es: entorno virtual, en: virtual environment, da: virtuelt miljø}, definition: {es: Contexto aislado de intérprete y dependencias para un proyecto., en: Isolated interpreter and dependency context for a project., da: Isoleret fortolker- og afhængighedskontekst for et projekt.}}
-  - {id: term.ndarray, term: {es: ndarray, en: ndarray, da: ndarray}, definition: {es: Array n-dimensional homogéneo de NumPy., en: Homogeneous n-dimensional NumPy array., da: Homogent n-dimensionalt NumPy-array.}}
-  - {id: term.dtype, term: {es: dtype, en: dtype, da: dtype}, definition: {es: Representación del tipo de elementos de un array o columna., en: Representation of element type in an array or column., da: Repræsentation af elementtypen i array eller kolonne.}}
-  - {id: term.broadcasting, term: {es: broadcasting, en: broadcasting, da: broadcasting}, definition: {es: Reglas para operar arrays de shapes compatibles mediante expansión implícita., en: Rules for operating on compatible shapes via implicit expansion., da: Regler for operationer på kompatible shapes via implicit udvidelse.}}
-  - {id: term.dataframe, term: {es: DataFrame, en: DataFrame, da: DataFrame}, definition: {es: Estructura tabular etiquetada con columnas potencialmente heterogéneas., en: Labeled tabular structure with potentially heterogeneous columns., da: Etiketteret tabelstruktur med potentielt heterogene kolonner.}}
-  - {id: term.index_alignment, term: {es: alineación por índice, en: index alignment, da: indeksalignment}, definition: {es: Asociación de valores por etiquetas de índice durante operaciones., en: Matching values by index labels during operations., da: Matchning af værdier efter indeksetiketter under operationer.}}
-  - {id: term.reproducibility_manifest, term: {es: manifiesto de reproducibilidad, en: reproducibility manifest, da: reproducerbarhedsmanifest}, definition: {es: Registro de código, entorno, datos, parámetros, ejecución y validaciones., en: Record of code, environment, data, parameters, execution, and validations., da: Registrering af kode, miljø, data, parametre, kørsel og kontroller.}}
+  - {id: term.module, term: {"es": "módulo", "en": "module", "da": "modul"}, definition: {"es": "Unidad Python importable con su propio espacio de nombres.", "en": "Importable Python unit with its own namespace.", "da": "Importérbar Python-enhed med eget namespace."}}
+  - {id: term.package, term: {"es": "paquete", "en": "package", "da": "pakke"}, definition: {"es": "Organización de módulos bajo un espacio de nombres.", "en": "Organization of modules under a namespace.", "da": "Organisering af moduler under et namespace."}}
+  - {id: term.virtual_environment, term: {"es": "entorno virtual", "en": "virtual environment", "da": "virtuelt miljø"}, definition: {"es": "Contexto aislado de intérprete y dependencias para un proyecto.", "en": "Isolated interpreter and dependency context for a project.", "da": "Isoleret fortolker- og afhængighedskontekst for et projekt."}}
+  - {id: term.ndarray, term: {"es": "ndarray", "en": "ndarray", "da": "ndarray"}, definition: {"es": "Array n-dimensional homogéneo de NumPy.", "en": "Homogeneous n-dimensional NumPy array.", "da": "Homogent n-dimensionalt NumPy-array."}}
+  - {id: term.dtype, term: {"es": "dtype", "en": "dtype", "da": "dtype"}, definition: {"es": "Representación del tipo de elementos de un array o columna.", "en": "Representation of element type in an array or column.", "da": "Repræsentation af elementtypen i array eller kolonne."}}
+  - {id: term.broadcasting, term: {"es": "broadcasting", "en": "broadcasting", "da": "broadcasting"}, definition: {"es": "Reglas para operar arrays de shapes compatibles mediante expansión implícita.", "en": "Rules for operating on compatible shapes via implicit expansion.", "da": "Regler for operationer på kompatible shapes via implicit udvidelse."}}
+  - {id: term.dataframe, term: {"es": "DataFrame", "en": "DataFrame", "da": "DataFrame"}, definition: {"es": "Estructura tabular etiquetada con columnas potencialmente heterogéneas.", "en": "Labeled tabular structure with potentially heterogeneous columns.", "da": "Etiketteret tabelstruktur med potentielt heterogene kolonner."}}
+  - {id: term.index_alignment, term: {"es": "alineación por índice", "en": "index alignment", "da": "indeksalignment"}, definition: {"es": "Asociación de valores por etiquetas de índice durante operaciones.", "en": "Matching values by index labels during operations.", "da": "Matchning af værdier efter indeksetiketter under operationer."}}
+  - {id: term.reproducibility_manifest, term: {"es": "manifiesto de reproducibilidad", "en": "reproducibility manifest", "da": "reproducerbarhedsmanifest"}, definition: {"es": "Registro de código, entorno, datos, parámetros, ejecución y validaciones.", "en": "Record of code, environment, data, parameters, execution, and validations.", "da": "Registrering af kode, miljø, data, parametre, kørsel og kontroller."}}
 
 hidden_guided_support:
   visibility: hidden_from_standard_reader
@@ -325,9 +325,9 @@ hidden_guided_support:
       Kræv shape, dtype, axis, enhed, indeks og manglende-politik før fortolkning. Bibliotekets accept
       er ikke det samme som videnskabelig korrekthed.
   misconceptions:
-    - {id: m13.mc01, claim: {es: Si NumPy no produce error, el cálculo es correcto., en: If NumPy raises no error, the calculation is correct., da: Hvis NumPy ikke giver fejl, er beregningen korrekt.}, correction: {es: Broadcasting puede producir shapes válidos pero semánticamente equivocados., en: Broadcasting may produce valid but semantically wrong shapes., da: Broadcasting kan give gyldige men semantisk forkerte shapes.}}
-    - {id: m13.mc02, claim: {es: Una semilla garantiza reproducibilidad total., en: A seed guarantees total reproducibility., da: Et seed garanterer fuld reproducerbarhed.}, correction: {es: También importan algoritmos, versiones, hardware y fuentes de no determinismo., en: Algorithms, versions, hardware, and nondeterminism sources also matter., da: Algoritmer, versioner, hardware og ikke-determinisme betyder også noget.}}
-    - {id: m13.mc03, claim: {es: `loc` e `iloc` son equivalentes., en: `loc` and `iloc` are equivalent., da: `loc` og `iloc` er ækvivalente.}, correction: {es: `loc` usa etiquetas; `iloc` posiciones., en: `loc` uses labels; `iloc` positions., da: `loc` bruger etiketter; `iloc` positioner.}}
+    - {id: m13.mc01, claim: {"es": "Si NumPy no produce error, el cálculo es correcto.", "en": "If NumPy raises no error, the calculation is correct.", "da": "Hvis NumPy ikke giver fejl, er beregningen korrekt."}, correction: {"es": "Broadcasting puede producir shapes válidos pero semánticamente equivocados.", "en": "Broadcasting may produce valid but semantically wrong shapes.", "da": "Broadcasting kan give gyldige men semantisk forkerte shapes."}}
+    - {id: m13.mc02, claim: {"es": "Una semilla garantiza reproducibilidad total.", "en": "A seed guarantees total reproducibility.", "da": "Et seed garanterer fuld reproducerbarhed."}, correction: {"es": "También importan algoritmos, versiones, hardware y fuentes de no determinismo.", "en": "Algorithms, versions, hardware, and nondeterminism sources also matter.", "da": "Algoritmer, versioner, hardware og ikke-determinisme betyder også noget."}}
+    - {id: m13.mc03, claim: {"es": "`loc` e `iloc` son equivalentes.", "en": "`loc` and `iloc` are equivalent.", "da": "`loc` og `iloc` er ækvivalente."}, correction: {"es": "`loc` usa etiquetas; `iloc` posiciones.", "en": "`loc` uses labels; `iloc` positions.", "da": "`loc` bruger etiketter; `iloc` positioner."}}
   socratic_questions:
     - ¿Cuál es el shape y qué representa cada eje?
     - ¿El dtype conserva la precisión y semántica esperadas?
@@ -338,8 +338,8 @@ hidden_guided_support:
     do_not_accept: [results without shape/unit interpretation, wildcard imports, reproducibility claims without environment/data identity, missing-data deletion without justification]
     strong_answer_features: [explicit contracts, clean environment, small reference calculation, shape/dtype assertions, index/cardinality checks, non-distorting visualization]
   retrieval_fragments:
-    - {id: m13.r01, topics: [numpy, broadcasting, shape], text: {es: Broadcasting alinea desde la derecha; compatibilidad de shape no prueba corrección semántica., en: Broadcasting aligns from the right; shape compatibility does not prove semantic correctness., da: Broadcasting justerer fra højre; shape-kompatibilitet beviser ikke semantisk korrekthed.}}
-    - {id: m13.r02, topics: [pandas, index, alignment], text: {es: pandas alinea por etiquetas; índices duplicados o desajustados pueden cambiar cardinalidad e introducir ausentes., en: pandas aligns by labels; duplicate or mismatched indexes may change cardinality and introduce missing values., da: pandas alignerer efter etiketter; dubletter eller mismatch kan ændre kardinalitet og indføre manglende værdier.}}
+    - {id: m13.r01, topics: [numpy, broadcasting, shape], text: {"es": "Broadcasting alinea desde la derecha; compatibilidad de shape no prueba corrección semántica.", "en": "Broadcasting aligns from the right; shape compatibility does not prove semantic correctness.", "da": "Broadcasting justerer fra højre; shape-kompatibilitet beviser ikke semantisk korrekthed."}}
+    - {id: m13.r02, topics: [pandas, index, alignment], text: {"es": "pandas alinea por etiquetas; índices duplicados o desajustados pueden cambiar cardinalidad e introducir ausentes.", "en": "pandas aligns by labels; duplicate or mismatched indexes may change cardinality and introduce missing values.", "da": "pandas alignerer efter etiketter; dubletter eller mismatch kan ændre kardinalitet og indføre manglende værdier."}}
 
 sources:
   - {id: source.official_dm857, role: curriculum_alignment, note: Official outcome on finding and using adequate library elements and testing programs.}

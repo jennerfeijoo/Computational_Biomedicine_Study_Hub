@@ -5,7 +5,7 @@ content_version: 1.0.0
 status: academically_reviewed_draft
 
 metadata:
-  title: {es: Modelado avanzado de conteos, proporciones y diseños complejos, en: Advanced statistical modeling for counts, proportions, and complex designs, da: Avanceret statistisk modellering af counts, proportioner og komplekse designs}
+  title: {"es": "Modelado avanzado de conteos, proporciones y diseños complejos", "en": "Advanced statistical modeling for counts, proportions, and complex designs", "da": "Avanceret statistisk modellering af counts, proportioner og komplekse designs"}
   summary:
     es: >-
       Modelos lineales generalizados para outcomes no gaussianos, con énfasis en Poisson, binomial,
@@ -28,18 +28,18 @@ alignment:
   later_modules: [bmb831.m08, bmb831.m09, bmb831.m12]
 
 objectives:
-  - {id: bmb831.m04.o01, text: {es: Elegir familia y link según outcome y mecanismo, en: Choose family and link from outcome and mechanism, da: Vælge familie og link ud fra outcome og mekanisme}}
-  - {id: bmb831.m04.o02, text: {es: Interpretar coeficientes en escala de link y respuesta, en: Interpret coefficients on link and response scales, da: Fortolke koefficienter på link- og responsskala}}
-  - {id: bmb831.m04.o03, text: {es: Usar offsets para exposición o tamaño de biblioteca, en: Use offsets for exposure or library size, da: Bruge offsets for eksponering eller bibliotekstørrelse}}
-  - {id: bmb831.m04.o04, text: {es: Detectar y modelar sobredispersión, en: Detect and model overdispersion, da: Detektere og modellere overdispersion}}
-  - {id: bmb831.m04.o05, text: {es: Construir matrices de diseño identificables, en: Build identifiable design matrices, da: Bygge identificerbare designmatricer}}
-  - {id: bmb831.m04.o06, text: {es: Formular interacciones y contrastes coherentes, en: Formulate coherent interactions and contrasts, da: Formulere sammenhængende interaktioner og kontraster}}
-  - {id: bmb831.m04.o07, text: {es: Respetar blocking y dependencia, en: Respect blocking and dependence, da: Respektere blocking og afhængighed}}
-  - {id: bmb831.m04.o08, text: {es: Diagnosticar ajuste, influencia y sensibilidad, en: Diagnose fit, influence, and sensitivity, da: Diagnosticere fit, influence og følsomhed}}
+  - {id: bmb831.m04.o01, text: {"es": "Elegir familia y link según outcome y mecanismo", "en": "Choose family and link from outcome and mechanism", "da": "Vælge familie og link ud fra outcome og mekanisme"}}
+  - {id: bmb831.m04.o02, text: {"es": "Interpretar coeficientes en escala de link y respuesta", "en": "Interpret coefficients on link and response scales", "da": "Fortolke koefficienter på link- og responsskala"}}
+  - {id: bmb831.m04.o03, text: {"es": "Usar offsets para exposición o tamaño de biblioteca", "en": "Use offsets for exposure or library size", "da": "Bruge offsets for eksponering eller bibliotekstørrelse"}}
+  - {id: bmb831.m04.o04, text: {"es": "Detectar y modelar sobredispersión", "en": "Detect and model overdispersion", "da": "Detektere og modellere overdispersion"}}
+  - {id: bmb831.m04.o05, text: {"es": "Construir matrices de diseño identificables", "en": "Build identifiable design matrices", "da": "Bygge identificerbare designmatricer"}}
+  - {id: bmb831.m04.o06, text: {"es": "Formular interacciones y contrastes coherentes", "en": "Formulate coherent interactions and contrasts", "da": "Formulere sammenhængende interaktioner og kontraster"}}
+  - {id: bmb831.m04.o07, text: {"es": "Respetar blocking y dependencia", "en": "Respect blocking and dependence", "da": "Respektere blocking og afhængighed"}}
+  - {id: bmb831.m04.o08, text: {"es": "Diagnosticar ajuste, influencia y sensibilidad", "en": "Diagnose fit, influence, and sensitivity", "da": "Diagnosticere fit, influence og følsomhed"}}
 
 concepts:
   - id: bmb831.m04.c01
-    title: {es: Estructura del GLM, en: GLM structure, da: GLM-struktur}
+    title: {"es": "Estructura del GLM", "en": "GLM structure", "da": "GLM-struktur"}
     body:
       es: >-
         Un GLM combina distribución para Y, predictor lineal η=Xβ y link g(E[Y])=η. La familia debe reflejar
@@ -51,9 +51,9 @@ concepts:
       da: >-
         En GLM kombinerer fordeling for Y, lineær prædiktor η=Xβ og link g(E[Y])=η.
     key_points:
-      - {es: Familia y link cumplen funciones distintas, en: Family and link serve different roles, da: Familie og link har forskellige roller}
+      - {"es": "Familia y link cumplen funciones distintas", "en": "Family and link serve different roles", "da": "Familie og link har forskellige roller"}
   - id: bmb831.m04.c02
-    title: {es: Conteos, tasas y offsets, en: Counts, rates, and offsets, da: Counts, rater og offsets}
+    title: {"es": "Conteos, tasas y offsets", "en": "Counts, rates, and offsets", "da": "Counts, rater og offsets"}
     body:
       es: >-
         Poisson modela conteos con media igual a varianza condicional. Cuando exposición varía, log(exposición)
@@ -65,9 +65,9 @@ concepts:
       da: >-
         Poisson modellerer counts; log(eksponering) bruges som offset for rater.
     key_points:
-      - {es: El offset define el denominador de la tasa, en: The offset defines the rate denominator, da: Offset definerer ratens nævner}
+      - {"es": "El offset define el denominador de la tasa", "en": "The offset defines the rate denominator", "da": "Offset definerer ratens nævner"}
   - id: bmb831.m04.c03
-    title: {es: Sobredispersión y binomial negativa, en: Overdispersion and negative binomial, da: Overdispersion og negativ binomial}
+    title: {"es": "Sobredispersión y binomial negativa", "en": "Overdispersion and negative binomial", "da": "Overdispersion og negativ binomial"}
     body:
       es: >-
         Si la varianza excede la media por heterogeneidad o agrupación, Poisson subestima incertidumbre.
@@ -79,9 +79,9 @@ concepts:
       da: >-
         Når varians overstiger middel, undervurderer Poisson usikkerhed. Negativ binomial tilføjer dispersion.
     key_points:
-      - {es: Sobredispersión es síntoma, no diagnóstico único, en: Overdispersion is a symptom, not a unique diagnosis, da: Overdispersion er et symptom, ikke en entydig diagnose}
+      - {"es": "Sobredispersión es síntoma, no diagnóstico único", "en": "Overdispersion is a symptom, not a unique diagnosis", "da": "Overdispersion er et symptom, ikke en entydig diagnose"}
   - id: bmb831.m04.c04
-    title: {es: Proporciones y binomial, en: Proportions and binomial models, da: Proportioner og binomialmodeller}
+    title: {"es": "Proporciones y binomial", "en": "Proportions and binomial models", "da": "Proportioner og binomialmodeller"}
     body:
       es: >-
         La binomial modela éxitos de n ensayos bajo probabilidad común condicional. El logit produce log-odds;
@@ -93,9 +93,9 @@ concepts:
       da: >-
         Binomial modellerer succeser ud af n. Logit-koefficienter er log-odds; eksponentiering giver odds ratios.
     key_points:
-      - {es: Una proporción sin denominador pierde información de precisión, en: A proportion without its denominator loses precision information, da: En proportion uden nævner mister præcisionsinformation}
+      - {"es": "Una proporción sin denominador pierde información de precisión", "en": "A proportion without its denominator loses precision information", "da": "En proportion uden nævner mister præcisionsinformation"}
   - id: bmb831.m04.c05
-    title: {es: Matriz de diseño e identificabilidad, en: Design matrix and identifiability, da: Designmatrix og identificerbarhed}
+    title: {"es": "Matriz de diseño e identificabilidad", "en": "Design matrix and identifiability", "da": "Designmatrix og identificerbarhed"}
     body:
       es: >-
         La matriz X codifica intercepto, factores, covariables, blocking e interacciones. Columnas linealmente
@@ -107,9 +107,9 @@ concepts:
       da: >-
         X koder intercept, faktorer, kovariater, blocking og interaktioner. Lineær afhængighed giver ikke-identificerbare parametre.
     key_points:
-      - {es: El software no puede crear variación ausente, en: Software cannot create absent variation, da: Software kan ikke skabe manglende variation}
+      - {"es": "El software no puede crear variación ausente", "en": "Software cannot create absent variation", "da": "Software kan ikke skabe manglende variation"}
   - id: bmb831.m04.c06
-    title: {es: Interacciones, blocking y dependencia, en: Interactions, blocking, and dependence, da: Interaktioner, blocking og afhængighed}
+    title: {"es": "Interacciones, blocking y dependencia", "en": "Interactions, blocking, and dependence", "da": "Interaktioner, blocking og afhængighed"}
     body:
       es: >-
         Una interacción indica que el efecto de una variable cambia según otra. Con interacción, efectos principales
@@ -121,73 +121,73 @@ concepts:
       da: >-
         En interaktion betyder at én effekt varierer efter en anden. Blocking kontrollerer delt variation.
     key_points:
-      - {es: Células o medidas repetidas no aumentan automáticamente n independiente, en: Cells or repeated measures do not automatically increase independent n, da: Celler eller gentagne målinger øger ikke automatisk uafhængig n}
+      - {"es": "Células o medidas repetidas no aumentan automáticamente n independiente", "en": "Cells or repeated measures do not automatically increase independent n", "da": "Celler eller gentagne målinger øger ikke automatisk uafhængig n"}
 
 worked_examples:
   - id: bmb831.m04.e01
-    title: {es: Conteos con distinta exposición, en: Counts with unequal exposure, da: Counts med forskellig eksponering}
-    scenario: {es: Dos muestras tienen 20 y 40 eventos, pero exposiciones 10 y 40 horas., en: Two samples have 20 and 40 events but exposures of 10 and 40 hours., da: To samples har 20 og 40 events men eksponering 10 og 40 timer.}
+    title: {"es": "Conteos con distinta exposición", "en": "Counts with unequal exposure", "da": "Counts med forskellig eksponering"}
+    scenario: {"es": "Dos muestras tienen 20 y 40 eventos, pero exposiciones 10 y 40 horas.", "en": "Two samples have 20 and 40 events but exposures of 10 and 40 hours.", "da": "To samples har 20 og 40 events men eksponering 10 og 40 timer."}
     reasoning:
-      - {es: Comparar conteos sugiere aumento; tasas son 2 y 1 por hora., en: Count comparison suggests increase; rates are 2 and 1 per hour., da: Count-sammenligning antyder stigning; rater er 2 og 1 per time.}
-      - {es: Usar log(horas) como offset., en: Use log(hours) as offset., da: Brug log(timer) som offset.}
-    conclusion: {es: El denominador cambia la interpretación., en: The denominator changes interpretation., da: Nævneren ændrer fortolkningen.}
+      - {"es": "Comparar conteos sugiere aumento; tasas son 2 y 1 por hora.", "en": "Count comparison suggests increase; rates are 2 and 1 per hour.", "da": "Count-sammenligning antyder stigning; rater er 2 og 1 per time."}
+      - {"es": "Usar log(horas) como offset.", "en": "Use log(hours) as offset.", "da": "Brug log(timer) som offset."}
+    conclusion: {"es": "El denominador cambia la interpretación.", "en": "The denominator changes interpretation.", "da": "Nævneren ændrer fortolkningen."}
   - id: bmb831.m04.e02
-    title: {es: Poisson sobredisperso, en: Overdispersed Poisson, da: Overdisperseret Poisson}
-    scenario: {es: Media de conteo 12 y varianza residual 60., en: Count mean 12 and residual variance 60., da: Count-middel 12 og residualvarians 60.}
+    title: {"es": "Poisson sobredisperso", "en": "Overdispersed Poisson", "da": "Overdisperseret Poisson"}
+    scenario: {"es": "Media de conteo 12 y varianza residual 60.", "en": "Count mean 12 and residual variance 60.", "da": "Count-middel 12 og residualvarians 60."}
     reasoning:
-      - {es: Relación incompatible con Poisson simple., en: Incompatible with simple Poisson., da: Uforenelig med simpel Poisson.}
-      - {es: Revisar heterogeneidad, ceros, clustering y binomial negativa., en: Inspect heterogeneity, zeros, clustering, and negative binomial., da: Undersøg heterogenitet, nuller, clustering og negativ binomial.}
-    conclusion: {es: Cambiar familia debe acompañarse de diagnóstico estructural., en: Changing family should accompany structural diagnosis., da: Familieskift bør ledsages af strukturel diagnose.}
+      - {"es": "Relación incompatible con Poisson simple.", "en": "Incompatible with simple Poisson.", "da": "Uforenelig med simpel Poisson."}
+      - {"es": "Revisar heterogeneidad, ceros, clustering y binomial negativa.", "en": "Inspect heterogeneity, zeros, clustering, and negative binomial.", "da": "Undersøg heterogenitet, nuller, clustering og negativ binomial."}
+    conclusion: {"es": "Cambiar familia debe acompañarse de diagnóstico estructural.", "en": "Changing family should accompany structural diagnosis.", "da": "Familieskift bør ledsages af strukturel diagnose."}
   - id: bmb831.m04.e03
-    title: {es: Interacción tratamiento por sexo, en: Treatment-by-sex interaction, da: Behandling-gange-køn-interaktion}
-    scenario: {es: El tratamiento cambia en dirección opuesta entre dos grupos., en: Treatment effects have opposite directions across two groups., da: Behandlingseffekter har modsat retning mellem to grupper.}
+    title: {"es": "Interacción tratamiento por sexo", "en": "Treatment-by-sex interaction", "da": "Behandling-gange-køn-interaktion"}
+    scenario: {"es": "El tratamiento cambia en dirección opuesta entre dos grupos.", "en": "Treatment effects have opposite directions across two groups.", "da": "Behandlingseffekter har modsat retning mellem to grupper."}
     reasoning:
-      - {es: Un único efecto promedio puede ocultar heterogeneidad., en: One average effect may hide heterogeneity., da: Én gennemsnitlig effekt kan skjule heterogenitet.}
-      - {es: Incluir interacción y reportar contrastes simples por grupo., en: Include interaction and report simple contrasts by group., da: Inkludér interaktion og rapportér simple kontraster per gruppe.}
-    conclusion: {es: Los efectos principales no resumen adecuadamente una interacción fuerte., en: Main effects do not adequately summarize a strong interaction., da: Hovedeffekter opsummerer ikke en stærk interaktion tilstrækkeligt.}
+      - {"es": "Un único efecto promedio puede ocultar heterogeneidad.", "en": "One average effect may hide heterogeneity.", "da": "Én gennemsnitlig effekt kan skjule heterogenitet."}
+      - {"es": "Incluir interacción y reportar contrastes simples por grupo.", "en": "Include interaction and report simple contrasts by group.", "da": "Inkludér interaktion og rapportér simple kontraster per gruppe."}
+    conclusion: {"es": "Los efectos principales no resumen adecuadamente una interacción fuerte.", "en": "Main effects do not adequately summarize a strong interaction.", "da": "Hovedeffekter opsummerer ikke en stærk interaktion tilstrækkeligt."}
 
 guided_practice:
-  - {id: bmb831.m04.p01, activity_type: method_selection, prompt: {es: Elige modelo para conteos, tasas, proporciones y continuos., en: Choose models for counts, rates, proportions, and continuous outcomes., da: Vælg modeller for counts, rater, proportioner og kontinuerte outcomes.}, expected_elements: [support, mean_variance, denominator, dependence]}
-  - {id: bmb831.m04.p02, activity_type: coefficient_interpretation, prompt: {es: Interpreta β=0.69 con link log., en: Interpret β=0.69 under a log link., da: Fortolk β=0.69 med log-link.}, expected_elements: [exp_beta_about_2, multiplicative_effect, conditional_covariates, interval]}
-  - {id: bmb831.m04.p03, activity_type: design_matrix, prompt: {es: Construye diseño para condición, lote y paciente pareado., en: Build a design for condition, batch, and paired patient., da: Byg design for condition, batch og parret patient.}, expected_elements: [patient_block, condition_effect, batch_overlap, identifiability]}
-  - {id: bmb831.m04.p04, activity_type: contrast_design, prompt: {es: Formula contrastes en una interacción 2×2., en: Formulate contrasts in a 2×2 interaction., da: Formulér kontraster i en 2×2-interaktion.}, expected_elements: [simple_effects, interaction_difference, reference_levels, estimability]}
-  - {id: bmb831.m04.p05, activity_type: diagnostics, prompt: {es: Audita sobredispersión y residuos en conteos., en: Audit overdispersion and residuals in count data., da: Auditér overdispersion og residualer i count-data.}, expected_elements: [dispersion, residual_patterns, zero_excess, influence, omitted_structure]}
-  - {id: bmb831.m04.p06, activity_type: publication_appraisal, prompt: {es: Critica un artículo que analiza proporciones sin denominadores., en: Critique a paper analyzing proportions without denominators., da: Kritisk vurder en artikel der analyserer proportioner uden nævnere.}, expected_elements: [precision_loss, unequal_n, binomial_model, uncertainty]}
+  - {id: bmb831.m04.p01, activity_type: method_selection, prompt: {"es": "Elige modelo para conteos, tasas, proporciones y continuos.", "en": "Choose models for counts, rates, proportions, and continuous outcomes.", "da": "Vælg modeller for counts, rater, proportioner og kontinuerte outcomes."}, expected_elements: [support, mean_variance, denominator, dependence]}
+  - {id: bmb831.m04.p02, activity_type: coefficient_interpretation, prompt: {"es": "Interpreta β=0.69 con link log.", "en": "Interpret β=0.69 under a log link.", "da": "Fortolk β=0.69 med log-link."}, expected_elements: [exp_beta_about_2, multiplicative_effect, conditional_covariates, interval]}
+  - {id: bmb831.m04.p03, activity_type: design_matrix, prompt: {"es": "Construye diseño para condición, lote y paciente pareado.", "en": "Build a design for condition, batch, and paired patient.", "da": "Byg design for condition, batch og parret patient."}, expected_elements: [patient_block, condition_effect, batch_overlap, identifiability]}
+  - {id: bmb831.m04.p04, activity_type: contrast_design, prompt: {"es": "Formula contrastes en una interacción 2×2.", "en": "Formulate contrasts in a 2×2 interaction.", "da": "Formulér kontraster i en 2×2-interaktion."}, expected_elements: [simple_effects, interaction_difference, reference_levels, estimability]}
+  - {id: bmb831.m04.p05, activity_type: diagnostics, prompt: {"es": "Audita sobredispersión y residuos en conteos.", "en": "Audit overdispersion and residuals in count data.", "da": "Auditér overdispersion og residualer i count-data."}, expected_elements: [dispersion, residual_patterns, zero_excess, influence, omitted_structure]}
+  - {id: bmb831.m04.p06, activity_type: publication_appraisal, prompt: {"es": "Critica un artículo que analiza proporciones sin denominadores.", "en": "Critique a paper analyzing proportions without denominators.", "da": "Kritisk vurder en artikel der analyserer proportioner uden nævnere."}, expected_elements: [precision_loss, unequal_n, binomial_model, uncertainty]}
 
 objective_bank:
-  - {id: bmb831.m04.q01, type: multiple_choice, prompt: {es: Tres componentes de un GLM., en: Three GLM components., da: Tre GLM-komponenter.}, options: [{id: a, text: {es: Distribución, predictor lineal y link, en: Distribution, linear predictor, and link, da: Fordeling, lineær prædiktor og link}}, {id: b, text: {es: Sólo media y SD, en: Mean and SD only, da: Kun middel og SD}}], correct_option_ids: [a], explanation: {es: Definen soporte, estructura y escala., en: They define support, structure, and scale., da: De definerer støtte, struktur og skala.}}
-  - {id: bmb831.m04.q02, type: true_false, prompt: {es: En Poisson exige varianza condicional igual a media., en: Poisson assumes conditional variance equals mean., da: Poisson antager betinget varians lig middel.}, correct: true, explanation: {es: Es su relación media-varianza básica., en: This is its basic mean-variance relation., da: Det er dens grundlæggende middel-varians-relation.}}
-  - {id: bmb831.m04.q03, type: multiple_choice, prompt: {es: Rol de un offset., en: Role of an offset., da: Rolle af et offset.}, options: [{id: a, text: {es: Incorporar exposición con coeficiente fijo, en: Include exposure with fixed coefficient, da: Inkludere eksponering med fast koefficient}}, {id: b, text: {es: Seleccionar genes, en: Select genes, da: Vælge gener}}], correct_option_ids: [a], explanation: {es: Convierte conteos en comparación de tasas., en: It converts count modeling into rate comparison., da: Det omdanner count-modellering til ratesammenligning.}}
-  - {id: bmb831.m04.q04, type: true_false, prompt: {es: Sobredispersión siempre implica usar binomial negativa sin más diagnóstico., en: Overdispersion always means using negative binomial without further diagnosis., da: Overdispersion betyder altid negativ binomial uden yderligere diagnose.}, correct: false, explanation: {es: Puede indicar estructura omitida, clustering o cero-inflación., en: It may indicate omitted structure, clustering, or zero inflation., da: Det kan indikere udeladt struktur, clustering eller zero inflation.}}
-  - {id: bmb831.m04.q05, type: multiple_choice, prompt: {es: exp(β) bajo link log representa..., en: exp(β) under log link represents..., da: exp(β) under log-link repræsenterer...}, options: [{id: a, text: {es: Razón multiplicativa, en: Multiplicative ratio, da: Multiplikativ ratio}}, {id: b, text: {es: Diferencia absoluta, en: Absolute difference, da: Absolut forskel}}], correct_option_ids: [a], explanation: {es: El link log convierte adición en multiplicación., en: The log link converts addition to multiplication., da: Log-link omdanner addition til multiplikation.}}
-  - {id: bmb831.m04.q06, type: true_false, prompt: {es: Una proporción 1/2 tiene la misma precisión que 50/100., en: A proportion 1/2 has the same precision as 50/100., da: En proportion 1/2 har samme præcision som 50/100.}, correct: false, explanation: {es: El denominador determina información., en: The denominator determines information., da: Nævneren bestemmer information.}}
-  - {id: bmb831.m04.q07, type: multiple_choice, prompt: {es: Columnas dependientes en X causan..., en: Dependent columns in X cause..., da: Afhængige kolonner i X giver...}, options: [{id: a, text: {es: No identificabilidad, en: Non-identifiability, da: Ikke-identificerbarhed}}, {id: b, text: {es: Mayor potencia garantizada, en: Guaranteed higher power, da: Garanteret højere power}}], correct_option_ids: [a], explanation: {es: Parámetros no pueden separarse., en: Parameters cannot be separated., da: Parametre kan ikke adskilles.}}
-  - {id: bmb831.m04.q08, type: true_false, prompt: {es: Con interacción, un efecto principal es promedio universal., en: With an interaction, a main effect is a universal average., da: Med interaktion er en hovedeffekt et universelt gennemsnit.}, correct: false, explanation: {es: Es condicional al nivel de referencia salvo reparametrización., en: It is conditional on the reference level unless reparameterized., da: Den er betinget af referenceniveauet medmindre reparametreret.}}
-  - {id: bmb831.m04.q09, type: multiple_choice, prompt: {es: Unidad independiente en medidas celulares de pacientes., en: Independent unit in patient-derived cell measurements., da: Uafhængig enhed i cellemålinger fra patienter.}, options: [{id: a, text: {es: Paciente, en: Patient, da: Patient}}, {id: b, text: {es: Cada célula automáticamente, en: Every cell automatically, da: Hver celle automatisk}}], correct_option_ids: [a], explanation: {es: La dependencia se origina a nivel paciente., en: Dependence originates at patient level., da: Afhængighed stammer fra patientniveau.}}
-  - {id: bmb831.m04.q10, type: true_false, prompt: {es: Un contraste válido debe ser estimable bajo X., en: A valid contrast must be estimable under X., da: En gyldig kontrast skal være estimerbar under X.}, correct: true, explanation: {es: No puede recuperar comparaciones ausentes por diseño., en: It cannot recover comparisons absent by design., da: Det kan ikke genskabe sammenligninger der mangler i designet.}}
+  - {id: bmb831.m04.q01, type: multiple_choice, prompt: {"es": "Tres componentes de un GLM.", "en": "Three GLM components.", "da": "Tre GLM-komponenter."}, options: [{id: a, text: {"es": "Distribución, predictor lineal y link", "en": "Distribution, linear predictor, and link", "da": "Fordeling, lineær prædiktor og link"}}, {id: b, text: {"es": "Sólo media y SD", "en": "Mean and SD only", "da": "Kun middel og SD"}}], correct_option_ids: [a], explanation: {"es": "Definen soporte, estructura y escala.", "en": "They define support, structure, and scale.", "da": "De definerer støtte, struktur og skala."}}
+  - {id: bmb831.m04.q02, type: true_false, prompt: {"es": "En Poisson exige varianza condicional igual a media.", "en": "Poisson assumes conditional variance equals mean.", "da": "Poisson antager betinget varians lig middel."}, correct: true, explanation: {"es": "Es su relación media-varianza básica.", "en": "This is its basic mean-variance relation.", "da": "Det er dens grundlæggende middel-varians-relation."}}
+  - {id: bmb831.m04.q03, type: multiple_choice, prompt: {"es": "Rol de un offset.", "en": "Role of an offset.", "da": "Rolle af et offset."}, options: [{id: a, text: {"es": "Incorporar exposición con coeficiente fijo", "en": "Include exposure with fixed coefficient", "da": "Inkludere eksponering med fast koefficient"}}, {id: b, text: {"es": "Seleccionar genes", "en": "Select genes", "da": "Vælge gener"}}], correct_option_ids: [a], explanation: {"es": "Convierte conteos en comparación de tasas.", "en": "It converts count modeling into rate comparison.", "da": "Det omdanner count-modellering til ratesammenligning."}}
+  - {id: bmb831.m04.q04, type: true_false, prompt: {"es": "Sobredispersión siempre implica usar binomial negativa sin más diagnóstico.", "en": "Overdispersion always means using negative binomial without further diagnosis.", "da": "Overdispersion betyder altid negativ binomial uden yderligere diagnose."}, correct: false, explanation: {"es": "Puede indicar estructura omitida, clustering o cero-inflación.", "en": "It may indicate omitted structure, clustering, or zero inflation.", "da": "Det kan indikere udeladt struktur, clustering eller zero inflation."}}
+  - {id: bmb831.m04.q05, type: multiple_choice, prompt: {"es": "exp(β) bajo link log representa...", "en": "exp(β) under log link represents...", "da": "exp(β) under log-link repræsenterer..."}, options: [{id: a, text: {"es": "Razón multiplicativa", "en": "Multiplicative ratio", "da": "Multiplikativ ratio"}}, {id: b, text: {"es": "Diferencia absoluta", "en": "Absolute difference", "da": "Absolut forskel"}}], correct_option_ids: [a], explanation: {"es": "El link log convierte adición en multiplicación.", "en": "The log link converts addition to multiplication.", "da": "Log-link omdanner addition til multiplikation."}}
+  - {id: bmb831.m04.q06, type: true_false, prompt: {"es": "Una proporción 1/2 tiene la misma precisión que 50/100.", "en": "A proportion 1/2 has the same precision as 50/100.", "da": "En proportion 1/2 har samme præcision som 50/100."}, correct: false, explanation: {"es": "El denominador determina información.", "en": "The denominator determines information.", "da": "Nævneren bestemmer information."}}
+  - {id: bmb831.m04.q07, type: multiple_choice, prompt: {"es": "Columnas dependientes en X causan...", "en": "Dependent columns in X cause...", "da": "Afhængige kolonner i X giver..."}, options: [{id: a, text: {"es": "No identificabilidad", "en": "Non-identifiability", "da": "Ikke-identificerbarhed"}}, {id: b, text: {"es": "Mayor potencia garantizada", "en": "Guaranteed higher power", "da": "Garanteret højere power"}}], correct_option_ids: [a], explanation: {"es": "Parámetros no pueden separarse.", "en": "Parameters cannot be separated.", "da": "Parametre kan ikke adskilles."}}
+  - {id: bmb831.m04.q08, type: true_false, prompt: {"es": "Con interacción, un efecto principal es promedio universal.", "en": "With an interaction, a main effect is a universal average.", "da": "Med interaktion er en hovedeffekt et universelt gennemsnit."}, correct: false, explanation: {"es": "Es condicional al nivel de referencia salvo reparametrización.", "en": "It is conditional on the reference level unless reparameterized.", "da": "Den er betinget af referenceniveauet medmindre reparametreret."}}
+  - {id: bmb831.m04.q09, type: multiple_choice, prompt: {"es": "Unidad independiente en medidas celulares de pacientes.", "en": "Independent unit in patient-derived cell measurements.", "da": "Uafhængig enhed i cellemålinger fra patienter."}, options: [{id: a, text: {"es": "Paciente", "en": "Patient", "da": "Patient"}}, {id: b, text: {"es": "Cada célula automáticamente", "en": "Every cell automatically", "da": "Hver celle automatisk"}}], correct_option_ids: [a], explanation: {"es": "La dependencia se origina a nivel paciente.", "en": "Dependence originates at patient level.", "da": "Afhængighed stammer fra patientniveau."}}
+  - {id: bmb831.m04.q10, type: true_false, prompt: {"es": "Un contraste válido debe ser estimable bajo X.", "en": "A valid contrast must be estimable under X.", "da": "En gyldig kontrast skal være estimerbar under X."}, correct: true, explanation: {"es": "No puede recuperar comparaciones ausentes por diseño.", "en": "It cannot recover comparisons absent by design.", "da": "Det kan ikke genskabe sammenligninger der mangler i designet."}}
 
 open_assessment_items:
   - id: bmb831.m04.a01
-    prompt: {es: Selecciona y defiende un modelo para conteos con exposición desigual y sobredispersión., en: Select and defend a model for counts with unequal exposure and overdispersion., da: Vælg og forsvar en model for counts med ulige eksponering og overdispersion.}
+    prompt: {"es": "Selecciona y defiende un modelo para conteos con exposición desigual y sobredispersión.", "en": "Select and defend a model for counts with unequal exposure and overdispersion.", "da": "Vælg og forsvar en model for counts med ulige eksponering og overdispersion."}
     rubric: [{criterion: generating_mechanism, weight: 0.25}, {criterion: family_link_offset, weight: 0.30}, {criterion: diagnostics, weight: 0.25}, {criterion: interpretation, weight: 0.20}]
   - id: bmb831.m04.a02
-    prompt: {es: Diseña una matriz y contrastes para condición×tiempo con pacientes pareados., en: Design a matrix and contrasts for condition×time with paired patients., da: Design en matrix og kontraster for condition×tid med parrede patienter.}
+    prompt: {"es": "Diseña una matriz y contrastes para condición×tiempo con pacientes pareados.", "en": "Design a matrix and contrasts for condition×time with paired patients.", "da": "Design en matrix og kontraster for condition×tid med parrede patienter."}
     rubric: [{criterion: blocking, weight: 0.25}, {criterion: interaction, weight: 0.25}, {criterion: estimable_contrasts, weight: 0.30}, {criterion: interpretation, weight: 0.20}]
   - id: bmb831.m04.a03
-    prompt: {es: Audita un GLM publicado que ignora clustering y reporta sólo p-values., en: Audit a published GLM that ignores clustering and reports only p-values., da: Auditér en publiceret GLM der ignorerer clustering og kun rapporterer p-værdier.}
+    prompt: {"es": "Audita un GLM publicado que ignora clustering y reporta sólo p-values.", "en": "Audit a published GLM that ignores clustering and reports only p-values.", "da": "Auditér en publiceret GLM der ignorerer clustering og kun rapporterer p-værdier."}
     rubric: [{criterion: dependence, weight: 0.30}, {criterion: effect_scale, weight: 0.20}, {criterion: diagnostics, weight: 0.25}, {criterion: claim_revision, weight: 0.25}]
 
 glossary:
-  - {id: bmb831.term.glm, term: {es: modelo lineal generalizado, en: generalized linear model, da: generaliseret lineær model}, definition: {es: Modelo que combina distribución, predictor lineal y link., en: Model combining a distribution, linear predictor, and link., da: Model der kombinerer fordeling, lineær prædiktor og link.}}
-  - {id: bmb831.term.link_function, term: {es: función link, en: link function, da: linkfunktion}, definition: {es: Función que conecta media esperada con predictor lineal., en: Function connecting expected mean to linear predictor., da: Funktion der forbinder forventet middel med lineær prædiktor.}}
-  - {id: bmb831.term.offset, term: {es: offset, en: offset, da: offset}, definition: {es: Término conocido con coeficiente fijado, usualmente exposición., en: Known term with fixed coefficient, usually exposure., da: Kendt term med fast koefficient, ofte eksponering.}}
-  - {id: bmb831.term.overdispersion, term: {es: sobredispersión, en: overdispersion, da: overdispersion}, definition: {es: Variabilidad mayor que la prevista por el modelo., en: Variability greater than predicted by the model., da: Variabilitet større end modellen forudsiger.}}
-  - {id: bmb831.term.negative_binomial, term: {es: binomial negativa, en: negative binomial, da: negativ binomial}, definition: {es: Distribución de conteos con parámetro de dispersión adicional., en: Count distribution with an additional dispersion parameter., da: Count-fordeling med ekstra dispersionsparameter.}}
-  - {id: bmb831.term.logit, term: {es: logit, en: logit, da: logit}, definition: {es: Logaritmo de odds usado como link binomial común., en: Log odds used as a common binomial link., da: Log-odds brugt som almindeligt binomial-link.}}
-  - {id: bmb831.term.design_matrix, term: {es: matriz de diseño, en: design matrix, da: designmatrix}, definition: {es: Matriz que codifica predictores y estructura del modelo., en: Matrix encoding predictors and model structure., da: Matrix der koder prædiktorer og modelstruktur.}}
-  - {id: bmb831.term.contrast, term: {es: contraste, en: contrast, da: kontrast}, definition: {es: Combinación lineal de parámetros que representa una comparación., en: Linear combination of parameters representing a comparison., da: Lineær kombination af parametre der repræsenterer en sammenligning.}}
-  - {id: bmb831.term.interaction, term: {es: interacción, en: interaction, da: interaktion}, definition: {es: Dependencia del efecto de una variable respecto a otra., en: Dependence of one variable effect on another., da: Afhængighed af én variabels effekt af en anden.}}
-  - {id: bmb831.term.identifiability, term: {es: identificabilidad, en: identifiability, da: identificerbarhed}, definition: {es: Posibilidad de estimar parámetros de forma separada a partir del diseño., en: Ability to separately estimate parameters from the design., da: Mulighed for separat at estimere parametre fra designet.}}
+  - {id: bmb831.term.glm, term: {"es": "modelo lineal generalizado", "en": "generalized linear model", "da": "generaliseret lineær model"}, definition: {"es": "Modelo que combina distribución, predictor lineal y link.", "en": "Model combining a distribution, linear predictor, and link.", "da": "Model der kombinerer fordeling, lineær prædiktor og link."}}
+  - {id: bmb831.term.link_function, term: {"es": "función link", "en": "link function", "da": "linkfunktion"}, definition: {"es": "Función que conecta media esperada con predictor lineal.", "en": "Function connecting expected mean to linear predictor.", "da": "Funktion der forbinder forventet middel med lineær prædiktor."}}
+  - {id: bmb831.term.offset, term: {"es": "offset", "en": "offset", "da": "offset"}, definition: {"es": "Término conocido con coeficiente fijado, usualmente exposición.", "en": "Known term with fixed coefficient, usually exposure.", "da": "Kendt term med fast koefficient, ofte eksponering."}}
+  - {id: bmb831.term.overdispersion, term: {"es": "sobredispersión", "en": "overdispersion", "da": "overdispersion"}, definition: {"es": "Variabilidad mayor que la prevista por el modelo.", "en": "Variability greater than predicted by the model.", "da": "Variabilitet større end modellen forudsiger."}}
+  - {id: bmb831.term.negative_binomial, term: {"es": "binomial negativa", "en": "negative binomial", "da": "negativ binomial"}, definition: {"es": "Distribución de conteos con parámetro de dispersión adicional.", "en": "Count distribution with an additional dispersion parameter.", "da": "Count-fordeling med ekstra dispersionsparameter."}}
+  - {id: bmb831.term.logit, term: {"es": "logit", "en": "logit", "da": "logit"}, definition: {"es": "Logaritmo de odds usado como link binomial común.", "en": "Log odds used as a common binomial link.", "da": "Log-odds brugt som almindeligt binomial-link."}}
+  - {id: bmb831.term.design_matrix, term: {"es": "matriz de diseño", "en": "design matrix", "da": "designmatrix"}, definition: {"es": "Matriz que codifica predictores y estructura del modelo.", "en": "Matrix encoding predictors and model structure.", "da": "Matrix der koder prædiktorer og modelstruktur."}}
+  - {id: bmb831.term.contrast, term: {"es": "contraste", "en": "contrast", "da": "kontrast"}, definition: {"es": "Combinación lineal de parámetros que representa una comparación.", "en": "Linear combination of parameters representing a comparison.", "da": "Lineær kombination af parametre der repræsenterer en sammenligning."}}
+  - {id: bmb831.term.interaction, term: {"es": "interacción", "en": "interaction", "da": "interaktion"}, definition: {"es": "Dependencia del efecto de una variable respecto a otra.", "en": "Dependence of one variable effect on another.", "da": "Afhængighed af én variabels effekt af en anden."}}
+  - {id: bmb831.term.identifiability, term: {"es": "identificabilidad", "en": "identifiability", "da": "identificerbarhed"}, definition: {"es": "Posibilidad de estimar parámetros de forma separada a partir del diseño.", "en": "Ability to separately estimate parameters from the design.", "da": "Mulighed for separat at estimere parametre fra designet."}}
 
 hidden_tutor_support:
   canonical_explanation:
@@ -219,8 +219,8 @@ hidden_tutor_support:
     - correct response-scale interpretation
   retrieval_fragments:
     - id: bmb831.m04.r01
-      text: {es: Un offset incorpora exposición conocida con coeficiente fijado y permite modelar tasas., en: An offset includes known exposure with a fixed coefficient and enables rate modeling., da: Et offset inkluderer kendt eksponering med fast koefficient og muliggør ratemodellering.}
+      text: {"es": "Un offset incorpora exposición conocida con coeficiente fijado y permite modelar tasas.", "en": "An offset includes known exposure with a fixed coefficient and enables rate modeling.", "da": "Et offset inkluderer kendt eksponering med fast koefficient og muliggør ratemodellering."}
     - id: bmb831.m04.r02
-      text: {es: Sobredispersión puede requerir binomial negativa pero también revisión de estructura omitida., en: Overdispersion may require negative binomial but also review of omitted structure., da: Overdispersion kan kræve negativ binomial men også vurdering af udeladt struktur.}
+      text: {"es": "Sobredispersión puede requerir binomial negativa pero también revisión de estructura omitida.", "en": "Overdispersion may require negative binomial but also review of omitted structure.", "da": "Overdispersion kan kræve negativ binomial men også vurdering af udeladt struktur."}
     - id: bmb831.m04.r03
-      text: {es: Un contraste no estimable no se vuelve válido por elegir otro paquete., en: A non-estimable contrast does not become valid by choosing another package., da: En ikke-estimerbar kontrast bliver ikke gyldig ved at vælge en anden pakke.}
+      text: {"es": "Un contraste no estimable no se vuelve válido por elegir otro paquete.", "en": "A non-estimable contrast does not become valid by choosing another package.", "da": "En ikke-estimerbar kontrast bliver ikke gyldig ved at vælge en anden pakke."}

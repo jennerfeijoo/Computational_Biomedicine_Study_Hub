@@ -7,97 +7,97 @@ locales: [es, en, da]
 cards:
   - id: dm847.m14.f01
     type: conceptual
-    front: {es: ¿Qué significa p≫n en datos ómicos?, en: What does p≫n mean in omics data?, da: Hvad betyder p≫n i omics-data?}
-    back: {es: El número de características supera ampliamente al número de unidades independientes, aumentando riesgo de sobreajuste e inestabilidad., en: Feature count greatly exceeds independent sample count, increasing overfitting and instability risk., da: Antallet af features er langt større end antallet af uafhængige samples, hvilket øger overfitting og ustabilitet.}
+    front: {"es": "¿Qué significa p≫n en datos ómicos?", "en": "What does p≫n mean in omics data?", "da": "Hvad betyder p≫n i omics-data?"}
+    back: {"es": "El número de características supera ampliamente al número de unidades independientes, aumentando riesgo de sobreajuste e inestabilidad.", "en": "Feature count greatly exceeds independent sample count, increasing overfitting and instability risk.", "da": "Antallet af features er langt større end antallet af uafhængige samples, hvilket øger overfitting og ustabilitet."}
   - id: dm847.m14.f02
     type: study_design
-    front: {es: ¿Qué unidad debe mantenerse junta al dividir varias visitas del mismo paciente?, en: Which unit must stay together when splitting repeated visits from one patient?, da: Hvilken enhed skal holdes samlet ved gentagne besøg fra samme patient?}
-    back: {es: Todas las visitas del paciente deben pertenecer a la misma partición para evitar dependencia entre entrenamiento y evaluación., en: All visits from one patient must remain in the same split to avoid dependence across training and evaluation., da: Alle besøg fra samme patient skal være i samme split for at undgå afhængighed mellem træning og evaluering.}
+    front: {"es": "¿Qué unidad debe mantenerse junta al dividir varias visitas del mismo paciente?", "en": "Which unit must stay together when splitting repeated visits from one patient?", "da": "Hvilken enhed skal holdes samlet ved gentagne besøg fra samme patient?"}
+    back: {"es": "Todas las visitas del paciente deben pertenecer a la misma partición para evitar dependencia entre entrenamiento y evaluación.", "en": "All visits from one patient must remain in the same split to avoid dependence across training and evaluation.", "da": "Alle besøg fra samme patient skal være i samme split for at undgå afhængighed mellem træning og evaluering."}
   - id: dm847.m14.f03
     type: leakage
-    front: {es: ¿Por qué escalar con todo el dataset antes de CV produce fuga?, en: Why does scaling on the full dataset before CV cause leakage?, da: Hvorfor giver skalering på hele datasættet før CV lækage?}
-    back: {es: Media y desviación de las muestras de validación influyen en la transformación aplicada al entrenamiento., en: Validation-sample means and variances influence the transformation applied to training data., da: Middelværdi og varians fra valideringssamples påvirker transformationen af træningsdata.}
+    front: {"es": "¿Por qué escalar con todo el dataset antes de CV produce fuga?", "en": "Why does scaling on the full dataset before CV cause leakage?", "da": "Hvorfor giver skalering på hele datasættet før CV lækage?"}
+    back: {"es": "Media y desviación de las muestras de validación influyen en la transformación aplicada al entrenamiento.", "en": "Validation-sample means and variances influence the transformation applied to training data.", "da": "Middelværdi og varians fra valideringssamples påvirker transformationen af træningsdata."}
   - id: dm847.m14.f04
     type: pipeline
-    front: {es: ¿Qué pasos deben ajustarse dentro de cada fold?, en: Which steps must be fitted within each fold?, da: Hvilke trin skal fittes i hvert fold?}
-    back: {es: Imputación, escalado, filtrado aprendido, corrección de batch, reducción dimensional, selección y modelo., en: Imputation, scaling, learned filtering, batch correction, dimensionality reduction, selection, and the model., da: Imputation, skalering, lært filtrering, batch correction, dimensionreduktion, selection og model.}
+    front: {"es": "¿Qué pasos deben ajustarse dentro de cada fold?", "en": "Which steps must be fitted within each fold?", "da": "Hvilke trin skal fittes i hvert fold?"}
+    back: {"es": "Imputación, escalado, filtrado aprendido, corrección de batch, reducción dimensional, selección y modelo.", "en": "Imputation, scaling, learned filtering, batch correction, dimensionality reduction, selection, and the model.", "da": "Imputation, skalering, lært filtrering, batch correction, dimensionreduktion, selection og model."}
   - id: dm847.m14.f05
     type: regularization
-    front: {es: Diferencia básica entre L1 y L2., en: Basic difference between L1 and L2 regularization., da: Grundlæggende forskel mellem L1- og L2-regularisering.}
-    back: {es: L1 puede llevar coeficientes exactamente a cero; L2 los contrae de forma continua sin seleccionar tan agresivamente., en: L1 can drive coefficients exactly to zero; L2 continuously shrinks them without equally aggressive selection., da: L1 kan sætte koefficienter præcis til nul; L2 krymper dem kontinuerligt uden lige så aggressiv selection.}
+    front: {"es": "Diferencia básica entre L1 y L2.", "en": "Basic difference between L1 and L2 regularization.", "da": "Grundlæggende forskel mellem L1- og L2-regularisering."}
+    back: {"es": "L1 puede llevar coeficientes exactamente a cero; L2 los contrae de forma continua sin seleccionar tan agresivamente.", "en": "L1 can drive coefficients exactly to zero; L2 continuously shrinks them without equally aggressive selection.", "da": "L1 kan sætte koefficienter præcis til nul; L2 krymper dem kontinuerligt uden lige så aggressiv selection."}
   - id: dm847.m14.f06
     type: regularization
-    front: {es: ¿Qué combina elastic net?, en: What does elastic net combine?, da: Hvad kombinerer elastic net?}
-    back: {es: Penalizaciones L1 y L2, útil cuando existen grupos de variables correlacionadas., en: L1 and L2 penalties, useful when correlated feature groups exist., da: L1- og L2-penalties, nyttigt ved korrelerede feature-grupper.}
+    front: {"es": "¿Qué combina elastic net?", "en": "What does elastic net combine?", "da": "Hvad kombinerer elastic net?"}
+    back: {"es": "Penalizaciones L1 y L2, útil cuando existen grupos de variables correlacionadas.", "en": "L1 and L2 penalties, useful when correlated feature groups exist.", "da": "L1- og L2-penalties, nyttigt ved korrelerede feature-grupper."}
   - id: dm847.m14.f07
     type: stability
-    front: {es: ¿Por qué dos firmas distintas pueden rendir de forma similar?, en: Why can different signatures perform similarly?, da: Hvorfor kan forskellige signaturer have lignende performance?}
-    back: {es: Variables correlacionadas pueden sustituirse entre sí en un problema p≫n y producir predicciones equivalentes., en: Correlated variables can substitute for one another in a p≫n problem and yield similar predictions., da: Korrelerede variable kan erstatte hinanden i et p≫n-problem og give lignende prædiktioner.}
+    front: {"es": "¿Por qué dos firmas distintas pueden rendir de forma similar?", "en": "Why can different signatures perform similarly?", "da": "Hvorfor kan forskellige signaturer have lignende performance?"}
+    back: {"es": "Variables correlacionadas pueden sustituirse entre sí en un problema p≫n y producir predicciones equivalentes.", "en": "Correlated variables can substitute for one another in a p≫n problem and yield similar predictions.", "da": "Korrelerede variable kan erstatte hinanden i et p≫n-problem og give lignende prædiktioner."}
   - id: dm847.m14.f08
     type: pca
-    front: {es: ¿Qué representan los scores de PCA?, en: What do PCA scores represent?, da: Hvad repræsenterer PCA-scores?}
-    back: {es: Coordenadas de las muestras en los componentes principales., en: Sample coordinates in principal-component space., da: Samplekoordinater i principal-component-rummet.}
+    front: {"es": "¿Qué representan los scores de PCA?", "en": "What do PCA scores represent?", "da": "Hvad repræsenterer PCA-scores?"}
+    back: {"es": "Coordenadas de las muestras en los componentes principales.", "en": "Sample coordinates in principal-component space.", "da": "Samplekoordinater i principal-component-rummet."}
   - id: dm847.m14.f09
     type: pca
-    front: {es: ¿Qué representan los loadings de PCA?, en: What do PCA loadings represent?, da: Hvad repræsenterer PCA-loadings?}
-    back: {es: Coeficientes que describen cuánto contribuye cada variable a cada componente., en: Coefficients describing each variable's contribution to each component., da: Koefficienter der beskriver hver variabels bidrag til hver komponent.}
+    front: {"es": "¿Qué representan los loadings de PCA?", "en": "What do PCA loadings represent?", "da": "Hvad repræsenterer PCA-loadings?"}
+    back: {"es": "Coeficientes que describen cuánto contribuye cada variable a cada componente.", "en": "Coefficients describing each variable's contribution to each component.", "da": "Koefficienter der beskriver hver variabels bidrag til hver komponent."}
   - id: dm847.m14.f10
     type: misconception
-    front: {es: Corrige: un PC que explica mucha varianza es necesariamente predictivo., en: Correct: a PC explaining much variance is necessarily predictive., da: Ret: en PC med høj forklaret varians er nødvendigvis prædiktiv.}
-    back: {es: La varianza puede reflejar batch, ruido o biología no relacionada con el outcome., en: Variance may reflect batch, noise, or biology unrelated to the outcome., da: Variansen kan skyldes batch, støj eller biologi uden relation til outcome.}
+    front: {"es": "Corrige: un PC que explica mucha varianza es necesariamente predictivo.", "en": "Correct: a PC explaining much variance is necessarily predictive.", "da": "Ret: en PC med høj forklaret varians er nødvendigvis prædiktiv."}
+    back: {"es": "La varianza puede reflejar batch, ruido o biología no relacionada con el outcome.", "en": "Variance may reflect batch, noise, or biology unrelated to the outcome.", "da": "Variansen kan skyldes batch, støj eller biologi uden relation til outcome."}
   - id: dm847.m14.f11
     type: clustering
-    front: {es: ¿De qué depende un resultado de clustering?, en: What does a clustering result depend on?, da: Hvad afhænger et clustering-resultat af?}
-    back: {es: Preprocesamiento, representación, distancia, algoritmo, parámetros y número de grupos., en: Preprocessing, representation, distance, algorithm, parameters, and number of groups., da: Preprocessing, repræsentation, afstand, algoritme, parametre og antal grupper.}
+    front: {"es": "¿De qué depende un resultado de clustering?", "en": "What does a clustering result depend on?", "da": "Hvad afhænger et clustering-resultat af?"}
+    back: {"es": "Preprocesamiento, representación, distancia, algoritmo, parámetros y número de grupos.", "en": "Preprocessing, representation, distance, algorithm, parameters, and number of groups.", "da": "Preprocessing, repræsentation, afstand, algoritme, parametre og antal grupper."}
   - id: dm847.m14.f12
     type: stability
-    front: {es: ¿Cómo evaluar estabilidad de clusters?, en: How can cluster stability be evaluated?, da: Hvordan kan clusterstabilitet evalueres?}
-    back: {es: Repetir bajo bootstrap, perturbaciones y parámetros alternativos, y comparar matrices de co-clustering., en: Repeat under bootstrap, perturbations, and alternative parameters, then compare co-clustering matrices., da: Gentag under bootstrap, perturbationer og alternative parametre, og sammenlign co-clustering-matricer.}
+    front: {"es": "¿Cómo evaluar estabilidad de clusters?", "en": "How can cluster stability be evaluated?", "da": "Hvordan kan clusterstabilitet evalueres?"}
+    back: {"es": "Repetir bajo bootstrap, perturbaciones y parámetros alternativos, y comparar matrices de co-clustering.", "en": "Repeat under bootstrap, perturbations, and alternative parameters, then compare co-clustering matrices.", "da": "Gentag under bootstrap, perturbationer og alternative parametre, og sammenlign co-clustering-matricer."}
   - id: dm847.m14.f13
     type: misconception
-    front: {es: Corrige: clusters visibles son subtipos clínicos., en: Correct: visible clusters are clinical subtypes., da: Ret: synlige clusters er kliniske subtyper.}
-    back: {es: Requieren estabilidad, replicación independiente y asociación externa relevante., en: They require stability, independent replication, and relevant external association., da: De kræver stabilitet, uafhængig replikation og relevant ekstern association.}
+    front: {"es": "Corrige: clusters visibles son subtipos clínicos.", "en": "Correct: visible clusters are clinical subtypes.", "da": "Ret: synlige clusters er kliniske subtyper."}
+    back: {"es": "Requieren estabilidad, replicación independiente y asociación externa relevante.", "en": "They require stability, independent replication, and relevant external association.", "da": "De kræver stabilitet, uafhængig replikation og relevant ekstern association."}
   - id: dm847.m14.f14
     type: validation
-    front: {es: Función del loop interno en CV anidada., en: Role of the inner loop in nested CV., da: Rollen for det indre loop i nested CV.}
-    back: {es: Seleccionar hiperparámetros, features y decisiones del pipeline usando sólo datos de desarrollo., en: Select hyperparameters, features, and pipeline decisions using development data only., da: Vælge hyperparametre, features og pipelinebeslutninger kun med udviklingsdata.}
+    front: {"es": "Función del loop interno en CV anidada.", "en": "Role of the inner loop in nested CV.", "da": "Rollen for det indre loop i nested CV."}
+    back: {"es": "Seleccionar hiperparámetros, features y decisiones del pipeline usando sólo datos de desarrollo.", "en": "Select hyperparameters, features, and pipeline decisions using development data only.", "da": "Vælge hyperparametre, features og pipelinebeslutninger kun med udviklingsdata."}
   - id: dm847.m14.f15
     type: validation
-    front: {es: Función del loop externo en CV anidada., en: Role of the outer loop in nested CV., da: Rollen for det ydre loop i nested CV.}
-    back: {es: Estimar el rendimiento del procedimiento completo de selección en datos no usados por el loop interno., en: Estimate performance of the full selection procedure on data untouched by the inner loop., da: Estimere performance for hele selektionsproceduren på data, som det indre loop ikke har set.}
+    front: {"es": "Función del loop externo en CV anidada.", "en": "Role of the outer loop in nested CV.", "da": "Rollen for det ydre loop i nested CV."}
+    back: {"es": "Estimar el rendimiento del procedimiento completo de selección en datos no usados por el loop interno.", "en": "Estimate performance of the full selection procedure on data untouched by the inner loop.", "da": "Estimere performance for hele selektionsproceduren på data, som det indre loop ikke har set."}
   - id: dm847.m14.f16
     type: metric
-    front: {es: ¿Qué mide ROC-AUC?, en: What does ROC-AUC measure?, da: Hvad måler ROC-AUC?}
-    back: {es: La capacidad de ranking entre positivos y negativos a través de todos los umbrales., en: Ranking ability between positives and negatives across thresholds., da: Evnen til at rangere positive over negative på tværs af tærskler.}
+    front: {"es": "¿Qué mide ROC-AUC?", "en": "What does ROC-AUC measure?", "da": "Hvad måler ROC-AUC?"}
+    back: {"es": "La capacidad de ranking entre positivos y negativos a través de todos los umbrales.", "en": "Ranking ability between positives and negatives across thresholds.", "da": "Evnen til at rangere positive over negative på tværs af tærskler."}
   - id: dm847.m14.f17
     type: metric
-    front: {es: ¿Por qué PR-AUC es útil con positivos raros?, en: Why is PR-AUC useful with rare positives?, da: Hvorfor er PR-AUC nyttig ved sjældne positive?}
-    back: {es: Resume precisión y recall y refleja directamente la dificultad de recuperar la clase positiva., en: It summarizes precision and recall and directly reflects recovery of the positive class., da: Den opsummerer precision og recall og afspejler direkte genfinding af den positive klasse.}
+    front: {"es": "¿Por qué PR-AUC es útil con positivos raros?", "en": "Why is PR-AUC useful with rare positives?", "da": "Hvorfor er PR-AUC nyttig ved sjældne positive?"}
+    back: {"es": "Resume precisión y recall y refleja directamente la dificultad de recuperar la clase positiva.", "en": "It summarizes precision and recall and directly reflects recovery of the positive class.", "da": "Den opsummerer precision og recall og afspejler direkte genfinding af den positive klasse."}
   - id: dm847.m14.f18
     type: calibration
-    front: {es: ¿Qué significa buena calibración?, en: What does good calibration mean?, da: Hvad betyder god kalibrering?}
-    back: {es: Entre predicciones cercanas a p, aproximadamente una fracción p presenta el outcome., en: Among predictions near p, approximately fraction p experiences the outcome., da: Blandt prædiktioner nær p oplever omtrent andelen p outcome.}
+    front: {"es": "¿Qué significa buena calibración?", "en": "What does good calibration mean?", "da": "Hvad betyder god kalibrering?"}
+    back: {"es": "Entre predicciones cercanas a p, aproximadamente una fracción p presenta el outcome.", "en": "Among predictions near p, approximately fraction p experiences the outcome.", "da": "Blandt prædiktioner nær p oplever omtrent andelen p outcome."}
   - id: dm847.m14.f19
     type: distinction
-    front: {es: Discriminación frente a calibración., en: Discrimination versus calibration., da: Diskrimination versus kalibrering.}
-    back: {es: Discriminación ordena casos; calibración evalúa exactitud de las probabilidades., en: Discrimination ranks cases; calibration assesses probability accuracy., da: Diskrimination rangerer cases; kalibrering vurderer sandsynlighedsaccuracy.}
+    front: {"es": "Discriminación frente a calibración.", "en": "Discrimination versus calibration.", "da": "Diskrimination versus kalibrering."}
+    back: {"es": "Discriminación ordena casos; calibración evalúa exactitud de las probabilidades.", "en": "Discrimination ranks cases; calibration assesses probability accuracy.", "da": "Diskrimination rangerer cases; kalibrering vurderer sandsynlighedsaccuracy."}
   - id: dm847.m14.f20
     type: threshold
-    front: {es: ¿Dónde debe elegirse un umbral operativo?, en: Where should an operating threshold be selected?, da: Hvor bør en operationel tærskel vælges?}
-    back: {es: En datos de desarrollo, usando costes o restricciones explícitas, nunca ajustándolo al test final., en: In development data using explicit costs or constraints, never tuned on the final test., da: I udviklingsdata med eksplicitte omkostninger eller krav, aldrig på det endelige testset.}
+    front: {"es": "¿Dónde debe elegirse un umbral operativo?", "en": "Where should an operating threshold be selected?", "da": "Hvor bør en operationel tærskel vælges?"}
+    back: {"es": "En datos de desarrollo, usando costes o restricciones explícitas, nunca ajustándolo al test final.", "en": "In development data using explicit costs or constraints, never tuned on the final test.", "da": "I udviklingsdata med eksplicitte omkostninger eller krav, aldrig på det endelige testset."}
   - id: dm847.m14.f21
     type: domain_shift
-    front: {es: Nombra cuatro fuentes de domain shift., en: Name four sources of domain shift., da: Nævn fire kilder til domain shift.}
-    back: {es: Plataforma, laboratorio, población, tiempo o protocolo de procesamiento., en: Platform, laboratory, population, time, or processing protocol., da: Platform, laboratorium, population, tid eller behandlingsprotokol.}
+    front: {"es": "Nombra cuatro fuentes de domain shift.", "en": "Name four sources of domain shift.", "da": "Nævn fire kilder til domain shift."}
+    back: {"es": "Plataforma, laboratorio, población, tiempo o protocolo de procesamiento.", "en": "Platform, laboratory, population, time, or processing protocol.", "da": "Platform, laboratorium, population, tid eller behandlingsprotokol."}
   - id: dm847.m14.f22
     type: confounding
-    front: {es: ¿Qué ocurre si batch coincide con outcome?, en: What happens when batch coincides with outcome?, da: Hvad sker når batch falder sammen med outcome?}
-    back: {es: El efecto biológico y técnico pueden ser no identificables; el modelo puede aprender el laboratorio., en: Biological and technical effects may be non-identifiable, and the model may learn the laboratory., da: Biologiske og tekniske effekter kan være ikke-identificerbare, og modellen kan lære laboratoriet.}
+    front: {"es": "¿Qué ocurre si batch coincide con outcome?", "en": "What happens when batch coincides with outcome?", "da": "Hvad sker når batch falder sammen med outcome?"}
+    back: {"es": "El efecto biológico y técnico pueden ser no identificables; el modelo puede aprender el laboratorio.", "en": "Biological and technical effects may be non-identifiable, and the model may learn the laboratory.", "da": "Biologiske og tekniske effekter kan være ikke-identificerbare, og modellen kan lære laboratoriet."}
   - id: dm847.m14.f23
     type: validation
-    front: {es: ¿Qué prueba un hold-out por hospital?, en: What does a hospital-held-out evaluation test?, da: Hvad tester evaluering med et hospital holdt ude?}
-    back: {es: Transportabilidad bajo cambio de sitio, práctica, población y potencialmente plataforma., en: Transportability under changes in site, practice, population, and potentially platform., da: Transportabilitet ved ændringer i site, praksis, population og eventuelt platform.}
+    front: {"es": "¿Qué prueba un hold-out por hospital?", "en": "What does a hospital-held-out evaluation test?", "da": "Hvad tester evaluering med et hospital holdt ude?"}
+    back: {"es": "Transportabilidad bajo cambio de sitio, práctica, población y potencialmente plataforma.", "en": "Transportability under changes in site, practice, population, and potentially platform.", "da": "Transportabilitet ved ændringer i site, praksis, population og eventuelt platform."}
   - id: dm847.m14.f24
     type: misconception
-    front: {es: Corrige: una feature predictiva es un biomarcador clínicamente validado., en: Correct: a predictive feature is a clinically validated biomarker., da: Ret: en prædiktiv feature er en klinisk valideret biomarkør.}
-    back: {es: Se requieren estabilidad, validez analítica, validación externa, calibración y evidencia de utilidad para el uso previsto., en: Stability, analytical validity, external validation, calibration, and evidence of utility for the intended use are required., da: Stabilitet, analytisk validitet, ekstern validering, kalibrering og evidens for nytte i den tilsigtede brug kræves.}
+    front: {"es": "Corrige: una feature predictiva es un biomarcador clínicamente validado.", "en": "Correct: a predictive feature is a clinically validated biomarker.", "da": "Ret: en prædiktiv feature er en klinisk valideret biomarkør."}
+    back: {"es": "Se requieren estabilidad, validez analítica, validación externa, calibración y evidencia de utilidad para el uso previsto.", "en": "Stability, analytical validity, external validation, calibration, and evidence of utility for the intended use are required.", "da": "Stabilitet, analytisk validitet, ekstern validering, kalibrering og evidens for nytte i den tilsigtede brug kræves."}

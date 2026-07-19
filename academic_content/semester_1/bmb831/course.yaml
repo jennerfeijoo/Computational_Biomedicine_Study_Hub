@@ -5,17 +5,17 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Bioestadística en R II
-    en: Biostatistics in R II
-    da: Biostatistik i R II
+    es: "Bioestadística en R II"
+    en: "Biostatistics in R II"
+    da: "Biostatistik i R II"
   ects: 5
   level: masters
   term: autumn
   teaching_language: English
   assessment:
-    es: Participación tutorial obligatoria e informe individual
-    en: Mandatory tutorial participation and individual report
-    da: Obligatorisk tutorialdeltagelse og individuel rapport
+    es: "Participación tutorial obligatoria e informe individual"
+    en: "Mandatory tutorial participation and individual report"
+    da: "Obligatorisk tutorialdeltagelse og individuel rapport"
   purpose:
     es: >-
       Desarrollar análisis reproducibles de datos biológicos complejos y de alta dimensión en R.
@@ -53,99 +53,99 @@ academic_preconditions:
 official_learning_outcomes:
   - id: bmb831.lo01
     statement:
-      es: Analizar de forma independiente conjuntos de datos conceptualmente exigentes.
-      en: Independently analyze conceptually demanding datasets.
-      da: Selvstændigt analysere konceptuelt krævende datasæt.
+      es: "Analizar de forma independiente conjuntos de datos conceptualmente exigentes."
+      en: "Independently analyze conceptually demanding datasets."
+      da: "Selvstændigt analysere konceptuelt krævende datasæt."
   - id: bmb831.lo02
     statement:
-      es: Trabajar con grandes conjuntos de datos y aplicar análisis estadísticos estándar para identificar características relevantes.
-      en: Work with large datasets and perform standard statistical analysis to identify relevant features.
-      da: Arbejde med store datasæt og udføre standardstatistiske analyser for at identificere relevante karakteristika.
+      es: "Trabajar con grandes conjuntos de datos y aplicar análisis estadísticos estándar para identificar características relevantes."
+      en: "Work with large datasets and perform standard statistical analysis to identify relevant features."
+      da: "Arbejde med store datasæt og udføre standardstatistiske analyser for at identificere relevante karakteristika."
   - id: bmb831.lo03
     statement:
-      es: Utilizar algoritmos multivariantes estándar.
-      en: Use standard multivariate algorithms.
-      da: Anvende standard multivariate algoritmer.
+      es: "Utilizar algoritmos multivariantes estándar."
+      en: "Use standard multivariate algorithms."
+      da: "Anvende standard multivariate algoritmer."
   - id: bmb831.lo04
     statement:
-      es: Diseñar scripts en R para visualización detallada.
-      en: Design R scripts for detailed visualization.
-      da: Designe R-scripts til detaljeret visualisering.
+      es: "Diseñar scripts en R para visualización detallada."
+      en: "Design R scripts for detailed visualization."
+      da: "Designe R-scripts til detaljeret visualisering."
   - id: bmb831.lo05
     statement:
-      es: Conocer y aplicar herramientas avanzadas para la interpretación biológica.
-      en: Know and apply advanced tools for biological interpretation.
-      da: Kende og anvende avancerede værktøjer til biologisk fortolkning.
+      es: "Conocer y aplicar herramientas avanzadas para la interpretación biológica."
+      en: "Know and apply advanced tools for biological interpretation."
+      da: "Kende og anvende avancerede værktøjer til biologisk fortolkning."
   - id: bmb831.lo06
     statement:
-      es: Conocer y aplicar pipelines estándar para el procesamiento de datos ómicos.
-      en: Know and apply standard pipelines for omics processing.
-      da: Kende og anvende standardpipelines til behandling af omics-data.
+      es: "Conocer y aplicar pipelines estándar para el procesamiento de datos ómicos."
+      en: "Know and apply standard pipelines for omics processing."
+      da: "Kende og anvende standardpipelines til behandling af omics-data."
   - id: bmb831.lo07
     statement:
-      es: Discutir objetivamente métodos de análisis utilizados en publicaciones científicas.
-      en: Objectively discuss data-analysis methods used in scientific publications.
-      da: Objektivt diskutere dataanalysemetoder anvendt i videnskabelige publikationer.
+      es: "Discutir objetivamente métodos de análisis utilizados en publicaciones científicas."
+      en: "Objectively discuss data-analysis methods used in scientific publications."
+      da: "Objektivt diskutere dataanalysemetoder anvendt i videnskabelige publikationer."
 
 module_sequence:
   - id: bmb831.m01
     order: 1
-    title: {es: Workflows avanzados de R, descomposición funcional, estructura de proyectos y procedencia, en: Advanced R workflows, functional decomposition, project structure, and provenance, da: Avancerede R-workflows, funktionel dekomposition, projektstruktur og provenance}
+    title: {"es": "Workflows avanzados de R, descomposición funcional, estructura de proyectos y procedencia", "en": "Advanced R workflows, functional decomposition, project structure, and provenance", "da": "Avancerede R-workflows, funktionel dekomposition, projektstruktur og provenance"}
     outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo04]
     prerequisites: [bmb830.m02, bmb830.m03, bmb830.m10]
   - id: bmb831.m02
     order: 2
-    title: {es: Calidad de datos de alta dimensión, normalización, ausencia y efectos de lote, en: High-dimensional data quality, normalization, missingness, and batch effects, da: Højdimensionel datakvalitet, normalisering, missingness og batch effects}
+    title: {"es": "Calidad de datos de alta dimensión, normalización, ausencia y efectos de lote", "en": "High-dimensional data quality, normalization, missingness, and batch effects", "da": "Højdimensionel datakvalitet, normalisering, missingness og batch effects"}
     outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo06]
     prerequisites: [bmb830.m03, bmb830.m04, bmb831.m01]
   - id: bmb831.m03
     order: 3
-    title: {es: Pruebas múltiples, FDR, tamaños de efecto y priorización, en: Multiple testing, false discovery rate, effect sizes, and prioritization, da: Multipel testning, FDR, effektstørrelser og prioritering}
+    title: {"es": "Pruebas múltiples, FDR, tamaños de efecto y priorización", "en": "Multiple testing, false discovery rate, effect sizes, and prioritization", "da": "Multipel testning, FDR, effektstørrelser og prioritering"}
     outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo07]
     prerequisites: [bmb830.m07, bmb831.m02]
   - id: bmb831.m04
     order: 4
-    title: {es: Modelado avanzado de conteos, proporciones y diseños complejos, en: Advanced statistical modeling for counts, proportions, and complex designs, da: Avanceret statistisk modellering af counts, proportioner og komplekse designs}
+    title: {"es": "Modelado avanzado de conteos, proporciones y diseños complejos", "en": "Advanced statistical modeling for counts, proportions, and complex designs", "da": "Avanceret statistisk modellering af counts, proportioner og komplekse designs"}
     outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo07]
     prerequisites: [bmb830.m08, bmb831.m02, bmb831.m03]
   - id: bmb831.m05
     order: 5
-    title: {es: Reducción dimensional, estructura latente y visualización multivariante robusta, en: Dimension reduction, latent structure, and robust multivariate visualization, da: Dimensionsreduktion, latent struktur og robust multivariat visualisering}
+    title: {"es": "Reducción dimensional, estructura latente y visualización multivariante robusta", "en": "Dimension reduction, latent structure, and robust multivariate visualization", "da": "Dimensionsreduktion, latent struktur og robust multivariat visualisering"}
     outcomes: [bmb831.lo03, bmb831.lo04, bmb831.lo05]
     prerequisites: [bmb830.m09, bmb831.m02]
   - id: bmb831.m06
     order: 6
-    title: {es: Clustering, clasificación, resampling y validación resistente a fuga, en: Clustering, classification, resampling, and leakage-resistant validation, da: Clustering, klassifikation, resampling og lækageresistent validering}
+    title: {"es": "Clustering, clasificación, resampling y validación resistente a fuga", "en": "Clustering, classification, resampling, and leakage-resistant validation", "da": "Clustering, klassifikation, resampling og lækageresistent validering"}
     outcomes: [bmb831.lo01, bmb831.lo03, bmb831.lo05, bmb831.lo07]
     prerequisites: [bmb830.m09, bmb831.m02, bmb831.m05]
   - id: bmb831.m07
     order: 7
-    title: {es: Contenedores Bioconductor, anotación e infraestructura ómica reproducible, en: Bioconductor data containers, annotation, and reproducible omics infrastructure, da: Bioconductor-datacontainere, annotation og reproducerbar omics-infrastruktur}
+    title: {"es": "Contenedores Bioconductor, anotación e infraestructura ómica reproducible", "en": "Bioconductor data containers, annotation, and reproducible omics infrastructure", "da": "Bioconductor-datacontainere, annotation og reproducerbar omics-infrastruktur"}
     outcomes: [bmb831.lo02, bmb831.lo06]
     prerequisites: [bmb831.m01, bmb831.m02, dm847.m02]
   - id: bmb831.m08
     order: 8
-    title: {es: Pipeline de transcriptómica bulk y expresión diferencial, en: Bulk transcriptomics workflow and differential expression, da: Bulk-transkriptomikworkflow og differential expression}
+    title: {"es": "Pipeline de transcriptómica bulk y expresión diferencial", "en": "Bulk transcriptomics workflow and differential expression", "da": "Bulk-transkriptomikworkflow og differential expression"}
     outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo04, bmb831.lo05, bmb831.lo06]
     prerequisites: [bmb831.m02, bmb831.m03, bmb831.m04, bmb831.m07]
   - id: bmb831.m09
     order: 9
-    title: {es: Caracterización de proteínas y proteómica cuantitativa, en: Protein characterization and quantitative proteomics workflows, da: Proteinkarakterisering og kvantitative proteomikworkflows}
+    title: {"es": "Caracterización de proteínas y proteómica cuantitativa", "en": "Protein characterization and quantitative proteomics workflows", "da": "Proteinkarakterisering og kvantitative proteomikworkflows"}
     outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo05, bmb831.lo06]
     prerequisites: [bmb831.m02, bmb831.m03, bmb831.m07]
   - id: bmb831.m10
     order: 10
-    title: {es: Enriquecimiento funcional, análisis de vías e interpretación consciente de evidencia, en: Functional enrichment, pathway analysis, and evidence-aware interpretation, da: Funktionel berigelse, pathway-analyse og evidensbevidst fortolkning}
+    title: {"es": "Enriquecimiento funcional, análisis de vías e interpretación consciente de evidencia", "en": "Functional enrichment, pathway analysis, and evidence-aware interpretation", "da": "Funktionel berigelse, pathway-analyse og evidensbevidst fortolkning"}
     outcomes: [bmb831.lo04, bmb831.lo05, bmb831.lo07]
     prerequisites: [bmb831.m03, bmb831.m08, bmb831.m09, dm847.m13]
   - id: bmb831.m11
     order: 11
-    title: {es: Integración multi-ómica, reproducibilidad y comparación crítica de workflows, en: Multi-omics integration, reproducibility, and critical workflow comparison, da: Multi-omics-integration, reproducerbarhed og kritisk workflowsammenligning}
+    title: {"es": "Integración multi-ómica, reproducibilidad y comparación crítica de workflows", "en": "Multi-omics integration, reproducibility, and critical workflow comparison", "da": "Multi-omics-integration, reproducerbarhed og kritisk workflowsammenligning"}
     outcomes: [bmb831.lo01, bmb831.lo03, bmb831.lo05, bmb831.lo06, bmb831.lo07]
     prerequisites: [bmb831.m05, bmb831.m06, bmb831.m08, bmb831.m09, bmb831.m10]
   - id: bmb831.m12
     order: 12
-    title: {es: Proyecto individual de informe ómico y defensa científica, en: Individual omics report project and scientific defense, da: Individuelt omics-rapportprojekt og videnskabeligt forsvar}
+    title: {"es": "Proyecto individual de informe ómico y defensa científica", "en": "Individual omics report project and scientific defense", "da": "Individuelt omics-rapportprojekt og videnskabeligt forsvar"}
     outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo03, bmb831.lo04, bmb831.lo05, bmb831.lo06, bmb831.lo07]
     prerequisites: [bmb831.m01, bmb831.m02, bmb831.m03, bmb831.m04, bmb831.m05, bmb831.m06, bmb831.m07, bmb831.m08, bmb831.m09, bmb831.m10, bmb831.m11]
 

@@ -11,9 +11,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: Distingue entidad biológica, registro, identificador, símbolo y etiqueta.
-      en: Distinguish biological entity, record, identifier, symbol, and label.
-      da: Skeln mellem biologisk enhed, post, identifikator, symbol og label.
+      es: "Distingue entidad biológica, registro, identificador, símbolo y etiqueta."
+      en: "Distinguish biological entity, record, identifier, symbol, and label."
+      da: "Skeln mellem biologisk enhed, post, identifikator, symbol og label."
     back:
       es: >-
         La entidad es aquello real o conceptual sobre lo que se afirma algo. El registro es su representación en un recurso.
@@ -34,9 +34,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué aporta un namespace a un identificador?
-      en: What does a namespace add to an identifier?
-      da: Hvad tilføjer et namespace til en identifikator?
+      es: "¿Qué aporta un namespace a un identificador?"
+      en: "What does a namespace add to an identifier?"
+      da: "Hvad tilføjer et namespace til en identifikator?"
     back:
       es: >-
         Define la autoridad, reglas de formato, ámbito y procedimiento de resolución. La cadena `1234` puede representar entidades
@@ -54,9 +54,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: ¿Cuál es la diferencia entre accesión y versión?
-      en: What is the difference between an accession and a version?
-      da: Hvad er forskellen mellem accession og version?
+      es: "¿Cuál es la diferencia entre accesión y versión?"
+      en: "What is the difference between an accession and a version?"
+      da: "Hvad er forskellen mellem accession og version?"
     back:
       es: >-
         La accesión identifica un registro de manera relativamente estable. La versión distingue una revisión concreta de su contenido.
@@ -74,9 +74,9 @@ cards:
     card_type: identifier_audit
     difficulty: intermediate
     front:
-      es: ¿Por qué `chr1:100000` no es una coordenada reproducible completa?
-      en: Why is `chr1:100000` not a complete reproducible coordinate?
-      da: Hvorfor er `chr1:100000` ikke en komplet reproducerbar koordinat?
+      es: "¿Por qué `chr1:100000` no es una coordenada reproducible completa?"
+      en: "Why is `chr1:100000` not a complete reproducible coordinate?"
+      da: "Hvorfor er `chr1:100000` ikke en komplet reproducerbar koordinat?"
     back:
       es: >-
         Falta ensamblaje y versión, namespace del contig, convención 0-based o 1-based, definición de intervalo,
@@ -94,9 +94,9 @@ cards:
     card_type: boundary_analysis
     difficulty: intermediate
     front:
-      es: ¿Qué error produce confundir intervalos 0-based semiabiertos con intervalos 1-based cerrados?
-      en: What error results from confusing zero-based half-open with one-based closed intervals?
-      da: Hvilken fejl opstår ved at forveksle nulbaserede halvåbne med étbaserede lukkede intervaller?
+      es: "¿Qué error produce confundir intervalos 0-based semiabiertos con intervalos 1-based cerrados?"
+      en: "What error results from confusing zero-based half-open with one-based closed intervals?"
+      da: "Hvilken fejl opstår ved at forveksle nulbaserede halvåbne med étbaserede lukkede intervaller?"
     back:
       es: >-
         Desplazamientos de una base y longitudes incorrectas. En `[start, end)` 0-based, la longitud es `end-start`;
@@ -114,9 +114,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: Compara vocabulario controlado, taxonomía, tesauro y ontología.
-      en: Compare controlled vocabulary, taxonomy, thesaurus, and ontology.
-      da: Sammenlign kontrolleret vokabular, taksonomi, tesaurus og ontologi.
+      es: "Compara vocabulario controlado, taxonomía, tesauro y ontología."
+      en: "Compare controlled vocabulary, taxonomy, thesaurus, and ontology."
+      da: "Sammenlign kontrolleret vokabular, taksonomi, tesaurus og ontologi."
     back:
       es: >-
         Vocabulario: términos permitidos. Taxonomía: organización principalmente jerárquica. Tesauro: jerarquías, sinónimos y relaciones asociativas.
@@ -135,9 +135,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: Distingue clase e instancia con un ejemplo biomédico.
-      en: Distinguish class and instance using a biomedical example.
-      da: Skeln mellem klasse og instans med et biomedicinsk eksempel.
+      es: "Distingue clase e instancia con un ejemplo biomédico."
+      en: "Distinguish class and instance using a biomedical example."
+      da: "Skeln mellem klasse og instans med et biomedicinsk eksempel."
     back:
       es: >-
         «Célula T CD8» es una clase que describe un tipo general. La célula concreta `cell_0042` observada en una muestra es una instancia.
@@ -155,9 +155,9 @@ cards:
     card_type: relation_typing
     difficulty: foundational
     front:
-      es: ¿Cuándo usar `is-a` y cuándo `part-of`?
-      en: When should `is-a` and `part-of` be used?
-      da: Hvornår bruges `is-a` og `part-of`?
+      es: "¿Cuándo usar `is-a` y cuándo `part-of`?"
+      en: "When should `is-a` and `part-of` be used?"
+      da: "Hvornår bruges `is-a` og `part-of`?"
     back:
       es: >-
         `is-a` expresa que una entidad o clase es un tipo más específico de otra: hepatocito `is-a` célula.
@@ -175,9 +175,9 @@ cards:
     card_type: relation_typing
     difficulty: intermediate
     front:
-      es: Tipifica: muestra—paciente, resultado—archivo, medición—gen y fármaco—diana.
-      en: Type the relations: sample—patient, result—file, measurement—gene, and drug—target.
-      da: Type relationerne: prøve—patient, resultat—fil, måling—gen og lægemiddel—target.
+      es: "Tipifica: muestra—paciente, resultado—archivo, medición—gen y fármaco—diana."
+      en: "Type the relations: sample—patient, result—file, measurement—gene, and drug—target."
+      da: "Type relationerne: prøve—patient, resultat—fil, måling—gen og lægemiddel—target."
     back:
       es: >-
         Muestra `collected-from` o `derived-from` paciente; resultado `derived-from` archivo mediante una actividad;
@@ -198,9 +198,9 @@ cards:
     card_type: misconception_correction
     difficulty: intermediate
     front:
-      es: Corrige: «Un p-valor pequeño permite codificar `causes`».
-      en: Correct: “A small p-value permits encoding `causes`.”
-      da: Ret: “En lille p-værdi tillader relationen `causes`.”
+      es: "Corrige: «Un p-valor pequeño permite codificar `causes`»."
+      en: "Correct: “A small p-value permits encoding `causes`.”"
+      da: "Ret: “En lille p-værdi tillader relationen `causes`.”"
     back:
       es: >-
         Un p-valor evalúa compatibilidad de datos con un modelo nulo bajo supuestos; no identifica dirección causal.
@@ -220,9 +220,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es procedencia de datos?
-      en: What is data provenance?
-      da: Hvad er dataproveniens?
+      es: "¿Qué es procedencia de datos?"
+      en: "What is data provenance?"
+      da: "Hvad er dataproveniens?"
     back:
       es: >-
         Es el registro de origen y proceso de producción de una entidad o afirmación. Debe conectar entradas,
@@ -241,9 +241,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: Distingue fuente, procedencia y tipo de evidencia.
-      en: Distinguish source, provenance, and evidence type.
-      da: Skeln mellem kilde, proveniens og evidenstype.
+      es: "Distingue fuente, procedencia y tipo de evidencia."
+      en: "Distinguish source, provenance, and evidence type."
+      da: "Skeln mellem kilde, proveniens og evidenstype."
     back:
       es: >-
         Fuente es el recurso o publicación de donde se obtiene una afirmación. Procedencia describe toda la cadena de producción y transformación.
@@ -262,9 +262,9 @@ cards:
     card_type: provenance_design
     difficulty: intermediate
     front:
-      es: ¿Qué metadatos mínimos necesita una tabla de expresión diferencial para ser auditable?
-      en: What minimum metadata does a differential-expression table need for auditability?
-      da: Hvilke minimale metadata kræver en differential-ekspressionstabel for audit?
+      es: "¿Qué metadatos mínimos necesita una tabla de expresión diferencial para ser auditable?"
+      en: "What minimum metadata does a differential-expression table need for auditability?"
+      da: "Hvilke minimale metadata kræver en differential-ekspressionstabel for audit?"
     back:
       es: >-
         Identificadores y versiones de datos de entrada, referencia y anotación; definición de grupos y contraste;
@@ -285,9 +285,9 @@ cards:
     card_type: misconception_correction
     difficulty: foundational
     front:
-      es: Corrige: «Un cross-reference significa que dos registros son idénticos».
-      en: Correct: “A cross-reference means two records are identical.”
-      da: Ret: “En cross-reference betyder at to poster er identiske.”
+      es: "Corrige: «Un cross-reference significa que dos registros son idénticos»."
+      en: "Correct: “A cross-reference means two records are identical.”"
+      da: "Ret: “En cross-reference betyder at to poster er identiske.”"
     back:
       es: >-
         Un cross-reference sólo afirma una conexión. Los registros pueden ser equivalentes, uno más amplio, uno más específico,
@@ -305,9 +305,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: Compara mapeo exacto, estrecho, amplio y relacionado.
-      en: Compare exact, narrow, broad, and related mappings.
-      da: Sammenlign eksakt, snæver, bred og relateret mapping.
+      es: "Compara mapeo exacto, estrecho, amplio y relacionado."
+      en: "Compare exact, narrow, broad, and related mappings."
+      da: "Sammenlign eksakt, snæver, bred og relateret mapping."
     back:
       es: >-
         Exacto: mismo alcance conceptual. Estrecho: el término fuente es más específico que el destino o viceversa según convención.
@@ -327,9 +327,9 @@ cards:
     card_type: mapping_audit
     difficulty: advanced
     front:
-      es: ¿Cómo auditarías 10 000 mapeos heredados entre dos ontologías?
-      en: How would you audit 10,000 inherited mappings between two ontologies?
-      da: Hvordan vil du auditere 10.000 arvede mappings mellem to ontologier?
+      es: "¿Cómo auditarías 10 000 mapeos heredados entre dos ontologías?"
+      en: "How would you audit 10,000 inherited mappings between two ontologies?"
+      da: "Hvordan vil du auditere 10.000 arvede mappings mellem to ontologier?"
     back:
       es: >-
         Congelar versiones; resolver términos deprecados, fusionados y divididos; comparar definiciones, entidad, organismo y granularidad;
@@ -350,9 +350,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué significa cada letra de FAIR?
-      en: What does each letter in FAIR mean?
-      da: Hvad betyder hvert bogstav i FAIR?
+      es: "¿Qué significa cada letra de FAIR?"
+      en: "What does each letter in FAIR mean?"
+      da: "Hvad betyder hvert bogstav i FAIR?"
     back:
       es: >-
         Findable/encontrable: identificadores y metadatos permiten localizar. Accessible/accesible: existe un protocolo claro de acceso,
@@ -372,9 +372,9 @@ cards:
     card_type: misconception_correction
     difficulty: foundational
     front:
-      es: Corrige: «FAIR significa que todos los datos deben ser abiertos».
-      en: Correct: “FAIR means all data must be open.”
-      da: Ret: “FAIR betyder at alle data skal være åbne.”
+      es: "Corrige: «FAIR significa que todos los datos deben ser abiertos»."
+      en: "Correct: “FAIR means all data must be open.”"
+      da: "Ret: “FAIR betyder at alle data skal være åbne.”"
     back:
       es: >-
         FAIR exige acceso definido y metadatos suficientes, no acceso irrestricto. Datos clínicos o genómicos sensibles pueden requerir
@@ -392,9 +392,9 @@ cards:
     card_type: fair_assessment
     difficulty: intermediate
     front:
-      es: Un CSV es público pero no tiene licencia, diccionario ni procedencia. ¿Qué dimensiones FAIR fallan más?
-      en: A CSV is public but lacks a license, dictionary, and provenance. Which FAIR dimensions fail most?
-      da: En CSV er offentlig men mangler licens, dataordbog og proveniens. Hvilke FAIR-dimensioner svigter mest?
+      es: "Un CSV es público pero no tiene licencia, diccionario ni procedencia. ¿Qué dimensiones FAIR fallan más?"
+      en: "A CSV is public but lacks a license, dictionary, and provenance. Which FAIR dimensions fail most?"
+      da: "En CSV er offentlig men mangler licens, dataordbog og proveniens. Hvilke FAIR-dimensioner svigter mest?"
     back:
       es: >-
         Interoperabilidad y reutilización: no hay semántica de columnas, unidades, identificadores, licencia ni contexto de producción.
@@ -413,9 +413,9 @@ cards:
     card_type: scenario_analysis
     difficulty: advanced
     front:
-      es: ¿Por qué un join técnicamente exitoso puede ser semánticamente incorrecto?
-      en: Why can a technically successful join be semantically wrong?
-      da: Hvorfor kan et teknisk vellykket join være semantisk forkert?
+      es: "¿Por qué un join técnicamente exitoso puede ser semánticamente incorrecto?"
+      en: "Why can a technically successful join be semantically wrong?"
+      da: "Hvorfor kan et teknisk vellykket join være semantisk forkert?"
     back:
       es: >-
         Las claves pueden compartir texto pero representar organismos, versiones, entidades o granularidades distintas. Un símbolo puede apuntar a gen,
@@ -436,9 +436,9 @@ cards:
     card_type: ontology_design
     difficulty: advanced
     front:
-      es: Diseña la representación mínima de una medición de expresión génica.
-      en: Design the minimal representation of a gene-expression measurement.
-      da: Design den minimale repræsentation af en genekspressionsmåling.
+      es: "Diseña la representación mínima de una medición de expresión génica."
+      en: "Design the minimal representation of a gene-expression measurement."
+      da: "Design den minimale repræsentation af en genekspressionsmåling."
     back:
       es: >-
         Instancia de medición con identificador; `about` un gen versionado; `measured-in` una muestra; `generated-by` un ensayo o actividad;
@@ -459,9 +459,9 @@ cards:
     card_type: oral_defense
     difficulty: advanced
     front:
-      es: Responde en 45 segundos: «¿Por qué un identificador estable no basta para reproducibilidad?»
-      en: Answer in 45 seconds: “Why is a stable identifier insufficient for reproducibility?”
-      da: Svar på 45 sekunder: “Hvorfor er en stabil identifikator utilstrækkelig til reproducerbarhed?”
+      es: "Responde en 45 segundos: «¿Por qué un identificador estable no basta para reproducibilidad?»"
+      en: "Answer in 45 seconds: “Why is a stable identifier insufficient for reproducibility?”"
+      da: "Svar på 45 sekunder: “Hvorfor er en stabil identifikator utilstrækkelig til reproducerbarhed?”"
     back:
       es: >-
         Porque el contenido, ensamblaje, anotación, estado de deprecación o reglas de resolución pueden cambiar mientras la accesión persiste.
@@ -482,9 +482,9 @@ cards:
     card_type: claim_audit
     difficulty: advanced
     front:
-      es: Audita: «Dos bases enlazan sus registros, por tanto podemos fusionarlos sin pérdida».
-      en: Audit: “Two databases cross-link their records, so we can merge them without loss.”
-      da: Auditér: “To databaser linker deres poster, så vi kan fusionere dem uden tab.”
+      es: "Audita: «Dos bases enlazan sus registros, por tanto podemos fusionarlos sin pérdida»."
+      en: "Audit: “Two databases cross-link their records, so we can merge them without loss.”"
+      da: "Auditér: “To databaser linker deres poster, så vi kan fusionere dem uden tab.”"
     back:
       es: >-
         Debe comprobarse tipo de entidad, organismo, nivel de granularidad, definición, versión, cardinalidad y dirección del mapeo.
@@ -505,9 +505,9 @@ cards:
     card_type: transfer
     difficulty: advanced
     front:
-      es: ¿Cómo prepara este módulo el diseño de bases de datos de biología de sistemas?
-      en: How does this module prepare systems-biology database design?
-      da: Hvordan forbereder dette modul databasedesign til systembiologi?
+      es: "¿Cómo prepara este módulo el diseño de bases de datos de biología de sistemas?"
+      en: "How does this module prepare systems-biology database design?"
+      da: "Hvordan forbereder dette modul databasedesign til systembiologi?"
     back:
       es: >-
         Establece identidades versionadas, clases, relaciones, restricciones, procedencia y reglas de mapeo antes de diseñar tablas o grafos.

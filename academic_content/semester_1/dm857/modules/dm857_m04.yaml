@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Funciones, contratos, ámbito y descomposición
-    en: Functions, contracts, scope, and decomposition
-    da: Funktioner, kontrakter, scope og dekomponering
+    es: "Funciones, contratos, ámbito y descomposición"
+    en: "Functions, contracts, scope, and decomposition"
+    da: "Funktioner, kontrakter, scope og dekomponering"
   summary:
     es: >-
       Diseño de funciones pequeñas, comprobables y reutilizables mediante parámetros, argumentos,
@@ -31,66 +31,66 @@ objectives:
   - id: m04.o1
     bloom_level: apply
     statement:
-      es: Definir y llamar funciones con nombres, parámetros y responsabilidades precisas.
-      en: Define and call functions with precise names, parameters, and responsibilities.
-      da: Definere og kalde funktioner med præcise navne, parametre og ansvarsområder.
+      es: "Definir y llamar funciones con nombres, parámetros y responsabilidades precisas."
+      en: "Define and call functions with precise names, parameters, and responsibilities."
+      da: "Definere og kalde funktioner med præcise navne, parametre og ansvarsområder."
     evidence: function_definition_and_call
   - id: m04.o2
     bloom_level: analyze
     statement:
-      es: Distinguir parámetros de argumentos y razonar sobre llamadas posicionales, nombradas y predeterminadas.
-      en: Distinguish parameters from arguments and reason about positional, keyword, and default calls.
-      da: Skelne mellem parametre og argumenter og ræsonnere om positionelle, navngivne og standardkald.
+      es: "Distinguir parámetros de argumentos y razonar sobre llamadas posicionales, nombradas y predeterminadas."
+      en: "Distinguish parameters from arguments and reason about positional, keyword, and default calls."
+      da: "Skelne mellem parametre og argumenter og ræsonnere om positionelle, navngivne og standardkald."
     evidence: call_binding_trace
   - id: m04.o3
     bloom_level: apply
     statement:
-      es: Utilizar `return` y explicar por qué retornar no equivale a imprimir.
-      en: Use `return` and explain why returning is not equivalent to printing.
-      da: Bruge `return` og forklare hvorfor returnering ikke svarer til udskrivning.
+      es: "Utilizar `return` y explicar por qué retornar no equivale a imprimir."
+      en: "Use `return` and explain why returning is not equivalent to printing."
+      da: "Bruge `return` og forklare hvorfor returnering ikke svarer til udskrivning."
     evidence: return_value_use
   - id: m04.o4
     bloom_level: analyze
     statement:
-      es: Razonar sobre variables locales, resolución de nombres y tiempo de vida durante una llamada.
-      en: Reason about local variables, name resolution, and lifetime during a call.
-      da: Ræsonnere om lokale variable, navneopslag og levetid under et kald.
+      es: "Razonar sobre variables locales, resolución de nombres y tiempo de vida durante una llamada."
+      en: "Reason about local variables, name resolution, and lifetime during a call."
+      da: "Ræsonnere om lokale variable, navneopslag og levetid under et kald."
     evidence: scope_trace
   - id: m04.o5
     bloom_level: evaluate
     statement:
-      es: Distinguir cálculo puro de efectos secundarios y justificar dónde deben concentrarse los efectos.
-      en: Distinguish pure computation from side effects and justify where effects should be concentrated.
-      da: Skelne mellem ren beregning og sideeffekter og begrunde hvor effekter bør samles.
+      es: "Distinguir cálculo puro de efectos secundarios y justificar dónde deben concentrarse los efectos."
+      en: "Distinguish pure computation from side effects and justify where effects should be concentrated."
+      da: "Skelne mellem ren beregning og sideeffekter og begrunde hvor effekter bør samles."
     evidence: purity_analysis
   - id: m04.o6
     bloom_level: create
     statement:
-      es: Descomponer un problema en funciones cohesionadas conectadas por interfaces explícitas.
-      en: Decompose a problem into cohesive functions connected through explicit interfaces.
-      da: Dekomponere et problem i sammenhængende funktioner forbundet gennem eksplicitte grænseflader.
+      es: "Descomponer un problema en funciones cohesionadas conectadas por interfaces explícitas."
+      en: "Decompose a problem into cohesive functions connected through explicit interfaces."
+      da: "Dekomponere et problem i sammenhængende funktioner forbundet gennem eksplicitte grænseflader."
     evidence: decomposition_design
   - id: m04.o7
     bloom_level: create
     statement:
-      es: Especificar precondiciones, poscondiciones, errores y ejemplos verificables en un contrato.
-      en: Specify preconditions, postconditions, errors, and verifiable examples in a contract.
-      da: Specificere forudsætninger, efterbetingelser, fejl og verificerbare eksempler i en kontrakt.
+      es: "Especificar precondiciones, poscondiciones, errores y ejemplos verificables en un contrato."
+      en: "Specify preconditions, postconditions, errors, and verifiable examples in a contract."
+      da: "Specificere forudsætninger, efterbetingelser, fejl og verificerbare eksempler i en kontrakt."
     evidence: function_contract
   - id: m04.o8
     bloom_level: create
     statement:
-      es: Diseñar pruebas unitarias que cubran casos normales, límites, inválidos y rutas de retorno.
-      en: Design unit tests covering normal, boundary, invalid, and return-path cases.
-      da: Designe enhedstest der dækker normale, grænse-, ugyldige og returvejstilfælde.
+      es: "Diseñar pruebas unitarias que cubran casos normales, límites, inválidos y rutas de retorno."
+      en: "Design unit tests covering normal, boundary, invalid, and return-path cases."
+      da: "Designe enhedstest der dækker normale, grænse-, ugyldige og returvejstilfælde."
     evidence: unit_test_set
 
 concepts:
   - id: definition-call-interface
     title:
-      es: Definición, llamada e interfaz
-      en: Definition, call, and interface
-      da: Definition, kald og grænseflade
+      es: "Definición, llamada e interfaz"
+      en: "Definition, call, and interface"
+      da: "Definition, kald og grænseflade"
     body:
       es: >-
         Una función asigna un nombre a una operación. La definición declara nombre, parámetros y cuerpo;
@@ -110,9 +110,9 @@ concepts:
 
   - id: parameters-arguments-defaults
     title:
-      es: Parámetros, argumentos y valores predeterminados
-      en: Parameters, arguments, and default values
-      da: Parametre, argumenter og standardværdier
+      es: "Parámetros, argumentos y valores predeterminados"
+      en: "Parameters, arguments, and default values"
+      da: "Parametre, argumenter og standardværdier"
     body:
       es: >-
         Los parámetros son nombres locales declarados en la definición; los argumentos son los valores
@@ -132,9 +132,9 @@ concepts:
 
   - id: return-versus-print
     title:
-      es: Retornar no es imprimir
-      en: Returning is not printing
-      da: Returnering er ikke udskrivning
+      es: "Retornar no es imprimir"
+      en: "Returning is not printing"
+      da: "Returnering er ikke udskrivning"
     body:
       es: >-
         `return` finaliza la llamada y entrega un valor al código que llamó a la función. `print` produce
@@ -153,9 +153,9 @@ concepts:
 
   - id: local-scope-lifetime
     title:
-      es: Ámbito local, resolución de nombres y tiempo de vida
-      en: Local scope, name resolution, and lifetime
-      da: Lokalt scope, navneopslag og levetid
+      es: "Ámbito local, resolución de nombres y tiempo de vida"
+      en: "Local scope, name resolution, and lifetime"
+      da: "Lokalt scope, navneopslag og levetid"
     body:
       es: >-
         Cada llamada crea un espacio local con sus parámetros y variables. Una variable local no está
@@ -175,9 +175,9 @@ concepts:
 
   - id: pure-functions-side-effects
     title:
-      es: Funciones puras y efectos secundarios
-      en: Pure functions and side effects
-      da: Rene funktioner og sideeffekter
+      es: "Funciones puras y efectos secundarios"
+      en: "Pure functions and side effects"
+      da: "Rene funktioner og sideeffekter"
     body:
       es: >-
         Una función pura determina su resultado únicamente a partir de sus argumentos y no modifica estado
@@ -197,9 +197,9 @@ concepts:
 
   - id: contracts-docstrings-errors
     title:
-      es: Contratos, docstrings y política de errores
-      en: Contracts, docstrings, and error policy
-      da: Kontrakter, docstrings og fejlpolitik
+      es: "Contratos, docstrings y política de errores"
+      en: "Contracts, docstrings, and error policy"
+      da: "Kontrakter, docstrings og fejlpolitik"
     body:
       es: >-
         Un contrato especifica entradas, precondiciones, resultado, poscondiciones y errores esperados. Una
@@ -218,9 +218,9 @@ concepts:
 
   - id: decomposition-composition
     title:
-      es: Descomposición, composición y flujo de datos
-      en: Decomposition, composition, and data flow
-      da: Dekomponering, komposition og dataflow
+      es: "Descomposición, composición y flujo de datos"
+      en: "Decomposition, composition, and data flow"
+      da: "Dekomponering, komposition og dataflow"
     body:
       es: >-
         Descomponer consiste en separar responsabilidades que puedan explicarse y probarse de forma independiente.
@@ -239,13 +239,13 @@ concepts:
 worked_examples:
   - id: dm857.m04.e01
     title:
-      es: Separar cálculo y presentación de un resumen
-      en: Separate calculation from presentation in a summary
-      da: Adskil beregning og præsentation i et resumé
+      es: "Separar cálculo y presentación de un resumen"
+      en: "Separate calculation from presentation in a summary"
+      da: "Adskil beregning og præsentation i et resumé"
     problem:
-      es: Calcular la media de mediciones sintéticas y producir un mensaje sin mezclar cálculo y salida.
-      en: Compute the mean of synthetic measurements and produce a message without mixing computation and output.
-      da: Beregn middelværdien af syntetiske målinger og producer en besked uden at blande beregning og output.
+      es: "Calcular la media de mediciones sintéticas y producir un mensaje sin mezclar cálculo y salida."
+      en: "Compute the mean of synthetic measurements and produce a message without mixing computation and output."
+      da: "Beregn middelværdien af syntetiske målinger og producer en besked uden at blande beregning og output."
     assumptions:
       - values is a non-empty sequence of numeric measurements
       - units are consistent
@@ -278,12 +278,12 @@ worked_examples:
     expected_output: "mean=4.00 a.u."
     validation:
       - mean of [2.0, 4.0, 6.0] is 4.0
-      - `mean` has no visible output
-      - `format_mean` returns a string
+      - "`mean` has no visible output"
+      - "`format_mean` returns a string"
     explanation:
-      es: El cálculo puro puede probarse sin capturar salida, mientras que la presentación queda aislada.
-      en: Pure computation can be tested without capturing output, while presentation remains isolated.
-      da: Ren beregning kan testes uden at indfange output, mens præsentationen er isoleret.
+      es: "El cálculo puro puede probarse sin capturar salida, mientras que la presentación queda aislada."
+      en: "Pure computation can be tested without capturing output, while presentation remains isolated."
+      da: "Ren beregning kan testes uden at indfange output, mens præsentationen er isoleret."
     limitations:
       - the empty-input policy is intentionally delegated to the contract
       - no uncertainty estimate is computed
@@ -291,13 +291,13 @@ worked_examples:
 
   - id: dm857.m04.e02
     title:
-      es: Evitar un valor predeterminado mutable
-      en: Avoid a mutable default value
-      da: Undgå en muterbar standardværdi
+      es: "Evitar un valor predeterminado mutable"
+      en: "Avoid a mutable default value"
+      da: "Undgå en muterbar standardværdi"
     problem:
-      es: Diseñar una función que añada una etiqueta a una colección sin compartir una lista entre llamadas.
-      en: Design a function that adds a label to a collection without sharing one list across calls.
-      da: Design en funktion der tilføjer en etiket uden at dele én liste mellem kald.
+      es: "Diseñar una función que añada una etiqueta a una colección sin compartir una lista entre llamadas."
+      en: "Design a function that adds a label to a collection without sharing one list across calls."
+      da: "Design en funktion der tilføjer en etiket uden at dele én liste mellem kald."
     assumptions:
       - labels are strings
       - omitted collection means create a new collection
@@ -332,22 +332,22 @@ worked_examples:
       - a supplied list is not mutated
       - the return value always has type list
     explanation:
-      es: `None` evita reutilizar una lista creada al definir la función; la copia evita mutar la entrada.
-      en: `None` avoids reusing a list created at definition time; copying avoids mutating the input.
-      da: `None` undgår genbrug af en liste fra definitionstidspunktet; kopien undgår mutation af input.
+      es: "`None` evita reutilizar una lista creada al definir la función; la copia evita mutar la entrada."
+      en: "`None` avoids reusing a list created at definition time; copying avoids mutating the input."
+      da: "`None` undgår genbrug af en liste fra definitionstidspunktet; kopien undgår mutation af input."
     limitations:
       - the copy is shallow
     linked_objectives: [m04.o2, m04.o5, m04.o7, m04.o8]
 
   - id: dm857.m04.e03
     title:
-      es: Diseñar una función de validación con contrato explícito
-      en: Design a validation function with an explicit contract
-      da: Design en valideringsfunktion med eksplicit kontrakt
+      es: "Diseñar una función de validación con contrato explícito"
+      en: "Design a validation function with an explicit contract"
+      da: "Design en valideringsfunktion med eksplicit kontrakt"
     problem:
-      es: Validar un porcentaje sintético que debe ser numérico y estar entre 0 y 100 incluidos.
-      en: Validate a synthetic percentage that must be numeric and lie between 0 and 100 inclusive.
-      da: Validér en syntetisk procentværdi der skal være numerisk og ligge mellem 0 og 100 inklusive.
+      es: "Validar un porcentaje sintético que debe ser numérico y estar entre 0 y 100 incluidos."
+      en: "Validate a synthetic percentage that must be numeric and lie between 0 and 100 inclusive."
+      da: "Validér en syntetisk procentværdi der skal være numerisk og ligge mellem 0 og 100 inklusive."
     assumptions:
       - booleans are rejected despite being subclasses of int
       - no string conversion is performed
@@ -378,9 +378,9 @@ worked_examples:
       - True and False are rejected
       - numeric strings are rejected
     explanation:
-      es: El contrato define el dominio conceptual, no solo aquello que Python puede comparar.
-      en: The contract defines the conceptual domain, not merely what Python can compare.
-      da: Kontrakten definerer det konceptuelle domæne, ikke blot hvad Python kan sammenligne.
+      es: "El contrato define el dominio conceptual, no solo aquello que Python puede comparar."
+      en: "The contract defines the conceptual domain, not merely what Python can compare."
+      da: "Kontrakten definerer det konceptuelle domæne, ikke blot hvad Python kan sammenligne."
     limitations:
       - NaN handling is not included and would require an additional rule
     linked_objectives: [m04.o1, m04.o5, m04.o7, m04.o8]
@@ -390,22 +390,22 @@ practice_exercises:
     activity_type: code_tracing
     difficulty: foundational
     prompt:
-      es: Predice el resultado y explica cada enlace de argumentos en `f(2, c=5)` para `def f(a, b=3, c=4): return a + b * c`.
-      en: Predict the result and explain each argument binding in `f(2, c=5)` for `def f(a, b=3, c=4): return a + b * c`.
-      da: Forudsig resultatet og forklar argumentbindingen i `f(2, c=5)` for `def f(a, b=3, c=4): return a + b * c`.
+      es: "Predice el resultado y explica cada enlace de argumentos en `f(2, c=5)` para `def f(a, b=3, c=4): return a + b * c`."
+      en: "Predict the result and explain each argument binding in `f(2, c=5)` for `def f(a, b=3, c=4): return a + b * c`."
+      da: "Forudsig resultatet og forklar argumentbindingen i `f(2, c=5)` for `def f(a, b=3, c=4): return a + b * c`."
     reference_solution:
-      es: `a=2`, `b=3`, `c=5`; el resultado es `17`.
-      en: `a=2`, `b=3`, `c=5`; the result is `17`.
-      da: `a=2`, `b=3`, `c=5`; resultatet er `17`.
+      es: "`a=2`, `b=3`, `c=5`; el resultado es `17`."
+      en: "`a=2`, `b=3`, `c=5`; the result is `17`."
+      da: "`a=2`, `b=3`, `c=5`; resultatet er `17`."
     linked_objectives: [m04.o2]
 
   - id: dm857.m04.p02
     activity_type: debugging
     difficulty: foundational
     prompt:
-      es: Corrige una función que imprime la suma cuando el programa necesita reutilizarla en otra expresión.
-      en: Correct a function that prints a sum when the program needs to reuse it in another expression.
-      da: Ret en funktion der udskriver en sum, når programmet skal genbruge den i et andet udtryk.
+      es: "Corrige una función que imprime la suma cuando el programa necesita reutilizarla en otra expresión."
+      en: "Correct a function that prints a sum when the program needs to reuse it in another expression."
+      da: "Ret en funktion der udskriver en sum, når programmet skal genbruge den i et andet udtryk."
     starter_code: |-
       def add(a, b):
           print(a + b)
@@ -415,18 +415,18 @@ practice_exercises:
       def add(a, b):
           return a + b
     explanation:
-      es: `print` retorna `None`; el llamador necesita el valor numérico.
-      en: `print` returns `None`; the caller needs the numeric value.
-      da: `print` returnerer `None`; den kaldende kode behøver den numeriske værdi.
+      es: "`print` retorna `None`; el llamador necesita el valor numérico."
+      en: "`print` returns `None`; the caller needs the numeric value."
+      da: "`print` returnerer `None`; den kaldende kode behøver den numeriske værdi."
     linked_objectives: [m04.o3]
 
   - id: dm857.m04.p03
     activity_type: refactoring
     difficulty: intermediate
     prompt:
-      es: Divide una función que lee datos, limpia valores, calcula una media y escribe un mensaje en funciones cohesionadas.
-      en: Split a function that reads data, cleans values, computes a mean, and writes a message into cohesive functions.
-      da: Opdel en funktion der læser data, renser værdier, beregner middelværdi og skriver en besked i sammenhængende funktioner.
+      es: "Divide una función que lee datos, limpia valores, calcula una media y escribe un mensaje en funciones cohesionadas."
+      en: "Split a function that reads data, cleans values, computes a mean, and writes a message into cohesive functions."
+      da: "Opdel en funktion der læser data, renser værdier, beregner middelværdi og skriver en besked i sammenhængende funktioner."
     accepted_answer_elements:
       - separate input boundary from pure cleaning and calculation
       - explicit arguments and returns
@@ -438,9 +438,9 @@ practice_exercises:
     activity_type: contract_design
     difficulty: intermediate
     prompt:
-      es: Escribe el contrato de `safe_ratio(numerator, denominator)` incluyendo dominio, retorno y división por cero.
-      en: Write the contract for `safe_ratio(numerator, denominator)`, including domain, return, and division by zero.
-      da: Skriv kontrakten for `safe_ratio(numerator, denominator)` inklusive domæne, retur og division med nul.
+      es: "Escribe el contrato de `safe_ratio(numerator, denominator)` incluyendo dominio, retorno y división por cero."
+      en: "Write the contract for `safe_ratio(numerator, denominator)`, including domain, return, and division by zero."
+      da: "Skriv kontrakten for `safe_ratio(numerator, denominator)` inklusive domæne, retur og division med nul."
     reference_solution:
       es: >-
         Acepta dos números reales no booleanos. Retorna `numerator / denominator` como `float` cuando el
@@ -458,9 +458,9 @@ practice_exercises:
     activity_type: test_design
     difficulty: intermediate
     prompt:
-      es: Diseña pruebas para una función con tres rutas de retorno: inválido, vacío y resultado calculado.
-      en: Design tests for a function with three return paths: invalid, empty, and computed result.
-      da: Design test til en funktion med tre returveje: ugyldig, tom og beregnet resultat.
+      es: "Diseña pruebas para una función con tres rutas de retorno: inválido, vacío y resultado calculado."
+      en: "Design tests for a function with three return paths: invalid, empty, and computed result."
+      da: "Design test til en funktion med tre returveje: ugyldig, tom og beregnet resultat."
     accepted_answer_elements:
       - at least one test reaches each return path
       - boundary values are tested separately from branch coverage
@@ -472,9 +472,9 @@ practice_exercises:
     activity_type: oral_explanation
     difficulty: advanced
     prompt:
-      es: Explica por qué una función pura suele ser más fácil de probar y cuándo un efecto secundario sigue siendo necesario.
-      en: Explain why a pure function is usually easier to test and when a side effect remains necessary.
-      da: Forklar hvorfor en ren funktion normalt er lettere at teste, og hvornår en sideeffekt stadig er nødvendig.
+      es: "Explica por qué una función pura suele ser más fácil de probar y cuándo un efecto secundario sigue siendo necesario."
+      en: "Explain why a pure function is usually easier to test and when a side effect remains necessary."
+      da: "Forklar hvorfor en ren funktion normalt er lettere at teste, og hvornår en sideeffekt stadig er nødvendig."
     accepted_answer_elements:
       - deterministic relationship between arguments and result
       - absence of hidden mutable state
@@ -486,130 +486,130 @@ objective_bank:
   - id: dm857.m04.q01
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Cuál es la diferencia correcta entre parámetro y argumento?, en: What correctly distinguishes a parameter from an argument?, da: Hvad skelner korrekt en parameter fra et argument?}
+    prompt: {"es": "¿Cuál es la diferencia correcta entre parámetro y argumento?", "en": "What correctly distinguishes a parameter from an argument?", "da": "Hvad skelner korrekt en parameter fra et argument?"}
     options:
       - id: correct
-        text: {es: El parámetro aparece en la definición y el argumento en la llamada., en: The parameter appears in the definition and the argument in the call., da: Parameteren står i definitionen og argumentet i kaldet.}
+        text: {"es": "El parámetro aparece en la definición y el argumento en la llamada.", "en": "The parameter appears in the definition and the argument in the call.", "da": "Parameteren står i definitionen og argumentet i kaldet."}
       - id: reverse
-        text: {es: El argumento aparece en la definición y el parámetro en la llamada., en: The argument appears in the definition and the parameter in the call., da: Argumentet står i definitionen og parameteren i kaldet.}
+        text: {"es": "El argumento aparece en la definición y el parámetro en la llamada.", "en": "The argument appears in the definition and the parameter in the call.", "da": "Argumentet står i definitionen og parameteren i kaldet."}
       - id: same
-        text: {es: Son términos idénticos sin diferencia contextual., en: They are identical terms with no contextual difference., da: De er identiske uden kontekstuel forskel.}
+        text: {"es": "Son términos idénticos sin diferencia contextual.", "en": "They are identical terms with no contextual difference.", "da": "De er identiske uden kontekstuel forskel."}
     correct_option_ids: [correct]
-    explanation: {es: Parámetro pertenece a la interfaz definida; argumento es el valor suministrado., en: A parameter belongs to the defined interface; an argument is the supplied value., da: En parameter hører til grænsefladen; et argument er den leverede værdi.}
+    explanation: {"es": "Parámetro pertenece a la interfaz definida; argumento es el valor suministrado.", "en": "A parameter belongs to the defined interface; an argument is the supplied value.", "da": "En parameter hører til grænsefladen; et argument er den leverede værdi."}
     linked_objectives: [m04.o2]
 
   - id: dm857.m04.q02
     activity_type: true_false
     difficulty: foundational
-    prompt: {es: Una función que solo usa `print` retorna automáticamente el texto impreso., en: A function using only `print` automatically returns the printed text., da: En funktion der kun bruger `print` returnerer automatisk den udskrevne tekst.}
+    prompt: {"es": "Una función que solo usa `print` retorna automáticamente el texto impreso.", "en": "A function using only `print` automatically returns the printed text.", "da": "En funktion der kun bruger `print` returnerer automatisk den udskrevne tekst."}
     correct_answer: false
-    explanation: {es: `print` retorna `None`., en: `print` returns `None`., da: `print` returnerer `None`.}
+    explanation: {"es": "`print` retorna `None`.", "en": "`print` returns `None`.", "da": "`print` returnerer `None`."}
     linked_objectives: [m04.o3]
 
   - id: dm857.m04.q03
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué problema presenta `def collect(x, items=[]): ...`?, en: What problem can `def collect(x, items=[]): ...` cause?, da: Hvilket problem kan `def collect(x, items=[]): ...` skabe?}
+    prompt: {"es": "¿Qué problema presenta `def collect(x, items=[]): ...`?", "en": "What problem can `def collect(x, items=[]): ...` cause?", "da": "Hvilket problem kan `def collect(x, items=[]): ...` skabe?"}
     options:
       - id: reused
-        text: {es: La misma lista predeterminada puede reutilizarse entre llamadas., en: The same default list may be reused across calls., da: Den samme standardliste kan genbruges mellem kald.}
+        text: {"es": "La misma lista predeterminada puede reutilizarse entre llamadas.", "en": "The same default list may be reused across calls.", "da": "Den samme standardliste kan genbruges mellem kald."}
       - id: syntax
-        text: {es: La sintaxis de listas está prohibida en parámetros., en: List syntax is forbidden in parameters., da: Listesyntaks er forbudt i parametre.}
+        text: {"es": "La sintaxis de listas está prohibida en parámetros.", "en": "List syntax is forbidden in parameters.", "da": "Listesyntaks er forbudt i parametre."}
       - id: immutable
-        text: {es: La lista se vuelve inmutable., en: The list becomes immutable., da: Listen bliver uforanderlig.}
+        text: {"es": "La lista se vuelve inmutable.", "en": "The list becomes immutable.", "da": "Listen bliver uforanderlig."}
     correct_option_ids: [reused]
-    explanation: {es: Los valores predeterminados se evalúan al definir la función., en: Default values are evaluated when the function is defined., da: Standardværdier evalueres ved funktionsdefinitionen.}
+    explanation: {"es": "Los valores predeterminados se evalúan al definir la función.", "en": "Default values are evaluated when the function is defined.", "da": "Standardværdier evalueres ved funktionsdefinitionen."}
     linked_objectives: [m04.o2, m04.o8]
 
   - id: dm857.m04.q04
     activity_type: multiple_choice
     difficulty: foundational
-    prompt: {es: ¿Cuál es el ámbito habitual de un parámetro?, en: What is the usual scope of a parameter?, da: Hvad er en parameters normale scope?}
+    prompt: {"es": "¿Cuál es el ámbito habitual de un parámetro?", "en": "What is the usual scope of a parameter?", "da": "Hvad er en parameters normale scope?"}
     options:
       - id: local
-        text: {es: Local a la llamada de la función., en: Local to the function call., da: Lokalt for funktionskaldet.}
+        text: {"es": "Local a la llamada de la función.", "en": "Local to the function call.", "da": "Lokalt for funktionskaldet."}
       - id: global
-        text: {es: Global para todo el programa., en: Global to the entire program., da: Globalt for hele programmet.}
+        text: {"es": "Global para todo el programa.", "en": "Global to the entire program.", "da": "Globalt for hele programmet."}
       - id: file
-        text: {es: Limitado al archivo pero no a la función., en: Limited to the file but not the function., da: Begrænset til filen men ikke funktionen.}
+        text: {"es": "Limitado al archivo pero no a la función.", "en": "Limited to the file but not the function.", "da": "Begrænset til filen men ikke funktionen."}
     correct_option_ids: [local]
-    explanation: {es: Los parámetros son variables locales inicializadas por la llamada., en: Parameters are local variables initialized by the call., da: Parametre er lokale variable initialiseret af kaldet.}
+    explanation: {"es": "Los parámetros son variables locales inicializadas por la llamada.", "en": "Parameters are local variables initialized by the call.", "da": "Parametre er lokale variable initialiseret af kaldet."}
     linked_objectives: [m04.o4]
 
   - id: dm857.m04.q05
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Cuál de las siguientes acciones es un efecto secundario?, en: Which action is a side effect?, da: Hvilken handling er en sideeffekt?}
+    prompt: {"es": "¿Cuál de las siguientes acciones es un efecto secundario?", "en": "Which action is a side effect?", "da": "Hvilken handling er en sideeffekt?"}
     options:
       - id: write_file
-        text: {es: Escribir en un archivo., en: Writing to a file., da: At skrive til en fil.}
+        text: {"es": "Escribir en un archivo.", "en": "Writing to a file.", "da": "At skrive til en fil."}
       - id: add_numbers
-        text: {es: Retornar la suma de dos argumentos., en: Returning the sum of two arguments., da: At returnere summen af to argumenter.}
+        text: {"es": "Retornar la suma de dos argumentos.", "en": "Returning the sum of two arguments.", "da": "At returnere summen af to argumenter."}
       - id: compare
-        text: {es: Comparar dos valores y retornar un booleano., en: Comparing two values and returning a Boolean., da: At sammenligne to værdier og returnere en boolesk værdi.}
+        text: {"es": "Comparar dos valores y retornar un booleano.", "en": "Comparing two values and returning a Boolean.", "da": "At sammenligne to værdier og returnere en boolesk værdi."}
     correct_option_ids: [write_file]
-    explanation: {es: Escribir modifica estado externo observable., en: Writing modifies observable external state., da: Skrivning ændrer observerbar ekstern tilstand.}
+    explanation: {"es": "Escribir modifica estado externo observable.", "en": "Writing modifies observable external state.", "da": "Skrivning ændrer observerbar ekstern tilstand."}
     linked_objectives: [m04.o5]
 
   - id: dm857.m04.q06
     activity_type: true_false
     difficulty: intermediate
-    prompt: {es: Dos llamadas independientes comparten automáticamente sus variables locales., en: Two independent calls automatically share local variables., da: To uafhængige kald deler automatisk lokale variable.}
+    prompt: {"es": "Dos llamadas independientes comparten automáticamente sus variables locales.", "en": "Two independent calls automatically share local variables.", "da": "To uafhængige kald deler automatisk lokale variable."}
     correct_answer: false
-    explanation: {es: Cada llamada crea su propio marco local., en: Each call creates its own local frame., da: Hvert kald skaber sin egen lokale ramme.}
+    explanation: {"es": "Cada llamada crea su propio marco local.", "en": "Each call creates its own local frame.", "da": "Hvert kald skaber sin egen lokale ramme."}
     linked_objectives: [m04.o4]
 
   - id: dm857.m04.q07
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué debe priorizar una buena descomposición?, en: What should good decomposition prioritize?, da: Hvad bør god dekomponering prioritere?}
+    prompt: {"es": "¿Qué debe priorizar una buena descomposición?", "en": "What should good decomposition prioritize?", "da": "Hvad bør god dekomponering prioritere?"}
     options:
       - id: cohesion
-        text: {es: Responsabilidades cohesionadas e interfaces explícitas., en: Cohesive responsibilities and explicit interfaces., da: Sammenhængende ansvar og eksplicitte grænseflader.}
+        text: {"es": "Responsabilidades cohesionadas e interfaces explícitas.", "en": "Cohesive responsibilities and explicit interfaces.", "da": "Sammenhængende ansvar og eksplicitte grænseflader."}
       - id: maximum_count
-        text: {es: El máximo número posible de funciones., en: The maximum possible number of functions., da: Det størst mulige antal funktioner.}
+        text: {"es": "El máximo número posible de funciones.", "en": "The maximum possible number of functions.", "da": "Det størst mulige antal funktioner."}
       - id: globals
-        text: {es: Compartir variables globales para evitar argumentos., en: Sharing globals to avoid arguments., da: At dele globale variable for at undgå argumenter.}
+        text: {"es": "Compartir variables globales para evitar argumentos.", "en": "Sharing globals to avoid arguments.", "da": "At dele globale variable for at undgå argumenter."}
     correct_option_ids: [cohesion]
-    explanation: {es: La división debe seguir responsabilidades verificables, no un conteo arbitrario., en: Division should follow testable responsibilities rather than an arbitrary count., da: Opdeling bør følge testbare ansvar frem for et vilkårligt antal.}
+    explanation: {"es": "La división debe seguir responsabilidades verificables, no un conteo arbitrario.", "en": "Division should follow testable responsibilities rather than an arbitrary count.", "da": "Opdeling bør følge testbare ansvar frem for et vilkårligt antal."}
     linked_objectives: [m04.o6]
 
   - id: dm857.m04.q08
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué elemento pertenece a una poscondición?, en: Which element belongs to a postcondition?, da: Hvilket element hører til en efterbetingelse?}
+    prompt: {"es": "¿Qué elemento pertenece a una poscondición?", "en": "Which element belongs to a postcondition?", "da": "Hvilket element hører til en efterbetingelse?"}
     options:
       - id: result_property
-        text: {es: Una propiedad que debe cumplir el resultado tras una llamada válida., en: A property the result must satisfy after a valid call., da: En egenskab resultatet skal opfylde efter et gyldigt kald.}
+        text: {"es": "Una propiedad que debe cumplir el resultado tras una llamada válida.", "en": "A property the result must satisfy after a valid call.", "da": "En egenskab resultatet skal opfylde efter et gyldigt kald."}
       - id: input_requirement
-        text: {es: Un requisito que debe cumplir el argumento antes de llamar., en: A requirement the argument must satisfy before calling., da: Et krav argumentet skal opfylde før kaldet.}
+        text: {"es": "Un requisito que debe cumplir el argumento antes de llamar.", "en": "A requirement the argument must satisfy before calling.", "da": "Et krav argumentet skal opfylde før kaldet."}
       - id: implementation
-        text: {es: El orden exacto de las líneas internas., en: The exact order of internal lines., da: Den præcise rækkefølge af interne linjer.}
+        text: {"es": "El orden exacto de las líneas internas.", "en": "The exact order of internal lines.", "da": "Den præcise rækkefølge af interne linjer."}
     correct_option_ids: [result_property]
-    explanation: {es: Las precondiciones describen entradas; las poscondiciones describen garantías posteriores., en: Preconditions describe inputs; postconditions describe guarantees after execution., da: Forudsætninger beskriver input; efterbetingelser beskriver garantier efter udførelse.}
+    explanation: {"es": "Las precondiciones describen entradas; las poscondiciones describen garantías posteriores.", "en": "Preconditions describe inputs; postconditions describe guarantees after execution.", "da": "Forudsætninger beskriver input; efterbetingelser beskriver garantier efter udførelse."}
     linked_objectives: [m04.o7]
 
   - id: dm857.m04.q09
     activity_type: multiple_choice
     difficulty: intermediate
-    prompt: {es: ¿Qué prueba detecta una ruta sin `return`?, en: Which test exposes a path without `return`?, da: Hvilken test afslører en vej uden `return`?}
+    prompt: {"es": "¿Qué prueba detecta una ruta sin `return`?", "en": "Which test exposes a path without `return`?", "da": "Hvilken test afslører en vej uden `return`?"}
     options:
       - id: trigger_path
-        text: {es: Una entrada que active esa ruta y una aserción sobre el valor retornado., en: An input that activates the path and an assertion on the returned value., da: Et input der aktiverer vejen og en assertion på returværdien.}
+        text: {"es": "Una entrada que active esa ruta y una aserción sobre el valor retornado.", "en": "An input that activates the path and an assertion on the returned value.", "da": "Et input der aktiverer vejen og en assertion på returværdien."}
       - id: syntax_only
-        text: {es: Revisar únicamente que el archivo compile., en: Only checking that the file compiles., da: Kun at kontrollere at filen kompilerer.}
+        text: {"es": "Revisar únicamente que el archivo compile.", "en": "Only checking that the file compiles.", "da": "Kun at kontrollere at filen kompilerer."}
       - id: print
-        text: {es: Añadir más impresiones sin comprobar el retorno., en: Adding more prints without checking the return., da: At tilføje flere udskrifter uden at kontrollere retur.}
+        text: {"es": "Añadir más impresiones sin comprobar el retorno.", "en": "Adding more prints without checking the return.", "da": "At tilføje flere udskrifter uden at kontrollere retur."}
     correct_option_ids: [trigger_path]
-    explanation: {es: La ruta debe ejecutarse y el test debe observar `None` o el valor incorrecto., en: The path must execute and the test must observe `None` or the incorrect value., da: Vejen skal udføres og testen skal observere `None` eller forkert værdi.}
+    explanation: {"es": "La ruta debe ejecutarse y el test debe observar `None` o el valor incorrecto.", "en": "The path must execute and the test must observe `None` or the incorrect value.", "da": "Vejen skal udføres og testen skal observere `None` eller forkert værdi."}
     linked_objectives: [m04.o3, m04.o8]
 
   - id: dm857.m04.q10
     activity_type: true_false
     difficulty: advanced
-    prompt: {es: Una función pura nunca puede llamar a otra función., en: A pure function can never call another function., da: En ren funktion kan aldrig kalde en anden funktion.}
+    prompt: {"es": "Una función pura nunca puede llamar a otra función.", "en": "A pure function can never call another function.", "da": "En ren funktion kan aldrig kalde en anden funktion."}
     correct_answer: false
-    explanation: {es: Puede llamar a otras funciones puras; lo decisivo es la ausencia de efectos y dependencias ocultas., en: It may call other pure functions; absence of effects and hidden dependencies is decisive., da: Den kan kalde andre rene funktioner; fravær af effekter og skjulte afhængigheder er afgørende.}
+    explanation: {"es": "Puede llamar a otras funciones puras; lo decisivo es la ausencia de efectos y dependencias ocultas.", "en": "It may call other pure functions; absence of effects and hidden dependencies is decisive.", "da": "Den kan kalde andre rene funktioner; fravær af effekter og skjulte afhængigheder er afgørende."}
     linked_objectives: [m04.o5, m04.o6]
 
 assessment_items:
@@ -667,9 +667,9 @@ assessment_items:
     activity_type: oral_explanation
     difficulty: advanced
     prompt:
-      es: Explica y defiende una descomposición funcional para un pequeño pipeline de limpieza, validación, cálculo y presentación.
-      en: Explain and defend a functional decomposition for a small cleaning, validation, calculation, and presentation pipeline.
-      da: Forklar og forsvar en funktionel dekomponering af en lille pipeline til rensning, validering, beregning og præsentation.
+      es: "Explica y defiende una descomposición funcional para un pequeño pipeline de limpieza, validación, cálculo y presentación."
+      en: "Explain and defend a functional decomposition for a small cleaning, validation, calculation, and presentation pipeline."
+      da: "Forklar og forsvar en funktionel dekomponering af en lille pipeline til rensning, validering, beregning og præsentation."
     accepted_answer_elements:
       - clear stage responsibilities
       - explicit contracts between stages
@@ -689,44 +689,44 @@ flashcards:
 
 glossary:
   - id: term.function
-    term: {es: función, en: function, da: funktion}
-    definition: {es: Bloque reutilizable con nombre, interfaz y comportamiento definido., en: Named reusable block with a defined interface and behavior., da: Navngivet genanvendelig blok med defineret grænseflade og adfærd.}
+    term: {"es": "función", "en": "function", "da": "funktion"}
+    definition: {"es": "Bloque reutilizable con nombre, interfaz y comportamiento definido.", "en": "Named reusable block with a defined interface and behavior.", "da": "Navngivet genanvendelig blok med defineret grænseflade og adfærd."}
     related_terms: [term.parameter, term.return_value]
   - id: term.parameter
-    term: {es: parámetro, en: parameter, da: parameter}
-    definition: {es: Nombre local declarado en la definición de una función., en: Local name declared in a function definition., da: Lokalt navn deklareret i en funktionsdefinition.}
+    term: {"es": "parámetro", "en": "parameter", "da": "parameter"}
+    definition: {"es": "Nombre local declarado en la definición de una función.", "en": "Local name declared in a function definition.", "da": "Lokalt navn deklareret i en funktionsdefinition."}
     related_terms: [term.argument]
   - id: term.argument
-    term: {es: argumento, en: argument, da: argument}
-    definition: {es: Valor suministrado a un parámetro durante una llamada., en: Value supplied to a parameter during a call., da: Værdi leveret til en parameter under et kald.}
+    term: {"es": "argumento", "en": "argument", "da": "argument"}
+    definition: {"es": "Valor suministrado a un parámetro durante una llamada.", "en": "Value supplied to a parameter during a call.", "da": "Værdi leveret til en parameter under et kald."}
     related_terms: [term.parameter]
   - id: term.return_value
-    term: {es: valor de retorno, en: return value, da: returværdi}
-    definition: {es: Valor entregado por una función al código llamador., en: Value delivered by a function to its caller., da: Værdi leveret af en funktion til den kaldende kode.}
+    term: {"es": "valor de retorno", "en": "return value", "da": "returværdi"}
+    definition: {"es": "Valor entregado por una función al código llamador.", "en": "Value delivered by a function to its caller.", "da": "Værdi leveret af en funktion til den kaldende kode."}
     related_terms: [term.function]
   - id: term.scope
-    term: {es: ámbito, en: scope, da: scope}
-    definition: {es: Región del programa en la que un nombre puede resolverse., en: Region of a program in which a name can be resolved., da: Område i et program hvor et navn kan opløses.}
+    term: {"es": "ámbito", "en": "scope", "da": "scope"}
+    definition: {"es": "Región del programa en la que un nombre puede resolverse.", "en": "Region of a program in which a name can be resolved.", "da": "Område i et program hvor et navn kan opløses."}
     related_terms: [term.local_variable]
   - id: term.local_variable
-    term: {es: variable local, en: local variable, da: lokal variabel}
-    definition: {es: Variable perteneciente al marco local de una llamada., en: Variable belonging to a call's local frame., da: Variabel der tilhører et kalds lokale ramme.}
+    term: {"es": "variable local", "en": "local variable", "da": "lokal variabel"}
+    definition: {"es": "Variable perteneciente al marco local de una llamada.", "en": "Variable belonging to a call's local frame.", "da": "Variabel der tilhører et kalds lokale ramme."}
     related_terms: [term.scope]
   - id: term.pure_function
-    term: {es: función pura, en: pure function, da: ren funktion}
-    definition: {es: Función cuyo resultado depende de sus argumentos y que no modifica estado externo., en: Function whose result depends on its arguments and that does not modify external state., da: Funktion hvis resultat afhænger af argumenterne og ikke ændrer ekstern tilstand.}
+    term: {"es": "función pura", "en": "pure function", "da": "ren funktion"}
+    definition: {"es": "Función cuyo resultado depende de sus argumentos y que no modifica estado externo.", "en": "Function whose result depends on its arguments and that does not modify external state.", "da": "Funktion hvis resultat afhænger af argumenterne og ikke ændrer ekstern tilstand."}
     related_terms: [term.side_effect]
   - id: term.side_effect
-    term: {es: efecto secundario, en: side effect, da: sideeffekt}
-    definition: {es: Cambio observable fuera del valor retornado., en: Observable change beyond the returned value., da: Observerbar ændring ud over returværdien.}
+    term: {"es": "efecto secundario", "en": "side effect", "da": "sideeffekt"}
+    definition: {"es": "Cambio observable fuera del valor retornado.", "en": "Observable change beyond the returned value.", "da": "Observerbar ændring ud over returværdien."}
     related_terms: [term.pure_function]
   - id: term.precondition
-    term: {es: precondición, en: precondition, da: forudsætning}
-    definition: {es: Requisito que debe cumplir una entrada antes de una llamada válida., en: Requirement an input must satisfy before a valid call., da: Krav et input skal opfylde før et gyldigt kald.}
+    term: {"es": "precondición", "en": "precondition", "da": "forudsætning"}
+    definition: {"es": "Requisito que debe cumplir una entrada antes de una llamada válida.", "en": "Requirement an input must satisfy before a valid call.", "da": "Krav et input skal opfylde før et gyldigt kald."}
     related_terms: [term.postcondition]
   - id: term.postcondition
-    term: {es: poscondición, en: postcondition, da: efterbetingelse}
-    definition: {es: Garantía que debe cumplir el resultado después de una llamada válida., en: Guarantee the result must satisfy after a valid call., da: Garanti resultatet skal opfylde efter et gyldigt kald.}
+    term: {"es": "poscondición", "en": "postcondition", "da": "efterbetingelse"}
+    definition: {"es": "Garantía que debe cumplir el resultado después de una llamada válida.", "en": "Guarantee the result must satisfy after a valid call.", "da": "Garanti resultatet skal opfylde efter et gyldigt kald."}
     related_terms: [term.precondition]
 
 hidden_guided_support:

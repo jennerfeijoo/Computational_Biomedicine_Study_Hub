@@ -5,7 +5,7 @@ content_version: 1.0.0
 status: academically_reviewed_draft
 
 metadata:
-  title: {es: Caracterización de proteínas y proteómica cuantitativa, en: Protein characterization and quantitative proteomics workflows, da: Proteinkarakterisering og kvantitative proteomikworkflows}
+  title: {"es": "Caracterización de proteínas y proteómica cuantitativa", "en": "Protein characterization and quantitative proteomics workflows", "da": "Proteinkarakterisering og kvantitative proteomikworkflows"}
   summary:
     es: >-
       Flujo de proteómica bottom-up desde proteínas y péptidos hasta identificación y cuantificación.
@@ -29,18 +29,18 @@ alignment:
   later_modules: [bmb831.m10, bmb831.m11, bmb831.m12]
 
 objectives:
-  - {id: bmb831.m09.o01, text: {es: Explicar la cadena proteína→péptido→espectro→PSM, en: Explain the protein-to-peptide-to-spectrum-to-PSM chain, da: Forklare kæden protein→peptid→spektrum→PSM}}
-  - {id: bmb831.m09.o02, text: {es: Interpretar FDR en distintos niveles, en: Interpret FDR at different levels, da: Fortolke FDR på forskellige niveauer}}
-  - {id: bmb831.m09.o03, text: {es: Resolver incertidumbre de péptidos compartidos, en: Resolve uncertainty from shared peptides, da: Håndtere usikkerhed fra delte peptider}}
-  - {id: bmb831.m09.o04, text: {es: Comparar LFQ, TMT y sus sesgos, en: Compare LFQ, TMT, and their biases, da: Sammenligne LFQ, TMT og deres bias}}
-  - {id: bmb831.m09.o05, text: {es: Evaluar QC, normalización y batch, en: Evaluate QC, normalization, and batch, da: Evaluere QC, normalisering og batch}}
-  - {id: bmb831.m09.o06, text: {es: Modelar missingness y abundancia diferencial, en: Model missingness and differential abundance, da: Modellere missingness og differential abundance}}
-  - {id: bmb831.m09.o07, text: {es: Integrar isoformas, PTMs y anotación funcional, en: Integrate isoforms, PTMs, and functional annotation, da: Integrere isoformer, PTM'er og funktionel annotation}}
-  - {id: bmb831.m09.o08, text: {es: Comunicar incertidumbre desde identificación hasta proteína, en: Communicate uncertainty from identification to protein level, da: Kommunikere usikkerhed fra identifikation til proteinniveau}}
+  - {id: bmb831.m09.o01, text: {"es": "Explicar la cadena proteína→péptido→espectro→PSM", "en": "Explain the protein-to-peptide-to-spectrum-to-PSM chain", "da": "Forklare kæden protein→peptid→spektrum→PSM"}}
+  - {id: bmb831.m09.o02, text: {"es": "Interpretar FDR en distintos niveles", "en": "Interpret FDR at different levels", "da": "Fortolke FDR på forskellige niveauer"}}
+  - {id: bmb831.m09.o03, text: {"es": "Resolver incertidumbre de péptidos compartidos", "en": "Resolve uncertainty from shared peptides", "da": "Håndtere usikkerhed fra delte peptider"}}
+  - {id: bmb831.m09.o04, text: {"es": "Comparar LFQ, TMT y sus sesgos", "en": "Compare LFQ, TMT, and their biases", "da": "Sammenligne LFQ, TMT og deres bias"}}
+  - {id: bmb831.m09.o05, text: {"es": "Evaluar QC, normalización y batch", "en": "Evaluate QC, normalization, and batch", "da": "Evaluere QC, normalisering og batch"}}
+  - {id: bmb831.m09.o06, text: {"es": "Modelar missingness y abundancia diferencial", "en": "Model missingness and differential abundance", "da": "Modellere missingness og differential abundance"}}
+  - {id: bmb831.m09.o07, text: {"es": "Integrar isoformas, PTMs y anotación funcional", "en": "Integrate isoforms, PTMs, and functional annotation", "da": "Integrere isoformer, PTM'er og funktionel annotation"}}
+  - {id: bmb831.m09.o08, text: {"es": "Comunicar incertidumbre desde identificación hasta proteína", "en": "Communicate uncertainty from identification to protein level", "da": "Kommunikere usikkerhed fra identifikation til proteinniveau"}}
 
 concepts:
   - id: bmb831.m09.c01
-    title: {es: Cadena de medición bottom-up, en: Bottom-up measurement chain, da: Bottom-up-målekæde}
+    title: {"es": "Cadena de medición bottom-up", "en": "Bottom-up measurement chain", "da": "Bottom-up-målekæde"}
     body:
       es: >-
         En proteómica bottom-up, proteínas se digieren en péptidos, se separan, ionizan y fragmentan. Los espectros MS/MS
@@ -52,9 +52,9 @@ concepts:
       da: >-
         I bottom-up-proteomik digesteres proteiner til peptider, fragmenteres og matches som PSM, hvorefter evidens aggregeres til proteingrupper.
     key_points:
-      - {es: La proteína no se observa directamente en la mayoría de workflows bottom-up, en: The protein is not directly observed in most bottom-up workflows, da: Proteinet observeres ikke direkte i de fleste bottom-up-workflows}
+      - {"es": "La proteína no se observa directamente en la mayoría de workflows bottom-up", "en": "The protein is not directly observed in most bottom-up workflows", "da": "Proteinet observeres ikke direkte i de fleste bottom-up-workflows"}
   - id: bmb831.m09.c02
-    title: {es: Target-decoy y FDR multinivel, en: Target-decoy and multilevel FDR, da: Target-decoy og FDR på flere niveauer}
+    title: {"es": "Target-decoy y FDR multinivel", "en": "Target-decoy and multilevel FDR", "da": "Target-decoy og FDR på flere niveauer"}
     body:
       es: >-
         Búsquedas target-decoy estiman falsos matches a partir de secuencias señuelo. Controlar FDR a nivel PSM no garantiza
@@ -66,9 +66,9 @@ concepts:
       da: >-
         Target-decoy estimerer falske matches. PSM-FDR indebærer ikke automatisk samme peptide- eller protein-FDR.
     key_points:
-      - {es: El nivel de inferencia debe coincidir con el nivel de FDR, en: The inference level should match the FDR level, da: Inferensniveau skal matche FDR-niveau}
+      - {"es": "El nivel de inferencia debe coincidir con el nivel de FDR", "en": "The inference level should match the FDR level", "da": "Inferensniveau skal matche FDR-niveau"}
   - id: bmb831.m09.c03
-    title: {es: Péptidos compartidos e inferencia de proteínas, en: Shared peptides and protein inference, da: Delte peptider og proteininferens}
+    title: {"es": "Péptidos compartidos e inferencia de proteínas", "en": "Shared peptides and protein inference", "da": "Delte peptider og proteininferens"}
     body:
       es: >-
         Un péptido único apoya una proteína o grupo específico; un péptido compartido puede provenir de múltiples isoformas o genes homólogos.
@@ -80,9 +80,9 @@ concepts:
       da: >-
         Et unikt peptid støtter et specifikt protein; et delt peptid kan komme fra flere isoformer eller homologer.
     key_points:
-      - {es: Protein group no equivale necesariamente a una proteína individual, en: A protein group is not necessarily one individual protein, da: En proteingruppe er ikke nødvendigvis ét individuelt protein}
+      - {"es": "Protein group no equivale necesariamente a una proteína individual", "en": "A protein group is not necessarily one individual protein", "da": "En proteingruppe er ikke nødvendigvis ét individuelt protein"}
   - id: bmb831.m09.c04
-    title: {es: Cuantificación LFQ y TMT, en: LFQ and TMT quantification, da: LFQ- og TMT-kvantificering}
+    title: {"es": "Cuantificación LFQ y TMT", "en": "LFQ and TMT quantification", "da": "LFQ- og TMT-kvantificering"}
     body:
       es: >-
         LFQ compara intensidades entre runs y es sensible a alineamiento, missingness y batch. TMT multiplexa muestras y reduce
@@ -94,9 +94,9 @@ concepts:
       da: >-
         LFQ sammenligner intensiteter mellem runs; TMT multiplexerer samples men kan have ratio compression.
     key_points:
-      - {es: La plataforma determina sesgos y estructura de batch, en: Platform determines biases and batch structure, da: Platformen bestemmer bias og batchstruktur}
+      - {"es": "La plataforma determina sesgos y estructura de batch", "en": "Platform determines biases and batch structure", "da": "Platformen bestemmer bias og batchstruktur"}
   - id: bmb831.m09.c05
-    title: {es: Missingness, normalización y QC, en: Missingness, normalization, and QC, da: Missingness, normalisering og QC}
+    title: {"es": "Missingness, normalización y QC", "en": "Missingness, normalization, and QC", "da": "Missingness, normalisering og QC"}
     body:
       es: >-
         Missingness puede depender de baja abundancia, selección estocástica, identificación, interferencia o fallo. QC incluye intensidad total,
@@ -108,9 +108,9 @@ concepts:
       da: >-
         Missingness kan afhænge af lav abundance, stokastisk selection, identifikation eller fejl. Imputation skal følge mekanismen.
     key_points:
-      - {es: La ausencia puede ocurrir en espectro, péptido o proteína, en: Missingness may arise at spectrum, peptide, or protein level, da: Missingness kan opstå på spektrum-, peptid- eller proteinniveau}
+      - {"es": "La ausencia puede ocurrir en espectro, péptido o proteína", "en": "Missingness may arise at spectrum, peptide, or protein level", "da": "Missingness kan opstå på spektrum-, peptid- eller proteinniveau"}
   - id: bmb831.m09.c06
-    title: {es: Abundancia diferencial, PTMs e interpretación, en: Differential abundance, PTMs, and interpretation, da: Differential abundance, PTM'er og fortolkning}
+    title: {"es": "Abundancia diferencial, PTMs e interpretación", "en": "Differential abundance, PTMs, and interpretation", "da": "Differential abundance, PTM'er og fortolkning"}
     body:
       es: >-
         El análisis diferencial debe respetar unidad, pairing, batch y escala log. Agregar péptidos requiere robustez a outliers y compartidos.
@@ -122,73 +122,73 @@ concepts:
       da: >-
         Differential analyse respekterer enhed, pairing, batch og log-skala. PTM'er kræver site-lokalisering og ekstra FDR.
     key_points:
-      - {es: Cambio de PTM no equivale automáticamente a cambio de actividad, en: A PTM change does not automatically equal activity change, da: En PTM-ændring er ikke automatisk aktivitetsændring}
+      - {"es": "Cambio de PTM no equivale automáticamente a cambio de actividad", "en": "A PTM change does not automatically equal activity change", "da": "En PTM-ændring er ikke automatisk aktivitetsændring"}
 
 worked_examples:
   - id: bmb831.m09.e01
-    title: {es: FDR PSM frente a proteína, en: PSM versus protein FDR, da: PSM versus protein-FDR}
-    scenario: {es: Se controla PSM FDR al 1% y se reportan proteínas sin filtro adicional., en: PSM FDR is controlled at 1% and proteins are reported without further filtering., da: PSM-FDR kontrolleres ved 1% og proteiner rapporteres uden yderligere filter.}
+    title: {"es": "FDR PSM frente a proteína", "en": "PSM versus protein FDR", "da": "PSM versus protein-FDR"}
+    scenario: {"es": "Se controla PSM FDR al 1% y se reportan proteínas sin filtro adicional.", "en": "PSM FDR is controlled at 1% and proteins are reported without further filtering.", "da": "PSM-FDR kontrolleres ved 1% og proteiner rapporteres uden yderligere filter."}
     reasoning:
-      - {es: Agregación de PSM cambia unidad de error., en: Aggregating PSMs changes the error unit., da: Aggregering af PSM ændrer fejlenheden.}
-      - {es: Aplicar inferencia y FDR a nivel proteína/grupo., en: Apply inference and FDR at protein/group level., da: Anvend inferens og FDR på protein/gruppe-niveau.}
-    conclusion: {es: FDR no se transfiere automáticamente entre niveles., en: FDR does not automatically transfer across levels., da: FDR overføres ikke automatisk mellem niveauer.}
+      - {"es": "Agregación de PSM cambia unidad de error.", "en": "Aggregating PSMs changes the error unit.", "da": "Aggregering af PSM ændrer fejlenheden."}
+      - {"es": "Aplicar inferencia y FDR a nivel proteína/grupo.", "en": "Apply inference and FDR at protein/group level.", "da": "Anvend inferens og FDR på protein/gruppe-niveau."}
+    conclusion: {"es": "FDR no se transfiere automáticamente entre niveles.", "en": "FDR does not automatically transfer across levels.", "da": "FDR overføres ikke automatisk mellem niveauer."}
   - id: bmb831.m09.e02
-    title: {es: Péptido compartido, en: Shared peptide, da: Delt peptid}
-    scenario: {es: Un péptido pertenece a dos isoformas y no hay péptidos únicos., en: A peptide belongs to two isoforms and no unique peptides exist., da: Et peptid tilhører to isoformer og ingen unikke peptider findes.}
+    title: {"es": "Péptido compartido", "en": "Shared peptide", "da": "Delt peptid"}
+    scenario: {"es": "Un péptido pertenece a dos isoformas y no hay péptidos únicos.", "en": "A peptide belongs to two isoforms and no unique peptides exist.", "da": "Et peptid tilhører to isoformer og ingen unikke peptider findes."}
     reasoning:
-      - {es: No distinguir isoformas individualmente., en: Individual isoforms cannot be distinguished., da: Individuelle isoformer kan ikke skelnes.}
-      - {es: Reportar grupo indistinguible y propagar ambigüedad., en: Report an indistinguishable group and propagate ambiguity., da: Rapportér en uadskillelig gruppe og propagér tvetydighed.}
-    conclusion: {es: La resolución está limitada por péptidos observados., en: Resolution is limited by observed peptides., da: Opløsning begrænses af observerede peptider.}
+      - {"es": "No distinguir isoformas individualmente.", "en": "Individual isoforms cannot be distinguished.", "da": "Individuelle isoformer kan ikke skelnes."}
+      - {"es": "Reportar grupo indistinguible y propagar ambigüedad.", "en": "Report an indistinguishable group and propagate ambiguity.", "da": "Rapportér en uadskillelig gruppe og propagér tvetydighed."}
+    conclusion: {"es": "La resolución está limitada por péptidos observados.", "en": "Resolution is limited by observed peptides.", "da": "Opløsning begrænses af observerede peptider."}
   - id: bmb831.m09.e03
-    title: {es: Fosfopéptido aumenta sin cambio de proteína, en: Phosphopeptide increase without protein change, da: Fosfopeptid-stigning uden proteinændring}
-    scenario: {es: Fosfopéptido log2FC=1.2 y proteína total estable., en: Phosphopeptide log2FC=1.2 while total protein is stable., da: Fosfopeptid log2FC=1.2 mens totalprotein er stabilt.}
+    title: {"es": "Fosfopéptido aumenta sin cambio de proteína", "en": "Phosphopeptide increase without protein change", "da": "Fosfopeptid-stigning uden proteinændring"}
+    scenario: {"es": "Fosfopéptido log2FC=1.2 y proteína total estable.", "en": "Phosphopeptide log2FC=1.2 while total protein is stable.", "da": "Fosfopeptid log2FC=1.2 mens totalprotein er stabilt."}
     reasoning:
-      - {es: Compatible con mayor ocupación del sitio, pero requiere localización fiable., en: Compatible with increased site occupancy but requires reliable localization., da: Kompatibel med øget site-occupancy men kræver pålidelig lokalisering.}
-      - {es: No prueba actividad funcional sin evidencia adicional., en: It does not prove functional activity without further evidence., da: Det beviser ikke funktionel aktivitet uden yderligere evidens.}
-    conclusion: {es: Separar abundancia total, modificación y función., en: Separate total abundance, modification, and function., da: Adskil total abundance, modifikation og funktion.}
+      - {"es": "Compatible con mayor ocupación del sitio, pero requiere localización fiable.", "en": "Compatible with increased site occupancy but requires reliable localization.", "da": "Kompatibel med øget site-occupancy men kræver pålidelig lokalisering."}
+      - {"es": "No prueba actividad funcional sin evidencia adicional.", "en": "It does not prove functional activity without further evidence.", "da": "Det beviser ikke funktionel aktivitet uden yderligere evidens."}
+    conclusion: {"es": "Separar abundancia total, modificación y función.", "en": "Separate total abundance, modification, and function.", "da": "Adskil total abundance, modifikation og funktion."}
 
 guided_practice:
-  - {id: bmb831.m09.p01, activity_type: pipeline_ordering, prompt: {es: Ordena un workflow bottom-up desde digestión hasta proteínas diferenciales., en: Order a bottom-up workflow from digestion to differential proteins., da: Ordne bottom-up-workflow fra digestion til differential proteins.}, expected_elements: [digestion, lc_ms, spectrum_search, psm_fdr, peptide_inference, protein_inference, quantification, qc, differential_model]}
-  - {id: bmb831.m09.p02, activity_type: fdr_reasoning, prompt: {es: Explica FDR separado para PSM, péptido y proteína., en: Explain separate FDR at PSM, peptide, and protein levels., da: Forklar separat FDR på PSM-, peptid- og proteinniveau.}, expected_elements: [unit_of_error, aggregation, decoys, reporting_level]}
-  - {id: bmb831.m09.p03, activity_type: protein_inference, prompt: {es: Resuelve una red de péptidos únicos y compartidos., en: Resolve a network of unique and shared peptides., da: Løs et netværk af unikke og delte peptider.}, expected_elements: [unique_evidence, indistinguishable_groups, parsimony_limit, ambiguity]}
-  - {id: bmb831.m09.p04, activity_type: missingness_audit, prompt: {es: Clasifica patrones de missingness LFQ y diseña sensibilidad., en: Classify LFQ missingness patterns and design sensitivity analysis., da: Klassificér LFQ-missingness og design følsomhedsanalyse.}, expected_elements: [abundance_dependence, sample_failure, batch, imputation_model, complete_case_comparison]}
-  - {id: bmb831.m09.p05, activity_type: method_comparison, prompt: {es: Compara LFQ y TMT para un diseño multicohorte., en: Compare LFQ and TMT for a multi-cohort design., da: Sammenlign LFQ og TMT for et multi-cohort-design.}, expected_elements: [multiplexing, batch, ratio_compression, missingness, bridge_channel, cost]}
-  - {id: bmb831.m09.p06, activity_type: publication_appraisal, prompt: {es: Critica un estudio que reporta proteínas individuales desde grupos indistinguibles., en: Critique a study reporting individual proteins from indistinguishable groups., da: Kritisk vurder et studie der rapporterer individuelle proteiner fra uadskillelige grupper.}, expected_elements: [shared_peptides, inference_resolution, false_specificity, revised_reporting]}
+  - {id: bmb831.m09.p01, activity_type: pipeline_ordering, prompt: {"es": "Ordena un workflow bottom-up desde digestión hasta proteínas diferenciales.", "en": "Order a bottom-up workflow from digestion to differential proteins.", "da": "Ordne bottom-up-workflow fra digestion til differential proteins."}, expected_elements: [digestion, lc_ms, spectrum_search, psm_fdr, peptide_inference, protein_inference, quantification, qc, differential_model]}
+  - {id: bmb831.m09.p02, activity_type: fdr_reasoning, prompt: {"es": "Explica FDR separado para PSM, péptido y proteína.", "en": "Explain separate FDR at PSM, peptide, and protein levels.", "da": "Forklar separat FDR på PSM-, peptid- og proteinniveau."}, expected_elements: [unit_of_error, aggregation, decoys, reporting_level]}
+  - {id: bmb831.m09.p03, activity_type: protein_inference, prompt: {"es": "Resuelve una red de péptidos únicos y compartidos.", "en": "Resolve a network of unique and shared peptides.", "da": "Løs et netværk af unikke og delte peptider."}, expected_elements: [unique_evidence, indistinguishable_groups, parsimony_limit, ambiguity]}
+  - {id: bmb831.m09.p04, activity_type: missingness_audit, prompt: {"es": "Clasifica patrones de missingness LFQ y diseña sensibilidad.", "en": "Classify LFQ missingness patterns and design sensitivity analysis.", "da": "Klassificér LFQ-missingness og design følsomhedsanalyse."}, expected_elements: [abundance_dependence, sample_failure, batch, imputation_model, complete_case_comparison]}
+  - {id: bmb831.m09.p05, activity_type: method_comparison, prompt: {"es": "Compara LFQ y TMT para un diseño multicohorte.", "en": "Compare LFQ and TMT for a multi-cohort design.", "da": "Sammenlign LFQ og TMT for et multi-cohort-design."}, expected_elements: [multiplexing, batch, ratio_compression, missingness, bridge_channel, cost]}
+  - {id: bmb831.m09.p06, activity_type: publication_appraisal, prompt: {"es": "Critica un estudio que reporta proteínas individuales desde grupos indistinguibles.", "en": "Critique a study reporting individual proteins from indistinguishable groups.", "da": "Kritisk vurder et studie der rapporterer individuelle proteiner fra uadskillelige grupper."}, expected_elements: [shared_peptides, inference_resolution, false_specificity, revised_reporting]}
 
 objective_bank:
-  - {id: bmb831.m09.q01, type: multiple_choice, prompt: {es: En bottom-up, objeto directamente observado., en: In bottom-up, directly observed object., da: I bottom-up, direkte observeret objekt.}, options: [{id: a, text: {es: Espectro/ión peptídico, en: Spectrum/peptide ion, da: Spektrum/peptidion}}, {id: b, text: {es: Proteína intacta universalmente, en: Intact protein universally, da: Intakt protein universelt}}], correct_option_ids: [a], explanation: {es: La proteína se infiere desde péptidos., en: Protein is inferred from peptides., da: Protein infereres fra peptider.}}
-  - {id: bmb831.m09.q02, type: true_false, prompt: {es: PSM FDR 1% garantiza protein FDR 1%., en: One-percent PSM FDR guarantees one-percent protein FDR., da: 1% PSM-FDR garanterer 1% protein-FDR.}, correct: false, explanation: {es: Agregación cambia unidad y selección., en: Aggregation changes the error unit and selection., da: Aggregering ændrer fejlenhed og selection.}}
-  - {id: bmb831.m09.q03, type: multiple_choice, prompt: {es: Péptido compartido implica..., en: A shared peptide implies..., da: Et delt peptid indebærer...}, options: [{id: a, text: {es: Ambigüedad entre proteínas/isoformas, en: Ambiguity among proteins/isoforms, da: Tvetydighed mellem proteiner/isoformer}}, {id: b, text: {es: Identificación única segura, en: Certain unique identification, da: Sikker unik identifikation}}], correct_option_ids: [a], explanation: {es: No distingue fuentes compatibles., en: It cannot distinguish compatible sources., da: Det kan ikke skelne kompatible kilder.}}
-  - {id: bmb831.m09.q04, type: true_false, prompt: {es: Protein group siempre equivale a un único gen., en: A protein group always equals one gene., da: En proteingruppe svarer altid til ét gen.}, correct: false, explanation: {es: Puede contener isoformas u homólogos indistinguibles., en: It may contain indistinguishable isoforms or homologs., da: Det kan indeholde uadskillelige isoformer eller homologer.}}
-  - {id: bmb831.m09.q05, type: multiple_choice, prompt: {es: Sesgo característico de TMT., en: Characteristic TMT bias., da: Karakteristisk TMT-bias.}, options: [{id: a, text: {es: Ratio compression, en: Ratio compression, da: Ratio compression}}, {id: b, text: {es: Ausencia total de interferencia, en: Complete absence of interference, da: Fuldstændigt fravær af interferens}}], correct_option_ids: [a], explanation: {es: Co-isolation puede acercar ratios a uno., en: Co-isolation may compress ratios toward one., da: Co-isolation kan komprimere ratios mod én.}}
-  - {id: bmb831.m09.q06, type: true_false, prompt: {es: LFQ nunca tiene missingness., en: LFQ never has missingness., da: LFQ har aldrig missingness.}, correct: false, explanation: {es: Identificación estocástica y baja intensidad generan ausencia., en: Stochastic identification and low intensity create missingness., da: Stokastisk identifikation og lav intensitet skaber missingness.}}
-  - {id: bmb831.m09.q07, type: multiple_choice, prompt: {es: Imputación mínima supone..., en: Minimum imputation assumes..., da: Minimumimputation antager...}, options: [{id: a, text: {es: Ausencia por baja abundancia, en: Missingness due to low abundance, da: Missingness pga. lav abundance}}, {id: b, text: {es: MCAR universal, en: Universal MCAR, da: Universel MCAR}}], correct_option_ids: [a], explanation: {es: No es válida para todo mecanismo., en: It is not valid for every mechanism., da: Det er ikke gyldigt for enhver mekanisme.}}
-  - {id: bmb831.m09.q08, type: true_false, prompt: {es: Fosfopéptido diferencial prueba activación de la proteína., en: A differential phosphopeptide proves protein activation., da: Et differentialt fosfopeptid beviser proteinaktivering.}, correct: false, explanation: {es: Requiere localización, normalización por proteína y evidencia funcional., en: It requires localization, protein normalization, and functional evidence., da: Det kræver lokalisering, proteinnormalisering og funktionel evidens.}}
-  - {id: bmb831.m09.q09, type: multiple_select, prompt: {es: QC proteómico relevante., en: Relevant proteomics QC., da: Relevant proteomik-QC.}, options: [{id: a, text: {es: Intensidad total, en: Total intensity, da: Total intensitet}}, {id: b, text: {es: CV replicados, en: Replicate CV, da: Replikat-CV}}, {id: c, text: {es: IDs detectados, en: Detected IDs, da: Detekterede ID'er}}, {id: d, text: {es: Ninguno, en: None, da: Ingen}}], correct_option_ids: [a,b,c], explanation: {es: Evalúan carga, precisión y cobertura., en: They assess loading, precision, and coverage., da: De vurderer loading, præcision og dækning.}}
-  - {id: bmb831.m09.q10, type: true_false, prompt: {es: FDR debe declararse al nivel de inferencia reportado., en: FDR should be declared at the reported inference level., da: FDR bør deklareres på det rapporterede inferensniveau.}, correct: true, explanation: {es: El lector debe conocer la unidad de error., en: The reader must know the error unit., da: Læseren skal kende fejlenheden.}}
+  - {id: bmb831.m09.q01, type: multiple_choice, prompt: {"es": "En bottom-up, objeto directamente observado.", "en": "In bottom-up, directly observed object.", "da": "I bottom-up, direkte observeret objekt."}, options: [{id: a, text: {"es": "Espectro/ión peptídico", "en": "Spectrum/peptide ion", "da": "Spektrum/peptidion"}}, {id: b, text: {"es": "Proteína intacta universalmente", "en": "Intact protein universally", "da": "Intakt protein universelt"}}], correct_option_ids: [a], explanation: {"es": "La proteína se infiere desde péptidos.", "en": "Protein is inferred from peptides.", "da": "Protein infereres fra peptider."}}
+  - {id: bmb831.m09.q02, type: true_false, prompt: {"es": "PSM FDR 1% garantiza protein FDR 1%.", "en": "One-percent PSM FDR guarantees one-percent protein FDR.", "da": "1% PSM-FDR garanterer 1% protein-FDR."}, correct: false, explanation: {"es": "Agregación cambia unidad y selección.", "en": "Aggregation changes the error unit and selection.", "da": "Aggregering ændrer fejlenhed og selection."}}
+  - {id: bmb831.m09.q03, type: multiple_choice, prompt: {"es": "Péptido compartido implica...", "en": "A shared peptide implies...", "da": "Et delt peptid indebærer..."}, options: [{id: a, text: {"es": "Ambigüedad entre proteínas/isoformas", "en": "Ambiguity among proteins/isoforms", "da": "Tvetydighed mellem proteiner/isoformer"}}, {id: b, text: {"es": "Identificación única segura", "en": "Certain unique identification", "da": "Sikker unik identifikation"}}], correct_option_ids: [a], explanation: {"es": "No distingue fuentes compatibles.", "en": "It cannot distinguish compatible sources.", "da": "Det kan ikke skelne kompatible kilder."}}
+  - {id: bmb831.m09.q04, type: true_false, prompt: {"es": "Protein group siempre equivale a un único gen.", "en": "A protein group always equals one gene.", "da": "En proteingruppe svarer altid til ét gen."}, correct: false, explanation: {"es": "Puede contener isoformas u homólogos indistinguibles.", "en": "It may contain indistinguishable isoforms or homologs.", "da": "Det kan indeholde uadskillelige isoformer eller homologer."}}
+  - {id: bmb831.m09.q05, type: multiple_choice, prompt: {"es": "Sesgo característico de TMT.", "en": "Characteristic TMT bias.", "da": "Karakteristisk TMT-bias."}, options: [{id: a, text: {"es": "Ratio compression", "en": "Ratio compression", "da": "Ratio compression"}}, {id: b, text: {"es": "Ausencia total de interferencia", "en": "Complete absence of interference", "da": "Fuldstændigt fravær af interferens"}}], correct_option_ids: [a], explanation: {"es": "Co-isolation puede acercar ratios a uno.", "en": "Co-isolation may compress ratios toward one.", "da": "Co-isolation kan komprimere ratios mod én."}}
+  - {id: bmb831.m09.q06, type: true_false, prompt: {"es": "LFQ nunca tiene missingness.", "en": "LFQ never has missingness.", "da": "LFQ har aldrig missingness."}, correct: false, explanation: {"es": "Identificación estocástica y baja intensidad generan ausencia.", "en": "Stochastic identification and low intensity create missingness.", "da": "Stokastisk identifikation og lav intensitet skaber missingness."}}
+  - {id: bmb831.m09.q07, type: multiple_choice, prompt: {"es": "Imputación mínima supone...", "en": "Minimum imputation assumes...", "da": "Minimumimputation antager..."}, options: [{id: a, text: {"es": "Ausencia por baja abundancia", "en": "Missingness due to low abundance", "da": "Missingness pga. lav abundance"}}, {id: b, text: {"es": "MCAR universal", "en": "Universal MCAR", "da": "Universel MCAR"}}], correct_option_ids: [a], explanation: {"es": "No es válida para todo mecanismo.", "en": "It is not valid for every mechanism.", "da": "Det er ikke gyldigt for enhver mekanisme."}}
+  - {id: bmb831.m09.q08, type: true_false, prompt: {"es": "Fosfopéptido diferencial prueba activación de la proteína.", "en": "A differential phosphopeptide proves protein activation.", "da": "Et differentialt fosfopeptid beviser proteinaktivering."}, correct: false, explanation: {"es": "Requiere localización, normalización por proteína y evidencia funcional.", "en": "It requires localization, protein normalization, and functional evidence.", "da": "Det kræver lokalisering, proteinnormalisering og funktionel evidens."}}
+  - {id: bmb831.m09.q09, type: multiple_select, prompt: {"es": "QC proteómico relevante.", "en": "Relevant proteomics QC.", "da": "Relevant proteomik-QC."}, options: [{id: a, text: {"es": "Intensidad total", "en": "Total intensity", "da": "Total intensitet"}}, {id: b, text: {"es": "CV replicados", "en": "Replicate CV", "da": "Replikat-CV"}}, {id: c, text: {"es": "IDs detectados", "en": "Detected IDs", "da": "Detekterede ID'er"}}, {id: d, text: {"es": "Ninguno", "en": "None", "da": "Ingen"}}], correct_option_ids: [a,b,c], explanation: {"es": "Evalúan carga, precisión y cobertura.", "en": "They assess loading, precision, and coverage.", "da": "De vurderer loading, præcision og dækning."}}
+  - {id: bmb831.m09.q10, type: true_false, prompt: {"es": "FDR debe declararse al nivel de inferencia reportado.", "en": "FDR should be declared at the reported inference level.", "da": "FDR bør deklareres på det rapporterede inferensniveau."}, correct: true, explanation: {"es": "El lector debe conocer la unidad de error.", "en": "The reader must know the error unit.", "da": "Læseren skal kende fejlenheden."}}
 
 open_assessment_items:
   - id: bmb831.m09.a01
-    prompt: {es: Diseña un pipeline LFQ reproducible desde PSM hasta abundancia diferencial., en: Design a reproducible LFQ pipeline from PSMs to differential abundance., da: Design et reproducerbart LFQ-pipeline fra PSM til differential abundance.}
+    prompt: {"es": "Diseña un pipeline LFQ reproducible desde PSM hasta abundancia diferencial.", "en": "Design a reproducible LFQ pipeline from PSMs to differential abundance.", "da": "Design et reproducerbart LFQ-pipeline fra PSM til differential abundance."}
     rubric: [{criterion: identification_fdr, weight: 0.25}, {criterion: protein_inference, weight: 0.25}, {criterion: qc_missingness_normalization, weight: 0.25}, {criterion: modeling_interpretation, weight: 0.25}]
   - id: bmb831.m09.a02
-    prompt: {es: Compara dos políticas para péptidos compartidos y sus consecuencias., en: Compare two shared-peptide policies and their consequences., da: Sammenlign to politikker for delte peptider og deres konsekvenser.}
+    prompt: {"es": "Compara dos políticas para péptidos compartidos y sus consecuencias.", "en": "Compare two shared-peptide policies and their consequences.", "da": "Sammenlign to politikker for delte peptider og deres konsekvenser."}
     rubric: [{criterion: ambiguity, weight: 0.25}, {criterion: parsimony_probability, weight: 0.25}, {criterion: quantification_bias, weight: 0.25}, {criterion: reporting_resolution, weight: 0.25}]
   - id: bmb831.m09.a03
-    prompt: {es: Interpreta un cambio de fosforilación separando proteína total, ocupación y función., en: Interpret a phosphorylation change separating total protein, occupancy, and function., da: Fortolk en fosforyleringsændring ved at adskille totalprotein, occupancy og funktion.}
+    prompt: {"es": "Interpreta un cambio de fosforilación separando proteína total, ocupación y función.", "en": "Interpret a phosphorylation change separating total protein, occupancy, and function.", "da": "Fortolk en fosforyleringsændring ved at adskille totalprotein, occupancy og funktion."}
     rubric: [{criterion: site_localization, weight: 0.25}, {criterion: total_protein_adjustment, weight: 0.25}, {criterion: uncertainty_fdr, weight: 0.25}, {criterion: functional_claim, weight: 0.25}]
 
 glossary:
-  - {id: bmb831.term.psm, term: {es: PSM, en: peptide-spectrum match, da: peptide-spectrum match}, definition: {es: Asignación de un espectro a una secuencia peptídica., en: Assignment of a spectrum to a peptide sequence., da: Tildeling af et spektrum til en peptidsekvens.}}
-  - {id: bmb831.term.target_decoy, term: {es: target-decoy, en: target-decoy, da: target-decoy}, definition: {es: Estrategia para estimar falsos matches usando secuencias señuelo., en: Strategy estimating false matches using decoy sequences., da: Strategi der estimerer falske matches med decoy-sekvenser.}}
-  - {id: bmb831.term.unique_peptide, term: {es: péptido único, en: unique peptide, da: unikt peptid}, definition: {es: Péptido compatible con una proteína o grupo específico., en: Peptide compatible with one specific protein or group., da: Peptid kompatibelt med ét specifikt protein eller gruppe.}}
-  - {id: bmb831.term.shared_peptide, term: {es: péptido compartido, en: shared peptide, da: delt peptid}, definition: {es: Péptido compatible con múltiples proteínas o isoformas., en: Peptide compatible with multiple proteins or isoforms., da: Peptid kompatibelt med flere proteiner eller isoformer.}}
-  - {id: bmb831.term.protein_group, term: {es: grupo de proteínas, en: protein group, da: proteingruppe}, definition: {es: Conjunto no distinguible con la evidencia peptídica disponible., en: Set indistinguishable from available peptide evidence., da: Sæt der ikke kan skelnes med tilgængelig peptid-evidens.}}
-  - {id: bmb831.term.lfq, term: {es: LFQ, en: label-free quantification, da: label-free quantification}, definition: {es: Cuantificación por intensidades entre runs sin etiquetas isotópicas., en: Intensity-based quantification across runs without isotopic labels., da: Intensitetsbaseret kvantificering mellem runs uden isotoplabels.}}
-  - {id: bmb831.term.tmt, term: {es: TMT, en: tandem mass tag, da: tandem mass tag}, definition: {es: Etiquetado isobárico para cuantificación multiplexada., en: Isobaric labeling for multiplexed quantification., da: Isobarisk labeling til multiplex-kvantificering.}}
-  - {id: bmb831.term.ratio_compression, term: {es: compresión de ratios, en: ratio compression, da: ratio compression}, definition: {es: Atenuación de diferencias por interferencia de iones co-aislados., en: Attenuation of differences due to co-isolated ion interference., da: Dæmpning af forskelle pga. interferens fra co-isolerede ioner.}}
-  - {id: bmb831.term.ptm_localization, term: {es: localización de PTM, en: PTM localization, da: PTM-lokalisering}, definition: {es: Asignación probabilística de una modificación a un residuo concreto., en: Probabilistic assignment of a modification to a specific residue., da: Probabilistisk tildeling af modifikation til en specifik rest.}}
-  - {id: bmb831.term.protein_inference, term: {es: inferencia de proteínas, en: protein inference, da: proteininferens}, definition: {es: Proceso de inferir proteínas desde evidencia peptídica., en: Process of inferring proteins from peptide evidence., da: Proces hvor proteiner infereres fra peptid-evidens.}}
+  - {id: bmb831.term.psm, term: {"es": "PSM", "en": "peptide-spectrum match", "da": "peptide-spectrum match"}, definition: {"es": "Asignación de un espectro a una secuencia peptídica.", "en": "Assignment of a spectrum to a peptide sequence.", "da": "Tildeling af et spektrum til en peptidsekvens."}}
+  - {id: bmb831.term.target_decoy, term: {"es": "target-decoy", "en": "target-decoy", "da": "target-decoy"}, definition: {"es": "Estrategia para estimar falsos matches usando secuencias señuelo.", "en": "Strategy estimating false matches using decoy sequences.", "da": "Strategi der estimerer falske matches med decoy-sekvenser."}}
+  - {id: bmb831.term.unique_peptide, term: {"es": "péptido único", "en": "unique peptide", "da": "unikt peptid"}, definition: {"es": "Péptido compatible con una proteína o grupo específico.", "en": "Peptide compatible with one specific protein or group.", "da": "Peptid kompatibelt med ét specifikt protein eller gruppe."}}
+  - {id: bmb831.term.shared_peptide, term: {"es": "péptido compartido", "en": "shared peptide", "da": "delt peptid"}, definition: {"es": "Péptido compatible con múltiples proteínas o isoformas.", "en": "Peptide compatible with multiple proteins or isoforms.", "da": "Peptid kompatibelt med flere proteiner eller isoformer."}}
+  - {id: bmb831.term.protein_group, term: {"es": "grupo de proteínas", "en": "protein group", "da": "proteingruppe"}, definition: {"es": "Conjunto no distinguible con la evidencia peptídica disponible.", "en": "Set indistinguishable from available peptide evidence.", "da": "Sæt der ikke kan skelnes med tilgængelig peptid-evidens."}}
+  - {id: bmb831.term.lfq, term: {"es": "LFQ", "en": "label-free quantification", "da": "label-free quantification"}, definition: {"es": "Cuantificación por intensidades entre runs sin etiquetas isotópicas.", "en": "Intensity-based quantification across runs without isotopic labels.", "da": "Intensitetsbaseret kvantificering mellem runs uden isotoplabels."}}
+  - {id: bmb831.term.tmt, term: {"es": "TMT", "en": "tandem mass tag", "da": "tandem mass tag"}, definition: {"es": "Etiquetado isobárico para cuantificación multiplexada.", "en": "Isobaric labeling for multiplexed quantification.", "da": "Isobarisk labeling til multiplex-kvantificering."}}
+  - {id: bmb831.term.ratio_compression, term: {"es": "compresión de ratios", "en": "ratio compression", "da": "ratio compression"}, definition: {"es": "Atenuación de diferencias por interferencia de iones co-aislados.", "en": "Attenuation of differences due to co-isolated ion interference.", "da": "Dæmpning af forskelle pga. interferens fra co-isolerede ioner."}}
+  - {id: bmb831.term.ptm_localization, term: {"es": "localización de PTM", "en": "PTM localization", "da": "PTM-lokalisering"}, definition: {"es": "Asignación probabilística de una modificación a un residuo concreto.", "en": "Probabilistic assignment of a modification to a specific residue.", "da": "Probabilistisk tildeling af modifikation til en specifik rest."}}
+  - {id: bmb831.term.protein_inference, term: {"es": "inferencia de proteínas", "en": "protein inference", "da": "proteininferens"}, definition: {"es": "Proceso de inferir proteínas desde evidencia peptídica.", "en": "Process of inferring proteins from peptide evidence.", "da": "Proces hvor proteiner infereres fra peptid-evidens."}}
 
 hidden_tutor_support:
   canonical_explanation:
@@ -220,8 +220,8 @@ hidden_tutor_support:
     - restrained PTM and functional interpretation
   retrieval_fragments:
     - id: bmb831.m09.r01
-      text: {es: PSM FDR no garantiza el mismo FDR a nivel proteína porque la agregación cambia la unidad de error., en: PSM FDR does not guarantee the same protein-level FDR because aggregation changes the error unit., da: PSM-FDR garanterer ikke samme protein-FDR fordi aggregering ændrer fejlenheden.}
+      text: {"es": "PSM FDR no garantiza el mismo FDR a nivel proteína porque la agregación cambia la unidad de error.", "en": "PSM FDR does not guarantee the same protein-level FDR because aggregation changes the error unit.", "da": "PSM-FDR garanterer ikke samme protein-FDR fordi aggregering ændrer fejlenheden."}
     - id: bmb831.m09.r02
-      text: {es: Péptidos compartidos limitan la resolución a grupos de proteínas indistinguibles., en: Shared peptides may limit resolution to indistinguishable protein groups., da: Delte peptider kan begrænse opløsning til uadskillelige proteingrupper.}
+      text: {"es": "Péptidos compartidos limitan la resolución a grupos de proteínas indistinguibles.", "en": "Shared peptides may limit resolution to indistinguishable protein groups.", "da": "Delte peptider kan begrænse opløsning til uadskillelige proteingrupper."}
     - id: bmb831.m09.r03
-      text: {es: Un cambio de PTM debe interpretarse junto con localización, proteína total e incertidumbre., en: A PTM change should be interpreted with localization, total protein, and uncertainty., da: En PTM-ændring bør fortolkes med lokalisering, totalprotein og usikkerhed.}
+      text: {"es": "Un cambio de PTM debe interpretarse junto con localización, proteína total e incertidumbre.", "en": "A PTM change should be interpreted with localization, total protein, and uncertainty.", "da": "En PTM-ændring bør fortolkes med lokalisering, totalprotein og usikkerhed."}

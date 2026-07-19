@@ -7,97 +7,97 @@ locales: [es, en, da]
 cards:
   - id: dm847.m06.f01
     type: conceptual
-    front: {es: ¿Qué diferencia un estado oculto de una observación?, en: What distinguishes a hidden state from an observation?, da: Hvad adskiller en skjult tilstand fra en observation?}
-    back: {es: El estado es una variable latente del modelo; la observación es el símbolo medido generado condicionalmente por ese estado., en: A state is a latent model variable; an observation is the measured symbol generated conditionally by that state., da: En tilstand er latent; observationen er det målte symbol, der genereres betinget af tilstanden.}
+    front: {"es": "¿Qué diferencia un estado oculto de una observación?", "en": "What distinguishes a hidden state from an observation?", "da": "Hvad adskiller en skjult tilstand fra en observation?"}
+    back: {"es": "El estado es una variable latente del modelo; la observación es el símbolo medido generado condicionalmente por ese estado.", "en": "A state is a latent model variable; an observation is the measured symbol generated conditionally by that state.", "da": "En tilstand er latent; observationen er det målte symbol, der genereres betinget af tilstanden."}
   - id: dm847.m06.f02
     type: conceptual
-    front: {es: ¿Qué afirma la propiedad de Markov de primer orden?, en: What does the first-order Markov property state?, da: Hvad siger førsteordens Markov-egenskaben?}
-    back: {es: Dado el estado actual, el siguiente estado es independiente de estados anteriores más remotos., en: Given the current state, the next state is independent of more distant previous states., da: Givet den aktuelle tilstand er den næste uafhængig af fjernere tidligere tilstande.}
+    front: {"es": "¿Qué afirma la propiedad de Markov de primer orden?", "en": "What does the first-order Markov property state?", "da": "Hvad siger førsteordens Markov-egenskaben?"}
+    back: {"es": "Dado el estado actual, el siguiente estado es independiente de estados anteriores más remotos.", "en": "Given the current state, the next state is independent of more distant previous states.", "da": "Givet den aktuelle tilstand er den næste uafhængig af fjernere tidligere tilstande."}
   - id: dm847.m06.f03
     type: formula
-    front: {es: ¿Cómo se factoriza la probabilidad conjunta de observaciones y estados?, en: How does the joint probability of observations and states factorize?, da: Hvordan faktoriseres den fælles sandsynlighed?}
-    back: {es: Distribución inicial por la primera emisión y luego el producto de transición y emisión en cada posición posterior., en: Initial distribution times the first emission, followed by transition-emission products at later positions., da: Startfordeling gange første emission og derefter produkter af overgang og emission.}
+    front: {"es": "¿Cómo se factoriza la probabilidad conjunta de observaciones y estados?", "en": "How does the joint probability of observations and states factorize?", "da": "Hvordan faktoriseres den fælles sandsynlighed?"}
+    back: {"es": "Distribución inicial por la primera emisión y luego el producto de transición y emisión en cada posición posterior.", "en": "Initial distribution times the first emission, followed by transition-emission products at later positions.", "da": "Startfordeling gange første emission og derefter produkter af overgang og emission."}
   - id: dm847.m06.f04
     type: conceptual
-    front: {es: ¿Qué calcula forward?, en: What does forward compute?, da: Hvad beregner forward?}
-    back: {es: La probabilidad marginal de la secuencia observada, sumando la contribución de todas las trayectorias de estados., en: The marginal probability of the observed sequence by summing all state-path contributions., da: Den marginale sandsynlighed for observationssekvensen ved at summere alle stier.}
+    front: {"es": "¿Qué calcula forward?", "en": "What does forward compute?", "da": "Hvad beregner forward?"}
+    back: {"es": "La probabilidad marginal de la secuencia observada, sumando la contribución de todas las trayectorias de estados.", "en": "The marginal probability of the observed sequence by summing all state-path contributions.", "da": "Den marginale sandsynlighed for observationssekvensen ved at summere alle stier."}
   - id: dm847.m06.f05
     type: conceptual
-    front: {es: ¿Qué calcula Viterbi?, en: What does Viterbi compute?, da: Hvad beregner Viterbi?}
-    back: {es: La trayectoria completa de estados con máxima probabilidad conjunta con la secuencia observada., en: The complete state path with maximum joint probability with the observed sequence., da: Den komplette tilstandssti med maksimal fælles sandsynlighed.}
+    front: {"es": "¿Qué calcula Viterbi?", "en": "What does Viterbi compute?", "da": "Hvad beregner Viterbi?"}
+    back: {"es": "La trayectoria completa de estados con máxima probabilidad conjunta con la secuencia observada.", "en": "The complete state path with maximum joint probability with the observed sequence.", "da": "Den komplette tilstandssti med maksimal fælles sandsynlighed."}
   - id: dm847.m06.f06
     type: misconception
-    front: {es: Corrige: Viterbi y forward producen la misma probabilidad., en: Correct: Viterbi and forward produce the same probability., da: Ret: Viterbi og forward giver samme sandsynlighed.}
-    back: {es: Forward suma sobre trayectorias; Viterbi toma el máximo. Sólo coinciden en casos degenerados., en: Forward sums over paths; Viterbi takes the maximum. They coincide only in degenerate cases., da: Forward summerer over stier; Viterbi tager maksimum.}
+    front: {"es": "Corrige: Viterbi y forward producen la misma probabilidad.", "en": "Correct: Viterbi and forward produce the same probability.", "da": "Ret: Viterbi og forward giver samme sandsynlighed."}
+    back: {"es": "Forward suma sobre trayectorias; Viterbi toma el máximo. Sólo coinciden en casos degenerados.", "en": "Forward sums over paths; Viterbi takes the maximum. They coincide only in degenerate cases.", "da": "Forward summerer over stier; Viterbi tager maksimum."}
   - id: dm847.m06.f07
     type: practical
-    front: {es: ¿Qué debe almacenarse además del valor Viterbi para reconstruir la trayectoria?, en: What must be stored besides the Viterbi value to reconstruct the path?, da: Hvad skal gemmes ud over Viterbi-værdien?}
-    back: {es: Un puntero al estado predecesor óptimo para cada estado y posición., en: A pointer to the optimal predecessor state for every state and position., da: En pointer til den optimale forgænger for hver tilstand og position.}
+    front: {"es": "¿Qué debe almacenarse además del valor Viterbi para reconstruir la trayectoria?", "en": "What must be stored besides the Viterbi value to reconstruct the path?", "da": "Hvad skal gemmes ud over Viterbi-værdien?"}
+    back: {"es": "Un puntero al estado predecesor óptimo para cada estado y posición.", "en": "A pointer to the optimal predecessor state for every state and position.", "da": "En pointer til den optimale forgænger for hver tilstand og position."}
   - id: dm847.m06.f08
     type: conceptual
-    front: {es: ¿Qué representa β_t(i)?, en: What does β_t(i) represent?, da: Hvad repræsenterer β_t(i)?}
-    back: {es: La probabilidad de las observaciones futuras desde t+1 hasta T condicionada al estado i en t., en: The probability of future observations from t+1 to T conditional on state i at t., da: Sandsynligheden for fremtidige observationer givet tilstand i ved t.}
+    front: {"es": "¿Qué representa β_t(i)?", "en": "What does β_t(i) represent?", "da": "Hvad repræsenterer β_t(i)?"}
+    back: {"es": "La probabilidad de las observaciones futuras desde t+1 hasta T condicionada al estado i en t.", "en": "The probability of future observations from t+1 to T conditional on state i at t.", "da": "Sandsynligheden for fremtidige observationer givet tilstand i ved t."}
   - id: dm847.m06.f09
     type: formula
-    front: {es: ¿Cómo se obtiene la posterior marginal de un estado en una posición?, en: How is a state marginal posterior at a position obtained?, da: Hvordan fås en marginal posterior for en tilstand?}
-    back: {es: Proporcional a α_t(i)β_t(i), normalizada por la verosimilitud total de la secuencia., en: Proportional to α_t(i)β_t(i), normalized by total sequence likelihood., da: Proportional med α_t(i)β_t(i), normaliseret med sekvensens likelihood.}
+    front: {"es": "¿Cómo se obtiene la posterior marginal de un estado en una posición?", "en": "How is a state marginal posterior at a position obtained?", "da": "Hvordan fås en marginal posterior for en tilstand?"}
+    back: {"es": "Proporcional a α_t(i)β_t(i), normalizada por la verosimilitud total de la secuencia.", "en": "Proportional to α_t(i)β_t(i), normalized by total sequence likelihood.", "da": "Proportional med α_t(i)β_t(i), normaliseret med sekvensens likelihood."}
   - id: dm847.m06.f10
     type: interpretation
-    front: {es: ¿Qué indica una posterior 0.52 frente a 0.48 entre dos estados?, en: What does a 0.52 versus 0.48 posterior indicate?, da: Hvad betyder posterior 0,52 mod 0,48?}
-    back: {es: Alta ambigüedad local; asignar una etiqueta dura ocultaría incertidumbre relevante., en: High local ambiguity; a hard label would hide relevant uncertainty., da: Høj lokal tvetydighed; en hård etiket skjuler usikkerhed.}
+    front: {"es": "¿Qué indica una posterior 0.52 frente a 0.48 entre dos estados?", "en": "What does a 0.52 versus 0.48 posterior indicate?", "da": "Hvad betyder posterior 0,52 mod 0,48?"}
+    back: {"es": "Alta ambigüedad local; asignar una etiqueta dura ocultaría incertidumbre relevante.", "en": "High local ambiguity; a hard label would hide relevant uncertainty.", "da": "Høj lokal tvetydighed; en hård etiket skjuler usikkerhed."}
   - id: dm847.m06.f11
     type: computational
-    front: {es: ¿Cuál es el coste típico de forward en una topología densa?, en: What is typical forward cost for dense topology?, da: Hvad er typisk forward-omkostning for en tæt topologi?}
-    back: {es: O(TK²), con T posiciones y K estados., en: O(TK²), for T positions and K states., da: O(TK²) for T positioner og K tilstande.}
+    front: {"es": "¿Cuál es el coste típico de forward en una topología densa?", "en": "What is typical forward cost for dense topology?", "da": "Hvad er typisk forward-omkostning for en tæt topologi?"}
+    back: {"es": "O(TK²), con T posiciones y K estados.", "en": "O(TK²), for T positions and K states.", "da": "O(TK²) for T positioner og K tilstande."}
   - id: dm847.m06.f12
     type: debugging
-    front: {es: Una implementación devuelve cero para secuencias largas. ¿Primera sospecha?, en: An implementation returns zero for long sequences. First suspicion?, da: En implementering giver nul for lange sekvenser. Første mistanke?}
-    back: {es: Underflow por multiplicar muchas probabilidades pequeñas; usar escalado o espacio logarítmico., en: Underflow from multiplying many small probabilities; use scaling or log space., da: Underflow fra mange små sandsynligheder; brug skalering eller log-rum.}
+    front: {"es": "Una implementación devuelve cero para secuencias largas. ¿Primera sospecha?", "en": "An implementation returns zero for long sequences. First suspicion?", "da": "En implementering giver nul for lange sekvenser. Første mistanke?"}
+    back: {"es": "Underflow por multiplicar muchas probabilidades pequeñas; usar escalado o espacio logarítmico.", "en": "Underflow from multiplying many small probabilities; use scaling or log space.", "da": "Underflow fra mange små sandsynligheder; brug skalering eller log-rum."}
   - id: dm847.m06.f13
     type: computational
-    front: {es: ¿Por qué no basta sumar log-probabilidades al marginalizar?, en: Why can log probabilities not simply be added when marginalizing?, da: Hvorfor kan log-sandsynligheder ikke blot lægges sammen ved marginalisering?}
-    back: {es: Porque log(a+b) no es log(a)+log(b); se requiere log-sum-exp., en: Because log(a+b) is not log(a)+log(b); log-sum-exp is required., da: Fordi log(a+b) ikke er log(a)+log(b); log-sum-exp kræves.}
+    front: {"es": "¿Por qué no basta sumar log-probabilidades al marginalizar?", "en": "Why can log probabilities not simply be added when marginalizing?", "da": "Hvorfor kan log-sandsynligheder ikke blot lægges sammen ved marginalisering?"}
+    back: {"es": "Porque log(a+b) no es log(a)+log(b); se requiere log-sum-exp.", "en": "Because log(a+b) is not log(a)+log(b); log-sum-exp is required.", "da": "Fordi log(a+b) ikke er log(a)+log(b); log-sum-exp kræves."}
   - id: dm847.m06.f14
     type: conceptual
-    front: {es: ¿Cómo se estiman transiciones cuando las trayectorias son conocidas?, en: How are transitions estimated when paths are known?, da: Hvordan estimeres overgange med kendte stier?}
-    back: {es: Contando transiciones salientes de cada estado y normalizando por fila, con regularización justificada., en: Count outgoing transitions from each state and normalize by row, with justified regularization., da: Tæl udgående overgange og normalisér pr. række med begrundet regularisering.}
+    front: {"es": "¿Cómo se estiman transiciones cuando las trayectorias son conocidas?", "en": "How are transitions estimated when paths are known?", "da": "Hvordan estimeres overgange med kendte stier?"}
+    back: {"es": "Contando transiciones salientes de cada estado y normalizando por fila, con regularización justificada.", "en": "Count outgoing transitions from each state and normalize by row, with justified regularization.", "da": "Tæl udgående overgange og normalisér pr. række med begrundet regularisering."}
   - id: dm847.m06.f15
     type: conceptual
-    front: {es: ¿Qué hace la fase E de Baum-Welch?, en: What does the E-step of Baum-Welch do?, da: Hvad gør E-trinnet i Baum-Welch?}
-    back: {es: Calcula conteos esperados de ocupaciones y transiciones mediante forward-backward., en: It computes expected state occupancies and transitions using forward-backward., da: Den beregner forventede tilstands- og overgangstællinger med forward-backward.}
+    front: {"es": "¿Qué hace la fase E de Baum-Welch?", "en": "What does the E-step of Baum-Welch do?", "da": "Hvad gør E-trinnet i Baum-Welch?"}
+    back: {"es": "Calcula conteos esperados de ocupaciones y transiciones mediante forward-backward.", "en": "It computes expected state occupancies and transitions using forward-backward.", "da": "Den beregner forventede tilstands- og overgangstællinger med forward-backward."}
   - id: dm847.m06.f16
     type: misconception
-    front: {es: Corrige: Baum-Welch garantiza la estructura biológica verdadera., en: Correct: Baum-Welch guarantees the true biological structure., da: Ret: Baum-Welch garanterer den sande biologiske struktur.}
-    back: {es: Sólo optimiza la verosimilitud dentro del modelo; puede alcanzar óptimos locales y estados no identificables., en: It only optimizes likelihood within the model; local optima and non-identifiable states remain possible., da: Den optimerer kun likelihood i modellen; lokale optima og ikke-identificerbare tilstande er mulige.}
+    front: {"es": "Corrige: Baum-Welch garantiza la estructura biológica verdadera.", "en": "Correct: Baum-Welch guarantees the true biological structure.", "da": "Ret: Baum-Welch garanterer den sande biologiske struktur."}
+    back: {"es": "Sólo optimiza la verosimilitud dentro del modelo; puede alcanzar óptimos locales y estados no identificables.", "en": "It only optimizes likelihood within the model; local optima and non-identifiable states remain possible.", "da": "Den optimerer kun likelihood i modellen; lokale optima og ikke-identificerbare tilstande er mulige."}
   - id: dm847.m06.f17
     type: conceptual
-    front: {es: ¿Qué función tiene un estado match en un profile HMM?, en: What is the role of a match state in a profile HMM?, da: Hvad er rollen for en match-tilstand?}
-    back: {es: Representa una posición de consenso de la familia y emite símbolos según su distribución específica., en: It represents a family consensus position and emits symbols from its position-specific distribution., da: Den repræsenterer en konsensusposition og udsender symboler fra en positionsspecifik fordeling.}
+    front: {"es": "¿Qué función tiene un estado match en un profile HMM?", "en": "What is the role of a match state in a profile HMM?", "da": "Hvad er rollen for en match-tilstand?"}
+    back: {"es": "Representa una posición de consenso de la familia y emite símbolos según su distribución específica.", "en": "It represents a family consensus position and emits symbols from its position-specific distribution.", "da": "Den repræsenterer en konsensusposition og udsender symboler fra en positionsspecifik fordeling."}
   - id: dm847.m06.f18
     type: conceptual
-    front: {es: ¿Qué función tiene un estado insert?, en: What is the role of an insert state?, da: Hvad er rollen for en insert-tilstand?}
-    back: {es: Modela símbolos adicionales entre posiciones de consenso., en: It models extra symbols between consensus positions., da: Den modellerer ekstra symboler mellem konsensuspositioner.}
+    front: {"es": "¿Qué función tiene un estado insert?", "en": "What is the role of an insert state?", "da": "Hvad er rollen for en insert-tilstand?"}
+    back: {"es": "Modela símbolos adicionales entre posiciones de consenso.", "en": "It models extra symbols between consensus positions.", "da": "Den modellerer ekstra symboler mellem konsensuspositioner."}
   - id: dm847.m06.f19
     type: conceptual
-    front: {es: ¿Por qué un estado delete es silencioso?, en: Why is a delete state silent?, da: Hvorfor er en delete-tilstand stille?}
-    back: {es: Porque representa omitir una posición de consenso sin consumir una observación., en: Because it represents skipping a consensus position without consuming an observation., da: Fordi den springer en konsensusposition over uden at forbruge en observation.}
+    front: {"es": "¿Por qué un estado delete es silencioso?", "en": "Why is a delete state silent?", "da": "Hvorfor er en delete-tilstand stille?"}
+    back: {"es": "Porque representa omitir una posición de consenso sin consumir una observación.", "en": "Because it represents skipping a consensus position without consuming an observation.", "da": "Fordi den springer en konsensusposition over uden at forbruge en observation."}
   - id: dm847.m06.f20
     type: model_selection
-    front: {es: ¿Qué datos ayudan a elegir el número de estados?, en: What evidence helps choose the number of states?, da: Hvilket bevis hjælper med at vælge antal tilstande?}
-    back: {es: Rendimiento en datos no usados, estabilidad, interpretabilidad sustentada, criterios penalizados y comparación con modelos más simples., en: Held-out performance, stability, supported interpretability, penalized criteria, and comparison with simpler models., da: Hold-out-ydeevne, stabilitet, underbygget fortolkning og sammenligning med enklere modeller.}
+    front: {"es": "¿Qué datos ayudan a elegir el número de estados?", "en": "What evidence helps choose the number of states?", "da": "Hvilket bevis hjælper med at vælge antal tilstande?"}
+    back: {"es": "Rendimiento en datos no usados, estabilidad, interpretabilidad sustentada, criterios penalizados y comparación con modelos más simples.", "en": "Held-out performance, stability, supported interpretability, penalized criteria, and comparison with simpler models.", "da": "Hold-out-ydeevne, stabilitet, underbygget fortolkning og sammenligning med enklere modeller."}
   - id: dm847.m06.f21
     type: validation
-    front: {es: ¿Qué aporta simular secuencias desde parámetros conocidos?, en: What does simulation from known parameters provide?, da: Hvad giver simulering fra kendte parametre?}
-    back: {es: Permite comprobar recuperación de trayectorias, parámetros y calibración contra una verdad conocida., en: It tests recovery of paths, parameters, and calibration against known truth., da: Det tester genfinding af stier, parametre og kalibrering mod kendt sandhed.}
+    front: {"es": "¿Qué aporta simular secuencias desde parámetros conocidos?", "en": "What does simulation from known parameters provide?", "da": "Hvad giver simulering fra kendte parametre?"}
+    back: {"es": "Permite comprobar recuperación de trayectorias, parámetros y calibración contra una verdad conocida.", "en": "It tests recovery of paths, parameters, and calibration against known truth.", "da": "Det tester genfinding af stier, parametre og kalibrering mod kendt sandhed."}
   - id: dm847.m06.f22
     type: validation
-    front: {es: ¿Qué aporta un conjunto externo anotado?, en: What does an external annotated set provide?, da: Hvad giver et eksternt annoteret datasæt?}
-    back: {es: Evalúa generalización y sustenta o refuta la interpretación biológica de los estados., en: It evaluates generalization and supports or challenges biological state interpretation., da: Det evaluerer generalisering og biologisk fortolkning af tilstande.}
+    front: {"es": "¿Qué aporta un conjunto externo anotado?", "en": "What does an external annotated set provide?", "da": "Hvad giver et eksternt annoteret datasæt?"}
+    back: {"es": "Evalúa generalización y sustenta o refuta la interpretación biológica de los estados.", "en": "It evaluates generalization and supports or challenges biological state interpretation.", "da": "Det evaluerer generalisering og biologisk fortolkning af tilstande."}
   - id: dm847.m06.f23
     type: oral
-    front: {es: Explica en una frase la diferencia entre decodificación y entrenamiento., en: Explain decoding versus training in one sentence., da: Forklar dekodning versus træning i én sætning.}
-    back: {es: Decodificar infiere estados con parámetros fijados; entrenar estima parámetros a partir de datos., en: Decoding infers states with fixed parameters; training estimates parameters from data., da: Dekodning infererer tilstande med faste parametre; træning estimerer parametre fra data.}
+    front: {"es": "Explica en una frase la diferencia entre decodificación y entrenamiento.", "en": "Explain decoding versus training in one sentence.", "da": "Forklar dekodning versus træning i én sætning."}
+    back: {"es": "Decodificar infiere estados con parámetros fijados; entrenar estima parámetros a partir de datos.", "en": "Decoding infers states with fixed parameters; training estimates parameters from data.", "da": "Dekodning infererer tilstande med faste parametre; træning estimerer parametre fra data."}
   - id: dm847.m06.f24
     type: transfer
-    front: {es: ¿Cómo conecta un HMM con descubrimiento de motivos y anotación de secuencias?, en: How do HMMs connect to motif discovery and sequence annotation?, da: Hvordan forbindes HMM'er med motivsøgning og sekvensannotation?}
-    back: {es: Los estados pueden representar regiones o posiciones con distribuciones distintas, pero la interpretación requiere diseño y validación específicos., en: States can represent regions or positions with different distributions, but interpretation requires task-specific design and validation., da: Tilstande kan repræsentere regioner med forskellige fordelinger, men fortolkning kræver specifikt design og validering.}
+    front: {"es": "¿Cómo conecta un HMM con descubrimiento de motivos y anotación de secuencias?", "en": "How do HMMs connect to motif discovery and sequence annotation?", "da": "Hvordan forbindes HMM'er med motivsøgning og sekvensannotation?"}
+    back: {"es": "Los estados pueden representar regiones o posiciones con distribuciones distintas, pero la interpretación requiere diseño y validación específicos.", "en": "States can represent regions or positions with different distributions, but interpretation requires task-specific design and validation.", "da": "Tilstande kan repræsentere regioner med forskellige fordelinger, men fortolkning kræver specifikt design og validering."}

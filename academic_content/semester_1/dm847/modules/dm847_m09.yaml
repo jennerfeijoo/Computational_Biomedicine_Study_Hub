@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Organización genética bacteriana y predicción de operones
-    en: Bacterial gene organization and operon prediction
-    da: Bakteriel genorganisation og operonprædiktion
+    es: "Organización genética bacteriana y predicción de operones"
+    en: "Bacterial gene organization and operon prediction"
+    da: "Bakteriel genorganisation og operonprædiktion"
   summary:
     es: >-
       Arquitectura de genomas bacterianos, operones y unidades de transcripción, regulación
@@ -33,18 +33,18 @@ alignment:
   later_modules: [dm847.m11, dm847.m12, dm847.m13]
 
 objectives:
-  - {id: dm847.m09.o01, text: {es: Distinguir gen, operón, unidad de transcripción y regulón, en: Distinguish gene, operon, transcription unit, and regulon, da: Skelne mellem gen, operon, transkriptionsenhed og regulon}}
-  - {id: dm847.m09.o02, text: {es: Explicar promotores, operadores, terminadores y transcritos policistrónicos, en: Explain promoters, operators, terminators, and polycistronic transcripts, da: Forklare promotorer, operatorer, terminatorer og polycistroniske transkripter}}
-  - {id: dm847.m09.o03, text: {es: Interpretar orientación, distancia intergénica y sintenia local, en: Interpret orientation, intergenic distance, and local synteny, da: Fortolke orientering, intergenisk afstand og lokal synteni}}
-  - {id: dm847.m09.o04, text: {es: Explicar transferencia horizontal, plasmidios y fagos sin confundir movilidad con función, en: Explain horizontal transfer, plasmids, and phages without conflating mobility with function, da: Forklare horisontal overførsel, plasmider og fager uden at forveksle mobilitet med funktion}}
-  - {id: dm847.m09.o05, text: {es: Construir características para pares de genes adyacentes, en: Construct features for adjacent gene pairs, da: Konstruere features for par af nabogener}}
-  - {id: dm847.m09.o06, text: {es: Formular predicción de operones como clasificación probabilística, en: Formulate operon prediction as probabilistic classification, da: Formulere operonprædiktion som probabilistisk klassifikation}}
-  - {id: dm847.m09.o07, text: {es: Diseñar particiones por genoma y métricas apropiadas para clases desbalanceadas, en: Design genome-level splits and metrics for imbalanced classes, da: Designe genomniveau-split og metrikker til ubalancerede klasser}}
-  - {id: dm847.m09.o08, text: {es: Auditar errores, incertidumbre, sesgo de anotación y transferencia entre especies, en: Audit errors, uncertainty, annotation bias, and cross-species transfer, da: Revidere fejl, usikkerhed, annotationsbias og overførsel mellem arter}}
+  - {id: dm847.m09.o01, text: {"es": "Distinguir gen, operón, unidad de transcripción y regulón", "en": "Distinguish gene, operon, transcription unit, and regulon", "da": "Skelne mellem gen, operon, transkriptionsenhed og regulon"}}
+  - {id: dm847.m09.o02, text: {"es": "Explicar promotores, operadores, terminadores y transcritos policistrónicos", "en": "Explain promoters, operators, terminators, and polycistronic transcripts", "da": "Forklare promotorer, operatorer, terminatorer og polycistroniske transkripter"}}
+  - {id: dm847.m09.o03, text: {"es": "Interpretar orientación, distancia intergénica y sintenia local", "en": "Interpret orientation, intergenic distance, and local synteny", "da": "Fortolke orientering, intergenisk afstand og lokal synteni"}}
+  - {id: dm847.m09.o04, text: {"es": "Explicar transferencia horizontal, plasmidios y fagos sin confundir movilidad con función", "en": "Explain horizontal transfer, plasmids, and phages without conflating mobility with function", "da": "Forklare horisontal overførsel, plasmider og fager uden at forveksle mobilitet med funktion"}}
+  - {id: dm847.m09.o05, text: {"es": "Construir características para pares de genes adyacentes", "en": "Construct features for adjacent gene pairs", "da": "Konstruere features for par af nabogener"}}
+  - {id: dm847.m09.o06, text: {"es": "Formular predicción de operones como clasificación probabilística", "en": "Formulate operon prediction as probabilistic classification", "da": "Formulere operonprædiktion som probabilistisk klassifikation"}}
+  - {id: dm847.m09.o07, text: {"es": "Diseñar particiones por genoma y métricas apropiadas para clases desbalanceadas", "en": "Design genome-level splits and metrics for imbalanced classes", "da": "Designe genomniveau-split og metrikker til ubalancerede klasser"}}
+  - {id: dm847.m09.o08, text: {"es": "Auditar errores, incertidumbre, sesgo de anotación y transferencia entre especies", "en": "Audit errors, uncertainty, annotation bias, and cross-species transfer", "da": "Revidere fejl, usikkerhed, annotationsbias og overførsel mellem arter"}}
 
 concepts:
   - id: dm847.m09.c01
-    title: {es: Genomas bacterianos y densidad génica, en: Bacterial genomes and gene density, da: Bakterielle genomer og gentæthed}
+    title: {"es": "Genomas bacterianos y densidad génica", "en": "Bacterial genomes and gene density", "da": "Bakterielle genomer og gentæthed"}
     body:
       es: >-
         Muchos genomas bacterianos son compactos, con alta densidad de regiones codificantes y
@@ -60,9 +60,9 @@ concepts:
         Mange bakterielle genomer er kompakte med høj kodende tæthed, men livsstil, pseudogener,
         genomøer og mobile elementer giver undtagelser. Nærhed alene betyder ikke kotranskription.
     key_points:
-      - {es: La circularidad afecta genes cercanos al origen del archivo de referencia, en: Circularity affects genes near the reference-file boundary, da: Cirkularitet påvirker gener nær referencefilens grænse}
+      - {"es": "La circularidad afecta genes cercanos al origen del archivo de referencia", "en": "Circularity affects genes near the reference-file boundary", "da": "Cirkularitet påvirker gener nær referencefilens grænse"}
   - id: dm847.m09.c02
-    title: {es: Operón, unidad de transcripción y regulón, en: Operon, transcription unit, and regulon, da: Operon, transkriptionsenhed og regulon}
+    title: {"es": "Operón, unidad de transcripción y regulón", "en": "Operon, transcription unit, and regulon", "da": "Operon, transkriptionsenhed og regulon"}
     body:
       es: >-
         Un operón es un conjunto de genes contiguos regulados desde una región promotora y
@@ -79,9 +79,9 @@ concepts:
         Et operon er et sammenhængende gensæt under fælles promotorregulering. En transkriptionsenhed
         er det konkrete transkript under en betingelse. Et regulon kan omfatte spredte gener.
     key_points:
-      - {es: La organización puede ser dependiente de condición, en: Organization can be condition-dependent, da: Organisation kan være betingelsesafhængig}
+      - {"es": "La organización puede ser dependiente de condición", "en": "Organization can be condition-dependent", "da": "Organisation kan være betingelsesafhængig"}
   - id: dm847.m09.c03
-    title: {es: Promotores, operadores y terminadores, en: Promoters, operators, and terminators, da: Promotorer, operatorer og terminatorer}
+    title: {"es": "Promotores, operadores y terminadores", "en": "Promoters, operators, and terminators", "da": "Promotorer, operatorer og terminatorer"}
     body:
       es: >-
         El promotor recluta la maquinaria de transcripción; operadores y otros sitios reguladores
@@ -98,9 +98,9 @@ concepts:
         Promotorer rekrutterer transkriptionsmaskineriet, regulatoriske sites modulerer aktiviteten,
         og terminatorer afgrænser transkripter. Konsensussekvenser er fordelinger, ikke obligatoriske strenge.
     key_points:
-      - {es: Motivo compatible no demuestra actividad en una condición, en: A compatible motif does not prove activity in a condition, da: Et kompatibelt motiv beviser ikke aktivitet i en betingelse}
+      - {"es": "Motivo compatible no demuestra actividad en una condición", "en": "A compatible motif does not prove activity in a condition", "da": "Et kompatibelt motiv beviser ikke aktivitet i en betingelse"}
   - id: dm847.m09.c04
-    title: {es: Orientación y distancia intergénica, en: Orientation and intergenic distance, da: Orientering og intergenisk afstand}
+    title: {"es": "Orientación y distancia intergénica", "en": "Orientation and intergenic distance", "da": "Orientering og intergenisk afstand"}
     body:
       es: >-
         Genes adyacentes en la misma hebra y con corta distancia intergénica tienen mayor
@@ -117,9 +117,9 @@ concepts:
         Nabogener på samme streng med kort intergenisk afstand er oftere i samme operon, men
         afstand og overlap kræver eksplicitte koordinatkonventioner. Cirkulære genomer kræver wrap-around.
     key_points:
-      - {es: La distancia es predictiva, no determinista, en: Distance is predictive, not deterministic, da: Afstand er prædiktiv, ikke deterministisk}
+      - {"es": "La distancia es predictiva, no determinista", "en": "Distance is predictive, not deterministic", "da": "Afstand er prædiktiv, ikke deterministisk"}
   - id: dm847.m09.c05
-    title: {es: Conservación de vecindad y función, en: Neighborhood conservation and function, da: Bevarelse af naboskab og funktion}
+    title: {"es": "Conservación de vecindad y función", "en": "Neighborhood conservation and function", "da": "Bevarelse af naboskab og funktion"}
     body:
       es: >-
         La conservación de pares de genes y orden local entre genomas puede apoyar cotranscripción
@@ -136,9 +136,9 @@ concepts:
         Bevaret genorden kan støtte kotranskription eller funktionel relation. Ortologi skal
         skelnes fra generel lighed, og nært beslægtede stammer er ikke uafhængige beviser.
     key_points:
-      - {es: La estructura filogenética induce dependencia entre ejemplos, en: Phylogenetic structure induces dependence among examples, da: Fylogenetisk struktur giver afhængighed mellem eksempler}
+      - {"es": "La estructura filogenética induce dependencia entre ejemplos", "en": "Phylogenetic structure induces dependence among examples", "da": "Fylogenetisk struktur giver afhængighed mellem eksempler"}
   - id: dm847.m09.c06
-    title: {es: Plasmidios, fagos y transferencia horizontal, en: Plasmids, phages, and horizontal transfer, da: Plasmider, fager og horisontal overførsel}
+    title: {"es": "Plasmidios, fagos y transferencia horizontal", "en": "Plasmids, phages, and horizontal transfer", "da": "Plasmider, fager og horisontal overførsel"}
     body:
       es: >-
         Plasmidios, profagos, transposones e islas genómicas movilizan genes y alteran composición,
@@ -154,9 +154,9 @@ concepts:
         Plasmider, profager, transposoner og genomøer flytter gener og ændrer sammensætning og
         naboskab. GC-afvigelse og integraser er indikatorer, ikke endelige beviser.
     key_points:
-      - {es: Elemento móvil no equivale automáticamente a patógeno, en: Mobile element does not automatically mean pathogenic, da: Mobilt element betyder ikke automatisk patogent}
+      - {"es": "Elemento móvil no equivale automáticamente a patógeno", "en": "Mobile element does not automatically mean pathogenic", "da": "Mobilt element betyder ikke automatisk patogent"}
   - id: dm847.m09.c07
-    title: {es: Formulación de predicción de operones, en: Operon-prediction formulation, da: Formulering af operonprædiktion}
+    title: {"es": "Formulación de predicción de operones", "en": "Operon-prediction formulation", "da": "Formulering af operonprædiktion"}
     body:
       es: >-
         Una formulación común clasifica pares de genes adyacentes como misma o distinta unidad.
@@ -173,9 +173,9 @@ concepts:
         En almindelig formulering klassificerer nabogenpar som samme eller forskellig enhed.
         Features omfatter streng, afstand, overlap, bevaret naboskab og ekspressionskorrelation.
     key_points:
-      - {es: Predecir fronteras y reconstruir operones completos son tareas relacionadas pero distintas, en: Boundary prediction and full-operon reconstruction are related but distinct, da: Grænseprædiktion og rekonstruktion af hele operoner er forskellige opgaver}
+      - {"es": "Predecir fronteras y reconstruir operones completos son tareas relacionadas pero distintas", "en": "Boundary prediction and full-operon reconstruction are related but distinct", "da": "Grænseprædiktion og rekonstruktion af hele operoner er forskellige opgaver"}
   - id: dm847.m09.c08
-    title: {es: Evaluación y transferencia, en: Evaluation and transfer, da: Evaluering og overførsel}
+    title: {"es": "Evaluación y transferencia", "en": "Evaluation and transfer", "da": "Evaluering og overførsel"}
     body:
       es: >-
         Dividir pares aleatoriamente filtra genes y vecindades casi idénticas entre entrenamiento y
@@ -192,12 +192,12 @@ concepts:
         Tilfældig opdeling af genpar giver lækage mellem træning og test. Split efter genom, art eller
         klade. Ved ubalance rapporteres precision, recall, PR-AUC og kalibrering.
     key_points:
-      - {es: El nivel de partición debe corresponder al uso futuro, en: Split level must match future use, da: Splitniveau skal svare til fremtidig brug}
+      - {"es": "El nivel de partición debe corresponder al uso futuro", "en": "Split level must match future use", "da": "Splitniveau skal svare til fremtidig brug"}
 
 worked_examples:
   - id: dm847.m09.e01
-    title: {es: Cálculo de características de un par adyacente, en: Feature calculation for an adjacent pair, da: Featureberegning for et nabogenpar}
-    scenario: {es: Dos genes en la hebra positiva terminan en 1200 y comienzan en 1215., en: Two plus-strand genes end at 1200 and start at 1215., da: To plus-streng-gener slutter ved 1200 og starter ved 1215.}
+    title: {"es": "Cálculo de características de un par adyacente", "en": "Feature calculation for an adjacent pair", "da": "Featureberegning for et nabogenpar"}
+    scenario: {"es": "Dos genes en la hebra positiva terminan en 1200 y comienzan en 1215.", "en": "Two plus-strand genes end at 1200 and start at 1215.", "da": "To plus-streng-gener slutter ved 1200 og starter ved 1215."}
     solution_outline:
       es: >-
         Definir coordenadas inclusivas o semiabiertas antes de calcular. Con coordenadas inclusivas,
@@ -211,8 +211,8 @@ worked_examples:
         Definér koordinatkonventionen. Med inklusive koordinater er afstanden 14 baser. Afstand alene er ikke et label.
     validation: [coordinate_convention_explicit, manual_distance_check, no_deterministic_claim]
   - id: dm847.m09.e02
-    title: {es: Fuga en una partición aleatoria, en: Leakage in a random split, da: Lækage i et tilfældigt split}
-    scenario: {es: Pares de genes de veinte cepas casi idénticas se distribuyen aleatoriamente., en: Gene pairs from twenty nearly identical strains are randomly distributed., da: Genpar fra tyve næsten identiske stammer fordeles tilfældigt.}
+    title: {"es": "Fuga en una partición aleatoria", "en": "Leakage in a random split", "da": "Lækage i et tilfældigt split"}
+    scenario: {"es": "Pares de genes de veinte cepas casi idénticas se distribuyen aleatoriamente.", "en": "Gene pairs from twenty nearly identical strains are randomly distributed.", "da": "Genpar fra tyve næsten identiske stammer fordeles tilfældigt."}
     solution_outline:
       es: >-
         Mostrar que ortólogos y vecindades equivalentes aparecen en ambos conjuntos. Repetir la
@@ -225,8 +225,8 @@ worked_examples:
         Vis at ortologe naboskaber findes i begge sæt. Evaluer igen med hele arter eller klader holdt ude.
     validation: [group_split, no_shared_genome, relatedness_reported]
   - id: dm847.m09.e03
-    title: {es: Umbral según coste de errores, en: Threshold by error cost, da: Tærskel efter fejlomkostning}
-    scenario: {es: Una aplicación prioriza no fusionar unidades distintas., en: An application prioritizes avoiding fusion of distinct units., da: En anvendelse prioriterer at undgå sammenlægning af forskellige enheder.}
+    title: {"es": "Umbral según coste de errores", "en": "Threshold by error cost", "da": "Tærskel efter fejlomkostning"}
+    scenario: {"es": "Una aplicación prioriza no fusionar unidades distintas.", "en": "An application prioritizes avoiding fusion of distinct units.", "da": "En anvendelse prioriterer at undgå sammenlægning af forskellige enheder."}
     solution_outline:
       es: >-
         Definir que falsos positivos tienen mayor coste, elegir umbral usando precisión o valor
@@ -240,34 +240,34 @@ worked_examples:
     validation: [cost_defined, threshold_not_test_tuned, precision_recall_reported]
 
 practice_exercises:
-  - {id: dm847.m09.p01, activity_type: concept_mapping, difficulty: foundational, prompt: {es: Relaciona gen, operón, unidad de transcripción y regulón con un ejemplo., en: Relate gene, operon, transcription unit, and regulon in one example., da: Relatér gen, operon, transkriptionsenhed og regulon i et eksempel.}, expected_elements: [distinct_definitions, condition_dependence, distributed_regulon]}
-  - {id: dm847.m09.p02, activity_type: data_interpretation, difficulty: intermediate, prompt: {es: Interpreta seis pares de genes con orientación y distancia distintas., en: Interpret six gene pairs with different orientation and distance., da: Fortolk seks genpar med forskellig orientering og afstand.}, expected_elements: [same_strand_signal, convergent_divergent, overlap, uncertainty]}
-  - {id: dm847.m09.p03, activity_type: feature_engineering, difficulty: intermediate, prompt: {es: Diseña una tabla de características para predicción de fronteras., en: Design a feature table for boundary prediction., da: Design en feature-tabel til grænseprædiktion.}, expected_elements: [pair_identifier, genome_group, strand, distance, conservation, expression, label_provenance]}
-  - {id: dm847.m09.p04, activity_type: model_audit, difficulty: advanced, prompt: {es: Detecta fuga y sesgo en un conjunto de 200 cepas de una sola especie., en: Detect leakage and bias in a 200-strain single-species dataset., da: Find lækage og bias i et datasæt med 200 stammer af én art.}, expected_elements: [phylogenetic_dependence, group_split, limited_external_validity]}
-  - {id: dm847.m09.p05, activity_type: metric_selection, difficulty: advanced, prompt: {es: Elige métricas con 10% de fronteras positivas., en: Choose metrics with 10% positive boundaries., da: Vælg metrikker med 10% positive grænser.}, expected_elements: [precision_recall, pr_auc, calibration, confusion_matrix_at_threshold]}
-  - {id: dm847.m09.p06, activity_type: oral_explanation, difficulty: advanced, prompt: {es: Explica por qué proximidad no demuestra cotranscripción., en: Explain why proximity does not prove cotranscription., da: Forklar hvorfor nærhed ikke beviser kotranskription.}, expected_elements: [promoters_terminators, condition_dependence, internal_regulation, empirical_evidence]}
+  - {id: dm847.m09.p01, activity_type: concept_mapping, difficulty: foundational, prompt: {"es": "Relaciona gen, operón, unidad de transcripción y regulón con un ejemplo.", "en": "Relate gene, operon, transcription unit, and regulon in one example.", "da": "Relatér gen, operon, transkriptionsenhed og regulon i et eksempel."}, expected_elements: [distinct_definitions, condition_dependence, distributed_regulon]}
+  - {id: dm847.m09.p02, activity_type: data_interpretation, difficulty: intermediate, prompt: {"es": "Interpreta seis pares de genes con orientación y distancia distintas.", "en": "Interpret six gene pairs with different orientation and distance.", "da": "Fortolk seks genpar med forskellig orientering og afstand."}, expected_elements: [same_strand_signal, convergent_divergent, overlap, uncertainty]}
+  - {id: dm847.m09.p03, activity_type: feature_engineering, difficulty: intermediate, prompt: {"es": "Diseña una tabla de características para predicción de fronteras.", "en": "Design a feature table for boundary prediction.", "da": "Design en feature-tabel til grænseprædiktion."}, expected_elements: [pair_identifier, genome_group, strand, distance, conservation, expression, label_provenance]}
+  - {id: dm847.m09.p04, activity_type: model_audit, difficulty: advanced, prompt: {"es": "Detecta fuga y sesgo en un conjunto de 200 cepas de una sola especie.", "en": "Detect leakage and bias in a 200-strain single-species dataset.", "da": "Find lækage og bias i et datasæt med 200 stammer af én art."}, expected_elements: [phylogenetic_dependence, group_split, limited_external_validity]}
+  - {id: dm847.m09.p05, activity_type: metric_selection, difficulty: advanced, prompt: {"es": "Elige métricas con 10% de fronteras positivas.", "en": "Choose metrics with 10% positive boundaries.", "da": "Vælg metrikker med 10% positive grænser."}, expected_elements: [precision_recall, pr_auc, calibration, confusion_matrix_at_threshold]}
+  - {id: dm847.m09.p06, activity_type: oral_explanation, difficulty: advanced, prompt: {"es": "Explica por qué proximidad no demuestra cotranscripción.", "en": "Explain why proximity does not prove cotranscription.", "da": "Forklar hvorfor nærhed ikke beviser kotranskription."}, expected_elements: [promoters_terminators, condition_dependence, internal_regulation, empirical_evidence]}
 
 objective_bank:
-  - {id: dm847.m09.q01, type: multiple_choice, prompt: {es: ¿Qué distingue un regulón de un operón?, en: What distinguishes a regulon from an operon?, da: Hvad adskiller et regulon fra et operon?}, options: [{id: a, es: Puede incluir genes dispersos controlados por un regulador, en: It may include dispersed genes controlled by one regulator, da: Det kan omfatte spredte gener under samme regulator}, {id: b, es: Siempre es un único gen, en: It is always one gene, da: Det er altid ét gen}, {id: c, es: No tiene regulación, en: It has no regulation, da: Det har ingen regulering}, {id: d, es: Sólo existe en eucariotas, en: It exists only in eukaryotes, da: Det findes kun i eukaryoter}], correct_option_ids: [a]}
-  - {id: dm847.m09.q02, type: true_false, prompt: {es: Un operón siempre produce exactamente la misma unidad de transcripción en todas las condiciones., en: An operon always produces exactly the same transcription unit in all conditions., da: Et operon producerer altid præcis samme transkriptionsenhed under alle betingelser.}, correct: false}
-  - {id: dm847.m09.q03, type: multiple_choice, prompt: {es: ¿Qué par es más compatible con un operón, manteniendo incertidumbre?, en: Which pair is more compatible with an operon while retaining uncertainty?, da: Hvilket par er mest kompatibelt med et operon?}, options: [{id: a, es: Genes adyacentes, misma hebra y distancia corta, en: Adjacent same-strand genes with short distance, da: Nabogener på samme streng med kort afstand}, {id: b, es: Genes en cromosomas distintos, en: Genes on different chromosomes, da: Gener på forskellige kromosomer}, {id: c, es: Genes divergentes muy separados, en: Distant divergent genes, da: Fjerne divergente gener}, {id: d, es: Cualquier par con GC similar, en: Any pair with similar GC, da: Ethvert par med lignende GC}], correct_option_ids: [a]}
-  - {id: dm847.m09.q04, type: true_false, prompt: {es: Una desviación de GC demuestra transferencia horizontal., en: GC deviation proves horizontal transfer., da: GC-afvigelse beviser horisontal overførsel.}, correct: false}
-  - {id: dm847.m09.q05, type: multiple_choice, prompt: {es: ¿Cuál es una característica válida para pares adyacentes?, en: Which is a valid adjacent-pair feature?, da: Hvilken er en gyldig feature for nabogenpar?}, options: [{id: a, es: Distancia intergénica, en: Intergenic distance, da: Intergenisk afstand}, {id: b, es: Número de pacientes, en: Number of patients, da: Antal patienter}, {id: c, es: Color del gráfico, en: Plot color, da: Figurfarve}, {id: d, es: Orden alfabético del nombre, en: Alphabetical gene-name order, da: Alfabetisk gennavn}], correct_option_ids: [a]}
-  - {id: dm847.m09.q06, type: true_false, prompt: {es: Una partición aleatoria de pares puede filtrar vecindades homólogas entre train y test., en: Random pair splitting may leak homologous neighborhoods across train and test., da: Tilfældig opdeling kan lække homologe naboskaber mellem træning og test.}, correct: true}
-  - {id: dm847.m09.q07, type: multiple_choice, prompt: {es: ¿Qué partición estima mejor transferencia a especies nuevas?, en: Which split better estimates transfer to new species?, da: Hvilket split estimerer bedst overførsel til nye arter?}, options: [{id: a, es: Dejar especies completas fuera, en: Hold out complete species, da: Hold hele arter ude}, {id: b, es: Dividir filas al azar, en: Random row split, da: Tilfældigt række-split}, {id: c, es: Usar todo para entrenar, en: Train on everything, da: Træn på alt}, {id: d, es: Duplicar positivos, en: Duplicate positives, da: Duplikér positive}], correct_option_ids: [a]}
-  - {id: dm847.m09.q08, type: true_false, prompt: {es: Accuracy puede ser alta aunque una clase minoritaria se detecte mal., en: Accuracy may be high while the minority class is poorly detected., da: Accuracy kan være høj selv om minoritetsklassen opdages dårligt.}, correct: true}
-  - {id: dm847.m09.q09, type: multiple_choice, prompt: {es: ¿Qué aporta calibración?, en: What does calibration assess?, da: Hvad vurderer kalibrering?}, options: [{id: a, es: Correspondencia entre probabilidades predichas y frecuencias observadas, en: Agreement between predicted probabilities and observed frequencies, da: Overensstemmelse mellem prædikterede sandsynligheder og observerede frekvenser}, {id: b, es: Sólo ranking, en: Ranking only, da: Kun rangering}, {id: c, es: Longitud del genoma, en: Genome length, da: Genomlængde}, {id: d, es: Sintaxis del código, en: Code syntax, da: Kodesyntaks}], correct_option_ids: [a]}
-  - {id: dm847.m09.q10, type: true_false, prompt: {es: La predicción de pares y la reconstrucción de operones completos son exactamente la misma tarea., en: Pair prediction and full-operon reconstruction are exactly the same task., da: Parprædiktion og rekonstruktion af hele operoner er præcis samme opgave.}, correct: false}
+  - {id: dm847.m09.q01, type: multiple_choice, prompt: {"es": "¿Qué distingue un regulón de un operón?", "en": "What distinguishes a regulon from an operon?", "da": "Hvad adskiller et regulon fra et operon?"}, options: [{id: a, es: Puede incluir genes dispersos controlados por un regulador, en: It may include dispersed genes controlled by one regulator, da: Det kan omfatte spredte gener under samme regulator}, {id: b, es: Siempre es un único gen, en: It is always one gene, da: Det er altid ét gen}, {id: c, es: No tiene regulación, en: It has no regulation, da: Det har ingen regulering}, {id: d, es: Sólo existe en eucariotas, en: It exists only in eukaryotes, da: Det findes kun i eukaryoter}], correct_option_ids: [a]}
+  - {id: dm847.m09.q02, type: true_false, prompt: {"es": "Un operón siempre produce exactamente la misma unidad de transcripción en todas las condiciones.", "en": "An operon always produces exactly the same transcription unit in all conditions.", "da": "Et operon producerer altid præcis samme transkriptionsenhed under alle betingelser."}, correct: false}
+  - {id: dm847.m09.q03, type: multiple_choice, prompt: {"es": "¿Qué par es más compatible con un operón, manteniendo incertidumbre?", "en": "Which pair is more compatible with an operon while retaining uncertainty?", "da": "Hvilket par er mest kompatibelt med et operon?"}, options: [{id: a, es: Genes adyacentes, misma hebra y distancia corta, en: Adjacent same-strand genes with short distance, da: Nabogener på samme streng med kort afstand}, {id: b, es: Genes en cromosomas distintos, en: Genes on different chromosomes, da: Gener på forskellige kromosomer}, {id: c, es: Genes divergentes muy separados, en: Distant divergent genes, da: Fjerne divergente gener}, {id: d, es: Cualquier par con GC similar, en: Any pair with similar GC, da: Ethvert par med lignende GC}], correct_option_ids: [a]}
+  - {id: dm847.m09.q04, type: true_false, prompt: {"es": "Una desviación de GC demuestra transferencia horizontal.", "en": "GC deviation proves horizontal transfer.", "da": "GC-afvigelse beviser horisontal overførsel."}, correct: false}
+  - {id: dm847.m09.q05, type: multiple_choice, prompt: {"es": "¿Cuál es una característica válida para pares adyacentes?", "en": "Which is a valid adjacent-pair feature?", "da": "Hvilken er en gyldig feature for nabogenpar?"}, options: [{id: a, es: Distancia intergénica, en: Intergenic distance, da: Intergenisk afstand}, {id: b, es: Número de pacientes, en: Number of patients, da: Antal patienter}, {id: c, es: Color del gráfico, en: Plot color, da: Figurfarve}, {id: d, es: Orden alfabético del nombre, en: Alphabetical gene-name order, da: Alfabetisk gennavn}], correct_option_ids: [a]}
+  - {id: dm847.m09.q06, type: true_false, prompt: {"es": "Una partición aleatoria de pares puede filtrar vecindades homólogas entre train y test.", "en": "Random pair splitting may leak homologous neighborhoods across train and test.", "da": "Tilfældig opdeling kan lække homologe naboskaber mellem træning og test."}, correct: true}
+  - {id: dm847.m09.q07, type: multiple_choice, prompt: {"es": "¿Qué partición estima mejor transferencia a especies nuevas?", "en": "Which split better estimates transfer to new species?", "da": "Hvilket split estimerer bedst overførsel til nye arter?"}, options: [{id: a, es: Dejar especies completas fuera, en: Hold out complete species, da: Hold hele arter ude}, {id: b, es: Dividir filas al azar, en: Random row split, da: Tilfældigt række-split}, {id: c, es: Usar todo para entrenar, en: Train on everything, da: Træn på alt}, {id: d, es: Duplicar positivos, en: Duplicate positives, da: Duplikér positive}], correct_option_ids: [a]}
+  - {id: dm847.m09.q08, type: true_false, prompt: {"es": "Accuracy puede ser alta aunque una clase minoritaria se detecte mal.", "en": "Accuracy may be high while the minority class is poorly detected.", "da": "Accuracy kan være høj selv om minoritetsklassen opdages dårligt."}, correct: true}
+  - {id: dm847.m09.q09, type: multiple_choice, prompt: {"es": "¿Qué aporta calibración?", "en": "What does calibration assess?", "da": "Hvad vurderer kalibrering?"}, options: [{id: a, es: Correspondencia entre probabilidades predichas y frecuencias observadas, en: Agreement between predicted probabilities and observed frequencies, da: Overensstemmelse mellem prædikterede sandsynligheder og observerede frekvenser}, {id: b, es: Sólo ranking, en: Ranking only, da: Kun rangering}, {id: c, es: Longitud del genoma, en: Genome length, da: Genomlængde}, {id: d, es: Sintaxis del código, en: Code syntax, da: Kodesyntaks}], correct_option_ids: [a]}
+  - {id: dm847.m09.q10, type: true_false, prompt: {"es": "La predicción de pares y la reconstrucción de operones completos son exactamente la misma tarea.", "en": "Pair prediction and full-operon reconstruction are exactly the same task.", "da": "Parprædiktion og rekonstruktion af hele operoner er præcis samme opgave."}, correct: false}
 
 open_assessment:
   - id: dm847.m09.a01
-    prompt: {es: Diseña un modelo de predicción de operones transferible entre especies., en: Design an operon-prediction model transferable across species., da: Design en operonmodel der kan overføres mellem arter.}
+    prompt: {"es": "Diseña un modelo de predicción de operones transferible entre especies.", "en": "Design an operon-prediction model transferable across species.", "da": "Design en operonmodel der kan overføres mellem arter."}
     rubric: [{criterion: biological_definition_and_labels, weight: 0.25}, {criterion: features_and_model, weight: 0.25}, {criterion: phylogeny_aware_validation, weight: 0.30}, {criterion: metrics_limits_and_uncertainty, weight: 0.20}]
   - id: dm847.m09.a02
-    prompt: {es: Audita una afirmación de que genes cercanos y coorientados forman un operón., en: Audit a claim that nearby co-oriented genes form an operon., da: Revider en påstand om at nære samorienterede gener danner et operon.}
+    prompt: {"es": "Audita una afirmación de que genes cercanos y coorientados forman un operón.", "en": "Audit a claim that nearby co-oriented genes form an operon.", "da": "Revider en påstand om at nære samorienterede gener danner et operon."}
     rubric: [{criterion: evidence_vs_prediction, weight: 0.30}, {criterion: alternative_regulatory_architecture, weight: 0.25}, {criterion: required_experimental_support, weight: 0.25}, {criterion: cautious_conclusion, weight: 0.20}]
   - id: dm847.m09.a03
-    prompt: {es: Propón un análisis de error estratificado por mecanismo y especie., en: Propose error analysis stratified by mechanism and species., da: Foreslå fejlanalyse stratificeret efter mekanisme og art.}
+    prompt: {"es": "Propón un análisis de error estratificado por mecanismo y especie.", "en": "Propose error analysis stratified by mechanism and species.", "da": "Foreslå fejlanalyse stratificeret efter mekanisme og art."}
     rubric: [{criterion: error_taxonomy, weight: 0.25}, {criterion: subgroup_metrics, weight: 0.25}, {criterion: annotation_uncertainty, weight: 0.25}, {criterion: actionable_revision, weight: 0.25}]
 
 glossary:
@@ -298,9 +298,9 @@ hidden_support:
       Operonprædiktion kombinerer svage signaler som streng, afstand, bevaret naboskab, funktion og
       ekspression. Labels afhænger af annotation og betingelse; evaluering skal splitte efter genomer eller klader.
   misconceptions:
-    - {id: dm847.m09.mc01, false_belief: {es: Operón y regulón son sinónimos, en: Operon and regulon are synonyms, da: Operon og regulon er synonymer}, correction: {es: Un operón es contiguo; un regulón puede estar distribuido, en: An operon is contiguous; a regulon may be distributed, da: Et operon er sammenhængende; et regulon kan være spredt}}
-    - {id: dm847.m09.mc02, false_belief: {es: Distancia corta demuestra cotranscripción, en: Short distance proves cotranscription, da: Kort afstand beviser kotranskription}, correction: {es: Es una característica probabilística que requiere evidencia adicional, en: It is a probabilistic feature requiring additional evidence, da: Det er en probabilistisk feature der kræver mere bevis}}
-    - {id: dm847.m09.mc03, false_belief: {es: Accuracy resume bien datos desbalanceados, en: Accuracy adequately summarizes imbalanced data, da: Accuracy opsummerer ubalancerede data godt}, correction: {es: Deben añadirse precision, recall, PR-AUC y calibración, en: Precision, recall, PR-AUC, and calibration are needed, da: Precision, recall, PR-AUC og kalibrering kræves}}
+    - {id: dm847.m09.mc01, false_belief: {"es": "Operón y regulón son sinónimos", "en": "Operon and regulon are synonyms", "da": "Operon og regulon er synonymer"}, correction: {"es": "Un operón es contiguo; un regulón puede estar distribuido", "en": "An operon is contiguous; a regulon may be distributed", "da": "Et operon er sammenhængende; et regulon kan være spredt"}}
+    - {id: dm847.m09.mc02, false_belief: {"es": "Distancia corta demuestra cotranscripción", "en": "Short distance proves cotranscription", "da": "Kort afstand beviser kotranskription"}, correction: {"es": "Es una característica probabilística que requiere evidencia adicional", "en": "It is a probabilistic feature requiring additional evidence", "da": "Det er en probabilistisk feature der kræver mere bevis"}}
+    - {id: dm847.m09.mc03, false_belief: {"es": "Accuracy resume bien datos desbalanceados", "en": "Accuracy adequately summarizes imbalanced data", "da": "Accuracy opsummerer ubalancerede data godt"}, correction: {"es": "Deben añadirse precision, recall, PR-AUC y calibración", "en": "Precision, recall, PR-AUC, and calibration are needed", "da": "Precision, recall, PR-AUC og kalibrering kræves"}}
   socratic_questions:
     - ¿Qué definición exacta utiliza la etiqueta positiva?
     - ¿La anotación corresponde a una condición o a una capacidad potencial?

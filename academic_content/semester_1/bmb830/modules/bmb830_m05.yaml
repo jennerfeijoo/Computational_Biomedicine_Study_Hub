@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Probabilidad, variables aleatorias y distribuciones biológicas
-    en: Probability, random variables, and biological distributions
-    da: Sandsynlighed, stokastiske variable og biologiske fordelinger
+    es: "Probabilidad, variables aleatorias y distribuciones biológicas"
+    en: "Probability, random variables, and biological distributions"
+    da: "Sandsynlighed, stokastiske variable og biologiske fordelinger"
   summary:
     es: >-
       Fundamentos de probabilidad para modelar incertidumbre biológica. Se cubren eventos, probabilidad
@@ -32,18 +32,18 @@ alignment:
   later_modules: [bmb830.m06, bmb830.m07, bmb830.m08, bmb830.m09, bmb830.m10, dm847.m04, dm847.m06, dm847.m10]
 
 objectives:
-  - {id: bmb830.m05.o01, text: {es: Definir espacio muestral, evento y probabilidad, en: Define sample space, event, and probability, da: Definere udfaldsrum, hændelse og sandsynlighed}}
-  - {id: bmb830.m05.o02, text: {es: Calcular probabilidades conjuntas y condicionales, en: Calculate joint and conditional probabilities, da: Beregne fælles og betingede sandsynligheder}}
-  - {id: bmb830.m05.o03, text: {es: Distinguir independencia de exclusión mutua, en: Distinguish independence from mutual exclusivity, da: Skelne uafhængighed fra gensidig udelukkelse}}
-  - {id: bmb830.m05.o04, text: {es: Aplicar la regla de Bayes a pruebas diagnósticas, en: Apply Bayes' rule to diagnostic testing, da: Anvende Bayes' regel på diagnostiske tests}}
-  - {id: bmb830.m05.o05, text: {es: Interpretar variables aleatorias, esperanza y varianza, en: Interpret random variables, expectation, and variance, da: Fortolke stokastiske variable, forventning og varians}}
-  - {id: bmb830.m05.o06, text: {es: Seleccionar distribuciones básicas según mecanismo y soporte, en: Select basic distributions by mechanism and support, da: Vælge grundlæggende fordelinger efter mekanisme og support}}
-  - {id: bmb830.m05.o07, text: {es: Simular distribuciones y comprobar propiedades en R, en: Simulate distributions and check properties in R, da: Simulere fordelinger og kontrollere egenskaber i R}}
-  - {id: bmb830.m05.o08, text: {es: Reconocer sobre-dispersión, dependencia y violaciones del modelo, en: Recognize overdispersion, dependence, and model violations, da: Genkende overdispersion, afhængighed og modelbrud}}
+  - {id: bmb830.m05.o01, text: {"es": "Definir espacio muestral, evento y probabilidad", "en": "Define sample space, event, and probability", "da": "Definere udfaldsrum, hændelse og sandsynlighed"}}
+  - {id: bmb830.m05.o02, text: {"es": "Calcular probabilidades conjuntas y condicionales", "en": "Calculate joint and conditional probabilities", "da": "Beregne fælles og betingede sandsynligheder"}}
+  - {id: bmb830.m05.o03, text: {"es": "Distinguir independencia de exclusión mutua", "en": "Distinguish independence from mutual exclusivity", "da": "Skelne uafhængighed fra gensidig udelukkelse"}}
+  - {id: bmb830.m05.o04, text: {"es": "Aplicar la regla de Bayes a pruebas diagnósticas", "en": "Apply Bayes' rule to diagnostic testing", "da": "Anvende Bayes' regel på diagnostiske tests"}}
+  - {id: bmb830.m05.o05, text: {"es": "Interpretar variables aleatorias, esperanza y varianza", "en": "Interpret random variables, expectation, and variance", "da": "Fortolke stokastiske variable, forventning og varians"}}
+  - {id: bmb830.m05.o06, text: {"es": "Seleccionar distribuciones básicas según mecanismo y soporte", "en": "Select basic distributions by mechanism and support", "da": "Vælge grundlæggende fordelinger efter mekanisme og support"}}
+  - {id: bmb830.m05.o07, text: {"es": "Simular distribuciones y comprobar propiedades en R", "en": "Simulate distributions and check properties in R", "da": "Simulere fordelinger og kontrollere egenskaber i R"}}
+  - {id: bmb830.m05.o08, text: {"es": "Reconocer sobre-dispersión, dependencia y violaciones del modelo", "en": "Recognize overdispersion, dependence, and model violations", "da": "Genkende overdispersion, afhængighed og modelbrud"}}
 
 concepts:
   - id: bmb830.m05.c01
-    title: {es: Eventos y reglas básicas, en: Events and basic rules, da: Hændelser og grundregler}
+    title: {"es": "Eventos y reglas básicas", "en": "Events and basic rules", "da": "Hændelser og grundregler"}
     body:
       es: >-
         Un espacio muestral contiene resultados posibles y un evento es un subconjunto. La probabilidad es no negativa,
@@ -55,9 +55,9 @@ concepts:
       da: >-
         Udfaldsrummet indeholder mulige udfald; en hændelse er en delmængde. Sandsynligheder er ikke-negative og summerer til én.
     key_points:
-      - {es: Disjuntos no significa independientes, en: Disjoint does not mean independent, da: Disjunkte betyder ikke uafhængige}
+      - {"es": "Disjuntos no significa independientes", "en": "Disjoint does not mean independent", "da": "Disjunkte betyder ikke uafhængige"}
   - id: bmb830.m05.c02
-    title: {es: Probabilidad condicional e independencia, en: Conditional probability and independence, da: Betinget sandsynlighed og uafhængighed}
+    title: {"es": "Probabilidad condicional e independencia", "en": "Conditional probability and independence", "da": "Betinget sandsynlighed og uafhængighed"}
     body:
       es: >-
         P(A|B)=P(A∩B)/P(B) actualiza el universo a casos donde B ocurrió. A y B son independientes si P(A∩B)=P(A)P(B),
@@ -69,9 +69,9 @@ concepts:
       da: >-
         Betinget sandsynlighed begrænser universet til B. Uafhængighed betyder at viden om B ikke ændrer sandsynligheden for A.
     key_points:
-      - {es: Independencia es una propiedad del modelo o diseño, en: Independence is a model or design property, da: Uafhængighed er en model- eller designegenskab}
+      - {"es": "Independencia es una propiedad del modelo o diseño", "en": "Independence is a model or design property", "da": "Uafhængighed er en model- eller designegenskab"}
   - id: bmb830.m05.c03
-    title: {es: Regla de Bayes y valor predictivo, en: Bayes' rule and predictive value, da: Bayes' regel og prædiktiv værdi}
+    title: {"es": "Regla de Bayes y valor predictivo", "en": "Bayes' rule and predictive value", "da": "Bayes' regel og prædiktiv værdi"}
     body:
       es: >-
         Bayes combina verosimilitud con prevalencia previa. En una prueba binaria, sensibilidad y especificidad no determinan por sí solas
@@ -83,9 +83,9 @@ concepts:
       da: >-
         Bayes kombinerer likelihood med prævalens. Positiv prædiktiv værdi afhænger af prævalens, ikke kun sensitivitet og specificitet.
     key_points:
-      - {es: Sensibilidad no es P(enfermedad|positivo), en: Sensitivity is not P(disease|positive), da: Sensitivitet er ikke P(sygdom|positiv)}
+      - {"es": "Sensibilidad no es P(enfermedad|positivo)", "en": "Sensitivity is not P(disease|positive)", "da": "Sensitivitet er ikke P(sygdom|positiv)"}
   - id: bmb830.m05.c04
-    title: {es: Variables aleatorias, esperanza y varianza, en: Random variables, expectation, and variance, da: Stokastiske variable, forventning og varians}
+    title: {"es": "Variables aleatorias, esperanza y varianza", "en": "Random variables, expectation, and variance", "da": "Stokastiske variable, forventning og varians"}
     body:
       es: >-
         Una variable aleatoria asigna un número a cada resultado. La esperanza es un promedio ponderado a largo plazo, no necesariamente un valor posible.
@@ -97,9 +97,9 @@ concepts:
       da: >-
         En stokastisk variabel tildeler tal til udfald. Forventning er et vægtet langtidsmiddel; varians måler kvadratisk spredning.
     key_points:
-      - {es: E[X+Y]=E[X]+E[Y] sin requerir independencia, en: E[X+Y]=E[X]+E[Y] without independence, da: E[X+Y]=E[X]+E[Y] uden uafhængighed}
+      - {"es": "E[X+Y]=E[X]+E[Y] sin requerir independencia", "en": "E[X+Y]=E[X]+E[Y] without independence", "da": "E[X+Y]=E[X]+E[Y] uden uafhængighed"}
   - id: bmb830.m05.c05
-    title: {es: Bernoulli y binomial, en: Bernoulli and binomial, da: Bernoulli og binomial}
+    title: {"es": "Bernoulli y binomial", "en": "Bernoulli and binomial", "da": "Bernoulli og binomial"}
     body:
       es: >-
         Bernoulli modela un ensayo binario con probabilidad p. Binomial cuenta éxitos en n ensayos Bernoulli con n fijo,
@@ -111,9 +111,9 @@ concepts:
       da: >-
         Bernoulli modellerer ét binært forsøg. Binomial tæller successer i n forsøg med fast n, fælles p og uafhængighed.
     key_points:
-      - {es: Binomial requiere un denominador n definido, en: Binomial requires a defined denominator n, da: Binomial kræver en defineret denominator n}
+      - {"es": "Binomial requiere un denominador n definido", "en": "Binomial requires a defined denominator n", "da": "Binomial kræver en defineret denominator n"}
   - id: bmb830.m05.c06
-    title: {es: Poisson y tasas, en: Poisson counts and rates, da: Poisson-counts og rater}
+    title: {"es": "Poisson y tasas", "en": "Poisson counts and rates", "da": "Poisson-counts og rater"}
     body:
       es: >-
         Poisson modela conteos de eventos en una exposición fija bajo tasa constante e independencia aproximada; media y varianza son λ.
@@ -125,9 +125,9 @@ concepts:
       da: >-
         Poisson modellerer counts over fast exposure med omtrent konstant rate. Overdispersion kan skyldes heterogenitet eller clustering.
     key_points:
-      - {es: Conteo y tasa no son intercambiables sin exposición, en: Count and rate are not interchangeable without exposure, da: Count og rate kan ikke udskiftes uden exposure}
+      - {"es": "Conteo y tasa no son intercambiables sin exposición", "en": "Count and rate are not interchangeable without exposure", "da": "Count og rate kan ikke udskiftes uden exposure"}
   - id: bmb830.m05.c07
-    title: {es: Normal y teorema del límite central, en: Normal distribution and central-limit reasoning, da: Normalfordeling og central-limit-ræsonnering}
+    title: {"es": "Normal y teorema del límite central", "en": "Normal distribution and central-limit reasoning", "da": "Normalfordeling og central-limit-ræsonnering"}
     body:
       es: >-
         La normal es continua, simétrica y determinada por media y SD. Puede aproximar mediciones generadas por muchos efectos pequeños o distribuciones
@@ -139,9 +139,9 @@ concepts:
       da: >-
         Normalfordelingen er kontinuert og symmetrisk og bestemmes af mean og SD. Den bør ikke antages mekanisk.
     key_points:
-      - {es: Un QQ plot evalúa forma, no independencia, en: A QQ plot assesses shape, not independence, da: Et QQ-plot vurderer form, ikke uafhængighed}
+      - {"es": "Un QQ plot evalúa forma, no independencia", "en": "A QQ plot assesses shape, not independence", "da": "Et QQ-plot vurderer form, ikke uafhængighed"}
   - id: bmb830.m05.c08
-    title: {es: Exponencial, tiempos y memoria nula, en: Exponential waiting times and memorylessness, da: Eksponentielle ventetider og memorylessness}
+    title: {"es": "Exponencial, tiempos y memoria nula", "en": "Exponential waiting times and memorylessness", "da": "Eksponentielle ventetider og memorylessness"}
     body:
       es: >-
         La exponencial modela tiempo hasta el próximo evento en un proceso Poisson homogéneo. Tiene soporte no negativo y propiedad sin memoria:
@@ -153,67 +153,67 @@ concepts:
       da: >-
         Eksponentialfordelingen modellerer ventetid i en homogen Poisson-proces og er memoryless. Biologiske processer kan bryde denne antagelse.
     key_points:
-      - {es: Distribución se elige por mecanismo, no sólo por histograma, en: Distribution choice follows mechanism, not histogram alone, da: Fordeling vælges efter mekanisme, ikke kun histogram}
+      - {"es": "Distribución se elige por mecanismo, no sólo por histograma", "en": "Distribution choice follows mechanism, not histogram alone", "da": "Fordeling vælges efter mekanisme, ikke kun histogram"}
 
 worked_examples:
   - id: bmb830.m05.e01
-    title: {es: Valor predictivo en evento raro, en: Predictive value for a rare event, da: Prædiktiv værdi ved sjælden hændelse}
-    problem: {es: Prevalencia 1%, sensibilidad 90% y especificidad 95%., en: Prevalence 1%, sensitivity 90%, specificity 95%., da: Prævalens 1%, sensitivitet 90% og specificitet 95%.}
-    reasoning: {es: En 10,000 personas se esperan 90 verdaderos positivos y 495 falsos positivos; PPV≈15.4%., en: Among 10,000 people expect 90 true positives and 495 false positives; PPV≈15.4%., da: Blandt 10.000 forventes 90 sande positive og 495 falske positive; PPV≈15,4%.}
-    answer: {es: Un positivo no implica 90% de probabilidad de enfermedad., en: A positive result does not imply 90% disease probability., da: Et positivt resultat betyder ikke 90% sygdomssandsynlighed.}
+    title: {"es": "Valor predictivo en evento raro", "en": "Predictive value for a rare event", "da": "Prædiktiv værdi ved sjælden hændelse"}
+    problem: {"es": "Prevalencia 1%, sensibilidad 90% y especificidad 95%.", "en": "Prevalence 1%, sensitivity 90%, specificity 95%.", "da": "Prævalens 1%, sensitivitet 90% og specificitet 95%."}
+    reasoning: {"es": "En 10,000 personas se esperan 90 verdaderos positivos y 495 falsos positivos; PPV≈15.4%.", "en": "Among 10,000 people expect 90 true positives and 495 false positives; PPV≈15.4%.", "da": "Blandt 10.000 forventes 90 sande positive og 495 falske positive; PPV≈15,4%."}
+    answer: {"es": "Un positivo no implica 90% de probabilidad de enfermedad.", "en": "A positive result does not imply 90% disease probability.", "da": "Et positivt resultat betyder ikke 90% sygdomssandsynlighed."}
   - id: bmb830.m05.e02
-    title: {es: Binomial con dependencia, en: Binomial with dependence, da: Binomial med afhængighed}
-    problem: {es: Se cuentan células positivas entre 100 células del mismo paciente., en: Positive cells are counted among 100 cells from one patient., da: Positive celler tælles blandt 100 celler fra én patient.}
-    reasoning: {es: Las células pueden compartir microambiente y estado; la independencia binomial puede fallar y la varianza real superar np(1-p)., en: Cells may share microenvironment and state; binomial independence may fail and variance exceed np(1-p)., da: Celler kan dele miljø; binomial uafhængighed kan brydes og varians overstige np(1-p).}
-    answer: {es: Evaluar agrupación o modelo beta-binomial/hierárquico en niveles posteriores., en: Assess clustering or a beta-binomial/hierarchical model in later coursework., da: Vurder clustering eller beta-binomial/hierarkisk model senere.}
+    title: {"es": "Binomial con dependencia", "en": "Binomial with dependence", "da": "Binomial med afhængighed"}
+    problem: {"es": "Se cuentan células positivas entre 100 células del mismo paciente.", "en": "Positive cells are counted among 100 cells from one patient.", "da": "Positive celler tælles blandt 100 celler fra én patient."}
+    reasoning: {"es": "Las células pueden compartir microambiente y estado; la independencia binomial puede fallar y la varianza real superar np(1-p).", "en": "Cells may share microenvironment and state; binomial independence may fail and variance exceed np(1-p).", "da": "Celler kan dele miljø; binomial uafhængighed kan brydes og varians overstige np(1-p)."}
+    answer: {"es": "Evaluar agrupación o modelo beta-binomial/hierárquico en niveles posteriores.", "en": "Assess clustering or a beta-binomial/hierarchical model in later coursework.", "da": "Vurder clustering eller beta-binomial/hierarkisk model senere."}
   - id: bmb830.m05.e03
-    title: {es: Poisson con exposiciones distintas, en: Poisson with unequal exposure, da: Poisson med forskellig exposure}
-    problem: {es: Dos laboratorios reportan 20 y 30 eventos, pero observaron 100 y 300 horas., en: Two labs report 20 and 30 events over 100 and 300 hours., da: To laboratorier rapporterer 20 og 30 events over 100 og 300 timer.}
-    reasoning: {es: Comparar conteos sugiere más en el segundo, pero tasas son 0.20 y 0.10 por hora. Debe incluirse exposición., en: Counts suggest more in the second, but rates are 0.20 and 0.10 per hour. Exposure must be included., da: Counts antyder mere i andet laboratorium, men rater er 0,20 og 0,10 per time; exposure skal med.}
-    answer: {es: Comparar tasas o usar offset log(exposición)., en: Compare rates or use log-exposure as offset., da: Sammenlign rater eller brug log(exposure) som offset.}
+    title: {"es": "Poisson con exposiciones distintas", "en": "Poisson with unequal exposure", "da": "Poisson med forskellig exposure"}
+    problem: {"es": "Dos laboratorios reportan 20 y 30 eventos, pero observaron 100 y 300 horas.", "en": "Two labs report 20 and 30 events over 100 and 300 hours.", "da": "To laboratorier rapporterer 20 og 30 events over 100 og 300 timer."}
+    reasoning: {"es": "Comparar conteos sugiere más en el segundo, pero tasas son 0.20 y 0.10 por hora. Debe incluirse exposición.", "en": "Counts suggest more in the second, but rates are 0.20 and 0.10 per hour. Exposure must be included.", "da": "Counts antyder mere i andet laboratorium, men rater er 0,20 og 0,10 per time; exposure skal med."}
+    answer: {"es": "Comparar tasas o usar offset log(exposición).", "en": "Compare rates or use log-exposure as offset.", "da": "Sammenlign rater eller brug log(exposure) som offset."}
 
 guided_practice:
-  - {id: bmb830.m05.p01, type: probability_table, prompt: {es: Calcula marginales, conjuntas y condicionales de una tabla diagnóstica., en: Calculate marginal, joint, and conditional probabilities from a diagnostic table., da: Beregn marginale, fælles og betingede sandsynligheder fra en diagnostisk tabel.}, expected_elements: [denominator_choice, sensitivity, specificity, PPV, NPV]}
-  - {id: bmb830.m05.p02, type: independence, prompt: {es: Decide si cinco pares de eventos son independientes, disjuntos o ninguno., en: Decide whether five event pairs are independent, disjoint, or neither., da: Afgør om fem hændelsespar er uafhængige, disjunkte eller ingen af delene.}, expected_elements: [intersection, product_rule, conditional_probability]}
-  - {id: bmb830.m05.p03, type: expectation, prompt: {es: Calcula esperanza y varianza de una variable discreta., en: Calculate expectation and variance of a discrete variable., da: Beregn forventning og varians af en diskret variabel.}, expected_elements: [probability_weighting, squared_deviation, units]}
-  - {id: bmb830.m05.p04, type: distribution_selection, prompt: {es: Elige distribución para ocho mecanismos biológicos y justifica supuestos., en: Choose distributions for eight biological mechanisms and justify assumptions., da: Vælg fordelinger til otte biologiske mekanismer og begrund antagelser.}, expected_elements: [support, denominator_or_exposure, dependence, rate_or_probability]}
-  - {id: bmb830.m05.p05, type: simulation, prompt: {es: Simula Bernoulli, binomial, Poisson y normal en R y compara media/varianza empíricas., en: Simulate Bernoulli, binomial, Poisson, and normal data in R and compare empirical mean/variance., da: Simulér Bernoulli, binomial, Poisson og normal i R og sammenlign empirisk mean/varians.}, expected_elements: [set_seed, r_functions, convergence_not_exact_equality]}
-  - {id: bmb830.m05.p06, type: model_critique, prompt: {es: Audita sobre-dispersión y dependencia en un modelo Poisson o binomial., en: Audit overdispersion and dependence in a Poisson or binomial model., da: Auditér overdispersion og afhængighed i en Poisson- eller binomialmodel.}, expected_elements: [mean_variance_check, clustering, alternative_model_or_robustness]}
+  - {id: bmb830.m05.p01, type: probability_table, prompt: {"es": "Calcula marginales, conjuntas y condicionales de una tabla diagnóstica.", "en": "Calculate marginal, joint, and conditional probabilities from a diagnostic table.", "da": "Beregn marginale, fælles og betingede sandsynligheder fra en diagnostisk tabel."}, expected_elements: [denominator_choice, sensitivity, specificity, PPV, NPV]}
+  - {id: bmb830.m05.p02, type: independence, prompt: {"es": "Decide si cinco pares de eventos son independientes, disjuntos o ninguno.", "en": "Decide whether five event pairs are independent, disjoint, or neither.", "da": "Afgør om fem hændelsespar er uafhængige, disjunkte eller ingen af delene."}, expected_elements: [intersection, product_rule, conditional_probability]}
+  - {id: bmb830.m05.p03, type: expectation, prompt: {"es": "Calcula esperanza y varianza de una variable discreta.", "en": "Calculate expectation and variance of a discrete variable.", "da": "Beregn forventning og varians af en diskret variabel."}, expected_elements: [probability_weighting, squared_deviation, units]}
+  - {id: bmb830.m05.p04, type: distribution_selection, prompt: {"es": "Elige distribución para ocho mecanismos biológicos y justifica supuestos.", "en": "Choose distributions for eight biological mechanisms and justify assumptions.", "da": "Vælg fordelinger til otte biologiske mekanismer og begrund antagelser."}, expected_elements: [support, denominator_or_exposure, dependence, rate_or_probability]}
+  - {id: bmb830.m05.p05, type: simulation, prompt: {"es": "Simula Bernoulli, binomial, Poisson y normal en R y compara media/varianza empíricas.", "en": "Simulate Bernoulli, binomial, Poisson, and normal data in R and compare empirical mean/variance.", "da": "Simulér Bernoulli, binomial, Poisson og normal i R og sammenlign empirisk mean/varians."}, expected_elements: [set_seed, r_functions, convergence_not_exact_equality]}
+  - {id: bmb830.m05.p06, type: model_critique, prompt: {"es": "Audita sobre-dispersión y dependencia en un modelo Poisson o binomial.", "en": "Audit overdispersion and dependence in a Poisson or binomial model.", "da": "Auditér overdispersion og afhængighed i en Poisson- eller binomialmodel."}, expected_elements: [mean_variance_check, clustering, alternative_model_or_robustness]}
 
 objective_bank:
-  - {id: bmb830.m05.q01, type: multiple_choice, prompt: {es: Si A y B son independientes, ¿qué se cumple?, en: If A and B are independent, what holds?, da: Hvis A og B er uafhængige, hvad gælder?}, options: [{id: a, text: {es: P(A∩B)=P(A)P(B), en: P(A∩B)=P(A)P(B), da: P(A∩B)=P(A)P(B)}}, {id: b, text: {es: P(A∩B)=0 siempre, en: P(A∩B)=0 always, da: P(A∩B)=0 altid}}, {id: c, text: {es: P(A)=P(B), en: P(A)=P(B), da: P(A)=P(B)}}], correct_option_ids: [a], explanation: {es: Es la definición multiplicativa de independencia., en: This is the product definition of independence., da: Det er produktdefinitionen af uafhængighed.}}
-  - {id: bmb830.m05.q02, type: true_false, prompt: {es: Eventos disjuntos con probabilidad positiva son independientes., en: Positive-probability disjoint events are independent., da: Disjunkte hændelser med positiv sandsynlighed er uafhængige.}, correct: false, explanation: {es: Si ocurre uno, el otro no puede ocurrir., en: If one occurs, the other cannot., da: Hvis den ene sker, kan den anden ikke ske.}}
-  - {id: bmb830.m05.q03, type: multiple_choice, prompt: {es: ¿De qué depende PPV además de sensibilidad y especificidad?, en: What does PPV depend on besides sensitivity and specificity?, da: Hvad afhænger PPV af ud over sensitivitet og specificitet?}, options: [{id: a, text: {es: prevalencia, en: prevalence, da: prævalens}}, {id: b, text: {es: color del test, en: test color, da: testens farve}}, {id: c, text: {es: nombre del hospital, en: hospital name, da: hospitalets navn}}], correct_option_ids: [a], explanation: {es: Bayes incorpora la probabilidad previa., en: Bayes incorporates prior probability., da: Bayes inkluderer prior-sandsynlighed.}}
-  - {id: bmb830.m05.q04, type: true_false, prompt: {es: Sensibilidad es P(enfermedad|test positivo)., en: Sensitivity is P(disease|positive test)., da: Sensitivitet er P(sygdom|positiv test).}, correct: false, explanation: {es: Sensibilidad es P(test positivo|enfermedad)., en: Sensitivity is P(positive test|disease)., da: Sensitivitet er P(positiv test|sygdom).}}
-  - {id: bmb830.m05.q05, type: multiple_choice, prompt: {es: Media y varianza de Binomial(n,p)., en: Mean and variance of Binomial(n,p)., da: Mean og varians for Binomial(n,p).}, options: [{id: a, text: {es: np y np(1-p), en: np and np(1-p), da: np og np(1-p)}}, {id: b, text: {es: p y n, en: p and n, da: p og n}}, {id: c, text: {es: n² y p², en: n² and p², da: n² og p²}}], correct_option_ids: [a], explanation: {es: Son las propiedades binomiales estándar., en: These are standard binomial properties., da: Det er standard binomialegenskaber.}}
-  - {id: bmb830.m05.q06, type: true_false, prompt: {es: Poisson simple supone media igual a varianza., en: Simple Poisson assumes mean equals variance., da: Simpel Poisson antager mean lig varians.}, correct: true, explanation: {es: Ambas son λ bajo el modelo., en: Both equal λ under the model., da: Begge er λ under modellen.}}
-  - {id: bmb830.m05.q07, type: multiple_choice, prompt: {es: ¿Qué necesita una comparación de tasas con exposiciones distintas?, en: What is needed to compare rates with unequal exposure?, da: Hvad kræves for at sammenligne rater med forskellig exposure?}, options: [{id: a, text: {es: incluir exposición u offset, en: include exposure or offset, da: inkludere exposure eller offset}}, {id: b, text: {es: ignorar tiempo, en: ignore time, da: ignorere tid}}, {id: c, text: {es: convertir a categorías, en: convert to categories, da: konvertere til kategorier}}], correct_option_ids: [a], explanation: {es: Conteos deben ajustarse por oportunidad de ocurrencia., en: Counts must account for opportunity to occur., da: Counts skal tage højde for mulighed for hændelser.}}
-  - {id: bmb830.m05.q08, type: true_false, prompt: {es: Normalidad del outcome bruto es requisito universal de modelos lineales., en: Raw outcome normality is a universal requirement of linear models., da: Normalitet af raw outcome er et universelt krav i lineære modeller.}, correct: false, explanation: {es: Los supuestos se refieren principalmente a errores condicionales y estructura del modelo., en: Assumptions mainly concern conditional errors and model structure., da: Antagelser vedrører primært betingede fejl og modelstruktur.}}
-  - {id: bmb830.m05.q09, type: multiple_choice, prompt: {es: Propiedad distintiva de exponencial., en: Distinctive property of the exponential distribution., da: Særkende ved eksponentialfordelingen.}, options: [{id: a, text: {es: sin memoria, en: memoryless, da: memoryless}}, {id: b, text: {es: soporte negativo ilimitado, en: unlimited negative support, da: ubegrænset negativ support}}, {id: c, text: {es: dos modos obligatorios, en: necessarily bimodal, da: nødvendigvis bimodal}}], correct_option_ids: [a], explanation: {es: La espera adicional no depende del tiempo ya esperado., en: Additional waiting does not depend on elapsed waiting., da: Yderligere ventetid afhænger ikke af allerede ventet tid.}}
-  - {id: bmb830.m05.q10, type: true_false, prompt: {es: La distribución debe elegirse sólo por parecido visual del histograma., en: Distribution choice should rely only on histogram appearance., da: Fordeling bør vælges kun efter histogrammets udseende.}, correct: false, explanation: {es: Deben considerarse mecanismo, soporte, exposición y dependencia., en: Mechanism, support, exposure, and dependence must be considered., da: Mekanisme, support, exposure og afhængighed skal overvejes.}}
+  - {id: bmb830.m05.q01, type: multiple_choice, prompt: {"es": "Si A y B son independientes, ¿qué se cumple?", "en": "If A and B are independent, what holds?", "da": "Hvis A og B er uafhængige, hvad gælder?"}, options: [{id: a, text: {"es": "P(A∩B)=P(A)P(B)", "en": "P(A∩B)=P(A)P(B)", "da": "P(A∩B)=P(A)P(B)"}}, {id: b, text: {"es": "P(A∩B)=0 siempre", "en": "P(A∩B)=0 always", "da": "P(A∩B)=0 altid"}}, {id: c, text: {"es": "P(A)=P(B)", "en": "P(A)=P(B)", "da": "P(A)=P(B)"}}], correct_option_ids: [a], explanation: {"es": "Es la definición multiplicativa de independencia.", "en": "This is the product definition of independence.", "da": "Det er produktdefinitionen af uafhængighed."}}
+  - {id: bmb830.m05.q02, type: true_false, prompt: {"es": "Eventos disjuntos con probabilidad positiva son independientes.", "en": "Positive-probability disjoint events are independent.", "da": "Disjunkte hændelser med positiv sandsynlighed er uafhængige."}, correct: false, explanation: {"es": "Si ocurre uno, el otro no puede ocurrir.", "en": "If one occurs, the other cannot.", "da": "Hvis den ene sker, kan den anden ikke ske."}}
+  - {id: bmb830.m05.q03, type: multiple_choice, prompt: {"es": "¿De qué depende PPV además de sensibilidad y especificidad?", "en": "What does PPV depend on besides sensitivity and specificity?", "da": "Hvad afhænger PPV af ud over sensitivitet og specificitet?"}, options: [{id: a, text: {"es": "prevalencia", "en": "prevalence", "da": "prævalens"}}, {id: b, text: {"es": "color del test", "en": "test color", "da": "testens farve"}}, {id: c, text: {"es": "nombre del hospital", "en": "hospital name", "da": "hospitalets navn"}}], correct_option_ids: [a], explanation: {"es": "Bayes incorpora la probabilidad previa.", "en": "Bayes incorporates prior probability.", "da": "Bayes inkluderer prior-sandsynlighed."}}
+  - {id: bmb830.m05.q04, type: true_false, prompt: {"es": "Sensibilidad es P(enfermedad|test positivo).", "en": "Sensitivity is P(disease|positive test).", "da": "Sensitivitet er P(sygdom|positiv test)."}, correct: false, explanation: {"es": "Sensibilidad es P(test positivo|enfermedad).", "en": "Sensitivity is P(positive test|disease).", "da": "Sensitivitet er P(positiv test|sygdom)."}}
+  - {id: bmb830.m05.q05, type: multiple_choice, prompt: {"es": "Media y varianza de Binomial(n,p).", "en": "Mean and variance of Binomial(n,p).", "da": "Mean og varians for Binomial(n,p)."}, options: [{id: a, text: {"es": "np y np(1-p)", "en": "np and np(1-p)", "da": "np og np(1-p)"}}, {id: b, text: {"es": "p y n", "en": "p and n", "da": "p og n"}}, {id: c, text: {"es": "n² y p²", "en": "n² and p²", "da": "n² og p²"}}], correct_option_ids: [a], explanation: {"es": "Son las propiedades binomiales estándar.", "en": "These are standard binomial properties.", "da": "Det er standard binomialegenskaber."}}
+  - {id: bmb830.m05.q06, type: true_false, prompt: {"es": "Poisson simple supone media igual a varianza.", "en": "Simple Poisson assumes mean equals variance.", "da": "Simpel Poisson antager mean lig varians."}, correct: true, explanation: {"es": "Ambas son λ bajo el modelo.", "en": "Both equal λ under the model.", "da": "Begge er λ under modellen."}}
+  - {id: bmb830.m05.q07, type: multiple_choice, prompt: {"es": "¿Qué necesita una comparación de tasas con exposiciones distintas?", "en": "What is needed to compare rates with unequal exposure?", "da": "Hvad kræves for at sammenligne rater med forskellig exposure?"}, options: [{id: a, text: {"es": "incluir exposición u offset", "en": "include exposure or offset", "da": "inkludere exposure eller offset"}}, {id: b, text: {"es": "ignorar tiempo", "en": "ignore time", "da": "ignorere tid"}}, {id: c, text: {"es": "convertir a categorías", "en": "convert to categories", "da": "konvertere til kategorier"}}], correct_option_ids: [a], explanation: {"es": "Conteos deben ajustarse por oportunidad de ocurrencia.", "en": "Counts must account for opportunity to occur.", "da": "Counts skal tage højde for mulighed for hændelser."}}
+  - {id: bmb830.m05.q08, type: true_false, prompt: {"es": "Normalidad del outcome bruto es requisito universal de modelos lineales.", "en": "Raw outcome normality is a universal requirement of linear models.", "da": "Normalitet af raw outcome er et universelt krav i lineære modeller."}, correct: false, explanation: {"es": "Los supuestos se refieren principalmente a errores condicionales y estructura del modelo.", "en": "Assumptions mainly concern conditional errors and model structure.", "da": "Antagelser vedrører primært betingede fejl og modelstruktur."}}
+  - {id: bmb830.m05.q09, type: multiple_choice, prompt: {"es": "Propiedad distintiva de exponencial.", "en": "Distinctive property of the exponential distribution.", "da": "Særkende ved eksponentialfordelingen."}, options: [{id: a, text: {"es": "sin memoria", "en": "memoryless", "da": "memoryless"}}, {id: b, text: {"es": "soporte negativo ilimitado", "en": "unlimited negative support", "da": "ubegrænset negativ support"}}, {id: c, text: {"es": "dos modos obligatorios", "en": "necessarily bimodal", "da": "nødvendigvis bimodal"}}], correct_option_ids: [a], explanation: {"es": "La espera adicional no depende del tiempo ya esperado.", "en": "Additional waiting does not depend on elapsed waiting.", "da": "Yderligere ventetid afhænger ikke af allerede ventet tid."}}
+  - {id: bmb830.m05.q10, type: true_false, prompt: {"es": "La distribución debe elegirse sólo por parecido visual del histograma.", "en": "Distribution choice should rely only on histogram appearance.", "da": "Fordeling bør vælges kun efter histogrammets udseende."}, correct: false, explanation: {"es": "Deben considerarse mecanismo, soporte, exposición y dependencia.", "en": "Mechanism, support, exposure, and dependence must be considered.", "da": "Mekanisme, support, exposure og afhængighed skal overvejes."}}
 
 open_assessment:
   - id: bmb830.m05.a01
-    prompt: {es: Resuelve e interpreta un problema de Bayes con una prueba biomédica., en: Solve and interpret a Bayes problem for a biomedical test., da: Løs og fortolk et Bayes-problem for en biomedicinsk test.}
+    prompt: {"es": "Resuelve e interpreta un problema de Bayes con una prueba biomédica.", "en": "Solve and interpret a Bayes problem for a biomedical test.", "da": "Løs og fortolk et Bayes-problem for en biomedicinsk test."}
     rubric: [{criterion: correct_conditioning, points: 3}, {criterion: numerical_reasoning, points: 3}, {criterion: prevalence_interpretation, points: 2}, {criterion: communication, points: 2}]
   - id: bmb830.m05.a02
-    prompt: {es: Selecciona y defiende distribuciones para cuatro outcomes biológicos., en: Select and defend distributions for four biological outcomes., da: Vælg og forsvar fordelinger for fire biologiske outcomes.}
+    prompt: {"es": "Selecciona y defiende distribuciones para cuatro outcomes biológicos.", "en": "Select and defend distributions for four biological outcomes.", "da": "Vælg og forsvar fordelinger for fire biologiske outcomes."}
     rubric: [{criterion: support_and_mechanism, points: 4}, {criterion: dependence_and_exposure, points: 2}, {criterion: model_checks, points: 2}, {criterion: alternatives, points: 2}]
   - id: bmb830.m05.a03
-    prompt: {es: Simula y compara propiedades teóricas y empíricas en R., en: Simulate and compare theoretical and empirical properties in R., da: Simulér og sammenlign teoretiske og empiriske egenskaber i R.}
+    prompt: {"es": "Simula y compara propiedades teóricas y empíricas en R.", "en": "Simulate and compare theoretical and empirical properties in R.", "da": "Simulér og sammenlign teoretiske og empiriske egenskaber i R."}
     rubric: [{criterion: reproducible_code, points: 3}, {criterion: correct_functions, points: 2}, {criterion: convergence_interpretation, points: 3}, {criterion: limitations, points: 2}]
 
 glossary:
-  - {id: bmb830.term.sample_space, term: {es: espacio muestral, en: sample space, da: udfaldsrum}, definition: {es: Conjunto de resultados posibles., en: Set of possible outcomes., da: Mængde af mulige udfald.}}
-  - {id: bmb830.term.conditional_probability, term: {es: probabilidad condicional, en: conditional probability, da: betinget sandsynlighed}, definition: {es: Probabilidad restringida a que otro evento ocurrió., en: Probability restricted to another event having occurred., da: Sandsynlighed betinget på en anden hændelse.}}
-  - {id: bmb830.term.independence, term: {es: independencia, en: independence, da: uafhængighed}, definition: {es: Conocer un evento no cambia la probabilidad del otro., en: Knowing one event does not change the probability of the other., da: Viden om én hændelse ændrer ikke sandsynligheden for den anden.}}
-  - {id: bmb830.term.expectation, term: {es: esperanza, en: expectation, da: forventning}, definition: {es: Promedio ponderado por probabilidades., en: Probability-weighted average., da: Sandsynlighedsvægtet gennemsnit.}}
-  - {id: bmb830.term.variance, term: {es: varianza, en: variance, da: varians}, definition: {es: Esperanza de la desviación cuadrática respecto a la media., en: Expected squared deviation from the mean., da: Forventet kvadratisk afvigelse fra mean.}}
-  - {id: bmb830.term.bernoulli, term: {es: Bernoulli, en: Bernoulli, da: Bernoulli}, definition: {es: Distribución de un resultado binario., en: Distribution of one binary outcome., da: Fordeling for ét binært udfald.}}
-  - {id: bmb830.term.binomial, term: {es: binomial, en: binomial, da: binomial}, definition: {es: Conteo de éxitos en n ensayos Bernoulli bajo supuestos comunes., en: Count of successes in n Bernoulli trials under common assumptions., da: Antal successer i n Bernoulli-forsøg under fælles antagelser.}}
-  - {id: bmb830.term.poisson, term: {es: Poisson, en: Poisson, da: Poisson}, definition: {es: Modelo de conteos por exposición con tasa constante aproximada., en: Count model over exposure with approximately constant rate., da: Count-model over exposure med omtrent konstant rate.}}
-  - {id: bmb830.term.overdispersion, term: {es: sobre-dispersión, en: overdispersion, da: overdispersion}, definition: {es: Variabilidad mayor que la esperada por el modelo., en: Variability larger than expected under the model., da: Variation større end forventet under modellen.}}
-  - {id: bmb830.term.memoryless, term: {es: sin memoria, en: memoryless, da: memoryless}, definition: {es: La distribución de espera restante no depende de la espera ya transcurrida., en: Remaining waiting distribution does not depend on elapsed waiting., da: Resterende ventetid afhænger ikke af allerede forløbet ventetid.}}
+  - {id: bmb830.term.sample_space, term: {"es": "espacio muestral", "en": "sample space", "da": "udfaldsrum"}, definition: {"es": "Conjunto de resultados posibles.", "en": "Set of possible outcomes.", "da": "Mængde af mulige udfald."}}
+  - {id: bmb830.term.conditional_probability, term: {"es": "probabilidad condicional", "en": "conditional probability", "da": "betinget sandsynlighed"}, definition: {"es": "Probabilidad restringida a que otro evento ocurrió.", "en": "Probability restricted to another event having occurred.", "da": "Sandsynlighed betinget på en anden hændelse."}}
+  - {id: bmb830.term.independence, term: {"es": "independencia", "en": "independence", "da": "uafhængighed"}, definition: {"es": "Conocer un evento no cambia la probabilidad del otro.", "en": "Knowing one event does not change the probability of the other.", "da": "Viden om én hændelse ændrer ikke sandsynligheden for den anden."}}
+  - {id: bmb830.term.expectation, term: {"es": "esperanza", "en": "expectation", "da": "forventning"}, definition: {"es": "Promedio ponderado por probabilidades.", "en": "Probability-weighted average.", "da": "Sandsynlighedsvægtet gennemsnit."}}
+  - {id: bmb830.term.variance, term: {"es": "varianza", "en": "variance", "da": "varians"}, definition: {"es": "Esperanza de la desviación cuadrática respecto a la media.", "en": "Expected squared deviation from the mean.", "da": "Forventet kvadratisk afvigelse fra mean."}}
+  - {id: bmb830.term.bernoulli, term: {"es": "Bernoulli", "en": "Bernoulli", "da": "Bernoulli"}, definition: {"es": "Distribución de un resultado binario.", "en": "Distribution of one binary outcome.", "da": "Fordeling for ét binært udfald."}}
+  - {id: bmb830.term.binomial, term: {"es": "binomial", "en": "binomial", "da": "binomial"}, definition: {"es": "Conteo de éxitos en n ensayos Bernoulli bajo supuestos comunes.", "en": "Count of successes in n Bernoulli trials under common assumptions.", "da": "Antal successer i n Bernoulli-forsøg under fælles antagelser."}}
+  - {id: bmb830.term.poisson, term: {"es": "Poisson", "en": "Poisson", "da": "Poisson"}, definition: {"es": "Modelo de conteos por exposición con tasa constante aproximada.", "en": "Count model over exposure with approximately constant rate.", "da": "Count-model over exposure med omtrent konstant rate."}}
+  - {id: bmb830.term.overdispersion, term: {"es": "sobre-dispersión", "en": "overdispersion", "da": "overdispersion"}, definition: {"es": "Variabilidad mayor que la esperada por el modelo.", "en": "Variability larger than expected under the model.", "da": "Variation større end forventet under modellen."}}
+  - {id: bmb830.term.memoryless, term: {"es": "sin memoria", "en": "memoryless", "da": "memoryless"}, definition: {"es": "La distribución de espera restante no depende de la espera ya transcurrida.", "en": "Remaining waiting distribution does not depend on elapsed waiting.", "da": "Resterende ventetid afhænger ikke af allerede forløbet ventetid."}}
 
 hidden_tutor_support:
   canonical_explanation:
@@ -245,11 +245,11 @@ hidden_tutor_support:
     - interpret expectation and variance in units
     - identify overdispersion and dependence
   retrieval_fragments:
-    - {id: bmb830.m05.r01, topic: bayes, text: {es: PPV depende de sensibilidad, especificidad y prevalencia., en: PPV depends on sensitivity, specificity, and prevalence., da: PPV afhænger af sensitivitet, specificitet og prævalens.}}
-    - {id: bmb830.m05.r02, topic: binomial, text: {es: Binomial requiere n fijo, p común e independencia condicional., en: Binomial requires fixed n, common p, and conditional independence., da: Binomial kræver fast n, fælles p og betinget uafhængighed.}}
-    - {id: bmb830.m05.r03, topic: poisson, text: {es: Poisson modela counts sobre exposición; media y varianza son λ bajo el modelo simple., en: Poisson models counts over exposure; mean and variance equal λ in the simple model., da: Poisson modellerer counts over exposure; mean og varians er λ.}}
-    - {id: bmb830.m05.r04, topic: normal, text: {es: La normalidad relevante suele ser condicional o del estimador, no necesariamente del outcome bruto., en: Relevant normality is often conditional or about an estimator, not necessarily the raw outcome., da: Relevant normalitet er ofte betinget eller for estimatoren, ikke raw outcome.}}
-    - {id: bmb830.m05.r05, topic: mechanism, text: {es: Elige distribución por soporte, mecanismo, exposición y dependencia, no sólo por forma visual., en: Choose distributions by support, mechanism, exposure, and dependence, not visual shape alone., da: Vælg fordeling efter support, mekanisme, exposure og afhængighed, ikke kun visuel form.}}
+    - {id: bmb830.m05.r01, topic: bayes, text: {"es": "PPV depende de sensibilidad, especificidad y prevalencia.", "en": "PPV depends on sensitivity, specificity, and prevalence.", "da": "PPV afhænger af sensitivitet, specificitet og prævalens."}}
+    - {id: bmb830.m05.r02, topic: binomial, text: {"es": "Binomial requiere n fijo, p común e independencia condicional.", "en": "Binomial requires fixed n, common p, and conditional independence.", "da": "Binomial kræver fast n, fælles p og betinget uafhængighed."}}
+    - {id: bmb830.m05.r03, topic: poisson, text: {"es": "Poisson modela counts sobre exposición; media y varianza son λ bajo el modelo simple.", "en": "Poisson models counts over exposure; mean and variance equal λ in the simple model.", "da": "Poisson modellerer counts over exposure; mean og varians er λ."}}
+    - {id: bmb830.m05.r04, topic: normal, text: {"es": "La normalidad relevante suele ser condicional o del estimador, no necesariamente del outcome bruto.", "en": "Relevant normality is often conditional or about an estimator, not necessarily the raw outcome.", "da": "Relevant normalitet er ofte betinget eller for estimatoren, ikke raw outcome."}}
+    - {id: bmb830.m05.r05, topic: mechanism, text: {"es": "Elige distribución por soporte, mecanismo, exposición y dependencia, no sólo por forma visual.", "en": "Choose distributions by support, mechanism, exposure, and dependence, not visual shape alone.", "da": "Vælg fordeling efter support, mekanisme, exposure og afhængighed, ikke kun visuel form."}}
 
 source_map:
   - {section: probability_and_random_variables, source: repository.probability_statistics.yachay}

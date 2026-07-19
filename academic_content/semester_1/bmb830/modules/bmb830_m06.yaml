@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Distribuciones muestrales, estimación, intervalos de confianza y bootstrap
-    en: Sampling distributions, estimation, confidence intervals, and bootstrap reasoning
-    da: Samplingfordelinger, estimation, konfidensintervaller og bootstrap-ræsonnering
+    es: "Distribuciones muestrales, estimación, intervalos de confianza y bootstrap"
+    en: "Sampling distributions, estimation, confidence intervals, and bootstrap reasoning"
+    da: "Samplingfordelinger, estimation, konfidensintervaller og bootstrap-ræsonnering"
   summary:
     es: >-
       Fundamentos de inferencia frecuentista para cuantificar incertidumbre. Se distinguen parámetro,
@@ -32,18 +32,18 @@ alignment:
   later_modules: [bmb830.m07, bmb830.m08, bmb830.m09, bmb830.m10]
 
 objectives:
-  - {id: bmb830.m06.o01, text: {es: Distinguir parámetro, estadístico, estimador y estimación, en: Distinguish parameter, statistic, estimator, and estimate, da: Skelne parameter, statistik, estimator og estimat}}
-  - {id: bmb830.m06.o02, text: {es: Explicar una distribución muestral, en: Explain a sampling distribution, da: Forklare en samplingfordeling}}
-  - {id: bmb830.m06.o03, text: {es: Interpretar sesgo, varianza y error estándar, en: Interpret bias, variance, and standard error, da: Fortolke bias, varians og standard error}}
-  - {id: bmb830.m06.o04, text: {es: Aplicar razonamiento del límite central con condiciones, en: Apply central-limit reasoning with conditions, da: Anvende central-limit-ræsonnering med betingelser}}
-  - {id: bmb830.m06.o05, text: {es: Construir e interpretar intervalos de confianza, en: Construct and interpret confidence intervals, da: Konstruere og fortolke konfidensintervaller}}
-  - {id: bmb830.m06.o06, text: {es: Ejecutar bootstrap no paramétrico en R, en: Perform nonparametric bootstrap in R, da: Udføre nonparametrisk bootstrap i R}}
-  - {id: bmb830.m06.o07, text: {es: Elegir la unidad correcta de remuestreo, en: Choose the correct resampling unit, da: Vælge korrekt resampling-enhed}}
-  - {id: bmb830.m06.o08, text: {es: Comunicar incertidumbre sin interpretación probabilística incorrecta, en: Communicate uncertainty without incorrect probability interpretation, da: Kommunikere usikkerhed uden forkert sandsynlighedsfortolkning}}
+  - {id: bmb830.m06.o01, text: {"es": "Distinguir parámetro, estadístico, estimador y estimación", "en": "Distinguish parameter, statistic, estimator, and estimate", "da": "Skelne parameter, statistik, estimator og estimat"}}
+  - {id: bmb830.m06.o02, text: {"es": "Explicar una distribución muestral", "en": "Explain a sampling distribution", "da": "Forklare en samplingfordeling"}}
+  - {id: bmb830.m06.o03, text: {"es": "Interpretar sesgo, varianza y error estándar", "en": "Interpret bias, variance, and standard error", "da": "Fortolke bias, varians og standard error"}}
+  - {id: bmb830.m06.o04, text: {"es": "Aplicar razonamiento del límite central con condiciones", "en": "Apply central-limit reasoning with conditions", "da": "Anvende central-limit-ræsonnering med betingelser"}}
+  - {id: bmb830.m06.o05, text: {"es": "Construir e interpretar intervalos de confianza", "en": "Construct and interpret confidence intervals", "da": "Konstruere og fortolke konfidensintervaller"}}
+  - {id: bmb830.m06.o06, text: {"es": "Ejecutar bootstrap no paramétrico en R", "en": "Perform nonparametric bootstrap in R", "da": "Udføre nonparametrisk bootstrap i R"}}
+  - {id: bmb830.m06.o07, text: {"es": "Elegir la unidad correcta de remuestreo", "en": "Choose the correct resampling unit", "da": "Vælge korrekt resampling-enhed"}}
+  - {id: bmb830.m06.o08, text: {"es": "Comunicar incertidumbre sin interpretación probabilística incorrecta", "en": "Communicate uncertainty without incorrect probability interpretation", "da": "Kommunikere usikkerhed uden forkert sandsynlighedsfortolkning"}}
 
 concepts:
   - id: bmb830.m06.c01
-    title: {es: Parámetros y estadísticos, en: Parameters and statistics, da: Parametre og statistikker}
+    title: {"es": "Parámetros y estadísticos", "en": "Parameters and statistics", "da": "Parametre og statistikker"}
     body:
       es: >-
         Un parámetro describe una población o proceso y normalmente es desconocido. Un estadístico es cualquier función
@@ -56,9 +56,9 @@ concepts:
       da: >-
         En parameter beskriver en population; en statistik er en funktion af samplen; en estimator målretter parameteren.
     key_points:
-      - {es: El parámetro no cambia entre muestras del mismo proceso, en: The parameter does not change across samples from the same process, da: Parameteren ændres ikke mellem samples fra samme proces}
+      - {"es": "El parámetro no cambia entre muestras del mismo proceso", "en": "The parameter does not change across samples from the same process", "da": "Parameteren ændres ikke mellem samples fra samme proces"}
   - id: bmb830.m06.c02
-    title: {es: Distribución muestral, en: Sampling distribution, da: Samplingfordeling}
+    title: {"es": "Distribución muestral", "en": "Sampling distribution", "da": "Samplingfordeling"}
     body:
       es: >-
         La distribución muestral es la distribución de un estadístico bajo repetición hipotética del mismo diseño y proceso de muestreo.
@@ -70,9 +70,9 @@ concepts:
       da: >-
         Samplingfordelingen er fordelingen af en statistik under hypotetisk gentagelse af samme design, ikke fordelingen af individuelle data.
     key_points:
-      - {es: Repetir mediciones dentro de una muestra no equivale a repetir el estudio, en: Repeated measurements within one sample do not equal repeating the study, da: Gentagne målinger i én sample er ikke gentagelse af studiet}
+      - {"es": "Repetir mediciones dentro de una muestra no equivale a repetir el estudio", "en": "Repeated measurements within one sample do not equal repeating the study", "da": "Gentagne målinger i én sample er ikke gentagelse af studiet"}
   - id: bmb830.m06.c03
-    title: {es: Sesgo, varianza y MSE, en: Bias, variance, and MSE, da: Bias, varians og MSE}
+    title: {"es": "Sesgo, varianza y MSE", "en": "Bias, variance, and MSE", "da": "Bias, varians og MSE"}
     body:
       es: >-
         El sesgo es E[estimador]−parámetro. La varianza describe variabilidad entre muestras y el error cuadrático medio combina varianza y sesgo².
@@ -84,9 +84,9 @@ concepts:
       da: >-
         Bias er E[estimator]−parameter. MSE kombinerer varians og bias². Insesghed alene er ikke tilstrækkelig.
     key_points:
-      - {es: Precisión y exactitud no son idénticas, en: Precision and accuracy are not identical, da: Præcision og nøjagtighed er ikke identiske}
+      - {"es": "Precisión y exactitud no son idénticas", "en": "Precision and accuracy are not identical", "da": "Præcision og nøjagtighed er ikke identiske"}
   - id: bmb830.m06.c04
-    title: {es: Error estándar y tamaño muestral, en: Standard error and sample size, da: Standard error og sample size}
+    title: {"es": "Error estándar y tamaño muestral", "en": "Standard error and sample size", "da": "Standard error og sample size"}
     body:
       es: >-
         El error estándar es la SD de la distribución muestral del estimador. Para una media independiente con varianza finita, SE≈s/√n.
@@ -98,9 +98,9 @@ concepts:
       da: >-
         Standard error er SD for estimatorens samplingfordeling. For et uafhængigt mean er SE≈s/√n; afhængighed reducerer effektiv n.
     key_points:
-      - {es: SE cuantifica incertidumbre del estimador, no variación biológica individual, en: SE quantifies estimator uncertainty, not individual biological variation, da: SE måler estimatorusikkerhed, ikke individuel biologisk variation}
+      - {"es": "SE cuantifica incertidumbre del estimador, no variación biológica individual", "en": "SE quantifies estimator uncertainty, not individual biological variation", "da": "SE måler estimatorusikkerhed, ikke individuel biologisk variation"}
   - id: bmb830.m06.c05
-    title: {es: Teorema del límite central, en: Central limit theorem, da: Central limit theorem}
+    title: {"es": "Teorema del límite central", "en": "Central limit theorem", "da": "Central limit theorem"}
     body:
       es: >-
         Bajo condiciones como independencia suficiente, varianza finita y ausencia de dominación extrema, la distribución estandarizada de la media
@@ -112,9 +112,9 @@ concepts:
       da: >-
         Under passende betingelser nærmer den standardiserede mean sig normalitet når n vokser. CLT gør ikke rådata normale og reparerer ikke bias.
     key_points:
-      - {es: “n grande” depende de forma y dependencia, en: “Large n” depends on shape and dependence, da: “Stor n” afhænger af form og afhængighed}
+      - {"es": "“n grande” depende de forma y dependencia", "en": "“Large n” depends on shape and dependence", "da": "“Stor n” afhænger af form og afhængighed"}
   - id: bmb830.m06.c06
-    title: {es: Intervalos de confianza, en: Confidence intervals, da: Konfidensintervaller}
+    title: {"es": "Intervalos de confianza", "en": "Confidence intervals", "da": "Konfidensintervaller"}
     body:
       es: >-
         Un procedimiento de intervalo del 95% captura el parámetro en 95% de repeticiones bajo el modelo y diseño. Tras observar un intervalo frecuentista,
@@ -126,9 +126,9 @@ concepts:
       da: >-
         En 95% konfidensprocedure dækker parameteren i 95% af gentagelser under modellen og designet. Det er ikke en posterior sandsynlighed.
     key_points:
-      - {es: Cobertura depende de supuestos y diseño, en: Coverage depends on assumptions and design, da: Dækning afhænger af antagelser og design}
+      - {"es": "Cobertura depende de supuestos y diseño", "en": "Coverage depends on assumptions and design", "da": "Dækning afhænger af antagelser og design"}
   - id: bmb830.m06.c07
-    title: {es: Bootstrap no paramétrico, en: Nonparametric bootstrap, da: Nonparametrisk bootstrap}
+    title: {"es": "Bootstrap no paramétrico", "en": "Nonparametric bootstrap", "da": "Nonparametrisk bootstrap"}
     body:
       es: >-
         El bootstrap aproxima la distribución muestral remuestreando con reemplazo unidades observadas del tamaño original y recalculando el estadístico.
@@ -140,9 +140,9 @@ concepts:
       da: >-
         Bootstrap resampler observerede enheder med replacement og genberegner statistikken. Det arver sample-bias og kræver korrekt afhængighedsenhed.
     key_points:
-      - {es: Remuestrear filas sólo es válido si las filas son unidades independientes, en: Resampling rows is valid only when rows are independent units, da: Resampling af rækker er kun gyldigt hvis rækker er uafhængige enheder}
+      - {"es": "Remuestrear filas sólo es válido si las filas son unidades independientes", "en": "Resampling rows is valid only when rows are independent units", "da": "Resampling af rækker er kun gyldigt hvis rækker er uafhængige enheder"}
   - id: bmb830.m06.c08
-    title: {es: Intervalos bootstrap y diseño, en: Bootstrap intervals and design, da: Bootstrap-intervaller og design}
+    title: {"es": "Intervalos bootstrap y diseño", "en": "Bootstrap intervals and design", "da": "Bootstrap-intervaller og design"}
     body:
       es: >-
         El intervalo percentil usa cuantiles de estimaciones bootstrap; el intervalo normal usa estimate±z·SE y requiere simetría aproximada;
@@ -154,67 +154,67 @@ concepts:
       da: >-
         Percentilintervaller bruger bootstrap-kvantiler. Parrede data resamples som par; clustrede data som clusters; tidsserier kræver blokke.
     key_points:
-      - {es: El esquema de remuestreo debe imitar el diseño generador, en: The resampling scheme should mimic the generating design, da: Resampling-schemat bør efterligne det genererende design}
+      - {"es": "El esquema de remuestreo debe imitar el diseño generador", "en": "The resampling scheme should mimic the generating design", "da": "Resampling-schemat bør efterligne det genererende design"}
 
 worked_examples:
   - id: bmb830.m06.e01
-    title: {es: SD frente a SE, en: SD versus SE, da: SD versus SE}
-    problem: {es: Una muestra tiene SD=12 y n=36., en: A sample has SD=12 and n=36., da: En sample har SD=12 og n=36.}
-    reasoning: {es: SE de la media≈12/√36=2. SD describe personas; SE describe incertidumbre de la media., en: Mean SE≈12/√36=2. SD describes individuals; SE describes uncertainty in the mean., da: SE≈12/√36=2. SD beskriver personer; SE usikkerhed i mean.}
-    answer: {es: SD=12 unidades; SE≈2 unidades., en: SD=12 units; SE≈2 units., da: SD=12 enheder; SE≈2 enheder.}
+    title: {"es": "SD frente a SE", "en": "SD versus SE", "da": "SD versus SE"}
+    problem: {"es": "Una muestra tiene SD=12 y n=36.", "en": "A sample has SD=12 and n=36.", "da": "En sample har SD=12 og n=36."}
+    reasoning: {"es": "SE de la media≈12/√36=2. SD describe personas; SE describe incertidumbre de la media.", "en": "Mean SE≈12/√36=2. SD describes individuals; SE describes uncertainty in the mean.", "da": "SE≈12/√36=2. SD beskriver personer; SE usikkerhed i mean."}
+    answer: {"es": "SD=12 unidades; SE≈2 unidades.", "en": "SD=12 units; SE≈2 units.", "da": "SD=12 enheder; SE≈2 enheder."}
   - id: bmb830.m06.e02
-    title: {es: Interpretación de IC95%, en: Interpreting a 95% CI, da: Fortolkning af 95% CI}
-    problem: {es: Diferencia media 4.2 con IC95% [1.1,7.3]., en: Mean difference 4.2 with 95% CI [1.1,7.3]., da: Mean-forskel 4,2 med 95% CI [1,1;7,3].}
-    reasoning: {es: El procedimiento es compatible con diferencias positivas de ese rango bajo supuestos. No significa 95% de probabilidad de que el parámetro esté dentro., en: Under assumptions, the procedure yields values compatible with positive differences in that range. It is not a 95% posterior probability., da: Under antagelser er intervallet kompatibelt med positive forskelle; det er ikke 95% posterior sandsynlighed.}
-    answer: {es: Estimación positiva con incertidumbre; revisar importancia biológica y supuestos., en: Positive estimate with uncertainty; assess biological relevance and assumptions., da: Positivt estimat med usikkerhed; vurder biologisk relevans og antagelser.}
+    title: {"es": "Interpretación de IC95%", "en": "Interpreting a 95% CI", "da": "Fortolkning af 95% CI"}
+    problem: {"es": "Diferencia media 4.2 con IC95% [1.1,7.3].", "en": "Mean difference 4.2 with 95% CI [1.1,7.3].", "da": "Mean-forskel 4,2 med 95% CI [1,1;7,3]."}
+    reasoning: {"es": "El procedimiento es compatible con diferencias positivas de ese rango bajo supuestos. No significa 95% de probabilidad de que el parámetro esté dentro.", "en": "Under assumptions, the procedure yields values compatible with positive differences in that range. It is not a 95% posterior probability.", "da": "Under antagelser er intervallet kompatibelt med positive forskelle; det er ikke 95% posterior sandsynlighed."}
+    answer: {"es": "Estimación positiva con incertidumbre; revisar importancia biológica y supuestos.", "en": "Positive estimate with uncertainty; assess biological relevance and assumptions.", "da": "Positivt estimat med usikkerhed; vurder biologisk relevans og antagelser."}
   - id: bmb830.m06.e03
-    title: {es: Bootstrap por paciente, en: Patient-level bootstrap, da: Bootstrap på patientniveau}
-    problem: {es: Cada paciente tiene varias mediciones celulares., en: Each patient has multiple cellular measurements., da: Hver patient har flere cellulære målinger.}
-    reasoning: {es: Remuestrear células rompe la estructura y exagera n. Se remuestrean pacientes con todas sus mediciones, recalculando el estimador completo., en: Resampling cells breaks structure and inflates n. Resample patients with all their measurements and recompute the full estimator., da: Resampling af celler bryder strukturen. Resample patienter med alle deres målinger.}
-    answer: {es: Unidad bootstrap: paciente o clúster definido por diseño., en: Bootstrap unit: patient or design-defined cluster., da: Bootstrap-enhed: patient eller design-defineret cluster.}
+    title: {"es": "Bootstrap por paciente", "en": "Patient-level bootstrap", "da": "Bootstrap på patientniveau"}
+    problem: {"es": "Cada paciente tiene varias mediciones celulares.", "en": "Each patient has multiple cellular measurements.", "da": "Hver patient har flere cellulære målinger."}
+    reasoning: {"es": "Remuestrear células rompe la estructura y exagera n. Se remuestrean pacientes con todas sus mediciones, recalculando el estimador completo.", "en": "Resampling cells breaks structure and inflates n. Resample patients with all their measurements and recompute the full estimator.", "da": "Resampling af celler bryder strukturen. Resample patienter med alle deres målinger."}
+    answer: {"es": "Unidad bootstrap: paciente o clúster definido por diseño.", "en": "Bootstrap unit: patient or design-defined cluster.", "da": "Bootstrap-enhed: patient eller design-defineret cluster."}
 
 guided_practice:
-  - {id: bmb830.m06.p01, type: simulation, prompt: {es: Simula 5000 muestras y construye la distribución muestral de la media., en: Simulate 5000 samples and build the sampling distribution of the mean., da: Simulér 5000 samples og byg samplingfordelingen for mean.}, expected_elements: [fixed_population_model, repeated_samples, estimate_distribution]}
-  - {id: bmb830.m06.p02, type: se_calculation, prompt: {es: Compara SD y SE para distintos n., en: Compare SD and SE across sample sizes., da: Sammenlign SD og SE for forskellige n.}, expected_elements: [units, square_root_relationship, interpretation]}
-  - {id: bmb830.m06.p03, type: ci_interpretation, prompt: {es: Corrige ocho interpretaciones incorrectas de intervalos., en: Correct eight incorrect interval interpretations., da: Ret otte forkerte fortolkninger af intervaller.}, expected_elements: [coverage_language, fixed_parameter, assumptions]}
-  - {id: bmb830.m06.p04, type: bootstrap, prompt: {es: Implementa bootstrap de mediana y diferencia de medianas., en: Implement bootstrap for a median and median difference., da: Implementér bootstrap for median og medianforskel.}, expected_elements: [replacement, original_n, repeated_statistic, interval]}
-  - {id: bmb830.m06.p05, type: resampling_design, prompt: {es: Elige unidad de remuestreo para datos independientes, emparejados, clústeres y tiempo., en: Choose resampling units for independent, paired, clustered, and temporal data., da: Vælg resampling-enhed for uafhængige, parrede, clustrede og tidslige data.}, expected_elements: [design_mimicry, pair_or_cluster_preservation, dependence]}
-  - {id: bmb830.m06.p06, type: method_critique, prompt: {es: Audita un IC estrecho obtenido con pseudorreplicación., en: Audit a narrow CI obtained through pseudoreplication., da: Auditér et smalt CI opnået gennem pseudoreplikation.}, expected_elements: [effective_n, invalid_se, corrected_design]}
+  - {id: bmb830.m06.p01, type: simulation, prompt: {"es": "Simula 5000 muestras y construye la distribución muestral de la media.", "en": "Simulate 5000 samples and build the sampling distribution of the mean.", "da": "Simulér 5000 samples og byg samplingfordelingen for mean."}, expected_elements: [fixed_population_model, repeated_samples, estimate_distribution]}
+  - {id: bmb830.m06.p02, type: se_calculation, prompt: {"es": "Compara SD y SE para distintos n.", "en": "Compare SD and SE across sample sizes.", "da": "Sammenlign SD og SE for forskellige n."}, expected_elements: [units, square_root_relationship, interpretation]}
+  - {id: bmb830.m06.p03, type: ci_interpretation, prompt: {"es": "Corrige ocho interpretaciones incorrectas de intervalos.", "en": "Correct eight incorrect interval interpretations.", "da": "Ret otte forkerte fortolkninger af intervaller."}, expected_elements: [coverage_language, fixed_parameter, assumptions]}
+  - {id: bmb830.m06.p04, type: bootstrap, prompt: {"es": "Implementa bootstrap de mediana y diferencia de medianas.", "en": "Implement bootstrap for a median and median difference.", "da": "Implementér bootstrap for median og medianforskel."}, expected_elements: [replacement, original_n, repeated_statistic, interval]}
+  - {id: bmb830.m06.p05, type: resampling_design, prompt: {"es": "Elige unidad de remuestreo para datos independientes, emparejados, clústeres y tiempo.", "en": "Choose resampling units for independent, paired, clustered, and temporal data.", "da": "Vælg resampling-enhed for uafhængige, parrede, clustrede og tidslige data."}, expected_elements: [design_mimicry, pair_or_cluster_preservation, dependence]}
+  - {id: bmb830.m06.p06, type: method_critique, prompt: {"es": "Audita un IC estrecho obtenido con pseudorreplicación.", "en": "Audit a narrow CI obtained through pseudoreplication.", "da": "Auditér et smalt CI opnået gennem pseudoreplikation."}, expected_elements: [effective_n, invalid_se, corrected_design]}
 
 objective_bank:
-  - {id: bmb830.m06.q01, type: multiple_choice, prompt: {es: ¿Qué es una distribución muestral?, en: What is a sampling distribution?, da: Hvad er en samplingfordeling?}, options: [{id: a, text: {es: Distribución de un estadístico en estudios repetidos, en: Distribution of a statistic across repeated studies, da: Fordeling af en statistik over gentagne studier}}, {id: b, text: {es: Histograma de una muestra, en: Histogram of one sample, da: Histogram af én sample}}, {id: c, text: {es: Lista de variables, en: Variable list, da: Variabelliste}}], correct_option_ids: [a], explanation: {es: Se refiere a repetición hipotética del diseño., en: It refers to hypothetical repetition of the design., da: Den refererer til hypotetisk gentagelse af designet.}}
-  - {id: bmb830.m06.q02, type: true_false, prompt: {es: El error estándar describe variabilidad individual., en: Standard error describes individual variability., da: Standard error beskriver individuel variation.}, correct: false, explanation: {es: Describe variabilidad del estimador entre muestras., en: It describes estimator variability across samples., da: Den beskriver estimatorens variation mellem samples.}}
-  - {id: bmb830.m06.q03, type: multiple_choice, prompt: {es: Si n se cuadruplica, SE de la media aproximadamente..., en: If n quadruples, mean SE approximately..., da: Hvis n firedobles, bliver mean SE omtrent...}, options: [{id: a, text: {es: se reduce a la mitad, en: halves, da: halveret}}, {id: b, text: {es: se cuadruplica, en: quadruples, da: firedoblet}}, {id: c, text: {es: no cambia nunca, en: never changes, da: ændres aldrig}}], correct_option_ids: [a], explanation: {es: SE escala como 1/√n., en: SE scales as 1/√n., da: SE skalerer som 1/√n.}}
-  - {id: bmb830.m06.q04, type: true_false, prompt: {es: El CLT hace normales los datos individuales., en: The CLT makes individual data normal., da: CLT gør individuelle data normale.}, correct: false, explanation: {es: Aproxima la distribución de ciertos estadísticos estandarizados., en: It approximates the distribution of certain standardized statistics., da: Den approksimerer fordelingen af visse standardiserede statistikker.}}
-  - {id: bmb830.m06.q05, type: multiple_choice, prompt: {es: Interpretación frecuentista correcta de IC95%., en: Correct frequentist interpretation of a 95% CI., da: Korrekt frequentistisk fortolkning af 95% CI.}, options: [{id: a, text: {es: El procedimiento cubre el parámetro en 95% de repeticiones, en: The procedure covers the parameter in 95% of repetitions, da: Proceduren dækker parameteren i 95% af gentagelser}}, {id: b, text: {es: El parámetro tiene 95% de probabilidad posterior dentro, en: The parameter has 95% posterior probability inside, da: Parameteren har 95% posterior sandsynlighed indenfor}}, {id: c, text: {es: 95% de observaciones están dentro, en: 95% of observations are inside, da: 95% af observationer er indenfor}}], correct_option_ids: [a], explanation: {es: Es una propiedad del procedimiento bajo repetición., en: It is a repeated-procedure property., da: Det er en egenskab ved proceduren under gentagelse.}}
-  - {id: bmb830.m06.q06, type: true_false, prompt: {es: Un IC estrecho garantiza ausencia de sesgo., en: A narrow CI guarantees absence of bias., da: Et smalt CI garanterer fravær af bias.}, correct: false, explanation: {es: Puede ser preciso alrededor de un valor sesgado., en: It may be precise around a biased value., da: Det kan være præcist omkring en biased værdi.}}
-  - {id: bmb830.m06.q07, type: multiple_choice, prompt: {es: Bootstrap no paramétrico remuestrea..., en: Nonparametric bootstrap resamples..., da: Nonparametrisk bootstrap resampler...}, options: [{id: a, text: {es: con reemplazo y tamaño original, en: with replacement at original size, da: med replacement og original størrelse}}, {id: b, text: {es: sin reemplazo y mitad del tamaño, en: without replacement at half size, da: uden replacement og halv størrelse}}, {id: c, text: {es: sólo parámetros, en: only parameters, da: kun parametre}}], correct_option_ids: [a], explanation: {es: Esa es la construcción bootstrap básica., en: This is the basic bootstrap construction., da: Det er den grundlæggende bootstrap-konstruktion.}}
-  - {id: bmb830.m06.q08, type: true_false, prompt: {es: Bootstrap corrige automáticamente sesgo de selección de la muestra., en: Bootstrap automatically fixes sample selection bias., da: Bootstrap retter automatisk sample-selection bias.}, correct: false, explanation: {es: Remuestrea la muestra observada y hereda su representación., en: It resamples the observed sample and inherits its representation., da: Den resampler den observerede sample og arver dens repræsentation.}}
-  - {id: bmb830.m06.q09, type: multiple_choice, prompt: {es: En datos emparejados, se debe remuestrear..., en: For paired data, one should resample..., da: For parrede data bør man resample...}, options: [{id: a, text: {es: pares completos, en: complete pairs, da: komplette par}}, {id: b, text: {es: cada columna independientemente, en: each column independently, da: hver kolonne uafhængigt}}, {id: c, text: {es: sólo diferencias positivas, en: only positive differences, da: kun positive forskelle}}], correct_option_ids: [a], explanation: {es: Se preserva la dependencia dentro del par., en: This preserves within-pair dependence., da: Det bevarer afhængigheden inden for parret.}}
-  - {id: bmb830.m06.q10, type: true_false, prompt: {es: El esquema de remuestreo debe imitar el diseño de muestreo., en: The resampling scheme should mimic the sampling design., da: Resampling-schemat bør efterligne samplingdesignet.}, correct: true, explanation: {es: Así aproxima la variabilidad relevante., en: This approximates the relevant variability., da: Så approksimeres den relevante variation.}}
+  - {id: bmb830.m06.q01, type: multiple_choice, prompt: {"es": "¿Qué es una distribución muestral?", "en": "What is a sampling distribution?", "da": "Hvad er en samplingfordeling?"}, options: [{id: a, text: {"es": "Distribución de un estadístico en estudios repetidos", "en": "Distribution of a statistic across repeated studies", "da": "Fordeling af en statistik over gentagne studier"}}, {id: b, text: {"es": "Histograma de una muestra", "en": "Histogram of one sample", "da": "Histogram af én sample"}}, {id: c, text: {"es": "Lista de variables", "en": "Variable list", "da": "Variabelliste"}}], correct_option_ids: [a], explanation: {"es": "Se refiere a repetición hipotética del diseño.", "en": "It refers to hypothetical repetition of the design.", "da": "Den refererer til hypotetisk gentagelse af designet."}}
+  - {id: bmb830.m06.q02, type: true_false, prompt: {"es": "El error estándar describe variabilidad individual.", "en": "Standard error describes individual variability.", "da": "Standard error beskriver individuel variation."}, correct: false, explanation: {"es": "Describe variabilidad del estimador entre muestras.", "en": "It describes estimator variability across samples.", "da": "Den beskriver estimatorens variation mellem samples."}}
+  - {id: bmb830.m06.q03, type: multiple_choice, prompt: {"es": "Si n se cuadruplica, SE de la media aproximadamente...", "en": "If n quadruples, mean SE approximately...", "da": "Hvis n firedobles, bliver mean SE omtrent..."}, options: [{id: a, text: {"es": "se reduce a la mitad", "en": "halves", "da": "halveret"}}, {id: b, text: {"es": "se cuadruplica", "en": "quadruples", "da": "firedoblet"}}, {id: c, text: {"es": "no cambia nunca", "en": "never changes", "da": "ændres aldrig"}}], correct_option_ids: [a], explanation: {"es": "SE escala como 1/√n.", "en": "SE scales as 1/√n.", "da": "SE skalerer som 1/√n."}}
+  - {id: bmb830.m06.q04, type: true_false, prompt: {"es": "El CLT hace normales los datos individuales.", "en": "The CLT makes individual data normal.", "da": "CLT gør individuelle data normale."}, correct: false, explanation: {"es": "Aproxima la distribución de ciertos estadísticos estandarizados.", "en": "It approximates the distribution of certain standardized statistics.", "da": "Den approksimerer fordelingen af visse standardiserede statistikker."}}
+  - {id: bmb830.m06.q05, type: multiple_choice, prompt: {"es": "Interpretación frecuentista correcta de IC95%.", "en": "Correct frequentist interpretation of a 95% CI.", "da": "Korrekt frequentistisk fortolkning af 95% CI."}, options: [{id: a, text: {"es": "El procedimiento cubre el parámetro en 95% de repeticiones", "en": "The procedure covers the parameter in 95% of repetitions", "da": "Proceduren dækker parameteren i 95% af gentagelser"}}, {id: b, text: {"es": "El parámetro tiene 95% de probabilidad posterior dentro", "en": "The parameter has 95% posterior probability inside", "da": "Parameteren har 95% posterior sandsynlighed indenfor"}}, {id: c, text: {"es": "95% de observaciones están dentro", "en": "95% of observations are inside", "da": "95% af observationer er indenfor"}}], correct_option_ids: [a], explanation: {"es": "Es una propiedad del procedimiento bajo repetición.", "en": "It is a repeated-procedure property.", "da": "Det er en egenskab ved proceduren under gentagelse."}}
+  - {id: bmb830.m06.q06, type: true_false, prompt: {"es": "Un IC estrecho garantiza ausencia de sesgo.", "en": "A narrow CI guarantees absence of bias.", "da": "Et smalt CI garanterer fravær af bias."}, correct: false, explanation: {"es": "Puede ser preciso alrededor de un valor sesgado.", "en": "It may be precise around a biased value.", "da": "Det kan være præcist omkring en biased værdi."}}
+  - {id: bmb830.m06.q07, type: multiple_choice, prompt: {"es": "Bootstrap no paramétrico remuestrea...", "en": "Nonparametric bootstrap resamples...", "da": "Nonparametrisk bootstrap resampler..."}, options: [{id: a, text: {"es": "con reemplazo y tamaño original", "en": "with replacement at original size", "da": "med replacement og original størrelse"}}, {id: b, text: {"es": "sin reemplazo y mitad del tamaño", "en": "without replacement at half size", "da": "uden replacement og halv størrelse"}}, {id: c, text: {"es": "sólo parámetros", "en": "only parameters", "da": "kun parametre"}}], correct_option_ids: [a], explanation: {"es": "Esa es la construcción bootstrap básica.", "en": "This is the basic bootstrap construction.", "da": "Det er den grundlæggende bootstrap-konstruktion."}}
+  - {id: bmb830.m06.q08, type: true_false, prompt: {"es": "Bootstrap corrige automáticamente sesgo de selección de la muestra.", "en": "Bootstrap automatically fixes sample selection bias.", "da": "Bootstrap retter automatisk sample-selection bias."}, correct: false, explanation: {"es": "Remuestrea la muestra observada y hereda su representación.", "en": "It resamples the observed sample and inherits its representation.", "da": "Den resampler den observerede sample og arver dens repræsentation."}}
+  - {id: bmb830.m06.q09, type: multiple_choice, prompt: {"es": "En datos emparejados, se debe remuestrear...", "en": "For paired data, one should resample...", "da": "For parrede data bør man resample..."}, options: [{id: a, text: {"es": "pares completos", "en": "complete pairs", "da": "komplette par"}}, {id: b, text: {"es": "cada columna independientemente", "en": "each column independently", "da": "hver kolonne uafhængigt"}}, {id: c, text: {"es": "sólo diferencias positivas", "en": "only positive differences", "da": "kun positive forskelle"}}], correct_option_ids: [a], explanation: {"es": "Se preserva la dependencia dentro del par.", "en": "This preserves within-pair dependence.", "da": "Det bevarer afhængigheden inden for parret."}}
+  - {id: bmb830.m06.q10, type: true_false, prompt: {"es": "El esquema de remuestreo debe imitar el diseño de muestreo.", "en": "The resampling scheme should mimic the sampling design.", "da": "Resampling-schemat bør efterligne samplingdesignet."}, correct: true, explanation: {"es": "Así aproxima la variabilidad relevante.", "en": "This approximates the relevant variability.", "da": "Så approksimeres den relevante variation."}}
 
 open_assessment:
   - id: bmb830.m06.a01
-    prompt: {es: Explica y simula la distribución muestral de un estimador., en: Explain and simulate the sampling distribution of an estimator., da: Forklar og simulér samplingfordelingen af en estimator.}
+    prompt: {"es": "Explica y simula la distribución muestral de un estimador.", "en": "Explain and simulate the sampling distribution of an estimator.", "da": "Forklar og simulér samplingfordelingen af en estimator."}
     rubric: [{criterion: parameter_and_estimator, points: 2}, {criterion: repeated_design, points: 3}, {criterion: bias_and_se, points: 3}, {criterion: interpretation, points: 2}]
   - id: bmb830.m06.a02
-    prompt: {es: Construye e interpreta un intervalo con método teórico y bootstrap., en: Construct and interpret an interval using theoretical and bootstrap methods., da: Konstruér og fortolk et interval med teoretisk og bootstrap-metode.}
+    prompt: {"es": "Construye e interpreta un intervalo con método teórico y bootstrap.", "en": "Construct and interpret an interval using theoretical and bootstrap methods.", "da": "Konstruér og fortolk et interval med teoretisk og bootstrap-metode."}
     rubric: [{criterion: correct_computation, points: 3}, {criterion: assumptions, points: 2}, {criterion: interval_interpretation, points: 3}, {criterion: comparison, points: 2}]
   - id: bmb830.m06.a03
-    prompt: {es: Diseña remuestreo válido para un conjunto jerárquico., en: Design valid resampling for a hierarchical dataset., da: Design gyldig resampling for et hierarkisk datasæt.}
+    prompt: {"es": "Diseña remuestreo válido para un conjunto jerárquico.", "en": "Design valid resampling for a hierarchical dataset.", "da": "Design gyldig resampling for et hierarkisk datasæt."}
     rubric: [{criterion: independence_unit, points: 4}, {criterion: preserved_structure, points: 3}, {criterion: estimator_recalculation, points: 2}, {criterion: limitations, points: 1}]
 
 glossary:
-  - {id: bmb830.term.parameter, term: {es: parámetro, en: parameter, da: parameter}, definition: {es: Cantidad fija del proceso o población., en: Fixed quantity of a process or population., da: Fast størrelse i en proces eller population.}}
-  - {id: bmb830.term.statistic, term: {es: estadístico, en: statistic, da: statistik}, definition: {es: Función de los datos muestrales., en: Function of sample data., da: Funktion af sampledata.}}
-  - {id: bmb830.term.sampling_distribution, term: {es: distribución muestral, en: sampling distribution, da: samplingfordeling}, definition: {es: Distribución de un estadístico bajo repetición del diseño., en: Distribution of a statistic under repeated design., da: Fordeling af en statistik under gentaget design.}}
-  - {id: bmb830.term.bias, term: {es: sesgo, en: bias, da: bias}, definition: {es: Diferencia entre esperanza del estimador y parámetro., en: Difference between estimator expectation and parameter., da: Forskellen mellem estimatorens forventning og parameteren.}}
-  - {id: bmb830.term.standard_error, term: {es: error estándar, en: standard error, da: standard error}, definition: {es: SD de la distribución muestral de un estimador., en: SD of an estimator's sampling distribution., da: SD for estimatorens samplingfordeling.}}
-  - {id: bmb830.term.mse, term: {es: error cuadrático medio, en: mean squared error, da: mean squared error}, definition: {es: Varianza más sesgo al cuadrado., en: Variance plus squared bias., da: Varians plus bias i anden.}}
-  - {id: bmb830.term.confidence_interval, term: {es: intervalo de confianza, en: confidence interval, da: konfidensinterval}, definition: {es: Intervalo producido por un procedimiento con cobertura repetida nominal., en: Interval produced by a procedure with nominal repeated coverage., da: Interval fra en procedure med nominel gentagen dækning.}}
-  - {id: bmb830.term.coverage, term: {es: cobertura, en: coverage, da: dækning}, definition: {es: Proporción de repeticiones cuyos intervalos contienen el parámetro., en: Proportion of repeated intervals containing the parameter., da: Proportion af gentagne intervaller der indeholder parameteren.}}
-  - {id: bmb830.term.bootstrap, term: {es: bootstrap, en: bootstrap, da: bootstrap}, definition: {es: Aproximación por remuestreo con reemplazo desde datos observados., en: Approximation by resampling observed data with replacement., da: Approksimation ved resampling af observerede data med replacement.}}
-  - {id: bmb830.term.percentile_interval, term: {es: intervalo percentil, en: percentile interval, da: percentilinterval}, definition: {es: Intervalo basado en cuantiles de estimaciones bootstrap., en: Interval based on quantiles of bootstrap estimates., da: Interval baseret på kvantiler af bootstrap-estimater.}}
+  - {id: bmb830.term.parameter, term: {"es": "parámetro", "en": "parameter", "da": "parameter"}, definition: {"es": "Cantidad fija del proceso o población.", "en": "Fixed quantity of a process or population.", "da": "Fast størrelse i en proces eller population."}}
+  - {id: bmb830.term.statistic, term: {"es": "estadístico", "en": "statistic", "da": "statistik"}, definition: {"es": "Función de los datos muestrales.", "en": "Function of sample data.", "da": "Funktion af sampledata."}}
+  - {id: bmb830.term.sampling_distribution, term: {"es": "distribución muestral", "en": "sampling distribution", "da": "samplingfordeling"}, definition: {"es": "Distribución de un estadístico bajo repetición del diseño.", "en": "Distribution of a statistic under repeated design.", "da": "Fordeling af en statistik under gentaget design."}}
+  - {id: bmb830.term.bias, term: {"es": "sesgo", "en": "bias", "da": "bias"}, definition: {"es": "Diferencia entre esperanza del estimador y parámetro.", "en": "Difference between estimator expectation and parameter.", "da": "Forskellen mellem estimatorens forventning og parameteren."}}
+  - {id: bmb830.term.standard_error, term: {"es": "error estándar", "en": "standard error", "da": "standard error"}, definition: {"es": "SD de la distribución muestral de un estimador.", "en": "SD of an estimator's sampling distribution.", "da": "SD for estimatorens samplingfordeling."}}
+  - {id: bmb830.term.mse, term: {"es": "error cuadrático medio", "en": "mean squared error", "da": "mean squared error"}, definition: {"es": "Varianza más sesgo al cuadrado.", "en": "Variance plus squared bias.", "da": "Varians plus bias i anden."}}
+  - {id: bmb830.term.confidence_interval, term: {"es": "intervalo de confianza", "en": "confidence interval", "da": "konfidensinterval"}, definition: {"es": "Intervalo producido por un procedimiento con cobertura repetida nominal.", "en": "Interval produced by a procedure with nominal repeated coverage.", "da": "Interval fra en procedure med nominel gentagen dækning."}}
+  - {id: bmb830.term.coverage, term: {"es": "cobertura", "en": "coverage", "da": "dækning"}, definition: {"es": "Proporción de repeticiones cuyos intervalos contienen el parámetro.", "en": "Proportion of repeated intervals containing the parameter.", "da": "Proportion af gentagne intervaller der indeholder parameteren."}}
+  - {id: bmb830.term.bootstrap, term: {"es": "bootstrap", "en": "bootstrap", "da": "bootstrap"}, definition: {"es": "Aproximación por remuestreo con reemplazo desde datos observados.", "en": "Approximation by resampling observed data with replacement.", "da": "Approksimation ved resampling af observerede data med replacement."}}
+  - {id: bmb830.term.percentile_interval, term: {"es": "intervalo percentil", "en": "percentile interval", "da": "percentilinterval"}, definition: {"es": "Intervalo basado en cuantiles de estimaciones bootstrap.", "en": "Interval based on quantiles of bootstrap estimates.", "da": "Interval baseret på kvantiler af bootstrap-estimater."}}
 
 hidden_tutor_support:
   canonical_explanation:
@@ -246,11 +246,11 @@ hidden_tutor_support:
     - implement valid bootstrap
     - preserve design dependence in resampling
   retrieval_fragments:
-    - {id: bmb830.m06.r01, topic: sampling, text: {es: La distribución muestral describe un estadístico bajo repetición del diseño., en: A sampling distribution describes a statistic under repeated design., da: Samplingfordelingen beskriver en statistik under gentaget design.}}
-    - {id: bmb830.m06.r02, topic: se, text: {es: SE es la SD del estimador, no la SD de individuos., en: SE is the SD of the estimator, not the SD of individuals., da: SE er SD for estimatoren, ikke for individer.}}
-    - {id: bmb830.m06.r03, topic: ci, text: {es: Un IC95% es una propiedad de cobertura del procedimiento, no 95% posterior del parámetro., en: A 95% CI is a coverage property of the procedure, not 95% posterior probability for the parameter., da: Et 95% CI er en dæknings-egenskab, ikke 95% posterior sandsynlighed.}}
-    - {id: bmb830.m06.r04, topic: bootstrap, text: {es: Bootstrap remuestrea unidades independientes con reemplazo y recalcula el estimador completo., en: Bootstrap resamples independent units with replacement and recomputes the full estimator., da: Bootstrap resampler uafhængige enheder med replacement og genberegner hele estimatoren.}}
-    - {id: bmb830.m06.r05, topic: dependence, text: {es: Pares, clústeres y series requieren esquemas que preserven dependencia., en: Pairs, clusters, and time series require dependence-preserving schemes., da: Par, clusters og tidsserier kræver schemes der bevarer afhængighed.}}
+    - {id: bmb830.m06.r01, topic: sampling, text: {"es": "La distribución muestral describe un estadístico bajo repetición del diseño.", "en": "A sampling distribution describes a statistic under repeated design.", "da": "Samplingfordelingen beskriver en statistik under gentaget design."}}
+    - {id: bmb830.m06.r02, topic: se, text: {"es": "SE es la SD del estimador, no la SD de individuos.", "en": "SE is the SD of the estimator, not the SD of individuals.", "da": "SE er SD for estimatoren, ikke for individer."}}
+    - {id: bmb830.m06.r03, topic: ci, text: {"es": "Un IC95% es una propiedad de cobertura del procedimiento, no 95% posterior del parámetro.", "en": "A 95% CI is a coverage property of the procedure, not 95% posterior probability for the parameter.", "da": "Et 95% CI er en dæknings-egenskab, ikke 95% posterior sandsynlighed."}}
+    - {id: bmb830.m06.r04, topic: bootstrap, text: {"es": "Bootstrap remuestrea unidades independientes con reemplazo y recalcula el estimador completo.", "en": "Bootstrap resamples independent units with replacement and recomputes the full estimator.", "da": "Bootstrap resampler uafhængige enheder med replacement og genberegner hele estimatoren."}}
+    - {id: bmb830.m06.r05, topic: dependence, text: {"es": "Pares, clústeres y series requieren esquemas que preserven dependencia.", "en": "Pairs, clusters, and time series require dependence-preserving schemes.", "da": "Par, clusters og tidsserier kræver schemes der bevarer afhængighed."}}
 
 source_map:
   - {section: estimation_and_confidence, source: repository.probability_statistics.yachay}

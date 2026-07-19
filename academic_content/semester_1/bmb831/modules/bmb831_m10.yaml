@@ -5,7 +5,7 @@ content_version: 1.0.0
 status: academically_reviewed_draft
 
 metadata:
-  title: {es: Enriquecimiento funcional, análisis de vías e interpretación consciente de evidencia, en: Functional enrichment, pathway analysis, and evidence-aware interpretation, da: Funktionel berigelse, pathway-analyse og evidensbevidst fortolkning}
+  title: {"es": "Enriquecimiento funcional, análisis de vías e interpretación consciente de evidencia", "en": "Functional enrichment, pathway analysis, and evidence-aware interpretation", "da": "Funktionel berigelse, pathway-analyse og evidensbevidst fortolkning"}
   summary:
     es: >-
       Métodos de interpretación funcional para listas y rankings ómicos: over-representation analysis,
@@ -29,18 +29,18 @@ alignment:
   later_modules: [bmb831.m11, bmb831.m12]
 
 objectives:
-  - {id: bmb831.m10.o01, text: {es: Distinguir ORA y enriquecimiento rankeado, en: Distinguish ORA and ranked enrichment, da: Skelne ORA og ranked enrichment}}
-  - {id: bmb831.m10.o02, text: {es: Definir universo y mapping coherentes, en: Define coherent universe and mapping, da: Definere sammenhængende univers og mapping}}
-  - {id: bmb831.m10.o03, text: {es: Explicar test hipergeométrico y sus supuestos, en: Explain the hypergeometric test and its assumptions, da: Forklare hypergeometrisk test og dens antagelser}}
-  - {id: bmb831.m10.o04, text: {es: Construir una métrica rankeada válida, en: Build a valid ranking metric, da: Bygge en gyldig ranking-metrik}}
-  - {id: bmb831.m10.o05, text: {es: Interpretar leading edge, dirección y tamaño de conjunto, en: Interpret leading edge, direction, and set size, da: Fortolke leading edge, retning og sætstørrelse}}
-  - {id: bmb831.m10.o06, text: {es: Controlar multiplicidad y redundancia, en: Control multiplicity and redundancy, da: Kontrollere multiplicitet og redundans}}
-  - {id: bmb831.m10.o07, text: {es: Auditar sesgo de anotación y circularidad, en: Audit annotation bias and circularity, da: Auditere annotationsbias og cirkularitet}}
-  - {id: bmb831.m10.o08, text: {es: Formular hipótesis funcionales limitadas y comprobables, en: Formulate limited and testable functional hypotheses, da: Formulere begrænsede og testbare funktionelle hypoteser}}
+  - {id: bmb831.m10.o01, text: {"es": "Distinguir ORA y enriquecimiento rankeado", "en": "Distinguish ORA and ranked enrichment", "da": "Skelne ORA og ranked enrichment"}}
+  - {id: bmb831.m10.o02, text: {"es": "Definir universo y mapping coherentes", "en": "Define coherent universe and mapping", "da": "Definere sammenhængende univers og mapping"}}
+  - {id: bmb831.m10.o03, text: {"es": "Explicar test hipergeométrico y sus supuestos", "en": "Explain the hypergeometric test and its assumptions", "da": "Forklare hypergeometrisk test og dens antagelser"}}
+  - {id: bmb831.m10.o04, text: {"es": "Construir una métrica rankeada válida", "en": "Build a valid ranking metric", "da": "Bygge en gyldig ranking-metrik"}}
+  - {id: bmb831.m10.o05, text: {"es": "Interpretar leading edge, dirección y tamaño de conjunto", "en": "Interpret leading edge, direction, and set size", "da": "Fortolke leading edge, retning og sætstørrelse"}}
+  - {id: bmb831.m10.o06, text: {"es": "Controlar multiplicidad y redundancia", "en": "Control multiplicity and redundancy", "da": "Kontrollere multiplicitet og redundans"}}
+  - {id: bmb831.m10.o07, text: {"es": "Auditar sesgo de anotación y circularidad", "en": "Audit annotation bias and circularity", "da": "Auditere annotationsbias og cirkularitet"}}
+  - {id: bmb831.m10.o08, text: {"es": "Formular hipótesis funcionales limitadas y comprobables", "en": "Formulate limited and testable functional hypotheses", "da": "Formulere begrænsede og testbare funktionelle hypoteser"}}
 
 concepts:
   - id: bmb831.m10.c01
-    title: {es: ORA y modelo hipergeométrico, en: ORA and the hypergeometric model, da: ORA og hypergeometrisk model}
+    title: {"es": "ORA y modelo hipergeométrico", "en": "ORA and the hypergeometric model", "da": "ORA og hypergeometrisk model"}
     body:
       es: >-
         ORA pregunta si un término aparece más de lo esperado en una lista seleccionada respecto a un universo.
@@ -52,9 +52,9 @@ concepts:
       da: >-
         ORA spørger om et term er overrepræsenteret i en valgt liste relativt til et univers.
     key_points:
-      - {es: El resultado depende tanto de la lista como del universo, en: The result depends on both list and universe, da: Resultatet afhænger af både liste og univers}
+      - {"es": "El resultado depende tanto de la lista como del universo", "en": "The result depends on both list and universe", "da": "Resultatet afhænger af både liste og univers"}
   - id: bmb831.m10.c02
-    title: {es: Universo, detectabilidad y mapping, en: Universe, detectability, and mapping, da: Univers, detekterbarhed og mapping}
+    title: {"es": "Universo, detectabilidad y mapping", "en": "Universe, detectability, and mapping", "da": "Univers, detekterbarhed og mapping"}
     body:
       es: >-
         El universo debe representar características que podían ser seleccionadas: genes medidos y que superaron criterios previos,
@@ -66,9 +66,9 @@ concepts:
       da: >-
         Universet bør indeholde features der kunne vælges, ikke automatisk hele genomet. Mapping og detekterbarhed påvirker odds.
     key_points:
-      - {es: Un universo incorrecto produce una pregunta estadística distinta, en: An incorrect universe produces a different statistical question, da: Et forkert univers giver et andet statistisk spørgsmål}
+      - {"es": "Un universo incorrecto produce una pregunta estadística distinta", "en": "An incorrect universe produces a different statistical question", "da": "Et forkert univers giver et andet statistisk spørgsmål"}
   - id: bmb831.m10.c03
-    title: {es: Enriquecimiento rankeado, en: Ranked enrichment, da: Ranked enrichment}
+    title: {"es": "Enriquecimiento rankeado", "en": "Ranked enrichment", "da": "Ranked enrichment"}
     body:
       es: >-
         Los métodos rankeados usan todas las características ordenadas por una métrica con signo, evitando un corte arbitrario.
@@ -80,9 +80,9 @@ concepts:
       da: >-
         Ranked metoder bruger alle features ordnet efter en signed metrik. Permutation skal respektere den eksperimentelle enhed.
     key_points:
-      - {es: El ranking debe definirse antes de inspeccionar vías favoritas, en: Ranking should be defined before inspecting favored pathways, da: Ranking bør defineres før yndlingspathways inspiceres}
+      - {"es": "El ranking debe definirse antes de inspeccionar vías favoritas", "en": "Ranking should be defined before inspecting favored pathways", "da": "Ranking bør defineres før yndlingspathways inspiceres"}
   - id: bmb831.m10.c04
-    title: {es: Leading edge, dirección y tamaño, en: Leading edge, direction, and size, da: Leading edge, retning og størrelse}
+    title: {"es": "Leading edge, dirección y tamaño", "en": "Leading edge, direction, and size", "da": "Leading edge, retning og størrelse"}
     body:
       es: >-
         Leading edge identifica miembros que impulsan la señal rankeada, no todos los genes del término. El signo depende de la convención
@@ -94,9 +94,9 @@ concepts:
       da: >-
         Leading edge identificerer medlemmer der driver signalet. Retning afhænger af ranking og kontrast.
     key_points:
-      - {es: Vía enriquecida no significa que todos sus genes cambien, en: An enriched pathway does not mean all its genes change, da: En beriget pathway betyder ikke at alle dens gener ændres}
+      - {"es": "Vía enriquecida no significa que todos sus genes cambien", "en": "An enriched pathway does not mean all its genes change", "da": "En beriget pathway betyder ikke at alle dens gener ændres"}
   - id: bmb831.m10.c05
-    title: {es: Multiplicidad, redundancia y visualización, en: Multiplicity, redundancy, and visualization, da: Multiplicitet, redundans og visualisering}
+    title: {"es": "Multiplicidad, redundancia y visualización", "en": "Multiplicity, redundancy, and visualization", "da": "Multiplicitet, redundans og visualisering"}
     body:
       es: >-
         Miles de términos solapados generan tests dependientes y resultados redundantes. FDR sigue siendo necesaria. Agrupar términos por
@@ -108,9 +108,9 @@ concepts:
       da: >-
         Tusinder af overlappende terms giver afhængige tests og redundans. FDR er stadig nødvendig.
     key_points:
-      - {es: Redundancia ontológica puede aparentar múltiples descubrimientos independientes, en: Ontology redundancy can mimic multiple independent discoveries, da: Ontologiredundans kan ligne flere uafhængige discoveries}
+      - {"es": "Redundancia ontológica puede aparentar múltiples descubrimientos independientes", "en": "Ontology redundancy can mimic multiple independent discoveries", "da": "Ontologiredundans kan ligne flere uafhængige discoveries"}
   - id: bmb831.m10.c06
-    title: {es: Sesgo, circularidad y alcance, en: Bias, circularity, and claim scope, da: Bias, cirkularitet og påstandsomfang}
+    title: {"es": "Sesgo, circularidad y alcance", "en": "Bias, circularity, and claim scope", "da": "Bias, cirkularitet og påstandsomfang"}
     body:
       es: >-
         Genes bien estudiados tienen más anotaciones y aparecen en más vías. Usar una base para seleccionar genes y luego la misma para “validar”
@@ -122,73 +122,73 @@ concepts:
       da: >-
         Velstuderede gener har flere annotationer. Enrichment opsummerer overensstemmelse med eksisterende annotation, ikke kausalitet.
     key_points:
-      - {es: Anotación es evidencia secundaria versionada, en: Annotation is versioned secondary evidence, da: Annotation er versioneret sekundær evidens}
+      - {"es": "Anotación es evidencia secundaria versionada", "en": "Annotation is versioned secondary evidence", "da": "Annotation er versioneret sekundær evidens"}
 
 worked_examples:
   - id: bmb831.m10.e01
-    title: {es: Universo genómico incorrecto, en: Incorrect genome-wide universe, da: Forkert genom-bredt univers}
-    scenario: {es: Proteómica detecta 3000 proteínas y ORA usa 20000 genes., en: Proteomics detects 3000 proteins but ORA uses 20000 genes., da: Proteomik detekterer 3000 proteiner men ORA bruger 20000 gener.}
+    title: {"es": "Universo genómico incorrecto", "en": "Incorrect genome-wide universe", "da": "Forkert genom-bredt univers"}
+    scenario: {"es": "Proteómica detecta 3000 proteínas y ORA usa 20000 genes.", "en": "Proteomics detects 3000 proteins but ORA uses 20000 genes.", "da": "Proteomik detekterer 3000 proteiner men ORA bruger 20000 gener."}
     reasoning:
-      - {es: Proteínas no detectables nunca podían entrar en la lista., en: Undetectable proteins could never enter the list., da: Ikke-detekterbare proteiner kunne aldrig komme i listen.}
-      - {es: Usar proteínas elegibles tras QC y mapping como universo., en: Use QC- and mapping-eligible proteins as the universe., da: Brug QC- og mapping-eligible proteiner som univers.}
-    conclusion: {es: El universo corrige oportunidad de selección., en: The universe encodes selection opportunity., da: Universet koder selektionsmulighed.}
+      - {"es": "Proteínas no detectables nunca podían entrar en la lista.", "en": "Undetectable proteins could never enter the list.", "da": "Ikke-detekterbare proteiner kunne aldrig komme i listen."}
+      - {"es": "Usar proteínas elegibles tras QC y mapping como universo.", "en": "Use QC- and mapping-eligible proteins as the universe.", "da": "Brug QC- og mapping-eligible proteiner som univers."}
+    conclusion: {"es": "El universo corrige oportunidad de selección.", "en": "The universe encodes selection opportunity.", "da": "Universet koder selektionsmulighed."}
   - id: bmb831.m10.e02
-    title: {es: ORA cambia con cutoff, en: ORA changes with cutoff, da: ORA ændres med cutoff}
-    scenario: {es: padj<0.05 da 40 genes; padj<0.1 da 120 y vías distintas., en: padj<0.05 yields 40 genes; padj<0.1 yields 120 and different pathways., da: padj<0.05 giver 40 gener; padj<0.1 giver 120 og andre pathways.}
+    title: {"es": "ORA cambia con cutoff", "en": "ORA changes with cutoff", "da": "ORA ændres med cutoff"}
+    scenario: {"es": "padj<0.05 da 40 genes; padj<0.1 da 120 y vías distintas.", "en": "padj<0.05 yields 40 genes; padj<0.1 yields 120 and different pathways.", "da": "padj<0.05 giver 40 gener; padj<0.1 giver 120 og andre pathways."}
     reasoning:
-      - {es: ORA depende de corte binario., en: ORA depends on a binary cutoff., da: ORA afhænger af binært cutoff.}
-      - {es: Comparar sensibilidad y método rankeado., en: Compare sensitivity and a ranked method., da: Sammenlign følsomhed og ranked metode.}
-    conclusion: {es: Vías robustas deben persistir razonablemente bajo decisiones plausibles., en: Robust pathways should persist under plausible choices., da: Robuste pathways bør persistere under plausible valg.}
+      - {"es": "ORA depende de corte binario.", "en": "ORA depends on a binary cutoff.", "da": "ORA afhænger af binært cutoff."}
+      - {"es": "Comparar sensibilidad y método rankeado.", "en": "Compare sensitivity and a ranked method.", "da": "Sammenlign følsomhed og ranked metode."}
+    conclusion: {"es": "Vías robustas deben persistir razonablemente bajo decisiones plausibles.", "en": "Robust pathways should persist under plausible choices.", "da": "Robuste pathways bør persistere under plausible valg."}
   - id: bmb831.m10.e03
-    title: {es: Términos redundantes, en: Redundant terms, da: Redundante terms}
-    scenario: {es: Diez términos GO comparten 80% de genes., en: Ten GO terms share 80% of genes., da: Ti GO-terms deler 80% af gener.}
+    title: {"es": "Términos redundantes", "en": "Redundant terms", "da": "Redundante terms"}
+    scenario: {"es": "Diez términos GO comparten 80% de genes.", "en": "Ten GO terms share 80% of genes.", "da": "Ti GO-terms deler 80% af gener."}
     reasoning:
-      - {es: No son diez procesos independientes., en: They are not ten independent processes., da: De er ikke ti uafhængige processer.}
-      - {es: Resumir por red de solapamiento y examinar leading edges., en: Summarize by overlap network and inspect leading edges., da: Opsummér med overlap-netværk og undersøg leading edges.}
-    conclusion: {es: La narrativa debe reflejar dependencia semántica., en: Narrative should reflect semantic dependence., da: Narrativet bør afspejle semantisk afhængighed.}
+      - {"es": "No son diez procesos independientes.", "en": "They are not ten independent processes.", "da": "De er ikke ti uafhængige processer."}
+      - {"es": "Resumir por red de solapamiento y examinar leading edges.", "en": "Summarize by overlap network and inspect leading edges.", "da": "Opsummér med overlap-netværk og undersøg leading edges."}
+    conclusion: {"es": "La narrativa debe reflejar dependencia semántica.", "en": "Narrative should reflect semantic dependence.", "da": "Narrativet bør afspejle semantisk afhængighed."}
 
 guided_practice:
-  - {id: bmb831.m10.p01, activity_type: universe_design, prompt: {es: Define universos para RNA-seq y proteómica., en: Define universes for RNA-seq and proteomics., da: Definér universer for RNA-seq og proteomik.}, expected_elements: [measured, eligible, mapping, species, version]}
-  - {id: bmb831.m10.p02, activity_type: calculation, prompt: {es: Construye tabla hipergeométrica para una vía., en: Build a hypergeometric table for a pathway., da: Byg en hypergeometrisk tabel for en pathway.}, expected_elements: [universe_term, list_term, list_not_term, not_list]}
-  - {id: bmb831.m10.p03, activity_type: ranking_design, prompt: {es: Compara rankings por log2FC, estadístico y signed -log10p., en: Compare rankings by log2FC, statistic, and signed -log10p., da: Sammenlign rankings efter log2FC, statistik og signed -log10p.}, expected_elements: [direction, variance, extreme_p, low_counts, prespecification]}
-  - {id: bmb831.m10.p04, activity_type: plot_interpretation, prompt: {es: Interpreta dotplot de vías con tamaño, NES y FDR., en: Interpret a pathway dotplot with size, NES, and FDR., da: Fortolk pathway-dotplot med størrelse, NES og FDR.}, expected_elements: [direction, magnitude, uncertainty, redundancy, leading_edge]}
-  - {id: bmb831.m10.p05, activity_type: sensitivity_analysis, prompt: {es: Diseña sensibilidad a universo, base, cutoff y ranking., en: Design sensitivity to universe, database, cutoff, and ranking., da: Design følsomhed for univers, database, cutoff og ranking.}, expected_elements: [predefined_alternatives, overlap, direction, stable_themes, version]}
-  - {id: bmb831.m10.p06, activity_type: publication_appraisal, prompt: {es: Critica la afirmación “la vía está activada” basada sólo en ORA., en: Critique “the pathway is activated” based only on ORA., da: Kritisk vurder “pathwayen er aktiveret” baseret kun på ORA.}, expected_elements: [no_direction, list_cutoff, annotation, causal_limit, validation]}
+  - {id: bmb831.m10.p01, activity_type: universe_design, prompt: {"es": "Define universos para RNA-seq y proteómica.", "en": "Define universes for RNA-seq and proteomics.", "da": "Definér universer for RNA-seq og proteomik."}, expected_elements: [measured, eligible, mapping, species, version]}
+  - {id: bmb831.m10.p02, activity_type: calculation, prompt: {"es": "Construye tabla hipergeométrica para una vía.", "en": "Build a hypergeometric table for a pathway.", "da": "Byg en hypergeometrisk tabel for en pathway."}, expected_elements: [universe_term, list_term, list_not_term, not_list]}
+  - {id: bmb831.m10.p03, activity_type: ranking_design, prompt: {"es": "Compara rankings por log2FC, estadístico y signed -log10p.", "en": "Compare rankings by log2FC, statistic, and signed -log10p.", "da": "Sammenlign rankings efter log2FC, statistik og signed -log10p."}, expected_elements: [direction, variance, extreme_p, low_counts, prespecification]}
+  - {id: bmb831.m10.p04, activity_type: plot_interpretation, prompt: {"es": "Interpreta dotplot de vías con tamaño, NES y FDR.", "en": "Interpret a pathway dotplot with size, NES, and FDR.", "da": "Fortolk pathway-dotplot med størrelse, NES og FDR."}, expected_elements: [direction, magnitude, uncertainty, redundancy, leading_edge]}
+  - {id: bmb831.m10.p05, activity_type: sensitivity_analysis, prompt: {"es": "Diseña sensibilidad a universo, base, cutoff y ranking.", "en": "Design sensitivity to universe, database, cutoff, and ranking.", "da": "Design følsomhed for univers, database, cutoff og ranking."}, expected_elements: [predefined_alternatives, overlap, direction, stable_themes, version]}
+  - {id: bmb831.m10.p06, activity_type: publication_appraisal, prompt: {"es": "Critica la afirmación “la vía está activada” basada sólo en ORA.", "en": "Critique “the pathway is activated” based only on ORA.", "da": "Kritisk vurder “pathwayen er aktiveret” baseret kun på ORA."}, expected_elements: [no_direction, list_cutoff, annotation, causal_limit, validation]}
 
 objective_bank:
-  - {id: bmb831.m10.q01, type: multiple_choice, prompt: {es: ORA compara lista contra..., en: ORA compares a list against..., da: ORA sammenligner en liste mod...}, options: [{id: a, text: {es: Universo elegible, en: Eligible universe, da: Eligible univers}}, {id: b, text: {es: Todo gen conocido siempre, en: Every known gene always, da: Alle kendte gener altid}}], correct_option_ids: [a], explanation: {es: Debe reflejar oportunidad de selección., en: It should reflect selection opportunity., da: Det bør afspejle selektionsmulighed.}}
-  - {id: bmb831.m10.q02, type: true_false, prompt: {es: Usar todo el genoma siempre es conservador., en: Using the whole genome is always conservative., da: Brug af hele genomet er altid konservativt.}, correct: false, explanation: {es: Puede distorsionar odds si muchos genes no eran detectables., en: It may distort odds if many genes were not detectable., da: Det kan forvrænge odds hvis mange gener ikke var detekterbare.}}
-  - {id: bmb831.m10.q03, type: multiple_choice, prompt: {es: Ventaja de método rankeado., en: Advantage of a ranked method., da: Fordel ved ranked metode.}, options: [{id: a, text: {es: Usa todas las características sin cutoff binario, en: Uses all features without a binary cutoff, da: Bruger alle features uden binært cutoff}}, {id: b, text: {es: Elimina multiplicidad, en: Eliminates multiplicity, da: Eliminerer multiplicitet}}], correct_option_ids: [a], explanation: {es: Aún requiere control y ranking válido., en: It still requires control and a valid ranking., da: Det kræver stadig kontrol og gyldig ranking.}}
-  - {id: bmb831.m10.q04, type: true_false, prompt: {es: Permutar genes y muestras representa la misma nula., en: Permuting genes and samples represents the same null., da: Permutation af gener og samples repræsenterer samme nul.}, correct: false, explanation: {es: Preservan estructuras distintas., en: They preserve different structures., da: De bevarer forskellige strukturer.}}
-  - {id: bmb831.m10.q05, type: multiple_choice, prompt: {es: Leading edge contiene..., en: Leading edge contains..., da: Leading edge indeholder...}, options: [{id: a, text: {es: Miembros que impulsan el score, en: Members driving the score, da: Medlemmer der driver score}}, {id: b, text: {es: Todos los genes del término necesariamente, en: All term genes necessarily, da: Alle term-gener nødvendigvis}}], correct_option_ids: [a], explanation: {es: Identifica contribuyentes principales., en: It identifies principal contributors., da: Det identificerer hovedbidragydere.}}
-  - {id: bmb831.m10.q06, type: true_false, prompt: {es: Vía enriquecida implica todos sus genes regulados igual., en: An enriched pathway implies all its genes are regulated equally., da: En beriget pathway indebærer at alle dens gener reguleres ens.}, correct: false, explanation: {es: La señal puede venir de un subconjunto y ser heterogénea., en: Signal may come from a subset and be heterogeneous., da: Signalet kan komme fra et subset og være heterogent.}}
-  - {id: bmb831.m10.q07, type: multiple_choice, prompt: {es: Por qué términos GO son redundantes., en: Why are GO terms redundant?, da: Hvorfor er GO-terms redundante?}, options: [{id: a, text: {es: Jerarquía y genes compartidos, en: Hierarchy and shared genes, da: Hierarki og delte gener}}, {id: b, text: {es: Cada término es independiente, en: Every term is independent, da: Hvert term er uafhængigt}}], correct_option_ids: [a], explanation: {es: Términos parent/child y similares se solapan., en: Parent/child and similar terms overlap., da: Parent/child og lignende terms overlapper.}}
-  - {id: bmb831.m10.q08, type: true_false, prompt: {es: Agrupar términos redundantes crea evidencia adicional., en: Grouping redundant terms creates additional evidence., da: Gruppering af redundante terms skaber yderligere evidens.}, correct: false, explanation: {es: Sólo resume resultados existentes., en: It only summarizes existing results., da: Det opsummerer kun eksisterende resultater.}}
-  - {id: bmb831.m10.q09, type: multiple_choice, prompt: {es: “Pathway activada” requiere..., en: “Pathway activated” requires..., da: “Pathway aktiveret” kræver...}, options: [{id: a, text: {es: Evidencia direccional y funcional adicional, en: Additional directional and functional evidence, da: Yderligere retnings- og funktionel evidens}}, {id: b, text: {es: Sólo ORA significativa, en: Significant ORA only, da: Kun signifikant ORA}}], correct_option_ids: [a], explanation: {es: ORA no modela actividad ni causalidad., en: ORA does not model activity or causality., da: ORA modellerer ikke aktivitet eller kausalitet.}}
-  - {id: bmb831.m10.q10, type: true_false, prompt: {es: Base de anotación y versión deben reportarse., en: Annotation database and version should be reported., da: Annotationsdatabase og version bør rapporteres.}, correct: true, explanation: {es: Contenido cambia con el tiempo., en: Content changes over time., da: Indhold ændres over tid.}}
+  - {id: bmb831.m10.q01, type: multiple_choice, prompt: {"es": "ORA compara lista contra...", "en": "ORA compares a list against...", "da": "ORA sammenligner en liste mod..."}, options: [{id: a, text: {"es": "Universo elegible", "en": "Eligible universe", "da": "Eligible univers"}}, {id: b, text: {"es": "Todo gen conocido siempre", "en": "Every known gene always", "da": "Alle kendte gener altid"}}], correct_option_ids: [a], explanation: {"es": "Debe reflejar oportunidad de selección.", "en": "It should reflect selection opportunity.", "da": "Det bør afspejle selektionsmulighed."}}
+  - {id: bmb831.m10.q02, type: true_false, prompt: {"es": "Usar todo el genoma siempre es conservador.", "en": "Using the whole genome is always conservative.", "da": "Brug af hele genomet er altid konservativt."}, correct: false, explanation: {"es": "Puede distorsionar odds si muchos genes no eran detectables.", "en": "It may distort odds if many genes were not detectable.", "da": "Det kan forvrænge odds hvis mange gener ikke var detekterbare."}}
+  - {id: bmb831.m10.q03, type: multiple_choice, prompt: {"es": "Ventaja de método rankeado.", "en": "Advantage of a ranked method.", "da": "Fordel ved ranked metode."}, options: [{id: a, text: {"es": "Usa todas las características sin cutoff binario", "en": "Uses all features without a binary cutoff", "da": "Bruger alle features uden binært cutoff"}}, {id: b, text: {"es": "Elimina multiplicidad", "en": "Eliminates multiplicity", "da": "Eliminerer multiplicitet"}}], correct_option_ids: [a], explanation: {"es": "Aún requiere control y ranking válido.", "en": "It still requires control and a valid ranking.", "da": "Det kræver stadig kontrol og gyldig ranking."}}
+  - {id: bmb831.m10.q04, type: true_false, prompt: {"es": "Permutar genes y muestras representa la misma nula.", "en": "Permuting genes and samples represents the same null.", "da": "Permutation af gener og samples repræsenterer samme nul."}, correct: false, explanation: {"es": "Preservan estructuras distintas.", "en": "They preserve different structures.", "da": "De bevarer forskellige strukturer."}}
+  - {id: bmb831.m10.q05, type: multiple_choice, prompt: {"es": "Leading edge contiene...", "en": "Leading edge contains...", "da": "Leading edge indeholder..."}, options: [{id: a, text: {"es": "Miembros que impulsan el score", "en": "Members driving the score", "da": "Medlemmer der driver score"}}, {id: b, text: {"es": "Todos los genes del término necesariamente", "en": "All term genes necessarily", "da": "Alle term-gener nødvendigvis"}}], correct_option_ids: [a], explanation: {"es": "Identifica contribuyentes principales.", "en": "It identifies principal contributors.", "da": "Det identificerer hovedbidragydere."}}
+  - {id: bmb831.m10.q06, type: true_false, prompt: {"es": "Vía enriquecida implica todos sus genes regulados igual.", "en": "An enriched pathway implies all its genes are regulated equally.", "da": "En beriget pathway indebærer at alle dens gener reguleres ens."}, correct: false, explanation: {"es": "La señal puede venir de un subconjunto y ser heterogénea.", "en": "Signal may come from a subset and be heterogeneous.", "da": "Signalet kan komme fra et subset og være heterogent."}}
+  - {id: bmb831.m10.q07, type: multiple_choice, prompt: {"es": "Por qué términos GO son redundantes.", "en": "Why are GO terms redundant?", "da": "Hvorfor er GO-terms redundante?"}, options: [{id: a, text: {"es": "Jerarquía y genes compartidos", "en": "Hierarchy and shared genes", "da": "Hierarki og delte gener"}}, {id: b, text: {"es": "Cada término es independiente", "en": "Every term is independent", "da": "Hvert term er uafhængigt"}}], correct_option_ids: [a], explanation: {"es": "Términos parent/child y similares se solapan.", "en": "Parent/child and similar terms overlap.", "da": "Parent/child og lignende terms overlapper."}}
+  - {id: bmb831.m10.q08, type: true_false, prompt: {"es": "Agrupar términos redundantes crea evidencia adicional.", "en": "Grouping redundant terms creates additional evidence.", "da": "Gruppering af redundante terms skaber yderligere evidens."}, correct: false, explanation: {"es": "Sólo resume resultados existentes.", "en": "It only summarizes existing results.", "da": "Det opsummerer kun eksisterende resultater."}}
+  - {id: bmb831.m10.q09, type: multiple_choice, prompt: {"es": "“Pathway activada” requiere...", "en": "“Pathway activated” requires...", "da": "“Pathway aktiveret” kræver..."}, options: [{id: a, text: {"es": "Evidencia direccional y funcional adicional", "en": "Additional directional and functional evidence", "da": "Yderligere retnings- og funktionel evidens"}}, {id: b, text: {"es": "Sólo ORA significativa", "en": "Significant ORA only", "da": "Kun signifikant ORA"}}], correct_option_ids: [a], explanation: {"es": "ORA no modela actividad ni causalidad.", "en": "ORA does not model activity or causality.", "da": "ORA modellerer ikke aktivitet eller kausalitet."}}
+  - {id: bmb831.m10.q10, type: true_false, prompt: {"es": "Base de anotación y versión deben reportarse.", "en": "Annotation database and version should be reported.", "da": "Annotationsdatabase og version bør rapporteres."}, correct: true, explanation: {"es": "Contenido cambia con el tiempo.", "en": "Content changes over time.", "da": "Indhold ændres over tid."}}
 
 open_assessment_items:
   - id: bmb831.m10.a01
-    prompt: {es: Diseña ORA y análisis rankeado para el mismo contraste y compara supuestos., en: Design ORA and ranked enrichment for the same contrast and compare assumptions., da: Design ORA og ranked enrichment for samme kontrast og sammenlign antagelser.}
+    prompt: {"es": "Diseña ORA y análisis rankeado para el mismo contraste y compara supuestos.", "en": "Design ORA and ranked enrichment for the same contrast and compare assumptions.", "da": "Design ORA og ranked enrichment for samme kontrast og sammenlign antagelser."}
     rubric: [{criterion: universe_list_ranking, weight: 0.30}, {criterion: null_permutation, weight: 0.25}, {criterion: multiplicity_redundancy, weight: 0.25}, {criterion: interpretation, weight: 0.20}]
   - id: bmb831.m10.a02
-    prompt: {es: Audita un enriquecimiento proteómico que usa todo el genoma como background., en: Audit proteomics enrichment using the whole genome as background., da: Auditér proteomik-enrichment der bruger hele genomet som background.}
+    prompt: {"es": "Audita un enriquecimiento proteómico que usa todo el genoma como background.", "en": "Audit proteomics enrichment using the whole genome as background.", "da": "Auditér proteomik-enrichment der bruger hele genomet som background."}
     rubric: [{criterion: detectability_universe, weight: 0.30}, {criterion: mapping, weight: 0.25}, {criterion: bias_direction, weight: 0.20}, {criterion: corrected_analysis, weight: 0.25}]
   - id: bmb831.m10.a03
-    prompt: {es: Convierte diez términos redundantes en una hipótesis funcional limitada., en: Convert ten redundant terms into a limited functional hypothesis., da: Omsæt ti redundante terms til en begrænset funktionel hypotese.}
+    prompt: {"es": "Convierte diez términos redundantes en una hipótesis funcional limitada.", "en": "Convert ten redundant terms into a limited functional hypothesis.", "da": "Omsæt ti redundante terms til en begrænset funktionel hypotese."}
     rubric: [{criterion: overlap_leading_edge, weight: 0.25}, {criterion: direction, weight: 0.20}, {criterion: evidence_chain, weight: 0.30}, {criterion: testable_claim, weight: 0.25}]
 
 glossary:
-  - {id: bmb831.term.ora, term: {es: ORA, en: over-representation analysis, da: over-representation analysis}, definition: {es: Test de exceso de términos en una lista frente a universo., en: Test of term excess in a list relative to a universe., da: Test af term-overskud i en liste relativt til et univers.}}
-  - {id: bmb831.term.hypergeometric_test, term: {es: test hipergeométrico, en: hypergeometric test, da: hypergeometrisk test}, definition: {es: Modelo de solapamiento bajo muestreo sin reemplazo., en: Overlap model under sampling without replacement., da: Overlap-model under sampling uden replacement.}}
-  - {id: bmb831.term.background_universe, term: {es: universo de fondo, en: background universe, da: background-univers}, definition: {es: Características elegibles que podían entrar en la lista., en: Eligible features that could have entered the list., da: Eligible features der kunne komme i listen.}}
-  - {id: bmb831.term.ranked_enrichment, term: {es: enriquecimiento rankeado, en: ranked enrichment, da: ranked enrichment}, definition: {es: Análisis que evalúa concentración de un conjunto a lo largo de un ranking., en: Analysis evaluating concentration of a set along a ranking., da: Analyse der evaluerer koncentration af et sæt langs en ranking.}}
-  - {id: bmb831.term.leading_edge, term: {es: leading edge, en: leading edge, da: leading edge}, definition: {es: Subconjunto que contribuye principalmente al score de enriquecimiento., en: Subset principally contributing to an enrichment score., da: Subset der primært bidrager til enrichment-score.}}
-  - {id: bmb831.term.nes, term: {es: NES, en: normalized enrichment score, da: normalized enrichment score}, definition: {es: Score ajustado por propiedades como tamaño del conjunto bajo un método., en: Score adjusted for properties such as set size under a method., da: Score justeret for egenskaber som sætstørrelse under en metode.}}
-  - {id: bmb831.term.term_redundancy, term: {es: redundancia de términos, en: term redundancy, da: term-redundans}, definition: {es: Solapamiento semántico o de miembros entre términos., en: Semantic or membership overlap between terms., da: Semantisk eller medlemsmæssigt overlap mellem terms.}}
-  - {id: bmb831.term.annotation_bias, term: {es: sesgo de anotación, en: annotation bias, da: annotationsbias}, definition: {es: Diferencias sistemáticas en cantidad/calidad de anotación entre genes., en: Systematic differences in annotation amount or quality among genes., da: Systematiske forskelle i annotationsmængde eller kvalitet mellem gener.}}
-  - {id: bmb831.term.gene_set_size, term: {es: tamaño de conjunto, en: gene-set size, da: gen-sætstørrelse}, definition: {es: Número de miembros elegibles de un término., en: Number of eligible members in a term., da: Antal eligible medlemmer i et term.}}
-  - {id: bmb831.term.circular_validation, term: {es: validación circular, en: circular validation, da: cirkulær validering}, definition: {es: Uso de la misma evidencia para generar y confirmar una afirmación., en: Use of the same evidence to generate and confirm a claim., da: Brug af samme evidens til at generere og bekræfte en påstand.}}
+  - {id: bmb831.term.ora, term: {"es": "ORA", "en": "over-representation analysis", "da": "over-representation analysis"}, definition: {"es": "Test de exceso de términos en una lista frente a universo.", "en": "Test of term excess in a list relative to a universe.", "da": "Test af term-overskud i en liste relativt til et univers."}}
+  - {id: bmb831.term.hypergeometric_test, term: {"es": "test hipergeométrico", "en": "hypergeometric test", "da": "hypergeometrisk test"}, definition: {"es": "Modelo de solapamiento bajo muestreo sin reemplazo.", "en": "Overlap model under sampling without replacement.", "da": "Overlap-model under sampling uden replacement."}}
+  - {id: bmb831.term.background_universe, term: {"es": "universo de fondo", "en": "background universe", "da": "background-univers"}, definition: {"es": "Características elegibles que podían entrar en la lista.", "en": "Eligible features that could have entered the list.", "da": "Eligible features der kunne komme i listen."}}
+  - {id: bmb831.term.ranked_enrichment, term: {"es": "enriquecimiento rankeado", "en": "ranked enrichment", "da": "ranked enrichment"}, definition: {"es": "Análisis que evalúa concentración de un conjunto a lo largo de un ranking.", "en": "Analysis evaluating concentration of a set along a ranking.", "da": "Analyse der evaluerer koncentration af et sæt langs en ranking."}}
+  - {id: bmb831.term.leading_edge, term: {"es": "leading edge", "en": "leading edge", "da": "leading edge"}, definition: {"es": "Subconjunto que contribuye principalmente al score de enriquecimiento.", "en": "Subset principally contributing to an enrichment score.", "da": "Subset der primært bidrager til enrichment-score."}}
+  - {id: bmb831.term.nes, term: {"es": "NES", "en": "normalized enrichment score", "da": "normalized enrichment score"}, definition: {"es": "Score ajustado por propiedades como tamaño del conjunto bajo un método.", "en": "Score adjusted for properties such as set size under a method.", "da": "Score justeret for egenskaber som sætstørrelse under en metode."}}
+  - {id: bmb831.term.term_redundancy, term: {"es": "redundancia de términos", "en": "term redundancy", "da": "term-redundans"}, definition: {"es": "Solapamiento semántico o de miembros entre términos.", "en": "Semantic or membership overlap between terms.", "da": "Semantisk eller medlemsmæssigt overlap mellem terms."}}
+  - {id: bmb831.term.annotation_bias, term: {"es": "sesgo de anotación", "en": "annotation bias", "da": "annotationsbias"}, definition: {"es": "Diferencias sistemáticas en cantidad/calidad de anotación entre genes.", "en": "Systematic differences in annotation amount or quality among genes.", "da": "Systematiske forskelle i annotationsmængde eller kvalitet mellem gener."}}
+  - {id: bmb831.term.gene_set_size, term: {"es": "tamaño de conjunto", "en": "gene-set size", "da": "gen-sætstørrelse"}, definition: {"es": "Número de miembros elegibles de un término.", "en": "Number of eligible members in a term.", "da": "Antal eligible medlemmer i et term."}}
+  - {id: bmb831.term.circular_validation, term: {"es": "validación circular", "en": "circular validation", "da": "cirkulær validering"}, definition: {"es": "Uso de la misma evidencia para generar y confirmar una afirmación.", "en": "Use of the same evidence to generate and confirm a claim.", "da": "Brug af samme evidens til at generere og bekræfte en påstand."}}
 
 hidden_tutor_support:
   canonical_explanation:
@@ -220,8 +220,8 @@ hidden_tutor_support:
     - restrained testable biological claims
   retrieval_fragments:
     - id: bmb831.m10.r01
-      text: {es: El universo debe contener características medibles y elegibles, no automáticamente todo el genoma., en: The universe should contain measurable eligible features, not automatically the whole genome., da: Universet bør indeholde målbare eligible features, ikke automatisk hele genomet.}
+      text: {"es": "El universo debe contener características medibles y elegibles, no automáticamente todo el genoma.", "en": "The universe should contain measurable eligible features, not automatically the whole genome.", "da": "Universet bør indeholde målbare eligible features, ikke automatisk hele genomet."}
     - id: bmb831.m10.r02
-      text: {es: ORA depende de un cutoff; métodos rankeados usan toda la lista ordenada pero requieren una métrica y nula válidas., en: ORA depends on a cutoff; ranked methods use the full ordered list but require a valid metric and null., da: ORA afhænger af cutoff; ranked metoder kræver en gyldig metrik og nulmodel.}
+      text: {"es": "ORA depende de un cutoff; métodos rankeados usan toda la lista ordenada pero requieren una métrica y nula válidas.", "en": "ORA depends on a cutoff; ranked methods use the full ordered list but require a valid metric and null.", "da": "ORA afhænger af cutoff; ranked metoder kræver en gyldig metrik og nulmodel."}
     - id: bmb831.m10.r03
-      text: {es: Enriquecimiento genera hipótesis funcionales y no demuestra activación o causalidad., en: Enrichment generates functional hypotheses and does not demonstrate activation or causality., da: Enrichment genererer funktionelle hypoteser og demonstrerer ikke aktivering eller kausalitet.}
+      text: {"es": "Enriquecimiento genera hipótesis funcionales y no demuestra activación o causalidad.", "en": "Enrichment generates functional hypotheses and does not demonstrate activation or causality.", "da": "Enrichment genererer funktionelle hypoteser og demonstrerer ikke aktivering eller kausalitet."}

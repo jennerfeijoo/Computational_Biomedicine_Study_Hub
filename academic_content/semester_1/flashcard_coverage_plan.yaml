@@ -19,7 +19,7 @@ rules:
 courses:
   dm857:
     total_modules: 17
-    planned_cards: 426
+    planned_cards: 420
     modules:
       dm857.m01:
         count: 24
@@ -417,8 +417,8 @@ courses:
 
 summary:
   total_modules: 54
-  total_planned_cards: 1344
-  localized_front_back_pairs: 4032
+  total_planned_cards: 1338
+  localized_front_back_pairs: 4014
   note: >-
     Counts refer to unique cards with stable IDs. Each card has equivalent ES, EN,
     and DA content, so translations do not count as separate conceptual cards.

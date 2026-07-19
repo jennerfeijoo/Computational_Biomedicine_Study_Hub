@@ -5,17 +5,17 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Introducción a la bioinformática
-    en: Introduction to Bioinformatics
-    da: Introduktion til bioinformatik
+    es: "Introducción a la bioinformática"
+    en: "Introduction to Bioinformatics"
+    da: "Introduktion til bioinformatik"
   ects: 10
   level: masters
   term: autumn
   teaching_language: English
   assessment:
-    es: Proyecto escrito y examen oral final
-    en: Written project and final oral examination
-    da: Skriftligt projekt og afsluttende mundtlig eksamen
+    es: "Proyecto escrito y examen oral final"
+    en: "Written project and final oral examination"
+    da: "Skriftligt projekt og afsluttende mundtlig eksamen"
   purpose:
     es: >-
       Introducir los principios biológicos, algorítmicos, estadísticos y de modelado de datos
@@ -51,169 +51,169 @@ academic_preconditions:
 official_learning_outcomes:
   - id: dm847.lo01
     statement:
-      es: Explicar genética molecular central, regulación génica, modificación epigenética del ADN y características de bacterias y fagos.
-      en: Explain central molecular genetics, gene regulation, epigenetic DNA modification, and bacterial and phage genetics.
-      da: Forklare central molekylær genetik, genregulering, epigenetisk DNA-modifikation samt bakterie- og faggenetik.
+      es: "Explicar genética molecular central, regulación génica, modificación epigenética del ADN y características de bacterias y fagos."
+      en: "Explain central molecular genetics, gene regulation, epigenetic DNA modification, and bacterial and phage genetics."
+      da: "Forklare central molekylær genetik, genregulering, epigenetisk DNA-modifikation samt bakterie- og faggenetik."
   - id: dm847.lo02
     statement:
-      es: Modelar ontologías y dependencias de datos biomédicos.
-      en: Model ontologies and biomedical data dependencies.
-      da: Modellere ontologier og afhængigheder i biomedicinske data.
+      es: "Modelar ontologías y dependencias de datos biomédicos."
+      en: "Model ontologies and biomedical data dependencies."
+      da: "Modellere ontologier og afhængigheder i biomedicinske data."
   - id: dm847.lo03
     statement:
-      es: Diseñar bases de datos para biología de sistemas.
-      en: Design systems-biology databases.
-      da: Designe databaser til systembiologi.
+      es: "Diseñar bases de datos para biología de sistemas."
+      en: "Design systems-biology databases."
+      da: "Designe databaser til systembiologi."
   - id: dm847.lo04
     statement:
-      es: Explicar e implementar análisis de secuencias de ADN y proteínas mediante HMM, matrices de puntuación, índices de sufijos y estadística eficiente.
-      en: Explain and implement DNA and amino-acid sequence analysis using HMMs, scoring matrices, suffix indexes, and efficient statistics.
-      da: Forklare og implementere analyse af DNA- og aminosyresekvenser med HMM'er, scoringsmatricer, suffiksindeks og effektiv statistik.
+      es: "Explicar e implementar análisis de secuencias de ADN y proteínas mediante HMM, matrices de puntuación, índices de sufijos y estadística eficiente."
+      en: "Explain and implement DNA and amino-acid sequence analysis using HMMs, scoring matrices, suffix indexes, and efficient statistics."
+      da: "Forklare og implementere analyse af DNA- og aminosyresekvenser med HMM'er, scoringsmatricer, suffiksindeks og effektiv statistik."
   - id: dm847.lo05
     statement:
-      es: Explicar e implementar aprendizaje estadístico sobre redes biológicas.
-      en: Explain and implement statistical learning on biological networks.
-      da: Forklare og implementere statistisk læring på biologiske netværk.
+      es: "Explicar e implementar aprendizaje estadístico sobre redes biológicas."
+      en: "Explain and implement statistical learning on biological networks."
+      da: "Forklare og implementere statistisk læring på biologiske netværk."
   - id: dm847.lo06
     statement:
-      es: Explicar particularidades de genética bacteriana y predicción de operones.
-      en: Explain bacterial-genetics specialties and operon prediction.
-      da: Forklare særlige aspekter af bakteriegenetik og operonprædiktion.
+      es: "Explicar particularidades de genética bacteriana y predicción de operones."
+      en: "Explain bacterial-genetics specialties and operon prediction."
+      da: "Forklare særlige aspekter af bakteriegenetik og operonprædiktion."
   - id: dm847.lo07
     statement:
-      es: Explicar e implementar árboles y arrays de sufijos y la transformación de Burrows-Wheeler.
-      en: Explain and implement suffix trees, suffix arrays, and the Burrows-Wheeler transform.
-      da: Forklare og implementere suffikstræer, suffiksarrays og Burrows-Wheeler-transformen.
+      es: "Explicar e implementar árboles y arrays de sufijos y la transformación de Burrows-Wheeler."
+      en: "Explain and implement suffix trees, suffix arrays, and the Burrows-Wheeler transform."
+      da: "Forklare og implementere suffikstræer, suffiksarrays og Burrows-Wheeler-transformen."
   - id: dm847.lo08
     statement:
-      es: Explicar cribado de motivos de novo mediante expectation-maximization y modelos de entropía.
-      en: Explain de novo motif screening using expectation-maximization and entropy models.
-      da: Forklare de novo-motifsøgning med expectation-maximization og entropimodeller.
+      es: "Explicar cribado de motivos de novo mediante expectation-maximization y modelos de entropía."
+      en: "Explain de novo motif screening using expectation-maximization and entropy models."
+      da: "Forklare de novo-motifsøgning med expectation-maximization og entropimodeller."
   - id: dm847.lo09
     statement:
-      es: Explicar e implementar métodos supervisados y no supervisados para datos ómicos biomédicos.
-      en: Explain and implement supervised and unsupervised methods for biomedical omics data.
-      da: Forklare og implementere superviserede og ikke-superviserede metoder til biomedicinske omics-data.
+      es: "Explicar e implementar métodos supervisados y no supervisados para datos ómicos biomédicos."
+      en: "Explain and implement supervised and unsupervised methods for biomedical omics data."
+      da: "Forklare og implementere superviserede og ikke-superviserede metoder til biomedicinske omics-data."
 
 module_sequence:
   - id: dm847.m01
     order: 1
     title:
-      es: Información molecular, dogma central, regulación, epigenética, bacterias y fagos
-      en: Molecular information, central dogma, regulation, epigenetics, bacteria, and phages
-      da: Molekylær information, det centrale dogme, regulering, epigenetik, bakterier og fager
+      es: "Información molecular, dogma central, regulación, epigenética, bacterias y fagos"
+      en: "Molecular information, central dogma, regulation, epigenetics, bacteria, and phages"
+      da: "Molekylær information, det centrale dogme, regulering, epigenetik, bakterier og fager"
     outcomes: [dm847.lo01]
     prerequisites: [dm857.m05, dm857.m06]
   - id: dm847.m02
     order: 2
     title:
-      es: Identificadores biomédicos, ontologías, procedencia y dependencias FAIR
-      en: Biomedical identifiers, ontologies, provenance, and FAIR data dependencies
-      da: Biomedicinske identifikatorer, ontologier, proveniens og FAIR-dataafhængigheder
+      es: "Identificadores biomédicos, ontologías, procedencia y dependencias FAIR"
+      en: "Biomedical identifiers, ontologies, provenance, and FAIR data dependencies"
+      da: "Biomedicinske identifikatorer, ontologier, proveniens og FAIR-dataafhængigheder"
     outcomes: [dm847.lo02]
     prerequisites: [dm857.m07, dm857.m08]
   - id: dm847.m03
     order: 3
     title:
-      es: Diseño de bases de datos de biología de sistemas e interoperabilidad
-      en: Systems-biology database design and interoperable biological resources
-      da: Databasedesign til systembiologi og interoperable biologiske ressourcer
+      es: "Diseño de bases de datos de biología de sistemas e interoperabilidad"
+      en: "Systems-biology database design and interoperable biological resources"
+      da: "Databasedesign til systembiologi og interoperable biologiske ressourcer"
     outcomes: [dm847.lo03]
     prerequisites: [dm857.m07, dm857.m11]
   - id: dm847.m04
     order: 4
     title:
-      es: Representación de secuencias, probabilidad, matrices de sustitución y significancia
-      en: Sequence representation, probability, substitution matrices, and significance
-      da: Sekvensrepræsentation, sandsynlighed, substitutionsmatricer og signifikans
+      es: "Representación de secuencias, probabilidad, matrices de sustitución y significancia"
+      en: "Sequence representation, probability, substitution matrices, and significance"
+      da: "Sekvensrepræsentation, sandsynlighed, substitutionsmatricer og signifikans"
     outcomes: [dm847.lo04]
     prerequisites: [dm847.m01, bmb830.m05]
   - id: dm847.m05
     order: 5
     title:
-      es: Alineamiento por pares y programación dinámica
-      en: Pairwise sequence alignment and dynamic programming
-      da: Parvis sekvensalignment og dynamisk programmering
+      es: "Alineamiento por pares y programación dinámica"
+      en: "Pairwise sequence alignment and dynamic programming"
+      da: "Parvis sekvensalignment og dynamisk programmering"
     outcomes: [dm847.lo04]
     prerequisites: [dm847.m04, dm857.m03, dm857.m04, dm857.m06]
   - id: dm847.m06
     order: 6
     title:
-      es: Modelos ocultos de Markov para secuencias biológicas
-      en: Hidden Markov models for biological sequences
-      da: Skjulte Markov-modeller til biologiske sekvenser
+      es: "Modelos ocultos de Markov para secuencias biológicas"
+      en: "Hidden Markov models for biological sequences"
+      da: "Skjulte Markov-modeller til biologiske sekvenser"
     outcomes: [dm847.lo04]
     prerequisites: [dm847.m04, bmb830.m05, dm857.m09]
   - id: dm847.m07
     order: 7
     title:
-      es: Árboles y arrays de sufijos, índices de k-mers y búsqueda exacta
-      en: Suffix trees, suffix arrays, k-mer indexes, and exact pattern search
-      da: Suffikstræer, suffiksarrays, k-mer-indeks og eksakt mønstersøgning
+      es: "Árboles y arrays de sufijos, índices de k-mers y búsqueda exacta"
+      en: "Suffix trees, suffix arrays, k-mer indexes, and exact pattern search"
+      da: "Suffikstræer, suffiksarrays, k-mer-indeks og eksakt mønstersøgning"
     outcomes: [dm847.lo04, dm847.lo07]
     prerequisites: [dm857.m10, dm857.m15]
   - id: dm847.m08
     order: 8
     title:
-      es: Burrows-Wheeler, FM-index y mapeo de lecturas consciente de memoria
-      en: Burrows-Wheeler transform, FM-index, and memory-aware read mapping
-      da: Burrows-Wheeler-transform, FM-indeks og hukommelsesbevidst read-mapping
+      es: "Burrows-Wheeler, FM-index y mapeo de lecturas consciente de memoria"
+      en: "Burrows-Wheeler transform, FM-index, and memory-aware read mapping"
+      da: "Burrows-Wheeler-transform, FM-indeks og hukommelsesbevidst read-mapping"
     outcomes: [dm847.lo04, dm847.lo07]
     prerequisites: [dm847.m07, dm857.m15]
   - id: dm847.m09
     order: 9
     title:
-      es: Organización génica bacteriana y predicción de operones
-      en: Bacterial gene organization and operon prediction
-      da: Bakteriel genorganisation og operonprædiktion
+      es: "Organización génica bacteriana y predicción de operones"
+      en: "Bacterial gene organization and operon prediction"
+      da: "Bakteriel genorganisation og operonprædiktion"
     outcomes: [dm847.lo01, dm847.lo06]
     prerequisites: [dm847.m01, dm847.m04]
   - id: dm847.m10
     order: 10
     title:
-      es: Descubrimiento de motivos de novo con entropía, mezclas y EM
-      en: De novo motif discovery with entropy, mixture models, and EM
-      da: De novo-motifidentifikation med entropi, blandingsmodeller og EM
+      es: "Descubrimiento de motivos de novo con entropía, mezclas y EM"
+      en: "De novo motif discovery with entropy, mixture models, and EM"
+      da: "De novo-motifidentifikation med entropi, blandingsmodeller og EM"
     outcomes: [dm847.lo08]
     prerequisites: [dm847.m04, dm847.m06, bmb830.m05]
   - id: dm847.m11
     order: 11
     title:
-      es: Datos NGS, flujos de lecturas cortas, evidencia de calidad y peak calling
-      en: NGS data, short-read workflows, quality evidence, and peak calling
-      da: NGS-data, short-read-workflows, kvalitetsbevis og peak calling
+      es: "Datos NGS, flujos de lecturas cortas, evidencia de calidad y peak calling"
+      en: "NGS data, short-read workflows, quality evidence, and peak calling"
+      da: "NGS-data, short-read-workflows, kvalitetsbevis og peak calling"
     outcomes: [dm847.lo04, dm847.lo07]
     prerequisites: [dm847.m08, dm857.m13]
   - id: dm847.m12
     order: 12
     title:
-      es: Redes biológicas, disposición gráfica y razonamiento visual
-      en: Biological networks, graph layout, and visual reasoning
-      da: Biologiske netværk, graf-layout og visuel ræsonnering
+      es: "Redes biológicas, disposición gráfica y razonamiento visual"
+      en: "Biological networks, graph layout, and visual reasoning"
+      da: "Biologiske netværk, graf-layout og visuel ræsonnering"
     outcomes: [dm847.lo05]
     prerequisites: [dm857.m10, dm857.m13]
   - id: dm847.m13
     order: 13
     title:
-      es: Enriquecimiento de redes, módulos activos e interpretación de vías
-      en: Network enrichment, active modules, and pathway interpretation
-      da: Netværksberigelse, aktive moduler og pathway-fortolkning
+      es: "Enriquecimiento de redes, módulos activos e interpretación de vías"
+      en: "Network enrichment, active modules, and pathway interpretation"
+      da: "Netværksberigelse, aktive moduler og pathway-fortolkning"
     outcomes: [dm847.lo05]
     prerequisites: [dm847.m12, bmb830.m07]
   - id: dm847.m14
     order: 14
     title:
-      es: Aprendizaje supervisado y no supervisado para ómicas biomédicas
-      en: Supervised and unsupervised learning for biomedical omics
-      da: Superviseret og ikke-superviseret læring til biomedicinske omics-data
+      es: "Aprendizaje supervisado y no supervisado para ómicas biomédicas"
+      en: "Supervised and unsupervised learning for biomedical omics"
+      da: "Superviseret og ikke-superviseret læring til biomedicinske omics-data"
     outcomes: [dm847.lo09]
     prerequisites: [bmb830.m09, bmb831.m05, bmb831.m06]
   - id: dm847.m15
     order: 15
     title:
-      es: Proyecto bioinformático integrador y defensa científica oral
-      en: Integrative bioinformatics project and oral scientific defense
-      da: Integreret bioinformatikprojekt og mundtligt videnskabeligt forsvar
+      es: "Proyecto bioinformático integrador y defensa científica oral"
+      en: "Integrative bioinformatics project and oral scientific defense"
+      da: "Integreret bioinformatikprojekt og mundtligt videnskabeligt forsvar"
     outcomes: [dm847.lo01, dm847.lo02, dm847.lo03, dm847.lo04, dm847.lo05, dm847.lo06, dm847.lo07, dm847.lo08, dm847.lo09]
     prerequisites: [dm847.m01, dm847.m02, dm847.m03, dm847.m04, dm847.m05, dm847.m06, dm847.m07, dm847.m08, dm847.m09, dm847.m10, dm847.m11, dm847.m12, dm847.m13, dm847.m14]
 

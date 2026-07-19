@@ -6,9 +6,9 @@ status: academically_reviewed_draft
 
 metadata:
   title:
-    es: Resolución de problemas, valores, tipos y estado del programa
-    en: Problem solving, values, types, and program state
-    da: Problemløsning, værdier, typer og programtilstand
+    es: "Resolución de problemas, valores, tipos y estado del programa"
+    en: "Problem solving, values, types, and program state"
+    da: "Problemløsning, værdier, typer og programtilstand"
   summary:
     es: >-
       Introducción al razonamiento computacional y a los elementos mínimos de un programa
@@ -31,52 +31,52 @@ objectives:
   - id: m01.o1
     bloom_level: analyze
     statement:
-      es: Separar una situación concreta en entradas, transformaciones, restricciones y salidas observables.
-      en: Separate a concrete situation into inputs, transformations, constraints, and observable outputs.
-      da: Opdele en konkret situation i input, transformationer, begrænsninger og observerbare output.
+      es: "Separar una situación concreta en entradas, transformaciones, restricciones y salidas observables."
+      en: "Separate a concrete situation into inputs, transformations, constraints, and observable outputs."
+      da: "Opdele en konkret situation i input, transformationer, begrænsninger og observerbare output."
     evidence: explanation_and_problem_model
   - id: m01.o2
     bloom_level: understand
     statement:
-      es: Distinguir expresión, valor, tipo, variable, asignación y sentencia.
-      en: Distinguish expression, value, type, variable, assignment, and statement.
-      da: Skelne mellem udtryk, værdi, type, variabel, tildeling og sætning.
+      es: "Distinguir expresión, valor, tipo, variable, asignación y sentencia."
+      en: "Distinguish expression, value, type, variable, assignment, and statement."
+      da: "Skelne mellem udtryk, værdi, type, variabel, tildeling og sætning."
     evidence: terminology_comparison
   - id: m01.o3
     bloom_level: apply
     statement:
-      es: Predecir el valor y el tipo de expresiones aritméticas y de texto antes de ejecutarlas.
-      en: Predict the value and type of arithmetic and text expressions before execution.
-      da: Forudsige værdien og typen af aritmetiske udtryk og tekstudtryk før udførelse.
+      es: "Predecir el valor y el tipo de expresiones aritméticas y de texto antes de ejecutarlas."
+      en: "Predict the value and type of arithmetic and text expressions before execution."
+      da: "Forudsige værdien og typen af aritmetiske udtryk og tekstudtryk før udførelse."
     evidence: expression_tracing
   - id: m01.o4
     bloom_level: apply
     statement:
-      es: Representar el estado de un programa mediante una tabla de trazado.
-      en: Represent program state using a trace table.
-      da: Repræsentere programtilstand med en gennemgangstabel.
+      es: "Representar el estado de un programa mediante una tabla de trazado."
+      en: "Represent program state using a trace table."
+      da: "Repræsentere programtilstand med en gennemgangstabel."
     evidence: state_trace
   - id: m01.o5
     bloom_level: apply
     statement:
-      es: Aplicar conversiones explícitas entre int, float y str cuando el significado del dato lo requiera.
-      en: Apply explicit conversions between int, float, and str when required by data meaning.
-      da: Anvende eksplicitte konverteringer mellem int, float og str, når dataenes betydning kræver det.
+      es: "Aplicar conversiones explícitas entre int, float y str cuando el significado del dato lo requiera."
+      en: "Apply explicit conversions between int, float, and str when required by data meaning."
+      da: "Anvende eksplicitte konverteringer mellem int, float og str, når dataenes betydning kræver det."
     evidence: executable_code
   - id: m01.o6
     bloom_level: analyze
     statement:
-      es: Diferenciar errores de sintaxis, ejecución, lógica y especificación, y proponer una prueba mínima para detectarlos.
-      en: Differentiate syntax, runtime, logic, and specification errors and propose a minimal test to detect them.
-      da: Skelne mellem syntaks-, kørsels-, logik- og specifikationsfejl og foreslå en minimal test.
+      es: "Diferenciar errores de sintaxis, ejecución, lógica y especificación, y proponer una prueba mínima para detectarlos."
+      en: "Differentiate syntax, runtime, logic, and specification errors and propose a minimal test to detect them."
+      da: "Skelne mellem syntaks-, kørsels-, logik- og specifikationsfejl og foreslå en minimal test."
     evidence: debugging_and_test_design
 
 concepts:
   - id: problem-model-algorithm-program
     title:
-      es: Del problema al programa
-      en: From problem to program
-      da: Fra problem til program
+      es: "Del problema al programa"
+      en: "From problem to program"
+      da: "Fra problem til program"
     body:
       es: >-
         Programar comienza construyendo una representación operativa del problema. La situación real
@@ -102,21 +102,21 @@ concepts:
         algoritmen. Ved at adskille lagene kan fejl lokaliseres i model, algoritme eller kode.
     key_points:
       - es: Problema, modelo, algoritmo y programa no son sinónimos.
-        en: Problem, model, algorithm, and program are not synonyms.
-        da: Problem, model, algoritme og program er ikke synonymer.
+        en: "Problem, model, algorithm, and program are not synonyms."
+        da: "Problem, model, algoritme og program er ikke synonymer."
       - es: Las entradas y salidas deben definirse antes de escribir código.
-        en: Inputs and outputs should be defined before writing code.
-        da: Input og output bør defineres før koden skrives.
+        en: "Inputs and outputs should be defined before writing code."
+        da: "Input og output bør defineres før koden skrives."
       - es: La corrección se evalúa respecto a una especificación explícita.
-        en: Correctness is evaluated against an explicit specification.
-        da: Korrekthed vurderes i forhold til en eksplicit specifikation.
+        en: "Correctness is evaluated against an explicit specification."
+        da: "Korrekthed vurderes i forhold til en eksplicit specifikation."
     linked_objectives: [m01.o1, m01.o6]
 
   - id: expressions-values-types
     title:
-      es: Expresiones, valores y tipos
-      en: Expressions, values, and types
-      da: Udtryk, værdier og typer
+      es: "Expresiones, valores y tipos"
+      en: "Expressions, values, and types"
+      da: "Udtryk, værdier og typer"
     body:
       es: >-
         Una expresión combina literales, variables, operadores y llamadas que Python evalúa para
@@ -146,9 +146,9 @@ concepts:
 
   - id: variables-assignment-state
     title:
-      es: Variables, asignación y estado
-      en: Variables, assignment, and state
-      da: Variable, tildeling og tilstand
+      es: "Variables, asignación y estado"
+      en: "Variables, assignment, and state"
+      da: "Variable, tildeling og tilstand"
     body:
       es: >-
         Una variable es un nombre asociado a un valor. La asignación evalúa primero la expresión de
@@ -170,9 +170,9 @@ concepts:
 
   - id: operators-precedence-conversion
     title:
-      es: Operadores, precedencia y conversión
-      en: Operators, precedence, and conversion
-      da: Operatorer, præcedens og konvertering
+      es: "Operadores, precedencia y conversión"
+      en: "Operators, precedence, and conversion"
+      da: "Operatorer, præcedens og konvertering"
     body:
       es: >-
         Los operadores aritméticos básicos son `+`, `-`, `*`, `/`, `//`, `%` y `**`. Python aplica
@@ -195,9 +195,9 @@ concepts:
 
   - id: input-output-and-errors
     title:
-      es: Entrada, salida, trazado y errores
-      en: Input, output, tracing, and errors
-      da: Input, output, gennemgang og fejl
+      es: "Entrada, salida, trazado y errores"
+      en: "Input, output, tracing, and errors"
+      da: "Input, output, gennemgang og fejl"
     body:
       es: >-
         `input()` devuelve siempre `str`, incluso cuando el usuario escribe dígitos. Si el problema
@@ -223,9 +223,9 @@ concepts:
 worked_examples:
   - id: dm857.m01.e01
     title:
-      es: Calcular el rendimiento útil de una corrida de secuenciación
-      en: Calculate the usable yield of a sequencing run
-      da: Beregn det anvendelige udbytte fra en sekventeringskørsel
+      es: "Calcular el rendimiento útil de una corrida de secuenciación"
+      en: "Calculate the usable yield of a sequencing run"
+      da: "Beregn det anvendelige udbytte fra en sekventeringskørsel"
     problem:
       es: >-
         Una corrida produce 48_000_000 lecturas y el 92.5 % supera un filtro didáctico de calidad.
@@ -285,13 +285,13 @@ worked_examples:
 
   - id: dm857.m01.e02
     title:
-      es: Convertir el volumen total entre microlitros y mililitros
-      en: Convert total volume between microlitres and millilitres
-      da: Konvertér samlet volumen mellem mikroliter og milliliter
+      es: "Convertir el volumen total entre microlitros y mililitros"
+      en: "Convert total volume between microlitres and millilitres"
+      da: "Konvertér samlet volumen mellem mikroliter og milliliter"
     problem:
-      es: Veinticuatro muestras requieren 35 microlitros cada una. Calcular el volumen total en microlitros y mililitros.
-      en: Twenty-four samples require 35 microlitres each. Calculate the total volume in microlitres and millilitres.
-      da: Fireogtyve prøver kræver 35 mikroliter hver. Beregn den samlede volumen i mikroliter og milliliter.
+      es: "Veinticuatro muestras requieren 35 microlitros cada una. Calcular el volumen total en microlitros y mililitros."
+      en: "Twenty-four samples require 35 microlitres each. Calculate the total volume in microlitres and millilitres."
+      da: "Fireogtyve prøver kræver 35 mikroliter hver. Beregn den samlede volumen i mikroliter og milliliter."
     assumptions:
       - each sample uses the same volume
       - 1000 microlitres equal 1 millilitre
@@ -322,9 +322,9 @@ worked_examples:
       - total_volume_ul == 840
       - total_volume_ml == 0.84
     explanation:
-      es: Los sufijos `_ul` y `_ml` reducen el riesgo de mezclar unidades y hacen visible el modelo del problema.
-      en: The suffixes `_ul` and `_ml` reduce the risk of mixing units and make the problem model visible.
-      da: Endelserne `_ul` og `_ml` reducerer risikoen for at blande enheder og synliggør problemmodellen.
+      es: "Los sufijos `_ul` y `_ml` reducen el riesgo de mezclar unidades y hacen visible el modelo del problema."
+      en: "The suffixes `_ul` and `_ml` reduce the risk of mixing units and make the problem model visible."
+      da: "Endelserne `_ul` og `_ml` reducerer risikoen for at blande enheder og synliggør problemmodellen."
     limitations:
       - no pipetting loss or excess preparation volume is modeled
     linked_objectives: [m01.o1, m01.o3, m01.o4, m01.o5]
@@ -334,9 +334,9 @@ practice_exercises:
     activity_type: code_tracing
     difficulty: foundational
     prompt:
-      es: Traza `x = 4; y = x + 3; x = y * 2`. Registra el estado después de cada sentencia.
-      en: Trace `x = 4; y = x + 3; x = y * 2`. Record state after each statement.
-      da: Gennemgå `x = 4; y = x + 3; x = y * 2`. Registrér tilstanden efter hver sætning.
+      es: "Traza `x = 4; y = x + 3; x = y * 2`. Registra el estado después de cada sentencia."
+      en: "Trace `x = 4; y = x + 3; x = y * 2`. Record state after each statement."
+      da: "Gennemgå `x = 4; y = x + 3; x = y * 2`. Registrér tilstanden efter hver sætning."
     hints:
       es: [Evalúa siempre la derecha antes de actualizar la izquierda.]
       en: [Always evaluate the right-hand side before updating the left-hand side.]
@@ -346,18 +346,18 @@ practice_exercises:
       en: "After the first statement: x=4. After the second: x=4, y=7. After the third: x=14, y=7."
       da: "Efter første sætning: x=4. Efter anden: x=4, y=7. Efter tredje: x=14, y=7."
     explanation:
-      es: La reasignación de `x` no modifica el valor ya almacenado en `y`.
-      en: Reassigning `x` does not modify the value already stored in `y`.
-      da: Gentildeling af `x` ændrer ikke den værdi, der allerede er gemt i `y`.
+      es: "La reasignación de `x` no modifica el valor ya almacenado en `y`."
+      en: "Reassigning `x` does not modify the value already stored in `y`."
+      da: "Gentildeling af `x` ændrer ikke den værdi, der allerede er gemt i `y`."
     linked_objectives: [m01.o4]
 
   - id: dm857.m01.p02
     activity_type: fill_in_the_blank
     difficulty: foundational
     prompt:
-      es: Completa las conversiones para leer una edad entera y una concentración decimal desde `input()`.
-      en: Complete the conversions needed to read an integer age and a decimal concentration from `input()`.
-      da: Fuldfør konverteringerne for at læse en heltalsalder og en decimalkoncentration fra `input()`.
+      es: "Completa las conversiones para leer una edad entera y una concentración decimal desde `input()`."
+      en: "Complete the conversions needed to read an integer age and a decimal concentration from `input()`."
+      da: "Fuldfør konverteringerne for at læse en heltalsalder og en decimalkoncentration fra `input()`."
     starter_code: |-
       age = ____(input("Age: "))
       concentration = ____(input("Concentration: "))
@@ -366,36 +366,36 @@ practice_exercises:
       age = int(input("Age: "))
       concentration = float(input("Concentration: "))
     explanation:
-      es: `input()` devuelve texto; la conversión debe corresponder al significado esperado.
-      en: `input()` returns text; conversion must correspond to the intended meaning.
-      da: `input()` returnerer tekst; konverteringen skal svare til den tilsigtede betydning.
+      es: "`input()` devuelve texto; la conversión debe corresponder al significado esperado."
+      en: "`input()` returns text; conversion must correspond to the intended meaning."
+      da: "`input()` returnerer tekst; konverteringen skal svare til den tilsigtede betydning."
     linked_objectives: [m01.o5]
 
   - id: dm857.m01.p03
     activity_type: debugging
     difficulty: intermediate
     prompt:
-      es: Diagnostica por qué `total = "12" + 3` falla y propone una corrección coherente con una suma numérica.
-      en: Diagnose why `total = "12" + 3` fails and propose a correction consistent with numeric addition.
-      da: Forklar hvorfor `total = "12" + 3` fejler, og foreslå en rettelse til numerisk addition.
+      es: "Diagnostica por qué `total = \"12\" + 3` falla y propone una corrección coherente con una suma numérica."
+      en: "Diagnose why `total = \"12\" + 3` fails and propose a correction consistent with numeric addition."
+      da: "Forklar hvorfor `total = \"12\" + 3` fejler, og foreslå en rettelse til numerisk addition."
     hints:
       es: [Compara los tipos de ambos operandos.]
       en: [Compare the types of both operands.]
       da: [Sammenlign typerne for begge operander.]
     reference_solution: "total = int('12') + 3"
     explanation:
-      es: El fallo es de ejecución por operandos incompatibles para `+`; la intención numérica exige convertir la cadena.
-      en: The runtime failure results from incompatible operands for `+`; numeric intent requires converting the string.
-      da: Kørselsfejlen skyldes inkompatible operander til `+`; numerisk hensigt kræver konvertering af tekststrengen.
+      es: "El fallo es de ejecución por operandos incompatibles para `+`; la intención numérica exige convertir la cadena."
+      en: "The runtime failure results from incompatible operands for `+`; numeric intent requires converting the string."
+      da: "Kørselsfejlen skyldes inkompatible operander til `+`; numerisk hensigt kræver konvertering af tekststrengen."
     linked_objectives: [m01.o2, m01.o5, m01.o6]
 
   - id: dm857.m01.p04
     activity_type: method_selection
     difficulty: intermediate
     prompt:
-      es: Decide si un resultado de 4.8 debe convertirse con `int`, `round` o conservarse como `float` cuando representa: a) número de tubos, b) masa estimada, c) media de réplicas.
-      en: Decide whether 4.8 should use `int`, `round`, or remain `float` when representing: a) number of tubes, b) estimated mass, c) replicate mean.
-      da: Vælg om 4.8 skal bruge `int`, `round` eller forblive `float` for: a) antal rør, b) estimeret masse, c) middelværdi af replikater.
+      es: "Decide si un resultado de 4.8 debe convertirse con `int`, `round` o conservarse como `float` cuando representa: a) número de tubos, b) masa estimada, c) media de réplicas."
+      en: "Decide whether 4.8 should use `int`, `round`, or remain `float` when representing: a) number of tubes, b) estimated mass, c) replicate mean."
+      da: "Vælg om 4.8 skal bruge `int`, `round` eller forblive `float` for: a) antal rør, b) estimeret masse, c) middelværdi af replikater."
     reference_solution:
       es: >-
         a) La política debe definirse; normalmente no puede prepararse 4.8 tubos, por lo que `int` sin justificación sería peligroso y podría requerirse redondeo hacia arriba. b) Conservar `float` con unidad. c) Conservar `float` y reportar precisión adecuada.
@@ -404,18 +404,18 @@ practice_exercises:
       da: >-
         a) Politikken skal specificeres; 4,8 rør er umuligt, så rå `int` er usikkert, og oprunding kan være nødvendig. b) Bevar `float` med enhed. c) Bevar `float` med passende præcision.
     explanation:
-      es: La conversión depende del significado del dato y de la regla del problema, no de una preferencia sintáctica.
-      en: Conversion depends on data meaning and the problem rule, not on syntactic preference.
-      da: Konvertering afhænger af dataenes betydning og problemets regel, ikke af syntaktisk præference.
+      es: "La conversión depende del significado del dato y de la regla del problema, no de una preferencia sintáctica."
+      en: "Conversion depends on data meaning and the problem rule, not on syntactic preference."
+      da: "Konvertering afhænger af dataenes betydning og problemets regel, ikke af syntaktisk præference."
     linked_objectives: [m01.o1, m01.o5, m01.o6]
 
   - id: dm857.m01.p05
     activity_type: test_design
     difficulty: intermediate
     prompt:
-      es: Diseña tres pruebas para un cálculo `usable = int(total * fraction)` que detecten fracción negativa, fracción mayor que uno y un caso normal.
-      en: Design three tests for `usable = int(total * fraction)` that detect a negative fraction, a fraction greater than one, and a normal case.
-      da: Design tre test for `usable = int(total * fraction)`, der dækker negativ andel, andel over én og et normalt tilfælde.
+      es: "Diseña tres pruebas para un cálculo `usable = int(total * fraction)` que detecten fracción negativa, fracción mayor que uno y un caso normal."
+      en: "Design three tests for `usable = int(total * fraction)` that detect a negative fraction, a fraction greater than one, and a normal case."
+      da: "Design tre test for `usable = int(total * fraction)`, der dækker negativ andel, andel over én og et normalt tilfælde."
     reference_solution:
       es: >-
         Caso normal: total=100, fraction=0.8, esperado=80. Inválido bajo: total=100, fraction=-0.1, debe rechazarse. Inválido alto: total=100, fraction=1.2, debe rechazarse. Las dos últimas pruebas revelan que el cálculo necesita validación previa.
@@ -430,184 +430,184 @@ objective_question_bank:
     activity_type: multiple_choice
     difficulty: foundational
     prompt:
-      es: ¿Cuál afirmación describe correctamente una expresión?
-      en: Which statement correctly describes an expression?
-      da: Hvilket udsagn beskriver et udtryk korrekt?
+      es: "¿Cuál afirmación describe correctamente una expresión?"
+      en: "Which statement correctly describes an expression?"
+      da: "Hvilket udsagn beskriver et udtryk korrekt?"
     options:
       - id: evaluates_to_value
         text:
-          es: Código que Python puede evaluar para producir un valor.
-          en: Code Python can evaluate to produce a value.
-          da: Kode som Python kan evaluere for at producere en værdi.
+          es: "Código que Python puede evaluar para producir un valor."
+          en: "Code Python can evaluate to produce a value."
+          da: "Kode som Python kan evaluere for at producere en værdi."
       - id: permanent_storage
         text:
-          es: Un espacio permanente de almacenamiento con tipo fijo.
-          en: A permanent storage location with a fixed type.
-          da: Et permanent lagersted med fast type.
+          es: "Un espacio permanente de almacenamiento con tipo fijo."
+          en: "A permanent storage location with a fixed type."
+          da: "Et permanent lagersted med fast type."
       - id: visible_output
         text:
-          es: Cualquier texto mostrado por `print()`.
-          en: Any text displayed by `print()`.
-          da: Enhver tekst vist af `print()`.
+          es: "Cualquier texto mostrado por `print()`."
+          en: "Any text displayed by `print()`."
+          da: "Enhver tekst vist af `print()`."
     correct_option_ids: [evaluates_to_value]
     explanation:
-      es: Una expresión se evalúa y produce un valor; no es sinónimo de variable ni de salida visible.
-      en: An expression is evaluated and produces a value; it is not synonymous with a variable or visible output.
-      da: Et udtryk evalueres og producerer en værdi; det er ikke det samme som en variabel eller synligt output.
+      es: "Una expresión se evalúa y produce un valor; no es sinónimo de variable ni de salida visible."
+      en: "An expression is evaluated and produces a value; it is not synonymous with a variable or visible output."
+      da: "Et udtryk evalueres og producerer en værdi; det er ikke det samme som en variabel eller synligt output."
     linked_objectives: [m01.o2]
 
   - id: dm857.m01.q02
     activity_type: multiple_choice
     difficulty: foundational
     prompt:
-      es: ¿Qué tipo tiene el resultado de `8 / 4` en Python?
-      en: What is the type of `8 / 4` in Python?
-      da: Hvilken type har resultatet af `8 / 4` i Python?
+      es: "¿Qué tipo tiene el resultado de `8 / 4` en Python?"
+      en: "What is the type of `8 / 4` in Python?"
+      da: "Hvilken type har resultatet af `8 / 4` i Python?"
     options:
       - id: int
-        text: {es: int, en: int, da: int}
+        text: {"es": "int", "en": "int", "da": "int"}
       - id: float
-        text: {es: float, en: float, da: float}
+        text: {"es": "float", "en": "float", "da": "float"}
       - id: str
-        text: {es: str, en: str, da: str}
+        text: {"es": "str", "en": "str", "da": "str"}
     correct_option_ids: [float]
     explanation:
-      es: El operador `/` produce `float`, incluso cuando la división es exacta.
-      en: The `/` operator produces `float`, even when division is exact.
-      da: Operatoren `/` producerer `float`, også når divisionen går op.
+      es: "El operador `/` produce `float`, incluso cuando la división es exacta."
+      en: "The `/` operator produces `float`, even when division is exact."
+      da: "Operatoren `/` producerer `float`, også når divisionen går op."
     linked_objectives: [m01.o3]
 
   - id: dm857.m01.q03
     activity_type: multiple_choice
     difficulty: foundational
     prompt:
-      es: Después de `x = 5; y = x; x = 9`, ¿cuál es el valor de `y`?
-      en: After `x = 5; y = x; x = 9`, what is the value of `y`?
-      da: Efter `x = 5; y = x; x = 9`, hvad er værdien af `y`?
+      es: "Después de `x = 5; y = x; x = 9`, ¿cuál es el valor de `y`?"
+      en: "After `x = 5; y = x; x = 9`, what is the value of `y`?"
+      da: "Efter `x = 5; y = x; x = 9`, hvad er værdien af `y`?"
     options:
       - id: five
-        text: {es: "5", en: "5", da: "5"}
+        text: {"es": "\"5\"", "en": "\"5\"", "da": "\"5\""}
       - id: nine
-        text: {es: "9", en: "9", da: "9"}
+        text: {"es": "\"9\"", "en": "\"9\"", "da": "\"9\""}
       - id: undefined
-        text: {es: No definido, en: Undefined, da: Ikke defineret}
+        text: {"es": "No definido", "en": "Undefined", "da": "Ikke defineret"}
     correct_option_ids: [five]
     explanation:
-      es: `y` recibió el valor de `x` antes de la reasignación posterior.
-      en: `y` received the value of `x` before the later reassignment.
-      da: `y` modtog værdien af `x` før den senere gentildeling.
+      es: "`y` recibió el valor de `x` antes de la reasignación posterior."
+      en: "`y` received the value of `x` before the later reassignment."
+      da: "`y` modtog værdien af `x` før den senere gentildeling."
     linked_objectives: [m01.o4]
 
   - id: dm857.m01.q04
     activity_type: true_false
     difficulty: foundational
     prompt:
-      es: `input()` devuelve automáticamente un número cuando el usuario escribe dígitos.
-      en: `input()` automatically returns a number when the user types digits.
-      da: `input()` returnerer automatisk et tal, når brugeren skriver cifre.
+      es: "`input()` devuelve automáticamente un número cuando el usuario escribe dígitos."
+      en: "`input()` automatically returns a number when the user types digits."
+      da: "`input()` returnerer automatisk et tal, når brugeren skriver cifre."
     options:
       - id: true
-        text: {es: Verdadero, en: True, da: Sandt}
+        text: {"es": "Verdadero", "en": "True", "da": "Sandt"}
       - id: false
-        text: {es: Falso, en: False, da: Falsk}
+        text: {"es": "Falso", "en": "False", "da": "Falsk"}
     correct_option_ids: [false]
     explanation:
-      es: `input()` devuelve siempre `str`; la conversión numérica debe ser explícita.
-      en: `input()` always returns `str`; numeric conversion must be explicit.
-      da: `input()` returnerer altid `str`; numerisk konvertering skal være eksplicit.
+      es: "`input()` devuelve siempre `str`; la conversión numérica debe ser explícita."
+      en: "`input()` always returns `str`; numeric conversion must be explicit."
+      da: "`input()` returnerer altid `str`; numerisk konvertering skal være eksplicit."
     linked_objectives: [m01.o5]
 
   - id: dm857.m01.q05
     activity_type: multiple_choice
     difficulty: intermediate
     prompt:
-      es: ¿Qué error describe un programa que finaliza sin excepción pero calcula el porcentaje usando `92.5` en lugar de `0.925`?
-      en: Which error describes a program that finishes without exception but uses `92.5` instead of `0.925` for a percentage?
-      da: Hvilken fejl beskriver et program, der afslutter uden undtagelse, men bruger `92.5` i stedet for `0.925`?
+      es: "¿Qué error describe un programa que finaliza sin excepción pero calcula el porcentaje usando `92.5` en lugar de `0.925`?"
+      en: "Which error describes a program that finishes without exception but uses `92.5` instead of `0.925` for a percentage?"
+      da: "Hvilken fejl beskriver et program, der afslutter uden undtagelse, men bruger `92.5` i stedet for `0.925`?"
     options:
       - id: syntax
-        text: {es: Error de sintaxis, en: Syntax error, da: Syntaksfejl}
+        text: {"es": "Error de sintaxis", "en": "Syntax error", "da": "Syntaksfejl"}
       - id: runtime
-        text: {es: Error de ejecución, en: Runtime error, da: Kørselsfejl}
+        text: {"es": "Error de ejecución", "en": "Runtime error", "da": "Kørselsfejl"}
       - id: logic
-        text: {es: Error lógico, en: Logic error, da: Logikfejl}
+        text: {"es": "Error lógico", "en": "Logic error", "da": "Logikfejl"}
     correct_option_ids: [logic]
     explanation:
-      es: El código es válido y se ejecuta, pero el modelo numérico implementado es incorrecto.
-      en: The code is valid and executes, but the implemented numeric model is incorrect.
-      da: Koden er gyldig og kører, men den implementerede numeriske model er forkert.
+      es: "El código es válido y se ejecuta, pero el modelo numérico implementado es incorrecto."
+      en: "The code is valid and executes, but the implemented numeric model is incorrect."
+      da: "Koden er gyldig og kører, men den implementerede numeriske model er forkert."
     linked_objectives: [m01.o6]
 
   - id: dm857.m01.q06
     activity_type: multiple_select
     difficulty: intermediate
     prompt:
-      es: ¿Qué elementos necesita una prueba útil? Selecciona todos los correctos.
-      en: What does a useful test require? Select all correct elements.
-      da: Hvad kræver en nyttig test? Vælg alle korrekte elementer.
+      es: "¿Qué elementos necesita una prueba útil? Selecciona todos los correctos."
+      en: "What does a useful test require? Select all correct elements."
+      da: "Hvad kræver en nyttig test? Vælg alle korrekte elementer."
     options:
       - id: input
-        text: {es: Entrada concreta, en: Concrete input, da: Konkret input}
+        text: {"es": "Entrada concreta", "en": "Concrete input", "da": "Konkret input"}
       - id: expected
-        text: {es: Resultado esperado, en: Expected result, da: Forventet resultat}
+        text: {"es": "Resultado esperado", "en": "Expected result", "da": "Forventet resultat"}
       - id: comparison
-        text: {es: Criterio de comparación, en: Comparison criterion, da: Sammenligningskriterium}
+        text: {"es": "Criterio de comparación", "en": "Comparison criterion", "da": "Sammenligningskriterium"}
       - id: no_specification
-        text: {es: Ausencia de especificación, en: Absence of specification, da: Fravær af specifikation}
+        text: {"es": "Ausencia de especificación", "en": "Absence of specification", "da": "Fravær af specifikation"}
     correct_option_ids: [input, expected, comparison]
     explanation:
-      es: Una prueba necesita entrada, expectativa y un criterio que determine si el resultado observado coincide.
-      en: A test needs input, expectation, and a criterion that determines whether observed and expected results agree.
-      da: En test kræver input, forventning og et kriterium for overensstemmelse.
+      es: "Una prueba necesita entrada, expectativa y un criterio que determine si el resultado observado coincide."
+      en: "A test needs input, expectation, and a criterion that determines whether observed and expected results agree."
+      da: "En test kræver input, forventning og et kriterium for overensstemmelse."
     linked_objectives: [m01.o6]
 
   - id: dm857.m01.q07
     activity_type: cloze_choice
     difficulty: foundational
     template:
-      es: La asignación evalúa primero el lado [[blank01]] y luego actualiza el nombre del lado [[blank02]].
-      en: Assignment evaluates the [[blank01]] side first and then updates the name on the [[blank02]] side.
-      da: Tildeling evaluerer først [[blank01]] side og opdaterer derefter navnet på [[blank02]] side.
+      es: "La asignación evalúa primero el lado [[blank01]] y luego actualiza el nombre del lado [[blank02]]."
+      en: "Assignment evaluates the [[blank01]] side first and then updates the name on the [[blank02]] side."
+      da: "Tildeling evaluerer først [[blank01]] side og opdaterer derefter navnet på [[blank02]] side."
     blanks:
       - id: blank01
         options:
           - id: right
-            text: {es: derecho, en: right, da: højre}
+            text: {"es": "derecho", "en": "right", "da": "højre"}
           - id: left
-            text: {es: izquierdo, en: left, da: venstre}
+            text: {"es": "izquierdo", "en": "left", "da": "venstre"}
         correct_option_id: right
       - id: blank02
         options:
           - id: left
-            text: {es: izquierdo, en: left, da: venstre}
+            text: {"es": "izquierdo", "en": "left", "da": "venstre"}
           - id: right
-            text: {es: derecho, en: right, da: højre}
+            text: {"es": "derecho", "en": "right", "da": "højre"}
         correct_option_id: left
     explanation:
-      es: Esta secuencia explica por qué la reasignación puede utilizar el valor anterior de una variable.
-      en: This sequence explains why reassignment can use the previous value of a variable.
-      da: Denne rækkefølge forklarer, hvorfor gentildeling kan bruge en variabels tidligere værdi.
+      es: "Esta secuencia explica por qué la reasignación puede utilizar el valor anterior de una variable."
+      en: "This sequence explains why reassignment can use the previous value of a variable."
+      da: "Denne rækkefølge forklarer, hvorfor gentildeling kan bruge en variabels tidligere værdi."
     linked_objectives: [m01.o4]
 
   - id: dm857.m01.q08
     activity_type: multiple_choice
     difficulty: intermediate
     prompt:
-      es: ¿Cuál nombre comunica mejor una cantidad y su unidad?
-      en: Which name best communicates a quantity and its unit?
-      da: Hvilket navn kommunikerer bedst en størrelse og dens enhed?
+      es: "¿Cuál nombre comunica mejor una cantidad y su unidad?"
+      en: "Which name best communicates a quantity and its unit?"
+      da: "Hvilket navn kommunikerer bedst en størrelse og dens enhed?"
     options:
       - id: x
-        text: {es: x, en: x, da: x}
+        text: {"es": "x", "en": "x", "da": "x"}
       - id: value
-        text: {es: value, en: value, da: value}
+        text: {"es": "value", "en": "value", "da": "value"}
       - id: total_volume_ml
-        text: {es: total_volume_ml, en: total_volume_ml, da: total_volume_ml}
+        text: {"es": "total_volume_ml", "en": "total_volume_ml", "da": "total_volume_ml"}
     correct_option_ids: [total_volume_ml]
     explanation:
-      es: El nombre indica significado y unidad, lo que reduce errores de interpretación.
-      en: The name communicates meaning and unit, reducing interpretation errors.
-      da: Navnet angiver betydning og enhed og reducerer fortolkningsfejl.
+      es: "El nombre indica significado y unidad, lo que reduce errores de interpretación."
+      en: "The name communicates meaning and unit, reducing interpretation errors."
+      da: "Navnet angiver betydning og enhed og reducerer fortolkningsfejl."
     linked_objectives: [m01.o1, m01.o4]
 
 assessment_items:
@@ -634,9 +634,9 @@ assessment_items:
       - criterion: explanation_of_conversion_and_concatenation
         points: 3
     explanation:
-      es: La actividad evalúa trazado, división, conversión y concatenación, no solo el resultado final.
-      en: The task evaluates tracing, division, conversion, and concatenation, not only the final result.
-      da: Opgaven vurderer gennemgang, division, konvertering og sammenkædning, ikke kun slutresultatet.
+      es: "La actividad evalúa trazado, división, conversión y concatenación, no solo el resultado final."
+      en: "The task evaluates tracing, division, conversion, and concatenation, not only the final result."
+      da: "Opgaven vurderer gennemgang, division, konvertering og sammenkædning, ikke kun slutresultatet."
     linked_objectives: [m01.o2, m01.o3, m01.o4, m01.o5]
 
   - id: dm857.m01.a02
@@ -665,9 +665,9 @@ assessment_items:
       - criterion: tests
         points: 1
     explanation:
-      es: El objetivo principal es separar el modelo del código y hacer visibles las restricciones.
-      en: The main objective is to separate the model from the code and make constraints visible.
-      da: Hovedformålet er at adskille modellen fra koden og synliggøre begrænsningerne.
+      es: "El objetivo principal es separar el modelo del código y hacer visibles las restricciones."
+      en: "The main objective is to separate the model from the code and make constraints visible."
+      da: "Hovedformålet er at adskille modellen fra koden og synliggøre begrænsningerne."
     linked_objectives: [m01.o1, m01.o5, m01.o6]
 
 flashcards:
@@ -676,60 +676,60 @@ flashcards:
 
 glossary:
   - id: term.expression
-    term: {es: expresión, en: expression, da: udtryk}
+    term: {"es": "expresión", "en": "expression", "da": "udtryk"}
     definition:
-      es: Código evaluable que produce un valor.
-      en: Evaluable code that produces a value.
-      da: Kode der kan evalueres og producerer en værdi.
+      es: "Código evaluable que produce un valor."
+      en: "Evaluable code that produces a value."
+      da: "Kode der kan evalueres og producerer en værdi."
     related_terms: [term.value, term.type]
   - id: term.value
-    term: {es: valor, en: value, da: værdi}
+    term: {"es": "valor", "en": "value", "da": "værdi"}
     definition:
-      es: Resultado concreto de evaluar una expresión.
-      en: Concrete result of evaluating an expression.
-      da: Konkret resultat af evalueringen af et udtryk.
+      es: "Resultado concreto de evaluar una expresión."
+      en: "Concrete result of evaluating an expression."
+      da: "Konkret resultat af evalueringen af et udtryk."
     related_terms: [term.expression, term.type]
   - id: term.type
-    term: {es: tipo, en: type, da: type}
+    term: {"es": "tipo", "en": "type", "da": "type"}
     definition:
-      es: Clasificación que determina la representación y las operaciones válidas de un valor.
-      en: Classification that determines a value's representation and valid operations.
-      da: Klassifikation der bestemmer en værdis repræsentation og gyldige operationer.
+      es: "Clasificación que determina la representación y las operaciones válidas de un valor."
+      en: "Classification that determines a value's representation and valid operations."
+      da: "Klassifikation der bestemmer en værdis repræsentation og gyldige operationer."
     related_terms: [term.value, term.conversion]
   - id: term.variable
-    term: {es: variable, en: variable, da: variabel}
+    term: {"es": "variable", "en": "variable", "da": "variabel"}
     definition:
-      es: Nombre asociado a un valor en el estado actual del programa.
-      en: Name associated with a value in the current program state.
-      da: Navn knyttet til en værdi i programmets aktuelle tilstand.
+      es: "Nombre asociado a un valor en el estado actual del programa."
+      en: "Name associated with a value in the current program state."
+      da: "Navn knyttet til en værdi i programmets aktuelle tilstand."
     related_terms: [term.assignment, term.state]
   - id: term.assignment
-    term: {es: asignación, en: assignment, da: tildeling}
+    term: {"es": "asignación", "en": "assignment", "da": "tildeling"}
     definition:
-      es: Sentencia que evalúa una expresión y vincula un nombre con el resultado.
-      en: Statement that evaluates an expression and binds a name to the result.
-      da: Sætning der evaluerer et udtryk og knytter et navn til resultatet.
+      es: "Sentencia que evalúa una expresión y vincula un nombre con el resultado."
+      en: "Statement that evaluates an expression and binds a name to the result."
+      da: "Sætning der evaluerer et udtryk og knytter et navn til resultatet."
     related_terms: [term.variable, term.state]
   - id: term.state
-    term: {es: estado del programa, en: program state, da: programtilstand}
+    term: {"es": "estado del programa", "en": "program state", "da": "programtilstand"}
     definition:
-      es: Conjunto de asociaciones nombre-valor existentes en un momento de la ejecución.
-      en: Set of name-value associations at a point during execution.
-      da: Mængden af navn-værdi-forbindelser på et tidspunkt under udførelsen.
+      es: "Conjunto de asociaciones nombre-valor existentes en un momento de la ejecución."
+      en: "Set of name-value associations at a point during execution."
+      da: "Mængden af navn-værdi-forbindelser på et tidspunkt under udførelsen."
     related_terms: [term.variable, term.trace]
   - id: term.conversion
-    term: {es: conversión de tipo, en: type conversion, da: typekonvertering}
+    term: {"es": "conversión de tipo", "en": "type conversion", "da": "typekonvertering"}
     definition:
-      es: Creación de un valor de otro tipo a partir de una representación compatible.
-      en: Creation of a value of another type from a compatible representation.
-      da: Oprettelse af en værdi af en anden type fra en kompatibel repræsentation.
+      es: "Creación de un valor de otro tipo a partir de una representación compatible."
+      en: "Creation of a value of another type from a compatible representation."
+      da: "Oprettelse af en værdi af en anden type fra en kompatibel repræsentation."
     related_terms: [term.type]
   - id: term.logic_error
-    term: {es: error lógico, en: logic error, da: logikfejl}
+    term: {"es": "error lógico", "en": "logic error", "da": "logikfejl"}
     definition:
-      es: Fallo que permite ejecutar el programa pero produce un resultado incorrecto respecto a la especificación.
-      en: Failure that allows execution but produces a result inconsistent with the specification.
-      da: Fejl der tillader udførelse, men giver et resultat i strid med specifikationen.
+      es: "Fallo que permite ejecutar el programa pero produce un resultado incorrecto respecto a la especificación."
+      en: "Failure that allows execution but produces a result inconsistent with the specification."
+      da: "Fejl der tillader udførelse, men giver et resultat i strid med specifikationen."
     related_terms: [term.specification, term.test]
 
 hidden_guided_support:
@@ -760,7 +760,7 @@ hidden_guided_support:
       content: In Python, `/` returns float; `//` performs floor division.
     - id: dm857.m01.t04
       topic: input
-      content: `input()` returns str and does not validate semantic meaning.
+      content: "`input()` returns str and does not validate semantic meaning."
     - id: dm857.m01.t05
       topic: conversion
       content: Conversion must be justified by the quantity represented and may lose information.
@@ -778,9 +778,9 @@ hidden_guided_support:
       correction: A variable name can be rebound; each current value has a type.
     - misconception: If code runs without an exception, it is correct.
       correction: Logic and specification errors may produce plausible but wrong output.
-    - misconception: `int()` rounds a decimal value.
-      correction: `int()` truncates toward zero for finite floats.
-    - misconception: `print()` and `return` are equivalent.
+    - misconception: "`int()` rounds a decimal value."
+      correction: "`int()` truncates toward zero for finite floats."
+    - misconception: "`print()` and `return` are equivalent."
       correction: Printing produces visible output; returning passes a value to the caller.
     - misconception: Units are only comments and do not affect correctness.
       correction: Mixing units changes the modeled quantity and can invalidate results.

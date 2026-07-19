@@ -11,9 +11,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué representa un diccionario en Python?
-      en: What does a Python dictionary represent?
-      da: Hvad repræsenterer en Python-ordbog?
+      es: "¿Qué representa un diccionario en Python?"
+      en: "What does a Python dictionary represent?"
+      da: "Hvad repræsenterer en Python-ordbog?"
     back:
       es: >-
         Una colección mutable de asociaciones clave-valor. Cada clave es única, hashable y permite
@@ -33,9 +33,9 @@ cards:
     card_type: mechanism
     difficulty: foundational
     front:
-      es: ¿Por qué una lista no puede usarse como clave de diccionario?
-      en: Why can a list not be used as a dictionary key?
-      da: Hvorfor kan en liste ikke bruges som nøgle i en ordbog?
+      es: "¿Por qué una lista no puede usarse como clave de diccionario?"
+      en: "Why can a list not be used as a dictionary key?"
+      da: "Hvorfor kan en liste ikke bruges som nøgle i en ordbog?"
     back:
       es: >-
         Porque es mutable y no es hashable. Una clave necesita un hash estable mientras permanece en el
@@ -53,9 +53,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: Compara `d[key]` y `d.get(key, default)`.
-      en: Compare `d[key]` and `d.get(key, default)`.
-      da: Sammenlign `d[key]` og `d.get(key, default)`.
+      es: "Compara `d[key]` y `d.get(key, default)`."
+      en: "Compare `d[key]` and `d.get(key, default)`."
+      da: "Sammenlign `d[key]` og `d.get(key, default)`."
     back:
       es: >-
         `d[key]` exige que la clave exista y produce `KeyError` si falta. `get` retorna un valor alternativo
@@ -74,9 +74,9 @@ cards:
     card_type: misconception_correction
     difficulty: foundational
     front:
-      es: Corrige la afirmación: «`key in d` busca `key` entre los valores».
-      en: Correct: “`key in d` searches among dictionary values.”
-      da: Ret udsagnet: “`key in d` søger blandt ordbogens værdier.”
+      es: "Corrige la afirmación: «`key in d` busca `key` entre los valores»."
+      en: "Correct: “`key in d` searches among dictionary values.”"
+      da: "Ret udsagnet: “`key in d` søger blandt ordbogens værdier.”"
     back:
       es: >-
         `key in d` comprueba las claves. Para buscar entre valores se usaría `key in d.values()`, aunque una
@@ -94,9 +94,9 @@ cards:
     card_type: code_tracing
     difficulty: foundational
     front:
-      es: ¿Cuál es el resultado de `d = {'a': 1}; d['b'] = 2; d['a'] += 3`?
-      en: What is the result of `d = {'a': 1}; d['b'] = 2; d['a'] += 3`?
-      da: Hvad er resultatet af `d = {'a': 1}; d['b'] = 2; d['a'] += 3`?
+      es: "¿Cuál es el resultado de `d = {'a': 1}; d['b'] = 2; d['a'] += 3`?"
+      en: "What is the result of `d = {'a': 1}; d['b'] = 2; d['a'] += 3`?"
+      da: "Hvad er resultatet af `d = {'a': 1}; d['b'] = 2; d['a'] += 3`?"
     back:
       es: >-
         `{'a': 4, 'b': 2}`. La primera asignación a `b` inserta una entrada nueva; la operación sobre `a`
@@ -113,9 +113,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: ¿En qué se diferencian `del d[key]`, `d.pop(key)` y `d.pop(key, default)`?
-      en: How do `del d[key]`, `d.pop(key)`, and `d.pop(key, default)` differ?
-      da: Hvordan adskiller `del d[key]`, `d.pop(key)` og `d.pop(key, default)` sig?
+      es: "¿En qué se diferencian `del d[key]`, `d.pop(key)` y `d.pop(key, default)`?"
+      en: "How do `del d[key]`, `d.pop(key)`, and `d.pop(key, default)` differ?"
+      da: "Hvordan adskiller `del d[key]`, `d.pop(key)` og `d.pop(key, default)` sig?"
     back:
       es: >-
         `del` elimina sin retornar y exige presencia. `pop(key)` elimina, retorna y exige presencia.
@@ -133,9 +133,9 @@ cards:
     card_type: mechanism
     difficulty: intermediate
     front:
-      es: ¿Qué significa que `keys()`, `values()` e `items()` sean vistas dinámicas?
-      en: What does it mean that `keys()`, `values()`, and `items()` are dynamic views?
-      da: Hvad betyder det, at `keys()`, `values()` og `items()` er dynamiske views?
+      es: "¿Qué significa que `keys()`, `values()` e `items()` sean vistas dinámicas?"
+      en: "What does it mean that `keys()`, `values()`, and `items()` are dynamic views?"
+      da: "Hvad betyder det, at `keys()`, `values()` og `items()` er dynamiske views?"
     back:
       es: >-
         Reflejan cambios posteriores del diccionario en lugar de ser copias independientes. Son eficientes para
@@ -153,15 +153,15 @@ cards:
     card_type: debugging
     difficulty: intermediate
     front:
-      es: ¿Cómo corriges un bucle que elimina claves dentro de `for key in d:`?
-      en: How do you fix a loop that deletes keys inside `for key in d:`?
-      da: Hvordan retter du en løkke, der sletter nøgler i `for key in d:`?
+      es: "¿Cómo corriges un bucle que elimina claves dentro de `for key in d:`?"
+      en: "How do you fix a loop that deletes keys inside `for key in d:`?"
+      da: "Hvordan retter du en løkke, der sletter nøgler i `for key in d:`?"
     back:
       es: >-
-        Recorre una copia fija, por ejemplo `for key in list(d):`, o construye un diccionario filtrado nuevo.
+        Recorre una copia fija, por ejemplo `for key in list(d):"`, o construye un diccionario filtrado nuevo."
         La primera opción muta el original; la segunda separa entrada y salida y suele ser más fácil de verificar.
       en: >-
-        Traverse a fixed copy such as `for key in list(d):`, or build a new filtered dictionary. The first
+        Traverse a fixed copy such as `for key in list(d):"`, or build a new filtered dictionary. The first"
         mutates the original; the second separates input and output.
       da: >-
         Gennemløb en kopi som `list(d)`, eller byg en ny filtreret ordbog.
@@ -173,9 +173,9 @@ cards:
     card_type: pattern
     difficulty: foundational
     front:
-      es: ¿Cuál es el patrón básico para una tabla de frecuencias con diccionario?
-      en: What is the basic dictionary frequency-table pattern?
-      da: Hvad er det grundlæggende mønster for en frekvenstabel med ordbog?
+      es: "¿Cuál es el patrón básico para una tabla de frecuencias con diccionario?"
+      en: "What is the basic dictionary frequency-table pattern?"
+      da: "Hvad er det grundlæggende mønster for en frekvenstabel med ordbog?"
     back:
       es: >-
         Normalizar la categoría y ejecutar `counts[key] = counts.get(key, 0) + 1`. El valor inicial cero
@@ -193,9 +193,9 @@ cards:
     card_type: invariant
     difficulty: intermediate
     front:
-      es: ¿Qué invariante valida una tabla de frecuencias?
-      en: What invariant validates a frequency table?
-      da: Hvilken invariant validerer en frekvenstabel?
+      es: "¿Qué invariante valida una tabla de frecuencias?"
+      en: "What invariant validates a frequency table?"
+      da: "Hvilken invariant validerer en frekvenstabel?"
     back:
       es: >-
         La suma de todos los conteos debe coincidir con el número de observaciones aceptadas. Si también
@@ -213,9 +213,9 @@ cards:
     card_type: reasoning
     difficulty: intermediate
     front:
-      es: ¿Por qué la normalización debe ocurrir antes de usar una etiqueta como clave?
-      en: Why should normalization happen before using a label as a key?
-      da: Hvorfor skal normalisering ske før en etiket bruges som nøgle?
+      es: "¿Por qué la normalización debe ocurrir antes de usar una etiqueta como clave?"
+      en: "Why should normalization happen before using a label as a key?"
+      da: "Hvorfor skal normalisering ske før en etiket bruges som nøgle?"
     back:
       es: >-
         Porque variantes equivalentes como espacios externos o diferencias de mayúsculas producirían claves
@@ -233,9 +233,9 @@ cards:
     card_type: pipeline_design
     difficulty: intermediate
     front:
-      es: ¿Cómo agrupas registros por categoría conservando el orden dentro de cada grupo?
-      en: How do you group records by category while preserving within-group order?
-      da: Hvordan grupperer du poster efter kategori og bevarer rækkefølgen i hver gruppe?
+      es: "¿Cómo agrupas registros por categoría conservando el orden dentro de cada grupo?"
+      en: "How do you group records by category while preserving within-group order?"
+      da: "Hvordan grupperer du poster efter kategori og bevarer rækkefølgen i hver gruppe?"
     back:
       es: >-
         Usa un diccionario cuyas claves sean categorías normalizadas y cuyos valores sean listas. Crea la lista
@@ -253,9 +253,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué representa un conjunto en Python?
-      en: What does a Python set represent?
-      da: Hvad repræsenterer en Python-mængde?
+      es: "¿Qué representa un conjunto en Python?"
+      en: "What does a Python set represent?"
+      da: "Hvad repræsenterer en Python-mængde?"
     back:
       es: >-
         Una colección mutable de elementos únicos y hashables. Representa pertenencia y unicidad, no posición,
@@ -273,9 +273,9 @@ cards:
     card_type: misconception_correction
     difficulty: intermediate
     front:
-      es: Corrige: «Un conjunto es una lista más rápida».
-      en: Correct: “A set is just a faster list.”
-      da: Ret: “En mængde er bare en hurtigere liste.”
+      es: "Corrige: «Un conjunto es una lista más rápida»."
+      en: "Correct: “A set is just a faster list.”"
+      da: "Ret: “En mængde er bare en hurtigere liste.”"
     back:
       es: >-
         Cambiar a conjunto modifica el significado: elimina duplicados, no representa posiciones y no conserva
@@ -293,9 +293,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: Compara `remove` y `discard` en conjuntos.
-      en: Compare `remove` and `discard` for sets.
-      da: Sammenlign `remove` og `discard` for mængder.
+      es: "Compara `remove` y `discard` en conjuntos."
+      en: "Compare `remove` and `discard` for sets."
+      da: "Sammenlign `remove` og `discard` for mængder."
     back:
       es: >-
         Ambos eliminan un elemento. `remove` produce `KeyError` si falta; `discard` no falla. La elección depende
@@ -313,9 +313,9 @@ cards:
     card_type: method_mapping
     difficulty: foundational
     front:
-      es: Relaciona operaciones: unión, intersección, diferencia y diferencia simétrica.
-      en: Match union, intersection, difference, and symmetric difference to their meanings.
-      da: Knyt union, snit, differens og symmetrisk differens til deres betydning.
+      es: "Relaciona operaciones: unión, intersección, diferencia y diferencia simétrica."
+      en: "Match union, intersection, difference, and symmetric difference to their meanings."
+      da: "Knyt union, snit, differens og symmetrisk differens til deres betydning."
     back:
       es: >-
         Unión: en al menos uno. Intersección: en ambos. Diferencia `A-B`: en A y no en B. Diferencia simétrica:
@@ -333,9 +333,9 @@ cards:
     card_type: code_tracing
     difficulty: intermediate
     front:
-      es: Para `A={1,2,3}` y `B={3,4}`, calcula `A&B`, `A-B` y `A^B`.
-      en: For `A={1,2,3}` and `B={3,4}`, compute `A&B`, `A-B`, and `A^B`.
-      da: For `A={1,2,3}` og `B={3,4}`, beregn `A&B`, `A-B` og `A^B`.
+      es: "Para `A={1,2,3}` y `B={3,4}`, calcula `A&B`, `A-B` y `A^B`."
+      en: "For `A={1,2,3}` and `B={3,4}`, compute `A&B`, `A-B`, and `A^B`."
+      da: "For `A={1,2,3}` og `B={3,4}`, beregn `A&B`, `A-B` og `A^B`."
     back:
       es: >-
         `A & B = {3}`, `A - B = {1, 2}` y `A ^ B = {1, 2, 4}`. La diferencia es direccional.
@@ -351,9 +351,9 @@ cards:
     card_type: invariant
     difficulty: advanced
     front:
-      es: ¿Qué relaciones deben cumplir «comunes», «solo A» y «solo B»?
-      en: What relationships should “common,” “A only,” and “B only” satisfy?
-      da: Hvilke relationer skal “fælles”, “kun A” og “kun B” opfylde?
+      es: "¿Qué relaciones deben cumplir «comunes», «solo A» y «solo B»?"
+      en: "What relationships should “common,” “A only,” and “B only” satisfy?"
+      da: "Hvilke relationer skal “fælles”, “kun A” og “kun B” opfylde?"
     back:
       es: >-
         Deben ser disjuntos por pares; su unión debe reconstruir `A | B`; comunes debe ser subconjunto de A y B;
@@ -371,9 +371,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: ¿Cuándo elegir lista, tupla, diccionario o conjunto?
-      en: When should you choose a list, tuple, dictionary, or set?
-      da: Hvornår vælger du liste, tuple, ordbog eller mængde?
+      es: "¿Cuándo elegir lista, tupla, diccionario o conjunto?"
+      en: "When should you choose a list, tuple, dictionary, or set?"
+      da: "Hvornår vælger du liste, tuple, ordbog eller mængde?"
     back:
       es: >-
         Lista para orden, multiplicidad y mutación; tupla para un registro ordenado y estable; diccionario para
@@ -391,9 +391,9 @@ cards:
     card_type: method_selection
     difficulty: intermediate
     front:
-      es: ¿Qué estructura usarías para identificadores únicos con varias visitas cronológicas por persona?
-      en: What structure would you use for unique identifiers with multiple chronological visits per person?
-      da: Hvilken struktur bruges til unikke id'er med flere kronologiske besøg pr. person?
+      es: "¿Qué estructura usarías para identificadores únicos con varias visitas cronológicas por persona?"
+      en: "What structure would you use for unique identifiers with multiple chronological visits per person?"
+      da: "Hvilken struktur bruges til unikke id'er med flere kronologiske besøg pr. person?"
     back:
       es: >-
         Un diccionario por identificador cuyos valores contengan listas de visitas. El diccionario resuelve identidad;
@@ -411,9 +411,9 @@ cards:
     card_type: validation
     difficulty: intermediate
     front:
-      es: ¿Qué debe validar un esquema para un diccionario anidado?
-      en: What should a schema validate for a nested dictionary?
-      da: Hvad skal et skema validere for en indlejret ordbog?
+      es: "¿Qué debe validar un esquema para un diccionario anidado?"
+      en: "What should a schema validate for a nested dictionary?"
+      da: "Hvad skal et skema validere for en indlejret ordbog?"
     back:
       es: >-
         Claves obligatorias, tipos esperados, campos opcionales, dominios permitidos, estructura de colecciones internas,
@@ -431,9 +431,9 @@ cards:
     card_type: test_design
     difficulty: advanced
     front:
-      es: ¿Qué casos mínimos probarías para una función de agrupación?
-      en: What minimum cases would you test for a grouping function?
-      da: Hvilke minimumstilfælde tester du for en grupperingsfunktion?
+      es: "¿Qué casos mínimos probarías para una función de agrupación?"
+      en: "What minimum cases would you test for a grouping function?"
+      da: "Hvilke minimumstilfælde tester du for en grupperingsfunktion?"
     back:
       es: >-
         Entrada vacía; una categoría; categorías repetidas; variantes que deben normalizarse juntas; etiqueta vacía o inválida;
@@ -451,9 +451,9 @@ cards:
     card_type: oral_defense
     difficulty: advanced
     front:
-      es: ¿Cómo defenderías que convertir una lista a conjunto es correcto en un análisis?
-      en: How would you defend converting a list to a set in an analysis?
-      da: Hvordan forsvarer du konvertering af en liste til en mængde i en analyse?
+      es: "¿Cómo defenderías que convertir una lista a conjunto es correcto en un análisis?"
+      en: "How would you defend converting a list to a set in an analysis?"
+      da: "Hvordan forsvarer du konvertering af en liste til en mængde i en analyse?"
     back:
       es: >-
         Debes demostrar que la pregunta depende solo de presencia o unicidad y que orden y multiplicidad no contienen
@@ -471,9 +471,9 @@ cards:
     card_type: synthesis
     difficulty: advanced
     front:
-      es: Resume el criterio central para elegir una estructura de datos.
-      en: Summarize the central criterion for selecting a data structure.
-      da: Opsummér hovedkriteriet for valg af datastruktur.
+      es: "Resume el criterio central para elegir una estructura de datos."
+      en: "Summarize the central criterion for selecting a data structure."
+      da: "Opsummér hovedkriteriet for valg af datastruktur."
     back:
       es: >-
         Comenzar por la semántica: identidad, posición, orden, multiplicidad, mutabilidad, acceso y comparación requeridos.

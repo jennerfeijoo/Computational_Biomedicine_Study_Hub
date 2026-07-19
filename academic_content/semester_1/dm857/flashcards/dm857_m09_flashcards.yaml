@@ -10,7 +10,7 @@ cards:
     mode: conceptual
     card_type: definition
     difficulty: foundational
-    front: {es: ¿Qué es una solución recursiva?, en: What is a recursive solution?, da: Hvad er en rekursiv løsning?}
+    front: {"es": "¿Qué es una solución recursiva?", "en": "What is a recursive solution?", "da": "Hvad er en rekursiv løsning?"}
     back:
       es: >-
         Una solución que resuelve una instancia mediante una o más instancias de la misma forma, estrictamente menores
@@ -27,7 +27,7 @@ cards:
     mode: conceptual
     card_type: framework
     difficulty: foundational
-    front: {es: ¿Cuáles son las cuatro piezas de una solución recursiva?, en: What are the four pieces of a recursive solution?, da: Hvad er de fire dele af en rekursiv løsning?}
+    front: {"es": "¿Cuáles son las cuatro piezas de una solución recursiva?", "en": "What are the four pieces of a recursive solution?", "da": "Hvad er de fire dele af en rekursiv løsning?"}
     back:
       es: >-
         Contrato, caso base, reducción y combinación. El contrato define el problema; el caso base resuelve la frontera;
@@ -44,7 +44,7 @@ cards:
     mode: conceptual
     card_type: definition
     difficulty: foundational
-    front: {es: ¿Qué es un caso base?, en: What is a base case?, da: Hvad er et basistilfælde?}
+    front: {"es": "¿Qué es un caso base?", "en": "What is a base case?", "da": "Hvad er et basistilfælde?"}
     back:
       es: >-
         Una instancia del dominio que puede resolverse directamente sin otra llamada recursiva. Debe ser alcanzable,
@@ -61,7 +61,7 @@ cards:
     mode: conceptual
     card_type: misconception_correction
     difficulty: intermediate
-    front: {es: Corrige: «Tener un caso base garantiza terminación»., en: Correct: “Having a base case guarantees termination.”, da: Ret: “Et basistilfælde garanterer terminering.”}
+    front: {"es": "Corrige: «Tener un caso base garantiza terminación».", "en": "Correct: “Having a base case guarantees termination.”", "da": "Ret: “Et basistilfælde garanterer terminering.”"}
     back:
       es: >-
         No basta con existir: cada rama recursiva debe acercarse a un caso base alcanzable mediante una medida bien fundada.
@@ -77,7 +77,7 @@ cards:
     mode: conceptual
     card_type: definition
     difficulty: intermediate
-    front: {es: ¿Qué es una medida de progreso bien fundada?, en: What is a well-founded progress measure?, da: Hvad er et velfunderet fremskridtsmål?}
+    front: {"es": "¿Qué es una medida de progreso bien fundada?", "en": "What is a well-founded progress measure?", "da": "Hvad er et velfunderet fremskridtsmål?"}
     back:
       es: >-
         Una cantidad que se reduce estrictamente en cada llamada y no puede disminuir indefinidamente, como un entero
@@ -94,7 +94,7 @@ cards:
     mode: practical
     card_type: debugging
     difficulty: foundational
-    front: {es: ¿Por qué `f(n + 1)` suele romper una recursión con caso base `n == 0` para `n >= 0`?, en: Why does `f(n + 1)` usually break recursion with base case `n == 0` for `n >= 0`?, da: Hvorfor bryder `f(n + 1)` normalt rekursion med basistilfældet `n == 0` for `n >= 0`?}
+    front: {"es": "¿Por qué `f(n + 1)` suele romper una recursión con caso base `n == 0` para `n >= 0`?", "en": "Why does `f(n + 1)` usually break recursion with base case `n == 0` for `n >= 0`?", "da": "Hvorfor bryder `f(n + 1)` normalt rekursion med basistilfældet `n == 0` for `n >= 0`?"}
     back:
       es: >-
         Porque `n` aumenta y se aleja del caso base. La medida de progreso debe decrecer, por ejemplo mediante `n - 1`,
@@ -110,7 +110,7 @@ cards:
     mode: conceptual
     card_type: mechanism
     difficulty: foundational
-    front: {es: ¿Qué contiene un marco de llamada recursiva?, en: What does a recursive call frame contain?, da: Hvad indeholder en rekursiv call frame?}
+    front: {"es": "¿Qué contiene un marco de llamada recursiva?", "en": "What does a recursive call frame contain?", "da": "Hvad indeholder en rekursiv call frame?"}
     back:
       es: >-
         Parámetros, variables locales, estado temporal y el punto al que debe regresar la ejecución. Cada llamada tiene
@@ -126,7 +126,7 @@ cards:
     mode: conceptual
     card_type: comparison
     difficulty: intermediate
-    front: {es: Compara descenso y desenrollado., en: Compare descent and unwinding., da: Sammenlign nedstigning og afvikling.}
+    front: {"es": "Compara descenso y desenrollado.", "en": "Compare descent and unwinding.", "da": "Sammenlign nedstigning og afvikling."}
     back:
       es: >-
         Durante el descenso se crean marcos y se ejecuta el trabajo anterior a la llamada. Tras el caso base, el
@@ -144,13 +144,13 @@ cards:
     card_type: code_tracing
     difficulty: foundational
     front:
-      es: Una función imprime `n` antes de llamar con `n-1`. ¿Qué imprime para 3 si se detiene en 0?
-      en: A function prints `n` before calling with `n-1`. What does it print for 3 when it stops at 0?
-      da: En funktion udskriver `n` før kald med `n-1`. Hvad udskrives for 3 med stop ved 0?
+      es: "Una función imprime `n` antes de llamar con `n-1`. ¿Qué imprime para 3 si se detiene en 0?"
+      en: "A function prints `n` before calling with `n-1`. What does it print for 3 when it stops at 0?"
+      da: "En funktion udskriver `n` før kald med `n-1`. Hvad udskrives for 3 med stop ved 0?"
     back:
-      es: `3, 2, 1`. La impresión ocurre durante el descenso.
-      en: `3, 2, 1`. Printing occurs during descent.
-      da: `3, 2, 1`. Udskriften sker under nedstigningen.
+      es: "`3, 2, 1`. La impresión ocurre durante el descenso."
+      en: "`3, 2, 1`. Printing occurs during descent."
+      da: "`3, 2, 1`. Udskriften sker under nedstigningen."
     linked_objectives: [m09.o4]
     tags: [tracing, descent]
 
@@ -159,13 +159,13 @@ cards:
     card_type: code_tracing
     difficulty: foundational
     front:
-      es: La misma función imprime después de la llamada. ¿Qué imprime para 3?
-      en: The same function prints after the recursive call. What does it print for 3?
-      da: Den samme funktion udskriver efter det rekursive kald. Hvad udskrives for 3?
+      es: "La misma función imprime después de la llamada. ¿Qué imprime para 3?"
+      en: "The same function prints after the recursive call. What does it print for 3?"
+      da: "Den samme funktion udskriver efter det rekursive kald. Hvad udskrives for 3?"
     back:
-      es: `1, 2, 3`. La impresión ocurre mientras la pila se desenrolla.
-      en: `1, 2, 3`. Printing occurs while the stack unwinds.
-      da: `1, 2, 3`. Udskriften sker under afviklingen.
+      es: "`1, 2, 3`. La impresión ocurre mientras la pila se desenrolla."
+      en: "`1, 2, 3`. Printing occurs while the stack unwinds."
+      da: "`1, 2, 3`. Udskriften sker under afviklingen."
     linked_objectives: [m09.o4]
     tags: [tracing, unwinding]
 
@@ -173,7 +173,7 @@ cards:
     mode: conceptual
     card_type: pattern
     difficulty: intermediate
-    front: {es: ¿Cómo se aplica el patrón «cabeza y resto» a una secuencia?, en: How does the “head and rest” pattern apply to a sequence?, da: Hvordan anvendes mønstret “hoved og rest” på en sekvens?}
+    front: {"es": "¿Cómo se aplica el patrón «cabeza y resto» a una secuencia?", "en": "How does the “head and rest” pattern apply to a sequence?", "da": "Hvordan anvendes mønstret “hoved og rest” på en sekvens?"}
     back:
       es: >-
         Se procesa el primer elemento y se delega el resto a una llamada recursiva. El caso base suele ser la secuencia
@@ -190,7 +190,7 @@ cards:
     mode: practical
     card_type: refactoring
     difficulty: intermediate
-    front: {es: ¿Cómo evitas `values[1:]` en cada llamada?, en: How do you avoid `values[1:]` at every call?, da: Hvordan undgår du `values[1:]` ved hvert kald?}
+    front: {"es": "¿Cómo evitas `values[1:]` en cada llamada?", "en": "How do you avoid `values[1:]` at every call?", "da": "Hvordan undgår du `values[1:]` ved hvert kald?"}
     back:
       es: >-
         Mantén la secuencia original y pasa un índice o límites. El caso base compara el índice con la longitud, y cada
@@ -207,7 +207,7 @@ cards:
     mode: conceptual
     card_type: invariant
     difficulty: intermediate
-    front: {es: ¿Qué invariante describe una suma recursiva por índice?, en: What invariant describes an index-based recursive sum?, da: Hvilken invariant beskriver en indeksbaseret rekursiv sum?}
+    front: {"es": "¿Qué invariante describe una suma recursiva por índice?", "en": "What invariant describes an index-based recursive sum?", "da": "Hvilken invariant beskriver en indeksbaseret rekursiv sum?"}
     back:
       es: >-
         La llamada en `index` retorna la suma de los elementos desde esa posición hasta el final. En el caso base
@@ -224,7 +224,7 @@ cards:
     mode: conceptual
     card_type: reasoning
     difficulty: intermediate
-    front: {es: ¿Por qué las estructuras anidadas favorecen la recursión?, en: Why do nested structures favor recursion?, da: Hvorfor favoriserer indlejrede strukturer rekursion?}
+    front: {"es": "¿Por qué las estructuras anidadas favorecen la recursión?", "en": "Why do nested structures favor recursion?", "da": "Hvorfor favoriserer indlejrede strukturer rekursion?"}
     back:
       es: >-
         Porque cada contenedor puede contener elementos o nuevos contenedores de la misma forma y con profundidad
@@ -241,7 +241,7 @@ cards:
     mode: conceptual
     card_type: boundary_analysis
     difficulty: advanced
-    front: {es: ¿Qué riesgo existe al tratar cadenas como contenedores genéricos?, en: What risk arises from treating strings as generic containers?, da: Hvilken risiko opstår ved at behandle strenge som generiske containere?}
+    front: {"es": "¿Qué riesgo existe al tratar cadenas como contenedores genéricos?", "en": "What risk arises from treating strings as generic containers?", "da": "Hvilken risiko opstår ved at behandle strenge som generiske containere?"}
     back:
       es: >-
         Una cadena puede descomponerse repetidamente en caracteres y seguir siendo una secuencia, causando comportamiento
@@ -258,7 +258,7 @@ cards:
     mode: conceptual
     card_type: comparison
     difficulty: intermediate
-    front: {es: Compara recursión e iteración en Python., en: Compare recursion and iteration in Python., da: Sammenlign rekursion og iteration i Python.}
+    front: {"es": "Compara recursión e iteración en Python.", "en": "Compare recursion and iteration in Python.", "da": "Sammenlign rekursion og iteration i Python."}
     back:
       es: >-
         Recursión puede reflejar mejor estructuras recursivas y divide y vencerás, pero usa un marco por llamada y tiene
@@ -275,7 +275,7 @@ cards:
     mode: conceptual
     card_type: misconception_correction
     difficulty: advanced
-    front: {es: Corrige: «Python optimiza automáticamente la recursión de cola»., en: Correct: “Python automatically optimizes tail recursion.”, da: Ret: “Python optimerer automatisk tail recursion.”}
+    front: {"es": "Corrige: «Python optimiza automáticamente la recursión de cola».", "en": "Correct: “Python automatically optimizes tail recursion.”", "da": "Ret: “Python optimerer automatisk tail recursion.”"}
     back:
       es: >-
         Python conserva los marcos y aplica un límite de recursión. Una formulación de cola profunda puede producir
@@ -291,7 +291,7 @@ cards:
     mode: conceptual
     card_type: mechanism
     difficulty: advanced
-    front: {es: ¿Qué revela un árbol de llamadas?, en: What does a call tree reveal?, da: Hvad afslører et kaldstræ?}
+    front: {"es": "¿Qué revela un árbol de llamadas?", "en": "What does a call tree reveal?", "da": "Hvad afslører et kaldstræ?"}
     back:
       es: >-
         Las relaciones entre llamadas, profundidad, ramificación y repetición de subproblemas. Permite distinguir una
@@ -308,7 +308,7 @@ cards:
     mode: conceptual
     card_type: definition
     difficulty: advanced
-    front: {es: ¿Qué es memoización?, en: What is memoization?, da: Hvad er memoization?}
+    front: {"es": "¿Qué es memoización?", "en": "What is memoization?", "da": "Hvad er memoization?"}
     back:
       es: >-
         Almacenar el resultado de un subproblema bajo una clave que representa su entrada para reutilizarlo cuando la misma
@@ -325,7 +325,7 @@ cards:
     mode: conceptual
     card_type: limitation
     difficulty: advanced
-    front: {es: ¿Cuándo puede ser incorrecta la memoización?, en: When can memoization be incorrect?, da: Hvornår kan memoization være forkert?}
+    front: {"es": "¿Cuándo puede ser incorrecta la memoización?", "en": "When can memoization be incorrect?", "da": "Hvornår kan memoization være forkert?"}
     back:
       es: >-
         Cuando la clave no incluye todo el estado que determina el resultado, por ejemplo estado global mutable, configuración,
@@ -341,7 +341,7 @@ cards:
     mode: practical
     card_type: complexity_analysis
     difficulty: advanced
-    front: {es: ¿Por qué Fibonacci ingenuo es costoso y el memoizado no?, en: Why is naive Fibonacci costly while memoized Fibonacci is not?, da: Hvorfor er naiv Fibonacci dyr, mens memoized Fibonacci ikke er?}
+    front: {"es": "¿Por qué Fibonacci ingenuo es costoso y el memoizado no?", "en": "Why is naive Fibonacci costly while memoized Fibonacci is not?", "da": "Hvorfor er naiv Fibonacci dyr, mens memoized Fibonacci ikke er?"}
     back:
       es: >-
         La versión ingenua vuelve a calcular los mismos `fib(k)` en múltiples ramas y genera crecimiento exponencial.
@@ -358,7 +358,7 @@ cards:
     mode: practical
     card_type: test_design
     difficulty: advanced
-    front: {es: ¿Qué pruebas necesita una función recursiva además de casos típicos?, en: What tests does a recursive function need beyond typical cases?, da: Hvilke test kræver en rekursiv funktion ud over typiske tilfælde?}
+    front: {"es": "¿Qué pruebas necesita una función recursiva además de casos típicos?", "en": "What tests does a recursive function need beyond typical cases?", "da": "Hvilke test kræver en rekursiv funktion ud over typiske tilfælde?"}
     back:
       es: >-
         Todos los casos base; entradas justo alrededor de las fronteras; dominio inválido; estructura vacía y asimétrica;
@@ -375,7 +375,7 @@ cards:
     mode: integrative
     card_type: oral_defense
     difficulty: advanced
-    front: {es: ¿Cómo defiendes la terminación de una función recursiva?, en: How do you defend termination of a recursive function?, da: Hvordan forsvarer du termineringen af en rekursiv funktion?}
+    front: {"es": "¿Cómo defiendes la terminación de una función recursiva?", "en": "How do you defend termination of a recursive function?", "da": "Hvordan forsvarer du termineringen af en rekursiv funktion?"}
     back:
       es: >-
         Define el dominio, identifica una medida bien fundada, demuestra que cada rama recursiva la reduce estrictamente
@@ -392,7 +392,7 @@ cards:
     mode: integrative
     card_type: synthesis
     difficulty: advanced
-    front: {es: Resume el criterio para aceptar una solución recursiva como correcta y adecuada., en: Summarize the criterion for accepting a recursive solution as correct and appropriate., da: Opsummér kriteriet for at acceptere en rekursiv løsning som korrekt og passende.}
+    front: {"es": "Resume el criterio para aceptar una solución recursiva como correcta y adecuada.", "en": "Summarize the criterion for accepting a recursive solution as correct and appropriate.", "da": "Opsummér kriteriet for at acceptere en rekursiv løsning som korrekt og passende."}
     back:
       es: >-
         Debe cumplir su contrato, cubrir casos base, reducir un subproblema en todas las ramas, combinar resultados correctamente,

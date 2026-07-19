@@ -11,9 +11,9 @@ cards:
     card_type: record_contract
     difficulty: foundational
     front:
-      es: ¿Qué metadatos convierten una cadena en un registro de secuencia interpretable?
-      en: Which metadata turn a string into an interpretable sequence record?
-      da: Hvilke metadata gør en streng til en fortolkelig sekvenspost?
+      es: "¿Qué metadatos convierten una cadena en un registro de secuencia interpretable?"
+      en: "Which metadata turn a string into an interpretable sequence record?"
+      da: "Hvilke metadata gør en streng til en fortolkelig sekvenspost?"
     back:
       es: >-
         Entidad y molécula representada, namespace, accesión y versión, organismo, alfabeto,
@@ -36,9 +36,9 @@ cards:
     card_type: misconception_correction
     difficulty: foundational
     front:
-      es: Corrige: «La cabecera FASTA tiene un formato universal».
-      en: Correct: “A FASTA header has one universal format.”
-      da: Ret: “En FASTA-header har ét universelt format.”
+      es: "Corrige: «La cabecera FASTA tiene un formato universal»."
+      en: "Correct: “A FASTA header has one universal format.”"
+      da: "Ret: “En FASTA-header har ét universelt format.”"
     back:
       es: >-
         FASTA sólo exige una línea que comienza con `>`, pero el significado del resto depende del recurso.
@@ -58,9 +58,9 @@ cards:
     card_type: interpretation
     difficulty: foundational
     front:
-      es: ¿Qué puede representar un símbolo ambiguo como `N` en ADN?
-      en: What may an ambiguous symbol such as `N` represent in DNA?
-      da: Hvad kan et tvetydigt symbol som `N` repræsentere i DNA?
+      es: "¿Qué puede representar un símbolo ambiguo como `N` en ADN?"
+      en: "What may an ambiguous symbol such as `N` represent in DNA?"
+      da: "Hvad kan et tvetydigt symbol som `N` repræsentere i DNA?"
     back:
       es: >-
         Una base no determinada, una mezcla compatible con varias bases o una región que el proceso de consenso
@@ -81,9 +81,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: Distingue identidad, similitud y homología.
-      en: Distinguish identity, similarity, and homology.
-      da: Skeln mellem identitet, lighed og homologi.
+      es: "Distingue identidad, similitud y homología."
+      en: "Distinguish identity, similarity, and homology."
+      da: "Skeln mellem identitet, lighed og homologi."
     back:
       es: >-
         Identidad es coincidencia exacta en posiciones comparadas. Similitud puede incluir sustituciones favorables
@@ -103,9 +103,9 @@ cards:
     card_type: calculation
     difficulty: foundational
     front:
-      es: Hay 60 matches en 80 columnas. ¿Identidad sobre todas las columnas?
-      en: There are 60 matches across 80 columns. Identity over all columns?
-      da: Der er 60 matches over 80 kolonner. Identitet over alle kolonner?
+      es: "Hay 60 matches en 80 columnas. ¿Identidad sobre todas las columnas?"
+      en: "There are 60 matches across 80 columns. Identity over all columns?"
+      da: "Der er 60 matches over 80 kolonner. Identitet over alle kolonner?"
     back:
       es: >-
         60/80 = 0,75 = 75 %. Debe indicarse que el denominador incluye todas las columnas.
@@ -123,9 +123,9 @@ cards:
     card_type: misconception_correction
     difficulty: intermediate
     front:
-      es: Corrige: «Estas proteínas tienen 42 % de homología».
-      en: Correct: “These proteins have 42% homology.”
-      da: Ret: “Disse proteiner har 42 % homologi.”
+      es: "Corrige: «Estas proteínas tienen 42 % de homología»."
+      en: "Correct: “These proteins have 42% homology.”"
+      da: "Ret: “Disse proteiner har 42 % homologi.”"
     back:
       es: >-
         Debe decirse «42 % de identidad» o una medida definida de similitud sobre una longitud y cobertura concretas.
@@ -145,9 +145,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: Distingue ortólogos y parálogos.
-      en: Distinguish orthologs and paralogs.
-      da: Skeln mellem ortologer og paraloger.
+      es: "Distingue ortólogos y parálogos."
+      en: "Distinguish orthologs and paralogs."
+      da: "Skeln mellem ortologer og paraloger."
     back:
       es: >-
         Ortólogos son genes homólogos cuya divergencia relevante se asocia a especiación; parálogos derivan de duplicación génica.
@@ -167,9 +167,9 @@ cards:
     card_type: formula_interpretation
     difficulty: intermediate
     front:
-      es: ¿Qué expresa `s = log(P(data|M1)/P(data|M0))`?
-      en: What does `s = log(P(data|M1)/P(data|M0))` express?
-      da: Hvad udtrykker `s = log(P(data|M1)/P(data|M0))`?
+      es: "¿Qué expresa `s = log(P(data|M1)/P(data|M0))`?"
+      en: "What does `s = log(P(data|M1)/P(data|M0))` express?"
+      da: "Hvad udtrykker `s = log(P(data|M1)/P(data|M0))`?"
     back:
       es: >-
         Evidencia relativa de los datos entre un modelo relacionado M1 y un modelo nulo M0.
@@ -189,9 +189,9 @@ cards:
     card_type: calculation
     difficulty: intermediate
     front:
-      es: Si P(par|M1)=0,08 y P(par|M0)=0,02, ¿log2-odds?
-      en: If P(pair|M1)=0.08 and P(pair|M0)=0.02, what is the log2-odds?
-      da: Hvis P(par|M1)=0,08 og P(par|M0)=0,02, hvad er log2-odds?
+      es: "Si P(par|M1)=0,08 y P(par|M0)=0,02, ¿log2-odds?"
+      en: "If P(pair|M1)=0.08 and P(pair|M0)=0.02, what is the log2-odds?"
+      da: "Hvis P(par|M1)=0,08 og P(par|M0)=0,02, hvad er log2-odds?"
     back:
       es: >-
         Cociente 0,08/0,02=4; log2(4)=2 bits. El par es cuatro veces más probable bajo M1 que bajo M0.
@@ -209,9 +209,9 @@ cards:
     card_type: background_model
     difficulty: intermediate
     front:
-      es: ¿Por qué un fondo uniforme de nucleótidos puede ser defectuoso?
-      en: Why can a uniform nucleotide background be defective?
-      da: Hvorfor kan en uniform nukleotidbaggrund være defekt?
+      es: "¿Por qué un fondo uniforme de nucleótidos puede ser defectuoso?"
+      en: "Why can a uniform nucleotide background be defective?"
+      da: "Hvorfor kan en uniform nukleotidbaggrund være defekt?"
     back:
       es: >-
         Genomas y regiones difieren en GC, dinucleótidos, repeticiones y uso de codones. Un fondo uniforme puede considerar
@@ -230,9 +230,9 @@ cards:
     card_type: kmer_calculation
     difficulty: foundational
     front:
-      es: ¿Cuántas ventanas solapadas de k=5 hay en una secuencia lineal de longitud 20?
-      en: How many overlapping k=5 windows are in a linear sequence of length 20?
-      da: Hvor mange overlappende k=5-vinduer er der i en lineær sekvens med længde 20?
+      es: "¿Cuántas ventanas solapadas de k=5 hay en una secuencia lineal de longitud 20?"
+      en: "How many overlapping k=5 windows are in a linear sequence of length 20?"
+      da: "Hvor mange overlappende k=5-vinduer er der i en lineær sekvens med længde 20?"
     back:
       es: >-
         `n-k+1 = 20-5+1 = 16`. Esto supone secuencia lineal, ventanas completas y ningún tratamiento especial de símbolos ambiguos.
@@ -250,9 +250,9 @@ cards:
     card_type: matrix_interpretation
     difficulty: intermediate
     front:
-      es: ¿Qué información resume una matriz de sustitución proteica?
-      en: What information does a protein substitution matrix summarize?
-      da: Hvilken information opsummerer en proteinsubstitutionsmatrix?
+      es: "¿Qué información resume una matriz de sustitución proteica?"
+      en: "What information does a protein substitution matrix summarize?"
+      da: "Hvilken information opsummerer en proteinsubstitutionsmatrix?"
     back:
       es: >-
         Frecuencias observadas de pares en secuencias relacionadas frente a frecuencias esperadas de fondo,
@@ -272,9 +272,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: ¿Cómo se interpretan los números de BLOSUM y PAM de forma general?
-      en: How are BLOSUM and PAM numbers generally interpreted?
-      da: Hvordan fortolkes BLOSUM- og PAM-numre generelt?
+      es: "¿Cómo se interpretan los números de BLOSUM y PAM de forma general?"
+      en: "How are BLOSUM and PAM numbers generally interpreted?"
+      da: "Hvordan fortolkes BLOSUM- og PAM-numre generelt?"
     back:
       es: >-
         En BLOSUM con número mayor suele orientarse a secuencias más cercanas porque el umbral de agrupación es más alto.
@@ -294,9 +294,9 @@ cards:
     card_type: method_selection
     difficulty: advanced
     front:
-      es: ¿Qué considerarías al elegir matriz para proteínas distantes?
-      en: What would you consider when selecting a matrix for distant proteins?
-      da: Hvad overvejes ved valg af matrix til fjerne proteiner?
+      es: "¿Qué considerarías al elegir matriz para proteínas distantes?"
+      en: "What would you consider when selecting a matrix for distant proteins?"
+      da: "Hvad overvejes ved valg af matrix til fjerne proteiner?"
     back:
       es: >-
         Distancia esperada, dominio completo o región conservada, longitud, composición, presencia de complejidad baja,
@@ -316,9 +316,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: Compara penalización lineal y afín de gaps.
-      en: Compare linear and affine gap penalties.
-      da: Sammenlign lineære og affine gap-straffe.
+      es: "Compara penalización lineal y afín de gaps."
+      en: "Compare linear and affine gap penalties."
+      da: "Sammenlign lineære og affine gap-straffe."
     back:
       es: >-
         Lineal cobra un coste proporcional a cada posición del gap. Afín separa una apertura costosa y extensiones menos costosas,
@@ -336,9 +336,9 @@ cards:
     card_type: misconception_correction
     difficulty: intermediate
     front:
-      es: Corrige: «Un gap demuestra dónde ocurrió una inserción histórica».
-      en: Correct: “A gap proves where a historical insertion occurred.”
-      da: Ret: “Et gap beviser hvor en historisk insertion skete.”
+      es: "Corrige: «Un gap demuestra dónde ocurrió una inserción histórica»."
+      en: "Correct: “A gap proves where a historical insertion occurred.”"
+      da: "Ret: “Et gap beviser hvor en historisk insertion skete.”"
     back:
       es: >-
         El gap es parte de una hipótesis de alineamiento bajo parámetros específicos. Sin outgroup ni reconstrucción ancestral,
@@ -358,9 +358,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: Distingue raw score, bit score, p-valor y E-value.
-      en: Distinguish raw score, bit score, p-value, and E-value.
-      da: Skeln mellem rå score, bit score, p-værdi og E-value.
+      es: "Distingue raw score, bit score, p-valor y E-value."
+      en: "Distinguish raw score, bit score, p-value, and E-value."
+      da: "Skeln mellem rå score, bit score, p-værdi og E-value."
     back:
       es: >-
         Raw score suma matriz y gaps bajo parámetros concretos. Bit score normaliza usando parámetros estadísticos.
@@ -381,9 +381,9 @@ cards:
     card_type: scaling
     difficulty: intermediate
     front:
-      es: E=1e-6. Si el espacio efectivo se multiplica por 100, ¿aproximación?
-      en: E=1e-6. If effective search space grows 100-fold, what is the approximation?
-      da: E=1e-6. Hvis det effektive søgerum vokser 100 gange, hvad er approksimationen?
+      es: "E=1e-6. Si el espacio efectivo se multiplica por 100, ¿aproximación?"
+      en: "E=1e-6. If effective search space grows 100-fold, what is the approximation?"
+      da: "E=1e-6. Hvis det effektive søgerum vokser 100 gange, hvad er approksimationen?"
     back:
       es: >-
         Aproximadamente 1e-4 si score, modelo y longitudes efectivas se mantienen comparables.
@@ -402,9 +402,9 @@ cards:
     card_type: misconception_correction
     difficulty: intermediate
     front:
-      es: Corrige: «E=1e-20 significa 1e-20 de probabilidad de que el hit sea falso».
-      en: Correct: “E=1e-20 means a 1e-20 probability that the hit is false.”
-      da: Ret: “E=1e-20 betyder 1e-20 sandsynlighed for at hittet er falsk.”
+      es: "Corrige: «E=1e-20 significa 1e-20 de probabilidad de que el hit sea falso»."
+      en: "Correct: “E=1e-20 means a 1e-20 probability that the hit is false.”"
+      da: "Ret: “E=1e-20 betyder 1e-20 sandsynlighed for at hittet er falsk.”"
     back:
       es: >-
         E-value es el número esperado de hits por azar con score igual o mejor en el espacio de búsqueda bajo el modelo.
@@ -423,9 +423,9 @@ cards:
     card_type: evidence_interpretation
     difficulty: advanced
     front:
-      es: Compara 70 % identidad/20 aa con 28 %/350 aa. ¿Qué debes revisar?
-      en: Compare 70% identity/20 aa with 28%/350 aa. What must be checked?
-      da: Sammenlign 70 % identitet/20 aa med 28 %/350 aa. Hvad skal undersøges?
+      es: "Compara 70 % identidad/20 aa con 28 %/350 aa. ¿Qué debes revisar?"
+      en: "Compare 70% identity/20 aa with 28%/350 aa. What must be checked?"
+      da: "Sammenlign 70 % identitet/20 aa med 28 %/350 aa. Hvad skal undersøges?"
     back:
       es: >-
         Longitud, cobertura de ambas secuencias, complejidad, dominios, composición, matriz, gaps, score normalizado,
@@ -445,9 +445,9 @@ cards:
     card_type: low_complexity
     difficulty: intermediate
     front:
-      es: ¿Por qué la complejidad baja genera hits engañosos?
-      en: Why does low complexity generate misleading hits?
-      da: Hvorfor skaber lav kompleksitet vildledende hits?
+      es: "¿Por qué la complejidad baja genera hits engañosos?"
+      en: "Why does low complexity generate misleading hits?"
+      da: "Hvorfor skaber lav kompleksitet vildledende hits?"
     back:
       es: >-
         Cuando pocos símbolos o patrones dominan, muchas secuencias no relacionadas comparten coincidencias repetidas.
@@ -467,9 +467,9 @@ cards:
     card_type: claim_audit
     difficulty: advanced
     front:
-      es: Audita: «83 % similitud y E=2e-20 demuestran función idéntica».
-      en: Audit: “83% similarity and E=2e-20 prove identical function.”
-      da: Auditér: “83 % lighed og E=2e-20 beviser identisk funktion.”
+      es: "Audita: «83 % similitud y E=2e-20 demuestran función idéntica»."
+      en: "Audit: “83% similarity and E=2e-20 prove identical function.”"
+      da: "Auditér: “83 % lighed og E=2e-20 beviser identisk funktion.”"
     back:
       es: >-
         Falta definir identidad/similitud, matriz, longitud, cobertura, gaps, dominios, complejidad, consulta/base y versiones.
@@ -490,9 +490,9 @@ cards:
     card_type: oral_defense
     difficulty: advanced
     front:
-      es: Responde en 45 segundos: «¿Por qué un score alto puede sostener una conclusión débil?»
-      en: Answer in 45 seconds: “Why can a high score support only a weak conclusion?”
-      da: Svar på 45 sekunder: “Hvorfor kan en høj score kun støtte en svag konklusion?”
+      es: "Responde en 45 segundos: «¿Por qué un score alto puede sostener una conclusión débil?»"
+      en: "Answer in 45 seconds: “Why can a high score support only a weak conclusion?”"
+      da: "Svar på 45 sekunder: “Hvorfor kan en høj score kun støtte en svag konklusion?”"
     back:
       es: >-
         El score es relativo a una matriz, gaps y modelo nulo. Puede concentrarse en una región corta, repetitiva o un dominio compartido;
@@ -513,9 +513,9 @@ cards:
     card_type: transfer
     difficulty: advanced
     front:
-      es: ¿Cómo prepara este módulo la programación dinámica de alineamientos?
-      en: How does this module prepare dynamic-programming alignment?
-      da: Hvordan forbereder dette modul dynamisk programmering til alignment?
+      es: "¿Cómo prepara este módulo la programación dinámica de alineamientos?"
+      en: "How does this module prepare dynamic-programming alignment?"
+      da: "Hvordan forbereder dette modul dynamisk programmering til alignment?"
     back:
       es: >-
         Define qué se optimiza: suma de scores de sustitución y gaps bajo modelos explícitos.

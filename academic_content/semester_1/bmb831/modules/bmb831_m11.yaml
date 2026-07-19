@@ -5,7 +5,7 @@ content_version: 1.0.0
 status: academically_reviewed_draft
 
 metadata:
-  title: {es: Integración multi-ómica, reproducibilidad y comparación crítica de workflows, en: Multi-omics integration, reproducibility, and critical workflow comparison, da: Multi-omics-integration, reproducerbarhed og kritisk workflowsammenligning}
+  title: {"es": "Integración multi-ómica, reproducibilidad y comparación crítica de workflows", "en": "Multi-omics integration, reproducibility, and critical workflow comparison", "da": "Multi-omics-integration, reproducerbarhed og kritisk workflowsammenligning"}
   summary:
     es: >-
       Estrategias de integración de transcriptómica, proteómica y otras modalidades. Incluye sample maps,
@@ -29,18 +29,18 @@ alignment:
   later_modules: [bmb831.m12]
 
 objectives:
-  - {id: bmb831.m11.o01, text: {es: Construir un sample map multi-assay verificable, en: Build a verifiable multi-assay sample map, da: Bygge et verificerbart multi-assay sample-map}}
-  - {id: bmb831.m11.o02, text: {es: Armonizar escalas e identificadores sin ocultar pérdidas, en: Harmonize scales and identifiers without hiding losses, da: Harmonisere skalaer og ID'er uden at skjule tab}}
-  - {id: bmb831.m11.o03, text: {es: Comparar integración temprana, intermedia y tardía, en: Compare early, intermediate, and late integration, da: Sammenligne tidlig, intermediær og sen integration}}
-  - {id: bmb831.m11.o04, text: {es: Interpretar factores latentes y cargas por modalidad, en: Interpret latent factors and modality loadings, da: Fortolke latente faktorer og modalitetsloadings}}
-  - {id: bmb831.m11.o05, text: {es: Aplicar métodos supervisados sin leakage, en: Apply supervised methods without leakage, da: Anvende superviserede metoder uden leakage}}
-  - {id: bmb831.m11.o06, text: {es: Evaluar modalidades ausentes y desbalance de información, en: Evaluate missing modalities and information imbalance, da: Evaluere manglende modaliteter og informationsubalance}}
-  - {id: bmb831.m11.o07, text: {es: Comparar integración con baselines unimodales, en: Compare integration with unimodal baselines, da: Sammenligne integration med unimodale baselines}}
-  - {id: bmb831.m11.o08, text: {es: Auditar estabilidad, sensibilidad y alcance biológico, en: Audit stability, sensitivity, and biological scope, da: Auditere stabilitet, følsomhed og biologisk omfang}}
+  - {id: bmb831.m11.o01, text: {"es": "Construir un sample map multi-assay verificable", "en": "Build a verifiable multi-assay sample map", "da": "Bygge et verificerbart multi-assay sample-map"}}
+  - {id: bmb831.m11.o02, text: {"es": "Armonizar escalas e identificadores sin ocultar pérdidas", "en": "Harmonize scales and identifiers without hiding losses", "da": "Harmonisere skalaer og ID'er uden at skjule tab"}}
+  - {id: bmb831.m11.o03, text: {"es": "Comparar integración temprana, intermedia y tardía", "en": "Compare early, intermediate, and late integration", "da": "Sammenligne tidlig, intermediær og sen integration"}}
+  - {id: bmb831.m11.o04, text: {"es": "Interpretar factores latentes y cargas por modalidad", "en": "Interpret latent factors and modality loadings", "da": "Fortolke latente faktorer og modalitetsloadings"}}
+  - {id: bmb831.m11.o05, text: {"es": "Aplicar métodos supervisados sin leakage", "en": "Apply supervised methods without leakage", "da": "Anvende superviserede metoder uden leakage"}}
+  - {id: bmb831.m11.o06, text: {"es": "Evaluar modalidades ausentes y desbalance de información", "en": "Evaluate missing modalities and information imbalance", "da": "Evaluere manglende modaliteter og informationsubalance"}}
+  - {id: bmb831.m11.o07, text: {"es": "Comparar integración con baselines unimodales", "en": "Compare integration with unimodal baselines", "da": "Sammenligne integration med unimodale baselines"}}
+  - {id: bmb831.m11.o08, text: {"es": "Auditar estabilidad, sensibilidad y alcance biológico", "en": "Audit stability, sensitivity, and biological scope", "da": "Auditere stabilitet, følsomhed og biologisk omfang"}}
 
 concepts:
   - id: bmb831.m11.c01
-    title: {es: Sample map y unidad común, en: Sample map and common unit, da: Sample-map og fælles enhed}
+    title: {"es": "Sample map y unidad común", "en": "Sample map and common unit", "da": "Sample-map og fælles enhed"}
     body:
       es: >-
         Integrar requiere identificar la misma unidad biológica a través de assays, tiempos, aliquots y plataformas.
@@ -53,9 +53,9 @@ concepts:
       da: >-
         Integration kræver identifikation af samme biologiske enhed på tværs af assays, tidspunkter og platforme.
     key_points:
-      - {es: La intersección de muestras puede cambiar la población analizada, en: Sample intersection may change the analyzed population, da: Sample-intersection kan ændre den analyserede population}
+      - {"es": "La intersección de muestras puede cambiar la población analizada", "en": "Sample intersection may change the analyzed population", "da": "Sample-intersection kan ændre den analyserede population"}
   - id: bmb831.m11.c02
-    title: {es: Armonización de escalas e IDs, en: Scale and identifier harmonization, da: Skala- og ID-harmonisering}
+    title: {"es": "Armonización de escalas e IDs", "en": "Scale and identifier harmonization", "da": "Skala- og ID-harmonisering"}
     body:
       es: >-
         Modalidades tienen unidades, varianzas, dimensiones y missingness distintas. Concatenar sin escalado puede dejar que una
@@ -67,9 +67,9 @@ concepts:
       da: >-
         Modaliteter har forskellige enheder, varians og missingness. Mapping mellem gener og proteiner kan være en-til-mange.
     key_points:
-      - {es: “Mismo gen” no implica misma entidad molecular, en: “Same gene” does not imply the same molecular entity, da: “Samme gen” indebærer ikke samme molekylære enhed}
+      - {"es": "“Mismo gen” no implica misma entidad molecular", "en": "“Same gene” does not imply the same molecular entity", "da": "“Samme gen” indebærer ikke samme molekylære enhed"}
   - id: bmb831.m11.c03
-    title: {es: Integración temprana, intermedia y tardía, en: Early, intermediate, and late integration, da: Tidlig, intermediær og sen integration}
+    title: {"es": "Integración temprana, intermedia y tardía", "en": "Early, intermediate, and late integration", "da": "Tidlig, intermediær og sen integration"}
     body:
       es: >-
         Integración temprana concatena features antes del modelo; es simple pero sensible a dimensión y escala. Intermedia aprende
@@ -81,9 +81,9 @@ concepts:
       da: >-
         Tidlig integration concatenates features; intermediær lærer fælles repræsentationer; sen kombinerer modalitetsspecifikke output.
     key_points:
-      - {es: Mayor complejidad no garantiza valor añadido, en: Greater complexity does not guarantee added value, da: Større kompleksitet garanterer ikke merværdi}
+      - {"es": "Mayor complejidad no garantiza valor añadido", "en": "Greater complexity does not guarantee added value", "da": "Større kompleksitet garanterer ikke merværdi"}
   - id: bmb831.m11.c04
-    title: {es: Factores latentes y estructura compartida, en: Latent factors and shared structure, da: Latente faktorer og delt struktur}
+    title: {"es": "Factores latentes y estructura compartida", "en": "Latent factors and shared structure", "da": "Latente faktorer og delt struktur"}
     body:
       es: >-
         Modelos factoriales multi-view descomponen variación en factores con loadings por modalidad y scores por muestra.
@@ -95,9 +95,9 @@ concepts:
       da: >-
         Multi-view-faktormodeller dekomponerer variation i faktorer med modalitetsspecifikke loadings og sample-scores.
     key_points:
-      - {es: Factor latente es constructo estadístico, en: A latent factor is a statistical construct, da: En latent faktor er et statistisk konstrukt}
+      - {"es": "Factor latente es constructo estadístico", "en": "A latent factor is a statistical construct", "da": "En latent faktor er et statistisk konstrukt"}
   - id: bmb831.m11.c05
-    title: {es: Integración supervisada y leakage, en: Supervised integration and leakage, da: Superviseret integration og leakage}
+    title: {"es": "Integración supervisada y leakage", "en": "Supervised integration and leakage", "da": "Superviseret integration og leakage"}
     body:
       es: >-
         PLS, sparse methods, CCA supervisada y ensembles pueden usar outcome o correlación entre vistas. Toda selección, escalado,
@@ -109,9 +109,9 @@ concepts:
       da: >-
         PLS, sparse metoder og ensembles kræver at selection, skalering, imputation og tuning sker inden for resampling.
     key_points:
-      - {es: La disponibilidad de assay es parte del escenario de uso, en: Assay availability is part of the intended-use scenario, da: Assay-tilgængelighed er en del af brugsscenariet}
+      - {"es": "La disponibilidad de assay es parte del escenario de uso", "en": "Assay availability is part of the intended-use scenario", "da": "Assay-tilgængelighed er en del af brugsscenariet"}
   - id: bmb831.m11.c06
-    title: {es: Valor añadido, validación y sensibilidad, en: Added value, validation, and sensitivity, da: Merværdi, validering og følsomhed}
+    title: {"es": "Valor añadido, validación y sensibilidad", "en": "Added value, validation, and sensitivity", "da": "Merværdi, validering og følsomhed"}
     body:
       es: >-
         Integración debe compararse con el mejor baseline unimodal y con combinaciones simples bajo los mismos splits y tuning.
@@ -123,73 +123,73 @@ concepts:
       da: >-
         Integration bør sammenlignes med bedste unimodale baseline under samme splits og tuning.
     key_points:
-      - {es: Valor añadido debe ser incremental y reproducible, en: Added value should be incremental and reproducible, da: Merværdi bør være inkrementel og reproducerbar}
+      - {"es": "Valor añadido debe ser incremental y reproducible", "en": "Added value should be incremental and reproducible", "da": "Merværdi bør være inkrementel og reproducerbar"}
 
 worked_examples:
   - id: bmb831.m11.e01
-    title: {es: Intersección sesgada de muestras, en: Biased sample intersection, da: Biased sample-intersection}
-    scenario: {es: Proteómica falta más en pacientes graves; integración usa sólo completos., en: Proteomics is more often missing in severe patients; integration uses complete cases only., da: Proteomik mangler oftere hos alvorlige patienter; integration bruger kun komplette cases.}
+    title: {"es": "Intersección sesgada de muestras", "en": "Biased sample intersection", "da": "Biased sample-intersection"}
+    scenario: {"es": "Proteómica falta más en pacientes graves; integración usa sólo completos.", "en": "Proteomics is more often missing in severe patients; integration uses complete cases only.", "da": "Proteomik mangler oftere hos alvorlige patienter; integration bruger kun komplette cases."}
     reasoning:
-      - {es: La cohorte integrada excluye sistemáticamente graves., en: Integrated cohort systematically excludes severe patients., da: Integreret kohorte ekskluderer systematisk alvorlige patienter.}
-      - {es: Comparar características, modelar missing modality o usar integración tardía., en: Compare characteristics, model missing modality, or use late integration., da: Sammenlign karakteristika, modellér manglende modalitet eller brug sen integration.}
-    conclusion: {es: Complete-case integration cambia estimando y población., en: Complete-case integration changes estimand and population., da: Complete-case-integration ændrer estimand og population.}
+      - {"es": "La cohorte integrada excluye sistemáticamente graves.", "en": "Integrated cohort systematically excludes severe patients.", "da": "Integreret kohorte ekskluderer systematisk alvorlige patienter."}
+      - {"es": "Comparar características, modelar missing modality o usar integración tardía.", "en": "Compare characteristics, model missing modality, or use late integration.", "da": "Sammenlign karakteristika, modellér manglende modalitet eller brug sen integration."}
+    conclusion: {"es": "Complete-case integration cambia estimando y población.", "en": "Complete-case integration changes estimand and population.", "da": "Complete-case-integration ændrer estimand og population."}
   - id: bmb831.m11.e02
-    title: {es: Concatenación dominada por transcriptómica, en: Transcriptomics-dominated concatenation, da: Transkriptomik-domineret concatenation}
-    scenario: {es: 20000 genes y 500 proteins se concatenan sin ponderación., en: 20,000 genes and 500 proteins are concatenated without weighting., da: 20000 gener og 500 proteiner concatenates uden vægtning.}
+    title: {"es": "Concatenación dominada por transcriptómica", "en": "Transcriptomics-dominated concatenation", "da": "Transkriptomik-domineret concatenation"}
+    scenario: {"es": "20000 genes y 500 proteins se concatenan sin ponderación.", "en": "20,000 genes and 500 proteins are concatenated without weighting.", "da": "20000 gener og 500 proteiner concatenates uden vægtning."}
     reasoning:
-      - {es: Dimensión y varianza hacen dominar transcriptómica., en: Dimension and variance make transcriptomics dominate., da: Dimension og varians får transkriptomik til at dominere.}
-      - {es: Escalar por vista, reducir dimensión o usar método multi-view., en: Scale by view, reduce dimension, or use a multi-view method., da: Skalér per view, reducer dimension eller brug multi-view-metode.}
-    conclusion: {es: Integración temprana necesita balance explícito., en: Early integration needs explicit balancing., da: Tidlig integration kræver eksplicit balancering.}
+      - {"es": "Dimensión y varianza hacen dominar transcriptómica.", "en": "Dimension and variance make transcriptomics dominate.", "da": "Dimension og varians får transkriptomik til at dominere."}
+      - {"es": "Escalar por vista, reducir dimensión o usar método multi-view.", "en": "Scale by view, reduce dimension, or use a multi-view method.", "da": "Skalér per view, reducer dimension eller brug multi-view-metode."}
+    conclusion: {"es": "Integración temprana necesita balance explícito.", "en": "Early integration needs explicit balancing.", "da": "Tidlig integration kræver eksplicit balancering."}
   - id: bmb831.m11.e03
-    title: {es: Integración no mejora baseline, en: Integration does not improve baseline, da: Integration forbedrer ikke baseline}
-    scenario: {es: Modelo multi-ómico AUC 0.81; transcriptómica sola 0.82 en mismos outer folds., en: Multi-omics AUC is 0.81; transcriptomics alone is 0.82 in the same outer folds., da: Multi-omics AUC er 0.81; transkriptomik alene 0.82 i samme outer folds.}
+    title: {"es": "Integración no mejora baseline", "en": "Integration does not improve baseline", "da": "Integration forbedrer ikke baseline"}
+    scenario: {"es": "Modelo multi-ómico AUC 0.81; transcriptómica sola 0.82 en mismos outer folds.", "en": "Multi-omics AUC is 0.81; transcriptomics alone is 0.82 in the same outer folds.", "da": "Multi-omics AUC er 0.81; transkriptomik alene 0.82 i samme outer folds."}
     reasoning:
-      - {es: No hay valor predictivo incremental demostrado., en: No demonstrated incremental predictive value., da: Ingen demonstreret inkrementel prædiktiv værdi.}
-      - {es: Evaluar calibración, coste y posibles objetivos mecanísticos separados., en: Assess calibration, cost, and separate mechanistic objectives., da: Vurder kalibrering, omkostning og separate mekanistiske mål.}
-    conclusion: {es: Integrar no es un fin en sí mismo., en: Integration is not an end in itself., da: Integration er ikke et mål i sig selv.}
+      - {"es": "No hay valor predictivo incremental demostrado.", "en": "No demonstrated incremental predictive value.", "da": "Ingen demonstreret inkrementel prædiktiv værdi."}
+      - {"es": "Evaluar calibración, coste y posibles objetivos mecanísticos separados.", "en": "Assess calibration, cost, and separate mechanistic objectives.", "da": "Vurder kalibrering, omkostning og separate mekanistiske mål."}
+    conclusion: {"es": "Integrar no es un fin en sí mismo.", "en": "Integration is not an end in itself.", "da": "Integration er ikke et mål i sig selv."}
 
 guided_practice:
-  - {id: bmb831.m11.p01, activity_type: sample_mapping, prompt: {es: Construye sample map para RNA, proteína y metabolitos con visitas., en: Build a sample map for RNA, protein, metabolites, and visits., da: Byg sample-map for RNA, protein, metabolitter og besøg.}, expected_elements: [participant, specimen, time, assay, aliquot, batch, availability]}
-  - {id: bmb831.m11.p02, activity_type: strategy_selection, prompt: {es: Elige integración temprana, intermedia o tardía para tres escenarios., en: Choose early, intermediate, or late integration for three scenarios., da: Vælg tidlig, intermediær eller sen integration for tre scenarier.}, expected_elements: [sample_overlap, dimensionality, prediction_goal, interpretability, missing_modalities]}
-  - {id: bmb831.m11.p03, activity_type: latent_factor_interpretation, prompt: {es: Interpreta un factor con RNA y proteína concordantes y asociación con lote., en: Interpret a factor with concordant RNA/protein loadings and batch association., da: Fortolk en faktor med konkordante RNA/protein-loadings og batch-association.}, expected_elements: [shared_variance, batch_confounding, loadings, sensitivity, claim_limit]}
-  - {id: bmb831.m11.p04, activity_type: validation_design, prompt: {es: Diseña nested CV para integración supervisada., en: Design nested CV for supervised integration., da: Design nested CV for superviseret integration.}, expected_elements: [grouped_outer, inner_preprocessing, modality_selection, baseline_comparison, final_test]}
-  - {id: bmb831.m11.p05, activity_type: missing_modality, prompt: {es: Compara complete-case, imputación y late integration., en: Compare complete-case, imputation, and late integration., da: Sammenlign complete-case, imputation og late integration.}, expected_elements: [missingness_mechanism, population_shift, uncertainty, deployability]}
-  - {id: bmb831.m11.p06, activity_type: workflow_comparison, prompt: {es: Compara dos pipelines multi-ómicos bajo una rúbrica común., en: Compare two multi-omics pipelines under a common rubric., da: Sammenlign to multi-omics-pipelines under en fælles rubrik.}, expected_elements: [question, inputs, preprocessing, validation, performance, interpretation, cost, reproducibility]}
+  - {id: bmb831.m11.p01, activity_type: sample_mapping, prompt: {"es": "Construye sample map para RNA, proteína y metabolitos con visitas.", "en": "Build a sample map for RNA, protein, metabolites, and visits.", "da": "Byg sample-map for RNA, protein, metabolitter og besøg."}, expected_elements: [participant, specimen, time, assay, aliquot, batch, availability]}
+  - {id: bmb831.m11.p02, activity_type: strategy_selection, prompt: {"es": "Elige integración temprana, intermedia o tardía para tres escenarios.", "en": "Choose early, intermediate, or late integration for three scenarios.", "da": "Vælg tidlig, intermediær eller sen integration for tre scenarier."}, expected_elements: [sample_overlap, dimensionality, prediction_goal, interpretability, missing_modalities]}
+  - {id: bmb831.m11.p03, activity_type: latent_factor_interpretation, prompt: {"es": "Interpreta un factor con RNA y proteína concordantes y asociación con lote.", "en": "Interpret a factor with concordant RNA/protein loadings and batch association.", "da": "Fortolk en faktor med konkordante RNA/protein-loadings og batch-association."}, expected_elements: [shared_variance, batch_confounding, loadings, sensitivity, claim_limit]}
+  - {id: bmb831.m11.p04, activity_type: validation_design, prompt: {"es": "Diseña nested CV para integración supervisada.", "en": "Design nested CV for supervised integration.", "da": "Design nested CV for superviseret integration."}, expected_elements: [grouped_outer, inner_preprocessing, modality_selection, baseline_comparison, final_test]}
+  - {id: bmb831.m11.p05, activity_type: missing_modality, prompt: {"es": "Compara complete-case, imputación y late integration.", "en": "Compare complete-case, imputation, and late integration.", "da": "Sammenlign complete-case, imputation og late integration."}, expected_elements: [missingness_mechanism, population_shift, uncertainty, deployability]}
+  - {id: bmb831.m11.p06, activity_type: workflow_comparison, prompt: {"es": "Compara dos pipelines multi-ómicos bajo una rúbrica común.", "en": "Compare two multi-omics pipelines under a common rubric.", "da": "Sammenlign to multi-omics-pipelines under en fælles rubrik."}, expected_elements: [question, inputs, preprocessing, validation, performance, interpretation, cost, reproducibility]}
 
 objective_bank:
-  - {id: bmb831.m11.q01, type: multiple_choice, prompt: {es: Primer requisito multi-ómico., en: First multi-omics requirement., da: Første multi-omics-krav.}, options: [{id: a, text: {es: Sample map verificable, en: Verifiable sample map, da: Verificerbart sample-map}}, {id: b, text: {es: Concatenar por orden de archivos, en: Concatenate by file order, da: Concatenate efter filrækkefølge}}], correct_option_ids: [a], explanation: {es: Identidad y tiempo deben ser correctos., en: Identity and time must be correct., da: Identitet og tid skal være korrekt.}}
-  - {id: bmb831.m11.q02, type: true_false, prompt: {es: Mismo símbolo génico implica misma entidad en RNA y proteína., en: The same gene symbol implies the same entity in RNA and protein., da: Samme gensymbol indebærer samme enhed i RNA og protein.}, correct: false, explanation: {es: Transcritos, isoformas y proteínas tienen relaciones complejas., en: Transcripts, isoforms, and proteins have complex relationships., da: Transkripter, isoformer og proteiner har komplekse relationer.}}
-  - {id: bmb831.m11.q03, type: multiple_choice, prompt: {es: Integración temprana..., en: Early integration..., da: Tidlig integration...}, options: [{id: a, text: {es: Concatena features antes del modelo, en: Concatenates features before modeling, da: Concatenates features før modellen}}, {id: b, text: {es: Combina predicciones finales, en: Combines final predictions, da: Kombinerer endelige prædiktioner}}], correct_option_ids: [a], explanation: {es: Es sensible a escala y dimensión., en: It is sensitive to scale and dimension., da: Det er følsomt for skala og dimension.}}
-  - {id: bmb831.m11.q04, type: true_false, prompt: {es: Late integration puede manejar modelos específicos por modalidad., en: Late integration can use modality-specific models., da: Late integration kan bruge modalitetsspecifikke modeller.}, correct: true, explanation: {es: Combina resultados o predicciones posteriores., en: It combines downstream results or predictions., da: Det kombinerer downstream-resultater eller prædiktioner.}}
-  - {id: bmb831.m11.q05, type: multiple_choice, prompt: {es: Un factor latente puede representar..., en: A latent factor may represent..., da: En latent faktor kan repræsentere...}, options: [{id: a, text: {es: Biología, batch o mezcla, en: Biology, batch, or a mixture, da: Biologi, batch eller blanding}}, {id: b, text: {es: Causalidad por definición, en: Causality by definition, da: Kausalitet per definition}}], correct_option_ids: [a], explanation: {es: Requiere asociación y validación., en: It requires association and validation., da: Det kræver association og validering.}}
-  - {id: bmb831.m11.q06, type: true_false, prompt: {es: Selección de features multi-ómica puede hacerse antes de CV., en: Multi-omics feature selection may be done before CV., da: Multi-omics feature selection kan udføres før CV.}, correct: false, explanation: {es: Filtraría información de validación., en: It would leak validation information., da: Det ville lække valideringsinformation.}}
-  - {id: bmb831.m11.q07, type: multiple_choice, prompt: {es: Riesgo de complete-case integration., en: Risk of complete-case integration., da: Risiko ved complete-case-integration.}, options: [{id: a, text: {es: Cambiar población si missingness no es aleatoria, en: Change population if missingness is nonrandom, da: Ændre population hvis missingness ikke er tilfældig}}, {id: b, text: {es: Garantizar ausencia de sesgo, en: Guarantee no bias, da: Garantere ingen bias}}], correct_option_ids: [a], explanation: {es: Disponibilidad puede depender del estado biológico o técnico., en: Availability may depend on biological or technical state., da: Tilgængelighed kan afhænge af biologisk eller teknisk status.}}
-  - {id: bmb831.m11.q08, type: true_false, prompt: {es: Modelo multi-ómico debe compararse con baselines unimodales., en: A multi-omics model should be compared with unimodal baselines., da: En multi-omics-model bør sammenlignes med unimodale baselines.}, correct: true, explanation: {es: Demuestra o refuta valor incremental., en: It demonstrates or refutes incremental value., da: Det demonstrerer eller afkræfter inkrementel værdi.}}
-  - {id: bmb831.m11.q09, type: multiple_select, prompt: {es: Sensibilidades multi-ómicas., en: Multi-omics sensitivity dimensions., da: Multi-omics-følsomhedsdimensioner.}, options: [{id: a, text: {es: Escalado por vista, en: View scaling, da: View-skalering}}, {id: b, text: {es: Sample matching, en: Sample matching, da: Sample-matching}}, {id: c, text: {es: Número de factores, en: Number of factors, da: Antal faktorer}}, {id: d, text: {es: Ninguna, en: None, da: Ingen}}], correct_option_ids: [a,b,c], explanation: {es: Todas pueden cambiar estructura y conclusiones., en: All can change structure and conclusions., da: Alle kan ændre struktur og konklusioner.}}
-  - {id: bmb831.m11.q10, type: true_false, prompt: {es: Mayor complejidad multi-ómica garantiza mejor generalización., en: Greater multi-omics complexity guarantees better generalization., da: Større multi-omics-kompleksitet garanterer bedre generalisering.}, correct: false, explanation: {es: Puede aumentar varianza, leakage y coste sin añadir señal., en: It may increase variance, leakage, and cost without adding signal., da: Det kan øge varians, leakage og omkostning uden at tilføje signal.}}
+  - {id: bmb831.m11.q01, type: multiple_choice, prompt: {"es": "Primer requisito multi-ómico.", "en": "First multi-omics requirement.", "da": "Første multi-omics-krav."}, options: [{id: a, text: {"es": "Sample map verificable", "en": "Verifiable sample map", "da": "Verificerbart sample-map"}}, {id: b, text: {"es": "Concatenar por orden de archivos", "en": "Concatenate by file order", "da": "Concatenate efter filrækkefølge"}}], correct_option_ids: [a], explanation: {"es": "Identidad y tiempo deben ser correctos.", "en": "Identity and time must be correct.", "da": "Identitet og tid skal være korrekt."}}
+  - {id: bmb831.m11.q02, type: true_false, prompt: {"es": "Mismo símbolo génico implica misma entidad en RNA y proteína.", "en": "The same gene symbol implies the same entity in RNA and protein.", "da": "Samme gensymbol indebærer samme enhed i RNA og protein."}, correct: false, explanation: {"es": "Transcritos, isoformas y proteínas tienen relaciones complejas.", "en": "Transcripts, isoforms, and proteins have complex relationships.", "da": "Transkripter, isoformer og proteiner har komplekse relationer."}}
+  - {id: bmb831.m11.q03, type: multiple_choice, prompt: {"es": "Integración temprana...", "en": "Early integration...", "da": "Tidlig integration..."}, options: [{id: a, text: {"es": "Concatena features antes del modelo", "en": "Concatenates features before modeling", "da": "Concatenates features før modellen"}}, {id: b, text: {"es": "Combina predicciones finales", "en": "Combines final predictions", "da": "Kombinerer endelige prædiktioner"}}], correct_option_ids: [a], explanation: {"es": "Es sensible a escala y dimensión.", "en": "It is sensitive to scale and dimension.", "da": "Det er følsomt for skala og dimension."}}
+  - {id: bmb831.m11.q04, type: true_false, prompt: {"es": "Late integration puede manejar modelos específicos por modalidad.", "en": "Late integration can use modality-specific models.", "da": "Late integration kan bruge modalitetsspecifikke modeller."}, correct: true, explanation: {"es": "Combina resultados o predicciones posteriores.", "en": "It combines downstream results or predictions.", "da": "Det kombinerer downstream-resultater eller prædiktioner."}}
+  - {id: bmb831.m11.q05, type: multiple_choice, prompt: {"es": "Un factor latente puede representar...", "en": "A latent factor may represent...", "da": "En latent faktor kan repræsentere..."}, options: [{id: a, text: {"es": "Biología, batch o mezcla", "en": "Biology, batch, or a mixture", "da": "Biologi, batch eller blanding"}}, {id: b, text: {"es": "Causalidad por definición", "en": "Causality by definition", "da": "Kausalitet per definition"}}], correct_option_ids: [a], explanation: {"es": "Requiere asociación y validación.", "en": "It requires association and validation.", "da": "Det kræver association og validering."}}
+  - {id: bmb831.m11.q06, type: true_false, prompt: {"es": "Selección de features multi-ómica puede hacerse antes de CV.", "en": "Multi-omics feature selection may be done before CV.", "da": "Multi-omics feature selection kan udføres før CV."}, correct: false, explanation: {"es": "Filtraría información de validación.", "en": "It would leak validation information.", "da": "Det ville lække valideringsinformation."}}
+  - {id: bmb831.m11.q07, type: multiple_choice, prompt: {"es": "Riesgo de complete-case integration.", "en": "Risk of complete-case integration.", "da": "Risiko ved complete-case-integration."}, options: [{id: a, text: {"es": "Cambiar población si missingness no es aleatoria", "en": "Change population if missingness is nonrandom", "da": "Ændre population hvis missingness ikke er tilfældig"}}, {id: b, text: {"es": "Garantizar ausencia de sesgo", "en": "Guarantee no bias", "da": "Garantere ingen bias"}}], correct_option_ids: [a], explanation: {"es": "Disponibilidad puede depender del estado biológico o técnico.", "en": "Availability may depend on biological or technical state.", "da": "Tilgængelighed kan afhænge af biologisk eller teknisk status."}}
+  - {id: bmb831.m11.q08, type: true_false, prompt: {"es": "Modelo multi-ómico debe compararse con baselines unimodales.", "en": "A multi-omics model should be compared with unimodal baselines.", "da": "En multi-omics-model bør sammenlignes med unimodale baselines."}, correct: true, explanation: {"es": "Demuestra o refuta valor incremental.", "en": "It demonstrates or refutes incremental value.", "da": "Det demonstrerer eller afkræfter inkrementel værdi."}}
+  - {id: bmb831.m11.q09, type: multiple_select, prompt: {"es": "Sensibilidades multi-ómicas.", "en": "Multi-omics sensitivity dimensions.", "da": "Multi-omics-følsomhedsdimensioner."}, options: [{id: a, text: {"es": "Escalado por vista", "en": "View scaling", "da": "View-skalering"}}, {id: b, text: {"es": "Sample matching", "en": "Sample matching", "da": "Sample-matching"}}, {id: c, text: {"es": "Número de factores", "en": "Number of factors", "da": "Antal faktorer"}}, {id: d, text: {"es": "Ninguna", "en": "None", "da": "Ingen"}}], correct_option_ids: [a,b,c], explanation: {"es": "Todas pueden cambiar estructura y conclusiones.", "en": "All can change structure and conclusions.", "da": "Alle kan ændre struktur og konklusioner."}}
+  - {id: bmb831.m11.q10, type: true_false, prompt: {"es": "Mayor complejidad multi-ómica garantiza mejor generalización.", "en": "Greater multi-omics complexity guarantees better generalization.", "da": "Større multi-omics-kompleksitet garanterer bedre generalisering."}, correct: false, explanation: {"es": "Puede aumentar varianza, leakage y coste sin añadir señal.", "en": "It may increase variance, leakage, and cost without adding signal.", "da": "Det kan øge varians, leakage og omkostning uden at tilføje signal."}}
 
 open_assessment_items:
   - id: bmb831.m11.a01
-    prompt: {es: Diseña una estrategia multi-ómica para muestras parcialmente solapadas., en: Design a multi-omics strategy for partially overlapping samples., da: Design en multi-omics-strategi for delvist overlappende samples.}
+    prompt: {"es": "Diseña una estrategia multi-ómica para muestras parcialmente solapadas.", "en": "Design a multi-omics strategy for partially overlapping samples.", "da": "Design en multi-omics-strategi for delvist overlappende samples."}
     rubric: [{criterion: sample_map_population, weight: 0.30}, {criterion: integration_strategy, weight: 0.25}, {criterion: missing_modality, weight: 0.25}, {criterion: validation, weight: 0.20}]
   - id: bmb831.m11.a02
-    prompt: {es: Interpreta tres factores latentes con loadings, varianza por vista y metadata., en: Interpret three latent factors using loadings, view variance, and metadata., da: Fortolk tre latente faktorer med loadings, view-varians og metadata.}
+    prompt: {"es": "Interpreta tres factores latentes con loadings, varianza por vista y metadata.", "en": "Interpret three latent factors using loadings, view variance, and metadata.", "da": "Fortolk tre latente faktorer med loadings, view-varians og metadata."}
     rubric: [{criterion: factor_evidence, weight: 0.25}, {criterion: technical_biological_separation, weight: 0.25}, {criterion: stability_enrichment, weight: 0.25}, {criterion: claim_scope, weight: 0.25}]
   - id: bmb831.m11.a03
-    prompt: {es: Determina si una integración aporta valor incremental sobre modalidades individuales., en: Determine whether an integration adds incremental value over individual modalities., da: Afgør om integration giver inkrementel værdi over individuelle modaliteter.}
+    prompt: {"es": "Determina si una integración aporta valor incremental sobre modalidades individuales.", "en": "Determine whether an integration adds incremental value over individual modalities.", "da": "Afgør om integration giver inkrementel værdi over individuelle modaliteter."}
     rubric: [{criterion: fair_baselines, weight: 0.30}, {criterion: independent_metrics, weight: 0.25}, {criterion: calibration_cost, weight: 0.20}, {criterion: stability_external_validity, weight: 0.25}]
 
 glossary:
-  - {id: bmb831.term.sample_map, term: {es: sample map, en: sample map, da: sample-map}, definition: {es: Tabla que relaciona unidades biológicas con columnas de cada assay., en: Table linking biological units to columns of each assay., da: Tabel der forbinder biologiske enheder med kolonner i hvert assay.}}
-  - {id: bmb831.term.early_integration, term: {es: integración temprana, en: early integration, da: tidlig integration}, definition: {es: Concatenación de features antes del modelo., en: Feature concatenation before modeling., da: Feature-concatenation før modellering.}}
-  - {id: bmb831.term.intermediate_integration, term: {es: integración intermedia, en: intermediate integration, da: intermediær integration}, definition: {es: Aprendizaje de representación conjunta preservando vistas., en: Learning a joint representation while preserving views., da: Læring af fælles repræsentation med bevarede views.}}
-  - {id: bmb831.term.late_integration, term: {es: integración tardía, en: late integration, da: sen integration}, definition: {es: Combinación de resultados o predicciones por modalidad., en: Combination of modality-specific results or predictions., da: Kombination af modalitetsspecifikke resultater eller prædiktioner.}}
-  - {id: bmb831.term.multi_view, term: {es: multi-view, en: multi-view, da: multi-view}, definition: {es: Representación de las mismas unidades mediante varias modalidades., en: Representation of the same units through multiple modalities., da: Repræsentation af samme enheder gennem flere modaliteter.}}
-  - {id: bmb831.term.latent_factor, term: {es: factor latente, en: latent factor, da: latent faktor}, definition: {es: Variable no observada que resume variación conjunta o específica., en: Unobserved variable summarizing shared or view-specific variation., da: Uobserveret variabel der opsummerer delt eller view-specifik variation.}}
-  - {id: bmb831.term.view_loading, term: {es: loading por modalidad, en: view loading, da: view-loading}, definition: {es: Contribución de features de una modalidad a un factor., en: Contribution of modality features to a factor., da: Bidrag fra modalitetsfeatures til en faktor.}}
-  - {id: bmb831.term.missing_modality, term: {es: modalidad ausente, en: missing modality, da: manglende modalitet}, definition: {es: Assay no disponible para una unidad incluida., en: Assay unavailable for an included unit., da: Assay der ikke er tilgængeligt for en inkluderet enhed.}}
-  - {id: bmb831.term.unimodal_baseline, term: {es: baseline unimodal, en: unimodal baseline, da: unimodal baseline}, definition: {es: Modelo de referencia usando una sola modalidad., en: Reference model using one modality., da: Referencemodel der bruger én modalitet.}}
-  - {id: bmb831.term.incremental_value, term: {es: valor incremental, en: incremental value, da: inkrementel værdi}, definition: {es: Mejora sobre un baseline bajo evaluación comparable., en: Improvement over a baseline under comparable evaluation., da: Forbedring over en baseline under sammenlignelig evaluering.}}
+  - {id: bmb831.term.sample_map, term: {"es": "sample map", "en": "sample map", "da": "sample-map"}, definition: {"es": "Tabla que relaciona unidades biológicas con columnas de cada assay.", "en": "Table linking biological units to columns of each assay.", "da": "Tabel der forbinder biologiske enheder med kolonner i hvert assay."}}
+  - {id: bmb831.term.early_integration, term: {"es": "integración temprana", "en": "early integration", "da": "tidlig integration"}, definition: {"es": "Concatenación de features antes del modelo.", "en": "Feature concatenation before modeling.", "da": "Feature-concatenation før modellering."}}
+  - {id: bmb831.term.intermediate_integration, term: {"es": "integración intermedia", "en": "intermediate integration", "da": "intermediær integration"}, definition: {"es": "Aprendizaje de representación conjunta preservando vistas.", "en": "Learning a joint representation while preserving views.", "da": "Læring af fælles repræsentation med bevarede views."}}
+  - {id: bmb831.term.late_integration, term: {"es": "integración tardía", "en": "late integration", "da": "sen integration"}, definition: {"es": "Combinación de resultados o predicciones por modalidad.", "en": "Combination of modality-specific results or predictions.", "da": "Kombination af modalitetsspecifikke resultater eller prædiktioner."}}
+  - {id: bmb831.term.multi_view, term: {"es": "multi-view", "en": "multi-view", "da": "multi-view"}, definition: {"es": "Representación de las mismas unidades mediante varias modalidades.", "en": "Representation of the same units through multiple modalities.", "da": "Repræsentation af samme enheder gennem flere modaliteter."}}
+  - {id: bmb831.term.latent_factor, term: {"es": "factor latente", "en": "latent factor", "da": "latent faktor"}, definition: {"es": "Variable no observada que resume variación conjunta o específica.", "en": "Unobserved variable summarizing shared or view-specific variation.", "da": "Uobserveret variabel der opsummerer delt eller view-specifik variation."}}
+  - {id: bmb831.term.view_loading, term: {"es": "loading por modalidad", "en": "view loading", "da": "view-loading"}, definition: {"es": "Contribución de features de una modalidad a un factor.", "en": "Contribution of modality features to a factor.", "da": "Bidrag fra modalitetsfeatures til en faktor."}}
+  - {id: bmb831.term.missing_modality, term: {"es": "modalidad ausente", "en": "missing modality", "da": "manglende modalitet"}, definition: {"es": "Assay no disponible para una unidad incluida.", "en": "Assay unavailable for an included unit.", "da": "Assay der ikke er tilgængeligt for en inkluderet enhed."}}
+  - {id: bmb831.term.unimodal_baseline, term: {"es": "baseline unimodal", "en": "unimodal baseline", "da": "unimodal baseline"}, definition: {"es": "Modelo de referencia usando una sola modalidad.", "en": "Reference model using one modality.", "da": "Referencemodel der bruger én modalitet."}}
+  - {id: bmb831.term.incremental_value, term: {"es": "valor incremental", "en": "incremental value", "da": "inkrementel værdi"}, definition: {"es": "Mejora sobre un baseline bajo evaluación comparable.", "en": "Improvement over a baseline under comparable evaluation.", "da": "Forbedring over en baseline under sammenlignelig evaluering."}}
 
 hidden_tutor_support:
   canonical_explanation:
@@ -221,8 +221,8 @@ hidden_tutor_support:
     - stable evidence-aware biological interpretation
   retrieval_fragments:
     - id: bmb831.m11.r01
-      text: {es: Un sample map explícito es obligatorio porque nombres similares no garantizan la misma unidad biológica., en: An explicit sample map is mandatory because similar names do not guarantee the same biological unit., da: Et eksplicit sample-map er obligatorisk fordi lignende navne ikke garanterer samme biologiske enhed.}
+      text: {"es": "Un sample map explícito es obligatorio porque nombres similares no garantizan la misma unidad biológica.", "en": "An explicit sample map is mandatory because similar names do not guarantee the same biological unit.", "da": "Et eksplicit sample-map er obligatorisk fordi lignende navne ikke garanterer samme biologiske enhed."}
     - id: bmb831.m11.r02
-      text: {es: Integración temprana concatena features, intermedia aprende representaciones y tardía combina outputs., en: Early integration concatenates features, intermediate learns representations, and late combines outputs., da: Tidlig integration concatenates features, intermediær lærer repræsentationer og sen kombinerer output.}
+      text: {"es": "Integración temprana concatena features, intermedia aprende representaciones y tardía combina outputs.", "en": "Early integration concatenates features, intermediate learns representations, and late combines outputs.", "da": "Tidlig integration concatenates features, intermediær lærer repræsentationer og sen kombinerer output."}
     - id: bmb831.m11.r03
-      text: {es: Un modelo multi-ómico debe superar baselines unimodales bajo los mismos splits para demostrar valor incremental., en: A multi-omics model must outperform unimodal baselines under the same splits to demonstrate incremental value., da: En multi-omics-model skal overgå unimodale baselines under samme splits for at demonstrere inkrementel værdi.}
+      text: {"es": "Un modelo multi-ómico debe superar baselines unimodales bajo los mismos splits para demostrar valor incremental.", "en": "A multi-omics model must outperform unimodal baselines under the same splits to demonstrate incremental value.", "da": "En multi-omics-model skal overgå unimodale baselines under samme splits for at demonstrere inkrementel værdi."}

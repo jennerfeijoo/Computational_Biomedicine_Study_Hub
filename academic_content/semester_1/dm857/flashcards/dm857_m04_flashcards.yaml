@@ -11,9 +11,9 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: ¿Cuál es la diferencia entre definir una función y llamarla?
-      en: What is the difference between defining a function and calling it?
-      da: Hvad er forskellen mellem at definere og kalde en funktion?
+      es: "¿Cuál es la diferencia entre definir una función y llamarla?"
+      en: "What is the difference between defining a function and calling it?"
+      da: "Hvad er forskellen mellem at definere og kalde en funktion?"
     back:
       es: >-
         La definición crea la función: establece nombre, parámetros y cuerpo. La llamada ejecuta ese cuerpo
@@ -36,18 +36,18 @@ cards:
     card_type: comparison
     difficulty: foundational
     front:
-      es: Distingue parámetro y argumento con un ejemplo.
-      en: Distinguish parameter and argument with an example.
-      da: Skeln mellem parameter og argument med et eksempel.
+      es: "Distingue parámetro y argumento con un ejemplo."
+      en: "Distinguish parameter and argument with an example."
+      da: "Skeln mellem parameter og argument med et eksempel."
     back:
       es: >-
-        En `def scale(value, factor=1):`, `value` y `factor` son parámetros. En `scale(3, factor=2)`,
+        En `def scale(value, factor=1):"`, `value` y `factor` son parámetros. En `scale(3, factor=2)`,"
         `3` y `2` son argumentos. Los parámetros pertenecen a la interfaz definida; los argumentos a una llamada.
       en: >-
-        In `def scale(value, factor=1):`, `value` and `factor` are parameters. In `scale(3, factor=2)`,
+        In `def scale(value, factor=1):"`, `value` and `factor` are parameters. In `scale(3, factor=2)`,"
         `3` and `2` are arguments. Parameters belong to the defined interface; arguments belong to a call.
       da: >-
-        I `def scale(value, factor=1):` er `value` og `factor` parametre. I `scale(3, factor=2)` er
+        I `def scale(value, factor=1):"` er `value` og `factor` parametre. I `scale(3, factor=2)` er"
         `3` og `2` argumenter. Parametre tilhører definitionen; argumenter tilhører kaldet.
     linked_objectives: [m04.o2]
     linked_concepts: [parameters-arguments-defaults]
@@ -83,9 +83,9 @@ cards:
     card_type: mechanism
     difficulty: foundational
     front:
-      es: ¿Qué hace `return` exactamente?
-      en: What exactly does `return` do?
-      da: Hvad gør `return` præcist?
+      es: "¿Qué hace `return` exactamente?"
+      en: "What exactly does `return` do?"
+      da: "Hvad gør `return` præcist?"
     back:
       es: >-
         Finaliza la ejecución de la llamada actual y transfiere un valor al código llamador. Ese valor puede
@@ -107,9 +107,9 @@ cards:
     card_type: misconception_correction
     difficulty: foundational
     front:
-      es: Corrige: “`print` y `return` hacen lo mismo porque ambos muestran un resultado”.
-      en: Correct: “`print` and `return` do the same thing because both show a result.”
-      da: Ret: “`print` og `return` gør det samme, fordi begge viser et resultat.”
+      es: "Corrige: “`print` y `return` hacen lo mismo porque ambos muestran un resultado”."
+      en: "Correct: “`print` and `return` do the same thing because both show a result.”"
+      da: "Ret: “`print` og `return` gør det samme, fordi begge viser et resultat.”"
     back:
       es: >-
         `print` escribe una representación en la salida estándar y retorna `None`. `return` no necesita mostrar
@@ -156,9 +156,9 @@ cards:
     card_type: mechanism
     difficulty: intermediate
     front:
-      es: ¿Por qué un valor predeterminado mutable puede conservar cambios entre llamadas?
-      en: Why can a mutable default retain changes across calls?
-      da: Hvorfor kan en muterbar standardværdi bevare ændringer mellem kald?
+      es: "¿Por qué un valor predeterminado mutable puede conservar cambios entre llamadas?"
+      en: "Why can a mutable default retain changes across calls?"
+      da: "Hvorfor kan en muterbar standardværdi bevare ændringer mellem kald?"
     back:
       es: >-
         Los valores predeterminados se evalúan una sola vez al definir la función. Si el objeto es una lista y
@@ -180,13 +180,13 @@ cards:
     card_type: debugging
     difficulty: intermediate
     front:
-      es: Corrige conceptualmente `def collect(x, items=[]): items.append(x); return items`.
-      en: Conceptually correct `def collect(x, items=[]): items.append(x); return items`.
-      da: Ret konceptuelt `def collect(x, items=[]): items.append(x); return items`.
+      es: "Corrige conceptualmente `def collect(x, items=[]): items.append(x); return items`."
+      en: "Conceptually correct `def collect(x, items=[]): items.append(x); return items`."
+      da: "Ret konceptuelt `def collect(x, items=[]): items.append(x); return items`."
     back:
       es: >-
         Usa `items=None`; dentro, crea una lista cuando `items is None`. Decide además si una lista proporcionada
-        debe mutarse. Una versión sin mutación copia: `result = [] if items is None else list(items)` y retorna
+        debe mutarse. Una versión sin mutación copia: "`result = [] if items is None else list(items)` y retorna"
         `result + [x]` o añade a la copia.
       en: >-
         Use `items=None`; create a list when `items is None`. Also decide whether a supplied list may be mutated.
@@ -204,9 +204,9 @@ cards:
     card_type: definition
     difficulty: foundational
     front:
-      es: ¿Qué es el ámbito local de una función?
-      en: What is a function's local scope?
-      da: Hvad er en funktions lokale scope?
+      es: "¿Qué es el ámbito local de una función?"
+      en: "What is a function's local scope?"
+      da: "Hvad er en funktions lokale scope?"
     back:
       es: >-
         Es el espacio de nombres creado para una llamada concreta. Contiene parámetros y variables definidas
@@ -255,9 +255,9 @@ cards:
     card_type: definition
     difficulty: intermediate
     front:
-      es: ¿Qué caracteriza a una función pura?
-      en: What characterizes a pure function?
-      da: Hvad karakteriserer en ren funktion?
+      es: "¿Qué caracteriza a una función pura?"
+      en: "What characterizes a pure function?"
+      da: "Hvad karakteriserer en ren funktion?"
     back:
       es: >-
         Para los mismos argumentos produce el mismo resultado observable y no modifica estado externo. No
@@ -280,9 +280,9 @@ cards:
     card_type: classification
     difficulty: intermediate
     front:
-      es: Clasifica como efecto secundario o cálculo puro: escribir un archivo, retornar una suma, modificar una lista recibida, comparar dos números.
-      en: Classify as side effect or pure computation: write a file, return a sum, mutate an input list, compare two numbers.
-      da: Klassificér som sideeffekt eller ren beregning: skriv fil, returnér sum, mutér inputliste, sammenlign to tal.
+      es: "Clasifica como efecto secundario o cálculo puro: escribir un archivo, retornar una suma, modificar una lista recibida, comparar dos números."
+      en: "Classify as side effect or pure computation: write a file, return a sum, mutate an input list, compare two numbers."
+      da: "Klassificér som sideeffekt eller ren beregning: skriv fil, returnér sum, mutér inputliste, sammenlign to tal."
     back:
       es: >-
         Escribir un archivo y modificar una lista recibida son efectos secundarios. Retornar una suma y retornar
@@ -303,9 +303,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: Distingue precondición y poscondición.
-      en: Distinguish precondition and postcondition.
-      da: Skeln mellem forudsætning og efterbetingelse.
+      es: "Distingue precondición y poscondición."
+      en: "Distinguish precondition and postcondition."
+      da: "Skeln mellem forudsætning og efterbetingelse."
     back:
       es: >-
         Una precondición debe cumplirse antes de una llamada válida, por ejemplo “la secuencia no está vacía”.
@@ -327,9 +327,9 @@ cards:
     card_type: method_selection
     difficulty: intermediate
     front:
-      es: ¿Cuándo conviene generar una excepción y cuándo retornar un sentinel como `None`?
-      en: When should a function raise an exception versus return a sentinel such as `None`?
-      da: Hvornår bør en funktion rejse en undtagelse kontra returnere en sentinel som `None`?
+      es: "¿Cuándo conviene generar una excepción y cuándo retornar un sentinel como `None`?"
+      en: "When should a function raise an exception versus return a sentinel such as `None`?"
+      da: "Hvornår bør en funktion rejse en undtagelse kontra returnere en sentinel som `None`?"
     back:
       es: >-
         Depende del contrato. Una excepción es apropiada cuando la entrada viola una precondición y continuar
@@ -351,9 +351,9 @@ cards:
     card_type: definition
     difficulty: intermediate
     front:
-      es: ¿Qué significa que una función sea cohesionada?
-      en: What does it mean for a function to be cohesive?
-      da: Hvad betyder det at en funktion er sammenhængende?
+      es: "¿Qué significa que una función sea cohesionada?"
+      en: "What does it mean for a function to be cohesive?"
+      da: "Hvad betyder det at en funktion er sammenhængende?"
     back:
       es: >-
         Sus operaciones contribuyen a una responsabilidad principal que puede nombrarse, explicarse y probarse
@@ -375,9 +375,9 @@ cards:
     card_type: pipeline_design
     difficulty: intermediate
     front:
-      es: Propón una descomposición para leer, limpiar, validar, resumir y presentar datos.
-      en: Propose a decomposition for reading, cleaning, validating, summarizing, and presenting data.
-      da: Foreslå en dekomponering til læsning, rensning, validering, opsummering og præsentation af data.
+      es: "Propón una descomposición para leer, limpiar, validar, resumir y presentar datos."
+      en: "Propose a decomposition for reading, cleaning, validating, summarizing, and presenting data."
+      da: "Foreslå en dekomponering til læsning, rensning, validering, opsummering og præsentation af data."
     back:
       es: >-
         Una estructura razonable separa `read_data`, `clean_values`, `validate_values`, `summarize_values` y
@@ -399,9 +399,9 @@ cards:
     card_type: comparison
     difficulty: intermediate
     front:
-      es: ¿Por qué “más funciones” no significa automáticamente “mejor diseño”?
-      en: Why does “more functions” not automatically mean “better design”?
-      da: Hvorfor betyder “flere funktioner” ikke automatisk “bedre design”?
+      es: "¿Por qué “más funciones” no significa automáticamente “mejor diseño”?"
+      en: "Why does “more functions” not automatically mean “better design”?"
+      da: "Hvorfor betyder “flere funktioner” ikke automatisk “bedre design”?"
     back:
       es: >-
         La fragmentación excesiva crea interfaces triviales, aumenta saltos mentales y dispersa una operación
@@ -423,9 +423,9 @@ cards:
     card_type: test_design
     difficulty: intermediate
     front:
-      es: ¿Cómo pruebas una función con tres rutas de retorno?
-      en: How do you test a function with three return paths?
-      da: Hvordan tester man en funktion med tre returveje?
+      es: "¿Cómo pruebas una función con tres rutas de retorno?"
+      en: "How do you test a function with three return paths?"
+      da: "Hvordan tester man en funktion med tre returveje?"
     back:
       es: >-
         Diseña al menos una entrada que active cada ruta y afirma el valor y tipo retornados. Añade valores de
@@ -447,9 +447,9 @@ cards:
     card_type: test_design
     difficulty: intermediate
     front:
-      es: ¿Qué prueba revela un valor predeterminado mutable compartido?
-      en: What test reveals a shared mutable default?
-      da: Hvilken test afslører en delt muterbar standardværdi?
+      es: "¿Qué prueba revela un valor predeterminado mutable compartido?"
+      en: "What test reveals a shared mutable default?"
+      da: "Hvilken test afslører en delt muterbar standardværdi?"
     back:
       es: >-
         Llama dos veces sin proporcionar la colección y verifica que el segundo resultado no contenga datos de la
@@ -470,9 +470,9 @@ cards:
     card_type: contract_design
     difficulty: advanced
     front:
-      es: Formula un contrato mínimo para `mean(values)`.
-      en: Formulate a minimal contract for `mean(values)`.
-      da: Formulér en minimal kontrakt for `mean(values)`.
+      es: "Formula un contrato mínimo para `mean(values)`."
+      en: "Formulate a minimal contract for `mean(values)`."
+      da: "Formulér en minimal kontrakt for `mean(values)`."
     back:
       es: >-
         Entrada: secuencia no vacía de números comparables y con unidades coherentes. Resultado: media aritmética
@@ -494,9 +494,9 @@ cards:
     card_type: misconception_correction
     difficulty: advanced
     front:
-      es: Corrige: “Si Python acepta un valor, entonces cumple el contrato conceptual de la función”.
-      en: Correct: “If Python accepts a value, it satisfies the function's conceptual contract.”
-      da: Ret: “Hvis Python accepterer en værdi, opfylder den funktionens konceptuelle kontrakt.”
+      es: "Corrige: “Si Python acepta un valor, entonces cumple el contrato conceptual de la función”."
+      en: "Correct: “If Python accepts a value, it satisfies the function's conceptual contract.”"
+      da: "Ret: “Hvis Python accepterer en værdi, opfylder den funktionens konceptuelle kontrakt.”"
     back:
       es: >-
         La compatibilidad sintáctica o de tipo no garantiza validez conceptual. `True` es una instancia de `int`,
@@ -517,9 +517,9 @@ cards:
     card_type: debugging
     difficulty: advanced
     front:
-      es: Una función modifica una variable global. ¿Cuál es el problema y cómo se rediseña?
-      en: A function modifies a global variable. What is the problem and how should it be redesigned?
-      da: En funktion ændrer en global variabel. Hvad er problemet og hvordan redesignes den?
+      es: "Una función modifica una variable global. ¿Cuál es el problema y cómo se rediseña?"
+      en: "A function modifies a global variable. What is the problem and how should it be redesigned?"
+      da: "En funktion ændrer en global variabel. Hvad er problemet og hvordan redesignes den?"
     back:
       es: >-
         Introduce dependencia y efecto ocultos: el resultado depende del historial y las pruebas se contaminan.
@@ -541,9 +541,9 @@ cards:
     card_type: oral_defense
     difficulty: advanced
     front:
-      es: Defiende por qué separar cálculo de entrada/salida mejora un programa científico.
-      en: Defend why separating computation from I/O improves a scientific program.
-      da: Forsvar hvorfor adskillelse af beregning og I/O forbedrer et videnskabeligt program.
+      es: "Defiende por qué separar cálculo de entrada/salida mejora un programa científico."
+      en: "Defend why separating computation from I/O improves a scientific program."
+      da: "Forsvar hvorfor adskillelse af beregning og I/O forbedrer et videnskabeligt program."
     back:
       es: >-
         Permite probar el cálculo con datos controlados, reutilizarlo en archivo, interfaz o notebook, reducir dependencias
@@ -565,9 +565,9 @@ cards:
     card_type: design_review
     difficulty: advanced
     front:
-      es: ¿Qué revisarías antes de aprobar una función para uso en un pipeline reproducible?
-      en: What would you review before approving a function for a reproducible pipeline?
-      da: Hvad ville du gennemgå før en funktion godkendes til en reproducerbar pipeline?
+      es: "¿Qué revisarías antes de aprobar una función para uso en un pipeline reproducible?"
+      en: "What would you review before approving a function for a reproducible pipeline?"
+      da: "Hvad ville du gennemgå før en funktion godkendes til en reproducerbar pipeline?"
     back:
       es: >-
         Responsabilidad y nombre; contrato y unidades; tipos conceptuales; política de entrada vacía y errores;
