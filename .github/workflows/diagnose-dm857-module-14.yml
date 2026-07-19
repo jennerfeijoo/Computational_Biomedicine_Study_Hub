@@ -27,11 +27,11 @@ jobs:
       - name: Install project quietly
         run: python -m pip install -q -e ".[dev]"
 
-      - name: Capture focused test output
+      - name: Capture first full-suite failure
         shell: bash
         run: |
           set +e
-          pytest tests/test_dm857_module_14_content.py tests/test_dm857_module_14_registration.py tests/test_dm857_module_catalog.py tests/test_module_bundles.py -q --tb=long -x > dm857-module-14-diagnostic.log 2>&1
+          pytest -q --tb=long -x > dm857-module-14-diagnostic.log 2>&1
           echo $? > dm857-module-14-exit-code.txt
           exit 0
 
