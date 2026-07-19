@@ -1,0 +1,151 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m15
+count: 36
+locales: [es, en, da]
+
+cards:
+  - id: dm847.m15.f01
+    type: specification
+    front: {es: ¿Qué cinco elementos hacen verificable una pregunta computacional?, en: Which five elements make a computational question verifiable?, da: Hvilke fem elementer gør et beregningsspørgsmål verificerbart?}
+    back: {es: Entrada, salida, unidad de análisis, supuestos y criterio de éxito o fallo., en: Input, output, analysis unit, assumptions, and success or failure criterion., da: Input, output, analyseenhed, antagelser og kriterium for succes eller fejl.}
+  - id: dm847.m15.f02
+    type: specification
+    front: {es: ¿Por qué “encontrar genes importantes” no es una especificación suficiente?, en: Why is “find important genes” not a sufficient specification?, da: Hvorfor er “find vigtige gener” ikke en tilstrækkelig specifikation?}
+    back: {es: No define importancia, universo, contexto, output, evidencia ni cómo evaluar el resultado., en: It does not define importance, universe, context, output, evidence, or evaluation., da: Det definerer ikke betydning, univers, kontekst, output, evidens eller evaluering.}
+  - id: dm847.m15.f03
+    type: evidence
+    front: {es: ¿Qué es una cadena de evidencia?, en: What is an evidence chain?, da: Hvad er en evidenskæde?}
+    back: {es: Una secuencia trazable desde fuente y dato crudo, pasando por transformaciones y estadísticos, hasta la afirmación., en: A traceable sequence from source and raw data through transformations and statistics to the claim., da: En sporbar sekvens fra kilde og rådata gennem transformationer og statistik til påstanden.}
+  - id: dm847.m15.f04
+    type: provenance
+    front: {es: ¿Qué debe conservar cada transformación?, en: What should every transformation preserve?, da: Hvad bør hver transformation bevare?}
+    back: {es: Identificadores, versiones, parámetros, filtros, cantidades de entrada y salida y motivo de exclusión., en: Identifiers, versions, parameters, filters, input/output counts, and exclusion reasons., da: Identifikatorer, versioner, parametre, filtre, input/output-tal og eksklusionsårsager.}
+  - id: dm847.m15.f05
+    type: misconception
+    front: {es: Corrige: una afirmación puede ser más fuerte que su eslabón de datos más débil., en: Correct: a claim can be stronger than its weakest data link., da: Ret: en påstand kan være stærkere end sit svageste dataled.}
+    back: {es: La fuerza máxima de la conclusión está limitada por la calidad y validez del eslabón más débil., en: Maximum claim strength is limited by the quality and validity of the weakest link., da: Den maksimale påstandsstyrke begrænses af kvaliteten og validiteten af det svageste led.}
+  - id: dm847.m15.f06
+    type: baseline
+    front: {es: ¿Qué función cumple un baseline simple?, en: What is the role of a simple baseline?, da: Hvad er rollen for en simpel baseline?}
+    back: {es: Determinar si el método complejo añade valor por encima de una referencia comprensible., en: Determine whether the complex method adds value over an understandable reference., da: Afgøre om den komplekse metode tilfører værdi over en forståelig reference.}
+  - id: dm847.m15.f07
+    type: comparison
+    front: {es: Baseline frente a método alternativo., en: Baseline versus alternative method., da: Baseline versus alternativ metode.}
+    back: {es: El baseline prueba valor añadido mínimo; la alternativa razonable evalúa si la elección metodológica es competitiva., en: A baseline tests minimum added value; a reasonable alternative tests whether method choice is competitive., da: Baseline tester minimal merværdi; et rimeligt alternativ tester metodevalgets konkurrenceevne.}
+  - id: dm847.m15.f08
+    type: fairness
+    front: {es: ¿Qué necesita una comparación metodológica justa?, en: What does a fair method comparison require?, da: Hvad kræver en fair metodesammenligning?}
+    back: {es: Mismos datos evaluativos, particiones, métricas, información disponible y presupuesto de ajuste., en: The same evaluation data, splits, metrics, available information, and tuning budget., da: Samme evalueringsdata, split, metrikker, tilgængelig information og tuning-budget.}
+  - id: dm847.m15.f09
+    type: validation
+    front: {es: ¿Qué comprueba validación técnica?, en: What does technical validation check?, da: Hvad kontrollerer teknisk validering?}
+    back: {es: Formatos, tipos, IDs, dimensiones, invariantes, integridad de archivos y ejecución esperada., en: Formats, types, IDs, dimensions, invariants, file integrity, and expected execution., da: Formater, typer, IDs, dimensioner, invarianter, filintegritet og forventet kørsel.}
+  - id: dm847.m15.f10
+    type: validation
+    front: {es: ¿Qué comprueba validación algorítmica?, en: What does algorithmic validation check?, da: Hvad kontrollerer algoritmisk validering?}
+    back: {es: Que la implementación reproduce resultados conocidos, oráculos simples, propiedades y casos simulados., en: That implementation matches known results, simple oracles, properties, and simulated cases., da: At implementeringen matcher kendte resultater, simple orakler, egenskaber og simulerede cases.}
+  - id: dm847.m15.f11
+    type: validation
+    front: {es: ¿Qué comprueba validación estadística?, en: What does statistical validation check?, da: Hvad kontrollerer statistisk validering?}
+    back: {es: Generalización, incertidumbre, calibración, multiplicidad y rendimiento bajo particiones apropiadas., en: Generalization, uncertainty, calibration, multiplicity, and performance under appropriate splits., da: Generalisering, usikkerhed, kalibrering, multiplicitet og performance under passende split.}
+  - id: dm847.m15.f12
+    type: validation
+    front: {es: ¿Qué comprueba validación biológica?, en: What does biological validation check?, da: Hvad kontrollerer biologisk validering?}
+    back: {es: Si la interpretación coincide con evidencia independiente, controles, anotaciones o experimentos pertinentes., en: Whether interpretation agrees with relevant independent evidence, controls, annotations, or experiments., da: Om fortolkningen stemmer med relevant uafhængig evidens, kontroller, annotationer eller eksperimenter.}
+  - id: dm847.m15.f13
+    type: misconception
+    front: {es: Corrige: si el código ejecuta, el análisis está validado., en: Correct: if the code runs, the analysis is validated., da: Ret: hvis koden kører, er analysen valideret.}
+    back: {es: Ejecutar sólo demuestra funcionamiento técnico; corrección algorítmica, estadística y biológica requieren pruebas adicionales., en: Running demonstrates only technical operation; algorithmic, statistical, and biological validity require further evidence., da: Kørsel viser kun teknisk funktion; algoritmisk, statistisk og biologisk validitet kræver mere evidens.}
+  - id: dm847.m15.f14
+    type: reproducibility
+    front: {es: Elementos mínimos de un manifiesto de procedencia., en: Minimum elements of a provenance manifest., da: Minimumselementer i et provenance-manifest.}
+    back: {es: Datos y checksums, referencias y anotaciones, versiones de software, entorno, parámetros, semillas y orden de etapas., en: Data and checksums, references and annotations, software versions, environment, parameters, seeds, and stage order., da: Data og checksums, referencer og annotationer, softwareversioner, miljø, parametre, seeds og trinrækkefølge.}
+  - id: dm847.m15.f15
+    type: misconception
+    front: {es: Corrige: reproducible significa científicamente correcto., en: Correct: reproducible means scientifically correct., da: Ret: reproducerbar betyder videnskabeligt korrekt.}
+    back: {es: Un error puede reproducirse; la reproducibilidad permite repetir y auditar, no garantiza validez., en: An error can reproduce; reproducibility enables repetition and audit but does not guarantee validity., da: En fejl kan reproduceres; reproducerbarhed muliggør gentagelse og audit, men garanterer ikke validitet.}
+  - id: dm847.m15.f16
+    type: randomness
+    front: {es: ¿Qué consigue fijar una semilla aleatoria?, en: What does fixing a random seed achieve?, da: Hvad opnår et fast random seed?}
+    back: {es: Repetir una realización estocástica específica; no cuantifica la variabilidad entre realizaciones., en: Reproduce one specific stochastic realization; it does not quantify variability across runs., da: Reproducere én bestemt stokastisk realisering; det kvantificerer ikke variation mellem kørsler.}
+  - id: dm847.m15.f17
+    type: sensitivity
+    front: {es: ¿Qué pregunta un análisis de sensibilidad?, en: What does sensitivity analysis ask?, da: Hvad spørger en følsomhedsanalyse om?}
+    back: {es: Si la conclusión cambia bajo elecciones plausibles de parámetros, filtros, modelos, fondos o redes., en: Whether the conclusion changes under plausible choices of parameters, filters, models, backgrounds, or networks., da: Om konklusionen ændres under plausible valg af parametre, filtre, modeller, baggrunde eller netværk.}
+  - id: dm847.m15.f18
+    type: uncertainty
+    front: {es: Nombra cinco fuentes de incertidumbre., en: Name five sources of uncertainty., da: Nævn fem kilder til usikkerhed.}
+    back: {es: Muestreo, medición, anotación, modelo, hiperparámetros y selección analítica., en: Sampling, measurement, annotation, model, hyperparameters, and analytical selection., da: Sampling, måling, annotation, model, hyperparametre og analytisk selection.}
+  - id: dm847.m15.f19
+    type: negative_result
+    front: {es: ¿Cuándo es informativo un resultado negativo?, en: When is a negative result informative?, da: Hvornår er et negativt resultat informativt?}
+    back: {es: Cuando se declaran calidad, potencia o sensibilidad, rango de efectos detectables y análisis predefinido., en: When quality, power or sensitivity, detectable effect range, and prespecified analysis are stated., da: Når kvalitet, power eller følsomhed, detekterbart effektinterval og foruddefineret analyse angives.}
+  - id: dm847.m15.f20
+    type: misconception
+    front: {es: Corrige: ausencia de evidencia es evidencia universal de ausencia., en: Correct: absence of evidence is universal evidence of absence., da: Ret: fravær af evidens er universel evidens for fravær.}
+    back: {es: Sólo permite excluir efectos que el diseño y los datos tenían capacidad razonable de detectar., en: It only excludes effects the design and data had reasonable capacity to detect., da: Det udelukker kun effekter, som design og data havde rimelig evne til at opdage.}
+  - id: dm847.m15.f21
+    type: reporting
+    front: {es: ¿Qué función debe cumplir cada figura?, en: What function should every figure serve?, da: Hvilken funktion bør hver figur have?}
+    back: {es: Responder una pregunta concreta y aportar evidencia con unidades, denominadores, incertidumbre y leyenda autosuficiente., en: Answer a concrete question and provide evidence with units, denominators, uncertainty, and a self-contained legend., da: Besvare et konkret spørgsmål og levere evidens med enheder, nævnere, usikkerhed og selvstændig legend.}
+  - id: dm847.m15.f22
+    type: reporting
+    front: {es: Resultados frente a discusión., en: Results versus discussion., da: Resultater versus diskussion.}
+    back: {es: Resultados describen lo observado; discusión interpreta, compara, explica incertidumbre y limita alcance., en: Results describe observations; discussion interprets, compares, explains uncertainty, and limits scope., da: Resultater beskriver observationer; diskussion fortolker, sammenligner, forklarer usikkerhed og afgrænser rækkevidde.}
+  - id: dm847.m15.f23
+    type: oral
+    front: {es: Estructura recomendada para una respuesta oral., en: Recommended structure for an oral answer., da: Anbefalet struktur for et mundtligt svar.}
+    back: {es: Respuesta directa, definición, razonamiento o mecanismo, evidencia, limitación y alternativa cuando sea relevante., en: Direct answer, definition, reasoning or mechanism, evidence, limitation, and an alternative when relevant., da: Direkte svar, definition, ræsonnement eller mekanisme, evidens, begrænsning og alternativ når relevant.}
+  - id: dm847.m15.f24
+    type: oral
+    front: {es: ¿Qué hacer si no conoces una cifra durante la defensa?, en: What should you do if you do not know a number during the defense?, da: Hvad gør du hvis du ikke kender et tal under forsvaret?}
+    back: {es: Declararlo con precisión y explicar qué fuente, cálculo o experimento permitiría obtenerla., en: State that clearly and explain which source, calculation, or experiment would obtain it., da: Sig det klart og forklar hvilken kilde, beregning eller eksperiment der kan give tallet.}
+  - id: dm847.m15.f25
+    type: oral
+    front: {es: ¿Cómo comparar dos métodos oralmente?, en: How should two methods be compared orally?, da: Hvordan bør to metoder sammenlignes mundtligt?}
+    back: {es: Contrastar objetivo, supuestos, datos, salida, complejidad, errores, validación y contexto de uso., en: Contrast objective, assumptions, data, output, complexity, errors, validation, and use context., da: Sammenlign mål, antagelser, data, output, kompleksitet, fejl, validering og brugskontekst.}
+  - id: dm847.m15.f26
+    type: sequence_methods
+    front: {es: ¿Cuándo elegir alineamiento frente a búsqueda exacta?, en: When should alignment be chosen over exact search?, da: Hvornår vælges alignment frem for eksakt søgning?}
+    back: {es: Cuando se necesitan sustituciones, gaps, homología o un score; búsqueda exacta sirve para igualdad de símbolos., en: When substitutions, gaps, homology, or scoring are needed; exact search serves symbol equality., da: Når substitutioner, gaps, homologi eller scoring kræves; eksakt søgning bruges til symbol-lighed.}
+  - id: dm847.m15.f27
+    type: probabilistic_methods
+    front: {es: ¿Cuándo aporta un HMM sobre una PWM aislada?, en: When does an HMM add value over an isolated PWM?, da: Hvornår giver en HMM værdi over en isoleret PWM?}
+    back: {es: Cuando importan estados, orden, duración o transiciones entre regiones y no sólo posiciones independientes., en: When states, order, duration, or transitions among regions matter rather than independent positions alone., da: Når tilstande, rækkefølge, varighed eller overgange mellem regioner er vigtige.}
+  - id: dm847.m15.f28
+    type: indexing
+    front: {es: ¿Qué añade un FM-index a un array de sufijos?, en: What does an FM-index add to a suffix array?, da: Hvad tilføjer et FM-index til et suffix-array?}
+    back: {es: Búsqueda hacia atrás y estructuras de rank comprimidas, con localización mediante SA completo o muestreado., en: Backward search and compressed rank support, with location through a full or sampled suffix array., da: Backward search og komprimerede rank-strukturer med lokalisering via fuldt eller samplet suffix-array.}
+  - id: dm847.m15.f29
+    type: database
+    front: {es: ¿Por qué separar identificador, versión y entidad?, en: Why separate identifier, version, and entity?, da: Hvorfor adskille identifikator, version og enhed?}
+    back: {es: Un ID puede cambiar de versión o resolver a entidades distintas; mezclarlos rompe trazabilidad e integración., en: An ID may change version or resolve to distinct entities; conflating them breaks provenance and integration., da: Et ID kan ændre version eller referere til forskellige enheder; sammenblanding bryder sporbarhed og integration.}
+  - id: dm847.m15.f30
+    type: ngs
+    front: {es: ¿Qué diferencia una alerta QC de una decisión de descarte?, en: What distinguishes a QC warning from a discard decision?, da: Hvad adskiller en QC-advarsel fra en kassationsbeslutning?}
+    back: {es: La advertencia genera una hipótesis; descartar requiere contexto del ensayo y evidencia de impacto no recuperable., en: A warning generates a hypothesis; discarding requires assay context and evidence of unrecoverable impact., da: En advarsel skaber en hypotese; kassation kræver assay-kontekst og evidens for uoprettelig påvirkning.}
+  - id: dm847.m15.f31
+    type: networks
+    front: {es: ¿Por qué centralidad no demuestra causalidad?, en: Why does centrality not prove causality?, da: Hvorfor beviser centralitet ikke kausalitet?}
+    back: {es: Describe topología de una red construida y sesgada; no establece dirección mecanística ni efecto de intervención., en: It describes topology of a constructed and biased network; it does not establish mechanism or intervention effect., da: Den beskriver topologi i et konstrueret og biased netværk; den fastlægger ikke mekanisme eller interventionseffekt.}
+  - id: dm847.m15.f32
+    type: enrichment
+    front: {es: ¿Qué cuatro elementos condicionan una conclusión de enriquecimiento?, en: Which four elements condition an enrichment conclusion?, da: Hvilke fire elementer betinger en enrichment-konklusion?}
+    back: {es: Universo, colección y versión, estadístico o ranking y modelo nulo o permutación., en: Universe, collection and version, statistic or ranking, and null model or permutation., da: Univers, samling og version, statistik eller ranking samt nulmodel eller permutation.}
+  - id: dm847.m15.f33
+    type: machine_learning
+    front: {es: ¿Qué diferencia un buen modelo interno de uno transportable?, en: What distinguishes a good internal model from a transportable one?, da: Hvad adskiller en god intern model fra en transportabel model?}
+    back: {es: Rendimiento, calibración y estabilidad conservados bajo datos externos con cambios de sitio, población o plataforma., en: Preserved performance, calibration, and stability under external site, population, or platform changes., da: Bevaret performance, kalibrering og stabilitet under eksterne ændringer i site, population eller platform.}
+  - id: dm847.m15.f34
+    type: claims
+    front: {es: Asociación, mecanismo y utilidad: ¿son equivalentes?, en: Are association, mechanism, and utility equivalent?, da: Er association, mekanisme og nytte ækvivalente?}
+    back: {es: No. Una asociación puede predecir sin explicar mecanismo, y un mecanismo puede no mejorar una decisión práctica., en: No. An association may predict without explaining mechanism, and a mechanism may not improve a practical decision., da: Nej. En association kan prædiktere uden mekanisme, og en mekanisme forbedrer ikke nødvendigvis en praktisk beslutning.}
+  - id: dm847.m15.f35
+    type: limitation
+    front: {es: ¿Cómo redactar una limitación útil?, en: How should a useful limitation be written?, da: Hvordan skrives en nyttig begrænsning?}
+    back: {es: Identificar su causa, qué resultado afecta, dirección probable del sesgo y qué estudio o dato la reduciría., en: Identify its cause, affected result, likely bias direction, and the study or data that would reduce it., da: Identificér årsag, berørt resultat, sandsynlig biasretning og hvilket studie eller data der kan reducere den.}
+  - id: dm847.m15.f36
+    type: oral
+    front: {es: ¿Qué demuestra una buena defensa individual?, en: What does a strong individual defense demonstrate?, da: Hvad demonstrerer et stærkt individuelt forsvar?}
+    back: {es: Comprensión transferible del proyecto y del programa, capacidad de justificar decisiones y honestidad ante incertidumbre y límites., en: Transferable understanding of project and syllabus, ability to justify decisions, and honesty about uncertainty and limits., da: Overførbar forståelse af projekt og pensum, evne til at begrunde beslutninger og ærlighed om usikkerhed og begrænsninger.}
