@@ -1,0 +1,327 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m13
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Enriquecimiento de redes, módulos activos e interpretación de vías
+    en: Network enrichment, active modules, and pathway interpretation
+    da: Netværksberigelse, aktive moduler og pathway-fortolkning
+  summary:
+    es: >-
+      Análisis de sobrerrepresentación, pruebas basadas en rankings, universos de genes,
+      corrección por multiplicidad, dependencia y redundancia de vías. Se desarrollan
+      propagación sobre redes, detección de módulos activos, modelos nulos competitivos y
+      autocontenidos, validación por permutación y reglas para interpretar resultados sin
+      convertir una lista enriquecida en causalidad o mecanismo demostrado.
+    en: >-
+      Over-representation analysis, rank-based tests, gene universes, multiple-testing
+      correction, dependency, and pathway redundancy. The module develops network propagation,
+      active-module detection, competitive and self-contained nulls, permutation validation,
+      and interpretation rules preventing enriched lists from being treated as proven causality.
+    da: >-
+      Overrepræsentationsanalyse, rank-baserede tests, genuniverser, multipel korrektion,
+      afhængighed og pathway-redundans. Modulet omfatter netværkspropagation, aktive moduler,
+      konkurrerende og selvstændige nulhypoteser samt permutationsvalidering.
+  estimated_study_hours: 12
+  difficulty: advanced
+
+alignment:
+  official_learning_outcomes: [dm847.lo05]
+  prerequisite_modules: [dm847.m10, dm847.m12, bmb830.m07]
+  later_modules: [dm847.m14, dm847.m15, bmb831.m09]
+
+objectives:
+  - {id: dm847.m13.o01, text: {es: Definir lista objetivo, universo y colección de conjuntos antes de probar enriquecimiento, en: Define target list, universe, and gene-set collection before enrichment testing, da: Definere målliste, univers og gensætsamling før berigelsestest}}
+  - {id: dm847.m13.o02, text: {es: Calcular e interpretar sobrerrepresentación hipergeométrica y tamaño de efecto, en: Compute and interpret hypergeometric over-representation and effect size, da: Beregne og fortolke hypergeometrisk overrepræsentation og effektstørrelse}}
+  - {id: dm847.m13.o03, text: {es: Distinguir análisis por umbral de métodos basados en ranking, en: Distinguish thresholded analysis from rank-based methods, da: Skelne tærskelbaseret analyse fra rank-baserede metoder}}
+  - {id: dm847.m13.o04, text: {es: Aplicar corrección múltiple y explicar dependencia entre términos, en: Apply multiple-testing correction and explain dependency among terms, da: Anvende multipel korrektion og forklare afhængighed mellem termer}}
+  - {id: dm847.m13.o05, text: {es: Formular nulos competitivos y autocontenidos y elegir una unidad de permutación, en: Formulate competitive and self-contained nulls and choose a permutation unit, da: Formulere konkurrerende og selvstændige nulhypoteser og vælge permutationsenhed}}
+  - {id: dm847.m13.o06, text: {es: Implementar propagación o difusión sobre una red con parámetros explícitos, en: Implement network propagation or diffusion with explicit parameters, da: Implementere netværkspropagation eller diffusion med eksplicitte parametre}}
+  - {id: dm847.m13.o07, text: {es: Detectar módulos activos y evaluar estabilidad frente a red, parámetros y semillas, en: Detect active modules and evaluate stability to network, parameters, and seeds, da: Detektere aktive moduler og evaluere stabilitet over for netværk, parametre og seeds}}
+  - {id: dm847.m13.o08, text: {es: Reducir redundancia y comunicar vías como hipótesis, no mecanismos demostrados, en: Reduce redundancy and communicate pathways as hypotheses rather than proven mechanisms, da: Reducere redundans og kommunikere pathways som hypoteser, ikke beviste mekanismer}}
+
+concepts:
+  - id: dm847.m13.c01
+    title: {es: Pregunta de enriquecimiento y universo, en: Enrichment question and universe, da: Berigelsesspørgsmål og univers}
+    body:
+      es: >-
+        La sobrerrepresentación pregunta si una lista contiene más miembros de un conjunto que lo
+        esperado al muestrear desde un universo definido. El universo debe ser el conjunto de genes
+        que podían haber sido seleccionados: medidos, mapeados y sometidos al mismo filtro. Usar todo
+        el genoma cuando sólo una fracción era detectable cambia probabilidades y puede crear resultados espurios.
+      en: >-
+        Over-representation asks whether a target list contains more members of a set than expected
+        when sampling from a defined universe. The universe should contain genes that could have been
+        selected: measured, mapped, and subject to the same filters. Using the whole genome when only
+        a subset was detectable changes probabilities and can create spurious results.
+      da: >-
+        Overrepræsentation spørger om en liste indeholder flere medlemmer af et sæt end forventet fra
+        et defineret univers. Universet bør være de gener, der faktisk kunne være valgt.
+    key_points:
+      - {es: El universo forma parte de la hipótesis nula, en: The universe is part of the null hypothesis, da: Universet er en del af nulhypotesen}
+      - {es: Mapeo muchos-a-muchos de IDs debe resolverse antes de contar, en: Many-to-many ID mapping must be resolved before counting, da: Mange-til-mange ID-mapping skal løses før optælling}
+  - id: dm847.m13.c02
+    title: {es: Prueba hipergeométrica y efecto, en: Hypergeometric test and effect size, da: Hypergeometrisk test og effekt}
+    body:
+      es: >-
+        Con N genes en el universo, K en una vía, n en la lista y k en la intersección, la cola
+        hipergeométrica calcula P(X>=k) bajo muestreo sin reemplazo. El p-value no expresa magnitud;
+        se reportan k, tamaños, razón observada/esperada u odds ratio e intervalo cuando corresponda.
+        Con conjuntos muy pequeños o grandes, un resultado significativo puede ser poco estable o informativo.
+      en: >-
+        With N universe genes, K pathway genes, n target genes, and overlap k, the hypergeometric
+        upper tail computes P(X>=k) under sampling without replacement. A p-value is not magnitude;
+        report k, set sizes, observed/expected ratio or odds ratio, and uncertainty where appropriate.
+        Very small or large sets may yield unstable or uninformative results.
+      da: >-
+        Med N gener i universet, K i pathway, n i listen og overlap k beregner den hypergeometriske
+        øvre hale P(X>=k). Rapportér også overlap og effektstørrelse, ikke kun p-værdi.
+    key_points:
+      - {es: Enriquecimiento estadístico y relevancia biológica no son sinónimos, en: Statistical enrichment and biological relevance are not synonyms, da: Statistisk berigelse og biologisk relevans er ikke synonymer}
+  - id: dm847.m13.c03
+    title: {es: Métodos basados en ranking, en: Rank-based methods, da: Rank-baserede metoder}
+    body:
+      es: >-
+        Los métodos por ranking usan toda una lista ordenada de estadísticas y evitan un umbral binario
+        arbitrario. Un running-sum aumenta al encontrar miembros del conjunto y disminuye en caso contrario;
+        el máximo desvío resume concentración en extremos. La dirección, métrica de ranking, tratamiento de
+        empates y correlación entre genes deben declararse. Rankings derivados de p-values solos pierden signo.
+      en: >-
+        Rank-based methods use an ordered statistic for all genes and avoid an arbitrary binary threshold.
+        A running sum increases at set members and decreases otherwise; its maximum deviation summarizes
+        concentration near an extreme. Direction, ranking metric, ties, and gene correlation must be stated.
+        Ranking by p-value alone loses sign.
+      da: >-
+        Rank-baserede metoder bruger en ordnet statistik for alle gener og undgår en binær tærskel. Retning,
+        ranking-metrik, ties og genkorrelation skal deklareres.
+    key_points:
+      - {es: El ranking debe preservar dirección y evidencia, en: Ranking should preserve direction and evidence, da: Ranking bør bevare retning og evidens}
+  - id: dm847.m13.c04
+    title: {es: Nulos competitivos y autocontenidos, en: Competitive and self-contained nulls, da: Konkurrerende og selvstændige nulhypoteser}
+    body:
+      es: >-
+        Un nulo competitivo compara genes del conjunto con genes fuera del conjunto; uno autocontenido
+        pregunta si ningún gen del conjunto se asocia con el fenotipo. La permutación de etiquetas de
+        muestra preserva correlación entre genes cuando el diseño lo permite; permutar genes rompe esa
+        estructura y responde otra pregunta. Diseños pareados, bloques y covariables restringen permutaciones válidas.
+      en: >-
+        A competitive null compares genes inside a set with genes outside it; a self-contained null asks
+        whether no gene in the set is associated with phenotype. Permuting sample labels preserves gene
+        correlation when design permits; permuting genes breaks that structure and answers another question.
+        Paired, blocked, and covariate designs constrain valid permutations.
+      da: >-
+        En konkurrerende nul sammenligner gener i og uden for sættet; en selvstændig nul spørger om ingen
+        gener i sættet er associeret. Permutationsenheden skal respektere designet.
+    key_points:
+      - {es: La unidad de permutación debe respetar intercambiabilidad, en: The permutation unit must respect exchangeability, da: Permutationsenheden skal respektere udskiftelighed}
+  - id: dm847.m13.c05
+    title: {es: Multiplicidad, dependencia y redundancia, en: Multiplicity, dependence, and redundancy, da: Multiplicitet, afhængighed og redundans}
+    body:
+      es: >-
+        Probar cientos de vías requiere FDR u otro control definido. Las vías comparten genes y jerarquías,
+        por lo que los tests son dependientes y los resultados aparecen como familias redundantes. BH suele
+        controlar FDR bajo condiciones amplias, pero la interpretación no debe contar términos solapados como
+        descubrimientos independientes. Se agrupan por similitud, ontología o genes conductores.
+      en: >-
+        Testing hundreds of pathways requires FDR or another stated control. Pathways share genes and
+        hierarchies, making tests dependent and results redundant. BH often controls FDR under broad
+        conditions, but overlapping terms should not be counted as independent discoveries. Group terms by
+        similarity, ontology, or leading genes.
+      da: >-
+        Hundreder af pathways kræver FDR-kontrol. Pathways deler gener og hierarkier, så resultater er
+        afhængige og redundante og bør grupperes frem for tælles som uafhængige fund.
+    key_points:
+      - {es: FDR no elimina redundancia semántica, en: FDR does not remove semantic redundancy, da: FDR fjerner ikke semantisk redundans}
+  - id: dm847.m13.c06
+    title: {es: Propagación sobre redes, en: Network propagation, da: Netværkspropagation}
+    body:
+      es: >-
+        La difusión parte de scores semilla y los propaga por una matriz de transición normalizada, con
+        un parámetro de reinicio que equilibra proximidad local y alcance global. Nodos de alto grado pueden
+        acumular señal, por lo que se comparan normalizaciones y nulos. La red, dirección, pesos, tratamiento
+        de componentes y parámetro de difusión deben definirse y someterse a sensibilidad.
+      en: >-
+        Diffusion starts from seed scores and propagates them through a normalized transition matrix, with
+        a restart parameter balancing local proximity and global reach. High-degree nodes may accumulate
+        signal, so normalizations and nulls should be compared. Network, direction, weights, components,
+        and diffusion parameter require explicit definition and sensitivity analysis.
+      da: >-
+        Diffusion starter fra seed-scores og propagerer gennem en normaliseret overgangsmatrix med restart.
+        Højgradsnoder kan akkumulere signal, så normalisering og nulmodeller er nødvendige.
+    key_points:
+      - {es: Propagación amplifica supuestos de la red, en: Propagation amplifies network assumptions, da: Propagation forstærker netværksantagelser}
+  - id: dm847.m13.c07
+    title: {es: Módulos activos, en: Active modules, da: Aktive moduler}
+    body:
+      es: >-
+        Un módulo activo busca un subgrafo cuyos nodos muestran señal coordinada. Combinar p-values como
+        scores requiere transformaciones y nulos que consideren tamaño y selección. Algoritmos heurísticos
+        pueden devolver óptimos locales y favorecer módulos grandes o densos. La estabilidad se evalúa por
+        bootstrap, perturbación de red, variación de parámetros y consistencia de genes núcleo.
+      en: >-
+        An active module is a subgraph whose nodes show coordinated signal. Combining p-values into scores
+        requires transformations and nulls accounting for size and selection. Heuristic algorithms may reach
+        local optima and favor large or dense modules. Assess stability with bootstrap, network perturbation,
+        parameter changes, and consistency of core genes.
+      da: >-
+        Et aktivt modul er en subgraf med koordineret signal. Heuristik kan favorisere store eller tætte
+        moduler; stabilitet vurderes med bootstrap, netværksperturbation og parameterændringer.
+    key_points:
+      - {es: El módulo seleccionado debe evaluarse considerando el proceso de selección, en: A selected module must be evaluated accounting for selection, da: Et valgt modul skal evalueres med hensyn til selektionsprocessen}
+  - id: dm847.m13.c08
+    title: {es: Interpretación, genes conductores y validación, en: Interpretation, leading genes, and validation, da: Fortolkning, leading genes og validering}
+    body:
+      es: >-
+        Se reportan genes responsables del score, dirección de cambios, cobertura del conjunto y redundancia
+        con términos vecinos. Los nombres de vías son etiquetas históricas y pueden mezclar procesos. Replicar
+        en una cohorte independiente, comprobar consistencia de dirección, usar datos de perturbación y revisar
+        fuentes de anotación fortalece la hipótesis. El resultado prioriza mecanismos para estudio; no demuestra causalidad.
+      en: >-
+        Report genes driving the score, effect direction, set coverage, and redundancy with neighboring terms.
+        Pathway names are historical labels and may mix processes. Independent replication, direction consistency,
+        perturbation data, and annotation review strengthen a hypothesis. Results prioritize mechanisms for study;
+        they do not prove causality.
+      da: >-
+        Rapportér gener der driver score, retning, dækning og redundans. Uafhængig replikation og perturbationsdata
+        styrker hypotesen; enrichment beviser ikke kausalitet.
+    key_points:
+      - {es: Una vía enriquecida es una hipótesis resumida, en: An enriched pathway is a summarized hypothesis, da: En beriget pathway er en opsummeret hypotese}
+
+worked_examples:
+  - id: dm847.m13.e01
+    title: {es: Efecto de cambiar el universo, en: Effect of changing the universe, da: Effekt af at ændre universet}
+    scenario: {es: Veinte genes de una lista de 100 pertenecen a una vía de 200 genes., en: Twenty of 100 target genes belong to a 200-gene pathway., da: Tyve af 100 målgener tilhører en pathway med 200 gener.}
+    solution_outline:
+      es: >-
+        Calcular una vez con universo de 20,000 genes y otra con 8,000 genes realmente detectables. Mantener K
+        consistente con cada universo. Mostrar cómo esperado y p-value cambian, y justificar el universo medido.
+      en: >-
+        Calculate once with a 20,000-gene genome universe and once with the 8,000 genes actually detectable.
+        Adjust K to each universe. Show changes in expectation and p-value and justify the measured universe.
+      da: >-
+        Beregn med genomunivers og med de faktisk detekterbare gener. Vis hvordan forventning og p-værdi ændres.
+    validation: [set_members_restricted_to_universe, expected_overlap_reported, effect_and_p_reported]
+  - id: dm847.m13.e02
+    title: {es: Ranking con signo frente a p-value, en: Signed ranking versus p-value ranking, da: Signeret ranking versus p-værdi-ranking}
+    scenario: {es: Una vía contiene genes fuertemente aumentados y disminuidos., en: A pathway contains strongly up- and down-regulated genes., da: En pathway indeholder stærkt op- og nedregulerede gener.}
+    solution_outline:
+      es: >-
+        Comparar ranking por -log10(p) con ranking por estadístico firmado. El primero mezcla direcciones y puede
+        producir enriquecimiento ambiguo; el segundo permite analizar extremos positivo y negativo. Reportar genes conductores.
+      en: >-
+        Compare ranking by -log10(p) with a signed test statistic. The former mixes directions and may yield
+        ambiguous enrichment; the latter supports positive and negative tails. Report leading genes.
+      da: >-
+        Sammenlign -log10(p) med en signeret teststatistik. Den første blander retninger; den anden bevarer dem.
+    validation: [direction_preserved, ties_defined, leading_edge_reported]
+  - id: dm847.m13.e03
+    title: {es: Difusión sensible al grado, en: Degree-sensitive diffusion, da: Gradfølsom diffusion}
+    scenario: {es: Semillas periféricas propagan señal hacia hubs inespecíficos., en: Peripheral seeds propagate signal toward nonspecific hubs., da: Perifere seeds propagerer signal mod uspecifikke hubs.}
+    solution_outline:
+      es: >-
+        Comparar normalización por grado, restart values y un nulo que permuta semillas por grado emparejado. Reportar
+        nodos estables y aquellos cuyo score desaparece bajo corrección. No interpretar hubs como mecanismos sin evidencia adicional.
+      en: >-
+        Compare degree normalization, restart values, and a degree-matched seed-permutation null. Report stable nodes
+        and those losing signal after correction. Do not interpret hubs as mechanisms without additional evidence.
+      da: >-
+        Sammenlign gradnormalisering, restart og grad-matchede seed-permutationer. Rapportér stabile noder.
+    validation: [degree_matched_null, parameter_sensitivity, stable_core_reported]
+
+practice_exercises:
+  - {id: dm847.m13.p01, activity_type: calculation, difficulty: foundational, prompt: {es: Calcula esperado, fold enrichment y cola hipergeométrica para una tabla dada., en: Compute expectation, fold enrichment, and hypergeometric upper tail for a table., da: Beregn forventning, fold enrichment og hypergeometrisk øvre hale.}, expected_elements: [N_K_n_k, expected_nK_over_N, effect, p_value]}
+  - {id: dm847.m13.p02, activity_type: universe_audit, difficulty: intermediate, prompt: {es: Elige el universo para un panel de 500 genes y justifica exclusiones., en: Choose the universe for a 500-gene panel and justify exclusions., da: Vælg universet for et panel med 500 gener og begrund eksklusioner.}, expected_elements: [measured_genes, qc_pass, id_mapping, same_selection_process]}
+  - {id: dm847.m13.p03, activity_type: ranking_design, difficulty: intermediate, prompt: {es: Diseña un ranking para expresión diferencial conservando dirección y estabilidad., en: Design a differential-expression ranking preserving direction and stability., da: Design en differential-expression-ranking med retning og stabilitet.}, expected_elements: [signed_statistic, ties, missing_values, shrinkage_consideration]}
+  - {id: dm847.m13.p04, activity_type: permutation_design, difficulty: advanced, prompt: {es: Diseña permutaciones válidas para un estudio pareado., en: Design valid permutations for a paired study., da: Design gyldige permutationer til et parret studie.}, expected_elements: [within_pair_exchangeability, covariates, label_permutation, sufficient_repetitions]}
+  - {id: dm847.m13.p05, activity_type: network_analysis, difficulty: advanced, prompt: {es: Implementa difusión con restart y verifica conservación de masa., en: Implement restart diffusion and verify mass conservation., da: Implementér diffusion med restart og verificér massebevarelse.}, expected_elements: [normalized_transition, restart, convergence, sum_check]}
+  - {id: dm847.m13.p06, activity_type: oral_explanation, difficulty: advanced, prompt: {es: Explica por qué diez vías similares no son diez mecanismos independientes., en: Explain why ten similar pathways are not ten independent mechanisms., da: Forklar hvorfor ti lignende pathways ikke er ti uafhængige mekanismer.}, expected_elements: [shared_genes, ontology_hierarchy, dependent_tests, redundancy_reduction]}
+
+objective_bank:
+  - {id: dm847.m13.q01, type: multiple_choice, prompt: {es: ¿Qué debe representar el universo?, en: What should the universe represent?, da: Hvad bør universet repræsentere?}, options: [{id: a, es: Genes que podían ser seleccionados, en: Genes that could have been selected, da: Gener der kunne være valgt}, {id: b, es: Siempre todo el genoma, en: Always the whole genome, da: Altid hele genomet}, {id: c, es: Sólo genes significativos, en: Significant genes only, da: Kun signifikante gener}, {id: d, es: Sólo la vía, en: The pathway only, da: Kun pathwayen}], correct_option_ids: [a]}
+  - {id: dm847.m13.q02, type: true_false, prompt: {es: Cambiar el universo puede cambiar el p-value de enriquecimiento., en: Changing the universe can change enrichment p-values., da: Ændring af universet kan ændre enrichment-p-værdien.}, correct: true}
+  - {id: dm847.m13.q03, type: multiple_choice, prompt: {es: ¿Qué distribución usa ORA clásica?, en: Which distribution does classical ORA use?, da: Hvilken fordeling bruger klassisk ORA?}, options: [{id: a, es: Hipergeométrica, en: Hypergeometric, da: Hypergeometrisk}, {id: b, es: Normal siempre, en: Always normal, da: Altid normal}, {id: c, es: Exponencial, en: Exponential, da: Eksponential}, {id: d, es: Cauchy, en: Cauchy, da: Cauchy}], correct_option_ids: [a]}
+  - {id: dm847.m13.q04, type: true_false, prompt: {es: Un p-value de enriquecimiento es una medida directa del tamaño de efecto., en: An enrichment p-value is a direct effect-size measure., da: En enrichment-p-værdi er et direkte mål for effektstørrelse.}, correct: false}
+  - {id: dm847.m13.q05, type: multiple_choice, prompt: {es: ¿Qué ventaja tiene un método por ranking?, en: What is an advantage of a rank-based method?, da: Hvad er en fordel ved en rank-baseret metode?}, options: [{id: a, es: Evita un umbral binario arbitrario, en: Avoids an arbitrary binary threshold, da: Undgår en vilkårlig binær tærskel}, {id: b, es: Elimina multiplicidad, en: Eliminates multiplicity, da: Fjerner multipel testning}, {id: c, es: Prueba causalidad, en: Proves causality, da: Beviser kausalitet}, {id: d, es: No necesita universo, en: Needs no universe or background, da: Behøver ingen baggrund}], correct_option_ids: [a]}
+  - {id: dm847.m13.q06, type: true_false, prompt: {es: Permutar genes y permutar etiquetas de muestra responden la misma hipótesis., en: Permuting genes and sample labels test the same null., da: Permutation af gener og samplelabels tester samme nul.}, correct: false}
+  - {id: dm847.m13.q07, type: multiple_choice, prompt: {es: ¿Qué controla BH?, en: What does BH control?, da: Hvad kontrollerer BH?}, options: [{id: a, es: Tasa esperada de falsos descubrimientos, en: Expected false discovery rate, da: Forventet false discovery rate}, {id: b, es: Error de una única prueba, en: Error of one test only, da: Fejl for én test}, {id: c, es: Tamaño de vía, en: Pathway size, da: Pathway-størrelse}, {id: d, es: Centralidad, en: Centrality, da: Centralitet}], correct_option_ids: [a]}
+  - {id: dm847.m13.q08, type: true_false, prompt: {es: FDR elimina la redundancia entre términos solapados., en: FDR removes redundancy among overlapping terms., da: FDR fjerner redundans mellem overlappende termer.}, correct: false}
+  - {id: dm847.m13.q09, type: multiple_choice, prompt: {es: ¿Qué parámetro equilibra señal local y global en random walk with restart?, en: Which parameter balances local and global signal in random walk with restart?, da: Hvilken parameter balancerer lokalt og globalt signal?}, options: [{id: a, es: Probabilidad de reinicio, en: Restart probability, da: Restart-sandsynlighed}, {id: b, es: Color del nodo, en: Node color, da: Nodefarve}, {id: c, es: Nombre de la vía, en: Pathway name, da: Pathwaynavn}, {id: d, es: Número de decimales, en: Number of decimals, da: Antal decimaler}], correct_option_ids: [a]}
+  - {id: dm847.m13.q10, type: true_false, prompt: {es: Una vía enriquecida demuestra un mecanismo causal., en: An enriched pathway proves a causal mechanism., da: En beriget pathway beviser en kausal mekanisme.}, correct: false}
+
+open_assessment:
+  - id: dm847.m13.a01
+    prompt: {es: Diseña un análisis de enriquecimiento completo para una lista de genes diferencialmente expresados., en: Design a complete enrichment analysis for a differential-expression gene list., da: Design en komplet enrichment-analyse for differentialt udtrykte gener.}
+    rubric: [{criterion: universe_and_id_mapping, weight: 0.25}, {criterion: method_and_effects, weight: 0.25}, {criterion: multiplicity_and_redundancy, weight: 0.25}, {criterion: validation_and_claims, weight: 0.25}]
+  - id: dm847.m13.a02
+    prompt: {es: Compara un nulo competitivo y uno autocontenido para una vía inmune., en: Compare competitive and self-contained nulls for an immune pathway., da: Sammenlign konkurrerende og selvstændige nulhypoteser for en immun-pathway.}
+    rubric: [{criterion: hypotheses, weight: 0.30}, {criterion: permutation_and_dependency, weight: 0.30}, {criterion: interpretation_difference, weight: 0.25}, {criterion: design_limits, weight: 0.15}]
+  - id: dm847.m13.a03
+    prompt: {es: Diseña y valida un algoritmo de módulos activos sobre una red incompleta., en: Design and validate an active-module algorithm on an incomplete network., da: Design og validér en aktiv-modul-algoritme på et ufuldstændigt netværk.}
+    rubric: [{criterion: node_scores_and_network, weight: 0.20}, {criterion: search_and_selection_bias, weight: 0.25}, {criterion: null_and_stability, weight: 0.30}, {criterion: biological_interpretation, weight: 0.25}]
+
+glossary:
+  - {id: dm847.term.gene_universe, es: Universo de genes, en: Gene universe, da: Genunivers, definition_en: Genes eligible for selection under the experiment and filters.}
+  - {id: dm847.term.ora, es: Sobrerrepresentación, en: Over-representation analysis, da: Overrepræsentationsanalyse, definition_en: Test of overlap between a selected list and an annotated set.}
+  - {id: dm847.term.hypergeometric_test, es: Prueba hipergeométrica, en: Hypergeometric test, da: Hypergeometrisk test, definition_en: Sampling-without-replacement overlap probability model.}
+  - {id: dm847.term.fold_enrichment, es: Fold enrichment, en: Fold enrichment, da: Fold enrichment, definition_en: Observed overlap divided by expected overlap.}
+  - {id: dm847.term.competitive_null, es: Nulo competitivo, en: Competitive null, da: Konkurrerende nul, definition_en: Compares a gene set with genes outside it.}
+  - {id: dm847.term.self_contained_null, es: Nulo autocontenido, en: Self-contained null, da: Selvstændig nul, definition_en: Tests whether any association exists within a set.}
+  - {id: dm847.term.leading_edge, es: Genes conductores, en: Leading-edge genes, da: Leading-edge-gener, definition_en: Set members contributing most to a rank-based enrichment score.}
+  - {id: dm847.term.network_propagation, es: Propagación de red, en: Network propagation, da: Netværkspropagation, definition_en: Diffusion of seed scores through network connections.}
+  - {id: dm847.term.active_module, es: Módulo activo, en: Active module, da: Aktivt modul, definition_en: Connected subnetwork with coordinated node-level signal.}
+  - {id: dm847.term.pathway_redundancy, es: Redundancia de vías, en: Pathway redundancy, da: Pathway-redundans, definition_en: Overlap and semantic dependence among annotated gene sets.}
+
+hidden_support:
+  canonical_explanation:
+    es: >-
+      El enriquecimiento compara una lista o ranking con conjuntos anotados bajo un universo y un
+      modelo nulo explícitos. El p-value mide incompatibilidad con ese nulo; efecto y genes conductores
+      explican magnitud y contenido. FDR controla multiplicidad, pero no redundancia. La propagación y
+      los módulos activos añaden supuestos de red que deben validarse por nulos y estabilidad.
+    en: >-
+      Enrichment compares a list or ranking with annotated sets under an explicit universe and null.
+      The p-value measures incompatibility with that null; effect size and leading genes describe
+      magnitude and content. FDR addresses multiplicity but not redundancy. Propagation and active
+      modules add network assumptions requiring null and stability validation.
+    da: >-
+      Enrichment sammenligner en liste eller ranking med annoterede sæt under et eksplicit univers og
+      nulmodel. FDR håndterer multipel testning, ikke redundans. Netværksmetoder kræver nul- og stabilitetstest.
+  misconceptions:
+    - {id: dm847.m13.mc01, false_belief: {es: El universo siempre es todo el genoma, en: The universe is always the whole genome, da: Universet er altid hele genomet}, correction: {es: Debe representar genes realmente elegibles, en: It should represent genuinely eligible genes, da: Det bør repræsentere reelt valgbare gener}}
+    - {id: dm847.m13.mc02, false_belief: {es: Diez términos significativos son diez mecanismos, en: Ten significant terms are ten mechanisms, da: Ti signifikante termer er ti mekanismer}, correction: {es: Pueden compartir genes y describir el mismo proceso, en: They may share genes and describe one process, da: De kan dele gener og beskrive samme proces}}
+    - {id: dm847.m13.mc03, false_belief: {es: Propagación descubre causalidad, en: Propagation discovers causality, da: Propagation opdager kausalitet}, correction: {es: Difunde scores según una red y sus sesgos, en: It diffuses scores according to a network and its biases, da: Den diffuserer scores efter et netværk og dets bias}}
+  socratic_questions:
+    - ¿Qué genes podían haber sido seleccionados?
+    - ¿Qué tamaño de efecto acompaña al p-value?
+    - ¿La permutación respeta el diseño y la correlación?
+    - ¿Cuántos términos son redundantes por genes compartidos?
+    - ¿Qué tan estable es el módulo al perturbar red y parámetros?
+  knowledge_fragments:
+    - {id: dm847.m13.k01, content_en: The gene universe is part of the null hypothesis.}
+    - {id: dm847.m13.k02, content_en: Hypergeometric ORA models overlap under sampling without replacement.}
+    - {id: dm847.m13.k03, content_en: P-values are not effect sizes.}
+    - {id: dm847.m13.k04, content_en: Rank-based methods avoid a hard significance threshold.}
+    - {id: dm847.m13.k05, content_en: Competitive and self-contained nulls answer different questions.}
+    - {id: dm847.m13.k06, content_en: Permutations must respect exchangeability and study design.}
+    - {id: dm847.m13.k07, content_en: FDR correction does not remove pathway redundancy.}
+    - {id: dm847.m13.k08, content_en: Network propagation is sensitive to degree and restart parameters.}
+    - {id: dm847.m13.k09, content_en: Active-module selection requires selection-aware validation.}
+    - {id: dm847.m13.k10, content_en: Enriched pathways are hypotheses, not proven causal mechanisms.}
+  response_constraints:
+    - State universe, ID mapping, gene-set collection and version.
+    - Report overlap counts, effect size, adjusted p-values and leading genes.
+    - Distinguish competitive from self-contained hypotheses.
+    - Do not describe enriched pathways or propagated nodes as causal without external evidence.
+
+sources:
+  - {id: sdu.dm847.official.2025, role: official_scope_and_learning_outcomes}
+  - {id: established_enrichment_and_network_statistics, role: ora_rank_methods_nulls_and_propagation}
+  - {id: original.dm847.m13, role: original_examples_questions_and_explanations}
+
+limitations:
+  - Gene-set databases are incomplete, redundant, and version dependent.
+  - Gene-level statistics are dependent and may reflect technical or annotation bias.
+  - Network propagation inherits incompleteness and bias from the underlying network.
