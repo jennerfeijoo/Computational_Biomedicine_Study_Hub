@@ -1,0 +1,664 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m15
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Proyecto bioinformático integrador y defensa científica oral
+    en: Integrative bioinformatics project and oral scientific defense
+    da: Integreret bioinformatikprojekt og mundtligt videnskabeligt forsvar
+  summary:
+    es: >-
+      Integración de genética molecular, ontologías, bases de datos, algoritmos de secuencia,
+      modelos probabilísticos, índices, motivos, NGS, redes y aprendizaje ómico en un proyecto
+      reproducible. El módulo desarrolla formulación de preguntas, cadena de evidencia, elección
+      de baselines, validación, análisis de incertidumbre, informe técnico y preparación de una
+      defensa oral individual de treinta minutos que cubre el programa completo.
+    en: >-
+      Integration of molecular genetics, ontologies, databases, sequence algorithms,
+      probabilistic models, indexes, motifs, NGS, networks, and omics learning in a reproducible
+      project. The module develops question formulation, evidence chains, baseline selection,
+      validation, uncertainty analysis, technical reporting, and preparation for a thirty-minute
+      individual oral defense spanning the complete syllabus.
+    da: >-
+      Integration af molekylær genetik, ontologier, databaser, sekvensalgoritmer,
+      probabilistiske modeller, indeks, motiver, NGS, netværk og omics-læring i et
+      reproducerbart projekt. Modulet udvikler spørgsmål, evidenskæde, baselines, validering,
+      usikkerhed, rapportering og forberedelse til et individuelt mundtligt forsvar.
+  estimated_study_hours: 24
+  difficulty: integrative_advanced
+
+alignment:
+  official_learning_outcomes:
+    - dm847.lo01
+    - dm847.lo02
+    - dm847.lo03
+    - dm847.lo04
+    - dm847.lo05
+    - dm847.lo06
+    - dm847.lo07
+    - dm847.lo08
+    - dm847.lo09
+  prerequisite_modules:
+    - dm847.m01
+    - dm847.m02
+    - dm847.m03
+    - dm847.m04
+    - dm847.m05
+    - dm847.m06
+    - dm847.m07
+    - dm847.m08
+    - dm847.m09
+    - dm847.m10
+    - dm847.m11
+    - dm847.m12
+    - dm847.m13
+    - dm847.m14
+
+objectives:
+  - id: dm847.m15.o01
+    text:
+      es: Convertir una pregunta biológica en una especificación computacional verificable.
+      en: Convert a biological question into a verifiable computational specification.
+      da: Omsætte et biologisk spørgsmål til en verificerbar beregningsspecifikation.
+  - id: dm847.m15.o02
+    text:
+      es: Definir entidades, identificadores, procedencia, versiones y dependencias del proyecto.
+      en: Define project entities, identifiers, provenance, versions, and dependencies.
+      da: Definere projektets enheder, identifikatorer, provenance, versioner og afhængigheder.
+  - id: dm847.m15.o03
+    text:
+      es: Seleccionar métodos y estructuras de datos a partir de supuestos, escalabilidad y evidencia.
+      en: Select methods and data structures from assumptions, scalability, and evidence.
+      da: Vælge metoder og datastrukturer ud fra antagelser, skalerbarhed og evidens.
+  - id: dm847.m15.o04
+    text:
+      es: Diseñar baselines, controles, datos simulados y particiones independientes.
+      en: Design baselines, controls, simulated data, and independent splits.
+      da: Designe baselines, kontroller, simulerede data og uafhængige split.
+  - id: dm847.m15.o05
+    text:
+      es: Implementar una cadena reproducible con validación en cada transición.
+      en: Implement a reproducible chain with validation at every transition.
+      da: Implementere en reproducerbar kæde med validering ved hver overgang.
+  - id: dm847.m15.o06
+    text:
+      es: Interpretar resultados separando observación, inferencia, mecanismo y limitación.
+      en: Interpret results by separating observation, inference, mechanism, and limitation.
+      da: Fortolke resultater ved at adskille observation, inferens, mekanisme og begrænsning.
+  - id: dm847.m15.o07
+    text:
+      es: Redactar un informe conciso que conecte pregunta, método, resultados y conclusiones.
+      en: Write a concise report connecting question, method, results, and conclusions.
+      da: Skrive en kortfattet rapport der forbinder spørgsmål, metode, resultater og konklusioner.
+  - id: dm847.m15.o08
+    text:
+      es: Defender oralmente decisiones, algoritmos, supuestos, resultados y alternativas.
+      en: Orally defend decisions, algorithms, assumptions, results, and alternatives.
+      da: Mundtligt forsvare beslutninger, algoritmer, antagelser, resultater og alternativer.
+
+concepts:
+  - id: dm847.m15.c01
+    title:
+      es: De la pregunta biológica a la especificación
+      en: From biological question to specification
+      da: Fra biologisk spørgsmål til specifikation
+    body:
+      es: >-
+        Una pregunta útil identifica entidad, contexto, contraste y resultado. La especificación
+        computacional define entradas, salidas, unidad de análisis, criterios de inclusión,
+        supuestos, restricciones y prueba de éxito. “Encontrar genes importantes” no es verificable;
+        “priorizar genes de una lista medida que muestran señal coordinada en una red versionada,
+        comparados con un nulo que conserva grado” sí establece objetos y evidencia.
+      en: >-
+        A useful question identifies entity, context, contrast, and outcome. The computational
+        specification defines inputs, outputs, analysis unit, inclusion criteria, assumptions,
+        constraints, and success tests. “Find important genes” is not verifiable; prioritizing
+        measured genes with coordinated signal in a versioned network against a degree-preserving
+        null defines objects and evidence.
+      da: >-
+        Et nyttigt spørgsmål identificerer enhed, kontekst, kontrast og outcome. Specifikationen
+        definerer input, output, analyseenhed, kriterier, antagelser og succestest.
+    key_points:
+      - {es: Una pregunta debe poder refutarse o fallar, en: A question must be capable of being refuted or failing, da: Et spørgsmål skal kunne afkræftes eller fejle}
+      - {es: El deliverable no sustituye la pregunta, en: The deliverable does not replace the question, da: Leverancen erstatter ikke spørgsmålet}
+  - id: dm847.m15.c02
+    title:
+      es: Cadena de evidencia y trazabilidad
+      en: Evidence chain and traceability
+      da: Evidenskæde og sporbarhed
+    body:
+      es: >-
+        La cadena conecta muestra o fuente, dato crudo, transformación, objeto intermedio,
+        estadístico y afirmación. Cada enlace conserva identificadores, versiones, parámetros,
+        filtros y pérdidas. Una afirmación sólo puede ser tan fuerte como el enlace más débil.
+        Los diagramas de flujo deben mostrar exclusiones, ramas y controles, no sólo una secuencia ideal.
+      en: >-
+        The chain links sample or source, raw data, transformation, intermediate object,
+        statistic, and claim. Every link preserves identifiers, versions, parameters, filters,
+        and losses. A claim is only as strong as the weakest link. Flow diagrams should include
+        exclusions, branches, and controls rather than only an ideal sequence.
+      da: >-
+        Kæden forbinder kilde, rådata, transformation, mellemobjekt, statistik og påstand. Hvert
+        led bevarer identifikatorer, versioner, parametre, filtre og tab.
+    key_points:
+      - {es: Todo resultado debe poder rastrearse hasta una entrada, en: Every result should trace to an input, da: Hvert resultat bør kunne spores til et input}
+      - {es: Las pérdidas de datos son resultados del pipeline, en: Data losses are pipeline results, da: Datatab er pipeline-resultater}
+  - id: dm847.m15.c03
+    title:
+      es: Selección de método y baseline
+      en: Method and baseline selection
+      da: Valg af metode og baseline
+    body:
+      es: >-
+        El método se elige por pregunta, tipo de dato, supuestos, escala y coste de error. Un baseline
+        simple comprueba si la complejidad añade valor: búsqueda exhaustiva para un índice, frecuencia
+        de clase para un clasificador, ranking sin red para propagación o modelo de fondo para motivos.
+        La comparación usa el mismo conjunto evaluativo y métricas predefinidas. Ganar a un baseline
+        débil no demuestra adecuación; también se compara con una alternativa razonable.
+      en: >-
+        Method choice follows the question, data type, assumptions, scale, and error cost. A simple
+        baseline tests whether complexity adds value: exhaustive search for an index, class frequency
+        for a classifier, no-network ranking for propagation, or background model for motifs. Use the
+        same evaluation data and prespecified metrics. Beating a weak baseline does not establish adequacy;
+        compare with a reasonable alternative.
+      da: >-
+        Metoden vælges ud fra spørgsmål, datatype, antagelser, skala og fejlomkostning. En simpel
+        baseline tester om kompleksitet tilfører værdi, og en rimelig alternativ metode bør også sammenlignes.
+    key_points:
+      - {es: Baseline y alternativa responden funciones distintas, en: Baseline and alternative serve different roles, da: Baseline og alternativ har forskellige roller}
+  - id: dm847.m15.c04
+    title:
+      es: Validación por capas
+      en: Layered validation
+      da: Lagdelt validering
+    body:
+      es: >-
+        La validación técnica comprueba formatos, invariantes y ejecución. La algorítmica compara con
+        oráculos o datos simulados. La estadística evalúa generalización, calibración y multiplicidad.
+        La biológica contrasta anotaciones, controles o evidencia externa. La validación de utilidad
+        pregunta si el resultado mejora una decisión. Estas capas no son intercambiables y deben declararse.
+      en: >-
+        Technical validation checks formats, invariants, and execution. Algorithmic validation compares
+        with oracles or simulations. Statistical validation assesses generalization, calibration, and
+        multiplicity. Biological validation uses annotations, controls, or external evidence. Utility
+        validation asks whether results improve a decision. These layers are not interchangeable.
+      da: >-
+        Teknisk validering kontrollerer formater og invarianter; algoritmisk validering bruger orakler
+        eller simulering; statistisk validering tester generalisering; biologisk validering bruger ekstern evidens.
+    key_points:
+      - {es: Que el código funcione es sólo la primera capa, en: Code execution is only the first layer, da: At koden kører er kun det første lag}
+  - id: dm847.m15.c05
+    title:
+      es: Reproducibilidad, entorno y procedencia
+      en: Reproducibility, environment, and provenance
+      da: Reproducerbarhed, miljø og provenance
+    body:
+      es: >-
+        Reproducir exige datos o referencias identificables, checksums cuando sea posible, versiones de
+        bases y anotaciones, software, entorno, parámetros, semillas y orden de operaciones. Un workflow
+        debe partir de una entrada documentada y regenerar tablas y figuras sin pasos manuales ocultos.
+        La reproducibilidad computacional no garantiza exactitud científica, pero permite auditarla.
+      en: >-
+        Reproduction requires identifiable data or references, checksums where possible, database and
+        annotation versions, software, environment, parameters, seeds, and operation order. A workflow
+        should start from documented input and regenerate tables and figures without hidden manual steps.
+        Computational reproducibility does not guarantee scientific correctness but enables auditing.
+      da: >-
+        Reproducerbarhed kræver identificerbare data, checksums, database- og annotationsversioner,
+        software, miljø, parametre, seeds og rækkefølge. Den garanterer ikke videnskabelig korrekthed.
+    key_points:
+      - {es: Semilla fija no elimina incertidumbre, en: A fixed seed does not remove uncertainty, da: Et fast seed fjerner ikke usikkerhed}
+  - id: dm847.m15.c06
+    title:
+      es: Incertidumbre, sensibilidad y resultados negativos
+      en: Uncertainty, sensitivity, and negative results
+      da: Usikkerhed, følsomhed og negative resultater
+    body:
+      es: >-
+        La incertidumbre proviene de muestreo, medición, anotación, modelo, hiperparámetros y selección.
+        Intervalos, bootstrap, múltiples inicializaciones, análisis de sensibilidad y validación externa
+        cubren componentes distintos. Un resultado negativo puede ser informativo si la potencia, calidad
+        y rango de efectos detectables están claros. No encontrar evidencia no demuestra ausencia universal.
+      en: >-
+        Uncertainty arises from sampling, measurement, annotation, model, hyperparameters, and selection.
+        Intervals, bootstrap, multiple starts, sensitivity analysis, and external validation cover distinct
+        components. A negative result is informative when power, quality, and detectable effect range are clear.
+        Failure to find evidence does not prove universal absence.
+      da: >-
+        Usikkerhed kommer fra sampling, måling, annotation, model, hyperparametre og selection. Intervaller,
+        bootstrap, flere starter og følsomhedsanalyse dækker forskellige komponenter.
+    key_points:
+      - {es: Sensibilidad robusta no significa verdad causal, en: Robust sensitivity does not imply causal truth, da: Robust følsomhed betyder ikke kausal sandhed}
+  - id: dm847.m15.c07
+    title:
+      es: Informe científico y figuras como argumentos
+      en: Scientific report and figures as arguments
+      da: Videnskabelig rapport og figurer som argumenter
+    body:
+      es: >-
+        El informe conecta pregunta, datos, método, validación, resultados y conclusión. Cada figura debe
+        responder una pregunta, mostrar denominadores y unidades, e incluir leyenda suficiente para entenderla
+        sin narración oral. Métodos describen decisiones reproducibles; resultados separan hallazgo de interpretación;
+        discusión compara alternativas y limita alcance. Material suplementario no debe ocultar información esencial.
+      en: >-
+        The report connects question, data, method, validation, results, and conclusion. Every figure should answer
+        a question, show denominators and units, and have a self-contained legend. Methods describe reproducible
+        decisions; results separate findings from interpretation; discussion compares alternatives and limits scope.
+        Supplementary material should not hide essential information.
+      da: >-
+        Rapporten forbinder spørgsmål, data, metode, validering, resultater og konklusion. Hver figur skal besvare
+        et spørgsmål, vise nævnere og enheder og have en selvstændig legend.
+    key_points:
+      - {es: Una figura decorativa consume espacio sin aportar evidencia, en: A decorative figure consumes space without evidence, da: En dekorativ figur bruger plads uden evidens}
+  - id: dm847.m15.c08
+    title:
+      es: Defensa oral como examen de razonamiento
+      en: Oral defense as a reasoning examination
+      da: Mundtligt forsvar som ræsonnementseksamen
+    body:
+      es: >-
+        La defensa evalúa comprensión individual, no memorización del informe. Una respuesta sólida comienza con
+        la conclusión, define el objeto, explica el mecanismo o algoritmo, cita evidencia y reconoce límites.
+        Ante una alternativa, compara supuestos, coste, salida y validación. Si una cantidad no se conoce, debe
+        declararse y explicarse cómo se obtendría, evitando improvisar precisión falsa.
+      en: >-
+        The defense evaluates individual understanding rather than report memorization. A strong answer starts
+        with the conclusion, defines the object, explains mechanism or algorithm, cites evidence, and states limits.
+        When comparing an alternative, address assumptions, cost, output, and validation. If a quantity is unknown,
+        say so and explain how it would be obtained rather than inventing precision.
+      da: >-
+        Forsvaret evaluerer individuel forståelse. Et stærkt svar starter med konklusion, definerer objektet,
+        forklarer algoritmen, citerer evidens og angiver begrænsninger. Ukendte størrelser må ikke opfindes.
+    key_points:
+      - {es: Defender una limitación aumenta credibilidad, en: Defending a limitation increases credibility, da: At forsvare en begrænsning øger troværdigheden}
+
+worked_examples:
+  - id: dm847.m15.e01
+    title:
+      es: Proyecto de anotación de familia proteica con profile HMM
+      en: Protein-family annotation project with a profile HMM
+      da: Protein-familieannotation med profile HMM
+    scenario:
+      es: >-
+        Construir un clasificador de secuencias para una familia conocida usando un alineamiento curado,
+        profile HMM y un conjunto externo con homologías cercanas y proteínas negativas difíciles.
+      en: >-
+        Build a sequence classifier for a known family using a curated alignment, a profile HMM,
+        and an external set containing close homologs and difficult negatives.
+      da: >-
+        Byg en sekvensklassifikator for en kendt familie med kurateret alignment, profile HMM og eksternt testsæt.
+    solution_outline:
+      es: >-
+        Definir versión y criterios del alineamiento; separar familias antes de entrenar; comparar con identidad
+        de secuencia o BLAST-like baseline; seleccionar umbral en validación; evaluar PR-AUC, sensibilidad a
+        longitud y falsos positivos por familia; revisar dominios y no equiparar score con función experimental.
+      en: >-
+        Define alignment version and criteria; split families before training; compare with a sequence-identity
+        baseline; select threshold on validation; evaluate PR-AUC, length sensitivity, and family-specific false
+        positives; inspect domains and avoid equating score with experimental function.
+      da: >-
+        Definér alignment og split, sammenlign med en simpel baseline, vælg tærskel i validering og evaluer eksternt.
+    validation: [family_group_split, baseline, threshold_not_test_tuned, external_annotation_review]
+  - id: dm847.m15.e02
+    title:
+      es: Proyecto de operones con red funcional
+      en: Operon project with a functional network
+      da: Operonprojekt med funktionelt netværk
+    scenario:
+      es: >-
+        Predecir fronteras de operones y comprobar si pares de alta confianza forman módulos funcionales coherentes.
+      en: >-
+        Predict operon boundaries and test whether high-confidence pairs form coherent functional modules.
+      da: >-
+        Prædikter operongrænser og test om par med høj tillid danner funktionelt sammenhængende moduler.
+    solution_outline:
+      es: >-
+        Definir etiquetas y coordenadas; separar por especie o clado; entrenar baseline de distancia y modelo multivariable;
+        calibrar probabilidades; construir red con aristas predichas y procedencia; comparar enriquecimiento con nulo que
+        preserva grado; evitar circularidad usando las mismas anotaciones como feature y validación.
+      en: >-
+        Define labels and coordinates; split by species or clade; train a distance baseline and multivariable model;
+        calibrate probabilities; build a provenance-aware predicted network; compare enrichment with a degree-preserving
+        null; avoid circular use of the same annotations as features and validation.
+      da: >-
+        Definér labels og koordinater, split efter art, sammenlign baseline og model, kalibrér og undgå cirkulær validering.
+    validation: [phylogeny_aware_split, calibration, noncircular_enrichment, uncertainty]
+  - id: dm847.m15.e03
+    title:
+      es: Proyecto NGS de motivos y peaks
+      en: NGS motif-and-peak project
+      da: NGS-projekt med motiver og peaks
+    scenario:
+      es: >-
+        Identificar motivos enriquecidos en peaks de un ensayo regulatorio y evaluar su asociación con señal cuantitativa.
+      en: >-
+        Identify motifs enriched in regulatory-assay peaks and evaluate association with quantitative signal.
+      da: >-
+        Identificér motiver beriget i regulatoriske peaks og evaluer association med kvantitativt signal.
+    solution_outline:
+      es: >-
+        Auditar FASTQ y mapeo; definir peaks y controles; crear secuencias de fondo emparejadas por GC, longitud y mapeabilidad;
+        descubrir motivo sólo en training; evaluar enriquecimiento y score en hold-out; comparar con motivos conocidos;
+        reportar que asociación no demuestra unión directa ni función.
+      en: >-
+        Audit FASTQ and mapping; define peaks and controls; create background sequences matched by GC, length, and mappability;
+        discover motifs in training only; evaluate enrichment and scores in hold-out; compare with known motifs; state that
+        association does not prove direct binding or function.
+      da: >-
+        Auditér FASTQ og mapping, match baggrund efter GC og længde, find motiv i træning og evaluer i hold-out.
+    validation: [matched_background, held_out_motif_test, multiple_testing, cautious_claim]
+  - id: dm847.m15.e04
+    title:
+      es: Proyecto ómico predictivo con validación externa
+      en: Predictive omics project with external validation
+      da: Prædiktivt omics-projekt med ekstern validering
+    scenario:
+      es: >-
+        Predecir una clase biomédica desde expresión génica en dos hospitales con plataformas parcialmente distintas.
+      en: >-
+        Predict a biomedical class from gene expression across two hospitals with partly different platforms.
+      da: >-
+        Prædikter en biomedicinsk klasse fra genekspression på to hospitaler med delvist forskellige platforme.
+    solution_outline:
+      es: >-
+        Definir genes comunes y unidad paciente; hospital A para desarrollo con CV anidada; hospital B como evaluación externa;
+        preprocesamiento dentro de folds; comparar baseline clínico o de prevalencia; reportar ROC-AUC, PR-AUC, calibración,
+        subgrupos y estabilidad de features; no denominar biomarcador validado sin validez analítica y utilidad.
+      en: >-
+        Define common features and patient unit; use hospital A for nested-CV development and hospital B for external evaluation;
+        fit preprocessing within folds; compare with a clinical or prevalence baseline; report ROC-AUC, PR-AUC, calibration,
+        subgroups, and feature stability; avoid validated-biomarker claims without analytical validity and utility.
+      da: >-
+        Definér fælles features og patientenhed, udvikl på hospital A med nested CV og evaluer eksternt på hospital B.
+    validation: [site_external_validation, leakage_free_pipeline, discrimination_and_calibration, claim_limits]
+
+practice_exercises:
+  - id: dm847.m15.p01
+    activity_type: specification
+    difficulty: intermediate
+    prompt:
+      es: Reescribe una pregunta vaga de bioinformática como especificación con entrada, salida, unidad y éxito.
+      en: Rewrite a vague bioinformatics question as a specification with input, output, unit, and success criteria.
+      da: Omskriv et vagt bioinformatikspørgsmål til en specifikation med input, output, enhed og succeskriterier.
+    expected_elements: [biological_entity, context, computational_object, independent_unit, testable_success]
+  - id: dm847.m15.p02
+    activity_type: evidence_map
+    difficulty: intermediate
+    prompt:
+      es: Construye un mapa desde dato crudo hasta afirmación e identifica tres puntos de pérdida o sesgo.
+      en: Build a raw-data-to-claim map and identify three points of loss or bias.
+      da: Byg et kort fra rådata til påstand og identificér tre steder med tab eller bias.
+    expected_elements: [source, transformations, intermediate_objects, statistic, claim, losses]
+  - id: dm847.m15.p03
+    activity_type: method_selection
+    difficulty: advanced
+    prompt:
+      es: Elige entre alineamiento, HMM, índice exacto y aprendizaje supervisado para cuatro preguntas.
+      en: Choose among alignment, HMM, exact indexing, and supervised learning for four questions.
+      da: Vælg mellem alignment, HMM, eksakt indeks og superviseret læring for fire spørgsmål.
+    expected_elements: [question_method_match, assumptions, output, complexity, validation]
+  - id: dm847.m15.p04
+    activity_type: validation_plan
+    difficulty: advanced
+    prompt:
+      es: Diseña validación técnica, algorítmica, estadística y biológica para un único proyecto.
+      en: Design technical, algorithmic, statistical, and biological validation for one project.
+      da: Design teknisk, algoritmisk, statistisk og biologisk validering for ét projekt.
+    expected_elements: [layer_specific_tests, independent_data, controls, failure_criteria]
+  - id: dm847.m15.p05
+    activity_type: reproducibility_audit
+    difficulty: advanced
+    prompt:
+      es: Audita un repositorio que no registra versiones de referencia, semillas ni parámetros.
+      en: Audit a repository lacking reference versions, seeds, and parameters.
+      da: Revider et repository uden referenceversioner, seeds og parametre.
+    expected_elements: [missing_provenance, consequences, minimum_manifest, rerun_test]
+  - id: dm847.m15.p06
+    activity_type: figure_audit
+    difficulty: advanced
+    prompt:
+      es: Revisa una figura y decide si demuestra resultado, interpretación o sólo apariencia visual.
+      en: Review a figure and decide whether it demonstrates a result, interpretation, or only visual appearance.
+      da: Revider en figur og afgør om den viser resultat, fortolkning eller kun visuelt indtryk.
+    expected_elements: [question, units, denominators, uncertainty, visual_encoding, claim_level]
+  - id: dm847.m15.p07
+    activity_type: oral_defense
+    difficulty: advanced
+    prompt:
+      es: Responde una pregunta inesperada comparando tu método con una alternativa razonable.
+      en: Answer an unexpected question comparing your method with a reasonable alternative.
+      da: Besvar et uventet spørgsmål ved at sammenligne din metode med et rimeligt alternativ.
+    expected_elements: [direct_answer, assumptions, tradeoffs, evidence, limitation]
+  - id: dm847.m15.p08
+    activity_type: limitation_rewrite
+    difficulty: advanced
+    prompt:
+      es: Convierte tres afirmaciones excesivas en conclusiones ajustadas a la evidencia.
+      en: Rewrite three overclaims as conclusions proportional to the evidence.
+      da: Omskriv tre overdrivelser som konklusioner proportionale med evidensen.
+    expected_elements: [association_vs_causation, external_validity, uncertainty, conditional_language]
+
+objective_bank:
+  - id: dm847.m15.q01
+    type: multiple_choice
+    prompt: {es: ¿Qué convierte una pregunta en verificable?, en: What makes a question verifiable?, da: Hvad gør et spørgsmål verificerbart?}
+    options:
+      - {id: a, es: Entradas, salida, unidad, supuestos y criterio de éxito, en: Inputs, output, unit, assumptions, and success criterion, da: Input, output, enhed, antagelser og succeskriterium}
+      - {id: b, es: Un título amplio, en: A broad title, da: En bred titel}
+      - {id: c, es: Muchas herramientas, en: Many tools, da: Mange værktøjer}
+      - {id: d, es: Una figura atractiva, en: An attractive figure, da: En attraktiv figur}
+    correct_option_ids: [a]
+  - id: dm847.m15.q02
+    type: true_false
+    prompt: {es: Una afirmación puede ser más sólida que la procedencia de los datos que la sustentan., en: A claim can be stronger than the provenance of its supporting data., da: En påstand kan være stærkere end provenancen af de data, der støtter den.}
+    correct: false
+  - id: dm847.m15.q03
+    type: multiple_choice
+    prompt: {es: ¿Qué función cumple un baseline?, en: What is the role of a baseline?, da: Hvad er rollen for en baseline?}
+    options:
+      - {id: a, es: Comprobar si la complejidad añade valor frente a una referencia simple, en: Test whether complexity adds value over a simple reference, da: Teste om kompleksitet tilfører værdi over en simpel reference}
+      - {id: b, es: Probar causalidad, en: Prove causality, da: Bevise kausalitet}
+      - {id: c, es: Sustituir validación externa, en: Replace external validation, da: Erstatte ekstern validering}
+      - {id: d, es: Elegir colores, en: Choose colors, da: Vælge farver}
+    correct_option_ids: [a]
+  - id: dm847.m15.q04
+    type: true_false
+    prompt: {es: Que un pipeline ejecute sin errores demuestra exactitud científica., en: A pipeline running without errors proves scientific correctness., da: Et pipeline der kører uden fejl beviser videnskabelig korrekthed.}
+    correct: false
+  - id: dm847.m15.q05
+    type: multiple_choice
+    prompt: {es: ¿Qué capa compara una implementación con un oráculo simple?, en: Which layer compares an implementation with a simple oracle?, da: Hvilket lag sammenligner en implementering med et simpelt orakel?}
+    options:
+      - {id: a, es: Validación algorítmica, en: Algorithmic validation, da: Algoritmisk validering}
+      - {id: b, es: Validación estética, en: Aesthetic validation, da: Æstetisk validering}
+      - {id: c, es: Discusión, en: Discussion, da: Diskussion}
+      - {id: d, es: Traducción, en: Translation, da: Oversættelse}
+    correct_option_ids: [a]
+  - id: dm847.m15.q06
+    type: true_false
+    prompt: {es: Una semilla aleatoria fija elimina la variabilidad del método., en: A fixed random seed eliminates method variability., da: Et fast random seed eliminerer metodevariabilitet.}
+    correct: false
+  - id: dm847.m15.q07
+    type: multiple_choice
+    prompt: {es: ¿Qué debe regenerar un workflow reproducible?, en: What should a reproducible workflow regenerate?, da: Hvad bør et reproducerbart workflow regenerere?}
+    options:
+      - {id: a, es: Tablas y figuras desde entradas documentadas, en: Tables and figures from documented inputs, da: Tabeller og figurer fra dokumenterede input}
+      - {id: b, es: Sólo la portada, en: Only the cover page, da: Kun forsiden}
+      - {id: c, es: Una conclusión idéntica sin datos, en: An identical conclusion without data, da: En identisk konklusion uden data}
+      - {id: d, es: Cualquier resultado, en: Any result, da: Ethvert resultat}
+    correct_option_ids: [a]
+  - id: dm847.m15.q08
+    type: true_false
+    prompt: {es: No detectar evidencia equivale a demostrar ausencia universal., en: Failure to detect evidence proves universal absence., da: Manglende evidens beviser universelt fravær.}
+    correct: false
+  - id: dm847.m15.q09
+    type: multiple_choice
+    prompt: {es: ¿Qué debería hacer una figura científica?, en: What should a scientific figure do?, da: Hvad bør en videnskabelig figur gøre?}
+    options:
+      - {id: a, es: Responder una pregunta con unidades, denominadores e incertidumbre, en: Answer a question with units, denominators, and uncertainty, da: Besvare et spørgsmål med enheder, nævnere og usikkerhed}
+      - {id: b, es: Decorar el informe, en: Decorate the report, da: Dekorere rapporten}
+      - {id: c, es: Sustituir métodos, en: Replace methods, da: Erstatte metoder}
+      - {id: d, es: Ocultar casos atípicos, en: Hide outliers, da: Skjule outliers}
+    correct_option_ids: [a]
+  - id: dm847.m15.q10
+    type: true_false
+    prompt: {es: Reconocer una limitación durante la defensa invalida automáticamente el proyecto., en: Acknowledging a limitation during the defense automatically invalidates the project., da: At erkende en begrænsning under forsvaret ugyldiggør automatisk projektet.}
+    correct: false
+  - id: dm847.m15.q11
+    type: multiple_choice
+    prompt: {es: ¿Qué estructura produce una respuesta oral sólida?, en: What structure produces a strong oral answer?, da: Hvilken struktur giver et stærkt mundtligt svar?}
+    options:
+      - {id: a, es: Conclusión, definición, razonamiento, evidencia y límite, en: Conclusion, definition, reasoning, evidence, and limit, da: Konklusion, definition, ræsonnement, evidens og begrænsning}
+      - {id: b, es: Rodeo sin conclusión, en: Digression without conclusion, da: Omvej uden konklusion}
+      - {id: c, es: Citar software únicamente, en: Name software only, da: Kun nævne software}
+      - {id: d, es: Inventar una cifra, en: Invent a number, da: Opfinde et tal}
+    correct_option_ids: [a]
+  - id: dm847.m15.q12
+    type: true_false
+    prompt: {es: Una comparación justa usa los mismos datos evaluativos y métricas predefinidas., en: A fair comparison uses the same evaluation data and prespecified metrics., da: En fair sammenligning bruger samme evalueringsdata og foruddefinerede metrikker.}
+    correct: true
+
+open_assessment:
+  - id: dm847.m15.a01
+    prompt:
+      es: Redacta una propuesta de proyecto integrador con pregunta, datos, métodos, baseline, validación y limitaciones.
+      en: Write an integrative project proposal with question, data, methods, baseline, validation, and limitations.
+      da: Skriv et integreret projektforslag med spørgsmål, data, metoder, baseline, validering og begrænsninger.
+    rubric:
+      - {criterion: biological_and_computational_question, weight: 0.20}
+      - {criterion: data_provenance_and_units, weight: 0.20}
+      - {criterion: method_baseline_and_assumptions, weight: 0.25}
+      - {criterion: validation_and_metrics, weight: 0.25}
+      - {criterion: scope_and_limits, weight: 0.10}
+  - id: dm847.m15.a02
+    prompt:
+      es: Construye una matriz de alineación que relacione cada objetivo del proyecto con contenido, evidencia y evaluación.
+      en: Build an alignment matrix linking every project objective to content, evidence, and assessment.
+      da: Byg en alignment-matrix der forbinder hvert projektmål med indhold, evidens og evaluering.
+    rubric:
+      - {criterion: objective_specificity, weight: 0.20}
+      - {criterion: evidence_traceability, weight: 0.30}
+      - {criterion: validation_coverage, weight: 0.30}
+      - {criterion: gaps_and_revisions, weight: 0.20}
+  - id: dm847.m15.a03
+    prompt:
+      es: Audita un proyecto que reporta gran rendimiento sin baseline, test externo ni calibración.
+      en: Audit a project reporting strong performance without a baseline, external test, or calibration.
+      da: Revider et projekt med høj performance uden baseline, ekstern test eller kalibrering.
+    rubric:
+      - {criterion: missing_comparators, weight: 0.20}
+      - {criterion: validation_bias, weight: 0.30}
+      - {criterion: probabilistic_and_threshold_limits, weight: 0.20}
+      - {criterion: revised_evaluation_plan, weight: 0.30}
+  - id: dm847.m15.a04
+    prompt:
+      es: Produce el esquema de un informe de proyecto con máximo de páginas y justifica cada figura y tabla.
+      en: Produce a page-limited project-report outline and justify every figure and table.
+      da: Udarbejd en sidebegrænset projektrapportstruktur og begrund hver figur og tabel.
+    rubric:
+      - {criterion: narrative_logic, weight: 0.25}
+      - {criterion: evidence_density, weight: 0.25}
+      - {criterion: reproducible_methods, weight: 0.20}
+      - {criterion: figure_table_justification, weight: 0.20}
+      - {criterion: limitations, weight: 0.10}
+  - id: dm847.m15.a05
+    prompt:
+      es: Realiza una defensa oral estructurada de diez minutos y responde preguntas sobre tres módulos no usados directamente en el proyecto.
+      en: Deliver a structured ten-minute defense and answer questions from three modules not directly used in the project.
+      da: Giv et struktureret ti-minutters forsvar og besvar spørgsmål fra tre moduler, der ikke bruges direkte i projektet.
+    rubric:
+      - {criterion: concise_project_argument, weight: 0.25}
+      - {criterion: individual_conceptual_mastery, weight: 0.30}
+      - {criterion: method_comparison_and_reasoning, weight: 0.25}
+      - {criterion: uncertainty_and_limits, weight: 0.20}
+
+glossary:
+  - {id: dm847.term.computational_specification, es: Especificación computacional, en: Computational specification, da: Beregningsspecifikation, definition_en: Explicit definition of inputs, outputs, constraints, and success tests.}
+  - {id: dm847.term.evidence_chain, es: Cadena de evidencia, en: Evidence chain, da: Evidenskæde, definition_en: Traceable sequence from source data to scientific claim.}
+  - {id: dm847.term.baseline_model, es: Modelo baseline, en: Baseline model, da: Baseline-model, definition_en: Simple reference method used to test added value.}
+  - {id: dm847.term.oracle, es: Oráculo de validación, en: Validation oracle, da: Valideringsorakel, definition_en: Trusted small-scale method or truth used to test correctness.}
+  - {id: dm847.term.technical_validation, es: Validación técnica, en: Technical validation, da: Teknisk validering, definition_en: Checks of formats, invariants, execution, and data integrity.}
+  - {id: dm847.term.biological_validation, es: Validación biológica, en: Biological validation, da: Biologisk validering, definition_en: Independent biological evidence supporting interpretation.}
+  - {id: dm847.term.sensitivity_analysis, es: Análisis de sensibilidad, en: Sensitivity analysis, da: Følsomhedsanalyse, definition_en: Evaluation of conclusions under plausible analytical choices.}
+  - {id: dm847.term.provenance_manifest, es: Manifiesto de procedencia, en: Provenance manifest, da: Provenance-manifest, definition_en: Structured record of data, versions, software, parameters, and transformations.}
+  - {id: dm847.term.negative_result, es: Resultado negativo, en: Negative result, da: Negativt resultat, definition_en: Failure to detect a prespecified effect under stated sensitivity and quality.}
+  - {id: dm847.term.external_validity, es: Validez externa, en: External validity, da: Ekstern validitet, definition_en: Applicability beyond the development data and context.}
+  - {id: dm847.term.scientific_claim, es: Afirmación científica, en: Scientific claim, da: Videnskabelig påstand, definition_en: Statement whose strength should match evidence and assumptions.}
+  - {id: dm847.term.oral_defense, es: Defensa oral, en: Oral defense, da: Mundtligt forsvar, definition_en: Individual examination of reasoning, methods, results, and limitations.}
+
+hidden_support:
+  canonical_explanation:
+    es: >-
+      Un proyecto sólido empieza con una pregunta verificable y una cadena trazable desde datos hasta
+      afirmación. Cada método se justifica frente a un baseline, se valida en capas y se ejecuta en un
+      entorno reproducible. El informe presenta sólo la evidencia necesaria y la defensa demuestra que
+      el estudiante comprende decisiones, alternativas, incertidumbre y límites, incluso fuera del método elegido.
+    en: >-
+      A strong project begins with a verifiable question and a traceable chain from data to claim.
+      Every method is justified against a baseline, validated in layers, and executed reproducibly.
+      The report presents necessary evidence, while the defense demonstrates understanding of decisions,
+      alternatives, uncertainty, and limits, including syllabus areas outside the chosen method.
+    da: >-
+      Et stærkt projekt starter med et verificerbart spørgsmål og en sporbar kæde fra data til påstand.
+      Metoder begrundes mod baselines, valideres i lag og køres reproducerbart. Forsvaret viser individuel forståelse.
+  misconceptions:
+    - id: dm847.m15.mc01
+      false_belief: {es: Usar una herramienta popular justifica el método, en: Using a popular tool justifies the method, da: Brug af et populært værktøj begrunder metoden}
+      correction: {es: Deben justificarse supuestos, salida, validación y adecuación a la pregunta, en: Assumptions, output, validation, and fit to the question must be justified, da: Antagelser, output, validering og pasform til spørgsmålet skal begrundes}
+    - id: dm847.m15.mc02
+      false_belief: {es: Reproducible significa científicamente correcto, en: Reproducible means scientifically correct, da: Reproducerbar betyder videnskabeligt korrekt}
+      correction: {es: La reproducibilidad permite repetir y auditar, pero un error también puede reproducirse, en: Reproducibility enables repetition and audit, but an error can also reproduce, da: Reproducerbarhed muliggør gentagelse og audit, men fejl kan også reproduceres}
+    - id: dm847.m15.mc03
+      false_belief: {es: La defensa sólo trata el proyecto, en: The defense covers only the project, da: Forsvaret handler kun om projektet}
+      correction: {es: La evaluación individual puede conectar el proyecto con todo el programa, en: Individual examination may connect the project to the complete syllabus, da: Den individuelle eksamen kan forbinde projektet med hele pensum}
+    - id: dm847.m15.mc04
+      false_belief: {es: Ocultar una limitación protege la calificación, en: Hiding a limitation protects the grade, da: At skjule en begrænsning beskytter karakteren}
+      correction: {es: Reconocerla y explicar su efecto demuestra comprensión y rigor, en: Recognizing it and explaining its effect demonstrates rigor, da: At erkende og forklare den viser forståelse og stringens}
+  socratic_questions:
+    - ¿Cuál es exactamente la afirmación que tu resultado permite sostener?
+    - ¿Qué baseline muestra que la complejidad añade valor?
+    - ¿Qué dato nunca vio el proceso de selección?
+    - ¿Qué cambiaría si el supuesto principal fuera falso?
+    - ¿Qué resultado invalidaría tu interpretación preferida?
+    - ¿Qué parte es reproducible y qué parte depende de una decisión manual?
+    - ¿Cómo se transportaría el método a otra especie, cohorte o plataforma?
+    - ¿Qué módulo del curso ofrece una alternativa metodológica?
+  knowledge_fragments:
+    - {id: dm847.m15.k01, content_en: A verifiable project specifies inputs, outputs, units, assumptions, and success criteria.}
+    - {id: dm847.m15.k02, content_en: Claims should trace through every transformation to source data.}
+    - {id: dm847.m15.k03, content_en: A baseline tests added value; an alternative tests method choice.}
+    - {id: dm847.m15.k04, content_en: Technical, algorithmic, statistical, biological, and utility validation are distinct.}
+    - {id: dm847.m15.k05, content_en: Reproducibility requires data and annotation versions, software, parameters, seeds, and order.}
+    - {id: dm847.m15.k06, content_en: A fixed seed reproduces one stochastic run but does not quantify variability.}
+    - {id: dm847.m15.k07, content_en: Sensitivity analysis tests dependence on plausible choices.}
+    - {id: dm847.m15.k08, content_en: Negative results require a statement of detectable effects and data quality.}
+    - {id: dm847.m15.k09, content_en: Figures should function as evidence-bearing arguments.}
+    - {id: dm847.m15.k10, content_en: Oral answers should begin with a direct conclusion and then justify it.}
+    - {id: dm847.m15.k11, content_en: Unknown quantities should be acknowledged and paired with a retrieval or estimation plan.}
+    - {id: dm847.m15.k12, content_en: Scientific conclusions must remain proportional to evidence and external validity.}
+  grading_criteria:
+    - Accurate biological and computational formulation.
+    - Traceable data and version provenance.
+    - Method choice justified through assumptions and alternatives.
+    - Reproducible implementation and explicit validation.
+    - Results interpreted with uncertainty and without causal inflation.
+    - Individual oral mastery across the complete course.
+  response_constraints:
+    - Never invent dataset properties, sample sizes, versions, or performance values.
+    - Distinguish project evidence from background knowledge and speculation.
+    - Ask for the exact analysis unit before evaluating a split or metric.
+    - Do not reveal complete answer keys during active oral practice.
+    - Challenge causal, clinical, or mechanistic claims unsupported by the design.
+
+sources:
+  - {id: sdu.dm847.official.2025, role: official_scope_project_and_oral_assessment}
+  - {id: dm847.modules.01_14, role: integrated_course_content}
+  - {id: original.dm847.m15, role: original_project_cases_questions_and_rubrics}
+
+limitations:
+  - Project feasibility depends on data availability, licensing, compute, and time.
+  - Public annotations and reference databases remain incomplete and version dependent.
+  - A course project demonstrates competence but does not by itself validate a clinical tool or biological mechanism.
