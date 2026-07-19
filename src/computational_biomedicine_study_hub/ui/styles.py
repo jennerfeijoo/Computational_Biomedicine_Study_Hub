@@ -131,6 +131,29 @@ QLabel#moduleContextTitle {
     font-weight: 700;
 }
 
+QLabel#courseInformationTitle {
+    color: #243b53;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+QLabel#courseInformationFieldTitle {
+    color: #394b59;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+QLabel#courseInformationFieldBody {
+    color: #52606d;
+    line-height: 1.35;
+}
+
+QDialog#courseInformationDialog,
+QWidget#courseInformationContent,
+QScrollArea#courseInformationScroll {
+    background: #ffffff;
+}
+
 QLabel#courseCardTitle {
     font-size: 16px;
     font-weight: 600;

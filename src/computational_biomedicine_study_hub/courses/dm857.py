@@ -4,11 +4,6 @@ from __future__ import annotations
 
 from PySide6.QtCore import Slot
 from PySide6.QtWidgets import (
-    QComboBox,
-    QFrame,
-    QHBoxLayout,
-    QLabel,
-    QPushButton,
     QStackedWidget,
     QVBoxLayout,
     QWidget,
@@ -16,9 +11,13 @@ from PySide6.QtWidgets import (
 
 from ..content.bundles import ModuleBundle
 from ..content.dm857 import BUNDLES, LOCALIZED_BUNDLES
-from ..i18n import DEFAULT_LOCALE, AppLocale, MessageKey, Translator
+from ..i18n import DEFAULT_LOCALE, AppLocale, Translator
 from ..learning.academic_catalog import AcademicCatalog, CatalogModule
 from ..learning.progress_repository import ProgressRepository
+from ..ui.course_module_toolbar import (
+    CourseModuleToolbar,
+    course_information_from_source,
+)
 from ..ui.learning_page_copy import LearningPageCopyKey, learning_text
 from ..ui.pages.module_reader_page import ModuleReaderPage
 from ..ui.study_state import StudyLocation
@@ -44,56 +43,43 @@ class DM857Page(QWidget):
             else tuple(bundle.materialize(locale) for bundle in LOCALIZED_BUNDLES)
         )
         existing_ids = {bundle.module.module_id for bundle in legacy_bundles}
-        yaml_records = AcademicCatalog(locale=locale).modules("DM857")
+        academic_catalog = AcademicCatalog(locale=locale)
+        yaml_records = academic_catalog.modules("DM857")
         additions = tuple(record for record in yaml_records if record.module_id not in existing_ids)
         self._bundles: tuple[ModuleBundle | CatalogModule, ...] = legacy_bundles + additions
 
-        self._module_selector = QComboBox()
-        self._module_selector.setObjectName("courseModuleSelector")
-        self._module_selector.setAccessibleName(learning_text(locale, LearningPageCopyKey.MODULE))
+        source_course = academic_catalog.source_course("DM857")
+        self._toolbar = CourseModuleToolbar(
+            course_code="DM857",
+            locale=locale,
+            information=course_information_from_source(source_course, locale),
+            cumulative_available=source_course.cumulative_assessment is not None,
+        )
+        self._module_selector = self._toolbar.module_selector
+        self._module_title = self._toolbar.module_title
+        self._progress_summary = self._toolbar.progress_summary
+        self._continue_button = self._toolbar.continue_button
+        self._cumulative_button = self._toolbar.cumulative_button
+
         self._module_stack = QStackedWidget()
         self._module_stack.setObjectName("courseModuleStack")
-        self._module_title = QLabel()
-        self._module_title.setObjectName("moduleContextTitle")
-        self._module_title.setWordWrap(True)
-        self._progress_summary = QLabel()
-        self._progress_summary.setObjectName("courseProgressSummary")
-        self._progress_summary.setWordWrap(True)
-        self._continue_button = QPushButton(learning_text(locale, LearningPageCopyKey.CONTINUE))
-        self._continue_button.setObjectName("continueCourseButton")
-        self._continue_button.setAccessibleName(self._continue_button.text())
-        self._continue_button.clicked.connect(self.continue_learning)
         self._reader_cache: dict[int, ModuleReaderPage] = {}
 
         for number, bundle in enumerate(self._bundles, start=1):
-            label = self._translator.text(MessageKey.MODULE_LABEL, number=number)
-            self._module_selector.addItem(label, bundle.module.module_id)
+            self._toolbar.add_module(number, bundle.module.module_id)
             placeholder = QWidget()
             placeholder.setObjectName("moduleReaderPlaceholder")
             placeholder.setProperty("moduleId", bundle.module.module_id)
             self._module_stack.addWidget(placeholder)
 
-        context_bar = QFrame()
-        context_bar.setObjectName("moduleContextBar")
-        context_layout = QHBoxLayout(context_bar)
-        context_layout.setContentsMargins(14, 8, 14, 8)
-        context_layout.setSpacing(12)
-
-        course_code = QLabel("DM857")
-        course_code.setObjectName("moduleContextKicker")
-        context_layout.addWidget(course_code)
-        context_layout.addWidget(self._module_selector)
-        context_layout.addWidget(self._module_title, 1)
-        context_layout.addWidget(self._progress_summary)
-        context_layout.addWidget(self._continue_button)
-
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(8)
-        layout.addWidget(context_bar)
+        layout.addWidget(self._toolbar)
         layout.addWidget(self._module_stack, 1)
 
-        self._module_selector.currentIndexChanged.connect(self._activate_module)
+        self._toolbar.module_changed.connect(self._activate_module)
+        self._toolbar.continue_requested.connect(self.continue_learning)
         self._activate_module(0)
 
     @property
@@ -192,15 +178,15 @@ class DM857Page(QWidget):
             return
         reader = self._reader_for_index(index)
         self._module_stack.setCurrentWidget(reader)
-        self._module_title.setText(reader.module.title)
+        self._toolbar.set_module_title(reader.module.title)
         self._update_progress(reader.module.course_code, reader.module.module_id)
 
     def _update_progress(self, course_code: str, module_id: str) -> None:
         if self._progress_repository is None:
-            self._progress_summary.clear()
+            self._toolbar.set_progress("")
             return
         progress = self._progress_repository.module_progress(course_code, module_id)
-        self._progress_summary.setText(
+        self._toolbar.set_progress(
             learning_text(
                 self._translator.locale,
                 LearningPageCopyKey.MODULE_PROGRESS,

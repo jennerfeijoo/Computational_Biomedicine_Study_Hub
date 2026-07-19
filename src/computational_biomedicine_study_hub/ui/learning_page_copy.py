@@ -102,9 +102,7 @@ _ES = {
     LearningPageCopyKey.SYNONYMS: "Sinónimos",
     LearningPageCopyKey.OPEN_MODULE: "Abrir módulo de origen",
     LearningPageCopyKey.NEW_CONCEPTS: "Añadir conceptos nuevos",
-    LearningPageCopyKey.MODULE_PROGRESS: (
-        "{percent} % correctas · {pending} pendientes · {attempts} intentos"
-    ),
+    LearningPageCopyKey.MODULE_PROGRESS: "{percent}% · {pending} pendientes · {attempts} intentos",
     LearningPageCopyKey.CONTINUE: "Continuar",
     LearningPageCopyKey.ASSESSMENT_CATEGORY: "Categoría",
     LearningPageCopyKey.OBJECTIVE_ASSESSMENTS: "Evaluaciones objetivas",
@@ -158,9 +156,7 @@ _EN = {
     LearningPageCopyKey.SYNONYMS: "Synonyms",
     LearningPageCopyKey.OPEN_MODULE: "Open source module",
     LearningPageCopyKey.NEW_CONCEPTS: "Add new concepts",
-    LearningPageCopyKey.MODULE_PROGRESS: (
-        "{percent}% correct · {pending} pending · {attempts} attempts"
-    ),
+    LearningPageCopyKey.MODULE_PROGRESS: "{percent}% · {pending} pending · {attempts} attempts",
     LearningPageCopyKey.CONTINUE: "Continue",
     LearningPageCopyKey.ASSESSMENT_CATEGORY: "Category",
     LearningPageCopyKey.OBJECTIVE_ASSESSMENTS: "Objective assessments",
@@ -216,9 +212,7 @@ _DA = {
     LearningPageCopyKey.SYNONYMS: "Synonymer",
     LearningPageCopyKey.OPEN_MODULE: "Åbn kildemodul",
     LearningPageCopyKey.NEW_CONCEPTS: "Tilføj nye begreber",
-    LearningPageCopyKey.MODULE_PROGRESS: (
-        "{percent} % korrekte · {pending} ventende · {attempts} forsøg"
-    ),
+    LearningPageCopyKey.MODULE_PROGRESS: "{percent}% · {pending} ventende · {attempts} forsøg",
     LearningPageCopyKey.CONTINUE: "Fortsæt",
     LearningPageCopyKey.ASSESSMENT_CATEGORY: "Kategori",
     LearningPageCopyKey.OBJECTIVE_ASSESSMENTS: "Objektive evalueringer",
