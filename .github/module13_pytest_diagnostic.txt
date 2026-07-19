@@ -1,0 +1,56 @@
+.................................................F...................... [ 42%]
+........................................................................ [ 84%]
+..........................                                               [100%]
+=================================== FAILURES ===================================
+_______ test_dm857_catalog_contains_modules_one_through_twelve_in_order ________
+
+    def test_dm857_catalog_contains_modules_one_through_twelve_in_order() -> None:
+>       assert [module.module_id for module in MODULES] == [
+            f"dm857.m{number:02d}" for number in range(1, 13)
+        ]
+E       AssertionError: assert ['dm857.m01',...857.m06', ...] == ['dm857.m01',...857.m06', ...]
+E         
+E         Left contains one more item: 'dm857.m13'
+E         
+E         Full diff:
+E           [
+E               'dm857.m01',
+E               'dm857.m02',
+E               'dm857.m03',
+E               'dm857.m04',
+E               'dm857.m05',
+E               'dm857.m06',
+E               'dm857.m07',
+E               'dm857.m08',
+E               'dm857.m09',
+E               'dm857.m10',
+E               'dm857.m11',
+E               'dm857.m12',
+E         +     'dm857.m13',
+E           ]
+
+tests/test_dm857_module_catalog.py:9: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_dm857_module_catalog.py::test_dm857_catalog_contains_modules_one_through_twelve_in_order - AssertionError: assert ['dm857.m01',...857.m06', ...] == ['dm857.m01',...857.m06', ...]
+  
+  Left contains one more item: 'dm857.m13'
+  
+  Full diff:
+    [
+        'dm857.m01',
+        'dm857.m02',
+        'dm857.m03',
+        'dm857.m04',
+        'dm857.m05',
+        'dm857.m06',
+        'dm857.m07',
+        'dm857.m08',
+        'dm857.m09',
+        'dm857.m10',
+        'dm857.m11',
+        'dm857.m12',
+  +     'dm857.m13',
+    ]
+1 failed, 169 passed in 1.61s
+
+PYTEST_EXIT=1
