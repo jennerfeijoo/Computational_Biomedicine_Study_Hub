@@ -1,0 +1,541 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m05
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm847.m05.f01
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué condiciones debe cumplir un alineamiento por pares válido?
+      en: Which conditions must a valid pairwise alignment satisfy?
+      da: Hvilke betingelser skal et gyldigt parvist alignment opfylde?
+    back:
+      es: >-
+        Debe preservar el orden de los símbolos de cada secuencia, usar columnas símbolo-símbolo o símbolo-gap,
+        no crear columnas gap-gap y recuperar las secuencias originales al retirar los gaps. La puntuación se calcula
+        únicamente bajo el esquema declarado de sustituciones y gaps.
+      en: >-
+        It must preserve symbol order in each sequence, use symbol-symbol or symbol-gap columns,
+        never create gap-gap columns, and recover the original sequences after removing gaps. Scoring is computed
+        only under the declared substitution and gap scheme.
+      da: >-
+        Det skal bevare symbolrækkefølgen, bruge symbol-symbol- eller symbol-gap-kolonner,
+        aldrig gap-gap og gendanne de oprindelige sekvenser når gaps fjernes.
+    linked_objectives: [m05.o1]
+    tags: [alignment, validity, order]
+
+  - id: dm847.m05.f02
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: foundational
+    front:
+      es: Corrige: «El alineamiento óptimo es la historia evolutiva verdadera».
+      en: Correct: “The optimum alignment is the true evolutionary history.”
+      da: Ret: “Optimumalignmentet er den sande evolutionære historie.”
+    back:
+      es: >-
+        Es el alineamiento con mayor puntuación dentro de un modelo concreto de sustituciones, gaps y cobertura.
+        Puede no ser único, puede cambiar al modificar parámetros y no identifica automáticamente la dirección ni el número
+        de eventos evolutivos. Es una hipótesis computacional que requiere evidencia filogenética y biológica adicional.
+      en: >-
+        It is the highest-scoring alignment under a specific substitution, gap, and coverage model.
+        It may be non-unique, change with parameters, and does not automatically identify the direction or number
+        of evolutionary events. It is a computational hypothesis requiring additional phylogenetic and biological evidence.
+      da: >-
+        Det er alignmentet med højeste score under en bestemt model. Det kan være ikke-entydigt,
+        ændres med parametre og beviser ikke den præcise evolutionære historie.
+    linked_objectives: [m05.o1, m05.o8]
+    tags: [optimality, evolution, misconception]
+
+  - id: dm847.m05.f03
+    mode: conceptual
+    card_type: state_interpretation
+    difficulty: foundational
+    front:
+      es: ¿Qué representa F[i,j] en programación dinámica de alineamiento?
+      en: What does F[i,j] represent in alignment dynamic programming?
+      da: Hvad repræsenterer F[i,j] i dynamisk programmering til alignment?
+    back:
+      es: >-
+        El mejor score para alinear los prefijos de longitud i y j bajo la variante y el modelo definidos.
+        Esta interpretación es el contrato del estado: si cambia la variante, también pueden cambiar inicialización,
+        endpoint y significado de los bordes.
+      en: >-
+        The best score for aligning prefixes of lengths i and j under the defined variant and model.
+        This interpretation is the state contract: changing the variant may also change initialization,
+        endpoint, and boundary meaning.
+      da: >-
+        Den bedste score for alignment af prefixes med længder i og j under den definerede variant og model.
+    linked_objectives: [m05.o1, m05.o2, m05.o3]
+    tags: [dynamic_programming, state, prefix]
+
+  - id: dm847.m05.f04
+    mode: practical
+    card_type: recurrence_recall
+    difficulty: foundational
+    front:
+      es: Escribe la recurrencia global con gap lineal y explica sus tres transiciones.
+      en: Write the global linear-gap recurrence and explain its three transitions.
+      da: Skriv den globale recurrence med lineær gap-straf og forklar de tre transitions.
+    back:
+      es: >-
+        F[i,j]=max(F[i-1,j-1]+s(x_i,y_j), F[i-1,j]+g, F[i,j-1]+g).
+        Diagonal alinea x_i con y_j; arriba consume x_i y coloca gap en y; izquierda consume y_j
+        y coloca gap en x, según la convención de ejes declarada.
+      en: >-
+        F[i,j]=max(F[i-1,j-1]+s(x_i,y_j), F[i-1,j]+g, F[i,j-1]+g).
+        Diagonal aligns x_i with y_j; up consumes x_i and places a gap in y; left consumes y_j
+        and places a gap in x, under the declared axis convention.
+      da: >-
+        F[i,j]=max(F[i-1,j-1]+s(x_i,y_j), F[i-1,j]+g, F[i,j-1]+g).
+        Diagonal er symbol-symbol; op og venstre er de to symbol-gap-muligheder.
+    linked_objectives: [m05.o1, m05.o2]
+    tags: [recurrence, global_alignment, linear_gap]
+
+  - id: dm847.m05.f05
+    mode: conceptual
+    card_type: initialization
+    difficulty: foundational
+    front:
+      es: ¿Cómo se inicializa Needleman–Wunsch con gap lineal g?
+      en: How is Needleman–Wunsch initialized with linear gap g?
+      da: Hvordan initialiseres Needleman–Wunsch med lineær gap-straf g?
+    back:
+      es: >-
+        F[0,0]=0; F[i,0]=i·g y F[0,j]=j·g. Los bordes representan alinear un prefijo completo
+        contra una secuencia vacía, por lo que cada símbolo paga un gap. Si g es una penalización negativa,
+        los valores decrecen al alejarse del origen.
+      en: >-
+        F[0,0]=0; F[i,0]=i·g and F[0,j]=j·g. Borders represent aligning a full prefix
+        against an empty sequence, so every symbol pays a gap. If g is a negative penalty,
+        values decrease away from the origin.
+      da: >-
+        F[0,0]=0; F[i,0]=i·g og F[0,j]=j·g. Randen repræsenterer alignment af et prefix mod tom sekvens.
+    linked_objectives: [m05.o2]
+    tags: [Needleman_Wunsch, initialization, boundaries]
+
+  - id: dm847.m05.f06
+    mode: conceptual
+    card_type: endpoint
+    difficulty: foundational
+    front:
+      es: ¿Dónde comienza y termina el traceback global estándar?
+      en: Where does standard global traceback start and end?
+      da: Hvor starter og slutter standard global traceback?
+    back:
+      es: >-
+        Comienza en F[m,n], porque ambas secuencias completas deben quedar cubiertas, y termina en F[0,0].
+        Cada movimiento inverso reconstruye una columna. El score del alineamiento reconstruido debe coincidir con F[m,n].
+      en: >-
+        It starts at F[m,n], because both complete sequences must be covered, and ends at F[0,0].
+        Each reverse move reconstructs one column. The reconstructed alignment score must equal F[m,n].
+      da: >-
+        Det starter i F[m,n], fordi begge sekvenser dækkes fuldt, og ender i F[0,0].
+    linked_objectives: [m05.o2, m05.o5]
+    tags: [global_alignment, traceback, endpoint]
+
+  - id: dm847.m05.f07
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: ¿Qué cambia Smith–Waterman respecto de Needleman–Wunsch?
+      en: What changes in Smith–Waterman relative to Needleman–Wunsch?
+      da: Hvad ændres i Smith–Waterman i forhold til Needleman–Wunsch?
+    back:
+      es: >-
+        Los bordes se fijan en cero, la recurrencia incluye cero como opción, el score óptimo es el máximo de toda la matriz
+        y traceback comienza allí y termina al alcanzar una celda cero. Así se descartan prefijos o sufijos con contribución negativa.
+      en: >-
+        Borders are zero, the recurrence includes zero, the optimum is the maximum anywhere in the matrix,
+        and traceback starts there and stops at zero. This discards prefixes or suffixes with negative contribution.
+      da: >-
+        Rande er nul, recurrencen inkluderer nul, optimum er matrixmaksimum,
+        og traceback starter dér og stopper ved nul.
+    linked_objectives: [m05.o3]
+    tags: [Smith_Waterman, local_alignment, zero_reset]
+
+  - id: dm847.m05.f08
+    mode: conceptual
+    card_type: mechanism
+    difficulty: intermediate
+    front:
+      es: ¿Por qué el reinicio en cero produce alineamiento local?
+      en: Why does resetting to zero produce local alignment?
+      da: Hvorfor giver nul-reset lokal alignment?
+    back:
+      es: >-
+        Porque cualquier prefijo acumulado con score negativo se reemplaza por comenzar una nueva región.
+        La ruta óptima conserva únicamente un segmento cuya contribución total es positiva. El máximo puede aparecer
+        en cualquier celda y delimita el extremo final de la mejor región local.
+      en: >-
+        Any accumulated prefix with negative score is replaced by starting a new region.
+        The optimum path retains only a segment with positive total contribution. The maximum may occur
+        in any cell and marks the endpoint of the best local region.
+      da: >-
+        Et negativt prefix erstattes af en ny start. Den optimale rute beholder kun en region med positiv samlet score.
+    linked_objectives: [m05.o3]
+    tags: [local_alignment, zero_reset, optimal_substructure]
+
+  - id: dm847.m05.f09
+    mode: conceptual
+    card_type: variant_selection
+    difficulty: intermediate
+    front:
+      es: ¿Cuándo elegir global, local o semiglobal?
+      en: When should global, local, or semiglobal alignment be chosen?
+      da: Hvornår vælges global, lokal eller semiglobal alignment?
+    back:
+      es: >-
+        Global cuando ambas secuencias deben explicarse completas y tienen relación global comparable.
+        Local cuando se busca un dominio o región compartida. Semiglobal cuando una secuencia debe cubrirse completa
+        dentro de otra o cuando ciertos extremos deben quedar libres, por ejemplo reads o solapamientos.
+      en: >-
+        Global when both full sequences should be explained and have comparable global relation.
+        Local when searching for a shared domain or region. Semiglobal when one sequence must be fully covered
+        within another or selected ends should be free, such as reads or overlaps.
+      da: >-
+        Global til to hele relaterede sekvenser; lokal til delte domæner; semiglobal når én sekvens skal dækkes helt
+        inde i en anden eller bestemte ender er gratis.
+    linked_objectives: [m05.o4]
+    tags: [method_selection, global, local, semiglobal]
+
+  - id: dm847.m05.f10
+    mode: practical
+    card_type: scenario_selection
+    difficulty: intermediate
+    front:
+      es: Elige variante: proteína completa, dominio compartido, read dentro de referencia y solapamiento de reads.
+      en: Choose variants for: full protein, shared domain, read within reference, and read overlap.
+      da: Vælg varianter for: helt protein, delt domæne, read i reference og read-overlap.
+    back:
+      es: >-
+        Proteínas completas comparables: global. Dominio compartido: local. Read completo dentro de referencia larga:
+        semiglobal con extremos de referencia libres. Solapamiento: semiglobal con los extremos correspondientes libres.
+        La respuesta depende del contrato exacto de cobertura.
+      en: >-
+        Comparable full proteins: global. Shared domain: local. Full read within a long reference:
+        semiglobal with free reference ends. Overlap: semiglobal with the appropriate ends free.
+        The exact answer depends on the coverage contract.
+      da: >-
+        Hele sammenlignelige proteiner: global. Delt domæne: lokal. Read i lang reference:
+        semiglobal med frie referenceender. Overlap: semiglobal med passende frie ender.
+    linked_objectives: [m05.o4]
+    tags: [application, reads, domains]
+
+  - id: dm847.m05.f11
+    mode: conceptual
+    card_type: traceback
+    difficulty: foundational
+    front:
+      es: ¿Qué columna produce cada movimiento de traceback?
+      en: Which alignment column does each traceback move produce?
+      da: Hvilken alignmentkolonne producerer hvert traceback-move?
+    back:
+      es: >-
+        Diagonal produce símbolo-símbolo. Un movimiento vertical consume un símbolo de una secuencia y coloca gap en la otra;
+        el horizontal hace lo contrario. La asignación exacta de vertical/horizontal a x o y depende de cómo se definieron filas y columnas.
+      en: >-
+        Diagonal yields symbol-symbol. A vertical move consumes one symbol from one sequence and places a gap in the other;
+        horizontal does the opposite. Exact x/y assignment depends on row and column conventions.
+      da: >-
+        Diagonal giver symbol-symbol. Vertikal og horisontal giver de to symbol-gap-muligheder afhængigt af aksekonventionen.
+    linked_objectives: [m05.o5]
+    tags: [traceback, movement, reconstruction]
+
+  - id: dm847.m05.f12
+    mode: practical
+    card_type: validation_invariant
+    difficulty: intermediate
+    front:
+      es: ¿Qué tres invariantes debes comprobar tras traceback?
+      en: Which three invariants should be checked after traceback?
+      da: Hvilke tre invarianter bør kontrolleres efter traceback?
+    back:
+      es: >-
+        Al retirar gaps se recuperan las secuencias o subregiones consumidas; ambos renglones del alineamiento tienen igual longitud;
+        y al recalcular sustituciones y gaps se obtiene exactamente el score de la celda óptima. También deben respetarse endpoint y cobertura de la variante.
+      en: >-
+        Removing gaps recovers the consumed sequences or subregions; both alignment rows have equal length;
+        and rescoring substitutions and gaps exactly reproduces the optimum-cell score. Variant endpoint and coverage must also hold.
+      da: >-
+        Fjernede gaps gendanner de forbrugte sekvenser; begge alignmentrækker har samme længde;
+        rescoring giver præcis optimumcellens score.
+    linked_objectives: [m05.o5, m05.o8]
+    tags: [validation, invariant, rescoring]
+
+  - id: dm847.m05.f13
+    mode: conceptual
+    card_type: tie_handling
+    difficulty: intermediate
+    front:
+      es: ¿Qué significa que diagonal y arriba empaten en una celda?
+      en: What does a tie between diagonal and up mean in one cell?
+      da: Hvad betyder et tie mellem diagonal og op i en celle?
+    back:
+      es: >-
+        Ambas transiciones producen el mismo score óptimo para esos prefijos. Existen varias rutas óptimas posibles,
+        aunque algunas pueden converger más adelante. Guardar un único puntero oculta no unicidad; se deben conservar todos,
+        contar rutas o declarar una regla determinista de tie-break.
+      en: >-
+        Both transitions produce the same optimum score for those prefixes. Multiple optimum paths are possible,
+        though some may later converge. A single pointer hides non-uniqueness; retain all, count paths,
+        or declare a deterministic tie-break rule.
+      da: >-
+        Begge transitions er optimale for prefixes. Der kan være flere optimumruter; gem alle pointers,
+        tæl ruter eller deklarér en deterministisk tie-break.
+    linked_objectives: [m05.o5, m05.o8]
+    tags: [ties, multiple_optima, traceback]
+
+  - id: dm847.m05.f14
+    mode: conceptual
+    card_type: reporting
+    difficulty: advanced
+    front:
+      es: ¿Cómo debe reportarse un tie-break determinista?
+      en: How should a deterministic tie-break be reported?
+      da: Hvordan bør en deterministisk tie-break rapporteres?
+    back:
+      es: >-
+        Como una decisión de implementación, no como evidencia de que esa ruta sea biológicamente preferida.
+        Debe indicarse el orden, por ejemplo diagonal→arriba→izquierda, y si se conservaron alternativas.
+        Cuando la incertidumbre afecta dominios o inferencias, deben evaluarse varios alineamientos óptimos.
+      en: >-
+        As an implementation decision, not evidence that the chosen path is biologically preferred.
+        State the order, such as diagonal→up→left, and whether alternatives were retained.
+        When ambiguity affects domains or inference, evaluate several optimum alignments.
+      da: >-
+        Som en implementeringsbeslutning, ikke biologisk evidens. Angiv rækkefølgen og om alternativer blev bevaret.
+    linked_objectives: [m05.o5, m05.o8]
+    tags: [tie_break, reporting, uncertainty]
+
+  - id: dm847.m05.f15
+    mode: conceptual
+    card_type: mechanism
+    difficulty: intermediate
+    front:
+      es: ¿Por qué una penalización afín necesita varios estados?
+      en: Why does an affine gap penalty require multiple states?
+      da: Hvorfor kræver en affin gap-straf flere tilstande?
+    back:
+      es: >-
+        Porque el coste de la siguiente columna depende de si se abre un gap nuevo o se extiende uno existente,
+        y de en cuál secuencia está. Un único valor F[i,j] no recuerda el tipo de columna final.
+        Estados M, X e Y conservan esa información para aplicar apertura o extensión correctamente.
+      en: >-
+        The next cost depends on whether a new gap is opened or an existing one is extended,
+        and in which sequence. One F[i,j] value does not remember the final column type.
+        M, X, and Y states retain this information for correct opening or extension costs.
+      da: >-
+        Næste omkostning afhænger af om et gap åbnes eller forlænges og i hvilken sekvens.
+        M-, X- og Y-tilstande bevarer sidste kolonnetype.
+    linked_objectives: [m05.o6]
+    tags: [affine_gap, state, opening_extension]
+
+  - id: dm847.m05.f16
+    mode: conceptual
+    card_type: state_comparison
+    difficulty: intermediate
+    front:
+      es: Define M, X e Y en un alineamiento con gaps afines.
+      en: Define M, X, and Y in affine-gap alignment.
+      da: Definér M, X og Y i alignment med affine gaps.
+    back:
+      es: >-
+        M[i,j] termina alineando x_i con y_j. X[i,j] termina con un gap en una secuencia
+        y consume símbolo de la otra; Y[i,j] representa el gap en la dirección opuesta.
+        Debe declararse qué letra corresponde a cada eje para evitar invertir transiciones y traceback.
+      en: >-
+        M[i,j] ends by aligning x_i with y_j. X[i,j] ends with a gap in one sequence
+        while consuming a symbol from the other; Y[i,j] represents the opposite gap direction.
+        State which letter corresponds to each axis to avoid reversed transitions and traceback.
+      da: >-
+        M ender med symbol-symbol; X og Y ender med gap i hver sin sekvens.
+        Aksekonventionen skal deklareres.
+    linked_objectives: [m05.o6]
+    tags: [M_state, X_state, Y_state]
+
+  - id: dm847.m05.f17
+    mode: conceptual
+    card_type: convention
+    difficulty: advanced
+    front:
+      es: ¿Qué convención de gap afín debe declararse explícitamente?
+      en: Which affine-gap convention must be stated explicitly?
+      da: Hvilken affin-gap-konvention skal deklareres eksplicit?
+    back:
+      es: >-
+        Si un gap de longitud k cuesta open+k·extend o open+(k-1)·extend; es decir,
+        si la primera posición paga apertura más extensión o sólo apertura. Ambas convenciones son válidas,
+        pero producen scores desplazados y requieren inicialización y tests coherentes.
+      en: >-
+        Whether a length-k gap costs open+k·extend or open+(k-1)·extend;
+        that is, whether the first gap position pays opening plus extension or opening only. Both are valid,
+        but produce shifted scores and require consistent initialization and tests.
+      da: >-
+        Om et gap med længde k koster open+k·extend eller open+(k-1)·extend.
+        Begge konventioner er mulige men kræver konsistent initialisering og test.
+    linked_objectives: [m05.o6, m05.o8]
+    tags: [gap_convention, scoring, validation]
+
+  - id: dm847.m05.f18
+    mode: conceptual
+    card_type: complexity
+    difficulty: foundational
+    front:
+      es: ¿Cuál es la complejidad de la matriz completa para longitudes m y n?
+      en: What is the complexity of the full matrix for lengths m and n?
+      da: Hvad er kompleksiteten af den fulde matrix for længder m og n?
+    back:
+      es: >-
+        O(mn) tiempo porque se calculan m·n estados con trabajo constante por transición en el modelo básico,
+        y O(mn) memoria si se conserva toda la matriz y/o punteros para traceback. Gaps afines multiplican
+        por un número constante de estados, no cambian el orden asintótico.
+      en: >-
+        O(mn) time because m·n states are computed with constant work per transition in the basic model,
+        and O(mn) memory when the full matrix and/or traceback pointers are retained. Affine gaps multiply
+        by a constant number of states without changing asymptotic order.
+      da: >-
+        O(mn) tid og O(mn) hukommelse for fuld matrix. Affine gaps tilføjer et konstant antal tilstande.
+    linked_objectives: [m05.o7]
+    tags: [complexity, time, memory]
+
+  - id: dm847.m05.f19
+    mode: conceptual
+    card_type: memory_optimization
+    difficulty: intermediate
+    front:
+      es: ¿Qué se conserva y qué se pierde al usar sólo dos filas?
+      en: What is preserved and lost when only two rows are used?
+      da: Hvad bevares og mistes når kun to rækker bruges?
+    back:
+      es: >-
+        Se conserva el score óptimo porque cada fila depende sólo de la anterior y de la celda izquierda actual.
+        Se pierde la ruta completa de traceback. Para reconstruir con memoria lineal se necesita divide-and-conquer,
+        punteros comprimidos o recomputación controlada.
+      en: >-
+        The optimum score is preserved because each row depends only on the previous row and current left cell.
+        Full traceback is lost. Linear-memory reconstruction requires divide-and-conquer,
+        compressed pointers, or controlled recomputation.
+      da: >-
+        Optimumscoren bevares, men den fulde traceback-rute mistes. Rekonstruktion kræver ekstra teknik.
+    linked_objectives: [m05.o7]
+    tags: [rolling_rows, memory, traceback]
+
+  - id: dm847.m05.f20
+    mode: conceptual
+    card_type: algorithm
+    difficulty: advanced
+    front:
+      es: ¿Qué aporta Hirschberg al alineamiento global?
+      en: What does Hirschberg contribute to global alignment?
+      da: Hvad bidrager Hirschberg med til global alignment?
+    back:
+      es: >-
+        Reconstruye un alineamiento global óptimo con O(mn) tiempo y O(min(m,n)) memoria mediante divide-and-conquer.
+        Calcula vectores de score hacia adelante y atrás para elegir un punto de división y resuelve recursivamente.
+        Reduce memoria, pero aumenta complejidad de implementación y constantes.
+      en: >-
+        It reconstructs an optimum global alignment in O(mn) time and O(min(m,n)) memory using divide-and-conquer.
+        Forward and reverse score vectors identify a split point, followed by recursive reconstruction.
+        Memory is reduced at the cost of implementation complexity and constants.
+      da: >-
+        Det rekonstruerer et optimalt globalt alignment i O(mn) tid og O(min(m,n)) hukommelse med divide-and-conquer.
+    linked_objectives: [m05.o7]
+    tags: [Hirschberg, divide_and_conquer, linear_space]
+
+  - id: dm847.m05.f21
+    mode: conceptual
+    card_type: assumption_audit
+    difficulty: advanced
+    front:
+      es: ¿Cuándo es válido usar banding y cómo puede fallar?
+      en: When is banding valid, and how can it fail?
+      da: Hvornår er banding gyldigt, og hvordan kan det fejle?
+    back:
+      es: >-
+        Es válido cuando existe una cota justificada que garantiza o hace muy probable que una ruta óptima permanezca
+        cerca de una diagonal, por ejemplo divergencia o número de indels limitado. Falla si el óptimo sale de la banda,
+        devolviendo el mejor alineamiento restringido sin advertencia si no existe verificación o expansión adaptativa.
+      en: >-
+        It is valid when a justified bound guarantees or strongly suggests that an optimum path remains near a diagonal,
+        such as limited divergence or indel count. It fails when the optimum leaves the band,
+        returning only the best constrained alignment unless verification or adaptive expansion exists.
+      da: >-
+        Det er gyldigt med en begrundet grænse for afstand fra diagonalen. Det fejler når optimumruten forlader banden.
+    linked_objectives: [m05.o7, m05.o8]
+    tags: [banding, heuristic, guarantee]
+
+  - id: dm847.m05.f22
+    mode: practical
+    card_type: test_design
+    difficulty: advanced
+    front:
+      es: ¿Qué casos forman una suite mínima robusta para global y local?
+      en: Which cases form a robust minimum test suite for global and local alignment?
+      da: Hvilke cases udgør en robust minimal testsuite for global og lokal alignment?
+    back:
+      es: >-
+        Ambas vacías; una vacía; un símbolo igual y distinto; secuencias idénticas; caso donde gap supera mismatch;
+        local con todos los scores no positivos; empate con varios óptimos; extremos semiglobales; comparación con enumeración
+        exhaustiva en cadenas pequeñas; rescoring y recuperación de secuencias.
+      en: >-
+        Both empty; one empty; one-symbol match and mismatch; identical sequences; case where gap beats mismatch;
+        local case with all non-positive scores; tie with multiple optima; semiglobal end cases; exhaustive comparison
+        on small strings; rescoring and sequence recovery.
+      da: >-
+        Begge tomme; én tom; match/mismatch med ét symbol; identiske sekvenser; gap bedre end mismatch;
+        lokal med ikke-positive scorer; tie; semiglobalrande; exhaustive små cases; rescoring.
+    linked_objectives: [m05.o8]
+    tags: [testing, edge_cases, oracle]
+
+  - id: dm847.m05.f23
+    mode: integrative
+    card_type: oral_defense
+    difficulty: advanced
+    front:
+      es: Responde en 45 segundos: «¿Por qué dos implementaciones correctas pueden devolver alineamientos distintos?»
+      en: Answer in 45 seconds: “Why can two correct implementations return different alignments?”
+      da: Svar på 45 sekunder: “Hvorfor kan to korrekte implementeringer returnere forskellige alignments?”
+    back:
+      es: >-
+        Puede haber múltiples alineamientos con el mismo score óptimo. Cada implementación puede resolver empates en distinto orden
+        o almacenar diferentes predecesores. También pueden usar convenciones equivalentes pero distintas para gaps afines.
+        Deben coincidir en el score y el contrato del problema; la ruta elegida debe reportarse como una de varias soluciones posibles.
+      en: >-
+        Multiple alignments may share the same optimum score. Implementations may resolve ties in different orders
+        or retain different predecessors. They may also use equivalent but different affine-gap conventions.
+        They should agree on score and problem contract; the selected path is one of several possible solutions.
+      da: >-
+        Flere alignments kan have samme optimumscore. Implementeringer kan bruge forskellige tie-breaks eller gapkonventioner.
+        De bør være enige om score og problemkontrakt.
+    linked_objectives: [m05.o5, m05.o6, m05.o8]
+    tags: [oral_exam, multiple_optima, implementation]
+
+  - id: dm847.m05.f24
+    mode: integrative
+    card_type: transfer
+    difficulty: advanced
+    front:
+      es: ¿Cómo conecta alineamiento dinámico con HMM y búsqueda de secuencias?
+      en: How does dynamic alignment connect to HMMs and sequence search?
+      da: Hvordan forbinder dynamisk alignment til HMM'er og sekvenssøgning?
+    back:
+      es: >-
+        Ambos usan estados, recurrencias y acumulación de scores. Viterbi en un HMM busca la ruta de estados más probable,
+        análoga al mejor traceback; forward suma sobre todas las rutas en lugar de maximizar. Los alineadores de bases grandes
+        usan seeds e índices para reducir candidatos y después aplican extensiones dinámicas o aproximadas.
+      en: >-
+        Both use states, recurrences, and accumulated scores. HMM Viterbi finds the most probable state path,
+        analogous to best traceback; forward sums over all paths instead of maximizing. Large-database aligners
+        use seeds and indexes to reduce candidates before dynamic or approximate extension.
+      da: >-
+        Begge bruger tilstande, recurrencer og akkumulerede scorer. Viterbi maksimerer en tilstandsrute,
+        mens forward summerer over ruter. Databasesøgning bruger seeds og indeks før alignment-extension.
+    linked_objectives: [m05.o1, m05.o7]
+    tags: [transfer, HMM, sequence_search]
