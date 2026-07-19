@@ -19,31 +19,44 @@ jobs:
         with:
           ref: feat/dm857-modules-13-15
 
-      - name: Diagnose source parts
+      - name: Reconstruct and verify module
         shell: bash
         run: |
           python - <<'PY'
           from hashlib import sha256
           from pathlib import Path
 
-          expected = {
-              'm13_01.part': '456b11390079b3d7dfd4eebee928d13db6ea5b989ecea9a828f2603df8dbe0f4',
-              'm13_02.part': '5780311791df1a0a7ec1b7fcbbeac17554a5777c47a0ee43c6e50f6b9d59f291',
-              'm13_03_1.part': '968e735d172a9e2f3ccf464ae0e12975d4af884d8a61e7c8618d53d2f433c7d5',
-              'm13_03_2.part': '44e247e14fa405576d5137f71ccb1777349a792c4895d73d035395527d0fd0d3',
-              'm13_04_1.part': '36a148dec058a1e4a799073aa294954a898aa00dac536367a58ae24a76448941',
-              'm13_04_2.part': 'b42bf8461211825fb57379a8aee650d4ac6e0e18e5113cc61a020acbdaac079f',
-          }
           source_dir = Path('.github/dm857_source')
-          lines = []
-          for name, wanted in expected.items():
-              path = source_dir / name
-              actual = sha256(path.read_bytes()).hexdigest() if path.exists() else 'MISSING'
-              lines.append(f'{name} expected={wanted} actual={actual} match={actual == wanted}')
-          Path('.github/dm857_source_hashes.txt').write_text('\n'.join(lines) + '\n', encoding='utf-8')
+          names = [
+              'm13_01.part',
+              'm13_02.part',
+              'm13_03_1.part',
+              'm13_03_2.part',
+              'm13_04_1.part',
+              'm13_04_2.part',
+          ]
+          pieces = [(source_dir / name).read_text(encoding='utf-8') for name in names]
+          # The contents API removed the terminal newline from the fifth transfer part.
+          pieces[4] += '\n'
+          target = Path('src/computational_biomedicine_study_hub/content/dm857/module_13_scientific_libraries.py')
+          target.parent.mkdir(parents=True, exist_ok=True)
+          target.write_text(''.join(pieces), encoding='utf-8')
+
+          digest = sha256(target.read_bytes()).hexdigest()
+          expected = '5608dd3033cca4a19b40955a623dc942240c86df264d8fa12fe0f8f1510e9e04'
+          if digest != expected:
+              raise SystemExit(f'Unexpected module hash: {digest}')
+          compile(target.read_text(encoding='utf-8'), str(target), 'exec')
           PY
+
+      - name: Remove transfer material and commit
+        shell: bash
+        run: |
+          rm -rf .github/dm857_source .github/dm857_payload
+          rm -f .github/dm857_source_hashes.txt
+          rm -f .github/workflows/materialize-dm857-module-13.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .github/dm857_source_hashes.txt
-          git commit -m "Record DM857 module 13 source diagnostics"
+          git add -A
+          git commit -m "Add DM857 module 13 scientific libraries"
           git push origin HEAD:feat/dm857-modules-13-15
