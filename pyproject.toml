@@ -31,6 +31,9 @@ cb-study-hub = "computational_biomedicine_study_hub.application:main"
 [tool.hatch.build.targets.wheel]
 packages = ["src/computational_biomedicine_study_hub"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"academic_content/semester_1" = "computational_biomedicine_study_hub/academic_content/semester_1"
+
 [tool.pytest.ini_options]
 addopts = "-ra --strict-config --strict-markers"
 testpaths = ["tests"]

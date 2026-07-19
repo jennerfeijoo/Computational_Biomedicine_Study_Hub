@@ -94,6 +94,12 @@ def test_flashcard_ids_and_runtime_entity_ids_are_unique(
         for item in collection
     ]
     assert len(set(entities)) == len(entities)
+    assert all(
+        question.prompt.complete
+        for course in catalog.courses
+        for module in course.modules
+        for question in module.objective_questions
+    )
 
 
 def test_hidden_tutor_fragments_are_separate_from_visible_content(
@@ -101,9 +107,13 @@ def test_hidden_tutor_fragments_are_separate_from_visible_content(
 ) -> None:
     fragments = build_fragments(catalog, "en")
 
-    assert (
-        sum(fragment.visibility is FragmentVisibility.HIDDEN_TUTOR for fragment in fragments) == 54
+    hidden = tuple(
+        fragment for fragment in fragments if fragment.visibility is FragmentVisibility.HIDDEN_TUTOR
     )
+    assert len(hidden) >= 54
+    assert {fragment.module_id for fragment in hidden} == {
+        module.id for course in catalog.courses for module in course.modules
+    }
     assert all(module.hidden_support.raw for course in catalog.courses for module in course.modules)
 
 

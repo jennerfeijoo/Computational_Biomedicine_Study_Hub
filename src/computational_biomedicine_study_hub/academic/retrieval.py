@@ -28,6 +28,7 @@ class AcademicFragment:
     locale: str
     text: str
     visibility: FragmentVisibility
+    expansion_terms: tuple[str, ...] = ()
 
     @property
     def source_label(self) -> str:
@@ -65,92 +66,148 @@ def _flatten_text(value: object) -> str:
     return ""
 
 
+def _text_leaves(value: object, path: tuple[str, ...] = ()) -> Iterable[tuple[str, str]]:
+    if isinstance(value, str) and value.strip():
+        yield (".".join(path) or "support", value.strip())
+    elif isinstance(value, Mapping):
+        for key, item in value.items():
+            yield from _text_leaves(item, (*path, str(key)))
+    elif isinstance(value, list):
+        for index, item in enumerate(value, start=1):
+            yield from _text_leaves(item, (*path, str(index)))
+
+
+def _safe_path(value: str) -> str:
+    return re.sub(r"[^a-z0-9_.-]+", "-", value.casefold()).strip(".-") or "support"
+
+
 def build_fragments(catalog: AcademicCatalog, locale: str) -> tuple[AcademicFragment, ...]:
     fragments: list[AcademicFragment] = []
+
+    def append(
+        *,
+        source_id: str,
+        course_id: str,
+        module_id: str,
+        kind: str,
+        text: str,
+        visibility: FragmentVisibility = FragmentVisibility.VISIBLE,
+        expansion_terms: tuple[str, ...] = (),
+    ) -> None:
+        clean_text = text.strip()
+        if not clean_text:
+            return
+        fragments.append(
+            AcademicFragment(
+                id=f"{source_id}:{locale}:{visibility.value}",
+                source_id=source_id,
+                course_id=course_id,
+                module_id=module_id,
+                kind=kind,
+                locale=locale,
+                text=clean_text,
+                visibility=visibility,
+                expansion_terms=expansion_terms,
+            )
+        )
+
     for course in catalog.courses:
         for module in course.modules:
-            visible_items: Iterable[tuple[str, str, str]] = (
-                (
-                    concept.qualified_id,
-                    "Concept",
-                    " ".join(
-                        (
-                            concept.title.resolve(locale),
-                            concept.explanation.resolve(locale),
-                            *(point.resolve(locale) for point in concept.key_points),
+            for concept in module.concepts:
+                append(
+                    source_id=concept.qualified_id,
+                    course_id=course.id,
+                    module_id=module.id,
+                    kind="Concept",
+                    text=f"{concept.title.resolve(locale)} {concept.explanation.resolve(locale)}",
+                )
+                for index, point in enumerate(concept.key_points, start=1):
+                    append(
+                        source_id=f"{concept.qualified_id}.key_point.{index}",
+                        course_id=course.id,
+                        module_id=module.id,
+                        kind="Key point",
+                        text=point.resolve(locale),
+                    )
+            for example in module.worked_examples:
+                append(
+                    source_id=f"{example.qualified_id}.prompt",
+                    course_id=course.id,
+                    module_id=module.id,
+                    kind="Worked example",
+                    text=f"{example.title.resolve(locale)} {example.prompt.resolve(locale)}",
+                )
+                append(
+                    source_id=f"{example.qualified_id}.explanation",
+                    course_id=course.id,
+                    module_id=module.id,
+                    kind="Example explanation",
+                    text=example.explanation.resolve(locale),
+                )
+            for exercise in module.practice:
+                append(
+                    source_id=exercise.qualified_id,
+                    course_id=course.id,
+                    module_id=module.id,
+                    kind="Practice",
+                    text=exercise.prompt.resolve(locale),
+                )
+            for objective_question in module.objective_questions:
+                append(
+                    source_id=objective_question.qualified_id,
+                    course_id=course.id,
+                    module_id=module.id,
+                    kind="Objective question",
+                    text=objective_question.prompt.resolve(locale),
+                )
+            for open_question in module.open_assessments:
+                append(
+                    source_id=open_question.qualified_id,
+                    course_id=course.id,
+                    module_id=module.id,
+                    kind="Open question",
+                    text=open_question.prompt.resolve(locale),
+                )
+            for card in module.flashcards:
+                append(
+                    source_id=card.id,
+                    course_id=course.id,
+                    module_id=module.id,
+                    kind="Flashcard",
+                    text=f"{card.front.resolve(locale)} {card.back.resolve(locale)}",
+                )
+            for entry in module.glossary:
+                term = entry.term.resolve(locale)
+                append(
+                    source_id=entry.qualified_id,
+                    course_id=course.id,
+                    module_id=module.id,
+                    kind="Glossary",
+                    text=f"{term} {entry.definition.resolve(locale)}",
+                    expansion_terms=tuple(
+                        dict.fromkeys(
+                            (
+                                *_tokens(term),
+                                *(
+                                    token
+                                    for related in entry.related_terms
+                                    for token in _tokens(related)
+                                ),
+                            )
                         )
                     ),
                 )
-                for concept in module.concepts
-            )
-            visible_items = (
-                *visible_items,
-                *(
-                    (
-                        example.qualified_id,
-                        "Worked example",
-                        " ".join(
-                            (
-                                example.title.resolve(locale),
-                                example.prompt.resolve(locale),
-                                example.explanation.resolve(locale),
-                            )
-                        ),
-                    )
-                    for example in module.worked_examples
-                ),
-                *(
-                    (exercise.qualified_id, "Practice", exercise.prompt.resolve(locale))
-                    for exercise in module.practice
-                ),
-                *(
-                    (
-                        card.id,
-                        "Flashcard",
-                        f"{card.front.resolve(locale)} {card.back.resolve(locale)}",
-                    )
-                    for card in module.flashcards
-                ),
-                *(
-                    (
-                        entry.qualified_id,
-                        "Glossary",
-                        f"{entry.term.resolve(locale)} {entry.definition.resolve(locale)}",
-                    )
-                    for entry in module.glossary
-                ),
-            )
-            for source_id, kind, text in visible_items:
-                clean_text = text.strip()
-                if not clean_text:
-                    continue
-                fragments.append(
-                    AcademicFragment(
-                        id=f"{source_id}:{locale}:visible",
-                        source_id=source_id,
-                        course_id=course.id,
-                        module_id=module.id,
-                        kind=kind,
-                        locale=locale,
-                        text=clean_text,
-                        visibility=FragmentVisibility.VISIBLE,
-                    )
-                )
 
             localized_hidden = localize_value(module.hidden_support.raw, locale)
-            hidden_text = _flatten_text(localized_hidden).strip()
-            if hidden_text:
-                fragments.append(
-                    AcademicFragment(
-                        id=f"{module.id}:hidden:{locale}",
-                        source_id=f"{module.id}.hidden",
-                        course_id=course.id,
-                        module_id=module.id,
-                        kind="Tutor support",
-                        locale=locale,
-                        text=hidden_text,
-                        visibility=FragmentVisibility.HIDDEN_TUTOR,
-                    )
+            for path, hidden_text in _text_leaves(localized_hidden):
+                source_id = f"{module.id}.hidden.{_safe_path(path)}"
+                append(
+                    source_id=source_id,
+                    course_id=course.id,
+                    module_id=module.id,
+                    kind="Tutor support",
+                    text=hidden_text,
+                    visibility=FragmentVisibility.HIDDEN_TUTOR,
                 )
     return tuple(fragments)
 
@@ -178,6 +235,14 @@ class LexicalRetriever:
         query_tokens = _tokens(query.text)
         if not query_tokens:
             return ()
+        expanded_tokens = list(query_tokens)
+        query_token_set = set(query_tokens)
+        for fragment in self._fragments:
+            if fragment.kind == "Glossary" and query_token_set.intersection(
+                fragment.expansion_terms
+            ):
+                expanded_tokens.extend(_tokens(fragment.text)[:24])
+        query_tokens = tuple(dict.fromkeys(expanded_tokens))
         candidates: list[RetrievedFragment] = []
         total_documents = max(1, len(self._fragments))
         for fragment, document in zip(self._fragments, self._tokens, strict=True):

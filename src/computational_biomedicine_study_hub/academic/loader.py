@@ -302,7 +302,7 @@ class SemesterContentLoader:
             id=_item_id(raw, f"{module_id}.q{index:02}"),
             module_id=module_id,
             raw=raw,
-            prompt=_localized(raw, "prompt", "question", "stem"),
+            prompt=_localized(raw, "prompt", "question", "stem", "template"),
             question_type=str(raw.get("type", raw.get("activity_type", "multiple_choice"))),
             difficulty=str(raw.get("difficulty", "")),
             correct_option_ids=_strings(correct),

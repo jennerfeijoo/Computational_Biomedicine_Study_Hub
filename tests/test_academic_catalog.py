@@ -9,10 +9,11 @@ def test_catalog_exposes_all_dm857_modules_without_widgets() -> None:
     cards = catalog.flashcards(course_code="DM857")
     glossary = catalog.glossary(course_code="DM857")
 
-    assert len(modules) == 14
+    assert len(modules) == 17
     assert modules[0].module_id == "dm857.m01"
-    assert modules[-1].module_id == "dm857.m14"
-    assert len(cards) > len(glossary) > 14
+    assert modules[-1].module_id == "dm857.m17"
+    assert len(cards) == 420
+    assert len(glossary) == 164
     assert len({card.card_id for card in cards}) == len(cards)
     assert len({entry.term_id for entry in glossary}) == len(glossary)
     assert all(entry.course_code == "DM857" for entry in glossary)
