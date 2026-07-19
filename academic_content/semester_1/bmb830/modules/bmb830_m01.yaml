@@ -1,0 +1,301 @@
+schema_version: 1.0.0
+course_code: BMB830
+module_id: bmb830.m01
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Preguntas estadísticas, variables biológicas, unidades de estudio y procedencia
+    en: Statistical questions, biological variables, study units, and data provenance
+    da: Statistiske spørgsmål, biologiske variable, studieenheder og provenance
+  summary:
+    es: >-
+      Fundamentos para convertir una pregunta biológica en una pregunta estadística verificable.
+      Se distinguen población, muestra, unidad observacional, unidad experimental, variable,
+      parámetro, estimando, estimador y alcance de inferencia. Se introducen diseños observacionales
+      y experimentales, dependencia, pseudorreplicación, confusión, sesgo de selección y procedencia.
+    en: >-
+      Foundations for converting a biological question into a verifiable statistical question.
+      Population, sample, observational unit, experimental unit, variable, parameter, estimand,
+      estimator, and scope of inference are distinguished. Observational and experimental designs,
+      dependence, pseudoreplication, confounding, selection bias, and provenance are introduced.
+    da: >-
+      Grundlag for at omsætte et biologisk spørgsmål til et verificerbart statistisk spørgsmål.
+      Population, sample, observationsenhed, eksperimentel enhed, variabel, parameter, estimand,
+      estimator, inferensområde, afhængighed, pseudoreplikation og confounding behandles.
+  estimated_study_hours: 10
+  difficulty: foundational
+
+alignment:
+  official_learning_outcomes: [bmb830.lo01, bmb830.lo05, bmb830.lo06]
+  prerequisite_modules: []
+  later_modules: [bmb830.m02, bmb830.m03, bmb830.m04, bmb830.m05, bmb830.m06, bmb830.m07, bmb830.m08, bmb830.m09, bmb830.m10]
+
+objectives:
+  - {id: bmb830.m01.o01, text: {es: Formular una pregunta estadística a partir de un objetivo biológico, en: Formulate a statistical question from a biological objective, da: Formulere et statistisk spørgsmål fra et biologisk mål}}
+  - {id: bmb830.m01.o02, text: {es: Identificar población objetivo, muestra y marco de muestreo, en: Identify target population, sample, and sampling frame, da: Identificere målpopulation, sample og sampling frame}}
+  - {id: bmb830.m01.o03, text: {es: Distinguir unidad observacional, experimental y de análisis, en: Distinguish observational, experimental, and analysis units, da: Skelne observations-, forsøgs- og analyseenhed}}
+  - {id: bmb830.m01.o04, text: {es: Clasificar variables por escala, rol y momento de medición, en: Classify variables by scale, role, and measurement time, da: Klassificere variable efter skala, rolle og måletidspunkt}}
+  - {id: bmb830.m01.o05, text: {es: Definir un estimando alineado con la pregunta, en: Define an estimand aligned with the question, da: Definere et estimand tilpasset spørgsmålet}}
+  - {id: bmb830.m01.o06, text: {es: Reconocer dependencia, pseudorreplicación y confusión, en: Recognize dependence, pseudoreplication, and confounding, da: Genkende afhængighed, pseudoreplikation og confounding}}
+  - {id: bmb830.m01.o07, text: {es: Evaluar procedencia y alcance de inferencia, en: Evaluate provenance and scope of inference, da: Evaluere provenance og inferensområde}}
+  - {id: bmb830.m01.o08, text: {es: Separar asociación, predicción y causalidad, en: Separate association, prediction, and causation, da: Adskille association, prædiktion og kausalitet}}
+
+concepts:
+  - id: bmb830.m01.c01
+    title: {es: Pregunta biológica y pregunta estadística, en: Biological and statistical questions, da: Biologiske og statistiske spørgsmål}
+    body:
+      es: >-
+        Una pregunta biológica expresa el fenómeno de interés; la pregunta estadística especifica
+        población, variables, contraste, unidad y cantidad que se desea estimar. “¿Influye el tratamiento?”
+        es incompleta. “¿Cuál es la diferencia media de cambio de un biomarcador a 8 semanas entre
+        grupos asignados, en la población elegible?” define una comparación estimable.
+      en: >-
+        A biological question states the phenomenon of interest; a statistical question specifies
+        population, variables, contrast, unit, and target quantity. “Does treatment matter?” is incomplete.
+        “What is the mean difference in eight-week biomarker change between assigned groups in the
+        eligible population?” defines an estimable comparison.
+      da: >-
+        Et biologisk spørgsmål beskriver fænomenet; et statistisk spørgsmål specificerer population,
+        variable, kontrast, enhed og målparameter.
+    key_points:
+      - {es: La pregunta determina el diseño y el análisis, en: The question determines design and analysis, da: Spørgsmålet bestemmer design og analyse}
+      - {es: El outcome y el tiempo deben declararse, en: Outcome and timing must be declared, da: Outcome og tidspunkt skal angives}
+  - id: bmb830.m01.c02
+    title: {es: Población, muestra y marco de muestreo, en: Population, sample, and sampling frame, da: Population, sample og sampling frame}
+    body:
+      es: >-
+        La población objetivo es el conjunto sobre el que se desea concluir. La población accesible
+        es la que puede reclutarse y el marco de muestreo enumera o aproxima sus miembros. La muestra
+        contiene las unidades observadas. Una muestra grande no corrige un marco sesgado; la validez
+        externa depende de cómo las unidades observadas representan el objetivo.
+      en: >-
+        The target population is the set about which conclusions are intended. The accessible population
+        can be recruited, and the sampling frame enumerates or approximates it. The sample contains observed
+        units. A large sample does not repair a biased frame; external validity depends on representation.
+      da: >-
+        Målpopulationen er den gruppe, som konklusioner vedrører. En stor sample korrigerer ikke et skævt sampling frame.
+    key_points:
+      - {es: Tamaño y representatividad son propiedades distintas, en: Size and representativeness are distinct, da: Størrelse og repræsentativitet er forskellige}
+  - id: bmb830.m01.c03
+    title: {es: Unidades y pseudorreplicación, en: Units and pseudoreplication, da: Enheder og pseudoreplikation}
+    body:
+      es: >-
+        La unidad experimental recibe independientemente una intervención; la observacional aporta una
+        medición; la unidad de análisis es la entidad tratada como independiente por el modelo. Varias células
+        del mismo paciente aumentan precisión de la medición del paciente, pero no crean nuevos pacientes.
+        Analizarlas como independientes subestima incertidumbre: esto es pseudorreplicación.
+      en: >-
+        The experimental unit independently receives an intervention; the observational unit contributes a
+        measurement; the analysis unit is treated as independent by the model. Multiple cells from one patient
+        improve measurement of that patient but do not create new patients. Treating them as independent is pseudoreplication.
+      da: >-
+        Flere celler fra samme patient er ikke flere uafhængige patienter. At behandle dem som uafhængige er pseudoreplikation.
+    key_points:
+      - {es: La independencia debe justificarse por diseño, en: Independence must be justified by design, da: Uafhængighed skal begrundes af designet}
+  - id: bmb830.m01.c04
+    title: {es: Variables, escalas y roles, en: Variables, scales, and roles, da: Variable, skalaer og roller}
+    body:
+      es: >-
+        Una variable puede ser nominal, ordinal, discreta o continua, pero también debe clasificarse por rol:
+        outcome, exposición, tratamiento, covariable, confusor, mediador, identificador o variable técnica.
+        La representación informática no determina la escala científica: un código 0/1 puede ser categoría,
+        no cantidad; una fecha almacenada como texto sigue teniendo estructura temporal.
+      en: >-
+        A variable may be nominal, ordinal, discrete, or continuous, but also has a role: outcome, exposure,
+        treatment, covariate, confounder, mediator, identifier, or technical variable. Storage type does not
+        determine scientific scale: a 0/1 code may be categorical rather than quantitative.
+      da: >-
+        En variabel har både måleskala og analytisk rolle. Lagringstype bestemmer ikke den videnskabelige skala.
+    key_points:
+      - {es: El rol depende de la pregunta y el modelo causal, en: Role depends on the question and causal model, da: Rollen afhænger af spørgsmålet og den kausale model}
+  - id: bmb830.m01.c05
+    title: {es: Parámetro, estimando, estimador y estimación, en: Parameter, estimand, estimator, and estimate, da: Parameter, estimand, estimator og estimat}
+    body:
+      es: >-
+        El estimando es la cantidad poblacional definida por la pregunta y las condiciones analíticas.
+        El estimador es la regla aplicada a datos para aproximarla y la estimación es el valor obtenido.
+        Cambiar de diferencia media a razón de medianas cambia el estimando, aunque los datos sean idénticos.
+        El estimando debe fijarse antes de seleccionar el método.
+      en: >-
+        The estimand is the population quantity defined by the question and analysis conditions. The estimator
+        is the rule applied to data, and the estimate is its realized value. Switching from a mean difference
+        to a median ratio changes the estimand even with identical data.
+      da: >-
+        Estimandet er den populationsstørrelse, spørgsmålet definerer; estimatoren er reglen, og estimatet er resultatet.
+    key_points:
+      - {es: Método y estimando no son sinónimos, en: Method and estimand are not synonyms, da: Metode og estimand er ikke synonymer}
+  - id: bmb830.m01.c06
+    title: {es: Diseño, sesgo, confusión y causalidad, en: Design, bias, confounding, and causation, da: Design, bias, confounding og kausalitet}
+    body:
+      es: >-
+        La aleatorización puede equilibrar causas conocidas y desconocidas en expectativa; un estudio observacional
+        requiere justificar comparabilidad y medir confusores relevantes. Sesgo de selección, medición diferencial,
+        pérdidas y análisis condicionados por variables posteriores pueden distorsionar asociaciones. Un resultado
+        predictivo puede ser útil sin identificar una causa, y una asociación ajustada no prueba causalidad por sí sola.
+      en: >-
+        Randomization can balance known and unknown causes in expectation; observational studies require justified
+        comparability and measured confounders. Selection bias, differential measurement, attrition, and conditioning
+        on post-exposure variables may distort associations. Prediction can be useful without identifying a cause.
+      da: >-
+        Randomisering kan balancere årsager i forventning. Observationelle studier kræver begrundet sammenlignelighed.
+    key_points:
+      - {es: El análisis no puede reparar todas las deficiencias de diseño, en: Analysis cannot repair every design deficiency, da: Analyse kan ikke reparere alle designfejl}
+  - id: bmb830.m01.c07
+    title: {es: Procedencia y alcance de inferencia, en: Provenance and scope of inference, da: Provenance og inferensområde}
+    body:
+      es: >-
+        Procedencia incluye fuente, versión, fecha, criterios de inclusión, transformaciones, unidades, instrumentos,
+        lotes y exclusiones. Permite evaluar si los datos responden a la pregunta y reproducir decisiones. El alcance
+        de inferencia debe limitarse por población observada, diseño, periodo, contexto y calidad de medición.
+      en: >-
+        Provenance includes source, version, date, inclusion criteria, transformations, units, instruments, batches,
+        and exclusions. It supports fitness assessment and reproducibility. Inference is bounded by observed population,
+        design, period, context, and measurement quality.
+      da: >-
+        Provenance omfatter kilde, version, tidspunkt, inklusion, transformationer, enheder, instrumenter og eksklusioner.
+    key_points:
+      - {es: Los datos no son separables de su proceso de generación, en: Data cannot be separated from their generating process, da: Data kan ikke adskilles fra deres genereringsproces}
+
+worked_examples:
+  - id: bmb830.m01.e01
+    title: {es: Células dentro de pacientes, en: Cells nested within patients, da: Celler nested i patienter}
+    problem: {es: Se miden 100 células de cada uno de 12 pacientes y se comparan dos grupos clínicos., en: One hundred cells are measured from each of 12 patients and two clinical groups are compared., da: Hundrede celler måles fra hver af 12 patienter, og to kliniske grupper sammenlignes.}
+    reasoning:
+      es: >-
+        La unidad independiente para la comparación entre grupos es normalmente el paciente, no la célula.
+        Las células son mediciones anidadas. El análisis debe resumir por paciente o usar un modelo que represente
+        la jerarquía; n=1200 no es el tamaño independiente para el contraste clínico.
+      en: >-
+        The independent unit for the group comparison is usually the patient, not the cell. Cells are nested measurements.
+        Analysis should summarize by patient or model the hierarchy; n=1200 is not the independent clinical sample size.
+      da: >-
+        Patienten er den uafhængige enhed. Celler er nested målinger og må ikke tælles som 1200 uafhængige patienter.
+    answer: {es: Unidad de análisis principal: paciente; dependencia: células dentro de paciente., en: Primary analysis unit: patient; dependence: cells within patient., da: Primær analyseenhed: patient; afhængighed: celler inden for patient.}
+  - id: bmb830.m01.e02
+    title: {es: De objetivo biológico a estimando, en: From biological objective to estimand, da: Fra biologisk mål til estimand}
+    problem: {es: Evaluar si una intervención reduce presión sistólica., en: Evaluate whether an intervention reduces systolic pressure., da: Evaluere om en intervention reducerer systolisk tryk.}
+    reasoning:
+      es: >-
+        Deben fijarse población, comparación, outcome, tiempo y resumen. Un estimando posible es la diferencia
+        media entre grupos en el cambio desde basal hasta 12 semanas, según asignación inicial, en personas elegibles.
+      en: >-
+        Population, comparison, outcome, time, and summary must be fixed. One estimand is the between-group mean
+        difference in change from baseline to 12 weeks according to initial assignment in eligible participants.
+      da: >-
+        Population, kontrast, outcome, tidspunkt og summary skal fastlægges.
+    answer: {es: Diferencia media de cambio a 12 semanas entre grupos asignados., en: Mean 12-week change difference between assigned groups., da: Gennemsnitlig forskel i 12-ugers ændring mellem tildelte grupper.}
+  - id: bmb830.m01.e03
+    title: {es: Asociación observacional y causalidad, en: Observational association and causation, da: Observationel association og kausalitet}
+    problem: {es: Un estudio transversal encuentra asociación entre actividad física y un biomarcador., en: A cross-sectional study finds an association between physical activity and a biomarker., da: Et tværsnitsstudie finder association mellem fysisk aktivitet og en biomarkør.}
+    reasoning:
+      es: >-
+        El diseño mide exposición y outcome en un periodo común; temporalidad, confusión y causalidad inversa
+        permanecen abiertas. Puede describirse asociación ajustada, no efecto causal demostrado.
+      en: >-
+        Exposure and outcome are measured in a common period; temporality, confounding, and reverse causation remain open.
+        An adjusted association may be reported, not a demonstrated causal effect.
+      da: >-
+        Temporalitet, confounding og omvendt kausalitet er uklare. Resultatet er en association, ikke et bevist kausalt effekt.
+    answer: {es: Conclusión válida: asociación en la muestra y modelo especificados., en: Valid conclusion: association in the specified sample and model., da: Gyldig konklusion: association i den specificerede sample og model.}
+
+guided_practice:
+  - {id: bmb830.m01.p01, type: classification, prompt: {es: Clasifica diez variables por escala y rol en un estudio de biomarcadores., en: Classify ten variables by scale and role in a biomarker study., da: Klassificer ti variable efter skala og rolle i et biomarkørstudie.}, expected_elements: [measurement_scale, analytical_role, measurement_time]}
+  - {id: bmb830.m01.p02, type: unit_identification, prompt: {es: Identifica unidades experimental, observacional y de análisis en un experimento con ratones y múltiples tejidos., en: Identify experimental, observational, and analysis units in a mouse experiment with multiple tissues., da: Identificer forsøgs-, observations- og analyseenheder i et museforsøg med flere væv.}, expected_elements: [mouse_as_assignment_unit, tissue_nested_within_mouse, dependence]}
+  - {id: bmb830.m01.p03, type: estimand_design, prompt: {es: Convierte una pregunta vaga sobre tratamiento en un estimando completo., en: Convert a vague treatment question into a complete estimand., da: Omsæt et uklart behandlingsspørgsmål til et komplet estimand.}, expected_elements: [population, contrast, outcome, time, summary]}
+  - {id: bmb830.m01.p04, type: bias_audit, prompt: {es: Audita selección, medición y pérdidas en un estudio observacional., en: Audit selection, measurement, and attrition in an observational study., da: Auditér selection, måling og frafald i et observationelt studie.}, expected_elements: [bias_pathways, direction_unknown_unless_justified, mitigation]}
+  - {id: bmb830.m01.p05, type: provenance, prompt: {es: Diseña un manifiesto mínimo de procedencia para una tabla biológica., en: Design a minimum provenance manifest for a biological table., da: Design et minimum provenance-manifest for en biologisk tabel.}, expected_elements: [source, version, date, units, transformations, exclusions]}
+  - {id: bmb830.m01.p06, type: claim_review, prompt: {es: Reescribe cinco afirmaciones causales injustificadas como conclusiones acordes con el diseño., en: Rewrite five unjustified causal claims as design-consistent conclusions., da: Omskriv fem uberettigede kausale påstande til designkonsistente konklusioner.}, expected_elements: [association_language, population_scope, uncertainty]}
+
+objective_bank:
+  - {id: bmb830.m01.q01, type: multiple_choice, prompt: {es: ¿Qué unidad determina principalmente el tamaño independiente en un tratamiento asignado por ratón?, en: Which unit mainly determines independent sample size when treatment is assigned by mouse?, da: Hvilken enhed bestemmer primært den uafhængige sample size når behandling tildeles per mus?}, options: [{id: a, text: {es: Cada célula, en: Each cell, da: Hver celle}}, {id: b, text: {es: Cada ratón, en: Each mouse, da: Hver mus}}, {id: c, text: {es: Cada gen, en: Each gene, da: Hvert gen}}], correct_option_ids: [b], explanation: {es: La asignación independiente ocurre por ratón., en: Independent assignment occurs at mouse level., da: Uafhængig tildeling sker på museniveau.}}
+  - {id: bmb830.m01.q02, type: true_false, prompt: {es: Una muestra grande elimina automáticamente el sesgo de selección., en: A large sample automatically removes selection bias., da: En stor sample fjerner automatisk selection bias.}, correct: false, explanation: {es: Reduce error aleatorio, no corrige representación sesgada., en: It may reduce random error but not biased representation., da: Den kan reducere tilfældig fejl, men ikke skæv repræsentation.}}
+  - {id: bmb830.m01.q03, type: multiple_choice, prompt: {es: ¿Cuál es un estimando?, en: Which is an estimand?, da: Hvad er et estimand?}, options: [{id: a, text: {es: El valor p observado, en: The observed p-value, da: Den observerede p-værdi}}, {id: b, text: {es: La diferencia media poblacional definida a 12 semanas, en: The defined population mean difference at 12 weeks, da: Den definerede populationsgennemsnitsforskel ved 12 uger}}, {id: c, text: {es: El nombre del test, en: The test name, da: Testens navn}}], correct_option_ids: [b], explanation: {es: Es la cantidad poblacional objetivo., en: It is the target population quantity., da: Det er målparameteren i populationen.}}
+  - {id: bmb830.m01.q04, type: true_false, prompt: {es: Una variable almacenada como entero es necesariamente cuantitativa., en: A variable stored as integer is necessarily quantitative., da: En variabel lagret som integer er nødvendigvis kvantitativ.}, correct: false, explanation: {es: Puede codificar categorías o identificadores., en: It may encode categories or identifiers., da: Den kan kode kategorier eller identifikatorer.}}
+  - {id: bmb830.m01.q05, type: multiple_choice, prompt: {es: ¿Qué diferencia principal hay entre estimador y estimación?, en: What mainly distinguishes estimator and estimate?, da: Hvad skelner primært estimator og estimat?}, options: [{id: a, text: {es: Regla frente a valor realizado, en: Rule versus realized value, da: Regel versus realiseret værdi}}, {id: b, text: {es: Muestra frente a población, en: Sample versus population, da: Sample versus population}}, {id: c, text: {es: Gráfico frente a tabla, en: Plot versus table, da: Plot versus tabel}}], correct_option_ids: [a], explanation: {es: El estimador es una regla; la estimación es su resultado., en: The estimator is a rule; the estimate is its result., da: Estimatoren er en regel; estimatet er resultatet.}}
+  - {id: bmb830.m01.q06, type: true_false, prompt: {es: Varias mediciones por sujeto son siempre independientes., en: Repeated measurements within a subject are always independent., da: Gentagne målinger inden for en person er altid uafhængige.}, correct: false, explanation: {es: Comparten sujeto y suelen estar correlacionadas., en: They share a subject and are typically correlated., da: De deler person og er typisk korrelerede.}}
+  - {id: bmb830.m01.q07, type: multiple_choice, prompt: {es: ¿Qué propiedad fortalece más una afirmación causal?, en: Which feature most strengthens a causal claim?, da: Hvilken egenskab styrker mest en kausal påstand?}, options: [{id: a, text: {es: Un gráfico atractivo, en: An attractive plot, da: Et attraktivt plot}}, {id: b, text: {es: Asignación aleatoria bien ejecutada, en: Well-executed random assignment, da: Veludført randomisering}}, {id: c, text: {es: Muchos decimales, en: Many decimals, da: Mange decimaler}}], correct_option_ids: [b], explanation: {es: La aleatorización apoya comparabilidad causal., en: Randomization supports causal comparability., da: Randomisering understøtter kausal sammenlignelighed.}}
+  - {id: bmb830.m01.q08, type: true_false, prompt: {es: Procedencia sólo significa guardar la URL de descarga., en: Provenance only means saving the download URL., da: Provenance betyder kun at gemme download-URL.}, correct: false, explanation: {es: Incluye versiones, criterios, transformaciones, unidades y exclusiones., en: It includes versions, criteria, transformations, units, and exclusions., da: Det omfatter versioner, kriterier, transformationer, enheder og eksklusioner.}}
+  - {id: bmb830.m01.q09, type: multiple_choice, prompt: {es: ¿Qué conclusión es apropiada para un estudio transversal?, en: Which conclusion is appropriate for a cross-sectional study?, da: Hvilken konklusion passer til et tværsnitsstudie?}, options: [{id: a, text: {es: La exposición causa el outcome, en: Exposure causes the outcome, da: Eksponeringen forårsager outcome}}, {id: b, text: {es: Existe una asociación en el contexto medido, en: An association exists in the measured context, da: Der findes en association i den målte kontekst}}, {id: c, text: {es: Se excluye toda confusión, en: All confounding is excluded, da: Al confounding er udelukket}}], correct_option_ids: [b], explanation: {es: El diseño no establece por sí solo temporalidad causal., en: The design alone does not establish causal temporality., da: Designet etablerer ikke alene kausal temporalitet.}}
+  - {id: bmb830.m01.q10, type: true_false, prompt: {es: El alcance de inferencia puede exceder la población observada sin justificación adicional., en: Scope of inference may exceed the observed population without additional justification., da: Inferensområdet kan overskride den observerede population uden yderligere begrundelse.}, correct: false, explanation: {es: La generalización requiere argumentos de transportabilidad y representación., en: Generalization requires transportability and representation arguments., da: Generalisering kræver argumenter om transportabilitet og repræsentation.}}
+
+open_assessment:
+  - id: bmb830.m01.a01
+    prompt: {es: Diseña la pregunta estadística y el estimando de un estudio biológico propuesto., en: Design the statistical question and estimand for a proposed biological study., da: Design det statistiske spørgsmål og estimand for et foreslået biologisk studie.}
+    rubric:
+      - {criterion: population_and_unit, points: 3}
+      - {criterion: contrast_outcome_time, points: 3}
+      - {criterion: estimand_precision, points: 2}
+      - {criterion: scope_and_limitations, points: 2}
+  - id: bmb830.m01.a02
+    prompt: {es: Audita pseudorreplicación y dependencia en un conjunto jerárquico., en: Audit pseudoreplication and dependence in a hierarchical dataset., da: Auditér pseudoreplikation og afhængighed i et hierarkisk datasæt.}
+    rubric:
+      - {criterion: units_identified, points: 4}
+      - {criterion: dependence_explained, points: 3}
+      - {criterion: valid_analysis_options, points: 3}
+  - id: bmb830.m01.a03
+    prompt: {es: Evalúa si las conclusiones de un resumen científico exceden diseño y procedencia., en: Evaluate whether conclusions in a scientific abstract exceed design and provenance., da: Vurder om konklusioner i et videnskabeligt abstract overskrider design og provenance.}
+    rubric:
+      - {criterion: claim_design_alignment, points: 4}
+      - {criterion: bias_and_scope, points: 3}
+      - {criterion: corrected_wording, points: 3}
+
+glossary:
+  - {id: bmb830.term.population, term: {es: población objetivo, en: target population, da: målpopulation}, definition: {es: Conjunto sobre el que se pretende concluir., en: Set about which conclusions are intended., da: Gruppe som konklusioner vedrører.}}
+  - {id: bmb830.term.sample, term: {es: muestra, en: sample, da: sample}, definition: {es: Unidades efectivamente observadas., en: Units actually observed., da: Enheder der faktisk observeres.}}
+  - {id: bmb830.term.experimental_unit, term: {es: unidad experimental, en: experimental unit, da: forsøgsenhed}, definition: {es: Unidad asignada independientemente a intervención., en: Unit independently assigned to intervention., da: Enhed der uafhængigt tildeles intervention.}}
+  - {id: bmb830.term.observational_unit, term: {es: unidad observacional, en: observational unit, da: observationsenhed}, definition: {es: Entidad que aporta una medición., en: Entity contributing a measurement., da: Enhed der bidrager med en måling.}}
+  - {id: bmb830.term.estimand, term: {es: estimando, en: estimand, da: estimand}, definition: {es: Cantidad poblacional objetivo., en: Target population quantity., da: Målparameter i populationen.}}
+  - {id: bmb830.term.estimator, term: {es: estimador, en: estimator, da: estimator}, definition: {es: Regla que transforma datos en una estimación., en: Rule mapping data to an estimate., da: Regel der omdanner data til et estimat.}}
+  - {id: bmb830.term.pseudoreplication, term: {es: pseudorreplicación, en: pseudoreplication, da: pseudoreplikation}, definition: {es: Tratar mediciones dependientes como réplicas independientes., en: Treating dependent measurements as independent replicates., da: At behandle afhængige målinger som uafhængige replikater.}}
+  - {id: bmb830.term.confounder, term: {es: confusor, en: confounder, da: confounder}, definition: {es: Causa común relevante de exposición y outcome., en: Relevant common cause of exposure and outcome., da: Relevant fælles årsag til eksponering og outcome.}}
+  - {id: bmb830.term.provenance, term: {es: procedencia, en: provenance, da: provenance}, definition: {es: Registro del origen y transformación de los datos., en: Record of data origin and transformation., da: Registrering af dataoprindelse og transformation.}}
+  - {id: bmb830.term.scope, term: {es: alcance de inferencia, en: scope of inference, da: inferensområde}, definition: {es: Conjunto de poblaciones y afirmaciones apoyadas por diseño y datos., en: Populations and claims supported by design and data., da: Populationer og påstande understøttet af design og data.}}
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      Empieza siempre por pregunta, población, unidad, variables, estimando y diseño. Después evalúa
+      dependencia, procedencia y alcance. No recomiendes una prueba estadística antes de saber qué se estima.
+    en: >-
+      Always start with question, population, unit, variables, estimand, and design. Then assess dependence,
+      provenance, and scope. Do not recommend a test before knowing what is being estimated.
+    da: >-
+      Start altid med spørgsmål, population, enhed, variable, estimand og design. Vurder derefter afhængighed,
+      provenance og inferensområde.
+  misconceptions:
+    - large_n_eliminates_bias
+    - every_row_is_independent
+    - storage_type_equals_measurement_scale
+    - association_implies_causation
+    - method_name_defines_estimand
+    - provenance_is_only_a_url
+  socratic_questions:
+    - What entity could have been independently sampled or randomized?
+    - What population quantity would answer the biological question?
+    - Which measurements share a subject, batch, family, site, or time series?
+    - What claim would remain valid if unmeasured confounding exists?
+    - What information is required to reproduce how the table was produced?
+  grading_criteria:
+    - identify the correct independence unit
+    - define a complete estimand
+    - separate measurement scale from storage type
+    - distinguish association, prediction, and causation
+    - bound conclusions by design and provenance
+  retrieval_fragments:
+    - {id: bmb830.m01.r01, topic: units, text: {es: La unidad independiente se determina por muestreo o asignación, no por el número de filas., en: The independent unit follows sampling or assignment, not row count., da: Den uafhængige enhed følger sampling eller tildeling, ikke antal rækker.}}
+    - {id: bmb830.m01.r02, topic: estimand, text: {es: Un estimando especifica población, contraste, outcome, tiempo y resumen., en: An estimand specifies population, contrast, outcome, time, and summary., da: Et estimand specificerer population, kontrast, outcome, tidspunkt og summary.}}
+    - {id: bmb830.m01.r03, topic: causality, text: {es: Ajustar covariables no convierte automáticamente asociación en causalidad., en: Covariate adjustment does not automatically turn association into causation., da: Covariatjustering gør ikke automatisk association kausal.}}
+    - {id: bmb830.m01.r04, topic: provenance, text: {es: Procedencia registra fuente, versión, unidades, transformaciones y exclusiones., en: Provenance records source, version, units, transformations, and exclusions., da: Provenance registrerer kilde, version, enheder, transformationer og eksklusioner.}}
+    - {id: bmb830.m01.r05, topic: scope, text: {es: La inferencia no debe exceder población, periodo y contexto respaldados., en: Inference should not exceed the supported population, period, and context., da: Inferens bør ikke overskride understøttet population, periode og kontekst.}}
+
+source_map:
+  - {section: design_and_units, source: sdu.bmb830.official.2025}
+  - {section: variables_and_descriptive_foundations, source: repository.biostatistics.yachay}
+  - {section: study_design_and_scope, source: cetinkaya_hardin.ims.2e}
+
+limitations:
+  - This module introduces causal vocabulary but does not replace a causal-inference course.
+  - Examples are educational and do not constitute clinical protocols.
+  - Danish text requires final native-language review before release.
