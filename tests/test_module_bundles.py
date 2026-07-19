@@ -19,7 +19,7 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 def test_dm857_bundle_catalog_covers_every_completed_module_once() -> None:
     validate_bundle_catalog(LOCALIZED_BUNDLES)
 
-    expected_count = 13
+    expected_count = 14
     assert len(LOCALIZED_BUNDLES) == expected_count
     assert len(BUNDLES) == expected_count
     assert [bundle.module.module_id for bundle in BUNDLES] == [
@@ -33,8 +33,8 @@ def test_dm857_bundle_catalog_covers_every_completed_module_once() -> None:
 def test_localized_bundle_materializes_module_and_bank_in_the_same_locale() -> None:
     bundle = LOCALIZED_BUNDLES[-1].materialize(AppLocale.DANISH_DENMARK)
 
-    assert bundle.module.module_id == "dm857.m13"
-    assert bundle.module.title.startswith("Biblioteker")
+    assert bundle.module.module_id == "dm857.m14"
+    assert bundle.module.title.startswith("Testning")
     assert all(item.prompt.strip() for item in bundle.objective_question_bank)
     assert all(item.option_ids for item in bundle.objective_question_bank)
     assert all(item.correct_option_ids for item in bundle.objective_question_bank)
