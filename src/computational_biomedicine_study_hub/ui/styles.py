@@ -225,6 +225,45 @@ QLabel#glossaryDetailEmptyState {
     padding: 24px;
 }
 
+QFrame#flashcardStudyCard {
+    background: #ffffff;
+    border: 2px solid #c7d9ec;
+    border-radius: 18px;
+}
+
+QFrame#flashcardStudyCard:hover,
+QFrame#flashcardStudyCard:focus {
+    border-color: #2f80ed;
+}
+
+QFrame#flashcardStudyCard[cardSide="back"] {
+    background: #f4f9ff;
+    border-color: #7ba9dc;
+}
+
+QLabel#flashcardSideIndicator {
+    color: #526d82;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+}
+
+QLabel#flashcardPosition {
+    color: #1d5fa7;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+QWidget#flashcardsPage QPushButton {
+    min-height: 34px;
+}
+
+QWidget#flashcardsPage QPushButton[objectName^="flashcardRating_"] {
+    font-size: 16px;
+    font-weight: 700;
+}
+
 QPushButton#courseOpenButton,
 QPushButton#primaryActionButton {
     background: #2f80ed;
