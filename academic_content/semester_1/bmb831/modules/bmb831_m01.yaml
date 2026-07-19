@@ -1,0 +1,229 @@
+schema_version: 1.0.0
+course_code: BMB831
+module_id: bmb831.m01
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title: {es: Workflows avanzados de R, descomposición funcional, estructura de proyectos y procedencia, en: Advanced R workflows, functional decomposition, project structure, and provenance, da: Avancerede R-workflows, funktionel dekomposition, projektstruktur og provenance}
+  summary:
+    es: >-
+      Diseño de proyectos R ejecutables desde una sesión limpia mediante separación de datos, configuración,
+      funciones, análisis, resultados e informe. Incluye funciones puras, validación de argumentos, iteración,
+      manejo explícito de errores, rutas relativas, entornos reproducibles, semillas, logging, manifests y
+      pruebas de invariantes para análisis biomédicos complejos.
+    en: >-
+      Design of R projects executable from a clean session by separating data, configuration, functions,
+      analysis, results, and reporting. Covers pure functions, argument validation, iteration, explicit error
+      handling, relative paths, reproducible environments, seeds, logging, manifests, and invariant tests.
+    da: >-
+      Design af R-projekter der kan køres fra en ren session med adskillelse af data, konfiguration,
+      funktioner, analyse, resultater og rapport samt validering, fejlbehandling, relative stier og provenance.
+  estimated_study_hours: 12
+  difficulty: intermediate_advanced
+
+alignment:
+  official_learning_outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo04]
+  prerequisite_modules: [bmb830.m02, bmb830.m03, bmb830.m10]
+  later_modules: [bmb831.m02, bmb831.m07, bmb831.m08, bmb831.m09, bmb831.m12]
+
+objectives:
+  - {id: bmb831.m01.o01, text: {es: Diseñar una estructura de proyecto reproducible, en: Design a reproducible project structure, da: Designe en reproducerbar projektstruktur}}
+  - {id: bmb831.m01.o02, text: {es: Separar funciones, configuración, datos y productos, en: Separate functions, configuration, data, and products, da: Adskille funktioner, konfiguration, data og produkter}}
+  - {id: bmb831.m01.o03, text: {es: Escribir funciones con contratos y validación, en: Write functions with contracts and validation, da: Skrive funktioner med kontrakter og validering}}
+  - {id: bmb831.m01.o04, text: {es: Evitar dependencia de estado global y orden manual, en: Avoid dependence on global state and manual order, da: Undgå afhængighed af global state og manuel rækkefølge}}
+  - {id: bmb831.m01.o05, text: {es: Registrar versiones, parámetros, semillas y checksums, en: Record versions, parameters, seeds, and checksums, da: Registrere versioner, parametre, seeds og checksums}}
+  - {id: bmb831.m01.o06, text: {es: Construir errores informativos y logs auditables, en: Build informative errors and auditable logs, da: Bygge informative fejl og auditerbare logs}}
+  - {id: bmb831.m01.o07, text: {es: Probar invariantes y resultados intermedios, en: Test invariants and intermediate outputs, da: Teste invarianter og mellemresultater}}
+  - {id: bmb831.m01.o08, text: {es: Auditar fallos de reproducibilidad en un análisis, en: Audit reproducibility failures in an analysis, da: Auditere reproducerbarhedsfejl i en analyse}}
+
+concepts:
+  - id: bmb831.m01.c01
+    title: {es: Proyecto como sistema de transformación, en: Project as a transformation system, da: Projekt som transformationssystem}
+    body:
+      es: >-
+        Un proyecto reproducible transforma entradas declaradas en productos declarados mediante código versionado.
+        Debe distinguir datos crudos inmutables, datos derivados regenerables, funciones, configuración, resultados y reporte.
+        El directorio de trabajo interactivo no puede ser una dependencia invisible.
+      en: >-
+        A reproducible project transforms declared inputs into declared products through versioned code. Raw immutable data,
+        regenerable derived data, functions, configuration, results, and reports should be separated. The interactive working
+        directory must not be a hidden dependency.
+      da: >-
+        Et reproducerbart projekt transformerer deklarerede input til deklarerede produkter med versioneret kode.
+    key_points:
+      - {es: Lo derivado debe poder regenerarse, en: Derived products should be regenerable, da: Afledte produkter bør kunne genskabes}
+      - {es: Los datos crudos no se editan manualmente, en: Raw data are not manually edited, da: Rådata redigeres ikke manuelt}
+  - id: bmb831.m01.c02
+    title: {es: Descomposición funcional y contratos, en: Functional decomposition and contracts, da: Funktionel dekomposition og kontrakter}
+    body:
+      es: >-
+        Una función debe tener propósito limitado, entradas y salidas explícitas, validación y efectos secundarios controlados.
+        Las funciones puras facilitan pruebas y reutilización. Un contrato especifica tipos, dimensiones, unidades, ausencia permitida
+        y condiciones que deben mantenerse.
+      en: >-
+        A function should have a limited purpose, explicit inputs and outputs, validation, and controlled side effects. Pure
+        functions facilitate testing. A contract specifies types, dimensions, units, permitted missingness, and invariants.
+      da: >-
+        En funktion bør have et begrænset formål, eksplicitte input og output, validering og kontrollerede sideeffekter.
+    key_points:
+      - {es: Una función no debe leer variables globales ocultas, en: A function should not read hidden global variables, da: En funktion bør ikke læse skjulte globale variable}
+  - id: bmb831.m01.c03
+    title: {es: Configuración frente a lógica, en: Configuration versus logic, da: Konfiguration versus logik}
+    body:
+      es: >-
+        Umbrales, nombres de contrastes, rutas, semillas y opciones de modelo pertenecen a configuración versionada, no dispersa
+        en el código. Separarlos permite comparar análisis, revisar cambios y evitar modificaciones silenciosas.
+      en: >-
+        Thresholds, contrast names, paths, seeds, and model options belong in versioned configuration rather than scattered code.
+        Separation supports comparison, review, and prevention of silent changes.
+      da: >-
+        Tærskler, kontraster, stier, seeds og modelvalg hører til versioneret konfiguration.
+    key_points:
+      - {es: La configuración es parte del análisis, en: Configuration is part of the analysis, da: Konfiguration er en del af analysen}
+  - id: bmb831.m01.c04
+    title: {es: Entorno y dependencias, en: Environment and dependencies, da: Miljø og afhængigheder}
+    body:
+      es: >-
+        La versión de R y de paquetes puede cambiar resultados o interfaces. Un lockfile o manifiesto registra dependencias.
+        La reproducibilidad requiere además versiones de datos, anotaciones, sistemas externos y parámetros; registrar paquetes
+        por sí solo es insuficiente.
+      en: >-
+        R and package versions can change results or interfaces. A lockfile or manifest records dependencies, but data,
+        annotation, external resource, and parameter versions are also required.
+      da: >-
+        R- og pakkeversioner kan ændre resultater. Data-, annotations- og parameter-versioner skal også registreres.
+    key_points:
+      - {es: Entorno reproducible no implica análisis válido, en: A reproducible environment does not imply a valid analysis, da: Et reproducerbart miljø indebærer ikke en gyldig analyse}
+  - id: bmb831.m01.c05
+    title: {es: Procedencia, logging y manifests, en: Provenance, logging, and manifests, da: Provenance, logging og manifests}
+    body:
+      es: >-
+        Un manifest identifica archivos, checksums, tamaños, versiones y roles. El log registra etapas, tiempos, conteos,
+        advertencias y decisiones. La procedencia conecta cada tabla y figura con entradas y código, permitiendo reconstruir
+        la cadena de evidencia.
+      en: >-
+        A manifest identifies files, checksums, sizes, versions, and roles. Logs record stages, times, counts, warnings,
+        and decisions. Provenance connects each table and figure to inputs and code.
+      da: >-
+        Et manifest identificerer filer og checksums; logs registrerer trin, tider, counts og advarsler.
+    key_points:
+      - {es: Un log debe registrar contexto, no sólo errores, en: A log should record context, not only errors, da: En log bør registrere kontekst, ikke kun fejl}
+  - id: bmb831.m01.c06
+    title: {es: Pruebas, invariantes y ejecución limpia, en: Tests, invariants, and clean execution, da: Tests, invarianter og ren kørsel}
+    body:
+      es: >-
+        Pruebas unitarias cubren funciones; pruebas de integración cubren etapas; invariantes comprueban claves únicas,
+        dimensiones, rangos, correspondencia de muestras y conservación de conteos. Una ejecución desde sesión limpia detecta
+        objetos heredados, orden manual y dependencias no declaradas.
+      en: >-
+        Unit tests cover functions; integration tests cover stages; invariants check unique keys, dimensions, ranges,
+        sample alignment, and count conservation. A clean-session run detects inherited objects and hidden dependencies.
+      da: >-
+        Unit tests dækker funktioner; integrationstests dækker trin; invarianter kontrollerer nøgler, dimensioner og sample-alignment.
+    key_points:
+      - {es: La ejecución limpia es una prueba mínima, no suficiente, en: Clean execution is a minimum but insufficient test, da: Ren kørsel er en minimumstest men ikke tilstrækkelig}
+
+worked_examples:
+  - id: bmb831.m01.e01
+    title: {es: Separar lectura y transformación, en: Separating reading and transformation, da: Adskille læsning og transformation}
+    scenario: {es: Un script lee un CSV dentro de una función que también filtra y grafica., en: One function reads a CSV, filters it, and plots it., da: Én funktion læser CSV, filtrerer og plotter.}
+    reasoning:
+      - {es: La función mezcla I/O, lógica y visualización., en: The function mixes I/O, logic, and visualization., da: Funktionen blander I/O, logik og visualisering.}
+      - {es: Separar read_data(), validate_data(), transform_data() y plot_result()., en: Separate read_data(), validate_data(), transform_data(), and plot_result()., da: Adskil read_data(), validate_data(), transform_data() og plot_result().}
+    conclusion: {es: Cada etapa puede probarse y reutilizarse de forma independiente., en: Each stage can be tested and reused independently., da: Hvert trin kan testes og genbruges uafhængigt.}
+  - id: bmb831.m01.e02
+    title: {es: Detectar estado global, en: Detecting global state, da: Opdage global state}
+    scenario: {es: Una función usa threshold sin recibirlo como argumento., en: A function uses threshold without receiving it as an argument., da: En funktion bruger threshold uden argument.}
+    reasoning:
+      - {es: El resultado depende del entorno y orden de ejecución., en: The result depends on environment and execution order., da: Resultatet afhænger af miljø og rækkefølge.}
+      - {es: Convertir threshold en argumento y validarlo., en: Make threshold an argument and validate it., da: Gør threshold til argument og validér det.}
+    conclusion: {es: Las dependencias explícitas permiten pruebas y auditoría., en: Explicit dependencies enable testing and audit., da: Eksplicitte afhængigheder muliggør test og audit.}
+  - id: bmb831.m01.e03
+    title: {es: Manifest de datos, en: Data manifest, da: Datamanifest}
+    scenario: {es: Dos archivos tienen el mismo nombre pero distinto contenido., en: Two files share a name but differ in content., da: To filer har samme navn men forskelligt indhold.}
+    reasoning:
+      - {es: El nombre no identifica una versión., en: A filename does not identify a version., da: Et filnavn identificerer ikke en version.}
+      - {es: Registrar checksum, tamaño, fecha, origen y licencia., en: Record checksum, size, date, source, and license., da: Registrér checksum, størrelse, dato, kilde og licens.}
+    conclusion: {es: El checksum hace detectable la sustitución silenciosa., en: A checksum makes silent replacement detectable., da: Et checksum gør stille udskiftning detekterbar.}
+
+guided_practice:
+  - {id: bmb831.m01.p01, activity_type: pipeline_design, prompt: {es: Diseña carpetas y responsabilidades para un análisis ómico reproducible., en: Design folders and responsibilities for a reproducible omics analysis., da: Design mapper og ansvar for en reproducerbar omics-analyse.}, expected_elements: [raw_data, metadata, functions, configuration, derived_data, results, reports, logs]}
+  - {id: bmb831.m01.p02, activity_type: debugging, prompt: {es: Identifica dependencias ocultas en un script que requiere objetos del workspace., en: Identify hidden dependencies in a script requiring workspace objects., da: Identificér skjulte afhængigheder i et script der kræver workspace-objekter.}, expected_elements: [global_objects, working_directory, package_state, manual_order]}
+  - {id: bmb831.m01.p03, activity_type: code_completion, prompt: {es: Completa una función R con validación de tipo, longitud y NA., en: Complete an R function with type, length, and NA validation., da: Fuldfør en R-funktion med type-, længde- og NA-validering.}, expected_elements: [arguments, stopifnot_or_checks, informative_error, deterministic_output]}
+  - {id: bmb831.m01.p04, activity_type: provenance_audit, prompt: {es: Audita un proyecto sin versiones de paquetes ni datos., en: Audit a project lacking package and data versions., da: Auditér et projekt uden pakke- og dataversioner.}, expected_elements: [R_version, package_lock, data_checksum, annotation_version, parameters]}
+  - {id: bmb831.m01.p05, activity_type: test_design, prompt: {es: Propón invariantes para una tabla de muestras y una matriz de expresión., en: Propose invariants for a sample table and expression matrix., da: Foreslå invarianter for sampletabel og ekspressionsmatrix.}, expected_elements: [unique_sample_ids, identical_order, nonnegative_counts, expected_dimensions, no_unexplained_missingness]}
+  - {id: bmb831.m01.p06, activity_type: oral_explanation, prompt: {es: Explica por qué guardar .RData no sustituye un workflow reproducible., en: Explain why saving .RData does not replace a reproducible workflow., da: Forklar hvorfor .RData ikke erstatter et reproducerbart workflow.}, expected_elements: [hidden_state, order, provenance, clean_rebuild]}
+
+objective_bank:
+  - {id: bmb831.m01.q01, type: multiple_choice, prompt: {es: ¿Qué archivo debe tratarse como inmutable?, en: Which file should be treated as immutable?, da: Hvilken fil bør behandles som uforanderlig?}, options: [{id: a, text: {es: Dato crudo recibido, en: Received raw data, da: Modtagne rådata}}, {id: b, text: {es: Tabla derivada, en: Derived table, da: Afledt tabel}}, {id: c, text: {es: Figura regenerable, en: Regenererbar figur, da: Regenererbar figur}}], correct_option_ids: [a], explanation: {es: Los datos crudos preservan la entrada original., en: Raw data preserve the original input., da: Rådata bevarer originalt input.}}
+  - {id: bmb831.m01.q02, type: true_false, prompt: {es: Una semilla fija cuantifica variabilidad entre ejecuciones., en: A fixed seed quantifies variability across runs., da: Et fast seed kvantificerer variation mellem kørsler.}, correct: false, explanation: {es: Sólo reproduce una realización., en: It only reproduces one realization., da: Det reproducerer kun én realisering.}}
+  - {id: bmb831.m01.q03, type: multiple_choice, prompt: {es: ¿Qué revela una ejecución limpia?, en: What can a clean run reveal?, da: Hvad kan en ren kørsel afsløre?}, options: [{id: a, text: {es: Objetos heredados y orden oculto, en: Inherited objects and hidden order, da: Arvede objekter og skjult rækkefølge}}, {id: b, text: {es: Validez causal, en: Causal validity, da: Kausal validitet}}, {id: c, text: {es: Potencia estadística, en: Statistical power, da: Statistisk power}}], correct_option_ids: [a], explanation: {es: No valida diseño ni inferencia., en: It does not validate design or inference., da: Det validerer ikke design eller inferens.}}
+  - {id: bmb831.m01.q04, type: true_false, prompt: {es: Una función pura modifica archivos como efecto principal., en: A pure function modifies files as its main effect., da: En ren funktion ændrer filer som hovedeffekt.}, correct: false, explanation: {es: Una función pura devuelve un resultado sin efectos externos observables., en: A pure function returns a result without observable external effects., da: En ren funktion returnerer et resultat uden observerbare eksterne effekter.}}
+  - {id: bmb831.m01.q05, type: multiple_select, prompt: {es: Elementos de un manifest útil., en: Elements of a useful manifest., da: Elementer i et nyttigt manifest.}, options: [{id: a, text: {es: Checksum, en: Checksum, da: Checksum}}, {id: b, text: {es: Origen, en: Source, da: Kilde}}, {id: c, text: {es: Rol del archivo, en: File role, da: Filrolle}}, {id: d, text: {es: Color favorito del analista, en: Analyst favorite color, da: Analytikerens yndlingsfarve}}], correct_option_ids: [a,b,c], explanation: {es: Debe identificar contenido, procedencia y función., en: It should identify content, provenance, and role., da: Det bør identificere indhold, provenance og rolle.}}
+  - {id: bmb831.m01.q06, type: multiple_choice, prompt: {es: ¿Dónde deben definirse umbrales comparables entre ejecuciones?, en: Where should comparable run thresholds be defined?, da: Hvor bør sammenlignelige tærskler defineres?}, options: [{id: a, text: {es: Configuración versionada, en: Versioned configuration, da: Versioneret konfiguration}}, {id: b, text: {es: Consola interactiva, en: Interactive console, da: Interaktiv konsol}}, {id: c, text: {es: Nombre de figura, en: Figure name, da: Figurnavn}}], correct_option_ids: [a], explanation: {es: Facilita trazabilidad y comparación., en: It supports traceability and comparison., da: Det støtter sporbarhed og sammenligning.}}
+  - {id: bmb831.m01.q07, type: true_false, prompt: {es: Un lockfile registra automáticamente la versión de una base de anotación externa., en: A lockfile automatically records an external annotation database version., da: En lockfile registrerer automatisk versionen af en ekstern annotationsdatabase.}, correct: false, explanation: {es: Debe registrarse por separado., en: It must be recorded separately., da: Den skal registreres separat.}}
+  - {id: bmb831.m01.q08, type: multiple_choice, prompt: {es: Mejor prueba para claves de muestra., en: Best test for sample keys., da: Bedste test for sample-nøgler.}, options: [{id: a, text: {es: Unicidad y no ausencia, en: Uniqueness and no missingness, da: Unikhed og ingen missingness}}, {id: b, text: {es: Media cercana a cero, en: Mean near zero, da: Middel nær nul}}, {id: c, text: {es: Distribución normal, en: Normal distribution, da: Normalfordeling}}], correct_option_ids: [a], explanation: {es: Las claves deben identificar sin ambigüedad., en: Keys must identify unambiguously., da: Nøgler skal identificere entydigt.}}
+  - {id: bmb831.m01.q09, type: true_false, prompt: {es: Reproducibilidad garantiza corrección científica., en: Reproducibility guarantees scientific correctness., da: Reproducerbarhed garanterer videnskabelig korrekthed.}, correct: false, explanation: {es: Un error también puede reproducirse., en: An error can also be reproduced., da: En fejl kan også reproduceres.}}
+  - {id: bmb831.m01.q10, type: multiple_choice, prompt: {es: ¿Qué debe producir un error informativo?, en: What should an informative error provide?, da: Hvad bør en informativ fejl give?}, options: [{id: a, text: {es: Condición fallida y contexto, en: Failed condition and context, da: Fejlet betingelse og kontekst}}, {id: b, text: {es: Sólo “error”, en: Only “error”, da: Kun “fejl”}}, {id: c, text: {es: Resultado parcial silencioso, en: Silent partial result, da: Stille delresultat}}], correct_option_ids: [a], explanation: {es: Debe permitir localizar y corregir la causa., en: It should support locating and correcting the cause., da: Den bør hjælpe med at lokalisere og rette årsagen.}}
+
+open_assessment_items:
+  - id: bmb831.m01.a01
+    prompt: {es: Rediseña un script monolítico como workflow modular y justifica cada frontera funcional., en: Redesign a monolithic script as a modular workflow and justify each functional boundary., da: Redesign et monolitisk script som modulært workflow og begrund hver funktionsgrænse.}
+    rubric: [{criterion: architecture, weight: 0.30}, {criterion: explicit_dependencies, weight: 0.25}, {criterion: validation_testing, weight: 0.25}, {criterion: provenance, weight: 0.20}]
+  - id: bmb831.m01.a02
+    prompt: {es: Diseña un manifest y log mínimo para una pipeline de expresión diferencial., en: Design a minimum manifest and log for a differential-expression pipeline., da: Design et minimum manifest og log til en differential-expression-pipeline.}
+    rubric: [{criterion: inputs_versions, weight: 0.30}, {criterion: parameters_counts, weight: 0.25}, {criterion: warnings_failures, weight: 0.20}, {criterion: output_traceability, weight: 0.25}]
+  - id: bmb831.m01.a03
+    prompt: {es: Audita la afirmación “corre en mi ordenador, por tanto es reproducible”., en: Audit the claim “it runs on my computer, therefore it is reproducible”., da: Auditér påstanden “det kører på min computer, derfor er det reproducerbart”.}
+    rubric: [{criterion: environment, weight: 0.25}, {criterion: data_provenance, weight: 0.25}, {criterion: clean_execution, weight: 0.25}, {criterion: validity_limits, weight: 0.25}]
+
+glossary:
+  - {id: bmb831.term.clean_session, term: {es: sesión limpia, en: clean session, da: ren session}, definition: {es: Sesión sin objetos heredados que reconstruye el análisis desde entradas declaradas., en: Session without inherited objects that rebuilds analysis from declared inputs., da: Session uden arvede objekter der genskaber analysen fra deklarerede input.}}
+  - {id: bmb831.term.manifest, term: {es: manifest, en: manifest, da: manifest}, definition: {es: Registro estructurado de archivos, versiones, checksums y roles., en: Structured record of files, versions, checksums, and roles., da: Struktureret register over filer, versioner, checksums og roller.}}
+  - {id: bmb831.term.provenance, term: {es: procedencia, en: provenance, da: provenance}, definition: {es: Cadena que conecta origen, transformaciones y productos., en: Chain connecting origin, transformations, and products., da: Kæde der forbinder oprindelse, transformationer og produkter.}}
+  - {id: bmb831.term.invariant, term: {es: invariante, en: invariant, da: invariant}, definition: {es: Condición que debe mantenerse durante una transformación válida., en: Condition that must remain true during a valid transformation., da: Betingelse der skal forblive sand under en gyldig transformation.}}
+  - {id: bmb831.term.pure_function, term: {es: función pura, en: pure function, da: ren funktion}, definition: {es: Función cuyo resultado depende sólo de sus argumentos y sin efectos externos observables., en: Function whose result depends only on arguments and has no observable external effects., da: Funktion hvis resultat kun afhænger af argumenter og uden observerbare eksterne effekter.}}
+  - {id: bmb831.term.lockfile, term: {es: lockfile, en: lockfile, da: lockfile}, definition: {es: Registro de versiones de dependencias de software., en: Record of software dependency versions., da: Register over softwareafhængigheders versioner.}}
+  - {id: bmb831.term.side_effect, term: {es: efecto secundario, en: side effect, da: sideeffekt}, definition: {es: Modificación externa a la salida retornada., en: External modification beyond the returned output., da: Ekstern ændring ud over det returnerede output.}}
+  - {id: bmb831.term.checksum, term: {es: checksum, en: checksum, da: checksum}, definition: {es: Huella que permite detectar cambios en contenido., en: Fingerprint enabling detection of content changes., da: Fingeraftryk der gør indholdsændringer detekterbare.}}
+  - {id: bmb831.term.configuration, term: {es: configuración, en: configuration, da: konfiguration}, definition: {es: Conjunto versionado de parámetros y opciones de ejecución., en: Versioned set of parameters and run options., da: Versioneret sæt af parametre og kørselsvalg.}}
+  - {id: bmb831.term.integration_test, term: {es: prueba de integración, en: integration test, da: integrationstest}, definition: {es: Prueba de interacción correcta entre etapas o componentes., en: Test of correct interaction between stages or components., da: Test af korrekt interaktion mellem trin eller komponenter.}}
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      La reproducibilidad computacional surge de dependencias explícitas, separación de responsabilidades,
+      datos y configuración versionados, validación, pruebas y ejecución limpia. No equivale a validez estadística.
+    en: >-
+      Computational reproducibility arises from explicit dependencies, separated responsibilities, versioned data
+      and configuration, validation, tests, and clean execution. It is not equivalent to statistical validity.
+    da: >-
+      Beregningsmæssig reproducerbarhed kræver eksplicitte afhængigheder, adskilte ansvar, versionerede data og tests.
+  misconceptions:
+    - saving the workspace is sufficient for reproducibility
+    - a fixed seed quantifies stochastic uncertainty
+    - package versions alone fully identify an analysis
+    - code that executes is scientifically valid
+    - absolute paths are harmless local details
+  socratic_questions:
+    - Which inputs are currently implicit?
+    - Can every derived product be deleted and rebuilt?
+    - What invariant would detect sample-order corruption?
+    - Which parameter changes the scientific estimand rather than only implementation?
+    - What evidence would distinguish reproducibility from validity?
+  grading_criteria:
+    - explicit inputs outputs and dependencies
+    - coherent functional decomposition
+    - validated arguments and informative failures
+    - versioned environment data annotations and parameters
+    - tests for biological and structural invariants
+  retrieval_fragments:
+    - id: bmb831.m01.r01
+      text: {es: Un workflow reproducible reconstruye productos desde entradas declaradas en una sesión limpia., en: A reproducible workflow rebuilds products from declared inputs in a clean session., da: Et reproducerbart workflow genskaber produkter fra deklarerede input i en ren session.}
+    - id: bmb831.m01.r02
+      text: {es: Un lockfile no registra por sí solo versiones de datos ni anotaciones., en: A lockfile alone does not record data or annotation versions., da: En lockfile registrerer ikke alene data- eller annotationsversioner.}
+    - id: bmb831.m01.r03
+      text: {es: Las funciones puras reducen estado oculto y facilitan pruebas., en: Pure functions reduce hidden state and facilitate testing., da: Rene funktioner reducerer skjult state og letter tests.}
+    - id: bmb831.m01.r04
+      text: {es: La ejecución limpia detecta dependencias ocultas pero no valida diseño o inferencia., en: Clean execution detects hidden dependencies but does not validate design or inference., da: Ren kørsel opdager skjulte afhængigheder men validerer ikke design eller inferens.}
