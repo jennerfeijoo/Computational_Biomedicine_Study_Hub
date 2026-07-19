@@ -1,0 +1,381 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m12
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title: {es: Clases, objetos y diseño orientado a objetos, en: Classes, objects, and object-oriented design, da: Klasser, objekter og objektorienteret design}
+  summary:
+    es: >-
+      Diseño de clases e instancias para combinar estado y comportamiento. Incluye construcción,
+      atributos de instancia y clase, métodos, identidad, igualdad, representación, encapsulación,
+      propiedades, dataclasses, métodos especiales, composición, herencia limitada, polimorfismo,
+      errores de estado compartido y pruebas de objetos.
+    en: >-
+      Design of classes and instances combining state and behavior. Covers construction, instance
+      and class attributes, methods, identity, equality, representation, encapsulation, properties,
+      dataclasses, special methods, composition, limited inheritance, polymorphism, shared-state
+      defects, and object testing.
+    da: >-
+      Design af klasser og instanser, der kombinerer tilstand og adfærd. Modulet dækker konstruktion,
+      instans- og klasseattributter, metoder, identitet, lighed, repræsentation, indkapsling,
+      properties, dataclasses, særlige metoder, komposition, begrænset arv og objekttest.
+  prerequisites: [dm857.m04, dm857.m06, dm857.m07, dm857.m11]
+  official_learning_outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo05, dm857.lo07]
+  estimated_study_hours: 20
+  difficulty: advanced
+
+objectives:
+  - {id: m12.o1, bloom_level: understand, statement: {es: Distinguir clase, instancia, atributo, método y método enlazado., en: Distinguish class, instance, attribute, method, and bound method., da: Skelne mellem klasse, instans, attribut, metode og bundet metode.}, evidence: oop_vocabulary}
+  - {id: m12.o2, bloom_level: create, statement: {es: Construir objetos válidos mediante `__init__` y validación temprana., en: Construct valid objects through `__init__` and early validation., da: Konstruere gyldige objekter gennem `__init__` og tidlig validering.}, evidence: valid_constructor}
+  - {id: m12.o3, bloom_level: analyze, statement: {es: Diferenciar identidad, igualdad lógica y representación textual., en: Differentiate identity, logical equality, and textual representation., da: Skelne mellem identitet, logisk lighed og tekstlig repræsentation.}, evidence: identity_equality_analysis}
+  - {id: m12.o4, bloom_level: create, statement: {es: Proteger invariantes mediante encapsulación, métodos y propiedades justificadas., en: Protect invariants using encapsulation, methods, and justified properties., da: Beskytte invarianter med indkapsling, metoder og begrundede properties.}, evidence: invariant_preserving_class}
+  - {id: m12.o5, bloom_level: apply, statement: {es: Utilizar dataclasses cuando el objeto es principalmente un modelo de datos., en: Use dataclasses when the object is primarily a data model., da: Bruge dataclasses når objektet primært er en datamodel.}, evidence: dataclass_model}
+  - {id: m12.o6, bloom_level: create, statement: {es: Implementar métodos especiales con contratos coherentes y sin sorpresas., en: Implement special methods with coherent, unsurprising contracts., da: Implementere særlige metoder med konsistente og ikke-overraskende kontrakter.}, evidence: special_method_design}
+  - {id: m12.o7, bloom_level: evaluate, statement: {es: Preferir composición y justificar herencia y polimorfismo cuando exista una relación semántica válida., en: Prefer composition and justify inheritance and polymorphism when a valid semantic relation exists., da: Foretrække komposition og begrunde arv og polymorfi ved en gyldig semantisk relation.}, evidence: composition_inheritance_decision}
+  - {id: m12.o8, bloom_level: create, statement: {es: Diseñar pruebas de construcción, estado, comportamiento, igualdad e independencia entre instancias., en: Design tests for construction, state, behavior, equality, and instance independence., da: Designe test af konstruktion, tilstand, adfærd, lighed og instansuafhængighed.}, evidence: object_test_suite}
+
+concepts:
+  - id: classes-instances-and-attribute-lookup
+    title: {es: Clases, instancias y resolución de atributos, en: Classes, instances, and attribute lookup, da: Klasser, instanser og attributopslag}
+    body:
+      es: >-
+        Una clase define una familia de objetos y comportamiento compartido; una instancia posee
+        identidad y estado propios. `obj.method` produce un método enlazado que recibe `obj` como `self`.
+        Los atributos de instancia pertenecen al objeto; los de clase pertenecen a la clase y pueden
+        compartirse. La resolución busca primero en la instancia y luego en la clase. Colocar una lista
+        mutable como atributo de clase puede compartir estado accidentalmente entre instancias.
+      en: >-
+        A class defines a family of objects and shared behavior; an instance has its own identity and
+        state. `obj.method` is a bound method receiving `obj` as `self`. Instance attributes belong to
+        objects; class attributes belong to the class and may be shared. A mutable class attribute can
+        accidentally share state across instances.
+      da: >-
+        En klasse definerer fælles adfærd; en instans har egen identitet og tilstand. Muterbare
+        klasseattributter kan ved en fejl dele tilstand mellem instanser.
+    linked_objectives: [m12.o1, m12.o8]
+  - id: construction-and-valid-state
+    title: {es: Construcción y estado válido, en: Construction and valid state, da: Konstruktion og gyldig tilstand}
+    body:
+      es: >-
+        `__init__` inicializa una instancia ya creada y debe dejarla en un estado válido. Conviene
+        validar parámetros antes de asignar parcialmente el estado y normalizar sólo cuando el contrato
+        lo requiere. `__init__` no retorna un valor distinto de None. Los parámetros predeterminados
+        mutables se crean una vez; se usa `None` y se crea una colección nueva dentro del constructor.
+        Toda instancia debe comenzar con sus invariantes satisfechas.
+      en: >-
+        `__init__` initializes an already created instance and must leave it valid. Validate parameters
+        before partial assignment and normalize only according to the contract. `__init__` returns no
+        non-None value. Mutable defaults are created once; use `None` and create a fresh collection inside.
+      da: >-
+        `__init__` skal efterlade instansen gyldig. Validér før delvis tildeling, og undgå muterbare
+        standardparametre ved at oprette nye samlinger pr. instans.
+    linked_objectives: [m12.o2, m12.o4, m12.o8]
+  - id: identity-equality-and-hashing
+    title: {es: Identidad, igualdad y hash, en: Identity, equality, and hashing, da: Identitet, lighed og hash}
+    body:
+      es: >-
+        `is` compara identidad: dos referencias al mismo objeto. `==` invoca igualdad lógica, normalmente
+        mediante `__eq__`. Objetos distintos pueden ser iguales por valor. La igualdad debe definir qué
+        atributos forman la identidad lógica y cómo tratar tipos incompatibles. Si dos objetos son iguales
+        y hashables, deben tener el mismo hash. Hacer hashable un objeto mutable suele ser peligroso porque
+        cambiar atributos usados en el hash rompe diccionarios y conjuntos.
+      en: >-
+        `is` compares identity; `==` invokes logical equality, usually through `__eq__`. Distinct objects
+        may be value-equal. Equal hashable objects must share a hash. Making mutable value objects hashable
+        is dangerous because changing hashed attributes breaks dictionary and set assumptions.
+      da: >-
+        `is` sammenligner identitet, mens `==` sammenligner logisk lighed. Lighed og hash skal være
+        konsistente, og muterbare objekter bør ikke uden videre være hashbare.
+    linked_objectives: [m12.o3, m12.o6]
+  - id: repr-str-and-observable-representation
+    title: {es: `__repr__`, `__str__` y representación observable, en: `__repr__`, `__str__`, and observable representation, da: `__repr__`, `__str__` og observerbar repræsentation}
+    body:
+      es: >-
+        `__repr__` debe ser inequívoco y útil para depuración, mostrando el estado relevante sin exponer
+        secretos. `__str__` puede ser más legible para usuarios. Ambos retornan cadenas. Una representación
+        no debe ejecutar E/S, cambiar estado ni depender de datos inestables. Las pruebas deben verificar
+        propiedades importantes del formato sin acoplarse innecesariamente a espacios irrelevantes.
+      en: >-
+        `__repr__` should be unambiguous and debugging-oriented; `__str__` may be user-friendly. Both return
+        strings and should not perform I/O, mutate state, or depend on unstable data. Tests should verify
+        meaningful format properties without brittle whitespace coupling.
+      da: >-
+        `__repr__` bør være entydig og nyttig til fejlfinding; `__str__` kan være mere brugervenlig.
+        Ingen af dem bør ændre tilstand eller udføre I/O.
+    linked_objectives: [m12.o3, m12.o6, m12.o8]
+  - id: encapsulation-and-properties
+    title: {es: Encapsulación y propiedades, en: Encapsulation and properties, da: Indkapsling og properties}
+    body:
+      es: >-
+        Python utiliza convenciones más que privacidad absoluta. Un nombre `_value` comunica uso interno.
+        Una property conserva sintaxis de atributo mientras aplica validación o cálculo. Un setter debe
+        validar antes de modificar y preservar invariantes si falla. No toda variable necesita property;
+        el acceso indirecto sólo se justifica por una regla real. Operaciones costosas, con E/S o efectos
+        secundarios suelen merecer métodos explícitos.
+      en: >-
+        Python uses conventions rather than absolute privacy. `_value` signals internal use. A property
+        retains attribute syntax while applying validation or computation. Setters validate before mutation
+        and preserve invariants on failure. Expensive or effectful operations deserve explicit methods.
+      da: >-
+        Python bruger konventioner frem for absolut privatliv. En property bør beskytte en reel regel;
+        dyre eller effektfulde operationer bør være eksplicitte metoder.
+    linked_objectives: [m12.o4]
+  - id: dataclasses-and-value-models
+    title: {es: Dataclasses y modelos de valor, en: Dataclasses and value models, da: Dataclasses og værdimodeller}
+    body:
+      es: >-
+        `@dataclass` genera `__init__`, `__repr__` y `__eq__` a partir de campos. Es adecuada para objetos
+        cuyo propósito principal es almacenar datos con invariantes moderadas. `field(default_factory=list)`
+        crea una lista nueva por instancia. `frozen=True` limita reasignación, pero no vuelve inmutables los
+        objetos anidados. `__post_init__` permite validar después de la inicialización generada.
+      en: >-
+        `@dataclass` generates `__init__`, `__repr__`, and `__eq__` from fields. It suits data-centered
+        objects with moderate invariants. `field(default_factory=list)` creates a fresh list per instance.
+        `frozen=True` limits reassignment but does not deep-freeze nested objects. `__post_init__` validates.
+      da: >-
+        `@dataclass` genererer centrale metoder fra felter. `default_factory` opretter nye samlinger pr.
+        instans, og `frozen=True` gør ikke nødvendigvis indlejrede objekter uforanderlige.
+    linked_objectives: [m12.o5, m12.o8]
+  - id: special-methods-and-protocols
+    title: {es: Métodos especiales y protocolos, en: Special methods and protocols, da: Særlige metoder og protokoller}
+    body:
+      es: >-
+        Métodos como `__len__`, `__iter__`, `__contains__`, `__eq__` y `__repr__` integran un objeto con
+        protocolos de Python. Deben respetar expectativas: `__len__` retorna entero no negativo,
+        `__iter__` produce elementos en un orden documentado y `__contains__` responde pertenencia.
+        Implementar un protocolo parcial o sorprendente puede ser peor que ofrecer un método explícito.
+      en: >-
+        Methods such as `__len__`, `__iter__`, `__contains__`, `__eq__`, and `__repr__` integrate objects
+        with Python protocols. They must meet expectations: non-negative integer length, documented
+        iteration order, and meaningful membership. A surprising partial protocol may be worse than an explicit method.
+      da: >-
+        Særlige metoder integrerer objekter med Python-protokoller og skal følge forventninger til
+        længde, iteration, medlemskab, lighed og repræsentation.
+    linked_objectives: [m12.o6]
+  - id: composition-inheritance-and-polymorphism
+    title: {es: Composición, herencia y polimorfismo, en: Composition, inheritance, and polymorphism, da: Komposition, arv og polymorfi}
+    body:
+      es: >-
+        Composición modela una relación tiene-un y permite delegar en objetos colaboradores. Herencia
+        modela una relación es-un y exige que la subclase pueda sustituir a la base sin romper su contrato.
+        Reutilizar código no basta para justificar herencia. El polimorfismo permite operar sobre objetos
+        diferentes que satisfacen el mismo protocolo. La composición suele reducir acoplamiento y facilitar
+        pruebas; la herencia es apropiada cuando existe una taxonomía y contrato realmente compartidos.
+      en: >-
+        Composition models has-a and delegates to collaborators. Inheritance models is-a and requires
+        substitutability without weakening the base contract. Code reuse alone is not enough. Polymorphism
+        works across objects satisfying the same protocol. Composition often reduces coupling and aids testing.
+      da: >-
+        Komposition modellerer har-en; arv modellerer er-en og kræver substituerbarhed. Kodegenbrug alene
+        begrunder ikke arv. Polymorfi bygger på fælles protokoller.
+    linked_objectives: [m12.o7]
+  - id: object-testing-and-shared-state
+    title: {es: Pruebas de objetos y estado compartido, en: Object testing and shared state, da: Objekttest og delt tilstand}
+    body:
+      es: >-
+        Las pruebas deben cubrir construcción válida e inválida, transiciones de estado, retorno de métodos,
+        preservación de invariantes, igualdad, representación e independencia entre instancias. Crear dos
+        objetos y mutar uno detecta listas compartidas por atributos de clase o valores predeterminados.
+        También deben probarse fallos atómicos: una operación inválida no debería dejar el objeto parcialmente
+        modificado. Las pruebas observan comportamiento público, no `__dict__` salvo diagnóstico interno.
+      en: >-
+        Tests cover valid and invalid construction, state transitions, method results, invariants, equality,
+        representation, and instance independence. Create two objects and mutate one to expose shared mutable
+        defaults or class attributes. Invalid operations should fail atomically without partial mutation.
+      da: >-
+        Test skal dække konstruktion, tilstandsovergange, invarianter, lighed, repræsentation og
+        instansuafhængighed. Ugyldige operationer bør ikke efterlade delvist ændret tilstand.
+    linked_objectives: [m12.o2, m12.o4, m12.o8]
+
+worked_examples:
+  - id: dm857.m12.e01
+    title: {es: Objeto de medición con validación atómica, en: Measurement object with atomic validation, da: Måleobjekt med atomisk validering}
+    problem: {es: Crear una clase Measurement con id no vacío, valor numérico y unidad no vacía; actualizar el valor sin romper estado si la entrada es inválida., en: Create a Measurement class with non-empty id, numeric value, and non-empty unit; update value without corrupting state on invalid input., da: Opret en Measurement-klasse med gyldigt id, numerisk værdi og enhed og atomisk opdatering.}
+    assumptions: [synthetic measurement model, no clinical thresholds]
+    reasoning:
+      es: [Validar antes de asignar., Centralizar validación del valor., No modificar estado si se lanza excepción.]
+      en: [Validate before assigning., Centralize value validation., Do not mutate state when raising.]
+      da: [Validér før tildeling., Centralisér validering., Ændr ikke tilstand ved fejl.]
+    code: |-
+      class Measurement:
+          def __init__(self, sample_id, value, unit):
+              sample_id = sample_id.strip()
+              unit = unit.strip()
+              if not sample_id or not unit:
+                  raise ValueError("id and unit must be non-empty")
+              self._validate_value(value)
+              self.sample_id = sample_id
+              self._value = float(value)
+              self.unit = unit
+
+          @staticmethod
+          def _validate_value(value):
+              if not isinstance(value, (int, float)):
+                  raise TypeError("value must be numeric")
+
+          @property
+          def value(self):
+              return self._value
+
+          @value.setter
+          def value(self, new_value):
+              self._validate_value(new_value)
+              self._value = float(new_value)
+    expected_output: invalid update raises and preserves previous value
+    validation: [empty id, nonnumeric value, invalid update preserves state, two instances remain independent]
+    explanation: {es: La validación precede a la mutación y mantiene la operación atómica., en: Validation precedes mutation and keeps the operation atomic., da: Validering sker før mutation og gør operationen atomisk.}
+    linked_objectives: [m12.o2, m12.o4, m12.o8]
+  - id: dm857.m12.e02
+    title: {es: Dataclass para un registro inmutable superficial, en: Dataclass for a shallowly immutable record, da: Dataclass til en overfladisk uforanderlig post}
+    problem: {es: Modelar un identificador y grupo con igualdad por valor y validación posterior., en: Model an identifier and group with value equality and post-initialization validation., da: Modellér identifikator og gruppe med værdilighed og validering efter initialisering.}
+    assumptions: [allowed groups are control and case]
+    reasoning:
+      es: [Usar frozen para impedir reasignación., Validar en __post_init__., Explicar que frozen no congela objetos anidados.]
+      en: [Use frozen to prevent reassignment., Validate in __post_init__., Explain that frozen does not deep-freeze nested objects.]
+      da: [Brug frozen mod omtildeling., Validér i __post_init__., Forklar at indlejrede objekter ikke dybfryses.]
+    code: |-
+      from dataclasses import dataclass
+
+      @dataclass(frozen=True)
+      class SampleKey:
+          sample_id: str
+          group: str
+
+          def __post_init__(self):
+              if not self.sample_id.strip():
+                  raise ValueError("empty sample id")
+              if self.group not in {"control", "case"}:
+                  raise ValueError("invalid group")
+    expected_output: equal field values produce value equality
+    validation: [invalid group, empty id, equality of distinct instances, reassignment blocked]
+    explanation: {es: La dataclass reduce código repetitivo, pero la validación de dominio sigue siendo responsabilidad del diseño., en: The dataclass removes boilerplate, but domain validation remains a design responsibility., da: Dataclass reducerer gentagelse, men domænevalidering er stadig designets ansvar.}
+    linked_objectives: [m12.o3, m12.o5, m12.o8]
+  - id: dm857.m12.e03
+    title: {es: Composición para una serie de mediciones, en: Composition for a measurement series, da: Komposition til en måleserie}
+    problem: {es: Diseñar una serie que contiene mediciones y calcula promedio sin heredar de list., en: Design a series containing measurements and computing a mean without inheriting from list., da: Design en serie med målinger og gennemsnit uden at arve fra list.}
+    assumptions: [series may begin empty, only Measurement instances are accepted]
+    reasoning:
+      es: [Usar una lista interna., Exponer add, len e iteración controlada., Definir el promedio vacío.]
+      en: [Use an internal list., Expose add, len, and controlled iteration., Define empty mean behavior.]
+      da: [Brug en intern liste., Eksponér add, len og kontrolleret iteration., Definér tomt gennemsnit.]
+    code: |-
+      class MeasurementSeries:
+          def __init__(self):
+              self._items = []
+
+          def add(self, measurement):
+              if not isinstance(measurement, Measurement):
+                  raise TypeError("Measurement required")
+              self._items.append(measurement)
+
+          def mean(self):
+              if not self._items:
+                  raise ValueError("empty series")
+              return sum(item.value for item in self._items) / len(self._items)
+
+          def __len__(self):
+              return len(self._items)
+
+          def __iter__(self):
+              return iter(tuple(self._items))
+    expected_output: iteration preserves insertion order and clients cannot directly replace internal storage
+    validation: [empty mean, wrong type, two series independent, correct mean]
+    explanation: {es: La serie tiene mediciones; no es una lista. La composición preserva un contrato de dominio más estrecho., en: The series has measurements; it is not a list. Composition preserves a narrower domain contract., da: Serien har målinger; den er ikke en liste. Komposition bevarer en smallere domænekontrakt.}
+    linked_objectives: [m12.o4, m12.o6, m12.o7, m12.o8]
+
+practice_exercises:
+  - {id: dm857.m12.p01, activity_type: terminology_mapping, difficulty: foundational, prompt: {es: Distingue clase, instancia, atributo de instancia, atributo de clase y método enlazado., en: Distinguish class, instance, instance attribute, class attribute, and bound method., da: Skeln mellem klasse, instans, instansattribut, klasseattribut og bundet metode.}, reference_solution: {es: La clase define; la instancia materializa; el atributo de instancia pertenece al objeto; el de clase se comparte; el método enlazado lleva la instancia como self., en: The class defines; the instance materializes; an instance attribute belongs to the object; a class attribute is shared; a bound method carries the instance as self., da: Klassen definerer, instansen materialiserer, og den bundne metode medfører self.}, linked_objectives: [m12.o1]}
+  - {id: dm857.m12.p02, activity_type: debugging, difficulty: intermediate, prompt: {es: Corrige `def __init__(self, items=[]): self.items = items` para evitar estado compartido., en: Correct `def __init__(self, items=[]): self.items = items` to avoid shared state., da: Ret `def __init__(self, items=[]): self.items = items` for at undgå delt tilstand.}, reference_solution: {es: Usar `items=None` y dentro `self.items = [] if items is None else list(items)`., en: Use `items=None` and inside `self.items = [] if items is None else list(items)`., da: Brug `items=None` og opret en ny liste inde i konstruktøren.}, linked_objectives: [m12.o2, m12.o8]}
+  - {id: dm857.m12.p03, activity_type: code_tracing, difficulty: intermediate, prompt: {es: Explica el resultado de `a is b` y `a == b` para dos dataclasses con campos iguales., en: Explain `a is b` and `a == b` for two dataclass instances with equal fields., da: Forklar `a is b` og `a == b` for to dataclass-instanser med ens felter.}, reference_solution: {es: `is` suele ser False porque son objetos distintos; `==` es True por igualdad de campos generada., en: `is` is normally False because objects are distinct; `==` is True through generated field equality., da: `is` er normalt False, mens `==` er True gennem feltlighed.}, linked_objectives: [m12.o3, m12.o5]}
+  - {id: dm857.m12.p04, activity_type: invariant_design, difficulty: advanced, prompt: {es: Define invariantes y operaciones para una clase Intervalo con inicio <= fin., en: Define invariants and operations for an Interval class with start <= end., da: Definér invarianter og operationer for en Interval-klasse med start <= slut.}, reference_solution: {es: Validar en construcción y cualquier setter; operaciones como longitud y contains no deben modificar; un cambio de un extremo debe comprobar la relación antes de asignar., en: Validate at construction and setters; length and contains are non-mutating; endpoint changes check ordering before assignment., da: Validér ved konstruktion og setters; ændringer skal bevare start <= slut.}, linked_objectives: [m12.o4, m12.o8]}
+  - {id: dm857.m12.p05, activity_type: design_comparison, difficulty: advanced, prompt: {es: Compara heredar de list con contener una lista para representar una colección validada., en: Compare inheriting from list with containing a list for a validated collection., da: Sammenlign arv fra list med at indeholde en liste til en valideret samling.}, reference_solution: {es: Heredar expone todas las mutaciones de list y dificulta preservar invariantes; composición permite una interfaz restringida y validada. La herencia sólo es válida si toda operación heredada sigue siendo semánticamente correcta., en: Inheritance exposes all list mutations and complicates invariants; composition enables a restricted validated interface. Inheritance is valid only if inherited operations remain semantically correct., da: Arv eksponerer alle list-mutationer; komposition giver en begrænset valideret grænseflade.}, linked_objectives: [m12.o7]}
+  - {id: dm857.m12.p06, activity_type: test_design, difficulty: advanced, prompt: {es: Diseña pruebas que detecten estado compartido entre dos instancias y mutación parcial tras un error., en: Design tests exposing shared state between two instances and partial mutation after an error., da: Design test der opdager delt tilstand og delvis mutation efter en fejl.}, reference_solution: {es: Crear dos instancias, mutar sólo una y comprobar la otra; guardar estado, ejecutar operación inválida y comprobar igualdad exacta con el estado previo., en: Create two instances, mutate one, and assert the other is unchanged; snapshot state, perform an invalid operation, and assert exact preservation., da: Opret to instanser, mutér én og kontrollér den anden; gem tilstand og verificér uændret tilstand efter ugyldig operation.}, linked_objectives: [m12.o2, m12.o4, m12.o8]}
+
+objective_bank:
+  - {id: dm857.m12.q01, activity_type: multiple_choice, prompt: {es: ¿Qué representa `self` en un método de instancia?, en: What does `self` represent in an instance method?, da: Hvad repræsenterer `self` i en instansmetode?}, options: [{id: receiver, text: {es: La instancia receptora., en: The receiving instance., da: Den modtagende instans.}}, {id: class_only, text: {es: Siempre la clase., en: Always the class., da: Altid klassen.}}, {id: global, text: {es: Una variable global., en: A global variable., da: En global variabel.}}], correct_option_ids: [receiver]}
+  - {id: dm857.m12.q02, activity_type: true_false, prompt: {es: Un atributo de clase mutable puede compartir estado entre instancias., en: A mutable class attribute may share state across instances., da: En muterbar klasseattribut kan dele tilstand mellem instanser.}, correct_answer: true}
+  - {id: dm857.m12.q03, activity_type: multiple_choice, prompt: {es: ¿Qué operador compara identidad?, en: Which operator compares identity?, da: Hvilken operator sammenligner identitet?}, options: [{id: is, text: {es: is, en: is, da: is}}, {id: eq, text: {es: ==, en: ==, da: ==}}, {id: in, text: {es: in, en: in, da: in}}], correct_option_ids: [is]}
+  - {id: dm857.m12.q04, activity_type: true_false, prompt: {es: `frozen=True` vuelve profundamente inmutable toda estructura anidada., en: `frozen=True` makes all nested structures deeply immutable., da: `frozen=True` gør alle indlejrede strukturer dybt uforanderlige.}, correct_answer: false}
+  - {id: dm857.m12.q05, activity_type: multiple_choice, prompt: {es: ¿Qué evita `default_factory=list`?, en: What does `default_factory=list` prevent?, da: Hvad forhindrer `default_factory=list`?}, options: [{id: shared, text: {es: Listas compartidas entre instancias., en: Lists shared across instances., da: Delte lister mellem instanser.}}, {id: equality, text: {es: Toda igualdad., en: All equality., da: Al lighed.}}, {id: iteration, text: {es: La iteración., en: Iteration., da: Iteration.}}], correct_option_ids: [shared]}
+  - {id: dm857.m12.q06, activity_type: multiple_choice, prompt: {es: ¿Qué relación suele modelar composición?, en: Which relation does composition usually model?, da: Hvilken relation modellerer komposition normalt?}, options: [{id: has_a, text: {es: tiene-un, en: has-a, da: har-en}}, {id: is_a, text: {es: es-un, en: is-a, da: er-en}}, {id: equals, text: {es: igual-a, en: equals-a, da: lig-med}}], correct_option_ids: [has_a]}
+  - {id: dm857.m12.q07, activity_type: true_false, prompt: {es: Reutilizar código es suficiente para justificar herencia., en: Code reuse alone is sufficient to justify inheritance., da: Kodegenbrug alene er nok til at begrunde arv.}, correct_answer: false}
+  - {id: dm857.m12.q08, activity_type: multiple_choice, prompt: {es: ¿Qué debe retornar `__len__`?, en: What must `__len__` return?, da: Hvad skal `__len__` returnere?}, options: [{id: nonnegative_int, text: {es: Entero no negativo., en: Non-negative integer., da: Ikke-negativt heltal.}}, {id: float, text: {es: Cualquier float., en: Any float., da: Enhver float.}}, {id: string, text: {es: Una cadena., en: A string., da: En streng.}}], correct_option_ids: [nonnegative_int]}
+  - {id: dm857.m12.q09, activity_type: true_false, prompt: {es: Un setter debería validar antes de modificar el atributo interno., en: A setter should validate before mutating internal state., da: En setter bør validere før intern mutation.}, correct_answer: true}
+  - {id: dm857.m12.q10, activity_type: multiple_choice, prompt: {es: ¿Qué prueba detecta mejor una lista compartida accidentalmente?, en: Which test best detects an accidentally shared list?, da: Hvilken test opdager bedst en utilsigtet delt liste?}, options: [{id: two_instances, text: {es: Crear dos instancias, mutar una y revisar la otra., en: Create two instances, mutate one, inspect the other., da: Opret to instanser, mutér én og kontrollér den anden.}}, {id: one_repr, text: {es: Imprimir una instancia., en: Print one instance., da: Udskriv én instans.}}, {id: type_only, text: {es: Comprobar sólo el tipo., en: Check only the type., da: Kontrollér kun typen.}}], correct_option_ids: [two_instances]}
+
+assessment_items:
+  - id: dm857.m12.a01
+    activity_type: class_design
+    difficulty: advanced
+    prompt: {es: Diseña una clase Cohort con identificador, nombre y colección de SampleKey. Debe impedir ids duplicados, no exponer su colección interna y ofrecer len, iteración y búsqueda. Incluye invariantes y pruebas., en: Design a Cohort class with identifier, name, and a collection of SampleKey objects. Prevent duplicate ids, avoid exposing the internal collection, and support len, iteration, and lookup. Include invariants and tests., da: Design en Cohort-klasse med identifikator, navn og SampleKey-samling; forhindr dubletter, skjul intern samling og tilbyd len, iteration og opslag.}
+    accepted_answer_elements: [constructor validation, duplicate policy, encapsulated storage, protocol methods, atomic mutation, independence tests]
+    rubric: [{criterion: contract_and_invariants, points: 3}, {criterion: implementation_design, points: 3}, {criterion: protocol_coherence, points: 2}, {criterion: tests, points: 2}]
+  - id: dm857.m12.a02
+    activity_type: design_review
+    difficulty: advanced
+    prompt: {es: Revisa un diseño que hereda MeasurementSeries de list y sobrescribe sólo append. Identifica operaciones heredadas capaces de romper el tipo y propone una alternativa., en: Review a MeasurementSeries inheriting from list while overriding only append. Identify inherited operations that can break the type and propose an alternative., da: Gennemgå en MeasurementSeries der arver fra list og kun overskriver append; identificér operationer der bryder typen og foreslå et alternativ.}
+    accepted_answer_elements: [extend/insert/item assignment/slice mutation risks, substitutability issue, composition alternative, restricted validated interface, tests]
+    rubric: [{criterion: risk_identification, points: 4}, {criterion: inheritance_reasoning, points: 2}, {criterion: redesign, points: 2}, {criterion: tests, points: 2}]
+  - id: dm857.m12.a03
+    activity_type: oral_explanation
+    difficulty: advanced
+    prompt: {es: Explica por qué igualdad por valor, mutabilidad y hash deben diseñarse conjuntamente antes de usar objetos como claves., en: Explain why value equality, mutability, and hashing must be designed together before using objects as keys., da: Forklar hvorfor værdilighed, muterbarhed og hash skal designes samlet før objekter bruges som nøgler.}
+    accepted_answer_elements: [equal objects same hash, stable hash requirement, mutation counterexample, immutable value model alternative]
+    rubric: [{criterion: equality_hash_contract, points: 4}, {criterion: mutation_risk, points: 2}, {criterion: counterexample, points: 2}, {criterion: safe_design, points: 2}]
+
+flashcards: {source_file: ../flashcards/dm857_m12_flashcards.yaml, expected_count: 24}
+
+glossary:
+  - {id: term.class, term: {es: clase, en: class, da: klasse}, definition: {es: Definición de una familia de objetos y su comportamiento., en: Definition of an object family and its behavior., da: Definition af en objektfamilie og dens adfærd.}}
+  - {id: term.instance, term: {es: instancia, en: instance, da: instans}, definition: {es: Objeto concreto creado a partir de una clase., en: Concrete object created from a class., da: Konkret objekt oprettet fra en klasse.}}
+  - {id: term.bound_method, term: {es: método enlazado, en: bound method, da: bundet metode}, definition: {es: Método asociado a una instancia receptora., en: Method associated with a receiving instance., da: Metode knyttet til en modtagende instans.}}
+  - {id: term.identity, term: {es: identidad, en: identity, da: identitet}, definition: {es: Propiedad de ser exactamente el mismo objeto., en: Property of being the exact same object., da: Egenskab ved at være præcis samme objekt.}}
+  - {id: term.property, term: {es: propiedad, en: property, da: property}, definition: {es: Descriptor que presenta acceso de atributo con lógica controlada., en: Descriptor presenting attribute access with controlled logic., da: Descriptor der giver attributadgang med kontrolleret logik.}}
+  - {id: term.dataclass, term: {es: dataclass, en: dataclass, da: dataclass}, definition: {es: Clase con métodos generados desde campos declarados., en: Class with methods generated from declared fields., da: Klasse med metoder genereret fra deklarerede felter.}}
+  - {id: term.composition, term: {es: composición, en: composition, da: komposition}, definition: {es: Diseño en el que un objeto contiene o usa otros objetos., en: Design in which one object contains or uses others., da: Design hvor et objekt indeholder eller bruger andre objekter.}}
+  - {id: term.inheritance, term: {es: herencia, en: inheritance, da: arv}, definition: {es: Mecanismo por el que una subclase extiende o especializa una base., en: Mechanism by which a subclass extends or specializes a base., da: Mekanisme hvor en underklasse udvider eller specialiserer en base.}}
+  - {id: term.polymorphism, term: {es: polimorfismo, en: polymorphism, da: polymorfi}, definition: {es: Uso uniforme de objetos que satisfacen un protocolo común., en: Uniform use of objects satisfying a common protocol., da: Ensartet brug af objekter med en fælles protokol.}}
+
+hidden_guided_support:
+  visibility: hidden_from_standard_reader
+  canonical_explanation:
+    es: >-
+      El tutor debe evaluar primero si una clase protege un concepto y sus invariantes o sólo agrupa
+      variables. Debe exigir construcción válida, operaciones atómicas, independencia entre instancias,
+      distinción entre identidad e igualdad y una justificación explícita de composición o herencia.
+      La sintaxis orientada a objetos no sustituye el diseño del contrato.
+    en: >-
+      First assess whether a class protects a concept and its invariants or merely groups variables.
+      Require valid construction, atomic operations, instance independence, identity/equality distinction,
+      and explicit composition or inheritance justification. OOP syntax does not replace contract design.
+    da: >-
+      Vurder først om klassen beskytter et koncept og dets invarianter. Kræv gyldig konstruktion,
+      atomiske operationer, instansuafhængighed og begrundet komposition eller arv.
+  misconceptions:
+    - {id: m12.mc01, claim: {es: `self` es una palabra reservada especial., en: `self` is a special reserved word., da: `self` er et særligt reserveret ord.}, correction: {es: Es una convención de nombre para el primer parámetro de un método de instancia., en: It is a naming convention for the first instance-method parameter., da: Det er en navnekonvention for første parameter i en instansmetode.}}
+    - {id: m12.mc02, claim: {es: `is` y `==` son intercambiables., en: `is` and `==` are interchangeable., da: `is` og `==` kan ombyttes.}, correction: {es: `is` compara identidad; `==` igualdad lógica., en: `is` compares identity; `==` logical equality., da: `is` sammenligner identitet; `==` logisk lighed.}}
+    - {id: m12.mc03, claim: {es: Heredar siempre es mejor que componer., en: Inheritance is always better than composition., da: Arv er altid bedre end komposition.}, correction: {es: Herencia exige una relación es-un y sustituibilidad; composición suele ser más flexible., en: Inheritance requires an is-a relation and substitutability; composition is often more flexible., da: Arv kræver en er-en-relation og substituerbarhed; komposition er ofte mere fleksibel.}}
+  socratic_questions:
+    - ¿Qué invariante protege la clase que una estructura libre no protegería?
+    - ¿Qué estado debe existir inmediatamente después de `__init__`?
+    - ¿La igualdad representa identidad lógica o sólo coincidencia parcial de campos?
+    - ¿Una operación inválida deja el objeto exactamente como estaba?
+    - ¿La relación entre clases es realmente es-un o sólo tiene-un?
+  grading_guidance:
+    do_not_accept: [mutable class attributes used as per-instance state, setters mutating before validation, inheritance justified only by reuse, equality without hash/mutability reasoning]
+    strong_answer_features: [valid construction, invariant-preserving methods, instance independence, coherent protocols, composition-first reasoning, adversarial tests]
+  retrieval_fragments:
+    - {id: m12.r01, topics: [identity, equality], text: {es: `is` pregunta si es el mismo objeto; `==` pregunta si los objetos son iguales según el contrato., en: `is` asks whether it is the same object; `==` asks whether objects are equal under the contract., da: `is` spørger om samme objekt; `==` om lighed under kontrakten.}}
+    - {id: m12.r02, topics: [composition, inheritance], text: {es: Composición modela tiene-un; herencia modela es-un y requiere sustituibilidad., en: Composition models has-a; inheritance models is-a and requires substitutability., da: Komposition modellerer har-en; arv modellerer er-en og kræver substituerbarhed.}}
+
+sources:
+  - {id: source.official_dm857, role: curriculum_alignment, note: Official outcomes on program structure, ADTs, implementation, and testing.}
+  - {id: source.guttag_python_2021, role: conceptual_reference, note: Classes, abstraction, information hiding, and object-oriented programming.}
+  - {id: source.think_python_2024, role: pedagogical_reference, note: Classes, objects, mutability, methods, and testing.}
+
+limitations:
+  - Multiple inheritance, metaclasses, descriptors beyond properties, and advanced typing are outside scope.
+  - Examples are synthetic data models and do not define biomedical information standards.
+  - Privacy conventions in Python do not provide security boundaries.
