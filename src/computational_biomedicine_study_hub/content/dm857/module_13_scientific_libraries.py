@@ -1087,24 +1087,26 @@ LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES = LocalizedLearningModule(
                 "Skriv en funktion der kontrollerer at et array er todimensionalt og ikke tomt.",
             ),
             (
-                "def validate_matrix(x):\n"
-                "    if x.ndim != 2:\n"
-                "        raise ValueError('expected 2D array')\n"
-                "    if x.size == 0:\n"
-                "        raise ValueError('array is empty')\n"
-                "    return x",
-                "def validate_matrix(x):\n"
-                "    if x.ndim != 2:\n"
-                "        raise ValueError('expected 2D array')\n"
-                "    if x.size == 0:\n"
-                "        raise ValueError('array is empty')\n"
-                "    return x",
-                "def validate_matrix(x):\n"
-                "    if x.ndim != 2:\n"
-                "        raise ValueError('expected 2D array')\n"
-                "    if x.size == 0:\n"
-                "        raise ValueError('array is empty')\n"
-                "    return x",
+                (
+                    "def validate_matrix(x):\n"
+                    "    if x.ndim != 2:\n"
+                    "        raise ValueError('expected 2D array')\n"
+                    "    if x.size == 0:\n"
+                    "        raise ValueError('array is empty')\n"
+                    "    return x",
+                    "def validate_matrix(x):\n"
+                    "    if x.ndim != 2:\n"
+                    "        raise ValueError('expected 2D array')\n"
+                    "    if x.size == 0:\n"
+                    "        raise ValueError('array is empty')\n"
+                    "    return x",
+                    "def validate_matrix(x):\n"
+                    "    if x.ndim != 2:\n"
+                    "        raise ValueError('expected 2D array')\n"
+                    "    if x.size == 0:\n"
+                    "        raise ValueError('array is empty')\n"
+                    "    return x",
+                ),
             ),
             (
                 "Las comprobaciones convierten supuestos de forma en contrato.",

@@ -1,2 +1,0 @@
-src/computational_biomedicine_study_hub/content/dm857/module_13_scientific_libraries.py:1089: error: Argument 4 to "authored_item" has incompatible type "tuple[str, str, str]"; expected "Sequence[tuple[str, str, str]]"  [arg-type]
-Found 1 error in 1 file (checked 69 source files)
