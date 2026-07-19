@@ -1,0 +1,225 @@
+schema_version: 1.0.0
+course_code: BMB831
+module_id: bmb831.m03
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title: {es: Pruebas múltiples, FDR, tamaños de efecto y priorización, en: Multiple testing, false discovery rate, effect sizes, and prioritization, da: Multipel testning, FDR, effektstørrelser og prioritering}
+  summary:
+    es: >-
+      Inferencia simultánea en estudios de alta dimensión: definición de familias, errores familiares,
+      tasa de falsos descubrimientos, procedimiento Benjamini–Hochberg, q-values, dependencia,
+      filtrado independiente, efectos y shrinkage, priorización multicriterio, replicación y estabilidad.
+    en: >-
+      Simultaneous inference in high-dimensional studies: family definition, family-wise errors,
+      false discovery rate, Benjamini–Hochberg, q-values, dependence, independent filtering,
+      effect sizes and shrinkage, multi-criterion prioritization, replication, and stability.
+    da: >-
+      Simultan inferens i højdimensionelle studier: testfamilier, FWER, FDR, Benjamini–Hochberg,
+      q-values, afhængighed, independent filtering, effektstørrelser, shrinkage og prioritering.
+  estimated_study_hours: 13
+  difficulty: advanced
+
+alignment:
+  official_learning_outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo07]
+  prerequisite_modules: [bmb830.m07, bmb831.m02]
+  later_modules: [bmb831.m04, bmb831.m08, bmb831.m09, bmb831.m10, bmb831.m12]
+
+objectives:
+  - {id: bmb831.m03.o01, text: {es: Definir una familia de hipótesis coherente, en: Define a coherent hypothesis family, da: Definere en sammenhængende hypotese-familie}}
+  - {id: bmb831.m03.o02, text: {es: Distinguir FWER, FDR y proporción de falsos descubrimientos, en: Distinguish FWER, FDR, and false discovery proportion, da: Skelne FWER, FDR og false discovery proportion}}
+  - {id: bmb831.m03.o03, text: {es: Ejecutar e interpretar Benjamini–Hochberg, en: Execute and interpret Benjamini–Hochberg, da: Udføre og fortolke Benjamini–Hochberg}}
+  - {id: bmb831.m03.o04, text: {es: Explicar límites bajo dependencia y selección, en: Explain limits under dependence and selection, da: Forklare grænser under afhængighed og selection}}
+  - {id: bmb831.m03.o05, text: {es: Aplicar filtrado independiente sin usar outcomes, en: Apply outcome-independent filtering, da: Anvende outcome-uafhængig filtrering}}
+  - {id: bmb831.m03.o06, text: {es: Priorizar con efecto, incertidumbre y evidencia, en: Prioritize with effect, uncertainty, and evidence, da: Prioritere med effekt, usikkerhed og evidens}}
+  - {id: bmb831.m03.o07, text: {es: Evaluar estabilidad de rankings y replicación, en: Evaluate ranking stability and replication, da: Evaluere rankingstabilitet og replikation}}
+  - {id: bmb831.m03.o08, text: {es: Criticar análisis basados sólo en p-values, en: Critique p-value-only analyses, da: Kritisk vurdere analyser baseret kun på p-værdier}}
+
+concepts:
+  - id: bmb831.m03.c01
+    title: {es: Familia de hipótesis y oportunidad de error, en: Hypothesis family and error opportunity, da: Hypotese-familie og fejlmulighed}
+    body:
+      es: >-
+        La familia incluye hipótesis que comparten una decisión científica o interpretación conjunta. Puede definirse por assay,
+        contraste, outcome o fase confirmatoria. Fragmentar después de observar resultados reduce la multiplicidad aparente y
+        aumenta selección. La definición debe preceder a la inspección de significancia.
+      en: >-
+        A family contains hypotheses sharing a scientific decision or joint interpretation. It may be defined by assay,
+        contrast, outcome, or confirmatory stage. Post-result fragmentation understates multiplicity.
+      da: >-
+        En familie indeholder hypoteser med fælles videnskabelig beslutning. Opdeling efter resultater undervurderer multiplicitet.
+    key_points:
+      - {es: La familia es científica y analítica, no sólo un vector de p-values, en: A family is scientific and analytical, not merely a p-value vector, da: En familie er videnskabelig og analytisk, ikke kun en p-værdi-vektor}
+  - id: bmb831.m03.c02
+    title: {es: FWER, FDP y FDR, en: FWER, FDP, and FDR, da: FWER, FDP og FDR}
+    body:
+      es: >-
+        FWER es la probabilidad de al menos un falso positivo en una familia. FDP es la proporción observada de falsos
+        entre descubrimientos en una realización, normalmente desconocida. FDR es el valor esperado de esa proporción.
+        Controlar FDR al 5% no garantiza que exactamente 5% de cada lista sea falsa.
+      en: >-
+        FWER is the probability of at least one false positive. FDP is the realized proportion of false discoveries,
+        usually unknown. FDR is its expectation. Five-percent FDR does not guarantee exactly five percent false in every list.
+      da: >-
+        FWER er sandsynligheden for mindst én falsk positiv. FDP er den realiserede falske andel; FDR er dens forventning.
+    key_points:
+      - {es: FDR describe un procedimiento repetido, en: FDR describes a repeated procedure, da: FDR beskriver en gentaget procedure}
+  - id: bmb831.m03.c03
+    title: {es: Procedimiento Benjamini–Hochberg, en: Benjamini–Hochberg procedure, da: Benjamini–Hochberg-procedure}
+    body:
+      es: >-
+        BH ordena p-values p(1)≤…≤p(m), encuentra el mayor k con p(k)≤kα/m y rechaza hasta k.
+        Los p ajustados representan el nivel FDR mínimo al que una hipótesis entraría bajo el procedimiento.
+        BH controla FDR bajo independencia y ciertas formas de dependencia positiva; otras dependencias requieren cautela.
+      en: >-
+        BH orders p-values, finds the largest k satisfying p(k)≤kα/m, and rejects through k. Adjusted p-values
+        represent the minimum FDR level at which a hypothesis would enter under the procedure.
+      da: >-
+        BH sorterer p-værdier, finder største k med p(k)≤kα/m og afviser til k.
+    key_points:
+      - {es: El umbral depende del rango y número de pruebas, en: The threshold depends on rank and number of tests, da: Tærsklen afhænger af rang og antal tests}
+  - id: bmb831.m03.c04
+    title: {es: Filtrado independiente y selección, en: Independent filtering and selection, da: Independent filtering og selection}
+    body:
+      es: >-
+        Filtrar características no informativas puede aumentar potencia si el criterio es independiente del estadístico bajo la nula,
+        por ejemplo abundancia media no relacionada con grupo. Filtrar por p-value, fold change observado o separación entre grupos
+        antes del ajuste usa el outcome y altera la distribución de selección.
+      en: >-
+        Removing uninformative features can increase power when the filter is independent of the test statistic under the null.
+        Filtering by observed p-value, fold change, or group separation before adjustment is outcome-dependent selection.
+      da: >-
+        Independent filtering kan øge power hvis filteret er uafhængigt af teststatistikken under nulhypotesen.
+    key_points:
+      - {es: El filtro también pertenece al procedimiento inferencial, en: Filtering belongs to the inferential procedure, da: Filtrering tilhører også inferensproceduren}
+  - id: bmb831.m03.c05
+    title: {es: Efecto, incertidumbre y shrinkage, en: Effect, uncertainty, and shrinkage, da: Effekt, usikkerhed og shrinkage}
+    body:
+      es: >-
+        Un p pequeño puede acompañar un efecto trivial con gran n; un efecto grande puede ser impreciso con pocos datos.
+        El shrinkage estabiliza efectos ruidosos hacia valores plausibles, especialmente en baja información. No es ocultar efectos,
+        sino reducir estimación extrema esperada por selección y ruido, bajo un modelo explícito.
+      en: >-
+        A small p-value may accompany a trivial effect with large n; a large effect may be imprecise. Shrinkage stabilizes
+        noisy effects toward plausible values, especially with low information, under an explicit model.
+      da: >-
+        En lille p-værdi kan ledsage en triviel effekt. Shrinkage stabiliserer støjende effekter mod plausible værdier.
+    key_points:
+      - {es: Priorizar requiere magnitud, precisión y contexto, en: Prioritization requires magnitude, precision, and context, da: Prioritering kræver størrelse, præcision og kontekst}
+  - id: bmb831.m03.c06
+    title: {es: Ranking, replicación y estabilidad, en: Ranking, replication, and stability, da: Ranking, replikation og stabilitet}
+    body:
+      es: >-
+        El top de una lista puede cambiar con muestras, filtros o modelo. Bootstrap, subsampling y análisis alternativos evalúan
+        estabilidad de signos, efectos y rangos. Replicación externa debe evaluar la misma dirección, escala y definición del contraste.
+        Un descubrimiento interno no equivale a biomarcador validado.
+      en: >-
+        Top-ranked lists may change with samples, filters, or models. Bootstrap, subsampling, and alternative analyses assess
+        sign, effect, and rank stability. External replication must preserve contrast definition and scale.
+      da: >-
+        Toplister kan ændres med samples, filtre eller model. Bootstrap og alternative analyser vurderer stabilitet.
+    key_points:
+      - {es: Estabilidad no sustituye replicación, en: Stability does not replace replication, da: Stabilitet erstatter ikke replikation}
+
+worked_examples:
+  - id: bmb831.m03.e01
+    title: {es: BH con cinco pruebas, en: BH with five tests, da: BH med fem tests}
+    scenario: {es: p={0.001,0.012,0.021,0.20,0.70}, α=0.05., en: p={0.001,0.012,0.021,0.20,0.70}, α=0.05., da: p={0.001,0.012,0.021,0.20,0.70}, α=0.05.}
+    reasoning:
+      - {es: Umbrales ordenados: 0.01,0.02,0.03,0.04,0.05., en: Ordered thresholds: 0.01,0.02,0.03,0.04,0.05., da: Sorterede tærskler: 0.01,0.02,0.03,0.04,0.05.}
+      - {es: El mayor k válido es 3; se rechazan las tres primeras., en: Largest valid k is 3; reject the first three., da: Største gyldige k er 3; afvis de første tre.}
+    conclusion: {es: BH usa una regla escalonada, no p<0.05 individual., en: BH uses a step-up rule rather than individual p<0.05., da: BH bruger en step-up-regel frem for individuel p<0.05.}
+  - id: bmb831.m03.e02
+    title: {es: Filtro por baja abundancia, en: Low-abundance filtering, da: Filtrering af lav abundance}
+    scenario: {es: Genes con casi cero conteos no tienen potencia y generan p discretos., en: Near-zero genes have little power and discrete p-values., da: Gener med næsten nul counts har lav power og diskrete p-værdier.}
+    reasoning:
+      - {es: Filtrar por abundancia media sin usar grupo puede ser independiente bajo la nula., en: Filtering on group-blind mean abundance may be null-independent., da: Filtrering på gruppeblind middelabundance kan være nul-uafhængig.}
+      - {es: Filtrar por fold change observado no lo es., en: Filtering on observed fold change is not., da: Filtrering på observeret fold change er ikke.}
+    conclusion: {es: El criterio debe definirse antes y documentarse., en: The criterion should be prespecified and documented., da: Kriteriet bør prædefineres og dokumenteres.}
+  - id: bmb831.m03.e03
+    title: {es: Prioridad por p frente a efecto, en: Priority by p versus effect, da: Prioritet efter p versus effekt}
+    scenario: {es: A tiene log2FC=0.2,padj=1e-8; B tiene log2FC=1.5,padj=0.03., en: A has log2FC=0.2,padj=1e-8; B has log2FC=1.5,padj=0.03., da: A har log2FC=0.2,padj=1e-8; B har log2FC=1.5,padj=0.03.}
+    reasoning:
+      - {es: A tiene evidencia precisa de efecto pequeño; B efecto mayor pero menos preciso., en: A has precise evidence of a small effect; B has a larger but less precise effect., da: A har præcis evidens for lille effekt; B har større men mindre præcis effekt.}
+      - {es: La prioridad depende de relevancia, coste y replicación., en: Priority depends on relevance, cost, and replication., da: Prioritet afhænger af relevans, omkostning og replikation.}
+    conclusion: {es: No existe ranking universal basado sólo en padj., en: There is no universal padj-only ranking., da: Der findes ingen universel ranking kun baseret på padj.}
+
+guided_practice:
+  - {id: bmb831.m03.p01, activity_type: calculation, prompt: {es: Aplica BH manualmente a ocho p-values., en: Apply BH manually to eight p-values., da: Anvend BH manuelt på otte p-værdier.}, expected_elements: [sorting, thresholds, largest_k, rejected_set]}
+  - {id: bmb831.m03.p02, activity_type: family_definition, prompt: {es: Define familias para tres contrasts y dos assays., en: Define families for three contrasts and two assays., da: Definér familier for tre kontraster og to assays.}, expected_elements: [scientific_decision, confirmatory_or_exploratory, cross_assay_scope, prespecification]}
+  - {id: bmb831.m03.p03, activity_type: filter_audit, prompt: {es: Clasifica filtros como independientes o outcome-dependent., en: Classify filters as independent or outcome-dependent., da: Klassificér filtre som uafhængige eller outcome-afhængige.}, expected_elements: [mean_abundance, variance, p_value, fold_change, missingness_by_group]}
+  - {id: bmb831.m03.p04, activity_type: prioritization, prompt: {es: Prioriza candidatos usando efecto, IC, padj y evidencia externa., en: Prioritize candidates using effect, CI, padj, and external evidence., da: Prioritér kandidater med effekt, CI, padj og ekstern evidens.}, expected_elements: [effect_relevance, precision, multiplicity, replication, mechanism]}
+  - {id: bmb831.m03.p05, activity_type: stability_analysis, prompt: {es: Diseña estabilidad de top-genes por bootstrap., en: Design bootstrap stability analysis for top genes., da: Design bootstrap-stabilitetsanalyse for top-gener.}, expected_elements: [resample_unit, refit_pipeline, selection_frequency, sign_stability, rank_distribution]}
+  - {id: bmb831.m03.p06, activity_type: publication_appraisal, prompt: {es: Critica una lista de genes ordenada sólo por p-value., en: Critique a gene list ranked only by p-value., da: Kritisk vurder en genliste rangeret kun efter p-værdi.}, expected_elements: [effect_size, uncertainty, expression_level, multiplicity, stability, external_validation]}
+
+objective_bank:
+  - {id: bmb831.m03.q01, type: multiple_choice, prompt: {es: FWER controla..., en: FWER controls..., da: FWER kontrollerer...}, options: [{id: a, text: {es: Probabilidad de al menos un falso positivo, en: Probability of at least one false positive, da: Sandsynlighed for mindst én falsk positiv}}, {id: b, text: {es: Proporción exacta falsa en cada lista, en: Exact false proportion in each list, da: Eksakt falsk andel i hver liste}}], correct_option_ids: [a], explanation: {es: Es un criterio familiar de cualquier error., en: It is a family-wise any-error criterion., da: Det er et family-wise kriterium for mindst én fejl.}}
+  - {id: bmb831.m03.q02, type: true_false, prompt: {es: FDR 5% garantiza que cada lista tenga exactamente 5% falsos., en: Five-percent FDR guarantees exactly five percent false in each list., da: Fem procent FDR garanterer præcist fem procent falske i hver liste.}, correct: false, explanation: {es: Controla una expectativa del procedimiento., en: It controls an expectation of the procedure., da: Det kontrollerer en forventning af proceduren.}}
+  - {id: bmb831.m03.q03, type: multiple_choice, prompt: {es: Paso central de BH., en: Central BH step., da: Centralt BH-trin.}, options: [{id: a, text: {es: Ordenar p-values y hallar mayor k, en: Order p-values and find largest k, da: Sortér p-værdier og find største k}}, {id: b, text: {es: Restar la media, en: Subtract the mean, da: Træk middel fra}}, {id: c, text: {es: Elegir top 10, en: Choose top 10, da: Vælg top 10}}], correct_option_ids: [a], explanation: {es: BH es una regla step-up., en: BH is a step-up rule., da: BH er en step-up-regel.}}
+  - {id: bmb831.m03.q04, type: true_false, prompt: {es: Filtrar por p<0.1 antes de BH es independent filtering., en: Filtering at p<0.1 before BH is independent filtering., da: Filtrering ved p<0.1 før BH er independent filtering.}, correct: false, explanation: {es: Usa el mismo outcome y estadístico., en: It uses the same outcome and statistic., da: Det bruger samme outcome og statistik.}}
+  - {id: bmb831.m03.q05, type: multiple_choice, prompt: {es: Buen filtro independiente en RNA-seq., en: Good independent filter in RNA-seq., da: Godt independent filter i RNA-seq.}, options: [{id: a, text: {es: Abundancia media ciega al grupo, en: Group-blind mean abundance, da: Gruppeblind middelabundance}}, {id: b, text: {es: Fold change observado, en: Observed fold change, da: Observeret fold change}}, {id: c, text: {es: Signo del efecto, en: Effect sign, da: Effekttegn}}], correct_option_ids: [a], explanation: {es: Puede ser independiente bajo la nula y mejorar potencia., en: It may be null-independent and improve power., da: Det kan være nul-uafhængigt og forbedre power.}}
+  - {id: bmb831.m03.q06, type: true_false, prompt: {es: padj mide relevancia biológica., en: Adjusted p-value measures biological relevance., da: Justeret p-værdi måler biologisk relevans.}, correct: false, explanation: {es: Mide evidencia relativa al modelo y multiplicidad, no importancia., en: It measures model-based evidence under multiplicity, not importance., da: Det måler modelbaseret evidens under multiplicitet, ikke betydning.}}
+  - {id: bmb831.m03.q07, type: multiple_select, prompt: {es: Componentes de priorización sólida., en: Components of robust prioritization., da: Komponenter i robust prioritering.}, options: [{id: a, text: {es: Efecto, en: Effect, da: Effekt}}, {id: b, text: {es: Incertidumbre, en: Uncertainty, da: Usikkerhed}}, {id: c, text: {es: Evidencia externa, en: External evidence, da: Ekstern evidens}}, {id: d, text: {es: Sólo rango por p, en: p-rank only, da: Kun p-rang}}], correct_option_ids: [a,b,c], explanation: {es: La prioridad es multicriterio., en: Prioritization is multi-criterion., da: Prioritering er multikriteriel.}}
+  - {id: bmb831.m03.q08, type: true_false, prompt: {es: Shrinkage siempre reduce todos los efectos por igual., en: Shrinkage always reduces all effects equally., da: Shrinkage reducerer altid alle effekter lige meget.}, correct: false, explanation: {es: Depende de información y modelo; efectos imprecisos se ajustan más., en: It depends on information and model; imprecise effects are adjusted more., da: Det afhænger af information og model; upræcise effekter justeres mere.}}
+  - {id: bmb831.m03.q09, type: multiple_choice, prompt: {es: Mejor medida de estabilidad de selección., en: Best measure of selection stability., da: Bedste mål for selektionsstabilitet.}, options: [{id: a, text: {es: Frecuencia de selección en resamples, en: Selection frequency across resamples, da: Selektionsfrekvens på tværs af resamples}}, {id: b, text: {es: p mínimo original, en: Minimum original p-value, da: Mindste originale p-værdi}}], correct_option_ids: [a], explanation: {es: Evalúa sensibilidad al muestreo., en: It evaluates sampling sensitivity., da: Det evaluerer sampling-følsomhed.}}
+  - {id: bmb831.m03.q10, type: true_false, prompt: {es: Estabilidad interna sustituye replicación externa., en: Internal stability replaces external replication., da: Intern stabilitet erstatter ekstern replikation.}, correct: false, explanation: {es: Evalúan amenazas distintas., en: They address different threats., da: De adresserer forskellige trusler.}}
+
+open_assessment_items:
+  - id: bmb831.m03.a01
+    prompt: {es: Define y justifica familias de hipótesis para un estudio multi-assay con varios contrasts., en: Define and justify hypothesis families for a multi-assay study with several contrasts., da: Definér og begrund hypotese-familier for et multi-assay-studie med flere kontraster.}
+    rubric: [{criterion: scientific_decision_scope, weight: 0.30}, {criterion: confirmatory_exploratory_separation, weight: 0.25}, {criterion: multiplicity_method, weight: 0.25}, {criterion: reporting, weight: 0.20}]
+  - id: bmb831.m03.a02
+    prompt: {es: Construye una regla de priorización que combine padj, efecto, incertidumbre y evidencia externa., en: Build a prioritization rule combining adjusted p-value, effect, uncertainty, and external evidence., da: Byg en prioriteringsregel der kombinerer padj, effekt, usikkerhed og ekstern evidens.}
+    rubric: [{criterion: relevance_thresholds, weight: 0.25}, {criterion: uncertainty, weight: 0.25}, {criterion: multiplicity, weight: 0.20}, {criterion: external_evidence_stability, weight: 0.30}]
+  - id: bmb831.m03.a03
+    prompt: {es: Critica la frase “los 20 genes con menor p son los biomarcadores más importantes”., en: Critique “the 20 genes with the smallest p-values are the most important biomarkers”., da: Kritisk vurder “de 20 gener med mindste p-værdier er de vigtigste biomarkører”.}
+    rubric: [{criterion: p_value_limits, weight: 0.25}, {criterion: biomarker_validation, weight: 0.25}, {criterion: effect_stability, weight: 0.25}, {criterion: external_validation, weight: 0.25}]
+
+glossary:
+  - {id: bmb831.term.fwer, term: {es: FWER, en: FWER, da: FWER}, definition: {es: Probabilidad de al menos un falso positivo en una familia., en: Probability of at least one false positive in a family., da: Sandsynlighed for mindst én falsk positiv i en familie.}}
+  - {id: bmb831.term.fdr, term: {es: FDR, en: FDR, da: FDR}, definition: {es: Esperanza de la proporción de falsos entre descubrimientos., en: Expected proportion of false discoveries among discoveries., da: Forventet andel falske blandt discoveries.}}
+  - {id: bmb831.term.fdp, term: {es: FDP, en: FDP, da: FDP}, definition: {es: Proporción realizada de falsos descubrimientos., en: Realized false discovery proportion., da: Realiseret andel falske discoveries.}}
+  - {id: bmb831.term.adjusted_p, term: {es: p ajustado, en: adjusted p-value, da: justeret p-værdi}, definition: {es: Nivel mínimo del procedimiento de multiplicidad para declarar una hipótesis., en: Minimum multiplicity-procedure level for declaring a hypothesis., da: Mindste niveau i multiplicitetsproceduren for at erklære en hypotese.}}
+  - {id: bmb831.term.q_value, term: {es: q-value, en: q-value, da: q-value}, definition: {es: Estimación asociada al FDR de una hipótesis o umbral bajo un método definido., en: FDR-related estimate for a hypothesis or threshold under a defined method., da: FDR-relateret estimat for hypotese eller tærskel under en defineret metode.}}
+  - {id: bmb831.term.independent_filtering, term: {es: filtrado independiente, en: independent filtering, da: independent filtering}, definition: {es: Filtrado por criterio independiente del test bajo la nula., en: Filtering by a criterion independent of the test under the null., da: Filtrering efter kriterium uafhængigt af testen under nulhypotesen.}}
+  - {id: bmb831.term.shrinkage, term: {es: shrinkage, en: shrinkage, da: shrinkage}, definition: {es: Regularización de estimaciones ruidosas hacia valores plausibles., en: Regularization of noisy estimates toward plausible values., da: Regularisering af støjende estimater mod plausible værdier.}}
+  - {id: bmb831.term.selection_frequency, term: {es: frecuencia de selección, en: selection frequency, da: selektionsfrekvens}, definition: {es: Fracción de resamples en que una característica es seleccionada., en: Fraction of resamples in which a feature is selected., da: Andel resamples hvor en feature vælges.}}
+  - {id: bmb831.term.replication, term: {es: replicación, en: replication, da: replikation}, definition: {es: Evaluación independiente del mismo efecto o hipótesis., en: Independent evaluation of the same effect or hypothesis., da: Uafhængig evaluering af samme effekt eller hypotese.}}
+  - {id: bmb831.term.hypothesis_family, term: {es: familia de hipótesis, en: hypothesis family, da: hypotese-familie}, definition: {es: Conjunto de pruebas ligado a una decisión o interpretación común., en: Set of tests tied to a common decision or interpretation., da: Sæt tests knyttet til fælles beslutning eller fortolkning.}}
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      En alta dimensión, la inferencia debe controlar la oportunidad acumulada de falsos positivos. BH controla FDR
+      para una familia predefinida, pero la priorización científica requiere además efecto, incertidumbre, estabilidad y replicación.
+    en: >-
+      In high dimensions, inference must control accumulated false-positive opportunity. BH controls FDR for a predefined
+      family, but scientific prioritization also requires effect, uncertainty, stability, and replication.
+    da: >-
+      I højdimensionelle data skal inferens kontrollere akkumuleret falsk-positiv mulighed. BH kontrollerer FDR for en prædefineret familie.
+  misconceptions:
+    - adjusted p-value is biological importance
+    - FDR five percent means exactly five percent false in every list
+    - filtering on fold change before adjustment is independent
+    - top-ranked features are stable by definition
+    - internal significance establishes a validated biomarker
+  socratic_questions:
+    - Which decision defines this hypothesis family?
+    - Was the filter chosen without using the outcome?
+    - What effect sizes remain compatible with the data?
+    - How stable is the sign and rank across resamples?
+    - What would constitute external replication?
+  grading_criteria:
+    - coherent family definition
+    - correct FWER FDR and BH interpretation
+    - valid filtering and selection logic
+    - effect uncertainty and shrinkage reasoning
+    - stability replication and claim restraint
+  retrieval_fragments:
+    - id: bmb831.m03.r01
+      text: {es: FDR es una esperanza del procedimiento, no la fracción exacta falsa de cada lista., en: FDR is an expectation of the procedure, not the exact false fraction of every list., da: FDR er en forventning af proceduren, ikke den præcise falske andel i hver liste.}
+    - id: bmb831.m03.r02
+      text: {es: BH ordena p-values y usa el mayor rango que satisface p(k)≤kα/m., en: BH orders p-values and uses the largest rank satisfying p(k)≤kα/m., da: BH sorterer p-værdier og bruger største rang der opfylder p(k)≤kα/m.}
+    - id: bmb831.m03.r03
+      text: {es: Priorizar sólo por p ignora magnitud, precisión, estabilidad y validación externa., en: Ranking only by p ignores magnitude, precision, stability, and external validation., da: Ranking kun efter p ignorerer størrelse, præcision, stabilitet og ekstern validering.}
