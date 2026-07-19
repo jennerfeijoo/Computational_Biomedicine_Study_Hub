@@ -1,0 +1,264 @@
+schema_version: 1.0.0
+course_code: BMB830
+module_id: bmb830.m07
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Contraste de hipótesis, tamaños de efecto, multiplicidad y afirmaciones científicas
+    en: Hypothesis testing, effect sizes, multiplicity awareness, and scientific claims
+    da: Hypotesetest, effektstørrelser, multiplicitet og videnskabelige påstande
+  summary:
+    es: >-
+      Formulación e interpretación de pruebas de hipótesis dentro de un flujo inferencial completo.
+      Se cubren hipótesis nula y alternativa, estadístico de prueba, distribución nula, valor p,
+      errores tipo I y II, potencia, pruebas unilaterales y bilaterales, tamaños de efecto,
+      significancia biológica, multiplicidad, selective reporting y límites de las afirmaciones.
+    en: >-
+      Formulation and interpretation of hypothesis tests within a complete inferential workflow.
+      Null and alternative hypotheses, test statistics, null distributions, p-values, type I and II errors,
+      power, one- and two-sided tests, effect sizes, biological relevance, multiplicity, selective reporting,
+      and limits on claims are covered.
+    da: >-
+      Formulering og fortolkning af hypotesetest: nul- og alternativ hypotese, teststatistik,
+      nulfordeling, p-værdi, type I/II-fejl, power, effektstørrelser, multiplicitet og påstande.
+  estimated_study_hours: 14
+  difficulty: intermediate
+
+alignment:
+  official_learning_outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo05, bmb830.lo06]
+  prerequisite_modules: [bmb830.m05, bmb830.m06]
+  later_modules: [bmb830.m08, bmb830.m09, bmb830.m10, bmb831.m03]
+
+objectives:
+  - {id: bmb830.m07.o01, text: {es: Formular hipótesis nula y alternativa alineadas al estimando, en: Formulate null and alternative hypotheses aligned with the estimand, da: Formulere nul- og alternativ hypotese tilpasset estimandet}}
+  - {id: bmb830.m07.o02, text: {es: Explicar estadístico, distribución nula y valor p, en: Explain test statistic, null distribution, and p-value, da: Forklare teststatistik, nulfordeling og p-værdi}}
+  - {id: bmb830.m07.o03, text: {es: Interpretar errores tipo I, tipo II y potencia, en: Interpret type I error, type II error, and power, da: Fortolke type I-fejl, type II-fejl og power}}
+  - {id: bmb830.m07.o04, text: {es: Elegir pruebas unilaterales o bilaterales antes de ver datos, en: Choose one- or two-sided tests before viewing data, da: Vælge ensidede eller tosidede tests før data ses}}
+  - {id: bmb830.m07.o05, text: {es: Reportar tamaños de efecto e intervalos junto al valor p, en: Report effect sizes and intervals with p-values, da: Rapportere effektstørrelser og intervaller sammen med p-værdier}}
+  - {id: bmb830.m07.o06, text: {es: Distinguir significancia estadística, biológica y clínica, en: Distinguish statistical, biological, and clinical significance, da: Skelne statistisk, biologisk og klinisk signifikans}}
+  - {id: bmb830.m07.o07, text: {es: Reconocer multiplicidad y selective reporting, en: Recognize multiplicity and selective reporting, da: Genkende multiplicitet og selective reporting}}
+  - {id: bmb830.m07.o08, text: {es: Criticar conclusiones basadas sólo en umbrales, en: Critique conclusions based only on thresholds, da: Kritikere konklusioner kun baseret på tærskler}}
+
+concepts:
+  - id: bmb830.m07.c01
+    title: {es: Hipótesis y estimando, en: Hypotheses and estimand, da: Hypoteser og estimand}
+    body:
+      es: >-
+        Una hipótesis debe referirse a un parámetro o distribución definidos. H0 suele representar ausencia de una diferencia
+        específica o un valor de referencia; H1 representa alternativas relevantes. “No hay efecto” es ambiguo si no se define
+        outcome, tiempo, población, escala y contraste. La prueba no reemplaza la definición del estimando.
+      en: >-
+        A hypothesis must refer to a defined parameter or distribution. H0 usually represents absence of a specified difference
+        or a reference value; H1 represents relevant alternatives. “No effect” is ambiguous without outcome, time, population, scale, and contrast.
+      da: >-
+        En hypotese skal referere til en defineret parameter. “Ingen effekt” er uklart uden outcome, tidspunkt, population, skala og kontrast.
+    key_points:
+      - {es: Hipótesis se fijan antes de inspeccionar resultados, en: Hypotheses are fixed before inspecting results, da: Hypoteser fastlægges før resultater inspiceres}
+  - id: bmb830.m07.c02
+    title: {es: Estadístico y distribución nula, en: Test statistic and null distribution, da: Teststatistik og nulfordeling}
+    body:
+      es: >-
+        El estadístico resume discrepancia entre datos y H0, idealmente estandarizada por variabilidad. La distribución nula
+        describe valores del estadístico si H0 y supuestos fueran correctos. Puede derivarse teóricamente, por permutación o simulación.
+        La elección debe respetar diseño, emparejamiento, clústeres y restricciones de intercambio.
+      en: >-
+        The test statistic summarizes discrepancy between data and H0, ideally standardized by variability. The null distribution
+        describes statistic values if H0 and assumptions held. It may be theoretical, permutational, or simulated and must respect design.
+      da: >-
+        Teststatistikken opsummerer afvigelse fra H0. Nulfordelingen kan være teoretisk, permutation eller simulation og skal respektere designet.
+    key_points:
+      - {es: Permutar requiere intercambiabilidad bajo H0, en: Permutation requires exchangeability under H0, da: Permutation kræver exchangeability under H0}
+  - id: bmb830.m07.c03
+    title: {es: Valor p, en: P-value, da: P-værdi}
+    body:
+      es: >-
+        El valor p es la probabilidad, bajo H0 y el modelo, de observar un estadístico al menos tan incompatible con H0 como el obtenido.
+        No es P(H0|datos), probabilidad de que el resultado sea azar ni tamaño del efecto. Un valor pequeño indica incompatibilidad relativa,
+        pero puede surgir por efecto trivial con n grande, sesgo, multiplicidad o supuestos incorrectos.
+      en: >-
+        The p-value is the probability, under H0 and the model, of a statistic at least as incompatible with H0 as observed.
+        It is not P(H0|data), probability the result is due to chance, or effect size. Small p may accompany trivial effects, bias, multiplicity, or misspecification.
+      da: >-
+        P-værdien er sandsynligheden under H0 for en teststatistik mindst så inkompatibel som observeret. Den er ikke P(H0|data).
+    key_points:
+      - {es: El valor p es condicional a H0, no una probabilidad de H0, en: The p-value is conditional on H0, not a probability of H0, da: P-værdien er betinget på H0, ikke sandsynligheden for H0}
+  - id: bmb830.m07.c04
+    title: {es: Errores y potencia, en: Errors and power, da: Fejl og power}
+    body:
+      es: >-
+        Error tipo I es rechazar H0 cuando es verdadera; α controla su probabilidad bajo el procedimiento. Error tipo II es no rechazar
+        cuando existe una alternativa específica; potencia=1−β. Potencia depende de tamaño de efecto, variabilidad, n, α, diseño y método.
+        Una prueba no significativa con baja potencia no demuestra equivalencia ni ausencia relevante.
+      en: >-
+        Type I error rejects a true H0; α controls its probability. Type II error fails to reject under a specific alternative; power=1−β.
+        Power depends on effect size, variability, n, α, design, and method. A non-significant low-power result does not demonstrate equivalence.
+      da: >-
+        Type I-fejl afviser sand H0; type II-fejl afviser ikke under en specifik alternativ. Power=1−β og afhænger af effekt, variation, n og design.
+    key_points:
+      - {es: Potencia se define frente a una alternativa concreta, en: Power is defined against a specific alternative, da: Power defineres mod en specifik alternativ hypotese}
+  - id: bmb830.m07.c05
+    title: {es: Unilateral, bilateral y dirección, en: One-sided, two-sided, and direction, da: Ensidet, tosidet og retning}
+    body:
+      es: >-
+        Una prueba bilateral considera desviaciones en ambas direcciones. Una unilateral asigna toda α a una dirección y sólo es defendible
+        si el efecto opuesto no conduciría a una afirmación equivalente y la dirección se fijó antes de datos. Elegir dirección después de observar
+        el signo invalida el nivel nominal. Un efecto dañino opuesto no debe ignorarse por conveniencia.
+      en: >-
+        A two-sided test considers both directions. A one-sided test allocates α to one direction and is defensible only if the opposite effect
+        would not support the same claim and direction was prespecified. Choosing direction after seeing the sign invalidates nominal error control.
+      da: >-
+        En tosidet test ser begge retninger. En ensidet test er kun forsvarlig hvis retningen er præspecifik og modsat effekt ikke ignoreres.
+    key_points:
+      - {es: Dirección analítica no se elige retrospectivamente, en: Analytical direction is not chosen retrospectively, da: Analytisk retning vælges ikke retrospektivt}
+  - id: bmb830.m07.c06
+    title: {es: Tamaños de efecto e intervalos, en: Effect sizes and intervals, da: Effektstørrelser og intervaller}
+    body:
+      es: >-
+        Un tamaño de efecto cuantifica magnitud en una escala interpretable: diferencia media, razón, odds ratio, correlación o diferencia estandarizada.
+        Las escalas absolutas suelen ser más directamente interpretables; las estandarizadas permiten comparación pero dependen de variabilidad.
+        El intervalo muestra precisión y valores compatibles. La relevancia requiere umbrales biológicos o clínicos externos al valor p.
+      en: >-
+        An effect size quantifies magnitude on an interpretable scale: mean difference, ratio, odds ratio, correlation, or standardized difference.
+        Absolute scales are often more directly interpretable; standardized scales depend on variability. Intervals show precision and compatible values.
+      da: >-
+        En effektstørrelse kvantificerer magnitude på en fortolkelig skala. Intervaller viser præcision og kompatible værdier.
+    key_points:
+      - {es: Un efecto preciso puede ser irrelevante, en: A precise effect can be irrelevant, da: En præcis effekt kan være irrelevant}
+  - id: bmb830.m07.c07
+    title: {es: Multiplicidad, en: Multiplicity, da: Multiplicitet}
+    body:
+      es: >-
+        Probar muchas hipótesis aumenta la probabilidad de al menos un falso positivo. La familia de pruebas debe definirse por la inferencia que se presenta.
+        Bonferroni controla error familiar bajo supuestos amplios; FDR controla proporción esperada de falsos descubrimientos entre rechazados y se desarrolla
+        en BMB831. Explorar múltiples outcomes, subgrupos, modelos o tiempos también genera multiplicidad aunque sólo se reporte uno.
+      en: >-
+        Testing many hypotheses increases the chance of at least one false positive. The test family follows the inferential claim.
+        Bonferroni controls family-wise error broadly; FDR controls expected false-discovery proportion and is developed in BMB831.
+        Multiple outcomes, subgroups, models, or time points also create multiplicity even if only one is reported.
+      da: >-
+        Mange tests øger risikoen for falske positive. Multiplicitet omfatter outcomes, subgrupper, modeller og tidspunkter, ikke kun mange gener.
+    key_points:
+      - {es: Ocultar pruebas no elimina multiplicidad, en: Hiding tests does not remove multiplicity, da: At skjule tests fjerner ikke multiplicitet}
+  - id: bmb830.m07.c08
+    title: {es: Selección analítica y afirmaciones, en: Analytical selection and claims, da: Analytisk selection og påstande}
+    body:
+      es: >-
+        Elegir filtros, transformaciones, covariables o endpoints por el resultado produce inferencia selectiva. Preregistro, análisis principal definido,
+        separación exploratorio-confirmatorio y análisis de sensibilidad reducen ambigüedad. Las conclusiones deben integrar diseño, efecto, intervalo,
+        supuestos, multiplicidad y plausibilidad, no dividir resultados en “funciona/no funciona” por p<0.05.
+      en: >-
+        Choosing filters, transformations, covariates, or endpoints by outcome induces selective inference. Prespecification, a defined primary analysis,
+        exploratory-confirmatory separation, and sensitivity analyses reduce ambiguity. Conclusions integrate design, effect, interval, assumptions, and multiplicity.
+      da: >-
+        Valg af filtre, transformationer eller endpoints efter resultatet giver selektiv inferens. Konklusioner må ikke kun følge p<0,05.
+    key_points:
+      - {es: Umbrales discretizan evidencia continua, en: Thresholds discretize continuous evidence, da: Tærskler diskretiserer kontinuerlig evidens}
+
+worked_examples:
+  - id: bmb830.m07.e01
+    title: {es: p pequeño y efecto trivial, en: Small p and trivial effect, da: Lille p og trivial effekt}
+    problem: {es: Diferencia media 0.2 unidades, IC95% [0.15,0.25], p<0.001; umbral biológico relevante 2 unidades., en: Mean difference 0.2, 95% CI [0.15,0.25], p<0.001; biologically relevant threshold 2 units., da: Mean-forskel 0,2, 95% CI [0,15;0,25], p<0,001; biologisk tærskel 2.}
+    reasoning: {es: Hay evidencia precisa de diferencia pequeña, pero el intervalo excluye magnitudes biológicamente relevantes., en: There is precise evidence of a small difference, but the interval excludes biologically relevant magnitude., da: Der er præcis evidens for en lille forskel, men intervallet udelukker biologisk relevant magnitude.}
+    answer: {es: Estadísticamente detectable, probablemente biológicamente irrelevante según el umbral declarado., en: Statistically detectable, likely biologically irrelevant under the declared threshold., da: Statistisk detekterbar, sandsynligvis biologisk irrelevant under den deklarerede tærskel.}
+  - id: bmb830.m07.e02
+    title: {es: No significancia y gran incertidumbre, en: Non-significance with high uncertainty, da: Ikke-signifikans med stor usikkerhed}
+    problem: {es: Diferencia 3, IC95% [-4,10], p=0.41., en: Difference 3, 95% CI [-4,10], p=0.41., da: Forskel 3, 95% CI [-4;10], p=0,41.}
+    reasoning: {es: El intervalo incluye beneficio, ausencia y daño. No hay evidencia precisa de ausencia., en: The interval includes benefit, no effect, and harm. It is not precise evidence of absence., da: Intervallet inkluderer fordel, ingen effekt og skade; det er ikke præcis evidens for fravær.}
+    answer: {es: Resultado inconcluso; se requiere más precisión o un diseño de equivalencia si esa es la pregunta., en: Inconclusive; more precision or an equivalence design is needed if that is the question., da: Inkonklusivt; mere præcision eller equivalence-design kræves.}
+  - id: bmb830.m07.e03
+    title: {es: Veinte pruebas sin ajuste, en: Twenty unadjusted tests, da: Tyve tests uden korrektion}
+    problem: {es: Se prueban 20 outcomes independientes a α=0.05., en: Twenty independent outcomes are tested at α=0.05., da: Tyve uafhængige outcomes testes ved α=0,05.}
+    reasoning: {es: P(al menos un falso positivo)=1−0.95^20≈0.64 bajo nulos verdaderos., en: P(at least one false positive)=1−0.95^20≈0.64 under true nulls., da: P(mindst én falsk positiv)=1−0,95^20≈0,64 under sande nuller.}
+    answer: {es: La familia requiere control o interpretación exploratoria explícita., en: The family requires control or explicit exploratory interpretation., da: Familien kræver kontrol eller tydelig eksplorativ fortolkning.}
+
+guided_practice:
+  - {id: bmb830.m07.p01, type: hypothesis_formulation, prompt: {es: Formula H0/H1 para seis estimandos distintos., en: Formulate H0/H1 for six distinct estimands., da: Formulér H0/H1 for seks forskellige estimands.}, expected_elements: [parameter, null_value, direction, prespecification]}
+  - {id: bmb830.m07.p02, type: pvalue_interpretation, prompt: {es: Corrige diez definiciones incorrectas de valor p., en: Correct ten incorrect p-value definitions., da: Ret ti forkerte definitioner af p-værdi.}, expected_elements: [conditional_on_null, statistic_extremeness, not_effect_or_truth]}
+  - {id: bmb830.m07.p03, type: power_reasoning, prompt: {es: Predice cómo cambian potencia y errores al variar n, efecto, SD y α., en: Predict changes in power and errors as n, effect, SD, and α vary., da: Forudsig power og fejl når n, effekt, SD og α ændres.}, expected_elements: [direction_of_change, tradeoffs, fixed_alternative]}
+  - {id: bmb830.m07.p04, type: effect_reporting, prompt: {es: Reescribe resultados usando efecto, IC, p y relevancia., en: Rewrite results using effect, CI, p, and relevance., da: Omskriv resultater med effekt, CI, p og relevans.}, expected_elements: [magnitude, precision, threshold, cautious_claim]}
+  - {id: bmb830.m07.p05, type: multiplicity_audit, prompt: {es: Identifica la familia de pruebas y fuentes ocultas de multiplicidad., en: Identify the test family and hidden multiplicity sources., da: Identificer testfamilien og skjulte multiplicitetkilder.}, expected_elements: [outcomes, subgroups, models, timepoints, reporting]}
+  - {id: bmb830.m07.p06, type: publication_critique, prompt: {es: Critica una publicación que equipara p>0.05 con ausencia de efecto., en: Critique a paper equating p>0.05 with no effect., da: Kritikér en artikel der ligestiller p>0,05 med ingen effekt.}, expected_elements: [interval, power, equivalence, corrected_claim]}
+
+objective_bank:
+  - {id: bmb830.m07.q01, type: multiple_choice, prompt: {es: ¿Qué es un valor p?, en: What is a p-value?, da: Hvad er en p-værdi?}, options: [{id: a, text: {es: P(datos tan extremos|H0 y modelo), en: P(data at least as extreme|H0 and model), da: P(data mindst så ekstrem|H0 og model)}}, {id: b, text: {es: P(H0|datos), en: P(H0|data), da: P(H0|data)}}, {id: c, text: {es: tamaño del efecto, en: effect size, da: effektstørrelse}}], correct_option_ids: [a], explanation: {es: Es condicional a H0 y al modelo., en: It is conditional on H0 and the model., da: Den er betinget på H0 og modellen.}}
+  - {id: bmb830.m07.q02, type: true_false, prompt: {es: p=0.03 significa 3% de probabilidad de que H0 sea verdadera., en: p=0.03 means a 3% probability that H0 is true., da: p=0,03 betyder 3% sandsynlighed for at H0 er sand.}, correct: false, explanation: {es: No es una probabilidad posterior de H0., en: It is not a posterior probability for H0., da: Det er ikke en posterior sandsynlighed for H0.}}
+  - {id: bmb830.m07.q03, type: multiple_choice, prompt: {es: Error tipo I., en: Type I error., da: Type I-fejl.}, options: [{id: a, text: {es: rechazar H0 verdadera, en: reject a true H0, da: afvise sand H0}}, {id: b, text: {es: no rechazar H0 falsa, en: fail to reject false H0, da: ikke afvise falsk H0}}, {id: c, text: {es: estimar con precisión, en: estimate precisely, da: estimere præcist}}], correct_option_ids: [a], explanation: {es: Su probabilidad nominal es α., en: Its nominal probability is α., da: Dens nominelle sandsynlighed er α.}}
+  - {id: bmb830.m07.q04, type: true_false, prompt: {es: Potencia depende del tamaño de efecto considerado., en: Power depends on the effect size considered., da: Power afhænger af den betragtede effektstørrelse.}, correct: true, explanation: {es: Se define bajo una alternativa específica., en: It is defined under a specific alternative., da: Den defineres under en specifik alternativ.}}
+  - {id: bmb830.m07.q05, type: multiple_choice, prompt: {es: ¿Cuándo elegir prueba unilateral?, en: When should a one-sided test be chosen?, da: Hvornår vælges en ensidet test?}, options: [{id: a, text: {es: Antes de datos y si la dirección opuesta no apoya la misma afirmación, en: Before data and if the opposite direction would not support the same claim, da: Før data og hvis modsat retning ikke støtter samme påstand}}, {id: b, text: {es: Después de ver el signo, en: After seeing the sign, da: Efter at have set tegnet}}, {id: c, text: {es: Siempre para obtener p menor, en: Always to obtain smaller p, da: Altid for mindre p}}], correct_option_ids: [a], explanation: {es: Debe ser una decisión preespecificada y científicamente coherente., en: It must be prespecified and scientifically coherent., da: Det skal være præspecifikt og videnskabeligt sammenhængende.}}
+  - {id: bmb830.m07.q06, type: true_false, prompt: {es: Significancia estadística implica relevancia biológica., en: Statistical significance implies biological relevance., da: Statistisk signifikans indebærer biologisk relevans.}, correct: false, explanation: {es: Relevancia depende de magnitud y contexto., en: Relevance depends on magnitude and context., da: Relevans afhænger af magnitude og kontekst.}}
+  - {id: bmb830.m07.q07, type: multiple_choice, prompt: {es: ¿Qué acompaña mejor a un valor p?, en: What best accompanies a p-value?, da: Hvad bør bedst ledsage en p-værdi?}, options: [{id: a, text: {es: efecto e intervalo, en: effect and interval, da: effekt og interval}}, {id: b, text: {es: más decimales, en: more decimals, da: flere decimaler}}, {id: c, text: {es: sólo asteriscos, en: stars only, da: kun stjerner}}], correct_option_ids: [a], explanation: {es: Magnitud y precisión son necesarias para interpretar., en: Magnitude and precision are needed for interpretation., da: Magnitude og præcision kræves for fortolkning.}}
+  - {id: bmb830.m07.q08, type: true_false, prompt: {es: Probar muchos subgrupos genera multiplicidad aunque sólo se reporte uno., en: Testing many subgroups creates multiplicity even if only one is reported., da: Test af mange subgrupper skaber multiplicitet selv hvis kun én rapporteres.}, correct: true, explanation: {es: La selección se realizó sobre múltiples oportunidades., en: Selection occurred over multiple opportunities., da: Selection skete over flere muligheder.}}
+  - {id: bmb830.m07.q09, type: multiple_choice, prompt: {es: p>0.05 con IC amplio indica..., en: p>0.05 with a wide CI indicates..., da: p>0,05 med bredt CI indikerer...}, options: [{id: a, text: {es: incertidumbre e inconclusión, en: uncertainty and inconclusiveness, da: usikkerhed og inkonklusivitet}}, {id: b, text: {es: equivalencia demostrada, en: proven equivalence, da: bevist ækvivalens}}, {id: c, text: {es: efecto exactamente cero, en: exactly zero effect, da: præcis nul effekt}}], correct_option_ids: [a], explanation: {es: El intervalo incluye múltiples efectos plausibles., en: The interval includes multiple plausible effects., da: Intervallet inkluderer flere plausible effekter.}}
+  - {id: bmb830.m07.q10, type: true_false, prompt: {es: Cambiar el análisis después de ver resultados debe declararse como exploratorio., en: Changing analysis after seeing results should be declared exploratory., da: Ændring af analyse efter resultater bør deklareres eksplorativt.}, correct: true, explanation: {es: La selección retrospectiva cambia la interpretación inferencial., en: Retrospective selection changes inferential interpretation., da: Retrospektiv selection ændrer inferensfortolkning.}}
+
+open_assessment:
+  - id: bmb830.m07.a01
+    prompt: {es: Formula y ejecuta una prueba completa con efecto e intervalo., en: Formulate and execute a complete test with effect and interval., da: Formulér og udfør en komplet test med effekt og interval.}
+    rubric: [{criterion: estimand_and_hypotheses, points: 2}, {criterion: method_and_assumptions, points: 3}, {criterion: effect_interval_pvalue, points: 3}, {criterion: claim, points: 2}]
+  - id: bmb830.m07.a02
+    prompt: {es: Audita multiplicidad y selective reporting en un análisis publicado., en: Audit multiplicity and selective reporting in a published analysis., da: Auditér multiplicitet og selective reporting i en publiceret analyse.}
+    rubric: [{criterion: test_family, points: 3}, {criterion: hidden_flexibility, points: 3}, {criterion: error_control_or_labeling, points: 2}, {criterion: corrected_interpretation, points: 2}]
+  - id: bmb830.m07.a03
+    prompt: {es: Distingue ausencia de evidencia, equivalencia y evidencia de ausencia., en: Distinguish absence of evidence, equivalence, and evidence of absence., da: Skeln fravær af evidens, ækvivalens og evidens for fravær.}
+    rubric: [{criterion: interval_reasoning, points: 4}, {criterion: relevance_margin, points: 2}, {criterion: power_or_design, points: 2}, {criterion: wording, points: 2}]
+
+glossary:
+  - {id: bmb830.term.null_hypothesis, term: {es: hipótesis nula, en: null hypothesis, da: nulhypotese}, definition: {es: Modelo o valor de referencia evaluado por la prueba., en: Reference model or value evaluated by the test., da: Reference-model eller værdi evalueret af testen.}}
+  - {id: bmb830.term.test_statistic, term: {es: estadístico de prueba, en: test statistic, da: teststatistik}, definition: {es: Resumen de discrepancia entre datos e hipótesis nula., en: Summary of discrepancy between data and null hypothesis., da: Summary af afvigelse mellem data og nulhypotese.}}
+  - {id: bmb830.term.pvalue, term: {es: valor p, en: p-value, da: p-værdi}, definition: {es: Probabilidad nula de un estadístico al menos tan extremo., en: Null probability of a statistic at least as extreme., da: Nul-sandsynlighed for en statistik mindst så ekstrem.}}
+  - {id: bmb830.term.type1, term: {es: error tipo I, en: type I error, da: type I-fejl}, definition: {es: Rechazar una hipótesis nula verdadera., en: Rejecting a true null hypothesis., da: At afvise en sand nulhypotese.}}
+  - {id: bmb830.term.type2, term: {es: error tipo II, en: type II error, da: type II-fejl}, definition: {es: No rechazar bajo una alternativa relevante., en: Failing to reject under a relevant alternative., da: Ikke at afvise under en relevant alternativ.}}
+  - {id: bmb830.term.power, term: {es: potencia, en: power, da: power}, definition: {es: Probabilidad de rechazo bajo una alternativa específica., en: Probability of rejection under a specific alternative., da: Sandsynlighed for afvisning under en specifik alternativ.}}
+  - {id: bmb830.term.effect_size, term: {es: tamaño de efecto, en: effect size, da: effektstørrelse}, definition: {es: Medida de magnitud de una diferencia o asociación., en: Measure of magnitude of a difference or association., da: Mål for magnitude af en forskel eller association.}}
+  - {id: bmb830.term.one_sided, term: {es: prueba unilateral, en: one-sided test, da: ensidet test}, definition: {es: Prueba cuya región crítica está en una dirección preespecificada., en: Test with critical region in one prespecified direction., da: Test med kritisk region i én præspecifik retning.}}
+  - {id: bmb830.term.multiplicity, term: {es: multiplicidad, en: multiplicity, da: multiplicitet}, definition: {es: Multiplicación de oportunidades inferenciales por múltiples análisis., en: Multiple inferential opportunities from multiple analyses., da: Flere inferentielle muligheder fra flere analyser.}}
+  - {id: bmb830.term.equivalence, term: {es: equivalencia, en: equivalence, da: ækvivalens}, definition: {es: Evidencia de que el efecto se encuentra dentro de márgenes predefinidos de irrelevancia., en: Evidence that effect lies within prespecified irrelevance margins., da: Evidens for at effekten ligger inden for prædefinerede irrelevansmargener.}}
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      Explica toda prueba en este orden: estimando y H0/H1, diseño y estadístico, distribución nula,
+      efecto e intervalo, valor p, multiplicidad, relevancia y límites. Nunca interpretes p como P(H0|datos).
+    en: >-
+      Explain every test in this order: estimand and H0/H1, design and statistic, null distribution,
+      effect and interval, p-value, multiplicity, relevance, and limitations. Never interpret p as P(H0|data).
+    da: >-
+      Forklar tests som: estimand og H0/H1, design og statistik, nulfordeling, effekt og interval,
+      p-værdi, multiplicitet, relevans og begrænsninger.
+  misconceptions:
+    - pvalue_is_probability_null_true
+    - nonsignificant_equals_no_effect
+    - significant_equals_important
+    - one_sided_can_be_chosen_after_data
+    - unreported_tests_do_not_count
+    - alpha_is_probability_result_due_to_chance
+  socratic_questions:
+    - What parameter and null value are being tested?
+    - What would make the statistic exchangeable under H0?
+    - What effect sizes remain compatible with the interval?
+    - How many analytical opportunities were explored?
+    - What threshold defines biological relevance?
+  grading_criteria:
+    - formulate hypotheses on a defined estimand
+    - interpret p-value conditionally
+    - report effect and interval
+    - distinguish significance and relevance
+    - identify multiplicity and selective inference
+  retrieval_fragments:
+    - {id: bmb830.m07.r01, topic: pvalue, text: {es: El valor p es P(estadístico al menos tan extremo|H0 y modelo), no P(H0|datos)., en: The p-value is P(statistic at least as extreme|H0 and model), not P(H0|data)., da: P-værdien er P(statistik mindst så ekstrem|H0 og model), ikke P(H0|data).}}
+    - {id: bmb830.m07.r02, topic: power, text: {es: Potencia depende de una alternativa, n, variabilidad, α y diseño., en: Power depends on an alternative, n, variability, α, and design., da: Power afhænger af alternativ, n, variation, α og design.}}
+    - {id: bmb830.m07.r03, topic: effect, text: {es: Reporta magnitud e intervalo; significancia no define relevancia., en: Report magnitude and interval; significance does not define relevance., da: Rapportér magnitude og interval; signifikans definerer ikke relevans.}}
+    - {id: bmb830.m07.r04, topic: multiplicity, text: {es: Multiplicidad incluye outcomes, subgrupos, tiempos, filtros y modelos explorados., en: Multiplicity includes outcomes, subgroups, times, filters, and models explored., da: Multiplicitet omfatter outcomes, subgrupper, tidspunkter, filtre og modeller.}}
+    - {id: bmb830.m07.r05, topic: absence, text: {es: p>0.05 no demuestra ausencia; observa el intervalo y el margen relevante., en: p>0.05 does not prove absence; inspect the interval and relevance margin., da: p>0,05 beviser ikke fravær; vurder interval og relevansmargin.}}
+
+source_map:
+  - {section: hypothesis_testing, source: repository.probability_statistics.yachay}
+  - {section: biostatistical_claims, source: repository.biostatistics.yachay}
+  - {section: modern_inference_and_multiplicity, source: cetinkaya_hardin.ims.2e}
+
+limitations:
+  - Equivalence and non-inferiority are introduced conceptually but not developed as full designs.
+  - FDR procedures are developed in BMB831.
+  - Danish text requires final native-language review before release.
