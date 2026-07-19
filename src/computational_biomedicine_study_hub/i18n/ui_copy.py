@@ -11,16 +11,10 @@ from .locales import AppLocale
 class UiCopyKey(StrEnum):
     """Stable keys for the current interactive application surface."""
 
-    REVIEW_PLACEHOLDER = "placeholder.review"
-    ASSESSMENTS_PLACEHOLDER = "placeholder.assessments"
-    FLASHCARDS_PLACEHOLDER = "placeholder.flashcards"
-    GLOSSARY_PLACEHOLDER = "placeholder.glossary"
     COURSE_STRUCTURE_HEADING = "course.structure.heading"
     COURSE_STRUCTURE_NOTICE = "course.structure.notice"
 
     MODULE_OBJECTIVE_SECTION = "module.objective_section"
-    MODULE_COMPLETE_ASSESSMENT = "module.complete_assessment"
-    MODULE_COMPLETE_ASSESSMENT_NOTICE = "module.complete_assessment_notice"
 
     PRACTICE_NUMBER = "practice.number"
     PRACTICE_YOUR_ANSWER = "practice.your_answer"
@@ -68,30 +62,12 @@ class UiCopyKey(StrEnum):
 
 
 SPANISH_UI_COPY: dict[UiCopyKey, str] = {
-    UiCopyKey.REVIEW_PLACEHOLDER: (
-        "El motor de repaso incorporará recuperación activa, intercalado y repetición espaciada."
-    ),
-    UiCopyKey.ASSESSMENTS_PLACEHOLDER: (
-        "Las evaluaciones incluirán opción múltiple, selección múltiple, rellenar espacios, "
-        "relacionar elementos, ordenar pasos, código y explicación oral."
-    ),
-    UiCopyKey.FLASHCARDS_PLACEHOLDER: (
-        "Las tarjetas cubrirán conceptos, fórmulas, código, errores frecuentes y conexiones "
-        "entre asignaturas."
-    ),
-    UiCopyKey.GLOSSARY_PLACEHOLDER: "El glosario se poblará junto con cada módulo académico.",
     UiCopyKey.COURSE_STRUCTURE_HEADING: "Estructura propia de la asignatura",
     UiCopyKey.COURSE_STRUCTURE_NOTICE: (
         "Esta pantalla confirma la selección de la asignatura. Los módulos y el contenido "
         "académico se añadirán en entregas independientes."
     ),
     UiCopyKey.MODULE_OBJECTIVE_SECTION: "Práctica objetiva aleatoria",
-    UiCopyKey.MODULE_COMPLETE_ASSESSMENT: "Evaluación completa del módulo",
-    UiCopyKey.MODULE_COMPLETE_ASSESSMENT_NOTICE: (
-        "Estas actividades cubren trazado, depuración, ordenación, relación de conceptos, código, "
-        "interpretación y respuestas abiertas. Las soluciones permanecen separadas del lector "
-        "para conservar su función evaluativa."
-    ),
     UiCopyKey.PRACTICE_NUMBER: "Práctica {number}",
     UiCopyKey.PRACTICE_YOUR_ANSWER: "Tu respuesta",
     UiCopyKey.PRACTICE_ANSWER_PLACEHOLDER: (
@@ -151,28 +127,12 @@ SPANISH_UI_COPY: dict[UiCopyKey, str] = {
 }
 
 ENGLISH_UI_COPY: dict[UiCopyKey, str] = {
-    UiCopyKey.REVIEW_PLACEHOLDER: (
-        "The review engine will include active recall, interleaving and spaced repetition."
-    ),
-    UiCopyKey.ASSESSMENTS_PLACEHOLDER: (
-        "Assessments will include multiple choice, multiple select, fill-in-the-blank, matching, "
-        "ordering, code and oral explanation."
-    ),
-    UiCopyKey.FLASHCARDS_PLACEHOLDER: (
-        "Flashcards will cover concepts, formulas, code, common errors and links between courses."
-    ),
-    UiCopyKey.GLOSSARY_PLACEHOLDER: "The glossary will grow with each academic module.",
     UiCopyKey.COURSE_STRUCTURE_HEADING: "Course-specific structure",
     UiCopyKey.COURSE_STRUCTURE_NOTICE: (
         "This screen confirms the selected course. Modules and academic content will be added in "
         "independent deliveries."
     ),
     UiCopyKey.MODULE_OBJECTIVE_SECTION: "Randomized objective practice",
-    UiCopyKey.MODULE_COMPLETE_ASSESSMENT: "Complete module assessment",
-    UiCopyKey.MODULE_COMPLETE_ASSESSMENT_NOTICE: (
-        "These activities cover tracing, debugging, ordering, concept matching, code, interpretation "
-        "and open responses. Solutions remain separate from the reader to preserve their assessment role."
-    ),
     UiCopyKey.PRACTICE_NUMBER: "Practice {number}",
     UiCopyKey.PRACTICE_YOUR_ANSWER: "Your answer",
     UiCopyKey.PRACTICE_ANSWER_PLACEHOLDER: (
@@ -230,26 +190,11 @@ ENGLISH_UI_COPY: dict[UiCopyKey, str] = {
 }
 
 DANISH_UI_COPY: dict[UiCopyKey, str] = {
-    UiCopyKey.REVIEW_PLACEHOLDER: (
-        "Repetitionsmotoren vil omfatte aktiv genkaldelse, variation og tidsfordelt repetition."
-    ),
-    UiCopyKey.ASSESSMENTS_PLACEHOLDER: (
-        "Evalueringer vil omfatte ét svar, flere svar, udfyldning, matching, rækkefølge, kode og mundtlig forklaring."
-    ),
-    UiCopyKey.FLASHCARDS_PLACEHOLDER: (
-        "Huskekort vil dække begreber, formler, kode, almindelige fejl og forbindelser mellem kurser."
-    ),
-    UiCopyKey.GLOSSARY_PLACEHOLDER: "Ordlisten udbygges sammen med hvert fagligt modul.",
     UiCopyKey.COURSE_STRUCTURE_HEADING: "Kursets egen struktur",
     UiCopyKey.COURSE_STRUCTURE_NOTICE: (
         "Denne skærm bekræfter det valgte kursus. Moduler og fagligt indhold tilføjes i separate leverancer."
     ),
     UiCopyKey.MODULE_OBJECTIVE_SECTION: "Tilfældig objektiv træning",
-    UiCopyKey.MODULE_COMPLETE_ASSESSMENT: "Komplet modulevaluering",
-    UiCopyKey.MODULE_COMPLETE_ASSESSMENT_NOTICE: (
-        "Aktiviteterne dækker kodegennemgang, fejlfinding, rækkefølge, matching af begreber, kode, "
-        "fortolkning og åbne svar. Løsningerne holdes adskilt fra læseren for at bevare evalueringens formål."
-    ),
     UiCopyKey.PRACTICE_NUMBER: "Øvelse {number}",
     UiCopyKey.PRACTICE_YOUR_ANSWER: "Dit svar",
     UiCopyKey.PRACTICE_ANSWER_PLACEHOLDER: (

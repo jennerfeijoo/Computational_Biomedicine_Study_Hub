@@ -297,9 +297,4 @@ QLabel#ollamaStatus[connectionState="error"] {
     color: #b42318;
 }
 
-QLabel#placeholderMessage {
-    color: #52606d;
-    font-size: 16px;
-    padding: 32px;
-}
 """

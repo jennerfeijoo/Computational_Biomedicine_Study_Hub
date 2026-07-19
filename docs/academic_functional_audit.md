@@ -257,3 +257,20 @@ terminado:
 
 Cada futuro módulo debe registrarse como bundle versionado y entrar en Review, Assessments,
 Flashcards y Glossary sin que esas páginas conozcan el curso concreto.
+
+## Resultado de la evolución incremental
+
+La auditoría anterior describe la línea base. En esta rama se han abordado sus P0 sin
+reescribir el catálogo:
+
+- SQLite v1 y entidades de progreso independientes de PySide6;
+- repetición espaciada determinista;
+- registro exhaustivo de renderers y cloze multihueco por IDs;
+- eliminación visual de la evaluación authored duplicada en el lector;
+- Review, Assessments, Flashcards y Glossary funcionales;
+- persistencia de práctica y banco objetivo al cambiar de idioma o reiniciar;
+- progreso compacto de módulo y acción Continuar;
+- tests específicos de migración, reinicio, locale, páginas, renderers y los 14 módulos.
+
+La arquitectura resultante, el esquema y los límites pendientes están documentados en
+[learning_engine_architecture.md](learning_engine_architecture.md).
