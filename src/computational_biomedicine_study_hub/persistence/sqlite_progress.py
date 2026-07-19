@@ -497,6 +497,69 @@ class SQLiteProgressRepository:
                 ),
             )
 
+    def get_review_schedule(
+        self,
+        course_code: str,
+        module_id: str,
+        item_id: str,
+        item_kind: str,
+    ) -> ReviewSchedule | None:
+        kind = LearningItemKind(item_kind)
+        with self._connect() as connection:
+            row = connection.execute(
+                """
+                SELECT * FROM review_schedule
+                WHERE course_code = ? AND module_id = ? AND item_id = ?
+                  AND item_kind = ?
+                """,
+                (course_code, module_id, item_id, kind.value),
+            ).fetchone()
+        return None if row is None else self._review_from_row(row)
+
+    def list_flashcard_progress(
+        self,
+        *,
+        course_code: str | None = None,
+        module_id: str | None = None,
+    ) -> tuple[FlashcardProgress, ...]:
+        clauses: list[str] = []
+        parameters: list[object] = []
+        if course_code is not None:
+            clauses.append("course_code = ?")
+            parameters.append(course_code)
+        if module_id is not None:
+            clauses.append("module_id = ?")
+            parameters.append(module_id)
+        where = f" WHERE {' AND '.join(clauses)}" if clauses else ""
+        with self._connect() as connection:
+            rows = connection.execute(
+                "SELECT * FROM flashcard_progress"
+                + where
+                + " ORDER BY course_code, module_id, card_id",
+                parameters,
+            ).fetchall()
+        values: list[FlashcardProgress] = []
+        for row in rows:
+            due_at = _load_datetime(str(row["due_at"]))
+            assert due_at is not None
+            reviewed_raw = row["last_reviewed_at"]
+            values.append(
+                FlashcardProgress(
+                    course_code=str(row["course_code"]),
+                    module_id=str(row["module_id"]),
+                    card_id=str(row["card_id"]),
+                    mastery_state=MasteryState(str(row["mastery_state"])),
+                    repetitions=int(row["repetitions"]),
+                    interval_days=int(row["interval_days"]),
+                    easiness=float(row["easiness"]),
+                    due_at=due_at,
+                    last_reviewed_at=_load_datetime(
+                        None if reviewed_raw is None else str(reviewed_raw)
+                    ),
+                )
+            )
+        return tuple(values)
+
     def list_due_reviews(
         self,
         *,

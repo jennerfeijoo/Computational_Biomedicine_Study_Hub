@@ -70,8 +70,25 @@ class ProgressRepository(Protocol):
     ) -> FlashcardProgress | None:
         """Return one card's scheduling state."""
 
+    def list_flashcard_progress(
+        self,
+        *,
+        course_code: str | None = None,
+        module_id: str | None = None,
+    ) -> tuple[FlashcardProgress, ...]:
+        """Return persisted card schedules in stable identifier order."""
+
     def save_review_schedule(self, schedule: ReviewSchedule) -> None:
         """Insert or update one review schedule."""
+
+    def get_review_schedule(
+        self,
+        course_code: str,
+        module_id: str,
+        item_id: str,
+        item_kind: str,
+    ) -> ReviewSchedule | None:
+        """Return one schedule by its stable composite identity."""
 
     def list_due_reviews(
         self,

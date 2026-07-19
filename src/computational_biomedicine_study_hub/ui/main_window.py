@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from PySide6.QtCore import QByteArray, QSettings, Slot
 from PySide6.QtGui import QCloseEvent
 from PySide6.QtWidgets import (
@@ -18,15 +20,19 @@ from ..i18n import (
     AppLocale,
     LanguageController,
     MessageKey,
-    UiCopyKey,
-    ui_text,
 )
+from ..learning.academic_catalog import AcademicCatalog
+from ..learning.progress_repository import ProgressRepository
+from ..persistence import SQLiteProgressRepository, default_progress_database_path
 from .header import PageHeader
 from .language_styles import LANGUAGE_STYLESHEET
 from .navigation import NavigationSidebar
+from .pages.assessments_page import AssessmentsPage
+from .pages.flashcards_page import FlashcardsPage
+from .pages.glossary_page import GlossaryPage
 from .pages.home_page import HomePage
 from .pages.ollama_settings_page import OllamaSettingsPage
-from .pages.placeholder_page import PlaceholderPage
+from .pages.review_page import ReviewPage
 from .routes import (
     PageDescriptor,
     RouteId,
@@ -45,6 +51,7 @@ class MainWindow(QMainWindow):
         parent: QWidget | None = None,
         *,
         settings: QSettings | None = None,
+        progress_repository: ProgressRepository | None = None,
     ) -> None:
         super().__init__(parent)
         self.resize(1200, 760)
@@ -52,6 +59,15 @@ class MainWindow(QMainWindow):
         self.setStyleSheet(APPLICATION_STYLESHEET + LANGUAGE_STYLESHEET)
 
         self._settings = settings if settings is not None else QSettings()
+        if progress_repository is not None:
+            self._progress = progress_repository
+        else:
+            database_path = (
+                Path(self._settings.fileName()).parent / "progress.sqlite3"
+                if settings is not None
+                else default_progress_database_path()
+            )
+            self._progress = SQLiteProgressRepository(database_path)
         self._language = LanguageController(self._settings, self)
         self._translator = self._language.translator
         self._courses: tuple[CourseRegistration, ...] = COURSES
@@ -103,6 +119,11 @@ class MainWindow(QMainWindow):
         """Return the active persisted application locale."""
         return self._language.locale
 
+    @property
+    def progress_repository(self) -> ProgressRepository:
+        """Return the long-lived repository shared across page rebuilds."""
+        return self._progress
+
     def navigate(self, route: RouteLike) -> None:
         """Switch to a registered route and persist the selection."""
         key = route_value(route)
@@ -124,21 +145,30 @@ class MainWindow(QMainWindow):
 
     def _register_pages(self) -> None:
         locale = self._language.locale
+        catalog = AcademicCatalog(locale=locale)
         home_page = HomePage(self._courses, self._translator)
         home_page.course_selected.connect(self.navigate)
+        glossary_page = GlossaryPage(catalog, locale=locale)
+        glossary_page.module_requested.connect(self._open_catalog_module)
 
         pages: dict[str, QWidget] = {
             RouteId.HOME.value: home_page,
-            RouteId.REVIEW.value: PlaceholderPage(ui_text(locale, UiCopyKey.REVIEW_PLACEHOLDER)),
-            RouteId.ASSESSMENTS.value: PlaceholderPage(
-                ui_text(locale, UiCopyKey.ASSESSMENTS_PLACEHOLDER)
+            RouteId.REVIEW.value: ReviewPage(
+                catalog,
+                self._progress,
+                locale=locale,
             ),
-            RouteId.FLASHCARDS.value: PlaceholderPage(
-                ui_text(locale, UiCopyKey.FLASHCARDS_PLACEHOLDER)
+            RouteId.ASSESSMENTS.value: AssessmentsPage(
+                catalog,
+                self._progress,
+                locale=locale,
             ),
-            RouteId.GLOSSARY.value: PlaceholderPage(
-                ui_text(locale, UiCopyKey.GLOSSARY_PLACEHOLDER)
+            RouteId.FLASHCARDS.value: FlashcardsPage(
+                catalog,
+                self._progress,
+                locale=locale,
             ),
+            RouteId.GLOSSARY.value: glossary_page,
             RouteId.SETTINGS.value: OllamaSettingsPage(
                 settings=self._settings,
                 locale=locale,
@@ -212,6 +242,19 @@ class MainWindow(QMainWindow):
 
     def _on_route_selected(self, selected_route: str) -> None:
         self.navigate(selected_route)
+
+    @Slot(str, str)
+    def _open_catalog_module(self, course_code: str, module_id: str) -> None:
+        course = next(
+            (item for item in self._courses if item.code == course_code),
+            None,
+        )
+        if course is None:
+            return
+        self.navigate(course.route)
+        page = self._pages.get(course.route)
+        if isinstance(page, DM857Page):
+            page.select_module_id(module_id)
 
     def _stored_route(self) -> str:
         value = str(

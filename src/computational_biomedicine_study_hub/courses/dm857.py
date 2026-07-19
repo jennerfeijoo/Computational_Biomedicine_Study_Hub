@@ -105,6 +105,11 @@ class DM857Page(QWidget):
             self._module_selector.setCurrentIndex(index)
         return True
 
+    def select_module_id(self, module_id: str) -> bool:
+        """Select a module using its stable language-independent identity."""
+        index = self._module_selector.findData(module_id)
+        return self.select_module(index)
+
     @Slot(int)
     def _activate_module(self, index: int) -> None:
         if not 0 <= index < self.module_count:

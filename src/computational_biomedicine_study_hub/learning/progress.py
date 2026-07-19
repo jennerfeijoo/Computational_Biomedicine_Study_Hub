@@ -97,8 +97,6 @@ class AttemptRecord:
         require_aware(self.created_at, "created_at")
         if self.score is not None and not 0.0 <= self.score <= 1.0:
             raise ValueError("score must be between 0 and 1.")
-        if len(self.selected_option_ids) != len(set(self.selected_option_ids)):
-            raise ValueError("selected_option_ids cannot contain duplicates.")
         for option_id in self.selected_option_ids:
             require_identifier(option_id, "selected option ID")
 
