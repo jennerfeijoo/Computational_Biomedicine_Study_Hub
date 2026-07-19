@@ -1,0 +1,277 @@
+schema_version: 1.0.0
+course_code: BMB830
+module_id: bmb830.m09
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Análisis multivariante introductorio con PCA, distancias y clustering
+    en: Introductory multivariate analysis with PCA, distances, and clustering
+    da: Introducerende multivariat analyse med PCA, afstande og clustering
+  summary:
+    es: >-
+      Introducción al análisis de matrices con múltiples variables biológicas. Se cubren orientación de la matriz,
+      centrado, escalado, transformación, distancias, similitud, análisis de componentes principales, scores,
+      loadings, varianza explicada, clustering jerárquico y k-means, elección del número de grupos, estabilidad,
+      batch effects, datos ausentes y límites de convertir estructura exploratoria en clases biológicas confirmadas.
+    en: >-
+      Introduction to matrices containing multiple biological variables. Matrix orientation, centering, scaling,
+      transformation, distances, similarity, principal component analysis, scores, loadings, explained variance,
+      hierarchical clustering, k-means, number-of-cluster selection, stability, batch effects, missing data, and
+      limits on converting exploratory structure into confirmed biological classes are covered.
+    da: >-
+      Introduktion til matricer med flere biologiske variable: orientering, centrering, skalering, afstande,
+      PCA, scores, loadings, forklaret varians, hierarkisk clustering, k-means, stabilitet og batch effects.
+  estimated_study_hours: 15
+  difficulty: intermediate_advanced
+
+alignment:
+  official_learning_outcomes: [bmb830.lo02, bmb830.lo03, bmb830.lo04, bmb830.lo05]
+  prerequisite_modules: [bmb830.m03, bmb830.m04, bmb830.m05]
+  later_modules: [bmb830.m10, bmb831.m05, bmb831.m06, dm847.m14]
+
+objectives:
+  - {id: bmb830.m09.o01, text: {es: Definir filas, columnas y unidad independiente en una matriz multivariante, en: Define rows, columns, and the independent unit in a multivariate matrix, da: Definere rækker, kolonner og uafhængig enhed i en multivariat matrix}}
+  - {id: bmb830.m09.o02, text: {es: Elegir centrado, escalado y transformación justificadamente, en: Choose centering, scaling, and transformation with justification, da: Vælge centrering, skalering og transformation med begrundelse}}
+  - {id: bmb830.m09.o03, text: {es: Calcular e interpretar distancias y similitudes, en: Calculate and interpret distances and similarities, da: Beregne og fortolke afstande og ligheder}}
+  - {id: bmb830.m09.o04, text: {es: Ejecutar e interpretar PCA mediante scores, loadings y varianza explicada, en: Run and interpret PCA using scores, loadings, and explained variance, da: Udføre og fortolke PCA med scores, loadings og forklaret varians}}
+  - {id: bmb830.m09.o05, text: {es: Aplicar clustering jerárquico y k-means, en: Apply hierarchical clustering and k-means, da: Anvende hierarkisk clustering og k-means}}
+  - {id: bmb830.m09.o06, text: {es: Evaluar estabilidad y sensibilidad a decisiones analíticas, en: Evaluate stability and sensitivity to analytical choices, da: Evaluere stabilitet og følsomhed over for analytiske valg}}
+  - {id: bmb830.m09.o07, text: {es: Reconocer patrones dominados por lote, escala o valores ausentes, en: Recognize patterns dominated by batch, scale, or missingness, da: Genkende mønstre domineret af batch, skala eller missingness}}
+  - {id: bmb830.m09.o08, text: {es: Comunicar estructura exploratoria sin convertirla en evidencia confirmatoria, en: Communicate exploratory structure without treating it as confirmatory evidence, da: Kommunikere eksplorativ struktur uden at gøre den til confirmatory evidens}}
+
+concepts:
+  - id: bmb830.m09.c01
+    title: {es: Matriz multivariante y orientación, en: Multivariate matrix and orientation, da: Multivariat matrix og orientering}
+    body:
+      es: >-
+        Una matriz X suele representar muestras en filas y variables en columnas, pero la convención debe declararse.
+        En ómicas es frecuente recibir la orientación opuesta. PCA, distancias y clustering responden preguntas distintas
+        si se aplican a filas o columnas. La unidad independiente debe coincidir con la fila analizada; réplicas técnicas
+        o mediciones celulares de una misma persona no se convierten en individuos independientes por entrar en la matriz.
+      en: >-
+        A matrix X commonly stores samples in rows and variables in columns, but orientation must be declared.
+        Omics files often use the opposite convention. PCA, distances, and clustering answer different questions when
+        applied to rows or columns. The independent unit must match the analyzed row.
+      da: >-
+        En matrix har ofte samples i rækker og variable i kolonner, men orienteringen skal deklareres.
+        Analysen ændrer betydning hvis rækker og kolonner byttes.
+    key_points:
+      - {es: Antes de PCA comprueba dimensiones, nombres y unidad de cada eje, en: Before PCA check dimensions, names, and the unit on each axis, da: Før PCA kontrollér dimensioner, navne og enheden på hver akse}
+  - id: bmb830.m09.c02
+    title: {es: Centrado, escalado y transformación, en: Centering, scaling, and transformation, da: Centrering, skalering og transformation}
+    body:
+      es: >-
+        Centrar resta la media de cada variable y permite analizar variación alrededor de su nivel medio. Escalar por SD
+        da igual peso inicial a variables con unidades o dispersiones distintas. Sin escalado, variables de gran magnitud
+        dominan distancias y PCA; con escalado, una variable ruidosa de baja varianza puede amplificarse. Transformaciones
+        logarítmicas o de varianza deben justificarse por mecanismo y distribución, no por buscar separación visual.
+      en: >-
+        Centering subtracts each variable mean. Scaling by SD gives variables with different units or spreads equal initial weight.
+        Without scaling, large-magnitude variables dominate distances and PCA; with scaling, low-variance noise may be amplified.
+        Transformations should follow mechanism and distribution rather than desired separation.
+      da: >-
+        Centrering trækker variabelmean fra. Skalering med SD giver variable samme initiale vægt,
+        men kan også forstærke støjende variable med lav varians.
+    key_points:
+      - {es: Escalar es una decisión científica, no una operación neutra, en: Scaling is a scientific decision, not a neutral operation, da: Skalering er en videnskabelig beslutning, ikke en neutral operation}
+  - id: bmb830.m09.c03
+    title: {es: Distancias y similitud, en: Distances and similarity, da: Afstande og lighed}
+    body:
+      es: >-
+        La distancia euclídea combina diferencias cuadráticas y depende de escala. Manhattan suma diferencias absolutas y puede
+        ser menos sensible a discrepancias individuales grandes. Correlation distance compara patrón relativo y puede considerar
+        cercanas dos muestras con magnitudes muy distintas. La elección debe reflejar qué diferencia biológica importa.
+        Datos ausentes, variables redundantes y dimensiones altas alteran la geometría.
+      en: >-
+        Euclidean distance combines squared differences and depends on scale. Manhattan sums absolute differences.
+        Correlation distance compares relative patterns and may call samples similar despite very different magnitudes.
+        Choice should reflect biologically meaningful difference. Missing data, redundant variables, and high dimension alter geometry.
+      da: >-
+        Euclidisk afstand afhænger af skala; Manhattan bruger absolutte forskelle; korrelationsafstand sammenligner relative mønstre.
+    key_points:
+      - {es: No existe una distancia universalmente correcta, en: There is no universally correct distance, da: Der findes ingen universelt korrekt afstand}
+  - id: bmb830.m09.c04
+    title: {es: PCA como rotación de la variación, en: PCA as a rotation of variation, da: PCA som rotation af variation}
+    body:
+      es: >-
+        PCA encuentra direcciones ortogonales que maximizan sucesivamente la varianza de los datos centrados. PC1 explica la
+        mayor varianza disponible, PC2 la mayor varianza restante ortogonal a PC1, y así sucesivamente. PCA no conoce grupos,
+        outcomes ni causalidad. Una componente de gran varianza puede reflejar biología, lote, calidad, tamaño o confusión.
+      en: >-
+        PCA finds orthogonal directions that successively maximize variance in centered data. PC1 explains the greatest available
+        variance and PC2 the greatest remaining orthogonal variance. PCA does not know groups, outcomes, or causation.
+      da: >-
+        PCA finder ortogonale retninger der successivt maksimerer varians. PCA kender ikke grupper, outcomes eller kausalitet.
+    key_points:
+      - {es: Máxima varianza no significa máxima relevancia biológica, en: Maximum variance does not mean maximum biological relevance, da: Maksimal varians betyder ikke maksimal biologisk relevans}
+  - id: bmb830.m09.c05
+    title: {es: Scores, loadings y varianza explicada, en: Scores, loadings, and explained variance, da: Scores, loadings og forklaret varians}
+    body:
+      es: >-
+        Los scores son coordenadas de las muestras en las componentes; los loadings indican cómo contribuyen las variables a cada eje.
+        El signo de una componente es arbitrario: invertir scores y loadings no cambia la solución. La varianza explicada cuantifica
+        fracción de variación, no precisión de clasificación. Interpretar loadings requiere considerar escala, correlación y estabilidad.
+      en: >-
+        Scores are sample coordinates in component space; loadings describe variable contributions. Component sign is arbitrary:
+        flipping scores and loadings leaves the solution unchanged. Explained variance is not classification accuracy.
+      da: >-
+        Scores er sample-koordinater; loadings viser variabelbidrag. Komponentens fortegn er vilkårligt.
+    key_points:
+      - {es: Un biplot combina dos espacios y exige atención a escala, en: A biplot combines two spaces and requires attention to scaling, da: Et biplot kombinerer to rum og kræver opmærksomhed på skalering}
+  - id: bmb830.m09.c06
+    title: {es: Clustering jerárquico, en: Hierarchical clustering, da: Hierarkisk clustering}
+    body:
+      es: >-
+        El clustering jerárquico aglomerativo comienza con unidades separadas y fusiona según distancia entre grupos.
+        Single linkage puede producir cadenas; complete favorece grupos compactos; average usa distancia media.
+        El dendrograma representa orden de fusiones, no una escala temporal ni filogenética automática. Cortarlo en k grupos
+        es una decisión adicional y sensible a distancia, linkage, escalado y observaciones extremas.
+      en: >-
+        Agglomerative hierarchical clustering starts with separate units and merges them according to between-cluster distance.
+        Single linkage may chain, complete favors compact groups, and average uses mean distance. A dendrogram is not automatically temporal or phylogenetic.
+      da: >-
+        Hierarkisk clustering fusionerer enheder efter afstand mellem clusters. Dendrogrammet er ikke automatisk tidsligt eller fylogenetisk.
+    key_points:
+      - {es: El dendrograma no demuestra grupos naturales, en: A dendrogram does not prove natural groups, da: Et dendrogram beviser ikke naturlige grupper}
+  - id: bmb830.m09.c07
+    title: {es: K-means y elección de k, en: K-means and choosing k, da: K-means og valg af k}
+    body:
+      es: >-
+        K-means minimiza suma de distancias cuadráticas a centroides y favorece grupos aproximadamente esféricos, de escala comparable.
+        Requiere k, es sensible a inicialización y extremos, y puede converger a óptimos locales; deben usarse múltiples inicios.
+        Elbow, silhouette y gap statistic son ayudas, no pruebas de existencia biológica. La elección debe evaluarse con estabilidad y utilidad.
+      en: >-
+        K-means minimizes within-cluster squared distance to centroids and favors roughly spherical, similarly scaled clusters.
+        It requires k, is sensitive to initialization and extremes, and may reach local optima. Elbow, silhouette, and gap statistic are aids, not biological proof.
+      da: >-
+        K-means minimerer kvadreret afstand til centroids og kræver k. Det er følsomt for initialisering og ekstremer.
+    key_points:
+      - {es: Fijar semilla reproduce una solución, no demuestra estabilidad, en: Fixing a seed reproduces one solution but does not prove stability, da: Et fast seed reproducerer én løsning men beviser ikke stabilitet}
+  - id: bmb830.m09.c08
+    title: {es: Estabilidad, batch effects y validez, en: Stability, batch effects, and validity, da: Stabilitet, batch effects og validitet}
+    body:
+      es: >-
+        Un patrón exploratorio debe examinarse frente a perturbaciones razonables: bootstrap, subconjuntos, escalado, distancia, k e inicialización.
+        Asociación de PCs o clusters con lote, fecha, instrumento o calidad puede indicar artefacto. Corregir batch sin diseño puede eliminar biología real
+        si batch y grupo están confundidos. Un cluster reproducible aún necesita evidencia externa antes de llamarse subtipo biológico o clínico.
+      en: >-
+        Exploratory patterns should be tested under bootstrap, subsets, scaling, distance, k, and initialization.
+        Association with batch, date, instrument, or quality may indicate artifact. Batch correction can remove biology when batch and group are confounded.
+        Even a reproducible cluster needs external evidence before being called a biological or clinical subtype.
+      da: >-
+        Eksplorative mønstre bør testes under perturbationer. Batch correction kan fjerne biologisk signal hvis batch og gruppe er confounded.
+    key_points:
+      - {es: Exploración genera hipótesis; validación independiente las evalúa, en: Exploration generates hypotheses; independent validation evaluates them, da: Eksploration genererer hypoteser; uafhængig validering evaluerer dem}
+
+worked_examples:
+  - id: bmb830.m09.e01
+    title: {es: Dominio por unidades, en: Dominance by units, da: Dominans fra enheder}
+    problem: {es: Una matriz incluye edad en años, proteína en pg/mL y peso en kg; PCA sin escalado está dominada por proteína., en: A matrix contains age in years, protein in pg/mL, and weight in kg; unscaled PCA is dominated by protein., da: En matrix har alder, protein i pg/mL og vægt; uskaleret PCA domineres af protein.}
+    reasoning: {es: La mayor varianza numérica controla la covarianza. Escalar puede ser apropiado si se desea peso comparable, pero cambia la pregunta., en: The largest numerical variance controls covariance. Scaling may be appropriate for equal initial weight but changes the question., da: Størst numerisk varians styrer kovariansen. Skalering kan være passende men ændrer spørgsmålet.}
+    answer: {es: Comparar PCA centrada y centrada-escalada, justificar la elegida y reportar sensibilidad., en: Compare centered and centered-scaled PCA, justify the choice, and report sensitivity., da: Sammenlign centreret og centreret-skaleret PCA og begrund valget.}
+  - id: bmb830.m09.e02
+    title: {es: PC1 asociado a lote, en: PC1 associated with batch, da: PC1 associeret med batch}
+    problem: {es: PC1 separa perfectamente controles y casos, pero todos los casos se procesaron otro día., en: PC1 perfectly separates cases and controls, but all cases were processed on another day., da: PC1 adskiller cases og kontroller, men alle cases blev behandlet en anden dag.}
+    reasoning: {es: Grupo y lote están completamente confundidos; no es posible atribuir la separación a biología con estos datos., en: Group and batch are completely confounded; separation cannot be attributed to biology from these data., da: Gruppe og batch er fuldt confounded; separation kan ikke tilskrives biologi.}
+    answer: {es: Declarar confusión de diseño y evitar una corrección que finja identificar el componente biológico., en: Declare design confounding and avoid correction that pretends to identify biology., da: Deklarér design-confounding og undgå korrektion der foregiver at identificere biologien.}
+  - id: bmb830.m09.e03
+    title: {es: Clusters inestables, en: Unstable clusters, da: Ustabile clusters}
+    problem: {es: k-means con k=3 cambia sustancialmente entre semillas., en: k-means with k=3 changes substantially across seeds., da: k-means med k=3 ændres væsentligt mellem seeds.}
+    reasoning: {es: La función objetivo tiene múltiples soluciones locales o estructura débil. Se requieren múltiples inicios y evaluación de estabilidad., en: The objective has multiple local solutions or weak structure. Multiple starts and stability assessment are needed., da: Objektivet har flere lokale løsninger eller svag struktur; flere starts og stabilitet kræves.}
+    answer: {es: No presentar tres subtipos definidos; reportar inestabilidad y alternativas., en: Do not present three established subtypes; report instability and alternatives., da: Præsenter ikke tre etablerede subtyper; rapportér ustabilitet og alternativer.}
+
+guided_practice:
+  - {id: bmb830.m09.p01, type: matrix_audit, prompt: {es: Identifica orientación, unidad, tipos y ausentes de cuatro matrices., en: Identify orientation, unit, types, and missingness in four matrices., da: Identificer orientering, enhed, typer og missingness i fire matricer.}, expected_elements: [rows, columns, independent_unit, metadata_separation]}
+  - {id: bmb830.m09.p02, type: preprocessing, prompt: {es: Compara PCA sin escalado, con z-scores y tras log-transformación., en: Compare unscaled, z-scored, and log-transformed PCA., da: Sammenlign uskaleret, z-skaleret og log-transformeret PCA.}, expected_elements: [scientific_question, variance_structure, sensitivity]}
+  - {id: bmb830.m09.p03, type: distance_selection, prompt: {es: Elige distancia para magnitud absoluta, perfil relativo y datos binarios., en: Choose distances for absolute magnitude, relative profile, and binary data., da: Vælg afstande for absolut magnitude, relativ profil og binære data.}, expected_elements: [euclidean_or_manhattan, correlation, binary_metric, justification]}
+  - {id: bmb830.m09.p04, type: pca_interpretation, prompt: {es: Interpreta scores, loadings y scree plot sin sobreafirmar., en: Interpret scores, loadings, and a scree plot without overclaiming., da: Fortolk scores, loadings og scree plot uden overdrivelse.}, expected_elements: [sample_pattern, contributing_variables, explained_variance, sign_arbitrariness]}
+  - {id: bmb830.m09.p05, type: clustering_comparison, prompt: {es: Compara linkage y k-means bajo distintas escalas., en: Compare linkage methods and k-means under different scaling choices., da: Sammenlign linkage-metoder og k-means under forskellige skaleringer.}, expected_elements: [method_assumptions, cluster_changes, stability]}
+  - {id: bmb830.m09.p06, type: batch_audit, prompt: {es: Evalúa si PCs o clusters están asociados a lote, sitio o calidad., en: Evaluate whether PCs or clusters are associated with batch, site, or quality., da: Evaluer om PCs eller clusters er associeret med batch, site eller kvalitet.}, expected_elements: [metadata_overlay, confounding, cautious_interpretation]}
+
+objective_bank:
+  - {id: bmb830.m09.q01, type: multiple_choice, prompt: {es: ¿Qué debe comprobarse antes de PCA?, en: What should be checked before PCA?, da: Hvad bør kontrolleres før PCA?}, options: [{id: a, text: {es: orientación y unidad de filas/columnas, en: row/column orientation and units, da: række/kolonne-orientering og enheder}}, {id: b, text: {es: sólo color de puntos, en: point color only, da: kun punktfarve}}, {id: c, text: {es: sólo valor p, en: p-value only, da: kun p-værdi}}], correct_option_ids: [a], explanation: {es: Intercambiar ejes cambia la pregunta., en: Swapping axes changes the question., da: Bytte af akser ændrer spørgsmålet.}}
+  - {id: bmb830.m09.q02, type: true_false, prompt: {es: Escalar todas las variables es siempre correcto., en: Scaling all variables is always correct., da: Skalering af alle variable er altid korrekt.}, correct: false, explanation: {es: Depende de unidades, ruido y pregunta científica., en: It depends on units, noise, and the scientific question., da: Det afhænger af enheder, støj og spørgsmål.}}
+  - {id: bmb830.m09.q03, type: multiple_choice, prompt: {es: ¿Qué distancia compara principalmente forma relativa del perfil?, en: Which distance mainly compares relative profile shape?, da: Hvilken afstand sammenligner primært relativ profilform?}, options: [{id: a, text: {es: distancia de correlación, en: correlation distance, da: korrelationsafstand}}, {id: b, text: {es: euclídea sin escala siempre, en: unscaled Euclidean always, da: altid uskaleret euclidisk}}, {id: c, text: {es: número de filas, en: row count, da: antal rækker}}], correct_option_ids: [a], explanation: {es: Reduce importancia de magnitud absoluta., en: It reduces emphasis on absolute magnitude., da: Den reducerer vægt på absolut magnitude.}}
+  - {id: bmb830.m09.q04, type: true_false, prompt: {es: PC1 es la dirección de máxima varianza, no necesariamente máxima relevancia., en: PC1 is the maximum-variance direction, not necessarily maximum relevance., da: PC1 er retningen med maksimal varians, ikke nødvendigvis maksimal relevans.}, correct: true, explanation: {es: PCA es no supervisada., en: PCA is unsupervised., da: PCA er usuperviseret.}}
+  - {id: bmb830.m09.q05, type: multiple_choice, prompt: {es: ¿Qué son los scores de PCA?, en: What are PCA scores?, da: Hvad er PCA-scores?}, options: [{id: a, text: {es: coordenadas de muestras en PCs, en: sample coordinates in PC space, da: sample-koordinater i PC-rum}}, {id: b, text: {es: valores p, en: p-values, da: p-værdier}}, {id: c, text: {es: nombres de genes, en: gene names, da: gennavne}}], correct_option_ids: [a], explanation: {es: Proyectan cada muestra sobre las componentes., en: They project each sample onto components., da: De projicerer hver sample på komponenterne.}}
+  - {id: bmb830.m09.q06, type: true_false, prompt: {es: El signo de una componente PCA tiene significado absoluto., en: The sign of a PCA component has absolute meaning., da: Fortegnet på en PCA-komponent har absolut betydning.}, correct: false, explanation: {es: Puede invertirse junto con loadings sin cambiar solución., en: It may be flipped with loadings without changing the solution., da: Det kan vendes sammen med loadings uden at ændre løsningen.}}
+  - {id: bmb830.m09.q07, type: multiple_choice, prompt: {es: ¿Qué linkage favorece chaining?, en: Which linkage favors chaining?, da: Hvilken linkage favoriserer chaining?}, options: [{id: a, text: {es: single, en: single, da: single}}, {id: b, text: {es: complete, en: complete, da: complete}}, {id: c, text: {es: ninguna distancia, en: no distance, da: ingen afstand}}], correct_option_ids: [a], explanation: {es: Usa la distancia mínima entre grupos., en: It uses minimum between-cluster distance., da: Den bruger minimumafstand mellem clusters.}}
+  - {id: bmb830.m09.q08, type: true_false, prompt: {es: Un dendrograma demuestra que existen grupos biológicos discretos., en: A dendrogram proves discrete biological groups exist., da: Et dendrogram beviser diskrete biologiske grupper.}, correct: false, explanation: {es: Siempre produce una jerarquía, aun con estructura continua., en: It always produces a hierarchy even for continuous structure., da: Det producerer altid et hierarki selv ved kontinuert struktur.}}
+  - {id: bmb830.m09.q09, type: multiple_choice, prompt: {es: ¿Qué requiere k-means?, en: What does k-means require?, da: Hvad kræver k-means?}, options: [{id: a, text: {es: número k y múltiples inicios, en: k and multiple starts, da: k og flere starts}}, {id: b, text: {es: hipótesis causal, en: a causal hypothesis, da: en kausal hypotese}}, {id: c, text: {es: outcome binario obligatorio, en: mandatory binary outcome, da: obligatorisk binært outcome}}], correct_option_ids: [a], explanation: {es: Es sensible a k e inicialización., en: It is sensitive to k and initialization., da: Det er følsomt for k og initialisering.}}
+  - {id: bmb830.m09.q10, type: true_false, prompt: {es: Un cluster estable es automáticamente un subtipo clínico validado., en: A stable cluster is automatically a validated clinical subtype., da: En stabil cluster er automatisk en valideret klinisk subtype.}, correct: false, explanation: {es: Requiere replicación y evidencia externa., en: It requires replication and external evidence., da: Det kræver replikation og ekstern evidens.}}
+
+open_assessment:
+  - id: bmb830.m09.a01
+    prompt: {es: Diseña, ejecuta e interpreta una PCA completa con análisis de sensibilidad., en: Design, run, and interpret a complete PCA with sensitivity analysis., da: Design, udfør og fortolk en komplet PCA med følsomhedsanalyse.}
+    rubric: [{criterion: matrix_and_preprocessing, points: 3}, {criterion: scores_loadings_variance, points: 3}, {criterion: metadata_and_batch, points: 2}, {criterion: limitations, points: 2}]
+  - id: bmb830.m09.a02
+    prompt: {es: Compara dos estrategias de clustering y evalúa estabilidad., en: Compare two clustering strategies and evaluate stability., da: Sammenlign to clustering-strategier og evaluer stabilitet.}
+    rubric: [{criterion: distance_and_algorithm, points: 3}, {criterion: k_or_cut_choice, points: 2}, {criterion: stability_evidence, points: 3}, {criterion: cautious_claim, points: 2}]
+  - id: bmb830.m09.a03
+    prompt: {es: Diagnostica un patrón multivariante confundido por lote., en: Diagnose a multivariate pattern confounded by batch., da: Diagnosticér et multivariat mønster confounded af batch.}
+    rubric: [{criterion: metadata_evidence, points: 3}, {criterion: confounding_explanation, points: 3}, {criterion: correction_limits, points: 2}, {criterion: redesign_or_validation, points: 2}]
+
+glossary:
+  - {id: bmb830.term.multivariate_matrix, term: {es: matriz multivariante, en: multivariate matrix, da: multivariat matrix}, definition: {es: Matriz con unidades y múltiples variables., en: Matrix containing units and multiple variables., da: Matrix med enheder og flere variable.}}
+  - {id: bmb830.term.centering, term: {es: centrado, en: centering, da: centrering}, definition: {es: Restar la media de cada variable., en: Subtracting each variable mean., da: At trække mean fra hver variabel.}}
+  - {id: bmb830.term.scaling, term: {es: escalado, en: scaling, da: skalering}, definition: {es: Dividir por una medida de escala como SD., en: Dividing by a scale measure such as SD., da: At dividere med et skalamål som SD.}}
+  - {id: bmb830.term.euclidean, term: {es: distancia euclídea, en: Euclidean distance, da: euclidisk afstand}, definition: {es: Raíz de la suma de diferencias cuadráticas., en: Square root of summed squared differences., da: Kvadratroden af summen af kvadrerede forskelle.}}
+  - {id: bmb830.term.pca, term: {es: análisis de componentes principales, en: principal component analysis, da: principal component analysis}, definition: {es: Rotación ortogonal que ordena direcciones por varianza., en: Orthogonal rotation ordering directions by variance., da: Ortogonal rotation der ordner retninger efter varians.}}
+  - {id: bmb830.term.score, term: {es: score de PCA, en: PCA score, da: PCA-score}, definition: {es: Coordenada de una muestra en una componente., en: Sample coordinate on a component., da: Sample-koordinat på en komponent.}}
+  - {id: bmb830.term.loading, term: {es: loading, en: loading, da: loading}, definition: {es: Peso o contribución de una variable a una componente., en: Weight or contribution of a variable to a component., da: Vægt eller bidrag fra en variabel til en komponent.}}
+  - {id: bmb830.term.dendrogram, term: {es: dendrograma, en: dendrogram, da: dendrogram}, definition: {es: Árbol que representa el orden y altura de fusiones de clustering., en: Tree representing clustering merge order and height., da: Træ der viser rækkefølge og højde af cluster-fusioner.}}
+  - {id: bmb830.term.centroid, term: {es: centroide, en: centroid, da: centroid}, definition: {es: Vector medio de un cluster en k-means., en: Mean vector of a k-means cluster., da: Mean-vektor for en k-means-cluster.}}
+  - {id: bmb830.term.silhouette, term: {es: silhouette, en: silhouette, da: silhouette}, definition: {es: Medida de cohesión y separación relativa de una unidad., en: Measure of relative within-cluster cohesion and separation., da: Mål for relativ cohesion og separation for en enhed.}}
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      Antes de interpretar PCA o clustering, pregunta qué representan filas y columnas, qué preprocessing se aplicó,
+      qué metadatos técnicos explican los ejes y cuán estable es el patrón. Nunca conviertas separación visual en subtipo validado.
+    en: >-
+      Before interpreting PCA or clustering, ask what rows and columns represent, what preprocessing was used,
+      which technical metadata explain axes, and how stable the pattern is. Never turn visual separation into a validated subtype.
+    da: >-
+      Før fortolkning af PCA eller clustering: spørg om rækker, kolonner, preprocessing, tekniske metadata og stabilitet.
+  misconceptions:
+    - PCA_is_supervised
+    - PC1_is_most_biologically_important
+    - scaling_is_always_required
+    - loading_sign_has_absolute_meaning
+    - dendrogram_proves_natural_groups
+    - stable_cluster_is_validated_subtype
+  socratic_questions:
+    - What does one row represent and is it independent?
+    - Which variables dominate before and after scaling?
+    - What biological notion of similarity does the distance encode?
+    - Are PCs associated with batch, quality, or site?
+    - Does the cluster assignment persist under reasonable perturbations?
+  grading_criteria:
+    - define matrix orientation and preprocessing
+    - interpret scores, loadings, and variance correctly
+    - justify distance and clustering choices
+    - evaluate stability and technical confounding
+    - maintain exploratory claim scope
+  retrieval_fragments:
+    - {id: bmb830.m09.r01, topic: matrix, text: {es: Declarar muestras en filas y variables en columnas evita invertir la pregunta., en: Declaring samples in rows and variables in columns prevents reversing the question., da: Deklaration af samples i rækker og variable i kolonner forhindrer omvendt spørgsmål.}}
+    - {id: bmb830.m09.r02, topic: scaling, text: {es: Escalado iguala peso inicial pero puede amplificar ruido; debe justificarse., en: Scaling equalizes initial weight but may amplify noise; justify it., da: Skalering udligner initial vægt men kan forstærke støj; begrund den.}}
+    - {id: bmb830.m09.r03, topic: pca, text: {es: PCA ordena varianza, no relevancia ni separación confirmatoria., en: PCA orders variance, not relevance or confirmatory separation., da: PCA ordner varians, ikke relevans eller confirmatory separation.}}
+    - {id: bmb830.m09.r04, topic: scores, text: {es: Scores describen muestras; loadings describen contribuciones de variables., en: Scores describe samples; loadings describe variable contributions., da: Scores beskriver samples; loadings beskriver variabelbidrag.}}
+    - {id: bmb830.m09.r05, topic: sign, text: {es: El signo de una PC puede invertirse sin cambiar la solución., en: A PC sign may flip without changing the solution., da: Fortegnet på en PC kan vendes uden at ændre løsningen.}}
+    - {id: bmb830.m09.r06, topic: distance, text: {es: Distancias codifican nociones distintas de similitud y dependen del preprocessing., en: Distances encode different notions of similarity and depend on preprocessing., da: Afstande koder forskellige lighedsbegreber og afhænger af preprocessing.}}
+    - {id: bmb830.m09.r07, topic: hierarchical, text: {es: Un dendrograma siempre crea una jerarquía; no demuestra clusters naturales., en: A dendrogram always creates a hierarchy; it does not prove natural clusters., da: Et dendrogram skaber altid et hierarki; det beviser ikke naturlige clusters.}}
+    - {id: bmb830.m09.r08, topic: kmeans, text: {es: k-means requiere k, múltiples inicios y evaluación de estabilidad., en: k-means requires k, multiple starts, and stability assessment., da: k-means kræver k, flere starts og stabilitetsvurdering.}}
+    - {id: bmb830.m09.r09, topic: batch, text: {es: Separación por grupo puede ser lote cuando ambos están confundidos., en: Group separation may be batch when the two are confounded., da: Gruppeseparation kan være batch når de er confounded.}}
+    - {id: bmb830.m09.r10, topic: validity, text: {es: Un cluster exploratorio necesita replicación y evidencia externa antes de llamarse subtipo., en: An exploratory cluster needs replication and external evidence before being called a subtype., da: En eksplorativ cluster kræver replikation og ekstern evidens før den kaldes subtype.}}
+
+source_map:
+  - {section: PCA_and_clustering, source: james_witten_hastie_tibshirani.islr.2e}
+  - {section: multivariate_foundations, source: repository.biostatistics.yachay}
+  - {section: exploratory_interpretation, source: cetinkaya_hardin.ims.2e}
+
+limitations:
+  - This module introduces PCA and clustering but not advanced latent-variable or manifold methods.
+  - Formal cluster-validation theory and high-dimensional asymptotics are deferred to BMB831.
+  - Danish text requires final native-language review before release.
