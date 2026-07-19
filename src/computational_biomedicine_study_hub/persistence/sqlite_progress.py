@@ -20,12 +20,14 @@ from ..learning.progress import (
     LearningItemKind,
     MasteryState,
     ModuleProgress,
+    OpenResponseAttempt,
+    OpenResponseDraft,
     PracticeProgress,
     ReviewSchedule,
     require_aware,
 )
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 3
 
 
 def _dump_ids(values: tuple[str, ...]) -> str:
@@ -79,6 +81,12 @@ class SQLiteProgressRepository:
                     )
                 if current < 1:
                     self._migrate_to_v1(connection)
+                    current = 1
+                if current < 2:
+                    self._migrate_to_v2(connection)
+                    current = 2
+                if current < 3:
+                    self._migrate_to_v3(connection)
                 connection.execute(f"PRAGMA user_version = {SCHEMA_VERSION}")
             self._initialized = True
 
@@ -163,6 +171,140 @@ class SQLiteProgressRepository:
             );
             CREATE INDEX IF NOT EXISTS idx_review_due
                 ON review_schedule(due_at, course_code, module_id);
+            """
+        )
+
+    @staticmethod
+    def _migrate_to_v2(connection: sqlite3.Connection) -> None:
+        connection.executescript(
+            """
+            ALTER TABLE flashcard_progress ADD COLUMN first_seen_at TEXT;
+            ALTER TABLE flashcard_progress ADD COLUMN lapse_count INTEGER NOT NULL DEFAULT 0;
+            ALTER TABLE flashcard_progress ADD COLUMN last_rating TEXT NOT NULL DEFAULT '';
+            ALTER TABLE flashcard_progress ADD COLUMN total_reviews INTEGER NOT NULL DEFAULT 0;
+            ALTER TABLE flashcard_progress ADD COLUMN bookmarked INTEGER NOT NULL DEFAULT 0;
+
+            CREATE TABLE IF NOT EXISTS schema_migrations (
+                version INTEGER PRIMARY KEY,
+                applied_at TEXT NOT NULL
+            );
+            INSERT OR IGNORE INTO schema_migrations(version, applied_at)
+                VALUES (1, CURRENT_TIMESTAMP), (2, CURRENT_TIMESTAMP);
+
+            CREATE TABLE IF NOT EXISTS study_sessions (
+                session_id TEXT PRIMARY KEY,
+                session_type TEXT NOT NULL,
+                course_code TEXT NOT NULL,
+                module_id TEXT NOT NULL,
+                started_at TEXT NOT NULL,
+                completed_at TEXT,
+                state_json TEXT NOT NULL DEFAULT '{}'
+            );
+            CREATE TABLE IF NOT EXISTS module_progress (
+                course_code TEXT NOT NULL,
+                module_id TEXT NOT NULL,
+                mastery REAL NOT NULL DEFAULT 0,
+                status TEXT NOT NULL DEFAULT 'not_started',
+                updated_at TEXT NOT NULL,
+                PRIMARY KEY(course_code, module_id)
+            );
+            CREATE TABLE IF NOT EXISTS objective_attempts (
+                attempt_id TEXT PRIMARY KEY,
+                session_id TEXT NOT NULL,
+                course_code TEXT NOT NULL,
+                module_id TEXT NOT NULL,
+                started_at TEXT NOT NULL,
+                completed_at TEXT,
+                seed INTEGER NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS objective_item_results (
+                attempt_id TEXT NOT NULL,
+                item_id TEXT NOT NULL,
+                selected_option_ids TEXT NOT NULL,
+                is_correct INTEGER NOT NULL,
+                answered_at TEXT NOT NULL,
+                PRIMARY KEY(attempt_id, item_id)
+            );
+            CREATE TABLE IF NOT EXISTS open_response_attempts (
+                attempt_id TEXT PRIMARY KEY,
+                item_id TEXT NOT NULL,
+                course_code TEXT NOT NULL,
+                module_id TEXT NOT NULL,
+                locale TEXT NOT NULL,
+                confidence TEXT NOT NULL,
+                response_text TEXT NOT NULL,
+                feedback_json TEXT,
+                version INTEGER NOT NULL DEFAULT 1,
+                helpful INTEGER,
+                created_at TEXT NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS tutor_sessions (
+                session_id TEXT PRIMARY KEY,
+                course_code TEXT NOT NULL,
+                module_id TEXT NOT NULL,
+                mode TEXT NOT NULL,
+                locale TEXT NOT NULL,
+                model TEXT NOT NULL,
+                created_at TEXT NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS tutor_messages (
+                message_id TEXT PRIMARY KEY,
+                session_id TEXT NOT NULL,
+                role TEXT NOT NULL,
+                content TEXT NOT NULL,
+                source_ids TEXT NOT NULL,
+                created_at TEXT NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS review_events (
+                event_id TEXT PRIMARY KEY,
+                item_id TEXT NOT NULL,
+                item_kind TEXT NOT NULL,
+                rating TEXT NOT NULL,
+                previous_due_at TEXT,
+                next_due_at TEXT NOT NULL,
+                created_at TEXT NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS bookmarks (
+                item_id TEXT NOT NULL,
+                item_kind TEXT NOT NULL,
+                course_code TEXT NOT NULL,
+                module_id TEXT NOT NULL,
+                created_at TEXT NOT NULL,
+                PRIMARY KEY(item_id, item_kind)
+            );
+            CREATE TABLE IF NOT EXISTS generated_questions (
+                generated_question_id TEXT PRIMARY KEY,
+                source_ids TEXT NOT NULL,
+                course_id TEXT NOT NULL,
+                module_id TEXT NOT NULL,
+                difficulty TEXT NOT NULL,
+                activity_type TEXT NOT NULL,
+                prompt TEXT NOT NULL,
+                hidden_reference_answer TEXT NOT NULL,
+                hidden_rubric TEXT NOT NULL,
+                created_at TEXT NOT NULL,
+                model TEXT NOT NULL,
+                content_version TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'active'
+            );
+            """
+        )
+
+    @staticmethod
+    def _migrate_to_v3(connection: sqlite3.Connection) -> None:
+        connection.executescript(
+            """
+            CREATE TABLE IF NOT EXISTS open_response_drafts (
+                course_code TEXT NOT NULL,
+                module_id TEXT NOT NULL,
+                item_id TEXT NOT NULL,
+                locale TEXT NOT NULL,
+                response_text TEXT NOT NULL,
+                updated_at TEXT NOT NULL,
+                PRIMARY KEY(course_code, module_id, item_id, locale)
+            );
+            INSERT OR IGNORE INTO schema_migrations(version, applied_at)
+                VALUES (3, CURRENT_TIMESTAMP);
             """
         )
 
@@ -364,6 +506,128 @@ class SQLiteProgressRepository:
                 ),
             )
 
+    def save_open_response_draft(self, draft: OpenResponseDraft) -> None:
+        with self._connect() as connection:
+            connection.execute(
+                """
+                INSERT INTO open_response_drafts (
+                    course_code, module_id, item_id, locale, response_text, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?)
+                ON CONFLICT(course_code, module_id, item_id, locale) DO UPDATE SET
+                    response_text=excluded.response_text,
+                    updated_at=excluded.updated_at
+                """,
+                (
+                    draft.course_code,
+                    draft.module_id,
+                    draft.item_id,
+                    draft.locale,
+                    draft.response_text,
+                    _dump_datetime(draft.updated_at),
+                ),
+            )
+
+    def get_open_response_draft(
+        self,
+        course_code: str,
+        module_id: str,
+        item_id: str,
+        locale: str,
+    ) -> OpenResponseDraft | None:
+        with self._connect() as connection:
+            row = connection.execute(
+                """
+                SELECT * FROM open_response_drafts
+                WHERE course_code = ? AND module_id = ? AND item_id = ? AND locale = ?
+                """,
+                (course_code, module_id, item_id, locale),
+            ).fetchone()
+        if row is None:
+            return None
+        updated_at = _load_datetime(str(row["updated_at"]))
+        assert updated_at is not None
+        return OpenResponseDraft(
+            course_code=str(row["course_code"]),
+            module_id=str(row["module_id"]),
+            item_id=str(row["item_id"]),
+            locale=str(row["locale"]),
+            response_text=str(row["response_text"]),
+            updated_at=updated_at,
+        )
+
+    def record_open_response_attempt(self, attempt: OpenResponseAttempt) -> None:
+        with self._connect() as connection:
+            connection.execute(
+                """
+                INSERT INTO open_response_attempts (
+                    attempt_id, item_id, course_code, module_id, locale, confidence,
+                    response_text, feedback_json, version, helpful, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    attempt.attempt_id,
+                    attempt.item_id,
+                    attempt.course_code,
+                    attempt.module_id,
+                    attempt.locale,
+                    attempt.confidence,
+                    attempt.response_text,
+                    attempt.feedback_json,
+                    attempt.version,
+                    None if attempt.helpful is None else int(attempt.helpful),
+                    _dump_datetime(attempt.created_at),
+                ),
+            )
+
+    def list_open_response_attempts(
+        self,
+        *,
+        course_code: str | None = None,
+        module_id: str | None = None,
+        item_id: str | None = None,
+    ) -> tuple[OpenResponseAttempt, ...]:
+        clauses: list[str] = []
+        parameters: list[object] = []
+        for column, value in (
+            ("course_code", course_code),
+            ("module_id", module_id),
+            ("item_id", item_id),
+        ):
+            if value is not None:
+                clauses.append(f"{column} = ?")
+                parameters.append(value)
+        where = f" WHERE {' AND '.join(clauses)}" if clauses else ""
+        with self._connect() as connection:
+            rows = connection.execute(
+                "SELECT * FROM open_response_attempts"
+                + where
+                + " ORDER BY created_at, version, attempt_id",
+                parameters,
+            ).fetchall()
+        attempts: list[OpenResponseAttempt] = []
+        for row in rows:
+            created_at = _load_datetime(str(row["created_at"]))
+            assert created_at is not None
+            helpful_raw = row["helpful"]
+            attempts.append(
+                OpenResponseAttempt(
+                    attempt_id=str(row["attempt_id"]),
+                    item_id=str(row["item_id"]),
+                    course_code=str(row["course_code"]),
+                    module_id=str(row["module_id"]),
+                    locale=str(row["locale"]),
+                    confidence=str(row["confidence"]),
+                    response_text=str(row["response_text"]),
+                    feedback_json=(
+                        None if row["feedback_json"] is None else str(row["feedback_json"])
+                    ),
+                    version=int(row["version"]),
+                    helpful=None if helpful_raw is None else bool(helpful_raw),
+                    created_at=created_at,
+                )
+            )
+        return tuple(attempts)
+
     def get_assessment_session(self, session_id: str) -> AssessmentSession | None:
         with self._connect() as connection:
             row = connection.execute(
@@ -425,15 +689,21 @@ class SQLiteProgressRepository:
                 """
                 INSERT INTO flashcard_progress (
                     course_code, module_id, card_id, mastery_state, repetitions,
-                    interval_days, easiness, due_at, last_reviewed_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    interval_days, easiness, due_at, last_reviewed_at, first_seen_at,
+                    lapse_count, last_rating, total_reviews, bookmarked
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(course_code, module_id, card_id) DO UPDATE SET
                     mastery_state=excluded.mastery_state,
                     repetitions=excluded.repetitions,
                     interval_days=excluded.interval_days,
                     easiness=excluded.easiness,
                     due_at=excluded.due_at,
-                    last_reviewed_at=excluded.last_reviewed_at
+                    last_reviewed_at=excluded.last_reviewed_at,
+                    first_seen_at=COALESCE(flashcard_progress.first_seen_at, excluded.first_seen_at),
+                    lapse_count=excluded.lapse_count,
+                    last_rating=excluded.last_rating,
+                    total_reviews=excluded.total_reviews,
+                    bookmarked=excluded.bookmarked
                 """,
                 (
                     progress.course_code,
@@ -445,6 +715,11 @@ class SQLiteProgressRepository:
                     progress.easiness,
                     _dump_datetime(progress.due_at),
                     _dump_datetime(progress.last_reviewed_at),
+                    _dump_datetime(progress.first_seen_at),
+                    progress.lapse_count,
+                    progress.last_rating,
+                    progress.total_reviews,
+                    int(progress.bookmarked),
                 ),
             )
 
@@ -464,20 +739,7 @@ class SQLiteProgressRepository:
             ).fetchone()
         if row is None:
             return None
-        due_at = _load_datetime(str(row["due_at"]))
-        assert due_at is not None
-        reviewed_raw = row["last_reviewed_at"]
-        return FlashcardProgress(
-            course_code=str(row["course_code"]),
-            module_id=str(row["module_id"]),
-            card_id=str(row["card_id"]),
-            mastery_state=MasteryState(str(row["mastery_state"])),
-            repetitions=int(row["repetitions"]),
-            interval_days=int(row["interval_days"]),
-            easiness=float(row["easiness"]),
-            due_at=due_at,
-            last_reviewed_at=_load_datetime(None if reviewed_raw is None else str(reviewed_raw)),
-        )
+        return self._flashcard_from_row(row)
 
     def save_review_schedule(self, schedule: ReviewSchedule) -> None:
         with self._connect() as connection:
@@ -550,27 +812,30 @@ class SQLiteProgressRepository:
                 + " ORDER BY course_code, module_id, card_id",
                 parameters,
             ).fetchall()
-        values: list[FlashcardProgress] = []
-        for row in rows:
-            due_at = _load_datetime(str(row["due_at"]))
-            assert due_at is not None
-            reviewed_raw = row["last_reviewed_at"]
-            values.append(
-                FlashcardProgress(
-                    course_code=str(row["course_code"]),
-                    module_id=str(row["module_id"]),
-                    card_id=str(row["card_id"]),
-                    mastery_state=MasteryState(str(row["mastery_state"])),
-                    repetitions=int(row["repetitions"]),
-                    interval_days=int(row["interval_days"]),
-                    easiness=float(row["easiness"]),
-                    due_at=due_at,
-                    last_reviewed_at=_load_datetime(
-                        None if reviewed_raw is None else str(reviewed_raw)
-                    ),
-                )
-            )
-        return tuple(values)
+        return tuple(self._flashcard_from_row(row) for row in rows)
+
+    @staticmethod
+    def _flashcard_from_row(row: sqlite3.Row) -> FlashcardProgress:
+        due_at = _load_datetime(str(row["due_at"]))
+        assert due_at is not None
+        reviewed_raw = row["last_reviewed_at"]
+        first_seen_raw = row["first_seen_at"]
+        return FlashcardProgress(
+            course_code=str(row["course_code"]),
+            module_id=str(row["module_id"]),
+            card_id=str(row["card_id"]),
+            mastery_state=MasteryState(str(row["mastery_state"])),
+            repetitions=int(row["repetitions"]),
+            interval_days=int(row["interval_days"]),
+            easiness=float(row["easiness"]),
+            due_at=due_at,
+            last_reviewed_at=_load_datetime(None if reviewed_raw is None else str(reviewed_raw)),
+            first_seen_at=_load_datetime(None if first_seen_raw is None else str(first_seen_raw)),
+            lapse_count=int(row["lapse_count"]),
+            last_rating=str(row["last_rating"]),
+            total_reviews=int(row["total_reviews"]),
+            bookmarked=bool(row["bookmarked"]),
+        )
 
     def list_due_reviews(
         self,
@@ -668,6 +933,48 @@ class SQLiteProgressRepository:
             pending_review_count=int(pending["pending_count"] or 0),
             last_activity_at=_load_datetime(None if last_raw is None else str(last_raw)),
         )
+
+    def set_bookmark(
+        self,
+        *,
+        item_id: str,
+        item_kind: str,
+        course_code: str,
+        module_id: str,
+        bookmarked: bool,
+    ) -> None:
+        kind = LearningItemKind(item_kind)
+        with self._connect() as connection:
+            if bookmarked:
+                connection.execute(
+                    """
+                    INSERT INTO bookmarks (
+                        item_id, item_kind, course_code, module_id, created_at
+                    ) VALUES (?, ?, ?, ?, ?)
+                    ON CONFLICT(item_id, item_kind) DO NOTHING
+                    """,
+                    (
+                        item_id,
+                        kind.value,
+                        course_code,
+                        module_id,
+                        _dump_datetime(datetime.now(UTC)),
+                    ),
+                )
+            else:
+                connection.execute(
+                    "DELETE FROM bookmarks WHERE item_id = ? AND item_kind = ?",
+                    (item_id, kind.value),
+                )
+
+    def is_bookmarked(self, *, item_id: str, item_kind: str) -> bool:
+        kind = LearningItemKind(item_kind)
+        with self._connect() as connection:
+            row = connection.execute(
+                "SELECT 1 FROM bookmarks WHERE item_id = ? AND item_kind = ?",
+                (item_id, kind.value),
+            ).fetchone()
+        return row is not None
 
     @staticmethod
     def _aggregate_mastery(states: tuple[MasteryState, ...]) -> MasteryState:

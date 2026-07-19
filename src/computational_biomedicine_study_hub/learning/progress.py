@@ -198,6 +198,55 @@ class ModuleProgress:
 
 
 @dataclass(frozen=True, slots=True)
+class OpenResponseDraft:
+    """Latest local draft for one language-independent open-response item."""
+
+    course_code: str
+    module_id: str
+    item_id: str
+    locale: str
+    response_text: str
+    updated_at: datetime
+
+    def __post_init__(self) -> None:
+        for field_name in ("course_code", "module_id", "item_id", "locale"):
+            require_identifier(str(getattr(self, field_name)), field_name)
+        require_aware(self.updated_at, "updated_at")
+
+
+@dataclass(frozen=True, slots=True)
+class OpenResponseAttempt:
+    """Versioned learner response and optional local formative feedback."""
+
+    attempt_id: str
+    item_id: str
+    course_code: str
+    module_id: str
+    locale: str
+    confidence: str
+    response_text: str
+    created_at: datetime
+    feedback_json: str | None = None
+    version: int = 1
+    helpful: bool | None = None
+
+    def __post_init__(self) -> None:
+        for field_name in (
+            "attempt_id",
+            "item_id",
+            "course_code",
+            "module_id",
+            "locale",
+        ):
+            require_identifier(str(getattr(self, field_name)), field_name)
+        if self.confidence not in {"low", "medium", "high"}:
+            raise ValueError("confidence must be low, medium, or high.")
+        if self.version < 1:
+            raise ValueError("version must be positive.")
+        require_aware(self.created_at, "created_at")
+
+
+@dataclass(frozen=True, slots=True)
 class FlashcardProgress:
     """Scheduling state for one generated or authored flashcard."""
 
@@ -210,17 +259,29 @@ class FlashcardProgress:
     easiness: float
     due_at: datetime
     last_reviewed_at: datetime | None = None
+    first_seen_at: datetime | None = None
+    lapse_count: int = 0
+    last_rating: str = ""
+    total_reviews: int = 0
+    bookmarked: bool = False
 
     def __post_init__(self) -> None:
         for field_name in ("course_code", "module_id", "card_id"):
             require_identifier(str(getattr(self, field_name)), field_name)
-        if self.repetitions < 0 or self.interval_days < 0:
+        if (
+            self.repetitions < 0
+            or self.interval_days < 0
+            or self.lapse_count < 0
+            or self.total_reviews < 0
+        ):
             raise ValueError("Flashcard repetitions and interval cannot be negative.")
         if not 1.3 <= self.easiness <= 3.0:
             raise ValueError("Flashcard easiness must be between 1.3 and 3.0.")
         require_aware(self.due_at, "due_at")
         if self.last_reviewed_at is not None:
             require_aware(self.last_reviewed_at, "last_reviewed_at")
+        if self.first_seen_at is not None:
+            require_aware(self.first_seen_at, "first_seen_at")
 
 
 @dataclass(frozen=True, slots=True)
@@ -259,6 +320,8 @@ __all__ = [
     "LearningItemKind",
     "MasteryState",
     "ModuleProgress",
+    "OpenResponseAttempt",
+    "OpenResponseDraft",
     "PracticeProgress",
     "ReviewSchedule",
     "require_aware",

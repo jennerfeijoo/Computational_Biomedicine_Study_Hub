@@ -16,6 +16,8 @@ from computational_biomedicine_study_hub.learning.progress import (
     FlashcardProgress,
     LearningItemKind,
     MasteryState,
+    OpenResponseAttempt,
+    OpenResponseDraft,
     PracticeProgress,
     ReviewSchedule,
 )
@@ -67,6 +69,18 @@ def test_schema_initialization_is_idempotent_and_versioned(tmp_path: Path) -> No
         "assessment_sessions",
         "flashcard_progress",
         "review_schedule",
+        "schema_migrations",
+        "study_sessions",
+        "module_progress",
+        "objective_attempts",
+        "objective_item_results",
+        "open_response_attempts",
+        "open_response_drafts",
+        "tutor_sessions",
+        "tutor_messages",
+        "review_events",
+        "bookmarks",
+        "generated_questions",
     }.issubset(tables)
 
 
@@ -77,6 +91,38 @@ def test_newer_database_schema_is_rejected(tmp_path: Path) -> None:
 
     with pytest.raises(RuntimeError, match="newer than supported"):
         SQLiteProgressRepository(database_path).initialize()
+
+
+def test_version_two_database_is_migrated_without_losing_progress(tmp_path: Path) -> None:
+    database_path = tmp_path / "version-two.sqlite3"
+    with sqlite3.connect(database_path) as connection:
+        SQLiteProgressRepository._migrate_to_v1(connection)
+        SQLiteProgressRepository._migrate_to_v2(connection)
+        connection.execute("PRAGMA user_version = 2")
+    repository = SQLiteProgressRepository(database_path)
+
+    repository.initialize()
+
+    assert repository.schema_version() == 3
+    repository.save_open_response_draft(
+        OpenResponseDraft(
+            "DM857",
+            "dm857.m01",
+            "dm857.m01.open.01",
+            "en",
+            "surviving draft",
+            NOW,
+        )
+    )
+    assert (
+        repository.get_open_response_draft(
+            "DM857",
+            "dm857.m01",
+            "dm857.m01.open.01",
+            "en",
+        )
+        is not None
+    )
 
 
 def test_attempts_survive_repository_restart_and_keep_option_ids(tmp_path: Path) -> None:
@@ -210,6 +256,11 @@ def test_flashcard_progress_and_module_summary_are_persistent(tmp_path: Path) ->
         easiness=2.5,
         due_at=NOW + timedelta(days=6),
         last_reviewed_at=NOW,
+        first_seen_at=NOW - timedelta(days=7),
+        lapse_count=1,
+        last_rating="good",
+        total_reviews=3,
+        bookmarked=True,
     )
     repository.save_flashcard_progress(card)
     repository.record_attempt(_attempt())
@@ -235,3 +286,35 @@ def test_flashcard_progress_and_module_summary_are_persistent(tmp_path: Path) ->
     assert summary.correct_count == 1
     assert summary.pending_review_count == 1
     assert summary.last_activity_at == NOW
+
+
+def test_open_response_versions_and_feedback_survive_restart(tmp_path: Path) -> None:
+    database_path = tmp_path / "progress.sqlite3"
+    first = OpenResponseAttempt(
+        attempt_id="open-1",
+        item_id="dm857.m01.open.01",
+        course_code="DM857",
+        module_id="dm857.m01",
+        locale="es-ES",
+        confidence="low",
+        response_text="primera versión",
+        created_at=NOW,
+    )
+    second = replace(
+        first,
+        attempt_id="open-2",
+        confidence="high",
+        response_text="segunda versión",
+        feedback_json='{"summary":"formative"}',
+        helpful=True,
+        version=2,
+        created_at=NOW + timedelta(minutes=5),
+    )
+    SQLiteProgressRepository(database_path).record_open_response_attempt(first)
+    SQLiteProgressRepository(database_path).record_open_response_attempt(second)
+
+    restored = SQLiteProgressRepository(database_path).list_open_response_attempts(
+        item_id=first.item_id
+    )
+
+    assert restored == (first, second)
