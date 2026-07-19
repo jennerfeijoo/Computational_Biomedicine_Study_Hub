@@ -1,0 +1,406 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m09
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm857.m09.f01
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front: {es: ¿Qué es una solución recursiva?, en: What is a recursive solution?, da: Hvad er en rekursiv løsning?}
+    back:
+      es: >-
+        Una solución que resuelve una instancia mediante una o más instancias de la misma forma, estrictamente menores
+        según una medida explícita, hasta alcanzar casos base resueltos directamente.
+      en: >-
+        A solution that solves an instance through one or more smaller instances of the same form, under an explicit
+        measure, until directly solved base cases are reached.
+      da: >-
+        En løsning der løser en instans gennem mindre instanser af samme form, indtil direkte basistilfælde nås.
+    linked_objectives: [m09.o1]
+    tags: [recursion, definition]
+
+  - id: dm857.m09.f02
+    mode: conceptual
+    card_type: framework
+    difficulty: foundational
+    front: {es: ¿Cuáles son las cuatro piezas de una solución recursiva?, en: What are the four pieces of a recursive solution?, da: Hvad er de fire dele af en rekursiv løsning?}
+    back:
+      es: >-
+        Contrato, caso base, reducción y combinación. El contrato define el problema; el caso base resuelve la frontera;
+        la reducción crea un subproblema menor; la combinación reconstruye la solución actual.
+      en: >-
+        Contract, base case, reduction, and combination. The contract defines the problem; the base case solves the
+        boundary; reduction creates a smaller subproblem; combination reconstructs the current result.
+      da: >-
+        Kontrakt, basistilfælde, reduktion og kombination.
+    linked_objectives: [m09.o1, m09.o2, m09.o3]
+    tags: [recursive-design]
+
+  - id: dm857.m09.f03
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front: {es: ¿Qué es un caso base?, en: What is a base case?, da: Hvad er et basistilfælde?}
+    back:
+      es: >-
+        Una instancia del dominio que puede resolverse directamente sin otra llamada recursiva. Debe ser alcanzable,
+        cubrir las fronteras necesarias y retornar un valor compatible con el contrato.
+      en: >-
+        A domain instance solved directly without another recursive call. It must be reachable, cover necessary boundaries,
+        and return a contract-compatible value.
+      da: >-
+        En domæneinstans der løses direkte uden endnu et rekursivt kald.
+    linked_objectives: [m09.o2]
+    tags: [base-case]
+
+  - id: dm857.m09.f04
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front: {es: Corrige: «Tener un caso base garantiza terminación»., en: Correct: “Having a base case guarantees termination.”, da: Ret: “Et basistilfælde garanterer terminering.”}
+    back:
+      es: >-
+        No basta con existir: cada rama recursiva debe acercarse a un caso base alcanzable mediante una medida bien fundada.
+        Una llamada con la misma entrada o con una medida creciente puede no terminar.
+      en: >-
+        Existence is insufficient: every recursive branch must approach a reachable base case under a well-founded measure.
+      da: >-
+        Det er ikke nok at basistilfældet findes; hver gren skal bevæge sig mod det med et velfunderet mål.
+    linked_objectives: [m09.o2, m09.o3]
+    tags: [termination, misconception]
+
+  - id: dm857.m09.f05
+    mode: conceptual
+    card_type: definition
+    difficulty: intermediate
+    front: {es: ¿Qué es una medida de progreso bien fundada?, en: What is a well-founded progress measure?, da: Hvad er et velfunderet fremskridtsmål?}
+    back:
+      es: >-
+        Una cantidad que se reduce estrictamente en cada llamada y no puede disminuir indefinidamente, como un entero
+        no negativo, una longitud restante o el tamaño de un intervalo finito.
+      en: >-
+        A quantity that strictly decreases at every call and cannot decrease indefinitely, such as a non-negative integer,
+        remaining length, or finite interval size.
+      da: >-
+        En størrelse der falder strengt ved hvert kald og ikke kan falde uendeligt.
+    linked_objectives: [m09.o3]
+    tags: [termination, progress]
+
+  - id: dm857.m09.f06
+    mode: practical
+    card_type: debugging
+    difficulty: foundational
+    front: {es: ¿Por qué `f(n + 1)` suele romper una recursión con caso base `n == 0` para `n >= 0`?, en: Why does `f(n + 1)` usually break recursion with base case `n == 0` for `n >= 0`?, da: Hvorfor bryder `f(n + 1)` normalt rekursion med basistilfældet `n == 0` for `n >= 0`?}
+    back:
+      es: >-
+        Porque `n` aumenta y se aleja del caso base. La medida de progreso debe decrecer, por ejemplo mediante `n - 1`,
+        o el contrato y el caso base deben reformularse coherentemente.
+      en: >-
+        Because `n` increases away from the base case. The progress measure should decrease, such as with `n - 1`.
+      da: >-
+        Fordi `n` vokser væk fra basistilfældet; fremskridtsmålet skal reduceres.
+    linked_objectives: [m09.o3]
+    tags: [debugging, progress]
+
+  - id: dm857.m09.f07
+    mode: conceptual
+    card_type: mechanism
+    difficulty: foundational
+    front: {es: ¿Qué contiene un marco de llamada recursiva?, en: What does a recursive call frame contain?, da: Hvad indeholder en rekursiv call frame?}
+    back:
+      es: >-
+        Parámetros, variables locales, estado temporal y el punto al que debe regresar la ejecución. Cada llamada tiene
+        un marco independiente, aunque los nombres locales sean iguales.
+      en: >-
+        Parameters, local variables, temporary state, and the return point. Each call has an independent frame.
+      da: >-
+        Parametre, lokale variable, midlertidig tilstand og returpunkt. Hvert kald har en uafhængig frame.
+    linked_objectives: [m09.o4]
+    tags: [call-frame, scope]
+
+  - id: dm857.m09.f08
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: Compara descenso y desenrollado., en: Compare descent and unwinding., da: Sammenlign nedstigning og afvikling.}
+    back:
+      es: >-
+        Durante el descenso se crean marcos y se ejecuta el trabajo anterior a la llamada. Tras el caso base, el
+        desenrollado retorna en orden LIFO y ejecuta la combinación o el trabajo posterior a la llamada.
+      en: >-
+        Descent creates frames and performs work before the recursive call. After the base case, unwinding returns in
+        LIFO order and performs combination or post-call work.
+      da: >-
+        Nedstigning opretter frames; afvikling returnerer i LIFO-rækkefølge og udfører kombinationen.
+    linked_objectives: [m09.o4]
+    tags: [call-stack, unwinding]
+
+  - id: dm857.m09.f09
+    mode: practical
+    card_type: code_tracing
+    difficulty: foundational
+    front:
+      es: Una función imprime `n` antes de llamar con `n-1`. ¿Qué imprime para 3 si se detiene en 0?
+      en: A function prints `n` before calling with `n-1`. What does it print for 3 when it stops at 0?
+      da: En funktion udskriver `n` før kald med `n-1`. Hvad udskrives for 3 med stop ved 0?
+    back:
+      es: `3, 2, 1`. La impresión ocurre durante el descenso.
+      en: `3, 2, 1`. Printing occurs during descent.
+      da: `3, 2, 1`. Udskriften sker under nedstigningen.
+    linked_objectives: [m09.o4]
+    tags: [tracing, descent]
+
+  - id: dm857.m09.f10
+    mode: practical
+    card_type: code_tracing
+    difficulty: foundational
+    front:
+      es: La misma función imprime después de la llamada. ¿Qué imprime para 3?
+      en: The same function prints after the recursive call. What does it print for 3?
+      da: Den samme funktion udskriver efter det rekursive kald. Hvad udskrives for 3?
+    back:
+      es: `1, 2, 3`. La impresión ocurre mientras la pila se desenrolla.
+      en: `1, 2, 3`. Printing occurs while the stack unwinds.
+      da: `1, 2, 3`. Udskriften sker under afviklingen.
+    linked_objectives: [m09.o4]
+    tags: [tracing, unwinding]
+
+  - id: dm857.m09.f11
+    mode: conceptual
+    card_type: pattern
+    difficulty: intermediate
+    front: {es: ¿Cómo se aplica el patrón «cabeza y resto» a una secuencia?, en: How does the “head and rest” pattern apply to a sequence?, da: Hvordan anvendes mønstret “hoved og rest” på en sekvens?}
+    back:
+      es: >-
+        Se procesa el primer elemento y se delega el resto a una llamada recursiva. El caso base suele ser la secuencia
+        vacía. Es conceptualmente claro, pero el slicing del resto puede crear copias costosas.
+      en: >-
+        Process the first element and delegate the rest to recursion. Empty input is a common base case. It is clear,
+        but slicing the rest may create costly copies.
+      da: >-
+        Behandl første element og deleger resten rekursivt. Tom input er ofte basistilfældet, men slicing kan koste kopier.
+    linked_objectives: [m09.o2, m09.o5, m09.o8]
+    tags: [sequence-recursion]
+
+  - id: dm857.m09.f12
+    mode: practical
+    card_type: refactoring
+    difficulty: intermediate
+    front: {es: ¿Cómo evitas `values[1:]` en cada llamada?, en: How do you avoid `values[1:]` at every call?, da: Hvordan undgår du `values[1:]` ved hvert kald?}
+    back:
+      es: >-
+        Mantén la secuencia original y pasa un índice o límites. El caso base compara el índice con la longitud, y cada
+        llamada incrementa el índice sin asignar una secuencia nueva.
+      en: >-
+        Keep the original sequence and pass an index or bounds. The base case compares the index with length, and each
+        call advances without allocating a new sequence.
+      da: >-
+        Bevar den oprindelige sekvens og send et indeks eller grænser.
+    linked_objectives: [m09.o5, m09.o8]
+    tags: [optimization, slicing]
+
+  - id: dm857.m09.f13
+    mode: conceptual
+    card_type: invariant
+    difficulty: intermediate
+    front: {es: ¿Qué invariante describe una suma recursiva por índice?, en: What invariant describes an index-based recursive sum?, da: Hvilken invariant beskriver en indeksbaseret rekursiv sum?}
+    back:
+      es: >-
+        La llamada en `index` retorna la suma de los elementos desde esa posición hasta el final. En el caso base
+        `index == len(values)`, el sufijo vacío suma el elemento neutro 0.
+      en: >-
+        The call at `index` returns the sum from that position to the end. At `index == len(values)`, the empty suffix
+        sums to neutral element 0.
+      da: >-
+        Kaldet ved `index` returnerer summen fra positionen til slutningen; det tomme suffix summerer til 0.
+    linked_objectives: [m09.o1, m09.o2, m09.o5]
+    tags: [contract, invariant]
+
+  - id: dm857.m09.f14
+    mode: conceptual
+    card_type: reasoning
+    difficulty: intermediate
+    front: {es: ¿Por qué las estructuras anidadas favorecen la recursión?, en: Why do nested structures favor recursion?, da: Hvorfor favoriserer indlejrede strukturer rekursion?}
+    back:
+      es: >-
+        Porque cada contenedor puede contener elementos o nuevos contenedores de la misma forma y con profundidad
+        desconocida. La función aplica el mismo contrato a cada subestructura.
+      en: >-
+        Each container may contain atoms or more containers of the same form at unknown depth. The same contract applies
+        to every substructure.
+      da: >-
+        Hver container kan indeholde atomer eller flere containere af samme form med ukendt dybde.
+    linked_objectives: [m09.o1, m09.o6]
+    tags: [nested-structures]
+
+  - id: dm857.m09.f15
+    mode: conceptual
+    card_type: boundary_analysis
+    difficulty: advanced
+    front: {es: ¿Qué riesgo existe al tratar cadenas como contenedores genéricos?, en: What risk arises from treating strings as generic containers?, da: Hvilken risiko opstår ved at behandle strenge som generiske containere?}
+    back:
+      es: >-
+        Una cadena puede descomponerse repetidamente en caracteres y seguir siendo una secuencia, causando comportamiento
+        no deseado o no terminación según la reducción. El contrato debe marcarla como átomo o rechazarla.
+      en: >-
+        A string may recursively decompose into characters while remaining a sequence, causing unintended behavior or
+        non-termination. The contract should classify it as atomic or reject it.
+      da: >-
+        En streng kan utilsigtet dekomponeres tegn for tegn. Kontrakten skal gøre den atomar eller afvise den.
+    linked_objectives: [m09.o3, m09.o6]
+    tags: [types, termination]
+
+  - id: dm857.m09.f16
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: Compara recursión e iteración en Python., en: Compare recursion and iteration in Python., da: Sammenlign rekursion og iteration i Python.}
+    back:
+      es: >-
+        Recursión puede reflejar mejor estructuras recursivas y divide y vencerás, pero usa un marco por llamada y tiene
+        límite práctico de profundidad. Iteración suele consumir menos pila y es preferible para secuencias planas grandes.
+      en: >-
+        Recursion may mirror recursive structures and divide-and-conquer, but uses one frame per call and has a practical
+        depth limit. Iteration usually uses less stack and fits large flat sequences.
+      da: >-
+        Rekursion spejler strukturen, men bruger frames og har dybdegrænse; iteration er ofte bedre til store flade sekvenser.
+    linked_objectives: [m09.o7]
+    tags: [recursion, iteration]
+
+  - id: dm857.m09.f17
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: advanced
+    front: {es: Corrige: «Python optimiza automáticamente la recursión de cola»., en: Correct: “Python automatically optimizes tail recursion.”, da: Ret: “Python optimerer automatisk tail recursion.”}
+    back:
+      es: >-
+        Python conserva los marcos y aplica un límite de recursión. Una formulación de cola profunda puede producir
+        `RecursionError`; si la profundidad crece con datos grandes, suele preferirse iteración explícita.
+      en: >-
+        Python retains frames and enforces a recursion limit. Deep tail recursion may raise `RecursionError`.
+      da: >-
+        Python bevarer frames og har en rekursionsgrænse; dyb tail recursion kan give `RecursionError`.
+    linked_objectives: [m09.o7]
+    tags: [tail-recursion, limits]
+
+  - id: dm857.m09.f18
+    mode: conceptual
+    card_type: mechanism
+    difficulty: advanced
+    front: {es: ¿Qué revela un árbol de llamadas?, en: What does a call tree reveal?, da: Hvad afslører et kaldstræ?}
+    back:
+      es: >-
+        Las relaciones entre llamadas, profundidad, ramificación y repetición de subproblemas. Permite distinguir una
+        cadena lineal de llamadas de un árbol exponencial y localizar entradas calculadas varias veces.
+      en: >-
+        Relationships among calls, depth, branching, and repeated subproblems. It distinguishes a linear call chain from
+        an exponential tree and locates repeated inputs.
+      da: >-
+        Relationer mellem kald, dybde, forgrening og gentagne delproblemer.
+    linked_objectives: [m09.o4, m09.o8]
+    tags: [call-tree, complexity]
+
+  - id: dm857.m09.f19
+    mode: conceptual
+    card_type: definition
+    difficulty: advanced
+    front: {es: ¿Qué es memoización?, en: What is memoization?, da: Hvad er memoization?}
+    back:
+      es: >-
+        Almacenar el resultado de un subproblema bajo una clave que representa su entrada para reutilizarlo cuando la misma
+        entrada reaparece. Intercambia memoria por tiempo y evita recomputación.
+      en: >-
+        Store a subproblem result under a key representing its input and reuse it when the same input returns. It trades
+        memory for avoided computation.
+      da: >-
+        Gem resultatet for et delproblem under en inputnøgle og genbrug det ved samme input.
+    linked_objectives: [m09.o8]
+    tags: [memoization, caching]
+
+  - id: dm857.m09.f20
+    mode: conceptual
+    card_type: limitation
+    difficulty: advanced
+    front: {es: ¿Cuándo puede ser incorrecta la memoización?, en: When can memoization be incorrect?, da: Hvornår kan memoization være forkert?}
+    back:
+      es: >-
+        Cuando la clave no incluye todo el estado que determina el resultado, por ejemplo estado global mutable, configuración,
+        tiempo o efectos secundarios. Igual clave debe implicar igual resultado válido.
+      en: >-
+        When the key omits state that determines the result, such as mutable global state, configuration, time, or side effects.
+      da: >-
+        Når nøglen udelader tilstand, der bestemmer resultatet, som muterbar global tilstand eller konfiguration.
+    linked_objectives: [m09.o8]
+    tags: [memoization, correctness]
+
+  - id: dm857.m09.f21
+    mode: practical
+    card_type: complexity_analysis
+    difficulty: advanced
+    front: {es: ¿Por qué Fibonacci ingenuo es costoso y el memoizado no?, en: Why is naive Fibonacci costly while memoized Fibonacci is not?, da: Hvorfor er naiv Fibonacci dyr, mens memoized Fibonacci ikke er?}
+    back:
+      es: >-
+        La versión ingenua vuelve a calcular los mismos `fib(k)` en múltiples ramas y genera crecimiento exponencial.
+        La memoizada calcula cada `k` una vez y reutiliza el resultado, produciendo un número lineal de estados distintos.
+      en: >-
+        Naive recursion recomputes identical `fib(k)` across branches, causing exponential growth. Memoization computes
+        each `k` once, yielding a linear number of distinct states.
+      da: >-
+        Den naive version genberegner samme `fib(k)` i flere grene; memoization beregner hvert `k` én gang.
+    linked_objectives: [m09.o8]
+    tags: [fibonacci, complexity]
+
+  - id: dm857.m09.f22
+    mode: practical
+    card_type: test_design
+    difficulty: advanced
+    front: {es: ¿Qué pruebas necesita una función recursiva además de casos típicos?, en: What tests does a recursive function need beyond typical cases?, da: Hvilke test kræver en rekursiv funktion ud over typiske tilfælde?}
+    back:
+      es: >-
+        Todos los casos base; entradas justo alrededor de las fronteras; dominio inválido; estructura vacía y asimétrica;
+        profundidad grande; equivalencia con una referencia; ausencia de mutación y límites de rendimiento.
+      en: >-
+        Every base case; values around boundaries; invalid domain; empty and asymmetric structures; large depth;
+        equivalence to a reference; non-mutation; and performance limits.
+      da: >-
+        Alle basistilfælde, grænser, ugyldigt domæne, tomme og asymmetriske strukturer, stor dybde og referenceækvivalens.
+    linked_objectives: [m09.o2, m09.o3, m09.o5, m09.o6, m09.o7]
+    tags: [testing, boundaries]
+
+  - id: dm857.m09.f23
+    mode: integrative
+    card_type: oral_defense
+    difficulty: advanced
+    front: {es: ¿Cómo defiendes la terminación de una función recursiva?, en: How do you defend termination of a recursive function?, da: Hvordan forsvarer du termineringen af en rekursiv funktion?}
+    back:
+      es: >-
+        Define el dominio, identifica una medida bien fundada, demuestra que cada rama recursiva la reduce estrictamente
+        y que al alcanzar su mínimo entra en un caso base. Después considera entradas inválidas y ciclos fuera del contrato.
+      en: >-
+        Define the domain, identify a well-founded measure, show every recursive branch strictly reduces it, and show its
+        minimum reaches a base case. Then address invalid inputs and cycles outside the contract.
+      da: >-
+        Definér domænet og et velfunderet mål, vis reduktion i hver gren og at minimum når et basistilfælde.
+    linked_objectives: [m09.o2, m09.o3]
+    tags: [oral-defense, termination]
+
+  - id: dm857.m09.f24
+    mode: integrative
+    card_type: synthesis
+    difficulty: advanced
+    front: {es: Resume el criterio para aceptar una solución recursiva como correcta y adecuada., en: Summarize the criterion for accepting a recursive solution as correct and appropriate., da: Opsummér kriteriet for at acceptere en rekursiv løsning som korrekt og passende.}
+    back:
+      es: >-
+        Debe cumplir su contrato, cubrir casos base, reducir un subproblema en todas las ramas, combinar resultados correctamente,
+        terminar para todo el dominio, tener coste y profundidad aceptables y superar pruebas de fronteras y equivalencia.
+      en: >-
+        It must satisfy its contract, cover base cases, reduce every recursive branch, combine correctly, terminate over the
+        full domain, have acceptable cost and depth, and pass boundary and equivalence tests.
+      da: >-
+        Den skal følge kontrakten, dække basistilfælde, reducere alle grene, kombinere korrekt, terminere og have acceptabel omkostning.
+    linked_objectives: [m09.o1, m09.o2, m09.o3, m09.o4, m09.o5, m09.o6, m09.o7, m09.o8]
+    tags: [synthesis, recursive-quality]
