@@ -1,0 +1,376 @@
+blueprint_version: 1.0.0
+semester: 1
+programme: MSc Computational Biomedicine
+status: authoring
+
+cross_course_design:
+  sequence:
+    - DM857 establishes computational thinking, Python, data structures, testing, and reproducibility.
+    - DM847 applies algorithmic and probabilistic models to biological sequences, networks, and omics.
+    - BMB830 establishes R-based statistical reasoning, visualization, inference, and introductory multivariate analysis.
+    - BMB831 extends R workflows to high-dimensional omics, multiple testing, protein characterization, and reproducible reporting.
+  shared_competencies:
+    - formulate a biological or medical question as an analyzable problem
+    - identify assumptions and data-generating structure
+    - implement reproducible computational workflows
+    - validate intermediate and final outputs
+    - interpret uncertainty and limitations
+    - communicate methods to specialist and non-specialist audiences
+  integration_points:
+    - id: semester1.integration.01
+      courses: [dm857, dm847]
+      focus: implement and test sequence algorithms in Python
+    - id: semester1.integration.02
+      courses: [dm847, bmb830]
+      focus: connect probabilistic sequence models with statistical reasoning
+    - id: semester1.integration.03
+      courses: [dm847, bmb831]
+      focus: analyze and interpret high-dimensional omics workflows
+    - id: semester1.integration.04
+      courses: [dm857, bmb830, bmb831]
+      focus: reproducible programming, diagnostics, visualization, and reporting
+
+courses:
+  dm857:
+    title:
+      es: Introducción a la programación
+      en: Introduction to Programming
+      da: Introduktion til programmering
+    ects: 10
+    official_assessment: group_project_report_presentation_and_individual_oral_defense
+    official_learning_outcomes:
+      - id: dm857.lo01
+        outcome: design models for concrete problems
+      - id: dm857.lo02
+        outcome: devise a program structure based on a model
+      - id: dm857.lo03
+        outcome: implement the planned program in Python
+      - id: dm857.lo04
+        outcome: find and use appropriate elements of the Python library ecosystem
+      - id: dm857.lo05
+        outcome: plan and execute program testing
+      - id: dm857.lo06
+        outcome: design and implement recursive solutions
+      - id: dm857.lo07
+        outcome: design and implement abstract data types
+      - id: dm857.lo08
+        outcome: use basic tree structures and algorithms
+    module_sequence:
+      - id: dm857.m01
+        title_en: Problem solving, values, types, and program state
+        outcomes: [dm857.lo01, dm857.lo02, dm857.lo03]
+        status: existing_content_requires_export_review
+      - id: dm857.m02
+        title_en: Boolean logic, conditionals, and decision tables
+        outcomes: [dm857.lo01, dm857.lo02, dm857.lo03]
+        status: existing_content_requires_export_review
+      - id: dm857.m03
+        title_en: Controlled iteration and loop invariants
+        outcomes: [dm857.lo02, dm857.lo03, dm857.lo05]
+        status: existing_content_requires_export_review
+      - id: dm857.m04
+        title_en: Functions, contracts, scope, and decomposition
+        outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo05]
+        status: existing_content_requires_export_review
+      - id: dm857.m05
+        title_en: Strings, parsing, and validation
+        outcomes: [dm857.lo02, dm857.lo03, dm857.lo05]
+        status: existing_content_requires_export_review
+      - id: dm857.m06
+        title_en: Sequences, mutability, and algorithmic patterns
+        outcomes: [dm857.lo02, dm857.lo03]
+        status: existing_content_requires_export_review
+      - id: dm857.m07
+        title_en: Mappings, sets, aggregation, and lookup
+        outcomes: [dm857.lo02, dm857.lo03, dm857.lo07]
+        status: existing_content_requires_export_review
+      - id: dm857.m08
+        title_en: Files, data boundaries, exceptions, and defensive I/O
+        outcomes: [dm857.lo03, dm857.lo05]
+        status: existing_content_requires_export_review
+      - id: dm857.m09
+        title_en: Recursion, recursive reasoning, and call trees
+        outcomes: [dm857.lo02, dm857.lo03, dm857.lo06]
+        status: existing_content_requires_export_review
+      - id: dm857.m10
+        title_en: Trees, traversal, and recursive data structures
+        outcomes: [dm857.lo06, dm857.lo08]
+        status: existing_content_requires_export_review
+      - id: dm857.m11
+        title_en: Abstract data types, invariants, and interfaces
+        outcomes: [dm857.lo02, dm857.lo03, dm857.lo07]
+        status: existing_content_requires_export_review
+      - id: dm857.m12
+        title_en: Classes, objects, composition, and maintainable design
+        outcomes: [dm857.lo02, dm857.lo03, dm857.lo07]
+        status: existing_content_requires_export_review
+      - id: dm857.m13
+        title_en: Libraries, environments, NumPy, pandas, and Matplotlib
+        outcomes: [dm857.lo03, dm857.lo04, dm857.lo05]
+        status: existing_content_requires_export_review
+      - id: dm857.m14
+        title_en: Testing, debugging, logging, and software quality
+        outcomes: [dm857.lo03, dm857.lo05]
+        status: existing_content_requires_export_review
+      - id: dm857.m15
+        title_en: Complexity, profiling, and evidence-based optimization
+        outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo05]
+        status: to_author
+      - id: dm857.m16
+        title_en: Integrative project design, reproducibility, and report construction
+        outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo04, dm857.lo05, dm857.lo07]
+        status: to_author
+      - id: dm857.m17
+        title_en: Project presentation and individual oral defense
+        outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo04, dm857.lo05, dm857.lo06, dm857.lo07, dm857.lo08]
+        status: to_author
+    cumulative_assessment:
+      - project brief with explicit functional and quality requirements
+      - reproducible repository and environment record
+      - report of no more than ten pages
+      - group presentation rubric
+      - individual oral-defense bank
+      - code review and testing checklist
+
+  dm847:
+    title:
+      es: Introducción a la bioinformática
+      en: Introduction to Bioinformatics
+      da: Introduktion til bioinformatik
+    ects: 10
+    official_assessment: written_project_and_30_minute_oral_exam
+    official_learning_outcomes:
+      - id: dm847.lo01
+        outcome: explain central molecular genetics, gene regulation, epigenetic DNA modification, and bacterial and phage genetics
+      - id: dm847.lo02
+        outcome: model ontologies for biomedical data dependencies
+      - id: dm847.lo03
+        outcome: design systems-biology databases
+      - id: dm847.lo04
+        outcome: explain and implement DNA and amino-acid sequence analysis using HMMs, scoring matrices, suffix arrays, and efficient statistics
+      - id: dm847.lo05
+        outcome: explain and implement statistical learning on biological networks
+      - id: dm847.lo06
+        outcome: explain bacterial-genetics specialties and operon prediction
+      - id: dm847.lo07
+        outcome: explain and implement suffix trees, suffix arrays, and the Burrows-Wheeler transformation
+      - id: dm847.lo08
+        outcome: explain de novo motif screening using expectation maximization and entropy models
+      - id: dm847.lo09
+        outcome: explain and implement supervised and unsupervised methods for biomedical omics data
+    module_sequence:
+      - id: dm847.m01
+        title_en: Molecular information, central dogma, regulation, epigenetics, bacteria, and phages
+        outcomes: [dm847.lo01]
+        bridge_from: [dm857.m05, dm857.m06]
+      - id: dm847.m02
+        title_en: Biomedical identifiers, ontologies, provenance, and FAIR data dependencies
+        outcomes: [dm847.lo02]
+        bridge_from: [dm857.m07, dm857.m08]
+      - id: dm847.m03
+        title_en: Systems-biology database design and interoperable biological resources
+        outcomes: [dm847.lo03]
+        bridge_from: [dm857.m07, dm857.m11]
+      - id: dm847.m04
+        title_en: Sequence representation, probability, scoring matrices, and significance
+        outcomes: [dm847.lo04]
+        bridge_from: [dm857.m05, bmb830.m05]
+      - id: dm847.m05
+        title_en: Pairwise sequence alignment and dynamic programming
+        outcomes: [dm847.lo04]
+        bridge_from: [dm857.m03, dm857.m04, dm857.m06]
+      - id: dm847.m06
+        title_en: Hidden Markov models for biological sequences
+        outcomes: [dm847.lo04]
+        bridge_from: [bmb830.m05, dm857.m09]
+      - id: dm847.m07
+        title_en: Suffix trees, suffix arrays, k-mer indexes, and exact pattern search
+        outcomes: [dm847.lo04, dm847.lo07]
+        bridge_from: [dm857.m10, dm857.m15]
+      - id: dm847.m08
+        title_en: Burrows-Wheeler transform, FM-index, and memory-aware read mapping
+        outcomes: [dm847.lo04, dm847.lo07]
+        bridge_from: [dm847.m07, dm857.m15]
+      - id: dm847.m09
+        title_en: Bacterial gene organization and operon prediction
+        outcomes: [dm847.lo01, dm847.lo06]
+        bridge_from: [dm847.m01, dm847.m04]
+      - id: dm847.m10
+        title_en: De novo motif discovery with entropy, mixture models, and EM
+        outcomes: [dm847.lo08]
+        bridge_from: [dm847.m04, dm847.m06, bmb830.m05]
+      - id: dm847.m11
+        title_en: NGS data, short-read workflows, quality evidence, and peak calling
+        outcomes: [dm847.lo04, dm847.lo07]
+        bridge_from: [dm847.m08, dm857.m13]
+      - id: dm847.m12
+        title_en: Biological networks, graph layout, and visual reasoning
+        outcomes: [dm847.lo05]
+        bridge_from: [dm857.m10, dm857.m13]
+      - id: dm847.m13
+        title_en: Network enrichment, active modules, and pathway interpretation
+        outcomes: [dm847.lo05]
+        bridge_from: [dm847.m12, bmb830.m07]
+      - id: dm847.m14
+        title_en: Supervised and unsupervised learning for biomedical omics
+        outcomes: [dm847.lo09]
+        bridge_from: [bmb830.m09, bmb831.m05, bmb831.m06]
+      - id: dm847.m15
+        title_en: Integrative bioinformatics project and oral scientific defense
+        outcomes: [dm847.lo01, dm847.lo02, dm847.lo03, dm847.lo04, dm847.lo05, dm847.lo06, dm847.lo07, dm847.lo08, dm847.lo09]
+        bridge_from: [dm847.m01, dm847.m02, dm847.m03, dm847.m04, dm847.m05, dm847.m06, dm847.m07, dm847.m08, dm847.m09, dm847.m10, dm847.m11, dm847.m12, dm847.m13, dm847.m14]
+    portfolio_assessment:
+      - written project assignment with transparent problem formulation and method selection
+      - reproducible algorithmic implementation or analytical workflow
+      - validation against synthetic or public reference data
+      - limitations and alternative-method comparison
+      - 30-minute oral exam bank spanning the complete syllabus
+
+  bmb830:
+    title:
+      es: Bioestadística en R I
+      en: Biostatistics in R I
+      da: Biostatistik i R I
+    ects: 5
+    official_assessment: tutorial_prerequisite_and_oral_examination
+    official_learning_outcomes:
+      - id: bmb830.lo01
+        outcome: independently analyze biological datasets
+      - id: bmb830.lo02
+        outcome: work with large data amounts and perform standard statistical analysis to identify relevant features
+      - id: bmb830.lo03
+        outcome: use standard algorithms for introductory multivariate analysis
+      - id: bmb830.lo04
+        outcome: design R scripts for detailed visualization
+      - id: bmb830.lo05
+        outcome: apply tools for data interpretation
+      - id: bmb830.lo06
+        outcome: objectively discuss data-analysis methods used in scientific publications
+    module_sequence:
+      - id: bmb830.m01
+        title_en: Statistical questions, biological variables, study units, and data provenance
+        outcomes: [bmb830.lo01, bmb830.lo05, bmb830.lo06]
+      - id: bmb830.m02
+        title_en: R foundations, vectors, data frames, functions, and reproducible scripts
+        outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo04]
+      - id: bmb830.m03
+        title_en: Data import, cleaning, missingness, reshaping, and validation
+        outcomes: [bmb830.lo01, bmb830.lo02]
+      - id: bmb830.m04
+        title_en: Descriptive statistics and honest biological visualization
+        outcomes: [bmb830.lo01, bmb830.lo04, bmb830.lo05]
+      - id: bmb830.m05
+        title_en: Probability, random variables, and biological distributions
+        outcomes: [bmb830.lo01, bmb830.lo05]
+      - id: bmb830.m06
+        title_en: Sampling distributions, estimation, confidence intervals, and bootstrap reasoning
+        outcomes: [bmb830.lo01, bmb830.lo05, bmb830.lo06]
+      - id: bmb830.m07
+        title_en: Hypothesis testing, effect sizes, multiplicity awareness, and scientific claims
+        outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo05, bmb830.lo06]
+      - id: bmb830.m08
+        title_en: Linear models, ANOVA, diagnostics, and biological interpretation
+        outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo05, bmb830.lo06]
+      - id: bmb830.m09
+        title_en: Introductory multivariate analysis with PCA, distances, and clustering
+        outcomes: [bmb830.lo02, bmb830.lo03, bmb830.lo04, bmb830.lo05]
+      - id: bmb830.m10
+        title_en: End-to-end analysis, publication appraisal, and oral examination
+        outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo03, bmb830.lo04, bmb830.lo05, bmb830.lo06]
+    oral_assessment:
+      - explain a selected statistical method and its assumptions
+      - interpret R output and visualization
+      - diagnose a flawed analysis or claim
+      - compare plausible alternative methods
+      - defend an end-to-end biological data workflow
+
+  bmb831:
+    title:
+      es: Bioestadística en R II
+      en: Biostatistics in R II
+      da: Biostatistik i R II
+    ects: 5
+    official_assessment: tutorial_participation_and_individual_report
+    official_learning_outcomes:
+      - id: bmb831.lo01
+        outcome: independently analyze conceptually demanding datasets
+      - id: bmb831.lo02
+        outcome: work with large datasets and perform standard statistical analysis to identify relevant features
+      - id: bmb831.lo03
+        outcome: use standard multivariate algorithms
+      - id: bmb831.lo04
+        outcome: design R scripts for detailed visualization
+      - id: bmb831.lo05
+        outcome: know and apply advanced tools for biological interpretation
+      - id: bmb831.lo06
+        outcome: know and apply standard pipelines for omics processing
+      - id: bmb831.lo07
+        outcome: objectively discuss data-analysis methods in scientific publications
+    module_sequence:
+      - id: bmb831.m01
+        title_en: Advanced R workflows, functional decomposition, project structure, and provenance
+        outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo04]
+        bridge_from: [bmb830.m02, bmb830.m03]
+      - id: bmb831.m02
+        title_en: High-dimensional data quality, normalization, missingness, and batch effects
+        outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo06]
+        bridge_from: [bmb830.m03, bmb830.m04]
+      - id: bmb831.m03
+        title_en: Multiple testing, false discovery rate, effect sizes, and prioritization
+        outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo07]
+        bridge_from: [bmb830.m07]
+      - id: bmb831.m04
+        title_en: Advanced statistical modeling for counts, proportions, and complex designs
+        outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo07]
+        bridge_from: [bmb830.m08]
+      - id: bmb831.m05
+        title_en: Dimension reduction, latent structure, and robust multivariate visualization
+        outcomes: [bmb831.lo03, bmb831.lo04, bmb831.lo05]
+        bridge_from: [bmb830.m09]
+      - id: bmb831.m06
+        title_en: Clustering, classification, resampling, and leakage-resistant validation
+        outcomes: [bmb831.lo01, bmb831.lo03, bmb831.lo05, bmb831.lo07]
+        bridge_from: [bmb830.m09]
+      - id: bmb831.m07
+        title_en: Bioconductor data containers, annotation, and reproducible omics infrastructure
+        outcomes: [bmb831.lo02, bmb831.lo06]
+        bridge_from: [bmb831.m01, bmb831.m02]
+      - id: bmb831.m08
+        title_en: Bulk transcriptomics workflow and differential expression
+        outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo04, bmb831.lo05, bmb831.lo06]
+        bridge_from: [bmb831.m02, bmb831.m03, bmb831.m04, bmb831.m07]
+      - id: bmb831.m09
+        title_en: Protein characterization and quantitative proteomics workflows
+        outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo05, bmb831.lo06]
+        bridge_from: [bmb831.m02, bmb831.m03, bmb831.m07]
+      - id: bmb831.m10
+        title_en: Functional enrichment, pathway analysis, and evidence-aware interpretation
+        outcomes: [bmb831.lo04, bmb831.lo05, bmb831.lo07]
+        bridge_from: [bmb831.m03, dm847.m13]
+      - id: bmb831.m11
+        title_en: Multi-omics integration, reproducibility, and critical workflow comparison
+        outcomes: [bmb831.lo01, bmb831.lo03, bmb831.lo05, bmb831.lo06, bmb831.lo07]
+        bridge_from: [bmb831.m05, bmb831.m06, bmb831.m08, bmb831.m09, bmb831.m10]
+      - id: bmb831.m12
+        title_en: Individual omics report project and scientific defense
+        outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo03, bmb831.lo04, bmb831.lo05, bmb831.lo06, bmb831.lo07]
+        bridge_from: [bmb831.m01, bmb831.m02, bmb831.m03, bmb831.m04, bmb831.m05, bmb831.m06, bmb831.m07, bmb831.m08, bmb831.m09, bmb831.m10, bmb831.m11]
+    report_assessment:
+      - explicit biological question and analysis plan
+      - documented data provenance and quality control
+      - justified preprocessing and statistical modeling
+      - reproducible R or Quarto workflow
+      - uncertainty, sensitivity, and limitations
+      - biological interpretation separated from statistical evidence
+      - report rubric aligned to all official learning outcomes
+
+authoring_order:
+  - establish shared glossary, source registry, and tutor policy
+  - export and academically review DM857 modules 1 to 14
+  - author DM857 modules 15 to 17 and cumulative project materials
+  - author DM847 modules 1 to 15
+  - author BMB830 modules 1 to 10
+  - author BMB831 modules 1 to 12
+  - run cross-course duplication and prerequisite audit
+  - produce Qwen/Ollama retrieval corpus and hidden grading guides
+  - freeze content version 1.0.0 for Codex integration
