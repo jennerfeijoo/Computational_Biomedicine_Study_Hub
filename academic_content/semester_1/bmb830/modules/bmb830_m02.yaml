@@ -144,16 +144,25 @@ concepts:
 
 worked_examples:
   - id: bmb830.m02.e01
+    example_kind: r_code
+    language: r
+    output_kind: interpretation
     title: {"es": "Coerción de un vector", "en": "Vector coercion", "da": "Vektor-coercion"}
     code: "x <- c(1, 2, \"3\")\ntypeof(x)\nx + 1"
     expected_output: {"es": "`x` es character y la suma produce error.", "en": "`x` is character and addition errors.", "da": "`x` er character og addition giver fejl."}
     explanation: {"es": "`c()` encuentra un tipo común; character domina en esta combinación.", "en": "`c()` finds a common type; character dominates here.", "da": "`c()` finder en fælles type; character dominerer her."}
   - id: bmb830.m02.e02
+    example_kind: r_code
+    language: r
+    output_kind: interpretation
     title: {"es": "Factor numérico mal convertido", "en": "Misconverted numeric factor", "da": "Forkert konverteret numerisk faktor"}
     code: "f <- factor(c(\"10\", \"20\", \"10\"))\nas.numeric(f)\nas.numeric(as.character(f))"
     expected_output: {"es": "La primera conversión da códigos 1/2; la segunda recupera 10/20.", "en": "The first returns level codes 1/2; the second recovers 10/20.", "da": "Første giver niveaukoder 1/2; anden giver 10/20."}
     explanation: {"es": "Un factor no almacena directamente los valores numéricos mostrados.", "en": "A factor does not directly store the displayed numeric values.", "da": "En faktor lagrer ikke direkte de viste numeriske værdier."}
   - id: bmb830.m02.e03
+    example_kind: r_code
+    language: r
+    output_kind: interpretation
     title: {"es": "Función segura de cambio porcentual", "en": "Safe percent-change function", "da": "Sikker procentændringsfunktion"}
     code: "percent_change <- function(before, after) {\n  stopifnot(length(before) == length(after), all(before != 0, na.rm = TRUE))\n  100 * (after - before) / before\n}"
     expected_output: {"es": "Vector de cambios porcentuales o error ante longitudes incompatibles o denominador cero.", "en": "Percent changes or an error for incompatible lengths or zero denominators.", "da": "Procentændringer eller fejl ved inkompatible længder eller nulnævnere."}

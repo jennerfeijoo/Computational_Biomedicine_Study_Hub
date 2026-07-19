@@ -126,6 +126,23 @@ concepts:
 
 worked_examples:
   - id: bmb831.m01.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      filter_measurements <- function(data, threshold) {
+        stopifnot(is.data.frame(data), length(threshold) == 1L)
+        data[data$signal >= threshold, , drop = FALSE]
+      }
+      measurements <- data.frame(
+        sample_id = c("S01", "S02", "S03"),
+        signal = c(2.1, 5.4, 4.8)
+      )
+      filter_measurements(measurements, threshold = 4)
+    expected_output: |-
+      sample_id signal
+      2       S02    5.4
+      3       S03    4.8
+    output_kind: table
     title: {"es": "Separar lectura y transformación", "en": "Separating reading and transformation", "da": "Adskille læsning og transformation"}
     scenario: {"es": "Un script lee un CSV dentro de una función que también filtra y grafica.", "en": "One function reads a CSV, filters it, and plots it.", "da": "Én funktion læser CSV, filtrerer og plotter."}
     reasoning:

@@ -125,6 +125,24 @@ concepts:
 
 worked_examples:
   - id: bmb831.m04.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      event_data <- data.frame(
+        events = c(20, 40),
+        exposure_hours = c(10, 40),
+        group = factor(c("A", "B"))
+      )
+      fit <- glm(
+        events ~ group + offset(log(exposure_hours)),
+        family = poisson(),
+        data = event_data
+      )
+      round(exp(coef(fit)["groupB"]), 2)
+    expected_output: |-
+      groupB
+         0.5
+    output_kind: console
     title: {"es": "Conteos con distinta exposición", "en": "Counts with unequal exposure", "da": "Counts med forskellig eksponering"}
     scenario: {"es": "Dos muestras tienen 20 y 40 eventos, pero exposiciones 10 y 40 horas.", "en": "Two samples have 20 and 40 events but exposures of 10 and 40 hours.", "da": "To samples har 20 og 40 events men eksponering 10 og 40 timer."}
     reasoning:
@@ -132,6 +150,17 @@ worked_examples:
       - {"es": "Usar log(horas) como offset.", "en": "Use log(hours) as offset.", "da": "Brug log(timer) som offset."}
     conclusion: {"es": "El denominador cambia la interpretación.", "en": "The denominator changes interpretation.", "da": "Nævneren ændrer fortolkningen."}
   - id: bmb831.m04.e02
+    example_kind: r_code
+    language: r
+    code: |-
+      counts <- c(4, 7, 9, 12, 18, 22)
+      poisson_fit <- glm(counts ~ 1, family = poisson())
+      dispersion <- sum(residuals(poisson_fit, type = "pearson")^2) /
+        df.residual(poisson_fit)
+      round(dispersion, 2)
+    expected_output: |-
+      [1] 3.9
+    output_kind: console
     title: {"es": "Poisson sobredisperso", "en": "Overdispersed Poisson", "da": "Overdisperseret Poisson"}
     scenario: {"es": "Media de conteo 12 y varianza residual 60.", "en": "Count mean 12 and residual variance 60.", "da": "Count-middel 12 og residualvarians 60."}
     reasoning:

@@ -140,6 +140,23 @@ concepts:
 
 worked_examples:
   - id: bmb831.m06.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      set.seed(831)
+      outcome <- rep(c(0, 1), each = 10)
+      features <- matrix(rnorm(20 * 50), nrow = 20)
+      fold_id <- sample(rep(1:5, length.out = nrow(features)))
+      selected_per_fold <- lapply(1:5, function(fold) {
+        training <- fold_id != fold
+        correlations <- apply(features[training, , drop = FALSE], 2, cor,
+                              y = outcome[training])
+        order(abs(correlations), decreasing = TRUE)[1:5]
+      })
+      lengths(selected_per_fold)
+    expected_output: |-
+      [1] 5 5 5 5 5
+    output_kind: console
     title: {"es": "Leakage por selección global", "en": "Leakage from global selection", "da": "Leakage fra global selection"}
     scenario: {"es": "Se eligen genes por asociación usando todos los datos antes de CV.", "en": "Genes are selected by association using all data before CV.", "da": "Gener vælges efter association på alle data før CV."}
     reasoning:
@@ -147,6 +164,25 @@ worked_examples:
       - {"es": "Selección debe repetirse dentro de cada training fold.", "en": "Selection must be repeated inside each training fold.", "da": "Selection skal gentages i hvert training-fold."}
     conclusion: {"es": "El AUC global está optimísticamente sesgado.", "en": "Global AUC is optimistically biased.", "da": "Global AUC er optimistisk biased."}
   - id: bmb831.m06.e02
+    example_kind: r_code
+    language: r
+    code: |-
+      cells <- data.frame(
+        patient_id = rep(sprintf("P%02d", 1:6), each = 3),
+        signal = seq_len(18)
+      )
+      test_patients <- c("P02", "P05")
+      cells$split <- ifelse(
+        cells$patient_id %in% test_patients,
+        "test",
+        "train"
+      )
+      table(cells$split, cells$patient_id)
+    expected_output:
+      es: "Cada paciente aparece en una sola partición; P02 y P05 aportan únicamente celdas de prueba."
+      en: "Every patient appears in one partition only; P02 and P05 contribute test cells only."
+      da: "Hver patient forekommer kun i én partition; P02 og P05 bidrager kun med testceller."
+    output_kind: interpretation
     title: {"es": "Células repartidas entre folds", "en": "Cells split across folds", "da": "Celler delt mellem folds"}
     scenario: {"es": "Células del mismo paciente aparecen en train y test.", "en": "Cells from the same patient appear in train and test.", "da": "Celler fra samme patient findes i train og test."}
     reasoning:

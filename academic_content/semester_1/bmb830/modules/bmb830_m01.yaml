@@ -160,6 +160,21 @@ concepts:
 
 worked_examples:
   - id: bmb830.m01.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      patients <- data.frame(
+        patient_id = sprintf("P%02d", 1:12),
+        group = rep(c("control", "intervention"), each = 6),
+        mean_cell_signal = c(4.1, 4.5, 3.9, 4.3, 4.0, 4.4,
+                             5.2, 5.0, 5.5, 4.9, 5.3, 5.1)
+      )
+      stopifnot(nrow(patients) == 12L, !anyDuplicated(patients$patient_id))
+      table(patients$group)
+    expected_output: |-
+      control intervention
+            6            6
+    output_kind: console
     title: {"es": "Células dentro de pacientes", "en": "Cells nested within patients", "da": "Celler nested i patienter"}
     problem: {"es": "Se miden 100 células de cada uno de 12 pacientes y se comparan dos grupos clínicos.", "en": "One hundred cells are measured from each of 12 patients and two clinical groups are compared.", "da": "Hundrede celler måles fra hver af 12 patienter, og to kliniske grupper sammenlignes."}
     reasoning:

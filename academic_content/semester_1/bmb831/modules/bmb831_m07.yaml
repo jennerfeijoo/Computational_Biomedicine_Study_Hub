@@ -125,6 +125,26 @@ concepts:
 
 worked_examples:
   - id: bmb831.m07.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      library(SummarizedExperiment)
+      counts <- matrix(
+        c(12, 8, 15, 9, 20, 11),
+        nrow = 2,
+        dimnames = list(c("gene_a", "gene_b"), c("S1", "S2", "S3"))
+      )
+      sample_data <- S4Vectors::DataFrame(
+        condition = c("control", "treated", "treated"),
+        row.names = colnames(counts)
+      )
+      se <- SummarizedExperiment(assays = list(counts = counts),
+                                 colData = sample_data)
+      keep <- colData(se)$condition == "treated"
+      dim(se[, keep])
+    expected_output: |-
+      [1] 2 2
+    output_kind: console
     title: {"es": "Subsetting seguro", "en": "Safe subsetting", "da": "Sikker subsetting"}
     scenario: {"es": "Se seleccionan muestras mediante `se[, keep]`.", "en": "Samples are selected using `se[, keep]`.", "da": "Samples vælges med `se[, keep]`."}
     reasoning:
@@ -139,6 +159,19 @@ worked_examples:
       - {"es": "Conservar tabla de mapeo, evidencia y política según análisis.", "en": "Preserve mapping table, evidence, and analysis-specific policy.", "da": "Bevar mapping-tabel, evidens og analysespecifik politik."}
     conclusion: {"es": "La ambigüedad debe propagarse o resolverse justificadamente.", "en": "Ambiguity must be propagated or justifiably resolved.", "da": "Tvetydighed skal propagere eller løses begrundet."}
   - id: bmb831.m07.e03
+    example_kind: r_code
+    language: r
+    code: |-
+      library(SummarizedExperiment)
+      counts <- matrix(c(10, 20, 15, 25), nrow = 2)
+      log_cpm <- log2(counts + 0.5)
+      se <- SummarizedExperiment(
+        assays = list(raw_counts = counts, log2_cpm = log_cpm)
+      )
+      assayNames(se)
+    expected_output: |-
+      [1] "raw_counts" "log2_cpm"
+    output_kind: console
     title: {"es": "Assays de escalas distintas", "en": "Assays on different scales", "da": "Assays på forskellige skalaer"}
     scenario: {"es": "Un objeto contiene counts y logCPM sin nombres descriptivos.", "en": "An object contains counts and logCPM without descriptive names.", "da": "Et objekt indeholder counts og logCPM uden beskrivende navne."}
     reasoning:

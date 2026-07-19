@@ -126,6 +126,24 @@ concepts:
 
 worked_examples:
   - id: bmb831.m10.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      detected_proteins <- 3000L
+      pathway_detected <- 80L
+      selected_proteins <- 120L
+      pathway_selected <- 12L
+      enrichment_p <- phyper(
+        pathway_selected - 1L,
+        pathway_detected,
+        detected_proteins - pathway_detected,
+        selected_proteins,
+        lower.tail = FALSE
+      )
+      signif(enrichment_p, 3)
+    expected_output: |-
+      [1] 5.79e-05
+    output_kind: console
     title: {"es": "Universo genómico incorrecto", "en": "Incorrect genome-wide universe", "da": "Forkert genom-bredt univers"}
     scenario: {"es": "Proteómica detecta 3000 proteínas y ORA usa 20000 genes.", "en": "Proteomics detects 3000 proteins but ORA uses 20000 genes.", "da": "Proteomik detekterer 3000 proteiner men ORA bruger 20000 gener."}
     reasoning:
@@ -140,6 +158,17 @@ worked_examples:
       - {"es": "Comparar sensibilidad y método rankeado.", "en": "Compare sensitivity and a ranked method.", "da": "Sammenlign følsomhed og ranked metode."}
     conclusion: {"es": "Vías robustas deben persistir razonablemente bajo decisiones plausibles.", "en": "Robust pathways should persist under plausible choices.", "da": "Robuste pathways bør persistere under plausible valg."}
   - id: bmb831.m10.e03
+    example_kind: r_code
+    language: r
+    code: |-
+      term_a <- c("G1", "G2", "G3", "G4", "G5")
+      term_b <- c("G1", "G2", "G3", "G4", "G6")
+      jaccard <- length(intersect(term_a, term_b)) /
+        length(union(term_a, term_b))
+      round(jaccard, 2)
+    expected_output: |-
+      [1] 0.67
+    output_kind: console
     title: {"es": "Términos redundantes", "en": "Redundant terms", "da": "Redundante terms"}
     scenario: {"es": "Diez términos GO comparten 80% de genes.", "en": "Ten GO terms share 80% of genes.", "da": "Ti GO-terms deler 80% af gener."}
     reasoning:

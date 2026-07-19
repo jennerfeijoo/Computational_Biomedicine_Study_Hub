@@ -159,11 +159,43 @@ concepts:
 
 worked_examples:
   - id: bmb830.m03.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      raw_csv <- "sample_id,value
+      0012,4.2
+      0120,5.1"
+      samples <- read.csv(
+        text = raw_csv,
+        colClasses = c(sample_id = "character", value = "numeric")
+      )
+      samples$sample_id
+    expected_output: |-
+      [1] "0012" "0120"
+    output_kind: console
     title: {"es": "IDs con ceros iniciales", "en": "Zero-padded identifiers", "da": "Identifikatorer med indledende nuller"}
     problem: {"es": "IDs `0012` y `0120` se importan como números.", "en": "IDs `0012` and `0120` are imported as numbers.", "da": "ID'er `0012` og `0120` importeres som tal."}
     reasoning: {"es": "Se pierde formato y puede cambiar la clave. El esquema debe declarar character y validar patrón y longitud.", "en": "Formatting is lost and keys may change. The schema should declare character and validate pattern and length.", "da": "Format og nøgle kan gå tabt. Schema skal deklarere character og validere mønster."}
     answer: {"es": "Reimportar como texto desde el archivo original; no reconstruir sin evidencia.", "en": "Reimport as text from the original file; do not reconstruct without evidence.", "da": "Genimportér som tekst fra originalfilen; rekonstruér ikke uden evidens."}
   - id: bmb830.m03.e02
+    example_kind: r_code
+    language: r
+    code: |-
+      visits <- data.frame(
+        patient_id = c("P1", "P1", "P2"),
+        visit = c(1L, 2L, 1L)
+      )
+      labs <- data.frame(
+        patient_id = c("P1", "P1", "P2"),
+        visit = c(1L, 2L, 1L),
+        marker = c(4.2, 4.8, 3.9)
+      )
+      nrow(merge(visits, labs, by = "patient_id"))
+      nrow(merge(visits, labs, by = c("patient_id", "visit")))
+    expected_output: |-
+      [1] 5
+      [1] 3
+    output_kind: console
     title: {"es": "Join muchos-a-muchos accidental", "en": "Accidental many-to-many join", "da": "Utilsigtet many-to-many join"}
     problem: {"es": "Dos tablas contienen varias filas por paciente y se unen sólo por `patient_id`.", "en": "Two tables contain multiple rows per patient and are joined only by `patient_id`.", "da": "To tabeller har flere rækker per patient og joines kun på `patient_id`."}
     reasoning: {"es": "Cada visita se combina con cada analito o visita de la otra tabla. Deben añadirse claves temporales o resumir a la granularidad requerida.", "en": "Each visit combines with every matching row. Add temporal keys or aggregate to intended granularity.", "da": "Hver række kombineres med alle matches. Tilføj tidsnøgle eller aggregér til korrekt granularitet."}

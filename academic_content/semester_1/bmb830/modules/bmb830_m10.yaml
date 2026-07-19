@@ -161,6 +161,20 @@ concepts:
 
 worked_examples:
   - id: bmb830.m10.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      biomarker <- data.frame(
+        group = factor(rep(c("control", "treatment"), each = 4)),
+        baseline = c(10, 11, 9, 12, 10, 12, 11, 9),
+        followup = c(11, 12, 10, 13, 14, 16, 15, 13)
+      )
+      fit <- lm(followup ~ group + baseline, data = biomarker)
+      round(coef(fit), 2)
+    expected_output: |-
+             (Intercept) grouptreatment        baseline
+                    1.00           3.00           1.00
+    output_kind: table
     title: {"es": "Análisis completo de biomarcador", "en": "End-to-end biomarker analysis", "da": "End-to-end biomarkøranalyse"}
     scenario: {"es": "Comparar cambio de biomarcador entre dos grupos con medición basal y final.", "en": "Compare biomarker change between two groups with baseline and follow-up.", "da": "Sammenlign biomarkørændring mellem to grupper med baseline og follow-up."}
     reasoning:
@@ -185,6 +199,21 @@ worked_examples:
     reasoning: {"es": "El intervalo incluye reducción, ausencia y aumento importante; el resultado es impreciso.", "en": "The interval includes reduction, no association, and substantial increase; the result is imprecise.", "da": "Intervallet inkluderer reduktion, ingen association og stor stigning; resultatet er upræcist."}
     conclusion: {"es": "Reescribir como evidencia insuficiente para precisar dirección y magnitud.", "en": "Rewrite as insufficient evidence to determine direction and magnitude precisely.", "da": "Omskriv som utilstrækkelig evidens til præcis retning og magnitude."}
   - id: bmb830.m10.e04
+    example_kind: r_code
+    language: r
+    code: |-
+      selected_matrix <- scale(matrix(
+        c(4, 5, 6, 7, 12, 13, 14, 15,
+          8, 7, 9, 8,  3,  4,  2,  3),
+        nrow = 8
+      ))
+      pca <- prcomp(selected_matrix)
+      round(summary(pca)$importance["Proportion of Variance", ], 2)
+    expected_output:
+      es: "Una proporción alta en PC1 describe varianza de estos datos seleccionados; no es una estimación de precisión predictiva fuera de muestra."
+      en: "A high PC1 proportion describes variance in these selected data; it is not an estimate of out-of-sample predictive accuracy."
+      da: "En høj PC1-andel beskriver varians i de valgte data; den estimerer ikke prædiktiv nøjagtighed uden for samplet."
+    output_kind: interpretation
     title: {"es": "PCA presentada como clasificación", "en": "PCA presented as classification", "da": "PCA præsenteret som klassifikation"}
     scenario: {"es": "Un PCA exploratorio separa visualmente grupos en los mismos datos usados para elegir variables.", "en": "Exploratory PCA visually separates groups in the same data used to select variables.", "da": "Eksplorativ PCA separerer visuelt grupper i samme data brugt til variabelvalg."}
     reasoning: {"es": "La selección supervisada previa introduce optimismo; PCA no estima generalización ni prueba clases.", "en": "Prior supervised selection induces optimism; PCA does not estimate generalization or prove classes.", "da": "Superviseret variabelvalg giver optimisme; PCA estimerer ikke generalisering."}

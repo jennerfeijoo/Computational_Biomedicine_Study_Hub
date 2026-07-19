@@ -157,11 +157,40 @@ concepts:
 
 worked_examples:
   - id: bmb830.m04.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      length_of_stay <- c(2, 3, 3, 4, 5, 42)
+      c(
+        mean = mean(length_of_stay),
+        median = median(length_of_stay),
+        q3 = unname(quantile(length_of_stay, 0.75))
+      )
+    expected_output: |-
+      mean median     q3
+      9.8333 3.5000 4.7500
+    output_kind: table
     title: {"es": "Media engañosa en distribución sesgada", "en": "Misleading mean in a skewed distribution", "da": "Misvisende mean i skæv fordeling"}
     problem: {"es": "Tiempos de estancia incluyen muchos valores bajos y pocos extremadamente altos.", "en": "Lengths of stay include many low values and a few extreme values.", "da": "Opholdstider har mange lave og få meget høje værdier."}
     reasoning: {"es": "La media refleja carga total, pero no al paciente típico. Deben mostrarse mediana, IQR, media y distribución según la pregunta.", "en": "Mean reflects total burden but not a typical patient. Show median, IQR, mean, and distribution according to the question.", "da": "Mean afspejler total belastning men ikke typisk patient; vis median, IQR, mean og fordeling."}
     answer: {"es": "No elegir media o mediana por regla fija; declarar qué aspecto resume cada una.", "en": "Do not choose mean or median by rote; state what each summarizes.", "da": "Vælg ikke mekanisk mean eller median; angiv hvad hver opsummerer."}
   - id: bmb830.m04.e02
+    example_kind: r_code
+    language: r
+    code: |-
+      values <- data.frame(
+        group = rep(c("A", "B"), each = 6),
+        response = c(4, 5, 5, 5, 5, 6, 1, 1, 1, 9, 9, 9)
+      )
+      stripchart(response ~ group, data = values, method = "jitter",
+                 vertical = TRUE, pch = 19, ylab = "Response")
+      points(1:2, tapply(values$response, values$group, mean),
+             pch = 18, cex = 1.4)
+    expected_output:
+      es: "Gráfico de puntos por grupo: las medias coinciden, pero B muestra mucha mayor dispersión y dos conglomerados."
+      en: "Grouped dot plot: the means coincide, but B shows much greater spread and two clusters."
+      da: "Grupperet punktplot: middelværdierne er ens, men B har langt større spredning og to klynger."
+    output_kind: plot_description
     title: {"es": "Barras de medias frente a puntos", "en": "Mean bars versus points", "da": "Mean-bars versus punkter"}
     problem: {"es": "Dos grupos de n=6 tienen igual media pero distribuciones muy diferentes.", "en": "Two n=6 groups have equal means but very different distributions.", "da": "To grupper med n=6 har samme mean men meget forskellige fordelinger."}
     reasoning: {"es": "Un barplot idéntico oculta dispersión y bimodalidad. Puntos individuales, resumen e intervalos revelan estructura.", "en": "Identical bars hide spread and bimodality. Individual points plus summary and intervals reveal structure.", "da": "Identiske bars skjuler spredning og multimodalitet; individuelle punkter viser strukturen."}

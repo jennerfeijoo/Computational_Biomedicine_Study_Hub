@@ -125,6 +125,20 @@ concepts:
 
 worked_examples:
   - id: bmb831.m02.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      expression <- matrix(
+        c(8, 9, 8, 14, 15, 14,
+          5, 5, 6, 10, 11, 10),
+        nrow = 6
+      )
+      batch <- factor(rep(c("run_1", "run_2"), each = 3))
+      pca <- prcomp(expression, scale. = TRUE)
+      round(abs(cor(pca$x[, 1], as.numeric(batch))), 2)
+    expected_output: |-
+      [1] 0.99
+    output_kind: console
     title: {"es": "PCA separa por lote", "en": "PCA separates by batch", "da": "PCA adskiller efter batch"}
     scenario: {"es": "PC1 coincide con fecha de secuenciación y no con condición.", "en": "PC1 aligns with sequencing date rather than condition.", "da": "PC1 følger sekventeringsdato frem for condition."}
     reasoning:
@@ -139,6 +153,18 @@ worked_examples:
       - {"es": "Se requieren controles externos o escala por célula para identificarlo.", "en": "External controls or per-cell scale are needed.", "da": "Eksterne kontroller eller per-celle-skala er nødvendig."}
     conclusion: {"es": "La normalización depende del estimando y referencia de escala.", "en": "Normalization depends on the estimand and scale reference.", "da": "Normalisering afhænger af estimand og skalareference."}
   - id: bmb831.m02.e03
+    example_kind: r_code
+    language: r
+    code: |-
+      protein <- c(12.4, NA, 8.1, NA, 15.2)
+      imputed <- replace(protein, is.na(protein),
+                         min(protein, na.rm = TRUE) / 2)
+      rbind(observed = protein, minimum_imputed = imputed)
+    expected_output:
+      es: "Las dos ausencias reciben 4.05, creando valores bajos artificialmente idénticos; la tabla no demuestra que fueran señales por debajo del límite."
+      en: "Both missing values become 4.05, creating identical artificial lows; the table does not show that they were signals below the limit."
+      da: "Begge manglende værdier bliver 4,05 og skaber identiske kunstige lave værdier; tabellen viser ikke at de lå under grænsen."
+    output_kind: interpretation
     title: {"es": "Imputación de mínimos en proteómica", "en": "Minimum imputation in proteomics", "da": "Minimumimputation i proteomik"}
     scenario: {"es": "Todos los NA se reemplazan por un valor pequeño.", "en": "All NAs are replaced by a small value.", "da": "Alle NA erstattes med en lille værdi."}
     reasoning:

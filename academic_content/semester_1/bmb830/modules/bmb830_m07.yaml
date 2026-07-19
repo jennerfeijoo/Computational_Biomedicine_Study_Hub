@@ -158,6 +158,20 @@ concepts:
 
 worked_examples:
   - id: bmb830.m07.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      estimate <- 0.2
+      confidence_interval <- c(0.15, 0.25)
+      biological_threshold <- 2
+      c(
+        statistically_compatible = all(confidence_interval > 0),
+        biologically_relevant = abs(estimate) >= biological_threshold
+      )
+    expected_output: |-
+      statistically_compatible biologically_relevant
+                           TRUE                 FALSE
+    output_kind: table
     title: {"es": "p pequeño y efecto trivial", "en": "Small p and trivial effect", "da": "Lille p og trivial effekt"}
     problem: {"es": "Diferencia media 0.2 unidades, IC95% [0.15,0.25], p<0.001; umbral biológico relevante 2 unidades.", "en": "Mean difference 0.2, 95% CI [0.15,0.25], p<0.001; biologically relevant threshold 2 units.", "da": "Mean-forskel 0,2, 95% CI [0,15;0,25], p<0,001; biologisk tærskel 2."}
     reasoning: {"es": "Hay evidencia precisa de diferencia pequeña, pero el intervalo excluye magnitudes biológicamente relevantes.", "en": "There is precise evidence of a small difference, but the interval excludes biologically relevant magnitude.", "da": "Der er præcis evidens for en lille forskel, men intervallet udelukker biologisk relevant magnitude."}
@@ -168,6 +182,18 @@ worked_examples:
     reasoning: {"es": "El intervalo incluye beneficio, ausencia y daño. No hay evidencia precisa de ausencia.", "en": "The interval includes benefit, no effect, and harm. It is not precise evidence of absence.", "da": "Intervallet inkluderer fordel, ingen effekt og skade; det er ikke præcis evidens for fravær."}
     answer: {"es": "Resultado inconcluso; se requiere más precisión o un diseño de equivalencia si esa es la pregunta.", "en": "Inconclusive; more precision or an equivalence design is needed if that is the question.", "da": "Inkonklusivt; mere præcision eller equivalence-design kræves."}
   - id: bmb830.m07.e03
+    example_kind: r_code
+    language: r
+    code: |-
+      p_values <- c(0.001, 0.012, 0.021, 0.049, rep(0.20, 16))
+      c(
+        raw_below_005 = sum(p_values < 0.05),
+        bh_below_005 = sum(p.adjust(p_values, method = "BH") < 0.05)
+      )
+    expected_output: |-
+      raw_below_005 bh_below_005
+                  4            1
+    output_kind: table
     title: {"es": "Veinte pruebas sin ajuste", "en": "Twenty unadjusted tests", "da": "Tyve tests uden korrektion"}
     problem: {"es": "Se prueban 20 outcomes independientes a α=0.05.", "en": "Twenty independent outcomes are tested at α=0.05.", "da": "Tyve uafhængige outcomes testes ved α=0,05."}
     reasoning: {"es": "P(al menos un falso positivo)=1−0.95^20≈0.64 bajo nulos verdaderos.", "en": "P(at least one false positive)=1−0.95^20≈0.64 under true nulls.", "da": "P(mindst én falsk positiv)=1−0,95^20≈0,64 under sande nuller."}

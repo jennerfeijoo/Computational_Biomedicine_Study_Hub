@@ -167,6 +167,23 @@ concepts:
 
 worked_examples:
   - id: bmb830.m09.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      measurements <- data.frame(
+        age_years = c(34, 41, 52, 60),
+        protein_pg_ml = c(1200, 1800, 2600, 3200),
+        weight_kg = c(62, 75, 81, 90)
+      )
+      unscaled <- prcomp(measurements, scale. = FALSE)
+      scaled <- prcomp(measurements, scale. = TRUE)
+      round(unscaled$rotation[, 1], 3)
+      round(scaled$rotation[, 1], 3)
+    expected_output:
+      es: "Sin escalado, la carga absoluta de proteína domina PC1; tras estandarizar, las tres variables contribuyen en una escala comparable."
+      en: "Without scaling, protein has the dominant absolute PC1 loading; after standardization, all three variables contribute on a comparable scale."
+      da: "Uden skalering dominerer protein PC1; efter standardisering bidrager alle tre variable på en sammenlignelig skala."
+    output_kind: interpretation
     title: {"es": "Dominio por unidades", "en": "Dominance by units", "da": "Dominans fra enheder"}
     problem: {"es": "Una matriz incluye edad en años, proteína en pg/mL y peso en kg; PCA sin escalado está dominada por proteína.", "en": "A matrix contains age in years, protein in pg/mL, and weight in kg; unscaled PCA is dominated by protein.", "da": "En matrix har alder, protein i pg/mL og vægt; uskaleret PCA domineres af protein."}
     reasoning: {"es": "La mayor varianza numérica controla la covarianza. Escalar puede ser apropiado si se desea peso comparable, pero cambia la pregunta.", "en": "The largest numerical variance controls covariance. Scaling may be appropriate for equal initial weight but changes the question.", "da": "Størst numerisk varians styrer kovariansen. Skalering kan være passende men ændrer spørgsmålet."}
@@ -177,6 +194,24 @@ worked_examples:
     reasoning: {"es": "Grupo y lote están completamente confundidos; no es posible atribuir la separación a biología con estos datos.", "en": "Group and batch are completely confounded; separation cannot be attributed to biology from these data.", "da": "Gruppe og batch er fuldt confounded; separation kan ikke tilskrives biologi."}
     answer: {"es": "Declarar confusión de diseño y evitar una corrección que finja identificar el componente biológico.", "en": "Declare design confounding and avoid correction that pretends to identify biology.", "da": "Deklarér design-confounding og undgå korrektion der foregiver at identificere biologien."}
   - id: bmb830.m09.e03
+    example_kind: r_code
+    language: r
+    code: |-
+      set.seed(830)
+      points <- rbind(
+        cbind(rnorm(10, -1, 0.8), rnorm(10, 0, 0.8)),
+        cbind(rnorm(10, 1, 0.8), rnorm(10, 0, 0.8))
+      )
+      set.seed(831)
+      cluster_a <- kmeans(points, centers = 3, nstart = 1)$cluster
+      set.seed(832)
+      cluster_b <- kmeans(points, centers = 3, nstart = 1)$cluster
+      sum(cluster_a != cluster_b)
+    expected_output:
+      es: "Un número positivo de asignaciones cambia entre inicializaciones; la comparación ilustra sensibilidad, no una etiqueta estable."
+      en: "A positive number of assignments changes across initializations; the comparison illustrates sensitivity, not a stable label."
+      da: "Et positivt antal tildelinger ændres mellem initialiseringer; sammenligningen viser følsomhed, ikke stabile labels."
+    output_kind: interpretation
     title: {"es": "Clusters inestables", "en": "Unstable clusters", "da": "Ustabile clusters"}
     problem: {"es": "k-means con k=3 cambia sustancialmente entre semillas.", "en": "k-means with k=3 changes substantially across seeds.", "da": "k-means med k=3 ændres væsentligt mellem seeds."}
     reasoning: {"es": "La función objetivo tiene múltiples soluciones locales o estructura débil. Se requieren múltiples inicios y evaluación de estabilidad.", "en": "The objective has multiple local solutions or weak structure. Multiple starts and stability assessment are needed.", "da": "Objektivet har flere lokale løsninger eller svag struktur; flere starts og stabilitet kræves."}

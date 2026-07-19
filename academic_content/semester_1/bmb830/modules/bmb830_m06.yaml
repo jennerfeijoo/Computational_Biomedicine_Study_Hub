@@ -158,6 +158,16 @@ concepts:
 
 worked_examples:
   - id: bmb830.m06.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      sample_sd <- 12
+      n <- 36L
+      standard_error <- sample_sd / sqrt(n)
+      standard_error
+    expected_output: |-
+      [1] 2
+    output_kind: console
     title: {"es": "SD frente a SE", "en": "SD versus SE", "da": "SD versus SE"}
     problem: {"es": "Una muestra tiene SD=12 y n=36.", "en": "A sample has SD=12 and n=36.", "da": "En sample har SD=12 og n=36."}
     reasoning: {"es": "SE de la media≈12/√36=2. SD describe personas; SE describe incertidumbre de la media.", "en": "Mean SE≈12/√36=2. SD describes individuals; SE describes uncertainty in the mean.", "da": "SE≈12/√36=2. SD beskriver personer; SE usikkerhed i mean."}
@@ -168,6 +178,21 @@ worked_examples:
     reasoning: {"es": "El procedimiento es compatible con diferencias positivas de ese rango bajo supuestos. No significa 95% de probabilidad de que el parámetro esté dentro.", "en": "Under assumptions, the procedure yields values compatible with positive differences in that range. It is not a 95% posterior probability.", "da": "Under antagelser er intervallet kompatibelt med positive forskelle; det er ikke 95% posterior sandsynlighed."}
     answer: {"es": "Estimación positiva con incertidumbre; revisar importancia biológica y supuestos.", "en": "Positive estimate with uncertainty; assess biological relevance and assumptions.", "da": "Positivt estimat med usikkerhed; vurder biologisk relevans og antagelser."}
   - id: bmb830.m06.e03
+    example_kind: r_code
+    language: r
+    code: |-
+      patient_means <- c(4.1, 5.3, 4.8, 6.0, 5.5, 4.6)
+      set.seed(830)
+      bootstrap_means <- replicate(
+        2000,
+        mean(sample(patient_means, replace = TRUE))
+      )
+      round(quantile(bootstrap_means, c(0.025, 0.975)), 2)
+    expected_output:
+      es: "Dos cuantiles reproducibles que delimitan la distribución bootstrap de la media de pacientes; la unidad remuestreada sigue siendo el paciente."
+      en: "Two reproducible quantiles delimiting the bootstrap distribution of the patient mean; the resampled unit remains the patient."
+      da: "To reproducerbare kvantiler af bootstrapfordelingen for patientgennemsnittet; den resamplede enhed er fortsat patienten."
+    output_kind: interpretation
     title: {"es": "Bootstrap por paciente", "en": "Patient-level bootstrap", "da": "Bootstrap på patientniveau"}
     problem: {"es": "Cada paciente tiene varias mediciones celulares.", "en": "Each patient has multiple cellular measurements.", "da": "Hver patient har flere cellulære målinger."}
     reasoning: {"es": "Remuestrear células rompe la estructura y exagera n. Se remuestrean pacientes con todas sus mediciones, recalculando el estimador completo.", "en": "Resampling cells breaks structure and inflates n. Resample patients with all their measurements and recompute the full estimator.", "da": "Resampling af celler bryder strukturen. Resample patienter med alle deres målinger."}

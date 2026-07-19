@@ -126,6 +126,22 @@ concepts:
 
 worked_examples:
   - id: bmb831.m09.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      identifications <- data.frame(
+        protein = c("P1", "P1", "P2", "P3"),
+        psm_p = c(0.001, 0.02, 0.03, 0.04)
+      )
+      protein_p <- aggregate(psm_p ~ protein, identifications, min)
+      protein_p$protein_fdr <- p.adjust(protein_p$psm_p, method = "BH")
+      protein_p
+    expected_output: |-
+      protein psm_p protein_fdr
+      1      P1 0.001       0.003
+      2      P2 0.030       0.040
+      3      P3 0.040       0.040
+    output_kind: table
     title: {"es": "FDR PSM frente a proteína", "en": "PSM versus protein FDR", "da": "PSM versus protein-FDR"}
     scenario: {"es": "Se controla PSM FDR al 1% y se reportan proteínas sin filtro adicional.", "en": "PSM FDR is controlled at 1% and proteins are reported without further filtering.", "da": "PSM-FDR kontrolleres ved 1% og proteiner rapporteres uden yderligere filter."}
     reasoning:
@@ -140,6 +156,25 @@ worked_examples:
       - {"es": "Reportar grupo indistinguible y propagar ambigüedad.", "en": "Report an indistinguishable group and propagate ambiguity.", "da": "Rapportér en uadskillelig gruppe og propagér tvetydighed."}
     conclusion: {"es": "La resolución está limitada por péptidos observados.", "en": "Resolution is limited by observed peptides.", "da": "Opløsning begrænses af observerede peptider."}
   - id: bmb831.m09.e03
+    example_kind: r_code
+    language: r
+    code: |-
+      abundance <- data.frame(
+        feature = c("phosphosite_A", "protein_A"),
+        log2_fold_change = c(1.2, 0.0),
+        layer = c("phosphoproteome", "proteome")
+      )
+      reshape(
+        abundance,
+        idvar = "feature",
+        timevar = "layer",
+        direction = "wide"
+      )
+    expected_output:
+      es: "Las dos capas deben permanecer explícitas: el aumento del fosfosito describe regulación de modificación, no mayor abundancia total de proteína."
+      en: "The two layers must remain explicit: the phosphosite increase indicates modification regulation, not higher total protein abundance."
+      da: "De to lag skal forblive eksplicitte: stigningen i phosphosite viser regulering af modifikation, ikke højere total proteinmængde."
+    output_kind: interpretation
     title: {"es": "Fosfopéptido aumenta sin cambio de proteína", "en": "Phosphopeptide increase without protein change", "da": "Fosfopeptid-stigning uden proteinændring"}
     scenario: {"es": "Fosfopéptido log2FC=1.2 y proteína total estable.", "en": "Phosphopeptide log2FC=1.2 while total protein is stable.", "da": "Fosfopeptid log2FC=1.2 mens totalprotein er stabilt."}
     reasoning:

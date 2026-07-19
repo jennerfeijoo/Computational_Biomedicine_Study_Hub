@@ -303,6 +303,19 @@ concepts:
 
 worked_examples:
   - id: bmb831.m12.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      sample_data <- data.frame(
+        batch = factor(c("B1", "B1", "B1", "B2", "B2", "B2")),
+        treatment = factor(c("control", "control", "treated",
+                             "control", "treated", "treated"))
+      )
+      design_matrix <- model.matrix(~ batch + treatment, data = sample_data)
+      qr(design_matrix)$rank == ncol(design_matrix)
+    expected_output: |-
+      [1] TRUE
+    output_kind: console
     title:
       es: "Informe transcriptómico con batch parcialmente cruzado"
       en: "Transcriptomics report with partially crossed batch"

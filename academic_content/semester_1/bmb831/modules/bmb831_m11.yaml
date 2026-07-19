@@ -127,6 +127,24 @@ concepts:
 
 worked_examples:
   - id: bmb831.m11.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      multi_omics <- data.frame(
+        patient_id = sprintf("P%02d", 1:6),
+        severity = c("low", "low", "medium", "high", "high", "high"),
+        transcript_score = c(2.1, 2.4, 3.0, 4.8, 5.1, 5.4),
+        protein_score = c(1.9, 2.2, 2.8, NA, NA, 4.9)
+      )
+      with(
+        multi_omics,
+        table(severity, complete_case = complete.cases(protein_score))
+      )
+    expected_output:
+      es: "Los casos completos excluyen de forma desproporcionada pacientes de gravedad alta; la intersección cambia la población analizada."
+      en: "Complete cases disproportionately exclude high-severity patients; the intersection changes the analyzed population."
+      da: "Complete cases udelukker uforholdsmæssigt patienter med høj severity; intersektionen ændrer populationen."
+    output_kind: interpretation
     title: {"es": "Intersección sesgada de muestras", "en": "Biased sample intersection", "da": "Biased sample-intersection"}
     scenario: {"es": "Proteómica falta más en pacientes graves; integración usa sólo completos.", "en": "Proteomics is more often missing in severe patients; integration uses complete cases only.", "da": "Proteomik mangler oftere hos alvorlige patienter; integration bruger kun komplette cases."}
     reasoning:
@@ -134,6 +152,21 @@ worked_examples:
       - {"es": "Comparar características, modelar missing modality o usar integración tardía.", "en": "Compare characteristics, model missing modality, or use late integration.", "da": "Sammenlign karakteristika, modellér manglende modalitet eller brug sen integration."}
     conclusion: {"es": "Complete-case integration cambia estimando y población.", "en": "Complete-case integration changes estimand and population.", "da": "Complete-case-integration ændrer estimand og population."}
   - id: bmb831.m11.e02
+    example_kind: r_code
+    language: r
+    code: |-
+      set.seed(831)
+      transcriptomics <- matrix(rnorm(8 * 20000), nrow = 8)
+      proteomics <- matrix(rnorm(8 * 500), nrow = 8)
+      block_weights <- c(
+        transcriptomics = 1 / sqrt(ncol(transcriptomics)),
+        proteomics = 1 / sqrt(ncol(proteomics))
+      )
+      round(block_weights, 4)
+    expected_output: |-
+      transcriptomics      proteomics
+              0.0071          0.0447
+    output_kind: table
     title: {"es": "Concatenación dominada por transcriptómica", "en": "Transcriptomics-dominated concatenation", "da": "Transkriptomik-domineret concatenation"}
     scenario: {"es": "20000 genes y 500 proteins se concatenan sin ponderación.", "en": "20,000 genes and 500 proteins are concatenated without weighting.", "da": "20000 gener og 500 proteiner concatenates uden vægtning."}
     reasoning:

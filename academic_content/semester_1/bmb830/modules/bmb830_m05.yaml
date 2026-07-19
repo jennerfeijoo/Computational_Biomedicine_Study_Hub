@@ -157,6 +157,18 @@ concepts:
 
 worked_examples:
   - id: bmb830.m05.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      prevalence <- 0.01
+      sensitivity <- 0.90
+      specificity <- 0.95
+      ppv <- sensitivity * prevalence /
+        (sensitivity * prevalence + (1 - specificity) * (1 - prevalence))
+      round(ppv, 3)
+    expected_output: |-
+      [1] 0.154
+    output_kind: console
     title: {"es": "Valor predictivo en evento raro", "en": "Predictive value for a rare event", "da": "Prædiktiv værdi ved sjælden hændelse"}
     problem: {"es": "Prevalencia 1%, sensibilidad 90% y especificidad 95%.", "en": "Prevalence 1%, sensitivity 90%, specificity 95%.", "da": "Prævalens 1%, sensitivitet 90% og specificitet 95%."}
     reasoning: {"es": "En 10,000 personas se esperan 90 verdaderos positivos y 495 falsos positivos; PPV≈15.4%.", "en": "Among 10,000 people expect 90 true positives and 495 false positives; PPV≈15.4%.", "da": "Blandt 10.000 forventes 90 sande positive og 495 falske positive; PPV≈15,4%."}
@@ -167,6 +179,16 @@ worked_examples:
     reasoning: {"es": "Las células pueden compartir microambiente y estado; la independencia binomial puede fallar y la varianza real superar np(1-p).", "en": "Cells may share microenvironment and state; binomial independence may fail and variance exceed np(1-p).", "da": "Celler kan dele miljø; binomial uafhængighed kan brydes og varians overstige np(1-p)."}
     answer: {"es": "Evaluar agrupación o modelo beta-binomial/hierárquico en niveles posteriores.", "en": "Assess clustering or a beta-binomial/hierarchical model in later coursework.", "da": "Vurder clustering eller beta-binomial/hierarkisk model senere."}
   - id: bmb830.m05.e03
+    example_kind: r_code
+    language: r
+    code: |-
+      events <- c(lab_a = 20, lab_b = 30)
+      hours <- c(lab_a = 100, lab_b = 300)
+      round(100 * events / hours, 1)
+    expected_output: |-
+      lab_a lab_b
+       20.0  10.0
+    output_kind: table
     title: {"es": "Poisson con exposiciones distintas", "en": "Poisson with unequal exposure", "da": "Poisson med forskellig exposure"}
     problem: {"es": "Dos laboratorios reportan 20 y 30 eventos, pero observaron 100 y 300 horas.", "en": "Two labs report 20 and 30 events over 100 and 300 hours.", "da": "To laboratorier rapporterer 20 og 30 events over 100 og 300 timer."}
     reasoning: {"es": "Comparar conteos sugiere más en el segundo, pero tasas son 0.20 y 0.10 por hora. Debe incluirse exposición.", "en": "Counts suggest more in the second, but rates are 0.20 and 0.10 per hour. Exposure must be included.", "da": "Counts antyder mere i andet laboratorium, men rater er 0,20 og 0,10 per time; exposure skal med."}

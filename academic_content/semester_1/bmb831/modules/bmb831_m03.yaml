@@ -124,6 +124,22 @@ concepts:
 
 worked_examples:
   - id: bmb831.m03.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      p_values <- c(0.001, 0.012, 0.021, 0.20, 0.70)
+      data.frame(
+        p_value = p_values,
+        bh_adjusted = round(p.adjust(p_values, method = "BH"), 3)
+      )
+    expected_output: |-
+      p_value bh_adjusted
+      1   0.001       0.005
+      2   0.012       0.030
+      3   0.021       0.035
+      4   0.200       0.250
+      5   0.700       0.700
+    output_kind: table
     title: {"es": "BH con cinco pruebas", "en": "BH with five tests", "da": "BH med fem tests"}
     scenario: {"es": "p={0.001,0.012,0.021,0.20,0.70}, α=0.05.", "en": "p={0.001,0.012,0.021,0.20,0.70}, α=0.05.", "da": "p={0.001,0.012,0.021,0.20,0.70}, α=0.05."}
     reasoning:
@@ -138,6 +154,22 @@ worked_examples:
       - {"es": "Filtrar por fold change observado no lo es.", "en": "Filtering on observed fold change is not.", "da": "Filtrering på observeret fold change er ikke."}
     conclusion: {"es": "El criterio debe definirse antes y documentarse.", "en": "The criterion should be prespecified and documented.", "da": "Kriteriet bør prædefineres og dokumenteres."}
   - id: bmb831.m03.e03
+    example_kind: r_code
+    language: r
+    code: |-
+      candidates <- data.frame(
+        feature = c("A", "B"),
+        log2_fold_change = c(0.2, 1.5),
+        adjusted_p = c(1e-8, 0.03)
+      )
+      candidates$passes_effect_threshold <-
+        abs(candidates$log2_fold_change) >= 1
+      candidates
+    expected_output: |-
+      feature log2_fold_change adjusted_p passes_effect_threshold
+      1       A              0.2       1e-08                   FALSE
+      2       B              1.5       3e-02                    TRUE
+    output_kind: table
     title: {"es": "Prioridad por p frente a efecto", "en": "Priority by p versus effect", "da": "Prioritet efter p versus effekt"}
     scenario: {"es": "A tiene log2FC=0.2,padj=1e-8; B tiene log2FC=1.5,padj=0.03.", "en": "A has log2FC=0.2,padj=1e-8; B has log2FC=1.5,padj=0.03.", "da": "A har log2FC=0.2,padj=1e-8; B har log2FC=1.5,padj=0.03."}
     reasoning:

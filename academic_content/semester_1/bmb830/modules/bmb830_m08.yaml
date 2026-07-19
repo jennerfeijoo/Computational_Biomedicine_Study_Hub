@@ -157,11 +157,34 @@ concepts:
 
 worked_examples:
   - id: bmb830.m08.e01
+    example_kind: r_code
+    language: r
+    code: |-
+      df <- expand.grid(
+        age = c(30, 40, 50),
+        treatment = factor(c("A", "B"))
+      )
+      df$marker <- 10 + 0.8 * df$age - 3.2 * (df$treatment == "B")
+      round(coef(lm(marker ~ age + treatment, data = df)), 1)
+    output_kind: table
     title: {"es": "Interpretación ajustada", "en": "Adjusted interpretation", "da": "Justeret fortolkning"}
     model: "lm(marker ~ age + treatment, data = df)"
     output: {"es": "β_age=0.8; β_treatmentB=-3.2.", "en": "β_age=0.8; β_treatmentB=-3.2.", "da": "β_age=0,8; β_treatmentB=-3,2."}
     explanation: {"es": "Por año de edad, el marcador aumenta 0.8 unidades manteniendo tratamiento; B difiere -3.2 respecto a referencia a igual edad.", "en": "Per year, marker increases 0.8 holding treatment; B differs by -3.2 from reference at equal age.", "da": "Per år stiger markøren 0,8 med behandling holdt konstant; B adskiller sig -3,2 fra reference ved samme alder."}
   - id: bmb830.m08.e02
+    example_kind: r_code
+    language: r
+    code: |-
+      df <- expand.grid(
+        treatment = factor(c("A", "B")),
+        sex = factor(c("male", "female")),
+        replicate = 1:2
+      )
+      df$y <- 10 + 2 * (df$treatment == "B") +
+        1 * (df$sex == "female") +
+        5 * (df$treatment == "B" & df$sex == "female")
+      coef(lm(y ~ treatment * sex, data = df))
+    output_kind: table
     title: {"es": "Interacción tratamiento por sexo", "en": "Treatment-by-sex interaction", "da": "Behandling-køn-interaktion"}
     model: "lm(y ~ treatment * sex, data = df)"
     output: {"es": "Interacción B:female=5.", "en": "Interaction B:female=5.", "da": "Interaktion B:female=5."}
