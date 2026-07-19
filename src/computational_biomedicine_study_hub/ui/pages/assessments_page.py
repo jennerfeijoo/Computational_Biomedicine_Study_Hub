@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 import random
 import uuid
-from collections.abc import Mapping
 from dataclasses import replace
 from datetime import UTC, datetime
 from functools import partial
@@ -23,8 +22,8 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ...academic.localization import localize_value
 from ...content.models import AssessmentItem
+from ...courses import COURSES
 from ...i18n import DEFAULT_LOCALE, AppLocale
 from ...learning.academic_catalog import AcademicCatalog, CatalogModule
 from ...learning.activity_submission import ActivitySubmission
@@ -48,6 +47,7 @@ from ..activities import (
     OpenResponseActivityWidget,
     create_default_activity_registry,
 )
+from ..cumulative_assessment_renderer import CumulativeAssessmentRenderer
 from ..learning_page_copy import LearningPageCopyKey, learning_text
 
 
@@ -85,7 +85,9 @@ class AssessmentsPage(QWidget):
             learning_text(locale, LearningPageCopyKey.COURSE),
         )
         for course_code in catalog.course_codes:
-            self.course_selector.addItem(course_code, course_code)
+            course = next((item for item in COURSES if item.code == course_code), None)
+            title = course.title_for(locale) if course is not None else course_code
+            self.course_selector.addItem(title, course_code)
         self.module_selector = self._combo(
             "assessmentModuleSelector",
             learning_text(locale, LearningPageCopyKey.MODULE),
@@ -540,21 +542,29 @@ class AssessmentsPage(QWidget):
         if not course_code:
             self._show_empty(LearningPageCopyKey.CUMULATIVE_UNAVAILABLE)
             return
-        cumulative = self._catalog.source_course(course_code).cumulative_assessment
+        course = self._catalog.source_course(course_code)
+        cumulative = course.cumulative_assessment
         if cumulative is None:
             self._show_empty(LearningPageCopyKey.CUMULATIVE_UNAVAILABLE)
             return
-        visible = _learner_visible(
-            localize_value(cumulative.raw, self._locale.value.split("_", 1)[0])
+        locale_code = self._locale.value.split("-", 1)[0].split("_", 1)[0]
+        registration = next((item for item in COURSES if item.code == course_code), None)
+        course_title = (
+            registration.title_for(self._locale)
+            if registration is not None
+            else course.title.resolve(locale_code)
         )
         browser = QTextBrowser()
         browser.setObjectName("cumulativeAssessmentContent")
-        browser.setAccessibleName(cumulative.title.resolve(self._locale.value.split("_", 1)[0]))
-        browser.setMarkdown(
-            _cumulative_markdown(
-                cumulative.title.resolve(self._locale.value.split("_", 1)[0]),
-                visible,
-            )
+        browser.setAccessibleName(cumulative.title.resolve(locale_code))
+        browser.setOpenExternalLinks(False)
+        browser.setHtml(
+            CumulativeAssessmentRenderer(
+                cumulative,
+                course,
+                course_title=course_title,
+                locale=locale_code,
+            ).render_html()
         )
         self._body_layout.addWidget(browser)
 
@@ -610,81 +620,6 @@ class AssessmentsPage(QWidget):
         combo.setAccessibleName(accessible_name)
         combo.setMinimumWidth(150)
         return combo
-
-
-_HIDDEN_CUMULATIVE_KEYS = {
-    "answer_key",
-    "canonical_answer",
-    "canonical_explanation",
-    "correct_answer",
-    "correct_answers",
-    "grading_guide",
-    "hidden_examiner_support",
-    "hidden_grading_guide",
-    "hidden_support",
-    "model_answer",
-    "solution",
-    "solutions",
-}
-
-
-def _learner_visible(value: object) -> object:
-    """Remove grading-only branches before cumulative content reaches a widget."""
-    if isinstance(value, Mapping):
-        return {
-            str(key): _learner_visible(item)
-            for key, item in value.items()
-            if str(key).casefold() not in _HIDDEN_CUMULATIVE_KEYS
-            and not str(key).casefold().startswith("hidden_")
-        }
-    if isinstance(value, list):
-        return [_learner_visible(item) for item in value]
-    return value
-
-
-def _cumulative_markdown(title: str, value: object) -> str:
-    lines = [f"# {title}"]
-    if not isinstance(value, Mapping):
-        return "\n\n".join((*lines, str(value)))
-    ignored_metadata = {
-        "schema_version",
-        "course_code",
-        "assessment_id",
-        "content_version",
-        "status",
-    }
-    for key, section in value.items():
-        if str(key) in ignored_metadata:
-            continue
-        lines.extend(("", f"## {_humanize(str(key))}", "", _markdown_value(section)))
-    return "\n".join(lines)
-
-
-def _markdown_value(value: object, *, depth: int = 0) -> str:
-    if isinstance(value, Mapping):
-        lines: list[str] = []
-        for key, item in value.items():
-            label = _humanize(str(key))
-            if isinstance(item, (Mapping, list)):
-                heading = min(6, depth + 3)
-                lines.extend((f"{'#' * heading} {label}", _markdown_value(item, depth=depth + 1)))
-            else:
-                lines.append(f"- **{label}:** {item}")
-        return "\n\n".join(lines)
-    if isinstance(value, list):
-        return "\n".join(
-            (
-                f"- {_markdown_value(item, depth=depth + 1)}"
-                if not isinstance(item, Mapping)
-                else f"-\n{_markdown_value(item, depth=depth + 1)}"
-            )
-            for item in value
-        )
-    return str(value)
-
-
-def _humanize(value: str) -> str:
-    return value.replace("_", " ").strip().capitalize()
 
 
 __all__ = ["AssessmentsPage"]

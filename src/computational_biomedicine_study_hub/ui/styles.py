@@ -424,4 +424,12 @@ QPushButton#studyLabSourceDetailsButton {
     text-align: left;
 }
 
+QTextBrowser#cumulativeAssessmentContent {
+    background: #ffffff;
+    border: 1px solid #cbd5df;
+    border-radius: 10px;
+    padding: 18px 22px;
+    selection-background-color: #2f80ed;
+}
+
 """
