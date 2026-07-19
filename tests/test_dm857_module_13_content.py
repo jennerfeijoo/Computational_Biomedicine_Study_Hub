@@ -14,7 +14,6 @@ from computational_biomedicine_study_hub.content.dm857 import (
 from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.activity_types import ActivityType
 
-
 TITLE_PREFIXES = {
     AppLocale.SPANISH_SPAIN: "Bibliotecas",
     AppLocale.ENGLISH: "Libraries",
@@ -58,8 +57,7 @@ def test_module_13_objective_bank_has_stable_locale_independent_identity() -> No
     assert len(LOCALIZED_OBJECTIVE_QUESTION_BANK_13) == 30
     assert len({item.item_id for item in LOCALIZED_OBJECTIVE_QUESTION_BANK_13}) == 30
     assert all(
-        item.item_id.startswith("dm857.m13.bank.")
-        for item in LOCALIZED_OBJECTIVE_QUESTION_BANK_13
+        item.item_id.startswith("dm857.m13.bank.") for item in LOCALIZED_OBJECTIVE_QUESTION_BANK_13
     )
     assert all(
         item.activity_type in {ActivityType.MULTIPLE_CHOICE, ActivityType.TRUE_FALSE}
@@ -78,9 +76,7 @@ def test_module_13_objective_bank_has_stable_locale_independent_identity() -> No
         assert tuple(item.correct_option_ids for item in bank) == reference_correct_ids
         assert len({item.prompt for item in bank}) == len(bank)
         assert all(len(item.correct_option_ids) == 1 for item in bank)
-        assert all(
-            set(item.correct_option_ids).issubset(set(item.option_ids)) for item in bank
-        )
+        assert all(set(item.correct_option_ids).issubset(set(item.option_ids)) for item in bank)
 
 
 @pytest.mark.parametrize("locale", tuple(AppLocale))
