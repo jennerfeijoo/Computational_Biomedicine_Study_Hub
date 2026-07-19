@@ -1,0 +1,312 @@
+schema_version: 1.0.0
+course_code: DM857
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+identity:
+  title:
+    es: Introducción a la programación
+    en: Introduction to Programming
+    da: Introduktion til programmering
+  ects: 10
+  semester: 1
+  teaching_language: English or Danish according to the official course arrangement
+  implementation_language: Python
+
+course_purpose:
+  es: >-
+    Desarrollar la capacidad de transformar problemas concretos en modelos computacionales,
+    diseñar algoritmos verificables e implementarlos en Python con estructuras de control,
+    funciones, estructuras de datos, recursión, tipos abstractos, árboles, bibliotecas y
+    procedimientos sistemáticos de prueba. El curso también prepara al estudiante para
+    documentar, presentar y defender un proyecto de programación reproducible.
+  en: >-
+    Develop the ability to transform concrete problems into computational models, design
+    verifiable algorithms, and implement them in Python using control structures, functions,
+    data structures, recursion, abstract data types, trees, libraries, and systematic testing.
+    The course also prepares the learner to document, present, and defend a reproducible
+    programming project.
+  da: >-
+    Udvikle evnen til at omsætte konkrete problemer til beregningsmodeller, designe
+    efterprøvelige algoritmer og implementere dem i Python med kontrolstrukturer, funktioner,
+    datastrukturer, rekursion, abstrakte datatyper, træer, biblioteker og systematisk test.
+    Kurset forbereder også den studerende på at dokumentere, præsentere og forsvare et
+    reproducerbart programmeringsprojekt.
+
+official_learning_outcomes:
+  - id: dm857.lo01
+    statement:
+      es: Diseñar modelos para problemas concretos.
+      en: Design models for concrete problems.
+      da: Designe modeller for konkrete problemer.
+  - id: dm857.lo02
+    statement:
+      es: Diseñar una estructura de programa basada en el modelo.
+      en: Devise a program structure based on the model.
+      da: Udforme en programstruktur baseret på modellen.
+  - id: dm857.lo03
+    statement:
+      es: Implementar el programa planificado en Python.
+      en: Implement the planned program in Python.
+      da: Implementere det planlagte program i Python.
+  - id: dm857.lo04
+    statement:
+      es: Encontrar y utilizar elementos adecuados del ecosistema de bibliotecas de Python.
+      en: Find and use appropriate elements of the Python library ecosystem.
+      da: Finde og anvende passende elementer i Pythons biblioteksøkosystem.
+  - id: dm857.lo05
+    statement:
+      es: Planificar y ejecutar pruebas del programa.
+      en: Plan and execute program testing.
+      da: Planlægge og gennemføre test af programmet.
+  - id: dm857.lo06
+    statement:
+      es: Diseñar e implementar soluciones recursivas.
+      en: Design and implement recursive solutions.
+      da: Designe og implementere rekursive løsninger.
+  - id: dm857.lo07
+    statement:
+      es: Diseñar e implementar tipos abstractos de datos.
+      en: Design and implement abstract data types.
+      da: Designe og implementere abstrakte datatyper.
+  - id: dm857.lo08
+    statement:
+      es: Utilizar estructuras y algoritmos básicos de árboles.
+      en: Use basic tree structures and algorithms.
+      da: Anvende grundlæggende træstrukturer og træalgoritmer.
+
+prerequisites:
+  required:
+    - high-school mathematics
+  recommended:
+    - basic algebraic manipulation
+    - reading simple tables and graphs
+    - willingness to trace programs manually
+  not_assumed:
+    - prior programming experience
+    - prior object-oriented programming
+    - prior algorithm analysis
+
+module_sequence:
+  - id: dm857.m01
+    order: 1
+    title:
+      es: Resolución de problemas, valores, tipos y estado del programa
+      en: Problem solving, values, types, and program state
+      da: Problemløsning, værdier, typer og programtilstand
+    outcomes: [dm857.lo01, dm857.lo02, dm857.lo03]
+    prerequisite_modules: []
+  - id: dm857.m02
+    order: 2
+    title:
+      es: Lógica booleana, comparaciones y estructuras condicionales
+      en: Boolean logic, comparisons, and conditional statements
+      da: Boolesk logik, sammenligninger og betingede sætninger
+    outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo05]
+    prerequisite_modules: [dm857.m01]
+  - id: dm857.m03
+    order: 3
+    title:
+      es: Iteración controlada e invariantes de bucle
+      en: Controlled iteration and loop invariants
+      da: Kontrolleret iteration og løkkeinvarianter
+    outcomes: [dm857.lo02, dm857.lo03, dm857.lo05]
+    prerequisite_modules: [dm857.m01, dm857.m02]
+  - id: dm857.m04
+    order: 4
+    title:
+      es: Funciones, contratos, alcance y descomposición
+      en: Functions, contracts, scope, and decomposition
+      da: Funktioner, kontrakter, scope og dekomponering
+    outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo05]
+    prerequisite_modules: [dm857.m01, dm857.m02, dm857.m03]
+  - id: dm857.m05
+    order: 5
+    title:
+      es: Cadenas, análisis sintáctico y validación
+      en: Strings, parsing, and validation
+      da: Tekststrenge, parsing og validering
+    outcomes: [dm857.lo02, dm857.lo03, dm857.lo05]
+    prerequisite_modules: [dm857.m02, dm857.m03, dm857.m04]
+  - id: dm857.m06
+    order: 6
+    title:
+      es: Secuencias, mutabilidad y patrones algorítmicos
+      en: Sequences, mutability, and algorithmic patterns
+      da: Sekvenser, mutabilitet og algoritmiske mønstre
+    outcomes: [dm857.lo02, dm857.lo03, dm857.lo05]
+    prerequisite_modules: [dm857.m03, dm857.m04, dm857.m05]
+  - id: dm857.m07
+    order: 7
+    title:
+      es: Mapeos, conjuntos, agregación y búsqueda
+      en: Mappings, sets, aggregation, and lookup
+      da: Afbildninger, mængder, aggregering og opslag
+    outcomes: [dm857.lo02, dm857.lo03, dm857.lo07]
+    prerequisite_modules: [dm857.m04, dm857.m06]
+  - id: dm857.m08
+    order: 8
+    title:
+      es: Archivos, límites de datos, excepciones y entrada/salida defensiva
+      en: Files, data boundaries, exceptions, and defensive I/O
+      da: Filer, datagrænser, undtagelser og defensiv input/output
+    outcomes: [dm857.lo03, dm857.lo05]
+    prerequisite_modules: [dm857.m04, dm857.m05, dm857.m06, dm857.m07]
+  - id: dm857.m09
+    order: 9
+    title:
+      es: Recursión, razonamiento recursivo y árboles de llamadas
+      en: Recursion, recursive reasoning, and call trees
+      da: Rekursion, rekursiv tænkning og kaldetræer
+    outcomes: [dm857.lo02, dm857.lo03, dm857.lo06]
+    prerequisite_modules: [dm857.m02, dm857.m04, dm857.m06]
+  - id: dm857.m10
+    order: 10
+    title:
+      es: Árboles, recorridos y estructuras de datos recursivas
+      en: Trees, traversal, and recursive data structures
+      da: Træer, gennemløb og rekursive datastrukturer
+    outcomes: [dm857.lo06, dm857.lo08]
+    prerequisite_modules: [dm857.m07, dm857.m09]
+  - id: dm857.m11
+    order: 11
+    title:
+      es: Tipos abstractos de datos, invariantes e interfaces
+      en: Abstract data types, invariants, and interfaces
+      da: Abstrakte datatyper, invarianter og grænseflader
+    outcomes: [dm857.lo02, dm857.lo03, dm857.lo07]
+    prerequisite_modules: [dm857.m04, dm857.m06, dm857.m07]
+  - id: dm857.m12
+    order: 12
+    title:
+      es: Clases, objetos, composición y diseño mantenible
+      en: Classes, objects, composition, and maintainable design
+      da: Klasser, objekter, komposition og vedligeholdeligt design
+    outcomes: [dm857.lo02, dm857.lo03, dm857.lo07]
+    prerequisite_modules: [dm857.m04, dm857.m11]
+  - id: dm857.m13
+    order: 13
+    title:
+      es: Bibliotecas, entornos, NumPy, pandas y Matplotlib
+      en: Libraries, environments, NumPy, pandas, and Matplotlib
+      da: Biblioteker, miljøer, NumPy, pandas og Matplotlib
+    outcomes: [dm857.lo03, dm857.lo04, dm857.lo05]
+    prerequisite_modules: [dm857.m04, dm857.m06, dm857.m07, dm857.m08]
+  - id: dm857.m14
+    order: 14
+    title:
+      es: Pruebas, depuración, registro y calidad del software
+      en: Testing, debugging, logging, and software quality
+      da: Test, fejlfinding, logning og softwarekvalitet
+    outcomes: [dm857.lo03, dm857.lo05]
+    prerequisite_modules: [dm857.m01, dm857.m02, dm857.m03, dm857.m04]
+  - id: dm857.m15
+    order: 15
+    title:
+      es: Complejidad, perfilado y optimización basada en evidencia
+      en: Complexity, profiling, and evidence-based optimization
+      da: Kompleksitet, profilering og evidensbaseret optimering
+    outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo05]
+    prerequisite_modules: [dm857.m03, dm857.m06, dm857.m07, dm857.m09, dm857.m10]
+  - id: dm857.m16
+    order: 16
+    title:
+      es: Diseño de proyecto integrador, reproducibilidad y construcción del informe
+      en: Integrative project design, reproducibility, and report construction
+      da: Integreret projektdesign, reproducerbarhed og rapportopbygning
+    outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo04, dm857.lo05, dm857.lo07]
+    prerequisite_modules: [dm857.m01, dm857.m02, dm857.m03, dm857.m04, dm857.m05, dm857.m06, dm857.m07, dm857.m08, dm857.m11, dm857.m12, dm857.m13, dm857.m14, dm857.m15]
+  - id: dm857.m17
+    order: 17
+    title:
+      es: Presentación del proyecto y defensa oral individual
+      en: Project presentation and individual oral defense
+      da: Projektpræsentation og individuelt mundtligt forsvar
+    outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo04, dm857.lo05, dm857.lo06, dm857.lo07, dm857.lo08]
+    prerequisite_modules: [dm857.m16]
+
+constructive_alignment:
+  module_minimums:
+    concepts: 5
+    worked_examples: 2
+    guided_practice: 5
+    objective_questions: 8
+    open_assessment_items: 2
+    flashcards: 24
+    glossary_entries: 8
+    hidden_support_fragments: 8
+  integrative_module_minimums:
+    concepts: 6
+    worked_examples: 3
+    guided_practice: 6
+    objective_questions: 10
+    open_assessment_items: 4
+    flashcards: 30
+    glossary_entries: 10
+    hidden_support_fragments: 10
+
+assessment_strategy:
+  formative:
+    - retrieval practice through memory cards
+    - code tracing and output prediction
+    - debugging and test design
+    - short implementation exercises
+    - explanation of assumptions and invariants
+  module_assessment:
+    - randomized objective questions
+    - constructed-response tasks with rubrics
+    - practical code or design tasks
+  cumulative_assessment:
+    - integrated group project
+    - reproducible repository and environment record
+    - report limited to ten pages
+    - group presentation
+    - individual oral defense
+  grading_principles:
+    - correctness is evaluated against the problem specification
+    - code execution alone is not evidence of general correctness
+    - tests must include normal, boundary, and invalid cases
+    - design decisions must be explained, not merely shown
+    - biomedical examples remain educational and non-clinical
+
+cross_course_bridges:
+  - target_course: DM847
+    competencies:
+      - sequence manipulation
+      - algorithm design
+      - recursion and trees
+      - testing bioinformatics implementations
+  - target_course: BMB830
+    competencies:
+      - reproducible scripts
+      - data validation
+      - tabular data handling
+      - interpretation of computational output
+  - target_course: BMB831
+    competencies:
+      - modular analytical workflows
+      - package and environment management
+      - testing and provenance
+      - scalable reasoning about data structures
+
+source_basis:
+  - id: sdu.dm857.official.2025
+    role: official_outcomes_and_assessment
+  - id: guttag.python.3e
+    role: programming_and_computational_modeling
+  - id: downey.think_python.3e
+    role: introductory_reasoning_testing_and_data_structures
+  - id: repository.dm857.existing
+    role: validated_existing_trilingual_content
+
+quality_requirements:
+  - All learner-visible content has equivalent Spanish, English, and Danish versions.
+  - Every objective is taught, practised, and assessed.
+  - Code examples state expected output and validation evidence.
+  - Practical tasks distinguish syntax, runtime, logic, and specification failures.
+  - Objective distractors represent plausible misconceptions.
+  - Open responses use explicit rubrics and are not graded by exact-string matching.
+  - Memory cards include conceptual and practical retrieval.
+  - Hidden support never exposes answer keys during active assessment.
+  - No copyrighted exercise or passage is reproduced.
+  - No synthetic biomedical example is presented as a validated protocol.
