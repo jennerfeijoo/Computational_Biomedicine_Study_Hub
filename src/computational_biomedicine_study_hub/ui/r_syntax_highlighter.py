@@ -29,9 +29,7 @@ class RSyntaxHighlighter(QSyntaxHighlighter):
         super().__init__(document)
         self._rules = (
             _Rule(
-                QRegularExpression(
-                    r"\b(if|else|repeat|while|function|for|in|next|break)\b"
-                ),
+                QRegularExpression(r"\b(if|else|repeat|while|function|for|in|next|break)\b"),
                 _format("#ff7b72", bold=True),
             ),
             _Rule(

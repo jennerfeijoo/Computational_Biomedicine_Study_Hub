@@ -113,9 +113,12 @@ traducciones semánticas.
 ### Cursos y módulos
 
 `CourseStudyPage` permite reutilizar un único lector perezoso para cualquier curso YAML.
-Expone resumen, resultados de aprendizaje, módulos, progreso, tarjetas vencidas, última
-actividad y acceso a la acumulativa. Una prueba abre los 54 IDs y comprueba que cada
-lector corresponde al módulo solicitado.
+Una `CourseModuleToolbar` compartida por DM847, BMB830, BMB831 y DM857 presenta el
+selector compacto, título del módulo, progreso actual, continuación, evaluación
+acumulativa cuando existe e información del curso. El resumen y los resultados de
+aprendizaje ya no ocupan de forma permanente la parte superior: se consultan en un
+diálogo localizado. Una prueba abre los 54 IDs y comprueba que cada lector corresponde
+al módulo solicitado.
 
 DM847, BMB830 y BMB831 usan esta página directamente desde `MainWindow`. DM857 conserva
 por compatibilidad su composición especializada para los 14 módulos Python anteriores y
@@ -426,6 +429,72 @@ dominio sin evidencia, coherencia del filtro mixto, conservación de la cola por
 cambiar ES/EN/DK, traducción completa de tipos/resultados e historial con títulos
 humanos.
 
+## R examples and compact course headers
+
+La auditoría encontró dos problemas diferentes en los ejemplos resueltos. BMB830
+contenía 31 ejemplos, pero sólo tres bloques de código —todos en M02— y cinco salidas
+materializables. BMB831 contenía 37 ejemplos y ninguno declaraba código ni salida.
+Además, el adaptador omitía las variantes históricas `answer` y `conclusion`, y el
+renderer creaba secciones oscuras aunque código o salida estuvieran vacíos. No era un
+problema de Qt ni de R instalado: el contenido fuente no contenía esos bloques y parte
+de la explicación disponible se perdía durante la adaptación.
+
+El contrato tipado de `WorkedExample` distingue ahora:
+
+- `example_kind`: `conceptual`, `calculation`, `r_code`, `interpretation` o `workflow`;
+- `language`: `r`, `python`, `shell`, `text` o ausencia de lenguaje;
+- `output_kind`: `console`, `table`, `plot_description`, `interpretation` o `none`;
+- `prompt`, pasos de `reasoning`, `code`, `expected_output`, `explanation` y
+  `source_ids`.
+
+El loader conserva aliases históricos, realiza una clasificación estructural para
+contenido anterior y el adaptador pasa el contrato tipado a la UI. El renderer sólo
+crea problema, razonamiento, código, salida y explicación cuando el campo
+correspondiente tiene contenido. `plot_description` se presenta como prosa, no como
+consola.
+
+El estado final es **11 ejemplos conceptuales y 20 ejemplos R en BMB830**, y **15
+conceptuales y 22 R en BMB831**. BMB830 M01 contiene un ejemplo estructural y M02–M10
+contienen al menos dos cada uno. Los doce módulos de BMB831 contienen R; M07–M11
+incluyen estructuras Bioconductor, transcriptómica, proteómica, enriquecimiento e
+integración multi-ómica según su alcance. Los ejemplos estocásticos fijan
+`set.seed()`. Cada ejemplo R tiene código, salida o descripción reproducible y
+explicación trilingüe. El código se muestra como R, monoespaciado, seleccionable y de
+sólo lectura, con resaltado léxico para palabras clave, funciones, cadenas,
+comentarios, números, operadores y constantes.
+
+No se añadió `rpy2`, un intérprete embebido, `subprocess` ni ejecución arbitraria. El
+entorno de validación tampoco dispone de `Rscript`, por lo que no se afirma una
+ejecución que no ocurrió. Una evolución futura puede ofrecer ejecución voluntaria
+mediante un `Rscript` externo aislado: proceso separado, directorio efímero, red
+deshabilitada, lista de paquetes permitidos, límites de CPU/memoria, timeout,
+cancelación y borrado verificable.
+
+La cabecera de curso se implementa una sola vez en `CourseModuleToolbar` y se usa en
+las cuatro asignaturas. El selector muestra `M01`, `M02`, etc.; los IDs permanecen en
+datos internos. El título admite hasta dos líneas y conserva el texto completo en
+tooltip. La barra incluye progreso, «Continuar», acumulativa sólo cuando existe e
+«Información». El diálogo informativo ofrece descripción, resultados, ECTS,
+evaluación, requisitos y conexiones cuando la fuente dispone de ellos, con chrome
+ES/EN/DK y retorno de foco al cerrarse. La navegación continúa usando
+`QStackedWidget`, lectores perezosos e identidades estables, por lo que reconstruir la
+página al cambiar de idioma conserva curso, módulo y pestaña.
+
+Las regresiones específicas validan clasificación y coherencia del esquema, cobertura
+R mínima por módulo, relevancia ómica, semillas, campos obligatorios, ausencia de un
+runner, renderizado condicional, descripción de gráficas, modo de sólo lectura,
+resaltado sintáctico, uso de la misma toolbar en 12 combinaciones curso/idioma,
+visibilidad de acumulativas, localización, foco y restauración de estado. La suite
+completa finaliza con **307 pruebas correctas** sin requerir R, Ollama ni red.
+
+La revisión visual offscreen cubrió las cuatro asignaturas, ES/EN/DK y ventanas de
+1280×800 y 1440×900: 24 combinaciones sin solapamientos ni controles fuera de la
+barra. También se inspeccionaron BMB830 M01 y un módulo computacional, BMB831 M03 y
+M07–M10, el acceso informativo de DM847 y los ejemplos Python de DM857. La primera
+pasada reveló una competencia de ancho entre título y progreso a 1280×800; se corrigió
+antes de la validación final mediante límites adaptativos, texto de progreso compacto
+y tooltips/nombres accesibles completos.
+
 ## Pruebas y comandos
 
 Se añadieron pruebas de:
@@ -446,8 +515,8 @@ Validación final:
 ```text
 ruff check .             → correcto
 ruff format --check .    → correcto
-mypy src                 → correcto (107 archivos fuente)
-pytest -q                → 280 passed
+mypy src                 → correcto
+pytest -q                → 307 passed
 git diff --check         → correcto
 pip wheel . --no-deps    → rueda creada; 119 YAML incluidos
 ```

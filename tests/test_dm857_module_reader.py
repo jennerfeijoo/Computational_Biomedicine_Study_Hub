@@ -36,7 +36,7 @@ def test_dm857_page_hosts_completed_modules_without_duplicate_identity_cards(
     assert selector is not None
     assert selector.count() == page.module_count
     assert [selector.itemText(index) for index in range(selector.count())] == [
-        f"Módulo {number}" for number in range(1, page.module_count + 1)
+        f"M{number:02}" for number in range(1, page.module_count + 1)
     ]
     assert page.findChild(QFrame, "courseIdentityCard") is None
     assert page.findChild(QFrame, "moduleIdentityCard") is None

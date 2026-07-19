@@ -329,9 +329,7 @@ class ModuleReaderPage(QWidget):
                 self._subheading(self._translator.text(MessageKey.MODULE_EXPECTED_OUTPUT))
             )
             if example.output_kind == "plot_description":
-                layout.addWidget(
-                    self._label(example.expected_output, "examplePlotDescription")
-                )
+                layout.addWidget(self._label(example.expected_output, "examplePlotDescription"))
             else:
                 layout.addWidget(
                     self._code_block(
@@ -340,9 +338,7 @@ class ModuleReaderPage(QWidget):
                     )
                 )
         if example.explanation.strip():
-            layout.addWidget(
-                self._subheading(self._translator.text(MessageKey.MODULE_EXPLANATION))
-            )
+            layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_EXPLANATION)))
             layout.addWidget(self._label(example.explanation, "contentBody"))
         return card
 
@@ -449,9 +445,7 @@ class ModuleReaderPage(QWidget):
         editor.setReadOnly(True)
         editor.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
         editor.setTabChangesFocus(True)
-        editor.setFont(
-            QFontDatabase.systemFont(QFontDatabase.SystemFont.FixedFont)
-        )
+        editor.setFont(QFontDatabase.systemFont(QFontDatabase.SystemFont.FixedFont))
         line_count = max(1, text.count("\n") + 1)
         editor.setFixedHeight(min(220, 32 + line_count * 21))
         if language.casefold() == "r":
