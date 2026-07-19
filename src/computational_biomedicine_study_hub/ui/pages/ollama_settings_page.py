@@ -22,6 +22,7 @@ from ...i18n import DEFAULT_LOCALE, AppLocale, UiCopyKey, ui_text
 from ...integrations import (
     OllamaClient,
     OllamaConfig,
+    OllamaConfigurationError,
     OllamaConnectionError,
     OllamaModel,
     OllamaProtocolError,
@@ -171,6 +172,11 @@ class OllamaSettingsPage(QWidget):
             return
 
         config = OllamaConfig(base_url=self.base_url)
+        try:
+            config.normalized_base_url()
+        except OllamaConfigurationError as error:
+            self.apply_probe_failure(str(error))
+            return
         client = self._client_factory(config)
 
         thread = QThread(self)
@@ -285,8 +291,8 @@ class OllamaSettingsPage(QWidget):
                 self.BASE_URL_KEY,
                 OllamaConfig().normalized_base_url(),
             )
-        )
-        return OllamaConfig(base_url=value).normalized_base_url()
+        ).strip()
+        return value or OllamaConfig().normalized_base_url()
 
     def _set_status_state(self, state: str) -> None:
         self._status.setProperty("connectionState", state)

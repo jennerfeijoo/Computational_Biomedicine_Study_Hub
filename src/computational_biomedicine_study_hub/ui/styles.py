@@ -373,4 +373,55 @@ QLabel#ollamaStatus[connectionState="error"] {
     color: #b42318;
 }
 
+QLabel#studyLabStatus {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+QLabel#studyLabStatus[labState="checking"],
+QLabel#studyLabStatus[labState="generating"],
+QLabel#studyLabStatus[labState="cancelling"] {
+    color: #8a5a00;
+}
+
+QLabel#studyLabStatus[labState="connected"],
+QLabel#studyLabStatus[labState="model_available"],
+QLabel#studyLabStatus[labState="complete"] {
+    color: #16734a;
+}
+
+QLabel#studyLabStatus[labState^="error_"] {
+    color: #b42318;
+}
+
+QLabel#studyLabModel[modelVerified="true"] {
+    color: #16734a;
+    font-weight: 700;
+}
+
+QLabel#studyLabDiagnostic {
+    background: #f7f9fb;
+    border: 1px solid #d6dee6;
+    border-radius: 7px;
+    color: #3e4c59;
+    padding: 8px 10px;
+}
+
+QTextBrowser#studyLabHistory,
+QTextBrowser#studyLabSources,
+QTextBrowser#studyLabTechnicalSources,
+QTextEdit#studyLabQuestion {
+    border: 1px solid #cbd5df;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+QPushButton#studyLabSourceDetailsButton {
+    background: transparent;
+    border: none;
+    color: #245a96;
+    padding: 3px;
+    text-align: left;
+}
+
 """

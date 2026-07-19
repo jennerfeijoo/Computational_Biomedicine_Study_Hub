@@ -10,6 +10,7 @@ from __future__ import annotations
 from collections.abc import Iterable
 from dataclasses import dataclass
 from enum import StrEnum
+from logging import getLogger
 from math import isfinite
 
 from .ollama import (
@@ -21,6 +22,7 @@ from .ollama import (
 )
 
 DEFAULT_CHAT_MODEL = "qwen3.6:27b"
+LOGGER = getLogger(__name__)
 
 
 class ChatRole(StrEnum):
@@ -149,7 +151,13 @@ class OllamaChatClient:
         )
 
     def _endpoint(self, path: str) -> str:
-        return f"{self.config.normalized_base_url()}/{path.lstrip('/')}"
+        endpoint = f"{self.config.normalized_base_url()}/{path.lstrip('/')}"
+        LOGGER.debug(
+            "Ollama POST endpoint=%s timeout=%s",
+            endpoint,
+            self.config.generation_timeout_seconds,
+        )
+        return endpoint
 
 
 def _non_negative_int(value: object) -> int:

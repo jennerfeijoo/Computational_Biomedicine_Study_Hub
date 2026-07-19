@@ -7,10 +7,12 @@ from .ollama import (
     JsonTransport,
     OllamaClient,
     OllamaConfig,
+    OllamaConfigurationError,
     OllamaConnectionError,
     OllamaError,
     OllamaModel,
     OllamaProtocolError,
+    OllamaTimeoutError,
     UrllibJsonTransport,
 )
 from .ollama_chat import (
@@ -31,9 +33,11 @@ __all__ = [
     "OllamaChatClient",
     "OllamaClient",
     "OllamaConfig",
+    "OllamaConfigurationError",
     "OllamaConnectionError",
     "OllamaError",
     "OllamaModel",
     "OllamaProtocolError",
+    "OllamaTimeoutError",
     "UrllibJsonTransport",
 ]

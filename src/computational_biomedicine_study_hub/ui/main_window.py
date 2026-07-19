@@ -174,6 +174,7 @@ class MainWindow(QMainWindow):
             catalog,
             self._settings,
         )
+        study_lab_page.settings_requested.connect(lambda: self.navigate(RouteId.SETTINGS))
         assessments_page.open_feedback_requested.connect(self._open_feedback_lab)
 
         pages: dict[str, QWidget] = {

@@ -4,11 +4,14 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
+from logging import getLogger
 from typing import Any, Protocol
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
 JsonObject = dict[str, Any]
+LOGGER = getLogger(__name__)
 
 
 class OllamaError(RuntimeError):
@@ -17,6 +20,14 @@ class OllamaError(RuntimeError):
 
 class OllamaConnectionError(OllamaError):
     """Raised when the local Ollama API cannot be reached."""
+
+
+class OllamaConfigurationError(OllamaError):
+    """Raised when the configured Ollama URL cannot identify an HTTP service."""
+
+
+class OllamaTimeoutError(OllamaConnectionError):
+    """Raised when an Ollama request exceeds its configured timeout."""
 
 
 class OllamaProtocolError(OllamaError):
@@ -32,13 +43,46 @@ class OllamaConfig:
     generation_timeout_seconds: float = 180.0
 
     def normalized_base_url(self) -> str:
-        """Return a normalized URL ending in ``/api``."""
-        value = self.base_url.strip().rstrip("/")
+        """Return one validated canonical API root ending in exactly one ``/api``."""
+        value = self.base_url.strip()
         if not value:
-            value = "http://localhost:11434/api"
-        if not value.endswith("/api"):
-            value = f"{value}/api"
-        return value
+            raise OllamaConfigurationError("The Ollama URL is empty.")
+
+        parsed = urlsplit(value)
+        if (
+            parsed.scheme.casefold() not in {"http", "https"}
+            or not parsed.netloc
+            or parsed.query
+            or parsed.fragment
+            or parsed.username
+            or parsed.password
+        ):
+            raise OllamaConfigurationError(
+                "The Ollama URL must be a plain http(s) server URL without "
+                "credentials, query parameters, or fragments."
+            )
+
+        segments = [segment for segment in parsed.path.split("/") if segment]
+        while segments and segments[-1].casefold() in {"chat", "tags", "version"}:
+            segments.pop()
+        while (
+            len(segments) >= 2
+            and segments[-1].casefold() == "api"
+            and segments[-2].casefold() == "api"
+        ):
+            segments.pop()
+        if not segments or segments[-1].casefold() != "api":
+            segments.append("api")
+
+        return urlunsplit(
+            (
+                parsed.scheme.casefold(),
+                parsed.netloc,
+                "/" + "/".join(segments),
+                "",
+                "",
+            )
+        )
 
 
 @dataclass(frozen=True, slots=True)
@@ -130,7 +174,20 @@ class UrllibJsonTransport:
         except HTTPError as exc:
             detail = _read_http_error(exc)
             raise OllamaConnectionError(f"Ollama returned HTTP {exc.code}: {detail}") from exc
-        except (URLError, TimeoutError, OSError) as exc:
+        except TimeoutError as exc:
+            raise OllamaTimeoutError(
+                f"The Ollama request exceeded its {timeout:g} second timeout."
+            ) from exc
+        except URLError as exc:
+            if isinstance(exc.reason, TimeoutError):
+                raise OllamaTimeoutError(
+                    f"The Ollama request exceeded its {timeout:g} second timeout."
+                ) from exc
+            raise OllamaConnectionError(
+                "No se pudo conectar con Ollama. Comprueba que el servicio "
+                "esté activo y que la URL configurada sea correcta."
+            ) from exc
+        except OSError as exc:
             raise OllamaConnectionError(
                 "No se pudo conectar con Ollama. Comprueba que el servicio "
                 "esté activo y que la URL configurada sea correcta."
@@ -209,4 +266,6 @@ class OllamaClient:
         return tuple(sorted(models, key=lambda item: item.name.casefold()))
 
     def _endpoint(self, path: str) -> str:
-        return f"{self.config.normalized_base_url()}/{path.lstrip('/')}"
+        endpoint = f"{self.config.normalized_base_url()}/{path.lstrip('/')}"
+        LOGGER.debug("Ollama GET endpoint=%s timeout=%s", endpoint, self.config.timeout_seconds)
+        return endpoint
