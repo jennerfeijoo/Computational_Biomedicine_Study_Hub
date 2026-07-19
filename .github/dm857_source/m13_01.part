@@ -1,0 +1,337 @@
+"""DM857 module 13: libraries, environments, and scientific computing."""
+from __future__ import annotations
+
+from ...i18n import AppLocale
+from ...learning.activity_types import ActivityType
+from ..localized_models import LocalizedLearningModule
+from ..models import AssessmentItem, LearningModule
+from .authoring import (
+    authored_item,
+    concept,
+    example,
+    objective,
+    objective_mcq,
+    objective_tf,
+    practice,
+    t,
+    tutor_support,
+)
+
+_OBJECTIVES = (('m13.o1',
+  ('Explicar cómo se resuelven imports, módulos, paquetes y espacios de nombres.',
+   'Explain how imports, modules, packages, and namespaces are resolved.',
+   'Forklare hvordan imports, moduler, pakker og namespaces opløses.')),
+ ('m13.o2',
+  ('Crear entornos reproducibles y registrar versiones relevantes.',
+   'Create reproducible environments and record relevant versions.',
+   'Oprette reproducerbare miljøer og registrere relevante versioner.')),
+ ('m13.o3',
+  ('Construir y examinar arrays NumPy con formas y tipos explícitos.',
+   'Construct and inspect NumPy arrays with explicit shapes and dtypes.',
+   'Konstruere og undersøge NumPy-arrays med eksplicitte former og datatyper.')),
+ ('m13.o4',
+  ('Aplicar vectorización y broadcasting sin ocultar supuestos dimensionales.',
+   'Apply vectorization and broadcasting without hiding dimensional assumptions.',
+   'Anvende vektorisering og broadcasting uden at skjule dimensionelle antagelser.')),
+ ('m13.o5',
+  ('Crear, seleccionar y transformar DataFrames de pandas de forma verificable.',
+   'Create, select, and transform pandas DataFrames in a verifiable way.',
+   'Oprette, vælge og transformere pandas-DataFrames på en verificerbar måde.')),
+ ('m13.o6',
+  ('Tratar valores ausentes, índices y tipos de columna explícitamente.',
+   'Handle missing values, indexes, and column types explicitly.',
+   'Håndtere manglende værdier, indeks og kolonnetyper eksplicit.')),
+ ('m13.o7',
+  ('Construir visualizaciones que representen los datos sin distorsión.',
+   'Build visualizations that represent data without distortion.',
+   'Bygge visualiseringer der repræsenterer data uden forvrængning.')),
+ ('m13.o8',
+  ('Validar resultados científicos mediante controles de forma, rango y equivalencia.',
+   'Validate scientific results through shape, range, and equivalence checks.',
+   'Validere videnskabelige resultater gennem kontrol af form, interval og ækvivalens.')))
+
+_CONCEPTS = (('imports-and-namespaces',
+  ('Imports, módulos y espacios de nombres',
+   'Imports, modules, and namespaces',
+   'Imports, moduler og namespaces'),
+  ('Un módulo es un archivo Python importable y un paquete organiza módulos bajo un espacio de '
+   'nombres. import nombre vincula el módulo; from nombre import objeto vincula un objeto '
+   'concreto. Los alias reducen repetición, pero deben conservar legibilidad. La búsqueda '
+   'depende de sys.path y del entorno activo. Los imports deben ser explícitos, ubicarse al '
+   'inicio y evitar comodines porque dificultan saber de dónde procede cada símbolo.',
+   'A module is an importable Python file and a package organizes modules under a namespace. '
+   'import name binds the module; from name import object binds a specific object. Aliases '
+   'reduce repetition but should preserve readability. Resolution depends on sys.path and the '
+   'active environment. Imports should be explicit, placed near the top, and avoid wildcards '
+   'because wildcards obscure symbol provenance.',
+   'Et modul er en importérbar Python-fil, og en pakke organiserer moduler under et namespace. '
+   'import navn binder modulet; from navn import objekt binder et bestemt objekt. Aliasser '
+   'reducerer gentagelse, men skal bevare læsbarhed. Opløsning afhænger af sys.path og det '
+   'aktive miljø. Imports bør være eksplicitte og undgå jokertegn, fordi de skjuler '
+   'symbolernes oprindelse.'),
+  [('Importa el módulo cuando necesitas varios nombres.',
+    'Import the module when you need several names.',
+    'Importér modulet når du behøver flere navne.'),
+   ('Evita from paquete import *.',
+    'Avoid from package import *.',
+    'Undgå from package import *.'),
+   ('El entorno activo determina qué paquete se carga.',
+    'The active environment determines which package loads.',
+    'Det aktive miljø bestemmer hvilken pakke der indlæses.')]),
+ ('documentation-and-api',
+  ('Documentación y contratos de API',
+   'Documentation and API contracts',
+   'Dokumentation og API-kontrakter'),
+  ('Usar una biblioteca exige leer su documentación, firma, tipos aceptados, forma de retorno, '
+   'errores y convenciones. help(), docstrings y documentación oficial permiten comprobar el '
+   'contrato. Los ejemplos mínimos verifican una hipótesis de uso, pero no sustituyen las '
+   'pruebas del propio programa. Una API puede cambiar entre versiones; por eso conviene '
+   'distinguir funciones públicas de detalles internos.',
+   'Using a library requires reading its documentation, signature, accepted types, return '
+   'shape, errors, and conventions. help(), docstrings, and official documentation expose the '
+   'contract. Minimal examples test a usage hypothesis but do not replace program tests. APIs '
+   'may change across versions, so public functions should be distinguished from internal '
+   'details.',
+   'Brug af et bibliotek kræver læsning af dokumentation, signatur, accepterede typer, '
+   'returform, fejl og konventioner. help(), docstrings og officiel dokumentation viser '
+   'kontrakten. Små eksempler afprøver en brugsantagelse, men erstatter ikke programtest. '
+   "API'er kan ændres mellem versioner."),
+  [('Comprueba parámetros y forma de retorno.',
+    'Check parameters and return shape.',
+    'Kontrollér parametre og returform.'),
+   ('Prefiere API pública documentada.',
+    'Prefer documented public APIs.',
+    "Foretræk dokumenterede offentlige API'er."),
+   ('Registra la versión usada al reproducir resultados.',
+    'Record the version used for reproducibility.',
+    'Registrér den anvendte version for reproducerbarhed.')]),
+ ('environments-and-versions',
+  ('Entornos y versiones reproducibles',
+   'Reproducible environments and versions',
+   'Reproducerbare miljøer og versioner'),
+  ('Un entorno virtual aísla dependencias por proyecto. Un archivo de requisitos o '
+   'configuración declara paquetes y restricciones; un archivo de bloqueo puede fijar '
+   'resoluciones exactas. La reproducibilidad también requiere versión de Python, sistema, '
+   'semilla aleatoria cuando proceda y datos de entrada. Fijar cada parche para siempre impide '
+   'actualizaciones; no fijar nada permite cambios silenciosos. La estrategia debe equilibrar '
+   'reproducibilidad, seguridad y mantenimiento.',
+   'A virtual environment isolates dependencies per project. A requirements or project file '
+   'declares packages and constraints; a lock file may preserve exact resolutions. '
+   'Reproducibility also requires the Python version, platform, random seed when relevant, and '
+   'input data. Pinning every patch forever blocks updates; pinning nothing allows silent '
+   'changes. The strategy should balance reproducibility, security, and maintenance.',
+   'Et virtuelt miljø isolerer afhængigheder pr. projekt. En krav- eller projektfil angiver '
+   'pakker og begrænsninger; en låsefil kan fastholde præcise løsninger. Reproducerbarhed '
+   'kræver også Python-version, platform, tilfældig seed når relevant og inputdata. Strategien '
+   'skal balancere reproducerbarhed, sikkerhed og vedligeholdelse.'),
+  [('Un proyecto debe declarar sus dependencias.',
+    'A project should declare its dependencies.',
+    'Et projekt bør deklarere sine afhængigheder.'),
+   ('Registra Python y paquetes relevantes.',
+    'Record Python and relevant package versions.',
+    'Registrér Python og relevante pakkeversioner.'),
+   ('Reproduce en un entorno limpio.',
+    'Reproduce in a clean environment.',
+    'Reproducer i et rent miljø.')]),
+ ('numpy-array-model',
+  ('Modelo de arrays NumPy', 'The NumPy array model', 'NumPy-arraymodellen'),
+  ('ndarray almacena elementos de tipo homogéneo en una estructura n-dimensional. shape '
+   'describe dimensiones, ndim su número, size el total de elementos y dtype la '
+   'representación. Crear un array desde datos mixtos puede promover tipos y cambiar la '
+   'semántica. reshape exige conservar size; axis determina sobre qué dimensión se reduce. Una '
+   'vista puede compartir memoria con el original, mientras una copia es independiente.',
+   'ndarray stores homogeneous elements in an n-dimensional structure. shape describes '
+   'dimensions, ndim their count, size the total elements, and dtype the representation. '
+   'Building an array from mixed data may promote types and change semantics. reshape must '
+   'preserve size; axis determines the reduction dimension. A view may share memory with the '
+   'original, whereas a copy is independent.',
+   'ndarray lagrer homogene elementer i en n-dimensional struktur. shape beskriver '
+   'dimensionerne, ndim deres antal, size det samlede antal elementer og dtype '
+   'repræsentationen. Blandede data kan fremme typen. reshape skal bevare size; axis bestemmer '
+   'reduktionsdimensionen. Et view kan dele hukommelse med originalen.'),
+  [('Inspecciona shape y dtype antes de calcular.',
+    'Inspect shape and dtype before computing.',
+    'Undersøg shape og dtype før beregning.'),
+   ('reshape no cambia el número de elementos.',
+    'reshape does not change element count.',
+    'reshape ændrer ikke antallet af elementer.'),
+   ('Distingue vista y copia.',
+    'Distinguish views and copies.',
+    'Skeln mellem view og kopi.')]),
+ ('vectorization-broadcasting',
+  ('Vectorización y broadcasting',
+   'Vectorization and broadcasting',
+   'Vektorisering og broadcasting'),
+  ('La vectorización expresa operaciones sobre arrays completos y delega bucles a '
+   'implementaciones optimizadas. Broadcasting alinea dimensiones desde la derecha y permite '
+   'operar cuando cada par es igual o una dimensión vale uno. Que una operación sea válida no '
+   'significa que sea conceptualmente correcta: una forma accidental puede producir un '
+   'resultado plausible pero equivocado. Deben verificarse shapes, unidades y orientación de '
+   'muestras y variables.',
+   'Vectorization expresses operations over complete arrays and delegates loops to optimized '
+   'implementations. Broadcasting aligns dimensions from the right and permits operations when '
+   'each pair matches or one dimension is one. A valid operation is not automatically '
+   'conceptually correct: an accidental shape may produce a plausible but wrong result. '
+   'Shapes, units, and sample-variable orientation must be checked.',
+   'Vektorisering udtrykker operationer over hele arrays og delegerer løkker til optimerede '
+   'implementeringer. Broadcasting justerer dimensioner fra højre og tillader operationer når '
+   'hvert par er ens eller én dimension er én. En gyldig operation er ikke nødvendigvis '
+   'konceptuelt korrekt; former, enheder og orientering skal kontrolleres.'),
+  [('Alinea dimensiones desde la derecha.',
+    'Align dimensions from the right.',
+    'Juster dimensioner fra højre.'),
+   ('Una dimensión uno puede expandirse.',
+    'A size-one dimension may expand.',
+    'En dimension på én kan udvides.'),
+   ('Valida la semántica además de la compatibilidad.',
+    'Validate semantics as well as compatibility.',
+    'Validér semantik såvel som kompatibilitet.')]),
+ ('pandas-tabular-model',
+  ('Series, DataFrame e índices',
+   'Series, DataFrame, and indexes',
+   'Series, DataFrame og indeks'),
+  ('Una Series combina valores e índice; un DataFrame alinea columnas por índice. El índice no '
+   'es sólo una posición: puede representar una identidad y participa en alineaciones. loc '
+   'selecciona por etiqueta e iloc por posición. Las operaciones encadenadas pueden crear '
+   'ambigüedad sobre vistas y copias; conviene seleccionar filas y columnas explícitamente y '
+   'asignar mediante loc. Los nombres y tipos de columnas forman parte del contrato tabular.',
+   'A Series combines values and an index; a DataFrame aligns columns by index. The index is '
+   'not merely a position: it may represent identity and participates in alignment. loc '
+   'selects by label and iloc by position. Chained operations may create ambiguity about views '
+   'and copies; select explicitly and assign through loc. Column names and dtypes form part of '
+   'the tabular contract.',
+   'En Series kombinerer værdier og indeks; en DataFrame justerer kolonner efter indeks. '
+   'Indekset er ikke kun en position, men kan repræsentere identitet. loc vælger efter etiket '
+   'og iloc efter position. Kædede operationer kan skabe tvivl om views og kopier; vælg '
+   'eksplicit og tildel gennem loc.'),
+  [('loc usa etiquetas; iloc usa posiciones.',
+    'loc uses labels; iloc uses positions.',
+    'loc bruger etiketter; iloc bruger positioner.'),
+   ('La alineación por índice puede introducir NaN.',
+    'Index alignment may introduce NaN.',
+    'Indeksjustering kan introducere NaN.'),
+   ('Valida nombres y dtypes de columnas.',
+    'Validate column names and dtypes.',
+    'Validér kolonnenavne og datatyper.')]),
+ ('missing-data-and-transforms',
+  ('Valores ausentes y transformaciones',
+   'Missing data and transformations',
+   'Manglende data og transformationer'),
+  ('NaN, None y pd.NA no son intercambiables en todos los tipos. isna detecta ausencia; dropna '
+   'elimina según una política; fillna imputa un valor que debe justificarse. groupby divide, '
+   'aplica y combina; merge une tablas según claves y puede multiplicar filas si las claves no '
+   'son únicas. Cada transformación debe documentar qué filas conserva, qué claves espera y '
+   'cómo cambia el tipo o la granularidad.',
+   'NaN, None, and pd.NA are not interchangeable across all dtypes. isna detects absence; '
+   'dropna removes under a policy; fillna imputes a value that must be justified. groupby '
+   'splits, applies, and combines; merge joins tables by keys and may multiply rows when keys '
+   'are not unique. Each transformation should document retained rows, expected keys, and '
+   'changes in dtype or granularity.',
+   'NaN, None og pd.NA er ikke udskiftelige for alle datatyper. isna opdager fravær; dropna '
+   'fjerner efter en politik; fillna imputerer en værdi der skal begrundes. groupby opdeler, '
+   'anvender og kombinerer; merge forbinder tabeller efter nøgler og kan mangedoble rækker ved '
+   'ikke-unikke nøgler.'),
+  [('Ausencia no implica cero.',
+    'Missingness does not mean zero.',
+    'Manglende værdi betyder ikke nul.'),
+   ('Comprueba cardinalidad antes y después de merge.',
+    'Check cardinality before and after merge.',
+    'Kontrollér kardinalitet før og efter merge.'),
+   ('Documenta la política de imputación.',
+    'Document the imputation policy.',
+    'Dokumentér imputationspolitikken.')]),
+ ('visualization-validation',
+  ('Visualización y validación científica',
+   'Visualization and scientific validation',
+   'Visualisering og videnskabelig validering'),
+  ('Una figura debe corresponder al tipo de variable y a la pregunta: líneas para evolución '
+   'ordenada, dispersión para relaciones, barras para categorías y histogramas para '
+   'distribuciones. Ejes, unidades, límites y leyendas deben ser explícitos. El gráfico no '
+   'sustituye controles numéricos: forma, rango, conteos, valores ausentes y comparación con '
+   'una implementación simple ayudan a detectar errores. Guardar la figura con parámetros '
+   'reproducibles completa el proceso.',
+   'A figure should match the variable type and question: lines for ordered evolution, scatter '
+   'for relationships, bars for categories, and histograms for distributions. Axes, units, '
+   'limits, and legends should be explicit. A plot does not replace numeric checks: shape, '
+   'range, counts, missingness, and comparison with a simple implementation help detect '
+   'errors. Saving the figure with reproducible parameters completes the process.',
+   'En figur skal passe til variabeltype og spørgsmål: linjer til ordnet udvikling, spredning '
+   'til relationer, søjler til kategorier og histogrammer til fordelinger. Akser, enheder, '
+   'grænser og signaturforklaring skal være eksplicitte. Et plot erstatter ikke numeriske '
+   'kontroller af form, interval, antal og manglende værdier.'),
+  [('Etiqueta ejes y unidades.', 'Label axes and units.', 'Mærk akser og enheder.'),
+   ('No truncar ejes para exagerar diferencias.',
+    'Do not truncate axes to exaggerate differences.',
+    'Afkort ikke akser for at overdrive forskelle.'),
+   ('Combina gráficos con controles numéricos.',
+    'Combine plots with numeric checks.',
+    'Kombinér plots med numeriske kontroller.')]))
+
+_EXAMPLES = (('array-standardization',
+  ('Estandarización por columnas', 'Column-wise standardization', 'Kolonnevis standardisering'),
+  ('Estandariza tres variables y verifica media y desviación.',
+   'Standardize three variables and verify mean and deviation.',
+   'Standardisér tre variable og kontrollér middelværdi og afvigelse.'),
+  [('Representar muestras por filas.',
+    'Represent samples by rows.',
+    'Repræsentér prøver som rækker.'),
+   ('Calcular por axis=0.', 'Compute along axis=0.', 'Beregn langs axis=0.'),
+   ('Comprobar el resultado.', 'Check the result.', 'Kontrollér resultatet.')],
+  'import numpy as np\n'
+  '\n'
+  'x = np.array([[1.0, 10.0], [2.0, 12.0], [3.0, 14.0]])\n'
+  'mean = x.mean(axis=0)\n'
+  'std = x.std(axis=0)\n'
+  'z = (x - mean) / std\n'
+  'print(z.shape)\n'
+  'print(np.allclose(z.mean(axis=0), 0.0))',
+  '(3, 2)\nTrue',
+  ('axis=0 reduce las filas y conserva una estadística por columna.',
+   'axis=0 reduces rows and keeps one statistic per column.',
+   'axis=0 reducerer rækker og bevarer én statistik pr. kolonne.')),
+ ('broadcast-centering',
+  ('Centrado mediante broadcasting',
+   'Centering through broadcasting',
+   'Centrering med broadcasting'),
+  ('Resta una media por variable a una matriz de muestras.',
+   'Subtract one mean per variable from a sample matrix.',
+   'Træk ét middel pr. variabel fra en prøvematrix.'),
+  [('La matriz tiene forma (n, p).',
+    'The matrix has shape (n, p).',
+    'Matricen har formen (n, p).'),
+   ('La media tiene forma (p,).', 'The mean has shape (p,).', 'Middelværdien har formen (p,).'),
+   ('La última dimensión coincide.',
+    'The final dimension matches.',
+    'Den sidste dimension matcher.')],
+  'import numpy as np\n'
+  '\n'
+  'x = np.array([[2.0, 5.0], [4.0, 9.0]])\n'
+  'centered = x - x.mean(axis=0)\n'
+  'print(centered.tolist())',
+  '[[-1.0, -2.0], [1.0, 2.0]]',
+  ('El vector se expande conceptualmente sobre las filas.',
+   'The vector conceptually expands across rows.',
+   'Vektoren udvides konceptuelt over rækkerne.')),
+ ('dataframe-filter',
+  ('Filtrado explícito de una tabla',
+   'Explicit table filtering',
+   'Eksplicit filtrering af en tabel'),
+  ('Selecciona registros válidos y conserva columnas definidas.',
+   'Select valid records and keep defined columns.',
+   'Vælg gyldige poster og behold definerede kolonner.'),
+  [('Construir una máscara booleana.', 'Build a Boolean mask.', 'Byg en boolesk maske.'),
+   ('Seleccionar con loc.', 'Select with loc.', 'Vælg med loc.'),
+   ('Copiar antes de transformar.', 'Copy before transforming.', 'Kopiér før transformering.')],
+  'import pandas as pd\n'
+  '\n'
+  "df = pd.DataFrame({'sample': ['A', 'B', 'C'], 'value': [2.1, None, 4.3]})\n"
+  "valid = df.loc[df['value'].notna(), ['sample', 'value']].copy()\n"
+  "print(valid['sample'].tolist())",
+  "['A', 'C']",
+  ('La política de ausencia se expresa en la máscara y no convierte NaN en cero.',
+   'The missingness policy is explicit in the mask and does not turn NaN into zero.',
+   'Politikken for manglende værdier er eksplicit i masken og gør ikke NaN til nul.')),
+ ('safe-merge',
+  ('Unión con validación de cardinalidad',
+   'Join with cardinality validation',
+   'Sammenføjning med ka
