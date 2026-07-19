@@ -1,0 +1,256 @@
+schema_version: 1.0.0
+purpose: >-
+  Canonical authoring contract for semester-one academic content. The application may
+  transform this structure into runtime models, but must preserve stable IDs, scientific
+  meaning, answer keys, rubric criteria, language parity, and source provenance.
+
+locales:
+  required: [es, en, da]
+  canonical_authoring_locale: en
+  rules:
+    - Every learner-visible string must exist in all required locales.
+    - Translation must preserve scientific scope rather than literal word order.
+    - Code, identifiers, formulas, and standard database accessions remain language-neutral.
+    - Correctness must be evaluated by stable IDs, never translated answer text.
+
+id_conventions:
+  course: "lowercase course code, for example dm847"
+  module: "{course}.mNN"
+  objective: "{module}.oNN"
+  concept: "{module}.cNN"
+  example: "{module}.eNN"
+  practice: "{module}.pNN"
+  assessment: "{module}.aNN"
+  objective_question: "{module}.qNN"
+  flashcard: "{module}.fNN"
+  glossary_term: "term.{canonical_slug}"
+  tutor_fragment: "{module}.tNN"
+  blank: "{assessment}.blankNN"
+  option: "semantic lowercase token unique within item"
+
+course_package:
+  required_fields:
+    - course_code
+    - title
+    - ects
+    - official_learning_outcomes
+    - module_sequence
+    - assessment_strategy
+    - source_basis
+    - academic_quality_checks
+
+module_package:
+  required_fields:
+    metadata:
+      - course_code
+      - module_id
+      - content_version
+      - status
+      - title
+      - summary
+      - prerequisites
+      - official_learning_outcomes
+      - estimated_study_hours
+      - difficulty
+    learning_content:
+      - objectives
+      - concepts
+      - worked_examples
+      - practice_exercises
+      - assessment_items
+      - objective_question_bank
+      - flashcards
+      - glossary
+      - tutor_support
+      - source_map
+      - limitations
+
+localized_text:
+  shape:
+    es: "non-empty Spanish text"
+    en: "non-empty English text"
+    da: "non-empty Danish text"
+
+objective:
+  required_fields: [id, statement, bloom_level, evidence]
+  bloom_levels: [remember, understand, apply, analyze, evaluate, create]
+  evidence_examples:
+    - explanation
+    - calculation
+    - executable_code
+    - debugging_trace
+    - data_interpretation
+    - model_comparison
+    - oral_defense
+    - reproducible_report
+
+concept:
+  required_fields: [id, title, body, key_points, linked_objectives]
+  optional_fields:
+    - equations
+    - assumptions
+    - failure_modes
+    - biological_context
+    - computational_complexity
+    - interpretation_notes
+
+worked_example:
+  required_fields:
+    - id
+    - title
+    - problem
+    - assumptions
+    - reasoning
+    - code
+    - expected_output
+    - validation
+    - explanation
+    - limitations
+    - linked_objectives
+  rules:
+    - Code must be syntactically valid in the declared language.
+    - Expected output must be deterministic or explain the allowed stochastic variation.
+    - Synthetic data must be labelled as synthetic.
+    - Biomedical conclusions must remain proportional to the demonstrated evidence.
+
+activity_types:
+  objective:
+    - multiple_choice
+    - multiple_select
+    - true_false
+    - cloze_choice
+  constructed:
+    - fill_in_the_blank
+    - matching
+    - ordering
+    - code_completion
+    - code_tracing
+    - debugging
+    - short_answer
+    - oral_explanation
+    - data_interpretation
+    - pipeline_design
+    - reproducibility_audit
+    - method_selection
+    - assumption_diagnosis
+    - project_checkpoint
+
+practice_exercise:
+  required_fields:
+    - id
+    - activity_type
+    - prompt
+    - hints
+    - reference_solution
+    - explanation
+    - difficulty
+    - linked_objectives
+  optional_fields:
+    - starter_code
+    - data_fixture
+    - expected_artifact
+    - self_assessment_criteria
+    - follow_up
+
+assessment_item:
+  required_fields:
+    - id
+    - activity_type
+    - prompt
+    - explanation
+    - difficulty
+    - linked_objectives
+  objective_item_fields:
+    - options
+    - correct_option_ids
+  constructed_item_fields:
+    - accepted_answer_elements
+    - rubric
+  cloze_choice_fields:
+    - template
+    - blanks
+  rules:
+    - Distractors must represent plausible misconceptions, not arbitrary wrong statements.
+    - Open responses must use a rubric and must not be falsely graded as fully objective.
+    - Each item must test knowledge not already disclosed in its prompt.
+
+flashcard:
+  required_fields: [id, front, back, card_type, linked_concepts]
+  card_types:
+    - definition
+    - mechanism
+    - formula
+    - method_assumption
+    - output_interpretation
+    - misconception_correction
+    - code_pattern
+    - workflow_step
+
+glossary_entry:
+  required_fields:
+    - id
+    - term
+    - definition
+    - course_codes
+    - module_ids
+    - related_terms
+  optional_fields:
+    - abbreviation
+    - equation
+    - warning
+    - external_identifier
+
+tutor_support:
+  visibility: hidden_from_standard_reader
+  required_fields:
+    - canonical_explanation
+    - knowledge_fragments
+    - common_misconceptions
+    - socratic_questions
+    - grading_criteria
+    - response_constraints
+    - escalation_rules
+    - source_anchors
+  response_constraints:
+    global:
+      - Answer in the learner-selected language unless asked otherwise.
+      - Use only retrieved course context for course-specific claims.
+      - Distinguish definitions, assumptions, evidence, interpretation, and limitations.
+      - Do not fabricate outputs, citations, datasets, software behavior, or clinical implications.
+      - Never present synthetic exercises as validated biomedical protocols.
+      - Prefer a hint before a complete solution when the learner is actively solving.
+      - Do not reveal hidden answer keys during a graded session.
+      - State uncertainty when the retrieved context is insufficient.
+
+source_map_entry:
+  required_fields: [target_ids, source_id, use]
+  use_values:
+    - official_outcome_alignment
+    - factual_foundation
+    - pedagogical_sequence
+    - algorithmic_reference
+    - statistical_reference
+    - biological_reference
+    - software_reference
+  copyright_rule: >-
+    Sources support original synthesis. Do not reproduce extensive text, figures, tables,
+    exercises, or answer keys from copyrighted works.
+
+quality_gates:
+  module:
+    - All required fields exist.
+    - All IDs are unique and correctly scoped.
+    - ES, EN, and DA contain the same scientific claims.
+    - Every objective is taught and assessed.
+    - Every assessment maps to at least one objective.
+    - Examples specify assumptions and validation.
+    - Objective distractors are plausible and unique.
+    - Open responses include usable rubrics.
+    - Tutor support includes misconceptions and constraints.
+    - Sources and limitations are explicit.
+  course:
+    - Every official learning outcome has sufficient module and assessment coverage.
+    - Prerequisite flow is coherent.
+    - Difficulty increases progressively.
+    - Cumulative assessment resembles the official examination format.
+    - Cross-course dependencies are documented.
