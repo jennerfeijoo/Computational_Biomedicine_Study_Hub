@@ -1,0 +1,176 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m15
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm857.m15.f01
+    mode: conceptual
+    card_type: cost_model
+    difficulty: foundational
+    front: {es: ¿Qué debe definirse antes de analizar la complejidad?, en: What must be defined before analyzing complexity?, da: Hvad skal defineres før kompleksitetsanalyse?}
+    back: {es: El tamaño o tamaños de entrada, la operación dominante, el caso analizado y los supuestos sobre datos y estructura., en: Input size or sizes, dominant operation, analyzed case, and assumptions about data and structure., da: Inputstørrelse(r), dominerende operation, analyseret case og antagelser om data og struktur.}
+    linked_objectives: [m15.o1]
+  - id: dm857.m15.f02
+    mode: conceptual
+    card_type: notation
+    difficulty: foundational
+    front: {es: Diferencia entre O, Ω y Θ., en: Difference among O, Ω, and Θ., da: Forskel mellem O, Ω og Θ.}
+    back: {es: O es una cota superior asintótica, Ω una inferior y Θ una cota ajustada de crecimiento bajo el modelo., en: O is an asymptotic upper bound, Ω a lower bound, and Θ a tight growth bound under the model., da: O er en asymptotisk øvre grænse, Ω en nedre og Θ en stram vækstgrænse.}
+    linked_objectives: [m15.o2]
+  - id: dm857.m15.f03
+    mode: conceptual
+    card_type: growth_order
+    difficulty: foundational
+    front: {es: Ordena O(1), O(log n), O(n), O(n log n), O(n²) y O(2^n) por crecimiento., en: Order O(1), O(log n), O(n), O(n log n), O(n²), and O(2^n) by growth., da: Ord­n O(1), O(log n), O(n), O(n log n), O(n²) og O(2^n) efter vækst.}
+    back: {es: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2^n), para n suficientemente grande., en: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2^n), for sufficiently large n., da: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2^n) for tilstrækkeligt stort n.}
+    linked_objectives: [m15.o2]
+  - id: dm857.m15.f04
+    mode: practical
+    card_type: complexity_trace
+    difficulty: intermediate
+    front: {es: Complejidad de un bucle que incrementa i de 1 hasta n., en: Complexity of a loop incrementing i from 1 to n., da: Kompleksitet af en løkke der øger i fra 1 til n.}
+    back: {es: Θ(n), si el cuerpo realiza trabajo constante por iteración., en: Θ(n), if the body performs constant work per iteration., da: Θ(n), hvis kroppen udfører konstant arbejde pr. iteration.}
+    linked_objectives: [m15.o1, m15.o2]
+  - id: dm857.m15.f05
+    mode: practical
+    card_type: complexity_trace
+    difficulty: intermediate
+    front: {es: Complejidad de un bucle que duplica i hasta n., en: Complexity of a loop doubling i until n., da: Kompleksitet af en løkke der fordobler i indtil n.}
+    back: {es: Θ(log n), porque tras k iteraciones i es proporcional a 2^k., en: Θ(log n), because after k iterations i is proportional to 2^k., da: Θ(log n), fordi i efter k iterationer er proportional med 2^k.}
+    linked_objectives: [m15.o1, m15.o2]
+  - id: dm857.m15.f06
+    mode: practical
+    card_type: multi_parameter
+    difficulty: intermediate
+    front: {es: Dos bucles recorren n filas y p columnas. ¿Qué complejidad tienen?, en: Two loops traverse n rows and p columns. What is the complexity?, da: To løkker gennemløber n rækker og p kolonner. Hvad er kompleksiteten?}
+    back: {es: Θ(np), no necesariamente Θ(n²). Sólo es cuadrática si p escala como n., en: Θ(np), not necessarily Θ(n²). It is quadratic only if p scales with n., da: Θ(np), ikke nødvendigvis Θ(n²). Den er kun kvadratisk hvis p skalerer som n.}
+    linked_objectives: [m15.o1, m15.o2]
+  - id: dm857.m15.f07
+    mode: conceptual
+    card_type: case_analysis
+    difficulty: intermediate
+    front: {es: Mejor, promedio y peor caso., en: Best, average, and worst case., da: Bedste, gennemsnitlige og værste case.}
+    back: {es: Describen costes bajo entradas distintas. El promedio necesita una distribución explícita; el peor ofrece una garantía superior bajo el dominio., en: They describe costs under different inputs. Average case needs an explicit distribution; worst case provides an upper guarantee over the domain., da: De beskriver omkostninger for forskellige input. Gennemsnit kræver en eksplicit distribution; værste case giver en øvre garanti.}
+    linked_objectives: [m15.o3]
+  - id: dm857.m15.f08
+    mode: conceptual
+    card_type: amortized_analysis
+    difficulty: intermediate
+    front: {es: ¿Qué significa coste amortizado?, en: What does amortized cost mean?, da: Hvad betyder amortiseret omkostning?}
+    back: {es: El coste por operación distribuido sobre una secuencia garantizada, aunque algunas operaciones individuales sean más caras. No es un promedio probabilístico., en: Per-operation cost spread over a guaranteed operation sequence, although some individual operations are expensive. It is not a probabilistic average., da: Omkostning pr. operation fordelt over en garanteret sekvens, selvom enkelte operationer er dyre. Det er ikke et probabilistisk gennemsnit.}
+    linked_objectives: [m15.o3]
+  - id: dm857.m15.f09
+    mode: conceptual
+    card_type: python_cost
+    difficulty: foundational
+    front: {es: Costes típicos de indexar y buscar en una lista., en: Typical costs of indexing and searching a list., da: Typiske omkostninger ved indeksering og søgning i en liste.}
+    back: {es: Indexar una posición válida es O(1); buscar un valor es O(n) en el peor caso., en: Indexing a valid position is O(1); value search is O(n) in the worst case., da: Indeksering af en gyldig position er O(1); værdisøgning er O(n) i værste case.}
+    linked_objectives: [m15.o4]
+  - id: dm857.m15.f10
+    mode: conceptual
+    card_type: python_cost
+    difficulty: intermediate
+    front: {es: Coste típico de pertenencia en dict/set y su limitación., en: Typical dict/set membership cost and its limitation., da: Typisk pris for medlemskab i dict/set og begrænsning.}
+    back: {es: O(1) promedio amortizado bajo hashing razonable; el peor caso puede ser O(n)., en: Average amortized O(1) under reasonable hashing; worst case may be O(n)., da: Gennemsnitligt amortiseret O(1) under rimelig hashing; værste case kan være O(n).}
+    linked_objectives: [m15.o3, m15.o4]
+  - id: dm857.m15.f11
+    mode: conceptual
+    card_type: tree_cost
+    difficulty: advanced
+    front: {es: ¿Cuándo una búsqueda en BST es O(log n)?, en: When is BST search O(log n)?, da: Hvornår er søgning i et BST O(log n)?}
+    back: {es: Cuando la altura h es O(log n), como en un árbol suficientemente equilibrado. En un BST degenerado puede ser O(n)., en: When height h is O(log n), as in a sufficiently balanced tree. In a degenerate BST it may be O(n)., da: Når højden h er O(log n), som i et tilstrækkeligt balanceret træ. I et degenereret BST kan det være O(n).}
+    linked_objectives: [m15.o4]
+  - id: dm857.m15.f12
+    mode: conceptual
+    card_type: memory_cost
+    difficulty: advanced
+    front: {es: ¿Por qué una versión más rápida puede ser peor?, en: Why can a faster version be worse?, da: Hvorfor kan en hurtigere version være dårligere?}
+    back: {es: Puede usar demasiada memoria, perder precisión, complicar mantenimiento, cambiar el contrato o ser más frágil/menos portable., en: It may consume excessive memory, lose precision, complicate maintenance, change the contract, or reduce robustness/portability., da: Den kan bruge for meget hukommelse, miste præcision, komplicere vedligeholdelse, ændre kontrakten eller være mindre robust.}
+    linked_objectives: [m15.o4, m15.o7]
+  - id: dm857.m15.f13
+    mode: conceptual
+    card_type: benchmark
+    difficulty: intermediate
+    front: {es: Componentes de un benchmark defendible., en: Components of a defensible benchmark., da: Komponenter i et forsvarligt benchmark.}
+    back: {es: Pregunta, carga representativa, tamaños, entorno, preparación, repeticiones, estadístico y dispersión, validación de outputs y protocolo reproducible., en: Question, representative workload, sizes, environment, setup, repetitions, summary and spread, output validation, and reproducible protocol., da: Spørgsmål, repræsentativ belastning, størrelser, miljø, setup, gentagelser, statistik og spredning, outputvalidering og reproducerbar protokol.}
+    linked_objectives: [m15.o5]
+  - id: dm857.m15.f14
+    mode: practical
+    card_type: benchmark_bias
+    difficulty: advanced
+    front: {es: ¿Cómo puede un benchmark favorecer injustamente a un conjunto frente a una lista?, en: How can a benchmark unfairly favor a set over a list?, da: Hvordan kan et benchmark uretfærdigt favorisere en mængde frem for en liste?}
+    back: {es: Excluyendo siempre el coste de construir el conjunto aunque en el uso real sólo haya una consulta y deba reconstruirse cada vez., en: By always excluding set-construction cost even when real use has one query and rebuilds the set each time., da: Ved altid at udelade konstruktionsprisen, selvom den reelle brug kun har én forespørgsel og genopbygger mængden.}
+    linked_objectives: [m15.o5]
+  - id: dm857.m15.f15
+    mode: conceptual
+    card_type: profile_metric
+    difficulty: intermediate
+    front: {es: Tiempo propio frente a acumulado en un perfil., en: Self time versus cumulative time in a profile., da: Egen tid versus kumulativ tid i en profil.}
+    back: {es: El tiempo propio excluye funciones llamadas; el acumulado incluye el trabajo de descendientes., en: Self time excludes callees; cumulative time includes descendant work., da: Egen tid ekskluderer underkald; kumulativ tid inkluderer efterkommernes arbejde.}
+    linked_objectives: [m15.o6]
+  - id: dm857.m15.f16
+    mode: practical
+    card_type: profile_interpretation
+    difficulty: advanced
+    front: {es: Una función tiene poco tiempo por llamada pero millones de llamadas. ¿Por qué importa?, en: A function has low per-call time but millions of calls. Why can it matter?, da: En funktion har lav tid pr. kald men millioner af kald. Hvorfor kan den være vigtig?}
+    back: {es: El producto frecuencia × coste puede dominar. Reducir llamadas, agrupar trabajo o sacar invariantes del bucle puede producir mayor mejora., en: Frequency times cost may dominate. Reducing calls, batching work, or hoisting invariants may yield the largest gain., da: Frekvens gange pris kan dominere. Reducér kald, batch arbejde eller flyt invarianter ud af løkken.}
+    linked_objectives: [m15.o6, m15.o7]
+  - id: dm857.m15.f17
+    mode: conceptual
+    card_type: optimization_workflow
+    difficulty: intermediate
+    front: {es: Secuencia de optimización basada en evidencia., en: Evidence-based optimization sequence., da: Evidensbaseret optimeringssekvens.}
+    back: {es: Baseline correcta; objetivo; carga representativa; perfil; hipótesis; cambio focalizado; pruebas; nueva medición; documentación., en: Correct baseline; target; representative workload; profile; hypothesis; focused change; tests; remeasurement; documentation., da: Korrekt baseline, mål, repræsentativ belastning, profil, hypotese, fokuseret ændring, test, ny måling og dokumentation.}
+    linked_objectives: [m15.o6, m15.o7, m15.o8]
+  - id: dm857.m15.f18
+    mode: conceptual
+    card_type: optimization_priority
+    difficulty: advanced
+    front: {es: Orden general de oportunidades de optimización., en: General order of optimization opportunities., da: Generel rækkefølge for optimeringsmuligheder.}
+    back: {es: Mejorar algoritmo/modelo; elegir estructura; eliminar trabajo/copia; reducir llamadas/conversiones; usar biblioteca especializada; microoptimizar sólo si sigue siendo cuello., en: Improve algorithm/model; choose structure; remove work/copies; reduce calls/conversions; use specialized libraries; micro-optimize only if still dominant., da: Forbedr algoritme/model, vælg struktur, fjern arbejde/kopier, reducer kald/konverteringer, brug specialbibliotek og mikrooptimér kun flaskehalse.}
+    linked_objectives: [m15.o7]
+  - id: dm857.m15.f19
+    mode: conceptual
+    card_type: premature_optimization
+    difficulty: intermediate
+    front: {es: ¿Qué es optimización prematura?, en: What is premature optimization?, da: Hvad er for tidlig optimering?}
+    back: {es: Aumentar complejidad antes de demostrar que una parte limita un objetivo relevante y sin medir impacto ni preservar el contrato., en: Increasing complexity before showing that a component limits a relevant target, without measuring impact or preserving the contract., da: At øge kompleksitet før det er vist at en del begrænser et relevant mål, uden måling og kontraktbevarelse.}
+    linked_objectives: [m15.o7]
+  - id: dm857.m15.f20
+    mode: practical
+    card_type: equivalence
+    difficulty: advanced
+    front: {es: ¿Qué debe comparar una prueba de equivalencia tras optimizar?, en: What should an equivalence test compare after optimization?, da: Hvad bør en ækvivalenstest sammenligne efter optimering?}
+    back: {es: Resultados, orden, tipos, shape, errores, mutación, precisión, casos frontera y política de ausentes bajo el mismo contrato., en: Results, order, types, shape, errors, mutation, precision, boundaries, and missing-data policy under the same contract., da: Resultater, orden, typer, shape, fejl, mutation, præcision, grænser og manglende-politik under samme kontrakt.}
+    linked_objectives: [m15.o8]
+  - id: dm857.m15.f21
+    mode: practical
+    card_type: floating_point
+    difficulty: advanced
+    front: {es: ¿Por qué una optimización numérica puede necesitar tolerancia en vez de igualdad exacta?, en: Why may a numerical optimization need tolerance rather than exact equality?, da: Hvorfor kan en numerisk optimering kræve tolerance i stedet for eksakt lighed?}
+    back: {es: El cambio de orden de operaciones modifica redondeo de punto flotante. La tolerancia debe justificarse por escala, error permitido y estabilidad., en: Reordering operations changes floating-point rounding. Tolerance must be justified by scale, acceptable error, and stability., da: Ændret operationsrækkefølge ændrer floating-point-afrunding. Tolerance skal begrundes af skala, tilladt fejl og stabilitet.}
+    linked_objectives: [m15.o8]
+  - id: dm857.m15.f22
+    mode: integrative
+    card_type: tradeoff
+    difficulty: advanced
+    front: {es: Índice dict para acelerar consultas repetidas: beneficio y coste., en: Dictionary index for repeated lookup: benefit and cost., da: Dict-indeks til gentagne opslag: fordel og pris.}
+    back: {es: Reduce consultas de O(n) a O(1) promedio tras construcción O(n), pero usa O(n) memoria y exige política para claves duplicadas y ausentes., en: It reduces lookup from O(n) to average O(1) after O(n) construction, but uses O(n) memory and needs duplicate/missing-key policies., da: Det reducerer opslag fra O(n) til gennemsnitligt O(1) efter O(n) konstruktion, men bruger O(n) hukommelse og kræver politikker.}
+    linked_objectives: [m15.o4, m15.o7, m15.o8]
+  - id: dm857.m15.f23
+    mode: integrative
+    card_type: oral_defense
+    difficulty: advanced
+    front: {es: ¿Cómo defenderías que un cambio es una optimización real?, en: How would you defend that a change is a real optimization?, da: Hvordan forsvarer du at en ændring er en reel optimering?}
+    back: {es: Mostrar cuello medido, hipótesis, benchmark reproducible antes/después, significancia práctica, equivalencia funcional, impacto en memoria/precisión y límites de generalización., en: Show measured bottleneck, hypothesis, reproducible before/after benchmark, practical significance, functional equivalence, memory/precision impact, and generalization limits., da: Vis målt flaskehals, hypotese, reproducerbart før/efter-benchmark, praktisk betydning, ækvivalens, hukommelse/præcision og begrænsninger.}
+    linked_objectives: [m15.o5, m15.o6, m15.o7, m15.o8]
+  - id: dm857.m15.f24
+    mode: integrative
+    card_type: synthesis
+    difficulty: advanced
+    front: {es: Lista de control final para rendimiento., en: Final performance checklist., da: Endelig tjekliste for ydelse.}
+    back: {es: Modelo de tamaño; caso; baseline correcta; carga representativa; tiempo y memoria; perfil; hipótesis; cambio focalizado; equivalencia; múltiples tamaños/repeticiones; dispersión; documentación y rollback., en: Size model; case; correct baseline; representative workload; time and memory; profile; hypothesis; focused change; equivalence; multiple sizes/repetitions; variability; documentation and rollback., da: Størrelsesmodel, case, korrekt baseline, repræsentativ belastning, tid og hukommelse, profil, hypotese, fokuseret ændring, ækvivalens, flere størrelser og dokumentation.}
+    linked_objectives: [m15.o1, m15.o2, m15.o3, m15.o4, m15.o5, m15.o6, m15.o7, m15.o8]
