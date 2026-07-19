@@ -1,0 +1,472 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m06
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm857.m06.f01
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front: {es: ¿Qué comparten listas y tuplas y en qué difieren?, en: What do lists and tuples share and how do they differ?, da: Hvad deler lister og tupler, og hvordan adskiller de sig?}
+    back:
+      es: >-
+        Ambas son secuencias ordenadas con `len`, índices, slices, pertenencia e iteración. Las listas son mutables;
+        las tuplas no permiten cambiar su estructura. Una tupla puede, sin embargo, contener objetos mutables.
+      en: >-
+        Both are ordered sequences supporting `len`, indices, slices, membership, and iteration. Lists are mutable;
+        tuples do not allow structural mutation. A tuple may still contain mutable objects.
+      da: >-
+        Begge er ordnede sekvenser med `len`, indeks, slices, medlemskab og iteration. Lister er muterbare;
+        tupler er strukturelt uforanderlige, men kan indeholde muterbare objekter.
+    linked_objectives: [m06.o1, m06.o7]
+    linked_concepts: [ordered-sequences, tuples-unpacking-records]
+    tags: [list, tuple, sequence]
+    reverse_allowed: true
+
+  - id: dm857.m06.f02
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front: {es: ¿Qué es mutación?, en: What is mutation?, da: Hvad er mutation?}
+    back:
+      es: >-
+        Es un cambio en el contenido o estado de un objeto existente sin reemplazar su identidad. `items.append(x)`
+        muta la lista. Otros nombres que referencian ese mismo objeto observan el cambio.
+      en: >-
+        It is a change to an existing object's contents or state without replacing its identity. `items.append(x)`
+        mutates the list. Other names referring to the same object observe the change.
+      da: >-
+        Det er en ændring af et eksisterende objekts indhold uden at erstatte identiteten. Andre aliaser ser ændringen.
+    linked_objectives: [m06.o2]
+    linked_concepts: [mutation-reassignment-aliasing]
+    tags: [mutation, object, state]
+    reverse_allowed: true
+
+  - id: dm857.m06.f03
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front: {es: Distingue mutación y reasignación., en: Distinguish mutation and reassignment., da: Skeln mellem mutation og gentildeling.}
+    back:
+      es: >-
+        Mutación cambia el objeto existente, como `a.append(3)`. Reasignación cambia el objeto al que apunta un nombre,
+        como `a = [9]`. La reasignación de `a` no modifica el objeto anterior ni otros nombres que lo referencien.
+      en: >-
+        Mutation changes the existing object, as in `a.append(3)`. Reassignment changes which object a name references,
+        as in `a = [9]`. Reassigning `a` does not mutate the previous object.
+      da: >-
+        Mutation ændrer objektet; gentildeling ændrer hvilket objekt navnet refererer til. Gentildeling ændrer ikke det gamle objekt.
+    linked_objectives: [m06.o2]
+    linked_concepts: [mutation-reassignment-aliasing]
+    tags: [mutation, reassignment, binding]
+    reverse_allowed: true
+
+  - id: dm857.m06.f04
+    mode: practical
+    card_type: code_tracing
+    difficulty: foundational
+    front: {es: Traza `a=[1,2]`; `b=a`; `b.append(3)`., en: Trace `a=[1,2]`; `b=a`; `b.append(3)`., da: Gennemgå `a=[1,2]`; `b=a`; `b.append(3)`.}
+    back:
+      es: >-
+        `a` y `b` referencian la misma lista. Tras `append`, ambos observan `[1,2,3]`. No se creó una copia;
+        se creó un alias. `a is b` es `True`.
+      en: >-
+        `a` and `b` reference the same list. After `append`, both observe `[1,2,3]`. No copy was created;
+        an alias was created. `a is b` is `True`.
+      da: >-
+        `a` og `b` refererer til samme liste. Efter `append` ser begge `[1,2,3]`; `a is b` er `True`.
+    linked_objectives: [m06.o2]
+    linked_concepts: [mutation-reassignment-aliasing]
+    tags: [aliasing, trace, identity]
+    reverse_allowed: false
+
+  - id: dm857.m06.f05
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: ¿Qué diferencia `==` de `is`?, en: What distinguishes `==` from `is`?, da: Hvad skelner `==` fra `is`?}
+    back:
+      es: >-
+        `==` compara valores según la semántica del tipo. `is` pregunta si dos expresiones referencian exactamente
+        el mismo objeto. Para contenido se usa normalmente `==`; para el singleton `None`, `is None` es apropiado.
+      en: >-
+        `==` compares values according to type semantics. `is` asks whether two expressions reference the exact same
+        object. Use `==` for content and typically `is None` for the singleton `None`.
+      da: >-
+        `==` sammenligner værdier; `is` sammenligner objektidentitet. Brug normalt `==` for indhold og `is None` for `None`.
+    linked_objectives: [m06.o2]
+    linked_concepts: [mutation-reassignment-aliasing]
+    tags: [equality, identity, is]
+    reverse_allowed: true
+
+  - id: dm857.m06.f06
+    mode: conceptual
+    card_type: definition
+    difficulty: intermediate
+    front: {es: ¿Qué es una copia superficial?, en: What is a shallow copy?, da: Hvad er en overfladisk kopi?}
+    back:
+      es: >-
+        Una colección exterior nueva cuyos elementos son referencias a los mismos objetos que contenía la original.
+        `a[:]`, `list(a)` y `a.copy()` son copias superficiales. Si hay listas internas, siguen compartidas.
+      en: >-
+        A new outer collection whose elements reference the same objects as the original. `a[:]`, `list(a)`, and
+        `a.copy()` are shallow copies. Nested lists remain shared.
+      da: >-
+        En ny ydre samling hvis elementer refererer til samme objekter som originalen. Indre lister deles stadig.
+    linked_objectives: [m06.o2, m06.o6]
+    linked_concepts: [shallow-copy-nesting]
+    tags: [copy, shallow, nesting]
+    reverse_allowed: true
+
+  - id: dm857.m06.f07
+    mode: practical
+    card_type: code_tracing
+    difficulty: intermediate
+    front: {es: >-
+        `a=[[1],[2]]`; `b=a[:]`; `b[0].append(9)`. ¿Qué observan `a` y `b`?
+      en: >-
+        `a=[[1],[2]]`; `b=a[:]`; `b[0].append(9)`. What do `a` and `b` show?
+      da: >-
+        `a=[[1],[2]]`; `b=a[:]`; `b[0].append(9)`. Hvad viser `a` og `b`?}
+    back:
+      es: >-
+        Ambas muestran `[[1,9],[2]]`. Las listas exteriores son distintas, pero `a[0] is b[0]` es `True`.
+        El slice copió referencias a las filas internas.
+      en: >-
+        Both show `[[1,9],[2]]`. The outer lists differ, but `a[0] is b[0]` is `True`; the slice copied row references.
+      da: >-
+        Begge viser `[[1,9],[2]]`. Ydre lister er forskellige, men første indre række er samme objekt.
+    linked_objectives: [m06.o2, m06.o6]
+    linked_concepts: [shallow-copy-nesting]
+    tags: [shallow_copy, aliasing, trace]
+    reverse_allowed: false
+
+  - id: dm857.m06.f08
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front: {es: Corrige: “`[[0]*3]*4` crea cuatro filas independientes”., en: Correct: “`[[0]*3]*4` creates four independent rows.”, da: Ret: “`[[0]*3]*4` skaber fire uafhængige rækker.”}
+    back:
+      es: >-
+        Crea cuatro referencias a la misma fila. Mutar `matrix[0][0]` modifica la fila observada en las cuatro posiciones.
+        Para filas independientes usa `[[0 for _ in range(3)] for _ in range(4)]`.
+      en: >-
+        It creates four references to the same row. Mutating `matrix[0][0]` appears in every row position.
+        Use a nested comprehension for independent rows.
+      da: >-
+        Det skaber fire referencer til samme række. Brug en indlejret comprehension for uafhængige rækker.
+    linked_objectives: [m06.o6, m06.o8]
+    linked_concepts: [shallow-copy-nesting, nested-lists-shape]
+    tags: [matrix, aliasing, construction]
+    reverse_allowed: false
+
+  - id: dm857.m06.f09
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front: {es: Distingue `append` y `extend`., en: Distinguish `append` and `extend`., da: Skeln mellem `append` og `extend`.}
+    back:
+      es: >-
+        `append(x)` añade `x` como un solo elemento. `extend(iterable)` añade cada elemento del iterable.
+        Sobre `[1]`, `append([2,3])` produce `[1,[2,3]]`; `extend([2,3])` produce `[1,2,3]`.
+      en: >-
+        `append(x)` adds `x` as one element. `extend(iterable)` adds every element from the iterable.
+      da: >-
+        `append(x)` tilføjer `x` som ét element; `extend` tilføjer hvert element fra en iterable.
+    linked_objectives: [m06.o3]
+    linked_concepts: [list-methods-effects]
+    tags: [append, extend, list_method]
+    reverse_allowed: true
+
+  - id: dm857.m06.f10
+    mode: practical
+    card_type: debugging
+    difficulty: foundational
+    front: {es: ¿Por qué `items = items.append(x)` suele romper el programa?, en: Why does `items = items.append(x)` usually break the program?, da: Hvorfor ødelægger `items = items.append(x)` ofte programmet?}
+    back:
+      es: >-
+        `append` muta la lista y retorna `None`. La asignación reemplaza el enlace `items` por `None`. La forma correcta
+        es `items.append(x)` sin asignación, o construir una lista nueva si el contrato prohíbe mutación.
+      en: >-
+        `append` mutates the list and returns `None`. Assignment replaces `items` with `None`. Use `items.append(x)`
+        or construct a new list for a non-mutating contract.
+      da: >-
+        `append` muterer og returnerer `None`; tildelingen erstatter `items` med `None`.
+    linked_objectives: [m06.o3, m06.o8]
+    linked_concepts: [list-methods-effects]
+    tags: [append, None, debugging]
+    reverse_allowed: false
+
+  - id: dm857.m06.f11
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: Compara `sorted(items)` e `items.sort()`., en: Compare `sorted(items)` and `items.sort()`., da: Sammenlign `sorted(items)` og `items.sort()`.}
+    back:
+      es: >-
+        `sorted(items)` acepta cualquier iterable y retorna una lista nueva. `items.sort()` ordena la lista en el mismo
+        objeto y retorna `None`. La elección depende de si el contrato permite modificar la entrada.
+      en: >-
+        `sorted(items)` accepts any iterable and returns a new list. `items.sort()` sorts the list in place and returns
+        `None`. Choice depends on whether input mutation is allowed.
+      da: >-
+        `sorted` returnerer en ny liste; `sort` muterer listen og returnerer `None`. Valget afhænger af kontrakten.
+    linked_objectives: [m06.o3, m06.o4]
+    linked_concepts: [list-methods-effects]
+    tags: [sort, mutation, return]
+    reverse_allowed: true
+
+  - id: dm857.m06.f12
+    mode: conceptual
+    card_type: mechanism
+    difficulty: intermediate
+    front: {es: ¿Por qué mutar una lista mientras se recorre puede omitir elementos?, en: Why can mutating a list during traversal skip elements?, da: Hvorfor kan mutation af en liste under gennemløb springe elementer over?}
+    back:
+      es: >-
+        Eliminar o insertar cambia posiciones y longitud mientras el iterador avanza. Tras eliminar, el siguiente elemento
+        puede desplazarse al índice ya superado. Construir una salida nueva hace estable la colección recorrida.
+      en: >-
+        Removal or insertion changes positions and length while the iterator advances. After deletion, the next element
+        may shift into an index already passed. Building a new output keeps traversal stable.
+      da: >-
+        Fjernelse eller indsættelse ændrer positioner mens iteratoren går frem. Byg en ny outputliste for stabilt gennemløb.
+    linked_objectives: [m06.o4, m06.o8]
+    linked_concepts: [traversal-construction-zip]
+    tags: [iteration, mutation, skipped_element]
+    reverse_allowed: false
+
+  - id: dm857.m06.f13
+    mode: practical
+    card_type: refactoring
+    difficulty: intermediate
+    front: {es: ¿Cómo eliminarías negativos sin mutar la lista recorrida?, en: How would you remove negatives without mutating the traversed list?, da: Hvordan fjernes negative værdier uden at mutere den gennemløbne liste?}
+    back:
+      es: >-
+        Construye otra lista: `result = [value for value in values if value >= 0]` o un bucle con `append` sobre
+        `result`. La entrada queda intacta y el resultado es verificable de forma independiente.
+      en: >-
+        Build another list using a comprehension or a loop appending to `result`. The input remains unchanged and the
+        result can be tested independently.
+      da: >-
+        Byg en ny liste med comprehension eller `append` til `result`. Input forbliver uændret.
+    linked_objectives: [m06.o4]
+    linked_concepts: [traversal-construction-zip]
+    tags: [filter, non_mutating, construction]
+    reverse_allowed: false
+
+  - id: dm857.m06.f14
+    mode: conceptual
+    card_type: mechanism
+    difficulty: intermediate
+    front: {es: ¿Qué hace `zip` con secuencias de longitudes distintas?, en: What does `zip` do with sequences of unequal length?, da: Hvad gør `zip` med sekvenser af forskellig længde?}
+    back:
+      es: >-
+        Se detiene cuando termina la secuencia más corta y descarta silenciosamente los elementos restantes de las más
+        largas. Si todas las observaciones deben emparejarse, valida primero longitudes o usa una estrategia explícita.
+      en: >-
+        It stops when the shortest sequence ends and silently ignores remaining elements from longer inputs. If every
+        observation must pair, validate lengths first or use an explicit strategy.
+      da: >-
+        Den stopper med den korteste sekvens og ignorerer resterende elementer. Validér længder hvis alle skal parres.
+    linked_objectives: [m06.o4, m06.o8]
+    linked_concepts: [traversal-construction-zip]
+    tags: [zip, truncation, validation]
+    reverse_allowed: true
+
+  - id: dm857.m06.f15
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front: {es: Corrige: “Inicializar `maximum=0` es una forma general de buscar máximos”., en: Correct: “Initializing `maximum=0` is a general way to find maxima.”, da: Ret: “At initialisere `maximum=0` er en generel måde at finde maksimum.”}
+    back:
+      es: >-
+        Falla si todos los valores son negativos. Para entrada no vacía, inicializa con el primer elemento o usa `max`.
+        Para entrada vacía, el contrato debe elegir excepción, `None` o `default`; no introducir un dato ficticio.
+      en: >-
+        It fails when all values are negative. For non-empty input use the first element or `max`. For empty input,
+        define an exception, sentinel, or default policy rather than introduce a fictitious data value.
+      da: >-
+        Det fejler når alle værdier er negative. Brug første element eller `max` og definér særskilt politik for tomt input.
+    linked_objectives: [m06.o5]
+    linked_concepts: [aggregation-empty-policy]
+    tags: [maximum, initialization, empty]
+    reverse_allowed: false
+
+  - id: dm857.m06.f16
+    mode: conceptual
+    card_type: contract_design
+    difficulty: intermediate
+    front: {es: ¿Qué debe definir una función `mean(values)` para entrada vacía?, en: What must `mean(values)` define for empty input?, da: Hvad skal `mean(values)` definere for tomt input?}
+    back:
+      es: >-
+        Una política explícita: por ejemplo generar `ValueError`, retornar `None` o aceptar un `default`. No existe media
+        aritmética ordinaria de cero observaciones. La política debe ser consistente, documentada y probada.
+      en: >-
+        An explicit policy such as raising `ValueError`, returning `None`, or accepting a default. The ordinary arithmetic
+        mean of zero observations is undefined. The policy must be consistent, documented, and tested.
+      da: >-
+        En eksplicit politik som `ValueError`, `None` eller `default`. Middelværdien af nul observationer er ikke defineret.
+    linked_objectives: [m06.o5, m06.o8]
+    linked_concepts: [aggregation-empty-policy]
+    tags: [mean, empty_input, contract]
+    reverse_allowed: false
+
+  - id: dm857.m06.f17
+    mode: practical
+    card_type: search_design
+    difficulty: intermediate
+    front: {es: ¿Qué puede retornar una búsqueda y cómo eliges?, en: What may a search return and how do you choose?, da: Hvad kan en søgning returnere, og hvordan vælges?}
+    back:
+      es: >-
+        Puede retornar booleano, índice, valor, `None` o generar excepción. Elige según lo que necesite el llamador y si la
+        ausencia es esperada. Evita sentinels ambiguos: `-1` puede confundirse con índice negativo si no se documenta.
+      en: >-
+        It may return a Boolean, index, value, `None`, or raise an exception. Choose according to caller needs and whether
+        absence is expected. Avoid ambiguous sentinels such as undocumented `-1`.
+      da: >-
+        Den kan returnere boolesk værdi, indeks, værdi, `None` eller rejse undtagelse. Vælg efter kontrakt og kalders behov.
+    linked_objectives: [m06.o5, m06.o7]
+    linked_concepts: [aggregation-empty-policy]
+    tags: [search, sentinel, absence]
+    reverse_allowed: false
+
+  - id: dm857.m06.f18
+    mode: conceptual
+    card_type: definition
+    difficulty: intermediate
+    front: {es: ¿Qué significa que una estructura de filas sea rectangular?, en: What does it mean for rows to form a rectangular structure?, da: Hvad betyder det at rækker danner en rektangulær struktur?}
+    back:
+      es: >-
+        Todas las filas tienen la misma longitud y existe una interpretación coherente de filas y columnas. Una lista de
+        listas con longitudes distintas es irregular. La rectangularidad debe validarse antes de operaciones matriciales.
+      en: >-
+        Every row has the same length and rows and columns have coherent meaning. A list of lists with unequal row lengths
+        is ragged. Validate rectangularity before matrix-like operations.
+      da: >-
+        Alle rækker har samme længde og en sammenhængende række-/kolonnebetydning. Validér før matrixoperationer.
+    linked_objectives: [m06.o6]
+    linked_concepts: [nested-lists-shape]
+    tags: [matrix, rectangular, ragged]
+    reverse_allowed: true
+
+  - id: dm857.m06.f19
+    mode: practical
+    card_type: test_design
+    difficulty: intermediate
+    front: {es: ¿Qué pruebas necesita `is_rectangular(rows)`?, en: What tests does `is_rectangular(rows)` need?, da: Hvilke test kræver `is_rectangular(rows)`?}
+    back:
+      es: >-
+        Varias filas iguales; una fila; filas de longitud distinta; lista exterior vacía; filas vacías; elemento que no sea
+        secuencia si el contrato lo contempla. Debe fijarse si la matriz vacía y la de cero columnas son rectangulares.
+      en: >-
+        Equal-length rows; one row; unequal lengths; empty outer list; empty rows; and non-sequence rows if relevant.
+        Define whether empty and zero-column structures count as rectangular.
+      da: >-
+        Lige lange rækker, én række, ujævne længder, tom ydre liste, tomme rækker og ugyldige rækketyper efter kontrakten.
+    linked_objectives: [m06.o6, m06.o8]
+    linked_concepts: [nested-lists-shape]
+    tags: [test, shape, empty]
+    reverse_allowed: false
+
+  - id: dm857.m06.f20
+    mode: conceptual
+    card_type: mechanism
+    difficulty: intermediate
+    front: {es: ¿Qué retorna realmente `return minimum, maximum`?, en: What does `return minimum, maximum` actually return?, da: Hvad returnerer `return minimum, maximum` egentlig?}
+    back:
+      es: >-
+        Una sola tupla de dos elementos. El llamador puede desempaquetarla con `low, high = function(...)`. La coma
+        construye la tupla; los paréntesis suelen ser opcionales.
+      en: >-
+        One two-element tuple. The caller may unpack it using `low, high = function(...)`. The comma constructs the tuple;
+        parentheses are usually optional.
+      da: >-
+        Én tuple med to elementer. Kalderen kan pakke den ud. Kommaet konstruerer tuplen.
+    linked_objectives: [m06.o7]
+    linked_concepts: [tuples-unpacking-records]
+    tags: [tuple, return, unpacking]
+    reverse_allowed: true
+
+  - id: dm857.m06.f21
+    mode: conceptual
+    card_type: method_selection
+    difficulty: advanced
+    front: {es: ¿Cuándo es insuficiente una tupla posicional?, en: When is a positional tuple insufficient?, da: Hvornår er en positionel tuple utilstrækkelig?}
+    back:
+      es: >-
+        Cuando el resultado tiene muchos campos, una interfaz pública o duradera, campos opcionales, validación compleja o
+        riesgo de confundir posiciones. Una estructura con nombres comunica semántica y facilita evolución y revisión.
+      en: >-
+        When results have many fields, public or long-lived interfaces, optional fields, complex validation, or positional
+        confusion risk. A named structure communicates semantics and supports evolution.
+      da: >-
+        Ved mange felter, offentlig/langvarig grænseflade, valgfrie felter eller risiko for positionsforveksling bør felter navngives.
+    linked_objectives: [m06.o7]
+    linked_concepts: [tuples-unpacking-records]
+    tags: [tuple, named_fields, interface]
+    reverse_allowed: false
+
+  - id: dm857.m06.f22
+    mode: practical
+    card_type: test_design
+    difficulty: advanced
+    front: {es: ¿Cómo pruebas que una función no muta su entrada?, en: How do you test that a function does not mutate its input?, da: Hvordan testes at en funktion ikke muterer input?}
+    back:
+      es: >-
+        Crea una entrada y una copia independiente del valor esperado antes de llamar. Ejecuta la función y afirma que la
+        entrada conserva el mismo valor. Para estructuras anidadas, crea una copia adecuada o compara una serialización
+        controlada y verifica también identidades relevantes cuando el contrato exige independencia.
+      en: >-
+        Create an input and an independent expected copy before calling. Execute and assert that input value remains unchanged.
+        For nested structures, use an appropriate copy or controlled representation and inspect identities when independence is required.
+      da: >-
+        Opret input og en uafhængig forventet kopi før kaldet. Kontrollér at inputværdien er uændret; for indlejrede strukturer
+        kræves passende kopiering og eventuelt identitetskontrol.
+    linked_objectives: [m06.o4, m06.o8]
+    linked_concepts: [mutation-reassignment-aliasing, shallow-copy-nesting]
+    tags: [testing, no_mutation, identity]
+    reverse_allowed: false
+
+  - id: dm857.m06.f23
+    mode: integrative
+    card_type: oral_defense
+    difficulty: advanced
+    front: {es: Defiende construir una lista nueva frente a mutar la entrada., en: Defend building a new list instead of mutating input., da: Forsvar at bygge en ny liste frem for at mutere input.}
+    back:
+      es: >-
+        Reduce efectos secundarios, aliasing y dependencia del orden de llamadas; facilita pruebas y composición. El coste es
+        memoria adicional y, a veces, tiempo de copia. La elección debe considerar tamaño, rendimiento y contrato; no existe una
+        prohibición absoluta de mutar, pero debe ser explícita.
+      en: >-
+        It reduces side effects, aliasing, and call-order dependence and improves testing and composition. The cost is additional
+        memory and sometimes copy time. Mutation is not absolutely forbidden, but must be explicit and justified.
+      da: >-
+        Det reducerer sideeffekter og aliasing og forbedrer test, men bruger mere hukommelse. Mutation kan være gyldig når den er eksplicit og begrundet.
+    linked_objectives: [m06.o2, m06.o4, m06.o8]
+    linked_concepts: [mutation-reassignment-aliasing, traversal-construction-zip]
+    tags: [design_tradeoff, mutation, memory]
+    reverse_allowed: false
+
+  - id: dm857.m06.f24
+    mode: integrative
+    card_type: design_review
+    difficulty: advanced
+    front: {es: ¿Qué revisarías antes de aprobar una función que procesa secuencias?, en: What would you review before approving a sequence-processing function?, da: Hvad ville du gennemgå før en sekvensfunktion godkendes?}
+    back:
+      es: >-
+        Tipos y forma de entrada; política de mutación; aliasing y copias; tratamiento de entrada vacía y ausencia;
+        comportamiento con duplicados, negativos y valores límite; estabilidad del recorrido; rectangularidad de estructuras
+        anidadas; significado del retorno; complejidad; y pruebas que revelen efectos compartidos.
+      en: >-
+        Input types and shape; mutation policy; aliasing and copies; empty and absence behavior; duplicates, negatives, and
+        boundaries; traversal stability; nested rectangularity; return meaning; complexity; and tests exposing shared effects.
+      da: >-
+        Inputtyper og form; mutationspolitik; aliasing og kopier; tomt input og fravær; dubletter og grænser; stabilt gennemløb;
+        rektangularitet; returbetydning; kompleksitet og test af delte effekter.
+    linked_objectives: [m06.o2, m06.o3, m06.o4, m06.o5, m06.o6, m06.o7, m06.o8]
+    linked_concepts: [mutation-reassignment-aliasing, aggregation-empty-policy, nested-lists-shape]
+    tags: [review, sequence, quality]
+    reverse_allowed: false
