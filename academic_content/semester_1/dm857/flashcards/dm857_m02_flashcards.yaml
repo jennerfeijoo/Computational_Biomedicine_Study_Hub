@@ -1,0 +1,544 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m02
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm857.m02.f01
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué es un valor booleano y cuáles son sus dos valores posibles en Python?
+      en: What is a Boolean value and what are its two possible values in Python?
+      da: Hvad er en boolesk værdi, og hvilke to værdier kan den have i Python?
+    back:
+      es: >-
+        Un valor booleano pertenece al tipo `bool` y representa una verdad lógica. Sus únicos valores
+        son `True` y `False`. No deben confundirse con las cadenas `'True'` y `'False'`, que pertenecen
+        al tipo `str`. Los booleanos se utilizan para representar resultados de comparaciones,
+        validaciones y decisiones de control.
+      en: >-
+        A Boolean value belongs to type `bool` and represents logical truth. Its only values are
+        `True` and `False`. They must not be confused with strings `'True'` and `'False'`, which belong
+        to type `str`. Booleans represent comparison results, validation states, and control decisions.
+      da: >-
+        En boolesk værdi tilhører typen `bool` og repræsenterer logisk sandhed. De eneste værdier er
+        `True` og `False`. De må ikke forveksles med tekststrengene `'True'` og `'False'`.
+    linked_objectives: [m02.o1]
+    linked_concepts: [boolean-values-and-predicates]
+    tags: [bool, true, false, type]
+
+  - id: dm857.m02.f02
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué es un predicado en programación?
+      en: What is a predicate in programming?
+      da: Hvad er et prædikat i programmering?
+    back:
+      es: >-
+        Un predicado es una expresión que se evalúa como `True` o `False`. Por ejemplo,
+        `temperature > 37` es un predicado sobre el estado actual del programa. Un predicado útil
+        debe expresar una afirmación verificable y tener un significado claro dentro del modelo del problema.
+      en: >-
+        A predicate is an expression that evaluates to `True` or `False`. For example,
+        `temperature > 37` is a predicate about current program state. A useful predicate expresses
+        a verifiable claim with clear meaning in the problem model.
+      da: >-
+        Et prædikat er et udtryk, der evalueres til `True` eller `False`. For eksempel er
+        `temperature > 37` et prædikat om programmets aktuelle tilstand.
+    linked_objectives: [m02.o1]
+    linked_concepts: [boolean-values-and-predicates]
+    tags: [predicate, condition, model]
+
+  - id: dm857.m02.f03
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: ¿Cuál es la diferencia entre `=` y `==`?
+      en: What is the difference between `=` and `==`?
+      da: Hvad er forskellen mellem `=` og `==`?
+    back:
+      es: >-
+        `=` realiza una asignación: evalúa una expresión y vincula un nombre con el resultado. `==`
+        realiza una comparación de igualdad y produce un booleano. Por ejemplo, `x = 4` cambia el
+        estado; `x == 4` pregunta si el valor actual de `x` es igual a 4.
+      en: >-
+        `=` performs assignment: it evaluates an expression and binds a name to the result. `==`
+        compares equality and produces a Boolean. For example, `x = 4` changes state; `x == 4` asks
+        whether the current value of `x` equals 4.
+      da: >-
+        `=` udfører tildeling, mens `==` sammenligner lighed og producerer en boolesk værdi.
+    linked_objectives: [m02.o1, m02.o2]
+    linked_concepts: [comparison-operators]
+    tags: [assignment, equality, comparison]
+
+  - id: dm857.m02.f04
+    mode: conceptual
+    card_type: formula
+    difficulty: foundational
+    front:
+      es: ¿Qué comparadores incluye Python y cuáles incluyen el límite?
+      en: Which comparison operators does Python provide, and which include the boundary?
+      da: Hvilke sammenligningsoperatorer har Python, og hvilke inkluderer grænsen?
+    back:
+      es: >-
+        Los comparadores básicos son `==`, `!=`, `<`, `<=`, `>` y `>=`. Los operadores `<=` y `>=`
+        incluyen el valor límite; `<` y `>` lo excluyen. Esta diferencia debe derivarse de la
+        especificación, no elegirse por costumbre.
+      en: >-
+        Basic comparison operators are `==`, `!=`, `<`, `<=`, `>`, and `>=`. Operators `<=` and `>=`
+        include the boundary, whereas `<` and `>` exclude it. The choice must follow the specification.
+      da: >-
+        De grundlæggende operatorer er `==`, `!=`, `<`, `<=`, `>` og `>=`. `<=` og `>=` inkluderer grænsen.
+    linked_objectives: [m02.o2, m02.o7]
+    linked_concepts: [comparison-operators]
+    tags: [comparison, boundary, inclusive]
+
+  - id: dm857.m02.f05
+    mode: conceptual
+    card_type: code_pattern
+    difficulty: foundational
+    front:
+      es: ¿Cómo se expresa claramente que `x` está entre `a` y `b`, incluyendo ambos límites?
+      en: How can you clearly express that `x` lies between `a` and `b`, including both boundaries?
+      da: Hvordan udtrykkes det klart, at `x` ligger mellem `a` og `b`, inklusive begge grænser?
+    back:
+      es: >-
+        Se utiliza la comparación encadenada `a <= x <= b`. Es equivalente a
+        `a <= x and x <= b`, pero evita repetir la variable y hace visible que el modelo es un intervalo.
+      en: >-
+        Use the chained comparison `a <= x <= b`. It is equivalent to
+        `a <= x and x <= b`, but avoids repeating the variable and makes the interval model visible.
+      da: >-
+        Brug den kædede sammenligning `a <= x <= b`. Den svarer til `a <= x and x <= b`.
+    linked_objectives: [m02.o2]
+    linked_concepts: [comparison-operators]
+    tags: [interval, chained-comparison]
+
+  - id: dm857.m02.f06
+    mode: conceptual
+    card_type: mechanism
+    difficulty: foundational
+    front:
+      es: ¿Qué significan `and`, `or` y `not`?
+      en: What do `and`, `or`, and `not` mean?
+      da: Hvad betyder `and`, `or` og `not`?
+    back:
+      es: >-
+        `A and B` es verdadero solo cuando ambos operandos son verdaderos. `A or B` es verdadero cuando
+        al menos uno es verdadero. `not A` invierte el valor lógico de `A`. La selección debe reflejar
+        la regla: requisitos simultáneos usan `and`; alternativas válidas usan `or`.
+      en: >-
+        `A and B` is true only when both operands are true. `A or B` is true when at least one is true.
+        `not A` reverses the truth value of `A`. Simultaneous requirements use `and`; valid alternatives use `or`.
+      da: >-
+        `A and B` er kun sand, når begge er sande. `A or B` er sand, når mindst én er sand. `not A` vender værdien.
+    linked_objectives: [m02.o3]
+    linked_concepts: [logical-operators-and-precedence]
+    tags: [and, or, not, logic]
+
+  - id: dm857.m02.f07
+    mode: conceptual
+    card_type: formula
+    difficulty: intermediate
+    front:
+      es: ¿Cuál es la precedencia de `not`, `and` y `or`?
+      en: What is the precedence of `not`, `and`, and `or`?
+      da: Hvad er præcedensen for `not`, `and` og `or`?
+    back:
+      es: >-
+        La precedencia es `not`, después `and` y finalmente `or`. Por ello,
+        `A or B and C` se interpreta como `A or (B and C)`. Aunque la precedencia sea conocida,
+        los paréntesis son recomendables cuando documentan la intención.
+      en: >-
+        Precedence is `not`, then `and`, then `or`. Therefore `A or B and C` is interpreted as
+        `A or (B and C)`. Parentheses remain useful when they document intent.
+      da: >-
+        Præcedensen er `not`, derefter `and` og til sidst `or`. Parenteser kan tydeliggøre hensigten.
+    linked_objectives: [m02.o3]
+    linked_concepts: [logical-operators-and-precedence]
+    tags: [precedence, parentheses]
+
+  - id: dm857.m02.f08
+    mode: conceptual
+    card_type: formula
+    difficulty: intermediate
+    front:
+      es: Aplica las leyes de De Morgan a `not (A and B)` y `not (A or B)`.
+      en: Apply De Morgan's laws to `not (A and B)` and `not (A or B)`.
+      da: Anvend De Morgans love på `not (A and B)` og `not (A or B)`.
+    back:
+      es: >-
+        `not (A and B)` equivale a `(not A) or (not B)`. `not (A or B)` equivale a
+        `(not A) and (not B)`. La transformación debe conservar exactamente los casos verdaderos y falsos;
+        no basta con retirar los paréntesis.
+      en: >-
+        `not (A and B)` equals `(not A) or (not B)`. `not (A or B)` equals
+        `(not A) and (not B)`. The transformation must preserve exactly the true and false cases.
+      da: >-
+        `not (A and B)` svarer til `(not A) or (not B)`, og `not (A or B)` svarer til `(not A) and (not B)`.
+    linked_objectives: [m02.o3]
+    linked_concepts: [logical-operators-and-precedence]
+    tags: [de-morgan, negation]
+
+  - id: dm857.m02.f09
+    mode: conceptual
+    card_type: mechanism
+    difficulty: intermediate
+    front:
+      es: ¿Cómo funciona el cortocircuito en `A and B`?
+      en: How does short-circuiting work in `A and B`?
+      da: Hvordan fungerer kortslutning i `A and B`?
+    back:
+      es: >-
+        Python evalúa `A` primero. Si `A` es falsa, el resultado completo ya es falso y `B` no se
+        evalúa. Si `A` es verdadera, se evalúa `B`. Esto permite colocar una condición guardián antes
+        de una operación potencialmente inválida.
+      en: >-
+        Python evaluates `A` first. If `A` is false, the complete result is already false and `B` is
+        not evaluated. If `A` is true, `B` is evaluated. This allows a guard before a potentially invalid operation.
+      da: >-
+        Python evaluerer først `A`. Hvis `A` er falsk, evalueres `B` ikke. Det kan beskytte en følsom operation.
+    linked_objectives: [m02.o4]
+    linked_concepts: [short-circuit-evaluation]
+    tags: [short-circuit, and, guard]
+
+  - id: dm857.m02.f10
+    mode: conceptual
+    card_type: mechanism
+    difficulty: intermediate
+    front:
+      es: ¿Cómo funciona el cortocircuito en `A or B`?
+      en: How does short-circuiting work in `A or B`?
+      da: Hvordan fungerer kortslutning i `A or B`?
+    back:
+      es: >-
+        Python evalúa `A` primero. Si `A` es verdadera, el resultado completo ya es verdadero y `B`
+        no se evalúa. Si `A` es falsa, se evalúa `B`. Esto puede evitar una operación innecesaria, pero
+        también puede impedir que ocurra un efecto secundario situado en `B`.
+      en: >-
+        Python evaluates `A` first. If `A` is true, the complete result is already true and `B` is not
+        evaluated. If `A` is false, `B` is evaluated. This may avoid unnecessary work but can also skip a side effect in `B`.
+      da: >-
+        Python evaluerer først `A`. Hvis `A` er sand, evalueres `B` ikke. Det kan spare arbejde, men også springe en sideeffekt over.
+    linked_objectives: [m02.o4]
+    linked_concepts: [short-circuit-evaluation]
+    tags: [short-circuit, or, side-effect]
+
+  - id: dm857.m02.f11
+    mode: practical
+    card_type: code_pattern
+    difficulty: intermediate
+    front:
+      es: Escribe una condición segura que compruebe si `n / d > 2` sin dividir cuando `d` es cero.
+      en: Write a safe condition that checks whether `n / d > 2` without dividing when `d` is zero.
+      da: Skriv en sikker betingelse, der kontrollerer `n / d > 2` uden at dividere, når `d` er nul.
+    back:
+      es: >-
+        `d != 0 and n / d > 2`. La condición guardián aparece primero. Si `d == 0`, el primer operando
+        es falso y la división no se evalúa. La forma inversa, `n / d > 2 and d != 0`, no es segura.
+      en: >-
+        `d != 0 and n / d > 2`. The guard appears first. When `d == 0`, the first operand is false and
+        division is skipped. The reversed order is unsafe.
+      da: >-
+        `d != 0 and n / d > 2`. Beskyttelsen står først, så divisionen springes over, når `d == 0`.
+    linked_objectives: [m02.o4]
+    linked_concepts: [short-circuit-evaluation]
+    tags: [division, guard, debugging]
+
+  - id: dm857.m02.f12
+    mode: conceptual
+    card_type: workflow_step
+    difficulty: foundational
+    front:
+      es: ¿Cómo selecciona una cadena `if`–`elif`–`else` la rama que ejecuta?
+      en: How does an `if`–`elif`–`else` chain select the branch to execute?
+      da: Hvordan vælger en `if`–`elif`–`else`-kæde den gren, der udføres?
+    back:
+      es: >-
+        Las condiciones se evalúan de arriba hacia abajo. Se ejecuta la primera rama cuya condición sea
+        verdadera y se omiten las restantes. Si ninguna condición es verdadera, se ejecuta `else`, si
+        existe. Por tanto, el orden de las ramas forma parte de la corrección.
+      en: >-
+        Conditions are evaluated top to bottom. The first branch whose condition is true executes and
+        the remaining branches are skipped. If none is true, `else` executes when present. Branch order is part of correctness.
+      da: >-
+        Betingelser evalueres ovenfra og ned. Den første sande gren udføres, og resten springes over.
+    linked_objectives: [m02.o5]
+    linked_concepts: [if-elif-else-control-flow]
+    tags: [if, elif, else, branch-order]
+
+  - id: dm857.m02.f13
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front:
+      es: Corrige: “En una cadena `if`–`elif`, todas las condiciones verdaderas ejecutan su bloque”.
+      en: Correct: “In an `if`–`elif` chain, every true condition executes its block.”
+      da: Ret: “I en `if`–`elif`-kæde udfører alle sande betingelser deres blok.”
+    back:
+      es: >-
+        Solo se ejecuta la primera rama verdadera. Una condición posterior puede ser verdadera en sentido
+        lógico, pero nunca se evalúa si una rama anterior ya fue seleccionada. Para decisiones independientes
+        deben utilizarse sentencias `if` separadas, no una sola cadena exclusiva.
+      en: >-
+        Only the first true branch executes. A later condition may be logically true but is never evaluated
+        after an earlier branch is selected. Independent decisions require separate `if` statements.
+      da: >-
+        Kun den første sande gren udføres. Uafhængige beslutninger kræver separate `if`-sætninger.
+    linked_objectives: [m02.o5]
+    linked_concepts: [if-elif-else-control-flow]
+    tags: [misconception, exclusive-chain]
+
+  - id: dm857.m02.f14
+    mode: practical
+    card_type: method_assumption
+    difficulty: intermediate
+    front:
+      es: ¿Por qué se colocan normalmente las reglas específicas antes que las generales?
+      en: Why are specific rules usually placed before general rules?
+      da: Hvorfor placeres specifikke regler normalt før generelle regler?
+    back:
+      es: >-
+        Una regla general puede ser verdadera para los mismos casos que una regla específica. Como la
+        primera rama verdadera detiene la cadena, una regla general temprana puede volver inalcanzable la
+        específica. Ejemplo: `score >= 60` debe aparecer después de `score >= 90` si 90 define otra categoría.
+      en: >-
+        A general rule may also be true for cases covered by a specific rule. Since the first true branch
+        stops the chain, an early general rule can make the specific rule unreachable.
+      da: >-
+        En generel regel kan også være sand for de specifikke tilfælde og dermed gøre den specifikke gren utilgængelig.
+    linked_objectives: [m02.o5]
+    linked_concepts: [if-elif-else-control-flow]
+    tags: [specificity, unreachable-branch]
+
+  - id: dm857.m02.f15
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front:
+      es: ¿Cuándo es preferible una condición compuesta y cuándo un condicional anidado?
+      en: When is a compound condition preferable, and when is a nested conditional preferable?
+      da: Hvornår er en sammensat betingelse bedst, og hvornår er en indlejret betingelse bedst?
+    back:
+      es: >-
+        Una condición compuesta es adecuada cuando varios requisitos forman una sola regla, como
+        `is_valid and has_control`. El anidamiento es adecuado cuando la segunda decisión solo tiene
+        sentido después de la primera, por ejemplo validar un archivo antes de analizar su contenido.
+        La elección debe comunicar la estructura del problema y evitar profundidad innecesaria.
+      en: >-
+        A compound condition suits multiple requirements that form one rule. Nesting suits staged
+        decisions where the second only makes sense after the first, such as validating a file before analyzing it.
+      da: >-
+        En sammensat betingelse passer til én regel med flere krav. Indlejring passer til beslutninger i trin.
+    linked_objectives: [m02.o6]
+    linked_concepts: [compound-versus-nested-conditionals]
+    tags: [compound, nested, readability]
+
+  - id: dm857.m02.f16
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué es una condición guardián?
+      en: What is a guard condition?
+      da: Hvad er en beskyttelsesbetingelse?
+    back:
+      es: >-
+        Es un predicado evaluado antes de una operación o bloque para comprobar que su ejecución sea
+        válida. Ejemplos: verificar que un denominador no sea cero, que un índice esté dentro del rango
+        o que un dato haya superado la validación. El guardián reduce el dominio antes de continuar.
+      en: >-
+        A guard condition is a predicate evaluated before an operation or block to verify that execution
+        is valid. Examples include a non-zero denominator, an in-range index, or validated input.
+      da: >-
+        En beskyttelsesbetingelse er et prædikat, der kontrolleres før en operation for at sikre gyldig udførelse.
+    linked_objectives: [m02.o4, m02.o5]
+    linked_concepts: [short-circuit-evaluation, compound-versus-nested-conditionals]
+    tags: [guard, validation]
+
+  - id: dm857.m02.f17
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué es una prueba de límite?
+      en: What is a boundary test?
+      da: Hvad er en grænsetest?
+    back:
+      es: >-
+        Es una prueba diseñada alrededor de un valor donde cambia la categoría o el comportamiento.
+        Debe incluir el valor exacto del límite y valores inmediatamente por debajo y por encima. Así se
+        detectan errores como usar `>` cuando la especificación exige `>=`.
+      en: >-
+        A boundary test is designed around a value where category or behavior changes. It should include
+        the exact boundary and values immediately below and above it, revealing inclusive/exclusive errors.
+      da: >-
+        En grænsetest bruger den præcise grænse og værdier lige under og over for at afsløre fejl i inklusion.
+    linked_objectives: [m02.o7]
+    linked_concepts: [validation-boundaries-and-branch-testing]
+    tags: [testing, boundary]
+
+  - id: dm857.m02.f18
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front:
+      es: ¿En qué se diferencian cobertura de ramas y cobertura de límites?
+      en: How do branch coverage and boundary coverage differ?
+      da: Hvordan adskiller grendækning og grænsedækning sig?
+    back:
+      es: >-
+        La cobertura de ramas demuestra que cada rama relevante se ejecutó al menos una vez. La cobertura
+        de límites demuestra que se probaron los puntos exactos donde cambia el comportamiento y valores
+        a ambos lados. Una prueba puede cubrir una rama sin detectar un operador inclusivo incorrecto;
+        por eso ambas coberturas son complementarias.
+      en: >-
+        Branch coverage shows that every relevant branch executed at least once. Boundary coverage shows
+        that exact change points and values on both sides were tested. They are complementary.
+      da: >-
+        Grendækning viser, at hver gren blev udført. Grænsedækning tester de præcise skift og begge sider.
+    linked_objectives: [m02.o7]
+    linked_concepts: [validation-boundaries-and-branch-testing]
+    tags: [branch-coverage, boundary-coverage]
+
+  - id: dm857.m02.f19
+    mode: practical
+    card_type: output_interpretation
+    difficulty: intermediate
+    front:
+      es: Predice `result` para `x = 4`, `y = 9` y `result = x > 3 and y < 5 or x == 4`.
+      en: Predict `result` for `x = 4`, `y = 9`, and `result = x > 3 and y < 5 or x == 4`.
+      da: Forudsig `result` for `x = 4`, `y = 9` og `result = x > 3 and y < 5 or x == 4`.
+    back:
+      es: >-
+        `x > 3` es `True`; `y < 5` es `False`; `x == 4` es `True`. Como `and` tiene mayor
+        precedencia, la expresión es `(True and False) or True`, que produce `True`.
+      en: >-
+        `x > 3` is `True`; `y < 5` is `False`; `x == 4` is `True`. Since `and` has higher precedence,
+        the expression is `(True and False) or True`, yielding `True`.
+      da: >-
+        Udtrykket bliver `(True and False) or True`, hvilket giver `True`.
+    linked_objectives: [m02.o2, m02.o3]
+    linked_concepts: [logical-operators-and-precedence]
+    tags: [trace, output, precedence]
+
+  - id: dm857.m02.f20
+    mode: practical
+    card_type: debugging
+    difficulty: intermediate
+    front:
+      es: ¿Por qué `value >= 0 or value <= 100` no valida correctamente el intervalo 0–100?
+      en: Why does `value >= 0 or value <= 100` fail to validate the interval 0–100?
+      da: Hvorfor validerer `value >= 0 or value <= 100` ikke intervallet 0–100 korrekt?
+    back:
+      es: >-
+        Casi todo número cumple al menos una parte: un número negativo suele ser `<= 100`, y uno mayor
+        que 100 suele ser `>= 0`. La condición correcta es `0 <= value <= 100` o
+        `value >= 0 and value <= 100`. Es un error lógico, no de sintaxis.
+      en: >-
+        Almost every number satisfies at least one part: a negative number is usually `<= 100`, and a
+        number above 100 is usually `>= 0`. Use `0 <= value <= 100` or the equivalent `and` expression.
+      da: >-
+        Næsten alle tal opfylder mindst én del. Brug `0 <= value <= 100` eller en tilsvarende `and`-betingelse.
+    linked_objectives: [m02.o3, m02.o5, m02.o7]
+    linked_concepts: [comparison-operators, validation-boundaries-and-branch-testing]
+    tags: [debugging, interval, or]
+
+  - id: dm857.m02.f21
+    mode: practical
+    card_type: method_selection
+    difficulty: intermediate
+    front:
+      es: Una regla exige concentración suficiente y pureza dentro de un intervalo. ¿Se combinan con `and` u `or`?
+      en: A rule requires sufficient concentration and purity within an interval. Should the conditions use `and` or `or`?
+      da: En regel kræver tilstrækkelig koncentration og renhed i et interval. Skal betingelserne bruge `and` eller `or`?
+    back:
+      es: >-
+        Se utiliza `and` porque ambos requisitos son necesarios. `or` aceptaría la muestra cuando solo uno
+        se cumpla. La selección se justifica por la semántica de la palabra “y” en la especificación,
+        no por una preferencia de estilo.
+      en: >-
+        Use `and` because both requirements are necessary. `or` would accept a sample when only one holds.
+        The choice follows the specification, not style preference.
+      da: >-
+        Brug `and`, fordi begge krav er nødvendige. `or` ville acceptere, når kun ét krav er opfyldt.
+    linked_objectives: [m02.o3, m02.o5]
+    linked_concepts: [logical-operators-and-precedence]
+    tags: [method-selection, requirements]
+
+  - id: dm857.m02.f22
+    mode: practical
+    card_type: workflow_step
+    difficulty: intermediate
+    front:
+      es: ¿Qué orden debe seguir una clasificación con entradas inválidas, categorías específicas y un caso residual?
+      en: What order should a classification follow when it has invalid input, specific categories, and a residual case?
+      da: Hvilken rækkefølge bør en klassifikation følge med ugyldige input, specifikke kategorier og et resttilfælde?
+    back:
+      es: >-
+        Primero se valida el dominio y se rechazan valores imposibles. Después se evalúan las categorías
+        específicas desde las más restrictivas hacia las más generales. Finalmente, `else` cubre solo
+        el dominio residual conocido. Este orden evita que entradas inválidas sean clasificadas como válidas.
+      en: >-
+        First validate the domain and reject impossible values. Then evaluate specific categories from
+        most restrictive to more general. Finally, `else` covers only the known residual domain.
+      da: >-
+        Validér først domænet, evaluér derefter specifikke kategorier og brug til sidst `else` til det kendte restdomæne.
+    linked_objectives: [m02.o5, m02.o7]
+    linked_concepts: [if-elif-else-control-flow, validation-boundaries-and-branch-testing]
+    tags: [validation, order, workflow]
+
+  - id: dm857.m02.f23
+    mode: integrative
+    card_type: misconception_correction
+    difficulty: advanced
+    front:
+      es: Corrige: “Si dos expresiones condicionales son lógicamente equivalentes, son igualmente buenas”.
+      en: Correct: “If two conditional expressions are logically equivalent, they are equally good.”
+      da: Ret: “Hvis to betingede udtryk er logisk ækvivalente, er de lige gode.”
+    back:
+      es: >-
+        La equivalencia lógica conserva resultados para las mismas entradas, pero no garantiza igual
+        legibilidad, facilidad de prueba, seguridad ante efectos secundarios ni capacidad de comunicar
+        la estructura del problema. La forma preferida debe ser correcta y además facilitar revisión,
+        mantenimiento y diagnóstico.
+      en: >-
+        Logical equivalence preserves results for the same inputs but does not guarantee equal readability,
+        testability, side-effect safety, or communication of problem structure. Preferred form should also support review and maintenance.
+      da: >-
+        Logisk ækvivalens garanterer ikke samme læsbarhed, testbarhed eller sikkerhed ved sideeffekter.
+    linked_objectives: [m02.o4, m02.o6]
+    linked_concepts: [compound-versus-nested-conditionals, short-circuit-evaluation]
+    tags: [equivalence, readability, maintainability]
+
+  - id: dm857.m02.f24
+    mode: integrative
+    card_type: oral_or_report_defense
+    difficulty: advanced
+    front:
+      es: ¿Cómo defenderías que una estructura condicional implementa correctamente una regla verbal?
+      en: How would you defend that a conditional structure correctly implements a verbal rule?
+      da: Hvordan ville du forsvare, at en betinget struktur implementerer en verbal regel korrekt?
+    back:
+      es: >-
+        Presentaría una tabla de decisión que traduzca cada regla a predicados, demostraría que las ramas
+        cubren el dominio previsto sin huecos accidentales, explicaría el orden cuando existen solapamientos,
+        y mostraría pruebas normales, de límite e inválidas con resultados esperados. También indicaría
+        supuestos, casos no cubiertos y por qué la forma elegida es legible.
+      en: >-
+        I would present a decision table translating each rule into predicates, show that branches cover
+        the intended domain without accidental gaps, explain ordering under overlap, and provide normal,
+        boundary, and invalid tests with expected results. I would also state assumptions and limitations.
+      da: >-
+        Jeg ville vise en beslutningstabel, dokumentere domænedækning, forklare rækkefølge ved overlap og
+        fremlægge normale, grænse- og ugyldige test med forventede resultater.
+    linked_objectives: [m02.o5, m02.o6, m02.o7]
+    linked_concepts: [if-elif-else-control-flow, validation-boundaries-and-branch-testing]
+    tags: [defense, evidence, testing, decision-table]
