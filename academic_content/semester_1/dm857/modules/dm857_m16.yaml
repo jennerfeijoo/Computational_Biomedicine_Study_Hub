@@ -1,0 +1,360 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m16
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title: {es: Diseño de proyecto integrador, reproducibilidad y construcción del informe, en: Integrative project design, reproducibility, and report construction, da: Integreret projektdesign, reproducerbarhed og rapportopbygning}
+  summary:
+    es: >-
+      Diseño y ejecución de un proyecto grupal de programación: pregunta y alcance, requisitos verificables,
+      criterios de aceptación, arquitectura y contratos, datos y procedencia, planificación, colaboración y
+      control de versiones, reproducibilidad, estrategia de pruebas, evaluación de rendimiento, riesgos,
+      documentación y construcción de un informe técnico conciso de hasta diez páginas basado en evidencia.
+    en: >-
+      Design and execution of a group programming project: question and scope, verifiable requirements,
+      acceptance criteria, architecture and contracts, data and provenance, planning, collaboration and
+      version control, reproducibility, testing strategy, performance evaluation, risks, documentation,
+      and construction of a concise evidence-based technical report of up to ten pages.
+    da: >-
+      Design og gennemførelse af et gruppeprogrammeringsprojekt: spørgsmål og afgrænsning, verificerbare
+      krav, acceptkriterier, arkitektur og kontrakter, data og proveniens, planlægning, samarbejde og
+      versionsstyring, reproducerbarhed, teststrategi, ydelse, risici, dokumentation og en teknisk rapport
+      på højst ti sider baseret på evidens.
+  prerequisites: [dm857.m01, dm857.m02, dm857.m03, dm857.m04, dm857.m05, dm857.m06, dm857.m07, dm857.m08, dm857.m11, dm857.m12, dm857.m13, dm857.m14, dm857.m15]
+  official_learning_outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo04, dm857.lo05, dm857.lo07]
+  estimated_study_hours: 28
+  difficulty: integrative
+
+objectives:
+  - {id: m16.o1, bloom_level: create, statement: {es: Transformar una pregunta concreta en alcance, requisitos y criterios de aceptación verificables., en: Transform a concrete question into scope, requirements, and verifiable acceptance criteria., da: Omsætte et konkret spørgsmål til afgrænsning, krav og verificerbare acceptkriterier.}, evidence: project_specification}
+  - {id: m16.o2, bloom_level: create, statement: {es: Diseñar una arquitectura modular con interfaces, invariantes y dependencias explícitas., en: Design a modular architecture with interfaces, invariants, and explicit dependencies., da: Designe en modulær arkitektur med interfaces, invarianter og eksplicitte afhængigheder.}, evidence: architecture_document}
+  - {id: m16.o3, bloom_level: evaluate, statement: {es: Definir contratos de datos, procedencia, validación y límites éticos o de privacidad., en: Define data contracts, provenance, validation, and ethical or privacy boundaries., da: Definere datakontrakter, proveniens, validering og etiske eller privatlivsmæssige grænser.}, evidence: data_governance_section}
+  - {id: m16.o4, bloom_level: create, statement: {es: Planificar entregas, responsabilidades, integración y revisión mediante control de versiones., en: Plan deliverables, responsibilities, integration, and review through version control., da: Planlægge leverancer, ansvar, integration og review gennem versionsstyring.}, evidence: collaboration_plan}
+  - {id: m16.o5, bloom_level: create, statement: {es: Construir un paquete reproducible con entorno, comandos, datos identificados y ejecución limpia., en: Build a reproducible package with environment, commands, identified data, and clean execution., da: Bygge en reproducerbar pakke med miljø, kommandoer, identificerede data og ren kørsel.}, evidence: reproducibility_package}
+  - {id: m16.o6, bloom_level: create, statement: {es: Diseñar evidencia de validación que cubra pruebas, resultados, rendimiento y limitaciones., en: Design validation evidence covering tests, results, performance, and limitations., da: Designe valideringsevidens der dækker test, resultater, ydelse og begrænsninger.}, evidence: validation_matrix}
+  - {id: m16.o7, bloom_level: create, statement: {es: Redactar un informe técnico de diez páginas con trazabilidad entre problema, decisiones, evidencia y conclusión., en: Write a ten-page technical report tracing problem, decisions, evidence, and conclusion., da: Skrive en teknisk rapport på ti sider med sporbarhed mellem problem, beslutninger, evidens og konklusion.}, evidence: technical_report}
+  - {id: m16.o8, bloom_level: evaluate, statement: {es: Auditar el proyecto completo para detectar afirmaciones no sustentadas, riesgos y deuda técnica., en: Audit the complete project for unsupported claims, risks, and technical debt., da: Revidere hele projektet for udokumenterede påstande, risici og teknisk gæld.}, evidence: project_audit}
+
+concepts:
+  - id: question-scope-and-success
+    title: {es: Pregunta, alcance y definición de éxito, en: Question, scope, and definition of success, da: Spørgsmål, afgrænsning og definition af succes}
+    body:
+      es: >-
+        Un proyecto comienza con una pregunta operativa que identifica usuario, entrada, transformación y
+        resultado observable. El alcance enumera qué se incluye y excluye, evitando que el proyecto crezca sin
+        control. El éxito se expresa mediante criterios verificables: exactitud frente a casos de referencia,
+        tratamiento de errores, reproducibilidad, tiempo o memoria cuando sean relevantes y calidad de
+        documentación. “Construir una aplicación útil” no es un criterio; “procesar un archivo válido y reportar
+        filas rechazadas sin perder contexto” sí puede comprobarse.
+      en: >-
+        A project begins with an operational question identifying user, input, transformation, and observable
+        result. Scope states inclusions and exclusions. Success uses verifiable criteria: reference correctness,
+        error handling, reproducibility, relevant time or memory, and documentation quality. Vague usefulness is
+        not an acceptance criterion.
+      da: >-
+        Et projekt starter med et operationelt spørgsmål om bruger, input, transformation og observerbart resultat.
+        Afgrænsning angiver hvad der er med og udenfor, og succes beskrives med verificerbare kriterier.
+    linked_objectives: [m16.o1, m16.o8]
+  - id: requirements-and-traceability
+    title: {es: Requisitos, aceptación y trazabilidad, en: Requirements, acceptance, and traceability, da: Krav, accept og sporbarhed}
+    body:
+      es: >-
+        Los requisitos funcionales describen conductas; los no funcionales describen restricciones como
+        reproducibilidad, rendimiento, portabilidad o seguridad. Cada requisito debe tener prioridad, fuente,
+        criterio de aceptación y evidencia. Una matriz de trazabilidad conecta requisito con módulo, prueba,
+        resultado e informe. Esto evita implementar funciones sin propósito o afirmar cobertura sin evidencia.
+        Los cambios de requisito se registran con impacto en arquitectura, pruebas y alcance.
+      en: >-
+        Functional requirements describe behavior; non-functional requirements describe constraints such as
+        reproducibility, performance, portability, or security. Each requirement has priority, source, acceptance
+        criterion, and evidence. A traceability matrix links requirement, component, test, result, and report.
+      da: >-
+        Funktionelle krav beskriver adfærd; ikke-funktionelle krav beskriver begrænsninger. En sporbarhedsmatrix
+        forbinder krav, komponent, test, resultat og rapport.
+    linked_objectives: [m16.o1, m16.o6, m16.o7]
+  - id: architecture-contracts-and-dependencies
+    title: {es: Arquitectura, contratos y dependencias, en: Architecture, contracts, and dependencies, da: Arkitektur, kontrakter og afhængigheder}
+    body:
+      es: >-
+        La arquitectura divide el sistema en componentes con responsabilidades estrechas: entrada, validación,
+        dominio, cálculo, salida y presentación. Cada frontera tiene un contrato sobre tipos, formatos, errores y
+        efectos. Las dependencias apuntan hacia abstracciones estables; el núcleo no debería depender de detalles de
+        interfaz o rutas locales. Un diagrama debe acompañarse de texto que explique flujo, estado, decisiones y
+        razones. La modularidad se evalúa por capacidad de probar y sustituir componentes, no por número de archivos.
+      en: >-
+        Architecture divides the system into focused components such as input, validation, domain, computation,
+        output, and presentation. Boundaries define types, formats, errors, and effects. Core logic should not depend
+        on UI details or local paths. Modularity is assessed by testability and substitutability, not file count.
+      da: >-
+        Arkitekturen opdeler systemet i fokuserede komponenter med kontrakter for typer, formater, fejl og effekter.
+        Modularitet vurderes gennem testbarhed og udskiftelighed, ikke antal filer.
+    linked_objectives: [m16.o2, m16.o6]
+  - id: data-contract-provenance-and-responsibility
+    title: {es: Contrato de datos, procedencia y responsabilidad, en: Data contract, provenance, and responsibility, da: Datakontrakt, proveniens og ansvar}
+    body:
+      es: >-
+        El contrato de datos define esquema, tipos, dominios, unidades, identificadores, cardinalidad, ausentes,
+        duplicados, encoding y política de rechazo. La procedencia registra origen, versión, licencia, fecha,
+        transformaciones y checksum. Datos sensibles requieren minimización, control de acceso y evitar exposición en
+        repositorio, logs o capturas. Los datos sintéticos deben identificarse como tales. El software educativo no debe
+        presentarse como herramienta diagnóstica ni extrapolar conclusiones clínicas sin validación correspondiente.
+      en: >-
+        A data contract defines schema, types, domains, units, identifiers, cardinality, missingness, duplicates,
+        encoding, and rejection policy. Provenance records source, version, license, date, transformations, and checksum.
+        Sensitive data require minimization and must not leak through repositories, logs, or screenshots. Synthetic data
+        and non-clinical status must be explicit.
+      da: >-
+        En datakontrakt definerer skema, typer, domæner, enheder, identifikatorer, manglende data, dubletter og fejlpolitik.
+        Proveniens registrerer kilde, version, licens, transformationer og checksum. Følsomme data må ikke eksponeres.
+    linked_objectives: [m16.o3, m16.o5, m16.o8]
+  - id: planning-collaboration-and-version-control
+    title: {es: Planificación, colaboración y control de versiones, en: Planning, collaboration, and version control, da: Planlægning, samarbejde og versionsstyring}
+    body:
+      es: >-
+        El trabajo se divide en entregables verticales verificables, no sólo en capas aisladas. Cada tarea tiene
+        responsable, dependencias, criterio de terminado y revisión. Las ramas son breves, los commits representan
+        cambios coherentes y las solicitudes de integración describen propósito, pruebas y riesgos. La revisión examina
+        contrato, código, pruebas, datos y documentación. Las decisiones relevantes se registran para que la historia del
+        proyecto explique por qué cambió el diseño. Integrar frecuentemente reduce conflictos tardíos.
+      en: >-
+        Work is divided into verifiable vertical deliverables. Tasks have owners, dependencies, done criteria, and review.
+        Branches remain short, commits coherent, and integration requests describe purpose, tests, and risks. Review covers
+        contract, code, tests, data, and documentation. Frequent integration reduces late conflicts.
+      da: >-
+        Arbejdet opdeles i verificerbare leverancer med ansvar, afhængigheder og færdigkriterier. Korte grene, sammenhængende
+        commits, review og hyppig integration reducerer risiko.
+    linked_objectives: [m16.o4, m16.o8]
+  - id: reproducible-project-package
+    title: {es: Paquete de proyecto reproducible, en: Reproducible project package, da: Reproducerbar projektpakke}
+    body:
+      es: >-
+        Un proyecto reproducible contiene instrucciones desde un entorno limpio, dependencias declaradas, versión de Python,
+        comandos de ejecución y prueba, configuración de ejemplo, datos accesibles o procedimiento de obtención, checksums,
+        parámetros y outputs esperados. No depende de rutas absolutas, orden oculto de notebook ni archivos manuales no
+        registrados. Una ejecución de verificación debe reconstruir entorno, ejecutar pruebas y generar el resultado principal.
+        Las limitaciones de plataforma o no determinismo se documentan.
+      en: >-
+        A reproducible project includes clean-environment instructions, declared dependencies, Python version, run and test
+        commands, example configuration, accessible data or acquisition procedure, checksums, parameters, and expected outputs.
+        It avoids absolute paths, hidden notebook order, and untracked manual files. Verification rebuilds, tests, and generates
+        the principal result.
+      da: >-
+        En reproducerbar projektpakke indeholder rent miljø, deklarerede afhængigheder, Python-version, kommandoer, data eller
+        hentningsprocedure, checksums, parametre og forventede output uden skjulte lokale afhængigheder.
+    linked_objectives: [m16.o5, m16.o6]
+  - id: validation-matrix-and-evidence
+    title: {es: Matriz de validación y jerarquía de evidencia, en: Validation matrix and evidence hierarchy, da: Valideringsmatrix og evidenshierarki}
+    body:
+      es: >-
+        La validación enlaza cada afirmación con evidencia apropiada: pruebas unitarias para funciones, integración para
+        contratos entre componentes, casos de referencia para algoritmos, propiedades para invariantes, ejecución limpia para
+        reproducibilidad y benchmarks para rendimiento. Capturas o una demostración única son evidencia débil. Los resultados
+        incluyen casos fallidos, no sólo éxito. La matriz registra requisito, método, dato, resultado, estado y referencia en el
+        informe. Una afirmación se limita al alcance que la evidencia realmente sostiene.
+      en: >-
+        Validation links each claim to suitable evidence: unit tests for functions, integration tests for boundaries, reference
+        cases for algorithms, properties for invariants, clean runs for reproducibility, and benchmarks for performance. Screenshots
+        and one demonstrations are weak evidence. Claims remain within the demonstrated scope.
+      da: >-
+        Validering forbinder hver påstand med passende evidens: unit-, integrations-, reference-, egenskabs-, reproducerbarheds-
+        og ydelsestest. Påstande må ikke være bredere end evidensen.
+    linked_objectives: [m16.o6, m16.o7, m16.o8]
+  - id: report-argument-and-page-budget
+    title: {es: Argumento del informe y presupuesto de páginas, en: Report argument and page budget, da: Rapportargument og sidebudget}
+    body:
+      es: >-
+        El informe no narra cronológicamente todo el trabajo; construye un argumento: problema, requisitos, diseño, implementación,
+        validación, resultados, discusión y conclusión. Cada sección responde una pregunta y utiliza tablas o figuras sólo cuando
+        condensan evidencia. El código completo pertenece al repositorio; el informe muestra fragmentos mínimos o pseudocódigo para
+        explicar decisiones. Un presupuesto de páginas se asigna temprano. Apéndices no deben ocultar elementos evaluados si el límite
+        formal los excluye. La introducción promete sólo lo que la evidencia puede cerrar.
+      en: >-
+        A report is not a chronological diary; it argues from problem through requirements, design, implementation, validation,
+        results, discussion, and conclusion. Code belongs in the repository; the report uses only minimal excerpts or pseudocode.
+        Allocate the page budget early and ensure the introduction promises only what evidence can close.
+      da: >-
+        Rapporten er et argument fra problem til krav, design, implementering, validering, resultater, diskussion og konklusion.
+        Fuld kode hører til repository, og sidebudgettet planlægges tidligt.
+    linked_objectives: [m16.o7]
+  - id: results-discussion-limitations-and-claims
+    title: {es: Resultados, discusión, limitaciones y afirmaciones, en: Results, discussion, limitations, and claims, da: Resultater, diskussion, begrænsninger og påstande}
+    body:
+      es: >-
+        Resultados presenta evidencia sin reinterpretarla excesivamente: pruebas, cobertura relevante, outputs, errores y rendimiento.
+        Discusión explica por qué el diseño produjo esos resultados, compara alternativas y analiza amenazas a validez. Limitaciones
+        deben ser específicas: datos, escala, plataforma, supuestos, precisión, seguridad o alcance. Una conclusión responde la pregunta
+        inicial y no introduce afirmaciones nuevas. “Funciona” se reemplaza por una afirmación delimitada: bajo qué entradas, pruebas y
+        entorno se observó el comportamiento.
+      en: >-
+        Results present evidence; discussion interprets design choices, alternatives, and validity threats. Limitations specify data,
+        scale, platform, assumptions, precision, security, or scope. Conclusions answer the original question without new claims.
+        Replace “it works” with bounded statements about inputs, tests, and environment.
+      da: >-
+        Resultater viser evidens; diskussion fortolker design, alternativer og validitetstrusler. Begrænsninger angiver data, skala,
+        platform, antagelser og omfang. Konklusionen besvarer spørgsmålet uden nye påstande.
+    linked_objectives: [m16.o7, m16.o8]
+  - id: project-risk-and-audit
+    title: {es: Riesgo, deuda técnica y auditoría final, en: Risk, technical debt, and final audit, da: Risiko, teknisk gæld og slutaudit}
+    body:
+      es: >-
+        Un registro de riesgos identifica evento, probabilidad, impacto, señal temprana, mitigación y responsable. Incluye acceso a
+        datos, integración, rendimiento, dependencia externa, privacidad, tiempo y conocimiento concentrado. La deuda técnica se
+        registra cuando se acepta una solución temporal, con consecuencia y plan. La auditoría final verifica reproducibilidad,
+        trazabilidad, licencias, secretos, afirmaciones, pruebas, errores conocidos y coherencia entre repositorio, demostración e informe.
+      en: >-
+        A risk register records event, probability, impact, early signal, mitigation, and owner. Include data access, integration,
+        performance, dependencies, privacy, time, and concentrated knowledge. Technical debt records temporary compromises and plans.
+        Final audit checks reproducibility, traceability, licenses, secrets, claims, tests, known errors, and consistency.
+      da: >-
+        Et risikoregister beskriver hændelse, sandsynlighed, effekt, signal, afhjælpning og ansvar. Slutaudit kontrollerer
+        reproducerbarhed, sporbarhed, licenser, hemmeligheder, påstande, test og konsistens.
+    linked_objectives: [m16.o4, m16.o8]
+
+worked_examples:
+  - id: dm857.m16.e01
+    title: {es: Convertir una idea vaga en especificación, en: Convert a vague idea into a specification, da: Omsæt en vag idé til en specifikation}
+    problem: {es: Refinar “hacer una herramienta para analizar secuencias” en un proyecto evaluable de un semestre., en: Refine “make a sequence-analysis tool” into an assessable semester project., da: Forfin “lav et værktøj til sekvensanalyse” til et vurderbart semesterprojekt.}
+    assumptions: [educational synthetic or public data, no clinical use]
+    reasoning:
+      es: [Elegir usuario y formato de entrada., Limitar operaciones., Definir outputs y errores., Especificar validación y rendimiento relevante.]
+      en: [Choose user and input format., Limit operations., Define outputs and errors., Specify validation and relevant performance.]
+      da: [Vælg bruger og inputformat., Afgræns operationer., Definér output, fejl og validering.]
+    expected_output: >-
+      A command-line program that reads validated FASTA-like educational input, computes length and symbol
+      summaries, rejects malformed records with line context, writes a deterministic table, and reproduces
+      results from one documented command; excluded: alignment, diagnosis, database access, and clinical claims.
+    validation: [requirements each have acceptance tests, exclusions are explicit, clean execution is possible]
+    explanation: {es: La especificación convierte una intención amplia en un conjunto pequeño de conductas y límites demostrables., en: The specification converts broad intent into a small set of demonstrable behaviors and boundaries., da: Specifikationen omsætter en bred idé til få demonstrerbare adfærdskrav og grænser.}
+    linked_objectives: [m16.o1, m16.o3]
+  - id: dm857.m16.e02
+    title: {es: Diseñar una matriz de trazabilidad, en: Design a traceability matrix, da: Design en sporbarhedsmatrix}
+    problem: {es: Relacionar requisitos de parsing, validación, resumen y reproducibilidad con componentes y evidencia., en: Link parsing, validation, summary, and reproducibility requirements to components and evidence., da: Forbind parsing-, validerings-, resumé- og reproducerbarhedskrav med komponenter og evidens.}
+    assumptions: [each requirement has a stable id]
+    reasoning:
+      es: [Asignar un componente responsable., Asociar pruebas y resultados., Referenciar sección del informe., Marcar estado y brechas.]
+      en: [Assign a responsible component., Link tests and results., Reference report section., Mark status and gaps.]
+      da: [Tildel ansvarlig komponent., Forbind test og resultater., Henvis til rapportafsnit., Markér status og huller.]
+    expected_output: table with columns requirement, component, test/evidence, result, report location, status
+    validation: [no requirement without evidence, no major component without requirement, failed evidence remains visible]
+    explanation: {es: La trazabilidad evita que el informe afirme capacidades no probadas y que las pruebas se desconecten del propósito., en: Traceability prevents untested claims and tests disconnected from purpose., da: Sporbarhed forhindrer uprøvede påstande og test uden forbindelse til formålet.}
+    linked_objectives: [m16.o1, m16.o6, m16.o7]
+  - id: dm857.m16.e03
+    title: {es: Distribuir diez páginas como argumento, en: Allocate ten pages as an argument, da: Fordel ti sider som et argument}
+    problem: {es: Proponer un presupuesto de páginas para un proyecto con código y resultados en repositorio., en: Propose a page budget for a project whose code and outputs are in the repository., da: Foreslå et sidebudget for et projekt med kode og output i repository.}
+    assumptions: [cover and references follow the applicable counting rule, full code is not embedded]
+    reasoning:
+      es: [Priorizar problema y decisiones., Dar espacio suficiente a validación y discusión., Mover detalles reproducibles al repositorio., Ajustar figuras por densidad informativa.]
+      en: [Prioritize problem and decisions., Give sufficient space to validation and discussion., Move reproducible detail to repository., Select information-dense figures.]
+      da: [Prioritér problem og beslutninger., Giv plads til validering og diskussion., Flyt reproducerbare detaljer til repository.]
+    expected_output: >-
+      Example allocation: 0.75 introduction/question; 1 requirements/data; 1.5 architecture/design;
+      1.25 implementation; 2 validation; 1 results; 1.5 discussion/limitations; 0.5 conclusion.
+    validation: [every assessment criterion has report space, validation is not compressed into a footnote, page count follows rules]
+    explanation: {es: El presupuesto protege las secciones de evidencia frente a una introducción o descripción de código excesiva., en: The budget protects evidence sections from an oversized introduction or code description., da: Sidebudgettet beskytter evidensafsnit mod for stor introduktion eller kodebeskrivelse.}
+    linked_objectives: [m16.o7]
+
+practice_exercises:
+  - {id: dm857.m16.p01, activity_type: requirement_writing, difficulty: intermediate, prompt: {es: Reescribe “el programa debe ser fácil y rápido” como requisitos verificables., en: Rewrite “the program must be easy and fast” as verifiable requirements., da: Omskriv “programmet skal være nemt og hurtigt” til verificerbare krav.}, reference_solution: {es: Definir interfaz/comando, mensajes y documentación para facilidad; carga, tamaño, métrica, entorno y umbral justificado para rendimiento., en: Define interface/command, messages, and documentation for usability; workload, size, metric, environment, and justified threshold for performance., da: Definér grænseflade, beskeder og dokumentation samt belastning, størrelse, metrik, miljø og begrundet tærskel.}, linked_objectives: [m16.o1]}
+  - {id: dm857.m16.p02, activity_type: architecture_review, difficulty: advanced, prompt: {es: Revisa una arquitectura donde la interfaz gráfica valida, calcula y escribe archivos directamente., en: Review an architecture where the UI directly validates, computes, and writes files., da: Gennemgå en arkitektur hvor UI direkte validerer, beregner og skriver filer.}, reference_solution: {es: Separar adaptador de UI, aplicación/orquestación, dominio/cálculo y repositorio de E/S; definir contratos e inyectar dependencias para pruebas., en: Separate UI adapter, application orchestration, domain computation, and I/O repository; define contracts and inject dependencies., da: Adskil UI-adapter, orkestrering, domæneberegning og I/O-repository; definér kontrakter og injicér afhængigheder.}, linked_objectives: [m16.o2]}
+  - {id: dm857.m16.p03, activity_type: data_contract, difficulty: advanced, prompt: {es: Especifica un contrato para una tabla de muestras con id, grupo, tiempo y valor., en: Specify a contract for a sample table with id, group, time, and value., da: Specificér en kontrakt for en prøvetabel med id, gruppe, tid og værdi.}, reference_solution: {es: Columnas requeridas, tipos, id/tiempo como clave compuesta, grupos permitidos, unidad, rango/finitud, ausentes, duplicados, encoding y errores con contexto., en: Required columns, types, id/time composite key, allowed groups, unit, range/finiteness, missingness, duplicates, encoding, and contextual errors., da: Krævede kolonner, typer, sammensat nøgle, grupper, enhed, interval, manglende data, dubletter, encoding og kontekstfejl.}, linked_objectives: [m16.o3]}
+  - {id: dm857.m16.p04, activity_type: collaboration_plan, difficulty: intermediate, prompt: {es: Diseña una semana de trabajo con tres integrantes que evite tres ramas largas incompatibles., en: Design a week of work for three members avoiding three long incompatible branches., da: Design en arbejdsuge for tre medlemmer uden tre lange inkompatible grene.}, reference_solution: {es: Acordar contrato primero, dividir entregables verticales pequeños, integrar diariamente, usar revisión cruzada y mantener una rama principal siempre ejecutable., en: Agree on contracts first, split small vertical deliverables, integrate daily, use cross-review, and keep main executable., da: Aftal kontrakter først, del små vertikale leverancer, integrér dagligt, brug krydsreview og hold hovedgrenen kørbar.}, linked_objectives: [m16.o4]}
+  - {id: dm857.m16.p05, activity_type: reproducibility_audit, difficulty: advanced, prompt: {es: Audita un repositorio que funciona sólo después de ejecutar celdas manualmente y editar rutas locales., en: Audit a repository that works only after manually running cells and editing local paths., da: Revidér et repository der kun virker efter manuelle celler og lokale stier.}, reference_solution: {es: Convertir flujo en comandos/scripts documentados, usar rutas relativas/configuración, declarar entorno, versionar parámetros, identificar datos y probar desde clon limpio., en: Convert flow into documented commands/scripts, use relative paths/configuration, declare environment, version parameters, identify data, and test from a clean clone., da: Konvertér til dokumenterede kommandoer, relative stier, deklareret miljø, versionerede parametre, identificerede data og ren klon-test.}, linked_objectives: [m16.o5]}
+  - {id: dm857.m16.p06, activity_type: report_editing, difficulty: advanced, prompt: {es: Reduce una página de descripción de código a un párrafo y una figura arquitectónica sin perder evidencia., en: Reduce one page of code description to one paragraph and an architecture figure without losing evidence., da: Reducér en side kodebeskrivelse til et afsnit og en arkitekturfigur uden at miste evidens.}, reference_solution: {es: Explicar responsabilidades, flujo y decisión; referenciar repositorio para detalles; usar la página liberada para validación, resultados o limitaciones., en: Explain responsibilities, flow, and decision; reference the repository for detail; use freed space for validation, results, or limitations., da: Forklar ansvar, flow og beslutning, henvis til repository og brug pladsen på validering, resultater eller begrænsninger.}, linked_objectives: [m16.o7]}
+
+objective_bank:
+  - {id: dm857.m16.q01, activity_type: multiple_choice, prompt: {es: ¿Cuál es un criterio de aceptación?, en: Which is an acceptance criterion?, da: Hvilket er et acceptkriterium?}, options: [{id: verifiable, text: {es: Dado un archivo inválido, reporta línea y causa sin escribir salida parcial., en: Given an invalid file, report line and cause without partial output., da: Ved ugyldig fil rapporteres linje og årsag uden delvist output.}}, {id: vague, text: {es: Debe ser moderno., en: It must be modern., da: Det skal være moderne.}}, {id: aesthetic, text: {es: Debe gustar al equipo., en: The team must like it., da: Teamet skal kunne lide det.}}], correct_option_ids: [verifiable]}
+  - {id: dm857.m16.q02, activity_type: true_false, prompt: {es: Modularidad equivale a tener muchos archivos., en: Modularity is equivalent to having many files., da: Modularitet er det samme som mange filer.}, correct_answer: false}
+  - {id: dm857.m16.q03, activity_type: multiple_choice, prompt: {es: ¿Qué conecta una matriz de trazabilidad?, en: What does a traceability matrix connect?, da: Hvad forbinder en sporbarhedsmatrix?}, options: [{id: req_evidence, text: {es: Requisitos, componentes, pruebas, resultados e informe., en: Requirements, components, tests, results, and report., da: Krav, komponenter, test, resultater og rapport.}}, {id: colors, text: {es: Colores de interfaz., en: Interface colors., da: Interfacefarver.}}, {id: authors, text: {es: Sólo autores., en: Authors only., da: Kun forfattere.}}], correct_option_ids: [req_evidence]}
+  - {id: dm857.m16.q04, activity_type: true_false, prompt: {es: Los datos sintéticos deben identificarse explícitamente., en: Synthetic data should be explicitly identified., da: Syntetiske data bør identificeres eksplicit.}, correct_answer: true}
+  - {id: dm857.m16.q05, activity_type: multiple_choice, prompt: {es: ¿Qué reduce conflictos tardíos?, en: What reduces late integration conflicts?, da: Hvad reducerer sene integrationskonflikter?}, options: [{id: frequent, text: {es: Integraciones pequeñas y frecuentes., en: Small frequent integrations., da: Små hyppige integrationer.}}, {id: long, text: {es: Ramas aisladas todo el semestre., en: Isolated branches all semester., da: Isolerede grene hele semesteret.}}, {id: no_review, text: {es: Omitir revisión., en: Skip review., da: Spring review over.}}], correct_option_ids: [frequent]}
+  - {id: dm857.m16.q06, activity_type: true_false, prompt: {es: Guardar el notebook es suficiente para reproducibilidad., en: Saving the notebook is sufficient for reproducibility., da: Det er nok at gemme notebooken for reproducerbarhed.}, correct_answer: false}
+  - {id: dm857.m16.q07, activity_type: multiple_choice, prompt: {es: ¿Qué evidencia corresponde a una afirmación de rendimiento?, en: What evidence supports a performance claim?, da: Hvilken evidens støtter en ydelsespåstand?}, options: [{id: benchmark, text: {es: Benchmark reproducible sobre carga definida., en: Reproducible benchmark on a defined workload., da: Reproducerbart benchmark på en defineret belastning.}}, {id: screenshot, text: {es: Una captura sin protocolo., en: A screenshot without protocol., da: Et screenshot uden protokol.}}, {id: feeling, text: {es: Sensación del autor., en: Author impression., da: Forfatterens følelse.}}], correct_option_ids: [benchmark]}
+  - {id: dm857.m16.q08, activity_type: true_false, prompt: {es: El informe debe incluir todo el código fuente., en: The report should include all source code., da: Rapporten bør indeholde al kildekode.}, correct_answer: false}
+  - {id: dm857.m16.q09, activity_type: multiple_choice, prompt: {es: ¿Dónde se interpretan alternativas y amenazas a validez?, en: Where are alternatives and validity threats interpreted?, da: Hvor fortolkes alternativer og validitetstrusler?}, options: [{id: discussion, text: {es: Discusión, en: Discussion, da: Diskussion}}, {id: title, text: {es: Título, en: Title, da: Titel}}, {id: raw_code, text: {es: Código sin comentario, en: Raw code, da: Rå kode}}], correct_option_ids: [discussion]}
+  - {id: dm857.m16.q10, activity_type: true_false, prompt: {es: Una conclusión puede introducir afirmaciones importantes no analizadas antes., en: A conclusion may introduce important claims not analyzed earlier., da: En konklusion kan introducere vigtige påstande der ikke er analyseret før.}, correct_answer: false}
+
+assessment_items:
+  - id: dm857.m16.a01
+    activity_type: project_specification
+    difficulty: integrative
+    prompt: {es: Produce una especificación de proyecto de dos páginas con pregunta, usuario, alcance, requisitos funcionales/no funcionales, criterios de aceptación, exclusiones, riesgos y datos., en: Produce a two-page project specification with question, user, scope, functional/non-functional requirements, acceptance criteria, exclusions, risks, and data., da: Udarbejd en to-siders projektspecifikation med spørgsmål, bruger, afgrænsning, krav, acceptkriterier, eksklusioner, risici og data.}
+    accepted_answer_elements: [operational question, bounded scope, stable requirement ids, measurable criteria, exclusions, data contract summary, risk register]
+    rubric: [{criterion: question_and_scope, points: 2}, {criterion: requirements_and_acceptance, points: 4}, {criterion: data_and_risks, points: 2}, {criterion: clarity_and_feasibility, points: 2}]
+  - id: dm857.m16.a02
+    activity_type: architecture_and_validation_design
+    difficulty: integrative
+    prompt: {es: Diseña arquitectura, interfaces y matriz de validación del proyecto. Cada componente debe vincularse con requisitos y evidencia., en: Design project architecture, interfaces, and validation matrix. Link every component to requirements and evidence., da: Design projektarkitektur, interfaces og valideringsmatrix og forbind hver komponent med krav og evidens.}
+    accepted_answer_elements: [component responsibilities, dependency direction, boundary contracts, failure paths, traceability matrix, unit/integration/reference/reproducibility evidence]
+    rubric: [{criterion: architecture_coherence, points: 3}, {criterion: interface_contracts, points: 2}, {criterion: validation_alignment, points: 3}, {criterion: failure_and_limit_analysis, points: 2}]
+  - id: dm857.m16.a03
+    activity_type: reproducibility_audit
+    difficulty: integrative
+    prompt: {es: Entrega una auditoría ejecutada desde un clon limpio que documente entorno, comandos, datos, tests, outputs, diferencias y problemas no resueltos., en: Deliver an audit executed from a clean clone documenting environment, commands, data, tests, outputs, differences, and unresolved problems., da: Lever en audit fra en ren klon med miljø, kommandoer, data, test, output, forskelle og uløste problemer.}
+    accepted_answer_elements: [clean setup evidence, dependency and Python versions, data identity, exact commands, test/results summary, deviations, unresolved limitations]
+    rubric: [{criterion: clean_reproduction, points: 3}, {criterion: provenance_and_commands, points: 2}, {criterion: validation_evidence, points: 3}, {criterion: honest_deviations, points: 2}]
+  - id: dm857.m16.a04
+    activity_type: report_outline_and_argument
+    difficulty: integrative
+    prompt: {es: Diseña el esquema detallado del informe de diez páginas con tesis central, evidencia por sección, figuras/tablas, presupuesto de páginas y lista de afirmaciones que deben moderarse., en: Design a detailed ten-page report outline with central thesis, evidence per section, figures/tables, page budget, and claims requiring moderation., da: Design en detaljeret ti-siders rapportstruktur med central tese, evidens pr. afsnit, figurer/tabeller, sidebudget og påstande der skal begrænses.}
+    accepted_answer_elements: [coherent argument, page allocation, evidence mapping, repository references, validation/discussion space, bounded claims]
+    rubric: [{criterion: argumentative_structure, points: 3}, {criterion: evidence_mapping, points: 3}, {criterion: page_and_visual_budget, points: 2}, {criterion: claim_discipline, points: 2}]
+
+flashcards: {source_file: ../flashcards/dm857_m16_flashcards.yaml, expected_count: 30}
+
+glossary:
+  - {id: term.scope, term: {es: alcance, en: scope, da: afgrænsning}, definition: {es: Límite explícito de lo incluido y excluido en el proyecto., en: Explicit boundary of project inclusions and exclusions., da: Eksplicit grænse for hvad projektet omfatter og udelukker.}}
+  - {id: term.requirement, term: {es: requisito, en: requirement, da: krav}, definition: {es: Conducta o restricción que el proyecto debe satisfacer., en: Behavior or constraint the project must satisfy., da: Adfærd eller begrænsning som projektet skal opfylde.}}
+  - {id: term.acceptance_criterion, term: {es: criterio de aceptación, en: acceptance criterion, da: acceptkriterium}, definition: {es: Condición observable usada para decidir si un requisito se cumple., en: Observable condition used to decide whether a requirement is met., da: Observerbar betingelse for om et krav er opfyldt.}}
+  - {id: term.traceability, term: {es: trazabilidad, en: traceability, da: sporbarhed}, definition: {es: Relación verificable entre requisito, implementación, evidencia y afirmación., en: Verifiable link among requirement, implementation, evidence, and claim., da: Verificerbar forbindelse mellem krav, implementering, evidens og påstand.}}
+  - {id: term.provenance, term: {es: procedencia, en: provenance, da: proveniens}, definition: {es: Historia documentada del origen y transformación de datos o artefactos., en: Documented history of artifact or data origin and transformation., da: Dokumenteret historie om data eller artefakters oprindelse og transformation.}}
+  - {id: term.clean_reproduction, term: {es: reproducción limpia, en: clean reproduction, da: ren reproduktion}, definition: {es: Ejecución desde un entorno nuevo siguiendo sólo instrucciones registradas., en: Execution from a fresh environment using only recorded instructions., da: Kørsel fra et nyt miljø kun med registrerede instruktioner.}}
+  - {id: term.validation_matrix, term: {es: matriz de validación, en: validation matrix, da: valideringsmatrix}, definition: {es: Tabla que relaciona afirmaciones o requisitos con métodos y resultados de evidencia., en: Table linking claims or requirements to evidence methods and results., da: Tabel der forbinder påstande eller krav med evidensmetoder og resultater.}}
+  - {id: term.page_budget, term: {es: presupuesto de páginas, en: page budget, da: sidebudget}, definition: {es: Asignación anticipada del espacio disponible entre secciones., en: Planned allocation of available space among sections., da: Planlagt fordeling af tilgængelig plads mellem afsnit.}}
+  - {id: term.risk_register, term: {es: registro de riesgos, en: risk register, da: risikoregister}, definition: {es: Lista gestionada de riesgos, impacto, señales, mitigación y responsable., en: Managed list of risks, impact, signals, mitigation, and owner., da: Styret liste over risici, effekt, signaler, afhjælpning og ansvar.}}
+  - {id: term.technical_debt, term: {es: deuda técnica, en: technical debt, da: teknisk gæld}, definition: {es: Consecuencia futura de una solución temporal o compromiso de diseño., en: Future consequence of a temporary solution or design compromise., da: Fremtidig konsekvens af en midlertidig løsning eller designkompromis.}}
+
+hidden_guided_support:
+  visibility: hidden_from_standard_reader
+  canonical_explanation:
+    es: >-
+      El tutor debe impedir que el proyecto empiece por una interfaz o una biblioteca. Debe pedir pregunta,
+      usuario, alcance, requisitos y evidencia antes de arquitectura. Ante cada afirmación debe preguntar qué
+      requisito satisface, qué prueba la respalda y dónde aparece en el informe. Debe señalar explícitamente
+      pérdidas de trazabilidad, datos no versionados, rutas locales, secretos, claims clínicos y validación basada
+      únicamente en demostraciones. Nunca debe inventar resultados no ejecutados.
+    en: >-
+      Do not let projects begin from a UI or library. Require question, user, scope, requirements, and evidence
+      before architecture. For each claim ask which requirement it satisfies, what evidence supports it, and where
+      it appears in the report. Flag unversioned data, local paths, secrets, clinical claims, and demonstration-only
+      validation. Never invent unexecuted results.
+    da: >-
+      Lad ikke projektet starte med UI eller bibliotek. Kræv spørgsmål, bruger, afgrænsning, krav og evidens før
+      arkitektur. Markér manglende sporbarhed, ikke-versionerede data, lokale stier, hemmeligheder og uprøvede claims.
+  misconceptions:
+    - {id: m16.mc01, claim: {es: El alcance es una lista de funciones deseadas., en: Scope is just a list of desired features., da: Afgrænsning er blot en liste over ønskede funktioner.}, correction: {es: También define exclusiones, usuarios, datos, restricciones y condiciones de éxito., en: It also defines exclusions, users, data, constraints, and success conditions., da: Det definerer også eksklusioner, brugere, data, begrænsninger og succes.}}
+    - {id: m16.mc02, claim: {es: Una demostración exitosa valida el proyecto., en: One successful demonstration validates the project., da: Én succesfuld demonstration validerer projektet.}, correction: {es: Se necesita evidencia sistemática sobre requisitos, errores, límites y reproducibilidad., en: Systematic evidence is needed for requirements, errors, boundaries, and reproducibility., da: Der kræves systematisk evidens om krav, fejl, grænser og reproducerbarhed.}}
+    - {id: m16.mc03, claim: {es: El informe debe describir todo el código., en: The report should describe all code., da: Rapporten bør beskrive al kode.}, correction: {es: Debe explicar decisiones y evidencia; el detalle completo vive en el repositorio., en: It should explain decisions and evidence; complete detail lives in the repository., da: Den bør forklare beslutninger og evidens; fulde detaljer findes i repository.}}
+  socratic_questions:
+    - ¿Qué problema concreto y para qué usuario resuelve este proyecto?
+    - ¿Qué requisito y criterio de aceptación justifican este componente?
+    - ¿Qué dato, versión, unidad y política de rechazo utiliza?
+    - ¿Qué evidencia demostraría el claim y qué evidencia lo refutaría?
+    - ¿Qué sección del informe cierra la promesa hecha en la introducción?
+  grading_guidance:
+    do_not_accept: [vague scope, requirements without tests, screenshots as primary validation, hidden local dependencies, report claims broader than evidence]
+    strong_answer_features: [bounded question, traceability, modular contracts, clean reproduction, negative and boundary evidence, concise report argument, explicit limitations]
+  retrieval_fragments:
+    - {id: m16.r01, topics: [requirements, acceptance, traceability], text: {es: Cada requisito necesita criterio de aceptación, componente responsable, evidencia y ubicación en el informe., en: Every requirement needs an acceptance criterion, responsible component, evidence, and report location., da: Hvert krav kræver acceptkriterium, ansvarlig komponent, evidens og rapportplacering.}}
+    - {id: m16.r02, topics: [report, evidence, claims], text: {es: El informe no enumera trabajo; construye un argumento donde cada afirmación está limitada por evidencia reproducible., en: A report does not list work; it builds an argument in which every claim is bounded by reproducible evidence., da: Rapporten oplister ikke arbejde; den bygger et argument hvor hver påstand begrænses af reproducerbar evidens.}}
+
+sources:
+  - {id: source.official_dm857, role: assessment_alignment, note: Group project, report of no more than ten pages, group presentation, and short individual oral examination.}
+  - {id: source.guttag_python_2021, role: software_design_reference, note: Problem modeling, program structure, testing, classes, and computational modeling.}
+  - {id: source.repository_practice, role: engineering_reference, note: Version control, review, reproducible environments, and evidence-oriented project organization.}
+
+limitations:
+  - Exact report-counting, formatting, and submission rules must be checked against the active course instructions.
+  - The module provides a general project framework rather than a predetermined project topic.
+  - Privacy, licensing, and data-access requirements depend on the selected dataset and institutional context.
