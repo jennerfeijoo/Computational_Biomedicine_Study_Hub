@@ -43,7 +43,7 @@ academic_preconditions:
     - prior R programming
     - prior formal statistics beyond introductory concepts
 
- official_learning_outcomes:
+official_learning_outcomes:
   - id: bmb830.lo01
     statement:
       es: Analizar de forma independiente conjuntos de datos biológicos.
