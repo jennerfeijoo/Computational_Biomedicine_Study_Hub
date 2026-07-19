@@ -8,10 +8,10 @@ from computational_biomedicine_study_hub.content.dm847 import (
     BUNDLES,
     LOCALIZED_MODULE_01_MOLECULAR_INFORMATION,
     LOCALIZED_OBJECTIVE_QUESTION_BANK_01,
-    MODULES,
     MODULE_01_MOLECULAR_INFORMATION,
-    OBJECTIVE_QUESTION_BANKS,
+    MODULES,
     OBJECTIVE_QUESTION_BANK_01,
+    OBJECTIVE_QUESTION_BANKS,
     materialize_module_01_question_bank,
 )
 from computational_biomedicine_study_hub.i18n import AppLocale
@@ -69,8 +69,7 @@ def test_module_01_objective_bank_has_stable_locale_independent_identity() -> No
     assert len(LOCALIZED_OBJECTIVE_QUESTION_BANK_01) == 20
     assert len({item.item_id for item in LOCALIZED_OBJECTIVE_QUESTION_BANK_01}) == 20
     assert all(
-        item.item_id.startswith("dm847.m01.bank.")
-        for item in LOCALIZED_OBJECTIVE_QUESTION_BANK_01
+        item.item_id.startswith("dm847.m01.bank.") for item in LOCALIZED_OBJECTIVE_QUESTION_BANK_01
     )
     assert all(
         item.activity_type in {ActivityType.MULTIPLE_CHOICE, ActivityType.TRUE_FALSE}

@@ -348,7 +348,13 @@ _PRACTICES = (
             "Distinguish reference sequence, gene, transcript, and protein.",
             "Skeln mellem referencesekvens, gen, transkript og protein.",
         ),
-        (("Describe entidades y relaciones.", "Describe entities and relationships.", "Beskriv enheder og relationer."),),
+        (
+            (
+                "Describe entidades y relaciones.",
+                "Describe entities and relationships.",
+                "Beskriv enheder og relationer.",
+            ),
+        ),
         (
             "La referencia es una representación ensamblada; un gen es una unidad anotada; un transcrito es un producto de ARN; una proteína es un producto traducido.",
             "A reference is an assembled representation; a gene is an annotated unit; a transcript is an RNA product; a protein is a translated product.",
@@ -369,7 +375,13 @@ _PRACTICES = (
             "Trace the reverse complement of AAGTC.",
             "Gennemgå det omvendte komplement af AAGTC.",
         ),
-        (("Complementa y luego invierte.", "Complement and then reverse.", "Komplementér og vend derefter."),),
+        (
+            (
+                "Complementa y luego invierte.",
+                "Complement and then reverse.",
+                "Komplementér og vend derefter.",
+            ),
+        ),
         ("TTCAG → GACTT", "TTCAG → GACTT", "TTCAG → GACTT"),
         (
             "El resultado final representa la hebra opuesta 5'→3'.",
@@ -407,7 +419,13 @@ _PRACTICES = (
             "Complete: the opposite 5'→3' strand is obtained with the ________.",
             "Udfyld: den modsatte 5'→3'-streng findes med det ________.",
         ),
-        (("Requiere dos operaciones.", "It requires two operations.", "Det kræver to operationer."),),
+        (
+            (
+                "Requiere dos operaciones.",
+                "It requires two operations.",
+                "Det kræver to operationer.",
+            ),
+        ),
         ("complemento inverso", "reverse complement", "omvendte komplement"),
         (
             "Complementar sin invertir no basta.",
@@ -424,7 +442,13 @@ _PRACTICES = (
             "Complete DNA validation for A/C/G/T/N.",
             "Færdiggør DNA-validering for A/C/G/T/N.",
         ),
-        (("Normaliza antes de validar.", "Normalize before validation.", "Normalisér før validering."),),
+        (
+            (
+                "Normaliza antes de validar.",
+                "Normalize before validation.",
+                "Normalisér før validering.",
+            ),
+        ),
         (
             "def validate_dna(sequence):\n    normalized = sequence.upper()\n    if set(normalized) - set('ACGTN'):\n        raise ValueError('unsupported symbol')\n    return normalized",
             "def validate_dna(sequence):\n    normalized = sequence.upper()\n    if set(normalized) - set('ACGTN'):\n        raise ValueError('unsupported symbol')\n    return normalized",
@@ -445,7 +469,13 @@ _PRACTICES = (
             "A region has 80% GC but only five known bases. Interpret it.",
             "En region har 80 % GC men kun fem kendte baser. Fortolk den.",
         ),
-        (("Considera tamaño y ambigüedad.", "Consider size and ambiguity.", "Overvej størrelse og tvetydighed."),),
+        (
+            (
+                "Considera tamaño y ambigüedad.",
+                "Consider size and ambiguity.",
+                "Overvej størrelse og tvetydighed.",
+            ),
+        ),
         (
             "La estimación es inestable; deben informarse el denominador, la política de ambigüedad y una referencia adecuada.",
             "The estimate is unstable; report the denominator, ambiguity policy, and a suitable reference.",
@@ -466,7 +496,13 @@ _PRACTICES = (
             "Order: question, representation, input validation, algorithm, output validation, interpretation.",
             "Ordén: spørgsmål, repræsentation, inputvalidering, algoritme, outputvalidering, fortolkning.",
         ),
-        (("La interpretación sigue a la verificación.", "Interpretation follows verification.", "Fortolkning følger verifikation."),),
+        (
+            (
+                "La interpretación sigue a la verificación.",
+                "Interpretation follows verification.",
+                "Fortolkning følger verifikation.",
+            ),
+        ),
         (
             "Pregunta → representación → validación de entrada → algoritmo → validación de salida → interpretación.",
             "Question → representation → input validation → algorithm → output validation → interpretation.",
@@ -487,7 +523,13 @@ _PRACTICES = (
             "Design a workflow for searching a motif on both strands.",
             "Design et workflow til motivsøgning på begge strenge.",
         ),
-        (("Incluye hebra y validación sintética.", "Include strand and synthetic validation.", "Medtag streng og syntetisk validering."),),
+        (
+            (
+                "Incluye hebra y validación sintética.",
+                "Include strand and synthetic validation.",
+                "Medtag streng og syntetisk validering.",
+            ),
+        ),
         (
             "Registrar fuente → validar alfabeto → normalizar → buscar motivo directo y complemento inverso → guardar posición y hebra → probar casos pequeños → resumir.",
             "Record source → validate alphabet → normalize → search motif and reverse complement → store position and strand → test small cases → summarize.",
@@ -937,7 +979,14 @@ _BANK_MCQS = (
             "Hvad adskiller DNA fra RNA i det kanoniske alfabet?",
         ),
         (
-            ("tu", ("ADN usa T y ARN usa U", "DNA uses T and RNA uses U", "DNA bruger T og RNA bruger U")),
+            (
+                "tu",
+                (
+                    "ADN usa T y ARN usa U",
+                    "DNA uses T and RNA uses U",
+                    "DNA bruger T og RNA bruger U",
+                ),
+            ),
             ("nog", ("ADN no contiene G", "DNA contains no G", "DNA indeholder ikke G")),
             ("noc", ("ARN no contiene C", "RNA contains no C", "RNA indeholder ikke C")),
         ),
@@ -1070,7 +1119,14 @@ _BANK_MCQS = (
             "Hvad formaliserer et bioinformatikspørgsmål?",
         ),
         (
-            ("contract", ("Representación, operación y validación", "Representation, operation, and validation", "Repræsentation, operation og validering")),
+            (
+                "contract",
+                (
+                    "Representación, operación y validación",
+                    "Representation, operation, and validation",
+                    "Repræsentation, operation og validering",
+                ),
+            ),
             ("more", ("Más datos sin definición", "More undefined data", "Flere udefinerede data")),
             ("plot", ("Una figura aislada", "An isolated plot", "En isoleret figur")),
         ),
