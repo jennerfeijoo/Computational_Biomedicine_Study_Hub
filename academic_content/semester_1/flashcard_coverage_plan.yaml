@@ -1,0 +1,424 @@
+plan_version: 1.0.0
+required_locales: [es, en, da]
+status: authoring
+
+rules:
+  standard_module_cards: 24
+  integrative_module_cards: 30
+  conceptual_fraction_target: 0.50
+  practical_fraction_target: 0.35
+  integrative_fraction_target: 0.15
+  every_module_must_include:
+    - conceptual retrieval
+    - practical application
+    - interpretation
+    - misconception correction
+    - prerequisite connection
+    - later-course transfer
+
+courses:
+  dm857:
+    total_modules: 17
+    planned_cards: 426
+    modules:
+      dm857.m01:
+        count: 24
+        focal_questions:
+          - distinguish values, expressions, statements, variables, and program state
+          - trace assignment and reassignment
+          - interpret types and operator precedence
+          - formulate a concrete problem as inputs, transformations, outputs, and constraints
+      dm857.m02:
+        count: 24
+        focal_questions:
+          - evaluate Boolean expressions
+          - distinguish mutually exclusive from overlapping conditions
+          - construct and audit decision tables
+          - diagnose unreachable or incomplete branches
+      dm857.m03:
+        count: 24
+        focal_questions:
+          - trace for and while loops
+          - identify loop invariants and termination conditions
+          - select iteration patterns
+          - diagnose off-by-one and non-termination defects
+      dm857.m04:
+        count: 24
+        focal_questions:
+          - define function contracts and decomposition
+          - distinguish parameters, arguments, return values, and side effects
+          - reason about local scope
+          - design testable helper functions
+      dm857.m05:
+        count: 24
+        focal_questions:
+          - index, slice, normalize, and validate strings
+          - parse delimited records defensively
+          - distinguish lexical validation from semantic validation
+          - diagnose encoding and whitespace assumptions
+      dm857.m06:
+        count: 24
+        focal_questions:
+          - compare lists, tuples, ranges, and sequence protocols
+          - reason about mutability, aliasing, and copying
+          - select accumulation and transformation patterns
+          - trace nested sequence operations
+      dm857.m07:
+        count: 24
+        focal_questions:
+          - select dictionaries or sets for a task
+          - reason about keys, membership, aggregation, and lookup
+          - construct frequency tables and grouped summaries
+          - diagnose missing-key and duplicate-handling errors
+      dm857.m08:
+        count: 24
+        focal_questions:
+          - reason about file modes and resource management
+          - separate parsing, validation, and error reporting
+          - choose exception boundaries
+          - audit a data-ingestion function for partial failure
+      dm857.m09:
+        count: 24
+        focal_questions:
+          - identify base and recursive cases
+          - trace call stacks and recursion trees
+          - compare recursive and iterative solutions
+          - diagnose non-progressing recursion
+      dm857.m10:
+        count: 24
+        focal_questions:
+          - define tree terminology and invariants
+          - trace depth-first and breadth-first traversal
+          - implement recursive tree operations
+          - compare tree representations and complexity
+      dm857.m11:
+        count: 24
+        focal_questions:
+          - define abstract data types by operations and invariants
+          - distinguish interface from implementation
+          - reason about stacks, queues, and encapsulation
+          - test representation invariants
+      dm857.m12:
+        count: 24
+        focal_questions:
+          - distinguish class, instance, attribute, and method
+          - select composition over inappropriate inheritance
+          - design object invariants and public interfaces
+          - diagnose shared mutable state and coupling
+      dm857.m13:
+        count: 24
+        focal_questions:
+          - reason about imports, environments, versions, and reproducibility
+          - interpret ndarray shapes, axes, views, and broadcasting
+          - use DataFrame indexing, grouping, and joins safely
+          - choose honest visual encodings and validate outputs
+      dm857.m14:
+        count: 24
+        focal_questions:
+          - design unit tests from contracts and boundaries
+          - use fixtures and parametrization appropriately
+          - distinguish defect localization from symptom suppression
+          - interpret logs, failures, and debugging evidence
+      dm857.m15:
+        count: 24
+        focal_questions:
+          - classify asymptotic growth
+          - estimate time and memory costs of operations
+          - interpret profiling evidence
+          - reject optimization without a measured bottleneck
+      dm857.m16:
+        count: 30
+        focal_questions:
+          - translate a project question into requirements and architecture
+          - define reproducibility and validation checkpoints
+          - structure a concise technical report
+          - defend library, data structure, and testing choices
+      dm857.m17:
+        count: 30
+        focal_questions:
+          - prepare project presentation arguments
+          - answer oral questions about code, models, tests, and limitations
+          - diagnose weak scientific or engineering claims
+          - compare alternative implementations under questioning
+
+  dm847:
+    total_modules: 15
+    planned_cards: 372
+    modules:
+      dm847.m01:
+        count: 24
+        focal_questions:
+          - connect DNA, RNA, protein, regulation, and phenotype without oversimplification
+          - distinguish replication, transcription, translation, and regulation
+          - explain epigenetic DNA modification and bacterial or phage-specific features
+          - interpret sequence and regulatory context
+      dm847.m02:
+        count: 24
+        focal_questions:
+          - distinguish identifiers, accessions, versions, entities, and concepts
+          - explain ontologies, controlled vocabularies, provenance, and evidence codes
+          - model biomedical dependencies
+          - diagnose ambiguous or stale identifiers
+      dm847.m03:
+        count: 24
+        focal_questions:
+          - design entities, relationships, keys, and constraints
+          - compare normalized relational and graph representations
+          - model provenance and versioning
+          - evaluate interoperability and query requirements
+      dm847.m04:
+        count: 24
+        focal_questions:
+          - represent nucleotide and amino-acid sequences
+          - interpret substitution scores and log-odds reasoning
+          - distinguish raw score, normalized score, and statistical significance
+          - choose a scoring model for a biological question
+      dm847.m05:
+        count: 24
+        focal_questions:
+          - derive and trace dynamic-programming recurrences
+          - distinguish global and local alignment
+          - reason about gap penalties and traceback
+          - evaluate alignment quality and limitations
+      dm847.m06:
+        count: 24
+        focal_questions:
+          - define states, emissions, transitions, and paths
+          - distinguish evaluation, decoding, and learning problems
+          - trace forward and Viterbi calculations
+          - interpret biological assumptions and model misspecification
+      dm847.m07:
+        count: 24
+        focal_questions:
+          - construct suffixes, suffix arrays, and search intervals
+          - compare suffix trees, arrays, and k-mer indexes
+          - reason about time-memory tradeoffs
+          - diagnose indexing and coordinate errors
+      dm847.m08:
+        count: 24
+        focal_questions:
+          - construct and invert the Burrows-Wheeler transform conceptually
+          - explain backward search and FM-index components
+          - connect exact matching to read mapping
+          - evaluate memory-aware mapping tradeoffs
+      dm847.m09:
+        count: 24
+        focal_questions:
+          - explain operons and bacterial gene organization
+          - distinguish sequence, distance, orientation, and functional evidence
+          - formulate an operon prediction model
+          - evaluate false positives and biological limitations
+      dm847.m10:
+        count: 24
+        focal_questions:
+          - interpret entropy and information content in motifs
+          - explain mixture models and expectation maximization
+          - trace E and M steps conceptually
+          - diagnose local optima, background-model, and initialization effects
+      dm847.m11:
+        count: 24
+        focal_questions:
+          - distinguish read quality, mapping quality, coverage, and enrichment
+          - order a short-read analysis workflow
+          - explain peak calling and bimodal signal assumptions
+          - audit quality evidence and overinterpretation
+      dm847.m12:
+        count: 24
+        focal_questions:
+          - define nodes, edges, direction, weight, and biological semantics
+          - compare layouts for small variable and large stable networks
+          - interpret topology without confusing layout with evidence
+          - select visual encodings and filters
+      dm847.m13:
+        count: 24
+        focal_questions:
+          - formulate network enrichment and active-module questions
+          - distinguish node-level from pathway-level evidence
+          - interpret CUSP, jActiveModules, and KeyPathwayMiner conceptually
+          - evaluate background sets, multiple testing, and network bias
+      dm847.m14:
+        count: 24
+        focal_questions:
+          - distinguish supervised and unsupervised learning
+          - reason about features, labels, validation, and leakage
+          - interpret clustering, classification, and dimensionality reduction
+          - connect model output to omics limitations
+      dm847.m15:
+        count: 36
+        focal_questions:
+          - formulate a biological problem and computational model
+          - justify algorithms, data structures, and validation
+          - compare alternative methods and complexity
+          - defend a written project and oral interpretation
+
+  bmb830:
+    total_modules: 10
+    planned_cards: 246
+    modules:
+      bmb830.m01:
+        count: 24
+        focal_questions:
+          - identify observational units, variables, populations, samples, and estimands
+          - distinguish association from causation
+          - assess provenance and scope of inference
+          - formulate a statistical question from a biological objective
+      bmb830.m02:
+        count: 24
+        focal_questions:
+          - reason about R vectors, factors, data frames, functions, and indexing
+          - trace vectorized operations and recycling
+          - write reproducible scripts
+          - diagnose type coercion and factor errors
+      bmb830.m03:
+        count: 24
+        focal_questions:
+          - import and validate rectangular biological data
+          - distinguish missing, censored, below-detection, and structurally absent values
+          - reshape and join data safely
+          - detect duplicates, impossible values, and unit inconsistencies
+      bmb830.m04:
+        count: 24
+        focal_questions:
+          - choose summaries and plots by variable type and question
+          - interpret center, spread, skewness, and outliers
+          - avoid misleading scales and aggregation
+          - connect visualization to data quality
+      bmb830.m05:
+        count: 24
+        focal_questions:
+          - define probability, conditional probability, independence, and random variables
+          - select binomial, normal, Poisson, or other basic models
+          - compute and interpret expectation and variability
+          - connect distributions to biological data-generating mechanisms
+      bmb830.m06:
+        count: 24
+        focal_questions:
+          - distinguish parameter, statistic, estimator, and sampling distribution
+          - interpret standard error and confidence intervals
+          - explain bootstrap logic
+          - diagnose incorrect probability statements about intervals
+      bmb830.m07:
+        count: 24
+        focal_questions:
+          - formulate null and alternative hypotheses
+          - interpret p-values, effect sizes, and uncertainty
+          - distinguish statistical from biological significance
+          - identify multiplicity and selective-reporting risks
+      bmb830.m08:
+        count: 24
+        focal_questions:
+          - interpret coefficients, contrasts, residuals, and model diagnostics
+          - distinguish simple regression, multiple regression, and ANOVA views
+          - assess linearity, variance, independence, and influence
+          - defend or revise a biological model
+      bmb830.m09:
+        count: 24
+        focal_questions:
+          - interpret distances, scaling, PCA, and clustering
+          - distinguish samples from variables in multivariate matrices
+          - diagnose batch-driven or scale-driven patterns
+          - avoid treating unsupervised groups as confirmed biological classes
+      bmb830.m10:
+        count: 30
+        focal_questions:
+          - design an end-to-end R analysis
+          - critique methods in a publication
+          - interpret outputs orally
+          - defend assumptions, alternatives, and limitations
+
+  bmb831:
+    total_modules: 12
+    planned_cards: 300
+    modules:
+      bmb831.m01:
+        count: 24
+        focal_questions:
+          - structure an R project and analysis pipeline
+          - separate functions, configuration, data, results, and reports
+          - record package and data provenance
+          - audit reproducibility failures
+      bmb831.m02:
+        count: 24
+        focal_questions:
+          - interpret high-dimensional quality metrics
+          - compare normalization goals and assumptions
+          - identify technical variation and batch effects
+          - distinguish correction from removal of biological signal
+      bmb831.m03:
+        count: 24
+        focal_questions:
+          - explain family-wise error and false discovery rate
+          - apply Benjamini-Hochberg conceptually
+          - prioritize features using effect and uncertainty
+          - diagnose p-value-only ranking
+      bmb831.m04:
+        count: 24
+        focal_questions:
+          - select models for counts, proportions, and complex designs
+          - interpret link functions and coefficients
+          - evaluate dispersion and design matrices
+          - diagnose confounding and invalid contrasts
+      bmb831.m05:
+        count: 24
+        focal_questions:
+          - interpret PCA, SVD, latent components, loadings, and scores
+          - assess scaling and transformation effects
+          - visualize high-dimensional structure honestly
+          - diagnose overinterpretation of components
+      bmb831.m06:
+        count: 24
+        focal_questions:
+          - compare clustering and classification methods
+          - design train-validation-test and resampling schemes
+          - detect leakage and optimistic performance
+          - interpret discrimination, calibration, and class imbalance
+      bmb831.m07:
+        count: 24
+        focal_questions:
+          - explain Bioconductor containers and assay metadata
+          - align assays, samples, and annotations
+          - use versioned biological annotation
+          - diagnose metadata and identifier mismatches
+      bmb831.m08:
+        count: 24
+        focal_questions:
+          - order a bulk transcriptomics workflow
+          - interpret counts, normalization, design, contrasts, and differential expression
+          - distinguish fold change from statistical evidence
+          - audit QC, batch effects, and multiple testing
+      bmb831.m09:
+        count: 24
+        focal_questions:
+          - explain peptide-to-protein inference and quantitative proteomics data structures
+          - assess missingness and normalization
+          - interpret differential abundance
+          - connect protein characterization to uncertainty
+      bmb831.m10:
+        count: 24
+        focal_questions:
+          - distinguish over-representation and ranked enrichment
+          - define the appropriate background universe
+          - interpret pathway redundancy and directionality
+          - avoid circular biological narratives
+      bmb831.m11:
+        count: 24
+        focal_questions:
+          - compare early, intermediate, and late multi-omics integration
+          - align samples and features across assays
+          - evaluate latent-factor and network-based integration
+          - audit reproducibility and sensitivity
+      bmb831.m12:
+        count: 36
+        focal_questions:
+          - formulate and justify an omics report
+          - defend preprocessing, models, figures, and interpretation
+          - discuss sensitivity analyses and alternatives
+          - separate evidence, inference, and biological hypothesis
+
+summary:
+  total_modules: 54
+  total_planned_cards: 1344
+  localized_front_back_pairs: 4032
+  note: >-
+    Counts refer to unique cards with stable IDs. Each card has equivalent ES, EN,
+    and DA content, so translations do not count as separate conceptual cards.
