@@ -1,0 +1,403 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m08
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm857.m08.f01
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front: {es: ¿Qué representa una ruta?, en: What does a path represent?, da: Hvad repræsenterer en sti?}
+    back:
+      es: >-
+        Una ubicación potencial en el sistema de archivos. No garantiza existencia, tipo ni permisos. La aplicación
+        debe validar esas propiedades por separado y evitar depender de una ruta relativa accidental.
+      en: >-
+        A potential filesystem location. It does not guarantee existence, type, or permissions. Those properties
+        must be validated separately.
+      da: >-
+        En potentiel placering i filsystemet. Den garanterer ikke eksistens, type eller rettigheder.
+    linked_objectives: [m08.o1]
+    tags: [path, filesystem]
+
+  - id: dm857.m08.f02
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front: {es: Compara rutas relativas y absolutas., en: Compare relative and absolute paths., da: Sammenlign relative og absolutte stier.}
+    back:
+      es: >-
+        Una ruta relativa se interpreta desde el directorio de trabajo; una absoluta fija una ubicación desde la raíz
+        del sistema. Las relativas son portables solo cuando la base está controlada explícitamente.
+      en: >-
+        A relative path is interpreted from the working directory; an absolute path anchors a location from the
+        filesystem root. Relative paths are portable only with a controlled base.
+      da: >-
+        En relativ sti fortolkes fra arbejdsmappen; en absolut sti fastlægger placeringen fra filsystemets rod.
+    linked_objectives: [m08.o1]
+    tags: [path, working-directory]
+
+  - id: dm857.m08.f03
+    mode: practical
+    card_type: method_selection
+    difficulty: foundational
+    front: {es: ¿Por qué usar `Path` en lugar de concatenar separadores manualmente?, en: Why use `Path` instead of manually concatenating separators?, da: Hvorfor bruge `Path` frem for manuel sammenkædning af separatorer?}
+    back:
+      es: >-
+        `Path` compone componentes de forma portable y ofrece operaciones semánticas sobre nombre, sufijo, padre,
+        existencia y tipo. La concatenación manual mezcla representación textual y estructura del sistema.
+      en: >-
+        `Path` composes components portably and provides semantic operations over names, suffixes, parents,
+        existence, and type.
+      da: >-
+        `Path` sammensætter komponenter portabelt og tilbyder semantiske operationer på stien.
+    linked_objectives: [m08.o1]
+    tags: [pathlib, portability]
+
+  - id: dm857.m08.f04
+    mode: conceptual
+    card_type: method_mapping
+    difficulty: foundational
+    front: {es: Relaciona modos `r`, `w`, `a` y `x`., en: Match modes `r`, `w`, `a`, and `x`., da: Knyt tilstandene `r`, `w`, `a` og `x` til deres funktion.}
+    back:
+      es: >-
+        `r`: leer; `w`: crear o truncar y reemplazar; `a`: añadir al final; `x`: crear solo si el destino no existe.
+      en: >-
+        `r`: read; `w`: create or truncate and replace; `a`: append; `x`: create only if the destination is absent.
+      da: >-
+        `r`: læs; `w`: opret eller afkort; `a`: tilføj; `x`: opret kun hvis destinationen ikke findes.
+    linked_objectives: [m08.o2]
+    tags: [file-modes]
+
+  - id: dm857.m08.f05
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: foundational
+    front: {es: Corrige: «`w` actualiza de forma segura un archivo existente»., en: Correct: “`w` safely updates an existing file.”, da: Ret: “`w` opdaterer sikkert en eksisterende fil.”}
+    back:
+      es: >-
+        `w` trunca el archivo al abrirlo, antes de escribir. Debe utilizarse solo cuando la pérdida del contenido previo
+        es parte explícita del contrato. `x` protege contra sobrescritura accidental.
+      en: >-
+        `w` truncates the file when opened, before writing. Use it only when replacement is explicit. `x` protects
+        against accidental overwrite.
+      da: >-
+        `w` afkorter filen ved åbning. Brug det kun ved eksplicit erstatning; `x` beskytter mod overskrivning.
+    linked_objectives: [m08.o2, m08.o8]
+    tags: [overwrite, safety]
+
+  - id: dm857.m08.f06
+    mode: conceptual
+    card_type: mechanism
+    difficulty: foundational
+    front: {es: ¿Qué garantiza `with open(...) as handle`?, en: What does `with open(...) as handle` guarantee?, da: Hvad garanterer `with open(...) as handle`?}
+    back:
+      es: >-
+        Administra la vida del recurso y ejecuta el cierre al salir del bloque, tanto en éxito como si ocurre una excepción.
+        No garantiza que el contenido sea válido ni que una escritura parcial se revierta.
+      en: >-
+        It manages resource lifetime and closes the file on block exit, both on success and on exception. It does not
+        validate contents or roll back partial writes.
+      da: >-
+        Det styrer ressourcens levetid og lukker filen ved blokafslutning, men validerer ikke indhold eller ruller skrivning tilbage.
+    linked_objectives: [m08.o2, m08.o7]
+    tags: [context-manager, cleanup]
+
+  - id: dm857.m08.f07
+    mode: conceptual
+    card_type: mechanism
+    difficulty: foundational
+    front: {es: ¿Qué papel cumple la codificación de texto?, en: What role does text encoding play?, da: Hvilken rolle spiller tekstkodning?}
+    back:
+      es: >-
+        Define cómo se convierten bytes en caracteres y viceversa. Una codificación incorrecta puede producir
+        `UnicodeDecodeError` o texto corrupto. Debe declararse explícitamente, normalmente `utf-8`.
+      en: >-
+        It defines how bytes map to characters and back. A wrong encoding may raise `UnicodeDecodeError` or corrupt text.
+      da: >-
+        Den definerer mapping mellem bytes og tegn. Forkert kodning kan give `UnicodeDecodeError` eller korrupt tekst.
+    linked_objectives: [m08.o2, m08.o5]
+    tags: [encoding, unicode]
+
+  - id: dm857.m08.f08
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: Compara `read()` e iteración por líneas., en: Compare `read()` and line iteration., da: Sammenlign `read()` og linjeiteration.}
+    back:
+      es: >-
+        `read()` carga todo el archivo y simplifica análisis globales pequeños. La iteración procesa incrementalmente,
+        reduce el uso de memoria y facilita conservar el número de línea para errores.
+      en: >-
+        `read()` loads the whole file and suits small global analyses. Line iteration is incremental, uses less memory,
+        and preserves line context.
+      da: >-
+        `read()` indlæser hele filen; linjeiteration er inkrementel og bevarer linjekontekst.
+    linked_objectives: [m08.o3]
+    tags: [reading, memory]
+
+  - id: dm857.m08.f09
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front: {es: ¿Por qué `strip()` puede ser demasiado agresivo?, en: Why can `strip()` be too aggressive?, da: Hvorfor kan `strip()` være for aggressiv?}
+    back:
+      es: >-
+        Elimina whitespace de ambos extremos, que puede formar parte del dato. Cuando solo se desea quitar el salto final,
+        `rstrip('\n')` o una regla más específica preserva mejor la información.
+      en: >-
+        It removes whitespace from both ends, which may be meaningful data. Use a more specific rule when only a newline
+        should be removed.
+      da: >-
+        Det fjerner whitespace i begge ender, som kan være betydningsfuldt. Brug en mere specifik regel ved behov.
+    linked_objectives: [m08.o3, m08.o5]
+    tags: [text-processing, preservation]
+
+  - id: dm857.m08.f10
+    mode: conceptual
+    card_type: reasoning
+    difficulty: intermediate
+    front: {es: ¿Por qué no debe analizarse CSV general con `split(',')`?, en: Why should general CSV not be parsed with `split(',')`?, da: Hvorfor bør generel CSV ikke parses med `split(',')`?}
+    back:
+      es: >-
+        Porque campos entrecomillados pueden contener comas, comillas escapadas o saltos. Un `split` ingenuo desplaza
+        columnas y puede producir errores silenciosos. Debe usarse `csv.reader` o `csv.DictReader`.
+      en: >-
+        Quoted fields may contain commas, escaped quotes, or newlines. Naive splitting shifts columns and may fail silently.
+      da: >-
+        Citerede felter kan indeholde kommaer og linjeskift. Naiv opdeling kan forskyde kolonner lydløst.
+    linked_objectives: [m08.o3, m08.o5]
+    tags: [csv, parsing]
+
+  - id: dm857.m08.f11
+    mode: practical
+    card_type: method_selection
+    difficulty: intermediate
+    front: {es: ¿Cuándo preferir `csv.DictReader` frente a `csv.reader`?, en: When prefer `csv.DictReader` over `csv.reader`?, da: Hvornår foretrækkes `csv.DictReader` frem for `csv.reader`?}
+    back:
+      es: >-
+        Cuando la cabecera define nombres de campos y se desea acceder por significado en lugar de posición. Aun así,
+        deben validarse cabeceras duplicadas, ausentes o adicionales.
+      en: >-
+        When headers define field names and semantic access is preferred to positional access. Headers still require validation.
+      da: >-
+        Når headers definerer feltnavne, og semantisk adgang foretrækkes frem for position.
+    linked_objectives: [m08.o3, m08.o5]
+    tags: [csv, schema]
+
+  - id: dm857.m08.f12
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: Distingue validación estructural, conversión y validación semántica., en: Distinguish structural validation, conversion, and semantic validation., da: Skeln mellem strukturel validering, konvertering og semantisk validering.}
+    back:
+      es: >-
+        Estructural: forma, columnas y presencia. Conversión: transformar texto a un tipo interno. Semántica: comprobar
+        rango, categoría y coherencia. Superar una capa no implica superar las siguientes.
+      en: >-
+        Structural: shape, columns, presence. Conversion: text to internal type. Semantic: range, category, consistency.
+        Passing one layer does not imply passing later layers.
+      da: >-
+        Strukturel validering kontrollerer form; konvertering ændrer type; semantisk validering kontrollerer domæne.
+    linked_objectives: [m08.o5]
+    tags: [validation, layers]
+
+  - id: dm857.m08.f13
+    mode: practical
+    card_type: error_classification
+    difficulty: intermediate
+    front: {es: Clasifica `FileNotFoundError`, `UnicodeDecodeError` y `ValueError` al importar datos., en: Classify `FileNotFoundError`, `UnicodeDecodeError`, and `ValueError` during import., da: Klassificér `FileNotFoundError`, `UnicodeDecodeError` og `ValueError` under import.}
+    back:
+      es: >-
+        Localización ausente; bytes incompatibles con la codificación; y conversión o contrato de valor inválido,
+        respectivamente. El mensaje debe añadir ruta, línea o campo sin borrar la causa.
+      en: >-
+        Missing location; bytes incompatible with encoding; and invalid conversion or value contract, respectively.
+      da: >-
+        Manglende placering; bytes der ikke passer til kodningen; og ugyldig konvertering eller værdikontrakt.
+    linked_objectives: [m08.o5, m08.o6]
+    tags: [exceptions, classification]
+
+  - id: dm857.m08.f14
+    mode: conceptual
+    card_type: principle
+    difficulty: intermediate
+    front: {es: ¿Qué excepciones debe capturar una función?, en: Which exceptions should a function catch?, da: Hvilke undtagelser bør en funktion fange?}
+    back:
+      es: >-
+        Solo las que puede recuperar, traducir a una excepción de mayor nivel o enriquecer con contexto útil. Lo inesperado
+        debe propagarse con traceback para no ocultar defectos de programación.
+      en: >-
+        Only those it can recover from, translate, or enrich with useful context. Unexpected failures should propagate.
+      da: >-
+        Kun dem den kan håndtere, oversætte eller berige med kontekst. Uventede fejl bør propagere.
+    linked_objectives: [m08.o6]
+    tags: [exception-policy]
+
+  - id: dm857.m08.f15
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front: {es: Corrige: «`except Exception` hace robusto cualquier importador»., en: Correct: “`except Exception` makes any importer robust.”, da: Ret: “`except Exception` gør enhver importør robust.”}
+    back:
+      es: >-
+        Una captura amplia puede ocultar errores de lógica, convertir fallos distintos en un resultado ambiguo y eliminar
+        el traceback. La robustez proviene de contratos, validación, manejadores específicos y pruebas de fallos.
+      en: >-
+        A broad catch may hide logic bugs, collapse distinct failures into ambiguity, and destroy the traceback.
+      da: >-
+        Bred fangst kan skjule logikfejl, gøre fejl tvetydige og fjerne traceback.
+    linked_objectives: [m08.o6, m08.o8]
+    tags: [exceptions, robustness]
+
+  - id: dm857.m08.f16
+    mode: conceptual
+    card_type: control_flow
+    difficulty: intermediate
+    front: {es: ¿Qué función cumplen `else` y `finally` tras un `try`?, en: What are `else` and `finally` for after `try`?, da: Hvad bruges `else` og `finally` til efter `try`?}
+    back:
+      es: >-
+        `else` ejecuta el camino de éxito solo si el `try` no produjo excepción. `finally` se ejecuta independientemente
+        del resultado y se usa para limpieza que no esté ya gestionada por un context manager.
+      en: >-
+        `else` is the success path when `try` completes normally. `finally` always runs and performs cleanup.
+      da: >-
+        `else` er succesvejen; `finally` udføres altid og bruges til oprydning.
+    linked_objectives: [m08.o7]
+    tags: [try, control-flow]
+
+  - id: dm857.m08.f17
+    mode: conceptual
+    card_type: mechanism
+    difficulty: advanced
+    front: {es: ¿Qué aporta `raise NewError(...) from exc`?, en: What does `raise NewError(...) from exc` add?, da: Hvad tilføjer `raise NewError(...) from exc`?}
+    back:
+      es: >-
+        Traduce una excepción de bajo nivel a una del contrato de la función y conserva explícitamente la causa original.
+        Esto mejora el mensaje sin perder el traceback causal.
+      en: >-
+        It translates a low-level exception into the function's contract while explicitly preserving the original cause.
+      da: >-
+        Det oversætter en lavniveaufejl og bevarer den oprindelige årsag eksplicit.
+    linked_objectives: [m08.o6, m08.o7]
+    tags: [exception-chaining]
+
+  - id: dm857.m08.f18
+    mode: practical
+    card_type: refactoring
+    difficulty: intermediate
+    front: {es: ¿Cómo separar análisis e I/O en un programa?, en: How do you separate analysis and I/O in a program?, da: Hvordan adskilles analyse og I/O i et program?}
+    back:
+      es: >-
+        Un lector transforma la fuente en datos validados; una función pura analiza esos datos y retorna resultados;
+        un formateador o escritor persiste los resultados. Así cada capa tiene pruebas y errores propios.
+      en: >-
+        A reader returns validated data; a pure function analyzes and returns results; a formatter or writer persists them.
+      da: >-
+        En læser returnerer validerede data, en ren funktion analyserer, og en skriver persisterer resultatet.
+    linked_objectives: [m08.o4, m08.o5, m08.o6]
+    tags: [architecture, purity]
+
+  - id: dm857.m08.f19
+    mode: conceptual
+    card_type: reasoning
+    difficulty: intermediate
+    front: {es: ¿Por qué `write` y `writelines` requieren una política explícita de separadores?, en: Why do `write` and `writelines` require an explicit separator policy?, da: Hvorfor kræver `write` og `writelines` en eksplicit separatorpolitik?}
+    back:
+      es: >-
+        Ninguno añade saltos o separadores automáticamente. El formato debe indicar dónde terminan líneas y campos;
+        de lo contrario, registros válidos en memoria pueden quedar concatenados de forma ambigua.
+      en: >-
+        Neither adds separators automatically. Output format must define line and field boundaries.
+      da: >-
+        Ingen af dem tilføjer separatorer automatisk; formatet skal definere linje- og feltgrænser.
+    linked_objectives: [m08.o4]
+    tags: [writing, format]
+
+  - id: dm857.m08.f20
+    mode: practical
+    card_type: test_design
+    difficulty: advanced
+    front: {es: ¿Qué debe comprobar una prueba de fallo de escritura?, en: What should a failed-write test verify?, da: Hvad skal en test af mislykket skrivning kontrollere?}
+    back:
+      es: >-
+        Tipo y contexto del error, cierre de recursos, ausencia o integridad del destino previo, ausencia de salida parcial
+        inesperada y posibilidad de reintento o recuperación según el contrato.
+      en: >-
+        Error type and context, resource closure, prior destination integrity, absence of unexpected partial output,
+        and contract-defined recovery behavior.
+      da: >-
+        Fejltype og kontekst, ressourcelukning, destinationens integritet og fravær af uventet delvist output.
+    linked_objectives: [m08.o4, m08.o8]
+    tags: [failure-testing, writing]
+
+  - id: dm857.m08.f21
+    mode: practical
+    card_type: test_design
+    difficulty: intermediate
+    front: {es: ¿Qué casos probarías para un lector numérico por líneas?, en: What cases would you test for a line-based numeric reader?, da: Hvilke tilfælde tester du for en linjebaseret numerisk læser?}
+    back:
+      es: >-
+        Archivo vacío, líneas vacías según política, valores válidos, primera y última línea inválida, Unicode incompatible,
+        archivo ausente, valores fuera de dominio y mensaje con número de línea y texto original.
+      en: >-
+        Empty file, blank lines according to policy, valid values, invalid first/last line, wrong encoding, missing file,
+        semantic outliers, and diagnostics with line number and original text.
+      da: >-
+        Tom fil, blanke linjer, gyldige og ugyldige værdier, forkert kodning, manglende fil og præcis diagnostik.
+    linked_objectives: [m08.o3, m08.o5, m08.o8]
+    tags: [testing, reader]
+
+  - id: dm857.m08.f22
+    mode: integrative
+    card_type: pipeline
+    difficulty: advanced
+    front: {es: Ordena las etapas de una frontera de entrada confiable., en: Order the stages of a trustworthy input boundary., da: Ordén trinene i en pålidelig inputgrænse.}
+    back:
+      es: >-
+        Resolver y validar ruta; abrir con modo y codificación; leer; analizar formato; validar estructura; convertir tipos;
+        validar semántica; construir datos internos; devolver o reportar errores con contexto.
+      en: >-
+        Resolve path; open with mode and encoding; read; parse format; validate structure; convert types; validate semantics;
+        build internal data; return or report contextual errors.
+      da: >-
+        Løs sti, åbn med tilstand og kodning, læs, parse, validér struktur, konvertér, validér semantik og byg interne data.
+    linked_objectives: [m08.o1, m08.o2, m08.o3, m08.o5, m08.o6]
+    tags: [pipeline, data-boundary]
+
+  - id: dm857.m08.f23
+    mode: integrative
+    card_type: oral_defense
+    difficulty: advanced
+    front: {es: ¿Cómo justificas una política «rechazar archivo completo» frente a «omitir filas inválidas»?, en: How do you justify “reject whole file” versus “skip invalid rows”?, da: Hvordan begrundes “afvis hele filen” versus “spring ugyldige rækker over”?}
+    back:
+      es: >-
+        Debe basarse en el uso del dato, riesgo de sesgo, necesidad de completitud, posibilidad de corregir filas y trazabilidad.
+        Omitir filas exige contarlas, conservar diagnósticos y demostrar que el análisis no interpreta el subconjunto como completo.
+      en: >-
+        Base the policy on data use, bias risk, completeness, repairability, and traceability. Skipping rows requires counts,
+        diagnostics, and explicit interpretation of incompleteness.
+      da: >-
+        Politikken skal følge databrug, biasrisiko, komplethed og sporbarhed. Springning kræver optælling og diagnostik.
+    linked_objectives: [m08.o5, m08.o6, m08.o8]
+    tags: [oral-defense, error-policy]
+
+  - id: dm857.m08.f24
+    mode: integrative
+    card_type: synthesis
+    difficulty: advanced
+    front: {es: Resume el principio central del módulo de archivos y excepciones., en: Summarize the central principle of the files and exceptions module., da: Opsummér hovedprincippet i modulet om filer og undtagelser.}
+    back:
+      es: >-
+        Tratar el sistema de archivos como una frontera no confiable: hacer explícitos ruta, formato, codificación,
+        validación y política de error; entregar al análisis solo datos internos validados y preservar evidencia diagnóstica.
+      en: >-
+        Treat the filesystem as an untrusted boundary: make path, format, encoding, validation, and error policy explicit;
+        pass only validated internal data to analysis and preserve diagnostic evidence.
+      da: >-
+        Behandl filsystemet som en upålidelig grænse, og gør sti, format, kodning, validering og fejlpolitik eksplicitte.
+    linked_objectives: [m08.o1, m08.o2, m08.o3, m08.o4, m08.o5, m08.o6, m08.o7, m08.o8]
+    tags: [synthesis, reliability]
