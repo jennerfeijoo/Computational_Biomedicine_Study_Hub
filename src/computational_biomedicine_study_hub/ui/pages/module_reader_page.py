@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Callable, Iterable
 
 from PySide6.QtCore import QSignalBlocker, Qt, Slot
+from PySide6.QtGui import QFontDatabase, QSyntaxHighlighter
 from PySide6.QtWidgets import (
     QFrame,
     QHBoxLayout,
@@ -20,6 +21,7 @@ from PySide6.QtWidgets import (
 from ...content.models import AssessmentItem, ConceptBlock, LearningModule, WorkedExample
 from ...i18n import MessageKey, Translator, UiCopyKey, ui_text
 from ...learning.progress_repository import ProgressRepository
+from ..r_syntax_highlighter import RSyntaxHighlighter
 from ..widgets import GuidedPracticeWidget, ObjectiveAssessmentWidget
 
 _ACTIVITY_KEYS = {
@@ -63,6 +65,7 @@ class ModuleReaderPage(QWidget):
         self._progress_repository = progress_repository
         self._content_version = content_version
         self._section_cache: dict[int, QWidget] = {}
+        self._syntax_highlighters: list[QSyntaxHighlighter] = []
         self._tab_builders: tuple[tuple[MessageKey, Callable[[], QWidget]], ...] = (
             (MessageKey.MODULE_TAB_OVERVIEW, self._build_overview_tab),
             (MessageKey.MODULE_TAB_CONCEPTS, self._build_concepts_tab),
@@ -300,17 +303,58 @@ class ModuleReaderPage(QWidget):
 
     def _example_card(self, example: WorkedExample) -> QFrame:
         card, layout = self._card("exampleCard", example.title)
-        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_PROBLEM)))
-        layout.addWidget(self._label(example.problem, "contentBody"))
-        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_REASONING)))
-        layout.addWidget(self._label(self._numbered(example.reasoning), "contentBulletList"))
-        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_CODE)))
-        layout.addWidget(self._code_block(example.code, "exampleCode"))
-        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_EXPECTED_OUTPUT)))
-        layout.addWidget(self._code_block(example.expected_output, "exampleOutput"))
-        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_EXPLANATION)))
-        layout.addWidget(self._label(example.explanation, "contentBody"))
+        if example.problem.strip():
+            layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_PROBLEM)))
+            layout.addWidget(self._label(example.problem, "contentBody"))
+        reasoning = tuple(step for step in example.reasoning if step.strip())
+        if reasoning:
+            layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_REASONING)))
+            layout.addWidget(self._label(self._numbered(reasoning), "contentBulletList"))
+        if example.code.strip():
+            if example.language:
+                language = QLabel(self._language_label(example.language))
+                language.setObjectName("exampleLanguageBadge")
+                language.setAccessibleName(self._language_label(example.language))
+                layout.addWidget(language, 0, Qt.AlignmentFlag.AlignLeft)
+            layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_CODE)))
+            layout.addWidget(
+                self._code_block(
+                    example.code,
+                    "exampleCode",
+                    language=example.language,
+                )
+            )
+        if example.expected_output.strip():
+            layout.addWidget(
+                self._subheading(self._translator.text(MessageKey.MODULE_EXPECTED_OUTPUT))
+            )
+            if example.output_kind == "plot_description":
+                layout.addWidget(
+                    self._label(example.expected_output, "examplePlotDescription")
+                )
+            else:
+                layout.addWidget(
+                    self._code_block(
+                        example.expected_output,
+                        "exampleOutput",
+                    )
+                )
+        if example.explanation.strip():
+            layout.addWidget(
+                self._subheading(self._translator.text(MessageKey.MODULE_EXPLANATION))
+            )
+            layout.addWidget(self._label(example.explanation, "contentBody"))
         return card
+
+    @staticmethod
+    def _language_label(language: str) -> str:
+        labels = {
+            "r": "R",
+            "python": "Python",
+            "shell": "Shell",
+            "text": "Text",
+        }
+        return labels.get(language.casefold(), language)
 
     def _assessment_card(self, number: int, item: AssessmentItem) -> QFrame:
         activity = self._activity_label(item.activity_type.value)
@@ -392,15 +436,26 @@ class ModuleReaderPage(QWidget):
         label.setObjectName("contentSubheading")
         return label
 
-    @staticmethod
-    def _code_block(text: str, object_name: str) -> QPlainTextEdit:
+    def _code_block(
+        self,
+        text: str,
+        object_name: str,
+        *,
+        language: str = "",
+    ) -> QPlainTextEdit:
         editor = QPlainTextEdit(text)
         editor.setObjectName(object_name)
+        editor.setProperty("language", language)
         editor.setReadOnly(True)
         editor.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
         editor.setTabChangesFocus(True)
+        editor.setFont(
+            QFontDatabase.systemFont(QFontDatabase.SystemFont.FixedFont)
+        )
         line_count = max(1, text.count("\n") + 1)
         editor.setFixedHeight(min(220, 32 + line_count * 21))
+        if language.casefold() == "r":
+            self._syntax_highlighters.append(RSyntaxHighlighter(editor.document()))
         return editor
 
     @staticmethod

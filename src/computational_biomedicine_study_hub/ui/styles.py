@@ -153,6 +153,15 @@ QLabel#contentSubheading {
     padding-top: 4px;
 }
 
+QLabel#exampleLanguageBadge {
+    color: #dbeafe;
+    background: #1f4f7a;
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
 QLabel#courseCardSummary,
 QLabel#courseSummary,
 QLabel#courseSectionList,
