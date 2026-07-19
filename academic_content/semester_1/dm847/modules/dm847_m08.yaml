@@ -1,0 +1,328 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m08
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Transformada de Burrows-Wheeler, FM-index y mapeo consciente de memoria
+    en: Burrows-Wheeler transform, FM-index, and memory-aware read mapping
+    da: Burrows-Wheeler-transform, FM-index og hukommelsesbevidst read-mapping
+  summary:
+    es: >-
+      Construcción e interpretación de la BWT, relación entre primera y última columna,
+      LF-mapping, tablas C y Occ, búsqueda hacia atrás, localización mediante suffix-array
+      muestreado y compromisos de compresión. El módulo conecta la búsqueda exacta con
+      estrategias seed-and-extend para lecturas, sin confundir un índice exacto con un
+      alineador tolerante a errores.
+    en: >-
+      Construction and interpretation of the BWT, the relationship between first and last
+      columns, LF mapping, C and Occ tables, backward search, sampled suffix-array location,
+      and compression trade-offs. The module connects exact indexing to seed-and-extend read
+      mapping without conflating an exact index with an error-tolerant aligner.
+    da: >-
+      Konstruktion og fortolkning af BWT, relationen mellem første og sidste kolonne,
+      LF-mapping, C- og Occ-tabeller, backward search, lokalisering med samplet suffix-array
+      og kompressionskompromiser. Modulet forbinder eksakt indeks med seed-and-extend.
+  estimated_study_hours: 12
+  difficulty: advanced
+
+alignment:
+  official_learning_outcomes: [dm847.lo04, dm847.lo07]
+  prerequisite_modules: [dm847.m07, dm857.m15]
+  later_modules: [dm847.m11]
+
+objectives:
+  - {id: dm847.m08.o01, text: {es: Construir la BWT desde rotaciones o desde el orden de sufijos, en: Construct the BWT from rotations or suffix order, da: Konstruere BWT fra rotationer eller suffix-orden}}
+  - {id: dm847.m08.o02, text: {es: Explicar por qué la BWT es reversible con un sentinela único, en: Explain why the BWT is reversible with a unique sentinel, da: Forklare hvorfor BWT er reversibel med en unik sentinel}}
+  - {id: dm847.m08.o03, text: {es: Derivar LF-mapping a partir de rangos de símbolos, en: Derive LF mapping from symbol ranks, da: Udlede LF-mapping fra symbolranks}}
+  - {id: dm847.m08.o04, text: {es: Ejecutar búsqueda hacia atrás usando C y Occ, en: Execute backward search using C and Occ, da: Udføre backward search med C og Occ}}
+  - {id: dm847.m08.o05, text: {es: Distinguir conteo de coincidencias de localización de posiciones, en: Distinguish match counting from position location, da: Skelne mellem optælling af matches og lokalisering}}
+  - {id: dm847.m08.o06, text: {es: Analizar muestreo de Occ y suffix array como compromisos tiempo-memoria, en: Analyze Occ and suffix-array sampling as time-memory trade-offs, da: Analysere sampling af Occ og suffix-array som tid-hukommelseskompromis}}
+  - {id: dm847.m08.o07, text: {es: Diseñar una estrategia seed-and-extend para lecturas con errores, en: Design a seed-and-extend strategy for reads with errors, da: Designe en seed-and-extend-strategi for reads med fejl}}
+  - {id: dm847.m08.o08, text: {es: Validar transformación, inversión, consultas y localización contra oráculos simples, en: Validate transform, inversion, queries, and location against simple oracles, da: Validere transformation, inversion, forespørgsler og lokalisering mod simple orakler}}
+
+concepts:
+  - id: dm847.m08.c01
+    title: {es: De rotaciones a BWT, en: From rotations to the BWT, da: Fra rotationer til BWT}
+    body:
+      es: >-
+        Para enseñanza, se añade un sentinela único, se generan todas las rotaciones cíclicas,
+        se ordenan lexicográficamente y se toma la última columna. Para implementación a escala,
+        la misma columna se obtiene desde el array de sufijos: BWT[i] es el símbolo anterior al
+        sufijo SA[i], usando el sentinela para el sufijo que comienza en cero. Materializar la
+        matriz de rotaciones cuesta memoria cuadrática y sólo sirve como oráculo pequeño.
+      en: >-
+        For teaching, append a unique sentinel, generate cyclic rotations, sort them, and take
+        the last column. At scale, derive the same column from the suffix array: BWT[i] is the
+        symbol preceding suffix SA[i], with the sentinel used for the suffix starting at zero.
+        Materializing the rotation matrix is quadratic and only suitable as a small oracle.
+      da: >-
+        Til undervisning sorteres alle cykliske rotationer og sidste kolonne tages. I praksis
+        udledes BWT fra suffix-arrayet. Den fulde rotationsmatrix er kvadratisk og kun egnet til små tests.
+    key_points:
+      - {es: La BWT no es simplemente el texto ordenado, en: The BWT is not simply the sorted text, da: BWT er ikke blot den sorterede tekst}
+      - {es: El sentinela fija una rotación única, en: The sentinel fixes a unique rotation, da: Sentinellen fastlægger en unik rotation}
+  - id: dm847.m08.c02
+    title: {es: Primera y última columna, en: First and last columns, da: Første og sidste kolonne}
+    body:
+      es: >-
+        La primera columna F contiene los mismos símbolos que L=BWT, pero ordenados. Las
+        ocurrencias repetidas se distinguen por su rango: la tercera A de L corresponde a la
+        tercera A de F. Esta correspondencia preserva el carácter que precede a cada sufijo y
+        permite reconstruir relaciones entre filas sin almacenar toda la matriz.
+      en: >-
+        First column F contains the same symbols as L=BWT but sorted. Repeated occurrences are
+        distinguished by rank: the third A in L corresponds to the third A in F. This preserves
+        predecessor relationships between suffixes without storing the full matrix.
+      da: >-
+        Første kolonne F indeholder de samme symboler som L, men sorteret. Gentagne symboler
+        skelnes ved rank, hvilket forbinder tilsvarende forekomster mellem L og F.
+    key_points:
+      - {es: La identidad se conserva por símbolo y rango, en: Identity is preserved by symbol and rank, da: Identitet bevares ved symbol og rank}
+  - id: dm847.m08.c03
+    title: {es: LF-mapping e inversión, en: LF mapping and inversion, da: LF-mapping og inversion}
+    body:
+      es: >-
+        LF(i) lleva una fila cuya última columna contiene c a la fila que representa el sufijo
+        precedido por esa misma ocurrencia de c en F. Repetir LF desde la fila del sentinela
+        recupera el texto en orden inverso. La reversibilidad depende de conservar todas las
+        ocurrencias y de que el sentinela aparezca una sola vez.
+      en: >-
+        LF(i) maps a row whose last-column symbol is c to the row representing the suffix
+        preceded by the same ranked occurrence of c in F. Repeated LF steps from the sentinel
+        row recover the text in reverse. Reversibility depends on preserving occurrences and a
+        unique sentinel.
+      da: >-
+        LF(i) forbinder en række i L med den tilsvarende rangforekomst i F. Gentagne LF-trin fra
+        sentinel-rækken rekonstruerer teksten baglæns.
+    key_points:
+      - {es: Invertir la BWT es una prueba fuerte de construcción, en: BWT inversion is a strong construction test, da: BWT-inversion er en stærk konstruktionstest}
+  - id: dm847.m08.c04
+    title: {es: Tablas C y Occ, en: C and Occ tables, da: C- og Occ-tabeller}
+    body:
+      es: >-
+        C[c] cuenta cuántos símbolos del texto son lexicográficamente menores que c. Occ(c,i)
+        cuenta ocurrencias de c en un prefijo de L; la convención inclusiva o exclusiva debe ser
+        constante. Juntas permiten actualizar un intervalo [l,r) al añadir c por la izquierda:
+        l'=C[c]+Occ(c,l), r'=C[c]+Occ(c,r). Un intervalo vacío indica que el patrón no aparece.
+      en: >-
+        C[c] counts text symbols lexicographically smaller than c. Occ(c,i) counts c in a prefix
+        of L; inclusive versus exclusive convention must remain consistent. Together they update
+        interval [l,r) when prepending c: l'=C[c]+Occ(c,l), r'=C[c]+Occ(c,r). An empty interval
+        means no occurrence.
+      da: >-
+        C[c] tæller symboler mindre end c; Occ(c,i) tæller c i et præfiks af L. De opdaterer
+        intervallet ved at tilføje et symbol til venstre.
+    key_points:
+      - {es: Los errores off-by-one suelen provenir de mezclar convenciones Occ, en: Off-by-one errors often come from mixed Occ conventions, da: Off-by-one-fejl kommer ofte fra blandede Occ-konventioner}
+  - id: dm847.m08.c05
+    title: {es: Búsqueda hacia atrás, en: Backward search, da: Backward search}
+    body:
+      es: >-
+        Se inicia con todo el intervalo de filas y se procesan los símbolos del patrón de derecha
+        a izquierda. Cada actualización conserva sólo sufijos precedidos por el nuevo símbolo.
+        Tras consumir P, el tamaño del intervalo es el número de coincidencias exactas. El coste
+        ideal es O(m) consultas de rank, independiente de n salvo por la representación de Occ.
+      en: >-
+        Start with the full row interval and process pattern symbols right to left. Each update
+        retains suffixes preceded by the new symbol. After consuming P, interval size is the
+        exact match count. Ideal cost is O(m) rank queries, independent of n except for Occ representation.
+      da: >-
+        Start med hele intervallet og behandl mønsteret fra højre mod venstre. Det endelige
+        intervals størrelse er antallet af eksakte matches.
+    key_points:
+      - {es: Buscar hacia atrás extiende el patrón por la izquierda, en: Backward search extends the pattern on the left, da: Backward search udvider mønsteret mod venstre}
+  - id: dm847.m08.c06
+    title: {es: Conteo y localización, en: Counting and locating, da: Optælling og lokalisering}
+    body:
+      es: >-
+        El intervalo BWT permite contar sin conocer posiciones genómicas. Para localizar se
+        necesita información del suffix array. Guardar SA completo permite acceso directo;
+        muestrearlo reduce memoria y obliga a seguir LF hasta una fila muestreada, acumulando
+        pasos. Por ello count y locate son operaciones distintas con costes diferentes.
+      en: >-
+        The BWT interval counts matches without genomic positions. Locating requires suffix-array
+        information. A full SA gives direct access; sampling saves memory but requires LF steps
+        to a sampled row while counting offsets. Count and locate therefore have different costs.
+      da: >-
+        BWT-intervallet tæller matches uden positioner. Lokalisering kræver suffix-array-data;
+        sampling sparer hukommelse men kræver LF-trin.
+    key_points:
+      - {es: Muestreo más disperso ahorra memoria y aumenta pasos de localización, en: Sparser sampling saves memory and increases location steps, da: Mere sparsom sampling sparer hukommelse og øger lokaliseringstrin}
+  - id: dm847.m08.c07
+    title: {es: Compresión y repetitividad, en: Compression and repetitiveness, da: Kompression og repetitivitet}
+    body:
+      es: >-
+        La BWT tiende a agrupar símbolos similares cuando contextos precedentes se repiten,
+        produciendo runs aptos para run-length encoding y estructuras rank comprimidas. La
+        compresibilidad depende de repetitividad, no sólo de frecuencia global de símbolos.
+        Un índice comprimido debe medirse por bytes reales, latencia de rank y coste de locate.
+      en: >-
+        The BWT tends to group equal symbols when preceding contexts repeat, creating runs suited
+        to run-length encoding and compressed rank structures. Compressibility depends on
+        repetitiveness, not merely global symbol frequency. Measure actual bytes, rank latency,
+        and locate cost.
+      da: >-
+        BWT grupperer ofte ens symboler ved gentagne kontekster og kan komprimeres med runs.
+        Kompressibilitet afhænger af repetitivitet, ikke kun globale frekvenser.
+    key_points:
+      - {es: Comprimido no significa automáticamente más rápido, en: Compressed does not automatically mean faster, da: Komprimeret betyder ikke automatisk hurtigere}
+  - id: dm847.m08.c08
+    title: {es: Seed-and-extend para lecturas, en: Seed-and-extend for reads, da: Seed-and-extend for reads}
+    body:
+      es: >-
+        Un FM-index exacto puede encontrar semillas de una lectura. Los candidatos se extienden
+        con alineamiento que tolera sustituciones e indels, se consideran ambas orientaciones y
+        se puntúan múltiples ubicaciones. Semillas demasiado frecuentes generan muchos candidatos;
+        semillas demasiado largas fallan ante errores. La calidad de base, repetitividad y política
+        de multimapeo forman parte del método completo.
+      en: >-
+        An exact FM-index can find read seeds. Candidates are extended with an aligner tolerating
+        substitutions and indels, both orientations are considered, and multiple locations are
+        scored. Frequent seeds yield many candidates; long seeds fail around errors. Base quality,
+        repetitiveness, and multimapping policy belong to the full method.
+      da: >-
+        Et eksakt FM-index finder read-seeds. Kandidater udvides med alignment, der tolererer
+        substitutioner og indels, i begge orienteringer. Seed-længde og repetitivitet er afgørende.
+    key_points:
+      - {es: El FM-index exacto es un componente, no el mapeador completo, en: The exact FM-index is a component, not the complete mapper, da: Det eksakte FM-index er en komponent, ikke hele mapperen}
+
+worked_examples:
+  - id: dm847.m08.e01
+    title: {es: BWT e inversión de banana$, en: BWT and inversion of banana$, da: BWT og inversion af banana$}
+    scenario: {es: Construir la BWT desde el array de sufijos y recuperar el texto mediante LF., en: Build the BWT from the suffix array and recover the text using LF., da: Byg BWT fra suffix-arrayet og rekonstruér teksten med LF.}
+    solution_outline:
+      es: >-
+        Usar SA=[6,5,3,1,0,4,2]. Para cada posición tomar el carácter anterior, obteniendo
+        annb$aa. Etiquetar ocurrencias por rango, iniciar en la fila $, aplicar LF y reconstruir
+        banana$ en orden inverso. Comparar con una construcción por rotaciones sólo como oráculo.
+      en: >-
+        Use SA=[6,5,3,1,0,4,2]. Taking preceding characters yields annb$aa. Rank occurrences,
+        start at the $ row, apply LF, and reconstruct banana$ in reverse. Compare with the
+        rotation-matrix construction only as an oracle.
+      da: >-
+        Brug SA=[6,5,3,1,0,4,2] og få annb$aa. Rangér forekomster og anvend LF fra $-rækken.
+    validation: [bwt_matches_rotation_oracle, inverse_equals_original, sentinel_unique]
+  - id: dm847.m08.e02
+    title: {es: Búsqueda hacia atrás de ana, en: Backward search for ana, da: Backward search efter ana}
+    scenario: {es: Actualizar el intervalo para a, luego na y finalmente ana., en: Update the interval for a, then na, then ana., da: Opdatér intervallet for a, derefter na og ana.}
+    solution_outline:
+      es: >-
+        Mantener intervalos semiabiertos y una Occ exclusiva. Tras cada símbolo verificar l<=r.
+        El intervalo final contiene dos filas, que coinciden con las posiciones 1 y 3 al consultar SA.
+      en: >-
+        Use half-open intervals and exclusive Occ consistently. The final interval has two rows,
+        which locate to starts 1 and 3 through SA.
+      da: >-
+        Brug halvåbne intervaller og eksklusiv Occ. Slutintervallet har to rækker ved position 1 og 3.
+    validation: [count_two, positions_match_suffix_array, no_off_by_one]
+  - id: dm847.m08.e03
+    title: {es: Muestreo y coste de locate, en: Sampling and locate cost, da: Sampling og locate-omkostning}
+    scenario: {es: Comparar SA completo, muestreo cada 4 y cada 16 filas., en: Compare full SA, sampling every 4 rows, and every 16 rows., da: Sammenlign fuldt SA og sampling hver 4. eller 16. række.}
+    solution_outline:
+      es: >-
+        Medir bytes almacenados, pasos LF medios y percentil 95 por localización. Un muestreo más
+        disperso reduce memoria pero puede elevar latencia; seleccionar según carga de count frente a locate.
+      en: >-
+        Measure stored bytes, mean LF steps, and 95th-percentile locate steps. Sparser sampling
+        saves memory but increases latency; choose according to count-versus-locate workload.
+      da: >-
+        Mål bytes og LF-trin. Mere sparsom sampling sparer hukommelse men øger latens.
+    validation: [all_positions_correct, memory_reported, latency_distribution_reported]
+
+practice_exercises:
+  - {id: dm847.m08.p01, activity_type: construction, difficulty: foundational, prompt: {es: Construye BWT de mississippi$ usando referencias de sufijos., en: Construct the BWT of mississippi$ using suffix references., da: Konstruér BWT for mississippi$ med suffix-referencer.}, expected_elements: [unique_sentinel, correct_suffix_order, preceding_character_rule]}
+  - {id: dm847.m08.p02, activity_type: code_tracing, difficulty: intermediate, prompt: {es: Traza LF durante seis pasos e identifica símbolo y rango., en: Trace LF for six steps and identify symbol and rank., da: Gennemgå LF i seks trin og angiv symbol og rank.}, expected_elements: [rank_consistency, row_updates, reconstructed_reverse_prefix]}
+  - {id: dm847.m08.p03, activity_type: debugging, difficulty: intermediate, prompt: {es: Corrige búsqueda hacia atrás que mezcla Occ inclusiva y exclusiva., en: Fix backward search mixing inclusive and exclusive Occ., da: Ret backward search der blander inklusiv og eksklusiv Occ.}, expected_elements: [one_convention, half_open_interval, tested_boundaries]}
+  - {id: dm847.m08.p04, activity_type: algorithm_design, difficulty: advanced, prompt: {es: Diseña locate con SA muestreado y demuestra terminación., en: Design locate with sampled SA and show termination., da: Design locate med samplet SA og vis terminering.}, expected_elements: [lf_until_sample, offset_mod_text_length, sentinel_handling, termination_argument]}
+  - {id: dm847.m08.p05, activity_type: performance_analysis, difficulty: advanced, prompt: {es: Compara checkpoints Occ cada 16, 64 y 256 posiciones., en: Compare Occ checkpoints every 16, 64, and 256 positions., da: Sammenlign Occ-checkpoints hver 16., 64. og 256. position.}, expected_elements: [memory, rank_scan_cost, query_workload, empirical_measurement]}
+  - {id: dm847.m08.p06, activity_type: pipeline_design, difficulty: advanced, prompt: {es: Diseña seed-and-extend para lecturas de 100 nt con hasta dos errores., en: Design seed-and-extend for 100-nt reads with up to two errors., da: Design seed-and-extend for 100-nt reads med op til to fejl.}, expected_elements: [multiple_seeds, both_strands, candidate_deduplication, extension_alignment, multimapping_policy]}
+
+objective_bank:
+  - {id: dm847.m08.q01, type: multiple_choice, prompt: {es: ¿Qué columna de la matriz de rotaciones define la BWT?, en: Which rotation-matrix column defines the BWT?, da: Hvilken kolonne definerer BWT?}, options: [{id: a, es: La última, en: The last, da: Den sidste}, {id: b, es: La primera, en: The first, da: Den første}, {id: c, es: La central, en: The middle, da: Den midterste}, {id: d, es: Ninguna, en: None, da: Ingen}], correct_option_ids: [a]}
+  - {id: dm847.m08.q02, type: true_false, prompt: {es: La matriz completa de rotaciones es apropiada para construir BWT de genomas grandes., en: The full rotation matrix is appropriate for large-genome BWT construction., da: Den fulde rotationsmatrix er passende til store genomer.}, correct: false}
+  - {id: dm847.m08.q03, type: multiple_choice, prompt: {es: ¿Qué preserva LF entre L y F?, en: What does LF preserve between L and F?, da: Hvad bevarer LF mellem L og F?}, options: [{id: a, es: Símbolo y rango de ocurrencia, en: Symbol and occurrence rank, da: Symbol og forekomstrank}, {id: b, es: Sólo posición física, en: Only physical position, da: Kun fysisk position}, {id: c, es: Calidad de base, en: Base quality, da: Basekvalitet}, {id: d, es: Distancia de edición, en: Edit distance, da: Edit-afstand}], correct_option_ids: [a]}
+  - {id: dm847.m08.q04, type: true_false, prompt: {es: C[c] cuenta símbolos lexicográficamente menores que c., en: C[c] counts symbols lexicographically smaller than c., da: C[c] tæller symboler leksikografisk mindre end c.}, correct: true}
+  - {id: dm847.m08.q05, type: multiple_choice, prompt: {es: ¿En qué dirección procesa el patrón backward search?, en: In which direction does backward search process the pattern?, da: I hvilken retning behandles mønsteret?}, options: [{id: a, es: De derecha a izquierda, en: Right to left, da: Fra højre mod venstre}, {id: b, es: De izquierda a derecha exclusivamente, en: Left to right only, da: Kun venstre mod højre}, {id: c, es: Aleatoria, en: Randomly, da: Tilfældigt}, {id: d, es: Por calidad, en: By quality, da: Efter kvalitet}], correct_option_ids: [a]}
+  - {id: dm847.m08.q06, type: true_false, prompt: {es: El tamaño del intervalo final es el número de coincidencias exactas., en: Final interval size equals the exact match count., da: Slutintervallets størrelse er antallet af eksakte matches.}, correct: true}
+  - {id: dm847.m08.q07, type: multiple_choice, prompt: {es: ¿Qué se necesita adicionalmente para localizar posiciones?, en: What additional information is needed to locate positions?, da: Hvilken ekstra information kræves for lokalisering?}, options: [{id: a, es: Suffix array completo o muestreado, en: Full or sampled suffix array, da: Fuldt eller samplet suffix-array}, {id: b, es: Sólo C, en: C only, da: Kun C}, {id: c, es: Una matriz de sustitución, en: A substitution matrix, da: En substitutionsmatrix}, {id: d, es: Un HMM, en: An HMM, da: En HMM}], correct_option_ids: [a]}
+  - {id: dm847.m08.q08, type: true_false, prompt: {es: Muestrear SA más dispersamente reduce memoria y puede aumentar pasos LF., en: Sparser SA sampling reduces memory and may increase LF steps., da: Mere sparsom SA-sampling reducerer hukommelse og kan øge LF-trin.}, correct: true}
+  - {id: dm847.m08.q09, type: multiple_choice, prompt: {es: ¿Qué debe hacer un mapeador después de encontrar una semilla?, en: What should a mapper do after finding a seed?, da: Hvad bør en mapper gøre efter at finde et seed?}, options: [{id: a, es: Extender y puntuar el candidato, en: Extend and score the candidate, da: Udvide og score kandidaten}, {id: b, es: Aceptarlo sin verificar, en: Accept it without checking, da: Acceptere uden kontrol}, {id: c, es: Eliminar el read, en: Delete the read, da: Slette readet}, {id: d, es: Convertirlo en proteína, en: Translate it to protein, da: Oversætte det til protein}], correct_option_ids: [a]}
+  - {id: dm847.m08.q10, type: true_false, prompt: {es: Un FM-index exacto por sí solo tolera cualquier número de indels., en: An exact FM-index alone tolerates any number of indels., da: Et eksakt FM-index alene tolererer vilkårligt mange indels.}, correct: false}
+
+open_assessment:
+  - id: dm847.m08.a01
+    prompt: {es: Deriva búsqueda hacia atrás y demuestra qué representa el intervalo tras cada símbolo., en: Derive backward search and prove what the interval represents after each symbol., da: Udled backward search og bevis intervallets betydning efter hvert symbol.}
+    rubric: [{criterion: c_occ_definitions, weight: 0.25}, {criterion: interval_recurrence, weight: 0.30}, {criterion: invariant_and_induction, weight: 0.30}, {criterion: boundary_convention, weight: 0.15}]
+  - id: dm847.m08.a02
+    prompt: {es: Diseña un experimento tiempo-memoria para checkpoints Occ y SA muestreado., en: Design a time-memory experiment for Occ checkpoints and sampled SA., da: Design et tid-hukommelseseksperiment for Occ-checkpoints og samplet SA.}
+    rubric: [{criterion: workloads_and_datasets, weight: 0.20}, {criterion: correctness_controls, weight: 0.20}, {criterion: memory_and_latency_metrics, weight: 0.35}, {criterion: justified_recommendation, weight: 0.25}]
+  - id: dm847.m08.a03
+    prompt: {es: Diseña un mapeador seed-and-extend y delimita lo que el FM-index resuelve y no resuelve., en: Design a seed-and-extend mapper and delimit what the FM-index does and does not solve., da: Design en seed-and-extend-mapper og afgræns hvad FM-index løser.}
+    rubric: [{criterion: seed_strategy, weight: 0.25}, {criterion: candidate_extension, weight: 0.25}, {criterion: strands_errors_and_multimapping, weight: 0.30}, {criterion: limitations, weight: 0.20}]
+
+glossary:
+  - {id: dm847.term.bwt, es: Transformada de Burrows-Wheeler, en: Burrows-Wheeler transform, da: Burrows-Wheeler-transform, definition_en: Reversible permutation derived from sorted rotations or suffix order.}
+  - {id: dm847.term.first_column, es: Primera columna F, en: First column F, da: Første kolonne F, definition_en: Sorted symbols of the BWT matrix.}
+  - {id: dm847.term.last_column, es: Última columna L, en: Last column L, da: Sidste kolonne L, definition_en: The BWT string.}
+  - {id: dm847.term.lf_mapping, es: LF-mapping, en: LF mapping, da: LF-mapping, definition_en: Mapping between ranked equal symbols in last and first columns.}
+  - {id: dm847.term.occ, es: Tabla Occ, en: Occ table, da: Occ-tabel, definition_en: Prefix rank counts for BWT symbols.}
+  - {id: dm847.term.c_table, es: Tabla C, en: C table, da: C-tabel, definition_en: Counts of lexicographically smaller text symbols.}
+  - {id: dm847.term.backward_search, es: Búsqueda hacia atrás, en: Backward search, da: Backward search, definition_en: Pattern search by repeated left extension of a suffix interval.}
+  - {id: dm847.term.fm_index, es: FM-index, en: FM-index, da: FM-index, definition_en: Compressed full-text index built from the BWT and rank support.}
+  - {id: dm847.term.sampled_sa, es: Suffix array muestreado, en: Sampled suffix array, da: Samplet suffix-array, definition_en: Subset of suffix positions used to trade location time for memory.}
+  - {id: dm847.term.seed_and_extend, es: Seed-and-extend, en: Seed-and-extend, da: Seed-and-extend, definition_en: Candidate generation by exact seeds followed by tolerant alignment.}
+
+hidden_support:
+  canonical_explanation:
+    es: >-
+      La BWT reorganiza símbolos según el orden lexicográfico de sufijos. C y Occ permiten
+      actualizar un intervalo de sufijos al anteponer símbolos, dando búsqueda exacta hacia
+      atrás. Contar usa sólo el intervalo; localizar requiere suffix-array completo o muestreado.
+      En mapeo de lecturas, el índice genera semillas y un alineador separado resuelve errores.
+    en: >-
+      The BWT rearranges symbols according to suffix order. C and Occ update a suffix interval
+      when characters are prepended, enabling exact backward search. Counting uses the interval;
+      locating requires a full or sampled suffix array. In read mapping, the index generates
+      seeds and a separate aligner handles errors.
+    da: >-
+      BWT omordner symboler efter suffix-orden. C og Occ opdaterer et interval ved venstre
+      udvidelse. Optælling bruger intervallet; lokalisering kræver suffix-array-data.
+  misconceptions:
+    - {id: dm847.m08.mc01, false_belief: {es: BWT es irreversiblemente comprimida, en: The BWT is irreversible compression, da: BWT er irreversibel kompression}, correction: {es: Es una permutación reversible con sentinela; la compresión se aplica después, en: It is a reversible permutation with a sentinel; compression is applied afterward, da: Det er en reversibel permutation; kompression anvendes bagefter}}
+    - {id: dm847.m08.mc02, false_belief: {es: Contar y localizar cuestan lo mismo, en: Counting and locating have the same cost, da: Optælling og lokalisering koster det samme}, correction: {es: Localizar puede requerir múltiples pasos LF hasta una muestra SA, en: Locating may require multiple LF steps to an SA sample, da: Lokalisering kan kræve flere LF-trin}}
+    - {id: dm847.m08.mc03, false_belief: {es: Un índice exacto ya es un alineador completo, en: An exact index is already a complete aligner, da: Et eksakt indeks er allerede en komplet aligner}, correction: {es: Los errores e indels requieren generación de candidatos y extensión adicional, en: Errors and indels require candidate generation and separate extension, da: Fejl og indels kræver separat udvidelse}}
+  socratic_questions:
+    - ¿Qué convención usa Occ en el límite i?
+    - ¿Qué representa el intervalo antes y después de añadir un símbolo?
+    - ¿Necesitas contar o también localizar?
+    - ¿Cuánta memoria ahorra el muestreo y cuántos pasos añade?
+    - ¿Cómo recuperarás lecturas con un error dentro de la semilla?
+  knowledge_fragments:
+    - {id: dm847.m08.k01, content_en: BWT is the last column of sorted rotations or the predecessor symbols in suffix-array order.}
+    - {id: dm847.m08.k02, content_en: LF mapping pairs equal symbols by occurrence rank.}
+    - {id: dm847.m08.k03, content_en: C counts lexicographically smaller symbols.}
+    - {id: dm847.m08.k04, content_en: Occ supports rank queries on BWT prefixes.}
+    - {id: dm847.m08.k05, content_en: Backward search processes the pattern right to left.}
+    - {id: dm847.m08.k06, content_en: Final interval size is the exact match count.}
+    - {id: dm847.m08.k07, content_en: Locating requires suffix-array information.}
+    - {id: dm847.m08.k08, content_en: Sparser sampling trades memory for LF steps.}
+    - {id: dm847.m08.k09, content_en: BWT compression benefits from repetitive contexts.}
+    - {id: dm847.m08.k10, content_en: Seed-and-extend separates candidate generation from tolerant alignment.}
+  response_constraints:
+    - State the sentinel and Occ boundary convention.
+    - Distinguish count from locate operations.
+    - Do not claim error tolerance from exact backward search alone.
+    - Report both memory and query latency when comparing representations.
+
+sources:
+  - {id: sdu.dm847.official.2025, role: official_scope_and_learning_outcomes}
+  - {id: compeau.pevzner.bioinformatics_algorithms.v1, role: bwt_and_string_index_foundations}
+  - {id: original.dm847.m08, role: original_examples_questions_and_explanations}
+
+limitations:
+  - Production read mappers use additional heuristics, scoring models, and engineering optimizations.
+  - Compression and latency depend strongly on sequence repetitiveness and implementation.
+  - Exact search does not by itself address sequencing errors, variants, or structural rearrangements.
