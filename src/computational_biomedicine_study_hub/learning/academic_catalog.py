@@ -232,12 +232,14 @@ def _learning_module(
             example_id=example.qualified_id,
             title=example.title.resolve(locale) or example.id,
             problem=example.prompt.resolve(locale),
-            reasoning=_string_values(example.raw.get("reasoning"), locale),
-            code=_localized_text(example.raw, locale, "code", "implementation"),
-            expected_output=_localized_text(
-                example.raw, locale, "expected_output", "output", "result"
-            ),
+            reasoning=tuple(step.resolve(locale) for step in example.reasoning),
+            code=example.code.resolve(locale),
+            expected_output=example.expected_output.resolve(locale),
             explanation=example.explanation.resolve(locale),
+            example_kind=example.example_kind.value,
+            language="" if example.language is None else example.language.value,
+            output_kind=example.output_kind.value,
+            source_ids=example.source_ids,
         )
         for example in source.worked_examples
     )

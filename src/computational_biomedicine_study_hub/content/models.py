@@ -31,7 +31,7 @@ class ConceptBlock:
 
 @dataclass(frozen=True, slots=True)
 class WorkedExample:
-    """A solved example connecting a problem statement to executable code."""
+    """A conceptual or computational worked example with optional code and output."""
 
     example_id: str
     title: str
@@ -40,6 +40,10 @@ class WorkedExample:
     code: str
     expected_output: str
     explanation: str
+    example_kind: str = "conceptual"
+    language: str = ""
+    output_kind: str = "none"
+    source_ids: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)

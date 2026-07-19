@@ -118,6 +118,9 @@ class LocalizedWorkedExample:
             code=self.code.for_locale(locale),
             expected_output=self.expected_output.for_locale(locale),
             explanation=self.explanation.for_locale(locale),
+            example_kind="workflow",
+            language="python",
+            output_kind="console",
         )
 
 

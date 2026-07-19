@@ -14,6 +14,9 @@ from .models import (
     ConceptBlock,
     CourseContent,
     CumulativeAssessment,
+    ExampleKind,
+    ExampleLanguage,
+    ExampleOutputKind,
     Flashcard,
     GlossaryEntry,
     HiddenTutorSupport,
@@ -82,8 +85,70 @@ def _localized(mapping: Mapping[str, Any], *keys: str) -> LocalizedText:
     return LocalizedText.from_value(_first(mapping, *keys))
 
 
+def _localized_items(value: object) -> tuple[LocalizedText, ...]:
+    if isinstance(value, Mapping):
+        return (LocalizedText.from_value(value),)
+    if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
+        return tuple(
+            text
+            for item in value
+            for text in (LocalizedText.from_value(item),)
+            if text.translations
+        )
+    text = LocalizedText.from_value(value)
+    return (text,) if text.translations else ()
+
+
 def _item_id(raw: Mapping[str, Any], fallback: str) -> str:
     return str(raw.get("id", fallback)).strip()
+
+
+def _example_language(raw: Mapping[str, Any], code: LocalizedText) -> ExampleLanguage | None:
+    declared = str(raw.get("language", "")).strip().casefold()
+    if declared:
+        return ExampleLanguage(declared)
+    source = code.resolve("en")
+    if not source:
+        return None
+    if any(token in source for token in ("<-", "|>", "%>%", "library(", "function(")):
+        return ExampleLanguage.R
+    if any(token in source for token in ("def ", "import ", "print(", "lambda ")):
+        return ExampleLanguage.PYTHON
+    if source.startswith(("#!", "$ ")) or "set -e" in source:
+        return ExampleLanguage.SHELL
+    return ExampleLanguage.TEXT
+
+
+def _example_kind(
+    raw: Mapping[str, Any],
+    language: ExampleLanguage | None,
+) -> ExampleKind:
+    declared = str(raw.get("example_kind", raw.get("kind", ""))).strip().casefold()
+    if declared:
+        return ExampleKind(declared)
+    if language is ExampleLanguage.R:
+        return ExampleKind.R_CODE
+    if "model" in raw or "calculation" in raw:
+        return ExampleKind.CALCULATION
+    if "interpretation" in raw:
+        return ExampleKind.INTERPRETATION
+    if language is not None:
+        return ExampleKind.WORKFLOW
+    return ExampleKind.CONCEPTUAL
+
+
+def _example_output_kind(
+    raw: Mapping[str, Any],
+    expected_output: LocalizedText,
+) -> ExampleOutputKind:
+    declared = str(raw.get("output_kind", "")).strip().casefold()
+    if declared:
+        return ExampleOutputKind(declared)
+    if not expected_output.translations:
+        return ExampleOutputKind.NONE
+    if "plot_description" in raw:
+        return ExampleOutputKind.PLOT_DESCRIPTION
+    return ExampleOutputKind.CONSOLE
 
 
 class SemesterContentLoader:
@@ -273,13 +338,37 @@ class SemesterContentLoader:
         )
 
     def _worked_example(self, raw: Mapping[str, Any], module_id: str, index: int) -> WorkedExample:
+        code = _localized(raw, "code", "implementation", "r_code", "script")
+        expected_output = _localized(
+            raw,
+            "expected_output",
+            "output",
+            "result",
+            "plot_description",
+        )
+        language = _example_language(raw, code)
         return WorkedExample(
             id=_item_id(raw, f"{module_id}.e{index:02}"),
             module_id=module_id,
             raw=raw,
             title=_localized(raw, "title", "name"),
+            example_kind=_example_kind(raw, language),
             prompt=_localized(raw, "prompt", "problem", "scenario"),
-            explanation=_localized(raw, "explanation", "solution", "walkthrough", "interpretation"),
+            reasoning=_localized_items(raw.get("reasoning")),
+            language=language,
+            code=code,
+            expected_output=expected_output,
+            output_kind=_example_output_kind(raw, expected_output),
+            explanation=_localized(
+                raw,
+                "explanation",
+                "solution",
+                "walkthrough",
+                "interpretation",
+                "answer",
+                "conclusion",
+            ),
+            source_ids=_strings(raw.get("source_ids", ())),
         )
 
     def _practice(self, raw: Mapping[str, Any], module_id: str, index: int) -> PracticeExercise:

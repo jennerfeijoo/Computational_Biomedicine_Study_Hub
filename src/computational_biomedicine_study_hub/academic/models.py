@@ -9,9 +9,39 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from dataclasses import dataclass, field
+from enum import StrEnum
 from typing import Any
 
 SUPPORTED_LOCALES = ("es", "en", "da")
+
+
+class ExampleKind(StrEnum):
+    """Pedagogical role of one worked example, independent of visible text."""
+
+    CONCEPTUAL = "conceptual"
+    CALCULATION = "calculation"
+    R_CODE = "r_code"
+    INTERPRETATION = "interpretation"
+    WORKFLOW = "workflow"
+
+
+class ExampleLanguage(StrEnum):
+    """Language used by an authored code block."""
+
+    R = "r"
+    PYTHON = "python"
+    SHELL = "shell"
+    TEXT = "text"
+
+
+class ExampleOutputKind(StrEnum):
+    """Presentation contract for an authored expected result."""
+
+    CONSOLE = "console"
+    TABLE = "table"
+    PLOT_DESCRIPTION = "plot_description"
+    INTERPRETATION = "interpretation"
+    NONE = "none"
 
 
 @dataclass(frozen=True, slots=True)
@@ -78,8 +108,15 @@ class ConceptBlock(AcademicItem):
 @dataclass(frozen=True, slots=True)
 class WorkedExample(AcademicItem):
     title: LocalizedText
+    example_kind: ExampleKind
     prompt: LocalizedText
+    reasoning: tuple[LocalizedText, ...]
+    language: ExampleLanguage | None
+    code: LocalizedText
+    expected_output: LocalizedText
+    output_kind: ExampleOutputKind
     explanation: LocalizedText
+    source_ids: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
