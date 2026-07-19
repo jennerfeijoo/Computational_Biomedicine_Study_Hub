@@ -2,8 +2,8 @@
 
 from computational_biomedicine_study_hub.content.dm857 import (
     BUNDLES,
-    MODULES,
     MODULE_13_SCIENTIFIC_LIBRARIES,
+    MODULES,
     OBJECTIVE_QUESTION_BANK_13,
     OBJECTIVE_QUESTION_BANKS,
 )
