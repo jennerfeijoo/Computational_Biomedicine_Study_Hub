@@ -1,0 +1,228 @@
+schema_version: 1.0.0
+course_code: BMB831
+module_id: bmb831.m08
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title: {es: Pipeline de transcriptómica bulk y expresión diferencial, en: Bulk transcriptomics workflow and differential expression, da: Bulk-transkriptomikworkflow og differential expression}
+  summary:
+    es: >-
+      Pipeline completo de RNA-seq bulk desde matriz de conteos y metadata hasta expresión diferencial.
+      Incluye diseño experimental, QC, filtrado independiente, normalización, dispersión, modelos de
+      binomial negativa, contrastes, batch, paired designs, log2 fold change, shrinkage, FDR, anotación,
+      visualización, sensibilidad y límites de atribución mecanística.
+    en: >-
+      Complete bulk RNA-seq workflow from count matrix and metadata to differential expression.
+      Covers experimental design, QC, independent filtering, normalization, dispersion, negative-binomial
+      models, contrasts, batch, paired designs, log2 fold change, shrinkage, FDR, annotation, visualization,
+      sensitivity, and limits of mechanistic interpretation.
+    da: >-
+      Komplet bulk RNA-seq-workflow fra count-matrix og metadata til differential expression med design,
+      QC, filtrering, normalisering, dispersion, negativ-binomial-modeller, kontraster, FDR og fortolkning.
+  estimated_study_hours: 18
+  difficulty: advanced
+
+alignment:
+  official_learning_outcomes: [bmb831.lo01, bmb831.lo02, bmb831.lo04, bmb831.lo05, bmb831.lo06]
+  prerequisite_modules: [bmb831.m02, bmb831.m03, bmb831.m04, bmb831.m07]
+  later_modules: [bmb831.m10, bmb831.m11, bmb831.m12]
+
+objectives:
+  - {id: bmb831.m08.o01, text: {es: Auditar diseño, metadata y matriz de conteos, en: Audit design, metadata, and count matrix, da: Auditere design, metadata og count-matrix}}
+  - {id: bmb831.m08.o02, text: {es: Realizar QC de biblioteca, muestra y gen, en: Perform library-, sample-, and gene-level QC, da: Udføre bibliotek-, sample- og gen-niveau-QC}}
+  - {id: bmb831.m08.o03, text: {es: Justificar filtrado y normalización, en: Justify filtering and normalization, da: Begrunde filtrering og normalisering}}
+  - {id: bmb831.m08.o04, text: {es: Explicar dispersión y modelo binomial-negativo, en: Explain dispersion and negative-binomial modeling, da: Forklare dispersion og negativ-binomial-modellering}}
+  - {id: bmb831.m08.o05, text: {es: Construir diseños y contrastes identificables, en: Build identifiable designs and contrasts, da: Bygge identificerbare designs og kontraster}}
+  - {id: bmb831.m08.o06, text: {es: Interpretar log2FC, shrinkage, p y FDR, en: Interpret log2FC, shrinkage, p-values, and FDR, da: Fortolke log2FC, shrinkage, p-værdier og FDR}}
+  - {id: bmb831.m08.o07, text: {es: Integrar anotación y visualización sin perder IDs, en: Integrate annotation and visualization without losing IDs, da: Integrere annotation og visualisering uden at miste ID'er}}
+  - {id: bmb831.m08.o08, text: {es: Evaluar sensibilidad y alcance biológico, en: Evaluate sensitivity and biological claim scope, da: Evaluere følsomhed og biologisk påstandsomfang}}
+
+concepts:
+  - id: bmb831.m08.c01
+    title: {es: Unidad, diseño y conteos crudos, en: Unit, design, and raw counts, da: Enhed, design og rå counts}
+    body:
+      es: >-
+        La unidad independiente suele ser la muestra biológica o paciente, no la lectura. La matriz conserva conteos enteros
+        por gen/transcrito y la metadata define condición, lote, tiempo, pairing y covariables. Conteos normalizados o TPM no
+        deben sustituir conteos crudos en modelos que estiman dispersión desde el mecanismo de conteo.
+      en: >-
+        The independent unit is usually the biological sample or patient, not the read. The matrix stores integer counts and
+        metadata defines condition, batch, time, pairing, and covariates. TPM or normalized counts should not replace raw counts
+        in models that estimate count dispersion.
+      da: >-
+        Den uafhængige enhed er normalt biologisk sample eller patient. Count-modeller kræver rå counts og korrekt metadata.
+    key_points:
+      - {es: Lecturas son eventos de medición, no réplicas biológicas, en: Reads are measurement events, not biological replicates, da: Reads er målehændelser, ikke biologiske replikater}
+  - id: bmb831.m08.c02
+    title: {es: QC y estructura antes del test, en: QC and structure before testing, da: QC og struktur før test}
+    body:
+      es: >-
+        QC revisa profundidad, complejidad, mapeo, composición, genes detectados, distribución, sample correlations,
+        PCA/VST y metadata técnica. Un outlier se investiga con múltiples métricas. PCA posterior a transformación sirve para
+        estructura y batch, no para probar diferencialmente genes.
+      en: >-
+        QC reviews depth, complexity, mapping, composition, detected genes, distributions, sample correlations, PCA/VST,
+        and technical metadata. Outliers require converging evidence. PCA assesses structure, not gene-level significance.
+      da: >-
+        QC vurderer dybde, kompleksitet, mapping, komposition, detekterede gener, korrelationer og PCA med metadata.
+    key_points:
+      - {es: QC debe preceder a interpretación de significancia, en: QC should precede significance interpretation, da: QC bør komme før fortolkning af signifikans}
+  - id: bmb831.m08.c03
+    title: {es: Filtrado y normalización de tamaño/composición, en: Filtering and size/composition normalization, da: Filtrering og størrelse/kompositionsnormalisering}
+    body:
+      es: >-
+        Genes con conteos mínimos aportan poca potencia y muchos tests. Filtrado por abundancia ciega al grupo puede ser independiente.
+        Factores de tamaño estiman escala relativa bajo la suposición de que la mayoría de genes no cambia de forma extrema o que
+        existe una referencia estable. Cambios globales requieren controles externos o interpretación relativa.
+      en: >-
+        Very low-count genes add little power and many tests. Group-blind abundance filtering may be independent. Size factors estimate
+        relative scale under assumptions about stable reference composition. Global shifts require external controls or relative interpretation.
+      da: >-
+        Lav-count-gener giver lav power. Size factors estimerer relativ skala under antagelser om stabil referencekomposition.
+    key_points:
+      - {es: Normalización no es corrección universal de batch, en: Normalization is not universal batch correction, da: Normalisering er ikke universel batch correction}
+  - id: bmb831.m08.c04
+    title: {es: Dispersión y modelo binomial-negativo, en: Dispersion and negative-binomial model, da: Dispersion og negativ-binomial-model}
+    body:
+      es: >-
+        La media esperada combina tamaño de biblioteca y diseño; la dispersión captura variabilidad biológica adicional a Poisson.
+        Estimaciones por gen se estabilizan compartiendo información sobre la tendencia media-dispersión. Muy pocas réplicas limitan
+        estimación y hacen que supuestos de shrinkage sean influyentes.
+      en: >-
+        Expected mean combines library size and design; dispersion captures extra-Poisson biological variability. Gene-wise estimates
+        are stabilized by sharing information along the mean-dispersion trend. Few replicates limit estimation.
+      da: >-
+        Forventet middel kombinerer bibliotekstørrelse og design; dispersion fanger ekstra-Poisson biologisk variation.
+    key_points:
+      - {es: Dispersión no es error técnico únicamente, en: Dispersion is not only technical error, da: Dispersion er ikke kun teknisk fejl}
+  - id: bmb831.m08.c05
+    title: {es: Diseño, contrastes e interacciones, en: Design, contrasts, and interactions, da: Design, kontraster og interaktioner}
+    body:
+      es: >-
+        El diseño puede incluir paciente, lote, condición, tiempo y su interacción. El contraste define exactamente la comparación.
+        En paired design, incluir paciente controla baseline. Una interacción condición×tiempo pregunta si el cambio temporal difiere
+        entre condiciones, no si un grupo cambia y el otro no según dos p-values separados.
+      en: >-
+        Design may include patient, batch, condition, time, and interaction. Contrasts define exact comparisons. In paired designs,
+        patient blocks baseline. A condition-by-time interaction asks whether temporal change differs between conditions.
+      da: >-
+        Design kan inkludere patient, batch, condition, tid og interaktion. Kontrasten definerer den præcise sammenligning.
+    key_points:
+      - {es: Diferencia de significancia no es significancia de diferencia, en: Difference in significance is not significance of difference, da: Forskel i signifikans er ikke signifikans af forskel}
+  - id: bmb831.m08.c06
+    title: {es: Efecto, shrinkage, multiplicidad y anotación, en: Effect, shrinkage, multiplicity, and annotation, da: Effekt, shrinkage, multiplicitet og annotation}
+    body:
+      es: >-
+        log2FC describe cambio multiplicativo condicionado al diseño; shrinkage estabiliza estimaciones ruidosas para ranking y gráficos.
+        El test y FDR evalúan evidencia; no sustituyen relevancia. IDs estables se conservan como clave y símbolos se añaden como anotación
+        versionada. Un gen diferencial es asociación molecular, no prueba de causalidad o mecanismo.
+      en: >-
+        log2FC describes design-conditional multiplicative change; shrinkage stabilizes noisy estimates. Tests and FDR assess evidence,
+        not relevance. Stable IDs remain keys and symbols are added as versioned annotation. Differential expression is not causality.
+      da: >-
+        log2FC beskriver betinget multiplikativ ændring; shrinkage stabiliserer støjende estimater. Differential expression er ikke kausalitet.
+    key_points:
+      - {es: Resultado debe incluir baseMean/abundancia, efecto, SE/IC y padj, en: Results should include abundance, effect, uncertainty, and adjusted p-value, da: Resultater bør inkludere abundance, effekt, usikkerhed og justeret p-værdi}
+
+worked_examples:
+  - id: bmb831.m08.e01
+    title: {es: Paired design, en: Paired design, da: Parret design}
+    scenario: {es: Ocho pacientes medidos antes y después., en: Eight patients measured before and after., da: Otte patienter målt før og efter.}
+    reasoning:
+      - {es: Diseño ~patient+time controla diferencias basales., en: Design ~patient+time controls baseline differences., da: Design ~patient+time kontrollerer baselineforskelle.}
+      - {es: Tratar 16 muestras como independientes infla error residual y puede confundir., en: Treating 16 samples as independent ignores pairing., da: At behandle 16 samples som uafhængige ignorerer pairing.}
+    conclusion: {es: La comparación es dentro de paciente., en: The comparison is within patient., da: Sammenligningen er inden for patient.}
+  - id: bmb831.m08.e02
+    title: {es: Interacción tiempo×tratamiento, en: Time-by-treatment interaction, da: Tid-gange-behandling-interaktion}
+    scenario: {es: Tratamiento y control tienen dos tiempos., en: Treatment and control have two time points., da: Behandling og kontrol har to tidspunkter.}
+    reasoning:
+      - {es: Contraste de interacción compara cambios temporales., en: Interaction contrast compares temporal changes., da: Interaktionskontrast sammenligner tidsændringer.}
+      - {es: Dos tests separados no prueban diferencia entre cambios., en: Two separate tests do not test difference between changes., da: To separate tests tester ikke forskel mellem ændringer.}
+    conclusion: {es: La pregunta requiere diferencia-de-diferencias., en: The question requires a difference-in-differences contrast., da: Spørgsmålet kræver difference-in-differences.}
+  - id: bmb831.m08.e03
+    title: {es: log2FC extremo en baja abundancia, en: Extreme log2FC at low abundance, da: Ekstrem log2FC ved lav abundance}
+    scenario: {es: Un gen pasa de 0–1 a 4–5 conteos y log2FC crudo es grande., en: A gene shifts from 0–1 to 4–5 counts and raw log2FC is large., da: Et gen går fra 0–1 til 4–5 counts og rå log2FC er stor.}
+    reasoning:
+      - {es: Estimación es ruidosa y sensible a pseudocounts., en: Estimate is noisy and pseudocount-sensitive., da: Estimatet er støjende og pseudocount-følsomt.}
+      - {es: Shrinkage y filtro/relevancia evitan ranking engañoso., en: Shrinkage and filtering/relevance avoid misleading ranking., da: Shrinkage og filtrering/relevans undgår misvisende ranking.}
+    conclusion: {es: Magnitud sin precisión no basta., en: Magnitude without precision is insufficient., da: Størrelse uden præcision er utilstrækkelig.}
+
+guided_practice:
+  - {id: bmb831.m08.p01, activity_type: pipeline_ordering, prompt: {es: Ordena etapas de RNA-seq bulk desde conteos hasta vías., en: Order bulk RNA-seq stages from counts to pathways., da: Ordne bulk RNA-seq-trin fra counts til pathways.}, expected_elements: [metadata_validation, qc, filtering, normalization_model, design_contrast, multiple_testing, annotation, enrichment]}
+  - {id: bmb831.m08.p02, activity_type: design_matrix, prompt: {es: Diseña modelo para paciente, lote, tratamiento y tiempo., en: Design a model for patient, batch, treatment, and time., da: Design en model for patient, batch, behandling og tid.}, expected_elements: [identifiability, pairing, batch_overlap, interaction, contrast]}
+  - {id: bmb831.m08.p03, activity_type: qc_interpretation, prompt: {es: Interpreta PCA donde un outlier tiene baja profundidad y mapping., en: Interpret PCA where an outlier has low depth and mapping., da: Fortolk PCA hvor en outlier har lav dybde og mapping.}, expected_elements: [converging_qc, technical_cause, exclusion_rule, sensitivity]}
+  - {id: bmb831.m08.p04, activity_type: result_interpretation, prompt: {es: Interpreta tabla con baseMean, log2FC, SE, p y padj., en: Interpret a table with baseMean, log2FC, SE, p, and padj., da: Fortolk tabel med baseMean, log2FC, SE, p og padj.}, expected_elements: [abundance, magnitude, precision, multiplicity, claim_scope]}
+  - {id: bmb831.m08.p05, activity_type: annotation_audit, prompt: {es: Audita pérdida de genes tras mapear a símbolos., en: Audit gene loss after mapping to symbols., da: Auditér gentab efter mapping til symboler.}, expected_elements: [stable_keys, one_to_many, no_match, duplicates, enrichment_bias]}
+  - {id: bmb831.m08.p06, activity_type: publication_appraisal, prompt: {es: Critica un estudio que usa TPM en t-test y no ajusta FDR., en: Critique a study using TPM in t-tests without FDR adjustment., da: Kritisk vurder et studie der bruger TPM i t-tests uden FDR-korrektion.}, expected_elements: [mean_variance, compositional_scale, design, multiplicity, corrected_workflow]}
+
+objective_bank:
+  - {id: bmb831.m08.q01, type: multiple_choice, prompt: {es: Unidad independiente en RNA-seq bulk humano., en: Independent unit in human bulk RNA-seq., da: Uafhængig enhed i human bulk RNA-seq.}, options: [{id: a, text: {es: Paciente/muestra biológica, en: Patient/biological sample, da: Patient/biologisk sample}}, {id: b, text: {es: Lectura, en: Read, da: Read}}], correct_option_ids: [a], explanation: {es: Las lecturas son submuestreo técnico., en: Reads are technical subsampling., da: Reads er teknisk subsampling.}}
+  - {id: bmb831.m08.q02, type: true_false, prompt: {es: TPM sustituye conteos crudos en un modelo NB estándar., en: TPM replaces raw counts in a standard NB model., da: TPM erstatter rå counts i en standard NB-model.}, correct: false, explanation: {es: El modelo NB usa conteos y factores de escala., en: NB modeling uses counts and scale factors., da: NB-modellering bruger counts og skalafaktorer.}}
+  - {id: bmb831.m08.q03, type: multiple_choice, prompt: {es: Buen filtro independiente., en: Good independent filter., da: Godt independent filter.}, options: [{id: a, text: {es: Conteo medio ciego a grupo, en: Group-blind mean count, da: Gruppeblind middel-count}}, {id: b, text: {es: padj observado, en: Observed padj, da: Observeret padj}}], correct_option_ids: [a], explanation: {es: No usa el contraste bajo la nula., en: It does not use the contrast under the null., da: Det bruger ikke kontrasten under nulhypotesen.}}
+  - {id: bmb831.m08.q04, type: true_false, prompt: {es: Factores de tamaño corrigen automáticamente cualquier cambio global absoluto., en: Size factors automatically correct any absolute global shift., da: Size factors korrigerer automatisk ethvert absolut globalt skift.}, correct: false, explanation: {es: Producen escala relativa bajo supuestos de referencia., en: They create a relative scale under reference assumptions., da: De skaber relativ skala under referenceantagelser.}}
+  - {id: bmb831.m08.q05, type: multiple_choice, prompt: {es: Rol de dispersión NB., en: Role of NB dispersion., da: Rolle af NB-dispersion.}, options: [{id: a, text: {es: Variabilidad extra-Poisson, en: Extra-Poisson variability, da: Ekstra-Poisson-variabilitet}}, {id: b, text: {es: Tamaño de gen, en: Gene length, da: Genlængde}}], correct_option_ids: [a], explanation: {es: Captura heterogeneidad biológica condicional., en: It captures conditional biological heterogeneity., da: Det fanger betinget biologisk heterogenitet.}}
+  - {id: bmb831.m08.q06, type: true_false, prompt: {es: ~patient+condition respeta un diseño pareado simple., en: ~patient+condition respects a simple paired design., da: ~patient+condition respekterer et simpelt parret design.}, correct: true, explanation: {es: Bloquea diferencias basales por paciente., en: It blocks patient baseline differences., da: Det blokerer baselineforskelle per patient.}}
+  - {id: bmb831.m08.q07, type: multiple_choice, prompt: {es: Para comparar cambios temporales entre grupos se usa..., en: To compare temporal changes between groups use..., da: For at sammenligne tidsændringer mellem grupper bruges...}, options: [{id: a, text: {es: Interacción grupo×tiempo, en: Group-by-time interaction, da: Gruppe-gange-tid-interaktion}}, {id: b, text: {es: Dos p-values separados, en: Two separate p-values, da: To separate p-værdier}}], correct_option_ids: [a], explanation: {es: Prueba directamente diferencia de cambios., en: It directly tests difference in changes., da: Det tester direkte forskel i ændringer.}}
+  - {id: bmb831.m08.q08, type: true_false, prompt: {es: log2FC grande en baja abundancia es necesariamente estable., en: Large log2FC at low abundance is necessarily stable., da: Stor log2FC ved lav abundance er nødvendigvis stabil.}, correct: false, explanation: {es: Puede ser extremadamente ruidoso., en: It may be extremely noisy., da: Det kan være ekstremt støjende.}}
+  - {id: bmb831.m08.q09, type: multiple_choice, prompt: {es: Shrinkage de log2FC es útil para..., en: log2FC shrinkage is useful for..., da: log2FC-shrinkage er nyttig til...}, options: [{id: a, text: {es: Ranking y visualización estable, en: Stable ranking and visualization, da: Stabil ranking og visualisering}}, {id: b, text: {es: Eliminar necesidad de FDR, en: Remove need for FDR, da: Fjerne behov for FDR}}], correct_option_ids: [a], explanation: {es: Estabiliza magnitud, no reemplaza inferencia., en: It stabilizes magnitude but does not replace inference., da: Det stabiliserer størrelse men erstatter ikke inferens.}}
+  - {id: bmb831.m08.q10, type: true_false, prompt: {es: Gen diferencial prueba mecanismo causal., en: A differentially expressed gene proves a causal mechanism., da: Et differentialt udtrykt gen beviser en kausal mekanisme.}, correct: false, explanation: {es: Es una asociación de abundancia condicionada al diseño., en: It is a design-conditional abundance association., da: Det er en designbetinget abundance-association.}}
+
+open_assessment_items:
+  - id: bmb831.m08.a01
+    prompt: {es: Diseña un pipeline reproducible de RNA-seq bulk para un estudio pareado con batch., en: Design a reproducible bulk RNA-seq pipeline for a paired study with batch., da: Design et reproducerbart bulk RNA-seq-pipeline for et parret studie med batch.}
+    rubric: [{criterion: metadata_qc, weight: 0.25}, {criterion: filtering_normalization, weight: 0.20}, {criterion: design_contrasts, weight: 0.30}, {criterion: interpretation_provenance, weight: 0.25}]
+  - id: bmb831.m08.a02
+    prompt: {es: Interpreta y prioriza cinco genes usando abundancia, efecto, incertidumbre y FDR., en: Interpret and prioritize five genes using abundance, effect, uncertainty, and FDR., da: Fortolk og prioriter fem gener med abundance, effekt, usikkerhed og FDR.}
+    rubric: [{criterion: effect_scale, weight: 0.25}, {criterion: precision, weight: 0.25}, {criterion: multiplicity, weight: 0.20}, {criterion: stability_biology, weight: 0.30}]
+  - id: bmb831.m08.a03
+    prompt: {es: Critica una conclusión mecanística basada sólo en una lista DE., en: Critique a mechanistic conclusion based only on a DE list., da: Kritisk vurder en mekanistisk konklusion baseret kun på en DE-liste.}
+    rubric: [{criterion: association_causality, weight: 0.25}, {criterion: annotation_pathways, weight: 0.25}, {criterion: validation, weight: 0.25}, {criterion: revised_claim, weight: 0.25}]
+
+glossary:
+  - {id: bmb831.term.raw_count, term: {es: conteo crudo, en: raw count, da: rå count}, definition: {es: Número entero de fragmentos asignados a una característica., en: Integer number of fragments assigned to a feature., da: Heltalsantal fragmenter tildelt en feature.}}
+  - {id: bmb831.term.size_factor, term: {es: factor de tamaño, en: size factor, da: size factor}, definition: {es: Escala relativa de biblioteca estimada bajo una referencia composicional., en: Relative library scale estimated under a compositional reference., da: Relativ biblioteksskala estimeret under kompositionsreference.}}
+  - {id: bmb831.term.dispersion, term: {es: dispersión, en: dispersion, da: dispersion}, definition: {es: Parámetro de variabilidad extra-Poisson., en: Extra-Poisson variability parameter., da: Parameter for ekstra-Poisson-variabilitet.}}
+  - {id: bmb831.term.log2fc, term: {es: log2 fold change, en: log2 fold change, da: log2 fold change}, definition: {es: Logaritmo base dos de una razón de medias condicionada al diseño., en: Base-two log of a design-conditional mean ratio., da: Base-to-log af en designbetinget middelratio.}}
+  - {id: bmb831.term.independent_filter, term: {es: filtro independiente, en: independent filter, da: independent filter}, definition: {es: Filtro no asociado al contraste bajo la nula., en: Filter unrelated to the contrast under the null., da: Filter der ikke er relateret til kontrasten under nulhypotesen.}}
+  - {id: bmb831.term.mean_dispersion_trend, term: {es: tendencia media-dispersión, en: mean-dispersion trend, da: middel-dispersion-trend}, definition: {es: Relación usada para estabilizar dispersión entre genes., en: Relationship used to stabilize gene-wise dispersion., da: Relation brugt til at stabilisere genvise dispersioner.}}
+  - {id: bmb831.term.vst_rnaseq, term: {es: VST, en: VST, da: VST}, definition: {es: Transformación para visualización que reduce dependencia media-varianza., en: Visualization transformation reducing mean-variance dependence., da: Visualiseringstransformation der reducerer middel-varians-afhængighed.}}
+  - {id: bmb831.term.de_gene, term: {es: gen diferencialmente expresado, en: differentially expressed gene, da: differentialt udtrykt gen}, definition: {es: Gen con evidencia de diferencia de abundancia bajo un contraste y modelo., en: Gene with evidence of abundance difference under a contrast and model., da: Gen med evidens for abundance-forskel under kontrast og model.}}
+  - {id: bmb831.term.paired_design, term: {es: diseño pareado, en: paired design, da: parret design}, definition: {es: Diseño que compara condiciones dentro de la misma unidad., en: Design comparing conditions within the same unit., da: Design der sammenligner conditions inden for samme enhed.}}
+  - {id: bmb831.term.interaction_contrast, term: {es: contraste de interacción, en: interaction contrast, da: interaktionskontrast}, definition: {es: Comparación de cómo cambia un efecto entre niveles de otra variable., en: Comparison of how one effect changes across another variable., da: Sammenligning af hvordan én effekt ændres på tværs af en anden variabel.}}
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      RNA-seq diferencial requiere conteos crudos, metadata alineada, QC, normalización relativa, dispersión,
+      diseño identificable y contrastes explícitos. El resultado combina abundancia, efecto, incertidumbre y FDR.
+    en: >-
+      Differential RNA-seq requires raw counts, aligned metadata, QC, relative normalization, dispersion,
+      identifiable design, and explicit contrasts. Results combine abundance, effect, uncertainty, and FDR.
+    da: >-
+      Differential RNA-seq kræver rå counts, alignet metadata, QC, relativ normalisering, dispersion og eksplicitte kontraster.
+  misconceptions:
+    - reads are biological replicates
+    - TPM is the correct input for every differential expression test
+    - normalization removes all batch effects
+    - significance in one group and not another proves interaction
+    - a DE gene establishes causality
+  socratic_questions:
+    - What is the independent unit and pairing structure?
+    - Which QC evidence supports exclusion?
+    - What reference scale does normalization assume?
+    - Is the contrast estimable and does it match the question?
+    - How do effect, uncertainty, and FDR jointly support prioritization?
+  grading_criteria:
+    - correct counts and metadata handling
+    - assay-specific QC and normalization
+    - dispersion design and contrast reasoning
+    - effect shrinkage multiplicity and annotation
+    - sensitivity and restrained biological interpretation
+  retrieval_fragments:
+    - id: bmb831.m08.r01
+      text: {es: Modelos NB de RNA-seq usan conteos crudos con factores de tamaño, no TPM como sustituto., en: RNA-seq NB models use raw counts with size factors, not TPM as a substitute., da: RNA-seq NB-modeller bruger rå counts med size factors, ikke TPM som erstatning.}
+    - id: bmb831.m08.r02
+      text: {es: Una interacción prueba diferencia entre cambios; dos p-values separados no lo hacen., en: An interaction tests the difference between changes; two separate p-values do not., da: En interaktion tester forskellen mellem ændringer; to separate p-værdier gør ikke.}
+    - id: bmb831.m08.r03
+      text: {es: Differential expression es evidencia de asociación molecular condicionada al diseño, no causalidad., en: Differential expression is evidence of a design-conditional molecular association, not causality., da: Differential expression er evidens for designbetinget molekylær association, ikke kausalitet.}
