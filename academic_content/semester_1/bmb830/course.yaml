@@ -1,0 +1,256 @@
+schema_version: 1.0.0
+course_code: BMB830
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Bioestadística en R I
+    en: Biostatistics in R I
+    da: Biostatistik i R I
+  ects: 5
+  level: masters
+  term: autumn
+  teaching_language: English
+  assessment:
+    es: Participación tutorial obligatoria y examen oral
+    en: Mandatory tutorial participation and oral examination
+    da: Obligatorisk tutorialdeltagelse og mundtlig eksamen
+  purpose:
+    es: >-
+      Desarrollar la capacidad de formular preguntas estadísticas a partir de problemas biológicos,
+      organizar y validar datos, programar análisis reproducibles en R, seleccionar métodos básicos,
+      interpretar incertidumbre y comunicar resultados sin exceder la evidencia. El curso conecta
+      análisis descriptivo, probabilidad, inferencia, modelos lineales y análisis multivariante introductorio.
+    en: >-
+      Develop the ability to formulate statistical questions from biological problems, organize and
+      validate data, program reproducible analyses in R, select basic methods, interpret uncertainty,
+      and communicate results without exceeding the evidence. The course connects descriptive analysis,
+      probability, inference, linear models, and introductory multivariate analysis.
+    da: >-
+      Udvikle evnen til at formulere statistiske spørgsmål fra biologiske problemer, organisere og
+      validere data, programmere reproducerbare analyser i R, vælge grundlæggende metoder,
+      fortolke usikkerhed og kommunikere resultater uden at overdrive evidensen.
+
+academic_preconditions:
+  required:
+    - high-school mathematics and algebra
+    - ability to read tables and simple graphs
+  recommended:
+    - basic spreadsheet familiarity
+    - willingness to inspect code and statistical output
+  not_assumed:
+    - prior R programming
+    - prior formal statistics beyond introductory concepts
+
+ official_learning_outcomes:
+  - id: bmb830.lo01
+    statement:
+      es: Analizar de forma independiente conjuntos de datos biológicos.
+      en: Independently analyze biological datasets.
+      da: Selvstændigt analysere biologiske datasæt.
+  - id: bmb830.lo02
+    statement:
+      es: Trabajar con grandes cantidades de datos y aplicar análisis estadísticos estándar para identificar características relevantes.
+      en: Work with large data amounts and perform standard statistical analysis to identify relevant features.
+      da: Arbejde med store datamængder og udføre standardstatistiske analyser for at identificere relevante karakteristika.
+  - id: bmb830.lo03
+    statement:
+      es: Utilizar algoritmos estándar de análisis multivariante introductorio.
+      en: Use standard algorithms for introductory multivariate analysis.
+      da: Anvende standardalgoritmer til introducerende multivariat analyse.
+  - id: bmb830.lo04
+    statement:
+      es: Diseñar scripts en R para visualización detallada.
+      en: Design R scripts for detailed visualization.
+      da: Designe R-scripts til detaljeret visualisering.
+  - id: bmb830.lo05
+    statement:
+      es: Aplicar herramientas para interpretar datos biológicos.
+      en: Apply tools for biological data interpretation.
+      da: Anvende værktøjer til fortolkning af biologiske data.
+  - id: bmb830.lo06
+    statement:
+      es: Discutir objetivamente métodos de análisis utilizados en publicaciones científicas.
+      en: Objectively discuss data-analysis methods used in scientific publications.
+      da: Objektivt diskutere dataanalysemetoder anvendt i videnskabelige publikationer.
+
+module_sequence:
+  - id: bmb830.m01
+    order: 1
+    title:
+      es: Preguntas estadísticas, variables biológicas, unidades de estudio y procedencia
+      en: Statistical questions, biological variables, study units, and data provenance
+      da: Statistiske spørgsmål, biologiske variable, studieenheder og provenance
+    outcomes: [bmb830.lo01, bmb830.lo05, bmb830.lo06]
+    prerequisites: []
+  - id: bmb830.m02
+    order: 2
+    title:
+      es: Fundamentos de R, vectores, data frames, funciones y scripts reproducibles
+      en: R foundations, vectors, data frames, functions, and reproducible scripts
+      da: R-grundlag, vektorer, data frames, funktioner og reproducerbare scripts
+    outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo04]
+    prerequisites: [bmb830.m01, dm857.m04, dm857.m06]
+  - id: bmb830.m03
+    order: 3
+    title:
+      es: Importación, limpieza, valores ausentes, reshaping y validación
+      en: Data import, cleaning, missingness, reshaping, and validation
+      da: Dataimport, rensning, manglende værdier, reshaping og validering
+    outcomes: [bmb830.lo01, bmb830.lo02]
+    prerequisites: [bmb830.m01, bmb830.m02]
+  - id: bmb830.m04
+    order: 4
+    title:
+      es: Estadística descriptiva y visualización biológica honesta
+      en: Descriptive statistics and honest biological visualization
+      da: Deskriptiv statistik og ærlig biologisk visualisering
+    outcomes: [bmb830.lo01, bmb830.lo04, bmb830.lo05]
+    prerequisites: [bmb830.m02, bmb830.m03]
+  - id: bmb830.m05
+    order: 5
+    title:
+      es: Probabilidad, variables aleatorias y distribuciones biológicas
+      en: Probability, random variables, and biological distributions
+      da: Sandsynlighed, stokastiske variable og biologiske fordelinger
+    outcomes: [bmb830.lo01, bmb830.lo05]
+    prerequisites: [bmb830.m01, bmb830.m04]
+  - id: bmb830.m06
+    order: 6
+    title:
+      es: Distribuciones muestrales, estimación, intervalos de confianza y bootstrap
+      en: Sampling distributions, estimation, confidence intervals, and bootstrap reasoning
+      da: Samplingfordelinger, estimation, konfidensintervaller og bootstrap-ræsonnering
+    outcomes: [bmb830.lo01, bmb830.lo05, bmb830.lo06]
+    prerequisites: [bmb830.m04, bmb830.m05]
+  - id: bmb830.m07
+    order: 7
+    title:
+      es: Contraste de hipótesis, tamaños de efecto, multiplicidad y afirmaciones científicas
+      en: Hypothesis testing, effect sizes, multiplicity awareness, and scientific claims
+      da: Hypotesetest, effektstørrelser, multiplicitet og videnskabelige påstande
+    outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo05, bmb830.lo06]
+    prerequisites: [bmb830.m05, bmb830.m06]
+  - id: bmb830.m08
+    order: 8
+    title:
+      es: Modelos lineales, ANOVA, diagnósticos e interpretación biológica
+      en: Linear models, ANOVA, diagnostics, and biological interpretation
+      da: Lineære modeller, ANOVA, diagnostik og biologisk fortolkning
+    outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo05, bmb830.lo06]
+    prerequisites: [bmb830.m03, bmb830.m04, bmb830.m06, bmb830.m07]
+  - id: bmb830.m09
+    order: 9
+    title:
+      es: Análisis multivariante introductorio con PCA, distancias y clustering
+      en: Introductory multivariate analysis with PCA, distances, and clustering
+      da: Introducerende multivariat analyse med PCA, afstande og clustering
+    outcomes: [bmb830.lo02, bmb830.lo03, bmb830.lo04, bmb830.lo05]
+    prerequisites: [bmb830.m03, bmb830.m04, bmb830.m05]
+  - id: bmb830.m10
+    order: 10
+    title:
+      es: Análisis completo, evaluación de publicaciones y examen oral
+      en: End-to-end analysis, publication appraisal, and oral examination
+      da: End-to-end-analyse, publikationskritik og mundtlig eksamen
+    outcomes: [bmb830.lo01, bmb830.lo02, bmb830.lo03, bmb830.lo04, bmb830.lo05, bmb830.lo06]
+    prerequisites: [bmb830.m01, bmb830.m02, bmb830.m03, bmb830.m04, bmb830.m05, bmb830.m06, bmb830.m07, bmb830.m08, bmb830.m09]
+
+constructive_alignment:
+  standard_module_minimums:
+    objectives: 8
+    concepts: 6
+    worked_examples: 3
+    guided_practice: 6
+    objective_questions: 10
+    open_assessment_items: 3
+    flashcards: 24
+    glossary_entries: 10
+    hidden_support_fragments: 10
+  integrative_module_minimums:
+    objectives: 8
+    concepts: 8
+    worked_examples: 4
+    guided_practice: 8
+    objective_questions: 12
+    open_assessment_items: 5
+    flashcards: 30
+    glossary_entries: 12
+    hidden_support_fragments: 12
+
+assessment_strategy:
+  formative:
+    - retrieval practice using conceptual and practical cards
+    - R code tracing and output interpretation
+    - data-quality and visualization audits
+    - method selection from study design and variable type
+    - short oral explanations of assumptions and limitations
+  module_assessment:
+    - randomized objective questions
+    - reproducible R tasks
+    - interpretation of tables, plots, estimates, intervals, and diagnostics
+    - constructed responses with analytic rubrics
+  cumulative_assessment:
+    - end-to-end biological data analysis
+    - critical appraisal of a published statistical workflow
+    - oral interpretation of R output and graphics
+    - defense of assumptions, alternatives, and limitations
+  grading_principles:
+    - statistical method follows the estimand, design, variable type, and dependence structure
+    - p-values are interpreted with effect size, uncertainty, and multiplicity
+    - association is not described as causation without an appropriate design
+    - data cleaning decisions remain traceable
+    - visualizations disclose sample size, scale, aggregation, and uncertainty where relevant
+    - open responses are assessed with rubrics rather than exact-string matching
+
+r_scope:
+  core_objects:
+    - atomic vectors
+    - factors
+    - lists
+    - matrices
+    - data frames and tibbles
+  core_workflows:
+    - readr or base import
+    - dplyr transformation
+    - tidyr reshaping
+    - ggplot2 visualization
+    - base statistical models
+    - broom-style extraction where appropriate
+  reproducibility:
+    - project-relative paths
+    - explicit package loading
+    - recorded package versions
+    - deterministic seeds for stochastic demonstrations
+    - separation of raw, derived, and output data
+    - Quarto or script-based reporting
+
+quality_requirements:
+  - Every analysis begins with the biological question, study unit, estimand, and scope of inference.
+  - Variables are described by measurement scale and role, not only storage type.
+  - Missing values are not automatically treated as random or interchangeable.
+  - Summary statistics and plots are selected by distribution and question.
+  - Probability models are linked to plausible data-generating mechanisms.
+  - Confidence intervals are not described as posterior probabilities.
+  - Hypothesis tests include effect size and uncertainty.
+  - Linear models include residual and influence diagnostics.
+  - PCA and clustering are treated as exploratory unless independently validated.
+  - R code is reproducible, readable, and auditable.
+  - Learner-visible content is equivalent in Spanish, English, and Danish.
+  - Hidden support does not reveal answer keys during active assessment.
+  - No protected exercise, figure, table, or passage is reproduced.
+
+source_basis:
+  - id: sdu.bmb830.official.2025
+    role: official_scope_learning_outcomes_and_assessment
+  - id: repository.biostatistics.yachay
+    role: descriptive_probability_inference_and_linear_models
+  - id: repository.probability_statistics.yachay
+    role: probability_sampling_and_hypothesis_testing
+  - id: cetinkaya_hardin.ims.2e
+    role: modern_introductory_statistics_and_study_design
+  - id: james_witten_hastie_tibshirani.islr.2e
+    role: regression_classification_and_multivariate_bridges
+  - id: r4ds.2e
+    role: reproducible_R_data_workflows
