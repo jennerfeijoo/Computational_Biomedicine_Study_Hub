@@ -1,0 +1,523 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m02
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm847.m02.f01
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: Distingue entidad biológica, registro, identificador, símbolo y etiqueta.
+      en: Distinguish biological entity, record, identifier, symbol, and label.
+      da: Skeln mellem biologisk enhed, post, identifikator, symbol og label.
+    back:
+      es: >-
+        La entidad es aquello real o conceptual sobre lo que se afirma algo. El registro es su representación en un recurso.
+        El identificador localiza de forma controlada un registro o entidad dentro de un namespace. El símbolo es una abreviatura
+        legible que puede cambiar o ser ambigua. La etiqueta es texto de presentación y no debe usarse como clave estable.
+      en: >-
+        The entity is the real or conceptual thing a statement concerns. A record is its representation in a resource.
+        An identifier locates a record or entity within a namespace. A symbol is a human-readable abbreviation that may change
+        or be ambiguous. A label is display text and should not serve as a stable key.
+      da: >-
+        Enheden er det virkelige eller konceptuelle objekt. En post er repræsentationen i en ressource.
+        En identifikator lokaliserer posten i et namespace. Symbol og label er menneskeligt læsbare og kan være ustabile.
+    linked_objectives: [m02.o1]
+    tags: [identifier, entity, record]
+
+  - id: dm847.m02.f02
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué aporta un namespace a un identificador?
+      en: What does a namespace add to an identifier?
+      da: Hvad tilføjer et namespace til en identifikator?
+    back:
+      es: >-
+        Define la autoridad, reglas de formato, ámbito y procedimiento de resolución. La cadena `1234` puede representar entidades
+        distintas en recursos diferentes; `namespace:1234` reduce esa ambigüedad y permite validar y resolver el registro.
+      en: >-
+        It defines authority, formatting rules, scope, and resolution procedure. The string `1234` may denote different entities
+        in different resources; `namespace:1234` reduces ambiguity and permits validation and resolution.
+      da: >-
+        Det definerer autoritet, formatregler, omfang og resolution. Strengen `1234` kan betyde forskellige ting i forskellige ressourcer.
+    linked_objectives: [m02.o1, m02.o2]
+    tags: [namespace, identifier, resolution]
+
+  - id: dm847.m02.f03
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: ¿Cuál es la diferencia entre accesión y versión?
+      en: What is the difference between an accession and a version?
+      da: Hvad er forskellen mellem accession og version?
+    back:
+      es: >-
+        La accesión identifica un registro de manera relativamente estable. La versión distingue una revisión concreta de su contenido.
+        Una accesión puede mantenerse mientras cambian secuencia, anotación o metadatos; por eso la reproducibilidad exige conservar ambas.
+      en: >-
+        An accession identifies a record relatively stably. A version distinguishes a specific revision of its content.
+        The accession may persist while sequence, annotation, or metadata change, so reproducibility requires both.
+      da: >-
+        Accession identificerer en post relativt stabilt, mens version skelner en bestemt revision af indholdet.
+    linked_objectives: [m02.o1, m02.o2]
+    tags: [accession, version, reproducibility]
+
+  - id: dm847.m02.f04
+    mode: practical
+    card_type: identifier_audit
+    difficulty: intermediate
+    front:
+      es: ¿Por qué `chr1:100000` no es una coordenada reproducible completa?
+      en: Why is `chr1:100000` not a complete reproducible coordinate?
+      da: Hvorfor er `chr1:100000` ikke en komplet reproducerbar koordinat?
+    back:
+      es: >-
+        Falta ensamblaje y versión, namespace del contig, convención 0-based o 1-based, definición de intervalo,
+        hebra si es relevante y alelos o entidad que se representa. La misma cadena puede señalar bases diferentes en ensamblajes distintos.
+      en: >-
+        Assembly and version, contig namespace, zero- or one-based convention, interval definition, strand when relevant,
+        and represented alleles or entity are missing. The same string may point to different bases across assemblies.
+      da: >-
+        Assembly/version, contig-namespace, 0- eller 1-baseret konvention, intervaldefinition, eventuel streng og repræsenteret enhed mangler.
+    linked_objectives: [m02.o1, m02.o2]
+    tags: [coordinates, assembly, version]
+
+  - id: dm847.m02.f05
+    mode: practical
+    card_type: boundary_analysis
+    difficulty: intermediate
+    front:
+      es: ¿Qué error produce confundir intervalos 0-based semiabiertos con intervalos 1-based cerrados?
+      en: What error results from confusing zero-based half-open with one-based closed intervals?
+      da: Hvilken fejl opstår ved at forveksle nulbaserede halvåbne med étbaserede lukkede intervaller?
+    back:
+      es: >-
+        Desplazamientos de una base y longitudes incorrectas. En `[start, end)` 0-based, la longitud es `end-start`;
+        en `[start, end]` 1-based, la longitud es `end-start+1`. La conversión debe documentarse y probarse en límites conocidos.
+      en: >-
+        One-base shifts and incorrect lengths. For zero-based `[start, end)`, length is `end-start`; for one-based `[start, end]`,
+        length is `end-start+1`. Conversion should be documented and tested on known boundaries.
+      da: >-
+        En-base-forskydninger og forkerte længder. I `[start,end)` er længden `end-start`; i 1-baseret lukket interval `end-start+1`.
+    linked_objectives: [m02.o2]
+    tags: [coordinates, off_by_one, intervals]
+
+  - id: dm847.m02.f06
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: Compara vocabulario controlado, taxonomía, tesauro y ontología.
+      en: Compare controlled vocabulary, taxonomy, thesaurus, and ontology.
+      da: Sammenlign kontrolleret vokabular, taksonomi, tesaurus og ontologi.
+    back:
+      es: >-
+        Vocabulario: términos permitidos. Taxonomía: organización principalmente jerárquica. Tesauro: jerarquías, sinónimos y relaciones asociativas.
+        Ontología: clases, relaciones, restricciones y axiomas con semántica explícita que puede permitir validación e inferencia.
+      en: >-
+        Vocabulary: allowed terms. Taxonomy: mainly hierarchical organization. Thesaurus: hierarchy, synonyms, and associative relations.
+        Ontology: classes, relations, constraints, and axioms with explicit semantics enabling validation or inference.
+      da: >-
+        Vokabular: tilladte termer. Taksonomi: primært hierarki. Tesaurus: hierarki, synonymer og associationer.
+        Ontologi: klasser, relationer, restriktioner og aksiomer med eksplicit semantik.
+    linked_objectives: [m02.o3]
+    tags: [ontology, vocabulary, taxonomy]
+
+  - id: dm847.m02.f07
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: Distingue clase e instancia con un ejemplo biomédico.
+      en: Distinguish class and instance using a biomedical example.
+      da: Skeln mellem klasse og instans med et biomedicinsk eksempel.
+    back:
+      es: >-
+        «Célula T CD8» es una clase que describe un tipo general. La célula concreta `cell_0042` observada en una muestra es una instancia.
+        Los axiomas universales deben aplicarse a todas las instancias pretendidas; las mediciones particulares pertenecen a la instancia.
+      en: >-
+        “CD8 T cell” is a class describing a general type. Concrete cell `cell_0042` observed in a sample is an instance.
+        Universal axioms should hold for all intended instances; particular measurements belong to the instance.
+      da: >-
+        “CD8 T-celle” er en generel klasse. Den konkrete `cell_0042` i en prøve er en instans.
+    linked_objectives: [m02.o4]
+    tags: [class, instance, ontology]
+
+  - id: dm847.m02.f08
+    mode: conceptual
+    card_type: relation_typing
+    difficulty: foundational
+    front:
+      es: ¿Cuándo usar `is-a` y cuándo `part-of`?
+      en: When should `is-a` and `part-of` be used?
+      da: Hvornår bruges `is-a` og `part-of`?
+    back:
+      es: >-
+        `is-a` expresa que una entidad o clase es un tipo más específico de otra: hepatocito `is-a` célula.
+        `part-of` expresa composición: núcleo `part-of` célula. Sustituir una por otra produce inferencias biológicamente incorrectas.
+      en: >-
+        `is-a` states that an entity or class is a more specific type: hepatocyte `is-a` cell.
+        `part-of` expresses composition: nucleus `part-of` cell. Interchanging them produces biologically invalid inferences.
+      da: >-
+        `is-a` udtrykker typeklassifikation, fx hepatocyt `is-a` celle. `part-of` udtrykker del-helhed, fx kerne `part-of` celle.
+    linked_objectives: [m02.o4, m02.o5]
+    tags: [is_a, part_of, relation]
+
+  - id: dm847.m02.f09
+    mode: practical
+    card_type: relation_typing
+    difficulty: intermediate
+    front:
+      es: Tipifica: muestra—paciente, resultado—archivo, medición—gen y fármaco—diana.
+      en: Type the relations: sample—patient, result—file, measurement—gene, and drug—target.
+      da: Type relationerne: prøve—patient, resultat—fil, måling—gen og lægemiddel—target.
+    back:
+      es: >-
+        Muestra `collected-from` o `derived-from` paciente; resultado `derived-from` archivo mediante una actividad;
+        medición `about` o `has-target` gen; fármaco `interacts-with` o `has-target` diana según evidencia.
+        No debe usarse `causes` salvo que el modelo represente evidencia causal específica.
+      en: >-
+        Sample `collected-from` or `derived-from` patient; result `derived-from` file through an activity;
+        measurement `about` or `has-target` gene; drug `interacts-with` or `has-target` target depending on evidence.
+        Avoid `causes` without specific causal evidence.
+      da: >-
+        Prøve `collected-from/derived-from` patient; resultat `derived-from` fil via aktivitet;
+        måling `about/has-target` gen; lægemiddel `interacts-with/has-target` target afhængigt af evidens.
+    linked_objectives: [m02.o5, m02.o6]
+    tags: [relation, provenance, evidence]
+
+  - id: dm847.m02.f10
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front:
+      es: Corrige: «Un p-valor pequeño permite codificar `causes`».
+      en: Correct: “A small p-value permits encoding `causes`.”
+      da: Ret: “En lille p-værdi tillader relationen `causes`.”
+    back:
+      es: >-
+        Un p-valor evalúa compatibilidad de datos con un modelo nulo bajo supuestos; no identifica dirección causal.
+        Debe registrarse una relación de asociación junto con diseño, modelo, contraste y procedencia. Causalidad requiere
+        diseño o supuestos causales adicionales, control de confusión y análisis de alternativas.
+      en: >-
+        A p-value assesses data compatibility with a null model under assumptions; it does not identify causal direction.
+        Record an association with design, model, contrast, and provenance. Causality requires additional design or causal assumptions,
+        confounding control, and alternative explanations.
+      da: >-
+        En p-værdi vurderer data under en nulmodel og identificerer ikke kausal retning. Registrér association med design og proveniens.
+    linked_objectives: [m02.o5, m02.o6]
+    tags: [causality, association, p_value]
+
+  - id: dm847.m02.f11
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué es procedencia de datos?
+      en: What is data provenance?
+      da: Hvad er dataproveniens?
+    back:
+      es: >-
+        Es el registro de origen y proceso de producción de una entidad o afirmación. Debe conectar entradas,
+        actividades, agentes o software, versiones, parámetros, tiempo y salidas, permitiendo reconstrucción, auditoría y responsabilidad.
+      en: >-
+        It is the record of the origin and production process of an entity or claim. It links inputs, activities,
+        agents or software, versions, parameters, time, and outputs, enabling reconstruction, audit, and accountability.
+      da: >-
+        Det er registreringen af oprindelse og produktionsproces for en enhed eller påstand, inklusive input, aktiviteter,
+        agenter/software, versioner, parametre, tid og output.
+    linked_objectives: [m02.o6]
+    tags: [provenance, lineage, reproducibility]
+
+  - id: dm847.m02.f12
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front:
+      es: Distingue fuente, procedencia y tipo de evidencia.
+      en: Distinguish source, provenance, and evidence type.
+      da: Skeln mellem kilde, proveniens og evidenstype.
+    back:
+      es: >-
+        Fuente es el recurso o publicación de donde se obtiene una afirmación. Procedencia describe toda la cadena de producción y transformación.
+        Tipo de evidencia describe cómo se respalda la afirmación, por ejemplo ensayo experimental, inferencia computacional o curación manual.
+      en: >-
+        Source is the resource or publication from which a claim is obtained. Provenance describes the full production and transformation chain.
+        Evidence type describes how the claim is supported, such as experimental assay, computational inference, or manual curation.
+      da: >-
+        Kilde er ressourcen eller publikationen. Proveniens er hele produktions- og transformationskæden.
+        Evidenstype beskriver hvordan påstanden understøttes.
+    linked_objectives: [m02.o6]
+    tags: [source, provenance, evidence]
+
+  - id: dm847.m02.f13
+    mode: practical
+    card_type: provenance_design
+    difficulty: intermediate
+    front:
+      es: ¿Qué metadatos mínimos necesita una tabla de expresión diferencial para ser auditable?
+      en: What minimum metadata does a differential-expression table need for auditability?
+      da: Hvilke minimale metadata kræver en differential-ekspressionstabel for audit?
+    back:
+      es: >-
+        Identificadores y versiones de datos de entrada, referencia y anotación; definición de grupos y contraste;
+        pasos de QC, cuantificación y normalización; fórmula del modelo; software, versiones y parámetros;
+        método de ajuste múltiple; fecha, agente, semilla cuando aplique y enlace a salidas intermedias relevantes.
+      en: >-
+        Versioned input data, reference, and annotation identifiers; group and contrast definition; QC, quantification,
+        and normalization steps; model formula; software, versions, and parameters; multiple-testing method; date, agent,
+        random seed when relevant, and links to essential intermediate outputs.
+      da: >-
+        Versions-ID'er for input, reference og annotation; grupper og kontrast; QC, kvantificering, normalisering;
+        modelformel; software/versioner/parametre; multipel testkorrektion; dato, agent og relevante mellemoutput.
+    linked_objectives: [m02.o6, m02.o8]
+    tags: [provenance, differential_expression, audit]
+
+  - id: dm847.m02.f14
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: foundational
+    front:
+      es: Corrige: «Un cross-reference significa que dos registros son idénticos».
+      en: Correct: “A cross-reference means two records are identical.”
+      da: Ret: “En cross-reference betyder at to poster er identiske.”
+    back:
+      es: >-
+        Un cross-reference sólo afirma una conexión. Los registros pueden ser equivalentes, uno más amplio, uno más específico,
+        una isoforma, un concepto relacionado o una relación histórica. El mapeo debe tiparse, versionarse y respaldarse.
+      en: >-
+        A cross-reference states only a connection. Records may be equivalent, broader, narrower, an isoform, a related concept,
+        or historically linked. The mapping must be typed, versioned, and supported.
+      da: >-
+        En cross-reference angiver kun en forbindelse. Poster kan være ækvivalente, bredere, snævrere, isoformer eller relaterede begreber.
+    linked_objectives: [m02.o7]
+    tags: [mapping, cross_reference, equivalence]
+
+  - id: dm847.m02.f15
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front:
+      es: Compara mapeo exacto, estrecho, amplio y relacionado.
+      en: Compare exact, narrow, broad, and related mappings.
+      da: Sammenlign eksakt, snæver, bred og relateret mapping.
+    back:
+      es: >-
+        Exacto: mismo alcance conceptual. Estrecho: el término fuente es más específico que el destino o viceversa según convención.
+        Amplio: el destino cubre un concepto más general. Relacionado: existe conexión relevante sin jerarquía o identidad suficiente.
+        La dirección y la convención del vocabulario deben declararse.
+      en: >-
+        Exact: same conceptual scope. Narrow: one term is more specific, according to mapping direction. Broad: the target covers a more general concept.
+        Related: meaningful connection without sufficient identity or hierarchy. Direction and vocabulary convention must be explicit.
+      da: >-
+        Eksakt: samme konceptuelle omfang. Snæver/bred: forskelligt granularitetsniveau afhængigt af retning.
+        Relateret: relevant forbindelse uden tilstrækkelig identitet eller hierarki.
+    linked_objectives: [m02.o7]
+    tags: [mapping, exact_match, broad_match]
+
+  - id: dm847.m02.f16
+    mode: practical
+    card_type: mapping_audit
+    difficulty: advanced
+    front:
+      es: ¿Cómo auditarías 10 000 mapeos heredados entre dos ontologías?
+      en: How would you audit 10,000 inherited mappings between two ontologies?
+      da: Hvordan vil du auditere 10.000 arvede mappings mellem to ontologier?
+    back:
+      es: >-
+        Congelar versiones; resolver términos deprecados, fusionados y divididos; comparar definiciones, entidad, organismo y granularidad;
+        clasificar tipo de mapeo y confianza; registrar método y evidencia; aplicar reglas automáticas; revisar manualmente una muestra estratificada;
+        versionar la nueva liberación y conservar el historial.
+      en: >-
+        Freeze versions; resolve deprecated, merged, and split terms; compare definitions, entity type, organism, and granularity;
+        classify mapping type and confidence; record method and evidence; apply automated checks; manually review a stratified sample;
+        version the new release and retain history.
+      da: >-
+        Frys versioner; håndtér deprecierede, fusionerede og splittede termer; sammenlign definition, enhedstype og granularitet;
+        klassificér mapping og confidence; kør automatiske checks og manuel stratificeret review; versionér output og bevar historik.
+    linked_objectives: [m02.o7]
+    tags: [mapping, quality_control, versioning]
+
+  - id: dm847.m02.f17
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué significa cada letra de FAIR?
+      en: What does each letter in FAIR mean?
+      da: Hvad betyder hvert bogstav i FAIR?
+    back:
+      es: >-
+        Findable/encontrable: identificadores y metadatos permiten localizar. Accessible/accesible: existe un protocolo claro de acceso,
+        incluso gobernado. Interoperable: formatos, identificadores y semántica permiten combinar. Reusable/reutilizable: licencia,
+        procedencia, calidad y contexto permiten uso apropiado.
+      en: >-
+        Findable: identifiers and metadata support discovery. Accessible: a clear access protocol exists, including governed access.
+        Interoperable: formats, identifiers, and semantics support combination. Reusable: license, provenance, quality, and context support proper use.
+      da: >-
+        Findable: ID og metadata muliggør lokalisering. Accessible: klar adgangsprotokol, også reguleret.
+        Interoperable: formater, ID og semantik kan kombineres. Reusable: licens, proveniens, kvalitet og kontekst muliggør genbrug.
+    linked_objectives: [m02.o8]
+    tags: [FAIR, metadata, reuse]
+
+  - id: dm847.m02.f18
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: foundational
+    front:
+      es: Corrige: «FAIR significa que todos los datos deben ser abiertos».
+      en: Correct: “FAIR means all data must be open.”
+      da: Ret: “FAIR betyder at alle data skal være åbne.”
+    back:
+      es: >-
+        FAIR exige acceso definido y metadatos suficientes, no acceso irrestricto. Datos clínicos o genómicos sensibles pueden requerir
+        autenticación, aprobación y entorno seguro. Aun así, sus metadatos, identificadores, condiciones y procedimiento de solicitud pueden ser FAIR.
+      en: >-
+        FAIR requires defined access and sufficient metadata, not unrestricted access. Sensitive clinical or genomic data may require
+        authentication, approval, and a secure environment. Their metadata, identifiers, conditions, and request procedure can still be FAIR.
+      da: >-
+        FAIR kræver defineret adgang og metadata, ikke ubegrænset adgang. Følsomme data kan kræve autentifikation og sikker governance.
+    linked_objectives: [m02.o8]
+    tags: [FAIR, access, privacy]
+
+  - id: dm847.m02.f19
+    mode: practical
+    card_type: fair_assessment
+    difficulty: intermediate
+    front:
+      es: Un CSV es público pero no tiene licencia, diccionario ni procedencia. ¿Qué dimensiones FAIR fallan más?
+      en: A CSV is public but lacks a license, dictionary, and provenance. Which FAIR dimensions fail most?
+      da: En CSV er offentlig men mangler licens, dataordbog og proveniens. Hvilke FAIR-dimensioner svigter mest?
+    back:
+      es: >-
+        Interoperabilidad y reutilización: no hay semántica de columnas, unidades, identificadores, licencia ni contexto de producción.
+        Encontrabilidad también puede ser débil sin identificador persistente y metadatos indexables. La descarga pública sólo cubre una parte de accesibilidad.
+      en: >-
+        Interoperability and reuse fail most because column semantics, units, identifiers, license, and production context are absent.
+        Findability may also be weak without a persistent identifier and indexed metadata. Public download covers only part of accessibility.
+      da: >-
+        Interoperabilitet og genbrug svigter mest på grund af manglende semantik, enheder, ID, licens og produktionskontekst.
+        Findbarhed kan også være svag uden persistent ID og metadata.
+    linked_objectives: [m02.o8]
+    tags: [FAIR, csv, reuse]
+
+  - id: dm847.m02.f20
+    mode: integrative
+    card_type: scenario_analysis
+    difficulty: advanced
+    front:
+      es: ¿Por qué un join técnicamente exitoso puede ser semánticamente incorrecto?
+      en: Why can a technically successful join be semantically wrong?
+      da: Hvorfor kan et teknisk vellykket join være semantisk forkert?
+    back:
+      es: >-
+        Las claves pueden compartir texto pero representar organismos, versiones, entidades o granularidades distintas. Un símbolo puede apuntar a gen,
+        transcrito o proteína; una accesión deprecada puede resolverse a otra entidad; un mapeo amplio puede duplicar filas. Validar cardinalidad,
+        namespace, versión y significado es tan importante como ejecutar el join.
+      en: >-
+        Keys may share text while representing different organisms, versions, entities, or granularities. A symbol may denote gene, transcript,
+        or protein; a deprecated accession may resolve elsewhere; a broad mapping may duplicate rows. Cardinality, namespace, version, and meaning
+        must be validated in addition to executing the join.
+      da: >-
+        Nøgler kan have samme tekst men repræsentere forskellige organismer, versioner, enheder eller granularitet.
+        Kardinalitet, namespace, version og betydning skal valideres, ikke kun join-syntaks.
+    linked_objectives: [m02.o1, m02.o2, m02.o7]
+    tags: [data_integration, join, semantics]
+
+  - id: dm847.m02.f21
+    mode: integrative
+    card_type: ontology_design
+    difficulty: advanced
+    front:
+      es: Diseña la representación mínima de una medición de expresión génica.
+      en: Design the minimal representation of a gene-expression measurement.
+      da: Design den minimale repræsentation af en genekspressionsmåling.
+    back:
+      es: >-
+        Instancia de medición con identificador; `about` un gen versionado; `measured-in` una muestra; `generated-by` un ensayo o actividad;
+        valor, unidad o escala, tiempo y condición; archivo y referencia de origen; método de normalización; agente/software y procedencia.
+        Un resultado diferencial posterior debe ser otra entidad derivada, no reemplazar la medición original.
+      en: >-
+        A measurement instance with an ID; `about` a versioned gene; `measured-in` a sample; `generated-by` an assay or activity;
+        value, unit or scale, time, and condition; source file and reference; normalization method; agent/software and provenance.
+        A later differential result is a separate derived entity.
+      da: >-
+        En måleinstans med ID; `about` et versionsgen; `measured-in` en prøve; `generated-by` et assay;
+        værdi, enhed/skala, tid og betingelse; kildefil/reference, normalisering, agent/software og proveniens.
+    linked_objectives: [m02.o4, m02.o5, m02.o6]
+    tags: [measurement, ontology, provenance]
+
+  - id: dm847.m02.f22
+    mode: integrative
+    card_type: oral_defense
+    difficulty: advanced
+    front:
+      es: Responde en 45 segundos: «¿Por qué un identificador estable no basta para reproducibilidad?»
+      en: Answer in 45 seconds: “Why is a stable identifier insufficient for reproducibility?”
+      da: Svar på 45 sekunder: “Hvorfor er en stabil identifikator utilstrækkelig til reproducerbarhed?”
+    back:
+      es: >-
+        Porque el contenido, ensamblaje, anotación, estado de deprecación o reglas de resolución pueden cambiar mientras la accesión persiste.
+        Además, el análisis depende de software, parámetros, tiempo, relación con otras entidades y procedencia. Reproducibilidad requiere
+        identificador con versión y contexto de transformación, no sólo una cadena estable.
+      en: >-
+        Content, assembly, annotation, deprecation status, or resolution rules may change while the accession persists.
+        Analysis also depends on software, parameters, time, relations, and provenance. Reproducibility needs a versioned identifier
+        plus transformation context, not only a stable string.
+      da: >-
+        Indhold, assembly, annotation, deprecationsstatus og resolutionsregler kan ændres mens accession består.
+        Reproducerbarhed kræver version og transformationskontekst, ikke kun en stabil streng.
+    linked_objectives: [m02.o1, m02.o2, m02.o6]
+    tags: [reproducibility, identifier, version]
+
+  - id: dm847.m02.f23
+    mode: integrative
+    card_type: claim_audit
+    difficulty: advanced
+    front:
+      es: Audita: «Dos bases enlazan sus registros, por tanto podemos fusionarlos sin pérdida».
+      en: Audit: “Two databases cross-link their records, so we can merge them without loss.”
+      da: Auditér: “To databaser linker deres poster, så vi kan fusionere dem uden tab.”
+    back:
+      es: >-
+        Debe comprobarse tipo de entidad, organismo, nivel de granularidad, definición, versión, cardinalidad y dirección del mapeo.
+        Una relación uno-a-muchos puede representar isoformas; una categoría amplia puede absorber conceptos específicos; campos y evidencia
+        pueden diferir. La integración debería conservar identificadores originales y procedencia, no borrar distinciones.
+      en: >-
+        Check entity type, organism, granularity, definition, version, cardinality, and mapping direction. One-to-many may represent isoforms;
+        a broad category may absorb specific concepts; fields and evidence may differ. Integration should preserve original identifiers
+        and provenance rather than erase distinctions.
+      da: >-
+        Kontrollér enhedstype, organisme, granularitet, definition, version, kardinalitet og mappingretning.
+        Bevar originale ID'er og proveniens i stedet for at slette forskelle.
+    linked_objectives: [m02.o7]
+    tags: [mapping, integration, provenance]
+
+  - id: dm847.m02.f24
+    mode: integrative
+    card_type: transfer
+    difficulty: advanced
+    front:
+      es: ¿Cómo prepara este módulo el diseño de bases de datos de biología de sistemas?
+      en: How does this module prepare systems-biology database design?
+      da: Hvordan forbereder dette modul databasedesign til systembiologi?
+    back:
+      es: >-
+        Establece identidades versionadas, clases, relaciones, restricciones, procedencia y reglas de mapeo antes de diseñar tablas o grafos.
+        Así, el siguiente módulo puede convertir entidades y dependencias en esquemas relacionales o de grafos sin perder semántica,
+        cardinalidad, evidencia ni reproducibilidad.
+      en: >-
+        It establishes versioned identities, classes, relations, constraints, provenance, and mapping rules before tables or graphs are designed.
+        The next module can therefore translate entities and dependencies into relational or graph schemas without losing semantics,
+        cardinality, evidence, or reproducibility.
+      da: >-
+        Modulet etablerer versionsidentiteter, klasser, relationer, restriktioner, proveniens og mappingregler før tabeller eller grafer designes.
+    linked_objectives: [m02.o1, m02.o4, m02.o5, m02.o6]
+    tags: [transfer, database_design, systems_biology]
