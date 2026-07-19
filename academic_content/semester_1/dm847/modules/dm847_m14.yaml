@@ -1,0 +1,327 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m14
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Aprendizaje supervisado y no supervisado para datos ómicos biomédicos
+    en: Supervised and unsupervised learning for biomedical omics
+    da: Superviseret og usuperviseret læring for biomedicinske omics-data
+  summary:
+    es: >-
+      Formulación de matrices ómicas de alta dimensión, preprocesamiento dentro de resampling,
+      PCA, clustering, clasificación, regresión, regularización, selección de variables,
+      validación cruzada anidada, métricas, calibración, batch effects, domain shift y
+      evaluación externa. El módulo enfatiza p≫n, independencia de muestras y límites de
+      interpretar características seleccionadas como mecanismos o biomarcadores validados.
+    en: >-
+      Formulation of high-dimensional omics matrices, preprocessing within resampling, PCA,
+      clustering, classification, regression, regularization, feature selection, nested cross-validation,
+      metrics, calibration, batch effects, domain shift, and external evaluation. The module emphasizes
+      p≫n, sample independence, and limits of interpreting selected features as mechanisms or validated biomarkers.
+    da: >-
+      Formulering af højdimensionelle omics-matricer, preprocessing inden for resampling, PCA,
+      clustering, klassifikation, regression, regularisering, feature selection, nested cross-validation,
+      metrikker, kalibrering, batch effects, domain shift og ekstern evaluering.
+  estimated_study_hours: 14
+  difficulty: advanced
+
+alignment:
+  official_learning_outcomes: [dm847.lo09]
+  prerequisite_modules: [dm847.m11, dm847.m12, dm847.m13, bmb830.m09, bmb831.m05, bmb831.m06]
+  later_modules: [dm847.m15]
+
+objectives:
+  - {id: dm847.m14.o01, text: {es: Definir muestras, características, outcome, grupos y unidad independiente, en: Define samples, features, outcome, groups, and the independent unit, da: Definere samples, features, outcome, grupper og uafhængig enhed}}
+  - {id: dm847.m14.o02, text: {es: Diseñar preprocesamiento sin fuga dentro de cada partición, en: Design leakage-free preprocessing within each split, da: Designe preprocessing uden lækage inden for hvert split}}
+  - {id: dm847.m14.o03, text: {es: Aplicar e interpretar PCA, clustering y visualización de alta dimensión, en: Apply and interpret PCA, clustering, and high-dimensional visualization, da: Anvende og fortolke PCA, clustering og højdimensionel visualisering}}
+  - {id: dm847.m14.o04, text: {es: Distinguir regresión, clasificación y objetivos probabilísticos, en: Distinguish regression, classification, and probabilistic targets, da: Skelne regression, klassifikation og probabilistiske mål}}
+  - {id: dm847.m14.o05, text: {es: Ajustar regularización y selección de variables mediante validación anidada, en: Tune regularization and feature selection with nested validation, da: Tune regularisering og feature selection med nested validering}}
+  - {id: dm847.m14.o06, text: {es: Elegir métricas acordes con desbalance, umbral y uso, en: Choose metrics consistent with imbalance, threshold, and use, da: Vælge metrikker passende til ubalance, tærskel og brug}}
+  - {id: dm847.m14.o07, text: {es: Evaluar calibración, subgrupos, batch effects y desplazamiento de dominio, en: Evaluate calibration, subgroups, batch effects, and domain shift, da: Evaluere kalibrering, subgrupper, batch effects og domain shift}}
+  - {id: dm847.m14.o08, text: {es: Comunicar rendimiento, incertidumbre, estabilidad e interpretación sin sobreafirmar, en: Communicate performance, uncertainty, stability, and interpretation without overclaiming, da: Kommunikere performance, usikkerhed, stabilitet og fortolkning uden overdrivelse}}
+
+concepts:
+  - id: dm847.m14.c01
+    title: {es: Matriz ómica y unidad independiente, en: Omics matrix and independent unit, da: Omics-matrix og uafhængig enhed}
+    body:
+      es: >-
+        Una matriz suele organizar muestras por filas y características por columnas, pero la orientación
+        debe declararse. Varias mediciones de un paciente, réplicas técnicas o células del mismo individuo
+        no son necesariamente independientes. La partición debe agrupar por paciente, familia, lote o sitio
+        según el uso futuro. El outcome, tiempo de predicción y datos disponibles en ese momento forman el target.
+      en: >-
+        A matrix commonly stores samples as rows and features as columns, but orientation must be stated.
+        Repeated measurements, technical replicates, or cells from one person are not necessarily independent.
+        Splits should group by patient, family, batch, or site according to future use. Outcome, prediction time,
+        and information available at that time define the target.
+      da: >-
+        En matrix har ofte samples som rækker og features som kolonner. Gentagne målinger, tekniske replikater
+        og celler fra samme person er ikke uafhængige. Split skal følge den relevante gruppeenhed.
+    key_points:
+      - {es: La unidad de resampling debe ser al menos tan grande como la dependencia, en: The resampling unit must be at least as large as the dependency unit, da: Resampling-enheden skal være mindst lige så stor som afhængighedsenheden}
+      - {es: El tiempo de disponibilidad evita leakage temporal, en: Availability time prevents temporal leakage, da: Tilgængelighedstid forhindrer tidsmæssig lækage}
+  - id: dm847.m14.c02
+    title: {es: p≫n, ruido y regularización, en: p≫n, noise, and regularization, da: p≫n, støj og regularisering}
+    body:
+      es: >-
+        En ómicas, miles de variables y pocas muestras permiten muchos modelos que ajustan el entrenamiento.
+        La correlación, ruido y batch effects reducen tamaño efectivo. Regularización L1, L2 o elastic net restringe
+        coeficientes y mejora estabilidad, pero el hiperparámetro debe ajustarse dentro del resampling. Un modelo
+        parsimonioso puede generalizar mejor aunque su ajuste aparente sea menor.
+      en: >-
+        Omics often has thousands of variables and few samples, allowing many models to fit training data.
+        Correlation, noise, and batch effects reduce effective sample size. L1, L2, or elastic-net regularization
+        constrains coefficients and may improve stability, but hyperparameters must be tuned inside resampling.
+        A parsimonious model may generalize better despite lower apparent fit.
+      da: >-
+        Omics har ofte tusinder af variable og få samples. L1, L2 og elastic net begrænser koefficienter,
+        men hyperparametre skal tunes inden for resampling.
+    key_points:
+      - {es: Selección inestable puede producir firmas diferentes con rendimiento similar, en: Unstable selection may produce different signatures with similar performance, da: Ustabil selection kan give forskellige signaturer med lignende performance}
+  - id: dm847.m14.c03
+    title: {es: Preprocesamiento y fuga, en: Preprocessing and leakage, da: Preprocessing og lækage}
+    body:
+      es: >-
+        Imputación, escalado, filtrado por varianza, selección supervisada, corrección de batch y reducción dimensional
+        aprenden parámetros de datos. Deben ajustarse sólo con el fold de entrenamiento y aplicarse al fold de validación.
+        Ejecutarlos una vez antes de CV filtra información y optimiza indirectamente el test. Las transformaciones puramente
+        definidas por protocolo también deben documentar referencia y constantes.
+      en: >-
+        Imputation, scaling, variance filtering, supervised selection, batch correction, and dimensionality reduction
+        learn parameters from data. Fit them only on each training fold and apply them to validation. Performing them once
+        before CV leaks information and indirectly optimizes the test. Protocol-defined transformations also need documentation.
+      da: >-
+        Imputation, skalering, filtrering, feature selection, batch correction og dimensionreduktion lærer fra data og
+        skal fittes i hvert træningsfold og anvendes på valideringsfoldet.
+    key_points:
+      - {es: El pipeline completo, no sólo el clasificador, debe resamplearse, en: The complete pipeline, not only the classifier, must be resampled, da: Hele pipelinet, ikke kun klassifikatoren, skal resamples}
+  - id: dm847.m14.c04
+    title: {es: PCA y estructura no supervisada, en: PCA and unsupervised structure, da: PCA og usuperviseret struktur}
+    body:
+      es: >-
+        PCA encuentra direcciones ortogonales de máxima varianza tras centrado y, según unidades, escalado. Los scores
+        ubican muestras; loadings describen contribuciones de variables. Alta varianza puede ser biológica, técnica o
+        confusión. Elegir PCs mirando labels convierte exploración en selección supervisada. Varianza explicada no mide
+        capacidad de clasificación ni relevancia clínica.
+      en: >-
+        PCA finds orthogonal maximum-variance directions after centering and, depending on units, scaling. Scores locate
+        samples; loadings describe variable contributions. High variance may be biological, technical, or confounded.
+        Selecting PCs after inspecting labels makes exploration supervised. Explained variance is not classification or clinical relevance.
+      da: >-
+        PCA finder ortogonale retninger med maksimal varians efter centrering og eventuel skalering. Scores viser samples;
+        loadings viser variablebidrag. Høj varians kan være biologisk eller teknisk.
+    key_points:
+      - {es: PCA no conoce outcomes salvo que se usen después para seleccionar, en: PCA does not know outcomes unless they are later used for selection, da: PCA kender ikke outcomes medmindre de bruges til efterfølgende selection}
+  - id: dm847.m14.c05
+    title: {es: Clustering y estabilidad, en: Clustering and stability, da: Clustering og stabilitet}
+    body:
+      es: >-
+        Clustering depende de representación, distancia, algoritmo, número de grupos y preprocesamiento. K-means optimiza
+        distancias euclídeas a centroides y favorece grupos aproximadamente esféricos; jerárquico produce un dendrograma
+        según linkage; métodos de densidad modelan otras formas. La estabilidad ante bootstrap y perturbaciones es más
+        informativa que una única figura. Clusters no equivalen automáticamente a subtipos clínicos.
+      en: >-
+        Clustering depends on representation, distance, algorithm, number of groups, and preprocessing. K-means optimizes
+        Euclidean distance to centroids and favors roughly spherical groups; hierarchical methods depend on linkage; density
+        methods support other shapes. Stability under bootstrap and perturbation is more informative than one plot. Clusters
+        do not automatically define clinical subtypes.
+      da: >-
+        Clustering afhænger af repræsentation, afstand, algoritme og antal grupper. Stabilitet under bootstrap og perturbation
+        er vigtigere end én figur. Clusters er ikke automatisk kliniske subtyper.
+    key_points:
+      - {es: Un cluster necesita reproducibilidad y asociación externa para interpretarse, en: A cluster needs reproducibility and external association for interpretation, da: En cluster kræver reproducerbarhed og ekstern association for fortolkning}
+  - id: dm847.m14.c06
+    title: {es: Aprendizaje supervisado y validación anidada, en: Supervised learning and nested validation, da: Superviseret læring og nested validering}
+    body:
+      es: >-
+        Clasificación predice categorías, regresión outcomes continuos y modelos probabilísticos distribuciones o riesgos.
+        Un loop interno selecciona hiperparámetros y un loop externo estima rendimiento del procedimiento completo. El test
+        final se usa una vez. Comparar muchos pipelines en los mismos folds externos también introduce selección y debe
+        formar parte del procedimiento o evaluarse en datos independientes.
+      en: >-
+        Classification predicts categories, regression continuous outcomes, and probabilistic models distributions or risks.
+        An inner loop selects hyperparameters and an outer loop estimates performance of the full procedure. The final test is
+        used once. Comparing many pipelines on the same outer folds also induces selection and should be included in the
+        procedure or evaluated independently.
+      da: >-
+        Klassifikation forudsiger kategorier og regression kontinuerte outcomes. Et indre loop vælger hyperparametre, et ydre
+        loop estimerer hele proceduren. Det endelige testset bruges én gang.
+    key_points:
+      - {es: CV anidada estima un proceso de selección, no un modelo aislado, en: Nested CV estimates a selection procedure, not an isolated model, da: Nested CV estimerer en selektionsprocedure, ikke en isoleret model}
+  - id: dm847.m14.c07
+    title: {es: Métricas, umbrales y calibración, en: Metrics, thresholds, and calibration, da: Metrikker, tærskler og kalibrering}
+    body:
+      es: >-
+        ROC-AUC mide ranking global y puede parecer alta con clases raras; PR-AUC enfatiza positivos. Sensibilidad,
+        especificidad, PPV y NPV dependen del umbral y, para valores predictivos, prevalencia. Brier y curvas de calibración
+        evalúan probabilidades. El umbral se selecciona con datos de desarrollo y costes explícitos, no con test. Intervalos
+        deben reflejar agrupación y resampling.
+      en: >-
+        ROC-AUC measures global ranking and may look high under rare outcomes; PR-AUC emphasizes positives. Sensitivity,
+        specificity, PPV, and NPV depend on threshold and predictive values on prevalence. Brier score and calibration curves
+        evaluate probabilities. Thresholds are selected in development data using explicit costs, not on test. Intervals should
+        reflect grouping and resampling.
+      da: >-
+        ROC-AUC måler ranking; PR-AUC fokuserer på positive. Sensitivitet, specificitet, PPV og NPV afhænger af tærskel og
+        prævalens. Kalibrering evaluerer sandsynligheder, og tærskler vælges uden testdata.
+    key_points:
+      - {es: Discriminación y calibración son propiedades distintas, en: Discrimination and calibration are distinct, da: Diskrimination og kalibrering er forskellige egenskaber}
+  - id: dm847.m14.c08
+    title: {es: Domain shift, batch y validación externa, en: Domain shift, batch, and external validation, da: Domain shift, batch og ekstern validering}
+    body:
+      es: >-
+        Cambios de plataforma, laboratorio, población, tiempo o protocolo alteran P(X), P(Y) o su relación. Si batch coincide
+        con outcome, un modelo puede aprender el laboratorio. Corrección no recupera información ausente y puede eliminar
+        señal real si diseño está confundido. Validación externa temporal o por sitio, análisis de subgrupos, calibración local
+        y revisión de estabilidad de features son necesarios antes de afirmar transportabilidad o biomarcadores.
+      en: >-
+        Platform, laboratory, population, time, or protocol changes alter P(X), P(Y), or their relationship. If batch aligns with
+        outcome, a model may learn the laboratory. Correction cannot recover missing information and may remove biology under
+        confounding. External temporal or site validation, subgroup analysis, local calibration, and feature-stability review are
+        needed before claiming transportability or biomarkers.
+      da: >-
+        Ændringer i platform, laboratorium, population, tid eller protokol giver domain shift. Hvis batch følger outcome, kan
+        modellen lære laboratoriet. Ekstern site- eller tidsvalidering og subgruppeanalyse er nødvendige.
+    key_points:
+      - {es: Un feature predictivo no es automáticamente causal ni accionable, en: A predictive feature is not automatically causal or actionable, da: En prædiktiv feature er ikke automatisk kausal eller handlingsbar}
+
+worked_examples:
+  - id: dm847.m14.e01
+    title: {es: Fuga por selección de genes, en: Leakage through gene selection, da: Lækage gennem genselektion}
+    scenario: {es: Se seleccionan los 100 genes más asociados usando todo el dataset antes de CV., en: The 100 most associated genes are selected using all data before CV., da: De 100 mest associerede gener vælges på hele datasættet før CV.}
+    solution_outline:
+      es: >-
+        Explicar que labels de folds de validación influyeron en los features. Mover selección dentro de cada fold interno,
+        ajustar hiperparámetros allí y estimar en fold externo no visto. Comparar rendimiento ingenuo y anidado y reportar la diferencia.
+      en: >-
+        Validation-fold labels influenced feature selection. Move selection inside each inner training fold, tune there, and
+        evaluate on untouched outer folds. Compare naive and nested performance and report the difference.
+      da: >-
+        Valideringslabels påvirkede feature selection. Flyt selection ind i hvert indre træningsfold og evaluer på ydre folds.
+    validation: [selection_inside_resampling, grouped_splits, performance_difference_reported]
+  - id: dm847.m14.e02
+    title: {es: PCA dominada por batch, en: PCA dominated by batch, da: PCA domineret af batch}
+    scenario: {es: PC1 separa muestras por laboratorio y el outcome está desbalanceado entre laboratorios., en: PC1 separates laboratories and outcome prevalence differs by lab., da: PC1 adskiller laboratorier og outcome-prævalens varierer mellem labs.}
+    solution_outline:
+      es: >-
+        Visualizar scores por batch y outcome, cuantificar asociación, revisar diseño y controles. Evaluar modelo dejando un laboratorio fuera.
+        No aplicar corrección ciega si batch y outcome están completamente confundidos; reconocer falta de identificabilidad.
+      en: >-
+        Plot scores by batch and outcome, quantify association, and review design. Evaluate by holding out a laboratory. Do not
+        blindly correct if batch and outcome are fully confounded; acknowledge non-identifiability.
+      da: >-
+        Visualisér scores efter batch og outcome, hold et laboratorium ude, og erkend ikke-identificerbarhed ved fuld confounding.
+    validation: [batch_association, site_holdout, confounding_acknowledged]
+  - id: dm847.m14.e03
+    title: {es: Buen AUC y mala calibración, en: Good AUC and poor calibration, da: God AUC og dårlig kalibrering}
+    scenario: {es: Un clasificador externo conserva ROC-AUC pero sobreestima riesgos., en: An external classifier preserves ROC-AUC but overestimates risks., da: En ekstern klassifikator bevarer ROC-AUC men overestimerer risici.}
+    solution_outline:
+      es: >-
+        Separar ranking de probabilidad. Calcular curva y pendiente/intercepto de calibración, Brier y prevalencia. Considerar recalibración
+        en un conjunto local distinto del test evaluativo y reportar rendimiento antes y después sin afirmar que el modelo original estaba calibrado.
+      en: >-
+        Separate ranking from probability accuracy. Compute calibration curve, slope/intercept, Brier score, and prevalence. Consider
+        recalibration on local development data distinct from evaluation test and report before/after performance.
+      da: >-
+        Adskil ranking fra sandsynlighedsaccuracy. Beregn kalibrering og Brier og overvej recalibrering på separate lokale udviklingsdata.
+    validation: [discrimination_and_calibration, separate_recalibration_data, pre_post_report]
+
+practice_exercises:
+  - {id: dm847.m14.p01, activity_type: data_schema, difficulty: foundational, prompt: {es: Define filas, columnas, grupos y outcome para un estudio multi-visita., en: Define rows, columns, groups, and outcome for a multi-visit study., da: Definér rækker, kolonner, grupper og outcome for et multi-visit-studie.}, expected_elements: [sample_unit, patient_group, visit_time, feature_matrix, prediction_time]}
+  - {id: dm847.m14.p02, activity_type: leakage_audit, difficulty: intermediate, prompt: {es: Identifica fuga en normalización, imputación y selección realizadas antes de CV., en: Identify leakage in normalization, imputation, and selection performed before CV., da: Find lækage i normalisering, imputation og selection før CV.}, expected_elements: [fit_on_train_only, transform_validation, nested_pipeline]}
+  - {id: dm847.m14.p03, activity_type: pca_interpretation, difficulty: intermediate, prompt: {es: Interpreta scores, loadings y varianza explicada sin concluir subtipos., en: Interpret scores, loadings, and explained variance without concluding subtypes., da: Fortolk scores, loadings og forklaret varians uden subtype-konklusion.}, expected_elements: [sample_pattern, feature_contributions, technical_covariates, exploratory_limit]}
+  - {id: dm847.m14.p04, activity_type: clustering_stability, difficulty: advanced, prompt: {es: Compara estabilidad de k-means y jerárquico mediante bootstrap., en: Compare k-means and hierarchical-clustering stability by bootstrap., da: Sammenlign stabilitet af k-means og hierarkisk clustering med bootstrap.}, expected_elements: [co_clustering_matrix, label_alignment, parameter_sensitivity, external_association]}
+  - {id: dm847.m14.p05, activity_type: nested_cv_design, difficulty: advanced, prompt: {es: Diseña CV anidada por paciente para elastic net., en: Design patient-grouped nested CV for elastic net., da: Design patient-grouped nested CV for elastic net.}, expected_elements: [outer_estimation, inner_tuning, preprocessing_inside, repeated_groups, uncertainty]}
+  - {id: dm847.m14.p06, activity_type: oral_explanation, difficulty: advanced, prompt: {es: Explica por qué una firma predictiva no es todavía un biomarcador clínicamente validado., en: Explain why a predictive signature is not yet a clinically validated biomarker., da: Forklar hvorfor en prædiktiv signatur ikke endnu er en klinisk valideret biomarkør.}, expected_elements: [external_validation, analytical_validity, calibration, clinical_utility, causality_not_required_but_transportability_required]}
+
+objective_bank:
+  - {id: dm847.m14.q01, type: multiple_choice, prompt: {es: ¿Qué debe agruparse si hay varias visitas por paciente?, en: What must be grouped when patients have repeated visits?, da: Hvad skal grupperes ved gentagne besøg pr. patient?}, options: [{id: a, es: Todas las visitas del mismo paciente, en: All visits from the same patient, da: Alle besøg fra samme patient}, {id: b, es: Genes por orden alfabético, en: Genes alphabetically, da: Gener alfabetisk}, {id: c, es: Sólo casos positivos, en: Positive cases only, da: Kun positive cases}, {id: d, es: PCs, en: PCs, da: PCs}], correct_option_ids: [a]}
+  - {id: dm847.m14.q02, type: true_false, prompt: {es: Escalar antes de CV con todas las muestras puede producir fuga., en: Scaling on all samples before CV can cause leakage., da: Skalering på alle samples før CV kan give lækage.}, correct: true}
+  - {id: dm847.m14.q03, type: multiple_choice, prompt: {es: ¿Qué describe un loading de PCA?, en: What does a PCA loading describe?, da: Hvad beskriver en PCA-loading?}, options: [{id: a, es: Contribución de una variable a un componente, en: A variable's contribution to a component, da: En variabels bidrag til en komponent}, {id: b, es: Probabilidad clínica, en: Clinical probability, da: Klinisk sandsynlighed}, {id: c, es: Clase verdadera, en: True class, da: Sand klasse}, {id: d, es: p-value corregido, en: Adjusted p-value, da: Justeret p-værdi}], correct_option_ids: [a]}
+  - {id: dm847.m14.q04, type: true_false, prompt: {es: Alta varianza explicada garantiza buena clasificación., en: High explained variance guarantees good classification., da: Høj forklaret varians garanterer god klassifikation.}, correct: false}
+  - {id: dm847.m14.q05, type: multiple_choice, prompt: {es: ¿Qué objetivo tiene el loop interno en CV anidada?, en: What is the inner loop for in nested CV?, da: Hvad bruges det indre loop til i nested CV?}, options: [{id: a, es: Seleccionar hiperparámetros y pipeline, en: Select hyperparameters and pipeline, da: Vælge hyperparametre og pipeline}, {id: b, es: Reportar rendimiento final, en: Report final performance, da: Rapportere endelig performance}, {id: c, es: Duplicar test, en: Duplicate test, da: Duplikere test}, {id: d, es: Crear outcomes, en: Create outcomes, da: Oprette outcomes}], correct_option_ids: [a]}
+  - {id: dm847.m14.q06, type: true_false, prompt: {es: El test final puede usarse repetidamente para elegir el mejor modelo., en: The final test may be repeatedly used to choose the best model., da: Det endelige testset kan bruges gentagne gange til modelvalg.}, correct: false}
+  - {id: dm847.m14.q07, type: multiple_choice, prompt: {es: ¿Qué métrica enfatiza positivos con clase rara?, en: Which metric emphasizes positives under a rare class?, da: Hvilken metrik fokuserer på positive ved sjælden klasse?}, options: [{id: a, es: PR-AUC, en: PR-AUC, da: PR-AUC}, {id: b, es: Accuracy exclusivamente, en: Accuracy only, da: Kun accuracy}, {id: c, es: R², en: R-squared, da: R²}, {id: d, es: Varianza explicada de PCA, en: PCA explained variance, da: PCA forklaret varians}], correct_option_ids: [a]}
+  - {id: dm847.m14.q08, type: true_false, prompt: {es: Buena discriminación implica buena calibración., en: Good discrimination implies good calibration., da: God diskrimination indebærer god kalibrering.}, correct: false}
+  - {id: dm847.m14.q09, type: multiple_choice, prompt: {es: ¿Qué validación prueba mejor cambio de laboratorio?, en: Which validation best tests laboratory change?, da: Hvilken validering tester bedst laboratorieskift?}, options: [{id: a, es: Dejar un laboratorio completo fuera, en: Hold out a complete laboratory, da: Hold et helt laboratorium ude}, {id: b, es: Split aleatorio de filas, en: Random row split, da: Tilfældigt række-split}, {id: c, es: Entrenar y probar en las mismas muestras, en: Train and test on the same samples, da: Træn og test på samme samples}, {id: d, es: Elegir PC1, en: Choose PC1, da: Vælg PC1}], correct_option_ids: [a]}
+  - {id: dm847.m14.q10, type: true_false, prompt: {es: Una variable seleccionada de forma estable es automáticamente causal., en: A stably selected feature is automatically causal., da: En stabilt valgt feature er automatisk kausal.}, correct: false}
+
+open_assessment:
+  - id: dm847.m14.a01
+    prompt: {es: Diseña un pipeline predictivo ómico completo con CV anidada y validación externa., en: Design a complete omics prediction pipeline with nested CV and external validation., da: Design et komplet omics-prædiktionspipeline med nested CV og ekstern validering.}
+    rubric: [{criterion: target_and_grouping, weight: 0.20}, {criterion: leakage_free_pipeline, weight: 0.30}, {criterion: tuning_metrics_and_uncertainty, weight: 0.25}, {criterion: external_validation_and_limits, weight: 0.25}]
+  - id: dm847.m14.a02
+    prompt: {es: Audita un estudio que descubre tres clusters y los denomina subtipos moleculares., en: Audit a study that discovers three clusters and labels them molecular subtypes., da: Revider et studie der finder tre clusters og kalder dem molekylære subtyper.}
+    rubric: [{criterion: preprocessing_and_algorithm, weight: 0.20}, {criterion: cluster_stability, weight: 0.25}, {criterion: external_and_clinical_association, weight: 0.30}, {criterion: claim_revision, weight: 0.25}]
+  - id: dm847.m14.a03
+    prompt: {es: Compara rendimiento y transportabilidad de una firma regularizada entre dos hospitales., en: Compare performance and transportability of a regularized signature across two hospitals., da: Sammenlign performance og transportabilitet af en regulariseret signatur mellem to hospitaler.}
+    rubric: [{criterion: site_split_and_prevalence, weight: 0.20}, {criterion: discrimination_and_calibration, weight: 0.30}, {criterion: subgroup_and_shift_analysis, weight: 0.25}, {criterion: biomarker_claim_limits, weight: 0.25}]
+
+glossary:
+  - {id: dm847.term.p_greater_n, es: p≫n, en: p much greater than n, da: p meget større end n, definition_en: Feature count greatly exceeds independent sample count.}
+  - {id: dm847.term.data_leakage, es: Fuga de datos, en: Data leakage, da: Datalækage, definition_en: Information unavailable in training improperly influences model fitting or evaluation.}
+  - {id: dm847.term.pca, es: PCA, en: Principal component analysis, da: PCA, definition_en: Orthogonal linear projection maximizing variance.}
+  - {id: dm847.term.loading, es: Loading, en: Loading, da: Loading, definition_en: Variable coefficient defining a principal component.}
+  - {id: dm847.term.cluster_stability, es: Estabilidad de clusters, en: Cluster stability, da: Clusterstabilitet, definition_en: Reproducibility of grouping under resampling or perturbation.}
+  - {id: dm847.term.regularization, es: Regularización, en: Regularization, da: Regularisering, definition_en: Constraint or penalty reducing model flexibility.}
+  - {id: dm847.term.nested_cv, es: CV anidada, en: Nested cross-validation, da: Nested cross-validation, definition_en: Outer performance estimation with inner model selection.}
+  - {id: dm847.term.pr_auc, es: PR-AUC, en: Precision-recall AUC, da: PR-AUC, definition_en: Area under the precision-recall curve.}
+  - {id: dm847.term.calibration, es: Calibración, en: Calibration, da: Kalibrering, definition_en: Agreement between predicted probabilities and observed frequencies.}
+  - {id: dm847.term.domain_shift, es: Desplazamiento de dominio, en: Domain shift, da: Domain shift, definition_en: Change in data or outcome distributions across deployment contexts.}
+
+hidden_support:
+  canonical_explanation:
+    es: >-
+      En ómicas, la alta dimensionalidad hace fácil sobreajustar. El pipeline completo debe ajustarse
+      dentro de cada fold y la unidad de partición debe respetar pacientes, lotes o sitios. PCA y clustering
+      describen estructura, no subtipos validados. La evaluación predictiva separa discriminación,
+      calibración, umbral y transportabilidad. Features seleccionados son asociaciones predictivas hasta
+      que evidencia adicional sostenga mecanismo o utilidad clínica.
+    en: >-
+      High-dimensional omics makes overfitting easy. The full pipeline must be fitted within each fold,
+      and splitting must respect patients, batches, or sites. PCA and clustering describe structure rather
+      than validated subtypes. Predictive evaluation separates discrimination, calibration, threshold, and
+      transportability. Selected features remain predictive associations until further evidence supports mechanism or utility.
+    da: >-
+      Højdimensionel omics gør overfitting let. Hele pipelinet fittes i hvert fold, og split respekterer
+      patienter, batches eller sites. PCA og clustering beskriver struktur, ikke validerede subtyper.
+  misconceptions:
+    - {id: dm847.m14.mc01, false_belief: {es: Preprocesar antes de CV es inocuo, en: Preprocessing before CV is harmless, da: Preprocessing før CV er harmløst}, correction: {es: Pasos que aprenden de datos producen fuga y deben quedar dentro del fold, en: Data-adaptive steps leak and must be inside each fold, da: Dataadaptive trin giver lækage og skal være i hvert fold}}
+    - {id: dm847.m14.mc02, false_belief: {es: Clusters visibles son subtipos reales, en: Visible clusters are real subtypes, da: Synlige clusters er reelle subtyper}, correction: {es: Requieren estabilidad, replicación y asociación externa, en: They require stability, replication, and external association, da: De kræver stabilitet, replikation og ekstern association}}
+    - {id: dm847.m14.mc03, false_belief: {es: AUC alta valida un biomarcador, en: High AUC validates a biomarker, da: Høj AUC validerer en biomarkør}, correction: {es: Se necesitan calibración, validación externa, validez analítica y utilidad, en: Calibration, external validation, analytical validity, and utility are also needed, da: Kalibrering, ekstern validering, analytisk validitet og nytte kræves}}
+  socratic_questions:
+    - ¿Cuál es la unidad realmente independiente?
+    - ¿Qué paso del pipeline vio datos de validación?
+    - ¿La estructura de PCA corresponde a batch o biología?
+    - ¿Cómo se eligieron hiperparámetros y umbral?
+    - ¿Qué evidencia sostiene transportabilidad y utilidad?
+  knowledge_fragments:
+    - {id: dm847.m14.k01, content_en: p much greater than n creates severe overfitting risk.}
+    - {id: dm847.m14.k02, content_en: Grouped splitting must follow the dependency unit.}
+    - {id: dm847.m14.k03, content_en: Data-adaptive preprocessing belongs inside resampling.}
+    - {id: dm847.m14.k04, content_en: PCA variance is not predictive performance.}
+    - {id: dm847.m14.k05, content_en: Cluster interpretation requires stability and external evidence.}
+    - {id: dm847.m14.k06, content_en: Nested CV separates tuning from performance estimation.}
+    - {id: dm847.m14.k07, content_en: PR-AUC is informative under rare positive outcomes.}
+    - {id: dm847.m14.k08, content_en: Discrimination and calibration are distinct.}
+    - {id: dm847.m14.k09, content_en: Site-held-out validation probes domain shift.}
+    - {id: dm847.m14.k10, content_en: Predictive association does not establish causality or clinical utility.}
+  response_constraints:
+    - State the independent unit, grouping, outcome time, and data available at prediction time.
+    - Place all learned preprocessing and selection inside resampling.
+    - Report discrimination, calibration, threshold metrics, uncertainty, and external validation separately.
+    - Do not call selected features validated biomarkers without analytical and external evidence.
+
+sources:
+  - {id: sdu.dm847.official.2025, role: official_scope_and_learning_outcomes}
+  - {id: james_witten_hastie_tibshirani.islr.2021, role: supervised_unsupervised_learning_and_validation}
+  - {id: murphy.probabilistic_ml.2022, role: probabilistic_models_calibration_and_dimensionality_reduction}
+  - {id: original.dm847.m14, role: original_examples_questions_and_explanations}
+
+limitations:
+  - Performance estimates may remain uncertain with small independent sample counts.
+  - Omics platforms, preprocessing, and populations can induce substantial domain shift.
+  - Feature importance and coefficient magnitude are model dependent and not causal evidence.
