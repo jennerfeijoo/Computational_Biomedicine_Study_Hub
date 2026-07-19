@@ -47,8 +47,7 @@ def test_dm847_modules_materialize_in_every_locale(locale: AppLocale) -> None:
         assert all(example.problem.strip() for example in module.worked_examples)
         assert all(exercise.solution.strip() for exercise in module.practice_exercises)
         assert all(
-            item.prompt.strip() and item.explanation.strip()
-            for item in module.assessment_items
+            item.prompt.strip() and item.explanation.strip() for item in module.assessment_items
         )
         assert all(item.prompt.strip() and item.explanation.strip() for item in bank)
         assert all(document.text.strip() for document in module.tutor_documents())
@@ -57,9 +56,7 @@ def test_dm847_modules_materialize_in_every_locale(locale: AppLocale) -> None:
 @pytest.mark.parametrize("bundle_index", range(10))
 def test_dm847_question_identity_is_stable_across_languages(bundle_index: int) -> None:
     localized_bundle = LOCALIZED_BUNDLES[bundle_index]
-    reference = localized_bundle.materialize(
-        AppLocale.SPANISH_SPAIN
-    ).objective_question_bank
+    reference = localized_bundle.materialize(AppLocale.SPANISH_SPAIN).objective_question_bank
     reference_ids = tuple(item.item_id for item in reference)
     reference_option_ids = tuple(item.option_ids for item in reference)
     reference_correct_ids = tuple(item.correct_option_ids for item in reference)
@@ -70,14 +67,9 @@ def test_dm847_question_identity_is_stable_across_languages(bundle_index: int) -
         assert tuple(item.option_ids for item in bank) == reference_option_ids
         assert tuple(item.correct_option_ids for item in bank) == reference_correct_ids
         assert len({item.item_id for item in bank}) == 20
-        assert all(
-            item.item_id.startswith(f"{EXPECTED_IDS[bundle_index]}.bank.")
-            for item in bank
-        )
+        assert all(item.item_id.startswith(f"{EXPECTED_IDS[bundle_index]}.bank.") for item in bank)
         assert all(len(item.correct_option_ids) == 1 for item in bank)
-        assert all(
-            set(item.correct_option_ids).issubset(set(item.option_ids)) for item in bank
-        )
+        assert all(set(item.correct_option_ids).issubset(set(item.option_ids)) for item in bank)
 
 
 def test_dm847_examples_and_starter_code_compile() -> None:
@@ -127,9 +119,7 @@ def test_dm847_practice_covers_the_supported_learning_cycle() -> None:
         ActivityType.MATCHING,
         ActivityType.ORDERING,
     }.issubset(practice_types)
-    assert {ActivityType.MULTIPLE_CHOICE, ActivityType.TRUE_FALSE}.issubset(
-        assessment_types
-    )
+    assert {ActivityType.MULTIPLE_CHOICE, ActivityType.TRUE_FALSE}.issubset(assessment_types)
 
 
 @pytest.mark.parametrize(

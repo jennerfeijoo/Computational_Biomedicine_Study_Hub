@@ -114,7 +114,11 @@ _SPEC = StandardModuleSpec(
         ),
         (
             "ora",
-            ("Enriquecimiento sobrerrepresentado", "Over-representation analysis", "Overrepræsentationsanalyse"),
+            (
+                "Enriquecimiento sobrerrepresentado",
+                "Over-representation analysis",
+                "Overrepræsentationsanalyse",
+            ),
             (
                 "El análisis hipergeométrico compara la superposición observada entre una lista seleccionada y un conjunto funcional con la distribución esperada al extraer sin reemplazo desde un universo. Requiere tamaños N del universo, K anotados, n seleccionados y k superpuestos. La hipótesis nula supone selección intercambiable dentro del universo definido.",
                 "Hypergeometric analysis compares observed overlap between a selected list and a functional set with the distribution expected from sampling without replacement from a universe. It requires universe size N, annotated count K, selected count n, and overlap k. The null assumes exchangeable selection within the defined universe.",
@@ -135,7 +139,11 @@ _SPEC = StandardModuleSpec(
         ),
         (
             "multiplicity-redundancy",
-            ("Multiplicidad y redundancia", "Multiplicity and redundancy", "Multiplicitet og redundans"),
+            (
+                "Multiplicidad y redundancia",
+                "Multiplicity and redundancy",
+                "Multiplicitet og redundans",
+            ),
             (
                 "Probar cientos o miles de conjuntos exige control de FDR u otra familia de error. Los conjuntos comparten genes y relaciones jerárquicas, por lo que los tests no son independientes y los resultados suelen ser redundantes. Reportar odds ratio, proporción de cobertura, genes responsables y estructura entre términos mejora la interpretación.",
                 "Testing hundreds or thousands of sets requires FDR or another error-family control. Sets share genes and hierarchical relationships, so tests are dependent and results are often redundant. Reporting odds ratio, coverage proportion, driving genes, and term structure improves interpretation.",
@@ -177,7 +185,11 @@ _SPEC = StandardModuleSpec(
         ),
         (
             "network-nulls",
-            ("Nulos y validación de red", "Network nulls and validation", "Netværksnulmodeller og validering"),
+            (
+                "Nulos y validación de red",
+                "Network nulls and validation",
+                "Netværksnulmodeller og validering",
+            ),
             (
                 "Permutar etiquetas de nodo prueba asociación manteniendo topología; reconfigurar aristas preservando grado prueba estructura más allá del grado; muestrear genes emparejados por anotación o expresión controla detectabilidad. El nulo debe conservar los sesgos que no son la señal de interés. La validación incluye redes independientes, perturbaciones y replicación por condición.",
                 "Permuting node labels tests association while retaining topology; rewiring edges with degree preservation tests structure beyond degree; sampling genes matched by annotation or expression controls detectability. The null should preserve biases that are not the signal of interest. Validation includes independent networks, perturbations, and replication by condition.",
@@ -252,7 +264,11 @@ print(graph_summary([("A", "B"), ("B", "C"), ("D", "E")]))
         ),
         (
             "m09.e02",
-            ("Probabilidad hipergeométrica", "Hypergeometric probability", "Hypergeometrisk sandsynlighed"),
+            (
+                "Probabilidad hipergeométrica",
+                "Hypergeometric probability",
+                "Hypergeometrisk sandsynlighed",
+            ),
             (
                 "Calcula la probabilidad exacta de observar k éxitos en una selección sin reemplazo.",
                 "Compute the exact probability of observing k successes in sampling without replacement.",
@@ -342,7 +358,13 @@ print([round(value, 3) for value in random_walk_with_restart(transition, [1.0, 0
                 "Distinguish a physical-interaction network from a co-expression network.",
                 "Skeln mellem et fysisk interaktionsnetværk og et co-ekspressionsnetværk.",
             ),
-            (("Compara significado de arista.", "Compare edge meaning.", "Sammenlign kantbetydning."),),
+            (
+                (
+                    "Compara significado de arista.",
+                    "Compare edge meaning.",
+                    "Sammenlign kantbetydning.",
+                ),
+            ),
             (
                 "Una arista física representa evidencia de contacto molecular; una arista de coexpresión representa asociación estadística entre perfiles y no demuestra contacto ni regulación directa.",
                 "A physical edge represents evidence of molecular contact; a co-expression edge represents statistical association between profiles and does not prove contact or direct regulation.",
@@ -358,10 +380,18 @@ print([round(value, 3) for value in random_walk_with_restart(transition, [1.0, 0
         (
             "m09.p02",
             "CODE_TRACING",
-            ("En estrella de cinco nodos tiene ¿qué grado central?", "What is the center degree in a five-node star?", "Hvilken grad har centrum i en stjerne med fem noder?"),
+            (
+                "En estrella de cinco nodos tiene ¿qué grado central?",
+                "What is the center degree in a five-node star?",
+                "Hvilken grad har centrum i en stjerne med fem noder?",
+            ),
             (("Cuenta las hojas.", "Count the leaves.", "Tæl bladene."),),
             ("4", "4", "4"),
-            ("Cada hoja tiene grado uno y el centro conecta con cuatro.", "Each leaf has degree one and the center connects to four.", "Hvert blad har grad én, og centrum forbinder til fire."),
+            (
+                "Cada hoja tiene grado uno y el centro conecta con cuatro.",
+                "Each leaf has degree one and the center connects to four.",
+                "Hvert blad har grad én, og centrum forbinder til fire.",
+            ),
             "",
         ),
         (
@@ -389,7 +419,13 @@ print([round(value, 3) for value in random_walk_with_restart(transition, [1.0, 0
                 "A term has FDR=0.01 but only two list genes. Interpret it.",
                 "En term har FDR=0,01 men kun to gener fra listen. Fortolk.",
             ),
-            (("Considera tamaño de efecto y estabilidad.", "Consider effect size and stability.", "Overvej effektstørrelse og stabilitet."),),
+            (
+                (
+                    "Considera tamaño de efecto y estabilidad.",
+                    "Consider effect size and stability.",
+                    "Overvej effektstørrelse og stabilitet.",
+                ),
+            ),
             (
                 "Es estadísticamente priorizable bajo el modelo, pero puede ser frágil y depender de dos genes. Deben reportarse k, K, odds ratio, identidad de genes, sensibilidad a retirar uno y redundancia con otros términos.",
                 "It is statistically prioritized under the model but may be fragile and driven by two genes. Report k, K, odds ratio, gene identities, leave-one-out sensitivity, and redundancy with other terms.",
@@ -410,7 +446,13 @@ print([round(value, 3) for value in random_walk_with_restart(transition, [1.0, 0
                 "Design a reproducible enrichment analysis for differentially expressed genes.",
                 "Design en reproducerbar berigelsesanalyse for differentielt udtrykte gener.",
             ),
-            (("Incluye universo y versión.", "Include universe and version.", "Medtag univers og version."),),
+            (
+                (
+                    "Incluye universo y versión.",
+                    "Include universe and version.",
+                    "Medtag univers og version.",
+                ),
+            ),
             (
                 "Fijar release de anotación; definir universo como genes incluidos en el test; mapear IDs con auditoría; elegir lista y dirección; ejecutar ORA; ajustar FDR; reportar solapamientos y tamaños; resumir redundancia; validar con ranking continuo o cohortes independientes.",
                 "Fix annotation release; define the universe as genes included in testing; audit ID mapping; choose list and direction; run ORA; adjust FDR; report overlaps and sizes; summarize redundancy; validate using continuous ranking or independent cohorts.",
@@ -431,7 +473,13 @@ print([round(value, 3) for value in random_walk_with_restart(transition, [1.0, 0
                 "Enrichment returns hundreds of significant terms dominated by heavily studied genes. Diagnose it.",
                 "Berigelse returnerer hundredvis af signifikante termer domineret af meget studerede gener. Diagnosticér.",
             ),
-            (("Revisa universo y sesgo de anotación.", "Inspect universe and annotation bias.", "Undersøg univers og annotationsbias."),),
+            (
+                (
+                    "Revisa universo y sesgo de anotación.",
+                    "Inspect universe and annotation bias.",
+                    "Undersøg univers og annotationsbias.",
+                ),
+            ),
             (
                 "Comprobar mapeos duplicados, universo inadecuado, profundidad de anotación y dependencia de hubs anotados; usar controles emparejados por detectabilidad/anotación, resumir términos redundantes y repetir sin genes dominantes.",
                 "Check duplicate mappings, an inappropriate universe, annotation depth, and dependence on annotated hubs; use controls matched by detectability/annotation, summarize redundant terms, and repeat without dominant genes.",
@@ -452,7 +500,13 @@ print([round(value, 3) for value in random_walk_with_restart(transition, [1.0, 0
                 "Explain a degree-preserving null for evaluating disease-gene proximity.",
                 "Forklar en gradbevarende nulmodel til evaluering af nærhed mellem sygdomsgener.",
             ),
-            (("Compara con selección uniforme.", "Compare with uniform selection.", "Sammenlign med uniform selektion."),),
+            (
+                (
+                    "Compara con selección uniforme.",
+                    "Compare with uniform selection.",
+                    "Sammenlign med uniform selektion.",
+                ),
+            ),
             (
                 "Muestrear conjuntos de nodos con distribución de grado similar o reconfigurar aristas preservando grados, recalcular la proximidad y comparar la observada. Así el resultado no se explica sólo porque los genes sean hubs.",
                 "Sample node sets with a similar degree distribution or rewire edges while preserving degrees, recompute proximity, and compare with observed proximity. Then the result is not explained only by genes being hubs.",
@@ -473,7 +527,13 @@ print([round(value, 3) for value in random_walk_with_restart(transition, [1.0, 0
                 "Order: define network, harmonize IDs, fix universe, compute statistic, generate null, adjust multiplicity, validate.",
                 "Ordén: definér netværk, harmonisér ID'er, fastlås univers, beregn statistik, generér nulmodel, justér multiplicitet, validér.",
             ),
-            (("La semántica precede al cálculo.", "Semantics precede computation.", "Semantik går forud for beregning."),),
+            (
+                (
+                    "La semántica precede al cálculo.",
+                    "Semantics precede computation.",
+                    "Semantik går forud for beregning.",
+                ),
+            ),
             (
                 "Definir red → armonizar IDs/versiones → fijar universo → calcular estadístico → generar nulo compatible → estimar significancia → ajustar multiplicidad → validar en evidencia independiente.",
                 "Define network → harmonize IDs/versions → fix universe → compute statistic → generate compatible null → estimate significance → adjust multiplicity → validate with independent evidence.",
@@ -490,14 +550,29 @@ print([round(value, 3) for value in random_walk_with_restart(transition, [1.0, 0
     mcqs=(
         (
             "001",
-            ("¿Qué debe acompañar a una arista?", "What should accompany an edge?", "Hvad bør følge en kant?"),
             (
-                ("semantics", ("Tipo, dirección y evidencia", "Type, direction, and evidence", "Type, retning og evidens")),
+                "¿Qué debe acompañar a una arista?",
+                "What should accompany an edge?",
+                "Hvad bør følge en kant?",
+            ),
+            (
+                (
+                    "semantics",
+                    (
+                        "Tipo, dirección y evidencia",
+                        "Type, direction, and evidence",
+                        "Type, retning og evidens",
+                    ),
+                ),
                 ("color", ("Sólo color", "Color only", "Kun farve")),
                 ("rank", ("Sólo rango", "Rank only", "Kun rang")),
             ),
             "semantics",
-            ("Sin semántica no se sabe qué relación representa.", "Without semantics the represented relationship is unknown.", "Uden semantik er den repræsenterede relation ukendt."),
+            (
+                "Sin semántica no se sabe qué relación representa.",
+                "Without semantics the represented relationship is unknown.",
+                "Uden semantik er den repræsenterede relation ukendt.",
+            ),
         ),
         (
             "002",
@@ -508,18 +583,30 @@ print([round(value, 3) for value in random_walk_with_restart(transition, [1.0, 0
                 ("expression", ("Expresión", "Expression", "Ekspression")),
             ),
             "neighbors",
-            ("En red simple no dirigida cuenta aristas incidentes.", "In a simple undirected graph it counts incident edges.", "I en simpel urettet graf tæller det incidentkanter."),
+            (
+                "En red simple no dirigida cuenta aristas incidentes.",
+                "In a simple undirected graph it counts incident edges.",
+                "I en simpel urettet graf tæller det incidentkanter.",
+            ),
         ),
         (
             "003",
-            ("¿Qué distribución usa ORA clásica?", "Which distribution does classical ORA use?", "Hvilken fordeling bruger klassisk ORA?"),
+            (
+                "¿Qué distribución usa ORA clásica?",
+                "Which distribution does classical ORA use?",
+                "Hvilken fordeling bruger klassisk ORA?",
+            ),
             (
                 ("hyper", ("Hipergeométrica", "Hypergeometric", "Hypergeometrisk")),
                 ("normal", ("Siempre normal", "Always normal", "Altid normal")),
                 ("poisson", ("Siempre Poisson", "Always Poisson", "Altid Poisson")),
             ),
             "hyper",
-            ("Modela extracción sin reemplazo.", "It models sampling without replacement.", "Den modellerer udtræk uden tilbagelægning."),
+            (
+                "Modela extracción sin reemplazo.",
+                "It models sampling without replacement.",
+                "Den modellerer udtræk uden tilbagelægning.",
+            ),
         ),
         (
             "004",
@@ -530,86 +617,322 @@ print([round(value, 3) for value in random_walk_with_restart(transition, [1.0, 0
                 ("terms", ("Número de términos", "Number of terms", "Antal termer")),
             ),
             "universe",
-            ("N es el conjunto de elementos elegibles.", "N is the set of eligible elements.", "N er sættet af kvalificerede elementer."),
+            (
+                "N es el conjunto de elementos elegibles.",
+                "N is the set of eligible elements.",
+                "N er sættet af kvalificerede elementer.",
+            ),
         ),
         (
             "005",
-            ("¿Qué controla Benjamini–Hochberg?", "What does Benjamini–Hochberg control?", "Hvad kontrollerer Benjamini–Hochberg?"),
+            (
+                "¿Qué controla Benjamini–Hochberg?",
+                "What does Benjamini–Hochberg control?",
+                "Hvad kontrollerer Benjamini–Hochberg?",
+            ),
             (
                 ("fdr", ("FDR", "FDR", "FDR")),
                 ("degree", ("Grado", "Degree", "Grad")),
                 ("coverage", ("Cobertura de red", "Network coverage", "Netværksdækning")),
             ),
             "fdr",
-            ("Controla la tasa esperada de falsos descubrimientos bajo condiciones apropiadas.", "It controls the expected false-discovery rate under appropriate conditions.", "Det kontrollerer den forventede falske opdagelsesrate under passende betingelser."),
+            (
+                "Controla la tasa esperada de falsos descubrimientos bajo condiciones apropiadas.",
+                "It controls the expected false-discovery rate under appropriate conditions.",
+                "Det kontrollerer den forventede falske opdagelsesrate under passende betingelser.",
+            ),
         ),
         (
             "006",
-            ("¿Qué parámetro retiene masa en semillas en RWR?", "Which parameter retains mass at seeds in RWR?", "Hvilken parameter bevarer masse ved seeds i RWR?"),
             (
-                ("restart", ("Probabilidad de reinicio", "Restart probability", "Restart-sandsynlighed")),
+                "¿Qué parámetro retiene masa en semillas en RWR?",
+                "Which parameter retains mass at seeds in RWR?",
+                "Hvilken parameter bevarer masse ved seeds i RWR?",
+            ),
+            (
+                (
+                    "restart",
+                    ("Probabilidad de reinicio", "Restart probability", "Restart-sandsynlighed"),
+                ),
                 ("degree", ("Grado máximo", "Maximum degree", "Maksimal grad")),
                 ("pvalue", ("p-valor", "p-value", "p-værdi")),
             ),
             "restart",
-            ("Equilibra difusión y retorno.", "It balances diffusion and return.", "Den balancerer diffusion og tilbagevenden."),
+            (
+                "Equilibra difusión y retorno.",
+                "It balances diffusion and return.",
+                "Den balancerer diffusion og tilbagevenden.",
+            ),
         ),
         (
             "007",
-            ("¿Qué nulo controla hubs?", "Which null controls for hubs?", "Hvilken nulmodel kontrollerer hubs?"),
             (
-                ("degree", ("Preservar distribución de grado", "Preserve degree distribution", "Bevar gradfordeling")),
-                ("uniform", ("Sólo muestreo uniforme", "Uniform sampling only", "Kun uniform sampling")),
-                ("labels", ("Cambiar nombres visuales", "Change display names", "Skift visningsnavne")),
+                "¿Qué nulo controla hubs?",
+                "Which null controls for hubs?",
+                "Hvilken nulmodel kontrollerer hubs?",
+            ),
+            (
+                (
+                    "degree",
+                    (
+                        "Preservar distribución de grado",
+                        "Preserve degree distribution",
+                        "Bevar gradfordeling",
+                    ),
+                ),
+                (
+                    "uniform",
+                    ("Sólo muestreo uniforme", "Uniform sampling only", "Kun uniform sampling"),
+                ),
+                (
+                    "labels",
+                    ("Cambiar nombres visuales", "Change display names", "Skift visningsnavne"),
+                ),
             ),
             "degree",
-            ("Impide que centralidad trivial explique el resultado.", "It prevents trivial centrality from explaining the result.", "Det forhindrer, at triviel centralitet forklarer resultatet."),
+            (
+                "Impide que centralidad trivial explique el resultado.",
+                "It prevents trivial centrality from explaining the result.",
+                "Det forhindrer, at triviel centralitet forklarer resultatet.",
+            ),
         ),
         (
             "008",
-            ("¿Qué describe un módulo de comunidad?", "What does a community module describe?", "Hvad beskriver et community-modul?"),
             (
-                ("dense", ("Grupo relativamente denso", "Relatively dense group", "Relativt tæt gruppe")),
-                ("pathway", ("Vía biológica demostrada", "Proven biological pathway", "Bevist biologisk pathway")),
+                "¿Qué describe un módulo de comunidad?",
+                "What does a community module describe?",
+                "Hvad beskriver et community-modul?",
+            ),
+            (
+                (
+                    "dense",
+                    ("Grupo relativamente denso", "Relatively dense group", "Relativt tæt gruppe"),
+                ),
+                (
+                    "pathway",
+                    (
+                        "Vía biológica demostrada",
+                        "Proven biological pathway",
+                        "Bevist biologisk pathway",
+                    ),
+                ),
                 ("causal", ("Mecanismo causal", "Causal mechanism", "Kausal mekanisme")),
             ),
             "dense",
-            ("La interpretación funcional requiere evidencia adicional.", "Functional interpretation requires additional evidence.", "Funktionel fortolkning kræver yderligere evidens."),
+            (
+                "La interpretación funcional requiere evidencia adicional.",
+                "Functional interpretation requires additional evidence.",
+                "Funktionel fortolkning kræver yderligere evidens.",
+            ),
         ),
         (
             "009",
-            ("¿Qué mejora interpretación de un término enriquecido?", "What improves interpretation of an enriched term?", "Hvad forbedrer fortolkningen af en beriget term?"),
             (
-                ("effect", ("Tamaño de efecto y genes responsables", "Effect size and driving genes", "Effektstørrelse og drivende gener")),
+                "¿Qué mejora interpretación de un término enriquecido?",
+                "What improves interpretation of an enriched term?",
+                "Hvad forbedrer fortolkningen af en beriget term?",
+            ),
+            (
+                (
+                    "effect",
+                    (
+                        "Tamaño de efecto y genes responsables",
+                        "Effect size and driving genes",
+                        "Effektstørrelse og drivende gener",
+                    ),
+                ),
                 ("pvalue", ("Sólo p-valor", "P-value only", "Kun p-værdi")),
                 ("title", ("Título largo", "Long title", "Lang titel")),
             ),
             "effect",
-            ("La significancia no explica magnitud ni mecanismo.", "Significance does not explain magnitude or mechanism.", "Signifikans forklarer ikke størrelse eller mekanisme."),
+            (
+                "La significancia no explica magnitud ni mecanismo.",
+                "Significance does not explain magnitude or mechanism.",
+                "Signifikans forklarer ikke størrelse eller mekanisme.",
+            ),
         ),
         (
             "010",
-            ("¿Qué red es mejor para validación?", "Which network is better for validation?", "Hvilket netværk er bedre til validering?"),
             (
-                ("independent", ("Derivada de evidencia independiente", "Derived from independent evidence", "Afledt af uafhængig evidens")),
-                ("same", ("La misma usada para descubrir", "The same used for discovery", "Den samme som til discovery")),
-                ("random", ("Una red sin metadatos", "A network without metadata", "Et netværk uden metadata")),
+                "¿Qué red es mejor para validación?",
+                "Which network is better for validation?",
+                "Hvilket netværk er bedre til validering?",
+            ),
+            (
+                (
+                    "independent",
+                    (
+                        "Derivada de evidencia independiente",
+                        "Derived from independent evidence",
+                        "Afledt af uafhængig evidens",
+                    ),
+                ),
+                (
+                    "same",
+                    (
+                        "La misma usada para descubrir",
+                        "The same used for discovery",
+                        "Den samme som til discovery",
+                    ),
+                ),
+                (
+                    "random",
+                    (
+                        "Una red sin metadatos",
+                        "A network without metadata",
+                        "Et netværk uden metadata",
+                    ),
+                ),
             ),
             "independent",
-            ("Reduce circularidad de evidencia.", "It reduces evidence circularity.", "Det reducerer cirkularitet i evidens."),
+            (
+                "Reduce circularidad de evidencia.",
+                "It reduces evidence circularity.",
+                "Det reducerer cirkularitet i evidens.",
+            ),
         ),
     ),
     true_false=(
-        ("011", ("Una arista de coexpresión demuestra interacción física.", "A co-expression edge proves physical interaction.", "En co-ekspressionskant beviser fysisk interaktion."), False, ("Representa asociación de perfiles.", "It represents profile association.", "Den repræsenterer profilassociation.")),
-        ("012", ("Centralidad alta demuestra causalidad.", "High centrality proves causality.", "Høj centralitet beviser kausalitet."), False, ("Es una propiedad topológica de la red observada.", "It is a topological property of the observed network.", "Det er en topologisk egenskab ved det observerede netværk.")),
-        ("013", ("El universo de ORA debe reflejar elementos evaluables.", "The ORA universe should reflect evaluable elements.", "ORA-universet bør afspejle evaluerbare elementer."), True, ("Define la población bajo el nulo.", "It defines the null population.", "Det definerer populationen under nulmodellen.")),
-        ("014", ("Un p-valor pequeño mide directamente tamaño de efecto.", "A small p-value directly measures effect size.", "En lille p-værdi måler direkte effektstørrelse."), False, ("Significancia y magnitud son distintas.", "Significance and magnitude are distinct.", "Signifikans og størrelse er forskellige.")),
-        ("015", ("Los términos funcionales suelen compartir genes.", "Functional terms often share genes.", "Funktionelle termer deler ofte gener."), True, ("Esto crea dependencia y redundancia.", "This creates dependence and redundancy.", "Det skaber afhængighed og redundans.")),
-        ("016", ("Random walk with restart depende del parámetro de reinicio.", "Random walk with restart depends on the restart parameter.", "Random walk with restart afhænger af restartparameteren."), True, ("Controla cuánto se conserva la señal inicial.", "It controls how much initial signal is retained.", "Den kontrollerer, hvor meget initialt signal bevares.")),
-        ("017", ("Un módulo de comunidad es automáticamente una vía.", "A community module is automatically a pathway.", "Et community-modul er automatisk en pathway."), False, ("La densidad computacional necesita anotación y validación.", "Computational density needs annotation and validation.", "Beregningsmæssig tæthed kræver annotation og validering.")),
-        ("018", ("Un nulo que preserva grado puede controlar sesgo de hubs.", "A degree-preserving null can control hub bias.", "En gradbevarende nulmodel kan kontrollere hub-bias."), True, ("Mantiene la distribución topológica relevante.", "It retains the relevant topological distribution.", "Den bevarer den relevante topologiske fordeling.")),
-        ("019", ("La versión de la red afecta reproducibilidad.", "Network version affects reproducibility.", "Netværksversion påvirker reproducerbarhed."), True, ("Nodos, aristas y evidencia cambian entre releases.", "Nodes, edges, and evidence change across releases.", "Noder, kanter og evidens ændres mellem releases.")),
-        ("020", ("En enriquecimiento significativo constituye recomendación clínica.", "Significant enrichment constitutes a clinical recommendation.", "Signifikant berigelse udgør en klinisk anbefaling."), False, ("Es evidencia exploratoria dependiente del modelo.", "It is model-dependent exploratory evidence.", "Det er modelafhængig eksplorativ evidens.")),
+        (
+            "011",
+            (
+                "Una arista de coexpresión demuestra interacción física.",
+                "A co-expression edge proves physical interaction.",
+                "En co-ekspressionskant beviser fysisk interaktion.",
+            ),
+            False,
+            (
+                "Representa asociación de perfiles.",
+                "It represents profile association.",
+                "Den repræsenterer profilassociation.",
+            ),
+        ),
+        (
+            "012",
+            (
+                "Centralidad alta demuestra causalidad.",
+                "High centrality proves causality.",
+                "Høj centralitet beviser kausalitet.",
+            ),
+            False,
+            (
+                "Es una propiedad topológica de la red observada.",
+                "It is a topological property of the observed network.",
+                "Det er en topologisk egenskab ved det observerede netværk.",
+            ),
+        ),
+        (
+            "013",
+            (
+                "El universo de ORA debe reflejar elementos evaluables.",
+                "The ORA universe should reflect evaluable elements.",
+                "ORA-universet bør afspejle evaluerbare elementer.",
+            ),
+            True,
+            (
+                "Define la población bajo el nulo.",
+                "It defines the null population.",
+                "Det definerer populationen under nulmodellen.",
+            ),
+        ),
+        (
+            "014",
+            (
+                "Un p-valor pequeño mide directamente tamaño de efecto.",
+                "A small p-value directly measures effect size.",
+                "En lille p-værdi måler direkte effektstørrelse.",
+            ),
+            False,
+            (
+                "Significancia y magnitud son distintas.",
+                "Significance and magnitude are distinct.",
+                "Signifikans og størrelse er forskellige.",
+            ),
+        ),
+        (
+            "015",
+            (
+                "Los términos funcionales suelen compartir genes.",
+                "Functional terms often share genes.",
+                "Funktionelle termer deler ofte gener.",
+            ),
+            True,
+            (
+                "Esto crea dependencia y redundancia.",
+                "This creates dependence and redundancy.",
+                "Det skaber afhængighed og redundans.",
+            ),
+        ),
+        (
+            "016",
+            (
+                "Random walk with restart depende del parámetro de reinicio.",
+                "Random walk with restart depends on the restart parameter.",
+                "Random walk with restart afhænger af restartparameteren.",
+            ),
+            True,
+            (
+                "Controla cuánto se conserva la señal inicial.",
+                "It controls how much initial signal is retained.",
+                "Den kontrollerer, hvor meget initialt signal bevares.",
+            ),
+        ),
+        (
+            "017",
+            (
+                "Un módulo de comunidad es automáticamente una vía.",
+                "A community module is automatically a pathway.",
+                "Et community-modul er automatisk en pathway.",
+            ),
+            False,
+            (
+                "La densidad computacional necesita anotación y validación.",
+                "Computational density needs annotation and validation.",
+                "Beregningsmæssig tæthed kræver annotation og validering.",
+            ),
+        ),
+        (
+            "018",
+            (
+                "Un nulo que preserva grado puede controlar sesgo de hubs.",
+                "A degree-preserving null can control hub bias.",
+                "En gradbevarende nulmodel kan kontrollere hub-bias.",
+            ),
+            True,
+            (
+                "Mantiene la distribución topológica relevante.",
+                "It retains the relevant topological distribution.",
+                "Den bevarer den relevante topologiske fordeling.",
+            ),
+        ),
+        (
+            "019",
+            (
+                "La versión de la red afecta reproducibilidad.",
+                "Network version affects reproducibility.",
+                "Netværksversion påvirker reproducerbarhed.",
+            ),
+            True,
+            (
+                "Nodos, aristas y evidencia cambian entre releases.",
+                "Nodes, edges, and evidence change across releases.",
+                "Noder, kanter og evidens ændres mellem releases.",
+            ),
+        ),
+        (
+            "020",
+            (
+                "En enriquecimiento significativo constituye recomendación clínica.",
+                "Significant enrichment constitutes a clinical recommendation.",
+                "Signifikant berigelse udgør en klinisk anbefaling.",
+            ),
+            False,
+            (
+                "Es evidencia exploratoria dependiente del modelo.",
+                "It is model-dependent exploratory evidence.",
+                "Det er modelafhængig eksplorativ evidens.",
+            ),
+        ),
     ),
     tutor=(
         (
@@ -618,43 +941,159 @@ print([round(value, 3) for value in random_walk_with_restart(transition, [1.0, 0
             "Netværksanalyse begynder med at definere, hvad noder og kanter repræsenterer, med eksplicit retning, vægt, betingelse, kilde og evidens. Centralitetsmål beskriver et observeret netværk og er følsomme over for dækning og bias, så de beviser ikke funktion eller kausalitet. Hypergeometrisk berigelse sammenligner en liste med annoterede sæt inden for et kvalificeret univers; den kræver korrektion for multiplicitet, effektstørrelse og drivende gener. Propagation og random walks spreder signal efter topologi og parametre, mens community-detektion giver beregningsmoduler, der kræver validering. Nulmodeller bør bevare grad, annotation eller detekterbarhed, når disse faktorer kan forklare resultatet. Versioner, ID'er og uafhængig evidens er essentielle for reproducerbarhed.",
         ),
         (
-            ("La semántica precede a la topología.", "Semantics precede topology.", "Semantik går forud for topologi."),
-            ("Centralidad no implica causalidad.", "Centrality does not imply causality.", "Centralitet indebærer ikke kausalitet."),
-            ("ORA depende del universo.", "ORA depends on the universe.", "ORA afhænger af universet."),
-            ("FDR y tamaño de efecto son complementarios.", "FDR and effect size are complementary.", "FDR og effektstørrelse er komplementære."),
-            ("Propagación depende de normalización y parámetros.", "Propagation depends on normalization and parameters.", "Propagation afhænger af normalisering og parametre."),
-            ("Los nulos deben conservar sesgos relevantes.", "Nulls should preserve relevant biases.", "Nulmodeller bør bevare relevante bias."),
+            (
+                "La semántica precede a la topología.",
+                "Semantics precede topology.",
+                "Semantik går forud for topologi.",
+            ),
+            (
+                "Centralidad no implica causalidad.",
+                "Centrality does not imply causality.",
+                "Centralitet indebærer ikke kausalitet.",
+            ),
+            (
+                "ORA depende del universo.",
+                "ORA depends on the universe.",
+                "ORA afhænger af universet.",
+            ),
+            (
+                "FDR y tamaño de efecto son complementarios.",
+                "FDR and effect size are complementary.",
+                "FDR og effektstørrelse er komplementære.",
+            ),
+            (
+                "Propagación depende de normalización y parámetros.",
+                "Propagation depends on normalization and parameters.",
+                "Propagation afhænger af normalisering og parametre.",
+            ),
+            (
+                "Los nulos deben conservar sesgos relevantes.",
+                "Nulls should preserve relevant biases.",
+                "Nulmodeller bør bevare relevante bias.",
+            ),
         ),
         (
-            ("Fusionar redes heterogéneas sin tipo de arista.", "Merging heterogeneous networks without edge type.", "At flette heterogene netværk uden kanttype."),
-            ("Interpretar hubs como genes esenciales.", "Interpreting hubs as essential genes.", "At fortolke hubs som essentielle gener."),
-            ("Usar todo el genoma como universo por defecto.", "Using the whole genome as the default universe.", "At bruge hele genomet som standardunivers."),
-            ("Reportar sólo términos y p-valores.", "Reporting only terms and p-values.", "At rapportere kun termer og p-værdier."),
-            ("Ignorar redundancia ontológica.", "Ignoring ontology redundancy.", "At ignorere ontologisk redundans."),
-            ("Usar un nulo uniforme con hubs.", "Using a uniform null with hubs.", "At bruge en uniform nulmodel med hubs."),
+            (
+                "Fusionar redes heterogéneas sin tipo de arista.",
+                "Merging heterogeneous networks without edge type.",
+                "At flette heterogene netværk uden kanttype.",
+            ),
+            (
+                "Interpretar hubs como genes esenciales.",
+                "Interpreting hubs as essential genes.",
+                "At fortolke hubs som essentielle gener.",
+            ),
+            (
+                "Usar todo el genoma como universo por defecto.",
+                "Using the whole genome as the default universe.",
+                "At bruge hele genomet som standardunivers.",
+            ),
+            (
+                "Reportar sólo términos y p-valores.",
+                "Reporting only terms and p-values.",
+                "At rapportere kun termer og p-værdier.",
+            ),
+            (
+                "Ignorar redundancia ontológica.",
+                "Ignoring ontology redundancy.",
+                "At ignorere ontologisk redundans.",
+            ),
+            (
+                "Usar un nulo uniforme con hubs.",
+                "Using a uniform null with hubs.",
+                "At bruge en uniform nulmodel med hubs.",
+            ),
         ),
         (
-            ("¿Qué significa exactamente esta arista?", "What exactly does this edge mean?", "Hvad betyder denne kant præcist?"),
-            ("¿Qué nodos podían aparecer en el análisis?", "Which nodes could appear in the analysis?", "Hvilke noder kunne indgå i analysen?"),
-            ("¿Qué genes impulsan el término?", "Which genes drive the term?", "Hvilke gener driver termen?"),
-            ("¿Cómo se controló multiplicidad?", "How was multiplicity controlled?", "Hvordan blev multiplicitet kontrolleret?"),
-            ("¿Qué sesgo conserva el nulo?", "Which bias does the null preserve?", "Hvilket bias bevarer nulmodellen?"),
-            ("¿Es estable en otra red o condición?", "Is it stable in another network or condition?", "Er det stabilt i et andet netværk eller en anden betingelse?"),
+            (
+                "¿Qué significa exactamente esta arista?",
+                "What exactly does this edge mean?",
+                "Hvad betyder denne kant præcist?",
+            ),
+            (
+                "¿Qué nodos podían aparecer en el análisis?",
+                "Which nodes could appear in the analysis?",
+                "Hvilke noder kunne indgå i analysen?",
+            ),
+            (
+                "¿Qué genes impulsan el término?",
+                "Which genes drive the term?",
+                "Hvilke gener driver termen?",
+            ),
+            (
+                "¿Cómo se controló multiplicidad?",
+                "How was multiplicity controlled?",
+                "Hvordan blev multiplicitet kontrolleret?",
+            ),
+            (
+                "¿Qué sesgo conserva el nulo?",
+                "Which bias does the null preserve?",
+                "Hvilket bias bevarer nulmodellen?",
+            ),
+            (
+                "¿Es estable en otra red o condición?",
+                "Is it stable in another network or condition?",
+                "Er det stabilt i et andet netværk eller en anden betingelse?",
+            ),
         ),
         (
-            ("Define nodos y aristas con precisión.", "Defines nodes and edges precisely.", "Definerer noder og kanter præcist."),
-            ("Interpreta topología con cautela.", "Interprets topology cautiously.", "Fortolker topologi forsigtigt."),
-            ("Formula ORA y universo correctamente.", "Formulates ORA and universe correctly.", "Formulerer ORA og univers korrekt."),
-            ("Reporta FDR, efecto y genes.", "Reports FDR, effect, and genes.", "Rapporterer FDR, effekt og gener."),
-            ("Explica propagación y módulos.", "Explains propagation and modules.", "Forklarer propagation og moduler."),
-            ("Diseña nulos estructuralmente apropiados.", "Designs structurally appropriate nulls.", "Designer strukturelt passende nulmodeller."),
+            (
+                "Define nodos y aristas con precisión.",
+                "Defines nodes and edges precisely.",
+                "Definerer noder og kanter præcist.",
+            ),
+            (
+                "Interpreta topología con cautela.",
+                "Interprets topology cautiously.",
+                "Fortolker topologi forsigtigt.",
+            ),
+            (
+                "Formula ORA y universo correctamente.",
+                "Formulates ORA and universe correctly.",
+                "Formulerer ORA og univers korrekt.",
+            ),
+            (
+                "Reporta FDR, efecto y genes.",
+                "Reports FDR, effect, and genes.",
+                "Rapporterer FDR, effekt og gener.",
+            ),
+            (
+                "Explica propagación y módulos.",
+                "Explains propagation and modules.",
+                "Forklarer propagation og moduler.",
+            ),
+            (
+                "Diseña nulos estructuralmente apropiados.",
+                "Designs structurally appropriate nulls.",
+                "Designer strukturelt passende nulmodeller.",
+            ),
         ),
         (
-            ("No inventar interacciones o vías.", "Do not invent interactions or pathways.", "Opfind ikke interaktioner eller pathways."),
-            ("No presentar centralidad como mecanismo.", "Do not present centrality as mechanism.", "Præsenter ikke centralitet som mekanisme."),
-            ("No ocultar universo o release.", "Do not hide universe or release.", "Skjul ikke univers eller release."),
-            ("No convertir enriquecimiento en consejo clínico.", "Do not turn enrichment into clinical advice.", "Omsæt ikke berigelse til klinisk rådgivning."),
-            ("Responder en el idioma activo.", "Answer in the active language.", "Svar på det aktive sprog."),
+            (
+                "No inventar interacciones o vías.",
+                "Do not invent interactions or pathways.",
+                "Opfind ikke interaktioner eller pathways.",
+            ),
+            (
+                "No presentar centralidad como mecanismo.",
+                "Do not present centrality as mechanism.",
+                "Præsenter ikke centralitet som mekanisme.",
+            ),
+            (
+                "No ocultar universo o release.",
+                "Do not hide universe or release.",
+                "Skjul ikke univers eller release.",
+            ),
+            (
+                "No convertir enriquecimiento en consejo clínico.",
+                "Do not turn enrichment into clinical advice.",
+                "Omsæt ikke berigelse til klinisk rådgivning.",
+            ),
+            (
+                "Responder en el idioma activo.",
+                "Answer in the active language.",
+                "Svar på det aktive sprog.",
+            ),
         ),
         (
             "Graph theory foundations for biological networks.",

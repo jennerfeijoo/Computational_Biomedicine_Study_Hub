@@ -9,71 +9,941 @@ from .standard import StandardModuleSpec, build_module, build_question_bank, mat
 
 _SPEC = StandardModuleSpec(
     module_id="dm847.m04",
-    title=("Alineamiento por pares y programación dinámica", "Pairwise alignment and dynamic programming", "Parvis alignment og dynamisk programmering"),
-    summary=("Formula alineamientos globales y locales mediante recurrencias, matrices de puntuación, penalizaciones de gaps y traceback, evaluando supuestos y ambigüedad.", "Formulate global and local alignments through recurrences, scoring matrices, gap penalties, and traceback while evaluating assumptions and ambiguity.", "Formulér globale og lokale alignments gennem rekurrenser, scoringsmatricer, gap-straffe og traceback med vurdering af antagelser og tvetydighed."),
+    title=(
+        "Alineamiento por pares y programación dinámica",
+        "Pairwise alignment and dynamic programming",
+        "Parvis alignment og dynamisk programmering",
+    ),
+    summary=(
+        "Formula alineamientos globales y locales mediante recurrencias, matrices de puntuación, penalizaciones de gaps y traceback, evaluando supuestos y ambigüedad.",
+        "Formulate global and local alignments through recurrences, scoring matrices, gap penalties, and traceback while evaluating assumptions and ambiguity.",
+        "Formulér globale og lokale alignments gennem rekurrenser, scoringsmatricer, gap-straffe og traceback med vurdering af antagelser og tvetydighed.",
+    ),
     objectives=(
-        ("m04.o1", ("Distinguir alineamiento global, local y semiglobal.", "Distinguish global, local, and semiglobal alignment.", "Skelne mellem global, lokal og semiglobal alignment.")),
-        ("m04.o2", ("Derivar la recurrencia de Needleman–Wunsch.", "Derive the Needleman–Wunsch recurrence.", "Udlede Needleman–Wunsch-rekurrensen.")),
-        ("m04.o3", ("Derivar la recurrencia de Smith–Waterman y su reinicio en cero.", "Derive the Smith–Waterman recurrence and zero reset.", "Udlede Smith–Waterman-rekurrensen og nulreset.")),
-        ("m04.o4", ("Implementar traceback y reconocer alineamientos óptimos múltiples.", "Implement traceback and recognize multiple optimal alignments.", "Implementere traceback og genkende flere optimale alignments.")),
-        ("m04.o5", ("Comparar gaps lineales y afines.", "Compare linear and affine gaps.", "Sammenligne lineære og affine gaps.")),
-        ("m04.o6", ("Evaluar complejidad, parámetros y significado biológico del resultado.", "Evaluate complexity, parameters, and biological meaning of the result.", "Vurdere kompleksitet, parametre og biologisk betydning af resultatet.")),
+        (
+            "m04.o1",
+            (
+                "Distinguir alineamiento global, local y semiglobal.",
+                "Distinguish global, local, and semiglobal alignment.",
+                "Skelne mellem global, lokal og semiglobal alignment.",
+            ),
+        ),
+        (
+            "m04.o2",
+            (
+                "Derivar la recurrencia de Needleman–Wunsch.",
+                "Derive the Needleman–Wunsch recurrence.",
+                "Udlede Needleman–Wunsch-rekurrensen.",
+            ),
+        ),
+        (
+            "m04.o3",
+            (
+                "Derivar la recurrencia de Smith–Waterman y su reinicio en cero.",
+                "Derive the Smith–Waterman recurrence and zero reset.",
+                "Udlede Smith–Waterman-rekurrensen og nulreset.",
+            ),
+        ),
+        (
+            "m04.o4",
+            (
+                "Implementar traceback y reconocer alineamientos óptimos múltiples.",
+                "Implement traceback and recognize multiple optimal alignments.",
+                "Implementere traceback og genkende flere optimale alignments.",
+            ),
+        ),
+        (
+            "m04.o5",
+            (
+                "Comparar gaps lineales y afines.",
+                "Compare linear and affine gaps.",
+                "Sammenligne lineære og affine gaps.",
+            ),
+        ),
+        (
+            "m04.o6",
+            (
+                "Evaluar complejidad, parámetros y significado biológico del resultado.",
+                "Evaluate complexity, parameters, and biological meaning of the result.",
+                "Vurdere kompleksitet, parametre og biologisk betydning af resultatet.",
+            ),
+        ),
     ),
     concepts=(
-        ("alignment-objective", ("Objetivo del alineamiento", "Alignment objective", "Alignmentens formål"), ("Un alineamiento propone correspondencias entre posiciones y gaps bajo una función de puntuación. No descubre una verdad única: optimiza un modelo concreto. El objetivo puede cubrir secuencias completas, regiones locales o extremos libres según la pregunta.", "An alignment proposes correspondences between positions and gaps under a scoring function. It does not discover a unique truth; it optimizes a specific model. The objective may cover complete sequences, local regions, or free ends depending on the question.", "En alignment foreslår korrespondancer mellem positioner og gaps under en scoringsfunktion. Den finder ikke én unik sandhed, men optimerer en bestemt model. Målet kan dække hele sekvenser, lokale regioner eller frie ender afhængigt af spørgsmålet."), (("La función de score define óptimo.", "The scoring function defines optimality.", "Scoringsfunktionen definerer optimalitet."), ("Global y local responden preguntas diferentes.", "Global and local answer different questions.", "Global og lokal besvarer forskellige spørgsmål."))),
-        ("dynamic-programming", ("Programación dinámica", "Dynamic programming", "Dynamisk programmering"), ("La programación dinámica divide el problema en prefijos y reutiliza soluciones. Cada celda representa el mejor score para un subproblema; las transiciones diagonal, vertical y horizontal corresponden a sustitución, gap en una secuencia y gap en la otra.", "Dynamic programming splits the problem into prefixes and reuses solutions. Each cell represents the best score for a subproblem; diagonal, vertical, and horizontal transitions correspond to substitution, a gap in one sequence, and a gap in the other.", "Dynamisk programmering opdeler problemet i præfikser og genbruger løsninger. Hver celle repræsenterer den bedste score for et delproblem; diagonale, vertikale og horisontale overgange svarer til substitution, gap i den ene sekvens og gap i den anden."), (("El estado debe tener significado preciso.", "The state must have precise meaning.", "Tilstanden skal have præcis betydning."), ("La inicialización forma parte de la recurrencia.", "Initialization is part of the recurrence.", "Initialisering er en del af rekurrensen."))),
-        ("global-alignment", ("Needleman–Wunsch", "Needleman–Wunsch", "Needleman–Wunsch"), ("El alineamiento global penaliza extremos y busca la mejor correspondencia completa. La primera fila y columna acumulan penalizaciones de gap. La celda final contiene el score óptimo global y el traceback termina en el origen.", "Global alignment penalizes ends and seeks the best complete correspondence. The first row and column accumulate gap penalties. The final cell contains the optimal global score and traceback ends at the origin.", "Global alignment straffer ender og søger den bedste komplette korrespondance. Første række og kolonne akkumulerer gap-straffe. Den sidste celle indeholder den optimale globale score, og traceback ender i origo."), (("Los extremos se penalizan.", "Ends are penalized.", "Ender straffes."), ("El traceback parte de la esquina final.", "Traceback starts at the final corner.", "Traceback starter i det sidste hjørne."))),
-        ("local-alignment", ("Smith–Waterman", "Smith–Waterman", "Smith–Waterman"), ("El alineamiento local añade cero a la recurrencia, impidiendo que una región negativa contamine una coincidencia posterior. El score óptimo es el máximo de toda la matriz y el traceback se detiene al alcanzar cero.", "Local alignment adds zero to the recurrence, preventing a negative region from contaminating a later match. The optimal score is the maximum over the matrix and traceback stops at zero.", "Lokal alignment tilføjer nul til rekurrensen, så en negativ region ikke forurener et senere match. Den optimale score er maksimum i hele matricen, og traceback stopper ved nul."), (("El reinicio en cero elimina prefijos desfavorables.", "Zero reset removes unfavorable prefixes.", "Nulreset fjerner ugunstige præfikser."), ("El máximo puede aparecer en cualquier celda.", "The maximum may occur in any cell.", "Maksimum kan forekomme i enhver celle."))),
-        ("affine-gaps", ("Penalizaciones afines", "Affine gap penalties", "Affine gap-straffe"), ("Un gap largo suele modelarse mejor como apertura más extensión que como penalización lineal por símbolo. Se usan estados o matrices separadas para match, gap horizontal y gap vertical. Esto aumenta complejidad constante, pero conserva O(nm) en tiempo.", "A long gap is often modeled better as opening plus extension than as a linear per-symbol penalty. Separate states or matrices are used for match, horizontal gap, and vertical gap. This increases constant complexity but retains O(nm) time.", "Et langt gap modelleres ofte bedre som åbning plus forlængelse end som lineær straf pr. symbol. Separate tilstande eller matricer bruges til match, horisontalt gap og vertikalt gap. Dette øger den konstante kompleksitet, men bevarer O(nm) tid."), (("Abrir un gap cuesta más que extenderlo.", "Opening a gap costs more than extending it.", "At åbne et gap koster mere end at forlænge det."), ("Se requieren estados adicionales.", "Additional states are required.", "Yderligere tilstande kræves."))),
-        ("traceback-validation", ("Traceback y validación", "Traceback and validation", "Traceback og validering"), ("Empates generan múltiples alineamientos óptimos. Guardar una sola flecha elige uno arbitrariamente. La validación incluye recalcular el score del alineamiento, comprobar que al retirar gaps se recuperan las secuencias y comparar sensibilidad a parámetros.", "Ties generate multiple optimal alignments. Storing one pointer chooses one arbitrarily. Validation includes recomputing alignment score, checking that removing gaps recovers the sequences, and testing sensitivity to parameters.", "Ties genererer flere optimale alignments. Lagring af én pil vælger én vilkårligt. Validering omfatter genberegning af alignment-score, kontrol af at fjernelse af gaps genskaber sekvenserne og test af parameterfølsomhed."), (("Un score óptimo puede tener varios tracebacks.", "An optimal score may have several tracebacks.", "En optimal score kan have flere tracebacks."), ("Recalcular el score detecta errores de traceback.", "Recomputing score detects traceback errors.", "Genberegning af score opdager traceback-fejl."))),
+        (
+            "alignment-objective",
+            ("Objetivo del alineamiento", "Alignment objective", "Alignmentens formål"),
+            (
+                "Un alineamiento propone correspondencias entre posiciones y gaps bajo una función de puntuación. No descubre una verdad única: optimiza un modelo concreto. El objetivo puede cubrir secuencias completas, regiones locales o extremos libres según la pregunta.",
+                "An alignment proposes correspondences between positions and gaps under a scoring function. It does not discover a unique truth; it optimizes a specific model. The objective may cover complete sequences, local regions, or free ends depending on the question.",
+                "En alignment foreslår korrespondancer mellem positioner og gaps under en scoringsfunktion. Den finder ikke én unik sandhed, men optimerer en bestemt model. Målet kan dække hele sekvenser, lokale regioner eller frie ender afhængigt af spørgsmålet.",
+            ),
+            (
+                (
+                    "La función de score define óptimo.",
+                    "The scoring function defines optimality.",
+                    "Scoringsfunktionen definerer optimalitet.",
+                ),
+                (
+                    "Global y local responden preguntas diferentes.",
+                    "Global and local answer different questions.",
+                    "Global og lokal besvarer forskellige spørgsmål.",
+                ),
+            ),
+        ),
+        (
+            "dynamic-programming",
+            ("Programación dinámica", "Dynamic programming", "Dynamisk programmering"),
+            (
+                "La programación dinámica divide el problema en prefijos y reutiliza soluciones. Cada celda representa el mejor score para un subproblema; las transiciones diagonal, vertical y horizontal corresponden a sustitución, gap en una secuencia y gap en la otra.",
+                "Dynamic programming splits the problem into prefixes and reuses solutions. Each cell represents the best score for a subproblem; diagonal, vertical, and horizontal transitions correspond to substitution, a gap in one sequence, and a gap in the other.",
+                "Dynamisk programmering opdeler problemet i præfikser og genbruger løsninger. Hver celle repræsenterer den bedste score for et delproblem; diagonale, vertikale og horisontale overgange svarer til substitution, gap i den ene sekvens og gap i den anden.",
+            ),
+            (
+                (
+                    "El estado debe tener significado preciso.",
+                    "The state must have precise meaning.",
+                    "Tilstanden skal have præcis betydning.",
+                ),
+                (
+                    "La inicialización forma parte de la recurrencia.",
+                    "Initialization is part of the recurrence.",
+                    "Initialisering er en del af rekurrensen.",
+                ),
+            ),
+        ),
+        (
+            "global-alignment",
+            ("Needleman–Wunsch", "Needleman–Wunsch", "Needleman–Wunsch"),
+            (
+                "El alineamiento global penaliza extremos y busca la mejor correspondencia completa. La primera fila y columna acumulan penalizaciones de gap. La celda final contiene el score óptimo global y el traceback termina en el origen.",
+                "Global alignment penalizes ends and seeks the best complete correspondence. The first row and column accumulate gap penalties. The final cell contains the optimal global score and traceback ends at the origin.",
+                "Global alignment straffer ender og søger den bedste komplette korrespondance. Første række og kolonne akkumulerer gap-straffe. Den sidste celle indeholder den optimale globale score, og traceback ender i origo.",
+            ),
+            (
+                ("Los extremos se penalizan.", "Ends are penalized.", "Ender straffes."),
+                (
+                    "El traceback parte de la esquina final.",
+                    "Traceback starts at the final corner.",
+                    "Traceback starter i det sidste hjørne.",
+                ),
+            ),
+        ),
+        (
+            "local-alignment",
+            ("Smith–Waterman", "Smith–Waterman", "Smith–Waterman"),
+            (
+                "El alineamiento local añade cero a la recurrencia, impidiendo que una región negativa contamine una coincidencia posterior. El score óptimo es el máximo de toda la matriz y el traceback se detiene al alcanzar cero.",
+                "Local alignment adds zero to the recurrence, preventing a negative region from contaminating a later match. The optimal score is the maximum over the matrix and traceback stops at zero.",
+                "Lokal alignment tilføjer nul til rekurrensen, så en negativ region ikke forurener et senere match. Den optimale score er maksimum i hele matricen, og traceback stopper ved nul.",
+            ),
+            (
+                (
+                    "El reinicio en cero elimina prefijos desfavorables.",
+                    "Zero reset removes unfavorable prefixes.",
+                    "Nulreset fjerner ugunstige præfikser.",
+                ),
+                (
+                    "El máximo puede aparecer en cualquier celda.",
+                    "The maximum may occur in any cell.",
+                    "Maksimum kan forekomme i enhver celle.",
+                ),
+            ),
+        ),
+        (
+            "affine-gaps",
+            ("Penalizaciones afines", "Affine gap penalties", "Affine gap-straffe"),
+            (
+                "Un gap largo suele modelarse mejor como apertura más extensión que como penalización lineal por símbolo. Se usan estados o matrices separadas para match, gap horizontal y gap vertical. Esto aumenta complejidad constante, pero conserva O(nm) en tiempo.",
+                "A long gap is often modeled better as opening plus extension than as a linear per-symbol penalty. Separate states or matrices are used for match, horizontal gap, and vertical gap. This increases constant complexity but retains O(nm) time.",
+                "Et langt gap modelleres ofte bedre som åbning plus forlængelse end som lineær straf pr. symbol. Separate tilstande eller matricer bruges til match, horisontalt gap og vertikalt gap. Dette øger den konstante kompleksitet, men bevarer O(nm) tid.",
+            ),
+            (
+                (
+                    "Abrir un gap cuesta más que extenderlo.",
+                    "Opening a gap costs more than extending it.",
+                    "At åbne et gap koster mere end at forlænge det.",
+                ),
+                (
+                    "Se requieren estados adicionales.",
+                    "Additional states are required.",
+                    "Yderligere tilstande kræves.",
+                ),
+            ),
+        ),
+        (
+            "traceback-validation",
+            ("Traceback y validación", "Traceback and validation", "Traceback og validering"),
+            (
+                "Empates generan múltiples alineamientos óptimos. Guardar una sola flecha elige uno arbitrariamente. La validación incluye recalcular el score del alineamiento, comprobar que al retirar gaps se recuperan las secuencias y comparar sensibilidad a parámetros.",
+                "Ties generate multiple optimal alignments. Storing one pointer chooses one arbitrarily. Validation includes recomputing alignment score, checking that removing gaps recovers the sequences, and testing sensitivity to parameters.",
+                "Ties genererer flere optimale alignments. Lagring af én pil vælger én vilkårligt. Validering omfatter genberegning af alignment-score, kontrol af at fjernelse af gaps genskaber sekvenserne og test af parameterfølsomhed.",
+            ),
+            (
+                (
+                    "Un score óptimo puede tener varios tracebacks.",
+                    "An optimal score may have several tracebacks.",
+                    "En optimal score kan have flere tracebacks.",
+                ),
+                (
+                    "Recalcular el score detecta errores de traceback.",
+                    "Recomputing score detects traceback errors.",
+                    "Genberegning af score opdager traceback-fejl.",
+                ),
+            ),
+        ),
     ),
     examples=(
-        ("m04.e01", ("Needleman–Wunsch mínimo", "Minimal Needleman–Wunsch", "Minimal Needleman–Wunsch"), ("Calcula sólo el score global con match=1, mismatch=-1 y gap=-1.", "Compute only the global score with match=1, mismatch=-1, and gap=-1.", "Beregn kun den globale score med match=1, mismatch=-1 og gap=-1."), (("Inicializa bordes con gaps.", "Initialize borders with gaps.", "Initialisér kanter med gaps."), ("Cada celda toma el máximo de tres transiciones.", "Each cell takes the maximum of three transitions.", "Hver celle tager maksimum af tre overgange.")), """def global_score(a: str, b: str) -> int:\n    gap = -1\n    matrix = [[0] * (len(b) + 1) for _ in range(len(a) + 1)]\n    for i in range(1, len(a) + 1):\n        matrix[i][0] = i * gap\n    for j in range(1, len(b) + 1):\n        matrix[0][j] = j * gap\n    for i, left in enumerate(a, start=1):\n        for j, right in enumerate(b, start=1):\n            substitution = 1 if left == right else -1\n            matrix[i][j] = max(\n                matrix[i - 1][j - 1] + substitution,\n                matrix[i - 1][j] + gap,\n                matrix[i][j - 1] + gap,\n            )\n    return matrix[-1][-1]\n\n\nprint(global_score(\"ACG\", \"AG\"))\n""", "1", ("El score resume el óptimo global, pero aún no reconstruye el alineamiento.", "The score summarizes the global optimum but does not yet reconstruct the alignment.", "Scoren opsummerer det globale optimum, men rekonstruerer endnu ikke alignmenten.")),
-        ("m04.e02", ("Smith–Waterman mínimo", "Minimal Smith–Waterman", "Minimal Smith–Waterman"), ("Obtén el mejor score local reiniciando valores negativos en cero.", "Obtain the best local score by resetting negative values to zero.", "Find den bedste lokale score ved at nulstille negative værdier."), (("La matriz comienza en cero.", "The matrix starts at zero.", "Matricen starter ved nul."), ("Se conserva el máximo global observado.", "The global maximum observed is retained.", "Det observerede globale maksimum bevares.")), """def local_score(a: str, b: str) -> int:\n    matrix = [[0] * (len(b) + 1) for _ in range(len(a) + 1)]\n    best = 0\n    for i, left in enumerate(a, start=1):\n        for j, right in enumerate(b, start=1):\n            substitution = 2 if left == right else -1\n            matrix[i][j] = max(\n                0,\n                matrix[i - 1][j - 1] + substitution,\n                matrix[i - 1][j] - 2,\n                matrix[i][j - 1] - 2,\n            )\n            best = max(best, matrix[i][j])\n    return best\n\n\nprint(local_score(\"TTACG\", \"ACGAA\"))\n""", "6", ("La subcadena ACG produce el óptimo local.", "The ACG substring produces the local optimum.", "Delstrengen ACG giver det lokale optimum.")),
-        ("m04.e03", ("Validar un alineamiento", "Validate an alignment", "Validér en alignment"), ("Recalcula score y comprueba recuperación de secuencias.", "Recompute score and check sequence recovery.", "Genberegn score og kontrollér sekvensgendannelse."), (("Los alineamientos deben tener igual longitud.", "Aligned strings must have equal length.", "Alignede strenge skal have samme længde."), ("Eliminar '-' debe recuperar entradas.", "Removing '-' must recover inputs.", "Fjernelse af '-' skal genskabe input.")), """def alignment_score(aligned_a: str, aligned_b: str) -> int:\n    if len(aligned_a) != len(aligned_b):\n        raise ValueError(\"unequal alignment lengths\")\n    score = 0\n    for left, right in zip(aligned_a, aligned_b, strict=True):\n        if \"-\" in (left, right):\n            score -= 1\n        else:\n            score += 1 if left == right else -1\n    return score\n\n\na, b = \"ACG\", \"A-G\"\nassert a.replace(\"-\", \"\") == \"ACG\"\nassert b.replace(\"-\", \"\") == \"AG\"\nprint(alignment_score(a, b))\n""", "1", ("La comprobación protege el contrato del traceback.", "The check protects the traceback contract.", "Kontrollen beskytter traceback-kontrakten.")),
+        (
+            "m04.e01",
+            ("Needleman–Wunsch mínimo", "Minimal Needleman–Wunsch", "Minimal Needleman–Wunsch"),
+            (
+                "Calcula sólo el score global con match=1, mismatch=-1 y gap=-1.",
+                "Compute only the global score with match=1, mismatch=-1, and gap=-1.",
+                "Beregn kun den globale score med match=1, mismatch=-1 og gap=-1.",
+            ),
+            (
+                (
+                    "Inicializa bordes con gaps.",
+                    "Initialize borders with gaps.",
+                    "Initialisér kanter med gaps.",
+                ),
+                (
+                    "Cada celda toma el máximo de tres transiciones.",
+                    "Each cell takes the maximum of three transitions.",
+                    "Hver celle tager maksimum af tre overgange.",
+                ),
+            ),
+            """def global_score(a: str, b: str) -> int:\n    gap = -1\n    matrix = [[0] * (len(b) + 1) for _ in range(len(a) + 1)]\n    for i in range(1, len(a) + 1):\n        matrix[i][0] = i * gap\n    for j in range(1, len(b) + 1):\n        matrix[0][j] = j * gap\n    for i, left in enumerate(a, start=1):\n        for j, right in enumerate(b, start=1):\n            substitution = 1 if left == right else -1\n            matrix[i][j] = max(\n                matrix[i - 1][j - 1] + substitution,\n                matrix[i - 1][j] + gap,\n                matrix[i][j - 1] + gap,\n            )\n    return matrix[-1][-1]\n\n\nprint(global_score(\"ACG\", \"AG\"))\n""",
+            "1",
+            (
+                "El score resume el óptimo global, pero aún no reconstruye el alineamiento.",
+                "The score summarizes the global optimum but does not yet reconstruct the alignment.",
+                "Scoren opsummerer det globale optimum, men rekonstruerer endnu ikke alignmenten.",
+            ),
+        ),
+        (
+            "m04.e02",
+            ("Smith–Waterman mínimo", "Minimal Smith–Waterman", "Minimal Smith–Waterman"),
+            (
+                "Obtén el mejor score local reiniciando valores negativos en cero.",
+                "Obtain the best local score by resetting negative values to zero.",
+                "Find den bedste lokale score ved at nulstille negative værdier.",
+            ),
+            (
+                (
+                    "La matriz comienza en cero.",
+                    "The matrix starts at zero.",
+                    "Matricen starter ved nul.",
+                ),
+                (
+                    "Se conserva el máximo global observado.",
+                    "The global maximum observed is retained.",
+                    "Det observerede globale maksimum bevares.",
+                ),
+            ),
+            """def local_score(a: str, b: str) -> int:\n    matrix = [[0] * (len(b) + 1) for _ in range(len(a) + 1)]\n    best = 0\n    for i, left in enumerate(a, start=1):\n        for j, right in enumerate(b, start=1):\n            substitution = 2 if left == right else -1\n            matrix[i][j] = max(\n                0,\n                matrix[i - 1][j - 1] + substitution,\n                matrix[i - 1][j] - 2,\n                matrix[i][j - 1] - 2,\n            )\n            best = max(best, matrix[i][j])\n    return best\n\n\nprint(local_score(\"TTACG\", \"ACGAA\"))\n""",
+            "6",
+            (
+                "La subcadena ACG produce el óptimo local.",
+                "The ACG substring produces the local optimum.",
+                "Delstrengen ACG giver det lokale optimum.",
+            ),
+        ),
+        (
+            "m04.e03",
+            ("Validar un alineamiento", "Validate an alignment", "Validér en alignment"),
+            (
+                "Recalcula score y comprueba recuperación de secuencias.",
+                "Recompute score and check sequence recovery.",
+                "Genberegn score og kontrollér sekvensgendannelse.",
+            ),
+            (
+                (
+                    "Los alineamientos deben tener igual longitud.",
+                    "Aligned strings must have equal length.",
+                    "Alignede strenge skal have samme længde.",
+                ),
+                (
+                    "Eliminar '-' debe recuperar entradas.",
+                    "Removing '-' must recover inputs.",
+                    "Fjernelse af '-' skal genskabe input.",
+                ),
+            ),
+            """def alignment_score(aligned_a: str, aligned_b: str) -> int:\n    if len(aligned_a) != len(aligned_b):\n        raise ValueError(\"unequal alignment lengths\")\n    score = 0\n    for left, right in zip(aligned_a, aligned_b, strict=True):\n        if \"-\" in (left, right):\n            score -= 1\n        else:\n            score += 1 if left == right else -1\n    return score\n\n\na, b = \"ACG\", \"A-G\"\nassert a.replace(\"-\", \"\") == \"ACG\"\nassert b.replace(\"-\", \"\") == \"AG\"\nprint(alignment_score(a, b))\n""",
+            "1",
+            (
+                "La comprobación protege el contrato del traceback.",
+                "The check protects the traceback contract.",
+                "Kontrollen beskytter traceback-kontrakten.",
+            ),
+        ),
     ),
     practices=(
-        ("m04.p01", "SHORT_ANSWER", ("¿Cuándo elegir alineamiento global?", "When should global alignment be chosen?", "Hvornår bør global alignment vælges?"), (("Piensa en cobertura completa.", "Think complete coverage.", "Tænk komplet dækning."),), ("Cuando las secuencias son comparables a lo largo de toda su longitud y los extremos deben contribuir al objetivo.", "When sequences are comparable across their full length and ends should contribute to the objective.", "Når sekvenser er sammenlignelige over hele længden, og enderne skal bidrage til målet."), ("Para dominios compartidos dentro de secuencias largas suele preferirse local.", "For shared domains inside long sequences, local is often preferred.", "For delte domæner i lange sekvenser foretrækkes ofte lokal alignment."), ""),
-        ("m04.p02", "FILL_IN_THE_BLANK", ("Smith–Waterman añade la alternativa ____ a la recurrencia.", "Smith–Waterman adds the alternative ____ to the recurrence.", "Smith–Waterman tilføjer alternativet ____ til rekurrensen."), (("Evita scores negativos acumulados.", "It avoids accumulated negative scores.", "Det undgår akkumulerede negative scores."),), ("0", "0", "0"), ("El reinicio permite empezar una región local nueva.", "Reset allows a new local region to start.", "Reset gør det muligt at starte en ny lokal region."), ""),
-        ("m04.p03", "CODE_TRACING", ("Traza la primera fila global para gap=-2 y longitud 3.", "Trace the first global row for gap=-2 and length 3.", "Gennemgå den første globale række for gap=-2 og længde 3."), (("Acumula penalizaciones.", "Accumulate penalties.", "Akkumulér straffe."),), ("[0, -2, -4, -6]", "[0, -2, -4, -6]", "[0, -2, -4, -6]"), ("Representa alinear un prefijo vacío con gaps.", "It represents aligning an empty prefix with gaps.", "Det repræsenterer alignment af et tomt præfiks med gaps."), ""),
-        ("m04.p04", "DATA_INTERPRETATION", ("Dos parametrizaciones cambian radicalmente el alineamiento. Interpreta.", "Two parameter sets radically change the alignment. Interpret.", "To parametersæt ændrer alignmenten radikalt. Fortolk."), (("La solución depende del modelo.", "The solution depends on the model.", "Løsningen afhænger af modellen."),), ("La evidencia es sensible a matriz y gaps; debe justificarse el régimen, explorar sensibilidad y evitar presentar una solución como única.", "Evidence is sensitive to matrix and gaps; justify the regime, explore sensitivity, and avoid presenting one solution as unique.", "Evidensen er følsom over for matrix og gaps; begrund regimet, undersøg følsomhed og undgå at præsentere én løsning som unik."), ("La robustez paramétrica es parte de la evaluación.", "Parameter robustness is part of evaluation.", "Parameterrobusthed er en del af evalueringen."), ""),
-        ("m04.p05", "MATCHING", ("Relaciona diagonal, arriba e izquierda con su operación.", "Match diagonal, up, and left to their operation.", "Match diagonal, op og venstre med deres operation."), (("Usa prefijos.", "Use prefixes.", "Brug præfikser."),), ("Diagonal: sustitución; arriba: gap en b; izquierda: gap en a.", "Diagonal: substitution; up: gap in b; left: gap in a.", "Diagonal: substitution; op: gap i b; venstre: gap i a."), ("La convención depende de qué secuencia indexa filas.", "Convention depends on which sequence indexes rows.", "Konventionen afhænger af, hvilken sekvens der indekserer rækker."), ""),
-        ("m04.p06", "PIPELINE_DESIGN", ("Diseña validación para una implementación de traceback.", "Design validation for a traceback implementation.", "Design validering af en traceback-implementering."), (("Incluye propiedades.", "Include properties.", "Medtag egenskaber."),), ("Comprobar longitudes iguales, recuperación de entradas sin gaps, score recalculado igual al óptimo, casos vacíos, empates y comparación con ejemplos pequeños enumerables.", "Check equal lengths, recovery of ungapped inputs, recomputed score equal to optimum, empty cases, ties, and comparison with small enumerable examples.", "Kontrollér ens længder, gendannelse af input uden gaps, genberegnet score lig optimum, tomme cases, ties og sammenligning med små enumererbare eksempler."), ("Las propiedades detectan tracebacks plausibles pero incorrectos.", "Properties detect plausible but wrong tracebacks.", "Egenskaber opdager plausible, men forkerte tracebacks."), ""),
-        ("m04.p07", "DEBUGGING", ("El score global es demasiado alto cuando una secuencia está vacía. Diagnostica.", "The global score is too high when one sequence is empty. Diagnose it.", "Den globale score er for høj, når én sekvens er tom. Diagnosticér."), (("Revisa inicialización.", "Inspect initialization.", "Undersøg initialisering."),), ("La primera fila o columna probablemente quedó en cero en vez de acumular gaps. Inicializar matrix[i][0]=i*gap y matrix[0][j]=j*gap.", "The first row or column was likely left at zero instead of accumulating gaps. Initialize matrix[i][0]=i*gap and matrix[0][j]=j*gap.", "Første række eller kolonne blev sandsynligvis stående på nul i stedet for at akkumulere gaps. Initialisér matrix[i][0]=i*gap og matrix[0][j]=j*gap."), ("La inicialización codifica el tratamiento de extremos.", "Initialization encodes end treatment.", "Initialisering koder behandlingen af ender."), ""),
-        ("m04.p08", "ORAL_EXPLANATION", ("Explica gaps afines con tres estados.", "Explain affine gaps with three states.", "Forklar affine gaps med tre tilstande."), (("Nombra M, Ix, Iy.", "Name M, Ix, Iy.", "Navngiv M, Ix, Iy."),), ("M termina en sustitución; Ix termina en gap en una secuencia; Iy en gap en la otra. Cambiar de M a gap paga apertura y permanecer en gap paga extensión.", "M ends in a substitution; Ix ends in a gap in one sequence; Iy in a gap in the other. Moving from M to a gap pays opening, while remaining in a gap pays extension.", "M ender i en substitution; Ix ender i et gap i den ene sekvens; Iy i et gap i den anden. Skift fra M til gap betaler åbning, mens fortsættelse i gap betaler forlængelse."), ("El estado recuerda si el gap ya estaba abierto.", "State remembers whether the gap was already open.", "Tilstanden husker, om gapet allerede var åbent."), ""),
+        (
+            "m04.p01",
+            "SHORT_ANSWER",
+            (
+                "¿Cuándo elegir alineamiento global?",
+                "When should global alignment be chosen?",
+                "Hvornår bør global alignment vælges?",
+            ),
+            (
+                (
+                    "Piensa en cobertura completa.",
+                    "Think complete coverage.",
+                    "Tænk komplet dækning.",
+                ),
+            ),
+            (
+                "Cuando las secuencias son comparables a lo largo de toda su longitud y los extremos deben contribuir al objetivo.",
+                "When sequences are comparable across their full length and ends should contribute to the objective.",
+                "Når sekvenser er sammenlignelige over hele længden, og enderne skal bidrage til målet.",
+            ),
+            (
+                "Para dominios compartidos dentro de secuencias largas suele preferirse local.",
+                "For shared domains inside long sequences, local is often preferred.",
+                "For delte domæner i lange sekvenser foretrækkes ofte lokal alignment.",
+            ),
+            "",
+        ),
+        (
+            "m04.p02",
+            "FILL_IN_THE_BLANK",
+            (
+                "Smith–Waterman añade la alternativa ____ a la recurrencia.",
+                "Smith–Waterman adds the alternative ____ to the recurrence.",
+                "Smith–Waterman tilføjer alternativet ____ til rekurrensen.",
+            ),
+            (
+                (
+                    "Evita scores negativos acumulados.",
+                    "It avoids accumulated negative scores.",
+                    "Det undgår akkumulerede negative scores.",
+                ),
+            ),
+            ("0", "0", "0"),
+            (
+                "El reinicio permite empezar una región local nueva.",
+                "Reset allows a new local region to start.",
+                "Reset gør det muligt at starte en ny lokal region.",
+            ),
+            "",
+        ),
+        (
+            "m04.p03",
+            "CODE_TRACING",
+            (
+                "Traza la primera fila global para gap=-2 y longitud 3.",
+                "Trace the first global row for gap=-2 and length 3.",
+                "Gennemgå den første globale række for gap=-2 og længde 3.",
+            ),
+            (("Acumula penalizaciones.", "Accumulate penalties.", "Akkumulér straffe."),),
+            ("[0, -2, -4, -6]", "[0, -2, -4, -6]", "[0, -2, -4, -6]"),
+            (
+                "Representa alinear un prefijo vacío con gaps.",
+                "It represents aligning an empty prefix with gaps.",
+                "Det repræsenterer alignment af et tomt præfiks med gaps.",
+            ),
+            "",
+        ),
+        (
+            "m04.p04",
+            "DATA_INTERPRETATION",
+            (
+                "Dos parametrizaciones cambian radicalmente el alineamiento. Interpreta.",
+                "Two parameter sets radically change the alignment. Interpret.",
+                "To parametersæt ændrer alignmenten radikalt. Fortolk.",
+            ),
+            (
+                (
+                    "La solución depende del modelo.",
+                    "The solution depends on the model.",
+                    "Løsningen afhænger af modellen.",
+                ),
+            ),
+            (
+                "La evidencia es sensible a matriz y gaps; debe justificarse el régimen, explorar sensibilidad y evitar presentar una solución como única.",
+                "Evidence is sensitive to matrix and gaps; justify the regime, explore sensitivity, and avoid presenting one solution as unique.",
+                "Evidensen er følsom over for matrix og gaps; begrund regimet, undersøg følsomhed og undgå at præsentere én løsning som unik.",
+            ),
+            (
+                "La robustez paramétrica es parte de la evaluación.",
+                "Parameter robustness is part of evaluation.",
+                "Parameterrobusthed er en del af evalueringen.",
+            ),
+            "",
+        ),
+        (
+            "m04.p05",
+            "MATCHING",
+            (
+                "Relaciona diagonal, arriba e izquierda con su operación.",
+                "Match diagonal, up, and left to their operation.",
+                "Match diagonal, op og venstre med deres operation.",
+            ),
+            (("Usa prefijos.", "Use prefixes.", "Brug præfikser."),),
+            (
+                "Diagonal: sustitución; arriba: gap en b; izquierda: gap en a.",
+                "Diagonal: substitution; up: gap in b; left: gap in a.",
+                "Diagonal: substitution; op: gap i b; venstre: gap i a.",
+            ),
+            (
+                "La convención depende de qué secuencia indexa filas.",
+                "Convention depends on which sequence indexes rows.",
+                "Konventionen afhænger af, hvilken sekvens der indekserer rækker.",
+            ),
+            "",
+        ),
+        (
+            "m04.p06",
+            "PIPELINE_DESIGN",
+            (
+                "Diseña validación para una implementación de traceback.",
+                "Design validation for a traceback implementation.",
+                "Design validering af en traceback-implementering.",
+            ),
+            (("Incluye propiedades.", "Include properties.", "Medtag egenskaber."),),
+            (
+                "Comprobar longitudes iguales, recuperación de entradas sin gaps, score recalculado igual al óptimo, casos vacíos, empates y comparación con ejemplos pequeños enumerables.",
+                "Check equal lengths, recovery of ungapped inputs, recomputed score equal to optimum, empty cases, ties, and comparison with small enumerable examples.",
+                "Kontrollér ens længder, gendannelse af input uden gaps, genberegnet score lig optimum, tomme cases, ties og sammenligning med små enumererbare eksempler.",
+            ),
+            (
+                "Las propiedades detectan tracebacks plausibles pero incorrectos.",
+                "Properties detect plausible but wrong tracebacks.",
+                "Egenskaber opdager plausible, men forkerte tracebacks.",
+            ),
+            "",
+        ),
+        (
+            "m04.p07",
+            "DEBUGGING",
+            (
+                "El score global es demasiado alto cuando una secuencia está vacía. Diagnostica.",
+                "The global score is too high when one sequence is empty. Diagnose it.",
+                "Den globale score er for høj, når én sekvens er tom. Diagnosticér.",
+            ),
+            (("Revisa inicialización.", "Inspect initialization.", "Undersøg initialisering."),),
+            (
+                "La primera fila o columna probablemente quedó en cero en vez de acumular gaps. Inicializar matrix[i][0]=i*gap y matrix[0][j]=j*gap.",
+                "The first row or column was likely left at zero instead of accumulating gaps. Initialize matrix[i][0]=i*gap and matrix[0][j]=j*gap.",
+                "Første række eller kolonne blev sandsynligvis stående på nul i stedet for at akkumulere gaps. Initialisér matrix[i][0]=i*gap og matrix[0][j]=j*gap.",
+            ),
+            (
+                "La inicialización codifica el tratamiento de extremos.",
+                "Initialization encodes end treatment.",
+                "Initialisering koder behandlingen af ender.",
+            ),
+            "",
+        ),
+        (
+            "m04.p08",
+            "ORAL_EXPLANATION",
+            (
+                "Explica gaps afines con tres estados.",
+                "Explain affine gaps with three states.",
+                "Forklar affine gaps med tre tilstande.",
+            ),
+            (("Nombra M, Ix, Iy.", "Name M, Ix, Iy.", "Navngiv M, Ix, Iy."),),
+            (
+                "M termina en sustitución; Ix termina en gap en una secuencia; Iy en gap en la otra. Cambiar de M a gap paga apertura y permanecer en gap paga extensión.",
+                "M ends in a substitution; Ix ends in a gap in one sequence; Iy in a gap in the other. Moving from M to a gap pays opening, while remaining in a gap pays extension.",
+                "M ender i en substitution; Ix ender i et gap i den ene sekvens; Iy i et gap i den anden. Skift fra M til gap betaler åbning, mens fortsættelse i gap betaler forlængelse.",
+            ),
+            (
+                "El estado recuerda si el gap ya estaba abierto.",
+                "State remembers whether the gap was already open.",
+                "Tilstanden husker, om gapet allerede var åbent.",
+            ),
+            "",
+        ),
     ),
     mcqs=(
-        ("001", ("¿Qué alineamiento cubre ambas secuencias completas?", "Which alignment covers both complete sequences?", "Hvilken alignment dækker begge komplette sekvenser?"), (("global", ("Global", "Global", "Global")), ("local", ("Local", "Local", "Lokal")), ("none", ("Ninguno", "None", "Ingen"))), "global", ("Needleman–Wunsch optimiza correspondencia completa.", "Needleman–Wunsch optimizes complete correspondence.", "Needleman–Wunsch optimerer komplet korrespondance.")),
-        ("002", ("¿Dónde está el score global óptimo?", "Where is the optimal global score?", "Hvor findes den optimale globale score?"), (("corner", ("Esquina final", "Final corner", "Sidste hjørne")), ("maximum", ("Máximo en cualquier celda", "Maximum anywhere", "Maksimum hvor som helst")), ("origin", ("Origen", "Origin", "Origo"))), "corner", ("La recurrencia cubre ambos prefijos completos.", "The recurrence covers both complete prefixes.", "Rekurrensen dækker begge komplette præfikser.")),
-        ("003", ("¿Dónde empieza traceback local?", "Where does local traceback start?", "Hvor starter lokal traceback?"), (("max", ("Máximo de la matriz", "Matrix maximum", "Matricens maksimum")), ("corner", ("Esquina final", "Final corner", "Sidste hjørne")), ("zero", ("Siempre origen", "Always origin", "Altid origo"))), "max", ("El óptimo local puede terminar en cualquier posición.", "The local optimum may end anywhere.", "Det lokale optimum kan ende hvor som helst.")),
-        ("004", ("¿Qué transición representa sustitución?", "Which transition represents substitution?", "Hvilken overgang repræsenterer substitution?"), (("diagonal", ("Diagonal", "Diagonal", "Diagonal")), ("vertical", ("Vertical", "Vertical", "Vertikal")), ("horizontal", ("Horizontal", "Horizontal", "Horisontal"))), "diagonal", ("Consume un símbolo de cada secuencia.", "It consumes one symbol from each sequence.", "Den forbruger ét symbol fra hver sekvens.")),
-        ("005", ("¿Qué permite el cero en Smith–Waterman?", "What does zero allow in Smith–Waterman?", "Hvad muliggør nul i Smith–Waterman?"), (("restart", ("Reiniciar región local", "Restart a local region", "Genstart lokal region")), ("global", ("Forzar extremos", "Force ends", "Tving ender")), ("affine", ("Abrir gap afín", "Open affine gap", "Åbn affint gap"))), "restart", ("Se descartan prefijos con score negativo.", "Negative-scoring prefixes are discarded.", "Præfikser med negativ score kasseres.")),
-        ("006", ("¿Qué gap suele pagar apertura más extensión?", "Which gap usually pays opening plus extension?", "Hvilket gap betaler normalt åbning plus forlængelse?"), (("affine", ("Afín", "Affine", "Affint")), ("linear", ("Lineal", "Linear", "Lineært")), ("none", ("Sin gap", "No gap", "Intet gap"))), "affine", ("Modela eventos largos con coste inicial mayor.", "It models long events with a larger initial cost.", "Det modellerer lange hændelser med større startomkostning.")),
-        ("007", ("¿Qué complejidad temporal tiene la DP básica?", "What is the time complexity of basic DP?", "Hvad er tidskompleksiteten af grundlæggende DP?"), (("nm", ("O(nm)", "O(nm)", "O(nm)")), ("n", ("O(n)", "O(n)", "O(n)")), ("log", ("O(log n)", "O(log n)", "O(log n)"))), "nm", ("Se llena una matriz de n por m.", "An n by m matrix is filled.", "En n gange m-matrix udfyldes.")),
-        ("008", ("¿Qué indica un empate en una celda?", "What does a tie in a cell indicate?", "Hvad indikerer et tie i en celle?"), (("multiple", ("Múltiples caminos óptimos", "Multiple optimal paths", "Flere optimale stier")), ("error", ("Error obligatorio", "Mandatory error", "Obligatorisk fejl")), ("unique", ("Solución única", "Unique solution", "Unik løsning"))), "multiple", ("Más de una transición alcanza el mismo score.", "More than one transition reaches the same score.", "Mere end én overgang når samme score.")),
-        ("009", ("¿Qué propiedad valida traceback?", "Which property validates traceback?", "Hvilken egenskab validerer traceback?"), (("recover", ("Quitar gaps recupera entradas", "Removing gaps recovers inputs", "Fjernelse af gaps genskaber input")), ("shorter", ("Siempre acorta", "Always shortens", "Forkorter altid")), ("positive", ("Score siempre positivo", "Score always positive", "Score altid positiv"))), "recover", ("El alineamiento debe representar las secuencias originales.", "The alignment must represent the original sequences.", "Alignmenten skal repræsentere de oprindelige sekvenser.")),
-        ("010", ("¿Qué debe explorarse al cambiar matriz o gaps?", "What should be explored when changing matrix or gaps?", "Hvad bør undersøges ved ændring af matrix eller gaps?"), (("sensitivity", ("Sensibilidad paramétrica", "Parameter sensitivity", "Parameterfølsomhed")), ("color", ("Color", "Color", "Farve")), ("filename", ("Nombre de archivo", "Filename", "Filnavn"))), "sensitivity", ("La solución óptima depende del modelo de puntuación.", "The optimum depends on the scoring model.", "Optimum afhænger af scoringsmodellen.")),
+        (
+            "001",
+            (
+                "¿Qué alineamiento cubre ambas secuencias completas?",
+                "Which alignment covers both complete sequences?",
+                "Hvilken alignment dækker begge komplette sekvenser?",
+            ),
+            (
+                ("global", ("Global", "Global", "Global")),
+                ("local", ("Local", "Local", "Lokal")),
+                ("none", ("Ninguno", "None", "Ingen")),
+            ),
+            "global",
+            (
+                "Needleman–Wunsch optimiza correspondencia completa.",
+                "Needleman–Wunsch optimizes complete correspondence.",
+                "Needleman–Wunsch optimerer komplet korrespondance.",
+            ),
+        ),
+        (
+            "002",
+            (
+                "¿Dónde está el score global óptimo?",
+                "Where is the optimal global score?",
+                "Hvor findes den optimale globale score?",
+            ),
+            (
+                ("corner", ("Esquina final", "Final corner", "Sidste hjørne")),
+                (
+                    "maximum",
+                    ("Máximo en cualquier celda", "Maximum anywhere", "Maksimum hvor som helst"),
+                ),
+                ("origin", ("Origen", "Origin", "Origo")),
+            ),
+            "corner",
+            (
+                "La recurrencia cubre ambos prefijos completos.",
+                "The recurrence covers both complete prefixes.",
+                "Rekurrensen dækker begge komplette præfikser.",
+            ),
+        ),
+        (
+            "003",
+            (
+                "¿Dónde empieza traceback local?",
+                "Where does local traceback start?",
+                "Hvor starter lokal traceback?",
+            ),
+            (
+                ("max", ("Máximo de la matriz", "Matrix maximum", "Matricens maksimum")),
+                ("corner", ("Esquina final", "Final corner", "Sidste hjørne")),
+                ("zero", ("Siempre origen", "Always origin", "Altid origo")),
+            ),
+            "max",
+            (
+                "El óptimo local puede terminar en cualquier posición.",
+                "The local optimum may end anywhere.",
+                "Det lokale optimum kan ende hvor som helst.",
+            ),
+        ),
+        (
+            "004",
+            (
+                "¿Qué transición representa sustitución?",
+                "Which transition represents substitution?",
+                "Hvilken overgang repræsenterer substitution?",
+            ),
+            (
+                ("diagonal", ("Diagonal", "Diagonal", "Diagonal")),
+                ("vertical", ("Vertical", "Vertical", "Vertikal")),
+                ("horizontal", ("Horizontal", "Horizontal", "Horisontal")),
+            ),
+            "diagonal",
+            (
+                "Consume un símbolo de cada secuencia.",
+                "It consumes one symbol from each sequence.",
+                "Den forbruger ét symbol fra hver sekvens.",
+            ),
+        ),
+        (
+            "005",
+            (
+                "¿Qué permite el cero en Smith–Waterman?",
+                "What does zero allow in Smith–Waterman?",
+                "Hvad muliggør nul i Smith–Waterman?",
+            ),
+            (
+                (
+                    "restart",
+                    ("Reiniciar región local", "Restart a local region", "Genstart lokal region"),
+                ),
+                ("global", ("Forzar extremos", "Force ends", "Tving ender")),
+                ("affine", ("Abrir gap afín", "Open affine gap", "Åbn affint gap")),
+            ),
+            "restart",
+            (
+                "Se descartan prefijos con score negativo.",
+                "Negative-scoring prefixes are discarded.",
+                "Præfikser med negativ score kasseres.",
+            ),
+        ),
+        (
+            "006",
+            (
+                "¿Qué gap suele pagar apertura más extensión?",
+                "Which gap usually pays opening plus extension?",
+                "Hvilket gap betaler normalt åbning plus forlængelse?",
+            ),
+            (
+                ("affine", ("Afín", "Affine", "Affint")),
+                ("linear", ("Lineal", "Linear", "Lineært")),
+                ("none", ("Sin gap", "No gap", "Intet gap")),
+            ),
+            "affine",
+            (
+                "Modela eventos largos con coste inicial mayor.",
+                "It models long events with a larger initial cost.",
+                "Det modellerer lange hændelser med større startomkostning.",
+            ),
+        ),
+        (
+            "007",
+            (
+                "¿Qué complejidad temporal tiene la DP básica?",
+                "What is the time complexity of basic DP?",
+                "Hvad er tidskompleksiteten af grundlæggende DP?",
+            ),
+            (
+                ("nm", ("O(nm)", "O(nm)", "O(nm)")),
+                ("n", ("O(n)", "O(n)", "O(n)")),
+                ("log", ("O(log n)", "O(log n)", "O(log n)")),
+            ),
+            "nm",
+            (
+                "Se llena una matriz de n por m.",
+                "An n by m matrix is filled.",
+                "En n gange m-matrix udfyldes.",
+            ),
+        ),
+        (
+            "008",
+            (
+                "¿Qué indica un empate en una celda?",
+                "What does a tie in a cell indicate?",
+                "Hvad indikerer et tie i en celle?",
+            ),
+            (
+                (
+                    "multiple",
+                    ("Múltiples caminos óptimos", "Multiple optimal paths", "Flere optimale stier"),
+                ),
+                ("error", ("Error obligatorio", "Mandatory error", "Obligatorisk fejl")),
+                ("unique", ("Solución única", "Unique solution", "Unik løsning")),
+            ),
+            "multiple",
+            (
+                "Más de una transición alcanza el mismo score.",
+                "More than one transition reaches the same score.",
+                "Mere end én overgang når samme score.",
+            ),
+        ),
+        (
+            "009",
+            (
+                "¿Qué propiedad valida traceback?",
+                "Which property validates traceback?",
+                "Hvilken egenskab validerer traceback?",
+            ),
+            (
+                (
+                    "recover",
+                    (
+                        "Quitar gaps recupera entradas",
+                        "Removing gaps recovers inputs",
+                        "Fjernelse af gaps genskaber input",
+                    ),
+                ),
+                ("shorter", ("Siempre acorta", "Always shortens", "Forkorter altid")),
+                (
+                    "positive",
+                    ("Score siempre positivo", "Score always positive", "Score altid positiv"),
+                ),
+            ),
+            "recover",
+            (
+                "El alineamiento debe representar las secuencias originales.",
+                "The alignment must represent the original sequences.",
+                "Alignmenten skal repræsentere de oprindelige sekvenser.",
+            ),
+        ),
+        (
+            "010",
+            (
+                "¿Qué debe explorarse al cambiar matriz o gaps?",
+                "What should be explored when changing matrix or gaps?",
+                "Hvad bør undersøges ved ændring af matrix eller gaps?",
+            ),
+            (
+                (
+                    "sensitivity",
+                    ("Sensibilidad paramétrica", "Parameter sensitivity", "Parameterfølsomhed"),
+                ),
+                ("color", ("Color", "Color", "Farve")),
+                ("filename", ("Nombre de archivo", "Filename", "Filnavn")),
+            ),
+            "sensitivity",
+            (
+                "La solución óptima depende del modelo de puntuación.",
+                "The optimum depends on the scoring model.",
+                "Optimum afhænger af scoringsmodellen.",
+            ),
+        ),
     ),
     true_false=(
-        ("011", ("Un alineamiento óptimo es una verdad biológica única.", "An optimal alignment is a unique biological truth.", "En optimal alignment er en unik biologisk sandhed."), False, ("Es óptimo bajo parámetros y modelo concretos.", "It is optimal under specific parameters and model.", "Den er optimal under bestemte parametre og model.")),
-        ("012", ("Needleman–Wunsch penaliza normalmente extremos.", "Needleman–Wunsch normally penalizes ends.", "Needleman–Wunsch straffer normalt ender."), True, ("La inicialización acumula gaps.", "Initialization accumulates gaps.", "Initialisering akkumulerer gaps.")),
-        ("013", ("Smith–Waterman puede empezar después de un prefijo desfavorable.", "Smith–Waterman can start after an unfavorable prefix.", "Smith–Waterman kan starte efter et ugunstigt præfiks."), True, ("El cero reinicia la región.", "Zero resets the region.", "Nul nulstiller regionen.")),
-        ("014", ("El máximo local siempre está en la esquina final.", "The local maximum is always in the final corner.", "Det lokale maksimum er altid i sidste hjørne."), False, ("Puede aparecer en cualquier celda.", "It may appear in any cell.", "Det kan forekomme i enhver celle.")),
-        ("015", ("Un gap afín distingue apertura y extensión.", "An affine gap distinguishes opening and extension.", "Et affint gap skelner mellem åbning og forlængelse."), True, ("Es su característica principal.", "That is its main feature.", "Det er dets vigtigste egenskab.")),
-        ("016", ("Guardar una sola flecha conserva todos los alineamientos óptimos.", "Storing one pointer preserves all optimal alignments.", "Lagring af én pil bevarer alle optimale alignments."), False, ("Los empates requieren múltiples predecesores.", "Ties require multiple predecessors.", "Ties kræver flere forgængere.")),
-        ("017", ("La DP básica usa O(nm) tiempo.", "Basic DP uses O(nm) time.", "Grundlæggende DP bruger O(nm) tid."), True, ("Cada par de prefijos define una celda.", "Each prefix pair defines a cell.", "Hvert præfikspar definerer en celle.")),
-        ("018", ("Recalcular el score ayuda a validar traceback.", "Recomputing score helps validate traceback.", "Genberegning af score hjælper med at validere traceback."), True, ("Debe coincidir con el valor óptimo almacenado.", "It should match the stored optimum.", "Den bør matche det lagrede optimum.")),
-        ("019", ("Identidad alta demuestra automáticamente función compartida.", "High identity automatically proves shared function.", "Høj identitet beviser automatisk fælles funktion."), False, ("Se requiere contexto y evidencia adicional.", "Context and additional evidence are required.", "Kontekst og yderligere evidens kræves.")),
-        ("020", ("La elección de parámetros debe documentarse.", "Parameter choice should be documented.", "Valg af parametre bør dokumenteres."), True, ("Afecta reproducibilidad e interpretación.", "It affects reproducibility and interpretation.", "Det påvirker reproducerbarhed og fortolkning.")),
+        (
+            "011",
+            (
+                "Un alineamiento óptimo es una verdad biológica única.",
+                "An optimal alignment is a unique biological truth.",
+                "En optimal alignment er en unik biologisk sandhed.",
+            ),
+            False,
+            (
+                "Es óptimo bajo parámetros y modelo concretos.",
+                "It is optimal under specific parameters and model.",
+                "Den er optimal under bestemte parametre og model.",
+            ),
+        ),
+        (
+            "012",
+            (
+                "Needleman–Wunsch penaliza normalmente extremos.",
+                "Needleman–Wunsch normally penalizes ends.",
+                "Needleman–Wunsch straffer normalt ender.",
+            ),
+            True,
+            (
+                "La inicialización acumula gaps.",
+                "Initialization accumulates gaps.",
+                "Initialisering akkumulerer gaps.",
+            ),
+        ),
+        (
+            "013",
+            (
+                "Smith–Waterman puede empezar después de un prefijo desfavorable.",
+                "Smith–Waterman can start after an unfavorable prefix.",
+                "Smith–Waterman kan starte efter et ugunstigt præfiks.",
+            ),
+            True,
+            ("El cero reinicia la región.", "Zero resets the region.", "Nul nulstiller regionen."),
+        ),
+        (
+            "014",
+            (
+                "El máximo local siempre está en la esquina final.",
+                "The local maximum is always in the final corner.",
+                "Det lokale maksimum er altid i sidste hjørne.",
+            ),
+            False,
+            (
+                "Puede aparecer en cualquier celda.",
+                "It may appear in any cell.",
+                "Det kan forekomme i enhver celle.",
+            ),
+        ),
+        (
+            "015",
+            (
+                "Un gap afín distingue apertura y extensión.",
+                "An affine gap distinguishes opening and extension.",
+                "Et affint gap skelner mellem åbning og forlængelse.",
+            ),
+            True,
+            (
+                "Es su característica principal.",
+                "That is its main feature.",
+                "Det er dets vigtigste egenskab.",
+            ),
+        ),
+        (
+            "016",
+            (
+                "Guardar una sola flecha conserva todos los alineamientos óptimos.",
+                "Storing one pointer preserves all optimal alignments.",
+                "Lagring af én pil bevarer alle optimale alignments.",
+            ),
+            False,
+            (
+                "Los empates requieren múltiples predecesores.",
+                "Ties require multiple predecessors.",
+                "Ties kræver flere forgængere.",
+            ),
+        ),
+        (
+            "017",
+            (
+                "La DP básica usa O(nm) tiempo.",
+                "Basic DP uses O(nm) time.",
+                "Grundlæggende DP bruger O(nm) tid.",
+            ),
+            True,
+            (
+                "Cada par de prefijos define una celda.",
+                "Each prefix pair defines a cell.",
+                "Hvert præfikspar definerer en celle.",
+            ),
+        ),
+        (
+            "018",
+            (
+                "Recalcular el score ayuda a validar traceback.",
+                "Recomputing score helps validate traceback.",
+                "Genberegning af score hjælper med at validere traceback.",
+            ),
+            True,
+            (
+                "Debe coincidir con el valor óptimo almacenado.",
+                "It should match the stored optimum.",
+                "Den bør matche det lagrede optimum.",
+            ),
+        ),
+        (
+            "019",
+            (
+                "Identidad alta demuestra automáticamente función compartida.",
+                "High identity automatically proves shared function.",
+                "Høj identitet beviser automatisk fælles funktion.",
+            ),
+            False,
+            (
+                "Se requiere contexto y evidencia adicional.",
+                "Context and additional evidence are required.",
+                "Kontekst og yderligere evidens kræves.",
+            ),
+        ),
+        (
+            "020",
+            (
+                "La elección de parámetros debe documentarse.",
+                "Parameter choice should be documented.",
+                "Valg af parametre bør dokumenteres.",
+            ),
+            True,
+            (
+                "Afecta reproducibilidad e interpretación.",
+                "It affects reproducibility and interpretation.",
+                "Det påvirker reproducerbarhed og fortolkning.",
+            ),
+        ),
     ),
     tutor=(
-        ("El alineamiento por pares optimiza correspondencias bajo un modelo de sustituciones y gaps. El alineamiento global cubre ambas secuencias y penaliza extremos; el local reinicia scores negativos, comienza en el máximo y termina en cero. La programación dinámica define un estado por par de prefijos y reutiliza subsoluciones. El traceback reconstruye una solución, pero empates pueden producir varias. Gaps afines separan apertura y extensión mediante estados adicionales. La validación debe recuperar entradas, reproducir el score, cubrir vacíos y empates y explorar sensibilidad a parámetros. Un alineamiento aporta evidencia estructurada, no una conclusión biológica automática.", "Pairwise alignment optimizes correspondences under a substitution and gap model. Global alignment covers both sequences and penalizes ends; local alignment resets negative scores, starts at the maximum, and ends at zero. Dynamic programming defines a state for each prefix pair and reuses subsolutions. Traceback reconstructs a solution, but ties may produce several. Affine gaps separate opening and extension through additional states. Validation should recover inputs, reproduce score, cover empty cases and ties, and explore parameter sensitivity. An alignment provides structured evidence, not an automatic biological conclusion.", "Parvis alignment optimerer korrespondancer under en substitutions- og gapmodel. Global alignment dækker begge sekvenser og straffer ender; lokal alignment nulstiller negative scores, starter ved maksimum og ender ved nul. Dynamisk programmering definerer en tilstand for hvert præfikspar og genbruger delløsninger. Traceback rekonstruerer en løsning, men ties kan give flere. Affine gaps adskiller åbning og forlængelse gennem yderligere tilstande. Validering bør genskabe input, reproducere score, dække tomme cases og ties og undersøge parameterfølsomhed. En alignment giver struktureret evidens, ikke en automatisk biologisk konklusion."),
-        (("Global cubre extremos.", "Global covers ends.", "Global dækker ender."), ("Local reinicia en cero.", "Local resets at zero.", "Lokal nulstiller ved nul."), ("DP reutiliza prefijos.", "DP reuses prefixes.", "DP genbruger præfikser."), ("Traceback puede no ser único.", "Traceback may not be unique.", "Traceback er måske ikke unik."), ("Gaps afines necesitan estados.", "Affine gaps need states.", "Affine gaps kræver tilstande."), ("Parámetros definen el óptimo.", "Parameters define the optimum.", "Parametre definerer optimum.")),
-        (("Confundir global y local.", "Confusing global and local.", "At forveksle global og lokal."), ("Inicializar bordes globales en cero.", "Initializing global borders at zero.", "At initialisere globale kanter med nul."), ("Empezar traceback local en la esquina.", "Starting local traceback at the corner.", "At starte lokal traceback i hjørnet."), ("Ignorar empates.", "Ignoring ties.", "At ignorere ties."), ("Tratar gaps lineales como universales.", "Treating linear gaps as universal.", "At behandle lineære gaps som universelle."), ("Sobreinterpretar identidad.", "Overinterpreting identity.", "At overfortolke identitet.")),
-        (("¿Cuál es el objetivo global o local?", "What is the global or local objective?", "Hvad er det globale eller lokale mål?"), ("¿Qué significa cada estado?", "What does each state mean?", "Hvad betyder hver tilstand?"), ("¿Cómo se inicializan bordes?", "How are borders initialized?", "Hvordan initialiseres kanter?"), ("¿Dónde comienza y termina traceback?", "Where does traceback start and stop?", "Hvor starter og stopper traceback?"), ("¿Hay empates óptimos?", "Are there optimal ties?", "Findes der optimale ties?"), ("¿Es robusto a otros parámetros?", "Is it robust to other parameters?", "Er det robust over for andre parametre?")),
-        (("Deriva recurrencias correctamente.", "Derives recurrences correctly.", "Udleder rekurrenser korrekt."), ("Inicializa según el objetivo.", "Initializes according to objective.", "Initialiserer efter målet."), ("Implementa traceback verificable.", "Implements verifiable traceback.", "Implementerer verificerbar traceback."), ("Explica gaps afines.", "Explains affine gaps.", "Forklarer affine gaps."), ("Analiza complejidad.", "Analyzes complexity.", "Analyserer kompleksitet."), ("Limita interpretación biológica.", "Limits biological interpretation.", "Begrænser biologisk fortolkning.")),
-        (("No afirmar función sólo por alineamiento.", "Do not claim function from alignment alone.", "Hævd ikke funktion alene ud fra alignment."), ("No ocultar parámetros.", "Do not hide parameters.", "Skjul ikke parametre."), ("No inventar significación.", "Do not invent significance.", "Opfind ikke signifikans."), ("No presentar un empate como solución única.", "Do not present a tie as unique solution.", "Præsenter ikke et tie som unik løsning."), ("Responder en idioma activo.", "Answer in active language.", "Svar på aktivt sprog.")),
-        ("Needleman and Wunsch global alignment paper.", "Smith and Waterman local alignment paper.", "Gotoh affine-gap dynamic programming.", "Durbin et al., Biological Sequence Analysis.", "Textbook treatments of traceback and semiglobal alignment.", "Active SDU DM847 alignment and scoring outcomes."),
+        (
+            "El alineamiento por pares optimiza correspondencias bajo un modelo de sustituciones y gaps. El alineamiento global cubre ambas secuencias y penaliza extremos; el local reinicia scores negativos, comienza en el máximo y termina en cero. La programación dinámica define un estado por par de prefijos y reutiliza subsoluciones. El traceback reconstruye una solución, pero empates pueden producir varias. Gaps afines separan apertura y extensión mediante estados adicionales. La validación debe recuperar entradas, reproducir el score, cubrir vacíos y empates y explorar sensibilidad a parámetros. Un alineamiento aporta evidencia estructurada, no una conclusión biológica automática.",
+            "Pairwise alignment optimizes correspondences under a substitution and gap model. Global alignment covers both sequences and penalizes ends; local alignment resets negative scores, starts at the maximum, and ends at zero. Dynamic programming defines a state for each prefix pair and reuses subsolutions. Traceback reconstructs a solution, but ties may produce several. Affine gaps separate opening and extension through additional states. Validation should recover inputs, reproduce score, cover empty cases and ties, and explore parameter sensitivity. An alignment provides structured evidence, not an automatic biological conclusion.",
+            "Parvis alignment optimerer korrespondancer under en substitutions- og gapmodel. Global alignment dækker begge sekvenser og straffer ender; lokal alignment nulstiller negative scores, starter ved maksimum og ender ved nul. Dynamisk programmering definerer en tilstand for hvert præfikspar og genbruger delløsninger. Traceback rekonstruerer en løsning, men ties kan give flere. Affine gaps adskiller åbning og forlængelse gennem yderligere tilstande. Validering bør genskabe input, reproducere score, dække tomme cases og ties og undersøge parameterfølsomhed. En alignment giver struktureret evidens, ikke en automatisk biologisk konklusion.",
+        ),
+        (
+            ("Global cubre extremos.", "Global covers ends.", "Global dækker ender."),
+            ("Local reinicia en cero.", "Local resets at zero.", "Lokal nulstiller ved nul."),
+            ("DP reutiliza prefijos.", "DP reuses prefixes.", "DP genbruger præfikser."),
+            (
+                "Traceback puede no ser único.",
+                "Traceback may not be unique.",
+                "Traceback er måske ikke unik.",
+            ),
+            (
+                "Gaps afines necesitan estados.",
+                "Affine gaps need states.",
+                "Affine gaps kræver tilstande.",
+            ),
+            (
+                "Parámetros definen el óptimo.",
+                "Parameters define the optimum.",
+                "Parametre definerer optimum.",
+            ),
+        ),
+        (
+            (
+                "Confundir global y local.",
+                "Confusing global and local.",
+                "At forveksle global og lokal.",
+            ),
+            (
+                "Inicializar bordes globales en cero.",
+                "Initializing global borders at zero.",
+                "At initialisere globale kanter med nul.",
+            ),
+            (
+                "Empezar traceback local en la esquina.",
+                "Starting local traceback at the corner.",
+                "At starte lokal traceback i hjørnet.",
+            ),
+            ("Ignorar empates.", "Ignoring ties.", "At ignorere ties."),
+            (
+                "Tratar gaps lineales como universales.",
+                "Treating linear gaps as universal.",
+                "At behandle lineære gaps som universelle.",
+            ),
+            (
+                "Sobreinterpretar identidad.",
+                "Overinterpreting identity.",
+                "At overfortolke identitet.",
+            ),
+        ),
+        (
+            (
+                "¿Cuál es el objetivo global o local?",
+                "What is the global or local objective?",
+                "Hvad er det globale eller lokale mål?",
+            ),
+            (
+                "¿Qué significa cada estado?",
+                "What does each state mean?",
+                "Hvad betyder hver tilstand?",
+            ),
+            (
+                "¿Cómo se inicializan bordes?",
+                "How are borders initialized?",
+                "Hvordan initialiseres kanter?",
+            ),
+            (
+                "¿Dónde comienza y termina traceback?",
+                "Where does traceback start and stop?",
+                "Hvor starter og stopper traceback?",
+            ),
+            ("¿Hay empates óptimos?", "Are there optimal ties?", "Findes der optimale ties?"),
+            (
+                "¿Es robusto a otros parámetros?",
+                "Is it robust to other parameters?",
+                "Er det robust over for andre parametre?",
+            ),
+        ),
+        (
+            (
+                "Deriva recurrencias correctamente.",
+                "Derives recurrences correctly.",
+                "Udleder rekurrenser korrekt.",
+            ),
+            (
+                "Inicializa según el objetivo.",
+                "Initializes according to objective.",
+                "Initialiserer efter målet.",
+            ),
+            (
+                "Implementa traceback verificable.",
+                "Implements verifiable traceback.",
+                "Implementerer verificerbar traceback.",
+            ),
+            ("Explica gaps afines.", "Explains affine gaps.", "Forklarer affine gaps."),
+            ("Analiza complejidad.", "Analyzes complexity.", "Analyserer kompleksitet."),
+            (
+                "Limita interpretación biológica.",
+                "Limits biological interpretation.",
+                "Begrænser biologisk fortolkning.",
+            ),
+        ),
+        (
+            (
+                "No afirmar función sólo por alineamiento.",
+                "Do not claim function from alignment alone.",
+                "Hævd ikke funktion alene ud fra alignment.",
+            ),
+            ("No ocultar parámetros.", "Do not hide parameters.", "Skjul ikke parametre."),
+            (
+                "No inventar significación.",
+                "Do not invent significance.",
+                "Opfind ikke signifikans.",
+            ),
+            (
+                "No presentar un empate como solución única.",
+                "Do not present a tie as unique solution.",
+                "Præsenter ikke et tie som unik løsning.",
+            ),
+            ("Responder en idioma activo.", "Answer in active language.", "Svar på aktivt sprog."),
+        ),
+        (
+            "Needleman and Wunsch global alignment paper.",
+            "Smith and Waterman local alignment paper.",
+            "Gotoh affine-gap dynamic programming.",
+            "Durbin et al., Biological Sequence Analysis.",
+            "Textbook treatments of traceback and semiglobal alignment.",
+            "Active SDU DM847 alignment and scoring outcomes.",
+        ),
     ),
 )
 
@@ -81,11 +951,21 @@ LOCALIZED_MODULE_04_PAIRWISE_ALIGNMENT: LocalizedLearningModule = build_module(_
 LOCALIZED_OBJECTIVE_QUESTION_BANK_04 = build_question_bank(_SPEC)
 
 
-def materialize_module_04_question_bank(locale: AppLocale | str = AppLocale.SPANISH_SPAIN) -> tuple[AssessmentItem, ...]:
+def materialize_module_04_question_bank(
+    locale: AppLocale | str = AppLocale.SPANISH_SPAIN,
+) -> tuple[AssessmentItem, ...]:
     return materialize_bank(LOCALIZED_OBJECTIVE_QUESTION_BANK_04, locale)
 
 
-MODULE_04_PAIRWISE_ALIGNMENT: LearningModule = LOCALIZED_MODULE_04_PAIRWISE_ALIGNMENT.materialize(AppLocale.SPANISH_SPAIN)
+MODULE_04_PAIRWISE_ALIGNMENT: LearningModule = LOCALIZED_MODULE_04_PAIRWISE_ALIGNMENT.materialize(
+    AppLocale.SPANISH_SPAIN
+)
 OBJECTIVE_QUESTION_BANK_04 = materialize_module_04_question_bank()
 
-__all__ = ["LOCALIZED_MODULE_04_PAIRWISE_ALIGNMENT", "LOCALIZED_OBJECTIVE_QUESTION_BANK_04", "MODULE_04_PAIRWISE_ALIGNMENT", "OBJECTIVE_QUESTION_BANK_04", "materialize_module_04_question_bank"]
+__all__ = [
+    "LOCALIZED_MODULE_04_PAIRWISE_ALIGNMENT",
+    "LOCALIZED_OBJECTIVE_QUESTION_BANK_04",
+    "MODULE_04_PAIRWISE_ALIGNMENT",
+    "OBJECTIVE_QUESTION_BANK_04",
+    "materialize_module_04_question_bank",
+]

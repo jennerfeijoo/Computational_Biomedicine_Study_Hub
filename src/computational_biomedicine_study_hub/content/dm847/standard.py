@@ -89,9 +89,7 @@ def _assessment_items(spec: StandardModuleSpec) -> tuple[LocalizedAssessmentItem
             correct=correct,
             explanation=explanation,
         )
-        for index, (_, prompt, correct, explanation) in enumerate(
-            spec.true_false[:5], start=6
-        )
+        for index, (_, prompt, correct, explanation) in enumerate(spec.true_false[:5], start=6)
     )
     return sampled_mcqs + sampled_tf
 
