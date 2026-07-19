@@ -1,0 +1,1063 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m02
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Lógica booleana, comparaciones y estructuras condicionales
+    en: Boolean logic, comparisons, and conditional statements
+    da: Boolesk logik, sammenligninger og betingede sætninger
+  summary:
+    es: >-
+      Desarrollo de decisiones verificables mediante valores booleanos, operadores de comparación,
+      lógica compuesta, evaluación en cortocircuito, estructuras `if`, `elif` y `else`, validación
+      de entradas, análisis de límites y diseño de pruebas para ramas de ejecución.
+    en: >-
+      Development of verifiable decisions using Boolean values, comparison operators, compound
+      logic, short-circuit evaluation, `if`, `elif`, and `else`, input validation, boundary analysis,
+      and tests for execution branches.
+    da: >-
+      Udvikling af efterprøvelige beslutninger med booleske værdier, sammenligningsoperatorer,
+      sammensat logik, kortslutningsevaluering, `if`, `elif` og `else`, inputvalidering,
+      grænseanalyse og test af programgrene.
+  prerequisites: [dm857.m01]
+  official_learning_outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo05]
+  estimated_study_hours: 14
+  difficulty: foundational
+
+objectives:
+  - id: m02.o1
+    bloom_level: understand
+    statement:
+      es: Interpretar `bool` como un tipo con los valores `True` y `False` y construir predicados verificables.
+      en: Interpret `bool` as a type with values `True` and `False` and construct verifiable predicates.
+      da: Fortolke `bool` som en type med værdierne `True` og `False` og opbygge efterprøvelige prædikater.
+    evidence: predicate_explanation
+  - id: m02.o2
+    bloom_level: apply
+    statement:
+      es: Predecir el resultado de comparaciones simples y encadenadas.
+      en: Predict the result of simple and chained comparisons.
+      da: Forudsige resultatet af enkle og kædede sammenligninger.
+    evidence: comparison_trace
+  - id: m02.o3
+    bloom_level: apply
+    statement:
+      es: Combinar condiciones con `and`, `or` y `not` respetando significado y precedencia.
+      en: Combine conditions with `and`, `or`, and `not` while respecting meaning and precedence.
+      da: Kombinere betingelser med `and`, `or` og `not` med korrekt betydning og præcedens.
+    evidence: boolean_expression
+  - id: m02.o4
+    bloom_level: analyze
+    statement:
+      es: Explicar y utilizar la evaluación en cortocircuito para proteger operaciones sensibles.
+      en: Explain and use short-circuit evaluation to guard sensitive operations.
+      da: Forklare og anvende kortslutningsevaluering til at beskytte følsomme operationer.
+    evidence: guarded_expression
+  - id: m02.o5
+    bloom_level: create
+    statement:
+      es: Diseñar estructuras `if`, `elif` y `else` cuyas ramas sean coherentes, ordenadas y exhaustivas respecto al problema.
+      en: Design `if`, `elif`, and `else` structures whose branches are coherent, ordered, and exhaustive for the problem.
+      da: Designe `if`, `elif` og `else`-strukturer med sammenhængende, ordnede og dækkende grene.
+    evidence: conditional_design
+  - id: m02.o6
+    bloom_level: evaluate
+    statement:
+      es: Comparar condiciones compuestas y condicionales anidados y elegir la forma más legible.
+      en: Compare compound conditions and nested conditionals and choose the more readable form.
+      da: Sammenligne sammensatte og indlejrede betingelser og vælge den mest læsbare form.
+    evidence: design_justification
+  - id: m02.o7
+    bloom_level: create
+    statement:
+      es: Diseñar casos normales, límite e inválidos que activen todas las ramas relevantes.
+      en: Design normal, boundary, and invalid cases that activate every relevant branch.
+      da: Designe normale, grænse- og ugyldige tilfælde, der aktiverer alle relevante grene.
+    evidence: branch_test_set
+
+concepts:
+  - id: boolean-values-and-predicates
+    title:
+      es: Valores booleanos y predicados
+      en: Boolean values and predicates
+      da: Booleske værdier og prædikater
+    body:
+      es: >-
+        Un valor booleano pertenece al tipo `bool` y solo puede ser `True` o `False`. Una condición
+        útil es un predicado que Python puede evaluar sobre el estado actual, por ejemplo
+        `concentration >= 20`. Los nombres booleanos deberían expresar una propiedad o pregunta,
+        como `is_valid` o `has_control`. El valor `True` no es igual a la cadena `'True'`.
+      en: >-
+        A Boolean value belongs to type `bool` and can only be `True` or `False`. A useful condition
+        is a predicate that Python can evaluate over current state, such as `concentration >= 20`.
+        Boolean names should express a property or question, such as `is_valid` or `has_control`.
+        The value `True` is not equal to the string `'True'`.
+      da: >-
+        En boolesk værdi tilhører typen `bool` og kan kun være `True` eller `False`. En nyttig
+        betingelse er et prædikat, som Python kan evaluere over den aktuelle tilstand, for eksempel
+        `concentration >= 20`. Booleske navne bør udtrykke en egenskab eller et spørgsmål.
+    linked_objectives: [m02.o1]
+
+  - id: comparison-operators
+    title:
+      es: Operadores de comparación e intervalos
+      en: Comparison operators and intervals
+      da: Sammenligningsoperatorer og intervaller
+    body:
+      es: >-
+        Python compara con `==`, `!=`, `<`, `<=`, `>` y `>=`. `==` pregunta si dos valores son
+        iguales; `=` realiza asignación. Los operadores inclusivos `<=` y `>=` contienen el límite.
+        Las comparaciones encadenadas como `18 <= age <= 65` representan intervalos con claridad y
+        equivalen lógicamente a combinar dos comparaciones mediante `and`. El significado también
+        depende del tipo: el orden lexicográfico de cadenas puede no modelar un orden biológico.
+      en: >-
+        Python compares with `==`, `!=`, `<`, `<=`, `>`, and `>=`. `==` asks whether values are equal;
+        `=` performs assignment. Inclusive operators `<=` and `>=` contain the boundary. Chained
+        comparisons such as `18 <= age <= 65` express intervals clearly and are logically equivalent
+        to two comparisons joined by `and`. Meaning also depends on type: lexicographic string order
+        may not model a biological ordering.
+      da: >-
+        Python sammenligner med `==`, `!=`, `<`, `<=`, `>` og `>=`. `==` undersøger lighed, mens `=`
+        udfører tildeling. `<=` og `>=` inkluderer grænsen. Kædede sammenligninger udtrykker intervaller
+        klart, men betydningen afhænger også af datatypen.
+    linked_objectives: [m02.o2, m02.o5, m02.o7]
+
+  - id: logical-operators-and-precedence
+    title:
+      es: Operadores lógicos, precedencia y leyes de De Morgan
+      en: Logical operators, precedence, and De Morgan's laws
+      da: Logiske operatorer, præcedens og De Morgans love
+    body:
+      es: >-
+        `and` exige que todas las condiciones sean verdaderas; `or` exige al menos una; `not` invierte
+        el valor lógico. La precedencia es `not`, después `and` y finalmente `or`. Los paréntesis son
+        recomendables cuando documentan la intención. Las leyes de De Morgan permiten transformar
+        `not (A and B)` en `(not A) or (not B)` y `not (A or B)` en `(not A) and (not B)`, pero una
+        transformación correcta debe conservar exactamente el conjunto de casos aceptados.
+      en: >-
+        `and` requires all conditions to be true; `or` requires at least one; `not` reverses truth.
+        Precedence is `not`, then `and`, then `or`. Parentheses are useful when they document intent.
+        De Morgan's laws transform `not (A and B)` into `(not A) or (not B)` and `not (A or B)` into
+        `(not A) and (not B)`, while preserving the accepted set of cases.
+      da: >-
+        `and` kræver alle betingelser sande, `or` mindst én, og `not` vender sandhedsværdien.
+        Præcedensen er `not`, derefter `and` og til sidst `or`. De Morgans love kan omskrive
+        sammensatte negationer uden at ændre de accepterede tilfælde.
+    linked_objectives: [m02.o3, m02.o6]
+
+  - id: short-circuit-evaluation
+    title:
+      es: Evaluación en cortocircuito y condiciones guardián
+      en: Short-circuit evaluation and guard conditions
+      da: Kortslutningsevaluering og beskyttelsesbetingelser
+    body:
+      es: >-
+        Python evalúa `and` y `or` de izquierda a derecha y se detiene cuando el resultado ya está
+        determinado. En `A and B`, si `A` es falsa, `B` no se evalúa. En `A or B`, si `A` es verdadera,
+        `B` no se evalúa. Esto permite proteger operaciones válidas solo bajo una condición, por ejemplo
+        `denominator != 0 and numerator / denominator > 2`. La condición guardián debe aparecer antes
+        de la operación sensible; invertir el orden puede reintroducir el error.
+      en: >-
+        Python evaluates `and` and `or` from left to right and stops when the result is determined. In
+        `A and B`, `B` is skipped when `A` is false. In `A or B`, `B` is skipped when `A` is true. This
+        protects operations that are valid only under a condition, for example
+        `denominator != 0 and numerator / denominator > 2`. The guard must precede the sensitive operation.
+      da: >-
+        Python evaluerer `and` og `or` fra venstre mod højre og stopper, når resultatet er bestemt.
+        Derfor kan en beskyttelsesbetingelse stå før en operation, der kun er gyldig i bestemte tilfælde.
+    linked_objectives: [m02.o4, m02.o7]
+
+  - id: if-elif-else-control-flow
+    title:
+      es: Flujo condicional con `if`, `elif` y `else`
+      en: Conditional flow with `if`, `elif`, and `else`
+      da: Betinget kontrolflow med `if`, `elif` og `else`
+    body:
+      es: >-
+        Una cadena condicional ejecuta la primera rama cuyo predicado sea verdadero. `if` inicia la
+        decisión, cada `elif` añade una alternativa y `else` cubre todos los casos restantes. Solo una
+        rama de la cadena se ejecuta. El orden es parte de la lógica: una regla general colocada antes
+        puede volver inalcanzable una regla más específica. La indentación delimita los bloques y forma
+        parte de la sintaxis de Python.
+      en: >-
+        A conditional chain executes the first branch whose predicate is true. `if` starts the decision,
+        each `elif` adds an alternative, and `else` covers all remaining cases. Only one branch executes.
+        Order is part of the logic: a general rule placed first may make a specific rule unreachable.
+        Indentation defines blocks and is part of Python syntax.
+      da: >-
+        En betinget kæde udfører den første gren med et sandt prædikat. `if` starter beslutningen,
+        `elif` tilføjer alternativer, og `else` dækker resten. Kun én gren udføres, og rækkefølgen er
+        derfor en del af logikken.
+    linked_objectives: [m02.o5, m02.o7]
+
+  - id: compound-versus-nested-conditionals
+    title:
+      es: Condiciones compuestas y decisiones anidadas
+      en: Compound conditions and nested decisions
+      da: Sammensatte betingelser og indlejrede beslutninger
+    body:
+      es: >-
+        Una condición compuesta reúne varios requisitos en una expresión; un condicional anidado coloca
+        una segunda decisión dentro de una rama. La forma compuesta es apropiada cuando todos los
+        requisitos pertenecen a una sola regla. El anidamiento comunica mejor una decisión por etapas,
+        cuando la segunda pregunta solo tiene sentido después de validar la primera. La equivalencia
+        lógica no garantiza la misma legibilidad y debe evitarse profundidad innecesaria.
+      en: >-
+        A compound condition combines requirements in one expression; a nested conditional places a
+        second decision inside a branch. Compound form suits requirements belonging to one rule.
+        Nesting better communicates staged decisions when the second question only makes sense after
+        the first is validated. Logical equivalence does not guarantee equal readability.
+      da: >-
+        En sammensat betingelse samler flere krav i ét udtryk, mens en indlejret betingelse placerer en
+        ny beslutning i en gren. Valget bør afspejle problemets struktur og undgå unødvendig dybde.
+    linked_objectives: [m02.o5, m02.o6]
+
+  - id: validation-boundaries-and-branch-testing
+    title:
+      es: Validación, límites y cobertura de ramas
+      en: Validation, boundaries, and branch coverage
+      da: Validering, grænser og grendækning
+    body:
+      es: >-
+        Las decisiones fallan con frecuencia exactamente en los límites. Si una categoría incluye 20,
+        la comparación debe usar `>= 20`; si lo excluye, `> 20`. La validación separa entradas aceptables
+        de entradas imposibles antes de aplicar reglas posteriores. Un conjunto de pruebas debe activar
+        cada rama, incluir valores exactamente en cada límite, justo por debajo y justo por encima, y
+        cubrir entradas inválidas. En condiciones compuestas conviene variar un componente cada vez.
+      en: >-
+        Decision logic often fails exactly at boundaries. If a category includes 20, use `>= 20`; if it
+        excludes 20, use `> 20`. Validation separates acceptable from impossible input before later
+        rules are applied. Tests should activate every branch, include each exact boundary and values
+        immediately below and above it, and cover invalid input. Compound predicates should vary one
+        component at a time.
+      da: >-
+        Beslutningslogik fejler ofte ved grænser. Validering skal adskille acceptable og umulige input,
+        og test skal aktivere hver gren samt værdier præcis på og på begge sider af grænserne.
+    linked_objectives: [m02.o5, m02.o7]
+
+worked_examples:
+  - id: dm857.m02.e01
+    title:
+      es: Clasificar una muestra con dos criterios didácticos
+      en: Classify a sample using two teaching criteria
+      da: Klassificér en prøve med to undervisningskriterier
+    problem:
+      es: >-
+        Una regla didáctica considera aceptable una muestra cuando `concentration_ng_ul` es al menos
+        20 y `purity_ratio` se encuentra entre 1.8 y 2.1, ambos límites incluidos. Mostrar
+        `acceptable` o `review`. Los umbrales son sintéticos y no constituyen un protocolo real.
+      en: >-
+        A teaching rule considers a sample acceptable when `concentration_ng_ul` is at least 20 and
+        `purity_ratio` is between 1.8 and 2.1 inclusive. Display `acceptable` or `review`. The thresholds
+        are synthetic and do not define a real protocol.
+      da: >-
+        En undervisningsregel accepterer en prøve, når `concentration_ng_ul` er mindst 20 og
+        `purity_ratio` ligger mellem 1.8 og 2.1 inklusive. Grænserne er syntetiske.
+    assumptions:
+      - both measurements are numeric
+      - both criteria must hold
+      - non-acceptable cases are grouped as review
+    reasoning:
+      es:
+        - Convertir cada requisito en un predicado.
+        - Usar una comparación encadenada para el intervalo.
+        - Combinar ambos requisitos con `and`.
+        - Usar `else` para cubrir todos los demás casos.
+      en:
+        - Convert each requirement into a predicate.
+        - Use a chained comparison for the interval.
+        - Combine both requirements with `and`.
+        - Use `else` for all other cases.
+      da:
+        - Omsæt hvert krav til et prædikat.
+        - Brug en kædet sammenligning for intervallet.
+        - Kombinér kravene med `and`.
+        - Brug `else` til de øvrige tilfælde.
+    code: |-
+      concentration_ng_ul = 24.0
+      purity_ratio = 1.93
+
+      concentration_ok = concentration_ng_ul >= 20
+      purity_ok = 1.8 <= purity_ratio <= 2.1
+
+      if concentration_ok and purity_ok:
+          status = "acceptable"
+      else:
+          status = "review"
+
+      print(status)
+    expected_output: acceptable
+    validation:
+      - concentration 20 and purity 1.8 must be accepted
+      - concentration 19.99 must be reviewed
+      - purity 2.1001 must be reviewed
+    explanation:
+      es: >-
+        Los nombres booleanos documentan cada criterio. La comparación encadenada expresa el intervalo
+        inclusivo. La prueba de límites confirma que `>=` y `<=` corresponden a la especificación.
+      en: >-
+        Boolean names document each criterion. The chained comparison expresses the inclusive interval.
+        Boundary tests verify that `>=` and `<=` match the specification.
+      da: >-
+        Booleske navne dokumenterer kriterierne, og den kædede sammenligning udtrykker det inklusive interval.
+    limitations:
+      - no measurement uncertainty is modeled
+      - the example does not imply laboratory validity
+    linked_objectives: [m02.o1, m02.o2, m02.o3, m02.o5, m02.o7]
+
+  - id: dm857.m02.e02
+    title:
+      es: Proteger una división mediante cortocircuito
+      en: Guard a division using short-circuit evaluation
+      da: Beskyt en division med kortslutningsevaluering
+    problem:
+      es: Determinar si el cociente `numerator / denominator` es mayor que 2 sin dividir cuando el denominador sea cero.
+      en: Determine whether `numerator / denominator` is greater than 2 without dividing when the denominator is zero.
+      da: Afgør om `numerator / denominator` er større end 2 uden at dividere, når nævneren er nul.
+    assumptions:
+      - numerator and denominator are numeric
+      - zero denominator is invalid for division
+    reasoning:
+      es:
+        - Comprobar primero que el denominador sea distinto de cero.
+        - Colocar la división como segundo operando de `and`.
+        - Probar con denominador positivo, negativo y cero.
+      en:
+        - First verify that the denominator is not zero.
+        - Place the division as the second operand of `and`.
+        - Test positive, negative, and zero denominators.
+      da:
+        - Kontrollér først at nævneren ikke er nul.
+        - Placér divisionen som andet operand til `and`.
+        - Test positive, negative og nul nævnere.
+    code: |-
+      numerator = 10
+      denominator = 0
+      is_large_ratio = denominator != 0 and numerator / denominator > 2
+      print(is_large_ratio)
+    expected_output: "False"
+    validation:
+      - denominator zero produces False without an exception
+      - denominator 2 produces True
+      - denominator 5 produces False
+    explanation:
+      es: >-
+        Cuando `denominator != 0` es falso, Python no evalúa la división. El orden inverso sería inseguro.
+      en: >-
+        When `denominator != 0` is false, Python does not evaluate the division. Reversing the order would be unsafe.
+      da: >-
+        Når `denominator != 0` er falsk, evaluerer Python ikke divisionen. Omvendt rækkefølge er usikker.
+    limitations:
+      - the expression returns False for an invalid denominator rather than reporting a distinct invalid state
+    linked_objectives: [m02.o3, m02.o4, m02.o7]
+
+  - id: dm857.m02.e03
+    title:
+      es: Ordenar reglas específicas antes de reglas generales
+      en: Order specific rules before general rules
+      da: Placér specifikke regler før generelle regler
+    problem:
+      es: >-
+        Clasificar una puntuación: `invalid` si está fuera de 0–100; `excellent` si es al menos 90;
+        `pass` si es al menos 60; `fail` en otro caso.
+      en: >-
+        Classify a score: `invalid` outside 0–100; `excellent` at least 90; `pass` at least 60; otherwise `fail`.
+      da: >-
+        Klassificér en score: `invalid` uden for 0–100; `excellent` mindst 90; `pass` mindst 60; ellers `fail`.
+    assumptions:
+      - score is numeric
+      - categories are mutually exclusive after ordering
+    reasoning:
+      es:
+        - Validar primero el dominio completo.
+        - Evaluar la categoría más específica antes de la general.
+        - Usar `else` solo cuando los casos restantes son conocidos.
+      en:
+        - Validate the full domain first.
+        - Evaluate the most specific category before the general one.
+        - Use `else` only when the remaining cases are known.
+      da:
+        - Validér først hele domænet.
+        - Evaluér den mest specifikke kategori før den generelle.
+        - Brug kun `else`, når de resterende tilfælde er kendte.
+    code: |-
+      score = 92
+
+      if not 0 <= score <= 100:
+          category = "invalid"
+      elif score >= 90:
+          category = "excellent"
+      elif score >= 60:
+          category = "pass"
+      else:
+          category = "fail"
+
+      print(category)
+    expected_output: excellent
+    validation:
+      - score -1 is invalid
+      - score 0 is fail
+      - score 60 is pass
+      - score 90 is excellent
+      - score 101 is invalid
+    explanation:
+      es: Una regla `score >= 60` colocada antes de `score >= 90` absorbería también los valores excelentes.
+      en: Placing `score >= 60` before `score >= 90` would also capture excellent scores.
+      da: Hvis `score >= 60` står før `score >= 90`, opfanger den også fremragende scorer.
+    limitations:
+      - the categories are a programming example and not an academic grading policy
+    linked_objectives: [m02.o2, m02.o5, m02.o7]
+
+practice_exercises:
+  - id: dm857.m02.p01
+    activity_type: code_tracing
+    difficulty: foundational
+    prompt:
+      es: Predice el valor de `result` para `x = 4`, `y = 9` y `result = x > 3 and y < 5 or x == 4`.
+      en: Predict `result` for `x = 4`, `y = 9`, and `result = x > 3 and y < 5 or x == 4`.
+      da: Forudsig `result` for `x = 4`, `y = 9` og `result = x > 3 and y < 5 or x == 4`.
+    hints:
+      es: [Evalúa comparaciones, después `and` y finalmente `or`.]
+      en: [Evaluate comparisons, then `and`, then `or`.]
+      da: [Evaluér sammenligninger, derefter `and` og til sidst `or`.]
+    reference_solution:
+      es: `(True and False) or True` produce `True`.
+      en: `(True and False) or True` evaluates to `True`.
+      da: `(True and False) or True` giver `True`.
+    explanation:
+      es: `and` tiene mayor precedencia que `or`.
+      en: `and` has higher precedence than `or`.
+      da: `and` har højere præcedens end `or`.
+    linked_objectives: [m02.o2, m02.o3]
+
+  - id: dm857.m02.p02
+    activity_type: debugging
+    difficulty: foundational
+    prompt:
+      es: Corrige `if score = 10:` y explica la diferencia entre los operadores implicados.
+      en: Correct `if score = 10:` and explain the difference between the operators involved.
+      da: Ret `if score = 10:` og forklar forskellen mellem operatorerne.
+    reference_solution: "if score == 10:"
+    explanation:
+      es: `=` asigna; `==` compara igualdad. La condición necesita una expresión booleana.
+      en: `=` assigns; `==` compares equality. A condition requires a Boolean expression.
+      da: `=` tildeler; `==` sammenligner lighed. En betingelse kræver et boolesk udtryk.
+    linked_objectives: [m02.o1, m02.o2]
+
+  - id: dm857.m02.p03
+    activity_type: boundary_analysis
+    difficulty: intermediate
+    prompt:
+      es: >-
+        Una regla define `low` para valores menores de 10, `normal` entre 10 y 20 incluidos y `high`
+        por encima de 20. Escribe las condiciones y propone cinco pruebas mínimas.
+      en: >-
+        A rule defines `low` below 10, `normal` from 10 to 20 inclusive, and `high` above 20. Write
+        the conditions and propose five minimal tests.
+      da: >-
+        En regel definerer `low` under 10, `normal` fra 10 til 20 inklusive og `high` over 20. Skriv
+        betingelserne og foreslå fem minimale test.
+    reference_solution:
+      es: >-
+        `if value < 10`, `elif value <= 20`, `else`. Pruebas: 9.99, 10, 15, 20 y 20.01.
+      en: >-
+        `if value < 10`, `elif value <= 20`, `else`. Tests: 9.99, 10, 15, 20, and 20.01.
+      da: >-
+        `if value < 10`, `elif value <= 20`, `else`. Test: 9.99, 10, 15, 20 og 20.01.
+    explanation:
+      es: Después de excluir valores menores de 10, `value <= 20` representa exactamente el intervalo normal.
+      en: After excluding values below 10, `value <= 20` represents the normal interval exactly.
+      da: Efter værdier under 10 er udelukket, repræsenterer `value <= 20` normalintervallet præcist.
+    linked_objectives: [m02.o2, m02.o5, m02.o7]
+
+  - id: dm857.m02.p04
+    activity_type: refactoring
+    difficulty: intermediate
+    prompt:
+      es: >-
+        Compara `if valid: if has_control: ...` con `if valid and has_control: ...`. Explica cuándo la
+        forma anidada comunica mejor el problema.
+      en: >-
+        Compare `if valid: if has_control: ...` with `if valid and has_control: ...`. Explain when the
+        nested form communicates the problem better.
+      da: >-
+        Sammenlign `if valid: if has_control: ...` med `if valid and has_control: ...`. Forklar hvornår
+        den indlejrede form kommunikerer problemet bedre.
+    reference_solution:
+      es: >-
+        La forma compuesta es preferible cuando ambos requisitos forman una sola regla. El anidamiento
+        es útil cuando la presencia del control solo debe evaluarse o explicarse después de validar el dato.
+      en: >-
+        Compound form is preferable when both requirements form one rule. Nesting is useful when the
+        control should only be evaluated or explained after data validity has been established.
+      da: >-
+        Den sammensatte form er bedst, når kravene udgør én regel. Indlejring er nyttig, når kontrollen
+        først giver mening efter validering.
+    linked_objectives: [m02.o5, m02.o6]
+
+  - id: dm857.m02.p05
+    activity_type: test_design
+    difficulty: intermediate
+    prompt:
+      es: Diseña un conjunto mínimo de pruebas para una cadena de cuatro ramas: inválido, bajo, aceptable y alto.
+      en: Design a minimal test set for a four-branch chain: invalid, low, acceptable, and high.
+      da: Design et minimalt testsæt til fire grene: invalid, low, acceptable og high.
+    reference_solution:
+      es: >-
+        Debe existir al menos un caso que active cada rama. Además, cada frontera necesita el valor
+        exacto y valores inmediatamente a ambos lados. Si hay dos límites, un conjunto robusto suele
+        contener más de cuatro casos porque la cobertura de ramas no garantiza cobertura de límites.
+      en: >-
+        At least one case must activate each branch. Every boundary also needs the exact value and values
+        immediately on both sides. With two boundaries, a robust set usually contains more than four
+        cases because branch coverage does not guarantee boundary coverage.
+      da: >-
+        Mindst ét tilfælde skal aktivere hver gren. Hver grænse kræver også den præcise værdi og værdier
+        lige på begge sider. Grendækning garanterer ikke grænsedækning.
+    linked_objectives: [m02.o7]
+
+  - id: dm857.m02.p06
+    activity_type: misconception_correction
+    difficulty: intermediate
+    prompt:
+      es: Corrige la afirmación: “`A or B` evalúa siempre ambos operandos”. Incluye una consecuencia práctica.
+      en: Correct the claim: “`A or B` always evaluates both operands.” Include a practical consequence.
+      da: Ret udsagnet: “`A or B` evaluerer altid begge operander.” Medtag en praktisk konsekvens.
+    reference_solution:
+      es: >-
+        Python evalúa de izquierda a derecha y, si `A` es verdadero, no evalúa `B`. Esto puede evitar
+        una operación costosa o inválida, pero también significa que efectos secundarios en `B` pueden no ocurrir.
+      en: >-
+        Python evaluates left to right and skips `B` when `A` is true. This can avoid an expensive or
+        invalid operation, but also means side effects in `B` may not occur.
+      da: >-
+        Python evaluerer fra venstre mod højre og springer `B` over, når `A` er sand. Det kan undgå en
+        dyr eller ugyldig operation, men sideeffekter i `B` sker måske ikke.
+    linked_objectives: [m02.o4]
+
+objective_question_bank:
+  - id: dm857.m02.q01
+    activity_type: multiple_choice
+    difficulty: foundational
+    prompt:
+      es: ¿Cuál es un valor de tipo `bool`?
+      en: Which is a value of type `bool`?
+      da: Hvilken er en værdi af typen `bool`?
+    options:
+      - id: boolean_true
+        text: {es: "True", en: "True", da: "True"}
+      - id: string_true
+        text: {es: "'True'", en: "'True'", da: "'True'"}
+      - id: integer_one
+        text: {es: "1", en: "1", da: "1"}
+    correct_option_ids: [boolean_true]
+    explanation:
+      es: `True` sin comillas es booleano; con comillas es una cadena.
+      en: `True` without quotes is Boolean; with quotes it is a string.
+      da: `True` uden anførselstegn er boolesk; med anførselstegn er det tekst.
+    linked_objectives: [m02.o1]
+
+  - id: dm857.m02.q02
+    activity_type: multiple_choice
+    difficulty: foundational
+    prompt:
+      es: ¿Qué produce `10 <= 10`?
+      en: What does `10 <= 10` produce?
+      da: Hvad giver `10 <= 10`?
+    options:
+      - id: true
+        text: {es: "True", en: "True", da: "True"}
+      - id: false
+        text: {es: "False", en: "False", da: "False"}
+      - id: error
+        text: {es: Error, en: Error, da: Fejl}
+    correct_option_ids: [true]
+    explanation:
+      es: `<=` incluye el valor límite.
+      en: `<=` includes the boundary value.
+      da: `<=` inkluderer grænseværdien.
+    linked_objectives: [m02.o2]
+
+  - id: dm857.m02.q03
+    activity_type: multiple_choice
+    difficulty: foundational
+    prompt:
+      es: ¿Cuál es el orden de precedencia correcto entre operadores lógicos?
+      en: What is the correct precedence order among logical operators?
+      da: Hvad er den korrekte præcedensrækkefølge for logiske operatorer?
+    options:
+      - id: not_and_or
+        text: {es: "not, and, or", en: "not, and, or", da: "not, and, or"}
+      - id: and_or_not
+        text: {es: "and, or, not", en: "and, or, not", da: "and, or, not"}
+      - id: or_and_not
+        text: {es: "or, and, not", en: "or, and, not", da: "or, and, not"}
+    correct_option_ids: [not_and_or]
+    explanation:
+      es: `not` tiene mayor precedencia, seguido de `and` y luego `or`.
+      en: `not` has highest precedence, followed by `and`, then `or`.
+      da: `not` har højest præcedens, derefter `and` og til sidst `or`.
+    linked_objectives: [m02.o3]
+
+  - id: dm857.m02.q04
+    activity_type: true_false
+    difficulty: foundational
+    prompt:
+      es: En cadena `if`–`elif`–`else` puede ejecutar dos ramas de la misma cadena.
+      en: An `if`–`elif`–`else` chain can execute two branches from the same chain.
+      da: En `if`–`elif`–`else`-kæde kan udføre to grene fra samme kæde.
+    options:
+      - id: true
+        text: {es: Verdadero, en: True, da: Sandt}
+      - id: false
+        text: {es: Falso, en: False, da: Falsk}
+    correct_option_ids: [false]
+    explanation:
+      es: Se ejecuta únicamente la primera rama cuya condición es verdadera.
+      en: Only the first branch whose condition is true executes.
+      da: Kun den første gren med en sand betingelse udføres.
+    linked_objectives: [m02.o5]
+
+  - id: dm857.m02.q05
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt:
+      es: ¿Qué expresión evita correctamente una división por cero?
+      en: Which expression correctly avoids division by zero?
+      da: Hvilket udtryk undgår korrekt division med nul?
+    options:
+      - id: safe_guard_first
+        text: {es: "d != 0 and n / d > 2", en: "d != 0 and n / d > 2", da: "d != 0 and n / d > 2"}
+      - id: unsafe_division_first
+        text: {es: "n / d > 2 and d != 0", en: "n / d > 2 and d != 0", da: "n / d > 2 and d != 0"}
+      - id: unrelated_or
+        text: {es: "d == 0 or n / d > 2", en: "d == 0 or n / d > 2", da: "d == 0 or n / d > 2"}
+    correct_option_ids: [safe_guard_first]
+    explanation:
+      es: La condición guardián debe evaluarse antes de la división sensible.
+      en: The guard condition must be evaluated before the sensitive division.
+      da: Beskyttelsesbetingelsen skal evalueres før den følsomme division.
+    linked_objectives: [m02.o4]
+
+  - id: dm857.m02.q06
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt:
+      es: ¿Por qué debe evaluarse `score >= 90` antes de `score >= 60` en una cadena exclusiva?
+      en: Why should `score >= 90` be evaluated before `score >= 60` in an exclusive chain?
+      da: Hvorfor skal `score >= 90` evalueres før `score >= 60` i en eksklusiv kæde?
+    options:
+      - id: specific_before_general
+        text:
+          es: Porque la regla general también es verdadera para valores de 90 o más.
+          en: Because the general rule is also true for values of 90 or more.
+          da: Fordi den generelle regel også er sand for værdier på 90 eller mere.
+      - id: performance_only
+        text:
+          es: Únicamente para hacer el programa más rápido.
+          en: Only to make the program faster.
+          da: Kun for at gøre programmet hurtigere.
+      - id: syntax_requirement
+        text:
+          es: Porque Python exige umbrales descendentes.
+          en: Because Python requires descending thresholds.
+          da: Fordi Python kræver faldende tærskler.
+    correct_option_ids: [specific_before_general]
+    explanation:
+      es: La primera condición verdadera detiene la cadena; una regla general temprana ocultaría la específica.
+      en: The first true condition stops the chain; an early general rule would hide the specific one.
+      da: Den første sande betingelse stopper kæden; en tidlig generel regel skjuler den specifikke.
+    linked_objectives: [m02.o5]
+
+  - id: dm857.m02.q07
+    activity_type: multiple_select
+    difficulty: intermediate
+    prompt:
+      es: ¿Qué casos son necesarios para comprobar un límite inclusivo en 20? Selecciona todos.
+      en: Which cases are needed to check an inclusive boundary at 20? Select all.
+      da: Hvilke tilfælde kræves for at kontrollere en inklusiv grænse ved 20? Vælg alle.
+    options:
+      - id: below
+        text: {es: Un valor justo menor que 20, en: A value just below 20, da: En værdi lige under 20}
+      - id: exact
+        text: {es: El valor 20, en: The value 20, da: Værdien 20}
+      - id: above
+        text: {es: Un valor justo mayor que 20, en: A value just above 20, da: En værdi lige over 20}
+      - id: arbitrary_far
+        text: {es: Solo un valor muy lejano, en: Only a distant value, da: Kun en fjern værdi}
+    correct_option_ids: [below, exact, above]
+    explanation:
+      es: Los tres casos muestran el cambio de comportamiento y la inclusión exacta del límite.
+      en: The three cases reveal the behavior change and exact inclusion of the boundary.
+      da: De tre tilfælde viser adfærdsændringen og den præcise inklusion af grænsen.
+    linked_objectives: [m02.o7]
+
+  - id: dm857.m02.q08
+    activity_type: cloze_choice
+    difficulty: intermediate
+    template:
+      es: En `A and B`, si `A` es [[blank01]], `B` [[blank02]].
+      en: In `A and B`, when `A` is [[blank01]], `B` is [[blank02]].
+      da: I `A and B`, når `A` er [[blank01]], bliver `B` [[blank02]].
+    blanks:
+      - id: blank01
+        options:
+          - id: false
+            text: {es: falsa, en: false, da: falsk}
+          - id: true
+            text: {es: verdadera, en: true, da: sand}
+        correct_option_id: false
+      - id: blank02
+        options:
+          - id: skipped
+            text: {es: no evaluada, en: not evaluated, da: ikke evalueret}
+          - id: always_evaluated
+            text: {es: evaluada siempre, en: always evaluated, da: altid evalueret}
+        correct_option_id: skipped
+    explanation:
+      es: El resultado ya está determinado como falso cuando el primer operando de `and` es falso.
+      en: The result is already determined as false when the first operand of `and` is false.
+      da: Resultatet er allerede bestemt som falsk, når første operand til `and` er falsk.
+    linked_objectives: [m02.o4]
+
+  - id: dm857.m02.q09
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt:
+      es: ¿Cuál es la negación equivalente de `A and B`?
+      en: What is the equivalent negation of `A and B`?
+      da: Hvad er den ækvivalente negation af `A and B`?
+    options:
+      - id: demorgan_correct
+        text: {es: "not A or not B", en: "not A or not B", da: "not A or not B"}
+      - id: both_not_and
+        text: {es: "not A and not B", en: "not A and not B", da: "not A and not B"}
+      - id: no_change
+        text: {es: "A or B", en: "A or B", da: "A or B"}
+    correct_option_ids: [demorgan_correct]
+    explanation:
+      es: Por De Morgan, negar una conjunción produce la disyunción de las negaciones.
+      en: By De Morgan's law, negating a conjunction yields the disjunction of the negations.
+      da: Ifølge De Morgans lov giver negationen af en konjunktion disjunktionen af negationerne.
+    linked_objectives: [m02.o3]
+
+  - id: dm857.m02.q10
+    activity_type: multiple_choice
+    difficulty: intermediate
+    prompt:
+      es: ¿Cuándo suele ser más apropiado un condicional anidado?
+      en: When is a nested conditional usually more appropriate?
+      da: Hvornår er en indlejret betingelse normalt mere passende?
+    options:
+      - id: staged_decision
+        text:
+          es: Cuando la segunda decisión solo tiene sentido después de validar la primera.
+          en: When the second decision only makes sense after validating the first.
+          da: Når den anden beslutning først giver mening efter validering af den første.
+      - id: all_same_rule
+        text:
+          es: Cuando todos los requisitos forman una sola regla simple.
+          en: When all requirements form one simple rule.
+          da: Når alle krav udgør én enkel regel.
+      - id: avoid_logic
+        text:
+          es: Cuando se desea evitar usar valores booleanos.
+          en: When Boolean values should be avoided.
+          da: Når booleske værdier skal undgås.
+    correct_option_ids: [staged_decision]
+    explanation:
+      es: El anidamiento comunica dependencia por etapas; una sola regla suele expresarse mejor de forma compuesta.
+      en: Nesting communicates staged dependency; one rule is often clearer as a compound condition.
+      da: Indlejring kommunikerer afhængighed i trin; én regel er ofte klarere som en sammensat betingelse.
+    linked_objectives: [m02.o6]
+
+assessment_items:
+  - id: dm857.m02.a01
+    activity_type: conditional_design
+    difficulty: intermediate
+    prompt:
+      es: >-
+        Diseña una clasificación para una medición sintética con cuatro estados: `invalid` para valores
+        negativos, `low` por debajo de 5, `target` entre 5 y 10 incluidos y `high` por encima de 10.
+        Incluye código, tabla de decisión y pruebas de límites.
+      en: >-
+        Design a classification for a synthetic measurement with four states: `invalid` for negative
+        values, `low` below 5, `target` from 5 to 10 inclusive, and `high` above 10. Include code, a
+        decision table, and boundary tests.
+      da: >-
+        Design en klassifikation for en syntetisk måling med fire tilstande: `invalid` for negative
+        værdier, `low` under 5, `target` fra 5 til 10 inklusive og `high` over 10. Medtag kode,
+        beslutningstabel og grænsetest.
+    accepted_answer_elements:
+      - validation precedes category rules
+      - boundaries 5 and 10 are inclusive
+      - branches are mutually exclusive
+      - tests include negative, 5, 10, and values on both sides
+    rubric:
+      - criterion: correct_predicates_and_order
+        points: 4
+      - criterion: complete_decision_table
+        points: 2
+      - criterion: boundary_and_invalid_tests
+        points: 3
+      - criterion: explanation
+        points: 1
+    explanation:
+      es: La actividad evalúa diseño, orden, cobertura y evidencia, no solo sintaxis.
+      en: The task evaluates design, order, coverage, and evidence, not only syntax.
+      da: Opgaven vurderer design, rækkefølge, dækning og evidens, ikke kun syntaks.
+    linked_objectives: [m02.o2, m02.o5, m02.o7]
+
+  - id: dm857.m02.a02
+    activity_type: debugging
+    difficulty: advanced
+    prompt:
+      es: >-
+        Un programa usa `if value >= 0 or value <= 100:` para validar que un valor pertenezca al intervalo
+        0–100. Explica por qué la condición es defectuosa, corrígela y diseña tres pruebas que revelen el error.
+      en: >-
+        A program uses `if value >= 0 or value <= 100:` to validate membership in 0–100. Explain why
+        the condition is defective, correct it, and design three tests that reveal the error.
+      da: >-
+        Et program bruger `if value >= 0 or value <= 100:` til at validere intervallet 0–100. Forklar
+        hvorfor betingelsen er forkert, ret den og design tre test, der afslører fejlen.
+    accepted_answer_elements:
+      - `or` makes nearly every numeric value pass
+      - correct expression is `0 <= value <= 100` or equivalent with `and`
+      - tests include a negative value, an in-range value, and a value above 100
+      - explanation identifies a logic error rather than a syntax error
+    rubric:
+      - criterion: diagnosis
+        points: 3
+      - criterion: correction
+        points: 2
+      - criterion: revealing_tests
+        points: 3
+      - criterion: error_classification_and_explanation
+        points: 2
+    explanation:
+      es: Un valor negativo suele cumplir `value <= 100`, y uno mayor que 100 suele cumplir `value >= 0`; por eso `or` invalida el modelo del intervalo.
+      en: A negative value usually satisfies `value <= 100`, and a value above 100 usually satisfies `value >= 0`; therefore `or` breaks the interval model.
+      da: En negativ værdi opfylder normalt `value <= 100`, og en værdi over 100 opfylder normalt `value >= 0`; derfor ødelægger `or` intervalmodellen.
+    linked_objectives: [m02.o3, m02.o5, m02.o7]
+
+  - id: dm857.m02.a03
+    activity_type: oral_explanation
+    difficulty: advanced
+    prompt:
+      es: >-
+        Explica sin ejecutar código cómo el cortocircuito puede mejorar la seguridad y también ocultar
+        efectos secundarios. Utiliza un ejemplo correcto y uno problemático.
+      en: >-
+        Explain without executing code how short-circuiting can improve safety and also hide side effects.
+        Use one correct and one problematic example.
+      da: >-
+        Forklar uden at køre kode hvordan kortslutning kan forbedre sikkerheden og samtidig skjule
+        sideeffekter. Brug ét korrekt og ét problematisk eksempel.
+    accepted_answer_elements:
+      - left-to-right evaluation
+      - guard before sensitive operation
+      - skipped second operand
+      - warning about mutation, logging, or function calls with side effects
+    rubric:
+      - criterion: mechanism
+        points: 4
+      - criterion: safe_example
+        points: 2
+      - criterion: problematic_side_effect_example
+        points: 2
+      - criterion: clarity_and_limits
+        points: 2
+    explanation:
+      es: El estudiante debe distinguir uso deliberado de cortocircuito y dependencia accidental de efectos secundarios.
+      en: The learner must distinguish deliberate short-circuit use from accidental dependence on side effects.
+      da: Den studerende skal skelne mellem bevidst kortslutning og utilsigtet afhængighed af sideeffekter.
+    linked_objectives: [m02.o4, m02.o6]
+
+flashcards:
+  source_file: ../flashcards/dm857_m02_flashcards.yaml
+  expected_count: 24
+
+glossary:
+  - id: term.boolean
+    term: {es: booleano, en: Boolean, da: boolesk}
+    definition:
+      es: Tipo lógico con los valores `True` y `False`.
+      en: Logical type with values `True` and `False`.
+      da: Logisk type med værdierne `True` og `False`.
+    related_terms: [term.predicate, term.condition]
+  - id: term.predicate
+    term: {es: predicado, en: predicate, da: prædikat}
+    definition:
+      es: Expresión que se evalúa como un valor booleano.
+      en: Expression that evaluates to a Boolean value.
+      da: Udtryk der evalueres til en boolesk værdi.
+    related_terms: [term.boolean, term.condition]
+  - id: term.condition
+    term: {es: condición, en: condition, da: betingelse}
+    definition:
+      es: Predicado utilizado para seleccionar o controlar la ejecución.
+      en: Predicate used to select or control execution.
+      da: Prædikat der bruges til at vælge eller styre udførelse.
+    related_terms: [term.predicate, term.branch]
+  - id: term.chained_comparison
+    term: {es: comparación encadenada, en: chained comparison, da: kædet sammenligning}
+    definition:
+      es: Notación que combina comparaciones relacionadas, como `a <= x <= b`.
+      en: Notation combining related comparisons, such as `a <= x <= b`.
+      da: Notation der kombinerer relaterede sammenligninger, som `a <= x <= b`.
+    related_terms: [term.boundary]
+  - id: term.short_circuit
+    term: {es: evaluación en cortocircuito, en: short-circuit evaluation, da: kortslutningsevaluering}
+    definition:
+      es: Omisión de operandos posteriores cuando el resultado lógico ya está determinado.
+      en: Skipping later operands when the logical result is already determined.
+      da: Overspringning af senere operander, når det logiske resultat allerede er bestemt.
+    related_terms: [term.guard_condition]
+  - id: term.guard_condition
+    term: {es: condición guardián, en: guard condition, da: beskyttelsesbetingelse}
+    definition:
+      es: Predicado evaluado antes de una operación para comprobar que esta sea válida.
+      en: Predicate evaluated before an operation to verify that the operation is valid.
+      da: Prædikat evalueret før en operation for at kontrollere dens gyldighed.
+    related_terms: [term.short_circuit]
+  - id: term.branch
+    term: {es: rama, en: branch, da: gren}
+    definition:
+      es: Bloque de sentencias seleccionado por una condición.
+      en: Block of statements selected by a condition.
+      da: Blok af sætninger valgt af en betingelse.
+    related_terms: [term.branch_coverage]
+  - id: term.boundary
+    term: {es: límite, en: boundary, da: grænse}
+    definition:
+      es: Valor en el que cambia la categoría o el comportamiento de una regla.
+      en: Value at which a rule changes category or behavior.
+      da: Værdi hvor en regel ændrer kategori eller adfærd.
+    related_terms: [term.boundary_test]
+  - id: term.branch_coverage
+    term: {es: cobertura de ramas, en: branch coverage, da: grendækning}
+    definition:
+      es: Evidencia de que cada rama relevante se ejecutó al menos una vez durante las pruebas.
+      en: Evidence that every relevant branch executed at least once during testing.
+      da: Evidens for at hver relevant gren blev udført mindst én gang under test.
+    related_terms: [term.branch, term.boundary_test]
+  - id: term.boundary_test
+    term: {es: prueba de límite, en: boundary test, da: grænsetest}
+    definition:
+      es: Prueba con el valor exacto de una frontera y valores inmediatamente a ambos lados.
+      en: Test using the exact boundary and values immediately on both sides.
+      da: Test med den præcise grænse og værdier lige på begge sider.
+    related_terms: [term.boundary]
+
+hidden_guided_support:
+  visibility: hidden_from_standard_reader
+  canonical_explanation:
+    es: >-
+      El módulo enseña a convertir reglas verbales en particiones verificables del espacio de entradas.
+      Una condición correcta debe representar exactamente la especificación, y una cadena condicional
+      debe ordenar las reglas para evitar solapamientos, huecos y ramas inalcanzables. La calidad se
+      demuestra mediante tablas de decisión, trazado y pruebas de límites.
+    en: >-
+      The module teaches how to convert verbal rules into verifiable partitions of the input space. A
+      correct condition must represent the specification exactly, and a conditional chain must order
+      rules to avoid overlap, gaps, and unreachable branches. Quality is demonstrated with decision
+      tables, tracing, and boundary tests.
+    da: >-
+      Modulet lærer at omsætte verbale regler til efterprøvelige opdelinger af inputrummet. En korrekt
+      betingelse skal repræsentere specifikationen præcist, og en betinget kæde skal undgå overlap,
+      huller og utilgængelige grene. Kvalitet dokumenteres med beslutningstabeller og grænsetest.
+  knowledge_fragments:
+    - id: dm857.m02.t01
+      topic: boolean_type
+      content: `True` and `False` are Boolean values; quoted equivalents are strings.
+    - id: dm857.m02.t02
+      topic: equality
+      content: `==` compares equality, whereas `=` assigns a value.
+    - id: dm857.m02.t03
+      topic: intervals
+      content: Chained comparisons often express bounded intervals more clearly than repeated variable names.
+    - id: dm857.m02.t04
+      topic: precedence
+      content: Logical precedence is `not`, then `and`, then `or`.
+    - id: dm857.m02.t05
+      topic: short_circuit
+      content: `and` stops at the first false operand; `or` stops at the first true operand.
+    - id: dm857.m02.t06
+      topic: branch_order
+      content: More specific overlapping rules usually precede more general rules.
+    - id: dm857.m02.t07
+      topic: validation
+      content: Validate the input domain before applying classification rules.
+    - id: dm857.m02.t08
+      topic: testing
+      content: Branch coverage and boundary coverage are complementary, not interchangeable.
+    - id: dm857.m02.t09
+      topic: readability
+      content: Logical equivalence does not guarantee equal readability or equal diagnostic value.
+    - id: dm857.m02.t10
+      topic: demorgan
+      content: De Morgan transformations must preserve the accepted and rejected input sets.
+  common_misconceptions:
+    - misconception: `True` and `'True'` are interchangeable.
+      correction: One is `bool`; the other is `str`.
+    - misconception: `or` is appropriate when all requirements must hold.
+      correction: Use `and` when every requirement is necessary.
+    - misconception: A branch after a broader true condition can still run.
+      correction: The first true branch ends the chain.
+    - misconception: One test per branch is sufficient.
+      correction: Exact boundaries and values on both sides also require tests.
+    - misconception: Short-circuiting always evaluates every function call.
+      correction: Later operands may be skipped entirely.
+    - misconception: An `else` branch is automatically meaningful.
+      correction: `else` is safe only when the remaining domain is understood.
+  socratic_questions:
+    - Which exact set of inputs should make this predicate true?
+    - Does the operator include or exclude the boundary?
+    - Could two branches be true for the same input, and which would run first?
+    - Is there an input that reaches no intended category?
+    - What operation is protected by the left-hand guard?
+    - Which test distinguishes `and` from `or` in this rule?
+    - Would a decision table make the overlap easier to see?
+  grading_criteria:
+    - predicates match the verbal specification
+    - branches are ordered and mutually coherent
+    - validation precedes sensitive operations
+    - tests include normal, boundary, and invalid cases
+    - explanations use Boolean terminology precisely
+    - refactoring decisions are justified by readability and model structure
+  response_constraints:
+    - Ask the learner to enumerate accepted and rejected cases before proposing code.
+    - Use decision tables for repeated confusion about branch order.
+    - Do not reveal answer keys during active assessment.
+    - Avoid presenting synthetic thresholds as biomedical standards.
+    - Distinguish a logical condition from truthiness shortcuts not yet taught.
+  escalation_rules:
+    - If `and` and `or` remain confused, reduce the problem to a two-row requirements table.
+    - If boundaries remain unclear, test the exact limit and one value on each side.
+    - If nesting becomes deep, ask whether a guard clause or compound predicate better reflects the model.
+    - If side effects appear inside Boolean expressions, isolate them before discussing short-circuit behavior.
+  source_anchors: [sdu.dm857.official.2025, guttag.python.3e, downey.think_python.3e, repository.dm857.existing]
+
+source_map:
+  - target_ids: [m02.o1, m02.o2, m02.o3, m02.o4, m02.o5, m02.o6, m02.o7]
+    source_id: sdu.dm857.official.2025
+    use: official_outcome_alignment
+  - target_ids: [boolean-values-and-predicates, comparison-operators, logical-operators-and-precedence, short-circuit-evaluation]
+    source_id: guttag.python.3e
+    use: factual_foundation
+  - target_ids: [if-elif-else-control-flow, compound-versus-nested-conditionals, validation-boundaries-and-branch-testing]
+    source_id: downey.think_python.3e
+    use: pedagogical_sequence
+  - target_ids: [dm857.m02.e01, dm857.m02.e02, dm857.m02.e03]
+    source_id: original.synthetic.dm857.m02
+    use: pedagogical_sequence
+
+limitations:
+  - Truthiness of non-Boolean objects is not treated as a replacement for explicit predicates.
+  - Structural pattern matching is outside the scope of this introductory module.
+  - Floating-point boundary tolerance is introduced later where numerical error is addressed.
+  - Synthetic thresholds and categories do not define biomedical or academic policies.
