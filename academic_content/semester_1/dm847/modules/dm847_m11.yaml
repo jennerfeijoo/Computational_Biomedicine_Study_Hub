@@ -1,0 +1,335 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m11
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Datos NGS, flujos de lecturas cortas, evidencia de calidad y peak calling
+    en: NGS data, short-read workflows, quality evidence, and peak calling
+    da: NGS-data, short-read-workflows, kvalitetsbevis og peak calling
+  summary:
+    es: >-
+      Fundamentos de generación de bibliotecas y lecturas, FASTQ y Phred, control de calidad,
+      adaptadores, duplicación, contaminación, trimming, mapeo, multimapeo, cobertura,
+      normalización básica y peak calling. El módulo enfatiza trazabilidad, controles,
+      reproducibilidad y la diferencia entre señal técnica, señal estadística e interpretación biológica.
+    en: >-
+      Foundations of library and read generation, FASTQ and Phred scores, quality control,
+      adapters, duplication, contamination, trimming, mapping, multimapping, coverage,
+      basic normalization, and peak calling. The module emphasizes provenance, controls,
+      reproducibility, and distinctions among technical, statistical, and biological signals.
+    da: >-
+      Grundlag for bibliotek- og read-generering, FASTQ og Phred, kvalitetskontrol,
+      adaptere, duplikation, kontaminering, trimming, mapping, multimapping, dækning,
+      normalisering og peak calling med fokus på sporbarhed og kontroller.
+  estimated_study_hours: 13
+  difficulty: advanced_applied
+
+alignment:
+  official_learning_outcomes: [dm847.lo04, dm847.lo07]
+  prerequisite_modules: [dm847.m08, dm847.m09, dm847.m10, dm857.m08, dm857.m13]
+  later_modules: [dm847.m13, dm847.m14, dm847.m15, bmb831.m06]
+
+objectives:
+  - {id: dm847.m11.o01, text: {es: Distinguir molécula, fragmento, read, par de reads y unidad biológica, en: Distinguish molecule, fragment, read, read pair, and biological unit, da: Skelne mellem molekyle, fragment, read, read-par og biologisk enhed}}
+  - {id: dm847.m11.o02, text: {es: Interpretar FASTQ y convertir Phred en probabilidad de error, en: Interpret FASTQ and convert Phred to error probability, da: Fortolke FASTQ og konvertere Phred til fejlsandsynlighed}}
+  - {id: dm847.m11.o03, text: {es: Evaluar calidad por base, composición, adaptadores, duplicación y contaminación, en: Evaluate per-base quality, composition, adapters, duplication, and contamination, da: Evaluere basekvalitet, sammensætning, adaptere, duplikation og kontaminering}}
+  - {id: dm847.m11.o04, text: {es: Justificar trimming y filtrado a partir de evidencia, en: Justify trimming and filtering from evidence, da: Begrund trimming og filtrering ud fra evidens}}
+  - {id: dm847.m11.o05, text: {es: Explicar mapeo, paired-end, orientación, multimapeo y sesgo de referencia, en: Explain mapping, paired-end orientation, multimapping, and reference bias, da: Forklare mapping, paired-end-orientering, multimapping og referencebias}}
+  - {id: dm847.m11.o06, text: {es: Calcular profundidad, breadth y cobertura normalizada con denominadores explícitos, en: Compute depth, breadth, and normalized coverage with explicit denominators, da: Beregne dybde, breadth og normaliseret dækning med eksplicitte nævnere}}
+  - {id: dm847.m11.o07, text: {es: Diseñar y auditar un análisis de peaks con controles y corrección múltiple, en: Design and audit peak analysis with controls and multiple-testing correction, da: Designe og revidere peak-analyse med kontroller og multipel korrektion}}
+  - {id: dm847.m11.o08, text: {es: Documentar un pipeline reproducible y validar cada transición de datos, en: Document a reproducible pipeline and validate each data transition, da: Dokumentere et reproducerbart pipeline og validere hver dataovergang}}
+
+concepts:
+  - id: dm847.m11.c01
+    title: {es: De muestra a biblioteca y reads, en: From sample to library and reads, da: Fra prøve til bibliotek og reads}
+    body:
+      es: >-
+        La secuenciación observa moléculas después de extracción, fragmentación, selección,
+        ligación de adaptadores, amplificación y lectura. Cada paso puede introducir sesgos de
+        composición, longitud y abundancia. Una read no es una célula ni necesariamente una
+        molécula original: PCR puede generar copias y paired-end produce dos observaciones de un fragmento.
+      en: >-
+        Sequencing observes molecules after extraction, fragmentation, selection, adapter ligation,
+        amplification, and reading. Each step may introduce composition, length, and abundance bias.
+        A read is not a cell and not necessarily one original molecule: PCR may create copies, while
+        paired-end sequencing yields two observations from one fragment.
+      da: >-
+        Sekventering observerer molekyler efter ekstraktion, fragmentering, selektion, adapterligation
+        og amplifikation. Hvert trin kan give bias. Et read er ikke nødvendigvis ét originalt molekyle.
+    key_points:
+      - {es: La unidad experimental debe definirse antes de contar reads, en: The experimental unit must be defined before counting reads, da: Den eksperimentelle enhed skal defineres før reads tælles}
+      - {es: Réplica técnica no sustituye réplica biológica, en: A technical replicate does not replace a biological replicate, da: En teknisk replikat erstatter ikke en biologisk replikat}
+  - id: dm847.m11.c02
+    title: {es: FASTQ y Phred, en: FASTQ and Phred scores, da: FASTQ og Phred-scores}
+    body:
+      es: >-
+        FASTQ representa identificador, secuencia, separador y cadena de calidades. Un score Phred
+        Q=-10 log10(p_error), por lo que Q20 corresponde aproximadamente a 1% y Q30 a 0.1% de error
+        por base bajo la calibración del instrumento. Las calidades son estimaciones, no garantías,
+        y pueden depender de ciclo, instrumento, química y contexto.
+      en: >-
+        FASTQ stores an identifier, sequence, separator, and quality string. A Phred score
+        Q=-10 log10(p_error), so Q20 is about 1% and Q30 about 0.1% per-base error under instrument
+        calibration. Qualities are estimates rather than guarantees and depend on cycle, platform,
+        chemistry, and context.
+      da: >-
+        FASTQ indeholder identifikator, sekvens, separator og kvalitetsstreng. Phred Q=-10log10(p),
+        så Q20 svarer omtrent til 1% fejl og Q30 til 0,1%. Scores er estimater, ikke garantier.
+    key_points:
+      - {es: La codificación ASCII debe interpretarse con el esquema correcto, en: ASCII encoding must be interpreted under the correct scheme, da: ASCII-kodning skal fortolkes med korrekt skema}
+  - id: dm847.m11.c03
+    title: {es: Control de calidad multidimensional, en: Multidimensional quality control, da: Flerdimensionel kvalitetskontrol}
+    body:
+      es: >-
+        La calidad por ciclo detecta degradación posicional; composición de bases puede revelar
+        primers o sesgo de protocolo; GC compara la biblioteca con expectativas; duplicación puede
+        reflejar PCR, alta abundancia o baja complejidad; secuencias sobrerrepresentadas pueden ser
+        adaptadores, rRNA o contaminación. Ninguna gráfica debe interpretarse sin conocer el ensayo.
+      en: >-
+        Per-cycle quality reveals positional degradation; base composition may expose primers or
+        protocol bias; GC distribution compares the library with expectations; duplication may reflect
+        PCR, high abundance, or low complexity; overrepresented sequences may be adapters, rRNA, or
+        contamination. Every plot requires assay context.
+      da: >-
+        Kvalitet pr. cyklus viser positionel forringelse; basesammensætning kan vise protokolbias;
+        duplikation kan skyldes PCR, høj abundance eller lav kompleksitet. Fortolkning kræver assay-kontekst.
+    key_points:
+      - {es: Una alerta de QC no equivale automáticamente a muestra inutilizable, en: A QC warning does not automatically make a sample unusable, da: En QC-advarsel betyder ikke automatisk at prøven er ubrugelig}
+  - id: dm847.m11.c04
+    title: {es: Adaptadores, trimming y filtrado, en: Adapters, trimming, and filtering, da: Adaptere, trimming og filtrering}
+    body:
+      es: >-
+        Los adaptadores aparecen cuando el fragmento es más corto que la longitud leída. El trimming
+        debe eliminar secuencia no biológica o extremos con evidencia de error, pero recortar
+        agresivamente reduce longitud, unicidad y capacidad de mapeo. Se comparan QC y métricas
+        downstream antes y después, se registra la herramienta y se evita seleccionar parámetros
+        sobre el resultado final de interés.
+      en: >-
+        Adapters appear when inserts are shorter than read length. Trimming should remove non-biological
+        sequence or evidence-based low-quality tails, but aggressive trimming reduces length,
+        uniqueness, and mappability. Compare QC and downstream metrics before and after, record the
+        tool, and avoid tuning parameters on the final outcome.
+      da: >-
+        Adaptere ses når inserts er kortere end read-længden. Trimming bør være evidensbaseret;
+        aggressiv trimming reducerer længde, unikhed og mappability.
+    key_points:
+      - {es: Más reads retenidas no siempre significa mejor información, en: More retained reads do not always mean better information, da: Flere beholdte reads betyder ikke altid bedre information}
+  - id: dm847.m11.c05
+    title: {es: Mapeo, paired-end y multimapeo, en: Mapping, paired-end, and multimapping, da: Mapping, paired-end og multimapping}
+    body:
+      es: >-
+        El mapeo combina generación de candidatos y alineamiento contra una referencia. Paired-end
+        utiliza orientación y distribución de inserto para resolver ubicaciones y detectar anomalías.
+        Regiones repetitivas producen multimapeo; descartarlo, asignarlo fraccionalmente o elegir una
+        ubicación cambia resultados. Reference bias favorece alelos similares a la referencia y debe
+        considerarse en análisis de variantes o expresión alélica.
+      en: >-
+        Mapping combines candidate generation and alignment against a reference. Paired-end data use
+        orientation and insert-size distribution to resolve locations and detect anomalies. Repeats
+        create multimapping; discarding, fractional assignment, or choosing one location changes results.
+        Reference bias favors reference-like alleles and matters in variant and allele-specific analysis.
+      da: >-
+        Mapping kombinerer kandidater og alignment mod en reference. Paired-end bruger orientering og
+        insert-størrelse. Repeats giver multimapping, og håndteringspolitikken ændrer resultater.
+    key_points:
+      - {es: Mapping quality estima ambigüedad de ubicación, no calidad de base, en: Mapping quality estimates placement ambiguity, not base-call quality, da: Mapping quality estimerer placeringsusikkerhed, ikke basekvalitet}
+  - id: dm847.m11.c06
+    title: {es: Cobertura, profundidad y breadth, en: Coverage depth and breadth, da: Dækningsdybde og breadth}
+    body:
+      es: >-
+        Profundidad en una posición es el número de fragmentos o reads que la cubren según la convención.
+        Profundidad media divide bases alineadas por longitud del objetivo; breadth es la fracción de
+        posiciones con cobertura al menos k. Duplicados, filtros, multimapeo, regiones no mapeables y
+        paired-end solapado alteran el numerador. Toda cifra necesita denominador y filtros explícitos.
+      en: >-
+        Depth at a position is the number of reads or fragments covering it under a stated convention.
+        Mean depth divides aligned bases by target length; breadth is the fraction of positions covered
+        at least k times. Duplicates, filters, multimapping, unmappable regions, and overlapping pairs
+        affect the numerator. Every number needs explicit numerator, denominator, and filters.
+      da: >-
+        Dybde er antal reads eller fragmenter over en position. Gennemsnitsdybde og breadth kræver
+        eksplicit tæller, nævner og filtre. Duplikater og multimapping ændrer resultatet.
+    key_points:
+      - {es: Misma media puede ocultar coberturas muy desiguales, en: The same mean can hide very uneven coverage, da: Samme gennemsnit kan skjule meget ujævn dækning}
+  - id: dm847.m11.c07
+    title: {es: Peak calling y controles, en: Peak calling and controls, da: Peak calling og kontroller}
+    body:
+      es: >-
+        En ChIP-seq o ATAC-seq se buscan regiones con acumulación de fragmentos sobre un fondo.
+        Input, IgG u otros controles modelan accesibilidad, fragmentación y sesgo de mapeo según el ensayo.
+        El algoritmo estima fondo local o global, genera regiones candidatas y controla multiplicidad.
+        Broad y narrow peaks requieren modelos distintos. Una peak representa enriquecimiento, no unión causal.
+      en: >-
+        ChIP-seq or ATAC-seq seeks regions with fragment accumulation above background. Input, IgG,
+        or other controls model accessibility, fragmentation, and mapping bias depending on assay.
+        Algorithms estimate local or global background, generate candidate regions, and control multiplicity.
+        Broad and narrow peaks need different models. A peak indicates enrichment, not causal binding.
+      da: >-
+        ChIP-seq og ATAC-seq søger regioner med fragmentberigelse over baggrund. Kontroller modellerer
+        assay-specifik bias. Narrow og broad peaks kræver forskellige modeller; en peak beviser ikke kausal binding.
+    key_points:
+      - {es: El control correcto depende del ensayo, en: The correct control depends on the assay, da: Den korrekte kontrol afhænger af assayet}
+  - id: dm847.m11.c08
+    title: {es: Reproducibilidad y validación del pipeline, en: Pipeline reproducibility and validation, da: Pipeline-reproducerbarhed og validering}
+    body:
+      es: >-
+        Un pipeline registra muestras, checksums, referencia y versión, anotación, parámetros, software,
+        entorno y orden de operaciones. Cada etapa debe producir métricas de transición: reads iniciales,
+        retenidas, mapeadas, únicas, duplicadas y usadas. Controles positivos, negativos, spike-ins o datos
+        simulados evalúan aspectos distintos. Reejecutar desde datos crudos en un entorno limpio es una prueba final.
+      en: >-
+        A pipeline records samples, checksums, reference and version, annotation, parameters, software,
+        environment, and operation order. Every stage emits transition metrics: initial, retained, mapped,
+        unique, duplicate, and analyzed reads. Positive, negative, spike-in, or simulated controls test
+        different aspects. Re-running from raw data in a clean environment is a final check.
+      da: >-
+        Et pipeline registrerer checksums, referenceversion, annotation, parametre, software og miljø.
+        Hvert trin rapporterer overgangsmetrikker. Genkørsel fra rådata i et rent miljø er en stærk test.
+    key_points:
+      - {es: Un pipeline que ejecuta no está validado sólo por ejecutar, en: A pipeline is not validated merely because it runs, da: Et pipeline er ikke valideret blot fordi det kører}
+
+worked_examples:
+  - id: dm847.m11.e01
+    title: {es: De Phred a errores esperados, en: From Phred to expected errors, da: Fra Phred til forventede fejl}
+    scenario: {es: Una read de 100 bases tiene Q30 uniforme., en: A 100-base read has uniform Q30., da: Et 100-base read har uniform Q30.}
+    solution_outline:
+      es: >-
+        Q30 implica p=10^-3 por base. La suma de probabilidades da 0.1 errores esperados por read,
+        pero no es la probabilidad exacta de al menos un error. Bajo independencia aproximada,
+        P(>=1 error)=1-(0.999)^100. Explicar supuestos de calibración e independencia.
+      en: >-
+        Q30 implies p=10^-3 per base. Summing probabilities yields 0.1 expected errors per read,
+        but not the exact probability of at least one error. Under approximate independence,
+        P(at least one)=1-(0.999)^100. State calibration and independence assumptions.
+      da: >-
+        Q30 giver p=10^-3 pr. base og 0,1 forventede fejl pr. read. Sandsynligheden for mindst én
+        fejl er under uafhængighed 1-(0,999)^100.
+    validation: [phred_conversion, expectation_vs_probability_distinguished, assumptions_stated]
+  - id: dm847.m11.e02
+    title: {es: Auditoría antes y después de trimming, en: Pre/post-trimming audit, da: Audit før og efter trimming}
+    scenario: {es: Una biblioteca muestra adaptadores al final y una caída leve de calidad., en: A library shows terminal adapters and a mild quality drop., da: Et bibliotek viser terminale adaptere og let kvalitetsfald.}
+    solution_outline:
+      es: >-
+        Aplicar trimming de adaptador con longitud mínima predefinida, no recorte indiscriminado por calidad.
+        Comparar longitud, reads retenidas, tasa de mapeo, multimapeo y cobertura. Aceptar el cambio sólo si
+        elimina adaptador sin deteriorar sustancialmente información o introducir sesgo.
+      en: >-
+        Apply adapter trimming with a prespecified minimum length rather than indiscriminate quality trimming.
+        Compare length, retained reads, mapping, multimapping, and coverage. Accept only if adapter removal
+        improves evidence without substantial information loss or bias.
+      da: >-
+        Trim adapter med foruddefineret minimumslængde og sammenlign mapping, multimapping og dækning før og efter.
+    validation: [parameters_prespecified, transition_metrics, downstream_comparison]
+  - id: dm847.m11.e03
+    title: {es: Peak enriquecida por sesgo de mapeo, en: Peak driven by mapping bias, da: Peak drevet af mappingbias}
+    scenario: {es: Una peak fuerte coincide con una región repetitiva y baja mapeabilidad., en: A strong peak overlaps a repetitive low-mappability region., da: En stærk peak overlapper en repetitiv region med lav mappability.}
+    solution_outline:
+      es: >-
+        Revisar mapping quality, multimapeo, blacklist y control input. Comparar señal normalizada en muestra y
+        control, inspeccionar distribución de fragmentos y repetir con política de multimapeo documentada.
+        Marcar la región como incierta si la señal depende de reads ambiguas.
+      en: >-
+        Inspect mapping quality, multimapping, blacklist, and input control. Compare normalized sample and
+        control signal, inspect fragment distribution, and repeat under a documented multimapping policy.
+        Flag the region as uncertain if signal depends on ambiguous reads.
+      da: >-
+        Undersøg mapping quality, multimapping, blacklist og input-kontrol. Markér regionen usikker hvis signalet afhænger af tvetydige reads.
+    validation: [control_comparison, mappability_review, uncertainty_reported]
+
+practice_exercises:
+  - {id: dm847.m11.p01, activity_type: file_interpretation, difficulty: foundational, prompt: {es: Anota las cuatro líneas de tres registros FASTQ y valida longitudes., en: Annotate the four lines of three FASTQ records and validate lengths., da: Annotér fire linjer i tre FASTQ-records og validér længder.}, expected_elements: [identifier, sequence, separator, quality, equal_lengths]}
+  - {id: dm847.m11.p02, activity_type: calculation, difficulty: intermediate, prompt: {es: Convierte Q10, Q20, Q30 y Q40 a probabilidades de error., en: Convert Q10, Q20, Q30, and Q40 to error probabilities., da: Konvertér Q10, Q20, Q30 og Q40 til fejlsandsynligheder.}, expected_elements: [0.1, 0.01, 0.001, 0.0001]}
+  - {id: dm847.m11.p03, activity_type: data_interpretation, difficulty: intermediate, prompt: {es: Interpreta un informe QC sin declarar pass/fail global., en: Interpret a QC report without assigning a global pass/fail label., da: Fortolk en QC-rapport uden global pass/fail.}, expected_elements: [assay_context, alerts, hypotheses, downstream_checks]}
+  - {id: dm847.m11.p04, activity_type: pipeline_design, difficulty: advanced, prompt: {es: Diseña un pipeline reproducible desde FASTQ hasta cobertura., en: Design a reproducible pipeline from FASTQ to coverage., da: Design et reproducerbart pipeline fra FASTQ til dækning.}, expected_elements: [metadata, qc, trimming_decision, mapping, filtering, deduplication_policy, coverage, provenance]}
+  - {id: dm847.m11.p05, activity_type: metric_audit, difficulty: advanced, prompt: {es: Audita una afirmación de cobertura 30x sin denominadores., en: Audit a claim of 30x coverage without denominators., da: Revider en påstand om 30x dækning uden nævnere.}, expected_elements: [target_length, aligned_bases, filters, depth_distribution, breadth]}
+  - {id: dm847.m11.p06, activity_type: oral_explanation, difficulty: advanced, prompt: {es: Explica por qué una peak no demuestra unión funcional., en: Explain why a peak does not prove functional binding., da: Forklar hvorfor en peak ikke beviser funktionel binding.}, expected_elements: [enrichment, controls, resolution, indirect_binding, functional_validation]}
+
+objective_bank:
+  - {id: dm847.m11.q01, type: multiple_choice, prompt: {es: ¿Qué representa paired-end?, en: What does paired-end sequencing represent?, da: Hvad repræsenterer paired-end?}, options: [{id: a, es: Dos lecturas de extremos de un fragmento, en: Two reads from the ends of one fragment, da: To reads fra enderne af ét fragment}, {id: b, es: Dos pacientes, en: Two patients, da: To patienter}, {id: c, es: Dos genes necesariamente, en: Necessarily two genes, da: Nødvendigvis to gener}, {id: d, es: Dos referencias, en: Two references, da: To referencer}], correct_option_ids: [a]}
+  - {id: dm847.m11.q02, type: true_false, prompt: {es: Una read equivale siempre a una molécula original., en: One read always equals one original molecule., da: Ét read svarer altid til ét originalt molekyle.}, correct: false}
+  - {id: dm847.m11.q03, type: multiple_choice, prompt: {es: Q30 corresponde aproximadamente a qué p_error?, en: Q30 corresponds approximately to what error probability?, da: Hvilken fejlsandsynlighed svarer Q30 omtrent til?}, options: [{id: a, es: 0.001, en: 0.001, da: 0.001}, {id: b, es: 0.1, en: 0.1, da: 0.1}, {id: c, es: 0.03, en: 0.03, da: 0.03}, {id: d, es: 0.3, en: 0.3, da: 0.3}], correct_option_ids: [a]}
+  - {id: dm847.m11.q04, type: true_false, prompt: {es: Una alerta QC siempre obliga a descartar la muestra., en: A QC warning always requires discarding the sample., da: En QC-advarsel kræver altid kassation af prøven.}, correct: false}
+  - {id: dm847.m11.q05, type: multiple_choice, prompt: {es: ¿Qué riesgo tiene trimming agresivo?, en: What is a risk of aggressive trimming?, da: Hvad er en risiko ved aggressiv trimming?}, options: [{id: a, es: Menor longitud y mapeabilidad, en: Reduced length and mappability, da: Mindre længde og mappability}, {id: b, es: Crea réplicas biológicas, en: Creates biological replicates, da: Skaber biologiske replikater}, {id: c, es: Elimina todo sesgo, en: Eliminates all bias, da: Fjerner al bias}, {id: d, es: Aumenta siempre cobertura, en: Always increases coverage, da: Øger altid dækning}], correct_option_ids: [a]}
+  - {id: dm847.m11.q06, type: true_false, prompt: {es: Mapping quality y base quality miden lo mismo., en: Mapping quality and base quality measure the same thing., da: Mapping quality og base quality måler det samme.}, correct: false}
+  - {id: dm847.m11.q07, type: multiple_choice, prompt: {es: ¿Qué es breadth de cobertura?, en: What is coverage breadth?, da: Hvad er coverage breadth?}, options: [{id: a, es: Fracción del objetivo cubierta al menos k veces, en: Fraction of target covered at least k times, da: Andel af målet dækket mindst k gange}, {id: b, es: Media de Phred, en: Mean Phred, da: Gennemsnitlig Phred}, {id: c, es: Número de muestras, en: Number of samples, da: Antal prøver}, {id: d, es: Longitud de adaptador, en: Adapter length, da: Adapterlængde}], correct_option_ids: [a]}
+  - {id: dm847.m11.q08, type: true_false, prompt: {es: Misma profundidad media implica distribución de cobertura equivalente., en: Equal mean depth implies equivalent coverage distribution., da: Samme gennemsnitsdybde betyder samme dækningsfordeling.}, correct: false}
+  - {id: dm847.m11.q09, type: multiple_choice, prompt: {es: ¿Qué representa una peak?, en: What does a peak represent?, da: Hvad repræsenterer en peak?}, options: [{id: a, es: Enriquecimiento regional frente a un fondo definido, en: Regional enrichment relative to a defined background, da: Regional berigelse relativt til en defineret baggrund}, {id: b, es: Causalidad demostrada, en: Proven causality, da: Bevist kausalitet}, {id: c, es: Un gen nuevo, en: A new gene, da: Et nyt gen}, {id: d, es: Una variante validada, en: A validated variant, da: En valideret variant}], correct_option_ids: [a]}
+  - {id: dm847.m11.q10, type: true_false, prompt: {es: Reejecutar el pipeline desde FASTQ en un entorno limpio es una prueba de reproducibilidad., en: Re-running from FASTQ in a clean environment tests reproducibility., da: Genkørsel fra FASTQ i et rent miljø tester reproducerbarhed.}, correct: true}
+
+open_assessment:
+  - id: dm847.m11.a01
+    prompt: {es: Diseña un pipeline de lecturas cortas con puntos de control y criterios de decisión., en: Design a short-read pipeline with checkpoints and decision criteria., da: Design et short-read-pipeline med checkpoints og beslutningskriterier.}
+    rubric: [{criterion: biological_and_technical_units, weight: 0.20}, {criterion: qc_and_evidence_based_preprocessing, weight: 0.25}, {criterion: mapping_filtering_and_metrics, weight: 0.30}, {criterion: provenance_and_reproducibility, weight: 0.25}]
+  - id: dm847.m11.a02
+    prompt: {es: Compara dos políticas de multimapeo para una región repetitiva., en: Compare two multimapping policies for a repetitive region., da: Sammenlign to multimapping-politikker for en repetitiv region.}
+    rubric: [{criterion: policies_defined, weight: 0.20}, {criterion: consequences_for_counts_and_peaks, weight: 0.30}, {criterion: sensitivity_analysis, weight: 0.30}, {criterion: cautious_interpretation, weight: 0.20}]
+  - id: dm847.m11.a03
+    prompt: {es: Audita un análisis de peak calling sin control y con selección de parámetros posterior., en: Audit peak calling without a control and with post-hoc parameter selection., da: Revider peak calling uden kontrol og med post-hoc parameterudvælgelse.}
+    rubric: [{criterion: missing_control_and_bias, weight: 0.30}, {criterion: multiplicity_and_tuning, weight: 0.25}, {criterion: revised_design, weight: 0.30}, {criterion: claims_and_limits, weight: 0.15}]
+
+glossary:
+  - {id: dm847.term.fastq, es: FASTQ, en: FASTQ, da: FASTQ, definition_en: Text format storing sequence reads and base qualities.}
+  - {id: dm847.term.phred, es: Phred, en: Phred score, da: Phred-score, definition_en: Logarithmic encoding of estimated base-call error probability.}
+  - {id: dm847.term.adapter, es: Adaptador, en: Adapter, da: Adapter, definition_en: Synthetic sequence ligated during library preparation.}
+  - {id: dm847.term.duplicate_read, es: Read duplicada, en: Duplicate read, da: Duplikeret read, definition_en: Reads with identical or near-identical coordinates or sequence under a duplicate definition.}
+  - {id: dm847.term.mapping_quality, es: Calidad de mapeo, en: Mapping quality, da: Mapping quality, definition_en: Confidence in the selected alignment location.}
+  - {id: dm847.term.multimapping, es: Multimapeo, en: Multimapping, da: Multimapping, definition_en: A read compatible with multiple reference locations.}
+  - {id: dm847.term.reference_bias, es: Sesgo de referencia, en: Reference bias, da: Referencebias, definition_en: Preferential alignment or detection of reference-like alleles.}
+  - {id: dm847.term.coverage_depth, es: Profundidad, en: Coverage depth, da: Dækningsdybde, definition_en: Number of reads or fragments covering a position.}
+  - {id: dm847.term.coverage_breadth, es: Breadth de cobertura, en: Coverage breadth, da: Coverage breadth, definition_en: Fraction of target positions meeting a depth threshold.}
+  - {id: dm847.term.peak_calling, es: Peak calling, en: Peak calling, da: Peak calling, definition_en: Detection of regions enriched for assay fragments relative to background.}
+
+hidden_support:
+  canonical_explanation:
+    es: >-
+      Un flujo NGS transforma reads crudas en evidencia mediante QC, preprocesamiento justificado,
+      mapeo, filtrado y resumen. Cada etapa cambia el conjunto de datos y debe registrar cuántas
+      unidades entran y salen. Phred describe error de base; mapping quality describe ambigüedad de
+      ubicación. Cobertura necesita denominadores y una peak es enriquecimiento estadístico, no causalidad.
+    en: >-
+      An NGS workflow turns raw reads into evidence through QC, justified preprocessing, mapping,
+      filtering, and summarization. Every step changes the dataset and should record inputs and outputs.
+      Phred describes base-call error; mapping quality describes placement ambiguity. Coverage needs
+      explicit denominators, and a peak is statistical enrichment rather than causality.
+    da: >-
+      Et NGS-workflow omdanner rå reads til evidens gennem QC, begrundet preprocessing, mapping,
+      filtrering og opsummering. Phred beskriver basefejl; mapping quality beskriver placeringsusikkerhed.
+  misconceptions:
+    - {id: dm847.m11.mc01, false_belief: {es: Más trimming siempre mejora datos, en: More trimming always improves data, da: Mere trimming forbedrer altid data}, correction: {es: Puede reducir longitud, unicidad y mapeabilidad, en: It may reduce length, uniqueness, and mappability, da: Det kan reducere længde, unikhed og mappability}}
+    - {id: dm847.m11.mc02, false_belief: {es: Q30 significa que la read es 99.9% correcta, en: Q30 means the whole read is 99.9% correct, da: Q30 betyder at hele readet er 99,9% korrekt}, correction: {es: Q30 es una estimación por base, no la probabilidad de perfección de toda la read, en: Q30 is a per-base estimate, not whole-read perfection probability, da: Q30 er et estimat pr. base, ikke for hele readet}}
+    - {id: dm847.m11.mc03, false_belief: {es: Una peak prueba función, en: A peak proves function, da: En peak beviser funktion}, correction: {es: Sólo evidencia enriquecimiento bajo el modelo y controles usados, en: It only evidences enrichment under the chosen model and controls, da: Den viser kun berigelse under den valgte model og kontroller}}
+  socratic_questions:
+    - ¿Cuál es la unidad biológica y cuál la unidad de lectura?
+    - ¿Qué evidencia concreta justifica recortar?
+    - ¿Cómo se manejan reads multimapeadas?
+    - ¿Qué numerador y denominador producen la cobertura reportada?
+    - ¿Qué control modela el fondo del ensayo?
+  knowledge_fragments:
+    - {id: dm847.m11.k01, content_en: A read is not automatically one original molecule.}
+    - {id: dm847.m11.k02, content_en: Phred scores encode per-base estimated error probabilities.}
+    - {id: dm847.m11.k03, content_en: QC warnings require assay context.}
+    - {id: dm847.m11.k04, content_en: Aggressive trimming can reduce mappability.}
+    - {id: dm847.m11.k05, content_en: Mapping quality differs from base quality.}
+    - {id: dm847.m11.k06, content_en: Multimapping policy changes downstream counts.}
+    - {id: dm847.m11.k07, content_en: Mean depth and coverage breadth answer different questions.}
+    - {id: dm847.m11.k08, content_en: Peak calling requires assay-appropriate background controls.}
+    - {id: dm847.m11.k09, content_en: Multiple testing applies when scanning many genomic regions.}
+    - {id: dm847.m11.k10, content_en: Reproducibility includes reference, annotation, parameters, software, and environment.}
+  response_constraints:
+    - Distinguish biological replicate, molecule, fragment, read, and read pair.
+    - State reference and annotation versions and all filtering conventions.
+    - Do not label QC warnings as automatic failure without assay context.
+    - Do not interpret peaks as causal or direct binding without additional evidence.
+
+sources:
+  - {id: sdu.dm847.official.2025, role: official_scope_and_learning_outcomes}
+  - {id: original.dm847.m11, role: original_workflow_examples_questions_and_explanations}
+  - {id: established_ngs_principles, role: sequencing_quality_mapping_and_peak_calling_foundations}
+
+limitations:
+  - Exact software behavior varies by platform, assay, aligner, and caller version.
+  - Short reads cannot resolve all repeats, isoforms, structural variants, or haplotypes.
+  - Quality and mapping scores are model-based estimates and may be miscalibrated.
