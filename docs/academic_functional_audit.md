@@ -1,7 +1,9 @@
 # Auditoría académica, funcional y arquitectónica
 
-Fecha de la línea base: 2026-07-19  
-Rama: `feat/learning-engine-global-pages`  
+Fecha de la línea base: 2026-07-19
+
+Rama: `feat/learning-engine-global-pages`
+
 Alcance: estado anterior a la evolución del motor transversal.
 
 ## Resumen ejecutivo

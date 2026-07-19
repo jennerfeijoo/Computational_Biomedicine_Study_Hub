@@ -44,6 +44,8 @@ def test_assessments_page_reuses_authored_items_and_persists_wrong_answer(
     repository = _repository(tmp_path)
     page = AssessmentsPage(catalog, repository, locale=AppLocale.ENGLISH)
     qtbot.addWidget(page)
+    page.course_selector.setCurrentIndex(page.course_selector.findData("DM857"))
+    page.module_selector.setCurrentIndex(page.module_selector.findData("dm857.m01"))
     page.type_selector.setCurrentIndex(
         page.type_selector.findData(ActivityType.MULTIPLE_CHOICE.value)
     )
@@ -59,6 +61,7 @@ def test_assessments_page_reuses_authored_items_and_persists_wrong_answer(
         for item in catalog.assessment_items(
             course_code="DM857",
             module_id="dm857.m01",
+            objective_bank=True,
         )
         if item.item_id == widget.item_id
     )
@@ -163,6 +166,9 @@ def test_review_page_filters_due_queue_and_reschedules_selected_item(
     qtbot.addWidget(page)
 
     assert tuple(item.item_id for item in page.queue) == ("m01.p01",)
+    today = page.findChild(QLabel, "reviewReasons_today")
+    assert today is not None
+    assert "m01.p01" in today.text()
     page.rate_selected(ReviewRating.GOOD)
     assert page.queue == ()
     assert page.findChild(QLabel, "reviewEmptyState") is not None
@@ -206,6 +212,33 @@ def test_glossary_searches_models_and_emits_stable_source_identity(qtbot) -> Non
         page.open_source_module()
     assert signal.args[0] == "DM857"
     assert str(signal.args[1]).startswith("dm857.")
+
+
+def test_glossary_favorite_and_related_actions_use_stable_module_identity(
+    qtbot,
+    tmp_path: Path,
+) -> None:
+    repository = _repository(tmp_path)
+    page = GlossaryPage(
+        AcademicCatalog(locale=AppLocale.ENGLISH),
+        locale=AppLocale.ENGLISH,
+        repository=repository,
+    )
+    qtbot.addWidget(page)
+    selected = page.entries[0]
+
+    page.toggle_favorite()
+
+    assert SQLiteProgressRepository(repository.database_path).is_bookmarked(
+        item_id=selected.term_id,
+        item_kind=LearningItemKind.CONCEPT.value,
+    )
+    with qtbot.waitSignal(page.flashcards_requested, timeout=1000) as cards:
+        page.open_related_cards()
+    with qtbot.waitSignal(page.assessments_requested, timeout=1000) as questions:
+        page.open_related_questions()
+    assert tuple(cards.args) == (selected.course_code, selected.module_id)
+    assert tuple(questions.args) == (selected.course_code, selected.module_id)
 
 
 def test_global_pages_have_explicit_empty_states(qtbot, tmp_path: Path) -> None:

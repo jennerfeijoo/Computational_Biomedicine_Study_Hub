@@ -1,7 +1,9 @@
 # Auditoría del contenido académico del primer semestre
 
-Fecha de auditoría: 19 de julio de 2026  
-Rama: `feat/semester-1-learning-engine`  
+Fecha de auditoría: 19 de julio de 2026
+
+Rama: `feat/semester-1-learning-engine`
+
 Fuente: `academic_content/semester_1/`
 
 ## Resumen global

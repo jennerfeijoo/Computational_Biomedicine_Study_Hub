@@ -1,7 +1,10 @@
 # Arquitectura del motor transversal de aprendizaje
 
 Estado: implementación incremental de la rama
-`feat/learning-engine-global-pages`.
+`feat/semester-1-learning-engine`.
+
+El estado final y sus límites están documentados en
+`docs/semester_1_integration_report.md`.
 
 ## Decisiones
 
@@ -38,10 +41,14 @@ Las dependencias se dirigen hacia el dominio. `persistence.sqlite_progress` impl
 protocolo definido en `learning.progress_repository`; las páginas reciben ese protocolo
 por constructor.
 
-## Esquema SQLite v1
+## Esquema SQLite v3
 
 La versión se guarda en `PRAGMA user_version`. La inicialización es idempotente, transaccional
 y rechaza una base creada por una versión futura de la aplicación.
+
+Las migraciones v2 y v3 incorporan sesiones, progreso de módulo, intentos objetivos y
+abiertos, borradores, tutor, eventos de repaso, favoritos y preguntas generadas. El
+informe de integración contiene la lista completa de tablas.
 
 ### `attempts`
 
@@ -174,15 +181,14 @@ materialización y evaluación pasan siempre por los constructores validados.
 
 ### Flashcards
 
-1. `AcademicCatalog` sintetiza tarjetas originales desde conceptos, puntos esenciales y
-   errores frecuentes.
+1. `AcademicCatalog` carga las tarjetas authored de los 54 YAML de flashcards.
 2. Los filtros no construyen lectores de módulo.
 3. Se muestra anverso, se revela reverso y se califica.
 4. La siguiente fecha, estadísticas y dominio sobreviven al reinicio.
 
 ### Glossary
 
-1. Se agregan conceptos directamente desde modelos.
+1. Se agregan las entradas de glosario authored de los 54 módulos.
 2. La búsqueda instantánea incluye término, definición, etiquetas, relacionados y
    sinónimos derivados.
 3. El detalle muestra curso y módulo.
@@ -260,11 +266,9 @@ mypy
 ## Trabajo deliberadamente pendiente
 
 - runner aislado de Python/R;
-- interfaz de tutor Ollama por módulo, asíncrona y cancelable;
 - streaming de tutor;
 - audio para ensayo oral;
 - proyectos integradores, preparación de informe y defensa de DM857;
 - matching con lados estructurados en el modelo, sin delimitador textual;
 - relación formal objetivo–actividad para informes automáticos de cobertura;
-- catálogos académicos de DM847, BMB830 y BMB831;
 - piloto de autoría externa JSON/YAML después de estabilizar el DTO.

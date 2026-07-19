@@ -28,15 +28,15 @@ def test_dm857_page_hosts_completed_modules_without_duplicate_identity_cards(
     context_title = page.findChild(QLabel, "moduleContextTitle")
     selector = page.findChild(QComboBox, "courseModuleSelector")
 
-    assert page.module_count == len(EXPECTED_MODULES)
+    assert page.module_count == 17
     assert page.reader.module is MODULE_01_FOUNDATIONS
     assert context_bar is not None
     assert context_title is not None
     assert context_title.text() == MODULE_01_FOUNDATIONS.title
     assert selector is not None
-    assert selector.count() == len(EXPECTED_MODULES)
+    assert selector.count() == page.module_count
     assert [selector.itemText(index) for index in range(selector.count())] == [
-        f"Módulo {number}" for number in range(1, len(EXPECTED_MODULES) + 1)
+        f"Módulo {number}" for number in range(1, page.module_count + 1)
     ]
     assert page.findChild(QFrame, "courseIdentityCard") is None
     assert page.findChild(QFrame, "moduleIdentityCard") is None
@@ -56,7 +56,7 @@ def test_dm857_page_switches_between_completed_modules_in_the_same_compact_layou
         assert context_title.text() == module.title
 
     assert not page.select_module(-1)
-    assert not page.select_module(len(EXPECTED_MODULES))
+    assert not page.select_module(page.module_count)
 
 
 def test_module_reader_exposes_five_lazy_study_sections(qapp: QApplication) -> None:
