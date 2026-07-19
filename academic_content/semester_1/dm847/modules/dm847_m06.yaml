@@ -1,0 +1,690 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m06
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Modelos ocultos de Markov para secuencias biológicas
+    en: Hidden Markov models for biological sequences
+    da: Skjulte Markovmodeller for biologiske sekvenser
+  summary:
+    es: >-
+      Formulación probabilística de modelos ocultos de Markov, cálculo de verosimilitud,
+      decodificación, probabilidades posteriores, estimación de parámetros y profile HMM.
+      El módulo distingue con precisión entre probabilidad de una secuencia, camino más
+      probable y probabilidad marginal por posición, e incluye estabilidad numérica,
+      validación y limitaciones biológicas.
+    en: >-
+      Probabilistic formulation of hidden Markov models, likelihood computation, decoding,
+      posterior probabilities, parameter estimation, and profile HMMs. The module precisely
+      distinguishes sequence probability, the most probable path, and position-wise marginal
+      probabilities, including numerical stability, validation, and biological limitations.
+    da: >-
+      Sandsynlighedsformulering af skjulte Markovmodeller, beregning af likelihood,
+      dekodning, posterior-sandsynligheder, parameterestimering og profile HMM'er. Modulet
+      skelner præcist mellem sekvenssandsynlighed, mest sandsynlige sti og marginale
+      sandsynligheder pr. position samt behandler numerisk stabilitet og validering.
+  estimated_study_hours: 12
+  difficulty: advanced_foundational
+
+alignment:
+  official_learning_outcomes: [dm847.lo04]
+  prerequisite_modules: [dm847.m04, dm847.m05, dm857.m09]
+  later_modules: [dm847.m10, dm847.m11, dm847.m14]
+
+objectives:
+  - id: dm847.m06.o01
+    text:
+      es: Definir estados, observaciones, transiciones, emisiones y distribución inicial de un HMM.
+      en: Define states, observations, transitions, emissions, and the initial distribution of an HMM.
+      da: Definere tilstande, observationer, overgange, emissioner og startfordeling i en HMM.
+  - id: dm847.m06.o02
+    text:
+      es: Calcular la probabilidad conjunta de una secuencia observada y una trayectoria de estados.
+      en: Compute the joint probability of an observed sequence and a state path.
+      da: Beregne den fælles sandsynlighed for en observeret sekvens og en tilstandssti.
+  - id: dm847.m06.o03
+    text:
+      es: Implementar y explicar el algoritmo forward para la verosimilitud de una secuencia.
+      en: Implement and explain the forward algorithm for sequence likelihood.
+      da: Implementere og forklare forward-algoritmen for sekvens-likelihood.
+  - id: dm847.m06.o04
+    text:
+      es: Implementar Viterbi y distinguir su objetivo de la suma marginal de forward.
+      en: Implement Viterbi and distinguish its objective from forward marginalization.
+      da: Implementere Viterbi og skelne dens mål fra forward-marginalisering.
+  - id: dm847.m06.o05
+    text:
+      es: Combinar forward y backward para obtener probabilidades posteriores por posición.
+      en: Combine forward and backward to obtain position-wise posterior probabilities.
+      da: Kombinere forward og backward for at opnå posterior-sandsynligheder pr. position.
+  - id: dm847.m06.o06
+    text:
+      es: Estimar parámetros con conteos supervisados y explicar la lógica de Baum-Welch.
+      en: Estimate parameters from supervised counts and explain the logic of Baum-Welch.
+      da: Estimere parametre fra superviserede tællinger og forklare logikken i Baum-Welch.
+  - id: dm847.m06.o07
+    text:
+      es: Explicar la arquitectura de un profile HMM con estados match, insert y delete.
+      en: Explain profile-HMM architecture with match, insert, and delete states.
+      da: Forklare profile-HMM-arkitektur med match-, insert- og delete-tilstande.
+  - id: dm847.m06.o08
+    text:
+      es: Evaluar estabilidad numérica, supuestos, identificabilidad y evidencia de validación.
+      en: Evaluate numerical stability, assumptions, identifiability, and validation evidence.
+      da: Vurdere numerisk stabilitet, antagelser, identificerbarhed og valideringsbevis.
+
+concepts:
+  - id: dm847.m06.c01
+    title:
+      es: Estructura generativa y propiedad de Markov
+      en: Generative structure and the Markov property
+      da: Generativ struktur og Markov-egenskaben
+    body:
+      es: >-
+        Un HMM supone una secuencia de estados no observados que evoluciona mediante una
+        cadena de Markov de primer orden. Cada estado emite una observación según una
+        distribución propia. Condicionado al estado actual, la observación no depende de
+        estados u observaciones anteriores; condicionado al estado anterior, el siguiente
+        estado no depende del pasado más remoto. Son supuestos de modelado, no propiedades
+        universales de las secuencias biológicas.
+      en: >-
+        An HMM assumes an unobserved state sequence evolving as a first-order Markov chain.
+        Each state emits an observation from its own distribution. Conditional on the current
+        state, the observation is independent of earlier states and observations; conditional
+        on the previous state, the next state is independent of the more distant past. These
+        are modeling assumptions rather than universal properties of biological sequences.
+      da: >-
+        En HMM antager en skjult tilstandssekvens, der udvikler sig som en førsteordens
+        Markovkæde. Hver tilstand udsender en observation fra sin egen fordeling. Disse
+        betingede uafhængigheder er modelantagelser og ikke universelle biologiske egenskaber.
+    key_points:
+      - es: Los estados son latentes; las observaciones son visibles.
+        en: States are latent; observations are visible.
+        da: Tilstande er latente; observationer er synlige.
+      - es: Las filas de transiciones y emisiones deben sumar uno.
+        en: Transition and emission rows must sum to one.
+        da: Rækker for overgange og emissioner skal summere til én.
+  - id: dm847.m06.c02
+    title:
+      es: Probabilidad conjunta y factorización
+      en: Joint probability and factorization
+      da: Fælles sandsynlighed og faktorisering
+    body:
+      es: >-
+        Para estados z1...zT y observaciones x1...xT, la probabilidad conjunta se factoriza
+        como probabilidad inicial, emisiones y transiciones sucesivas. Esta factorización
+        permite calcular una trayectoria concreta en tiempo lineal. Sin embargo, la
+        probabilidad marginal de las observaciones exige sumar sobre todas las trayectorias,
+        cuyo número crece exponencialmente si se enumeran de forma ingenua.
+      en: >-
+        For states z1...zT and observations x1...xT, the joint probability factors into an
+        initial probability followed by emissions and transitions. A fixed path can therefore
+        be scored in linear time. Marginal observation probability, however, requires summing
+        over all paths, whose number grows exponentially under naive enumeration.
+      da: >-
+        Den fælles sandsynlighed faktoriseres i startfordeling, emissioner og overgange.
+        En fast sti kan beregnes lineært, mens marginalisering over alle stier kræver dynamisk
+        programmering for at undgå eksponentiel enumeration.
+    key_points:
+      - es: Producto para una trayectoria; suma sobre trayectorias para la verosimilitud.
+        en: Product for one path; sum over paths for likelihood.
+        da: Produkt for én sti; sum over stier for likelihood.
+  - id: dm847.m06.c03
+    title:
+      es: Algoritmo forward
+      en: The forward algorithm
+      da: Forward-algoritmen
+    body:
+      es: >-
+        La variable forward α_t(j) representa la probabilidad de observar el prefijo hasta t
+        y terminar en el estado j. La recurrencia suma las contribuciones de todos los estados
+        previos y multiplica por la emisión actual. La suma final sobre estados entrega
+        P(x1...xT). El algoritmo cuesta O(TK²) para K estados densamente conectados y puede
+        reducirse cuando la topología es dispersa.
+      en: >-
+        The forward variable α_t(j) is the probability of observing the prefix through t and
+        ending in state j. The recurrence sums contributions from all previous states and
+        multiplies by the current emission. Summing over final states yields P(x1...xT).
+        Complexity is O(TK²) for a dense K-state model and lower for sparse topology.
+      da: >-
+        Forward-variablen α_t(j) er sandsynligheden for præfikset til t og sluttilstand j.
+        Rekurrensen summerer bidrag fra tidligere tilstande og multiplicerer med den aktuelle
+        emission. Tiden er O(TK²) for en tæt model.
+    key_points:
+      - es: Forward suma, no maximiza.
+        en: Forward sums; it does not maximize.
+        da: Forward summerer; den maksimerer ikke.
+  - id: dm847.m06.c04
+    title:
+      es: Viterbi y trayectoria MAP
+      en: Viterbi and the MAP path
+      da: Viterbi og MAP-stien
+    body:
+      es: >-
+        Viterbi reemplaza la suma de forward por una maximización y conserva punteros al
+        predecesor óptimo. El traceback produce una trayectoria completa de máxima
+        probabilidad conjunta. No devuelve la probabilidad marginal de la secuencia ni
+        necesariamente el estado con mayor probabilidad posterior en cada posición.
+      en: >-
+        Viterbi replaces the forward sum with maximization and stores optimal predecessor
+        pointers. Traceback produces the single path with maximum joint probability. It does
+        not return sequence marginal likelihood and need not equal the most probable marginal
+        state at each position.
+      da: >-
+        Viterbi erstatter summen med maksimering og gemmer optimale forgængere. Traceback
+        giver den mest sandsynlige komplette sti, ikke marginal likelihood eller nødvendigvis
+        den mest sandsynlige tilstand ved hver position.
+    key_points:
+      - es: Una mejor trayectoria no representa toda la incertidumbre.
+        en: One best path does not represent all uncertainty.
+        da: Én bedste sti repræsenterer ikke al usikkerhed.
+  - id: dm847.m06.c05
+    title:
+      es: Backward y decodificación posterior
+      en: Backward and posterior decoding
+      da: Backward og posterior-dekodning
+    body:
+      es: >-
+        β_t(i) resume la probabilidad de las observaciones futuras dada la presencia en el
+        estado i en t. El producto α_t(i)β_t(i), normalizado por la verosimilitud total,
+        proporciona P(z_t=i | x). Esto permite visualizar incertidumbre local, detectar
+        fronteras ambiguas y producir estimaciones marginales que pueden diferir de Viterbi.
+      en: >-
+        β_t(i) summarizes the probability of future observations conditional on state i at t.
+        The product α_t(i)β_t(i), normalized by total likelihood, gives P(z_t=i | x). It
+        exposes local uncertainty and may disagree with the globally optimal Viterbi path.
+      da: >-
+        β_t(i) opsummerer sandsynligheden for fremtidige observationer givet tilstand i ved t.
+        Normaliseret α_t(i)β_t(i) giver den marginale posterior og viser lokal usikkerhed.
+    key_points:
+      - es: Posterior por posición y trayectoria MAP responden preguntas distintas.
+        en: Position-wise posterior and MAP path answer different questions.
+        da: Posterior pr. position og MAP-sti besvarer forskellige spørgsmål.
+  - id: dm847.m06.c06
+    title:
+      es: Estimación de parámetros y Baum-Welch
+      en: Parameter estimation and Baum-Welch
+      da: Parameterestimering og Baum-Welch
+    body:
+      es: >-
+        Con estados conocidos, las probabilidades se estiman a partir de conteos normalizados,
+        preferiblemente con pseudoconteos para evitar ceros estructuralmente injustificados.
+        Con estados ocultos, Baum-Welch aplica EM: calcula conteos esperados con forward-backward
+        y actualiza parámetros para no disminuir la verosimilitud. EM puede converger a óptimos
+        locales y depende de inicialización, regularización y cantidad de datos.
+      en: >-
+        With known states, probabilities are estimated from normalized counts, often with
+        pseudocounts to avoid unjustified zeros. With latent states, Baum-Welch applies EM:
+        forward-backward computes expected counts and parameters are updated so likelihood
+        does not decrease. EM may reach local optima and depends on initialization and data.
+      da: >-
+        Med kendte tilstande estimeres parametre fra normaliserede tællinger. Med skjulte
+        tilstande bruger Baum-Welch EM med forventede tællinger fra forward-backward. EM kan
+        ende i lokale optima og afhænger af initialisering.
+    key_points:
+      - es: Aumento de verosimilitud no garantiza recuperación de la estructura verdadera.
+        en: Increased likelihood does not guarantee recovery of the true structure.
+        da: Stigende likelihood garanterer ikke den sande struktur.
+  - id: dm847.m06.c07
+    title:
+      es: Profile HMM
+      en: Profile HMMs
+      da: Profile HMM'er
+    body:
+      es: >-
+        Un profile HMM resume una familia alineada mediante estados match para posiciones
+        conservadas, insert para residuos adicionales y delete silenciosos para ausencias.
+        La topología codifica el orden de la familia y las emisiones capturan preferencias de
+        símbolos. Los umbrales para decidir columnas match y los pseudoconteos afectan la
+        sensibilidad, especialmente con alineamientos pequeños o sesgados.
+      en: >-
+        A profile HMM summarizes an aligned family using match states for conserved columns,
+        insert states for extra residues, and silent delete states for omissions. Topology
+        encodes family order and emissions capture symbol preferences. Match-column thresholds
+        and pseudocounts affect sensitivity, especially with small or biased alignments.
+      da: >-
+        En profile HMM beskriver en alignet familie med match-tilstande for konserverede
+        kolonner, insert-tilstande for ekstra symboler og stille delete-tilstande. Tærskler og
+        pseudotællinger påvirker følsomheden.
+    key_points:
+      - es: Delete no emite símbolo.
+        en: A delete state emits no symbol.
+        da: En delete-tilstand udsender intet symbol.
+  - id: dm847.m06.c08
+    title:
+      es: Estabilidad, identificabilidad y validación
+      en: Stability, identifiability, and validation
+      da: Stabilitet, identificerbarhed og validering
+    body:
+      es: >-
+        Multiplicar muchas probabilidades causa underflow. Se utilizan logaritmos con log-sum-exp
+        o factores de escalado coherentes. Diferentes parametrizaciones pueden producir
+        distribuciones observables similares, por lo que las etiquetas de estados no siempre
+        tienen significado biológico intrínseco. La validación debe incluir secuencias simuladas
+        con verdad conocida, particiones independientes, comparación con baselines y análisis de
+        sensibilidad a inicialización y pseudoconteos.
+      en: >-
+        Multiplying many probabilities causes underflow. Use log probabilities with log-sum-exp
+        or coherent scaling factors. Different parameterizations can yield similar observable
+        distributions, so state labels need not have intrinsic biological meaning. Validation
+        should include simulated truth, held-out data, baselines, and sensitivity analysis.
+      da: >-
+        Mange sandsynlighedsprodukter giver underflow. Brug log-sandsynligheder med log-sum-exp
+        eller konsistent skalering. Tilstandsetiketter har ikke automatisk biologisk betydning;
+        validering kræver simulering, hold-out-data og følsomhedsanalyse.
+    key_points:
+      - es: Una probabilidad alta no valida por sí sola la interpretación del estado.
+        en: High probability alone does not validate state interpretation.
+        da: Høj sandsynlighed validerer ikke alene en biologisk fortolkning.
+
+worked_examples:
+  - id: dm847.m06.e01
+    title:
+      es: Verosimilitud forward en un HMM de dos estados
+      en: Forward likelihood in a two-state HMM
+      da: Forward-likelihood i en to-tilstands HMM
+    scenario:
+      es: >-
+        Estados H y L modelan regiones con distinta composición de GC. Se proporciona una
+        distribución inicial, matriz de transición y emisiones para A,C,G,T. Calcular la
+        verosimilitud de ACG sin enumerar las ocho trayectorias.
+      en: >-
+        States H and L model regions with different GC composition. Given initial,
+        transition, and emission probabilities, compute the likelihood of ACG without
+        enumerating all eight paths.
+      da: >-
+        Tilstande H og L modellerer forskellig GC-sammensætning. Beregn likelihood for ACG
+        uden at enumerere alle otte stier.
+    solution_outline:
+      es: >-
+        Inicializar α1(H)=πH·bH(A) y α1(L)=πL·bL(A). Para C y G, sumar sobre los dos
+        predecesores y multiplicar por la emisión del estado destino. Sumar α3(H)+α3(L).
+        Comprobar el resultado mediante enumeración únicamente como prueba en este caso pequeño.
+      en: >-
+        Initialize α1(H)=πH·bH(A) and α1(L)=πL·bL(A). For C and G, sum over both predecessors
+        and multiply by the destination emission. Sum α3(H)+α3(L). Verify by enumeration only
+        as a small-case test.
+      da: >-
+        Initialisér α1, anvend rekurrensen for C og G, og summér de to slutværdier. Brug kun
+        enumeration som kontrol i dette lille eksempel.
+    validation: [rows_sum_to_one, forward_matches_enumeration, probability_between_zero_and_one]
+  - id: dm847.m06.e02
+    title:
+      es: Viterbi frente a posterior marginal
+      en: Viterbi versus marginal posterior
+      da: Viterbi versus marginal posterior
+    scenario:
+      es: Un modelo produce dos trayectorias globales casi empatadas que difieren en varias posiciones.
+      en: A model yields two nearly tied global paths differing at several positions.
+      da: En model giver to næsten lige sandsynlige globale stier.
+    solution_outline:
+      es: >-
+        Ejecutar Viterbi para una única trayectoria y forward-backward para P(z_t|x). Mostrar
+        que una posición puede favorecer marginalmente un estado que no aparece allí en la
+        trayectoria Viterbi, porque la masa posterior se reparte entre muchas trayectorias.
+      en: >-
+        Run Viterbi for one path and forward-backward for P(z_t|x). Show that a position may
+        marginally favor a state absent from the Viterbi path because posterior mass is spread
+        across many paths.
+      da: >-
+        Kør Viterbi og forward-backward og vis, at marginalt mest sandsynlig tilstand kan afvige
+        fra Viterbi-stien.
+    validation: [posterior_rows_sum_to_one, viterbi_path_is_valid, objectives_not_conflated]
+  - id: dm847.m06.e03
+    title:
+      es: Construcción de un profile HMM pequeño
+      en: Building a small profile HMM
+      da: Opbygning af en lille profile HMM
+    scenario:
+      es: Un alineamiento múltiple corto contiene columnas conservadas, inserciones y gaps.
+      en: A short multiple alignment contains conserved columns, insertions, and gaps.
+      da: En kort multipel alignment indeholder konserverede kolonner, insertioner og gaps.
+    solution_outline:
+      es: >-
+        Definir un umbral de ocupación para columnas match; convertir columnas restantes en
+        inserciones relativas; contar transiciones y emisiones; añadir pseudoconteos; normalizar.
+        Documentar que cambiar el umbral modifica la arquitectura y debe evaluarse en datos externos.
+      en: >-
+        Define an occupancy threshold for match columns; map remaining columns to insertion
+        regions; count transitions and emissions; add pseudocounts; normalize. Document that
+        the threshold changes architecture and must be evaluated on external data.
+      da: >-
+        Definér en belægningstærskel, identificér match- og insert-positioner, tæl overgange og
+        emissioner, tilføj pseudotællinger og normalisér.
+    validation: [valid_topology, normalized_distributions, held_out_family_test]
+
+practice_exercises:
+  - id: dm847.m06.p01
+    activity_type: code_tracing
+    difficulty: foundational
+    prompt:
+      es: Traza una iteración de forward para tres estados e identifica dimensiones de cada objeto.
+      en: Trace one forward iteration for three states and identify every object dimension.
+      da: Gennemgå ét forward-trin for tre tilstande og angiv dimensionerne.
+    expected_elements: [previous_alpha_vector, transition_matrix, emission_vector, resulting_alpha_vector]
+  - id: dm847.m06.p02
+    activity_type: debugging
+    difficulty: intermediate
+    prompt:
+      es: Corrige una implementación de Viterbi que usa suma en lugar de máximo y no conserva punteros.
+      en: Fix a Viterbi implementation that uses summation instead of maximization and stores no pointers.
+      da: Ret en Viterbi-implementering, der summerer i stedet for at maksimere og mangler pointere.
+    expected_elements: [max_recurrence, backpointer_matrix, traceback, boundary_initialization]
+  - id: dm847.m06.p03
+    activity_type: data_interpretation
+    difficulty: intermediate
+    prompt:
+      es: Interpreta una matriz de posteriores y localiza posiciones ambiguas usando un umbral explícito.
+      en: Interpret a posterior matrix and locate ambiguous positions using an explicit threshold.
+      da: Fortolk en posteriormatrix og find tvetydige positioner med en eksplicit tærskel.
+    expected_elements: [row_normalization, uncertainty_definition, no_overclaiming]
+  - id: dm847.m06.p04
+    activity_type: algorithm_design
+    difficulty: advanced
+    prompt:
+      es: Diseña forward en espacio logarítmico y especifica dónde aplicar log-sum-exp.
+      en: Design log-space forward and specify where log-sum-exp is required.
+      da: Design forward i log-rum og angiv, hvor log-sum-exp bruges.
+    expected_elements: [log_initialization, log_transition, log_emission, stable_logsumexp]
+  - id: dm847.m06.p05
+    activity_type: model_audit
+    difficulty: advanced
+    prompt:
+      es: Audita un HMM cuyos estados se etiquetan como exon e intron sin validación externa.
+      en: Audit an HMM whose states are labeled exon and intron without external validation.
+      da: Revider en HMM med exon- og intronetiketter uden ekstern validering.
+    expected_elements: [label_switching, biological_evidence, held_out_validation, alternative_models]
+  - id: dm847.m06.p06
+    activity_type: oral_explanation
+    difficulty: advanced
+    prompt:
+      es: Explica en dos minutos por qué Viterbi, forward y posterior decoding no son intercambiables.
+      en: Explain in two minutes why Viterbi, forward, and posterior decoding are not interchangeable.
+      da: Forklar på to minutter, hvorfor Viterbi, forward og posterior-dekodning ikke er udskiftelige.
+    expected_elements: [distinct_objectives, sum_vs_max, global_path_vs_marginals]
+
+objective_bank:
+  - id: dm847.m06.q01
+    type: multiple_choice
+    prompt:
+      es: ¿Qué operación distingue principalmente forward de Viterbi?
+      en: Which operation mainly distinguishes forward from Viterbi?
+      da: Hvilken operation adskiller primært forward fra Viterbi?
+    options:
+      - {id: a, es: Forward suma contribuciones y Viterbi maximiza, en: Forward sums contributions and Viterbi maximizes, da: Forward summerer bidrag og Viterbi maksimerer}
+      - {id: b, es: Forward usa emisiones y Viterbi no, en: Forward uses emissions and Viterbi does not, da: Forward bruger emissioner og Viterbi gør ikke}
+      - {id: c, es: Viterbi no usa transiciones, en: Viterbi uses no transitions, da: Viterbi bruger ingen overgange}
+      - {id: d, es: Son idénticos, en: They are identical, da: De er identiske}
+    correct_option_ids: [a]
+    explanation:
+      es: Forward marginaliza mediante suma; Viterbi busca una trayectoria mediante máximo.
+      en: Forward marginalizes by summation; Viterbi searches for one path by maximization.
+      da: Forward marginaliserer med sum; Viterbi finder én sti med maksimum.
+  - id: dm847.m06.q02
+    type: true_false
+    prompt:
+      es: El estado Viterbi en cada posición siempre coincide con el estado posterior marginal más probable.
+      en: The Viterbi state at each position always equals the most probable marginal posterior state.
+      da: Viterbi-tilstanden ved hver position er altid den marginalt mest sandsynlige tilstand.
+    correct: false
+    explanation:
+      es: Una trayectoria global óptima y máximos marginales por posición optimizan criterios diferentes.
+      en: A globally optimal path and position-wise marginal maxima optimize different criteria.
+      da: Global optimal sti og marginale maksima optimerer forskellige kriterier.
+  - id: dm847.m06.q03
+    type: multiple_choice
+    prompt:
+      es: ¿Qué problema resuelve principalmente log-sum-exp?
+      en: What problem does log-sum-exp mainly address?
+      da: Hvilket problem løser log-sum-exp primært?
+    options:
+      - {id: a, es: Underflow al sumar probabilidades en logaritmos, en: Underflow when summing probabilities in log space, da: Underflow ved summering i log-rum}
+      - {id: b, es: Falta de datos, en: Missing data, da: Manglende data}
+      - {id: c, es: Etiquetas intercambiadas, en: Label switching, da: Label switching}
+      - {id: d, es: Sobreajuste por sí solo, en: Overfitting by itself, da: Overfitting alene}
+    correct_option_ids: [a]
+    explanation:
+      es: Permite calcular el logaritmo de una suma de exponenciales de forma numéricamente estable.
+      en: It computes the logarithm of a sum of exponentials stably.
+      da: Den beregner logaritmen af en sum af eksponentialer stabilt.
+  - id: dm847.m06.q04
+    type: multiple_choice
+    prompt:
+      es: ¿Qué emite un estado delete de un profile HMM?
+      en: What does a profile-HMM delete state emit?
+      da: Hvad udsender en delete-tilstand i en profile HMM?
+    options:
+      - {id: a, es: Ningún símbolo, en: No symbol, da: Intet symbol}
+      - {id: b, es: Siempre un gap observado, en: Always an observed gap, da: Altid et observeret gap}
+      - {id: c, es: Un aminoácido uniforme, en: A uniformly sampled amino acid, da: En uniform aminosyre}
+      - {id: d, es: La columna anterior, en: The previous column, da: Den forrige kolonne}
+    correct_option_ids: [a]
+    explanation:
+      es: Es un estado silencioso que permite omitir una posición match.
+      en: It is a silent state allowing a match position to be skipped.
+      da: Det er en stille tilstand, der tillader at springe en match-position over.
+  - id: dm847.m06.q05
+    type: true_false
+    prompt:
+      es: Baum-Welch garantiza encontrar el máximo global de verosimilitud.
+      en: Baum-Welch guarantees finding the global likelihood maximum.
+      da: Baum-Welch garanterer det globale likelihood-maksimum.
+    correct: false
+    explanation:
+      es: EM puede converger a óptimos locales o puntos estacionarios dependientes de la inicialización.
+      en: EM may converge to local optima or stationary points depending on initialization.
+      da: EM kan konvergere til lokale optima afhængigt af initialisering.
+  - id: dm847.m06.q06
+    type: multiple_choice
+    prompt:
+      es: ¿Qué representa α_t(j)?
+      en: What does α_t(j) represent?
+      da: Hvad repræsenterer α_t(j)?
+    options:
+      - {id: a, es: Probabilidad del prefijo y de terminar en j, en: Probability of the prefix and ending in j, da: Sandsynligheden for præfikset og sluttilstand j}
+      - {id: b, es: Sólo la emisión en j, en: Only the emission in j, da: Kun emissionen i j}
+      - {id: c, es: La mejor trayectoria completa, en: The best complete path, da: Den bedste komplette sti}
+      - {id: d, es: El número de estados, en: The number of states, da: Antallet af tilstande}
+    correct_option_ids: [a]
+    explanation:
+      es: Es una probabilidad conjunta parcial que suma todas las trayectorias compatibles con ese final.
+      en: It is a partial joint probability summing all paths compatible with that ending.
+      da: Det er en delvis fælles sandsynlighed summeret over kompatible stier.
+  - id: dm847.m06.q07
+    type: multiple_choice
+    prompt:
+      es: ¿Qué validación es más informativa para una interpretación biológica de estados?
+      en: Which validation is most informative for a biological interpretation of states?
+      da: Hvilken validering er mest informativ for biologisk fortolkning af tilstande?
+    options:
+      - {id: a, es: Comparación con anotaciones externas independientes, en: Comparison with independent external annotations, da: Sammenligning med uafhængige eksterne annotationer}
+      - {id: b, es: Verificar que el código ejecuta, en: Checking that the code runs, da: Kontrollere at koden kører}
+      - {id: c, es: Aumentar el número de decimales, en: Increasing decimal places, da: Øge antal decimaler}
+      - {id: d, es: Elegir nombres descriptivos, en: Choosing descriptive names, da: Vælge beskrivende navne}
+    correct_option_ids: [a]
+    explanation:
+      es: La semántica biológica requiere evidencia independiente, no sólo ajuste interno.
+      en: Biological semantics require independent evidence, not merely internal fit.
+      da: Biologisk semantik kræver uafhængigt bevis, ikke kun internt fit.
+  - id: dm847.m06.q08
+    type: true_false
+    prompt:
+      es: Añadir pseudoconteos puede evitar probabilidades cero para eventos no observados en una muestra pequeña.
+      en: Adding pseudocounts can avoid zero probabilities for events absent from a small sample.
+      da: Pseudotællinger kan undgå nul-sandsynligheder for ikke-observerede hændelser.
+    correct: true
+    explanation:
+      es: Regularizan estimaciones, aunque su magnitud debe justificarse.
+      en: They regularize estimates, though their magnitude must be justified.
+      da: De regulariserer estimater, men størrelsen skal begrundes.
+  - id: dm847.m06.q09
+    type: multiple_choice
+    prompt:
+      es: Para una topología densa con K estados y T posiciones, ¿cuál es el coste típico de forward?
+      en: For a dense topology with K states and T positions, what is typical forward cost?
+      da: Hvad er den typiske forward-omkostning for K tilstande og T positioner?
+    options:
+      - {id: a, es: O(TK²), en: O(TK²), da: O(TK²)}
+      - {id: b, es: O(T+K), en: O(T+K), da: O(T+K)}
+      - {id: c, es: O(2^T) con programación dinámica, en: O(2^T) with dynamic programming, da: O(2^T) med dynamisk programmering}
+      - {id: d, es: O(K!), en: O(K!), da: O(K!)}
+    correct_option_ids: [a]
+    explanation:
+      es: En cada posición se consideran transiciones entre pares de estados.
+      en: Each position considers transitions between pairs of states.
+      da: Ved hver position vurderes overgange mellem par af tilstande.
+  - id: dm847.m06.q10
+    type: multiple_choice
+    prompt:
+      es: ¿Qué afirmación sobre identificabilidad es correcta?
+      en: Which statement about identifiability is correct?
+      da: Hvilket udsagn om identificerbarhed er korrekt?
+    options:
+      - {id: a, es: Distintas parametrizaciones pueden inducir distribuciones observables equivalentes, en: Different parameterizations may induce equivalent observable distributions, da: Forskellige parametriseringer kan give samme observerbare fordeling}
+      - {id: b, es: Cada estado tiene significado biológico único por definición, en: Every state has unique biological meaning by definition, da: Hver tilstand har unik biologisk betydning per definition}
+      - {id: c, es: Viterbi elimina el problema, en: Viterbi eliminates the issue, da: Viterbi fjerner problemet}
+      - {id: d, es: Sólo ocurre con un estado, en: It occurs only with one state, da: Det forekommer kun med én tilstand}
+    correct_option_ids: [a]
+    explanation:
+      es: La equivalencia o permutación de estados limita interpretaciones directas.
+      en: Equivalent or permuted states limit direct interpretation.
+      da: Ækvivalente eller permuterede tilstande begrænser direkte fortolkning.
+
+open_assessment:
+  - id: dm847.m06.a01
+    prompt:
+      es: Deriva forward y Viterbi desde la factorización conjunta y explica por qué difieren.
+      en: Derive forward and Viterbi from the joint factorization and explain why they differ.
+      da: Udled forward og Viterbi fra den fælles faktorisering og forklar forskellen.
+    rubric:
+      - {criterion: correct_factorization, weight: 0.25}
+      - {criterion: correct_recurrences_and_boundaries, weight: 0.35}
+      - {criterion: sum_vs_max_interpretation, weight: 0.25}
+      - {criterion: complexity_and_stability, weight: 0.15}
+  - id: dm847.m06.a02
+    prompt:
+      es: Diseña un plan para entrenar y validar un HMM de regiones composicionales en ADN.
+      en: Design a plan to train and validate an HMM for compositional regions in DNA.
+      da: Design en plan til træning og validering af en HMM for kompositionelle DNA-regioner.
+    rubric:
+      - {criterion: data_partition_and_baseline, weight: 0.25}
+      - {criterion: parameter_estimation_and_regularization, weight: 0.25}
+      - {criterion: numerical_and_implementation_checks, weight: 0.20}
+      - {criterion: biological_validation_and_limits, weight: 0.30}
+  - id: dm847.m06.a03
+    prompt:
+      es: Compara una trayectoria Viterbi con una matriz posterior y redacta una interpretación prudente.
+      en: Compare a Viterbi path with a posterior matrix and write a cautious interpretation.
+      da: Sammenlign en Viterbi-sti med en posteriormatrix og skriv en forsigtig fortolkning.
+    rubric:
+      - {criterion: correct_reading_of_outputs, weight: 0.35}
+      - {criterion: uncertainty_identification, weight: 0.25}
+      - {criterion: distinction_of_inference_targets, weight: 0.25}
+      - {criterion: no_biological_overclaim, weight: 0.15}
+
+glossary:
+  - {id: dm847.term.hidden_state, es: Estado latente, en: Hidden state, da: Skjult tilstand, definition_en: Unobserved variable that generates observations and evolves through transitions.}
+  - {id: dm847.term.emission_probability, es: Probabilidad de emisión, en: Emission probability, da: Emissionssandsynlighed, definition_en: Probability of observing a symbol conditional on a state.}
+  - {id: dm847.term.transition_probability, es: Probabilidad de transición, en: Transition probability, da: Overgangssandsynlighed, definition_en: Probability of moving from one state to another.}
+  - {id: dm847.term.forward_algorithm, es: Algoritmo forward, en: Forward algorithm, da: Forward-algoritme, definition_en: Dynamic program that sums probabilities over all paths.}
+  - {id: dm847.term.viterbi_algorithm, es: Algoritmo de Viterbi, en: Viterbi algorithm, da: Viterbi-algoritme, definition_en: Dynamic program that finds the maximum-probability state path.}
+  - {id: dm847.term.backward_algorithm, es: Algoritmo backward, en: Backward algorithm, da: Backward-algoritme, definition_en: Dynamic program summarizing the probability of future observations.}
+  - {id: dm847.term.posterior_decoding, es: Decodificación posterior, en: Posterior decoding, da: Posterior-dekodning, definition_en: Position-wise inference from marginal state probabilities.}
+  - {id: dm847.term.baum_welch, es: Baum-Welch, en: Baum-Welch, da: Baum-Welch, definition_en: EM procedure for HMM parameter estimation with latent states.}
+  - {id: dm847.term.profile_hmm, es: Profile HMM, en: Profile HMM, da: Profile HMM, definition_en: HMM architecture representing a sequence family alignment.}
+  - {id: dm847.term.logsumexp, es: Log-sum-exp, en: Log-sum-exp, da: Log-sum-exp, definition_en: Stable computation of the logarithm of a sum of exponentials.}
+
+hidden_support:
+  canonical_explanation:
+    es: >-
+      Un HMM combina una cadena de estados latentes con emisiones observables. Forward responde
+      cuánto explica el modelo una secuencia sumando todas las trayectorias; Viterbi responde
+      cuál es la trayectoria completa más probable; forward-backward responde cuánta evidencia
+      marginal existe para cada estado en cada posición. Entrenamiento y decodificación deben
+      separarse de la interpretación biológica, que requiere validación externa.
+    en: >-
+      An HMM combines a latent-state Markov chain with observable emissions. Forward asks how
+      well the model explains a sequence by summing over all paths; Viterbi asks for the single
+      most probable complete path; forward-backward asks for marginal support for each state at
+      each position. Training and decoding are distinct from biological interpretation, which
+      requires external validation.
+    da: >-
+      En HMM kombinerer en skjult Markovkæde med observerbare emissioner. Forward summerer
+      over alle stier, Viterbi finder én mest sandsynlig komplet sti, og forward-backward giver
+      marginal støtte pr. position. Biologisk fortolkning kræver ekstern validering.
+  misconceptions:
+    - id: dm847.m06.mc01
+      false_belief:
+        es: Viterbi calcula la probabilidad total de la secuencia.
+        en: Viterbi computes total sequence probability.
+        da: Viterbi beregner den samlede sekvenssandsynlighed.
+      correction:
+        es: Viterbi maximiza sobre trayectorias; forward suma sobre ellas.
+        en: Viterbi maximizes over paths; forward sums over them.
+        da: Viterbi maksimerer over stier; forward summerer.
+    - id: dm847.m06.mc02
+      false_belief:
+        es: Los estados aprendidos reciben automáticamente una interpretación biológica.
+        en: Learned states automatically receive biological meaning.
+        da: Lærte tilstande får automatisk biologisk betydning.
+      correction:
+        es: Las etiquetas son modelísticas y requieren evidencia externa para interpretarse.
+        en: Labels are model constructs requiring external evidence.
+        da: Etiketter er modelkonstruktioner og kræver eksternt bevis.
+    - id: dm847.m06.mc03
+      false_belief:
+        es: EM siempre encuentra la mejor solución posible.
+        en: EM always finds the best possible solution.
+        da: EM finder altid den bedst mulige løsning.
+      correction:
+        es: Puede converger a óptimos locales y debe repetirse con varias inicializaciones.
+        en: It may reach local optima and should be run from multiple starts.
+        da: Den kan nå lokale optima og bør køres fra flere initialiseringer.
+  socratic_questions:
+    - ¿Qué cantidad estás calculando: una suma sobre trayectorias, un máximo global o un marginal por posición?
+    - ¿Qué supuesto de independencia permite la recurrencia?
+    - ¿Qué evidencia externa justifica el nombre biológico asignado a un estado?
+    - ¿Cómo sabes que una diferencia de resultados no es un problema de underflow?
+    - ¿Qué cambia en la arquitectura de un profile HMM al modificar el umbral de ocupación?
+  knowledge_fragments:
+    - id: dm847.m06.k01
+      content_en: Forward sums path probabilities; Viterbi maximizes one path probability.
+    - id: dm847.m06.k02
+      content_en: Posterior decoding uses normalized forward-backward products.
+    - id: dm847.m06.k03
+      content_en: Dense HMM dynamic programming commonly costs O(TK squared).
+    - id: dm847.m06.k04
+      content_en: Log-space computation requires log-sum-exp for marginalization.
+    - id: dm847.m06.k05
+      content_en: Delete states in profile HMMs are silent.
+    - id: dm847.m06.k06
+      content_en: Baum-Welch is EM and is sensitive to initialization.
+    - id: dm847.m06.k07
+      content_en: Pseudocounts regularize sparse transition and emission counts.
+    - id: dm847.m06.k08
+      content_en: State labels do not automatically imply biological categories.
+    - id: dm847.m06.k09
+      content_en: Simulated truth and held-out data serve different validation roles.
+    - id: dm847.m06.k10
+      content_en: A profile HMM architecture depends on how alignment columns are classified.
+  response_constraints:
+    - Do not describe an HMM state as biologically validated unless external evidence is provided.
+    - Do not conflate Viterbi score with sequence marginal likelihood.
+    - State whether probabilities are raw, scaled, or represented in log space.
+    - Expose assumptions, initialization, pseudocounts, and validation split.
+
+sources:
+  - id: sdu.dm847.official.2025
+    role: official_scope_and_learning_outcomes
+  - id: murphy.probabilistic_ml.2022
+    role: probability_dynamic_programming_and_em
+  - id: original.dm847.m06
+    role: original_examples_questions_and_explanations
+
+limitations:
+  - The biological scenarios are instructional and not clinical decision tools.
+  - HMM assumptions may be inadequate for long-range dependencies or heterogeneous populations.
+  - Parameter estimates are contingent on topology, initialization, priors, and training data.
