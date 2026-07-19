@@ -1,0 +1,226 @@
+schema_version: 1.0.0
+course_code: BMB831
+module_id: bmb831.m07
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title: {es: Contenedores Bioconductor, anotación e infraestructura ómica reproducible, en: Bioconductor data containers, annotation, and reproducible omics infrastructure, da: Bioconductor-datacontainere, annotation og reproducerbar omics-infrastruktur}
+  summary:
+    es: >-
+      Organización de datos ómicos mediante contenedores Bioconductor. Incluye `SummarizedExperiment`,
+      assays, metadata de filas y columnas, rangos genómicos, subsetting sincronizado, identificadores,
+      anotación versionada, mapeos uno-a-muchos, `SingleCellExperiment`, `MultiAssayExperiment`,
+      validación estructural y serialización reproducible.
+    en: >-
+      Organization of omics data through Bioconductor containers. Covers `SummarizedExperiment`, assays,
+      row and column metadata, genomic ranges, synchronized subsetting, identifiers, versioned annotation,
+      one-to-many mappings, `SingleCellExperiment`, `MultiAssayExperiment`, structural validation, and serialization.
+    da: >-
+      Organisering af omics-data med Bioconductor-containere: `SummarizedExperiment`, assays,
+      række- og kolonnemetadata, genomiske ranges, synkron subsetting, identifikatorer og versioneret annotation.
+  estimated_study_hours: 13
+  difficulty: advanced
+
+alignment:
+  official_learning_outcomes: [bmb831.lo02, bmb831.lo06]
+  prerequisite_modules: [bmb831.m01, bmb831.m02, dm847.m02]
+  later_modules: [bmb831.m08, bmb831.m09, bmb831.m11, bmb831.m12]
+
+objectives:
+  - {id: bmb831.m07.o01, text: {es: Explicar la arquitectura de SummarizedExperiment, en: Explain SummarizedExperiment architecture, da: Forklare SummarizedExperiment-arkitektur}}
+  - {id: bmb831.m07.o02, text: {es: Alinear assays, rowData y colData, en: Align assays, rowData, and colData, da: Tilpasse assays, rowData og colData}}
+  - {id: bmb831.m07.o03, text: {es: Usar rowRanges cuando la posición genómica es relevante, en: Use rowRanges when genomic position is relevant, da: Bruge rowRanges når genomisk position er relevant}}
+  - {id: bmb831.m07.o04, text: {es: Realizar subsetting sin perder correspondencia, en: Subset without losing correspondence, da: Udføre subsetting uden at miste korrespondance}}
+  - {id: bmb831.m07.o05, text: {es: Mapear identificadores con procedencia y cardinalidad, en: Map identifiers with provenance and cardinality, da: Mappe identifikatorer med provenance og kardinalitet}}
+  - {id: bmb831.m07.o06, text: {es: Seleccionar contenedor según modalidad, en: Select a container according to modality, da: Vælge container efter modalitet}}
+  - {id: bmb831.m07.o07, text: {es: Validar integridad estructural antes del análisis, en: Validate structural integrity before analysis, da: Validere strukturel integritet før analyse}}
+  - {id: bmb831.m07.o08, text: {es: Serializar objetos con entorno y versiones registradas, en: Serialize objects with recorded environment and versions, da: Serialisere objekter med registreret miljø og versioner}}
+
+concepts:
+  - id: bmb831.m07.c01
+    title: {es: SummarizedExperiment como contrato de alineación, en: SummarizedExperiment as an alignment contract, da: SummarizedExperiment som alignment-kontrakt}
+    body:
+      es: >-
+        `SummarizedExperiment` vincula una o más matrices assay con metadata de características y muestras.
+        Todas las assays comparten dimensiones y orden de filas/columnas. El contenedor reduce errores de
+        desalineación al aplicar subsetting coordinado, pero no valida automáticamente el significado biológico.
+      en: >-
+        `SummarizedExperiment` links one or more assay matrices with feature and sample metadata. All assays share
+        row and column dimensions and ordering. Coordinated subsetting reduces alignment errors but does not validate meaning.
+      da: >-
+        `SummarizedExperiment` forbinder assays med feature- og samplemetadata og sikrer synkron dimension og rækkefølge.
+    key_points:
+      - {es: El contenedor protege correspondencia estructural, no semántica, en: The container protects structural, not semantic, correspondence, da: Containeren beskytter strukturel, ikke semantisk, korrespondance}
+  - id: bmb831.m07.c02
+    title: {es: Assays, rowData, colData y metadata, en: Assays, rowData, colData, and metadata, da: Assays, rowData, colData og metadata}
+    body:
+      es: >-
+        `assays()` almacena mediciones como counts, normalized o log-expression con nombres claros. `rowData()` describe
+        genes, proteínas o regiones; `colData()` describe muestras; `metadata()` conserva información global, parámetros y
+        procedencia. Guardar resultados incompatibles en el mismo slot sin declarar escala induce errores.
+      en: >-
+        `assays()` stores measurements such as counts, normalized values, or log expression. `rowData()` describes features,
+        `colData()` samples, and `metadata()` global provenance and parameters. Scales must be explicit.
+      da: >-
+        `assays()` lagrer målinger; `rowData()` beskriver features; `colData()` samples; `metadata()` global provenance.
+    key_points:
+      - {es: Cada assay necesita nombre, escala y método de generación, en: Every assay needs a name, scale, and generation method, da: Hvert assay kræver navn, skala og genereringsmetode}
+  - id: bmb831.m07.c03
+    title: {es: Rangos genómicos y coordenadas, en: Genomic ranges and coordinates, da: Genomiske ranges og koordinater}
+    body:
+      es: >-
+        `RangedSummarizedExperiment` usa `rowRanges()` para cromosoma, inicio, fin, hebra y build. Coordenadas deben declarar
+        sistema 0/1-based, intervalos cerrados/half-open y ensamblaje. Convertir builds sin cadena o control puede producir
+        pérdidas y mapeos múltiples.
+      en: >-
+        `RangedSummarizedExperiment` uses `rowRanges()` for chromosome, start, end, strand, and genome build. Coordinate
+        convention and assembly must be declared. Build conversion may fail or map multiply.
+      da: >-
+        `rowRanges()` lagrer kromosom, start, slut, strand og genome build; koordinatkonvention skal deklareres.
+    key_points:
+      - {es: Una coordenada sin build es ambigua, en: A coordinate without a genome build is ambiguous, da: En koordinat uden genome build er tvetydig}
+  - id: bmb831.m07.c04
+    title: {es: Identificadores y cardinalidad de mapeo, en: Identifiers and mapping cardinality, da: Identifikatorer og mapping-kardinalitet}
+    body:
+      es: >-
+        Ensembl IDs, símbolos, Entrez, UniProt y accesiones no son intercambiables. Versiones como ENSG...“.5” pueden
+        requerir tratamiento explícito. Los mapeos pueden ser uno-a-uno, uno-a-muchos, muchos-a-uno o ausentes.
+        Elegir el primer match silenciosamente pierde información y sesga conteos o enriquecimiento.
+      en: >-
+        Ensembl IDs, symbols, Entrez, UniProt, and accessions are not interchangeable. Mapping can be one-to-one,
+        one-to-many, many-to-one, or missing. Silently taking the first match loses information.
+      da: >-
+        Ensembl, symboler, Entrez og UniProt er ikke udskiftelige. Mapping kan være en-til-mange eller manglende.
+    key_points:
+      - {es: La política de duplicados debe ser explícita, en: Duplicate-resolution policy must be explicit, da: Duplikatpolitik skal være eksplicit}
+  - id: bmb831.m07.c05
+    title: {es: Contenedores especializados y multi-assay, en: Specialized and multi-assay containers, da: Specialiserede og multi-assay-containere}
+    body:
+      es: >-
+        `SingleCellExperiment` añade reduced dimensions, size factors y alternative experiments. `MultiAssayExperiment`
+        coordina múltiples assays con tablas de mapeo porque no todas las muestras o unidades están presentes en cada modalidad.
+        La elección debe reflejar jerarquía, modalidad y relaciones entre unidades.
+      en: >-
+        `SingleCellExperiment` adds reduced dimensions, size factors, and alternative experiments. `MultiAssayExperiment`
+        coordinates multiple assays through mapping tables because sample coverage may differ by modality.
+      da: >-
+        `SingleCellExperiment` tilføjer reduced dimensions og size factors; `MultiAssayExperiment` koordinerer flere assays via mapping-tabeller.
+    key_points:
+      - {es: Multi-assay requiere mapa de muestras, no sólo nombres parecidos, en: Multi-assay requires a sample map, not merely similar names, da: Multi-assay kræver sample-map, ikke kun lignende navne}
+  - id: bmb831.m07.c06
+    title: {es: Validación, serialización y procedencia, en: Validation, serialization, and provenance, da: Validering, serialisering og provenance}
+    body:
+      es: >-
+        Antes de modelar se verifican dimensiones, nombres únicos, correspondencia, tipos, niveles, unidades y ausencia.
+        RDS preserva clase y slots, pero debe acompañarse de versión de R, paquetes, anotaciones, fuente y código que lo genera.
+        Un objeto serializado puede ser reproducible pero obsoleto o semánticamente incorrecto.
+      en: >-
+        Before modeling, validate dimensions, unique names, alignment, types, levels, units, and missingness. RDS preserves
+        class and slots but requires R, package, annotation, source, and generating-code versions.
+      da: >-
+        Før modellering valideres dimensioner, navne, alignment, typer og enheder. RDS kræver versions- og provenanceinformation.
+    key_points:
+      - {es: Serialización no sustituye código de construcción, en: Serialization does not replace construction code, da: Serialisering erstatter ikke konstruktionskode}
+
+worked_examples:
+  - id: bmb831.m07.e01
+    title: {es: Subsetting seguro, en: Safe subsetting, da: Sikker subsetting}
+    scenario: {es: Se seleccionan muestras mediante `se[, keep]`., en: Samples are selected using `se[, keep]`., da: Samples vælges med `se[, keep]`.}
+    reasoning:
+      - {es: Assays y colData se reducen en el mismo orden., en: Assays and colData subset in the same order., da: Assays og colData subsets i samme rækkefølge.}
+      - {es: Extraer matriz y metadata por separado requiere volver a validar., en: Separate matrix and metadata subsetting requires revalidation., da: Separat subsetting af matrix og metadata kræver revalidering.}
+    conclusion: {es: El contenedor reduce desalineación accidental., en: The container reduces accidental misalignment., da: Containeren reducerer utilsigtet misalignment.}
+  - id: bmb831.m07.e02
+    title: {es: Mapeo uno-a-muchos, en: One-to-many mapping, da: En-til-mange mapping}
+    scenario: {es: Un símbolo antiguo mapea a dos Ensembl IDs., en: An old symbol maps to two Ensembl IDs., da: Et gammelt symbol mapper til to Ensembl-ID'er.}
+    reasoning:
+      - {es: No elegir primer match silenciosamente., en: Do not silently choose the first match., da: Vælg ikke stille første match.}
+      - {es: Conservar tabla de mapeo, evidencia y política según análisis., en: Preserve mapping table, evidence, and analysis-specific policy., da: Bevar mapping-tabel, evidens og analysespecifik politik.}
+    conclusion: {es: La ambigüedad debe propagarse o resolverse justificadamente., en: Ambiguity must be propagated or justifiably resolved., da: Tvetydighed skal propagere eller løses begrundet.}
+  - id: bmb831.m07.e03
+    title: {es: Assays de escalas distintas, en: Assays on different scales, da: Assays på forskellige skalaer}
+    scenario: {es: Un objeto contiene counts y logCPM sin nombres descriptivos., en: An object contains counts and logCPM without descriptive names., da: Et objekt indeholder counts og logCPM uden beskrivende navne.}
+    reasoning:
+      - {es: Modelos pueden usar por error la escala equivocada., en: Models may accidentally use the wrong scale., da: Modeller kan bruge forkert skala.}
+      - {es: Nombrar assays y registrar método/parámetros., en: Name assays and record method and parameters., da: Navngiv assays og registrér metode og parametre.}
+    conclusion: {es: Escala es parte de la semántica del objeto., en: Scale is part of object semantics., da: Skala er en del af objektets semantik.}
+
+guided_practice:
+  - {id: bmb831.m07.p01, activity_type: container_design, prompt: {es: Diseña un SummarizedExperiment para RNA-seq., en: Design a SummarizedExperiment for RNA-seq., da: Design et SummarizedExperiment for RNA-seq.}, expected_elements: [counts_assay, rowData_ids, colData_design, metadata_provenance]}
+  - {id: bmb831.m07.p02, activity_type: validation, prompt: {es: Propón invariantes de alineación entre assay y metadata., en: Propose alignment invariants between assay and metadata., da: Foreslå alignment-invarianter mellem assay og metadata.}, expected_elements: [identical_colnames_rownames, unique_ids, dimension_match, no_unexplained_duplicates]}
+  - {id: bmb831.m07.p03, activity_type: identifier_mapping, prompt: {es: Resuelve un mapeo Ensembl→símbolo con duplicados., en: Resolve an Ensembl-to-symbol mapping with duplicates., da: Løs Ensembl-til-symbol mapping med duplikater.}, expected_elements: [version_strip_policy, cardinality_table, missing_ids, duplicate_policy, provenance]}
+  - {id: bmb831.m07.p04, activity_type: genomic_ranges, prompt: {es: Audita coordenadas sin build ni convención., en: Audit coordinates lacking build and convention., da: Auditér koordinater uden build og konvention.}, expected_elements: [genome_build, coordinate_system, strand, interval_type, liftover_limits]}
+  - {id: bmb831.m07.p05, activity_type: method_selection, prompt: {es: Elige SummarizedExperiment, SingleCellExperiment o MultiAssayExperiment., en: Choose SummarizedExperiment, SingleCellExperiment, or MultiAssayExperiment., da: Vælg SummarizedExperiment, SingleCellExperiment eller MultiAssayExperiment.}, expected_elements: [modality, reduced_dims, alternative_experiments, sample_map]}
+  - {id: bmb831.m07.p06, activity_type: reproducibility_audit, prompt: {es: Audita un RDS sin código ni versiones., en: Audit an RDS lacking code and versions., da: Auditér en RDS uden kode og versioner.}, expected_elements: [construction_script, package_versions, annotation_version, input_manifest, validity_checks]}
+
+objective_bank:
+  - {id: bmb831.m07.q01, type: multiple_choice, prompt: {es: `colData` describe..., en: `colData` describes..., da: `colData` beskriver...}, options: [{id: a, text: {es: Muestras/columnas, en: Samples/columns, da: Samples/kolonner}}, {id: b, text: {es: Genes/filas, en: Genes/rows, da: Gener/rækker}}], correct_option_ids: [a], explanation: {es: Está alineado con columnas de assays., en: It aligns with assay columns., da: Det aligner med assay-kolonner.}}
+  - {id: bmb831.m07.q02, type: true_false, prompt: {es: Todas las assays en SummarizedExperiment deben compartir dimensiones., en: All assays in a SummarizedExperiment must share dimensions., da: Alle assays i et SummarizedExperiment skal dele dimensioner.}, correct: true, explanation: {es: Comparten características y muestras., en: They share features and samples., da: De deler features og samples.}}
+  - {id: bmb831.m07.q03, type: multiple_choice, prompt: {es: ¿Dónde guardar build genómico?, en: Where should genome build be recorded?, da: Hvor bør genome build registreres?}, options: [{id: a, text: {es: rowRanges/metadata, en: rowRanges/metadata, da: rowRanges/metadata}}, {id: b, text: {es: Sólo nombre de archivo, en: Filename only, da: Kun filnavn}}], correct_option_ids: [a], explanation: {es: Debe viajar con coordenadas., en: It must travel with coordinates., da: Det skal følge koordinaterne.}}
+  - {id: bmb831.m07.q04, type: true_false, prompt: {es: Símbolo génico es identificador estable universal., en: A gene symbol is a universal stable identifier., da: Et gensymbol er en universel stabil identifikator.}, correct: false, explanation: {es: Puede cambiar, reutilizarse o ser ambiguo., en: It may change, be reused, or be ambiguous., da: Det kan ændres, genbruges eller være tvetydigt.}}
+  - {id: bmb831.m07.q05, type: multiple_choice, prompt: {es: Mejor manejo de mapeo uno-a-muchos., en: Best handling of one-to-many mapping., da: Bedste håndtering af en-til-mange mapping.}, options: [{id: a, text: {es: Conservar cardinalidad y política explícita, en: Preserve cardinality and explicit policy, da: Bevar kardinalitet og eksplicit politik}}, {id: b, text: {es: Elegir primer match silenciosamente, en: Silently choose first match, da: Vælg stille første match}}], correct_option_ids: [a], explanation: {es: Evita pérdida y sesgo ocultos., en: It avoids hidden loss and bias., da: Det undgår skjult tab og bias.}}
+  - {id: bmb831.m07.q06, type: true_false, prompt: {es: `se[, keep]` mantiene assay y colData sincronizados., en: `se[, keep]` keeps assay and colData synchronized., da: `se[, keep]` holder assay og colData synkroniseret.}, correct: true, explanation: {es: Es una ventaja del contenedor., en: This is a container advantage., da: Det er en containerfordel.}}
+  - {id: bmb831.m07.q07, type: multiple_choice, prompt: {es: Contenedor para múltiples modalidades con cobertura distinta., en: Container for multiple modalities with differing coverage., da: Container for flere modaliteter med forskellig dækning.}, options: [{id: a, text: {es: MultiAssayExperiment, en: MultiAssayExperiment, da: MultiAssayExperiment}}, {id: b, text: {es: Vector atómico, en: Atomic vector, da: Atomisk vektor}}], correct_option_ids: [a], explanation: {es: Incluye mapa entre unidades y assays., en: It includes mappings between units and assays., da: Det inkluderer mapping mellem enheder og assays.}}
+  - {id: bmb831.m07.q08, type: true_false, prompt: {es: RDS conserva automáticamente procedencia completa., en: RDS automatically preserves complete provenance., da: RDS bevarer automatisk komplet provenance.}, correct: false, explanation: {es: Preserva objeto, no necesariamente fuente, código o versiones externas., en: It preserves the object, not necessarily source, code, or external versions., da: Det bevarer objektet, ikke nødvendigvis kilde, kode eller eksterne versioner.}}
+  - {id: bmb831.m07.q09, type: multiple_select, prompt: {es: Validaciones antes de modelar., en: Validations before modeling., da: Valideringer før modellering.}, options: [{id: a, text: {es: IDs únicos, en: Unique IDs, da: Unikke ID'er}}, {id: b, text: {es: Dimensiones alineadas, en: Aligned dimensions, da: Alignede dimensioner}}, {id: c, text: {es: Tipos y niveles, en: Types and levels, da: Typer og niveauer}}, {id: d, text: {es: Ninguna, en: None, da: Ingen}}], correct_option_ids: [a,b,c], explanation: {es: Estructura y metadata deben ser coherentes., en: Structure and metadata must be coherent., da: Struktur og metadata skal være sammenhængende.}}
+  - {id: bmb831.m07.q10, type: true_false, prompt: {es: Contenedor válido garantiza anotación biológicamente correcta., en: A valid container guarantees biologically correct annotation., da: En gyldig container garanterer biologisk korrekt annotation.}, correct: false, explanation: {es: Validez estructural no equivale a semántica., en: Structural validity is not semantic correctness., da: Strukturel validitet er ikke semantisk korrekthed.}}
+
+open_assessment_items:
+  - id: bmb831.m07.a01
+    prompt: {es: Diseña un contenedor Bioconductor completo para un estudio transcriptómico., en: Design a complete Bioconductor container for a transcriptomics study., da: Design en komplet Bioconductor-container til et transkriptomikstudie.}
+    rubric: [{criterion: assays_scales, weight: 0.25}, {criterion: row_col_metadata, weight: 0.25}, {criterion: provenance_versions, weight: 0.25}, {criterion: validation, weight: 0.25}]
+  - id: bmb831.m07.a02
+    prompt: {es: Audita un pipeline con símbolos génicos duplicados y builds mezclados., en: Audit a pipeline with duplicated gene symbols and mixed genome builds., da: Auditér et pipeline med duplikerede gensymboler og blandede genome builds.}
+    rubric: [{criterion: identifier_cardinality, weight: 0.25}, {criterion: coordinate_semantics, weight: 0.25}, {criterion: resolution_policy, weight: 0.25}, {criterion: downstream_bias, weight: 0.25}]
+  - id: bmb831.m07.a03
+    prompt: {es: Compara contenedores para bulk, single-cell y multi-omics., en: Compare containers for bulk, single-cell, and multi-omics., da: Sammenlign containere for bulk, single-cell og multi-omics.}
+    rubric: [{criterion: modality_requirements, weight: 0.30}, {criterion: sample_mapping, weight: 0.25}, {criterion: specialized_slots, weight: 0.20}, {criterion: reproducibility, weight: 0.25}]
+
+glossary:
+  - {id: bmb831.term.summarized_experiment, term: {es: SummarizedExperiment, en: SummarizedExperiment, da: SummarizedExperiment}, definition: {es: Contenedor coordinado de assays y metadata de filas/columnas., en: Coordinated container for assays and row/column metadata., da: Koordineret container for assays og række/kolonnemetadata.}}
+  - {id: bmb831.term.assay, term: {es: assay, en: assay, da: assay}, definition: {es: Matriz de mediciones con escala y método definidos., en: Measurement matrix with defined scale and method., da: Målematrix med defineret skala og metode.}}
+  - {id: bmb831.term.row_data, term: {es: rowData, en: rowData, da: rowData}, definition: {es: Metadata alineada con características., en: Metadata aligned with features., da: Metadata alignet med features.}}
+  - {id: bmb831.term.col_data, term: {es: colData, en: colData, da: colData}, definition: {es: Metadata alineada con muestras., en: Metadata aligned with samples., da: Metadata alignet med samples.}}
+  - {id: bmb831.term.row_ranges, term: {es: rowRanges, en: rowRanges, da: rowRanges}, definition: {es: Rangos genómicos alineados con filas., en: Genomic ranges aligned with rows., da: Genomiske ranges alignet med rækker.}}
+  - {id: bmb831.term.genome_build, term: {es: ensamblaje genómico, en: genome build, da: genome build}, definition: {es: Versión de referencia que da significado a coordenadas., en: Reference version giving coordinates meaning., da: Referenceversion der giver koordinater betydning.}}
+  - {id: bmb831.term.identifier_cardinality, term: {es: cardinalidad de mapeo, en: mapping cardinality, da: mapping-kardinalitet}, definition: {es: Número de entidades de origen y destino relacionadas., en: Number of related source and target entities., da: Antal relaterede kilde- og målenheder.}}
+  - {id: bmb831.term.single_cell_experiment, term: {es: SingleCellExperiment, en: SingleCellExperiment, da: SingleCellExperiment}, definition: {es: Contenedor especializado para datos single-cell., en: Specialized container for single-cell data., da: Specialiseret container til single-cell-data.}}
+  - {id: bmb831.term.multi_assay_experiment, term: {es: MultiAssayExperiment, en: MultiAssayExperiment, da: MultiAssayExperiment}, definition: {es: Contenedor coordinado para múltiples assays y mapas de muestras., en: Coordinated container for multiple assays and sample maps., da: Koordineret container for flere assays og sample-maps.}}
+  - {id: bmb831.term.serialization, term: {es: serialización, en: serialization, da: serialisering}, definition: {es: Almacenamiento de un objeto conservando estructura y clase., en: Storage of an object preserving structure and class., da: Lagring af et objekt med bevaret struktur og klasse.}}
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      Los contenedores Bioconductor coordinan mediciones y metadata para reducir desalineación. La validez requiere además
+      IDs, escalas, builds, cardinalidades, versiones y procedimientos de construcción explícitos.
+    en: >-
+      Bioconductor containers coordinate measurements and metadata to reduce misalignment. Validity additionally requires
+      explicit IDs, scales, builds, mapping cardinalities, versions, and construction procedures.
+    da: >-
+      Bioconductor-containere koordinerer målinger og metadata. Gyldighed kræver også eksplicitte ID'er, skalaer og versioner.
+  misconceptions:
+    - a container automatically validates biological meaning
+    - gene symbols are stable unique identifiers
+    - first-match identifier mapping is harmless
+    - coordinates are meaningful without genome build
+    - an RDS file replaces construction code and provenance
+  socratic_questions:
+    - Are assay columns identical to colData row names and order?
+    - What scale and method generated each assay?
+    - What is the cardinality of identifier mapping?
+    - Which genome build and coordinate convention are used?
+    - Can this object be rebuilt from raw inputs?
+  grading_criteria:
+    - correct container architecture
+    - synchronized alignment and validation
+    - identifier and coordinate provenance
+    - appropriate specialized container selection
+    - reproducible serialization and reconstruction
+  retrieval_fragments:
+    - id: bmb831.m07.r01
+      text: {es: SummarizedExperiment sincroniza assays con rowData y colData durante subsetting., en: SummarizedExperiment synchronizes assays with rowData and colData during subsetting., da: SummarizedExperiment synkroniserer assays med rowData og colData under subsetting.}
+    - id: bmb831.m07.r02
+      text: {es: Un mapeo de identificadores puede ser uno-a-muchos y nunca debe reducirse silenciosamente al primer match., en: Identifier mapping may be one-to-many and should never be silently reduced to the first match., da: Identifikatormapping kan være en-til-mange og bør aldrig stille reduceres til første match.}
+    - id: bmb831.m07.r03
+      text: {es: Un objeto serializado requiere código, versiones y manifest para ser reconstruible y auditable., en: A serialized object requires code, versions, and a manifest to be reconstructible and auditable., da: Et serialiseret objekt kræver kode, versioner og manifest for at kunne genskabes og auditeres.}
