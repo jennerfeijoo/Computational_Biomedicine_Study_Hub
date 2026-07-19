@@ -13,6 +13,8 @@ from ..i18n import AppLocale
 from ..learning.activity_types import ActivityType
 from .models import (
     AssessmentItem,
+    AssessmentOption,
+    ClozeGap,
     ConceptBlock,
     LearningModule,
     LearningObjective,
@@ -164,6 +166,50 @@ class LocalizedAssessmentOption:
 
 
 @dataclass(frozen=True, slots=True)
+class LocalizedClozeGap:
+    """One stable cloze gap whose visible options are aligned in three locales."""
+
+    gap_id: str
+    options: tuple[LocalizedAssessmentOption, ...]
+    correct_option_id: str
+
+    def __post_init__(self) -> None:
+        if not self.gap_id.strip():
+            raise ValueError("Cloze gap IDs cannot be empty.")
+        if self.gap_id != self.gap_id.strip():
+            raise ValueError("Cloze gap IDs cannot contain surrounding whitespace.")
+        if len(self.options) < 2:
+            raise ValueError(f"Cloze gap {self.gap_id!r} requires at least two options.")
+        option_ids = tuple(option.option_id for option in self.options)
+        if len(option_ids) != len(set(option_id.casefold() for option_id in option_ids)):
+            raise ValueError(f"Cloze gap {self.gap_id!r} has duplicate option IDs.")
+        if self.correct_option_id not in option_ids:
+            raise ValueError(
+                f"Cloze gap {self.gap_id!r} references unknown correct option ID "
+                f"{self.correct_option_id!r}."
+            )
+        for locale in AppLocale:
+            texts = tuple(
+                option.text.for_locale(locale).strip().casefold() for option in self.options
+            )
+            if len(texts) != len(set(texts)):
+                raise ValueError(
+                    f"Cloze gap {self.gap_id!r} has duplicate option text for "
+                    f"locale {locale.value!r}."
+                )
+
+    def materialize(self, locale: AppLocale) -> ClozeGap:
+        return ClozeGap(
+            gap_id=self.gap_id,
+            options=tuple(
+                AssessmentOption(option.option_id, option.text.for_locale(locale))
+                for option in self.options
+            ),
+            correct_option_id=self.correct_option_id,
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class LocalizedAssessmentItem:
     """An assessment item whose grading remains stable across translations."""
 
@@ -175,6 +221,7 @@ class LocalizedAssessmentItem:
     accepted_answers: tuple[LocalizedText, ...]
     explanation: LocalizedText
     rubric: tuple[LocalizedText, ...] = ()
+    cloze_gaps: tuple[LocalizedClozeGap, ...] = ()
 
     def __post_init__(self) -> None:
         if not self.item_id.strip():
@@ -196,6 +243,33 @@ class LocalizedAssessmentItem:
                     f"Assessment item {self.item_id!r} has duplicate option text for "
                     f"locale {locale.value!r}."
                 )
+
+        is_cloze = self.activity_type is ActivityType.CLOZE_CHOICE
+        if is_cloze:
+            if not self.cloze_gaps:
+                raise ValueError(f"Cloze item {self.item_id!r} requires at least one gap.")
+            if self.options or self.correct_option_ids or self.accepted_answers:
+                raise ValueError(f"Cloze item {self.item_id!r} must keep answers inside its gaps.")
+            gap_ids = tuple(gap.gap_id for gap in self.cloze_gaps)
+            if len(gap_ids) != len(set(gap_id.casefold() for gap_id in gap_ids)):
+                raise ValueError(f"Cloze item {self.item_id!r} has duplicate gap IDs.")
+            for locale in AppLocale:
+                localized_prompt = self.prompt.for_locale(locale)
+                missing = tuple(
+                    gap_id for gap_id in gap_ids if "{" + gap_id + "}" not in localized_prompt
+                )
+                if missing:
+                    raise ValueError(
+                        f"Cloze item {self.item_id!r} is missing prompt markers for "
+                        f"locale {locale.value!r}: {list(missing)}"
+                    )
+            return
+
+        if self.cloze_gaps:
+            raise ValueError(
+                f"Assessment item {self.item_id!r} cannot define cloze gaps for "
+                f"{self.activity_type.value!r}."
+            )
 
         option_based = {
             ActivityType.MULTIPLE_CHOICE,
@@ -257,6 +331,7 @@ class LocalizedAssessmentItem:
             rubric=tuple(criterion.for_locale(locale) for criterion in self.rubric),
             option_ids=tuple(option.option_id for option in self.options),
             correct_option_ids=self.correct_option_ids,
+            cloze_gaps=tuple(gap.materialize(locale) for gap in self.cloze_gaps),
         )
 
 

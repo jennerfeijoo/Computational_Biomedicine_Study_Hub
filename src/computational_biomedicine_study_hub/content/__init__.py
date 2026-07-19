@@ -6,6 +6,7 @@ from .bundles import LocalizedModuleBundle, ModuleBundle, validate_bundle_catalo
 from .localized_models import (
     LocalizedAssessmentItem,
     LocalizedAssessmentOption,
+    LocalizedClozeGap,
     LocalizedConceptBlock,
     LocalizedLearningModule,
     LocalizedLearningObjective,
@@ -17,6 +18,7 @@ from .localized_models import (
 from .models import (
     AssessmentItem,
     AssessmentOption,
+    ClozeGap,
     ConceptBlock,
     LearningModule,
     LearningObjective,
@@ -29,11 +31,13 @@ from .models import (
 __all__ = [
     "AssessmentItem",
     "AssessmentOption",
+    "ClozeGap",
     "ConceptBlock",
     "LearningModule",
     "LearningObjective",
     "LocalizedAssessmentItem",
     "LocalizedAssessmentOption",
+    "LocalizedClozeGap",
     "LocalizedConceptBlock",
     "LocalizedLearningModule",
     "LocalizedLearningObjective",

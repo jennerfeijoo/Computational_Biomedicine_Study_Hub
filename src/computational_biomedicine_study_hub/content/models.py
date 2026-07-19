@@ -72,6 +72,32 @@ class AssessmentOption:
 
 
 @dataclass(frozen=True, slots=True)
+class ClozeGap:
+    """One language-independent gap with localized visible options."""
+
+    gap_id: str
+    options: tuple[AssessmentOption, ...]
+    correct_option_id: str
+
+    def __post_init__(self) -> None:
+        if not self.gap_id.strip():
+            raise ValueError("Cloze gap IDs cannot be empty.")
+        if self.gap_id != self.gap_id.strip():
+            raise ValueError("Cloze gap IDs cannot contain surrounding whitespace.")
+        if len(self.options) < 2:
+            raise ValueError(f"Cloze gap {self.gap_id!r} requires at least two options.")
+        option_ids = tuple(option.option_id for option in self.options)
+        normalized = tuple(option_id.casefold() for option_id in option_ids)
+        if len(normalized) != len(set(normalized)):
+            raise ValueError(f"Cloze gap {self.gap_id!r} has duplicate option IDs.")
+        if self.correct_option_id not in option_ids:
+            raise ValueError(
+                f"Cloze gap {self.gap_id!r} references unknown correct option ID "
+                f"{self.correct_option_id!r}."
+            )
+
+
+@dataclass(frozen=True, slots=True)
 class AssessmentItem:
     """An assessable item with deterministic, locale-independent answer keys.
 
@@ -90,6 +116,7 @@ class AssessmentItem:
     rubric: tuple[str, ...] = ()
     option_ids: tuple[str, ...] = ()
     correct_option_ids: tuple[str, ...] = ()
+    cloze_gaps: tuple[ClozeGap, ...] = ()
 
     def __post_init__(self) -> None:
         if not self.item_id.strip():
@@ -100,8 +127,33 @@ class AssessmentItem:
             raise ValueError(f"Assessment item {self.item_id!r} has an empty prompt.")
         if not self.explanation.strip():
             raise ValueError(f"Assessment item {self.item_id!r} has an empty explanation.")
-        if not self.correct_answers:
+        is_cloze = self.activity_type is ActivityType.CLOZE_CHOICE
+        if not is_cloze and not self.correct_answers:
             raise ValueError(f"Assessment item {self.item_id!r} must define a correct answer.")
+
+        if is_cloze:
+            if not self.cloze_gaps:
+                raise ValueError(f"Cloze item {self.item_id!r} requires at least one gap.")
+            if self.options or self.option_ids or self.correct_option_ids or self.correct_answers:
+                raise ValueError(f"Cloze item {self.item_id!r} must keep answers inside its gaps.")
+            gap_ids = tuple(gap.gap_id for gap in self.cloze_gaps)
+            if len(gap_ids) != len(set(gap_id.casefold() for gap_id in gap_ids)):
+                raise ValueError(f"Cloze item {self.item_id!r} has duplicate gap IDs.")
+            missing_markers = tuple(
+                gap_id for gap_id in gap_ids if "{" + gap_id + "}" not in self.prompt
+            )
+            if missing_markers:
+                raise ValueError(
+                    f"Cloze item {self.item_id!r} is missing prompt markers for gaps: "
+                    f"{list(missing_markers)}"
+                )
+            return
+
+        if self.cloze_gaps:
+            raise ValueError(
+                f"Assessment item {self.item_id!r} cannot define gaps for "
+                f"{self.activity_type.value!r}."
+            )
 
         option_based = {
             ActivityType.MULTIPLE_CHOICE,

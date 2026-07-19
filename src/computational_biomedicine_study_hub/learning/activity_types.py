@@ -14,6 +14,7 @@ class ActivityType(StrEnum):
     MULTIPLE_SELECT = "multiple_select"
     TRUE_FALSE = "true_false"
     FILL_IN_THE_BLANK = "fill_in_the_blank"
+    CLOZE_CHOICE = "cloze_choice"
     MATCHING = "matching"
     ORDERING = "ordering"
     CODE_COMPLETION = "code_completion"
