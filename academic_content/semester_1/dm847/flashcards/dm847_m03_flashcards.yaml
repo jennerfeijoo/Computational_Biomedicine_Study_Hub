@@ -1,0 +1,500 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m03
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm847.m03.f01
+    mode: conceptual
+    card_type: design_principle
+    difficulty: foundational
+    front:
+      es: ¿Cuál es el principio inicial del diseño de una base biológica?
+      en: What is the first principle of biological database design?
+      da: Hvad er det første princip i biologisk databasedesign?
+    back:
+      es: >-
+        Diseñar desde preguntas, usuarios, entidades, invariantes y requisitos operativos; no copiar la forma accidental
+        de un archivo. Las consultas previstas y los estados inválidos que deben impedirse definen el contrato del esquema.
+      en: >-
+        Design from questions, users, entities, invariants, and operational requirements, not from an accidental file shape.
+        Expected queries and invalid states to prevent define the schema contract.
+      da: >-
+        Design ud fra spørgsmål, brugere, enheder, invarianter og operationelle krav, ikke et tilfældigt filformat.
+    linked_objectives: [m03.o1]
+    tags: [database_design, requirements, schema]
+
+  - id: dm847.m03.f02
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: Distingue entidad y atributo con un ejemplo.
+      en: Distinguish an entity and an attribute using an example.
+      da: Skeln mellem en enhed og en attribut med et eksempel.
+    back:
+      es: >-
+        Una muestra es una entidad con identidad propia; fecha de extracción, tejido y estado de conservación son atributos.
+        Si algo necesita relaciones, historial o referencias independientes, probablemente debe modelarse como entidad y no como texto embebido.
+      en: >-
+        A sample is an entity with its own identity; collection date, tissue, and storage state are attributes.
+        If something needs independent relations, history, or references, it likely belongs as an entity rather than embedded text.
+      da: >-
+        En prøve er en enhed; prøvetagningsdato, væv og opbevaringsstatus er attributter.
+    linked_objectives: [m03.o1]
+    tags: [entity, attribute, modeling]
+
+  - id: dm847.m03.f03
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: ¿Qué diferencia hay entre clave primaria, clave natural y clave sustituta?
+      en: What is the difference among primary, natural, and surrogate keys?
+      da: Hvad er forskellen mellem primærnøgle, naturlig nøgle og surrogatnøgle?
+    back:
+      es: >-
+        Clave primaria es la restricción que identifica una fila. Una clave natural proviene del dominio, como namespace+accesión+versión.
+        Una clave sustituta es un ID interno sin significado de dominio. Puede ser primaria, pero debe coexistir con una restricción única natural
+        para evitar duplicados semánticos.
+      en: >-
+        A primary key is the constraint identifying a row. A natural key comes from the domain, such as namespace+accession+version.
+        A surrogate key is an internal domain-free ID. It may be primary but should coexist with a natural uniqueness constraint.
+      da: >-
+        Primærnøglen identificerer rækken. En naturlig nøgle kommer fra domænet. En surrogatnøgle er et internt ID og bør ledsages af domæneunikhed.
+    linked_objectives: [m03.o2]
+    tags: [primary_key, natural_key, surrogate_key]
+
+  - id: dm847.m03.f04
+    mode: practical
+    card_type: key_design
+    difficulty: intermediate
+    front:
+      es: Diseña una clave natural para una secuencia de referencia versionada.
+      en: Design a natural key for a versioned reference sequence.
+      da: Design en naturlig nøgle for en versionsreferencesekvens.
+    back:
+      es: >-
+        Como mínimo: namespace, accesión y versión; según el recurso también organismo o ensamblaje. La clave interna puede ser sustituta,
+        pero `UNIQUE(namespace, accession, version)` conserva identidad del dominio. El símbolo no debe sustituirla.
+      en: >-
+        At minimum: namespace, accession, and version; organism or assembly may also be required. An internal surrogate key is acceptable,
+        but `UNIQUE(namespace, accession, version)` preserves domain identity. A symbol should not replace it.
+      da: >-
+        Mindst namespace, accession og version; eventuelt organisme eller assembly. Brug domæneunikhed selv med intern surrogatnøgle.
+    linked_objectives: [m03.o2, m03.o6]
+    tags: [identifier, uniqueness, version]
+
+  - id: dm847.m03.f05
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué es cardinalidad en un modelo de datos?
+      en: What is cardinality in a data model?
+      da: Hvad er kardinalitet i en datamodel?
+    back:
+      es: >-
+        Es el número mínimo y máximo de entidades que pueden relacionarse en cada extremo: uno-a-uno, uno-a-muchos o muchos-a-muchos.
+        Debe reflejar reglas del dominio y tiempo. Por ejemplo, un gen puede tener varios transcritos y una ruta muchos genes, mientras un gen puede pertenecer a muchas rutas.
+      en: >-
+        It is the minimum and maximum number of entities participating at each relation end: one-to-one, one-to-many, or many-to-many.
+        It should reflect domain and temporal rules. A gene may have several transcripts, and genes and pathways are many-to-many.
+      da: >-
+        Det er minimum og maksimum antal enheder i hver relationsende: en-til-en, en-til-mange eller mange-til-mange.
+    linked_objectives: [m03.o2]
+    tags: [cardinality, relationship, constraints]
+
+  - id: dm847.m03.f06
+    mode: practical
+    card_type: cardinality_analysis
+    difficulty: intermediate
+    front:
+      es: ¿Qué cardinalidades esperas entre paciente, muestra, gen y transcrito?
+      en: Which cardinalities do you expect among patient, sample, gene, and transcript?
+      da: Hvilke kardinaliteter forventes mellem patient, prøve, gen og transkript?
+    back:
+      es: >-
+        Paciente→muestra suele ser uno-a-muchos; muestra→paciente normalmente muchos-a-uno bajo un episodio de origen definido;
+        gen→transcrito es uno-a-muchos en una anotación; transcrito→gen suele muchos-a-uno. Excepciones y fusiones deben representarse explícitamente,
+        no forzarse silenciosamente en la cardinalidad canónica.
+      en: >-
+        Patient→sample is commonly one-to-many; sample→patient many-to-one under a defined provenance episode;
+        gene→transcript one-to-many in an annotation; transcript→gene commonly many-to-one. Exceptions and fusions require explicit modeling.
+      da: >-
+        Patient→prøve er typisk en-til-mange; gen→transkript en-til-mange i en annotation; transkript→gen typisk mange-til-en.
+    linked_objectives: [m03.o1, m03.o2]
+    tags: [cardinality, sample, transcript]
+
+  - id: dm847.m03.f07
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué problema resuelve la normalización?
+      en: What problem does normalization solve?
+      da: Hvilket problem løser normalisering?
+    back:
+      es: >-
+        Reduce redundancia no controlada y anomalías de inserción, actualización y eliminación al separar hechos que cambian independientemente.
+        No busca maximizar el número de tablas, sino que cada tabla represente un tipo coherente de hecho con dependencias correctas.
+      en: >-
+        It reduces uncontrolled redundancy and insertion, update, and deletion anomalies by separating independently changing facts.
+        It does not maximize table count; each table should represent a coherent fact type with correct dependencies.
+      da: >-
+        Den reducerer ukontrolleret redundans og insert-, update- og delete-anomalier ved at adskille fakta der ændres uafhængigt.
+    linked_objectives: [m03.o3]
+    tags: [normalization, redundancy, anomalies]
+
+  - id: dm847.m03.f08
+    mode: practical
+    card_type: normalization
+    difficulty: intermediate
+    front:
+      es: ¿Por qué repetir descripción de gen en cada medición es defectuoso?
+      en: Why is repeating a gene description in every measurement defective?
+      da: Hvorfor er gentagelse af genbeskrivelse i hver måling defekt?
+    back:
+      es: >-
+        La descripción puede actualizarse en unas filas y no en otras, generando versiones incompatibles del mismo hecho.
+        El gen debe almacenarse una vez con identidad versionada; la medición referencia `gene_id`. La descripción histórica puede versionarse por separado.
+      en: >-
+        The description may update in some rows but not others, creating incompatible versions of one fact.
+        Store the versioned gene once and reference `gene_id` from measurement. Historical descriptions can be versioned separately.
+      da: >-
+        Beskrivelsen kan opdateres inkonsistent. Gem genet én gang med versionsidentitet og referér det fra målingen.
+    linked_objectives: [m03.o2, m03.o3]
+    tags: [normalization, gene, measurement]
+
+  - id: dm847.m03.f09
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front:
+      es: Corrige: «Normalizar significa dividir todo en tantas tablas como sea posible».
+      en: Correct: “Normalization means splitting everything into as many tables as possible.”
+      da: Ret: “Normalisering betyder at splitte alt i så mange tabeller som muligt.”
+    back:
+      es: >-
+        Normalizar significa representar dependencias funcionales y hechos independientes de forma coherente. Una fragmentación sin semántica
+        puede aumentar complejidad sin reducir anomalías. El criterio es qué cambia junto, qué identifica qué y qué restricciones deben preservarse.
+      en: >-
+        Normalization means coherently representing functional dependencies and independent facts. Semantic-free fragmentation may add complexity
+        without reducing anomalies. Ask what changes together, what identifies what, and which constraints must hold.
+      da: >-
+        Normalisering repræsenterer funktionelle afhængigheder og uafhængige fakta konsistent; vilkårlig fragmentering er ikke målet.
+    linked_objectives: [m03.o3]
+    tags: [normalization, misconception, dependencies]
+
+  - id: dm847.m03.f10
+    mode: conceptual
+    card_type: relation_modeling
+    difficulty: foundational
+    front:
+      es: ¿Cómo debe modelarse una relación muchos-a-muchos?
+      en: How should a many-to-many relation be modeled?
+      da: Hvordan bør en mange-til-mange-relation modelleres?
+    back:
+      es: >-
+        Med una entidad o tabla asociativa que contiene claves externas a ambos participantes y, cuando corresponda,
+        atributos propios como evidencia, versión, dirección, contexto y fecha. Una lista delimitada en una celda pierde integridad y granularidad.
+      en: >-
+        With an associative entity or table containing foreign keys to both participants and, when relevant,
+        its own evidence, version, direction, context, and date. A delimited list in one cell loses integrity and granularity.
+      da: >-
+        Med en associativ enhed/tabel med fremmednøgler til begge deltagere og egne attributter som evidens, version, retning og kontekst.
+    linked_objectives: [m03.o5]
+    tags: [many_to_many, associative_table, integrity]
+
+  - id: dm847.m03.f11
+    mode: practical
+    card_type: interaction_modeling
+    difficulty: advanced
+    front:
+      es: ¿Qué campos necesita una observación proteína–proteína para ser interpretable?
+      en: Which fields make a protein–protein interaction observation interpretable?
+      da: Hvilke felter gør en protein-protein-interaktionsobservation fortolkelig?
+    back:
+      es: >-
+        Participantes versionados, dirección o simetría, organismo, tejido/célula, condición, método, publicación o fuente,
+        código de evidencia, puntuación y su definición, fecha/versión y procedencia. Debe distinguirse observación primaria de interacción consolidada.
+      en: >-
+        Versioned participants, direction or symmetry, organism, tissue/cell, condition, method, publication or source,
+        evidence code, score and definition, date/version, and provenance. Distinguish primary observation from consolidated interaction.
+      da: >-
+        Versionsdeltagere, retning/symmetri, organisme, væv/celle, betingelse, metode, kilde, evidenskode, scoredefinition, version og proveniens.
+    linked_objectives: [m03.o5, m03.o6]
+    tags: [interaction, evidence, context]
+
+  - id: dm847.m03.f12
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front:
+      es: Compara modelo relacional, property graph y RDF.
+      en: Compare relational, property-graph, and RDF models.
+      da: Sammenlign relationelle modeller, property graphs og RDF.
+    back:
+      es: >-
+        Relacional: esquemas, restricciones, transacciones y agregación tabular. Property graph: nodos/aristas con propiedades y recorridos eficientes.
+        RDF: triples globalmente identificados, interoperabilidad semántica e inferencia. La elección depende de consultas, integridad, escala y ecosistema.
+      en: >-
+        Relational: schemas, constraints, transactions, and tabular aggregation. Property graph: property-bearing nodes/edges and traversal.
+        RDF: globally identified triples, semantic interoperability, and inference. Choice depends on queries, integrity, scale, and ecosystem.
+      da: >-
+        Relationel: skema, restriktioner og transaktioner. Property graph: noder/kanter og traversal. RDF: globale triples og semantisk interoperabilitet.
+    linked_objectives: [m03.o4]
+    tags: [relational, property_graph, RDF]
+
+  - id: dm847.m03.f13
+    mode: integrative
+    card_type: architecture_selection
+    difficulty: advanced
+    front:
+      es: ¿Cuándo es apropiada una arquitectura híbrida relacional+grafo?
+      en: When is a relational-plus-graph hybrid appropriate?
+      da: Hvornår er en relationel+graf-hybrid passende?
+    back:
+      es: >-
+        Cuando se necesita una fuente transaccional con restricciones fuertes y también consultas frecuentes de vecindad o caminos.
+        La base relacional conserva identidad y procedencia; el grafo es una proyección versionada y reconstruible. Deben medirse beneficio,
+        latencia de sincronización, consistencia y coste operativo.
+      en: >-
+        When a constrained transactional source and frequent neighborhood/path queries are both needed. The relational database preserves identity
+        and provenance; the graph is a versioned rebuildable projection. Measure benefit, synchronization lag, consistency, and operational cost.
+      da: >-
+        Når både en stærkt valideret transaktionel kilde og hyppige traversalqueries kræves. Grafen bør være en versioneret, genopbyggelig projektion.
+    linked_objectives: [m03.o4, m03.o6, m03.o7]
+    tags: [hybrid_architecture, graph_projection, source_of_truth]
+
+  - id: dm847.m03.f14
+    mode: conceptual
+    card_type: temporal_modeling
+    difficulty: intermediate
+    front:
+      es: Distingue tiempo válido y tiempo de transacción.
+      en: Distinguish valid time and transaction time.
+      da: Skeln mellem valid time og transaction time.
+    back:
+      es: >-
+        Tiempo válido indica cuándo el hecho se considera verdadero en el dominio. Tiempo de transacción indica cuándo el registro estuvo almacenado
+        en la base. Una anotación puede ser válida desde una fecha biológica o de liberación, pero cargarse después y corregirse posteriormente.
+      en: >-
+        Valid time states when a fact is considered true in the domain. Transaction time states when the record existed in the database.
+        An annotation may be valid from a biological or release date but ingested later and corrected afterward.
+      da: >-
+        Valid time angiver hvornår et fakta er sandt i domænet; transaction time angiver hvornår posten eksisterede i databasen.
+    linked_objectives: [m03.o6]
+    tags: [valid_time, transaction_time, history]
+
+  - id: dm847.m03.f15
+    mode: practical
+    card_type: history_design
+    difficulty: advanced
+    front:
+      es: ¿Cómo conservarías una anotación que cambia de candidata a validada y luego se depreca?
+      en: How would you preserve an annotation changing from candidate to validated and then deprecated?
+      da: Hvordan bevarer du en annotation der ændres fra kandidat til valideret og derefter deprecieres?
+    back:
+      es: >-
+        Crear versiones o filas históricas inmutables con estado controlado, `valid_from/valid_to`, versión de fuente, evidencia y procedencia de cada transición.
+        La deprecación debe registrar reemplazo o razón. Las consultas deben reconstruir el estado en una fecha o liberación elegida.
+      en: >-
+        Create immutable versions or history rows with controlled status, `valid_from/valid_to`, source version, evidence, and provenance for each transition.
+        Deprecation records replacement or reason. Queries can reconstruct state at a chosen date or release.
+      da: >-
+        Opret uforanderlige versioner/historikrækker med status, `valid_from/valid_to`, kildeversion, evidens og proveniens; gem deprecationsårsag eller erstatning.
+    linked_objectives: [m03.o6, m03.o8]
+    tags: [versioning, deprecation, temporal_database]
+
+  - id: dm847.m03.f16
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué es un índice de base de datos?
+      en: What is a database index?
+      da: Hvad er et databaseindeks?
+    back:
+      es: >-
+        Una estructura derivada que acelera ciertos filtros, joins u ordenamientos a costa de almacenamiento, mantenimiento y escrituras más costosas.
+        No es la fuente de verdad y debe poder reconstruirse desde datos validados.
+      en: >-
+        A derived structure accelerating selected filters, joins, or ordering at the cost of storage, maintenance, and slower writes.
+        It is not the source of truth and should be rebuildable from validated data.
+      da: >-
+        En afledt struktur der accelererer udvalgte filtre, joins eller sortering mod lagrings- og vedligeholdelsesomkostning.
+    linked_objectives: [m03.o7]
+    tags: [index, performance, derived_structure]
+
+  - id: dm847.m03.f17
+    mode: practical
+    card_type: index_selection
+    difficulty: intermediate
+    front:
+      es: ¿Cómo decides si crear un índice compuesto `(sample_id, gene_id)`?
+      en: How do you decide whether to create a composite `(sample_id, gene_id)` index?
+      da: Hvordan beslutter du om et sammensat `(sample_id, gene_id)`-indeks skal oprettes?
+    back:
+      es: >-
+        Examinar consultas reales: filtros por muestra, joins y búsquedas de gen dentro de muestra; revisar selectividad, orden de columnas y plan de ejecución;
+        medir lectura y coste de escritura con volúmenes representativos. Si las consultas filtran principalmente por gen, el orden puede requerir otro índice.
+      en: >-
+        Inspect real queries: sample filters, joins, and gene-within-sample lookup; examine selectivity, column order, and execution plan;
+        measure read benefit and write cost at representative volume. Gene-first queries may require a different order or index.
+      da: >-
+        Undersøg reelle queries, selektivitet, kolonnerækkefølge og eksekveringsplan; mål read-fordel og write-omkostning på repræsentativ volumen.
+    linked_objectives: [m03.o7]
+    tags: [composite_index, query_plan, benchmarking]
+
+  - id: dm847.m03.f18
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: intermediate
+    front:
+      es: Corrige: «Más índices siempre mejora el rendimiento».
+      en: Correct: “More indexes always improve performance.”
+      da: Ret: “Flere indeks forbedrer altid performance.”
+    back:
+      es: >-
+        Cada índice consume almacenamiento y debe actualizarse en inserciones, cambios y borrados. Índices redundantes pueden empeorar escrituras
+        y confundir al optimizador. Deben responder a patrones medidos, revisarse con planes de ejecución y eliminarse si no aportan beneficio.
+      en: >-
+        Every index consumes storage and must be updated on insert, update, and delete. Redundant indexes may harm writes and optimizer choices.
+        Indexes should answer measured patterns, be reviewed through execution plans, and be removed when not useful.
+      da: >-
+        Hvert indeks bruger lagring og opdateres ved writes. Redundante indeks kan skade performance og bør begrundes med målte queries.
+    linked_objectives: [m03.o7]
+    tags: [index, misconception, performance]
+
+  - id: dm847.m03.f19
+    mode: conceptual
+    card_type: data_quality
+    difficulty: intermediate
+    front:
+      es: ¿Qué dimensiones mínimas componen calidad de datos?
+      en: Which minimum dimensions constitute data quality?
+      da: Hvilke minimumsdimensioner udgør datakvalitet?
+    back:
+      es: >-
+        Validez, completitud, consistencia, unicidad, actualidad y adecuación al uso. También pueden incluir exactitud, trazabilidad y representatividad.
+        Una tabla puede ser completa pero incorrecta, o válida sintácticamente pero inadecuada para una pregunta concreta.
+      en: >-
+        Validity, completeness, consistency, uniqueness, timeliness, and fitness for use; accuracy, traceability, and representativeness may also matter.
+        A table may be complete but wrong, or syntactically valid yet unsuitable for a question.
+      da: >-
+        Validitet, komplethed, konsistens, entydighed, aktualitet og fitness-for-use; også nøjagtighed, sporbarhed og repræsentativitet kan være relevante.
+    linked_objectives: [m03.o8]
+    tags: [data_quality, validation, fitness_for_use]
+
+  - id: dm847.m03.f20
+    mode: practical
+    card_type: ingestion_validation
+    difficulty: advanced
+    front:
+      es: Diseña cinco validaciones de ingesta para mediciones ómicas.
+      en: Design five ingestion validations for omics measurements.
+      da: Design fem ingestionvalideringer for omicsmålinger.
+    back:
+      es: >-
+        Resolver muestra y feature en namespaces/versiones esperados; verificar valor numérico finito; declarar unidad o escala;
+        distinguir cero de ausente; aplicar política de duplicados; exigir ensayo y procedencia; validar rangos y categorías;
+        cuarentenar filas fallidas con motivo en vez de descartarlas silenciosamente.
+      en: >-
+        Resolve sample and feature in expected namespaces/versions; verify finite numeric value; require unit or scale;
+        distinguish zero from missing; enforce duplicate policy; require assay and provenance; validate ranges and categories;
+        quarantine failed rows with reasons rather than silently dropping them.
+      da: >-
+        Resolve prøve og feature i forventede namespaces/versioner; verificér numerisk værdi; kræv enhed/skala; skeln nul fra missing;
+        håndhæv dubletpolitik og proveniens; quarantine fejl med årsag.
+    linked_objectives: [m03.o2, m03.o8]
+    tags: [ingestion, validation, omics]
+
+  - id: dm847.m03.f21
+    mode: integrative
+    card_type: scenario_analysis
+    difficulty: advanced
+    front:
+      es: ¿Por qué una interacción debe modelarse como observación y no sólo como arista A—B?
+      en: Why should an interaction be modeled as an observation rather than only an A—B edge?
+      da: Hvorfor bør en interaktion modelleres som en observation og ikke kun en A—B-kant?
+    back:
+      es: >-
+        Porque diferentes métodos, especies, tejidos, condiciones y publicaciones pueden producir observaciones incompatibles o complementarias.
+        La observación necesita identidad, evidencia y procedencia. Una arista consolidada puede derivarse después mediante reglas explícitas y mantener enlaces a sus observaciones.
+      en: >-
+        Different methods, species, tissues, conditions, and publications may yield incompatible or complementary observations.
+        The observation needs identity, evidence, and provenance. A consolidated edge can later be derived by explicit rules and link back to observations.
+      da: >-
+        Forskellige metoder, arter, væv og betingelser kan give forskellige observationer. Observationen kræver identitet, evidens og proveniens;
+        en konsolideret kant kan afledes senere.
+    linked_objectives: [m03.o5, m03.o6]
+    tags: [interaction, observation, provenance]
+
+  - id: dm847.m03.f22
+    mode: integrative
+    card_type: oral_defense
+    difficulty: advanced
+    front:
+      es: Responde en 45 segundos: «¿Por qué una base flexible sigue necesitando esquema?»
+      en: Answer in 45 seconds: “Why does a flexible database still need a schema?”
+      da: Svar på 45 sekunder: “Hvorfor kræver en fleksibel database stadig et skema?”
+    back:
+      es: >-
+        Porque flexibilidad de almacenamiento no define significado. Se necesitan tipos de entidad y relación, cardinalidades, identificadores,
+        unidades, versiones, restricciones y procedencia para validar e interpretar. Sin contrato, dos equipos pueden crear aristas o propiedades
+        homónimas con significados incompatibles y obtener consultas aparentemente correctas pero científicamente falsas.
+      en: >-
+        Storage flexibility does not define meaning. Entity and relation types, cardinalities, identifiers, units, versions, constraints,
+        and provenance are required for validation and interpretation. Without a contract, teams may create identically named but incompatible
+        properties and obtain technically correct yet scientifically false queries.
+      da: >-
+        Lagringsfleksibilitet definerer ikke betydning. Typer, kardinaliteter, ID'er, enheder, versioner, restriktioner og proveniens kræves.
+    linked_objectives: [m03.o4, m03.o8]
+    tags: [schema, graph, oral_exam]
+
+  - id: dm847.m03.f23
+    mode: integrative
+    card_type: risk_prioritization
+    difficulty: advanced
+    front:
+      es: Prioriza: símbolos como claves, datos humanos sin control, listas en celdas y anotaciones sobrescritas.
+      en: Prioritize: symbols as keys, uncontrolled human data, lists in cells, and overwritten annotations.
+      da: Prioritér: symboler som nøgler, ukontrollerede menneskedata, lister i celler og overskrevne annotationer.
+    back:
+      es: >-
+        Primero restringir y auditar datos humanos por riesgo ético y legal. Después detener sobrescritura para no perder más historia.
+        Introducir IDs estables y migrar claves con validación. Normalizar listas en entidades asociativas. Cada cambio requiere backup,
+        pruebas de reconciliación, medición de impacto y comunicación de ruptura.
+      en: >-
+        First restrict and audit human data due to ethical and legal risk. Then stop overwriting to prevent further history loss.
+        Introduce stable IDs and migrate keys with validation. Normalize lists into associative entities. Each change needs backup,
+        reconciliation tests, impact measurement, and breaking-change communication.
+      da: >-
+        Begræns og auditér først menneskedata. Stop derefter overskrivning. Indfør stabile ID'er med valideret migration og normalisér lister.
+    linked_objectives: [m03.o2, m03.o3, m03.o6, m03.o8]
+    tags: [risk, governance, migration]
+
+  - id: dm847.m03.f24
+    mode: integrative
+    card_type: transfer
+    difficulty: advanced
+    front:
+      es: ¿Cómo conecta este módulo con análisis de secuencias y redes posteriores?
+      en: How does this module connect to later sequence and network analysis?
+      da: Hvordan forbinder dette modul til senere sekvens- og netværksanalyse?
+    back:
+      es: >-
+        Proporciona identidades versionadas, esquemas de relaciones, evidencia y procedencia para almacenar secuencias, alineamientos,
+        HMM, motivos, lecturas, interacciones y rutas. También define cuándo usar tablas, índices o grafos. Sin esta capa, algoritmos correctos
+        pueden combinar entidades equivocadas o perder el contexto necesario para interpretar resultados.
+      en: >-
+        It supplies versioned identities, relation schemas, evidence, and provenance for sequences, alignments, HMMs, motifs, reads,
+        interactions, and pathways. It also defines when to use tables, indexes, or graphs. Without this layer, correct algorithms may combine
+        wrong entities or lose interpretive context.
+      da: >-
+        Modulet giver versionsidentiteter, relationsskemaer, evidens og proveniens til sekvenser, alignments, HMM, motifs, reads og netværk.
+    linked_objectives: [m03.o1, m03.o4, m03.o6]
+    tags: [transfer, sequence_analysis, networks]
