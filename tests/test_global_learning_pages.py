@@ -4,7 +4,7 @@ import random
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
-from PySide6.QtWidgets import QLabel
+from PySide6.QtWidgets import QLabel, QPushButton
 
 from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.academic_catalog import AcademicCatalog
@@ -150,7 +150,7 @@ def test_review_page_filters_due_queue_and_reschedules_selected_item(
         ReviewSchedule(
             course_code="DM857",
             module_id="dm857.m01",
-            item_id="m01.p01",
+            item_id="dm857.m01.p01",
             item_kind=LearningItemKind.PRACTICE,
             mastery_state=MasteryState.LEARNING,
             repetitions=0,
@@ -165,10 +165,13 @@ def test_review_page_filters_due_queue_and_reschedules_selected_item(
     )
     qtbot.addWidget(page)
 
-    assert tuple(item.item_id for item in page.queue) == ("m01.p01",)
+    assert tuple(item.item_id for item in page.queue) == ("dm857.m01.p01",)
     today = page.findChild(QLabel, "reviewReasons_today")
     assert today is not None
-    assert "m01.p01" in today.text()
+    assert "dm857.m01.p01" not in today.text()
+    assert "Traza" in today.text()
+    page.findChild(QPushButton, "revealReferenceButton").click()
+    page.findChild(QPushButton, "selfAssess_solved").click()
     page.rate_selected(ReviewRating.GOOD)
     assert page.queue == ()
     assert page.findChild(QLabel, "reviewEmptyState") is not None

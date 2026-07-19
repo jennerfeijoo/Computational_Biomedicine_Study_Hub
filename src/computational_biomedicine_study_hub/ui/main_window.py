@@ -170,20 +170,25 @@ class MainWindow(QMainWindow):
             self._progress,
             locale=locale,
         )
+        review_page = ReviewPage(
+            catalog,
+            self._progress,
+            locale=locale,
+        )
         study_lab_page = StudyLabPage(
             catalog,
             self._settings,
         )
         study_lab_page.settings_requested.connect(lambda: self.navigate(RouteId.SETTINGS))
         assessments_page.open_feedback_requested.connect(self._open_feedback_lab)
+        review_page.module_requested.connect(self._open_catalog_module)
+        review_page.assessments_requested.connect(self._open_module_assessments)
+        review_page.flashcards_requested.connect(self._open_module_flashcards)
+        review_page.open_feedback_requested.connect(self._open_feedback_lab)
 
         pages: dict[str, QWidget] = {
             RouteId.HOME.value: home_page,
-            RouteId.REVIEW.value: ReviewPage(
-                catalog,
-                self._progress,
-                locale=locale,
-            ),
+            RouteId.REVIEW.value: review_page,
             RouteId.ASSESSMENTS.value: assessments_page,
             RouteId.FLASHCARDS.value: flashcards_page,
             RouteId.GLOSSARY.value: glossary_page,

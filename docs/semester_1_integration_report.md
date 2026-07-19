@@ -382,6 +382,50 @@ tarjeta extensa a 18 px con scroll, tarjeta de código, anverso/reverso, BMB830 
 documento, modelo ausente, timeout real y generación real completada. También se
 verificaron estados ES/EN/DA mediante widgets y clientes falsos deterministas.
 
+## Review page learner-facing refinement
+
+Repaso conserva `ReviewSchedule`, SQLite, el algoritmo de repetición espaciada,
+`AcademicCatalog` y todos los IDs persistidos. La nueva capa
+`ReviewPresentationResolver` construye en memoria un `ReviewItemPresentation` para
+cada identidad vencida. Resuelve el nombre completo localizado de la asignatura, el
+título del módulo y, según el tipo, el anverso de la tarjeta, término y definición,
+prompt de evaluación o prompt y solución de práctica. Ningún texto localizado se
+persiste. Los IDs permanecen exclusivamente en `Qt.UserRole`, tooltips diagnósticos,
+señales de navegación y llamadas al repositorio.
+
+Una identidad que no existe en el catálogo produce un warning con curso, módulo, tipo
+e ID, pero la fila y el panel muestran «Contenido no disponible». La referencia
+huérfana permanece auditable en SQLite, no rompe la página y nunca habilita botones de
+valoración.
+
+El flujo distingue selección de estudio: seleccionar sólo abre el panel y mantiene
+«Otra vez», «Difícil», «Bien» y «Fácil» deshabilitados. Tarjetas y conceptos requieren
+mostrar primero reverso o explicación. Evaluaciones y prácticas reutilizan
+`ActivityRendererRegistry`; una entrega objetiva se corrige por IDs de opción y se
+registra como `AttemptRecord` antes de habilitar la valoración. Las respuestas
+abiertas revelan referencia y autoevaluación, y pueden enviar el texto a Study Lab.
+Después de valorar se conserva el mismo scheduling, se reconstruyen cola, resúmenes,
+dominio e historial y se selecciona el siguiente elemento vencido.
+
+El dominio se etiqueta por su ámbito real: módulo, asignatura o semestre. Si no hay
+intentos se muestra explícitamente que todavía no existe evidencia suficiente; el
+progreso por asignatura usa «Sin intentos» y nunca presenta `0 % en 0 intentos` como
+medición. Historial y tarjetas de resumen resuelven títulos humanos, fechas locales y
+resultados traducidos.
+
+El filtro adopta la alternativa sin ambigüedad: «Mezclar asignaturas» deshabilita
+curso y módulo y usa las cuatro asignaturas; al desactivarlo ambos selectores vuelven a
+estar disponibles y el selector de módulos depende del curso. El filtro de tipo está
+localizado. «Añadir conceptos nuevos» respeta curso, módulo y tipo activos y omite toda
+identidad que ya tenga programación.
+
+Las regresiones nuevas cubren los cuatro tipos de elemento, ausencia de IDs en texto
+learner-facing, referencias huérfanas, bloqueo previo de valoración, registro de
+intentos objetivos, reprogramación y retirada de vencidos, estados vacíos sin guiones,
+dominio sin evidencia, coherencia del filtro mixto, conservación de la cola por IDs al
+cambiar ES/EN/DK, traducción completa de tipos/resultados e historial con títulos
+humanos.
+
 ## Pruebas y comandos
 
 Se añadieron pruebas de:
@@ -402,8 +446,8 @@ Validación final:
 ```text
 ruff check .             → correcto
 ruff format --check .    → correcto
-mypy src                 → correcto (106 archivos fuente)
-pytest -q                → 268 passed
+mypy src                 → correcto (107 archivos fuente)
+pytest -q                → 280 passed
 git diff --check         → correcto
 pip wheel . --no-deps    → rueda creada; 119 YAML incluidos
 ```
