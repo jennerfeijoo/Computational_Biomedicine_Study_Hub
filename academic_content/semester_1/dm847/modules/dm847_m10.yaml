@@ -1,0 +1,329 @@
+schema_version: 1.0.0
+course_code: DM847
+module_id: dm847.m10
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title:
+    es: Descubrimiento de motivos de novo con entropía, mezclas y EM
+    en: De novo motif discovery with entropy, mixture models, and EM
+    da: De novo motivsøgning med entropi, blandingsmodeller og EM
+  summary:
+    es: >-
+      Representación de motivos mediante matrices de conteo, frecuencia y peso; información
+      y entropía; modelos de fondo; formulaciones OOPS, ZOOPS y TCM; estimación mediante EM;
+      inicialización, pseudoconteos, selección de ancho, búsqueda en ambas hebras, enriquecimiento,
+      validación y límites de atribuir función reguladora a patrones estadísticos.
+    en: >-
+      Motif representation through count, frequency, and weight matrices; information and entropy;
+      background models; OOPS, ZOOPS, and TCM formulations; EM estimation; initialization,
+      pseudocounts, width selection, both-strand search, enrichment, validation, and limits of
+      assigning regulatory function to statistical patterns.
+    da: >-
+      Motivrepræsentation med tælle-, frekvens- og vægtmatricer; information og entropi;
+      baggrundsmodeller; OOPS-, ZOOPS- og TCM-formuleringer; EM-estimering; initialisering,
+      pseudotællinger, motivbredde, begge strenge, berigelse og validering.
+  estimated_study_hours: 12
+  difficulty: advanced
+
+alignment:
+  official_learning_outcomes: [dm847.lo08]
+  prerequisite_modules: [dm847.m04, dm847.m06, bmb830.m05]
+  later_modules: [dm847.m11, dm847.m13, dm847.m15]
+
+objectives:
+  - {id: dm847.m10.o01, text: {es: Construir matrices de conteo, frecuencia, consenso y PWM, en: Build count, frequency, consensus, and PWM representations, da: Bygge tælle-, frekvens-, konsensus- og PWM-repræsentationer}}
+  - {id: dm847.m10.o02, text: {es: Calcular entropía e información por posición frente a un fondo explícito, en: Compute positional entropy and information against an explicit background, da: Beregne positionsentropi og information mod en eksplicit baggrund}}
+  - {id: dm847.m10.o03, text: {es: Distinguir OOPS, ZOOPS y TCM según el proceso generativo asumido, en: Distinguish OOPS, ZOOPS, and TCM by their generative assumptions, da: Skelne OOPS, ZOOPS og TCM efter generative antagelser}}
+  - {id: dm847.m10.o04, text: {es: Derivar responsabilidades y actualizaciones EM para posiciones de motivo, en: Derive EM responsibilities and updates for motif positions, da: Udlede EM-responsibilities og opdateringer for motivpositioner}}
+  - {id: dm847.m10.o05, text: {es: Aplicar pseudoconteos y espacio logarítmico para estabilidad, en: Apply pseudocounts and log-space computation for stability, da: Anvende pseudotællinger og log-rum for stabilitet}}
+  - {id: dm847.m10.o06, text: {es: Seleccionar ancho, fondo e inicialización mediante validación y sensibilidad, en: Select width, background, and initialization through validation and sensitivity analysis, da: Vælge bredde, baggrund og initialisering via validering og følsomhedsanalyse}}
+  - {id: dm847.m10.o07, text: {es: Evaluar motivos con datos simulados, hold-out, enriquecimiento y comparación externa, en: Evaluate motifs with simulation, hold-out data, enrichment, and external comparison, da: Evaluere motiver med simulering, hold-out, berigelse og ekstern sammenligning}}
+  - {id: dm847.m10.o08, text: {es: Comunicar incertidumbre y evitar inferencias regulatorias no sustentadas, en: Communicate uncertainty and avoid unsupported regulatory inference, da: Kommunikere usikkerhed og undgå uunderbyggede regulatoriske slutninger}}
+
+concepts:
+  - id: dm847.m10.c01
+    title: {es: Motivos y alineamiento de sitios, en: Motifs and site alignment, da: Motiver og alignment af sites}
+    body:
+      es: >-
+        Un motivo es una distribución de preferencias de símbolos en posiciones alineadas, no una
+        cadena exacta. Dado un conjunto de sitios de ancho w, una matriz de conteo resume cuántas
+        veces aparece cada símbolo por columna y una matriz de frecuencia normaliza esos conteos.
+        El consenso conserva sólo el símbolo modal y pierde degeneración e incertidumbre.
+      en: >-
+        A motif is a distribution of symbol preferences across aligned positions, not an exact
+        string. For width-w sites, a count matrix records each symbol per column and a frequency
+        matrix normalizes those counts. A consensus retains only the modal symbol and discards
+        degeneracy and uncertainty.
+      da: >-
+        Et motiv er en fordeling af symbolpræferencer over alignede positioner, ikke en eksakt
+        streng. En tælle- og frekvensmatrix bevarer mere information end en konsensusstreng.
+    key_points:
+      - {es: La alineación de sitios determina la matriz, en: Site alignment determines the matrix, da: Alignment af sites bestemmer matricen}
+      - {es: El consenso no representa toda la variabilidad, en: Consensus does not represent all variability, da: Konsensus repræsenterer ikke al variation}
+  - id: dm847.m10.c02
+    title: {es: PWM y razón de verosimilitudes, en: PWM and likelihood ratios, da: PWM og likelihood-ratioer}
+    body:
+      es: >-
+        Una PWM suele almacenar log2(p_motivo(b,j)/p_fondo(b)). Sumar pesos a lo largo de una
+        ventana produce un log-likelihood ratio entre modelo de motivo y fondo, si se asume
+        independencia posicional. Los ceros causan pesos infinitos y se regularizan con pseudoconteos.
+        El fondo puede ser uniforme, de composición empírica o Markoviano; la elección modifica scores.
+      en: >-
+        A PWM commonly stores log2(p_motif(b,j)/p_background(b)). Summing weights across a window
+        yields a motif-versus-background log-likelihood ratio under positional independence. Zeros
+        create infinite weights and require pseudocounts. Uniform, empirical, or Markov backgrounds
+        produce different scores.
+      da: >-
+        En PWM gemmer ofte log2-forholdet mellem motiv- og baggrundssandsynlighed. Pseudotællinger
+        undgår uendelige vægte, og baggrundsvalget ændrer scores.
+    key_points:
+      - {es: Un score depende tanto del motivo como del fondo, en: A score depends on motif and background, da: En score afhænger af både motiv og baggrund}
+  - id: dm847.m10.c03
+    title: {es: Entropía e información, en: Entropy and information, da: Entropi og information}
+    body:
+      es: >-
+        La entropía de una columna mide dispersión de probabilidades; es baja cuando domina un
+        símbolo y alta cuando la distribución es uniforme. La información relativa al fondo se
+        expresa como divergencia KL y puede diferir de 2-H cuando el fondo de ADN no es uniforme.
+        Con muestras pequeñas, estimaciones de información están sesgadas y requieren regularización
+        o corrección; un logo visual no sustituye cuantificación.
+      en: >-
+        Column entropy measures probability dispersion; it is low for a dominant symbol and high
+        near uniformity. Information relative to background is a KL divergence and differs from
+        2-H when DNA background is non-uniform. Small samples bias information estimates and need
+        regularization or correction; a logo is not a substitute for quantification.
+      da: >-
+        Kolonneentropi måler spredning. Information relativt til baggrund er KL-divergens og er ikke
+        nødvendigvis 2-H ved ikke-uniform baggrund. Små samples giver bias.
+    key_points:
+      - {es: Conservación e información dependen del fondo, en: Conservation and information depend on background, da: Konservering og information afhænger af baggrunden}
+  - id: dm847.m10.c04
+    title: {es: OOPS, ZOOPS y TCM, en: OOPS, ZOOPS, and TCM, da: OOPS, ZOOPS og TCM}
+    body:
+      es: >-
+        OOPS supone exactamente una ocurrencia por secuencia; ZOOPS permite cero o una; TCM permite
+        múltiples ocurrencias con una tasa. Elegir un modelo incompatible fuerza sitios espurios o
+        pierde múltiples sitios reales. También debe definirse si las posiciones son equiprobables,
+        si ambas hebras se consideran y si existen regiones enmascaradas.
+      en: >-
+        OOPS assumes exactly one occurrence per sequence; ZOOPS allows zero or one; TCM allows
+        multiple occurrences according to a rate. A mismatched model forces spurious sites or misses
+        real multiple sites. Position priors, both strands, and masked regions must also be defined.
+      da: >-
+        OOPS antager præcis én forekomst pr. sekvens, ZOOPS nul eller én, og TCM flere. Forkert
+        model kan tvinge falske sites eller overse reelle forekomster.
+    key_points:
+      - {es: El modelo de ocurrencia es una hipótesis biológica, en: The occurrence model is a biological hypothesis, da: Forekomstmodellen er en biologisk hypotese}
+  - id: dm847.m10.c05
+    title: {es: Modelo de mezcla y variables latentes, en: Mixture model and latent variables, da: Blandingsmodel og latente variable}
+    body:
+      es: >-
+        La posición del sitio y, en ZOOPS, la presencia del sitio son variables latentes. Para cada
+        posición candidata se compara la probabilidad de la secuencia bajo una ventana de motivo y
+        fondo alrededor. La probabilidad posterior de cada candidato combina score, prior de posición
+        y probabilidad de no sitio. Estas responsabilidades deben normalizarse por secuencia.
+      en: >-
+        Site position and, in ZOOPS, site presence are latent variables. Each candidate position is
+        evaluated under a motif window plus surrounding background. Candidate posterior probability
+        combines score, position prior, and no-site probability. Responsibilities normalize per sequence.
+      da: >-
+        Site-position og eventuel tilstedeværelse er latente variable. Kandidaters posterior kombinerer
+        motivscore, positionsprior og mulighed for intet site og normaliseres pr. sekvens.
+    key_points:
+      - {es: Responsabilidad no es una etiqueta observada, en: Responsibility is not an observed label, da: Responsibility er ikke et observeret label}
+  - id: dm847.m10.c06
+    title: {es: EM para motivos, en: EM for motifs, da: EM for motiver}
+    body:
+      es: >-
+        En la fase E se calculan responsabilidades de posiciones y orientaciones dadas la PWM y el
+        fondo actuales. En la fase M se actualizan conteos esperados, PWM y parámetros de ocurrencia.
+        La verosimilitud no disminuye, pero EM puede converger a óptimos locales, motivos de baja
+        complejidad o patrones del fondo. Se requieren múltiples inicializaciones y diagnósticos.
+      en: >-
+        The E-step computes responsibilities over positions and orientations given current motif and
+        background. The M-step updates expected counts, PWM, and occurrence parameters. Likelihood
+        does not decrease, but EM may reach local optima, low-complexity motifs, or background patterns.
+        Multiple starts and diagnostics are required.
+      da: >-
+        E-trinnet beregner responsibilities over positioner og orienteringer; M-trinnet opdaterer
+        forventede tællinger og PWM. EM kan ende i lokale optima eller lav-kompleksitetsmotiver.
+    key_points:
+      - {es: Mayor verosimilitud no garantiza mayor relevancia biológica, en: Higher likelihood does not guarantee greater biological relevance, da: Højere likelihood garanterer ikke større biologisk relevans}
+  - id: dm847.m10.c07
+    title: {es: Ancho, inicialización y estabilidad, en: Width, initialization, and stability, da: Bredde, initialisering og stabilitet}
+    body:
+      es: >-
+        El ancho puede fijarse por conocimiento previo o compararse mediante datos no usados y
+        criterios penalizados. Anchos grandes pueden absorber flancos; pequeños fragmentan el núcleo.
+        Las inicializaciones pueden provenir de k-mers enriquecidos, sitios aleatorios o perturbaciones
+        de soluciones previas. Los cálculos deben usar log-sum-exp y pseudoconteos documentados.
+      en: >-
+        Width may be fixed from prior knowledge or compared with held-out data and penalized criteria.
+        Wide motifs absorb flanks; narrow motifs fragment a core. Initializations may use enriched
+        k-mers, random sites, or perturbations. Computation requires log-sum-exp and documented pseudocounts.
+      da: >-
+        Motivbredde kan vælges med forhåndsviden eller hold-out-data. Brede motiver kan absorbere
+        flanker; smalle kan splitte kernen. Brug flere initialiseringer og log-sum-exp.
+    key_points:
+      - {es: Comparar anchos con los mismos datos de prueba produce optimismo, en: Comparing widths on test data is optimistic, da: Sammenligning af bredder på testdata er optimistisk}
+  - id: dm847.m10.c08
+    title: {es: Validación e interpretación biológica, en: Validation and biological interpretation, da: Validering og biologisk fortolkning}
+    body:
+      es: >-
+        La recuperación de sitios simulados comprueba el algoritmo. Datos hold-out evalúan
+        generalización. Enriquecimiento frente a secuencias de control debe preservar composición,
+        longitud y sesgos de muestreo. Comparación con motivos conocidos, accesibilidad, conservación
+        o ensayos de unión aporta evidencia externa. Un motivo enriquecido es una asociación
+        estadística; no demuestra causalidad ni unión de un factor concreto.
+      en: >-
+        Recovery of simulated sites checks the algorithm. Held-out data assess generalization.
+        Enrichment controls should preserve composition, length, and sampling biases. Comparison
+        with known motifs, accessibility, conservation, or binding assays adds external evidence.
+        An enriched motif is a statistical association, not proof of causality or specific-factor binding.
+      da: >-
+        Simulerede sites tester algoritmen; hold-out-data tester generalisering. Kontrolsekvenser
+        bør matche sammensætning og længde. Et beriget motiv beviser ikke kausalitet eller specifik binding.
+    key_points:
+      - {es: La validación computacional y funcional son capas distintas, en: Computational and functional validation are distinct layers, da: Beregningsmæssig og funktionel validering er forskellige lag}
+
+worked_examples:
+  - id: dm847.m10.e01
+    title: {es: De sitios alineados a PWM, en: From aligned sites to a PWM, da: Fra alignede sites til PWM}
+    scenario: {es: Se proporcionan ocho sitios de ADN de ancho seis y un fondo con GC=0.6., en: Eight width-six DNA sites and a GC=0.6 background are provided., da: Otte DNA-sites med bredde seks og GC-baggrund 0,6 gives.}
+    solution_outline:
+      es: >-
+        Contar A,C,G,T por columna, añadir pseudoconteos proporcionales al fondo, normalizar y calcular
+        log2(p_motivo/p_fondo). Comparar con PWM construida bajo fondo uniforme y explicar cambios de score.
+      en: >-
+        Count A,C,G,T per column, add background-proportional pseudocounts, normalize, and compute
+        log2(p_motif/p_background). Compare with a uniform-background PWM and explain score changes.
+      da: >-
+        Tæl symboler, tilføj baggrundsproportionale pseudotællinger, normalisér og beregn log-ratioer.
+    validation: [columns_normalized, no_infinite_weights, background_effect_explained]
+  - id: dm847.m10.e02
+    title: {es: Una iteración EM en OOPS, en: One EM iteration under OOPS, da: Én EM-iteration under OOPS}
+    scenario: {es: Tres secuencias cortas contienen exactamente un sitio de ancho cuatro., en: Three short sequences contain exactly one width-four site., da: Tre korte sekvenser indeholder præcis ét site med bredde fire.}
+    solution_outline:
+      es: >-
+        Calcular log-score para cada posición y hebra, normalizar por secuencia con log-sum-exp,
+        acumular conteos ponderados por responsabilidades y actualizar la PWM. Confirmar que cada
+        secuencia suma responsabilidad uno y que la verosimilitud no disminuye.
+      en: >-
+        Compute log scores for each position and strand, normalize within sequence using log-sum-exp,
+        accumulate responsibility-weighted counts, and update the PWM. Confirm responsibilities sum
+        to one per sequence and likelihood does not decrease.
+      da: >-
+        Beregn log-scores, normalisér pr. sekvens, akkumuler vægtede tællinger og opdatér PWM.
+    validation: [responsibilities_sum_one, pwm_columns_sum_one, likelihood_non_decrease]
+  - id: dm847.m10.e03
+    title: {es: Control de enriquecimiento emparejado, en: Matched enrichment control, da: Matchet berigelseskontrol}
+    scenario: {es: Promotores positivos tienen GC mayor y longitud distinta que controles., en: Positive promoters have higher GC and different length than controls., da: Positive promotorer har højere GC og anden længde end kontroller.}
+    solution_outline:
+      es: >-
+        Mostrar que controles ingenuos confunden composición con motivo. Construir controles emparejados
+        por longitud y GC o usar un modelo de fondo condicionado. Repetir enriquecimiento y reportar
+        cambio en efecto, incertidumbre y sensibilidad a la estrategia de control.
+      en: >-
+        Show that naive controls confound composition with motif signal. Match controls by length and
+        GC or use a conditional background model. Repeat enrichment and report effect changes and uncertainty.
+      da: >-
+        Vis at naive kontroller blander sammensætning og motivsignal. Match efter længde og GC og gentag analysen.
+    validation: [matched_controls, effect_size_and_interval, sensitivity_reported]
+
+practice_exercises:
+  - {id: dm847.m10.p01, activity_type: calculation, difficulty: foundational, prompt: {es: Calcula entropía e información de cuatro columnas con fondo uniforme., en: Compute entropy and information for four columns under uniform background., da: Beregn entropi og information for fire kolonner med uniform baggrund.}, expected_elements: [normalized_probabilities, entropy, information, interpretation]}
+  - {id: dm847.m10.p02, activity_type: data_interpretation, difficulty: intermediate, prompt: {es: Compara consenso, logo y PWM del mismo motivo., en: Compare consensus, logo, and PWM for the same motif., da: Sammenlign konsensus, logo og PWM for samme motiv.}, expected_elements: [information_loss, degeneracy, background_dependence]}
+  - {id: dm847.m10.p03, activity_type: model_selection, difficulty: intermediate, prompt: {es: Elige entre OOPS, ZOOPS y TCM para tres escenarios experimentales., en: Choose among OOPS, ZOOPS, and TCM for three experiments., da: Vælg mellem OOPS, ZOOPS og TCM for tre eksperimenter.}, expected_elements: [occurrence_assumption, no_site_option, multiple_sites]}
+  - {id: dm847.m10.p04, activity_type: code_tracing, difficulty: advanced, prompt: {es: Traza responsabilidades de una secuencia con tres posiciones candidatas., en: Trace responsibilities for a sequence with three candidate positions., da: Gennemgå responsibilities for en sekvens med tre kandidater.}, expected_elements: [log_scores, normalization, posterior_sum_one]}
+  - {id: dm847.m10.p05, activity_type: debugging, difficulty: advanced, prompt: {es: Corrige EM que produce NaN tras una columna sin A observada., en: Fix EM producing NaN after a column with no observed A., da: Ret EM der giver NaN efter en kolonne uden observeret A.}, expected_elements: [pseudocounts, log_zero_handling, normalization_check]}
+  - {id: dm847.m10.p06, activity_type: oral_explanation, difficulty: advanced, prompt: {es: Defiende por qué un motivo enriquecido no identifica automáticamente un factor de transcripción., en: Defend why an enriched motif does not automatically identify a transcription factor., da: Forsvar hvorfor et beriget motiv ikke automatisk identificerer en transkriptionsfaktor.}, expected_elements: [motif_similarity, indirect_association, accessibility, experimental_validation]}
+
+objective_bank:
+  - {id: dm847.m10.q01, type: multiple_choice, prompt: {es: ¿Qué pierde una secuencia consenso?, en: What does a consensus sequence lose?, da: Hvad mister en konsensussekvens?}, options: [{id: a, es: Variabilidad y probabilidades por posición, en: Positional variability and probabilities, da: Positionsvariation og sandsynligheder}, {id: b, es: Longitud siempre, en: Always length, da: Altid længde}, {id: c, es: Alfabeto, en: Alphabet, da: Alfabet}, {id: d, es: Todas las posiciones, en: All positions, da: Alle positioner}], correct_option_ids: [a]}
+  - {id: dm847.m10.q02, type: true_false, prompt: {es: Una PWM suele comparar motivo frente a un modelo de fondo., en: A PWM commonly compares motif against a background model., da: En PWM sammenligner ofte motiv med en baggrundsmodel.}, correct: true}
+  - {id: dm847.m10.q03, type: multiple_choice, prompt: {es: ¿Qué indica entropía baja?, en: What does low entropy indicate?, da: Hvad indikerer lav entropi?}, options: [{id: a, es: Una distribución concentrada, en: A concentrated distribution, da: En koncentreret fordeling}, {id: b, es: Uniformidad máxima, en: Maximum uniformity, da: Maksimal uniformitet}, {id: c, es: Ausencia de datos siempre, en: Always no data, da: Altid ingen data}, {id: d, es: Error de código, en: Code error, da: Kodefejl}], correct_option_ids: [a]}
+  - {id: dm847.m10.q04, type: true_false, prompt: {es: Información igual a 2-H sólo es exacta para fondo uniforme de cuatro símbolos., en: Information equal to 2-H is exact only for a uniform four-symbol background., da: Information lig 2-H er kun præcis for uniform fire-symbol-baggrund.}, correct: true}
+  - {id: dm847.m10.q05, type: multiple_choice, prompt: {es: ¿Qué asume ZOOPS?, en: What does ZOOPS assume?, da: Hvad antager ZOOPS?}, options: [{id: a, es: Cero o una ocurrencia por secuencia, en: Zero or one occurrence per sequence, da: Nul eller én forekomst pr. sekvens}, {id: b, es: Exactamente dos, en: Exactly two, da: Præcis to}, {id: c, es: Múltiples obligatorias, en: Mandatory multiple sites, da: Obligatorisk flere sites}, {id: d, es: Ninguna secuencia, en: No sequences, da: Ingen sekvenser}], correct_option_ids: [a]}
+  - {id: dm847.m10.q06, type: true_false, prompt: {es: EM garantiza el máximo global., en: EM guarantees the global maximum., da: EM garanterer det globale maksimum.}, correct: false}
+  - {id: dm847.m10.q07, type: multiple_choice, prompt: {es: ¿Qué hace la fase E?, en: What does the E-step do?, da: Hvad gør E-trinnet?}, options: [{id: a, es: Calcula posteriores de posiciones latentes, en: Computes posteriors over latent positions, da: Beregner posteriorer over latente positioner}, {id: b, es: Fija manualmente todos los sitios, en: Manually fixes all sites, da: Fastlægger alle sites manuelt}, {id: c, es: Elimina el fondo, en: Removes the background, da: Fjerner baggrunden}, {id: d, es: Evalúa sólo test, en: Evaluates test only, da: Evaluerer kun test}], correct_option_ids: [a]}
+  - {id: dm847.m10.q08, type: true_false, prompt: {es: Los pseudoconteos evitan pesos infinitos causados por frecuencias cero., en: Pseudocounts avoid infinite weights caused by zero frequencies., da: Pseudotællinger undgår uendelige vægte fra nulfrekvenser.}, correct: true}
+  - {id: dm847.m10.q09, type: multiple_choice, prompt: {es: ¿Qué control es preferible para enriquecimiento?, en: Which control is preferable for enrichment?, da: Hvilken kontrol er bedst til berigelse?}, options: [{id: a, es: Secuencias emparejadas por composición y longitud, en: Sequences matched for composition and length, da: Sekvenser matchet for sammensætning og længde}, {id: b, es: Cualquier secuencia más corta, en: Any shorter sequence, da: En vilkårlig kortere sekvens}, {id: c, es: Sólo sitios positivos, en: Positive sites only, da: Kun positive sites}, {id: d, es: Texto aleatorio sin alfabeto, en: Random text without alphabet control, da: Tilfældig tekst uden alfabetkontrol}], correct_option_ids: [a]}
+  - {id: dm847.m10.q10, type: true_false, prompt: {es: Un motivo enriquecido demuestra unión directa de un factor concreto., en: An enriched motif proves direct binding by a specific factor., da: Et beriget motiv beviser direkte binding af en bestemt faktor.}, correct: false}
+
+open_assessment:
+  - id: dm847.m10.a01
+    prompt: {es: Deriva una iteración EM para ZOOPS, incluyendo estado sin sitio y ambas hebras., en: Derive one EM iteration for ZOOPS including the no-site state and both strands., da: Udled én EM-iteration for ZOOPS med no-site og begge strenge.}
+    rubric: [{criterion: generative_model, weight: 0.25}, {criterion: e_step_normalization, weight: 0.30}, {criterion: m_step_expected_counts, weight: 0.25}, {criterion: numerical_stability, weight: 0.20}]
+  - id: dm847.m10.a02
+    prompt: {es: Diseña una estrategia para seleccionar ancho y fondo sin usar el conjunto de prueba., en: Design a strategy to select width and background without using the test set., da: Design en strategi til valg af bredde og baggrund uden testdata.}
+    rubric: [{criterion: train_validation_test_roles, weight: 0.30}, {criterion: candidate_models, weight: 0.20}, {criterion: penalization_and_stability, weight: 0.25}, {criterion: final_external_evaluation, weight: 0.25}]
+  - id: dm847.m10.a03
+    prompt: {es: Evalúa críticamente un motivo descubierto en promotores tumorales y delimita las conclusiones válidas., en: Critically evaluate a motif found in tumor promoters and delimit valid conclusions., da: Evaluer kritisk et motiv fundet i tumor-promotorer og afgræns gyldige konklusioner.}
+    rubric: [{criterion: confounding_and_controls, weight: 0.25}, {criterion: statistical_evidence, weight: 0.25}, {criterion: external_biological_evidence, weight: 0.30}, {criterion: cautious_claims, weight: 0.20}]
+
+glossary:
+  - {id: dm847.term.motif, es: Motivo, en: Motif, da: Motiv, definition_en: Recurring sequence pattern represented probabilistically.}
+  - {id: dm847.term.count_matrix, es: Matriz de conteo, en: Count matrix, da: Tællematrix, definition_en: Symbol counts by aligned motif position.}
+  - {id: dm847.term.pwm, es: Matriz de pesos, en: Position weight matrix, da: Positionsvægtmatrix, definition_en: Position-specific log likelihood ratios against background.}
+  - {id: dm847.term.sequence_logo, es: Logo de secuencia, en: Sequence logo, da: Sekvenslogo, definition_en: Visual display of symbol preferences and information by position.}
+  - {id: dm847.term.entropy, es: Entropía, en: Entropy, da: Entropi, definition_en: Measure of uncertainty in a probability distribution.}
+  - {id: dm847.term.information_content, es: Contenido de información, en: Information content, da: Informationsindhold, definition_en: Divergence of a motif column from its background distribution.}
+  - {id: dm847.term.oops, es: OOPS, en: OOPS, da: OOPS, definition_en: Exactly one motif occurrence per sequence model.}
+  - {id: dm847.term.zoops, es: ZOOPS, en: ZOOPS, da: ZOOPS, definition_en: Zero or one motif occurrence per sequence model.}
+  - {id: dm847.term.tcm, es: TCM, en: TCM, da: TCM, definition_en: Multiple independent occurrence mixture model.}
+  - {id: dm847.term.responsibility, es: Responsabilidad, en: Responsibility, da: Responsibility, definition_en: Posterior weight assigned to a latent candidate in EM.}
+
+hidden_support:
+  canonical_explanation:
+    es: >-
+      Un motivo se representa como distribuciones por posición comparadas con un fondo. EM alterna
+      entre asignar probabilidades posteriores a sitios candidatos y actualizar la PWM con conteos
+      esperados. El resultado depende de modelo de ocurrencia, ancho, fondo, pseudoconteos e
+      inicialización. La significancia estadística y la función reguladora requieren validaciones distintas.
+    en: >-
+      A motif is represented by position-specific distributions compared with a background. EM
+      alternates between assigning posterior probabilities to candidate sites and updating the PWM
+      from expected counts. Results depend on occurrence model, width, background, pseudocounts, and
+      initialization. Statistical significance and regulatory function require different validation layers.
+    da: >-
+      Et motiv repræsenteres med positionsspecifikke fordelinger mod en baggrund. EM skifter mellem
+      posteriorer for sites og opdatering af PWM fra forventede tællinger. Funktion kræver ekstern validering.
+  misconceptions:
+    - {id: dm847.m10.mc01, false_belief: {es: Consenso y PWM contienen la misma información, en: Consensus and PWM contain the same information, da: Konsensus og PWM indeholder samme information}, correction: {es: El consenso descarta variabilidad y probabilidades, en: Consensus discards variability and probabilities, da: Konsensus kasserer variation og sandsynligheder}}
+    - {id: dm847.m10.mc02, false_belief: {es: EM siempre encuentra el motivo verdadero, en: EM always finds the true motif, da: EM finder altid det sande motiv}, correction: {es: Puede converger a óptimos locales o patrones de fondo, en: It may converge to local optima or background patterns, da: Den kan konvergere til lokale optima eller baggrundsmønstre}}
+    - {id: dm847.m10.mc03, false_belief: {es: Enriquecimiento implica causalidad reguladora, en: Enrichment implies regulatory causality, da: Berigelse indebærer regulatorisk kausalitet}, correction: {es: Es asociación estadística que requiere evidencia funcional, en: It is statistical association requiring functional evidence, da: Det er statistisk association der kræver funktionelt bevis}}
+  socratic_questions:
+    - ¿Qué modelo de fondo define el score?
+    - ¿Cada secuencia debe contener un sitio?
+    - ¿Cómo cambia la solución con otra inicialización?
+    - ¿Se evaluó el ancho en datos independientes?
+    - ¿Qué evidencia distingue asociación de unión funcional?
+  knowledge_fragments:
+    - {id: dm847.m10.k01, content_en: A motif is a distribution, not an exact consensus string.}
+    - {id: dm847.m10.k02, content_en: PWM scores are motif-versus-background log likelihood ratios.}
+    - {id: dm847.m10.k03, content_en: Information content depends on the background distribution.}
+    - {id: dm847.m10.k04, content_en: OOPS assumes one site; ZOOPS allows none; TCM allows multiple.}
+    - {id: dm847.m10.k05, content_en: EM responsibilities normalize over latent candidates.}
+    - {id: dm847.m10.k06, content_en: EM likelihood can improve while biological relevance does not.}
+    - {id: dm847.m10.k07, content_en: Pseudocounts regularize zero symbol counts.}
+    - {id: dm847.m10.k08, content_en: Motif width is a model-selection choice.}
+    - {id: dm847.m10.k09, content_en: Matched controls reduce compositional confounding.}
+    - {id: dm847.m10.k10, content_en: Enrichment does not prove direct factor binding.}
+  response_constraints:
+    - State motif width, occurrence model, strand handling, background, and pseudocounts.
+    - Separate discovery, statistical enrichment, and functional validation.
+    - Do not identify a transcription factor from motif similarity alone.
+    - Report multiple starts and stability when EM is used.
+
+sources:
+  - {id: sdu.dm847.official.2025, role: official_scope_and_learning_outcomes}
+  - {id: compeau.pevzner.bioinformatics_algorithms.v1, role: motif_algorithms_and_active_learning_context}
+  - {id: murphy.probabilistic_ml.2022, role: mixture_models_em_and_information_theory}
+  - {id: original.dm847.m10, role: original_examples_questions_and_explanations}
+
+limitations:
+  - Independent-position PWMs do not represent all dependencies between motif positions.
+  - Motif databases and annotations may contain redundant or uncertain labels.
+  - Experimental context, chromatin accessibility, and cofactors may dominate sequence preference.
