@@ -208,6 +208,7 @@ def test_glossary_searches_models_and_emits_stable_source_identity(qtbot) -> Non
         ).casefold()
         for entry in page.entries
     )
+    page.term_list.setCurrentRow(0)
     with qtbot.waitSignal(page.module_requested, timeout=1000) as signal:
         page.open_source_module()
     assert signal.args[0] == "DM857"

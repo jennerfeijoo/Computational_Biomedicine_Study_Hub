@@ -9,6 +9,7 @@ from computational_biomedicine_study_hub.integrations.ollama import (
     JsonObject,
     OllamaClient,
     OllamaConfig,
+    OllamaConfigurationError,
     OllamaProtocolError,
 )
 
@@ -31,6 +32,23 @@ def test_config_normalizes_local_server_urls() -> None:
         OllamaConfig("http://localhost:11434/api/").normalized_base_url()
         == "http://localhost:11434/api"
     )
+    assert (
+        OllamaConfig("http://localhost:11434/api/api/chat").normalized_base_url()
+        == "http://localhost:11434/api"
+    )
+    assert (
+        OllamaConfig("http://localhost:11434/chat/chat").normalized_base_url()
+        == "http://localhost:11434/api"
+    )
+
+
+@pytest.mark.parametrize(
+    "value",
+    ("", "localhost:11434", "ftp://localhost:11434", "http://localhost:11434?x=1"),
+)
+def test_config_rejects_invalid_or_ambiguous_urls(value: str) -> None:
+    with pytest.raises(OllamaConfigurationError):
+        OllamaConfig(value).normalized_base_url()
 
 
 def test_client_reads_version_from_expected_endpoint() -> None:

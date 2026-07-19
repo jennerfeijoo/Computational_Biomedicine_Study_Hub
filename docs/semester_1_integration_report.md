@@ -277,6 +277,111 @@ fuentes. La UI lo muestra como «evaluación formativa local, no calificación o
 La respuesta del estudiante, confianza y versiones se persisten antes de solicitar
 feedback.
 
+## UI refinement and Ollama diagnostics
+
+Esta corrección conserva `AcademicCatalog`, los IDs canónicos, BM25, SQLite,
+`OllamaChatClient`, los modelos tipados y la ejecución mediante `QThread`. No se
+modificó contenido científico para resolver defectos de presentación.
+
+### Glosario
+
+La causa de las filas «· DM847» era contenido estructuralmente incompleto: 102 de las
+550 entidades de glosario, concentradas en DM847 M06–M15, resuelven término y definición
+vacíos en los tres idiomas. La lista anterior concatenaba el texto vacío con el código
+de curso. La página ahora resuelve el texto localizado con el fallback existente a
+inglés, exige término y definición no vacíos antes de crear la fila, excluye las 102
+entidades inutilizables y registra `course`, `module` e ID mediante warning. El defecto
+editorial permanece así observable sin inventar ni corregir contenido científico.
+
+Las 448 entradas utilizables muestran sólo el término. Curso, módulo e ID permanecen
+como datos estables del modelo y de `Qt.UserRole`, pero el detalle ordinario usa el
+nombre completo de la asignatura y el título localizado del módulo. El selector único
+se sustituyó por un botón con menú de checkboxes: «Todas» controla las cuatro
+asignaturas, se admiten combinaciones de 1–4 y el estado se captura/restaura por códigos
+estables al reconstruir la UI en otro idioma. Si el término seleccionado deja de
+pertenecer al filtro, el detalle vuelve al estado vacío.
+
+### Tarjetas
+
+`AdaptiveCardBrowser` mide cada cara con `QTextDocument` y el ancho útil real. Una
+búsqueda binaria elige el mayor tamaño que cabe: 18–42 px para texto y 18–24 px para
+código. El cálculo se repite al cambiar de tarjeta o cara, al restaurar otro idioma o
+filtro y al recibir un resize. El texto ordinario usa alineación horizontal centrada y
+padding vertical calculado; las tarjetas breves alcanzan 42 px.
+
+El detector de código conserva espacios, aplica fuente monoespaciada, alineación
+izquierda y scroll horizontal sólo cuando es necesario. Si el contenido no cabe a
+18 px, se fija ese mínimo y se activa scroll vertical real. Se añadió coalescencia por
+firma de layout para que actualizar padding o scrollbars no origine un ciclo
+resize→timer→recalcular. Anverso/reverso tienen estado visual y accesible, clic,
+Space/Enter y valoración 1–4; los botones de valoración sólo se habilitan en el
+reverso y el foco vuelve a la tarjeta tras valorar.
+
+### Preflight y diagnóstico de Ollama
+
+La causa del error genérico era doble: `normalized_base_url()` sólo comprobaba el
+sufijo textual `/api`, por lo que una URL de endpoint podía terminar como
+`/api/chat/api`, y el transporte agrupaba timeout, servicio apagado y protocolo
+inválido en el mismo error. La normalización ahora valida esquema y servidor, rechaza
+credenciales/query/fragment, elimina sufijos `chat`, `tags` o `version`, colapsa
+`/api/api` y produce una única raíz canónica terminada en `/api`.
+
+El flujo compartido con Settings usa:
+
+1. `GET /api/version`, con timeout corto de preflight;
+2. `GET /api/tags`, para la lista real de modelos;
+3. comparación exacta del modelo solicitado, sin seleccionar otro;
+4. `POST /api/chat`, no streaming, sólo cuando el modelo está confirmado.
+
+Study Lab diferencia URL inválida, conexión, modelo ausente, timeout, respuesta vacía
+y respuesta inválida. «Probar conexión» ejecuta sólo los dos GET y la comprobación del
+modelo; «Abrir configuración» navega a la misma página de preferencias. El nombre no
+se presenta como modelo activo antes del preflight. Si falta, se muestran el solicitado
+y los detectados. Cancelar impide publicar una respuesta tardía; al finalizar, fallar o
+agotar timeout se reactivan los controles sin workers huérfanos ni llamadas duplicadas.
+
+Los estados, botones, roles y fallback están localizados en ES/EN/DA. Las fuentes
+visibles muestran nombre completo de asignatura, módulo, tipo y resumen humano. Los IDs
+se conservan en «Detalles de fuente», cerrado por defecto, y el soporte oculto no se
+publica. El logging incluye URL normalizada, endpoint, modelo, modelos encontrados,
+tipo de fallo, duración y timeouts; no incluye pregunta ni respuesta del estudiante.
+
+La validación manual contra Ollama 0.32.1 detectó
+`ornith:9b`, `qwen3-embedding:0.6b` y `qwen3.6:27b`. Un modelo inexistente produjo el
+diagnóstico específico y la lista detectada sin generar. `qwen3.6:27b` agotó el timeout
+configurado de 180 s y la UI recuperó estado y botones. Tras seleccionar explícitamente
+el modelo instalado `ornith:9b`, la misma consulta de Study Lab completó en 26,12 s,
+marcó el modelo como activo y publicó la respuesta. No hubo fallback automático.
+
+### Evaluación acumulativa
+
+`CumulativeAssessmentRenderer` reemplaza el recorrido recursivo de diccionarios por un
+documento que conoce el contrato académico. Presenta título, propósito, aviso de
+preparación, nombre completo de asignatura, cobertura humana, competencias oficiales,
+componentes, líneas de proyecto, estructura, rúbricas, casos, preguntas y checklist.
+Las rúbricas se muestran como filas criterio/puntos/desempeño excelente.
+
+El renderer sólo consulta rutas semánticas conocidas y descarta de forma recursiva
+respuestas canónicas, elementos esperados, desempeño insuficiente y soporte del
+examinador. No materializa `metadata`, nombres de claves, `covered_modules`,
+`covered_outcomes` ni IDs. BMB830, DM847 y BMB831 se abren en ES/EN/DA sin excepción;
+DM857 conserva el estado honesto de acumulativa no disponible.
+
+### Pruebas y revisión visual añadidas
+
+Se añadieron regresiones para filas válidas y logging del glosario, filtro
+multiasignatura y persistencia por IDs; medición, alineación, mínimo, scroll real,
+resize, clic, teclado y rating de tarjetas; normalización de URL, preflight,
+servicio apagado, modelo ausente, éxito, timeout, cancelación tardía, no bloqueo,
+localización y fuentes de Study Lab; y documento semántico/ramas ocultas de las tres
+acumulativas. Las expectativas anteriores que asumían selección automática se
+actualizaron para seleccionar explícitamente tras un filtro que excluye el término.
+
+La pasada visual offscreen revisó glosario ES con DM847+BMB831, tarjeta breve a 42 px,
+tarjeta extensa a 18 px con scroll, tarjeta de código, anverso/reverso, BMB830 como
+documento, modelo ausente, timeout real y generación real completada. También se
+verificaron estados ES/EN/DA mediante widgets y clientes falsos deterministas.
+
 ## Pruebas y comandos
 
 Se añadieron pruebas de:
@@ -297,8 +402,9 @@ Validación final:
 ```text
 ruff check .             → correcto
 ruff format --check .    → correcto
-mypy src                 → correcto (105 archivos fuente)
-pytest -q                → 244 passed
+mypy src                 → correcto (106 archivos fuente)
+pytest -q                → 268 passed
+git diff --check         → correcto
 pip wheel . --no-deps    → rueda creada; 119 YAML incluidos
 ```
 
