@@ -1,0 +1,176 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m10
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm857.m10.f01
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front: {es: ¿Qué es un árbol en estructuras de datos?, en: What is a tree in data structures?, da: Hvad er et træ i datastrukturer?}
+    back: {es: Una estructura jerárquica acíclica de nodos conectados por relaciones padre-hijo, con una raíz y un único padre para cada nodo no raíz., en: An acyclic hierarchical structure of nodes connected by parent-child relations, with one root and one parent for each non-root node., da: En acyklisk hierarkisk struktur af noder med forælder-barn-relationer, én rod og én forælder for hver ikke-rod-node.}
+    linked_objectives: [m10.o1]
+  - id: dm857.m10.f02
+    mode: conceptual
+    card_type: distinction
+    difficulty: foundational
+    front: {es: Diferencia entre raíz, hoja y nodo interno., en: Distinguish root, leaf, and internal node., da: Skeln mellem rod, blad og intern node.}
+    back: {es: La raíz no tiene padre; una hoja no tiene hijos; un nodo interno tiene al menos un hijo. Un árbol de un solo nodo puede tener una raíz que también es hoja., en: The root has no parent; a leaf has no children; an internal node has at least one child. In a one-node tree, the root is also a leaf., da: Roden har ingen forælder; et blad har ingen børn; en intern node har mindst ét barn. I et træ med én node er roden også et blad.}
+    linked_objectives: [m10.o1]
+  - id: dm857.m10.f03
+    mode: conceptual
+    card_type: formula_interpretation
+    difficulty: foundational
+    front: {es: ¿Qué relación existe entre nodos y aristas en un árbol conectado?, en: What relation holds between nodes and edges in a connected tree?, da: Hvilken relation gælder mellem noder og kanter i et sammenhængende træ?}
+    back: {es: Un árbol conectado con n nodos tiene n-1 aristas. Es una invariante útil para validar una representación., en: A connected tree with n nodes has n-1 edges. This is a useful validation invariant., da: Et sammenhængende træ med n noder har n-1 kanter. Det er en nyttig valideringsinvariant.}
+    linked_objectives: [m10.o1, m10.o8]
+  - id: dm857.m10.f04
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front: {es: Profundidad frente a altura., en: Depth versus height., da: Dybde versus højde.}
+    back: {es: La profundidad mide desde la raíz hasta un nodo; la altura mide desde un nodo hasta su hoja más distante. La convención debe indicar si se cuentan aristas o nodos., en: Depth measures from the root to a node; height measures from a node to its farthest leaf. The convention must state whether edges or nodes are counted., da: Dybde måler fra roden til en node; højde fra en node til det fjerneste blad. Konventionen skal angive kanter eller noder.}
+    linked_objectives: [m10.o5]
+  - id: dm857.m10.f05
+    mode: conceptual
+    card_type: misconception
+    difficulty: foundational
+    front: {es: ¿Todo árbol binario está equilibrado y ordenado?, en: Is every binary tree balanced and ordered?, da: Er ethvert binært træ balanceret og ordnet?}
+    back: {es: No. Binario sólo significa como máximo un hijo izquierdo y uno derecho. Equilibrio y orden son propiedades adicionales., en: No. Binary only means at most one left and one right child. Balance and ordering are additional properties., da: Nej. Binær betyder kun højst ét venstre og ét højre barn. Balance og orden er ekstra egenskaber.}
+    linked_objectives: [m10.o6]
+  - id: dm857.m10.f06
+    mode: conceptual
+    card_type: representation
+    difficulty: intermediate
+    front: {es: ¿Qué ventajas ofrece una clase Node frente a un diccionario anidado?, en: What advantages can a Node class offer over a nested dictionary?, da: Hvilke fordele kan en Node-klasse have frem for en indlejret ordbog?}
+    back: {es: Puede expresar identidad, métodos e invariantes de forma explícita. El diccionario anidado es compacto, pero suele requerir validación externa y convenciones más frágiles., en: It can express identity, methods, and invariants explicitly. A nested dictionary is compact but usually relies on external validation and conventions., da: Den kan udtrykke identitet, metoder og invarianter eksplicit. En indlejret ordbog er kompakt, men kræver ofte ekstern validering.}
+    linked_objectives: [m10.o2]
+  - id: dm857.m10.f07
+    mode: practical
+    card_type: ordering
+    difficulty: foundational
+    front: {es: Orden de preorden, inorden y postorden en un árbol binario., en: Order of preorder, inorder, and postorder in a binary tree., da: Rækkefølge for preorder, inorder og postorder i et binært træ.}
+    back: {es: Preorden nodo-izquierda-derecha; inorden izquierda-nodo-derecha; postorden izquierda-derecha-nodo., en: Preorder node-left-right; inorder left-node-right; postorder left-right-node., da: Preorder node-venstre-højre; inorder venstre-node-højre; postorder venstre-højre-node.}
+    linked_objectives: [m10.o3]
+  - id: dm857.m10.f08
+    mode: practical
+    card_type: code_tracing
+    difficulty: intermediate
+    front: {es: Para raíz A con hijos B y C, ¿cuál es el postorden?, en: For root A with children B and C, what is postorder?, da: For rod A med børn B og C, hvad er postorder?}
+    back: {es: B, C, A. Los hijos se procesan antes de la raíz., en: B, C, A. The children are processed before the root., da: B, C, A. Børnene behandles før roden.}
+    linked_objectives: [m10.o3]
+  - id: dm857.m10.f09
+    mode: conceptual
+    card_type: method_selection
+    difficulty: intermediate
+    front: {es: ¿Cuándo elegir BFS en lugar de DFS?, en: When should BFS be preferred over DFS?, da: Hvornår bør BFS foretrækkes frem for DFS?}
+    back: {es: Cuando se necesita procesar por niveles, encontrar una coincidencia de menor profundidad o calcular distancia mínima en un árbol no ponderado., en: When processing by levels, finding a shallowest match, or computing shortest distance in an unweighted tree., da: Ved niveaugennemløb, nærmeste match til roden eller korteste afstand i et uvægtet træ.}
+    linked_objectives: [m10.o4]
+  - id: dm857.m10.f10
+    mode: practical
+    card_type: data_structure_selection
+    difficulty: intermediate
+    front: {es: ¿Qué estructura de apoyo requiere BFS y por qué?, en: What support structure does BFS require and why?, da: Hvilken hjælpestruktur kræver BFS og hvorfor?}
+    back: {es: Una cola FIFO, porque los nodos descubiertos primero deben procesarse primero para conservar el orden por niveles., en: A FIFO queue, because nodes discovered first must be processed first to preserve level order., da: En FIFO-kø, fordi først opdagede noder skal behandles først for at bevare niveauorden.}
+    linked_objectives: [m10.o4]
+  - id: dm857.m10.f11
+    mode: practical
+    card_type: debugging
+    difficulty: intermediate
+    front: {es: ¿Por qué `list.pop(0)` no es ideal para una cola grande?, en: Why is `list.pop(0)` not ideal for a large queue?, da: Hvorfor er `list.pop(0)` ikke ideel til en stor kø?}
+    back: {es: Eliminar el primer elemento desplaza los restantes y cuesta tiempo lineal. `collections.deque.popleft()` ofrece coste amortizado constante., en: Removing the first element shifts the rest and costs linear time. `collections.deque.popleft()` provides amortized constant time., da: Fjernelse forrest flytter resten og koster lineær tid. `deque.popleft()` er amortiseret konstant.}
+    linked_objectives: [m10.o4, m10.o7]
+  - id: dm857.m10.f12
+    mode: conceptual
+    card_type: contract
+    difficulty: intermediate
+    front: {es: ¿Por qué debe definirse la altura del árbol vacío?, en: Why must empty-tree height be defined?, da: Hvorfor skal højden af det tomme træ defineres?}
+    back: {es: Porque determina la recurrencia y la altura de una hoja. Usar -1 suele producir altura 0 para una hoja al contar aristas; usar 0 suele corresponder a contar nodos., en: Because it determines the recurrence and leaf height. Using -1 usually gives leaf height 0 when counting edges; using 0 often corresponds to counting nodes., da: Fordi det bestemmer rekurrensen og bladhøjden. -1 giver ofte bladhøjde 0 ved kanttælling.}
+    linked_objectives: [m10.o5]
+  - id: dm857.m10.f13
+    mode: practical
+    card_type: invariant
+    difficulty: advanced
+    front: {es: Invariantes mínimos al construir un árbol desde pares padre-hijo., en: Minimal invariants when building a tree from parent-child pairs., da: Minimale invarianter ved bygning af et træ fra forælder-barn-par.}
+    back: {es: Una raíz, ningún ciclo, cada nodo no raíz con un solo padre, referencias existentes y conectividad si se espera un único árbol., en: One root, no cycles, one parent per non-root node, valid references, and connectivity when one tree is expected., da: Én rod, ingen cykler, én forælder pr. ikke-rod-node, gyldige referencer og sammenhæng.}
+    linked_objectives: [m10.o2, m10.o8]
+  - id: dm857.m10.f14
+    mode: practical
+    card_type: test_design
+    difficulty: advanced
+    front: {es: Casos esenciales para probar una función de altura., en: Essential cases for testing a height function., da: Vigtige tilfælde til test af en højdefunktion.}
+    back: {es: Árbol vacío, una hoja, cadena izquierda, cadena derecha, árbol equilibrado y árbol irregular. Cada expectativa debe seguir la misma convención., en: Empty tree, one leaf, left chain, right chain, balanced tree, and irregular tree. Every expectation must follow one convention., da: Tomt træ, ét blad, venstre og højre kæde, balanceret og uregelmæssigt træ under samme konvention.}
+    linked_objectives: [m10.o5, m10.o8]
+  - id: dm857.m10.f15
+    mode: conceptual
+    card_type: complexity
+    difficulty: intermediate
+    front: {es: Coste temporal de un recorrido completo correcto., en: Time cost of a correct full traversal., da: Tidsomkostning for et korrekt fuldt gennemløb.}
+    back: {es: O(n) si cada uno de los n nodos se visita una vez y el trabajo local es constante., en: O(n) when each of the n nodes is visited once and local work is constant., da: O(n), når hver af n noder besøges én gang og lokalt arbejde er konstant.}
+    linked_objectives: [m10.o7]
+  - id: dm857.m10.f16
+    mode: conceptual
+    card_type: complexity
+    difficulty: advanced
+    front: {es: Espacio auxiliar de DFS recursivo., en: Auxiliary space of recursive DFS., da: Ekstra plads for rekursiv DFS.}
+    back: {es: O(h), donde h es la altura. En un árbol equilibrado puede ser O(log n); en una cadena puede ser O(n)., en: O(h), where h is height. It may be O(log n) in a balanced tree and O(n) in a chain., da: O(h), hvor h er højden. Det kan være O(log n) i et balanceret træ og O(n) i en kæde.}
+    linked_objectives: [m10.o7]
+  - id: dm857.m10.f17
+    mode: conceptual
+    card_type: complexity
+    difficulty: advanced
+    front: {es: Espacio auxiliar de BFS., en: Auxiliary space of BFS., da: Ekstra plads for BFS.}
+    back: {es: O(w), donde w es la anchura máxima de un nivel. Un árbol poco profundo pero muy ancho puede requerir mucha memoria., en: O(w), where w is the maximum level width. A shallow but very wide tree may require substantial memory., da: O(w), hvor w er maksimal niveaubredde. Et lavt men bredt træ kan kræve meget hukommelse.}
+    linked_objectives: [m10.o7]
+  - id: dm857.m10.f18
+    mode: practical
+    card_type: code_review
+    difficulty: advanced
+    front: {es: Riesgo de construir recorridos recursivos con concatenaciones repetidas de listas., en: Risk of building recursive traversals with repeated list concatenation., da: Risiko ved gentagen listesammenkædning i rekursive gennemløb.}
+    back: {es: Cada concatenación crea listas nuevas y puede elevar el coste por encima de O(n). Acumular en una lista compartida de forma controlada puede evitar copias repetidas., en: Each concatenation creates new lists and may raise cost above O(n). Controlled accumulation into one list can avoid repeated copying., da: Hver sammenkædning opretter nye lister og kan øge omkostningen. Kontrolleret akkumulering undgår gentagne kopier.}
+    linked_objectives: [m10.o3, m10.o7]
+  - id: dm857.m10.f19
+    mode: conceptual
+    card_type: ambiguity_analysis
+    difficulty: advanced
+    front: {es: ¿Por qué buscar por etiqueta puede ser ambiguo?, en: Why can searching by label be ambiguous?, da: Hvorfor kan søgning efter etiket være tvetydig?}
+    back: {es: Nodos diferentes pueden compartir etiqueta. El contrato debe indicar primer DFS, primer BFS, una ruta, todos los nodos o una identidad única distinta de la etiqueta., en: Distinct nodes may share a label. The contract must state first DFS, first BFS, path, all matches, or a separate unique identity., da: Forskellige noder kan have samme etiket. Kontrakten skal angive søgeorden eller unik identitet.}
+    linked_objectives: [m10.o4, m10.o8]
+  - id: dm857.m10.f20
+    mode: practical
+    card_type: debugging
+    difficulty: advanced
+    front: {es: Error conceptual: usar inorden en un árbol general con muchos hijos sin definirlo., en: Conceptual error: using inorder on a general multi-child tree without defining it., da: Konceptuel fejl: at bruge inorder på et generelt træ uden definition.}
+    back: {es: Inorden tiene una definición natural ligada a hijo izquierdo y derecho. En un árbol general debe definirse otra política de procesamiento o usar pre/postorden., en: Inorder is naturally tied to left and right children. A general tree needs another explicit processing policy or preorder/postorder., da: Inorder er naturligt knyttet til venstre og højre barn. Et generelt træ kræver en anden eksplicit politik.}
+    linked_objectives: [m10.o3, m10.o6]
+  - id: dm857.m10.f21
+    mode: integrative
+    card_type: method_selection
+    difficulty: advanced
+    front: {es: Elegir representación para una jerarquía almacenada en una tabla pero recorrida repetidamente., en: Choose a representation for a hierarchy stored as a table but traversed repeatedly., da: Vælg repræsentation for et hierarki lagret som tabel men gennemløbet ofte.}
+    back: {es: Conservar la tabla para persistencia y construir un índice padre->hijos o nodos enlazados para navegación. Validar raíz, referencias, ciclos y padres múltiples al materializar., en: Keep the table for persistence and build a parent-to-children index or linked nodes for navigation. Validate root, references, cycles, and multiple parents during materialization., da: Bevar tabellen til lagring og byg et forælder-til-børn-indeks eller linkede noder til navigation.}
+    linked_objectives: [m10.o2, m10.o8]
+  - id: dm857.m10.f22
+    mode: integrative
+    card_type: oral_defense
+    difficulty: advanced
+    front: {es: Defiende por qué una búsqueda en árbol no puede declararse O(log n) sin más., en: Defend why tree search cannot simply be declared O(log n)., da: Begrund hvorfor træ-søgning ikke blot kan erklæres O(log n).}
+    back: {es: Deben especificarse invariante de búsqueda, equilibrio, caso analizado y forma. Un árbol binario general o un BST degenerado puede requerir O(n)., en: Search ordering, balance, analyzed case, and shape must be specified. A general binary tree or degenerate BST may require O(n)., da: Søgeinvariant, balance, analysetilfælde og form skal angives. Et degenereret BST kan kræve O(n).}
+    linked_objectives: [m10.o6, m10.o7]
+  - id: dm857.m10.f23
+    mode: integrative
+    card_type: test_design
+    difficulty: advanced
+    front: {es: Prueba que detecta un segundo padre al construir un árbol., en: Test that detects a second parent while building a tree., da: Test der opdager en anden forælder ved bygning af et træ.}
+    back: {es: Introducir pares A->C y B->C y exigir rechazo o una política explícita. Aceptarlo silenciosamente viola la invariante de árbol., en: Insert A->C and B->C and require rejection or an explicit policy. Silent acceptance violates the tree invariant., da: Indsæt A->C og B->C og kræv afvisning eller eksplicit politik. Stiltiende accept bryder træinvarianten.}
+    linked_objectives: [m10.o8]
+  - id: dm857.m10.f24
+    mode: integrative
+    card_type: synthesis
+    difficulty: advanced
+    front: {es: Secuencia mínima para resolver un problema con árboles de forma verificable., en: Minimal sequence for solving a tree problem verifiably., da: Minimal rækkefølge til verificerbar løsning af et træproblem.}
+    back: {es: Definir representación e invariantes; fijar vacío y métricas; elegir recorrido; implementar caso base y combinación; trazar; probar vacío, hoja, forma degenerada, ramificación y ambigüedades; analizar tiempo y espacio., en: Define representation and invariants; fix empty and metric conventions; choose traversal; implement base and combination; trace; test empty, leaf, degenerate, branching, and ambiguous cases; analyze time and space., da: Definér repræsentation og invarianter, fastlæg tomt tilfælde og mål, vælg gennemløb, implementér, gennemgå, test og analysér tid og plads.}
+    linked_objectives: [m10.o1, m10.o2, m10.o3, m10.o4, m10.o5, m10.o7, m10.o8]
