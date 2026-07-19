@@ -1,0 +1,1026 @@
+"""DM847 module 7: bacterial genetics and operon prediction."""
+
+from __future__ import annotations
+
+from ...i18n import AppLocale
+from ..localized_models import LocalizedLearningModule
+from ..models import AssessmentItem, LearningModule
+from .standard import StandardModuleSpec, build_module, build_question_bank, materialize_bank
+
+_SPEC = StandardModuleSpec(
+    module_id="dm847.m07",
+    title=(
+        "Genética bacteriana y predicción de operones",
+        "Bacterial genetics and operon prediction",
+        "Bakteriel genetik og operonprædiktion",
+    ),
+    summary=(
+        "Integra arquitectura génica, orientación, distancias, conservación, regulación y coexpresión en modelos reproducibles de operones, considerando transferencia horizontal y validación por especie.",
+        "Integrate gene architecture, orientation, distances, conservation, regulation, and co-expression into reproducible operon models while considering horizontal transfer and species-aware validation.",
+        "Integrér genarkitektur, orientering, afstande, konservering, regulering og co-ekspression i reproducerbare operonmodeller med hensyn til horisontal overførsel og artsbevidst validering.",
+    ),
+    objectives=(
+        (
+            "m07.o1",
+            (
+                "Explicar transcripción policistrónica y organización de operones.",
+                "Explain polycistronic transcription and operon organization.",
+                "Forklare polycistronisk transkription og operonorganisation.",
+            ),
+        ),
+        (
+            "m07.o2",
+            (
+                "Construir pares de genes adyacentes con orientación y distancia correctas.",
+                "Construct adjacent-gene pairs with correct orientation and distance.",
+                "Konstruere nabogenpar med korrekt orientering og afstand.",
+            ),
+        ),
+        (
+            "m07.o3",
+            (
+                "Diseñar características para predicción de operones.",
+                "Design features for operon prediction.",
+                "Designe features til operonprædiktion.",
+            ),
+        ),
+        (
+            "m07.o4",
+            (
+                "Interpretar modelos probabilísticos y discriminativos sin confundir score con verdad.",
+                "Interpret probabilistic and discriminative models without confusing score with truth.",
+                "Fortolke probabilistiske og diskriminative modeller uden at forveksle score med sandhed.",
+            ),
+        ),
+        (
+            "m07.o5",
+            (
+                "Evaluar generalización entre especies y transferencia horizontal.",
+                "Evaluate cross-species generalization and horizontal transfer.",
+                "Evaluere generalisering mellem arter og horisontal overførsel.",
+            ),
+        ),
+        (
+            "m07.o6",
+            (
+                "Validar predicciones con transcriptómica y evidencia regulatoria independiente.",
+                "Validate predictions with transcriptomics and independent regulatory evidence.",
+                "Validere prædiktioner med transkriptomik og uafhængig regulatorisk evidens.",
+            ),
+        ),
+    ),
+    concepts=(
+        (
+            "operon-biology",
+            ("Biología del operón", "Operon biology", "Operonbiologi"),
+            (
+                "Un operón reúne genes co-transcritos desde un promotor común y puede producir un ARN policistrónico. La frontera funcional depende de promotores, terminadores y procesamiento. Genes adyacentes en la misma hebra son candidatos, pero no todos forman operones y algunos operones presentan regulación compleja.",
+                "An operon groups genes co-transcribed from a common promoter and may produce a polycistronic RNA. Functional boundaries depend on promoters, terminators, and processing. Adjacent same-strand genes are candidates, but not all form operons and some operons have complex regulation.",
+                "Et operon grupperer gener, der co-transskriberes fra en fælles promotor og kan danne et polycistronisk RNA. Funktionelle grænser afhænger af promotorer, terminatorer og processering. Nabogener på samme streng er kandidater, men ikke alle danner operoner, og nogle operoner har kompleks regulering.",
+            ),
+            (
+                (
+                    "Co-localización no demuestra co-transcripción.",
+                    "Co-location does not prove co-transcription.",
+                    "Samlokalisering beviser ikke co-transkription.",
+                ),
+                (
+                    "La unidad predicha suele ser el par adyacente.",
+                    "The predicted unit is often an adjacent pair.",
+                    "Den prædikterede enhed er ofte et nabopar.",
+                ),
+            ),
+        ),
+        (
+            "gene-order",
+            (
+                "Orden, orientación y distancia",
+                "Order, orientation, and distance",
+                "Rækkefølge, orientering og afstand",
+            ),
+            (
+                "Los genes deben ordenarse por coordenadas dentro de cada replicón. La distancia intergénica depende de hebra y extremos de CDS; solapamientos producen valores negativos. Comparar genes de hebras opuestas como un par operónico viola el dominio del problema.",
+                "Genes should be ordered by coordinates within each replicon. Intergenic distance depends on strand and CDS ends; overlaps produce negative values. Comparing opposite-strand genes as an operon pair violates the problem domain.",
+                "Gener bør ordnes efter koordinater inden for hvert replikon. Intergen afstand afhænger af streng og CDS-ender; overlap giver negative værdier. Sammenligning af gener på modsatte strenge som operonpar bryder problemets domæne.",
+            ),
+            (
+                (
+                    "Separar replicones antes de crear adyacencias.",
+                    "Separate replicons before creating adjacency.",
+                    "Adskil replikoner før naboskab oprettes.",
+                ),
+                (
+                    "Solapamiento es una señal, no un error automático.",
+                    "Overlap is a signal, not automatically an error.",
+                    "Overlap er et signal, ikke automatisk en fejl.",
+                ),
+            ),
+        ),
+        (
+            "features",
+            ("Características predictivas", "Predictive features", "Prædiktive features"),
+            (
+                "Distancia, solapamiento, conservación del vecindario, similitud funcional, promotores, terminadores y coexpresión pueden combinarse. Las características deben definirse sin fuga de la etiqueta y con procedimientos idénticos para entrenamiento y despliegue.",
+                "Distance, overlap, neighborhood conservation, functional similarity, promoters, terminators, and co-expression can be combined. Features must be defined without label leakage and with identical procedures for training and deployment.",
+                "Afstand, overlap, konservering af nabolag, funktionel lighed, promotorer, terminatorer og co-ekspression kan kombineres. Features skal defineres uden label leakage og med identiske procedurer til træning og deployment.",
+            ),
+            (
+                (
+                    "Ninguna característica aislada es suficiente.",
+                    "No single feature is sufficient.",
+                    "Ingen enkelt feature er tilstrækkelig.",
+                ),
+                (
+                    "La fuga puede inflar validación.",
+                    "Leakage can inflate validation.",
+                    "Leakage kan oppuste validering.",
+                ),
+            ),
+        ),
+        (
+            "models",
+            ("Modelos de clasificación", "Classification models", "Klassifikationsmodeller"),
+            (
+                "Un modelo puede estimar P(mismo operón|características) o producir un score discriminativo. Los umbrales traducen score en decisiones y deben elegirse según coste de falsos positivos y negativos. Calibración y ranking son propiedades distintas.",
+                "A model may estimate P(same operon|features) or produce a discriminative score. Thresholds translate scores into decisions and should reflect false-positive and false-negative costs. Calibration and ranking are distinct properties.",
+                "En model kan estimere P(samme operon|features) eller producere en diskriminativ score. Tærskler omsætter scores til beslutninger og bør afspejle omkostninger ved falske positive og negative. Kalibrering og ranking er forskellige egenskaber.",
+            ),
+            (
+                (
+                    "AUC no define un umbral operativo.",
+                    "AUC does not define an operating threshold.",
+                    "AUC definerer ikke en operationel tærskel.",
+                ),
+                (
+                    "Probabilidades requieren calibración.",
+                    "Probabilities require calibration.",
+                    "Sandsynligheder kræver kalibrering.",
+                ),
+            ),
+        ),
+        (
+            "cross-species",
+            (
+                "Generalización entre especies",
+                "Cross-species generalization",
+                "Generalisering mellem arter",
+            ),
+            (
+                "Distribuciones de distancia, densidad génica, GC, familias y mecanismos regulatorios varían entre especies. Dividir aleatoriamente pares de la misma especie puede sobreestimar generalización. Validación leave-one-species-out y análisis por clado evalúan transferencia del modelo.",
+                "Distance distributions, gene density, GC, families, and regulatory mechanisms vary across species. Randomly splitting pairs from the same species may overestimate generalization. Leave-one-species-out validation and clade analysis evaluate model transfer.",
+                "Fordelinger af afstand, gentæthed, GC, familier og regulatoriske mekanismer varierer mellem arter. Tilfældig opdeling af par fra samme art kan overvurdere generalisering. Leave-one-species-out-validering og kladeanalyse evaluerer modeloverførsel.",
+            ),
+            (
+                (
+                    "La especie es una unidad de agrupación.",
+                    "Species is a grouping unit.",
+                    "Arten er en grupperingsenhed.",
+                ),
+                (
+                    "Transferencia horizontal altera conservación.",
+                    "Horizontal transfer alters conservation.",
+                    "Horisontal overførsel ændrer konservering.",
+                ),
+            ),
+        ),
+        (
+            "validation",
+            ("Validación biológica", "Biological validation", "Biologisk validering"),
+            (
+                "RNA-seq, long reads, RT-PCR, mapas de TSS/terminadores y curación aportan evidencia independiente. La ausencia de señal puede deberse a condición experimental. Una evaluación rigurosa reporta cobertura, sesgo hacia genes expresados y discrepancias entre fuentes.",
+                "RNA-seq, long reads, RT-PCR, TSS/terminator maps, and curation provide independent evidence. Absence of signal may reflect experimental condition. Rigorous evaluation reports coverage, expression bias, and disagreement between sources.",
+                "RNA-seq, long reads, RT-PCR, TSS/terminator-kort og kuratering giver uafhængig evidens. Fravær af signal kan skyldes den eksperimentelle betingelse. Streng evaluering rapporterer dækning, ekspressionsbias og uenighed mellem kilder.",
+            ),
+            (
+                (
+                    "No observar co-transcripción no prueba ausencia.",
+                    "Not observing co-transcription does not prove absence.",
+                    "Manglende observation af co-transkription beviser ikke fravær.",
+                ),
+                (
+                    "La evidencia debe ser independiente del entrenamiento.",
+                    "Evidence should be independent of training.",
+                    "Evidens bør være uafhængig af træning.",
+                ),
+            ),
+        ),
+    ),
+    examples=(
+        (
+            "m07.e01",
+            ("Pares adyacentes válidos", "Valid adjacent pairs", "Gyldige nabopar"),
+            (
+                "Ordena genes por replicón y crea pares sólo si comparten hebra.",
+                "Order genes by replicon and create pairs only when they share strand.",
+                "Ordén gener efter replikon og opret kun par, hvis de deler streng.",
+            ),
+            (
+                ("Agrupa antes de ordenar.", "Group before sorting.", "Gruppér før sortering."),
+                (
+                    "La distancia puede ser negativa por solapamiento.",
+                    "Distance may be negative because of overlap.",
+                    "Afstand kan være negativ på grund af overlap.",
+                ),
+            ),
+            """def adjacent_pairs(genes: list[dict[str, object]]) -> list[tuple[str, str, int]]:\n    pairs: list[tuple[str, str, int]] = []\n    replicons = sorted({str(gene[\"replicon\"]) for gene in genes})\n    for replicon in replicons:\n        ordered = sorted(\n            (gene for gene in genes if gene[\"replicon\"] == replicon),\n            key=lambda gene: int(gene[\"start\"]),\n        )\n        for left, right in zip(ordered, ordered[1:], strict=False):\n            if left[\"strand\"] == right[\"strand\"]:\n                distance = int(right[\"start\"]) - int(left[\"end\"]) - 1\n                pairs.append((str(left[\"id\"]), str(right[\"id\"]), distance))\n    return pairs\n\n\ngenes = [\n    {\"id\": \"g1\", \"replicon\": \"chr\", \"start\": 1, \"end\": 100, \"strand\": \"+\"},\n    {\"id\": \"g2\", \"replicon\": \"chr\", \"start\": 121, \"end\": 200, \"strand\": \"+\"},\n]\nprint(adjacent_pairs(genes))\n""",
+            "[('g1', 'g2', 20)]",
+            (
+                "La unidad de datos conserva identidad y distancia verificable.",
+                "The data unit preserves identity and verifiable distance.",
+                "Dataenheden bevarer identitet og verificerbar afstand.",
+            ),
+        ),
+        (
+            "m07.e02",
+            ("Score logístico didáctico", "Teaching logistic score", "Didaktisk logistisk score"),
+            (
+                "Convierte características estandarizadas en una probabilidad ilustrativa.",
+                "Convert standardized features into an illustrative probability.",
+                "Omsæt standardiserede features til en illustrativ sandsynlighed.",
+            ),
+            (
+                (
+                    "La función logística acota entre cero y uno.",
+                    "The logistic function bounds between zero and one.",
+                    "Den logistiske funktion afgrænser mellem nul og én.",
+                ),
+                (
+                    "Los coeficientes requieren entrenamiento real.",
+                    "Coefficients require real training.",
+                    "Koefficienter kræver reel træning.",
+                ),
+            ),
+            """from math import exp\n\n\ndef operon_probability(distance_z: float, coexpression_z: float) -> float:\n    linear = 0.4 - 1.2 * distance_z + 1.0 * coexpression_z\n    return 1.0 / (1.0 + exp(-linear))\n\n\nprint(round(operon_probability(-0.8, 1.1), 3))\n""",
+            "0.921",
+            (
+                "Es un ejemplo matemático; no es un modelo calibrado para una especie.",
+                "This is a mathematical example, not a calibrated species model.",
+                "Det er et matematisk eksempel, ikke en kalibreret artsmodel.",
+            ),
+        ),
+        (
+            "m07.e03",
+            ("Validación por especie", "Species-held-out validation", "Arts-hold-out-validering"),
+            (
+                "Genera particiones leave-one-species-out para evitar mezclar pares relacionados.",
+                "Generate leave-one-species-out splits to avoid mixing related pairs.",
+                "Generér leave-one-species-out-splits for at undgå blanding af beslægtede par.",
+            ),
+            (
+                (
+                    "Cada especie actúa una vez como test.",
+                    "Each species acts once as test.",
+                    "Hver art fungerer én gang som test.",
+                ),
+                (
+                    "El entrenamiento excluye completamente esa especie.",
+                    "Training excludes that species completely.",
+                    "Træning ekskluderer arten fuldstændigt.",
+                ),
+            ),
+            """def leave_one_species_out(rows: list[dict[str, str]]):\n    species = sorted({row[\"species\"] for row in rows})\n    for held_out in species:\n        train = [row for row in rows if row[\"species\"] != held_out]\n        test = [row for row in rows if row[\"species\"] == held_out]\n        yield held_out, train, test\n\n\nrows = [{\"species\": \"A\"}, {\"species\": \"A\"}, {\"species\": \"B\"}]\nprint([(name, len(train), len(test)) for name, train, test in leave_one_species_out(rows)])\n""",
+            "[('A', 1, 2), ('B', 2, 1)]",
+            (
+                "El diseño mide transferencia a especies no vistas.",
+                "The design measures transfer to unseen species.",
+                "Designet måler overførsel til ikke-sete arter.",
+            ),
+        ),
+    ),
+    practices=(
+        (
+            "m07.p01",
+            "SHORT_ANSWER",
+            (
+                "Distingue operón y regulón.",
+                "Distinguish operon and regulon.",
+                "Skeln mellem operon og regulon.",
+            ),
+            (("Considera proximidad.", "Consider proximity.", "Overvej nærhed."),),
+            (
+                "Un operón es una unidad física co-transcrita; un regulón reúne genes u operones regulados por el mismo factor y puede estar distribuido por el genoma.",
+                "An operon is a physical co-transcribed unit; a regulon groups genes or operons controlled by the same regulator and may be distributed across the genome.",
+                "Et operon er en fysisk co-transskriberet enhed; et regulon grupperer gener eller operoner reguleret af samme regulator og kan være spredt i genomet.",
+            ),
+            (
+                "No deben intercambiarse.",
+                "They are not interchangeable.",
+                "De er ikke udskiftelige.",
+            ),
+            "",
+        ),
+        (
+            "m07.p02",
+            "CODE_TRACING",
+            (
+                "Genes [1,100] y [91,180] tienen ¿qué distancia?",
+                "Genes [1,100] and [91,180] have what distance?",
+                "Gener [1,100] og [91,180] har hvilken afstand?",
+            ),
+            (("Usa start2-end1-1.", "Use start2-end1-1.", "Brug start2-end1-1."),),
+            ("-10", "-10", "-10"),
+            (
+                "El valor negativo representa diez bases de solapamiento.",
+                "The negative value represents a ten-base overlap.",
+                "Den negative værdi repræsenterer ti basers overlap.",
+            ),
+            "",
+        ),
+        (
+            "m07.p03",
+            "DATA_INTERPRETATION",
+            (
+                "Un modelo tiene AUC alta y mala calibración. Interpreta.",
+                "A model has high AUC and poor calibration. Interpret.",
+                "En model har høj AUC og dårlig kalibrering. Fortolk.",
+            ),
+            (
+                (
+                    "Separa ranking y probabilidad.",
+                    "Separate ranking and probability.",
+                    "Adskil ranking og sandsynlighed.",
+                ),
+            ),
+            (
+                "Ordena bien pares positivos y negativos, pero sus probabilidades no corresponden a frecuencias observadas. Puede requerir recalibración antes de usar umbrales probabilísticos.",
+                "It ranks positive and negative pairs well, but probabilities do not match observed frequencies. Recalibration may be needed before probability thresholds are used.",
+                "Den rangerer positive og negative par godt, men sandsynlighederne svarer ikke til observerede frekvenser. Rekalibrering kan være nødvendig før sandsynlighedstærskler bruges.",
+            ),
+            (
+                "Discriminación y calibración son dimensiones distintas.",
+                "Discrimination and calibration are distinct dimensions.",
+                "Diskrimination og kalibrering er forskellige dimensioner.",
+            ),
+            "",
+        ),
+        (
+            "m07.p04",
+            "PIPELINE_DESIGN",
+            (
+                "Diseña features sin fuga para predicción de operones.",
+                "Design leakage-free features for operon prediction.",
+                "Design leakage-frie features til operonprædiktion.",
+            ),
+            (
+                (
+                    "Evita anotaciones derivadas de la etiqueta.",
+                    "Avoid annotations derived from the label.",
+                    "Undgå annotationer afledt af labelen.",
+                ),
+            ),
+            (
+                "Usar distancia, orientación, GC local, conservación y coexpresión calculadas sólo con datos disponibles; ajustar normalización dentro de cada fold; excluir nombres o IDs que codifiquen la etiqueta.",
+                "Use distance, orientation, local GC, conservation, and co-expression computed only from available data; fit normalization inside each fold; exclude names or IDs encoding the label.",
+                "Brug afstand, orientering, lokal GC, konservering og co-ekspression beregnet kun fra tilgængelige data; tilpas normalisering i hvert fold; ekskludér navne eller ID'er, der koder labelen.",
+            ),
+            (
+                "Toda transformación aprendida pertenece al entrenamiento.",
+                "Every learned transformation belongs inside training.",
+                "Enhver lært transformation hører til i træningen.",
+            ),
+            "",
+        ),
+        (
+            "m07.p05",
+            "FILL_IN_THE_BLANK",
+            (
+                "La validación que deja una especie completa fuera se llama ________.",
+                "Validation leaving one complete species out is called ________.",
+                "Validering, der udelader én hel art, kaldes ________.",
+            ),
+            (("Es una forma de grouped CV.", "It is grouped CV.", "Det er grouped CV."),),
+            ("leave-one-species-out", "leave-one-species-out", "leave-one-species-out"),
+            (
+                "Evalúa transferencia entre especies.",
+                "It evaluates cross-species transfer.",
+                "Det evaluerer overførsel mellem arter.",
+            ),
+            "",
+        ),
+        (
+            "m07.p06",
+            "DEBUGGING",
+            (
+                "El modelo usa genes de cromosomas distintos como adyacentes. Diagnostica.",
+                "The model treats genes on different chromosomes as adjacent. Diagnose it.",
+                "Modellen behandler gener på forskellige kromosomer som naboer. Diagnosticér.",
+            ),
+            (("Revisa agrupación.", "Inspect grouping.", "Undersøg gruppering."),),
+            (
+                "Agrupar por replicón antes de ordenar y generar pares; añadir una prueba que prohíba pares con replicon distinto.",
+                "Group by replicon before sorting and pairing; add a test forbidding pairs with different replicons.",
+                "Gruppér efter replikon før sortering og pardannelse; tilføj en test, der forbyder par med forskelligt replikon.",
+            ),
+            (
+                "Es un defecto estructural de preparación de datos.",
+                "It is a structural data-preparation defect.",
+                "Det er en strukturel fejl i dataforberedelsen.",
+            ),
+            "",
+        ),
+        (
+            "m07.p07",
+            "ORAL_EXPLANATION",
+            (
+                "Explica cómo transferencia horizontal afecta conservación de vecindario.",
+                "Explain how horizontal transfer affects neighborhood conservation.",
+                "Forklar hvordan horisontal overførsel påvirker konservering af nabolag.",
+            ),
+            (
+                (
+                    "Considera inserciones móviles.",
+                    "Consider mobile insertions.",
+                    "Overvej mobile insertioner.",
+                ),
+            ),
+            (
+                "Un bloque transferido puede conservarse como unidad en algunos linajes y aparecer en contextos distintos en otros; por ello conservación aporta evidencia, pero no sigue necesariamente la filogenia de especies.",
+                "A transferred block may remain a unit in some lineages and appear in different contexts in others; conservation provides evidence but need not follow species phylogeny.",
+                "En overført blok kan bevares som en enhed i nogle linjer og optræde i andre kontekster i andre; konservering giver evidens, men følger ikke nødvendigvis artsfylogenien.",
+            ),
+            (
+                "Los elementos móviles son un factor de heterogeneidad.",
+                "Mobile elements are a source of heterogeneity.",
+                "Mobile elementer er en kilde til heterogenitet.",
+            ),
+            "",
+        ),
+        (
+            "m07.p08",
+            "ORDERING",
+            (
+                "Ordena: definir pares, calcular features, separar especies, entrenar, calibrar, validar evidencia.",
+                "Order: define pairs, compute features, split species, train, calibrate, validate evidence.",
+                "Ordén: definér par, beregn features, opdel arter, træn, kalibrér, validér evidens.",
+            ),
+            (
+                (
+                    "La separación ocurre antes del ajuste.",
+                    "Splitting occurs before fitting.",
+                    "Opdeling sker før tilpasning.",
+                ),
+            ),
+            (
+                "Definir pares → separar especies → calcular/ajustar features dentro de train → entrenar → calibrar → validar con evidencia independiente.",
+                "Define pairs → split species → compute/fit features within train → train → calibrate → validate with independent evidence.",
+                "Definér par → opdel arter → beregn/tilpas features i train → træn → kalibrér → validér med uafhængig evidens.",
+            ),
+            (
+                "Evita fuga entre especies y etapas.",
+                "It avoids leakage across species and stages.",
+                "Det undgår leakage mellem arter og trin.",
+            ),
+            "",
+        ),
+    ),
+    mcqs=(
+        (
+            "001",
+            (
+                "¿Qué produce un operón típico?",
+                "What does a typical operon produce?",
+                "Hvad producerer et typisk operon?",
+            ),
+            (
+                ("poly", ("ARN policistrónico", "Polycistronic RNA", "Polycistronisk RNA")),
+                (
+                    "single",
+                    (
+                        "Sólo una proteína aislada",
+                        "Only one isolated protein",
+                        "Kun ét isoleret protein",
+                    ),
+                ),
+                ("dna", ("Nuevo cromosoma", "New chromosome", "Nyt kromosom")),
+            ),
+            "poly",
+            (
+                "Varios genes pueden transcribirse juntos.",
+                "Several genes may be transcribed together.",
+                "Flere gener kan transskriberes sammen.",
+            ),
+        ),
+        (
+            "002",
+            (
+                "¿Qué pares son candidatos básicos?",
+                "Which pairs are basic candidates?",
+                "Hvilke par er grundlæggende kandidater?",
+            ),
+            (
+                (
+                    "adjacent",
+                    (
+                        "Genes adyacentes misma hebra",
+                        "Adjacent same-strand genes",
+                        "Nabogener på samme streng",
+                    ),
+                ),
+                (
+                    "different",
+                    (
+                        "Genes en replicones distintos",
+                        "Genes on different replicons",
+                        "Gener på forskellige replikoner",
+                    ),
+                ),
+                ("random", ("Genes aleatorios", "Random genes", "Tilfældige gener")),
+            ),
+            "adjacent",
+            (
+                "La co-transcripción requiere proximidad y orientación compatibles.",
+                "Co-transcription requires compatible proximity and orientation.",
+                "Co-transkription kræver kompatibel nærhed og orientering.",
+            ),
+        ),
+        (
+            "003",
+            (
+                "¿Qué significa distancia negativa?",
+                "What does negative intergenic distance mean?",
+                "Hvad betyder negativ intergen afstand?",
+            ),
+            (
+                ("overlap", ("Solapamiento", "Overlap", "Overlap")),
+                ("missing", ("Dato ausente", "Missing data", "Manglende data")),
+                ("reverse", ("Hebra inversa", "Reverse strand", "Omvendt streng")),
+            ),
+            "overlap",
+            ("Las CDS se superponen.", "CDSs overlap.", "CDS'er overlapper."),
+        ),
+        (
+            "004",
+            (
+                "¿Qué propiedad no garantiza AUC alta?",
+                "What does high AUC not guarantee?",
+                "Hvad garanterer høj AUC ikke?",
+            ),
+            (
+                ("calibration", ("Calibración", "Calibration", "Kalibrering")),
+                ("ranking", ("Ranking", "Ranking", "Ranking")),
+                ("discrimination", ("Discriminación", "Discrimination", "Diskrimination")),
+            ),
+            "calibration",
+            (
+                "AUC evalúa ranking, no probabilidades absolutas.",
+                "AUC evaluates ranking, not absolute probabilities.",
+                "AUC evaluerer ranking, ikke absolutte sandsynligheder.",
+            ),
+        ),
+        (
+            "005",
+            (
+                "¿Qué split evalúa transferencia?",
+                "Which split evaluates transfer?",
+                "Hvilket split evaluerer overførsel?",
+            ),
+            (
+                (
+                    "species",
+                    ("Leave-one-species-out", "Leave-one-species-out", "Leave-one-species-out"),
+                ),
+                ("row", ("Filas aleatorias", "Random rows", "Tilfældige rækker")),
+                ("duplicate", ("Duplicar test", "Duplicate test", "Duplikér test")),
+            ),
+            "species",
+            (
+                "La especie completa permanece no vista.",
+                "The complete species remains unseen.",
+                "Hele arten forbliver ikke-set.",
+            ),
+        ),
+        (
+            "006",
+            (
+                "¿Qué evidencia valida co-transcripción?",
+                "Which evidence validates co-transcription?",
+                "Hvilken evidens validerer co-transkription?",
+            ),
+            (
+                (
+                    "rna",
+                    (
+                        "Lecturas que atraviesan la frontera",
+                        "Reads spanning the boundary",
+                        "Reads, der krydser grænsen",
+                    ),
+                ),
+                ("color", ("Color del gen", "Gene color", "Genfarve")),
+                ("name", ("Nombre similar", "Similar name", "Lignende navn")),
+            ),
+            "rna",
+            (
+                "La señal transcripcional aporta evidencia directa.",
+                "Transcriptional signal provides direct evidence.",
+                "Transkriptionssignal giver direkte evidens.",
+            ),
+        ),
+        (
+            "007",
+            ("¿Qué es leakage?", "What is leakage?", "Hvad er leakage?"),
+            (
+                (
+                    "future",
+                    (
+                        "Información de test usada al entrenar",
+                        "Test information used during training",
+                        "Testinformation brugt under træning",
+                    ),
+                ),
+                ("missing", ("Valores ausentes", "Missing values", "Manglende værdier")),
+                ("slow", ("Modelo lento", "Slow model", "Langsom model")),
+            ),
+            "future",
+            (
+                "Produce estimaciones optimistas.",
+                "It produces optimistic estimates.",
+                "Det giver optimistiske estimater.",
+            ),
+        ),
+        (
+            "008",
+            (
+                "¿Qué representa un regulón?",
+                "What does a regulon represent?",
+                "Hvad repræsenterer et regulon?",
+            ),
+            (
+                (
+                    "shared",
+                    (
+                        "Genes regulados por un factor común",
+                        "Genes controlled by a common regulator",
+                        "Gener reguleret af en fælles regulator",
+                    ),
+                ),
+                ("adjacent", ("Sólo genes adyacentes", "Only adjacent genes", "Kun nabogener")),
+                ("protein", ("Una proteína", "One protein", "Ét protein")),
+            ),
+            "shared",
+            (
+                "Puede abarcar varias regiones genómicas.",
+                "It may span multiple genomic regions.",
+                "Det kan spænde over flere genomiske regioner.",
+            ),
+        ),
+        (
+            "009",
+            (
+                "¿Qué unidad debe agrupar la validación?",
+                "Which unit should validation group by?",
+                "Hvilken enhed bør validering gruppere efter?",
+            ),
+            (
+                ("species", ("Especie/linaje", "Species/lineage", "Art/linje")),
+                (
+                    "pair",
+                    (
+                        "Cada par independientemente",
+                        "Each pair independently",
+                        "Hvert par uafhængigt",
+                    ),
+                ),
+                ("score", ("Score", "Score", "Score")),
+            ),
+            "species",
+            (
+                "Los pares de una especie no son independientes.",
+                "Pairs within a species are not independent.",
+                "Par inden for en art er ikke uafhængige.",
+            ),
+        ),
+        (
+            "010",
+            (
+                "¿Qué debe preceder a interpretación de probabilidad?",
+                "What should precede probability interpretation?",
+                "Hvad bør gå forud for fortolkning af sandsynlighed?",
+            ),
+            (
+                (
+                    "calibration",
+                    (
+                        "Evaluación de calibración",
+                        "Calibration evaluation",
+                        "Kalibreringsevaluering",
+                    ),
+                ),
+                ("sorting", ("Ordenar nombres", "Sort names", "Sortér navne")),
+                ("plot", ("Cambiar color", "Change color", "Skift farve")),
+            ),
+            "calibration",
+            (
+                "Un score puede no ser una probabilidad fiable.",
+                "A score may not be a reliable probability.",
+                "En score er måske ikke en pålidelig sandsynlighed.",
+            ),
+        ),
+    ),
+    true_false=(
+        (
+            "011",
+            (
+                "Todos los genes adyacentes de la misma hebra forman un operón.",
+                "All adjacent same-strand genes form an operon.",
+                "Alle nabogener på samme streng danner et operon.",
+            ),
+            False,
+            (
+                "Son candidatos, no certeza.",
+                "They are candidates, not certainty.",
+                "De er kandidater, ikke sikkerhed.",
+            ),
+        ),
+        (
+            "012",
+            (
+                "Un regulón puede incluir loci distantes.",
+                "A regulon may include distant loci.",
+                "Et regulon kan inkludere fjerne loci.",
+            ),
+            True,
+            (
+                "Comparte regulador, no necesariamente ubicación.",
+                "It shares a regulator, not necessarily location.",
+                "Det deler regulator, ikke nødvendigvis placering.",
+            ),
+        ),
+        (
+            "013",
+            (
+                "Distancia negativa puede indicar solapamiento.",
+                "Negative distance may indicate overlap.",
+                "Negativ afstand kan indikere overlap.",
+            ),
+            True,
+            ("Las coordenadas se superponen.", "Coordinates overlap.", "Koordinater overlapper."),
+        ),
+        (
+            "014",
+            (
+                "AUC alta garantiza probabilidades calibradas.",
+                "High AUC guarantees calibrated probabilities.",
+                "Høj AUC garanterer kalibrerede sandsynligheder.",
+            ),
+            False,
+            (
+                "Ranking y calibración son distintos.",
+                "Ranking and calibration differ.",
+                "Ranking og kalibrering er forskellige.",
+            ),
+        ),
+        (
+            "015",
+            (
+                "Features deben ajustarse usando todo el dataset antes de CV.",
+                "Features should be fitted using the full dataset before CV.",
+                "Features bør tilpasses med hele datasættet før CV.",
+            ),
+            False,
+            ("Eso introduce fuga.", "That introduces leakage.", "Det introducerer leakage."),
+        ),
+        (
+            "016",
+            (
+                "Leave-one-species-out evalúa especies no vistas.",
+                "Leave-one-species-out evaluates unseen species.",
+                "Leave-one-species-out evaluerer ikke-sete arter.",
+            ),
+            True,
+            (
+                "La especie de test se excluye del entrenamiento.",
+                "The test species is excluded from training.",
+                "Testarten ekskluderes fra træning.",
+            ),
+        ),
+        (
+            "017",
+            (
+                "Transferencia horizontal puede cambiar vecindarios conservados.",
+                "Horizontal transfer can change conserved neighborhoods.",
+                "Horisontal overførsel kan ændre konserverede nabolag.",
+            ),
+            True,
+            (
+                "Bloques móviles aparecen en contextos distintos.",
+                "Mobile blocks appear in different contexts.",
+                "Mobile blokke optræder i forskellige kontekster.",
+            ),
+        ),
+        (
+            "018",
+            (
+                "Ausencia de RNA-seq demuestra ausencia de operón.",
+                "Absence of RNA-seq signal proves absence of an operon.",
+                "Fravær af RNA-seq-signal beviser fravær af et operon.",
+            ),
+            False,
+            (
+                "La condición puede no expresar los genes.",
+                "The condition may not express the genes.",
+                "Betingelsen udtrykker måske ikke generne.",
+            ),
+        ),
+        (
+            "019",
+            (
+                "Un umbral depende del coste de errores.",
+                "A threshold depends on error costs.",
+                "En tærskel afhænger af fejlomkostninger.",
+            ),
+            True,
+            (
+                "Falsos positivos y negativos pueden tener impactos diferentes.",
+                "False positives and negatives may have different impacts.",
+                "Falske positive og negative kan have forskellig påvirkning.",
+            ),
+        ),
+        (
+            "020",
+            (
+                "Una probabilidad de ejemplo puede usarse clínicamente sin calibración.",
+                "An example probability can be used clinically without calibration.",
+                "En eksempelsandsynlighed kan bruges klinisk uden kalibrering.",
+            ),
+            False,
+            (
+                "Es material didáctico.",
+                "It is teaching material.",
+                "Det er undervisningsmateriale.",
+            ),
+        ),
+    ),
+    tutor=(
+        (
+            "La predicción de operones convierte organización genómica y evidencia regulatoria en un problema de clasificación de pares adyacentes. Los genes deben agruparse por replicón, ordenarse y compararse sólo bajo orientación compatible. Distancia, solapamiento, conservación, coexpresión, promotores y terminadores son características complementarias. Un score no es una verdad ni necesariamente una probabilidad calibrada. La validación aleatoria por pares puede filtrar información de especie; leave-one-species-out mide transferencia. Transferencia horizontal y elementos móviles generan heterogeneidad. RNA-seq, long reads y mapas reguladores aportan evidencia independiente, pero ausencia de señal depende de la condición.",
+            "Operon prediction turns genome organization and regulatory evidence into classification of adjacent gene pairs. Genes must be grouped by replicon, ordered, and compared only under compatible orientation. Distance, overlap, conservation, co-expression, promoters, and terminators are complementary features. A score is not truth and may not be a calibrated probability. Random pair-level validation can leak species information; leave-one-species-out measures transfer. Horizontal transfer and mobile elements create heterogeneity. RNA-seq, long reads, and regulatory maps provide independent evidence, but absence of signal depends on condition.",
+            "Operonprædiktion omsætter genomorganisation og regulatorisk evidens til klassifikation af nabogenpar. Gener skal grupperes efter replikon, ordnes og kun sammenlignes ved kompatibel orientering. Afstand, overlap, konservering, co-ekspression, promotorer og terminatorer er komplementære features. En score er ikke sandhed og er måske ikke en kalibreret sandsynlighed. Tilfældig validering på parniveau kan lække artsinformation; leave-one-species-out måler overførsel. Horisontal overførsel og mobile elementer skaber heterogenitet. RNA-seq, long reads og regulatoriske kort giver uafhængig evidens, men fravær af signal afhænger af betingelsen.",
+        ),
+        (
+            (
+                "Operon es unidad co-transcrita.",
+                "An operon is a co-transcribed unit.",
+                "Et operon er en co-transskriberet enhed.",
+            ),
+            (
+                "Pares deben compartir replicón y hebra.",
+                "Pairs should share replicon and strand.",
+                "Par bør dele replikon og streng.",
+            ),
+            (
+                "Features integran evidencia.",
+                "Features integrate evidence.",
+                "Features integrerer evidens.",
+            ),
+            (
+                "AUC y calibración son diferentes.",
+                "AUC and calibration differ.",
+                "AUC og kalibrering er forskellige.",
+            ),
+            (
+                "La especie agrupa observaciones.",
+                "Species groups observations.",
+                "Arten grupperer observationer.",
+            ),
+            (
+                "Validación biológica depende de condición.",
+                "Biological validation depends on condition.",
+                "Biologisk validering afhænger af betingelse.",
+            ),
+        ),
+        (
+            (
+                "Confundir operón y regulón.",
+                "Confusing operon and regulon.",
+                "At forveksle operon og regulon.",
+            ),
+            (
+                "Crear adyacencias entre replicones.",
+                "Creating adjacency across replicons.",
+                "At skabe naboskab mellem replikoner.",
+            ),
+            (
+                "Tratar distancia corta como prueba.",
+                "Treating short distance as proof.",
+                "At behandle kort afstand som bevis.",
+            ),
+            (
+                "Ajustar features antes de split.",
+                "Fitting features before split.",
+                "At tilpasse features før split.",
+            ),
+            (
+                "Validar por filas aleatorias.",
+                "Validating by random rows.",
+                "At validere med tilfældige rækker.",
+            ),
+            (
+                "Interpretar ausencia de expresión como ausencia estructural.",
+                "Interpreting no expression as structural absence.",
+                "At fortolke manglende ekspression som strukturelt fravær.",
+            ),
+        ),
+        (
+            (
+                "¿Cuál es la unidad de predicción?",
+                "What is the prediction unit?",
+                "Hvad er prædiktionsenheden?",
+            ),
+            ("¿Se agruparon replicones?", "Were replicons grouped?", "Blev replikoner grupperet?"),
+            (
+                "¿Qué feature podría filtrar la etiqueta?",
+                "Which feature might leak the label?",
+                "Hvilken feature kan lække labelen?",
+            ),
+            ("¿Está calibrado el score?", "Is the score calibrated?", "Er scoren kalibreret?"),
+            ("¿La especie de test fue vista?", "Was the test species seen?", "Blev testarten set?"),
+            (
+                "¿Qué evidencia independiente valida?",
+                "What independent evidence validates it?",
+                "Hvilken uafhængig evidens validerer?",
+            ),
+        ),
+        (
+            ("Construye pares correctos.", "Builds correct pairs.", "Bygger korrekte par."),
+            (
+                "Define features sin fuga.",
+                "Defines leakage-free features.",
+                "Definerer leakage-frie features.",
+            ),
+            (
+                "Distingue discriminación y calibración.",
+                "Distinguishes discrimination and calibration.",
+                "Skelner diskrimination og kalibrering.",
+            ),
+            (
+                "Agrupa validación por especie.",
+                "Groups validation by species.",
+                "Grupperer validering efter art.",
+            ),
+            (
+                "Integra transferencia horizontal.",
+                "Accounts for horizontal transfer.",
+                "Medtager horisontal overførsel.",
+            ),
+            (
+                "Limita conclusiones experimentales.",
+                "Limits experimental conclusions.",
+                "Begrænser eksperimentelle konklusioner.",
+            ),
+        ),
+        (
+            (
+                "No presentar scores como certeza.",
+                "Do not present scores as certainty.",
+                "Præsenter ikke scores som sikkerhed.",
+            ),
+            (
+                "No inventar operones o evidencia.",
+                "Do not invent operons or evidence.",
+                "Opfind ikke operoner eller evidens.",
+            ),
+            (
+                "No recomendar uso clínico.",
+                "Do not recommend clinical use.",
+                "Anbefal ikke klinisk brug.",
+            ),
+            (
+                "No ocultar especie y condición.",
+                "Do not hide species and condition.",
+                "Skjul ikke art og betingelse.",
+            ),
+            ("Responder en idioma activo.", "Answer in active language.", "Svar på aktivt sprog."),
+        ),
+        (
+            "Bacterial operon and regulon biology.",
+            "Operon prediction literature using intergenic distance and conservation.",
+            "Grouped and leave-one-species-out validation principles.",
+            "Calibration and discrimination references.",
+            "Horizontal gene transfer and synteny literature.",
+            "Active SDU DM847 bacterial-genetics learning outcomes.",
+        ),
+    ),
+)
+
+LOCALIZED_MODULE_07_OPERONS_BACTERIAL_GENETICS: LocalizedLearningModule = build_module(_SPEC)
+LOCALIZED_OBJECTIVE_QUESTION_BANK_07 = build_question_bank(_SPEC)
+
+
+def materialize_module_07_question_bank(
+    locale: AppLocale | str = AppLocale.SPANISH_SPAIN,
+) -> tuple[AssessmentItem, ...]:
+    return materialize_bank(LOCALIZED_OBJECTIVE_QUESTION_BANK_07, locale)
+
+
+MODULE_07_OPERONS_BACTERIAL_GENETICS: LearningModule = (
+    LOCALIZED_MODULE_07_OPERONS_BACTERIAL_GENETICS.materialize(AppLocale.SPANISH_SPAIN)
+)
+OBJECTIVE_QUESTION_BANK_07 = materialize_module_07_question_bank()
+
+__all__ = [
+    "LOCALIZED_MODULE_07_OPERONS_BACTERIAL_GENETICS",
+    "LOCALIZED_OBJECTIVE_QUESTION_BANK_07",
+    "MODULE_07_OPERONS_BACTERIAL_GENETICS",
+    "OBJECTIVE_QUESTION_BANK_07",
+    "materialize_module_07_question_bank",
+]
