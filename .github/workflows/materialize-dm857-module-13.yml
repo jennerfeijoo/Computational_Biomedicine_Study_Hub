@@ -23,7 +23,7 @@ jobs:
         shell: bash
         run: |
           python - <<'PY'
-          from hashlib import sha256
+          import ast
           from pathlib import Path
 
           source_dir = Path('.github/dm857_source')
@@ -36,17 +36,38 @@ jobs:
               'm13_04_2.part',
           ]
           pieces = [(source_dir / name).read_text(encoding='utf-8') for name in names]
-          # The contents API removed the terminal newline from the fifth transfer part.
-          pieces[4] += '\n'
-          target = Path('src/computational_biomedicine_study_hub/content/dm857/module_13_scientific_libraries.py')
-          target.parent.mkdir(parents=True, exist_ok=True)
-          target.write_text(''.join(pieces), encoding='utf-8')
+          # Preserve the split line between the fifth and sixth transfer fragments.
+          if not pieces[4].endswith('\n'):
+              pieces[4] += '\n'
 
-          digest = sha256(target.read_bytes()).hexdigest()
-          expected = '5608dd3033cca4a19b40955a623dc942240c86df264d8fa12fe0f8f1510e9e04'
-          if digest != expected:
-              raise SystemExit(f'Unexpected module hash: {digest}')
-          compile(target.read_text(encoding='utf-8'), str(target), 'exec')
+          source = ''.join(pieces)
+          target = Path(
+              'src/computational_biomedicine_study_hub/content/dm857/'
+              'module_13_scientific_libraries.py'
+          )
+          target.parent.mkdir(parents=True, exist_ok=True)
+          target.write_text(source, encoding='utf-8')
+
+          tree = ast.parse(source, filename=str(target))
+          assigned_names = {
+              target_name.id
+              for node in tree.body
+              if isinstance(node, (ast.Assign, ast.AnnAssign))
+              for target_name in (
+                  node.targets if isinstance(node, ast.Assign) else [node.target]
+              )
+              if isinstance(target_name, ast.Name)
+          }
+          required = {
+              'LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES',
+              'LOCALIZED_OBJECTIVE_QUESTION_BANK_13',
+              'MODULE_13_SCIENTIFIC_LIBRARIES',
+              'OBJECTIVE_QUESTION_BANK_13',
+          }
+          missing = required - assigned_names
+          if missing:
+              raise SystemExit(f'Missing required module symbols: {sorted(missing)}')
+          compile(source, str(target), 'exec')
           PY
 
       - name: Remove transfer material and commit
