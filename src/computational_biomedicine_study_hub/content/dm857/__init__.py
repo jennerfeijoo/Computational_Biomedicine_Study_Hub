@@ -69,6 +69,11 @@ from .module_13_scientific_libraries import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_13,
     materialize_module_13_question_bank,
 )
+from .module_14_testing_debugging_quality import (
+    LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_14,
+    materialize_module_14_question_bank,
+)
 
 LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
@@ -136,6 +141,11 @@ LOCALIZED_BUNDLES = (
         localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_13,
         content_version="1.0.0",
     ),
+    LocalizedModuleBundle(
+        localized_module=LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,
+        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_14,
+        content_version="1.0.0",
+    ),
 )
 validate_bundle_catalog(LOCALIZED_BUNDLES)
 
@@ -154,6 +164,7 @@ MODULE_10_TREES = BUNDLES[9].module
 MODULE_11_ADTS = BUNDLES[10].module
 MODULE_12_OOP = BUNDLES[11].module
 MODULE_13_SCIENTIFIC_LIBRARIES = BUNDLES[12].module
+MODULE_14_TESTING_DEBUGGING_QUALITY = BUNDLES[13].module
 
 OBJECTIVE_QUESTION_BANK = BUNDLES[0].objective_question_bank
 OBJECTIVE_QUESTION_BANK_02 = BUNDLES[1].objective_question_bank
@@ -168,6 +179,7 @@ OBJECTIVE_QUESTION_BANK_10 = BUNDLES[9].objective_question_bank
 OBJECTIVE_QUESTION_BANK_11 = BUNDLES[10].objective_question_bank
 OBJECTIVE_QUESTION_BANK_12 = BUNDLES[11].objective_question_bank
 OBJECTIVE_QUESTION_BANK_13 = BUNDLES[12].objective_question_bank
+OBJECTIVE_QUESTION_BANK_14 = BUNDLES[13].objective_question_bank
 
 MODULES = tuple(bundle.module for bundle in BUNDLES)
 LOCALIZED_MODULES = tuple(bundle.localized_module for bundle in LOCALIZED_BUNDLES)
@@ -192,6 +204,7 @@ __all__ = [
     "LOCALIZED_MODULE_11_ADTS",
     "LOCALIZED_MODULE_12_OOP",
     "LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES",
+    "LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_02",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_03",
@@ -205,6 +218,7 @@ __all__ = [
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_11",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_12",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_13",
+    "LOCALIZED_OBJECTIVE_QUESTION_BANK_14",
     "MODULES",
     "MODULE_01_FOUNDATIONS",
     "MODULE_02_CONDITIONALS",
@@ -219,6 +233,7 @@ __all__ = [
     "MODULE_11_ADTS",
     "MODULE_12_OOP",
     "MODULE_13_SCIENTIFIC_LIBRARIES",
+    "MODULE_14_TESTING_DEBUGGING_QUALITY",
     "OBJECTIVE_QUESTION_BANK",
     "OBJECTIVE_QUESTION_BANKS",
     "OBJECTIVE_QUESTION_BANK_02",
@@ -233,6 +248,7 @@ __all__ = [
     "OBJECTIVE_QUESTION_BANK_11",
     "OBJECTIVE_QUESTION_BANK_12",
     "OBJECTIVE_QUESTION_BANK_13",
+    "OBJECTIVE_QUESTION_BANK_14",
     "materialize_module_02_question_bank",
     "materialize_module_03_question_bank",
     "materialize_module_04_question_bank",
@@ -245,5 +261,6 @@ __all__ = [
     "materialize_module_11_question_bank",
     "materialize_module_12_question_bank",
     "materialize_module_13_question_bank",
+    "materialize_module_14_question_bank",
     "materialize_objective_question_bank",
 ]
