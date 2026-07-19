@@ -235,6 +235,8 @@ class MainWindow(QMainWindow):
         page = self._pages.get(route)
         if isinstance(page, FlashcardsPage):
             return page.capture_state()
+        if isinstance(page, GlossaryPage):
+            return page.capture_state()
         if not isinstance(page, (DM857Page, CourseStudyPage)):
             return None
         return page.capture_state(route)
@@ -248,6 +250,9 @@ class MainWindow(QMainWindow):
             return
         page = self._pages.get(route)
         if isinstance(page, FlashcardsPage):
+            page.restore_state(state)
+            return
+        if isinstance(page, GlossaryPage):
             page.restore_state(state)
             return
         if not isinstance(page, (DM857Page, CourseStudyPage)):

@@ -175,7 +175,9 @@ QLabel#moduleSectionNotice {
 }
 
 QLineEdit#ollamaBaseUrl,
-QComboBox#ollamaModelSelector {
+QComboBox#ollamaModelSelector,
+QLineEdit#glossarySearch,
+QToolButton#glossaryCourseSelector {
     background: #ffffff;
     border: 1px solid #cbd5df;
     border-radius: 7px;
@@ -184,8 +186,43 @@ QComboBox#ollamaModelSelector {
 }
 
 QLineEdit#ollamaBaseUrl:focus,
-QComboBox#ollamaModelSelector:focus {
+QComboBox#ollamaModelSelector:focus,
+QLineEdit#glossarySearch:focus,
+QToolButton#glossaryCourseSelector:focus {
     border: 1px solid #2f80ed;
+}
+
+QToolButton#glossaryCourseSelector {
+    min-width: 220px;
+    text-align: left;
+}
+
+QListWidget#glossaryTermList,
+QWidget#glossaryDetailPanel {
+    background: #ffffff;
+    border: 1px solid #d8e0e8;
+    border-radius: 10px;
+}
+
+QListWidget#glossaryTermList::item {
+    min-height: 30px;
+    padding: 6px 10px;
+}
+
+QListWidget#glossaryTermList::item:selected {
+    background: #dcecff;
+    color: #173b63;
+}
+
+QLabel#glossaryTerm {
+    font-size: 25px;
+    font-weight: 700;
+    color: #243b53;
+}
+
+QLabel#glossaryDetailEmptyState {
+    color: #66727f;
+    padding: 24px;
 }
 
 QPushButton#courseOpenButton,
