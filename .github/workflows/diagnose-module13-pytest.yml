@@ -1,0 +1,43 @@
+name: Diagnose module 13 pytest
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/diagnose-module13-pytest.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/dm857-modules-13-15
+
+      - name: Install runtime and project
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes libegl1
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+
+      - name: Capture pytest output
+        shell: bash
+        run: |
+          set +e
+          pytest -q > .github/module13_pytest_diagnostic.txt 2>&1
+          status=$?
+          printf '\nPYTEST_EXIT=%s\n' "$status" >> .github/module13_pytest_diagnostic.txt
+          rm -f .github/workflows/diagnose-module13-pytest.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Capture DM857 module 13 pytest diagnostic"
+          git push origin HEAD:feat/dm857-modules-13-15
