@@ -1,0 +1,369 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m14
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title: {es: Pruebas, depuración y calidad del software, en: Testing, debugging, and software quality, da: Test, fejlsøgning og softwarekvalitet}
+  summary:
+    es: >-
+      Pruebas como contratos ejecutables; estructura pytest, aserciones, fixtures, parametrización,
+      excepciones, advertencias, límites e invariantes; flujo sistemático de depuración, trazas,
+      reducción de casos, logging, diseño comprobable, inyección de dependencias, regresiones y
+      pruebas basadas en propiedades como complemento de ejemplos concretos.
+    en: >-
+      Tests as executable contracts; pytest structure, assertions, fixtures, parametrization,
+      exceptions, warnings, boundaries, and invariants; systematic debugging, tracebacks, case
+      reduction, logging, testable design, dependency injection, regressions, and property-based tests.
+    da: >-
+      Test som eksekverbare kontrakter; pytest-struktur, assertions, fixtures, parametrisering,
+      exceptions, advarsler, grænser og invarianter; systematisk fejlsøgning, tracebacks,
+      casereduktion, logging, testbart design, afhængighedsinjektion og egenskabsbaserede test.
+  prerequisites: [dm857.m02, dm857.m04, dm857.m08, dm857.m11, dm857.m12, dm857.m13]
+  official_learning_outcomes: [dm857.lo01, dm857.lo02, dm857.lo03, dm857.lo05]
+  estimated_study_hours: 22
+  difficulty: advanced
+
+objectives:
+  - {id: m14.o1, bloom_level: understand, statement: {es: Explicar qué verifica una prueba y su relación con un contrato observable., en: Explain what a test verifies and how it relates to an observable contract., da: Forklare hvad en test verificerer og relationen til en observerbar kontrakt.}, evidence: testing_contract_explanation}
+  - {id: m14.o2, bloom_level: create, statement: {es: Escribir pruebas pytest legibles con Arrange-Act-Assert y diagnósticos útiles., en: Write readable pytest tests using Arrange-Act-Assert and useful diagnostics., da: Skrive læsbare pytest-tests med Arrange-Act-Assert og nyttige diagnoser.}, evidence: pytest_test_design}
+  - {id: m14.o3, bloom_level: apply, statement: {es: Usar fixtures y parametrización preservando aislamiento y ciclo de vida., en: Use fixtures and parametrization while preserving isolation and lifecycle., da: Bruge fixtures og parametrisering med bevaret isolation og livscyklus.}, evidence: fixture_parametrization}
+  - {id: m14.o4, bloom_level: create, statement: {es: Comprobar excepciones, advertencias, límites e invariantes de manera explícita., en: Check exceptions, warnings, boundaries, and invariants explicitly., da: Kontrollere exceptions, advarsler, grænser og invarianter eksplicit.}, evidence: negative_and_boundary_tests}
+  - {id: m14.o5, bloom_level: analyze, statement: {es: Depurar fallos mediante reproducción, traceback, reducción y comprobación de hipótesis., en: Debug failures through reproduction, traceback, reduction, and hypothesis testing., da: Fejlsøge gennem reproduktion, traceback, reduktion og hypotesetest.}, evidence: debugging_report}
+  - {id: m14.o6, bloom_level: create, statement: {es: Diseñar logging útil sin mezclar observabilidad con salida funcional ni exponer datos sensibles., en: Design useful logging without mixing observability with functional output or exposing sensitive data., da: Designe nyttig logging uden at blande observerbarhed med funktionelt output eller afsløre følsomme data.}, evidence: logging_design}
+  - {id: m14.o7, bloom_level: evaluate, statement: {es: Diseñar funciones y dependencias para aislamiento, determinismo y facilidad de prueba., en: Design functions and dependencies for isolation, determinism, and testability., da: Designe funktioner og afhængigheder for isolation, determinisme og testbarhed.}, evidence: testability_refactor}
+  - {id: m14.o8, bloom_level: create, statement: {es: Aplicar pruebas basadas en propiedades e invariantes como complemento de casos concretos., en: Apply property- and invariant-based tests as a complement to concrete cases., da: Anvende egenskabs- og invariantbaserede test som supplement til konkrete cases.}, evidence: property_test_design}
+
+concepts:
+  - id: tests-as-executable-contracts
+    title: {es: Pruebas como contratos ejecutables, en: Tests as executable contracts, da: Test som eksekverbare kontrakter}
+    body:
+      es: >-
+        Una prueba prepara un estado, ejecuta una conducta y comprueba un resultado observable. No demuestra
+        corrección universal, pero protege contratos específicos frente a regresiones. Una prueba valiosa
+        puede fallar por la razón esperada, usa datos controlados y comunica la discrepancia. Debe observar
+        resultados, errores, efectos y propiedades públicas, no detalles internos irrelevantes. Un error
+        corregido se convierte en prueba de regresión para impedir su reaparición.
+      en: >-
+        A test prepares state, executes behavior, and checks an observable result. It does not prove universal
+        correctness but protects specific contracts against regression. Valuable tests fail for the intended
+        reason, use controlled data, and diagnose discrepancies. They observe public behavior rather than irrelevant internals.
+      da: >-
+        En test forbereder tilstand, udfører adfærd og kontrollerer et observerbart resultat. Den beskytter
+        kontrakter mod regressioner uden at bevise universel korrekthed.
+    linked_objectives: [m14.o1, m14.o2]
+  - id: pytest-arrange-act-assert
+    title: {es: Estructura pytest y Arrange-Act-Assert, en: pytest structure and Arrange-Act-Assert, da: pytest-struktur og Arrange-Act-Assert}
+    body:
+      es: >-
+        pytest descubre funciones `test_*` y usa `assert` con introspección diagnóstica. Arrange prepara
+        datos y dependencias; Act ejecuta una conducta concreta; Assert verifica el contrato. Una prueba
+        debe tener un nombre que describa la conducta esperada. Varias aserciones son apropiadas cuando
+        describen un único resultado coherente; mezclar escenarios independientes dificulta localizar fallos.
+        Las pruebas deben ser rápidas, repetibles y capaces de ejecutarse en cualquier orden.
+      en: >-
+        pytest discovers `test_*` functions and enhances Python assertions. Arrange prepares inputs and
+        dependencies; Act executes one behavior; Assert verifies the contract. Tests should be fast,
+        repeatable, order-independent, and named after expected behavior.
+      da: >-
+        pytest finder `test_*`-funktioner. Arrange forbereder, Act udfører, Assert kontrollerer. Test bør
+        være hurtige, reproducerbare og uafhængige af rækkefølge.
+    linked_objectives: [m14.o2]
+  - id: fixtures-isolation-and-lifecycle
+    title: {es: Fixtures, aislamiento y ciclo de vida, en: Fixtures, isolation, and lifecycle, da: Fixtures, isolation og livscyklus}
+    body:
+      es: >-
+        Una fixture proporciona datos o recursos reutilizables y puede limpiar mediante `yield`. El alcance
+        function crea una instancia por prueba y reduce estado compartido. Alcances más amplios se justifican
+        sólo cuando el coste es real y la dependencia puede reiniciarse. Las fixtures deben ser pequeñas,
+        explícitas y devolver objetos listos para usar; no deben ocultar un segundo programa ni modificar
+        configuración global sin restaurarla.
+      en: >-
+        A fixture provides reusable data or resources and may clean up through `yield`. Function scope gives
+        one instance per test and reduces shared state. Broader scopes require real cost justification and
+        resettable dependencies. Fixtures should remain small and explicit.
+      da: >-
+        En fixture leverer genbrugelige data eller ressourcer og kan rydde op med `yield`. Function-scope
+        reducerer delt tilstand; bredere scopes kræver begrundelse.
+    linked_objectives: [m14.o3]
+  - id: parametrization-boundaries-and-expected-errors
+    title: {es: Parametrización, fronteras y errores esperados, en: Parametrization, boundaries, and expected errors, da: Parametrisering, grænser og forventede fejl}
+    body:
+      es: >-
+        La parametrización ejecuta el mismo contrato sobre entradas diferentes y evita duplicar estructura.
+        Debe reunir casos comparables, no problemas desconectados. Una suite incluye valores típicos, límites,
+        vacío, tipos inválidos, ausentes y casos adversos. `pytest.raises` debe envolver sólo la operación que
+        debe fallar; un bloque amplio puede pasar por una excepción incorrecta. También se verifica tipo,
+        mensaje o contexto cuando forman parte del contrato.
+      en: >-
+        Parametrization runs one contract over multiple inputs. Cases include typical, boundary, empty,
+        invalid-type, missing, and adversarial inputs. `pytest.raises` should wrap only the expected failing
+        operation; broad blocks may pass for the wrong exception.
+      da: >-
+        Parametrisering kører samme kontrakt på flere input. `pytest.raises` bør kun omslutte det forventede
+        fejlkald, og grænse- samt ugyldige cases skal være bevidste.
+    linked_objectives: [m14.o3, m14.o4]
+  - id: systematic-debugging-workflow
+    title: {es: Flujo sistemático de depuración, en: Systematic debugging workflow, da: Systematisk fejlsøgningsworkflow}
+    body:
+      es: >-
+        Depurar no es cambiar líneas al azar. Primero se reproduce el fallo de forma estable y se conserva
+        el traceback completo. Después se reduce el caso sin perder la causa, se formula una hipótesis y se
+        inspecciona sólo el estado relevante mediante depurador, logging o aserciones temporales. Se cambia
+        una causa a la vez y se verifica la hipótesis. La corrección termina con una prueba de regresión,
+        revisión de casos vecinos y eliminación de diagnósticos accidentales.
+      en: >-
+        Debugging is not random editing. Reproduce reliably, preserve the full traceback, reduce the case,
+        state a hypothesis, inspect relevant state, change one cause at a time, and verify. Finish with a
+        regression test, neighboring cases, and removal of temporary diagnostics.
+      da: >-
+        Fejlsøgning kræver stabil reproduktion, fuldt traceback, casereduktion, hypotese, relevant inspektion,
+        én ændring ad gangen og en afsluttende regressionstest.
+    linked_objectives: [m14.o5]
+  - id: traceback-and-failure-localization
+    title: {es: Traceback y localización del fallo, en: Traceback and failure localization, da: Traceback og lokalisering af fejl}
+    body:
+      es: >-
+        El traceback muestra la cadena de llamadas hasta la excepción. La última línea indica tipo y mensaje,
+        pero la causa lógica puede estar antes. Debe leerse desde el punto de fallo hacia las llamadas propias,
+        separando dónde se detectó el problema de dónde se originó el dato incorrecto. Capturar excepciones
+        ampliamente y reemplazar el mensaje elimina evidencia. El caso mínimo debe conservar entradas,
+        estado y ruta de ejecución suficientes para reproducir la causa.
+      en: >-
+        A traceback shows the call chain to an exception. The final line gives type and message, but the logical
+        cause may originate earlier. Read from failure into project code and distinguish detection from origin.
+        Broad exception replacement destroys evidence.
+      da: >-
+        Et traceback viser kaldskæden til en exception. Skeln mellem stedet hvor fejlen opdages og hvor den
+        forkerte tilstand opstår; brede exception-handlers kan ødelægge evidens.
+    linked_objectives: [m14.o5]
+  - id: logging-and-observability
+    title: {es: Logging y observabilidad, en: Logging and observability, da: Logging og observerbarhed}
+    body:
+      es: >-
+        Logging registra eventos con nivel y contexto configurables. DEBUG aporta detalle de diagnóstico;
+        INFO hitos normales; WARNING una situación recuperable; ERROR una operación fallida. Una biblioteca
+        no debe configurar globalmente logging ni usar print como sustituto. Los mensajes deben incluir
+        identificadores no sensibles, conteos, etapa y decisión, evitando secretos, datos personales y
+        volúmenes excesivos. La salida funcional y el log cumplen contratos diferentes.
+      en: >-
+        Logging records events with configurable level and context. DEBUG is diagnostic detail, INFO normal
+        milestones, WARNING recoverable situations, and ERROR failed operations. Libraries should not globally
+        configure logging or replace it with print. Avoid sensitive data and separate logs from functional output.
+      da: >-
+        Logging registrerer hændelser med niveau og kontekst. Biblioteker bør ikke konfigurere logging globalt,
+        og følsomme data må ikke logges.
+    linked_objectives: [m14.o6]
+  - id: testable-design-and-dependency-injection
+    title: {es: Diseño comprobable e inyección de dependencias, en: Testable design and dependency injection, da: Testbart design og afhængighedsinjektion}
+    body:
+      es: >-
+        El código es más fácil de probar cuando las funciones son pequeñas, puras cuando es posible y reciben
+        dependencias explícitas. Tiempo, aleatoriedad, sistema de archivos y red pueden inyectarse como funciones
+        u objetos, permitiendo sustitutos controlados. Mezclar cálculo, lectura, escritura y presentación obliga
+        a pruebas lentas y frágiles. Separar núcleo puro de adaptadores de E/S mejora determinismo, aislamiento y
+        capacidad de simular errores sin tocar recursos reales.
+      en: >-
+        Code is easier to test when functions are small, pure where possible, and receive explicit dependencies.
+        Time, randomness, filesystems, and networks can be injected and replaced with controlled substitutes.
+        Separate pure computation from I/O adapters for determinism and failure simulation.
+      da: >-
+        Testbart design bruger små funktioner og eksplicitte afhængigheder. Tid, tilfældighed, filsystem og netværk
+        kan injiceres og erstattes med kontrollerede substitutter.
+    linked_objectives: [m14.o7]
+  - id: property-based-and-invariant-testing
+    title: {es: Pruebas basadas en propiedades e invariantes, en: Property-based and invariant testing, da: Egenskabs- og invariantbaseret test}
+    body:
+      es: >-
+        Una prueba de ejemplo verifica entradas concretas; una propiedad describe una relación que debe cumplirse
+        para muchas entradas. Ejemplos: ordenar conserva multiconjunto y produce orden no decreciente; serializar y
+        leer preserva un registro válido; push seguido de pop restaura una pila. Las propiedades no sustituyen casos
+        de regresión ni contratos específicos. Los generadores deben respetar dominios y los fallos reducidos deben
+        convertirse en ejemplos comprensibles.
+      en: >-
+        Example tests check concrete inputs; properties state relations across many inputs. Sorting preserves the
+        multiset and yields nondecreasing order; serialization round-trips; push then pop restores a stack.
+        Properties complement rather than replace regression and contract tests.
+      da: >-
+        Eksempeltests bruger konkrete input; egenskaber beskriver relationer over mange input. Egenskabstest supplerer
+        regressioner og specifikke kontrakttest.
+    linked_objectives: [m14.o8]
+  - id: coverage-mutation-and-quality-signals
+    title: {es: Cobertura, mutación y señales de calidad, en: Coverage, mutation, and quality signals, da: Dækning, mutation og kvalitetssignaler}
+    body:
+      es: >-
+        Cobertura indica qué código se ejecutó, no si se comprobó correctamente. Alta cobertura puede coexistir
+        con aserciones débiles. Las pruebas de mutación introducen cambios artificiales y observan si la suite los
+        detecta, ofreciendo una señal sobre sensibilidad. Ninguna métrica única mide calidad: se combinan revisión,
+        claridad del contrato, casos frontera, aislamiento, velocidad, ausencia de flakiness y capacidad diagnóstica.
+      en: >-
+        Coverage shows executed code, not assertion quality. Mutation testing changes code deliberately and checks
+        whether tests detect it. No single metric measures quality; combine review, contract clarity, boundaries,
+        isolation, speed, non-flakiness, and diagnostics.
+      da: >-
+        Dækning viser udført kode, ikke kvaliteten af assertions. Mutationstest måler følsomhed over for ændringer.
+        Ingen enkelt metrik måler hele kvaliteten.
+    linked_objectives: [m14.o1, m14.o8]
+
+worked_examples:
+  - id: dm857.m14.e01
+    title: {es: Parametrizar límites y comprobar errores, en: Parametrize boundaries and check errors, da: Parametrisér grænser og kontrollér fejl}
+    problem: {es: Probar una función `classify(value)` con dominio 0–100 y categorías low/target/high., en: Test a `classify(value)` function with domain 0–100 and low/target/high categories., da: Test en `classify(value)`-funktion med domæne 0–100 og kategorier.}
+    assumptions: [negative and above-100 values raise ValueError, category boundaries are documented]
+    reasoning:
+      es: [Separar casos válidos de inválidos., Parametrizar valores frontera., Limitar raises a la llamada.]
+      en: [Separate valid from invalid cases., Parametrize boundary values., Limit raises to the call.]
+      da: [Adskil gyldige og ugyldige cases., Parametrisér grænser., Begræns raises til kaldet.]
+    code: |-
+      import pytest
+
+      @pytest.mark.parametrize(
+          ("value", "expected"),
+          [(0, "low"), (9.99, "low"), (10, "target"), (20, "target"), (20.01, "high"), (100, "high")],
+      )
+      def test_classify_valid_boundaries(value, expected):
+          assert classify(value) == expected
+
+      @pytest.mark.parametrize("value", [-0.01, 100.01])
+      def test_classify_rejects_out_of_domain(value):
+          with pytest.raises(ValueError, match="0.*100"):
+              classify(value)
+    expected_output: all contract boundaries pass and invalid values fail explicitly
+    validation: [exact limits, just-below and just-above, correct exception]
+    explanation: {es: La parametrización expresa una sola conducta sobre una tabla de casos y mantiene errores separados., en: Parametrization expresses one behavior over a case table while keeping error behavior separate., da: Parametrisering udtrykker én adfærd over en casetabel og holder fejl separat.}
+    linked_objectives: [m14.o2, m14.o3, m14.o4]
+  - id: dm857.m14.e02
+    title: {es: Depurar una mutación parcial, en: Debug partial mutation, da: Fejlsøg delvis mutation}
+    problem: {es: Una operación actualiza el valor antes de validar la unidad y deja el objeto corrupto al fallar., en: An operation updates value before validating unit and leaves the object corrupted on failure., da: En operation opdaterer værdi før validering af enhed og efterlader objektet korrupt.}
+    assumptions: [the operation should be atomic]
+    reasoning:
+      es: [Reproducir con una prueba que capture estado previo., Confirmar orden de asignaciones., Validar todo antes de mutar., Añadir regresión.]
+      en: [Reproduce with a test snapshotting prior state., Confirm assignment order., Validate everything before mutation., Add regression.]
+      da: [Reproducer med snapshot af tilstand., Kontrollér tildelingsorden., Validér alt før mutation., Tilføj regression.]
+    code: |-
+      def test_invalid_update_preserves_state(measurement):
+          before = (measurement.value, measurement.unit)
+          with pytest.raises(ValueError):
+              measurement.update(value=12.0, unit="")
+          assert (measurement.value, measurement.unit) == before
+    expected_output: test fails before fix and passes after validation is moved before assignment
+    validation: [invalid value, invalid unit, both invalid, valid update]
+    explanation: {es: La prueba no sólo exige una excepción; exige preservación de la invariante después del fallo., en: The test requires not only an exception but invariant preservation after failure., da: Testen kræver både exception og bevaret invariant efter fejl.}
+    linked_objectives: [m14.o4, m14.o5]
+  - id: dm857.m14.e03
+    title: {es: Inyectar reloj y aleatoriedad, en: Inject clock and randomness, da: Injicér ur og tilfældighed}
+    problem: {es: Hacer determinista una función que crea un id con fecha y número aleatorio., en: Make deterministic a function creating an id from time and randomness., da: Gør en funktion deterministisk, når den bruger tid og tilfældighed.}
+    assumptions: [production defaults may use real clock and RNG]
+    reasoning:
+      es: [Convertir dependencias ocultas en parámetros., Proporcionar dobles controlados en prueba., Verificar formato sin dormir ni fijar globales.]
+      en: [Turn hidden dependencies into parameters., Provide controlled test doubles., Verify format without sleeping or global mutation.]
+      da: [Gør skjulte afhængigheder til parametre., Brug kontrollerede test doubles., Undgå globale ændringer.]
+    code: |-
+      def make_id(prefix, now, randint):
+          stamp = now().strftime("%Y%m%d")
+          return f"{prefix}-{stamp}-{randint(1000, 9999)}"
+
+      def test_make_id_uses_injected_dependencies():
+          from datetime import datetime
+          result = make_id("S", lambda: datetime(2026, 7, 19), lambda a, b: 1234)
+          assert result == "S-20260719-1234"
+    expected_output: deterministic id without patching globals
+    validation: [different prefix, boundary random values, invalid prefix contract]
+    explanation: {es: La inyección vuelve controlables dependencias no deterministas y simplifica la prueba., en: Injection makes nondeterministic dependencies controllable and simplifies testing., da: Injektion gør ikke-deterministiske afhængigheder kontrollerbare.}
+    linked_objectives: [m14.o7]
+
+practice_exercises:
+  - {id: dm857.m14.p01, activity_type: test_review, difficulty: foundational, prompt: {es: Reescribe una prueba que mezcla tres escenarios independientes en una sola función., en: Rewrite a test mixing three independent scenarios into one function., da: Omskriv en test der blander tre uafhængige scenarier.}, reference_solution: {es: Separar por conducta o parametrizar cuando el contrato es el mismo; nombrar cada expectativa., en: Split by behavior or parametrize when the contract is the same; name each expectation., da: Opdel efter adfærd eller parametrisér samme kontrakt; navngiv forventningerne.}, linked_objectives: [m14.o2, m14.o3]}
+  - {id: dm857.m14.p02, activity_type: fixture_design, difficulty: intermediate, prompt: {es: Diseña una fixture temporal de archivo con creación y limpieza aisladas., en: Design an isolated temporary-file fixture with setup and cleanup., da: Design en isoleret midlertidig fil-fixture med oprettelse og oprydning.}, reference_solution: {es: Preferir `tmp_path`; crear datos dentro de cada prueba o fixture function-scoped y devolver Path listo para usar., en: Prefer `tmp_path`; create data per test or function-scoped fixture and return a ready Path., da: Foretræk `tmp_path`; opret data pr. test og returnér en klar Path.}, linked_objectives: [m14.o3]}
+  - {id: dm857.m14.p03, activity_type: exception_testing, difficulty: intermediate, prompt: {es: Corrige un `pytest.raises(ValueError)` que envuelve preparación y llamada., en: Correct a `pytest.raises(ValueError)` wrapping both setup and call., da: Ret en `pytest.raises(ValueError)` der omslutter både setup og kald.}, reference_solution: {es: Mover la preparación fuera y dejar dentro sólo la llamada que contractualmente debe lanzar., en: Move setup outside and keep only the contractually failing call inside., da: Flyt setup udenfor og behold kun det forventede fejlkald inde.}, linked_objectives: [m14.o4]}
+  - {id: dm857.m14.p04, activity_type: debugging_workflow, difficulty: advanced, prompt: {es: Propón una secuencia de depuración para un fallo intermitente dependiente del orden de pruebas., en: Propose a debugging sequence for an order-dependent intermittent test failure., da: Foreslå en fejlsøgningssekvens for en intermitterende rækkefølgeafhængig testfejl.}, reference_solution: {es: Reproducir con orden/seed registrado, ejecutar aislada y en pares, buscar estado global/fixture amplia, reducir dependencia, restaurar estado y añadir prueba de aislamiento., en: Record order/seed, run isolated and in pairs, inspect global or broad-scope state, reduce dependency, restore state, and add isolation regression., da: Registrér rækkefølge/seed, kør isoleret og i par, undersøg global tilstand, reducer og tilføj isolationstest.}, linked_objectives: [m14.o3, m14.o5]}
+  - {id: dm857.m14.p05, activity_type: logging_design, difficulty: advanced, prompt: {es: Diseña eventos y niveles para un pipeline que lee, valida, transforma y escribe sin registrar datos personales., en: Design events and levels for a read-validate-transform-write pipeline without logging personal data., da: Design events og niveauer for en pipeline uden at logge persondata.}, reference_solution: {es: INFO para inicio/fin y conteos, DEBUG para shapes y etapas, WARNING para filas rechazadas resumidas, ERROR para operación fallida; usar ids técnicos o hashes no reversibles cuando proceda., en: INFO for start/end and counts, DEBUG for shapes/stages, WARNING for summarized rejected rows, ERROR for failed operations; use non-sensitive technical identifiers., da: INFO for start/slut og antal, DEBUG for shapes, WARNING for afviste rækker samlet og ERROR for fejl uden persondata.}, linked_objectives: [m14.o6]}
+  - {id: dm857.m14.p06, activity_type: property_test_design, difficulty: advanced, prompt: {es: Formula propiedades para una función que deduplica preservando primera aparición., en: Formulate properties for a function deduplicating while preserving first occurrence., da: Formulér egenskaber for deduplikering med bevaret første forekomst.}, reference_solution: {es: Resultado sin duplicados; mismo conjunto de valores; orden relativo según primera aparición; aplicar dos veces no cambia el resultado; entrada no se muta., en: No duplicates; same set of values; first-occurrence relative order; idempotence; input not mutated., da: Ingen dubletter, samme værdimængde, første forekomsts rækkefølge, idempotens og ingen inputmutation.}, linked_objectives: [m14.o8]}
+
+objective_bank:
+  - {id: dm857.m14.q01, activity_type: true_false, prompt: {es: Una suite con 100 % de cobertura demuestra corrección., en: A suite with 100% coverage proves correctness., da: En suite med 100 % dækning beviser korrekthed.}, correct_answer: false}
+  - {id: dm857.m14.q02, activity_type: multiple_choice, prompt: {es: ¿Qué fase ejecuta la conducta bajo prueba?, en: Which phase executes the behavior under test?, da: Hvilken fase udfører den testede adfærd?}, options: [{id: act, text: {es: Act, en: Act, da: Act}}, {id: arrange, text: {es: Arrange, en: Arrange, da: Arrange}}, {id: assert, text: {es: Assert, en: Assert, da: Assert}}], correct_option_ids: [act]}
+  - {id: dm857.m14.q03, activity_type: true_false, prompt: {es: Una fixture de alcance session siempre mejora las pruebas., en: A session-scoped fixture always improves tests., da: En session-scoped fixture forbedrer altid test.}, correct_answer: false}
+  - {id: dm857.m14.q04, activity_type: multiple_choice, prompt: {es: ¿Qué debe envolver `pytest.raises`?, en: What should `pytest.raises` wrap?, da: Hvad bør `pytest.raises` omslutte?}, options: [{id: exact_call, text: {es: La llamada concreta que debe fallar., en: The exact call expected to fail., da: Det præcise kald der skal fejle.}}, {id: whole_test, text: {es: Toda la prueba., en: The whole test., da: Hele testen.}}, {id: imports, text: {es: Todos los imports., en: All imports., da: Alle imports.}}], correct_option_ids: [exact_call]}
+  - {id: dm857.m14.q05, activity_type: true_false, prompt: {es: Depurar correctamente empieza por reproducir el fallo., en: Correct debugging starts by reproducing the failure., da: Korrekt fejlsøgning starter med at reproducere fejlen.}, correct_answer: true}
+  - {id: dm857.m14.q06, activity_type: multiple_choice, prompt: {es: ¿Qué nivel representa una situación recuperable anómala?, en: Which level represents an anomalous but recoverable situation?, da: Hvilket niveau repræsenterer en unormal men håndterbar situation?}, options: [{id: warning, text: {es: WARNING, en: WARNING, da: WARNING}}, {id: debug, text: {es: DEBUG, en: DEBUG, da: DEBUG}}, {id: critical_only, text: {es: Siempre CRITICAL, en: Always CRITICAL, da: Altid CRITICAL}}], correct_option_ids: [warning]}
+  - {id: dm857.m14.q07, activity_type: true_false, prompt: {es: Una biblioteca debería llamar `basicConfig` al importarse., en: A library should call `basicConfig` on import., da: Et bibliotek bør kalde `basicConfig` ved import.}, correct_answer: false}
+  - {id: dm857.m14.q08, activity_type: multiple_choice, prompt: {es: ¿Qué mejora más la prueba de una función dependiente del tiempo?, en: What most improves testing a time-dependent function?, da: Hvad forbedrer mest test af en tidsafhængig funktion?}, options: [{id: inject_clock, text: {es: Inyectar una función reloj., en: Inject a clock function., da: Injicér en urfunktion.}}, {id: sleep, text: {es: Añadir sleep largo., en: Add a long sleep., da: Tilføj lang sleep.}}, {id: print, text: {es: Imprimir la hora., en: Print the time., da: Udskriv tiden.}}], correct_option_ids: [inject_clock]}
+  - {id: dm857.m14.q09, activity_type: true_false, prompt: {es: Las pruebas basadas en propiedades sustituyen todas las regresiones concretas., en: Property-based tests replace all concrete regression tests., da: Egenskabsbaserede test erstatter alle konkrete regressionstest.}, correct_answer: false}
+  - {id: dm857.m14.q10, activity_type: multiple_choice, prompt: {es: ¿Qué convierte un bug corregido en protección permanente?, en: What turns a fixed bug into permanent protection?, da: Hvad gør en rettet fejl til permanent beskyttelse?}, options: [{id: regression, text: {es: Una prueba de regresión., en: A regression test., da: En regressionstest.}}, {id: comment, text: {es: Un comentario únicamente., en: A comment only., da: Kun en kommentar.}}, {id: print, text: {es: Un print temporal., en: A temporary print., da: Et midlertidigt print.}}], correct_option_ids: [regression]}
+
+assessment_items:
+  - id: dm857.m14.a01
+    activity_type: test_suite_design
+    difficulty: advanced
+    prompt: {es: Diseña una suite para una función que carga y valida CSV: éxito, archivo ausente, encoding, cabecera, número de campos, conversión, filas inválidas y política de rechazo. Incluye fixtures y aislamiento., en: Design a suite for a CSV loader/validator covering success, missing file, encoding, header, field count, conversion, invalid rows, and rejection policy. Include fixtures and isolation., da: Design en suite til CSV-indlæsning og validering med succes, manglende fil, encoding, header, felter, konvertering, ugyldige rækker og isolation.}
+    accepted_answer_elements: [tmp_path or isolated resource, parametrized structural/semantic cases, exact exceptions, context preservation, no shared state, regression cases]
+    rubric: [{criterion: contract_coverage, points: 3}, {criterion: isolation_and_fixtures, points: 2}, {criterion: error_precision, points: 3}, {criterion: readability_and_diagnostics, points: 2}]
+  - id: dm857.m14.a02
+    activity_type: debugging_report
+    difficulty: advanced
+    prompt: {es: Elabora un informe de depuración para un fallo que sólo aparece tras ejecutar otra prueba. Debe incluir reproducción, hipótesis, evidencia, causa, corrección y regresión., en: Produce a debugging report for a failure appearing only after another test. Include reproduction, hypothesis, evidence, cause, fix, and regression., da: Udarbejd en fejlsøgningsrapport for en fejl der kun opstår efter en anden test, med reproduktion, hypotese, evidens, årsag, rettelse og regression.}
+    accepted_answer_elements: [order reproduction, state leak identification, minimized pair, evidence before fix, isolation repair, regression test]
+    rubric: [{criterion: reproducibility, points: 2}, {criterion: hypothesis_and_evidence, points: 3}, {criterion: root_cause, points: 2}, {criterion: fix_and_regression, points: 3}]
+  - id: dm857.m14.a03
+    activity_type: oral_explanation
+    difficulty: advanced
+    prompt: {es: Explica por qué una prueba puede pasar por la razón equivocada y cómo diseñar fallos diagnósticos., en: Explain how a test may pass for the wrong reason and how to design diagnostic failures., da: Forklar hvordan en test kan bestå af forkert grund, og hvordan diagnostiske fejl designes.}
+    accepted_answer_elements: [overly broad raises, weak assertions, uncontrolled state, false positives, focused setup/action/assertion, mutation or negative control]
+    rubric: [{criterion: mechanisms, points: 4}, {criterion: examples, points: 2}, {criterion: redesign_strategy, points: 2}, {criterion: clarity, points: 2}]
+
+flashcards: {source_file: ../flashcards/dm857_m14_flashcards.yaml, expected_count: 24}
+
+glossary:
+  - {id: term.regression_test, term: {es: prueba de regresión, en: regression test, da: regressionstest}, definition: {es: Prueba permanente creada para impedir la reaparición de un fallo corregido., en: Permanent test preventing recurrence of a fixed defect., da: Permanent test der forhindrer genkomst af en rettet fejl.}}
+  - {id: term.fixture, term: {es: fixture, en: fixture, da: fixture}, definition: {es: Dependencia o recurso reutilizable administrado por el framework de pruebas., en: Reusable dependency or resource managed by the test framework., da: Genbrugelig afhængighed eller ressource styret af testframeworket.}}
+  - {id: term.parametrization, term: {es: parametrización, en: parametrization, da: parametrisering}, definition: {es: Ejecución de un mismo contrato sobre múltiples casos., en: Execution of one contract over multiple cases., da: Udførelse af én kontrakt over flere cases.}}
+  - {id: term.traceback, term: {es: traceback, en: traceback, da: traceback}, definition: {es: Registro de la cadena de llamadas hasta una excepción., en: Record of the call chain leading to an exception., da: Registrering af kaldskæden frem til en exception.}}
+  - {id: term.flaky_test, term: {es: prueba inestable, en: flaky test, da: ustabil test}, definition: {es: Prueba cuyo resultado varía sin cambios relevantes del código., en: Test whose outcome varies without relevant code changes., da: Test hvis resultat varierer uden relevante kodeændringer.}}
+  - {id: term.dependency_injection, term: {es: inyección de dependencias, en: dependency injection, da: afhængighedsinjektion}, definition: {es: Suministro explícito de colaboradores externos a una unidad., en: Explicit provision of external collaborators to a unit., da: Eksplicit levering af eksterne samarbejdspartnere til en enhed.}}
+  - {id: term.property_test, term: {es: prueba basada en propiedades, en: property-based test, da: egenskabsbaseret test}, definition: {es: Prueba de una relación general sobre muchos datos generados., en: Test of a general relation over many generated inputs., da: Test af en generel relation over mange genererede input.}}
+  - {id: term.coverage, term: {es: cobertura, en: coverage, da: dækning}, definition: {es: Medida de qué partes del código se ejecutaron durante pruebas., en: Measure of which code parts executed during tests., da: Mål for hvilke kodedele der blev udført under test.}}
+  - {id: term.mutation_testing, term: {es: pruebas de mutación, en: mutation testing, da: mutationstest}, definition: {es: Evaluación de si la suite detecta cambios artificiales del código., en: Evaluation of whether a suite detects artificial code changes., da: Evaluering af om en suite opdager kunstige kodeændringer.}}
+
+hidden_guided_support:
+  visibility: hidden_from_standard_reader
+  canonical_explanation:
+    es: >-
+      El tutor debe pedir primero el contrato que se intenta proteger y el tipo de evidencia que una prueba
+      puede aportar. No debe recomendar más casos indiscriminadamente; debe identificar clases de equivalencia,
+      fronteras, errores, propiedades e interacciones. En depuración debe exigir reproducción y evidencia antes
+      de sugerir cambios. La corrección termina sólo cuando existe una regresión que habría fallado antes.
+    en: >-
+      Ask first which contract is protected and what evidence a test can provide. Do not recommend arbitrary
+      case volume; identify equivalence classes, boundaries, errors, properties, and interactions. Require
+      reproduction and evidence before code changes. A fix is complete only with a regression test.
+    da: >-
+      Spørg først hvilken kontrakt der beskyttes og hvilken evidens testen giver. Kræv reproduktion og evidens
+      før ændringer og afslut med en regressionstest.
+  misconceptions:
+    - {id: m14.mc01, claim: {es: Más cobertura significa automáticamente mejores pruebas., en: More coverage automatically means better tests., da: Mere dækning betyder automatisk bedre test.}, correction: {es: Cobertura no mide fuerza de aserciones ni calidad de casos., en: Coverage does not measure assertion strength or case quality., da: Dækning måler ikke assertionstyrke eller casekvalitet.}}
+    - {id: m14.mc02, claim: {es: Depurar consiste en probar cambios hasta que funcione., en: Debugging means trying changes until it works., da: Fejlsøgning er at prøve ændringer til det virker.}, correction: {es: Es un proceso de reproducción, hipótesis, evidencia, corrección y regresión., en: It is a process of reproduction, hypothesis, evidence, correction, and regression., da: Det er en proces med reproduktion, hypotese, evidens, rettelse og regression.}}
+    - {id: m14.mc03, claim: {es: `print` y logging son equivalentes., en: `print` and logging are equivalent., da: `print` og logging er ækvivalente.}, correction: {es: Logging ofrece niveles, contexto y configuración y debe separarse de la salida funcional., en: Logging provides levels, context, and configuration and remains separate from functional output., da: Logging giver niveauer, kontekst og konfiguration og er adskilt fra funktionelt output.}}
+  socratic_questions:
+    - ¿Qué contrato observable protege exactamente esta prueba?
+    - ¿Podría pasar por una excepción o estado diferente del esperado?
+    - ¿Qué frontera o clase de equivalencia no está representada?
+    - ¿Qué dependencia oculta vuelve la prueba lenta o inestable?
+    - ¿Qué prueba habría fallado antes de corregir este bug?
+  grading_guidance:
+    do_not_accept: [coverage as proof, broad exception blocks, tests depending on order, fixes without reproduction or regression, logs containing sensitive data]
+    strong_answer_features: [focused contract, isolated cases, explicit boundaries/errors, reproducible debugging evidence, dependency injection, property plus regression tests]
+  retrieval_fragments:
+    - {id: m14.r01, topics: [debugging, workflow], text: {es: Reproduce, conserva traceback, reduce, formula hipótesis, inspecciona evidencia, cambia una causa y añade regresión., en: Reproduce, preserve traceback, reduce, hypothesize, inspect evidence, change one cause, and add a regression., da: Reproducer, bevar traceback, reducer, formulér hypotese, undersøg evidens, ret én årsag og tilføj regression.}}
+    - {id: m14.r02, topics: [testing, coverage], text: {es: Cobertura indica ejecución, no que las aserciones protejan el contrato correcto., en: Coverage indicates execution, not that assertions protect the correct contract., da: Dækning viser udførelse, ikke at assertions beskytter den korrekte kontrakt.}}
+
+sources:
+  - {id: source.official_dm857, role: curriculum_alignment, note: Official outcome on planning and executing program testing.}
+  - {id: source.think_python_2024, role: pedagogical_reference, note: Testing, debugging, exceptions, and development strategies.}
+  - {id: source.guttag_python_2021, role: conceptual_reference, note: Testing, debugging, exceptions, assertions, and program quality.}
+
+limitations:
+  - Security testing, fuzzing infrastructure, performance benchmarking, and formal verification require dedicated treatment.
+  - Logging examples must be adapted to organizational privacy and retention policies.
+  - Property-based testing is introduced conceptually; specific third-party APIs may evolve.
