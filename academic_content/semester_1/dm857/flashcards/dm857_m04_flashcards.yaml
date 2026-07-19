@@ -1,0 +1,586 @@
+schema_version: 1.0.0
+course_code: DM857
+module_id: dm857.m04
+content_version: 1.0.0
+status: academically_reviewed_draft
+card_count: 24
+
+cards:
+  - id: dm857.m04.f01
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: ¿Cuál es la diferencia entre definir una función y llamarla?
+      en: What is the difference between defining a function and calling it?
+      da: Hvad er forskellen mellem at definere og kalde en funktion?
+    back:
+      es: >-
+        La definición crea la función: establece nombre, parámetros y cuerpo. La llamada ejecuta ese cuerpo
+        con argumentos concretos y crea un nuevo marco local. Definir no implica ejecutar; llamar no modifica
+        la definición.
+      en: >-
+        The definition creates the function by establishing its name, parameters, and body. A call executes
+        that body with concrete arguments and creates a new local frame. Defining does not execute; calling
+        does not alter the definition.
+      da: >-
+        Definitionen opretter funktionen med navn, parametre og krop. Et kald udfører kroppen med konkrete
+        argumenter og skaber en ny lokal ramme. Definition er ikke udførelse.
+    linked_objectives: [m04.o1, m04.o4]
+    linked_concepts: [definition-call-interface]
+    tags: [function, definition, call]
+    reverse_allowed: true
+
+  - id: dm857.m04.f02
+    mode: conceptual
+    card_type: comparison
+    difficulty: foundational
+    front:
+      es: Distingue parámetro y argumento con un ejemplo.
+      en: Distinguish parameter and argument with an example.
+      da: Skeln mellem parameter og argument med et eksempel.
+    back:
+      es: >-
+        En `def scale(value, factor=1):`, `value` y `factor` son parámetros. En `scale(3, factor=2)`,
+        `3` y `2` son argumentos. Los parámetros pertenecen a la interfaz definida; los argumentos a una llamada.
+      en: >-
+        In `def scale(value, factor=1):`, `value` and `factor` are parameters. In `scale(3, factor=2)`,
+        `3` and `2` are arguments. Parameters belong to the defined interface; arguments belong to a call.
+      da: >-
+        I `def scale(value, factor=1):` er `value` og `factor` parametre. I `scale(3, factor=2)` er
+        `3` og `2` argumenter. Parametre tilhører definitionen; argumenter tilhører kaldet.
+    linked_objectives: [m04.o2]
+    linked_concepts: [parameters-arguments-defaults]
+    tags: [parameter, argument, interface]
+    reverse_allowed: true
+
+  - id: dm857.m04.f03
+    mode: practical
+    card_type: code_tracing
+    difficulty: foundational
+    front:
+      es: >-
+        Predice `f(2, c=5)` para `def f(a, b=3, c=4): return a + b * c`.
+      en: >-
+        Predict `f(2, c=5)` for `def f(a, b=3, c=4): return a + b * c`.
+      da: >-
+        Forudsig `f(2, c=5)` for `def f(a, b=3, c=4): return a + b * c`.
+    back:
+      es: >-
+        `a=2` por posición, `b=3` por defecto y `c=5` por nombre. Se calcula `2 + 3*5 = 17`.
+        El argumento nombrado permite omitir `b` sin confundir el enlace.
+      en: >-
+        `a=2` by position, `b=3` by default, and `c=5` by keyword. The result is `2 + 3*5 = 17`.
+      da: >-
+        `a=2` positionelt, `b=3` som standard og `c=5` navngivet. Resultatet er `17`.
+    linked_objectives: [m04.o2]
+    linked_concepts: [parameters-arguments-defaults]
+    tags: [binding, default, trace]
+    reverse_allowed: false
+
+  - id: dm857.m04.f04
+    mode: conceptual
+    card_type: mechanism
+    difficulty: foundational
+    front:
+      es: ¿Qué hace `return` exactamente?
+      en: What exactly does `return` do?
+      da: Hvad gør `return` præcist?
+    back:
+      es: >-
+        Finaliza la ejecución de la llamada actual y transfiere un valor al código llamador. Ese valor puede
+        almacenarse, combinarse, probarse o pasarse a otra función. El código posterior a un `return` ejecutado
+        no se alcanza en esa llamada.
+      en: >-
+        It ends the current call and transfers a value to the caller. The value can be stored, combined,
+        tested, or passed to another function. Code after an executed `return` is unreachable in that call.
+      da: >-
+        Det afslutter det aktuelle kald og overfører en værdi til den kaldende kode. Kode efter en udført
+        `return` nås ikke i det kald.
+    linked_objectives: [m04.o3]
+    linked_concepts: [return-versus-print]
+    tags: [return, control_flow, caller]
+    reverse_allowed: true
+
+  - id: dm857.m04.f05
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: foundational
+    front:
+      es: Corrige: “`print` y `return` hacen lo mismo porque ambos muestran un resultado”.
+      en: Correct: “`print` and `return` do the same thing because both show a result.”
+      da: Ret: “`print` og `return` gør det samme, fordi begge viser et resultat.”
+    back:
+      es: >-
+        `print` escribe una representación en la salida estándar y retorna `None`. `return` no necesita mostrar
+        nada: entrega un dato reutilizable al llamador. Confundirlos produce errores como multiplicar `None`.
+      en: >-
+        `print` writes a representation to standard output and returns `None`. `return` need not display
+        anything: it delivers reusable data to the caller. Confusing them can lead to operations on `None`.
+      da: >-
+        `print` skriver til standardoutput og returnerer `None`. `return` leverer genanvendelige data til
+        den kaldende kode og behøver ikke vise noget.
+    linked_objectives: [m04.o3]
+    linked_concepts: [return-versus-print]
+    tags: [print, return, None]
+    reverse_allowed: false
+
+  - id: dm857.m04.f06
+    mode: practical
+    card_type: debugging
+    difficulty: foundational
+    front:
+      es: >-
+        ¿Por qué falla `result = add(2, 3) * 2` si `add` solo contiene `print(a + b)`?
+      en: >-
+        Why does `result = add(2, 3) * 2` fail if `add` only contains `print(a + b)`?
+      da: >-
+        Hvorfor fejler `result = add(2, 3) * 2`, hvis `add` kun indeholder `print(a + b)`?
+    back:
+      es: >-
+        La función imprime `5` pero retorna `None`; por tanto se intenta evaluar `None * 2`. La corrección es
+        `return a + b`. La prueba debe afirmar que `add(2, 3) == 5`, no depender de la salida visible.
+      en: >-
+        The function prints `5` but returns `None`, so the program attempts `None * 2`. Replace printing with
+        `return a + b` and assert that `add(2, 3) == 5`.
+      da: >-
+        Funktionen udskriver `5`, men returnerer `None`, så programmet forsøger `None * 2`. Brug
+        `return a + b` og test returværdien.
+    linked_objectives: [m04.o3, m04.o8]
+    linked_concepts: [return-versus-print]
+    tags: [debugging, None, test]
+    reverse_allowed: false
+
+  - id: dm857.m04.f07
+    mode: conceptual
+    card_type: mechanism
+    difficulty: intermediate
+    front:
+      es: ¿Por qué un valor predeterminado mutable puede conservar cambios entre llamadas?
+      en: Why can a mutable default retain changes across calls?
+      da: Hvorfor kan en muterbar standardværdi bevare ændringer mellem kald?
+    back:
+      es: >-
+        Los valores predeterminados se evalúan una sola vez al definir la función. Si el objeto es una lista y
+        se muta, llamadas posteriores reutilizan ese mismo objeto. El patrón seguro habitual es usar `None` y
+        crear una lista dentro de la llamada.
+      en: >-
+        Default values are evaluated once when the function is defined. If the object is a list and is mutated,
+        later calls reuse that same object. The usual safe pattern is `None` plus creation inside the call.
+      da: >-
+        Standardværdier evalueres én gang ved definitionen. Hvis en liste muteres, genbruger senere kald samme
+        objekt. Brug normalt `None` og opret listen inde i kaldet.
+    linked_objectives: [m04.o2, m04.o8]
+    linked_concepts: [parameters-arguments-defaults]
+    tags: [default, mutability, shared_state]
+    reverse_allowed: true
+
+  - id: dm857.m04.f08
+    mode: practical
+    card_type: debugging
+    difficulty: intermediate
+    front:
+      es: Corrige conceptualmente `def collect(x, items=[]): items.append(x); return items`.
+      en: Conceptually correct `def collect(x, items=[]): items.append(x); return items`.
+      da: Ret konceptuelt `def collect(x, items=[]): items.append(x); return items`.
+    back:
+      es: >-
+        Usa `items=None`; dentro, crea una lista cuando `items is None`. Decide además si una lista proporcionada
+        debe mutarse. Una versión sin mutación copia: `result = [] if items is None else list(items)` y retorna
+        `result + [x]` o añade a la copia.
+      en: >-
+        Use `items=None`; create a list when `items is None`. Also decide whether a supplied list may be mutated.
+        A non-mutating design copies the supplied collection before adding `x`.
+      da: >-
+        Brug `items=None`; opret en liste når `items is None`. Beslut også om en leveret liste må muteres.
+        Et ikke-muterende design kopierer input før tilføjelsen.
+    linked_objectives: [m04.o2, m04.o5, m04.o7]
+    linked_concepts: [parameters-arguments-defaults, pure-functions-side-effects]
+    tags: [mutable_default, copy, contract]
+    reverse_allowed: false
+
+  - id: dm857.m04.f09
+    mode: conceptual
+    card_type: definition
+    difficulty: foundational
+    front:
+      es: ¿Qué es el ámbito local de una función?
+      en: What is a function's local scope?
+      da: Hvad er en funktions lokale scope?
+    back:
+      es: >-
+        Es el espacio de nombres creado para una llamada concreta. Contiene parámetros y variables definidas
+        dentro de la función. Esos nombres dejan de ser accesibles desde fuera cuando la llamada termina,
+        salvo que un objeto haya sido retornado o compartido explícitamente.
+      en: >-
+        It is the namespace created for a particular call. It contains parameters and variables defined inside
+        the function. Those names are not accessible from outside after the call ends unless an object is
+        returned or explicitly shared.
+      da: >-
+        Det er navnerummet for et bestemt kald. Det indeholder parametre og lokale variable. Navnene er ikke
+        tilgængelige udefra efter kaldet, medmindre et objekt returneres eller deles eksplicit.
+    linked_objectives: [m04.o4]
+    linked_concepts: [local-scope-lifetime]
+    tags: [scope, local, lifetime]
+    reverse_allowed: true
+
+  - id: dm857.m04.f10
+    mode: practical
+    card_type: code_tracing
+    difficulty: intermediate
+    front:
+      es: >-
+        `x=10`; `def f(x): x=x+1; return x`; `y=f(3)`. ¿Cuánto valen `x` e `y` al final?
+      en: >-
+        `x=10`; `def f(x): x=x+1; return x`; `y=f(3)`. What are final `x` and `y`?
+      da: >-
+        `x=10`; `def f(x): x=x+1; return x`; `y=f(3)`. Hvad er de endelige værdier af `x` og `y`?
+    back:
+      es: >-
+        El parámetro local `x` recibe `3`, se reasigna a `4` y se retorna. La `x` global sigue siendo `10`;
+        `y` vale `4`. Compartir el nombre no implica compartir el enlace.
+      en: >-
+        The local parameter `x` receives `3`, is rebound to `4`, and is returned. Global `x` remains `10`;
+        `y` is `4`. Sharing a name does not mean sharing a binding.
+      da: >-
+        Den lokale parameter `x` modtager `3`, gentildeles til `4` og returneres. Global `x` forbliver `10`;
+        `y` er `4`.
+    linked_objectives: [m04.o4]
+    linked_concepts: [local-scope-lifetime]
+    tags: [scope, binding, trace]
+    reverse_allowed: false
+
+  - id: dm857.m04.f11
+    mode: conceptual
+    card_type: definition
+    difficulty: intermediate
+    front:
+      es: ¿Qué caracteriza a una función pura?
+      en: What characterizes a pure function?
+      da: Hvad karakteriserer en ren funktion?
+    back:
+      es: >-
+        Para los mismos argumentos produce el mismo resultado observable y no modifica estado externo. No
+        depende de variables globales mutables, hora, aleatoriedad no controlada o entrada/salida oculta.
+        Esto simplifica razonamiento, pruebas y composición.
+      en: >-
+        For the same arguments it produces the same observable result and does not modify external state.
+        It avoids hidden dependence on mutable globals, time, uncontrolled randomness, or I/O, simplifying
+        reasoning, testing, and composition.
+      da: >-
+        For samme argumenter producerer den samme observerbare resultat og ændrer ikke ekstern tilstand.
+        Det gør ræsonnering, test og komposition enklere.
+    linked_objectives: [m04.o5]
+    linked_concepts: [pure-functions-side-effects]
+    tags: [purity, determinism, state]
+    reverse_allowed: true
+
+  - id: dm857.m04.f12
+    mode: conceptual
+    card_type: classification
+    difficulty: intermediate
+    front:
+      es: Clasifica como efecto secundario o cálculo puro: escribir un archivo, retornar una suma, modificar una lista recibida, comparar dos números.
+      en: Classify as side effect or pure computation: write a file, return a sum, mutate an input list, compare two numbers.
+      da: Klassificér som sideeffekt eller ren beregning: skriv fil, returnér sum, mutér inputliste, sammenlign to tal.
+    back:
+      es: >-
+        Escribir un archivo y modificar una lista recibida son efectos secundarios. Retornar una suma y retornar
+        el resultado de una comparación son cálculos puros si no dependen de estado oculto.
+      en: >-
+        Writing a file and mutating an input list are side effects. Returning a sum and returning a comparison
+        result are pure computations when they do not depend on hidden state.
+      da: >-
+        Filskrivning og mutation af inputlisten er sideeffekter. Returnering af sum og sammenligningsresultat er
+        rene beregninger uden skjult tilstand.
+    linked_objectives: [m04.o5]
+    linked_concepts: [pure-functions-side-effects]
+    tags: [side_effect, classification, purity]
+    reverse_allowed: false
+
+  - id: dm857.m04.f13
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front:
+      es: Distingue precondición y poscondición.
+      en: Distinguish precondition and postcondition.
+      da: Skeln mellem forudsætning og efterbetingelse.
+    back:
+      es: >-
+        Una precondición debe cumplirse antes de una llamada válida, por ejemplo “la secuencia no está vacía”.
+        Una poscondición es una garantía posterior, por ejemplo “el resultado está entre el mínimo y el máximo
+        de la entrada”. Ambas deben ser observables o verificables.
+      en: >-
+        A precondition must hold before a valid call, such as “the sequence is non-empty.” A postcondition is
+        a guarantee after execution, such as “the result lies between the input minimum and maximum.”
+      da: >-
+        En forudsætning skal gælde før et gyldigt kald; en efterbetingelse er en garanti efter udførelsen.
+        Begge bør være observerbare eller verificerbare.
+    linked_objectives: [m04.o7]
+    linked_concepts: [contracts-docstrings-errors]
+    tags: [contract, precondition, postcondition]
+    reverse_allowed: true
+
+  - id: dm857.m04.f14
+    mode: conceptual
+    card_type: method_selection
+    difficulty: intermediate
+    front:
+      es: ¿Cuándo conviene generar una excepción y cuándo retornar un sentinel como `None`?
+      en: When should a function raise an exception versus return a sentinel such as `None`?
+      da: Hvornår bør en funktion rejse en undtagelse kontra returnere en sentinel som `None`?
+    back:
+      es: >-
+        Depende del contrato. Una excepción es apropiada cuando la entrada viola una precondición y continuar
+        sería engañoso. Un sentinel es adecuado cuando la ausencia es un resultado esperado y el llamador debe
+        manejarla. La política debe ser única, explícita y comprobada.
+      en: >-
+        It depends on the contract. An exception fits a violated precondition when continuing would be misleading.
+        A sentinel fits an expected absence the caller must handle. The policy should be explicit, consistent, and tested.
+      da: >-
+        Det afhænger af kontrakten. En undtagelse passer til brud på en forudsætning; en sentinel passer til
+        forventet fravær. Politikken skal være eksplicit og testet.
+    linked_objectives: [m04.o7, m04.o8]
+    linked_concepts: [contracts-docstrings-errors]
+    tags: [exception, sentinel, contract]
+    reverse_allowed: false
+
+  - id: dm857.m04.f15
+    mode: conceptual
+    card_type: definition
+    difficulty: intermediate
+    front:
+      es: ¿Qué significa que una función sea cohesionada?
+      en: What does it mean for a function to be cohesive?
+      da: Hvad betyder det at en funktion er sammenhængende?
+    back:
+      es: >-
+        Sus operaciones contribuyen a una responsabilidad principal que puede nombrarse, explicarse y probarse
+        como unidad. Una función que mezcla lectura, limpieza, cálculo, escritura y presentación suele tener baja
+        cohesión y varias razones para cambiar.
+      en: >-
+        Its operations contribute to one primary responsibility that can be named, explained, and tested as a unit.
+        A function mixing input, cleaning, calculation, writing, and presentation usually has low cohesion.
+      da: >-
+        Dens operationer bidrager til ét primært ansvar, der kan navngives, forklares og testes som en enhed.
+        En funktion der blander mange trin har ofte lav sammenhæng.
+    linked_objectives: [m04.o1, m04.o6]
+    linked_concepts: [definition-call-interface, decomposition-composition]
+    tags: [cohesion, responsibility, design]
+    reverse_allowed: true
+
+  - id: dm857.m04.f16
+    mode: practical
+    card_type: pipeline_design
+    difficulty: intermediate
+    front:
+      es: Propón una descomposición para leer, limpiar, validar, resumir y presentar datos.
+      en: Propose a decomposition for reading, cleaning, validating, summarizing, and presenting data.
+      da: Foreslå en dekomponering til læsning, rensning, validering, opsummering og præsentation af data.
+    back:
+      es: >-
+        Una estructura razonable separa `read_data`, `clean_values`, `validate_values`, `summarize_values` y
+        `format_summary`. La lectura y presentación concentran efectos; limpieza, validación y resumen pueden ser
+        puras. Cada etapa recibe y retorna datos explícitos y documenta su política de errores.
+      en: >-
+        A reasonable design separates `read_data`, `clean_values`, `validate_values`, `summarize_values`, and
+        `format_summary`. Reading and presentation contain effects; cleaning, validation, and summarization can be pure.
+      da: >-
+        Et rimeligt design adskiller læsning, rensning, validering, opsummering og formatering. Effekter samles
+        ved grænserne, mens kerneberegningen kan være ren.
+    linked_objectives: [m04.o5, m04.o6, m04.o7]
+    linked_concepts: [decomposition-composition, pure-functions-side-effects]
+    tags: [pipeline, decomposition, data_flow]
+    reverse_allowed: false
+
+  - id: dm857.m04.f17
+    mode: conceptual
+    card_type: comparison
+    difficulty: intermediate
+    front:
+      es: ¿Por qué “más funciones” no significa automáticamente “mejor diseño”?
+      en: Why does “more functions” not automatically mean “better design”?
+      da: Hvorfor betyder “flere funktioner” ikke automatisk “bedre design”?
+    back:
+      es: >-
+        La fragmentación excesiva crea interfaces triviales, aumenta saltos mentales y dispersa una operación
+        inseparable. El criterio correcto es si cada función representa una responsabilidad cohesionada y si su
+        interfaz reduce complejidad y mejora verificabilidad.
+      en: >-
+        Excessive fragmentation creates trivial interfaces, increases cognitive jumps, and scatters inseparable
+        work. The correct criterion is cohesive responsibility and whether interfaces reduce complexity and improve testability.
+      da: >-
+        Overdreven fragmentering skaber trivielle grænseflader og spreder sammenhængende arbejde. Kriteriet er
+        sammenhængende ansvar og bedre testbarhed.
+    linked_objectives: [m04.o6]
+    linked_concepts: [decomposition-composition]
+    tags: [design, decomposition, tradeoff]
+    reverse_allowed: false
+
+  - id: dm857.m04.f18
+    mode: practical
+    card_type: test_design
+    difficulty: intermediate
+    front:
+      es: ¿Cómo pruebas una función con tres rutas de retorno?
+      en: How do you test a function with three return paths?
+      da: Hvordan tester man en funktion med tre returveje?
+    back:
+      es: >-
+        Diseña al menos una entrada que active cada ruta y afirma el valor y tipo retornados. Añade valores de
+        frontera cuando las rutas dependen de límites. La cobertura de ramas demuestra ejecución, pero no sustituye
+        pruebas de semántica ni de límites.
+      en: >-
+        Design at least one input for each path and assert returned value and type. Add boundary values when paths
+        depend on thresholds. Branch coverage proves execution but not semantic or boundary correctness.
+      da: >-
+        Design mindst ét input for hver vej og kontrollér returværdi og type. Tilføj grænseværdier. Grendækning
+        erstatter ikke semantiske test.
+    linked_objectives: [m04.o8]
+    linked_concepts: [contracts-docstrings-errors]
+    tags: [testing, return_path, boundary]
+    reverse_allowed: false
+
+  - id: dm857.m04.f19
+    mode: practical
+    card_type: test_design
+    difficulty: intermediate
+    front:
+      es: ¿Qué prueba revela un valor predeterminado mutable compartido?
+      en: What test reveals a shared mutable default?
+      da: Hvilken test afslører en delt muterbar standardværdi?
+    back:
+      es: >-
+        Llama dos veces sin proporcionar la colección y verifica que el segundo resultado no contenga datos de la
+        primera llamada. Por ejemplo, `collect('a')` debe producir `['a']` y `collect('b')` debe producir `['b']`,
+        no `['a', 'b']`.
+      en: >-
+        Call twice without supplying the collection and verify the second result does not contain state from the first.
+        `collect('a')` should produce `['a']` and `collect('b')` should produce `['b']`.
+      da: >-
+        Kald to gange uden samling og kontrollér at andet resultat ikke indeholder tilstand fra første kald.
+    linked_objectives: [m04.o2, m04.o8]
+    linked_concepts: [parameters-arguments-defaults]
+    tags: [test, mutable_default, regression]
+    reverse_allowed: false
+
+  - id: dm857.m04.f20
+    mode: practical
+    card_type: contract_design
+    difficulty: advanced
+    front:
+      es: Formula un contrato mínimo para `mean(values)`.
+      en: Formulate a minimal contract for `mean(values)`.
+      da: Formulér en minimal kontrakt for `mean(values)`.
+    back:
+      es: >-
+        Entrada: secuencia no vacía de números comparables y con unidades coherentes. Resultado: media aritmética
+        numérica, entre mínimo y máximo. Efectos: ninguno. Error: política explícita para entrada vacía o no numérica.
+        Las pruebas incluyen un elemento, negativos, decimales y el caso vacío.
+      en: >-
+        Input: non-empty sequence of numeric values with coherent units. Result: numeric arithmetic mean between
+        minimum and maximum. Effects: none. Error: explicit policy for empty or nonnumeric input.
+      da: >-
+        Input: ikke-tom numerisk sekvens med ensartede enheder. Resultat: numerisk middelværdi mellem minimum og
+        maksimum. Ingen effekter. Eksplicit fejlpolitik for tomt eller ikke-numerisk input.
+    linked_objectives: [m04.o7, m04.o8]
+    linked_concepts: [contracts-docstrings-errors]
+    tags: [contract, mean, validation]
+    reverse_allowed: false
+
+  - id: dm857.m04.f21
+    mode: conceptual
+    card_type: misconception_correction
+    difficulty: advanced
+    front:
+      es: Corrige: “Si Python acepta un valor, entonces cumple el contrato conceptual de la función”.
+      en: Correct: “If Python accepts a value, it satisfies the function's conceptual contract.”
+      da: Ret: “Hvis Python accepterer en værdi, opfylder den funktionens konceptuelle kontrakt.”
+    back:
+      es: >-
+        La compatibilidad sintáctica o de tipo no garantiza validez conceptual. `True` es una instancia de `int`,
+        pero puede ser inválida como porcentaje. Una cadena numérica puede convertirse, pero el contrato puede exigir
+        números ya validados. El dominio debe definirse explícitamente.
+      en: >-
+        Syntactic or type compatibility does not guarantee conceptual validity. `True` is an `int` instance but may be
+        invalid as a percentage. The domain must be defined explicitly.
+      da: >-
+        Syntaktisk eller typemæssig kompatibilitet garanterer ikke konceptuel gyldighed. Domænet skal defineres eksplicit.
+    linked_objectives: [m04.o7]
+    linked_concepts: [contracts-docstrings-errors]
+    tags: [domain, type, validation]
+    reverse_allowed: false
+
+  - id: dm857.m04.f22
+    mode: practical
+    card_type: debugging
+    difficulty: advanced
+    front:
+      es: Una función modifica una variable global. ¿Cuál es el problema y cómo se rediseña?
+      en: A function modifies a global variable. What is the problem and how should it be redesigned?
+      da: En funktion ændrer en global variabel. Hvad er problemet og hvordan redesignes den?
+    back:
+      es: >-
+        Introduce dependencia y efecto ocultos: el resultado depende del historial y las pruebas se contaminan.
+        Preferentemente, pasa el estado como argumento y retorna el estado nuevo. Si el estado compartido es realmente
+        necesario, encapsúlalo y documenta explícitamente su ciclo de vida.
+      en: >-
+        It introduces hidden dependency and effect: results depend on history and tests contaminate one another.
+        Prefer passing state as an argument and returning new state. If shared state is necessary, encapsulate and document it.
+      da: >-
+        Det skaber skjult afhængighed og effekt. Send helst tilstanden som argument og returnér ny tilstand. Nødvendig
+        delt tilstand bør indkapsles og dokumenteres.
+    linked_objectives: [m04.o4, m04.o5, m04.o6]
+    linked_concepts: [local-scope-lifetime, pure-functions-side-effects]
+    tags: [global_state, refactoring, dependency]
+    reverse_allowed: false
+
+  - id: dm857.m04.f23
+    mode: integrative
+    card_type: oral_defense
+    difficulty: advanced
+    front:
+      es: Defiende por qué separar cálculo de entrada/salida mejora un programa científico.
+      en: Defend why separating computation from I/O improves a scientific program.
+      da: Forsvar hvorfor adskillelse af beregning og I/O forbedrer et videnskabeligt program.
+    back:
+      es: >-
+        Permite probar el cálculo con datos controlados, reutilizarlo en archivo, interfaz o notebook, reducir dependencias
+        ambientales y aislar fallos. También hace explícita la procedencia: una función obtiene datos, otra transforma y
+        otra presenta. La limitación es que la separación debe seguir responsabilidades reales, no crear capas vacías.
+      en: >-
+        It enables controlled testing, reuse across files, interfaces, or notebooks, reduced environmental dependency,
+        and isolated failures. It also makes provenance and data flow explicit. Separation should reflect real responsibilities.
+      da: >-
+        Det muliggør kontrolleret test, genbrug, færre miljøafhængigheder og isolerede fejl. Dataflow og proveniens bliver
+        tydeligere, men opdelingen skal følge reelle ansvar.
+    linked_objectives: [m04.o5, m04.o6, m04.o7]
+    linked_concepts: [pure-functions-side-effects, decomposition-composition]
+    tags: [scientific_programming, I/O, defense]
+    reverse_allowed: false
+
+  - id: dm857.m04.f24
+    mode: integrative
+    card_type: design_review
+    difficulty: advanced
+    front:
+      es: ¿Qué revisarías antes de aprobar una función para uso en un pipeline reproducible?
+      en: What would you review before approving a function for a reproducible pipeline?
+      da: Hvad ville du gennemgå før en funktion godkendes til en reproducerbar pipeline?
+    back:
+      es: >-
+        Responsabilidad y nombre; contrato y unidades; tipos conceptuales; política de entrada vacía y errores;
+        ausencia o documentación de efectos; flujo explícito de argumentos y retornos; rutas de retorno completas;
+        pruebas normales, límite e inválidas; ejemplos reproducibles; y documentación de limitaciones.
+      en: >-
+        Responsibility and name; contract and units; conceptual types; empty-input and error policy; absence or
+        documentation of effects; explicit arguments and returns; complete return paths; normal, boundary, and invalid
+        tests; reproducible examples; and documented limitations.
+      da: >-
+        Ansvar og navn; kontrakt og enheder; konceptuelle typer; fejlpolitik; effekter; eksplicit dataflow; komplette
+        returveje; normale, grænse- og ugyldige test; reproducerbare eksempler og begrænsninger.
+    linked_objectives: [m04.o1, m04.o5, m04.o6, m04.o7, m04.o8]
+    linked_concepts: [definition-call-interface, contracts-docstrings-errors, decomposition-composition]
+    tags: [review, reproducibility, quality]
+    reverse_allowed: false
