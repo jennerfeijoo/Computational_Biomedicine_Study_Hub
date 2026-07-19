@@ -1,0 +1,224 @@
+schema_version: 1.0.0
+course_code: BMB831
+module_id: bmb831.m05
+content_version: 1.0.0
+status: academically_reviewed_draft
+
+metadata:
+  title: {es: Reducción dimensional, estructura latente y visualización multivariante robusta, en: Dimension reduction, latent structure, and robust multivariate visualization, da: Dimensionsreduktion, latent struktur og robust multivariat visualisering}
+  summary:
+    es: >-
+      Análisis de matrices de alta dimensión mediante centrado, escalado, SVD, PCA, scores, loadings,
+      biplots, elección de componentes, reconstrucción, detección de outliers, PCA robusta, MDS y
+      métodos no lineales. Se enfatiza distinguir estructura técnica, biológica y visual, evitar
+      selección por etiquetas y cuantificar estabilidad y sensibilidad.
+    en: >-
+      Analysis of high-dimensional matrices using centering, scaling, SVD, PCA, scores, loadings,
+      biplots, component selection, reconstruction, outlier detection, robust PCA, MDS, and nonlinear
+      methods. Emphasis is placed on separating technical, biological, and visual structure.
+    da: >-
+      Analyse af højdimensionelle matricer med centrering, skalering, SVD, PCA, scores, loadings,
+      biplots, komponentvalg, robust PCA, MDS og ikke-lineære metoder.
+  estimated_study_hours: 14
+  difficulty: advanced
+
+alignment:
+  official_learning_outcomes: [bmb831.lo03, bmb831.lo04, bmb831.lo05]
+  prerequisite_modules: [bmb830.m09, bmb831.m02]
+  later_modules: [bmb831.m06, bmb831.m11, bmb831.m12]
+
+objectives:
+  - {id: bmb831.m05.o01, text: {es: Construir una matriz multivariante con orientación explícita, en: Build a multivariate matrix with explicit orientation, da: Bygge en multivariat matrix med eksplicit orientering}}
+  - {id: bmb831.m05.o02, text: {es: Explicar SVD y su conexión con PCA, en: Explain SVD and its connection to PCA, da: Forklare SVD og forbindelsen til PCA}}
+  - {id: bmb831.m05.o03, text: {es: Interpretar scores, loadings y varianza explicada, en: Interpret scores, loadings, and explained variance, da: Fortolke scores, loadings og forklaret varians}}
+  - {id: bmb831.m05.o04, text: {es: Evaluar efectos de centrado, escalado y transformación, en: Evaluate centering, scaling, and transformation effects, da: Evaluere effekter af centrering, skalering og transformation}}
+  - {id: bmb831.m05.o05, text: {es: Seleccionar componentes sin usar indebidamente etiquetas, en: Select components without improper label use, da: Vælge komponenter uden forkert brug af labels}}
+  - {id: bmb831.m05.o06, text: {es: Detectar outliers e influencia multivariante, en: Detect multivariate outliers and influence, da: Detektere multivariate outliers og influence}}
+  - {id: bmb831.m05.o07, text: {es: Comparar PCA, MDS, t-SNE y UMAP con cautela, en: Compare PCA, MDS, t-SNE, and UMAP cautiously, da: Sammenligne PCA, MDS, t-SNE og UMAP med forsigtighed}}
+  - {id: bmb831.m05.o08, text: {es: Comunicar estabilidad y límites de una visualización, en: Communicate visualization stability and limits, da: Kommunikere visualiseringsstabilitet og grænser}}
+
+concepts:
+  - id: bmb831.m05.c01
+    title: {es: Matriz, orientación y geometría, en: Matrix, orientation, and geometry, da: Matrix, orientering og geometri}
+    body:
+      es: >-
+        Una matriz X suele tener muestras en filas y variables en columnas, pero debe declararse. Distancias entre filas
+        representan similitud entre muestras sólo después de definir escala, transformación y tratamiento de missingness.
+        Transponer cambia la pregunta: PCA de muestras no es PCA de genes.
+      en: >-
+        X commonly has samples as rows and variables as columns, but orientation must be stated. Distances represent
+        sample similarity only after scale, transformation, and missingness are defined. Transposition changes the question.
+      da: >-
+        X har ofte samples som rækker og variable som kolonner. Transponering ændrer spørgsmålet.
+    key_points:
+      - {es: La geometría depende del preprocessing, en: Geometry depends on preprocessing, da: Geometri afhænger af preprocessing}
+  - id: bmb831.m05.c02
+    title: {es: SVD y PCA, en: SVD and PCA, da: SVD og PCA}
+    body:
+      es: >-
+        Para X centrada, SVD X=UDVᵀ descompone variación en direcciones ortogonales. Las columnas de V son
+        direcciones o loadings; UD contiene scores; D² se relaciona con varianza explicada. PCA encuentra subespacios
+        de máxima varianza, no necesariamente máxima relevancia biológica.
+      en: >-
+        For centered X, SVD X=UDVᵀ decomposes variation into orthogonal directions. V contains loadings,
+        UD contains scores, and D² relates to explained variance. PCA maximizes variance, not biological relevance.
+      da: >-
+        For centreret X dekomponerer SVD X=UDVᵀ variation i ortogonale retninger.
+    key_points:
+      - {es: Ortogonalidad matemática no implica independencia biológica, en: Mathematical orthogonality does not imply biological independence, da: Matematisk ortogonalitet indebærer ikke biologisk uafhængighed}
+  - id: bmb831.m05.c03
+    title: {es: Scores, loadings y signos, en: Scores, loadings, and signs, da: Scores, loadings og tegn}
+    body:
+      es: >-
+        Scores ubican muestras; loadings indican contribución de variables a una dirección. El signo de un componente es arbitrario:
+        multiplicar scores y loadings por -1 no cambia el modelo. La magnitud de loading depende del escalado y no prueba causalidad.
+      en: >-
+        Scores locate samples; loadings indicate variable contributions. Component sign is arbitrary: multiplying scores
+        and loadings by -1 leaves the model unchanged. Loading magnitude depends on scaling and does not establish causality.
+      da: >-
+        Scores placerer samples; loadings viser variablebidrag. Komponentens tegn er vilkårligt.
+    key_points:
+      - {es: Interpretar conjuntos de loadings es más estable que un único extremo, en: Interpreting loading sets is often more stable than one extreme feature, da: Fortolkning af loading-sæt er ofte mere stabil end én ekstrem feature}
+  - id: bmb831.m05.c04
+    title: {es: Centrado, escalado y transformación, en: Centering, scaling, and transformation, da: Centrering, skalering og transformation}
+    body:
+      es: >-
+        Centrar elimina medias; escalar a varianza uno iguala contribución marginal; no escalar deja dominar variables de gran varianza.
+        Log/VST cambia asimetría y dependencia media-varianza. No existe opción universal: debe corresponder a unidad, ruido y objetivo.
+      en: >-
+        Centering removes means; unit-variance scaling equalizes marginal contribution; no scaling lets high-variance variables dominate.
+        Log/VST changes skewness and mean-variance dependence. Choice depends on unit, noise, and objective.
+      da: >-
+        Centrering fjerner middel; unit-variance-skalering udligner bidrag; transformation ændrer skævhed og geometri.
+    key_points:
+      - {es: Escalar puede amplificar variables ruidosas de baja varianza, en: Scaling may amplify low-variance noisy variables, da: Skalering kan forstærke lav-varians støjende variable}
+  - id: bmb831.m05.c05
+    title: {es: Elección, reconstrucción y estabilidad, en: Selection, reconstruction, and stability, da: Valg, rekonstruktion og stabilitet}
+    body:
+      es: >-
+        Scree plots, varianza acumulada, reconstrucción y estabilidad ayudan a decidir dimensiones. Elegir PCs porque separan
+        etiquetas observadas convierte exploración en selección supervisada. Bootstrap o perturbación evalúan subespacios,
+        no sólo correlación de componentes individuales susceptibles a rotación.
+      en: >-
+        Scree plots, cumulative variance, reconstruction, and stability guide dimension choice. Selecting PCs because they
+        separate observed labels makes exploration supervised. Stability should assess subspaces, not only individual components.
+      da: >-
+        Scree plots, rekonstruktion og stabilitet hjælper komponentvalg. Label-baseret valg gør analysen superviseret.
+    key_points:
+      - {es: Varianza explicada no mide poder predictivo, en: Explained variance does not measure predictive power, da: Forklaret varians måler ikke prædiktiv evne}
+  - id: bmb831.m05.c06
+    title: {es: Robustez y métodos no lineales, en: Robustness and nonlinear methods, da: Robusthed og ikke-lineære metoder}
+    body:
+      es: >-
+        PCA clásica es sensible a extremos. Métodos robustos limitan influencia pero introducen supuestos. MDS intenta preservar
+        distancias; t-SNE y UMAP priorizan vecindarios y dependen de parámetros, semillas y densidad. Distancias globales,
+        tamaños de clusters y separaciones visuales no deben interpretarse literalmente sin validación.
+      en: >-
+        Classical PCA is outlier-sensitive. Robust methods limit influence under assumptions. MDS preserves distances;
+        t-SNE and UMAP emphasize neighborhoods and depend on parameters, seeds, and density. Visual gaps are not direct evidence.
+      da: >-
+        Klassisk PCA er outlier-følsom. MDS bevarer afstande; t-SNE og UMAP prioriterer nabolag og afhænger af parametre.
+    key_points:
+      - {es: Una embedding es una representación, no el dato original, en: An embedding is a representation, not the original data, da: En embedding er en repræsentation, ikke originaldata}}
+
+worked_examples:
+  - id: bmb831.m05.e01
+    title: {es: Efecto de escalado, en: Scaling effect, da: Skaleringseffekt}
+    scenario: {es: Una variable está en miles y otra entre 0 y 1., en: One variable is in thousands and another between 0 and 1., da: Én variabel er i tusinder og en anden mellem 0 og 1.}
+    reasoning:
+      - {es: Sin escalado, la primera domina covarianza., en: Without scaling, the first dominates covariance., da: Uden skalering dominerer den første kovarians.}
+      - {es: Con z-scores contribuyen por correlación, pero ruido pequeño puede amplificarse., en: With z-scores they contribute by correlation, but small-scale noise may be amplified., da: Med z-scores bidrager de via korrelation, men lavskala støj kan forstærkes.}
+    conclusion: {es: Comparar ambas representaciones y justificar según unidades., en: Compare both representations and justify by units., da: Sammenlign begge repræsentationer og begrund efter enheder.}
+  - id: bmb831.m05.e02
+    title: {es: PC1 impulsada por lote, en: Batch-driven PC1, da: Batch-drevet PC1}
+    scenario: {es: PC1 explica 35% y coincide con lote., en: PC1 explains 35% and matches batch., da: PC1 forklarer 35% og matcher batch.}
+    reasoning:
+      - {es: Varianza alta puede ser técnica., en: High variance may be technical., da: Høj varians kan være teknisk.}
+      - {es: Revisar loadings, QC, diseño y solapamiento con condición., en: Inspect loadings, QC, design, and overlap with condition., da: Undersøg loadings, QC, design og overlap med condition.}
+    conclusion: {es: No atribuir separación a biología sin evidencia externa., en: Do not attribute separation to biology without external evidence., da: Tilskriv ikke separation til biologi uden ekstern evidens.}
+  - id: bmb831.m05.e03
+    title: {es: UMAP cambia con semilla, en: UMAP changes with seed, da: UMAP ændres med seed}
+    scenario: {es: Dos ejecuciones muestran número aparente distinto de clusters., en: Two runs show a different apparent number of clusters., da: To kørsler viser forskelligt tilsyneladende antal clusters.}
+    reasoning:
+      - {es: La embedding es estocástica y parametrizada., en: The embedding is stochastic and parameterized., da: Embedding er stokastisk og parameteriseret.}
+      - {es: Evaluar estabilidad, datos originales y método formal de clustering., en: Assess stability, original-space structure, and formal clustering., da: Vurder stabilitet, originalt rum og formel clustering.}
+    conclusion: {es: La figura no define por sí sola subpoblaciones., en: The figure alone does not define subpopulations., da: Figuren alene definerer ikke subpopulationer.}
+
+guided_practice:
+  - {id: bmb831.m05.p01, activity_type: matrix_orientation, prompt: {es: Determina orientación correcta para estudiar muestras y genes., en: Determine correct orientation for studying samples and genes., da: Bestem korrekt orientering for studie af samples og gener.}, expected_elements: [rows, columns, distance_target, transpose_effect]}
+  - {id: bmb831.m05.p02, activity_type: calculation, prompt: {es: Reconstruye X aproximada con dos componentes SVD., en: Reconstruct approximate X with two SVD components., da: Rekonstruér approksimeret X med to SVD-komponenter.}, expected_elements: [U2, D2, V2, reconstruction_error]}
+  - {id: bmb831.m05.p03, activity_type: plot_interpretation, prompt: {es: Interpreta scores y loadings sin afirmar causalidad., en: Interpret scores and loadings without claiming causality., da: Fortolk scores og loadings uden at påstå kausalitet.}, expected_elements: [sample_pattern, variable_contribution, metadata_overlay, uncertainty]}
+  - {id: bmb831.m05.p04, activity_type: sensitivity_analysis, prompt: {es: Compara PCA cruda, log y escalada., en: Compare raw, log, and scaled PCA., da: Sammenlign rå, log og skaleret PCA.}, expected_elements: [variance_structure, outliers, dominant_features, stability]}
+  - {id: bmb831.m05.p05, activity_type: method_comparison, prompt: {es: Compara PCA, MDS, t-SNE y UMAP para una pregunta concreta., en: Compare PCA, MDS, t-SNE, and UMAP for a concrete question., da: Sammenlign PCA, MDS, t-SNE og UMAP for et konkret spørgsmål.}, expected_elements: [objective, preserved_structure, parameters, global_vs_local, reproducibility]}
+  - {id: bmb831.m05.p06, activity_type: publication_appraisal, prompt: {es: Critica un artículo que llama subtipos a clusters visuales en UMAP., en: Critique a paper calling visual UMAP clusters subtypes., da: Kritisk vurder en artikel der kalder visuelle UMAP-clusters subtyper.}, expected_elements: [embedding_instability, clustering_method, external_association, replication, claim_scope]}
+
+objective_bank:
+  - {id: bmb831.m05.q01, type: multiple_choice, prompt: {es: En PCA de muestras, filas de X suelen ser..., en: In sample PCA, rows of X usually are..., da: I sample-PCA er rækker i X normalt...}, options: [{id: a, text: {es: Muestras, en: Samples, da: Samples}}, {id: b, text: {es: Componentes, en: Components, da: Komponenter}}], correct_option_ids: [a], explanation: {es: Las distancias entre filas describen muestras., en: Distances between rows describe samples., da: Afstande mellem rækker beskriver samples.}}
+  - {id: bmb831.m05.q02, type: true_false, prompt: {es: PCA maximiza relevancia clínica., en: PCA maximizes clinical relevance., da: PCA maksimerer klinisk relevans.}, correct: false, explanation: {es: Maximiza varianza bajo la representación elegida., en: It maximizes variance under the chosen representation., da: Det maksimerer varians under valgt repræsentation.}}
+  - {id: bmb831.m05.q03, type: multiple_choice, prompt: {es: En X=UDVᵀ, V contiene..., en: In X=UDVᵀ, V contains..., da: I X=UDVᵀ indeholder V...}, options: [{id: a, text: {es: Direcciones/loadings, en: Directions/loadings, da: Retninger/loadings}}, {id: b, text: {es: p-values, en: p-values, da: p-værdier}}], correct_option_ids: [a], explanation: {es: Define ejes en espacio de variables., en: It defines axes in variable space., da: Det definerer akser i variabelrummet.}}
+  - {id: bmb831.m05.q04, type: true_false, prompt: {es: Cambiar signo de scores y loadings cambia PCA., en: Flipping signs of scores and loadings changes PCA., da: At ændre tegn på scores og loadings ændrer PCA.}, correct: false, explanation: {es: El subespacio y reconstrucción permanecen iguales., en: Subspace and reconstruction remain identical., da: Subspace og rekonstruktion forbliver identiske.}}
+  - {id: bmb831.m05.q05, type: multiple_choice, prompt: {es: Escalar a SD uno hace que..., en: Scaling to unit SD makes..., da: Skalering til SD én gør at...}, options: [{id: a, text: {es: Cada variable tenga varianza marginal uno, en: Each variable has marginal variance one, da: Hver variabel har marginal varians én}}, {id: b, text: {es: Todos los samples sean iguales, en: All samples become equal, da: Alle samples bliver ens}}], correct_option_ids: [a], explanation: {es: Cambia pesos relativos, no elimina estructura., en: It changes relative weighting, not all structure., da: Det ændrer relativ vægtning, ikke al struktur.}}
+  - {id: bmb831.m05.q06, type: true_false, prompt: {es: Varianza explicada alta demuestra poder predictivo., en: High explained variance proves predictive power., da: Høj forklaret varians beviser prædiktiv evne.}, correct: false, explanation: {es: Predicción exige evaluación supervisada independiente., en: Prediction requires independent supervised evaluation., da: Prædiktion kræver uafhængig superviseret evaluering.}}
+  - {id: bmb831.m05.q07, type: multiple_choice, prompt: {es: Seleccionar PCs mirando etiquetas es..., en: Selecting PCs by looking at labels is..., da: At vælge PCs ved at se labels er...}, options: [{id: a, text: {es: Selección supervisada, en: Supervised selection, da: Superviseret selection}}, {id: b, text: {es: Completamente no supervisado, en: Fully unsupervised, da: Fuldt usuperviseret}}], correct_option_ids: [a], explanation: {es: Las etiquetas influyen en la elección., en: Labels influence the choice., da: Labels påvirker valget.}}
+  - {id: bmb831.m05.q08, type: true_false, prompt: {es: Distancias globales en t-SNE deben interpretarse literalmente., en: Global t-SNE distances should be interpreted literally., da: Globale t-SNE-afstande bør fortolkes bogstaveligt.}, correct: false, explanation: {es: El método prioriza vecindarios locales., en: The method prioritizes local neighborhoods., da: Metoden prioriterer lokale nabolag.}}
+  - {id: bmb831.m05.q09, type: multiple_select, prompt: {es: Factores que afectan UMAP., en: Factors affecting UMAP., da: Faktorer der påvirker UMAP.}, options: [{id: a, text: {es: Semilla, en: Seed, da: Seed}}, {id: b, text: {es: Número de vecinos, en: Number of neighbors, da: Antal naboer}}, {id: c, text: {es: Métrica, en: Metric, da: Metrik}}, {id: d, text: {es: Ninguno, en: None, da: Ingen}}], correct_option_ids: [a,b,c], explanation: {es: La embedding es parametrizada y estocástica., en: The embedding is parameterized and stochastic., da: Embedding er parameteriseret og stokastisk.}}
+  - {id: bmb831.m05.q10, type: true_false, prompt: {es: Un loading grande prueba que el gen causa el fenotipo., en: A large loading proves the gene causes the phenotype., da: En stor loading beviser at genet forårsager fænotypen.}, correct: false, explanation: {es: Sólo indica contribución a una dirección de variación., en: It only indicates contribution to a variation direction., da: Det indikerer kun bidrag til en variationsretning.}}
+
+open_assessment_items:
+  - id: bmb831.m05.a01
+    prompt: {es: Diseña y defiende una PCA para un dataset ómico con distintas escalas y lotes., en: Design and defend a PCA for an omics dataset with different scales and batches., da: Design og forsvar en PCA for et omics-datasæt med forskellige skalaer og batches.}
+    rubric: [{criterion: matrix_preprocessing, weight: 0.30}, {criterion: scores_loadings, weight: 0.25}, {criterion: technical_metadata, weight: 0.25}, {criterion: sensitivity_claims, weight: 0.20}]
+  - id: bmb831.m05.a02
+    prompt: {es: Compara una embedding lineal y una no lineal y limita su interpretación., en: Compare a linear and nonlinear embedding and limit interpretation., da: Sammenlign en lineær og ikke-lineær embedding og begræns fortolkningen.}
+    rubric: [{criterion: preserved_structure, weight: 0.25}, {criterion: parameters_stochasticity, weight: 0.25}, {criterion: stability, weight: 0.25}, {criterion: claim_scope, weight: 0.25}]
+  - id: bmb831.m05.a03
+    prompt: {es: Audita una afirmación de “nuevo subtipo” basada únicamente en separación visual., en: Audit a “new subtype” claim based only on visual separation., da: Auditér en påstand om “ny subtype” baseret kun på visuel separation.}
+    rubric: [{criterion: representation_limits, weight: 0.25}, {criterion: cluster_validation, weight: 0.25}, {criterion: external_association, weight: 0.25}, {criterion: replication, weight: 0.25}]
+
+glossary:
+  - {id: bmb831.term.svd, term: {es: SVD, en: SVD, da: SVD}, definition: {es: Descomposición matricial en vectores singulares y valores singulares., en: Matrix decomposition into singular vectors and singular values., da: Matrixdekomposition i singulære vektorer og værdier.}}
+  - {id: bmb831.term.score, term: {es: score, en: score, da: score}, definition: {es: Coordenada de una muestra en un componente., en: Sample coordinate on a component., da: Samplekoordinat på en komponent.}}
+  - {id: bmb831.term.loading, term: {es: loading, en: loading, da: loading}, definition: {es: Contribución de una variable a una dirección componente., en: Variable contribution to a component direction., da: Variabelbidrag til en komponentretning.}}
+  - {id: bmb831.term.explained_variance, term: {es: varianza explicada, en: explained variance, da: forklaret varians}, definition: {es: Fracción de variación representada por un componente o subespacio., en: Fraction of variation represented by a component or subspace., da: Andel variation repræsenteret af komponent eller subspace.}}
+  - {id: bmb831.term.biplot, term: {es: biplot, en: biplot, da: biplot}, definition: {es: Representación conjunta de scores y loadings con escalado declarado., en: Joint display of scores and loadings under a declared scaling., da: Fælles visning af scores og loadings med deklareret skalering.}}
+  - {id: bmb831.term.mds, term: {es: MDS, en: MDS, da: MDS}, definition: {es: Embedding construida para preservar distancias., en: Embedding constructed to preserve distances., da: Embedding konstrueret til at bevare afstande.}}
+  - {id: bmb831.term.embedding, term: {es: embedding, en: embedding, da: embedding}, definition: {es: Representación de menor dimensión de objetos de alta dimensión., en: Lower-dimensional representation of high-dimensional objects., da: Lavdimensionel repræsentation af højdimensionelle objekter.}}
+  - {id: bmb831.term.robust_pca, term: {es: PCA robusta, en: robust PCA, da: robust PCA}, definition: {es: Variante que reduce influencia de observaciones extremas bajo supuestos definidos., en: Variant reducing extreme-observation influence under defined assumptions., da: Variant der reducerer influence fra ekstreme observationer under definerede antagelser.}}
+  - {id: bmb831.term.reconstruction_error, term: {es: error de reconstrucción, en: reconstruction error, da: rekonstruktionsfejl}, definition: {es: Diferencia entre datos y aproximación de baja dimensión., en: Difference between data and low-dimensional approximation., da: Forskel mellem data og lavdimensionel approksimation.}}
+  - {id: bmb831.term.subspace_stability, term: {es: estabilidad de subespacio, en: subspace stability, da: subspace-stabilitet}, definition: {es: Persistencia de un espacio componente bajo perturbaciones o resampling., en: Persistence of a component space under perturbations or resampling., da: Persistens af komponentrum under perturbationer eller resampling.}}
+
+hidden_tutor_support:
+  canonical_explanation:
+    es: >-
+      PCA resume máxima varianza de una representación concreta. Scores describen muestras, loadings variables y la
+      interpretación depende de transformación, escala, outliers y metadata. Embeddings no lineales son visualizaciones parametrizadas.
+    en: >-
+      PCA summarizes maximum variance of a specific representation. Scores describe samples, loadings variables, and interpretation
+      depends on transformation, scaling, outliers, and metadata. Nonlinear embeddings are parameterized visualizations.
+    da: >-
+      PCA opsummerer maksimal varians i en specifik repræsentation. Fortolkning afhænger af transformation, skalering og metadata.
+  misconceptions:
+    - PCA discovers clinically relevant dimensions by definition
+    - component sign has intrinsic biological meaning
+    - explained variance measures prediction
+    - visual UMAP clusters are validated subtypes
+    - scaling is always beneficial
+  socratic_questions:
+    - What do rows and columns represent?
+    - Which variables dominate before and after scaling?
+    - Does PC structure align with technical metadata?
+    - How stable is the subspace under resampling?
+    - What structure does the chosen embedding preserve?
+  grading_criteria:
+    - explicit matrix orientation and preprocessing
+    - correct SVD PCA scores and loadings reasoning
+    - sensitivity to scaling transformation and outliers
+    - separation of exploration from prediction
+    - restrained interpretation of nonlinear embeddings
+  retrieval_fragments:
+    - id: bmb831.m05.r01
+      text: {es: PCA maximiza varianza, no relevancia biológica ni capacidad predictiva., en: PCA maximizes variance, not biological relevance or predictive ability., da: PCA maksimerer varians, ikke biologisk relevans eller prædiktiv evne.}
+    - id: bmb831.m05.r02
+      text: {es: El signo de un componente es arbitrario si scores y loadings cambian juntos., en: Component sign is arbitrary when scores and loadings flip together., da: Komponenttegn er vilkårligt når scores og loadings skifter sammen.}
+    - id: bmb831.m05.r03
+      text: {es: t-SNE y UMAP dependen de parámetros y no preservan necesariamente geometría global., en: t-SNE and UMAP depend on parameters and need not preserve global geometry., da: t-SNE og UMAP afhænger af parametre og bevarer ikke nødvendigvis global geometri.}
