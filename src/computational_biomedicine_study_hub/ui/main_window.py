@@ -145,6 +145,9 @@ class MainWindow(QMainWindow):
             key = RouteId.HOME.value
             page = self._pages[key]
 
+        if isinstance(page, HomePage):
+            page.refresh()
+
         descriptor = self._descriptors[key]
         self._stack.setCurrentWidget(page)
         self._header.set_text(descriptor.title, descriptor.subtitle)
