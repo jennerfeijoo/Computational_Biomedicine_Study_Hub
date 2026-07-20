@@ -10,6 +10,7 @@ from PySide6.QtCore import (
     QParallelAnimationGroup,
     QPropertyAnimation,
     QSize,
+    Qt,
     Signal,
 )
 from PySide6.QtWidgets import (
@@ -182,7 +183,7 @@ class NavigationSidebar(QWidget):
         scroll.setObjectName("navigationScroll")
         scroll.setWidgetResizable(True)
         scroll.setFrameShape(QFrame.Shape.NoFrame)
-        scroll.setHorizontalScrollBarPolicy(scroll.horizontalScrollBarPolicy().ScrollBarAlwaysOff)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
         self._container = QWidget()
         self._container.setObjectName("navigationContainer")
