@@ -24,6 +24,7 @@ from ..i18n import (
 from ..learning.academic_catalog import AcademicCatalog
 from ..learning.progress_repository import ProgressRepository
 from ..persistence import SQLiteProgressRepository, default_progress_database_path
+from .design_system import DESIGN_SYSTEM_STYLESHEET
 from .header import PageHeader
 from .language_styles import LANGUAGE_STYLESHEET
 from .navigation import NavigationSidebar
@@ -57,9 +58,11 @@ class MainWindow(QMainWindow):
         progress_repository: ProgressRepository | None = None,
     ) -> None:
         super().__init__(parent)
-        self.resize(1200, 760)
+        self.resize(1280, 800)
         self.setMinimumSize(960, 640)
-        self.setStyleSheet(APPLICATION_STYLESHEET + LANGUAGE_STYLESHEET)
+        self.setStyleSheet(
+            APPLICATION_STYLESHEET + LANGUAGE_STYLESHEET + DESIGN_SYSTEM_STYLESHEET
+        )
 
         self._settings = settings if settings is not None else QSettings()
         if progress_repository is not None:
@@ -77,8 +80,13 @@ class MainWindow(QMainWindow):
         self._pages: dict[str, QWidget] = {}
         self._descriptors: dict[str, PageDescriptor] = localized_page_descriptors(self._translator)
 
-        self._navigation = NavigationSidebar(self._courses, self._translator)
+        self._navigation = NavigationSidebar(
+            self._courses,
+            self._translator,
+            collapsed=self._stored_navigation_collapsed(),
+        )
         self._navigation.route_selected.connect(self._on_route_selected)
+        self._navigation.collapsed_changed.connect(self._save_navigation_collapsed)
         self._header = PageHeader(self._language.locale)
         self._header.language_selected.connect(self._language.set_locale)
         self._language.locale_changed.connect(self._apply_locale)
@@ -86,6 +94,7 @@ class MainWindow(QMainWindow):
         self._stack.setObjectName("mainPageStack")
 
         content = QWidget()
+        content.setObjectName("mainContent")
         content_layout = QVBoxLayout(content)
         content_layout.setContentsMargins(28, 24, 28, 24)
         content_layout.setSpacing(20)
@@ -93,6 +102,7 @@ class MainWindow(QMainWindow):
         content_layout.addWidget(self._stack, 1)
 
         shell = QWidget()
+        shell.setObjectName("mainShell")
         shell_layout = QHBoxLayout(shell)
         shell_layout.setContentsMargins(0, 0, 0, 0)
         shell_layout.setSpacing(0)
@@ -149,8 +159,15 @@ class MainWindow(QMainWindow):
     def _register_pages(self) -> None:
         locale = self._language.locale
         catalog = AcademicCatalog(locale=locale)
-        home_page = HomePage(self._courses, self._translator)
+        home_page = HomePage(
+            self._courses,
+            self._translator,
+            catalog=catalog,
+            repository=self._progress,
+        )
         home_page.course_selected.connect(self.navigate)
+        home_page.module_selected.connect(self._open_catalog_module)
+        home_page.review_selected.connect(lambda: self.navigate(RouteId.REVIEW))
         glossary_page = GlossaryPage(
             catalog,
             locale=locale,
@@ -348,6 +365,16 @@ class MainWindow(QMainWindow):
         if value in self._pages:
             return value
         return RouteId.HOME.value
+
+    def _stored_navigation_collapsed(self) -> bool:
+        value = self._settings.value("navigation/collapsed", False)
+        if isinstance(value, bool):
+            return value
+        return str(value).strip().casefold() in {"1", "true", "yes", "on"}
+
+    @Slot(bool)
+    def _save_navigation_collapsed(self, collapsed: bool) -> None:
+        self._settings.setValue("navigation/collapsed", collapsed)
 
     def _restore_window_state(self) -> None:
         geometry = self._settings.value("window/geometry")
