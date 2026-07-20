@@ -41,7 +41,6 @@ class DashboardCopy:
     modules_caption: str
     activity_title: str
     no_activity: str
-    courses_title: str
     course_progress: str
     course_status: str
     attempts: str
@@ -65,7 +64,6 @@ _DASHBOARD_COPY: dict[AppLocale, DashboardCopy] = {
         modules_caption="de {total} módulos",
         activity_title="Actividad reciente",
         no_activity="Sin actividad registrada",
-        courses_title="Asignaturas",
         course_progress="{progress}% de progreso estimado",
         course_status="{started}/{total} módulos iniciados · {pending} pendientes",
         attempts="{attempts} intentos · {success}% correctos",
@@ -87,7 +85,6 @@ _DASHBOARD_COPY: dict[AppLocale, DashboardCopy] = {
         modules_caption="of {total} modules",
         activity_title="Recent activity",
         no_activity="No activity recorded",
-        courses_title="Courses",
         course_progress="{progress}% estimated progress",
         course_status="{started}/{total} modules started · {pending} pending",
         attempts="{attempts} attempts · {success}% correct",
@@ -109,7 +106,6 @@ _DASHBOARD_COPY: dict[AppLocale, DashboardCopy] = {
         modules_caption="af {total} moduler",
         activity_title="Seneste aktivitet",
         no_activity="Ingen aktivitet registreret",
-        courses_title="Kurser",
         course_progress="{progress}% estimeret fremgang",
         course_status="{started}/{total} moduler påbegyndt · {pending} afventer",
         attempts="{attempts} forsøg · {success}% korrekte",
@@ -183,7 +179,8 @@ class CourseCard(QFrame):
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
-        self.setObjectName("dashboardCourseCard")
+        self.setObjectName("courseCard")
+        self.setProperty("dashboardCard", "true")
         self.setProperty("courseCode", course.code)
         self.setMinimumHeight(260)
         apply_elevation(self, blur_radius=20, y_offset=4)
@@ -194,7 +191,7 @@ class CourseCard(QFrame):
 
         top_row = QHBoxLayout()
         code = QLabel(course.code)
-        code.setObjectName("dashboardCourseCode")
+        code.setObjectName("courseCardCode")
         top_row.addWidget(code)
         top_row.addStretch(1)
 
@@ -205,17 +202,17 @@ class CourseCard(QFrame):
                 ects=course.ects,
             )
         )
-        metadata.setObjectName("dashboardCourseMetadata")
+        metadata.setObjectName("courseCardMetadata")
         top_row.addWidget(metadata)
         layout.addLayout(top_row)
 
         title = QLabel(course.title_for(translator.locale))
-        title.setObjectName("dashboardCourseTitle")
+        title.setObjectName("courseCardTitle")
         title.setWordWrap(True)
         layout.addWidget(title)
 
         summary = QLabel(course.summary_for(translator.locale))
-        summary.setObjectName("dashboardCourseSummary")
+        summary.setObjectName("courseCardSummary")
         summary.setWordWrap(True)
         summary.setMaximumHeight(48)
         layout.addWidget(summary)
@@ -258,7 +255,8 @@ class CourseCard(QFrame):
         layout.addStretch(1)
 
         open_button = QPushButton(translator.text(MessageKey.COURSE_OPEN))
-        open_button.setObjectName("dashboardSecondaryAction")
+        open_button.setObjectName("courseOpenButton")
+        open_button.setProperty("dashboardVariant", "secondary")
         open_button.setCursor(Qt.CursorShape.PointingHandCursor)
         open_button.clicked.connect(
             lambda checked=False, route=course.route: self.selected.emit(route)
@@ -284,17 +282,31 @@ class HomePage(QWidget):
     ) -> None:
         super().__init__(parent)
         self.setObjectName("homeDashboardPage")
-        course_list = tuple(courses)
-        copy = _DASHBOARD_COPY[translator.locale]
+        self._courses = tuple(courses)
+        self._translator = translator
+        self._catalog = catalog
+        self._repository = repository
 
         root_layout = QVBoxLayout(self)
         root_layout.setContentsMargins(0, 0, 0, 0)
 
-        scroll = QScrollArea()
-        scroll.setObjectName("dashboardScroll")
-        scroll.setWidgetResizable(True)
-        scroll.setFrameShape(QFrame.Shape.NoFrame)
+        self._scroll = QScrollArea()
+        self._scroll.setObjectName("dashboardScroll")
+        self._scroll.setWidgetResizable(True)
+        self._scroll.setFrameShape(QFrame.Shape.NoFrame)
+        root_layout.addWidget(self._scroll)
+        self.refresh()
 
+    def refresh(self) -> None:
+        """Rebuild progress-dependent dashboard values from the persistence layer."""
+
+        previous = self._scroll.takeWidget()
+        self._scroll.setWidget(self._create_body())
+        if previous is not None:
+            previous.deleteLater()
+
+    def _create_body(self) -> QWidget:
+        copy = _DASHBOARD_COPY[self._translator.locale]
         body = QWidget()
         body.setObjectName("dashboardBody")
         layout = QVBoxLayout(body)
@@ -302,15 +314,22 @@ class HomePage(QWidget):
         layout.setSpacing(18)
 
         states = {
-            course.code: _course_state(course.code, catalog, repository) for course in course_list
+            course.code: _course_state(course.code, self._catalog, self._repository)
+            for course in self._courses
         }
-        latest = _latest_attempt(repository)
-        latest_module_title = _module_title(catalog, latest[0], latest[1]) if latest else ""
-        due_count = _due_count(repository)
+        latest = _latest_attempt(self._repository)
+        latest_module_title = (
+            _module_title(self._catalog, latest[0], latest[1]) if latest is not None else ""
+        )
+        due_count = _due_count(self._repository)
         started_modules = sum(state.started_modules for state in states.values())
         total_modules = sum(state.total_modules for state in states.values())
         last_activity = max(
-            (state.last_activity_at for state in states.values() if state.last_activity_at is not None),
+            (
+                state.last_activity_at
+                for state in states.values()
+                if state.last_activity_at is not None
+            ),
             default=None,
         )
 
@@ -326,7 +345,7 @@ class HomePage(QWidget):
         eyebrow.setObjectName("dashboardEyebrow")
         hero_copy.addWidget(eyebrow)
 
-        title = QLabel(copy.hero_title_active if latest else copy.hero_title_empty)
+        title = QLabel(copy.hero_title_active if latest is not None else copy.hero_title_empty)
         title.setObjectName("dashboardHeroTitle")
         title.setWordWrap(True)
         hero_copy.addWidget(title)
@@ -335,7 +354,8 @@ class HomePage(QWidget):
         if latest_module_title:
             body_text = f"{latest_module_title}\n{body_text}"
         hero_body = QLabel(body_text)
-        hero_body.setObjectName("dashboardHeroBody")
+        hero_body.setObjectName("homeDescription")
+        hero_body.setProperty("dashboardRole", "heroBody")
         hero_body.setWordWrap(True)
         hero_copy.addWidget(hero_body)
 
@@ -344,12 +364,16 @@ class HomePage(QWidget):
         continue_button.setObjectName("dashboardPrimaryAction")
         continue_button.setCursor(Qt.CursorShape.PointingHandCursor)
         if latest is not None:
+            course_code, module_id = latest
             continue_button.clicked.connect(
-                lambda checked=False, context=latest: self.module_selected.emit(*context)
+                lambda checked=False, course=course_code, module=module_id: (
+                    self.module_selected.emit(course, module)
+                )
             )
-        elif course_list:
+        elif self._courses:
+            first_route = self._courses[0].route
             continue_button.clicked.connect(
-                lambda checked=False, route=course_list[0].route: self.course_selected.emit(route)
+                lambda checked=False, route=first_route: self.course_selected.emit(route)
             )
         actions.addWidget(continue_button)
 
@@ -393,16 +417,19 @@ class HomePage(QWidget):
         )
         metrics.addWidget(
             DashboardMetricCard(
-                value=_format_activity(last_activity, translator.locale),
+                value=_format_activity(last_activity, self._translator.locale),
                 title=copy.activity_title,
-                caption=copy.no_activity if last_activity is None else _format_time(last_activity),
+                caption=(
+                    copy.no_activity if last_activity is None else _format_time(last_activity)
+                ),
             ),
             1,
         )
         layout.addLayout(metrics)
 
-        course_heading = QLabel(copy.courses_title)
-        course_heading.setObjectName("dashboardSectionTitle")
+        course_heading = QLabel(self._translator.text(MessageKey.HOME_HEADING))
+        course_heading.setObjectName("sectionHeading")
+        course_heading.setProperty("dashboardRole", "sectionTitle")
         layout.addWidget(course_heading)
 
         grid = QGridLayout()
@@ -411,15 +438,14 @@ class HomePage(QWidget):
         grid.setColumnStretch(0, 1)
         grid.setColumnStretch(1, 1)
 
-        for index, course in enumerate(course_list):
-            card = CourseCard(course, translator, states[course.code], copy)
+        for index, course in enumerate(self._courses):
+            card = CourseCard(course, self._translator, states[course.code], copy)
             card.selected.connect(self.course_selected.emit)
             grid.addWidget(card, index // 2, index % 2)
 
         layout.addLayout(grid)
         layout.addStretch(1)
-        scroll.setWidget(body)
-        root_layout.addWidget(scroll)
+        return body
 
 
 def _course_state(
