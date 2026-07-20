@@ -131,9 +131,16 @@ QWidget#navigationSidebar[collapsed="true"] QPushButton#navigationButton {{
     padding: 8px;
 }}
 
+QScrollArea#dashboardScroll,
+QWidget#dashboardBody,
+QWidget#homeDashboardPage {{
+    background: transparent;
+    border: none;
+}}
+
 QFrame#dashboardHero,
 QFrame#dashboardMetricCard,
-QFrame#dashboardCourseCard,
+QFrame#courseCard[dashboardCard="true"],
 QFrame#academicCard,
 QFrame#emptyStateCard {{
     background: {TOKENS.surface};
@@ -159,10 +166,10 @@ QLabel#dashboardHeroTitle {{
     font-weight: 780;
 }}
 
-QLabel#dashboardHeroBody,
+QLabel[dashboardRole="heroBody"],
 QLabel#dashboardMetricCaption,
-QLabel#dashboardCourseMetadata,
-QLabel#dashboardCourseSummary,
+QLabel#courseCardMetadata,
+QLabel#courseCardSummary,
 QLabel#dashboardCourseStatus {{
     color: {TOKENS.text_muted};
 }}
@@ -179,20 +186,36 @@ QLabel#dashboardMetricTitle {{
     font-weight: 700;
 }}
 
-QLabel#dashboardCourseCode {{
+QLabel#courseCardCode {{
     color: {TOKENS.primary};
     font-size: 13px;
     font-weight: 800;
 }}
 
-QLabel#dashboardCourseTitle {{
+QLabel#courseCardTitle {{
     color: {TOKENS.text};
     font-size: 18px;
     font-weight: 760;
 }}
 
-QFrame#dashboardCourseCard:hover {{
+QFrame#courseCard[dashboardCard="true"]:hover {{
     border-color: {TOKENS.primary};
+}}
+
+QFrame#courseCard[courseCode="DM857"] {{
+    border-top: 4px solid {COURSE_ACCENTS["DM857"]};
+}}
+
+QFrame#courseCard[courseCode="DM847"] {{
+    border-top: 4px solid {COURSE_ACCENTS["DM847"]};
+}}
+
+QFrame#courseCard[courseCode="BMB830"] {{
+    border-top: 4px solid {COURSE_ACCENTS["BMB830"]};
+}}
+
+QFrame#courseCard[courseCode="BMB831"] {{
+    border-top: 4px solid {COURSE_ACCENTS["BMB831"]};
 }}
 
 QProgressBar#dashboardCourseProgress {{
@@ -208,6 +231,22 @@ QProgressBar#dashboardCourseProgress {{
 QProgressBar#dashboardCourseProgress::chunk {{
     border-radius: 4px;
     background: {TOKENS.primary};
+}}
+
+QProgressBar#dashboardCourseProgress[courseCode="DM857"]::chunk {{
+    background: {COURSE_ACCENTS["DM857"]};
+}}
+
+QProgressBar#dashboardCourseProgress[courseCode="DM847"]::chunk {{
+    background: {COURSE_ACCENTS["DM847"]};
+}}
+
+QProgressBar#dashboardCourseProgress[courseCode="BMB830"]::chunk {{
+    background: {COURSE_ACCENTS["BMB830"]};
+}}
+
+QProgressBar#dashboardCourseProgress[courseCode="BMB831"]::chunk {{
+    background: {COURSE_ACCENTS["BMB831"]};
 }}
 
 QPushButton#dashboardPrimaryAction,
@@ -226,6 +265,7 @@ QPushButton#dashboardReviewAction:hover {{
     background: {TOKENS.primary_hover};
 }}
 
+QPushButton#courseOpenButton[dashboardVariant="secondary"],
 QPushButton#dashboardSecondaryAction {{
     min-height: 38px;
     padding: 0 16px;
@@ -236,12 +276,13 @@ QPushButton#dashboardSecondaryAction {{
     font-weight: 700;
 }}
 
+QPushButton#courseOpenButton[dashboardVariant="secondary"]:hover,
 QPushButton#dashboardSecondaryAction:hover {{
     background: {TOKENS.primary_soft};
     border-color: #8BADE0;
 }}
 
-QLabel#dashboardSectionTitle {{
+QLabel[dashboardRole="sectionTitle"] {{
     color: {TOKENS.text};
     font-size: 19px;
     font-weight: 780;
