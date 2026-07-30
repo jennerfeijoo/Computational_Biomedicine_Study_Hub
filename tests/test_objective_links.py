@@ -55,7 +55,7 @@ def test_every_module_01_objective_receives_practice_and_assessment_evidence() -
 
 
 def test_specific_multidimensional_activities_keep_all_objective_links() -> None:
-    assert DM847_M01_OBJECTIVE_LINKS.objectives_for("dm847.m01.p04") == (
+    assert DM847_M01_OBJECTIVE_LINKS.objectives_for("m01.p04") == (
         "m01.o4",
         "m01.o6",
     )
@@ -72,7 +72,7 @@ def test_unmapped_modules_do_not_receive_inferred_objectives() -> None:
 
 
 def test_catalog_rejects_duplicate_activity_ids() -> None:
-    duplicate = ObjectiveLink("dm847.m01.p01", ("m01.o1",))
+    duplicate = ObjectiveLink("m01.p01", ("m01.o1",))
 
     with pytest.raises(ValueError, match="duplicate linked activity IDs"):
         ObjectiveLinkCatalog("dm847.m01", (duplicate, duplicate))
@@ -82,7 +82,7 @@ def test_catalog_validation_rejects_unknown_objectives() -> None:
     bundle = LOCALIZED_BUNDLES[0].materialize(AppLocale.ENGLISH)
     links = tuple(
         ObjectiveLink(link.activity_id, ("m01.missing",))
-        if link.activity_id == "dm847.m01.p01"
+        if link.activity_id == "m01.p01"
         else link
         for link in DM847_M01_OBJECTIVE_LINKS.links
     )
