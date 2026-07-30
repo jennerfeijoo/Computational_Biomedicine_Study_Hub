@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import TypeVar
 
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import QApplication, QPushButton, QStackedWidget, QTabWidget
@@ -9,6 +10,8 @@ from computational_biomedicine_study_hub.courses.dm847 import DM847Page
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
 from computational_biomedicine_study_hub.i18n import AppLocale, validate_ui_copy
 from computational_biomedicine_study_hub.ui.main_window import MainWindow
+
+CoursePageT = TypeVar("CoursePageT", DM847Page, DM857Page)
 
 
 def _settings(tmp_path: Path) -> QSettings:
@@ -22,10 +25,10 @@ def _language_button(window: MainWindow, label: str) -> QPushButton:
     raise AssertionError(f"Missing language button {label!r}")
 
 
-def _active_course_page[T: DM847Page | DM857Page](
+def _active_course_page(
     window: MainWindow,
-    page_type: type[T],
-) -> T:
+    page_type: type[CoursePageT],
+) -> CoursePageT:
     stack = window.findChild(QStackedWidget, "mainPageStack")
     assert stack is not None
     page = stack.currentWidget()
