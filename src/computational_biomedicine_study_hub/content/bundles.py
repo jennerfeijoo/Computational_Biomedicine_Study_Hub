@@ -8,6 +8,7 @@ from ..i18n import AppLocale
 from ..learning.activity_types import ActivityType
 from .localized_models import LocalizedAssessmentItem, LocalizedLearningModule
 from .models import AssessmentItem, LearningModule
+from .objective_links import ObjectiveLinkCatalog, objective_links_for_module
 
 _OBJECTIVE_TYPES = {
     ActivityType.MULTIPLE_CHOICE,
@@ -58,6 +59,15 @@ class ModuleBundle:
                 + ", ".join(unsupported)
             )
 
+        if self.objective_links is not None:
+            self.objective_links.validate_against(self.module, self.objective_question_bank)
+
+    @property
+    def objective_links(self) -> ObjectiveLinkCatalog | None:
+        """Return the locale-independent objective mapping for this module."""
+
+        return objective_links_for_module(self.module.module_id)
+
 
 @dataclass(frozen=True, slots=True)
 class LocalizedModuleBundle:
@@ -94,6 +104,12 @@ class LocalizedModuleBundle:
                 f"Localized module {self.localized_module.module_id!r} has out-of-scope items: "
                 + ", ".join(wrong_scope)
             )
+
+    @property
+    def objective_links(self) -> ObjectiveLinkCatalog | None:
+        """Return the mapping shared by all materialized locales."""
+
+        return objective_links_for_module(self.localized_module.module_id)
 
     def materialize(self, locale: AppLocale | str) -> ModuleBundle:
         """Materialize the module and bank together in one selected locale."""
