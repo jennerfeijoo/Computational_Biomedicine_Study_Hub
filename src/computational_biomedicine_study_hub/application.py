@@ -45,9 +45,7 @@ def create_application(argv: Sequence[str] | None = None) -> QApplication:
 def progress_database_path() -> Path:
     """Return the writable per-user path for private learning progress."""
 
-    location = QStandardPaths.writableLocation(
-        QStandardPaths.StandardLocation.AppDataLocation
-    )
+    location = QStandardPaths.writableLocation(QStandardPaths.StandardLocation.AppDataLocation)
     directory = Path(location) if location else Path.home() / ".cb-study-hub"
     directory.mkdir(parents=True, exist_ok=True)
     return directory / _PROGRESS_DATABASE_NAME
