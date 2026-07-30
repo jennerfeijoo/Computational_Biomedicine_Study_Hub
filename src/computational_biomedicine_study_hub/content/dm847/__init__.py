@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
+
 from ...i18n import AppLocale
 from ..bundles import LocalizedModuleBundle, validate_bundle_catalog
+from ..localized_models import LocalizedText
 from .module_01_molecular_information import (
     LOCALIZED_MODULE_01_MOLECULAR_INFORMATION,
     LOCALIZED_OBJECTIVE_QUESTION_BANK_01,
@@ -30,7 +33,7 @@ from .module_05_hidden_markov_models import (
     materialize_module_05_question_bank,
 )
 from .module_06_suffix_arrays_bwt_mapping import (
-    LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING,
+    LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING as _RAW_LOCALIZED_MODULE_06,
     LOCALIZED_OBJECTIVE_QUESTION_BANK_06,
     materialize_module_06_question_bank,
 )
@@ -53,6 +56,82 @@ from .module_10_omics_learning_project import (
     LOCALIZED_MODULE_10_OMICS_LEARNING_PROJECT,
     LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
     materialize_module_10_question_bank,
+)
+
+
+def _replace_spanish(
+    texts: tuple[LocalizedText, ...],
+    spanish_values: tuple[str, ...],
+) -> tuple[LocalizedText, ...]:
+    """Replace only the Spanish member while preserving English and Danish identity."""
+    if len(texts) != len(spanish_values):
+        raise ValueError("Localized tutor correction must preserve item count.")
+    return tuple(
+        replace(text, spanish=spanish)
+        for text, spanish in zip(texts, spanish_values, strict=True)
+    )
+
+
+_module_06_tutor = _RAW_LOCALIZED_MODULE_06.tutor_support
+LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING = replace(
+    _RAW_LOCALIZED_MODULE_06,
+    tutor_support=replace(
+        _module_06_tutor,
+        knowledge_fragments=_replace_spanish(
+            _module_06_tutor.knowledge_fragments,
+            (
+                "El suffix array almacena posiciones.",
+                "LCP mide prefijos compartidos.",
+                "BWT requiere un centinela único.",
+                "LF conserva el rango de ocurrencia.",
+                "FM-index separa count y locate.",
+                "El mapeo de lecturas requiere verificar candidatos.",
+            ),
+        ),
+        common_misconceptions=_replace_spanish(
+            _module_06_tutor.common_misconceptions,
+            (
+                "Almacenar sufijos completos.",
+                "Usar varios centinelas.",
+                "Confundir F y L.",
+                "Tratar count como locate.",
+                "Elegir arbitrariamente una posición con multimapping.",
+                "Interpretar MAPQ como universal.",
+            ),
+        ),
+        socratic_questions=_replace_spanish(
+            _module_06_tutor.socratic_questions,
+            (
+                "¿Qué se almacena en el índice?",
+                "¿El centinela es único?",
+                "¿Qué significan los límites del intervalo?",
+                "¿Se necesita count o locate?",
+                "¿Cómo se manejan los mismatches?",
+                "¿Cómo se reporta el multimapping?",
+            ),
+        ),
+        grading_criteria=_replace_spanish(
+            _module_06_tutor.grading_criteria,
+            (
+                "Construye suffix arrays y BWT correctos.",
+                "Explica LF y backward search.",
+                "Analiza los compromisos de memoria.",
+                "Distingue count y locate.",
+                "Diseña correctamente seed-and-extend.",
+                "Conserva la incertidumbre del mapeo.",
+            ),
+        ),
+        response_constraints=_replace_spanish(
+            _module_06_tutor.response_constraints,
+            (
+                "No inventar coordenadas de mapeo.",
+                "No ocultar multimapping.",
+                "No asumir que MAPQ está calibrado universalmente.",
+                "No recomendar construcciones ingenuas para genomas.",
+                "Responder en el idioma activo.",
+            ),
+        ),
+    ),
 )
 
 LOCALIZED_BUNDLES = (
