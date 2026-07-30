@@ -45,7 +45,9 @@ from .module_07_operons_bacterial_genetics import (
     materialize_module_07_question_bank,
 )
 from .module_08_motif_discovery_em import (
-    LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM,
+    LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM as _RAW_LOCALIZED_MODULE_08,
+)
+from .module_08_motif_discovery_em import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_08,
     materialize_module_08_question_bank,
 )
@@ -129,6 +131,68 @@ LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING = replace(
                 "No ocultar multimapping.",
                 "No asumir que MAPQ está calibrado universalmente.",
                 "No recomendar construcciones ingenuas para genomas.",
+                "Responder en el idioma activo.",
+            ),
+        ),
+    ),
+)
+
+_module_08_tutor = _RAW_LOCALIZED_MODULE_08.tutor_support
+LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM = replace(
+    _RAW_LOCALIZED_MODULE_08,
+    tutor_support=replace(
+        _module_08_tutor,
+        knowledge_fragments=_replace_spanish(
+            _module_08_tutor.knowledge_fragments,
+            (
+                "Las PWM requieren pseudoconteos.",
+                "La entropía mide incertidumbre.",
+                "El score depende del modelo de fondo.",
+                "El modelo de ocurrencia es un supuesto.",
+                "EM encuentra óptimos locales.",
+                "La validación requiere datos retenidos y evidencia externa.",
+            ),
+        ),
+        common_misconceptions=_replace_spanish(
+            _module_08_tutor.common_misconceptions,
+            (
+                "Omitir pseudoconteos.",
+                "Asumir un fondo uniforme.",
+                "Forzar OOPS cuando pueden faltar sitios.",
+                "Usar una sola inicialización de EM.",
+                "Seleccionar la anchura con los datos de prueba.",
+                "Interpretar un logo como prueba funcional.",
+            ),
+        ),
+        socratic_questions=_replace_spanish(
+            _module_08_tutor.socratic_questions,
+            (
+                "¿Qué modelo de fondo se utiliza?",
+                "¿Qué modelo de ocurrencia es apropiado?",
+                "¿Cómo se selecciona la anchura?",
+                "¿Cuántos reinicios se ejecutan?",
+                "¿El motivo es estable?",
+                "¿Qué evidencia externa existe?",
+            ),
+        ),
+        grading_criteria=_replace_spanish(
+            _module_08_tutor.grading_criteria,
+            (
+                "Construye y normaliza la PWM.",
+                "Interpreta entropía e información.",
+                "Formula log-odds frente al fondo correcto.",
+                "Explica los pasos E y M.",
+                "Gestiona los óptimos locales.",
+                "Diseña una validación independiente.",
+            ),
+        ),
+        response_constraints=_replace_spanish(
+            _module_08_tutor.response_constraints,
+            (
+                "No inventar sitios de unión.",
+                "No atribuir función basándose solo en una PWM.",
+                "No ocultar el fondo ni los pseudoconteos.",
+                "No usar motivos didácticos con fines clínicos.",
                 "Responder en el idioma activo.",
             ),
         ),
