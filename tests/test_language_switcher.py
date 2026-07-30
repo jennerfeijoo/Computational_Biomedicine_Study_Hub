@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import TypeVar
 
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import QApplication, QPushButton, QStackedWidget, QTabWidget
 
+from computational_biomedicine_study_hub.courses.dm847 import DM847Page
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
 from computational_biomedicine_study_hub.i18n import AppLocale, validate_ui_copy
 from computational_biomedicine_study_hub.ui.main_window import MainWindow
+
+CoursePageT = TypeVar("CoursePageT", DM847Page, DM857Page)
 
 
 def _settings(tmp_path: Path) -> QSettings:
@@ -21,11 +25,14 @@ def _language_button(window: MainWindow, label: str) -> QPushButton:
     raise AssertionError(f"Missing language button {label!r}")
 
 
-def _active_dm857_page(window: MainWindow) -> DM857Page:
+def _active_course_page(
+    window: MainWindow,
+    page_type: type[CoursePageT],
+) -> CoursePageT:
     stack = window.findChild(QStackedWidget, "mainPageStack")
     assert stack is not None
     page = stack.currentWidget()
-    assert isinstance(page, DM857Page)
+    assert isinstance(page, page_type)
     return page
 
 
@@ -51,7 +58,7 @@ def test_language_change_is_immediate_and_preserves_dm857_location(
     settings = _settings(tmp_path)
     window = MainWindow(settings=settings)
     window.navigate("course/dm857")
-    page = _active_dm857_page(window)
+    page = _active_course_page(window, DM857Page)
     assert page.select_module(4)
     assert page.reader.select_section_index(2)
 
@@ -60,7 +67,7 @@ def test_language_change_is_immediate_and_preserves_dm857_location(
 
     assert window.current_locale is AppLocale.ENGLISH
     assert str(window.current_route) == "course/dm857"
-    translated_page = _active_dm857_page(window)
+    translated_page = _active_course_page(window, DM857Page)
     assert translated_page.current_module_index == 4
     assert translated_page.reader.current_section_index == 2
     assert translated_page.reader.module.title.startswith("Strings")
@@ -74,6 +81,27 @@ def test_language_change_is_immediate_and_preserves_dm857_location(
         "Assessment",
     ]
     assert settings.value("ui/locale") == "en"
+
+
+def test_language_change_preserves_dm847_location(
+    qapp: QApplication,
+    tmp_path: Path,
+) -> None:
+    window = MainWindow(settings=_settings(tmp_path))
+    window.navigate("course/dm847")
+    page = _active_course_page(window, DM847Page)
+    assert page.select_module(5)
+    assert page.reader.select_section_index(3)
+
+    _language_button(window, "DK").click()
+    qapp.processEvents()
+
+    assert window.current_locale is AppLocale.DANISH_DENMARK
+    assert str(window.current_route) == "course/dm847"
+    translated_page = _active_course_page(window, DM847Page)
+    assert translated_page.current_module_index == 5
+    assert translated_page.reader.current_section_index == 3
+    assert translated_page.reader.module.title.startswith("Suffix")
 
 
 def test_persisted_danish_locale_is_restored(

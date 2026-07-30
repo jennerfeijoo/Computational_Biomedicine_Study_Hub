@@ -17,7 +17,7 @@ def make_settings(path: Path) -> QSettings:
     return QSettings(str(path), QSettings.Format.IniFormat)
 
 
-def test_settings_page_prefers_and_persists_qwen_automatically(
+def test_settings_page_prefers_qwen_and_persists_only_after_explicit_save(
     qapp: QApplication,
     tmp_path: Path,
 ) -> None:
@@ -26,7 +26,7 @@ def test_settings_page_prefers_and_persists_qwen_automatically(
     models = (
         OllamaModel(name="ornith:9b"),
         OllamaModel(name="qwen3-embedding:0.6b"),
-        OllamaModel(name="qwen3.6:27b"),
+        OllamaModel(name="qwen3.5:9b-q8_0"),
     )
 
     page.apply_probe_success("0.32.1", models)
@@ -35,10 +35,15 @@ def test_settings_page_prefers_and_persists_qwen_automatically(
     assert selector is not None
     assert selector.isEnabled()
     assert selector.count() == 3
-    assert page.selected_model == "qwen3.6:27b"
-    assert page.status_text == "Conectado automáticamente con qwen3.6:27b."
-    assert settings.value(OllamaSettingsPage.MODEL_KEY) == "qwen3.6:27b"
-    assert settings.value(OllamaSettingsPage.BASE_URL_KEY) == ("http://localhost:11434/api")
+    assert page.selected_model == "qwen3.5:9b-q8_0"
+    assert page.status_text == "Conectado automáticamente con qwen3.5:9b-q8_0."
+    assert settings.value(OllamaSettingsPage.MODEL_KEY) is None
+    assert settings.value(OllamaSettingsPage.BASE_URL_KEY) is None
+
+    page.save_preferences()
+
+    assert settings.value(OllamaSettingsPage.MODEL_KEY) == "qwen3.5:9b-q8_0"
+    assert settings.value(OllamaSettingsPage.BASE_URL_KEY) == "http://localhost:11434/api"
 
 
 def test_settings_page_falls_back_when_preferred_model_is_missing(
@@ -58,7 +63,7 @@ def test_settings_page_falls_back_when_preferred_model_is_missing(
     )
 
     assert page.selected_model == "ornith:9b"
-    assert "no se encontró qwen3.6:27b" in page.status_text
+    assert "no se encontró qwen3.5:9b-q8_0" in page.status_text
 
 
 def test_settings_page_surfaces_connection_failures(

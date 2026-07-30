@@ -20,7 +20,7 @@ from .ollama import (
     UrllibJsonTransport,
 )
 
-DEFAULT_CHAT_MODEL = "qwen3.6:27b"
+DEFAULT_CHAT_MODEL = "qwen3.5:9b-q8_0"
 
 
 class ChatRole(StrEnum):

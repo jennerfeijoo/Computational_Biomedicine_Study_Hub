@@ -13,6 +13,7 @@ from PySide6.QtWidgets import (
 )
 
 from ..courses import COURSES, CourseRegistration
+from ..courses.dm847 import DM847Page
 from ..courses.dm857 import DM857Page
 from ..i18n import (
     AppLocale,
@@ -35,6 +36,9 @@ from .routes import (
     route_value,
 )
 from .styles import APPLICATION_STYLESHEET
+
+ModularCoursePage = DM847Page | DM857Page
+StudyLocation = tuple[int, int]
 
 
 class MainWindow(QMainWindow):
@@ -161,7 +165,7 @@ class MainWindow(QMainWindow):
     def _apply_locale(self, locale_code: str) -> None:
         """Rebuild visible pages immediately while preserving study location."""
         route = route_value(self.current_route)
-        dm857_state = self._capture_dm857_state(route)
+        study_location = self._capture_study_location(route)
 
         self._header.set_locale(locale_code)
         self._navigation.retranslate(self._translator)
@@ -170,33 +174,33 @@ class MainWindow(QMainWindow):
         self._register_pages()
         self._set_window_title()
         self.navigate(route)
-        self._restore_dm857_state(route, dm857_state)
+        self._restore_study_location(route, study_location)
 
-    def _capture_dm857_state(self, route: str) -> tuple[int, int] | None:
-        dm857_route = next(
-            (course.route for course in self._courses if course.code == "DM857"),
-            "",
-        )
-        if route != dm857_route:
-            return None
-        page = self._pages.get(route)
-        if not isinstance(page, DM857Page):
+    def _capture_study_location(self, route: str) -> StudyLocation | None:
+        page = self._modular_course_page(route)
+        if page is None:
             return None
         return page.current_module_index, page.reader.current_section_index
 
-    def _restore_dm857_state(
+    def _restore_study_location(
         self,
         route: str,
-        state: tuple[int, int] | None,
+        state: StudyLocation | None,
     ) -> None:
         if state is None:
             return
-        page = self._pages.get(route)
-        if not isinstance(page, DM857Page):
+        page = self._modular_course_page(route)
+        if page is None:
             return
         module_index, section_index = state
         page.select_module(module_index)
         page.reader.select_section_index(section_index)
+
+    def _modular_course_page(self, route: str) -> ModularCoursePage | None:
+        page = self._pages.get(route)
+        if isinstance(page, (DM847Page, DM857Page)):
+            return page
+        return None
 
     def _clear_pages(self) -> None:
         self._pages.clear()

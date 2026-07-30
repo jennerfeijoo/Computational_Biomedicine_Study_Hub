@@ -60,7 +60,7 @@ class OllamaSettingsPage(QWidget):
 
     BASE_URL_KEY = "ollama/base_url"
     MODEL_KEY = "ollama/model"
-    PREFERRED_MODEL = "qwen3.6:27b"
+    PREFERRED_MODEL = "qwen3.5:9b-q8_0"
 
     def __init__(
         self,
@@ -74,7 +74,7 @@ class OllamaSettingsPage(QWidget):
         super().__init__(parent)
         self.setObjectName("ollamaSettingsPage")
 
-        self._settings = settings or QSettings()
+        self._settings = settings if settings is not None else QSettings()
         self._client_factory = client_factory or OllamaClient
         self._locale = locale
         self._probe_thread: QThread | None = None
@@ -240,7 +240,6 @@ class OllamaSettingsPage(QWidget):
 
         self._models.setEnabled(True)
         self._save_button.setEnabled(True)
-        self._persist_current_preferences()
         self._set_status_state("success")
 
     @Slot(str)
