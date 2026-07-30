@@ -69,8 +69,7 @@ def _replace_spanish(
     if len(texts) != len(spanish_values):
         raise ValueError("Localized tutor correction must preserve item count.")
     return tuple(
-        replace(text, spanish=spanish)
-        for text, spanish in zip(texts, spanish_values, strict=True)
+        replace(text, spanish=spanish) for text, spanish in zip(texts, spanish_values, strict=True)
     )
 
 
