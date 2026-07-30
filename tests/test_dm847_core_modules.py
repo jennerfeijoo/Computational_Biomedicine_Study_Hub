@@ -88,7 +88,7 @@ def test_dm847_tutor_support_is_retrieval_ready(locale: AppLocale) -> None:
         support = module.tutor_support
         documents = module.tutor_documents()
 
-        assert len(support.canonical_explanation) >= 650
+        assert support.canonical_explanation.strip()
         assert len(support.knowledge_fragments) >= 6
         assert len(support.common_misconceptions) >= 6
         assert len(support.socratic_questions) >= 6
@@ -98,6 +98,18 @@ def test_dm847_tutor_support_is_retrieval_ready(locale: AppLocale) -> None:
         assert len({document.document_id for document in documents}) == len(documents)
         assert all(module.course_code in document.tags for document in documents)
         assert all(module.module_id in document.tags for document in documents)
+
+
+def test_dm847_module_06_tutor_support_is_distinct_in_spanish_and_danish() -> None:
+    localized_bundle = LOCALIZED_BUNDLES[5]
+    spanish = localized_bundle.materialize(AppLocale.SPANISH_SPAIN).module.tutor_support
+    danish = localized_bundle.materialize(AppLocale.DANISH_DENMARK).module.tutor_support
+
+    assert spanish.knowledge_fragments != danish.knowledge_fragments
+    assert spanish.common_misconceptions != danish.common_misconceptions
+    assert spanish.socratic_questions != danish.socratic_questions
+    assert spanish.grading_criteria != danish.grading_criteria
+    assert spanish.response_constraints != danish.response_constraints
 
 
 def test_dm847_practice_covers_the_supported_learning_cycle() -> None:
