@@ -34,6 +34,8 @@ from .module_05_hidden_markov_models import (
 )
 from .module_06_suffix_arrays_bwt_mapping import (
     LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING as _RAW_LOCALIZED_MODULE_06,
+)
+from .module_06_suffix_arrays_bwt_mapping import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_06,
     materialize_module_06_question_bank,
 )
