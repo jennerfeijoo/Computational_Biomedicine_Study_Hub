@@ -64,6 +64,7 @@ def test_chat_uses_preferred_model_and_non_streaming_payload() -> None:
         ]
     )
 
+    assert DEFAULT_CHAT_MODEL == "qwen3.5:9b-q8_0"
     assert response.model == DEFAULT_CHAT_MODEL
     assert response.content.startswith("Una función")
     assert response.done_reason == "stop"
@@ -76,7 +77,7 @@ def test_chat_uses_preferred_model_and_non_streaming_payload() -> None:
     assert url == "http://localhost:11434/api/chat"
     assert timeout == 240.0
     assert payload == {
-        "model": "qwen3.6:27b",
+        "model": "qwen3.5:9b-q8_0",
         "messages": [
             {"role": "system", "content": "Responde de forma precisa."},
             {"role": "user", "content": "¿Qué es una función?"},
