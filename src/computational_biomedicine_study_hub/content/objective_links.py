@@ -58,10 +58,12 @@ class ObjectiveLinkCatalog:
         if len(normalized) != len(set(normalized)):
             raise ValueError(f"Module {self.module_id!r} has duplicate linked activity IDs.")
 
+        local_module_id = self.module_id.rsplit(".", maxsplit=1)[-1]
+        valid_prefixes = (f"{self.module_id}.", f"{local_module_id}.")
         out_of_scope = tuple(
             activity_id
             for activity_id in activity_ids
-            if not activity_id.startswith(f"{self.module_id}.")
+            if not activity_id.startswith(valid_prefixes)
         )
         if out_of_scope:
             raise ValueError(
@@ -139,14 +141,14 @@ DM847_M01_OBJECTIVE_LINKS = ObjectiveLinkCatalog(
     module_id="dm847.m01",
     links=(
         # Guided practice
-        _link("dm847.m01.p01", "m01.o1", "m01.o4"),
-        _link("dm847.m01.p02", "m01.o2"),
-        _link("dm847.m01.p03", "m01.o3"),
-        _link("dm847.m01.p04", "m01.o4", "m01.o6"),
-        _link("dm847.m01.p05", "m01.o3", "m01.o6"),
-        _link("dm847.m01.p06", "m01.o4"),
-        _link("dm847.m01.p07", "m01.o5"),
-        _link("dm847.m01.p08", "m01.o3"),
+        _link("m01.p01", "m01.o1", "m01.o4"),
+        _link("m01.p02", "m01.o2"),
+        _link("m01.p03", "m01.o3"),
+        _link("m01.p04", "m01.o4", "m01.o6"),
+        _link("m01.p05", "m01.o3", "m01.o6"),
+        _link("m01.p06", "m01.o4"),
+        _link("m01.p07", "m01.o5"),
+        _link("m01.p08", "m01.o3"),
         # Complete authored assessment: MCQ 001-005 followed by true/false 011-015.
         _link("dm847.m01.assessment.001", "m01.o3"),
         _link("dm847.m01.assessment.002", "m01.o2"),
