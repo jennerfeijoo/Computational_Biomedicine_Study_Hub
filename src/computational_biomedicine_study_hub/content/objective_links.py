@@ -30,9 +30,7 @@ class ObjectiveLink:
         normalized = tuple(objective_id.strip().casefold() for objective_id in self.objective_ids)
         if any(not objective_id for objective_id in normalized):
             raise ValueError(f"Activity {self.activity_id!r} contains an empty objective ID.")
-        if any(
-            objective_id != objective_id.strip() for objective_id in self.objective_ids
-        ):
+        if any(objective_id != objective_id.strip() for objective_id in self.objective_ids):
             raise ValueError(
                 f"Activity {self.activity_id!r} has objective IDs with surrounding whitespace."
             )
