@@ -5,18 +5,22 @@ import random
 import pytest
 from PySide6.QtWidgets import QApplication
 
+from computational_biomedicine_study_hub.content.dm847 import BUNDLES as DM847_BUNDLES
 from computational_biomedicine_study_hub.content.dm857 import (
     LOCALIZED_BUNDLES,
     OBJECTIVE_QUESTION_BANK,
 )
 from computational_biomedicine_study_hub.content.models import AssessmentItem
+from computational_biomedicine_study_hub.courses.dm847 import DM847Page
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
 from computational_biomedicine_study_hub.i18n import AppLocale
-from computational_biomedicine_study_hub.learning import ActivityType
+from computational_biomedicine_study_hub.learning import ActivityType, ConfidenceLevel
 from computational_biomedicine_study_hub.learning.objective_assessment import (
     ObjectiveSessionGenerator,
     grade_objective_answer,
 )
+from computational_biomedicine_study_hub.learning.progress_service import LearningProgressService
+from computational_biomedicine_study_hub.storage import SQLiteProgressStore
 from computational_biomedicine_study_hub.ui.widgets import (
     ObjectiveAssessmentWidget,
     ObjectiveQuestionCard,
@@ -122,6 +126,31 @@ def test_dm857_page_renders_six_interactive_questions(qapp: QApplication) -> Non
     assert widget.score_text == "0 aciertos · 0/6"
 
 
+def test_question_card_requires_confidence_before_feedback(qapp: QApplication) -> None:
+    widget = ObjectiveAssessmentWidget(
+        OBJECTIVE_QUESTION_BANK,
+        generator=ObjectiveSessionGenerator(
+            OBJECTIVE_QUESTION_BANK,
+            question_count=6,
+            rng=random.Random(19),
+        ),
+    )
+    bank_by_id = {item.item_id: item for item in OBJECTIVE_QUESTION_BANK}
+    card = widget.question_cards[0]
+    item = bank_by_id[card.item_id]
+
+    assert card.choose_option(item.correct_option_ids[0])
+    card.check_answer()
+
+    assert not card.is_answered
+    assert "confianza" in card.feedback_text.casefold()
+    assert widget.score_text == "0 aciertos · 0/6"
+
+    card.choose_confidence(ConfidenceLevel.MEDIUM)
+    card.check_answer()
+    assert card.is_answered
+
+
 def test_question_card_autocorrects_and_updates_score(qapp: QApplication) -> None:
     widget = ObjectiveAssessmentWidget(
         OBJECTIVE_QUESTION_BANK,
@@ -136,9 +165,11 @@ def test_question_card_autocorrects_and_updates_score(qapp: QApplication) -> Non
     item = bank_by_id[card.item_id]
 
     assert card.choose_option(item.correct_option_ids[0])
+    card.choose_confidence(ConfidenceLevel.HIGH)
     card.check_answer()
 
     assert card.is_answered
+    assert card.selected_confidence is ConfidenceLevel.HIGH
     assert card.feedback_text.startswith("Correcto.")
     assert widget.score_text == "1 aciertos · 1/6"
 
@@ -160,12 +191,42 @@ def test_question_card_exposes_correct_answer_after_an_error(qapp: QApplication)
     )
 
     assert card.choose_option(wrong_option_id)
+    card.choose_confidence(ConfidenceLevel.LOW)
     card.check_answer()
 
     assert card.is_answered
     assert card.feedback_text.startswith("Incorrecto.")
     assert item.option_text(item.correct_option_ids[0]) in card.feedback_text
     assert widget.score_text == "0 aciertos · 1/6"
+
+
+def test_dm847_module_01_persists_evidence_for_each_linked_objective(
+    qapp: QApplication,
+) -> None:
+    bundle = DM847_BUNDLES[0]
+    assert bundle.objective_links is not None
+
+    with SQLiteProgressStore(":memory:") as store:
+        page = DM847Page(progress_recorder=LearningProgressService(store))
+        assert page.reader.select_section("Evaluación")
+        widget = page.findChild(ObjectiveAssessmentWidget, "objectiveAssessmentWidget")
+        assert widget is not None
+
+        bank_by_id = {item.item_id: item for item in bundle.objective_question_bank}
+        card = widget.question_cards[0]
+        item = bank_by_id[card.item_id]
+        expected_objectives = bundle.objective_links.objectives_for(card.item_id)
+
+        assert card.choose_option(item.correct_option_ids[0])
+        card.choose_confidence(ConfidenceLevel.HIGH)
+        card.check_answer()
+        attempts = store.list_attempts()
+
+    assert len(attempts) == len(expected_objectives)
+    assert {attempt.objective_id for attempt in attempts} == set(expected_objectives)
+    assert all(attempt.item_id == card.item_id for attempt in attempts)
+    assert all(attempt.confidence is ConfidenceLevel.HIGH for attempt in attempts)
+    assert all(attempt.response_time_ms >= 0 for attempt in attempts)
 
 
 def test_new_practice_replaces_the_question_set(qapp: QApplication) -> None:
