@@ -81,9 +81,7 @@ def test_catalog_rejects_duplicate_activity_ids() -> None:
 def test_catalog_validation_rejects_unknown_objectives() -> None:
     bundle = LOCALIZED_BUNDLES[0].materialize(AppLocale.ENGLISH)
     links = tuple(
-        ObjectiveLink(link.activity_id, ("m01.missing",))
-        if link.activity_id == "m01.p01"
-        else link
+        ObjectiveLink(link.activity_id, ("m01.missing",)) if link.activity_id == "m01.p01" else link
         for link in DM847_M01_OBJECTIVE_LINKS.links
     )
     invalid = ObjectiveLinkCatalog("dm847.m01", links)
