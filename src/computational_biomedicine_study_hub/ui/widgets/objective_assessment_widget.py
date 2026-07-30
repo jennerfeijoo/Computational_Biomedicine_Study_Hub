@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
+from datetime import UTC, datetime
+from time import monotonic
+
 from PySide6.QtCore import Signal, Slot
 from PySide6.QtWidgets import (
     QButtonGroup,
@@ -15,12 +19,23 @@ from PySide6.QtWidgets import (
 )
 
 from ...content.models import AssessmentItem
-from ...i18n import DEFAULT_LOCALE, AppLocale, UiCopyKey, ui_text
+from ...content.objective_links import ObjectiveLinkCatalog
+from ...i18n import (
+    DEFAULT_LOCALE,
+    AppLocale,
+    ConfidenceCopyKey,
+    UiCopyKey,
+    confidence_text,
+    ui_text,
+)
 from ...learning.objective_assessment import (
     ObjectiveSessionGenerator,
     ObjectiveSessionQuestion,
     grade_objective_answer,
 )
+from ...learning.progress import ConfidenceLevel
+from ...learning.progress_service import ObjectiveAnswerSubmission, ObjectiveAttemptRecorder
+from .confidence_selector import ConfidenceSelector
 from .objective_assessment_styles import OBJECTIVE_ASSESSMENT_STYLESHEET
 
 
@@ -36,12 +51,31 @@ class ObjectiveQuestionCard(QFrame):
         parent: QWidget | None = None,
         *,
         locale: AppLocale = DEFAULT_LOCALE,
+        course_code: str = "",
+        module_id: str = "",
+        objective_ids: tuple[str, ...] = (),
+        progress_recorder: ObjectiveAttemptRecorder | None = None,
+        clock: Callable[[], float] = monotonic,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("objectiveQuestionCard")
         self._question = question
         self._locale = locale
         self._answered = False
+        self._course_code = course_code
+        self._module_id = module_id
+        self._objective_ids = objective_ids
+        self._progress_recorder = progress_recorder
+        self._clock = clock
+        self._started_at = clock()
+
+        if progress_recorder is not None:
+            if not course_code.strip():
+                raise ValueError("Persistent objective cards require a course code.")
+            if not module_id.strip():
+                raise ValueError("Persistent objective cards require a module ID.")
+            if not objective_ids:
+                raise ValueError("Persistent objective cards require explicit objective links.")
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(18, 16, 18, 16)
@@ -68,6 +102,9 @@ class ObjectiveQuestionCard(QFrame):
             self._option_buttons.append(button)
             layout.addWidget(button)
 
+        self._confidence_selector = ConfidenceSelector(locale=locale)
+        layout.addWidget(self._confidence_selector)
+
         self._check_button = QPushButton(ui_text(locale, UiCopyKey.OBJECTIVE_CHECK))
         self._check_button.setObjectName("checkObjectiveAnswerButton")
         self._check_button.clicked.connect(self.check_answer)
@@ -82,11 +119,13 @@ class ObjectiveQuestionCard(QFrame):
     @property
     def item_id(self) -> str:
         """Return the stable authored question identifier."""
+
         return self._question.item.item_id
 
     @property
     def selected_option_id(self) -> str:
         """Return the stable ID for the selected option or an empty string."""
+
         selected = self._button_group.checkedButton()
         if selected is None:
             return ""
@@ -96,21 +135,31 @@ class ObjectiveQuestionCard(QFrame):
     @property
     def selected_answer(self) -> str:
         """Return the visible text for the currently selected option."""
+
         selected = self._button_group.checkedButton()
         return selected.text() if selected is not None else ""
 
     @property
+    def selected_confidence(self) -> ConfidenceLevel | None:
+        """Return the confidence judgement made before feedback."""
+
+        return self._confidence_selector.selected_confidence
+
+    @property
     def is_answered(self) -> bool:
         """Return whether this card has already been graded."""
+
         return self._answered
 
     @property
     def feedback_text(self) -> str:
         """Return visible feedback text for tests and accessibility."""
+
         return self._feedback.text()
 
     def choose_option(self, option_id: str) -> bool:
         """Select one option by its stable authored identifier."""
+
         for button in self._option_buttons:
             if button.property("answerId") == option_id:
                 button.setChecked(True)
@@ -119,6 +168,7 @@ class ObjectiveQuestionCard(QFrame):
 
     def choose_answer(self, answer: str) -> bool:
         """Compatibility helper that accepts either an option ID or visible text."""
+
         if self.choose_option(answer):
             return True
         for button in self._option_buttons:
@@ -127,9 +177,15 @@ class ObjectiveQuestionCard(QFrame):
                 return True
         return False
 
+    def choose_confidence(self, confidence: ConfidenceLevel) -> None:
+        """Select a confidence level programmatically."""
+
+        self._confidence_selector.choose(confidence)
+
     @Slot()
     def check_answer(self) -> None:
-        """Grade the selected answer once and expose immediate feedback."""
+        """Grade once after both an answer and a confidence judgement are present."""
+
         if self._answered:
             return
 
@@ -141,7 +197,32 @@ class ObjectiveQuestionCard(QFrame):
             )
             return
 
+        confidence = self.selected_confidence
+        if confidence is None:
+            self._show_feedback(
+                confidence_text(self._locale, ConfidenceCopyKey.REQUIRED),
+                "warning",
+            )
+            return
+
         feedback = grade_objective_answer(self._question, selected_option_id)
+        if self._progress_recorder is not None:
+            elapsed_ms = max(0, round((self._clock() - self._started_at) * 1000))
+            self._progress_recorder.record_objective_answer(
+                ObjectiveAnswerSubmission(
+                    course_code=self._course_code,
+                    module_id=self._module_id,
+                    item_id=self.item_id,
+                    activity_type=self._question.item.activity_type.value,
+                    answer=selected_option_id,
+                    is_correct=feedback.is_correct,
+                    confidence=confidence,
+                    response_time_ms=elapsed_ms,
+                    objective_ids=self._objective_ids,
+                    attempted_at=datetime.now(UTC),
+                )
+            )
+
         if feedback.is_correct:
             message = ui_text(
                 self._locale,
@@ -161,6 +242,7 @@ class ObjectiveQuestionCard(QFrame):
         self._answered = True
         for button in self._option_buttons:
             button.setEnabled(False)
+        self._confidence_selector.set_interaction_enabled(False)
         self._check_button.setEnabled(False)
         self._show_feedback(message, state)
         self.answered.emit(self.item_id, feedback.is_correct)
@@ -183,12 +265,30 @@ class ObjectiveAssessmentWidget(QWidget):
         question_count: int = 6,
         generator: ObjectiveSessionGenerator | None = None,
         locale: AppLocale = DEFAULT_LOCALE,
+        course_code: str = "",
+        module_id: str = "",
+        objective_links: ObjectiveLinkCatalog | None = None,
+        progress_recorder: ObjectiveAttemptRecorder | None = None,
+        clock: Callable[[], float] = monotonic,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("objectiveAssessmentWidget")
         self.setStyleSheet(OBJECTIVE_ASSESSMENT_STYLESHEET)
         self._locale = locale
+        self._course_code = course_code
+        self._module_id = module_id
+        self._objective_links = objective_links
+        self._progress_recorder = progress_recorder
+        self._clock = clock
+
+        if progress_recorder is not None:
+            if objective_links is None:
+                raise ValueError("Persistent objective assessment requires objective links.")
+            if objective_links.module_id != module_id:
+                raise ValueError("Objective links must match the persistent assessment module.")
+            if not course_code.strip():
+                raise ValueError("Persistent objective assessment requires a course code.")
 
         self._generator = generator or ObjectiveSessionGenerator(
             bank,
@@ -246,21 +346,25 @@ class ObjectiveAssessmentWidget(QWidget):
     @property
     def current_item_ids(self) -> tuple[str, ...]:
         """Return IDs for the current randomized session."""
+
         return self._current_item_ids
 
     @property
     def question_cards(self) -> tuple[ObjectiveQuestionCard, ...]:
         """Return current question cards in display order."""
+
         return tuple(self._question_cards)
 
     @property
     def score_text(self) -> str:
         """Return the visible score summary."""
+
         return self._score.text()
 
     @Slot()
     def new_session(self) -> None:
         """Replace the current session with a new non-identical random sample."""
+
         session = self._generator.new_session()
         self._results.clear()
         self._current_item_ids = session.item_ids
@@ -268,7 +372,21 @@ class ObjectiveAssessmentWidget(QWidget):
         self._clear_cards()
 
         for number, question in enumerate(session.questions, start=1):
-            card = ObjectiveQuestionCard(number, question, locale=self._locale)
+            objective_ids = (
+                self._objective_links.objectives_for(question.item.item_id)
+                if self._objective_links is not None
+                else ()
+            )
+            card = ObjectiveQuestionCard(
+                number,
+                question,
+                locale=self._locale,
+                course_code=self._course_code,
+                module_id=self._module_id,
+                objective_ids=objective_ids,
+                progress_recorder=self._progress_recorder,
+                clock=self._clock,
+            )
             card.answered.connect(self._record_result)
             self._question_cards.append(card)
             self._cards_layout.addWidget(card)

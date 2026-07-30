@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .confidence_copy import ConfidenceCopyKey, confidence_text, validate_confidence_copy
 from .controller import LanguageController
 from .locales import DEFAULT_LOCALE, SUPPORTED_LOCALES, AppLocale
 from .messages import ALL_MESSAGE_KEYS, MessageKey
@@ -11,6 +12,7 @@ from .ui_copy import UiCopyKey, ui_text, validate_ui_copy
 __all__ = [
     "ALL_MESSAGE_KEYS",
     "AppLocale",
+    "ConfidenceCopyKey",
     "DEFAULT_LOCALE",
     "LanguageController",
     "MessageKey",
@@ -18,7 +20,9 @@ __all__ = [
     "TranslationError",
     "Translator",
     "UiCopyKey",
+    "confidence_text",
     "ui_text",
     "validate_catalogs",
+    "validate_confidence_copy",
     "validate_ui_copy",
 ]

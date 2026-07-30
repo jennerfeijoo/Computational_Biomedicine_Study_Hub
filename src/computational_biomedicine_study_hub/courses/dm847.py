@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (
     QFrame,
     QHBoxLayout,
     QLabel,
+    QScrollArea,
     QStackedWidget,
     QVBoxLayout,
     QWidget,
@@ -15,18 +16,111 @@ from PySide6.QtWidgets import (
 
 from ..content.bundles import ModuleBundle
 from ..content.dm847 import BUNDLES, LOCALIZED_BUNDLES
-from ..i18n import DEFAULT_LOCALE, AppLocale, MessageKey, Translator
+from ..i18n import (
+    DEFAULT_LOCALE,
+    AppLocale,
+    MessageKey,
+    Translator,
+    UiCopyKey,
+    ui_text,
+)
+from ..learning.progress_service import ObjectiveAttemptRecorder
 from ..ui.pages.module_reader_page import ModuleReaderPage
+from ..ui.widgets import ObjectiveAssessmentWidget
 from .models import CourseRegistration
+
+_DEFAULT_PROGRESS_RECORDER: ObjectiveAttemptRecorder | None = None
+
+
+def configure_progress_recorder(recorder: ObjectiveAttemptRecorder | None) -> None:
+    """Configure the application-level recorder used by newly created DM847 pages."""
+
+    global _DEFAULT_PROGRESS_RECORDER
+    _DEFAULT_PROGRESS_RECORDER = recorder
+
+
+class DM847ModuleReaderPage(ModuleReaderPage):
+    """DM847 reader that persists explicitly mapped objective assessment evidence."""
+
+    def __init__(
+        self,
+        bundle: ModuleBundle,
+        *,
+        translator: Translator,
+        progress_recorder: ObjectiveAttemptRecorder | None,
+    ) -> None:
+        self._objective_links = bundle.objective_links
+        self._progress_recorder = progress_recorder
+        super().__init__(
+            bundle.module,
+            objective_question_bank=bundle.objective_question_bank,
+            show_context_bar=False,
+            translator=translator,
+        )
+
+    def _build_assessment_tab(self) -> QScrollArea:
+        body = self._scroll_body()
+        layout = body.layout()
+        assert isinstance(layout, QVBoxLayout)
+
+        if self._objective_question_bank:
+            objective_heading = self._subheading(
+                ui_text(self._translator.locale, UiCopyKey.MODULE_OBJECTIVE_SECTION)
+            )
+            objective_heading.setObjectName("objectiveAssessmentSectionTitle")
+            layout.addWidget(objective_heading)
+            notice = self._label(
+                self._translator.text(MessageKey.MODULE_ASSESSMENT_NOTICE),
+                "moduleSectionNotice",
+            )
+            layout.addWidget(notice)
+            layout.addWidget(
+                ObjectiveAssessmentWidget(
+                    self._objective_question_bank,
+                    locale=self._translator.locale,
+                    course_code=self._module.course_code,
+                    module_id=self._module.module_id,
+                    objective_links=self._objective_links,
+                    progress_recorder=self._progress_recorder,
+                )
+            )
+
+        complete_heading = self._subheading(
+            ui_text(self._translator.locale, UiCopyKey.MODULE_COMPLETE_ASSESSMENT)
+        )
+        complete_heading.setObjectName("authoredAssessmentSectionTitle")
+        layout.addWidget(complete_heading)
+        complete_notice = self._label(
+            ui_text(
+                self._translator.locale,
+                UiCopyKey.MODULE_COMPLETE_ASSESSMENT_NOTICE,
+            ),
+            "moduleSectionNotice",
+        )
+        layout.addWidget(complete_notice)
+
+        for number, item in enumerate(self._module.assessment_items, start=1):
+            layout.addWidget(self._assessment_card(number, item))
+
+        layout.addStretch(1)
+        return self._scroll_area(body, "moduleAssessmentScroll")
 
 
 class DM847Page(QWidget):
     """Construct each completed localized DM847 module reader on first selection."""
 
-    def __init__(self, locale: AppLocale = DEFAULT_LOCALE) -> None:
+    def __init__(
+        self,
+        locale: AppLocale = DEFAULT_LOCALE,
+        *,
+        progress_recorder: ObjectiveAttemptRecorder | None = None,
+    ) -> None:
         super().__init__()
         self.setObjectName("dm847CoursePage")
         self._translator = Translator(locale)
+        self._progress_recorder = (
+            progress_recorder if progress_recorder is not None else _DEFAULT_PROGRESS_RECORDER
+        )
         self._bundles: tuple[ModuleBundle, ...] = (
             BUNDLES
             if locale == DEFAULT_LOCALE
@@ -40,7 +134,7 @@ class DM847Page(QWidget):
         self._module_title = QLabel()
         self._module_title.setObjectName("moduleContextTitle")
         self._module_title.setWordWrap(True)
-        self._reader_cache: dict[int, ModuleReaderPage] = {}
+        self._reader_cache: dict[int, DM847ModuleReaderPage] = {}
 
         for number, bundle in enumerate(self._bundles, start=1):
             label = self._translator.text(MessageKey.MODULE_LABEL, number=number)
@@ -74,29 +168,35 @@ class DM847Page(QWidget):
     @property
     def reader(self) -> ModuleReaderPage:
         """Return the reader for the currently selected module."""
+
         return self._reader_for_index(self.current_module_index)
 
     @property
     def module_count(self) -> int:
         """Return the number of completed modules available in the course page."""
+
         return len(self._bundles)
 
     @property
     def current_module_index(self) -> int:
         """Return the zero-based selected module index."""
+
         return self._module_selector.currentIndex()
 
     @property
     def constructed_reader_count(self) -> int:
         """Return the number of readers constructed during this page lifetime."""
+
         return len(self._reader_cache)
 
     def has_constructed_reader(self, index: int) -> bool:
         """Return whether a module reader has been constructed for one index."""
+
         return index in self._reader_cache
 
     def select_module(self, index: int) -> bool:
         """Select a completed module by zero-based index."""
+
         if not 0 <= index < self.module_count:
             return False
         if index == self.current_module_index:
@@ -113,7 +213,7 @@ class DM847Page(QWidget):
         self._module_stack.setCurrentWidget(reader)
         self._module_title.setText(reader.module.title)
 
-    def _reader_for_index(self, index: int) -> ModuleReaderPage:
+    def _reader_for_index(self, index: int) -> DM847ModuleReaderPage:
         if not 0 <= index < self.module_count:
             raise IndexError(index)
         cached = self._reader_cache.get(index)
@@ -121,11 +221,10 @@ class DM847Page(QWidget):
             return cached
 
         bundle = self._bundles[index]
-        reader = ModuleReaderPage(
-            bundle.module,
-            objective_question_bank=bundle.objective_question_bank,
-            show_context_bar=False,
+        reader = DM847ModuleReaderPage(
+            bundle,
             translator=self._translator,
+            progress_recorder=self._progress_recorder,
         )
         reader.setProperty("contentVersion", bundle.content_version)
 
@@ -141,6 +240,7 @@ class DM847Page(QWidget):
 
 def create_page(locale: AppLocale = DEFAULT_LOCALE) -> QWidget:
     """Create the DM847 page without constructing widgets during import."""
+
     return DM847Page(locale)
 
 
