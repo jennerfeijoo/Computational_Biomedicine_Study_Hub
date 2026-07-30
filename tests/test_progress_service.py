@@ -13,7 +13,9 @@ from computational_biomedicine_study_hub.learning.progress_service import (
 from computational_biomedicine_study_hub.storage import SQLiteProgressStore
 
 
-def _submission(*, objective_ids: tuple[str, ...] = ("m01.o4", "m01.o6")) -> ObjectiveAnswerSubmission:
+def _submission(
+    *, objective_ids: tuple[str, ...] = ("m01.o4", "m01.o6")
+) -> ObjectiveAnswerSubmission:
     return ObjectiveAnswerSubmission(
         course_code="DM847",
         module_id="dm847.m01",
