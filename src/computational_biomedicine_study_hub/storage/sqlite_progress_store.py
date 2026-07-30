@@ -1,7 +1,7 @@
 """SQLite persistence for attempts and objective-level mastery.
 
 The store keeps study data local and uses only Python's standard library. Public
-methods are transaction-safe so an attempt and its resulting mastery state can be
+methods are transaction-safe so attempts and their resulting mastery states can be
 saved atomically.
 """
 
@@ -47,14 +47,35 @@ class SQLiteProgressStore:
             self._upsert_mastery(state)
 
     def record_and_update(self, attempt: AttemptRecord) -> MasteryState:
-        """Atomically store an attempt and update its objective mastery."""
+        """Atomically store one attempt and update its objective mastery."""
 
+        return self.record_batch_and_update((attempt,))[0]
+
+    def record_batch_and_update(
+        self,
+        attempts: tuple[AttemptRecord, ...],
+    ) -> tuple[MasteryState, ...]:
+        """Atomically store one interaction expanded across explicit objectives."""
+
+        if not attempts:
+            raise ValueError("Attempt batches cannot be empty.")
+        attempt_ids = tuple(attempt.attempt_id for attempt in attempts)
+        if len(attempt_ids) != len(set(attempt_ids)):
+            raise ValueError("Attempt batches cannot contain duplicate attempt IDs.")
+
+        states: list[MasteryState] = []
+        staged_by_objective: dict[str, MasteryState] = {}
         with self._connection:
-            previous = self._get_mastery(attempt.objective_id)
-            state = update_mastery(previous, attempt)
-            self._insert_attempt(attempt)
-            self._upsert_mastery(state)
-        return state
+            for attempt in attempts:
+                previous = staged_by_objective.get(attempt.objective_id)
+                if previous is None:
+                    previous = self._get_mastery(attempt.objective_id)
+                state = update_mastery(previous, attempt)
+                self._insert_attempt(attempt)
+                self._upsert_mastery(state)
+                staged_by_objective[attempt.objective_id] = state
+                states.append(state)
+        return tuple(states)
 
     def get_attempt(self, attempt_id: str) -> AttemptRecord | None:
         """Return one attempt by stable ID."""
