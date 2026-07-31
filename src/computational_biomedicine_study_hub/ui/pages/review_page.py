@@ -20,7 +20,7 @@ from PySide6.QtWidgets import (
 from ...i18n.locales import AppLocale
 from ...i18n.review_copy import ReviewCopyKey, review_text
 from ...learning.progress import ReviewItem
-from ...learning.review_catalog import ObjectiveDescriptor, authored_objective_catalog
+from ...learning.review_catalog import authored_objective_catalog
 from ...storage import SQLiteProgressStore
 
 Clock = Callable[[], datetime]
