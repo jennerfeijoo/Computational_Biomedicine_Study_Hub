@@ -273,17 +273,19 @@ def authored_review_activity_candidates(
     """Merge explicitly linked questions and programming challenges."""
 
     merged: dict[ReviewObjectiveKey, list[ReviewActivityCandidate]] = {}
-    for key, candidates in authored_review_candidates(locale).items():
-        merged.setdefault(key, []).extend(candidates)
-    for key, candidates in authored_review_programming_candidates(locale).items():
-        merged.setdefault(key, []).extend(candidates)
+    question_catalog = authored_review_candidates(locale)
+    programming_catalog = authored_review_programming_candidates(locale)
+    for key, question_candidates in question_catalog.items():
+        merged.setdefault(key, []).extend(question_candidates)
+    for key, programming_candidates in programming_catalog.items():
+        merged.setdefault(key, []).extend(programming_candidates)
 
     result: dict[ReviewObjectiveKey, tuple[ReviewActivityCandidate, ...]] = {}
-    for key, candidates in merged.items():
-        activity_keys = tuple(candidate.activity_key for candidate in candidates)
+    for key, activity_candidates in merged.items():
+        activity_keys = tuple(candidate.activity_key for candidate in activity_candidates)
         if len(activity_keys) != len(set(activity_keys)):
             raise ValueError(f"Duplicate adaptive review activities are registered for {key!r}.")
-        result[key] = tuple(candidates)
+        result[key] = tuple(activity_candidates)
     return result
 
 
