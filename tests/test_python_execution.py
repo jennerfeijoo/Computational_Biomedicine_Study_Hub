@@ -116,9 +116,7 @@ def test_runner_caps_large_output_before_returning_to_the_ui() -> None:
 
 
 def test_runtime_errors_return_traceback_without_escaping_the_runner() -> None:
-    result = PythonSubprocessRunner().run(
-        PythonExecutionRequest(source="1 / 0", output_limit=1024)
-    )
+    result = PythonSubprocessRunner().run(PythonExecutionRequest(source="1 / 0", output_limit=1024))
 
     assert result.status is ExecutionStatus.RUNTIME_ERROR
     assert "ZeroDivisionError" in result.stderr
