@@ -5,6 +5,7 @@ from datetime import UTC, datetime, timedelta
 from PySide6.QtWidgets import QApplication, QLabel, QPushButton
 
 from computational_biomedicine_study_hub.i18n import AppLocale
+from computational_biomedicine_study_hub.learning.adaptive_review import ReviewActivityKind
 from computational_biomedicine_study_hub.learning.progress import (
     AttemptRecord,
     ConfidenceLevel,
@@ -58,7 +59,7 @@ def test_review_page_starts_and_persists_an_adaptive_question(
 
         assert isinstance(widget, AdaptiveReviewSessionWidget)
         current = widget.session.current_question
-        card = widget.current_card
+        card = widget.current_question_card
         assert current is not None
         assert card is not None
         assert card.choose_option(current.question.item.correct_option_ids[0])
@@ -80,9 +81,82 @@ def test_review_page_starts_and_persists_an_adaptive_question(
             summary = widget.findChild(QLabel, "adaptiveReviewSummaryText")
             assert summary is not None
             assert "Answers: 1." in summary.text()
+            assert "1 questions" in summary.text()
         else:
             assert not widget.summary_visible
             assert next_question.item_id != current.item_id
+
+
+def test_programming_review_keeps_retries_inside_one_session_activity(
+    qapp: QApplication,
+) -> None:
+    with SQLiteProgressStore(":memory:") as store:
+        store.record_and_update(
+            _due_attempt(
+                "dm857-code-seed",
+                course_code="DM857",
+                module_id="dm857.m07",
+                objective_id="m07.o6",
+            )
+        )
+        page = ReviewPage(store, AppLocale.ENGLISH, clock=lambda: _NOW)
+        start = page.findChild(QPushButton, "adaptiveReviewStartButton")
+
+        assert start is not None
+        assert start.isEnabled()
+        start.click()
+        widget = page.adaptive_session_widget
+
+        assert isinstance(widget, AdaptiveReviewSessionWidget)
+        current = widget.session.current_programming_activity
+        challenge = widget.current_challenge_widget
+        assert current is not None
+        assert current.kind is ReviewActivityKind.PROGRAMMING
+        assert challenge is not None
+        assert challenge.tutor_panel is not None
+
+        challenge.set_source("def unique_count(values):\n    return len(values)")
+        challenge.choose_confidence(ConfidenceLevel.HIGH)
+        challenge.run_tests()
+
+        assert challenge.last_result is not None
+        assert not challenge.last_result.all_passed
+        assert widget.session.answered_count == 0
+
+        challenge.set_source("def unique_count(values):\n    return len(set(values))")
+        challenge.choose_confidence(ConfidenceLevel.MEDIUM)
+        challenge.run_tests()
+
+        assert challenge.last_result is not None
+        assert challenge.last_result.all_passed
+        assert widget.session.answered_count == 0
+        next_button = widget.findChild(QPushButton, "adaptiveReviewNextButton")
+        assert next_button is not None
+        assert not next_button.isHidden()
+
+        next_button.click()
+
+        assert widget.session.answered_count == 1
+        assert widget.session.correct_count == 1
+        assert widget.session.summary.programming_activities == 1
+        assert widget.summary_visible
+        saved = [
+            attempt
+            for attempt in store.list_attempts(
+                course_code="DM857",
+                module_id="dm857.m07",
+            )
+            if attempt.item_id == "m07.p04"
+        ]
+        assert {attempt.objective_id for attempt in saved} == {"m07.o6", "m07.o8"}
+        for objective_id in ("m07.o6", "m07.o8"):
+            objective_results = [
+                attempt.is_correct for attempt in saved if attempt.objective_id == objective_id
+            ]
+            assert objective_results == [False, True]
+        summary = widget.findChild(QLabel, "adaptiveReviewSummaryText")
+        assert summary is not None
+        assert "1 programming challenges" in summary.text()
 
 
 def test_review_page_disables_session_without_due_objectives(qapp: QApplication) -> None:
