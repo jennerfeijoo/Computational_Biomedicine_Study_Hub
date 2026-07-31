@@ -1,4 +1,4 @@
-"""Functional spaced review and an authored error notebook."""
+"""Functional adaptive review, spaced queue and authored error notebook."""
 
 from __future__ import annotations
 
@@ -18,11 +18,14 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ...i18n.locales import AppLocale
+from ...i18n import AdaptiveReviewCopyKey, AppLocale, adaptive_review_text
 from ...i18n.review_copy import ReviewCopyKey, review_text
+from ...learning.adaptive_review import AdaptiveReviewSession
 from ...learning.progress import ConfidenceLevel, ErrorKind, ErrorRecord, ReviewItem
+from ...learning.progress_service import LearningProgressService
 from ...learning.review_catalog import authored_objective_catalog
 from ...storage import SQLiteProgressStore
+from ..widgets.adaptive_review_session_widget import AdaptiveReviewSessionWidget
 
 Clock = Callable[[], datetime]
 
@@ -32,7 +35,7 @@ def _now_utc() -> datetime:
 
 
 class ReviewPage(QWidget):
-    """Present scheduled objectives and persistent authored error history."""
+    """Present an adaptive session, scheduled objectives and persistent errors."""
 
     review_requested = Signal(str, str, str)
 
@@ -54,6 +57,8 @@ class ReviewPage(QWidget):
         self._errors: tuple[ErrorRecord, ...] = ()
         self._cards: list[QFrame] = []
         self._error_cards: list[QFrame] = []
+        self._pending_session: AdaptiveReviewSession | None = None
+        self._session_widget: AdaptiveReviewSessionWidget | None = None
 
         heading_row = QHBoxLayout()
         heading_row.setContentsMargins(0, 0, 0, 0)
@@ -74,6 +79,10 @@ class ReviewPage(QWidget):
 
         self._tabs = QTabWidget()
         self._tabs.setObjectName("reviewSystemTabs")
+        self._tabs.addTab(
+            self._build_session_tab(),
+            adaptive_review_text(locale, AdaptiveReviewCopyKey.TAB),
+        )
         self._tabs.addTab(
             self._build_queue_tab(),
             review_text(locale, ReviewCopyKey.QUEUE_TAB),
@@ -111,6 +120,18 @@ class ReviewPage(QWidget):
         return tuple(self._cards)
 
     @property
+    def adaptive_session_widget(self) -> AdaptiveReviewSessionWidget | None:
+        """Return the active adaptive session surface, when started."""
+
+        return self._session_widget
+
+    @property
+    def pending_session(self) -> AdaptiveReviewSession | None:
+        """Return the prepared session used by the launcher."""
+
+        return self._pending_session
+
+    @property
     def error_count(self) -> int:
         """Return the number of retained error events."""
 
@@ -136,7 +157,7 @@ class ReviewPage(QWidget):
 
     @Slot()
     def refresh(self) -> None:
-        """Reload scheduled review and error history from the local database."""
+        """Reload review data and reset any in-memory adaptive session."""
 
         now = self._clock()
         if now.tzinfo is None or now.utcoffset() is None:
@@ -149,8 +170,50 @@ class ReviewPage(QWidget):
             self._items = self._store.due_reviews(now)
             self._errors = self._store.list_errors()
 
+        self._render_session_launcher()
         self._render_queue(now)
         self._render_error_notebook()
+
+    def _build_session_tab(self) -> QWidget:
+        tab = QWidget()
+        tab.setObjectName("adaptiveReviewTab")
+
+        title = QLabel(adaptive_review_text(self._locale, AdaptiveReviewCopyKey.TITLE))
+        title.setObjectName("adaptiveReviewLauncherTitle")
+
+        intro = QLabel(adaptive_review_text(self._locale, AdaptiveReviewCopyKey.INTRO))
+        intro.setObjectName("adaptiveReviewLauncherIntro")
+        intro.setWordWrap(True)
+
+        self._session_status = QLabel()
+        self._session_status.setObjectName("adaptiveReviewLauncherStatus")
+        self._session_status.setWordWrap(True)
+
+        actions = QHBoxLayout()
+        actions.setContentsMargins(0, 0, 0, 0)
+        actions.addStretch(1)
+        self._session_start_button = QPushButton(
+            adaptive_review_text(self._locale, AdaptiveReviewCopyKey.START)
+        )
+        self._session_start_button.setObjectName("adaptiveReviewStartButton")
+        self._session_start_button.clicked.connect(self.start_adaptive_session)
+        actions.addWidget(self._session_start_button)
+
+        self._session_host = QWidget()
+        self._session_host.setObjectName("adaptiveReviewSessionHost")
+        self._session_layout = QVBoxLayout(self._session_host)
+        self._session_layout.setContentsMargins(0, 0, 0, 0)
+        self._session_layout.setSpacing(10)
+
+        layout = QVBoxLayout(tab)
+        layout.setContentsMargins(8, 12, 8, 8)
+        layout.setSpacing(12)
+        layout.addWidget(title)
+        layout.addWidget(intro)
+        layout.addWidget(self._session_status)
+        layout.addLayout(actions)
+        layout.addWidget(self._session_host, 1)
+        return tab
 
     def _build_queue_tab(self) -> QWidget:
         tab = QWidget()
@@ -203,6 +266,64 @@ class ReviewPage(QWidget):
         layout.addWidget(self._error_count_label)
         layout.addWidget(scroll, 1)
         return tab
+
+    def _render_session_launcher(self) -> None:
+        self._clear_layout(self._session_layout)
+        self._session_widget = None
+        self._pending_session = AdaptiveReviewSession(
+            self._items,
+            locale=self._locale,
+            target_questions=6,
+        )
+        session = self._pending_session
+        self._session_start_button.setEnabled(session.can_start)
+        self._session_start_button.setText(
+            adaptive_review_text(self._locale, AdaptiveReviewCopyKey.START)
+        )
+
+        if not self._items:
+            self._session_status.setText(
+                adaptive_review_text(self._locale, AdaptiveReviewCopyKey.NO_DUE)
+            )
+            return
+
+        self._session_status.setText(
+            adaptive_review_text(
+                self._locale,
+                AdaptiveReviewCopyKey.DUE_SUMMARY,
+                due=len(self._items),
+                eligible=session.eligible_objective_count,
+                unsupported=len(session.unsupported_keys),
+            )
+        )
+        if not session.can_start:
+            unavailable = QLabel(
+                adaptive_review_text(self._locale, AdaptiveReviewCopyKey.NO_ELIGIBLE)
+            )
+            unavailable.setObjectName("adaptiveReviewUnavailable")
+            unavailable.setWordWrap(True)
+            self._session_layout.addWidget(unavailable)
+
+    @Slot()
+    def start_adaptive_session(self) -> None:
+        """Replace the launcher body with the prepared adaptive session."""
+
+        session = self._pending_session
+        if session is None or not session.can_start:
+            return
+        self._clear_layout(self._session_layout)
+        recorder = LearningProgressService(self._store) if self._store is not None else None
+        self._session_widget = AdaptiveReviewSessionWidget(
+            session,
+            locale=self._locale,
+            progress_recorder=recorder,
+        )
+        self._session_widget.queue_refresh_requested.connect(self.refresh)
+        self._session_layout.addWidget(self._session_widget)
+        self._session_start_button.setEnabled(False)
+        self._session_start_button.setText(
+            adaptive_review_text(self._locale, AdaptiveReviewCopyKey.RESTART)
+        )
 
     def _render_queue(self, now: datetime) -> None:
         self._count_label.setText(
@@ -543,6 +664,7 @@ class ReviewPage(QWidget):
                 continue
             widget = item.widget()
             if widget is not None:
+                widget.setParent(None)
                 widget.deleteLater()
 
     @staticmethod
