@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+from computational_biomedicine_study_hub.content.dm857 import (
+    MODULE_07_MAPPINGS_SETS,
+    MODULE_09_RECURSION,
+)
 from computational_biomedicine_study_hub.content.python_challenges import (
     python_challenge_for,
     validate_python_challenge_catalog,
@@ -40,6 +44,25 @@ def test_catalog_materializes_complete_trilingual_challenges() -> None:
 
     assert len(set(descriptions.values())) == 3
     assert all(description.strip() for description in descriptions.values())
+
+
+def test_challenges_use_explicit_authored_objective_links() -> None:
+    mappings = (
+        (_unique_count_challenge(), MODULE_07_MAPPINGS_SETS),
+        (_recursive_length_challenge(), MODULE_09_RECURSION),
+    )
+
+    for challenge, module in mappings:
+        authored_ids = {objective.objective_id for objective in module.objectives}
+        assert challenge.objective_ids
+        assert set(challenge.objective_ids) <= authored_ids
+
+    assert _unique_count_challenge().objective_ids == ("m07.o6", "m07.o8")
+    assert _recursive_length_challenge().objective_ids == (
+        "m09.o2",
+        "m09.o3",
+        "m09.o5",
+    )
 
 
 def test_reference_unique_count_solution_passes_visible_and_hidden_tests() -> None:

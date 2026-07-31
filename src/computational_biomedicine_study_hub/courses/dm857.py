@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (
     QFrame,
     QHBoxLayout,
     QLabel,
+    QScrollArea,
     QStackedWidget,
     QVBoxLayout,
     QWidget,
@@ -16,17 +17,75 @@ from PySide6.QtWidgets import (
 from ..content.bundles import ModuleBundle
 from ..content.dm857 import BUNDLES, LOCALIZED_BUNDLES
 from ..i18n import DEFAULT_LOCALE, AppLocale, MessageKey, Translator
+from ..learning.progress_service import ObjectiveAttemptRecorder
 from ..ui.pages.module_reader_page import ModuleReaderPage
+from ..ui.widgets import GuidedPracticeWidget
 from .models import CourseRegistration
+
+_DEFAULT_PROGRESS_RECORDER: ObjectiveAttemptRecorder | None = None
+
+
+def configure_progress_recorder(recorder: ObjectiveAttemptRecorder | None) -> None:
+    """Configure the application recorder used by newly created DM857 pages."""
+
+    global _DEFAULT_PROGRESS_RECORDER
+    _DEFAULT_PROGRESS_RECORDER = recorder
+
+
+class DM857ModuleReaderPage(ModuleReaderPage):
+    """DM857 reader that persists tested programming-practice evidence."""
+
+    def __init__(
+        self,
+        bundle: ModuleBundle,
+        *,
+        translator: Translator,
+        progress_recorder: ObjectiveAttemptRecorder | None,
+    ) -> None:
+        self._progress_recorder = progress_recorder
+        super().__init__(
+            bundle.module,
+            objective_question_bank=bundle.objective_question_bank,
+            show_context_bar=False,
+            translator=translator,
+        )
+
+    def _build_practice_tab(self) -> QScrollArea:
+        body = self._scroll_body()
+        layout = body.layout()
+        assert isinstance(layout, QVBoxLayout)
+
+        notice = self._label(
+            self._translator.text(MessageKey.MODULE_PRACTICE_NOTICE),
+            "moduleSectionNotice",
+        )
+        layout.addWidget(notice)
+        layout.addWidget(
+            GuidedPracticeWidget(
+                self._module.practice_exercises,
+                locale=self._translator.locale,
+                progress_recorder=self._progress_recorder,
+            )
+        )
+        layout.addStretch(1)
+        return self._scroll_area(body, "modulePracticeScroll")
 
 
 class DM857Page(QWidget):
     """Construct each completed localized module reader once, when first selected."""
 
-    def __init__(self, locale: AppLocale = DEFAULT_LOCALE) -> None:
+    def __init__(
+        self,
+        locale: AppLocale = DEFAULT_LOCALE,
+        *,
+        progress_recorder: ObjectiveAttemptRecorder | None = None,
+    ) -> None:
         super().__init__()
         self.setObjectName("dm857CoursePage")
         self._translator = Translator(locale)
+        self._progress_recorder = (
+            progress_recorder if progress_recorder is not None else _DEFAULT_PROGRESS_RECORDER
+        )
         self._bundles: tuple[ModuleBundle, ...] = (
             BUNDLES
             if locale == DEFAULT_LOCALE
@@ -40,7 +99,7 @@ class DM857Page(QWidget):
         self._module_title = QLabel()
         self._module_title.setObjectName("moduleContextTitle")
         self._module_title.setWordWrap(True)
-        self._reader_cache: dict[int, ModuleReaderPage] = {}
+        self._reader_cache: dict[int, DM857ModuleReaderPage] = {}
 
         for number, bundle in enumerate(self._bundles, start=1):
             label = self._translator.text(MessageKey.MODULE_LABEL, number=number)
@@ -127,7 +186,7 @@ class DM857Page(QWidget):
         self._module_stack.setCurrentWidget(reader)
         self._module_title.setText(reader.module.title)
 
-    def _reader_for_index(self, index: int) -> ModuleReaderPage:
+    def _reader_for_index(self, index: int) -> DM857ModuleReaderPage:
         if not 0 <= index < self.module_count:
             raise IndexError(index)
         cached = self._reader_cache.get(index)
@@ -135,11 +194,10 @@ class DM857Page(QWidget):
             return cached
 
         bundle = self._bundles[index]
-        reader = ModuleReaderPage(
-            bundle.module,
-            objective_question_bank=bundle.objective_question_bank,
-            show_context_bar=False,
+        reader = DM857ModuleReaderPage(
+            bundle,
             translator=self._translator,
+            progress_recorder=self._progress_recorder,
         )
         reader.setProperty("contentVersion", bundle.content_version)
 

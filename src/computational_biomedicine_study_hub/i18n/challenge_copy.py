@@ -16,6 +16,7 @@ class ChallengeCopyKey(StrEnum):
     RUN = "challenge.run"
     RESET = "challenge.reset"
     RUNNING = "challenge.running"
+    SOURCE_REQUIRED = "challenge.source_required"
     VISIBLE_TESTS = "challenge.visible_tests"
     HIDDEN_SUMMARY = "challenge.hidden_summary"
     STATUS_ALL_PASSED = "challenge.status.all_passed"
@@ -39,6 +40,7 @@ _CATALOGS: dict[AppLocale, dict[ChallengeCopyKey, str]] = {
         ChallengeCopyKey.RUN: "Ejecutar pruebas",
         ChallengeCopyKey.RESET: "Restablecer código",
         ChallengeCopyKey.RUNNING: "Ejecutando pruebas…",
+        ChallengeCopyKey.SOURCE_REQUIRED: "Escribe una solución antes de ejecutar las pruebas.",
         ChallengeCopyKey.VISIBLE_TESTS: "Pruebas visibles",
         ChallengeCopyKey.HIDDEN_SUMMARY: "Pruebas ocultas superadas: {passed}/{total}",
         ChallengeCopyKey.STATUS_ALL_PASSED: "Todas las pruebas fueron superadas",
@@ -60,6 +62,7 @@ _CATALOGS: dict[AppLocale, dict[ChallengeCopyKey, str]] = {
         ChallengeCopyKey.RUN: "Run tests",
         ChallengeCopyKey.RESET: "Reset code",
         ChallengeCopyKey.RUNNING: "Running tests…",
+        ChallengeCopyKey.SOURCE_REQUIRED: "Write a solution before running the tests.",
         ChallengeCopyKey.VISIBLE_TESTS: "Visible tests",
         ChallengeCopyKey.HIDDEN_SUMMARY: "Hidden tests passed: {passed}/{total}",
         ChallengeCopyKey.STATUS_ALL_PASSED: "All tests passed",
@@ -81,6 +84,7 @@ _CATALOGS: dict[AppLocale, dict[ChallengeCopyKey, str]] = {
         ChallengeCopyKey.RUN: "Kør test",
         ChallengeCopyKey.RESET: "Nulstil kode",
         ChallengeCopyKey.RUNNING: "Kører test…",
+        ChallengeCopyKey.SOURCE_REQUIRED: "Skriv en løsning, før du kører testene.",
         ChallengeCopyKey.VISIBLE_TESTS: "Synlige test",
         ChallengeCopyKey.HIDDEN_SUMMARY: "Beståede skjulte test: {passed}/{total}",
         ChallengeCopyKey.STATUS_ALL_PASSED: "Alle test er bestået",

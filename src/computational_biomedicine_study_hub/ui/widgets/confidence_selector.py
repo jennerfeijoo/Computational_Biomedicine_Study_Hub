@@ -71,6 +71,14 @@ class ConfidenceSelector(QFrame):
 
         self._buttons[level].setChecked(True)
 
+    def clear(self) -> None:
+        """Clear the current judgement so a later attempt requires a fresh choice."""
+
+        self._button_group.setExclusive(False)
+        for button in self._buttons.values():
+            button.setChecked(False)
+        self._button_group.setExclusive(True)
+
     def set_interaction_enabled(self, enabled: bool) -> None:
         """Enable or disable all confidence choices."""
 
