@@ -12,7 +12,7 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.r_execution import can_execute_r
 
 
-def test_bmb830_registers_eight_complete_modules_in_order() -> None:
+def test_bmb830_registers_nine_complete_modules_in_order() -> None:
     assert tuple(module.module_id for module in MODULES) == (
         "bmb830.m01",
         "bmb830.m02",
@@ -22,8 +22,9 @@ def test_bmb830_registers_eight_complete_modules_in_order() -> None:
         "bmb830.m06",
         "bmb830.m07",
         "bmb830.m08",
+        "bmb830.m09",
     )
-    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 8
+    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 9
     assert set(OBJECTIVE_QUESTION_BANKS) == {
         "bmb830.m01",
         "bmb830.m02",
@@ -33,8 +34,9 @@ def test_bmb830_registers_eight_complete_modules_in_order() -> None:
         "bmb830.m06",
         "bmb830.m07",
         "bmb830.m08",
+        "bmb830.m09",
     }
-    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 128
+    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 144
 
     for bundle in BUNDLES:
         module = bundle.module
@@ -72,12 +74,15 @@ def test_bmb830_inference_block_covers_required_concepts() -> None:
 
 
 def test_bmb830_regression_block_covers_required_concepts() -> None:
-    simple, multiple = MODULES[6:8]
+    simple, multiple, interaction = MODULES[6:9]
     simple_text = " ".join(
         (simple.summary, *(concept.body for concept in simple.concepts))
     ).casefold()
     multiple_text = " ".join(
         (multiple.summary, *(concept.body for concept in multiple.concepts))
+    ).casefold()
+    interaction_text = " ".join(
+        (interaction.summary, *(concept.body for concept in interaction.concepts))
     ).casefold()
 
     assert "causalidad" in simple_text
@@ -92,6 +97,12 @@ def test_bmb830_regression_block_covers_required_concepts() -> None:
     assert "referencia" in multiple_text
     assert "confus" in multiple_text
     assert "colinealidad" in multiple_text
+
+    assert "modificación de efecto" in interaction_text
+    assert "diferencia de pendientes" in interaction_text
+    assert "centrar" in interaction_text
+    assert "cuadrático" in interaction_text
+    assert "extrapol" in interaction_text
 
 
 def test_bmb830_locales_preserve_assessment_identity() -> None:
