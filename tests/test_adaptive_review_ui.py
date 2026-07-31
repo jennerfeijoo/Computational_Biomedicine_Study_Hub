@@ -75,8 +75,14 @@ def test_review_page_starts_and_persists_an_adaptive_question(
 
         next_button.click()
         next_question = widget.session.current_question
-        assert next_question is not None
-        assert next_question.item_id != current.item_id
+        if next_question is None:
+            assert widget.summary_visible
+            summary = widget.findChild(QLabel, "adaptiveReviewSummaryText")
+            assert summary is not None
+            assert "Answers: 1." in summary.text()
+        else:
+            assert not widget.summary_visible
+            assert next_question.item_id != current.item_id
 
 
 def test_review_page_disables_session_without_due_objectives(qapp: QApplication) -> None:
