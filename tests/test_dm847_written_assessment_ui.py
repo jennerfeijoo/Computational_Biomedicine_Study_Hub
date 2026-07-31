@@ -135,6 +135,31 @@ def test_editing_a_reviewed_draft_invalidates_stale_feedback(qapp: QApplication)
     progress_store.close()
 
 
+def test_switching_tasks_keeps_each_learner_draft_under_its_prompt(
+    qapp: QApplication,
+) -> None:
+    del qapp
+    progress_store = SQLiteProgressStore(":memory:")
+    page = DM847WrittenAssessmentPage(
+        progress_store,
+        AppLocale.ENGLISH,
+        feedback_runner=FakeWrittenRunner(),
+        executor=ImmediateExecutor(),
+    )
+    first_text = "The first response defines molecular representation and coordinate assumptions."
+    second_text = "The second response records database versions, identifiers, and provenance."
+
+    page.draft_editor.setPlainText(first_text)
+    assert page.select_prompt("dm847.w02")
+    page.draft_editor.setPlainText(second_text)
+    assert page.select_prompt("dm847.w01")
+
+    assert page.draft_editor.toPlainText() == first_text
+    assert page.snapshot.draft("dm847.w01").response_text == first_text
+    assert page.snapshot.draft("dm847.w02").response_text == second_text
+    progress_store.close()
+
+
 def test_assessments_route_hosts_dm847_writing_and_dm857_project(
     qapp: QApplication,
 ) -> None:
