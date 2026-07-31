@@ -92,9 +92,7 @@ class TutorSessionSnapshot:
     def solution_revealed(self) -> bool:
         """Return whether a full-explanation response was requested."""
 
-        return any(
-            turn.assistance_level is TutorAssistanceLevel.EXPLANATION for turn in self.turns
-        )
+        return any(turn.assistance_level is TutorAssistanceLevel.EXPLANATION for turn in self.turns)
 
     def append(self, turn: TutorSessionTurn, *, max_turns: int = 6) -> TutorSessionSnapshot:
         """Append one turn while retaining only the newest local session context."""
