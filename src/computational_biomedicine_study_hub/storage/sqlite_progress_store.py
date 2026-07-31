@@ -102,7 +102,9 @@ class SQLiteProgressStore:
         course_code, module_id, item_id = next(iter(interaction_keys))
         if error is not None:
             if resolve_item_errors:
-                raise ValueError("An interaction cannot create and resolve an error simultaneously.")
+                raise ValueError(
+                    "An interaction cannot create and resolve an error simultaneously."
+                )
             if (error.course_code, error.module_id, error.item_id) != (
                 course_code,
                 module_id,
