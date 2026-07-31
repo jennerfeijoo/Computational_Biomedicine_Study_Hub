@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
+from datetime import UTC, datetime
+from time import monotonic
+
 from PySide6.QtCore import Signal, Slot
 from PySide6.QtWidgets import (
     QApplication,
@@ -16,7 +20,10 @@ from PySide6.QtWidgets import (
 
 from ...content.python_challenges import PythonChallenge
 from ...i18n.challenge_copy import ChallengeCopyKey, challenge_text
+from ...i18n.confidence_copy import ConfidenceCopyKey, confidence_text
 from ...i18n.locales import DEFAULT_LOCALE, AppLocale
+from ...learning.progress import ConfidenceLevel
+from ...learning.progress_service import ObjectiveAnswerSubmission, ObjectiveAttemptRecorder
 from ...learning.python_challenge import (
     ChallengeCaseStatus,
     PythonChallengeCaseResult,
@@ -24,6 +31,7 @@ from ...learning.python_challenge import (
     PythonChallengeResult,
     PythonChallengeRunner,
 )
+from .confidence_selector import ConfidenceSelector
 from .python_challenge_styles import PYTHON_CHALLENGE_STYLESHEET
 
 _CASE_COPY = {
@@ -37,7 +45,7 @@ _CASE_COPY = {
 
 
 class PythonChallengeWidget(QFrame):
-    """Let learners complete starter code and run visible plus hidden tests."""
+    """Run tested code attempts and persist objective evidence when configured."""
 
     tests_finished = Signal(str, bool)
 
@@ -48,6 +56,12 @@ class PythonChallengeWidget(QFrame):
         *,
         locale: AppLocale = DEFAULT_LOCALE,
         evaluator: PythonChallengeRunner | None = None,
+        activity_type: str = "code_completion",
+        prompt: str = "",
+        reference_solution: str = "",
+        explanation: str = "",
+        progress_recorder: ObjectiveAttemptRecorder | None = None,
+        clock: Callable[[], float] = monotonic,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
@@ -56,12 +70,37 @@ class PythonChallengeWidget(QFrame):
         if starter_code != challenge.starter_code:
             raise ValueError("Starter code must match the authored Python challenge.")
 
+        context = {
+            "activity_type": activity_type,
+            "prompt": prompt,
+            "reference_solution": reference_solution,
+            "explanation": explanation,
+        }
+        if progress_recorder is not None:
+            for field_name, value in context.items():
+                if not value.strip():
+                    raise ValueError(
+                        f"Persistent Python challenges require non-empty {field_name}."
+                    )
+                if value != value.strip():
+                    raise ValueError(
+                        f"Persistent Python challenge field {field_name!r} cannot contain "
+                        "surrounding whitespace."
+                    )
+
         self.setObjectName("pythonChallengeWidget")
         self.setStyleSheet(PYTHON_CHALLENGE_STYLESHEET)
         self._challenge = challenge
         self._locale = locale
         self._original_source = starter_code
         self._evaluator = evaluator or PythonChallengeEvaluator()
+        self._activity_type = activity_type
+        self._prompt = prompt
+        self._reference_solution = reference_solution
+        self._explanation = explanation
+        self._progress_recorder = progress_recorder
+        self._clock = clock
+        self._started_at = clock()
         self._last_result: PythonChallengeResult | None = None
         self._result_labels: list[QLabel] = []
 
@@ -84,6 +123,9 @@ class PythonChallengeWidget(QFrame):
         self._editor.setTabChangesFocus(False)
         self._editor.setMinimumHeight(145)
         layout.addWidget(self._editor)
+
+        self._confidence_selector = ConfidenceSelector(locale=locale)
+        layout.addWidget(self._confidence_selector)
 
         actions = QHBoxLayout()
         actions.setContentsMargins(0, 0, 0, 0)
@@ -138,6 +180,12 @@ class PythonChallengeWidget(QFrame):
         return self._last_result
 
     @property
+    def selected_confidence(self) -> ConfidenceLevel | None:
+        """Return the confidence judgement prepared for the next execution."""
+
+        return self._confidence_selector.selected_confidence
+
+    @property
     def status_text(self) -> str:
         """Return the visible localized aggregate status."""
 
@@ -160,10 +208,24 @@ class PythonChallengeWidget(QFrame):
 
         self._editor.setPlainText(source)
 
+    def choose_confidence(self, confidence: ConfidenceLevel) -> None:
+        """Select confidence programmatically for tests and accessibility adapters."""
+
+        self._confidence_selector.choose(confidence)
+
     @Slot()
     def run_tests(self) -> None:
-        """Evaluate the current source and render visible plus hidden summaries."""
+        """Evaluate and persist one confidence-gated programming attempt."""
 
+        confidence = self.selected_confidence
+        if confidence is None:
+            self._status.setProperty("resultState", "warning")
+            self._status.setText(confidence_text(self._locale, ConfidenceCopyKey.REQUIRED))
+            self._status.show()
+            self._refresh_style(self._status)
+            return
+
+        source = self.source.strip()
         self._set_busy(True)
         self._status.setProperty("resultState", "running")
         self._status.setText(challenge_text(self._locale, ChallengeCopyKey.RUNNING))
@@ -172,7 +234,7 @@ class PythonChallengeWidget(QFrame):
         QApplication.processEvents()
 
         try:
-            result = self._evaluator.evaluate(self.source, self._challenge)
+            result = self._evaluator.evaluate(source, self._challenge)
         except Exception as exc:  # pragma: no cover - defensive adapter boundary
             result = PythonChallengeResult(
                 exercise_id=self._challenge.exercise_id,
@@ -192,8 +254,11 @@ class PythonChallengeWidget(QFrame):
         finally:
             self._set_busy(False)
 
+        self._record_attempt(source, result, confidence)
         self._last_result = result
         self._render_result(result)
+        self._confidence_selector.clear()
+        self._started_at = self._clock()
         self.tests_finished.emit(result.exercise_id, result.all_passed)
 
     @Slot()
@@ -201,6 +266,8 @@ class PythonChallengeWidget(QFrame):
         """Restore starter code and clear all prior test feedback."""
 
         self._editor.setPlainText(self._original_source)
+        self._confidence_selector.clear()
+        self._started_at = self._clock()
         self._last_result = None
         self._status.clear()
         self._status.hide()
@@ -209,6 +276,35 @@ class PythonChallengeWidget(QFrame):
         self._hidden_summary.hide()
         self._clear_result_labels()
         self._results_container.hide()
+
+    def _record_attempt(
+        self,
+        source: str,
+        result: PythonChallengeResult,
+        confidence: ConfidenceLevel,
+    ) -> None:
+        if self._progress_recorder is None:
+            return
+
+        elapsed_ms = max(0, round((self._clock() - self._started_at) * 1000))
+        self._progress_recorder.record_objective_answer(
+            ObjectiveAnswerSubmission(
+                course_code=self._challenge.course_code,
+                module_id=self._challenge.module_id,
+                item_id=self._challenge.exercise_id,
+                activity_type=self._activity_type,
+                answer=source,
+                is_correct=result.all_passed,
+                confidence=confidence,
+                response_time_ms=elapsed_ms,
+                objective_ids=self._challenge.objective_ids,
+                attempted_at=datetime.now(UTC),
+                prompt=self._prompt,
+                selected_answer=source,
+                correct_answer=self._reference_solution,
+                explanation=self._explanation,
+            )
+        )
 
     def _render_result(self, result: PythonChallengeResult) -> None:
         aggregate_key = (
@@ -270,6 +366,7 @@ class PythonChallengeWidget(QFrame):
         self._run_button.setEnabled(not busy)
         self._reset_button.setEnabled(not busy)
         self._editor.setReadOnly(busy)
+        self._confidence_selector.set_interaction_enabled(not busy)
 
     @staticmethod
     def _refresh_style(widget: QWidget) -> None:
