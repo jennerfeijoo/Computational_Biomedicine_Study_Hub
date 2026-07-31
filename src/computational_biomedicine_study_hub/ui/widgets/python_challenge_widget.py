@@ -19,6 +19,7 @@ from ...i18n.challenge_copy import ChallengeCopyKey, challenge_text
 from ...i18n.locales import DEFAULT_LOCALE, AppLocale
 from ...learning.python_challenge import (
     ChallengeCaseStatus,
+    PythonChallengeCaseResult,
     PythonChallengeEvaluator,
     PythonChallengeResult,
     PythonChallengeRunner,
@@ -106,9 +107,7 @@ class PythonChallengeWidget(QFrame):
         self._status.hide()
         layout.addWidget(self._status)
 
-        self._visible_heading = QLabel(
-            challenge_text(locale, ChallengeCopyKey.VISIBLE_TESTS)
-        )
+        self._visible_heading = QLabel(challenge_text(locale, ChallengeCopyKey.VISIBLE_TESTS))
         self._visible_heading.setObjectName("pythonChallengeHeading")
         self._visible_heading.hide()
         layout.addWidget(self._visible_heading)
@@ -174,6 +173,22 @@ class PythonChallengeWidget(QFrame):
 
         try:
             result = self._evaluator.evaluate(self.source, self._challenge)
+        except Exception as exc:  # pragma: no cover - defensive adapter boundary
+            result = PythonChallengeResult(
+                exercise_id=self._challenge.exercise_id,
+                visible_results=tuple(
+                    PythonChallengeCaseResult(
+                        case_id=case.case_id,
+                        description=case.description,
+                        status=ChallengeCaseStatus.ERROR,
+                        detail=str(exc),
+                    )
+                    for case in self._challenge.visible_cases
+                ),
+                hidden_passed=0,
+                hidden_total=len(self._challenge.hidden_cases),
+                duration_ms=0,
+            )
         finally:
             self._set_busy(False)
 
