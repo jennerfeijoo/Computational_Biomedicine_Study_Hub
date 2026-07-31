@@ -163,9 +163,7 @@ class ReviewPage(QWidget):
         module_line.setObjectName("reviewModuleLine")
         layout.addWidget(module_line)
 
-        objective = QLabel(
-            descriptor.statement if descriptor is not None else item.objective_id
-        )
+        objective = QLabel(descriptor.statement if descriptor is not None else item.objective_id)
         objective.setObjectName("reviewObjectiveStatement")
         objective.setWordWrap(True)
         layout.addWidget(objective)
