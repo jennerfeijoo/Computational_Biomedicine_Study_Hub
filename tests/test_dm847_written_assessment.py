@@ -69,9 +69,13 @@ def test_written_store_persists_across_progress_store_lifetime() -> None:
     progress_store = SQLiteProgressStore(":memory:")
     store = DM847WrittenAssessmentStore.for_progress_store(progress_store)
     prompt_id = DM847_WRITTEN_PROMPTS[-1].prompt_id
-    snapshot = WrittenAssessmentSnapshot.empty().with_active_prompt(prompt_id).with_response(
-        prompt_id,
-        "Nested validation must keep every learned preprocessing step inside training folds.",
+    snapshot = (
+        WrittenAssessmentSnapshot.empty()
+        .with_active_prompt(prompt_id)
+        .with_response(
+            prompt_id,
+            "Nested validation must keep every learned preprocessing step inside training folds.",
+        )
     )
 
     store.save(snapshot)
