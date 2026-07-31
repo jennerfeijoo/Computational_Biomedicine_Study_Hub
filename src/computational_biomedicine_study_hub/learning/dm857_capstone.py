@@ -463,7 +463,7 @@ def _required_int(payload: object, key: str) -> int:
     value = payload[key]
     if isinstance(value, bool) or not isinstance(value, int):
         raise TypeError(f"{key!r} must be an integer.")
-    return value
+    return int(value)
 
 
 def _required_string_list(payload: object, key: str) -> list[str]:
