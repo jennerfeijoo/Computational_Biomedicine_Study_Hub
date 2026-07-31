@@ -19,7 +19,8 @@ from PySide6.QtWidgets import (
 
 from ...content.models import AssessmentItem, ConceptBlock, LearningModule, WorkedExample
 from ...i18n import MessageKey, Translator, UiCopyKey, ui_text
-from ..widgets import GuidedPracticeWidget, ObjectiveAssessmentWidget
+from ...learning.python_execution import can_execute_python
+from ..widgets import GuidedPracticeWidget, ObjectiveAssessmentWidget, PythonLabWidget
 
 _ACTIVITY_KEYS = {
     "worked_example": MessageKey.ACTIVITY_WORKED_EXAMPLE,
@@ -311,6 +312,14 @@ class ModuleReaderPage(QWidget):
         layout.addWidget(self._code_block(example.code, "exampleCode"))
         layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_EXPECTED_OUTPUT)))
         layout.addWidget(self._code_block(example.expected_output, "exampleOutput"))
+        if can_execute_python(example.code):
+            layout.addWidget(
+                PythonLabWidget(
+                    example.code,
+                    example.expected_output,
+                    locale=self._translator.locale,
+                )
+            )
         layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_EXPLANATION)))
         layout.addWidget(self._label(example.explanation, "contentBody"))
         return card
