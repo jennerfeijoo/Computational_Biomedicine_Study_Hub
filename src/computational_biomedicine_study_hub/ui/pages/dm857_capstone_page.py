@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from PySide6.QtCore import QTimer, Signal
 from PySide6.QtWidgets import (
@@ -51,7 +51,10 @@ class CapstoneMilestoneEditor(QGroupBox):
         locale: AppLocale,
         parent: QWidget | None = None,
     ) -> None:
-        title, description, checklist_labels = capstone_milestone_copy(locale, spec.milestone_id)
+        title, description, checklist_labels = capstone_milestone_copy(
+            locale,
+            spec.milestone_id,
+        )
         super().__init__(title, parent)
         self.setObjectName("capstoneMilestone")
         self.setProperty("milestoneId", spec.milestone_id)
@@ -71,12 +74,16 @@ class CapstoneMilestoneEditor(QGroupBox):
         layout.addWidget(self._status)
 
         completed = set(progress.completed_item_ids)
-        for item_id, label in zip(spec.checklist_item_ids, checklist_labels, strict=True):
+        for item_id, label in zip(
+            spec.checklist_item_ids,
+            checklist_labels,
+            strict=True,
+        ):
             checkbox = QCheckBox(label)
             checkbox.setObjectName("capstoneChecklistItem")
             checkbox.setProperty("checklistItemId", item_id)
             checkbox.setChecked(item_id in completed)
-            checkbox.toggled.connect(self.changed.emit)
+            checkbox.toggled.connect(lambda _checked: self.changed.emit())
             self._checkboxes[item_id] = checkbox
             layout.addWidget(checkbox)
 
@@ -151,9 +158,8 @@ class DM857CapstonePage(QWidget):
         self._store = capstone_store
         if self._store is None and progress_store is not None:
             self._store = DM857CapstoneStore.for_progress_store(progress_store)
-        self._progress = (
-            self._store.load() if self._store is not None else None
-        ) or DM857CapstoneProgress.empty()
+        loaded = self._store.load() if self._store is not None else None
+        self._progress = loaded or DM857CapstoneProgress.empty()
         self._milestone_editors: dict[str, CapstoneMilestoneEditor] = {}
         self._rubric_scores: dict[str, QComboBox] = {}
 
@@ -196,10 +202,22 @@ class DM857CapstonePage(QWidget):
         self._repository_url.setObjectName("capstoneRepositoryUrl")
         self._report_path = QLineEdit(self._progress.report_path)
         self._report_path.setObjectName("capstoneReportPath")
-        form.addRow(capstone_text(locale, CapstoneCopyKey.PROJECT_TITLE), self._project_title)
-        form.addRow(capstone_text(locale, CapstoneCopyKey.GROUP_MEMBERS), self._group_members)
-        form.addRow(capstone_text(locale, CapstoneCopyKey.REPOSITORY_URL), self._repository_url)
-        form.addRow(capstone_text(locale, CapstoneCopyKey.REPORT_PATH), self._report_path)
+        form.addRow(
+            capstone_text(locale, CapstoneCopyKey.PROJECT_TITLE),
+            self._project_title,
+        )
+        form.addRow(
+            capstone_text(locale, CapstoneCopyKey.GROUP_MEMBERS),
+            self._group_members,
+        )
+        form.addRow(
+            capstone_text(locale, CapstoneCopyKey.REPOSITORY_URL),
+            self._repository_url,
+        )
+        form.addRow(
+            capstone_text(locale, CapstoneCopyKey.REPORT_PATH),
+            self._report_path,
+        )
         for field in (
             self._project_title,
             self._group_members,
@@ -231,7 +249,9 @@ class DM857CapstonePage(QWidget):
             self._milestone_editors[spec.milestone_id] = editor
             layout.addWidget(editor)
 
-        rubric_group = QGroupBox(capstone_text(locale, CapstoneCopyKey.RUBRIC_TITLE))
+        rubric_group = QGroupBox(
+            capstone_text(locale, CapstoneCopyKey.RUBRIC_TITLE)
+        )
         rubric_group.setObjectName("capstoneRubric")
         rubric_layout = QVBoxLayout(rubric_group)
         rubric_notice = QLabel(capstone_text(locale, CapstoneCopyKey.RUBRIC_NOTICE))
@@ -258,7 +278,9 @@ class DM857CapstonePage(QWidget):
             for score in range(5):
                 combo.addItem(str(score), score)
             saved_score = self._progress.rubric_score(criterion.criterion_id)
-            combo.setCurrentIndex(combo.findData(saved_score))
+            combo.setCurrentIndex(
+                0 if saved_score is None else combo.findData(saved_score)
+            )
             combo.currentIndexChanged.connect(self._schedule_save)
             self._rubric_scores[criterion.criterion_id] = combo
             row_layout.addWidget(label, 1)
@@ -267,7 +289,9 @@ class DM857CapstonePage(QWidget):
             rubric_layout.addWidget(row)
         layout.addWidget(rubric_group)
 
-        report_group = QGroupBox(capstone_text(locale, CapstoneCopyKey.REPORT_TITLE))
+        report_group = QGroupBox(
+            capstone_text(locale, CapstoneCopyKey.REPORT_TITLE)
+        )
         report_group.setObjectName("capstoneReportTemplate")
         report_layout = QVBoxLayout(report_group)
         report_notice = QLabel(capstone_text(locale, CapstoneCopyKey.REPORT_NOTICE))
@@ -283,9 +307,11 @@ class DM857CapstonePage(QWidget):
         layout.addWidget(report_group)
 
         actions = QHBoxLayout()
-        self._save_button = QPushButton(capstone_text(locale, CapstoneCopyKey.SAVE))
+        self._save_button = QPushButton(
+            capstone_text(locale, CapstoneCopyKey.SAVE)
+        )
         self._save_button.setObjectName("capstoneSaveButton")
-        self._save_button.clicked.connect(self.persist)
+        self._save_button.clicked.connect(lambda _checked=False: self.persist())
         self._save_status = QLabel()
         self._save_status.setObjectName("capstoneSaveStatus")
         actions.addWidget(self._save_button)
@@ -320,12 +346,18 @@ class DM857CapstonePage(QWidget):
         self._progress = self._capture_progress()
         if self._store is not None:
             self._store.save(self._progress)
-        self._save_status.setText(capstone_text(self._locale, CapstoneCopyKey.SAVED))
+        self._save_status.setText(
+            capstone_text(self._locale, CapstoneCopyKey.SAVED)
+        )
         self._refresh_summary(self._progress)
 
     def _capture_progress(self) -> DM857CapstoneProgress:
-        timestamp = datetime.now(timezone.utc)
-        members = tuple(part.strip() for part in self._group_members.text().split(",") if part.strip())
+        timestamp = datetime.now(UTC)
+        members = tuple(
+            part.strip()
+            for part in self._group_members.text().split(",")
+            if part.strip()
+        )
         progress = self._progress.with_metadata(
             project_title=self._project_title.text(),
             group_members=members,
@@ -355,7 +387,9 @@ class DM857CapstonePage(QWidget):
 
     def _refresh_summary(self, progress: DM857CapstoneProgress) -> None:
         for milestone in progress.milestones:
-            self._milestone_editors[milestone.milestone_id].refresh_status(milestone.status)
+            self._milestone_editors[milestone.milestone_id].refresh_status(
+                milestone.status
+            )
         self._progress_bar.setValue(progress.milestone_completion_percent)
         self._progress_label.setText(
             capstone_text(
@@ -372,7 +406,10 @@ class DM857CapstonePage(QWidget):
             else CapstoneCopyKey.INCOMPLETE_SUMMARY
         )
         self._readiness.setText(capstone_text(self._locale, readiness_key))
-        self._readiness.setProperty("preparationReady", progress.preparation_ready)
+        self._readiness.setProperty(
+            "preparationReady",
+            progress.preparation_ready,
+        )
 
 
 __all__ = ["CapstoneMilestoneEditor", "DM857CapstonePage"]
