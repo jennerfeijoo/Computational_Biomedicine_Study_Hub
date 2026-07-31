@@ -21,6 +21,10 @@ class AdaptiveReviewCopyKey(StrEnum):
     NO_ELIGIBLE = "adaptive_review.no_eligible"
     PROGRESS = "adaptive_review.progress"
     PRIMARY_OBJECTIVE = "adaptive_review.primary_objective"
+    ACTIVITY_TYPE = "adaptive_review.activity_type"
+    QUESTION_ACTIVITY = "adaptive_review.activity.question"
+    PROGRAMMING_ACTIVITY = "adaptive_review.activity.programming"
+    PROGRAMMING_RETRY_NOTICE = "adaptive_review.programming_retry_notice"
     NEXT = "adaptive_review.next"
     FINISH = "adaptive_review.finish"
     SUMMARY_TITLE = "adaptive_review.summary_title"
@@ -35,32 +39,42 @@ _CATALOGS: dict[AppLocale, dict[AdaptiveReviewCopyKey, str]] = {
         AdaptiveReviewCopyKey.TAB: "Sesión adaptativa",
         AdaptiveReviewCopyKey.TITLE: "Repaso adaptativo",
         AdaptiveReviewCopyKey.INTRO: (
-            "La sesión selecciona preguntas autorizadas según debilidad, lapsos y resultados de "
-            "esta sesión. Evita repetir inmediatamente el mismo objetivo."
+            "La sesión combina preguntas y retos de programación autorizados según debilidad, "
+            "lapsos y resultados de esta sesión. Evita repetir inmediatamente el mismo objetivo."
         ),
         AdaptiveReviewCopyKey.START: "Iniciar sesión",
         AdaptiveReviewCopyKey.RESTART: "Crear otra sesión",
         AdaptiveReviewCopyKey.DUE_SUMMARY: (
-            "Objetivos vencidos: {due}. Elegibles para preguntas deterministas: {eligible}. "
+            "Objetivos vencidos: {due}. Elegibles para actividades deterministas: {eligible}. "
             "Sin banco objetivo: {unsupported}."
         ),
         AdaptiveReviewCopyKey.NO_DUE: "No hay objetivos vencidos para repasar.",
         AdaptiveReviewCopyKey.NO_ELIGIBLE: (
-            "Los objetivos vencidos actuales todavía no tienen un banco de preguntas con enlaces "
-            "explícitos. Permanecen disponibles en la cola de módulos."
+            "Los objetivos vencidos actuales todavía no tienen actividades con enlaces explícitos. "
+            "Permanecen disponibles en la cola de módulos."
         ),
-        AdaptiveReviewCopyKey.PROGRESS: "Pregunta {current} de hasta {target} · {correct} correctas",
+        AdaptiveReviewCopyKey.PROGRESS: (
+            "Actividad {current} de hasta {target} · {correct} correctas"
+        ),
         AdaptiveReviewCopyKey.PRIMARY_OBJECTIVE: "Objetivo prioritario: {objective}",
-        AdaptiveReviewCopyKey.NEXT: "Siguiente pregunta",
+        AdaptiveReviewCopyKey.ACTIVITY_TYPE: "Tipo de actividad: {activity}",
+        AdaptiveReviewCopyKey.QUESTION_ACTIVITY: "Pregunta objetiva",
+        AdaptiveReviewCopyKey.PROGRAMMING_ACTIVITY: "Reto de programación",
+        AdaptiveReviewCopyKey.PROGRAMMING_RETRY_NOTICE: (
+            "Puedes revisar el diagnóstico, pedir ayuda al tutor y volver a ejecutar el código. "
+            "Al continuar, contará el resultado determinista más reciente."
+        ),
+        AdaptiveReviewCopyKey.NEXT: "Continuar",
         AdaptiveReviewCopyKey.FINISH: "Ver resumen",
         AdaptiveReviewCopyKey.SUMMARY_TITLE: "Resumen de la sesión",
         AdaptiveReviewCopyKey.SUMMARY: (
             "Respuestas: {answered}. Correctas: {correct}. Precisión: {accuracy} %. "
+            "Actividades: {questions} preguntas y {programming} retos de programación. "
             "Objetivos trabajados: {objectives}."
         ),
         AdaptiveReviewCopyKey.EXHAUSTED: (
-            "La sesión terminó antes del objetivo previsto porque no quedaban preguntas autorizadas "
-            "sin repetir."
+            "La sesión terminó antes del objetivo previsto porque no quedaban actividades "
+            "autorizadas sin repetir."
         ),
         AdaptiveReviewCopyKey.COMPLETE: "Se alcanzó el objetivo de la sesión.",
         AdaptiveReviewCopyKey.RETURN_TO_QUEUE: "Actualizar cola de repaso",
@@ -69,31 +83,42 @@ _CATALOGS: dict[AppLocale, dict[AdaptiveReviewCopyKey, str]] = {
         AdaptiveReviewCopyKey.TAB: "Adaptive session",
         AdaptiveReviewCopyKey.TITLE: "Adaptive review",
         AdaptiveReviewCopyKey.INTRO: (
-            "The session selects authorized questions from weakness, lapses, and results within this "
-            "session. It avoids immediately repeating the same objective."
+            "The session combines authorized questions and programming challenges from weakness, "
+            "lapses, and results within this session. It avoids immediately repeating the same "
+            "objective."
         ),
         AdaptiveReviewCopyKey.START: "Start session",
         AdaptiveReviewCopyKey.RESTART: "Create another session",
         AdaptiveReviewCopyKey.DUE_SUMMARY: (
-            "Due objectives: {due}. Eligible for deterministic questions: {eligible}. "
+            "Due objectives: {due}. Eligible for deterministic activities: {eligible}. "
             "Without an objective bank: {unsupported}."
         ),
         AdaptiveReviewCopyKey.NO_DUE: "No objectives are currently due for review.",
         AdaptiveReviewCopyKey.NO_ELIGIBLE: (
-            "The current due objectives do not yet have a question bank with explicit links. They "
+            "The current due objectives do not yet have activities with explicit links. They "
             "remain available in the module queue."
         ),
-        AdaptiveReviewCopyKey.PROGRESS: "Question {current} of up to {target} · {correct} correct",
+        AdaptiveReviewCopyKey.PROGRESS: (
+            "Activity {current} of up to {target} · {correct} correct"
+        ),
         AdaptiveReviewCopyKey.PRIMARY_OBJECTIVE: "Priority objective: {objective}",
-        AdaptiveReviewCopyKey.NEXT: "Next question",
+        AdaptiveReviewCopyKey.ACTIVITY_TYPE: "Activity type: {activity}",
+        AdaptiveReviewCopyKey.QUESTION_ACTIVITY: "Objective question",
+        AdaptiveReviewCopyKey.PROGRAMMING_ACTIVITY: "Programming challenge",
+        AdaptiveReviewCopyKey.PROGRAMMING_RETRY_NOTICE: (
+            "You may inspect the diagnostic, ask the tutor for help, and run the code again. The "
+            "latest deterministic result counts when you continue."
+        ),
+        AdaptiveReviewCopyKey.NEXT: "Continue",
         AdaptiveReviewCopyKey.FINISH: "View summary",
         AdaptiveReviewCopyKey.SUMMARY_TITLE: "Session summary",
         AdaptiveReviewCopyKey.SUMMARY: (
-            "Answers: {answered}. Correct: {correct}. Accuracy: {accuracy}%. Objectives reviewed: "
+            "Answers: {answered}. Correct: {correct}. Accuracy: {accuracy}%. Activities: "
+            "{questions} questions and {programming} programming challenges. Objectives reviewed: "
             "{objectives}."
         ),
         AdaptiveReviewCopyKey.EXHAUSTED: (
-            "The session ended before its target because no unrepeated authorized questions "
+            "The session ended before its target because no unrepeated authorized activities "
             "remained."
         ),
         AdaptiveReviewCopyKey.COMPLETE: "The session target was reached.",
@@ -103,33 +128,42 @@ _CATALOGS: dict[AppLocale, dict[AdaptiveReviewCopyKey, str]] = {
         AdaptiveReviewCopyKey.TAB: "Adaptiv session",
         AdaptiveReviewCopyKey.TITLE: "Adaptiv repetition",
         AdaptiveReviewCopyKey.INTRO: (
-            "Sessionen vælger autoriserede spørgsmål ud fra svaghed, tilbagefald og resultater i "
-            "denne session. Det samme læringsmål gentages ikke umiddelbart."
+            "Sessionen kombinerer autoriserede spørgsmål og programmeringsopgaver ud fra svaghed, "
+            "tilbagefald og resultater i denne session. Det samme læringsmål gentages ikke "
+            "umiddelbart."
         ),
         AdaptiveReviewCopyKey.START: "Start session",
         AdaptiveReviewCopyKey.RESTART: "Opret en ny session",
         AdaptiveReviewCopyKey.DUE_SUMMARY: (
-            "Forfaldne læringsmål: {due}. Egnede til deterministiske spørgsmål: {eligible}. "
+            "Forfaldne læringsmål: {due}. Egnede til deterministiske aktiviteter: {eligible}. "
             "Uden objektivbank: {unsupported}."
         ),
         AdaptiveReviewCopyKey.NO_DUE: "Der er ingen læringsmål, som skal repeteres nu.",
         AdaptiveReviewCopyKey.NO_ELIGIBLE: (
-            "De aktuelle forfaldne læringsmål har endnu ikke en spørgsmålsbank med eksplicitte "
+            "De aktuelle forfaldne læringsmål har endnu ikke aktiviteter med eksplicitte "
             "koblinger. De er fortsat tilgængelige i modulkøen."
         ),
         AdaptiveReviewCopyKey.PROGRESS: (
-            "Spørgsmål {current} af op til {target} · {correct} korrekte"
+            "Aktivitet {current} af op til {target} · {correct} korrekte"
         ),
         AdaptiveReviewCopyKey.PRIMARY_OBJECTIVE: "Prioriteret læringsmål: {objective}",
-        AdaptiveReviewCopyKey.NEXT: "Næste spørgsmål",
+        AdaptiveReviewCopyKey.ACTIVITY_TYPE: "Aktivitetstype: {activity}",
+        AdaptiveReviewCopyKey.QUESTION_ACTIVITY: "Objektivt spørgsmål",
+        AdaptiveReviewCopyKey.PROGRAMMING_ACTIVITY: "Programmeringsopgave",
+        AdaptiveReviewCopyKey.PROGRAMMING_RETRY_NOTICE: (
+            "Du kan gennemgå diagnosen, bede tutoren om hjælp og køre koden igen. Det seneste "
+            "deterministiske resultat tæller, når du fortsætter."
+        ),
+        AdaptiveReviewCopyKey.NEXT: "Fortsæt",
         AdaptiveReviewCopyKey.FINISH: "Se oversigt",
         AdaptiveReviewCopyKey.SUMMARY_TITLE: "Sessionsoversigt",
         AdaptiveReviewCopyKey.SUMMARY: (
-            "Svar: {answered}. Korrekte: {correct}. Nøjagtighed: {accuracy} %. Bearbejdede "
-            "læringsmål: {objectives}."
+            "Svar: {answered}. Korrekte: {correct}. Nøjagtighed: {accuracy} %. Aktiviteter: "
+            "{questions} spørgsmål og {programming} programmeringsopgaver. Bearbejdede læringsmål: "
+            "{objectives}."
         ),
         AdaptiveReviewCopyKey.EXHAUSTED: (
-            "Sessionen sluttede før målet, fordi der ikke var flere autoriserede spørgsmål uden "
+            "Sessionen sluttede før målet, fordi der ikke var flere autoriserede aktiviteter uden "
             "gentagelse."
         ),
         AdaptiveReviewCopyKey.COMPLETE: "Sessionens mål blev nået.",
