@@ -24,6 +24,7 @@ from ...i18n import (
     ui_text,
 )
 from ...learning.guided_practice import GuidedPracticeSessionGenerator
+from ...learning.progress_service import ObjectiveAttemptRecorder
 from ...learning.python_challenge import PythonChallengeRunner
 from .guided_practice_styles import GUIDED_PRACTICE_STYLESHEET
 from .python_challenge_widget import PythonChallengeWidget
@@ -55,6 +56,7 @@ class GuidedPracticeCard(QFrame):
         *,
         locale: AppLocale = DEFAULT_LOCALE,
         challenge_runner: PythonChallengeRunner | None = None,
+        progress_recorder: ObjectiveAttemptRecorder | None = None,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("guidedPracticeCard")
@@ -103,6 +105,11 @@ class GuidedPracticeCard(QFrame):
                 challenge,
                 locale=locale,
                 evaluator=challenge_runner,
+                activity_type=exercise.activity_type.value,
+                prompt=exercise.prompt,
+                reference_solution=exercise.solution,
+                explanation=exercise.explanation,
+                progress_recorder=progress_recorder,
             )
             layout.addWidget(self._challenge_widget)
         else:
@@ -311,6 +318,7 @@ class GuidedPracticeWidget(QWidget):
         generator: GuidedPracticeSessionGenerator | None = None,
         locale: AppLocale = DEFAULT_LOCALE,
         challenge_runner: PythonChallengeRunner | None = None,
+        progress_recorder: ObjectiveAttemptRecorder | None = None,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
@@ -318,6 +326,7 @@ class GuidedPracticeWidget(QWidget):
         self.setStyleSheet(GUIDED_PRACTICE_STYLESHEET)
         self._locale = locale
         self._challenge_runner = challenge_runner
+        self._progress_recorder = progress_recorder
 
         self._generator = generator or GuidedPracticeSessionGenerator(
             bank,
@@ -402,6 +411,7 @@ class GuidedPracticeWidget(QWidget):
                 exercise,
                 locale=self._locale,
                 challenge_runner=self._challenge_runner,
+                progress_recorder=self._progress_recorder,
             )
             card.self_assessed.connect(self._record_self_assessment)
             self._exercise_cards.append(card)
