@@ -1,5 +1,11 @@
 """Authored-context tutoring services for local language models."""
 
+from .adaptive_session import (
+    TutorAssistanceLevel,
+    TutorSessionSnapshot,
+    TutorSessionTurn,
+    bounded_history,
+)
 from .challenge_diagnostic import (
     ChallengeDiagnostic,
     ChallengeDiagnosticCase,
@@ -23,7 +29,11 @@ __all__ = [
     "ChallengeTutorService",
     "ModuleTutorPromptBuilder",
     "RankedTutorDocument",
+    "TutorAssistanceLevel",
     "TutorContext",
     "TutorDocumentRetriever",
     "TutorPrompt",
+    "TutorSessionSnapshot",
+    "TutorSessionTurn",
+    "bounded_history",
 ]
