@@ -58,12 +58,8 @@ def test_mastery_identity_is_scoped_by_course_and_module() -> None:
             )
         )
 
-        assert store.get_mastery(
-            "m01.o1", course_code="DM847", module_id="dm847.m01"
-        ) == dm847
-        assert store.get_mastery(
-            "m01.o1", course_code="DM857", module_id="dm857.m01"
-        ) == dm857
+        assert store.get_mastery("m01.o1", course_code="DM847", module_id="dm847.m01") == dm847
+        assert store.get_mastery("m01.o1", course_code="DM857", module_id="dm857.m01") == dm857
         with pytest.raises(ValueError, match="ambiguous"):
             store.get_mastery("m01.o1")
 
@@ -136,9 +132,7 @@ def test_schema_v1_is_migrated_without_losing_mastery(tmp_path: Path) -> None:
 
     with SQLiteProgressStore(database) as store:
         assert store.schema_version == 2
-        state = store.get_mastery(
-            "m01.o1", course_code="DM847", module_id="dm847.m01"
-        )
+        state = store.get_mastery("m01.o1", course_code="DM847", module_id="dm847.m01")
         due = store.due_reviews(_NOW)
 
     assert state is not None
@@ -163,9 +157,7 @@ def test_review_page_renders_localized_due_objective(qapp: QApplication) -> None
 
         received: list[tuple[str, str, str]] = []
         page.review_requested.connect(
-            lambda course, module, objective_id: received.append(
-                (course, module, objective_id)
-            )
+            lambda course, module, objective_id: received.append((course, module, objective_id))
         )
         button = page.findChild(QPushButton, "reviewOpenModuleButton")
         assert button is not None
