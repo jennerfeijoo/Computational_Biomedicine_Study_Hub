@@ -14,8 +14,7 @@ from enum import StrEnum
 from . import BUNDLES
 
 DM857_ODIN_SOURCE_URL = (
-    "https://odin.sdu.dk/sitecore/index.php?"
-    "a=searchfagbesk&internkode=DM857&lang=en"
+    "https://odin.sdu.dk/sitecore/index.php?a=searchfagbesk&internkode=DM857&lang=en"
 )
 DM857_ODIN_APPROVAL_DATE = "2025-04-11"
 DM857_ODIN_VERSION = "Approved - active"
@@ -288,9 +287,7 @@ def validate_dm857_official_coverage() -> None:
         raise ValueError("The DM857 official matrix contains duplicate requirement IDs.")
 
     expected_module_ids = set(_ALL_MODULE_IDS)
-    referenced_module_ids = {
-        module_id for row in rows for module_id in row.requirement.module_ids
-    }
+    referenced_module_ids = {module_id for row in rows for module_id in row.requirement.module_ids}
     unknown_module_ids = referenced_module_ids - expected_module_ids
     if unknown_module_ids:
         raise ValueError(
@@ -322,11 +319,7 @@ def validate_dm857_official_coverage() -> None:
                 raise ValueError(
                     f"Covered requirement {row.requirement.requirement_id!r} lacks practice evidence."
                 )
-            if (
-                row.evidence.authored_assessment_count
-                + row.evidence.objective_bank_item_count
-                == 0
-            ):
+            if row.evidence.authored_assessment_count + row.evidence.objective_bank_item_count == 0:
                 raise ValueError(
                     f"Covered requirement {row.requirement.requirement_id!r} lacks assessment evidence."
                 )
