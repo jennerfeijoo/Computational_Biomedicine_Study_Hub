@@ -104,9 +104,7 @@ class PythonLabWidget(QFrame):
         self._status.hide()
         layout.addWidget(self._status)
 
-        self._expected_heading = self._output_heading(
-            lab_text(locale, LabCopyKey.EXPECTED)
-        )
+        self._expected_heading = self._output_heading(lab_text(locale, LabCopyKey.EXPECTED))
         self._expected = self._code_editor(
             expected_output or lab_text(locale, LabCopyKey.NO_OUTPUT),
             "pythonLabExpected",
