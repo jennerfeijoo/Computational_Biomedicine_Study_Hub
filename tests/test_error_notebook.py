@@ -28,6 +28,11 @@ def _submission(
     confidence: ConfidenceLevel = ConfidenceLevel.HIGH,
     attempted_at: datetime = _NOW,
 ) -> ObjectiveAnswerSubmission:
+    selected_answer = (
+        "DNA can be transcribed into RNA."
+        if is_correct
+        else "DNA can only be copied into DNA."
+    )
     return ObjectiveAnswerSubmission(
         course_code="DM847",
         module_id="dm847.m01",
@@ -40,7 +45,7 @@ def _submission(
         objective_ids=("m01.o1", "m01.o2"),
         attempted_at=attempted_at,
         prompt="Which statement best represents molecular information flow?",
-        selected_answer="DNA can only be copied into DNA." if not is_correct else "DNA can be transcribed into RNA.",
+        selected_answer=selected_answer,
         correct_answer="DNA can be transcribed into RNA.",
         explanation="Transcription produces RNA from a DNA template.",
     )
@@ -194,7 +199,7 @@ def test_review_page_renders_error_context_and_routes_to_module(
         assert prompt is not None
         assert status is not None
         assert kind is not None
-        assert "flujo" in prompt.text().casefold()
+        assert "molecular information flow" in prompt.text().casefold()
         assert status.text() == "Pendiente de corregir"
         assert "concepción errónea" in kind.text().casefold()
 
