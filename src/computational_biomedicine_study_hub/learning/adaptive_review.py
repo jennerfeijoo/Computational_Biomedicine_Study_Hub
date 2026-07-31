@@ -273,13 +273,10 @@ def authored_review_activity_candidates(
     """Merge explicitly linked questions and programming challenges."""
 
     merged: dict[ReviewObjectiveKey, list[ReviewActivityCandidate]] = {}
-    catalogs = (
-        authored_review_candidates(locale),
-        authored_review_programming_candidates(locale),
-    )
-    for catalog in catalogs:
-        for key, candidates in catalog.items():
-            merged.setdefault(key, []).extend(candidates)
+    for key, candidates in authored_review_candidates(locale).items():
+        merged.setdefault(key, []).extend(candidates)
+    for key, candidates in authored_review_programming_candidates(locale).items():
+        merged.setdefault(key, []).extend(candidates)
 
     result: dict[ReviewObjectiveKey, tuple[ReviewActivityCandidate, ...]] = {}
     for key, candidates in merged.items():
