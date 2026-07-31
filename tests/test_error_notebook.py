@@ -29,9 +29,7 @@ def _submission(
     attempted_at: datetime = _NOW,
 ) -> ObjectiveAnswerSubmission:
     selected_answer = (
-        "DNA can be transcribed into RNA."
-        if is_correct
-        else "DNA can only be copied into DNA."
+        "DNA can be transcribed into RNA." if is_correct else "DNA can only be copied into DNA."
     )
     return ObjectiveAnswerSubmission(
         course_code="DM847",
@@ -82,9 +80,7 @@ def test_later_correct_answer_resolves_open_errors_for_the_same_item() -> None:
         )
         service.record_objective_answer(_submission(is_correct=False))
         corrected_at = _NOW + timedelta(days=1)
-        service.record_objective_answer(
-            _submission(is_correct=True, attempted_at=corrected_at)
-        )
+        service.record_objective_answer(_submission(is_correct=True, attempted_at=corrected_at))
 
         errors = store.list_errors()
         unresolved = store.list_errors(include_resolved=False)
