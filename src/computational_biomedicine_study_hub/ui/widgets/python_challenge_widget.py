@@ -219,13 +219,14 @@ class PythonChallengeWidget(QFrame):
 
         confidence = self.selected_confidence
         if confidence is None:
-            self._status.setProperty("resultState", "warning")
-            self._status.setText(confidence_text(self._locale, ConfidenceCopyKey.REQUIRED))
-            self._status.show()
-            self._refresh_style(self._status)
+            self._show_warning(confidence_text(self._locale, ConfidenceCopyKey.REQUIRED))
             return
 
         source = self.source.strip()
+        if not source:
+            self._show_warning(challenge_text(self._locale, ChallengeCopyKey.SOURCE_REQUIRED))
+            return
+
         self._set_busy(True)
         self._status.setProperty("resultState", "running")
         self._status.setText(challenge_text(self._locale, ChallengeCopyKey.RUNNING))
@@ -350,6 +351,12 @@ class PythonChallengeWidget(QFrame):
             )
         )
         self._hidden_summary.show()
+
+    def _show_warning(self, text: str) -> None:
+        self._status.setProperty("resultState", "warning")
+        self._status.setText(text)
+        self._status.show()
+        self._refresh_style(self._status)
 
     def _clear_result_labels(self) -> None:
         self._result_labels.clear()
