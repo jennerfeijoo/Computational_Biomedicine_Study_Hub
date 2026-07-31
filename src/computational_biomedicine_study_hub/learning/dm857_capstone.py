@@ -165,9 +165,7 @@ class CapstoneMilestoneProgress:
 
         spec = _MILESTONE_BY_ID[self.milestone_id]
         has_any = bool(
-            self.completed_item_ids
-            or self.evidence_note.strip()
-            or self.commit_reference.strip()
+            self.completed_item_ids or self.evidence_note.strip() or self.commit_reference.strip()
         )
         if not has_any:
             return CapstoneMilestoneStatus.NOT_STARTED
@@ -200,9 +198,7 @@ class DM857CapstoneProgress:
                 f"expected {CAPSTONE_SCHEMA_VERSION}."
             )
         _require_aware(self.updated_at, "updated_at")
-        expected_milestones = tuple(
-            item.milestone_id for item in DM857_CAPSTONE_MILESTONES
-        )
+        expected_milestones = tuple(item.milestone_id for item in DM857_CAPSTONE_MILESTONES)
         if tuple(item.milestone_id for item in self.milestones) != expected_milestones:
             raise ValueError(
                 "Capstone milestone progress must preserve the authored milestone order."
@@ -220,14 +216,11 @@ class DM857CapstoneProgress:
         unknown = set(criterion_ids) - set(_RUBRIC_BY_ID)
         if unknown:
             raise ValueError(
-                "Capstone rubric scores reference unknown criteria: "
-                + ", ".join(sorted(unknown))
+                "Capstone rubric scores reference unknown criteria: " + ", ".join(sorted(unknown))
             )
         for criterion_id, score in self.rubric_scores:
             if not 0 <= score <= 4:
-                raise ValueError(
-                    f"Criterion {criterion_id!r} requires a score from 0 to 4."
-                )
+                raise ValueError(f"Criterion {criterion_id!r} requires a score from 0 to 4.")
 
     @classmethod
     def empty(cls, *, now: datetime | None = None) -> DM857CapstoneProgress:
@@ -240,8 +233,7 @@ class DM857CapstoneProgress:
             repository_url="",
             report_path="",
             milestones=tuple(
-                CapstoneMilestoneProgress(item.milestone_id)
-                for item in DM857_CAPSTONE_MILESTONES
+                CapstoneMilestoneProgress(item.milestone_id) for item in DM857_CAPSTONE_MILESTONES
             ),
             rubric_scores=(),
             updated_at=now or datetime.now(UTC),
@@ -329,9 +321,7 @@ class DM857CapstoneProgress:
 
     @property
     def ready_milestone_count(self) -> int:
-        return sum(
-            item.status is CapstoneMilestoneStatus.READY for item in self.milestones
-        )
+        return sum(item.status is CapstoneMilestoneStatus.READY for item in self.milestones)
 
     @property
     def milestone_completion_percent(self) -> int:
@@ -345,8 +335,7 @@ class DM857CapstoneProgress:
         if set(scores) != set(_RUBRIC_BY_ID):
             return None
         weighted = sum(
-            scores[item.criterion_id] / 4 * item.weight_percent
-            for item in DM857_CAPSTONE_RUBRIC
+            scores[item.criterion_id] / 4 * item.weight_percent for item in DM857_CAPSTONE_RUBRIC
         )
         return round(weighted)
 
@@ -409,9 +398,7 @@ class DM857CapstoneProgress:
             milestones = tuple(
                 CapstoneMilestoneProgress(
                     milestone_id=_required_string(item, "milestone_id"),
-                    completed_item_ids=tuple(
-                        _required_string_list(item, "completed_item_ids")
-                    ),
+                    completed_item_ids=tuple(_required_string_list(item, "completed_item_ids")),
                     evidence_note=_required_string(
                         item,
                         "evidence_note",
@@ -448,9 +435,7 @@ class DM857CapstoneProgress:
                 report_path=_required_string(payload, "report_path", allow_empty=True),
                 milestones=milestones,
                 rubric_scores=rubric_scores,
-                updated_at=datetime.fromisoformat(
-                    _required_string(payload, "updated_at")
-                ),
+                updated_at=datetime.fromisoformat(_required_string(payload, "updated_at")),
             )
         except (KeyError, TypeError, ValueError) as exc:
             raise CapstoneSnapshotError("Invalid DM857 capstone document.") from exc
