@@ -13,7 +13,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ...content.models import PracticeExercise
+from ...content.models import LearningModule, PracticeExercise
 from ...content.python_challenges import python_challenge_for
 from ...i18n import (
     DEFAULT_LOCALE,
@@ -57,6 +57,7 @@ class GuidedPracticeCard(QFrame):
         locale: AppLocale = DEFAULT_LOCALE,
         challenge_runner: PythonChallengeRunner | None = None,
         progress_recorder: ObjectiveAttemptRecorder | None = None,
+        learning_module: LearningModule | None = None,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("guidedPracticeCard")
@@ -110,6 +111,7 @@ class GuidedPracticeCard(QFrame):
                 reference_solution=exercise.solution,
                 explanation=exercise.explanation,
                 progress_recorder=progress_recorder,
+                learning_module=learning_module,
             )
             layout.addWidget(self._challenge_widget)
         else:
@@ -319,6 +321,7 @@ class GuidedPracticeWidget(QWidget):
         locale: AppLocale = DEFAULT_LOCALE,
         challenge_runner: PythonChallengeRunner | None = None,
         progress_recorder: ObjectiveAttemptRecorder | None = None,
+        learning_module: LearningModule | None = None,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
@@ -327,6 +330,7 @@ class GuidedPracticeWidget(QWidget):
         self._locale = locale
         self._challenge_runner = challenge_runner
         self._progress_recorder = progress_recorder
+        self._learning_module = learning_module
 
         self._generator = generator or GuidedPracticeSessionGenerator(
             bank,
@@ -412,6 +416,7 @@ class GuidedPracticeWidget(QWidget):
                 locale=self._locale,
                 challenge_runner=self._challenge_runner,
                 progress_recorder=self._progress_recorder,
+                learning_module=self._learning_module,
             )
             card.self_assessed.connect(self._record_self_assessment)
             self._exercise_cards.append(card)
