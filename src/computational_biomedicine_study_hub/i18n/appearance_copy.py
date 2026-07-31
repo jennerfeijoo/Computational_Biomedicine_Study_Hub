@@ -73,9 +73,7 @@ def appearance_text(
 
     template = _CATALOGS[locale][key]
     required = {
-        field_name
-        for _, field_name, _, _ in Formatter().parse(template)
-        if field_name is not None
+        field_name for _, field_name, _, _ in Formatter().parse(template) if field_name is not None
     }
     supplied = set(values)
     if supplied != required:
