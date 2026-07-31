@@ -16,6 +16,10 @@ class AdaptiveReviewCopyKey(StrEnum):
     INTRO = "adaptive_review.intro"
     START = "adaptive_review.start"
     RESTART = "adaptive_review.restart"
+    RESUME = "adaptive_review.resume"
+    DISCARD = "adaptive_review.discard"
+    RESUME_AVAILABLE = "adaptive_review.resume_available"
+    INVALIDATED = "adaptive_review.invalidated"
     DUE_SUMMARY = "adaptive_review.due_summary"
     NO_DUE = "adaptive_review.no_due"
     NO_ELIGIBLE = "adaptive_review.no_eligible"
@@ -25,6 +29,7 @@ class AdaptiveReviewCopyKey(StrEnum):
     QUESTION_ACTIVITY = "adaptive_review.activity.question"
     PROGRAMMING_ACTIVITY = "adaptive_review.activity.programming"
     PROGRAMMING_RETRY_NOTICE = "adaptive_review.programming_retry_notice"
+    RESTORED_RESULT = "adaptive_review.restored_result"
     NEXT = "adaptive_review.next"
     FINISH = "adaptive_review.finish"
     SUMMARY_TITLE = "adaptive_review.summary_title"
@@ -44,6 +49,16 @@ _CATALOGS: dict[AppLocale, dict[AdaptiveReviewCopyKey, str]] = {
         ),
         AdaptiveReviewCopyKey.START: "Iniciar sesión",
         AdaptiveReviewCopyKey.RESTART: "Crear otra sesión",
+        AdaptiveReviewCopyKey.RESUME: "Reanudar sesión",
+        AdaptiveReviewCopyKey.DISCARD: "Descartar sesión guardada",
+        AdaptiveReviewCopyKey.RESUME_AVAILABLE: (
+            "Hay una sesión guardada: {answered} de {target} actividades aceptadas. "
+            "Puedes continuar exactamente desde la actividad pendiente."
+        ),
+        AdaptiveReviewCopyKey.INVALIDATED: (
+            "La sesión guardada se descartó porque cambió el catálogo académico o el archivo era "
+            "incompatible. Tus intentos y tu dominio permanecen intactos."
+        ),
         AdaptiveReviewCopyKey.DUE_SUMMARY: (
             "Objetivos vencidos: {due}. Elegibles para actividades deterministas: {eligible}. "
             "Sin banco objetivo: {unsupported}."
@@ -62,7 +77,12 @@ _CATALOGS: dict[AppLocale, dict[AdaptiveReviewCopyKey, str]] = {
         AdaptiveReviewCopyKey.PROGRAMMING_ACTIVITY: "Reto de programación",
         AdaptiveReviewCopyKey.PROGRAMMING_RETRY_NOTICE: (
             "Puedes revisar el diagnóstico, pedir ayuda al tutor y volver a ejecutar el código. "
-            "Al continuar, contará el resultado determinista más reciente."
+            "Al continuar, contará el resultado determinista más reciente. El borrador se guarda "
+            "automáticamente."
+        ),
+        AdaptiveReviewCopyKey.RESTORED_RESULT: (
+            "Se restauró un resultado determinista pendiente. Puedes continuar con ese resultado o "
+            "volver a ejecutar el código."
         ),
         AdaptiveReviewCopyKey.NEXT: "Continuar",
         AdaptiveReviewCopyKey.FINISH: "Ver resumen",
@@ -89,6 +109,16 @@ _CATALOGS: dict[AppLocale, dict[AdaptiveReviewCopyKey, str]] = {
         ),
         AdaptiveReviewCopyKey.START: "Start session",
         AdaptiveReviewCopyKey.RESTART: "Create another session",
+        AdaptiveReviewCopyKey.RESUME: "Resume session",
+        AdaptiveReviewCopyKey.DISCARD: "Discard saved session",
+        AdaptiveReviewCopyKey.RESUME_AVAILABLE: (
+            "A saved session is available: {answered} of {target} activities accepted. You can "
+            "continue from the exact pending activity."
+        ),
+        AdaptiveReviewCopyKey.INVALIDATED: (
+            "The saved session was discarded because the academic catalog changed or the document "
+            "was incompatible. Your attempts and mastery remain intact."
+        ),
         AdaptiveReviewCopyKey.DUE_SUMMARY: (
             "Due objectives: {due}. Eligible for deterministic activities: {eligible}. "
             "Without an objective bank: {unsupported}."
@@ -107,7 +137,12 @@ _CATALOGS: dict[AppLocale, dict[AdaptiveReviewCopyKey, str]] = {
         AdaptiveReviewCopyKey.PROGRAMMING_ACTIVITY: "Programming challenge",
         AdaptiveReviewCopyKey.PROGRAMMING_RETRY_NOTICE: (
             "You may inspect the diagnostic, ask the tutor for help, and run the code again. The "
-            "latest deterministic result counts when you continue."
+            "latest deterministic result counts when you continue. The draft is saved "
+            "automatically."
+        ),
+        AdaptiveReviewCopyKey.RESTORED_RESULT: (
+            "A pending deterministic result was restored. You may continue with it or run the code "
+            "again."
         ),
         AdaptiveReviewCopyKey.NEXT: "Continue",
         AdaptiveReviewCopyKey.FINISH: "View summary",
@@ -134,6 +169,16 @@ _CATALOGS: dict[AppLocale, dict[AdaptiveReviewCopyKey, str]] = {
         ),
         AdaptiveReviewCopyKey.START: "Start session",
         AdaptiveReviewCopyKey.RESTART: "Opret en ny session",
+        AdaptiveReviewCopyKey.RESUME: "Genoptag session",
+        AdaptiveReviewCopyKey.DISCARD: "Kassér gemt session",
+        AdaptiveReviewCopyKey.RESUME_AVAILABLE: (
+            "Der findes en gemt session: {answered} af {target} aktiviteter er accepteret. Du kan "
+            "fortsætte fra den præcise ventende aktivitet."
+        ),
+        AdaptiveReviewCopyKey.INVALIDATED: (
+            "Den gemte session blev kasseret, fordi det faglige katalog blev ændret, eller dokumentet "
+            "var inkompatibelt. Dine forsøg og din mestring er bevaret."
+        ),
         AdaptiveReviewCopyKey.DUE_SUMMARY: (
             "Forfaldne læringsmål: {due}. Egnede til deterministiske aktiviteter: {eligible}. "
             "Uden objektivbank: {unsupported}."
@@ -152,7 +197,11 @@ _CATALOGS: dict[AppLocale, dict[AdaptiveReviewCopyKey, str]] = {
         AdaptiveReviewCopyKey.PROGRAMMING_ACTIVITY: "Programmeringsopgave",
         AdaptiveReviewCopyKey.PROGRAMMING_RETRY_NOTICE: (
             "Du kan gennemgå diagnosen, bede tutoren om hjælp og køre koden igen. Det seneste "
-            "deterministiske resultat tæller, når du fortsætter."
+            "deterministiske resultat tæller, når du fortsætter. Kladdekoden gemmes automatisk."
+        ),
+        AdaptiveReviewCopyKey.RESTORED_RESULT: (
+            "Et ventende deterministisk resultat blev gendannet. Du kan fortsætte med det eller køre "
+            "koden igen."
         ),
         AdaptiveReviewCopyKey.NEXT: "Fortsæt",
         AdaptiveReviewCopyKey.FINISH: "Se oversigt",
