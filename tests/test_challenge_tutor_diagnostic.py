@@ -9,6 +9,7 @@ from computational_biomedicine_study_hub.content.python_challenges import (
     PythonChallenge,
     python_challenge_for,
 )
+from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.integrations import (
     ChatMessage,
     ChatResponse,
@@ -35,7 +36,7 @@ def _challenge() -> PythonChallenge:
     challenge = python_challenge_for(
         "m07.p04",
         "def unique_count(values):\n    pass",
-        _module().locale,
+        AppLocale.SPANISH_SPAIN,
     )
     assert challenge is not None
     return challenge
