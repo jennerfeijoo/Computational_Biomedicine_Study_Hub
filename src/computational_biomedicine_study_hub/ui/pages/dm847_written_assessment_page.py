@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable
 from typing import Protocol
 
-from PySide6.QtCore import QObject, QRunnable, QSettings, QThreadPool, QTimer, Signal, Slot
+from PySide6.QtCore import QSettings, QTimer, Signal, Slot
 from PySide6.QtWidgets import (
     QComboBox,
     QGroupBox,
@@ -28,13 +27,7 @@ from ...i18n.written_assessment_copy import (
     written_assessment_text,
     written_prompt_copy,
 )
-from ...integrations import (
-    DEFAULT_CHAT_MODEL,
-    OllamaChatClient,
-    OllamaConfig,
-    OllamaConnectionError,
-    OllamaProtocolError,
-)
+from ...integrations import DEFAULT_CHAT_MODEL, OllamaChatClient, OllamaConfig
 from ...learning.dm847_written_assessment import (
     DM847_WRITTEN_PROMPTS,
     WrittenAssessmentSnapshot,
@@ -48,10 +41,14 @@ from ...tutoring.written_feedback import (
     WrittenFeedbackResponse,
     WrittenFeedbackService,
 )
+from ..written_feedback_executor import (
+    QtWrittenFeedbackExecutor,
+    WrittenFeedbackExecutor,
+)
 
 
 class WrittenFeedbackRunner(Protocol):
-    """Minimal feedback service contract consumed by the writing page."""
+    """Minimal feedback-service contract consumed by the writing page."""
 
     @property
     def model(self) -> str:
@@ -65,76 +62,8 @@ class WrittenFeedbackRunner(Protocol):
         """Return source-bounded feedback for one learner draft."""
 
 
-FeedbackTask = Callable[[], WrittenFeedbackResponse]
-FeedbackSuccessCallback = Callable[[int, WrittenFeedbackResponse], None]
-FeedbackFailureCallback = Callable[[int, Exception], None]
-
-
-class WrittenFeedbackExecutor(Protocol):
-    """Execution boundary keeping blocking Ollama calls outside the UI thread."""
-
-    def submit(
-        self,
-        request_id: int,
-        task: FeedbackTask,
-        on_success: FeedbackSuccessCallback,
-        on_failure: FeedbackFailureCallback,
-    ) -> None:
-        """Schedule one request and report its eventual outcome."""
-
-    def cancel(self, request_id: int) -> None:
-        """Cancel or detach one request without blocking the UI."""
-
-
-class _FeedbackSignals(QObject):
-    succeeded = Signal(int, object)
-    failed = Signal(int, object)
-
-
-class _FeedbackRunnable(QRunnable):
-    def __init__(self, request_id: int, task: FeedbackTask) -> None:
-        super().__init__()
-        self._request_id = request_id
-        self._task = task
-        self.signals = _FeedbackSignals()
-        self.setAutoDelete(True)
-
-    @Slot()
-    def run(self) -> None:
-        try:
-            response = self._task()
-        except Exception as exc:  # pragma: no cover - exercised through executor tests
-            self.signals.failed.emit(self._request_id, exc)
-        else:
-            self.signals.succeeded.emit(self._request_id, response)
-
-
-class QtWrittenFeedbackExecutor:
-    """Run blocking local generation in Qt's shared worker pool."""
-
-    def __init__(self, thread_pool: QThreadPool | None = None) -> None:
-        self._thread_pool = thread_pool or QThreadPool.globalInstance()
-
-    def submit(
-        self,
-        request_id: int,
-        task: FeedbackTask,
-        on_success: FeedbackSuccessCallback,
-        on_failure: FeedbackFailureCallback,
-    ) -> None:
-        runnable = _FeedbackRunnable(request_id, task)
-        runnable.signals.succeeded.connect(on_success)
-        runnable.signals.failed.connect(on_failure)
-        self._thread_pool.start(runnable)
-
-    def cancel(self, request_id: int) -> None:
-        """Detach from a running request; stale results are rejected by ID."""
-
-        del request_id
-
-
 class DM847WrittenAssessmentPage(QWidget):
-    """Author, persist and revise DM847 written responses with local-model support."""
+    """Author, persist, and revise DM847 responses with local-model support."""
 
     BASE_URL_KEY = "ollama/base_url"
     MODEL_KEY = "ollama/model"
@@ -162,8 +91,12 @@ class DM847WrittenAssessmentPage(QWidget):
             if locale == DEFAULT_LOCALE
             else tuple(bundle.materialize(locale) for bundle in LOCALIZED_BUNDLES)
         )
-        self._module_by_id = {bundle.module.module_id: bundle.module for bundle in self._bundles}
-        self._prompt_by_id = {item.prompt_id: item for item in DM847_WRITTEN_PROMPTS}
+        self._module_by_id = {
+            bundle.module.module_id: bundle.module for bundle in self._bundles
+        }
+        self._prompt_by_id = {
+            item.prompt_id: item for item in DM847_WRITTEN_PROMPTS
+        }
         self._store = written_store
         if self._store is None and progress_store is not None:
             self._store = DM847WrittenAssessmentStore.for_progress_store(progress_store)
@@ -171,8 +104,8 @@ class DM847WrittenAssessmentPage(QWidget):
         self._snapshot = loaded or WrittenAssessmentSnapshot.empty()
         self._runner = feedback_runner or self._default_runner()
         self._executor = executor or QtWrittenFeedbackExecutor()
-        self._loading = False
         self._loaded_prompt_id = self._snapshot.active_prompt_id
+        self._loading = False
         self._request_serial = 0
         self._active_request_id: int | None = None
         self._pending_prompt_id = ""
@@ -184,7 +117,6 @@ class DM847WrittenAssessmentPage(QWidget):
 
         root = QVBoxLayout(self)
         root.setContentsMargins(0, 0, 0, 0)
-
         scroll = QScrollArea()
         scroll.setObjectName("writtenAssessmentScroll")
         scroll.setWidgetResizable(True)
@@ -194,168 +126,12 @@ class DM847WrittenAssessmentPage(QWidget):
         layout.setContentsMargins(4, 4, 12, 24)
         layout.setSpacing(14)
 
-        title = QLabel(written_assessment_text(locale, WrittenAssessmentCopyKey.TITLE))
-        title.setObjectName("writtenAssessmentTitle")
-        intro = QLabel(written_assessment_text(locale, WrittenAssessmentCopyKey.INTRO))
-        intro.setObjectName("writtenAssessmentIntro")
-        intro.setWordWrap(True)
-        layout.addWidget(title)
-        layout.addWidget(intro)
-
-        selector_group = QGroupBox(written_assessment_text(locale, WrittenAssessmentCopyKey.TASK))
-        selector_group.setObjectName("writtenTaskSelectorGroup")
-        selector_layout = QVBoxLayout(selector_group)
-        self._prompt_selector = QComboBox()
-        self._prompt_selector.setObjectName("writtenPromptSelector")
-        for spec in DM847_WRITTEN_PROMPTS:
-            prompt_title, _, _ = written_prompt_copy(locale, spec.prompt_id)
-            module = self._module_by_id[spec.module_id]
-            self._prompt_selector.addItem(
-                f"{module.title} — {prompt_title}",
-                spec.prompt_id,
-            )
-        saved_index = self._prompt_selector.findData(self._snapshot.active_prompt_id)
-        self._prompt_selector.setCurrentIndex(max(0, saved_index))
-        self._prompt_selector.currentIndexChanged.connect(self._on_prompt_changed)
-        selector_layout.addWidget(self._prompt_selector)
-
-        self._module_label = QLabel()
-        self._module_label.setObjectName("writtenModuleLabel")
-        self._module_label.setWordWrap(True)
-        self._kind_label = QLabel()
-        self._kind_label.setObjectName("writtenTaskKind")
-        self._objectives_label = QLabel()
-        self._objectives_label.setObjectName("writtenObjectives")
-        self._objectives_label.setWordWrap(True)
-        selector_layout.addWidget(self._module_label)
-        selector_layout.addWidget(self._kind_label)
-        selector_layout.addWidget(self._objectives_label)
-        layout.addWidget(selector_group)
-
-        task_group = QGroupBox(written_assessment_text(locale, WrittenAssessmentCopyKey.TASK))
-        task_group.setObjectName("writtenTaskGroup")
-        task_layout = QVBoxLayout(task_group)
-        self._task_text = QLabel()
-        self._task_text.setObjectName("writtenTaskText")
-        self._task_text.setWordWrap(True)
-        self._focus_heading = QLabel(
-            written_assessment_text(locale, WrittenAssessmentCopyKey.FOCUS)
-        )
-        self._focus_heading.setObjectName("contentSubheading")
-        self._focus_text = QLabel()
-        self._focus_text.setObjectName("writtenFocusPoints")
-        self._focus_text.setWordWrap(True)
-        task_layout.addWidget(self._task_text)
-        task_layout.addWidget(self._focus_heading)
-        task_layout.addWidget(self._focus_text)
-        layout.addWidget(task_group)
-
-        draft_group = QGroupBox(written_assessment_text(locale, WrittenAssessmentCopyKey.DRAFT))
-        draft_group.setObjectName("writtenDraftGroup")
-        draft_layout = QVBoxLayout(draft_group)
-        self._draft = QPlainTextEdit()
-        self._draft.setObjectName("writtenDraftEditor")
-        self._draft.setPlaceholderText(
-            written_assessment_text(locale, WrittenAssessmentCopyKey.DRAFT_PLACEHOLDER)
-        )
-        self._draft.setMinimumHeight(260)
-        self._draft.textChanged.connect(self._on_draft_changed)
-        self._word_count = QLabel()
-        self._word_count.setObjectName("writtenWordCount")
-        draft_actions = QHBoxLayout()
-        self._save_button = QPushButton(
-            written_assessment_text(locale, WrittenAssessmentCopyKey.SAVE)
-        )
-        self._save_button.setObjectName("writtenSaveButton")
-        self._save_button.clicked.connect(lambda _checked=False: self.persist())
-        self._save_status = QLabel()
-        self._save_status.setObjectName("writtenSaveStatus")
-        draft_actions.addWidget(self._save_button)
-        draft_actions.addWidget(self._word_count)
-        draft_actions.addWidget(self._save_status, 1)
-        draft_layout.addWidget(self._draft)
-        draft_layout.addLayout(draft_actions)
-        layout.addWidget(draft_group)
-
-        feedback_group = QGroupBox(
-            written_assessment_text(locale, WrittenAssessmentCopyKey.FEEDBACK_TITLE)
-        )
-        feedback_group.setObjectName("writtenFeedbackGroup")
-        feedback_layout = QVBoxLayout(feedback_group)
-        notice = QLabel(
-            written_assessment_text(locale, WrittenAssessmentCopyKey.FEEDBACK_NOTICE)
-        )
-        notice.setObjectName("writtenFeedbackNotice")
-        notice.setWordWrap(True)
-        feedback_layout.addWidget(notice)
-
-        buttons = QHBoxLayout()
-        self._review_button = QPushButton(
-            written_assessment_text(locale, WrittenAssessmentCopyKey.CONTENT_REVIEW)
-        )
-        self._review_button.setObjectName("writtenContentReviewButton")
-        self._review_button.clicked.connect(
-            lambda _checked=False: self.request_feedback(WrittenFeedbackMode.CONTENT_REVIEW)
-        )
-        self._revision_button = QPushButton(
-            written_assessment_text(locale, WrittenAssessmentCopyKey.WRITING_REVISION)
-        )
-        self._revision_button.setObjectName("writtenRevisionButton")
-        self._revision_button.clicked.connect(
-            lambda _checked=False: self.request_feedback(WrittenFeedbackMode.WRITING_REVISION)
-        )
-        self._essay_button = QPushButton(
-            written_assessment_text(locale, WrittenAssessmentCopyKey.ESSAY_COACH)
-        )
-        self._essay_button.setObjectName("writtenEssayButton")
-        self._essay_button.clicked.connect(
-            lambda _checked=False: self.request_feedback(WrittenFeedbackMode.ESSAY_COACH)
-        )
-        self._cancel_button = QPushButton(
-            written_assessment_text(locale, WrittenAssessmentCopyKey.CANCEL)
-        )
-        self._cancel_button.setObjectName("writtenCancelButton")
-        self._cancel_button.clicked.connect(self.cancel_request)
-        self._cancel_button.hide()
-        buttons.addWidget(self._review_button)
-        buttons.addWidget(self._revision_button)
-        buttons.addWidget(self._essay_button)
-        buttons.addWidget(self._cancel_button)
-        buttons.addStretch(1)
-        feedback_layout.addLayout(buttons)
-
-        self._feedback_status = QLabel()
-        self._feedback_status.setObjectName("writtenFeedbackStatus")
-        self._feedback_status.setWordWrap(True)
-        feedback_layout.addWidget(self._feedback_status)
-
-        self._feedback = QTextBrowser()
-        self._feedback.setObjectName("writtenFeedbackBrowser")
-        self._feedback.setOpenExternalLinks(False)
-        self._feedback.setMinimumHeight(240)
-        feedback_layout.addWidget(self._feedback)
-
-        sources_heading = QLabel(
-            written_assessment_text(locale, WrittenAssessmentCopyKey.SOURCES)
-        )
-        sources_heading.setObjectName("contentSubheading")
-        self._sources = QLabel()
-        self._sources.setObjectName("writtenFeedbackSources")
-        self._sources.setWordWrap(True)
-        self._model_label = QLabel(
-            written_assessment_text(
-                locale,
-                WrittenAssessmentCopyKey.MODEL,
-                model=self._runner.model,
-            )
-        )
-        self._model_label.setObjectName("writtenFeedbackModel")
-        feedback_layout.addWidget(sources_heading)
-        feedback_layout.addWidget(self._sources)
-        feedback_layout.addWidget(self._model_label)
-        layout.addWidget(feedback_group)
+        self._build_header(layout)
+        self._build_selector(layout)
+        self._build_task(layout)
+        self._build_draft(layout)
+        self._build_feedback(layout)
         layout.addStretch(1)
-
         scroll.setWidget(body)
         root.addWidget(scroll)
         self._load_prompt(self._snapshot.active_prompt_id)
@@ -364,7 +140,10 @@ class DM847WrittenAssessmentPage(QWidget):
     def snapshot(self) -> WrittenAssessmentSnapshot:
         """Return the latest captured state, including the visible draft."""
 
-        return self._capture_prompt_draft(self._loaded_prompt_id, clear_feedback=False)
+        return self._capture_prompt_draft(
+            self._loaded_prompt_id,
+            clear_feedback=False,
+        )
 
     @property
     def current_prompt_id(self) -> str:
@@ -407,9 +186,7 @@ class DM847WrittenAssessmentPage(QWidget):
         )
         if self._store is not None:
             self._store.save(self._snapshot)
-        self._save_status.setText(
-            written_assessment_text(self._locale, WrittenAssessmentCopyKey.SAVED)
-        )
+        self._save_status.setText(self._text(WrittenAssessmentCopyKey.SAVED))
 
     def request_feedback(self, mode: WrittenFeedbackMode) -> None:
         """Request one bounded asynchronous Ollama operation for the current draft."""
@@ -419,12 +196,12 @@ class DM847WrittenAssessmentPage(QWidget):
         draft = self._draft.toPlainText().strip()
         if not draft:
             self._feedback_status.setText(
-                written_assessment_text(self._locale, WrittenAssessmentCopyKey.EMPTY_DRAFT)
+                self._text(WrittenAssessmentCopyKey.EMPTY_DRAFT)
             )
             return
         if _word_count(draft) < self.MINIMUM_FEEDBACK_WORDS:
             self._feedback_status.setText(
-                written_assessment_text(self._locale, WrittenAssessmentCopyKey.TOO_SHORT)
+                self._text(WrittenAssessmentCopyKey.TOO_SHORT)
             )
             return
 
@@ -432,7 +209,6 @@ class DM847WrittenAssessmentPage(QWidget):
         prompt_id = self._loaded_prompt_id
         spec = self._prompt_by_id[prompt_id]
         _, task_prompt, focus_points = written_prompt_copy(self._locale, prompt_id)
-        module = self._module_by_id[spec.module_id]
         request = WrittenFeedbackRequest(
             prompt_id=prompt_id,
             task_prompt=task_prompt,
@@ -446,6 +222,7 @@ class DM847WrittenAssessmentPage(QWidget):
         self._active_request_id = request_id
         self._pending_prompt_id = prompt_id
         self._set_generating(True)
+        module = self._module_by_id[spec.module_id]
         self._executor.submit(
             request_id,
             lambda: self._runner.generate(module, request),
@@ -467,18 +244,173 @@ class DM847WrittenAssessmentPage(QWidget):
         self._set_generating(False)
         self._feedback_status.clear()
 
-    def _default_runner(self) -> WrittenFeedbackService:
-        base_url = str(
-            self._settings.value(
-                self.BASE_URL_KEY,
-                OllamaConfig().normalized_base_url(),
+    def _build_header(self, layout: QVBoxLayout) -> None:
+        title = QLabel(self._text(WrittenAssessmentCopyKey.TITLE))
+        title.setObjectName("writtenAssessmentTitle")
+        intro = QLabel(self._text(WrittenAssessmentCopyKey.INTRO))
+        intro.setObjectName("writtenAssessmentIntro")
+        intro.setWordWrap(True)
+        layout.addWidget(title)
+        layout.addWidget(intro)
+
+    def _build_selector(self, layout: QVBoxLayout) -> None:
+        group = QGroupBox(self._text(WrittenAssessmentCopyKey.TASK))
+        group.setObjectName("writtenTaskSelectorGroup")
+        group_layout = QVBoxLayout(group)
+        self._prompt_selector = QComboBox()
+        self._prompt_selector.setObjectName("writtenPromptSelector")
+        for spec in DM847_WRITTEN_PROMPTS:
+            title, _, _ = written_prompt_copy(self._locale, spec.prompt_id)
+            module = self._module_by_id[spec.module_id]
+            self._prompt_selector.addItem(
+                f"{module.title} — {title}",
+                spec.prompt_id,
+            )
+        saved_index = self._prompt_selector.findData(self._snapshot.active_prompt_id)
+        self._prompt_selector.setCurrentIndex(max(0, saved_index))
+        self._prompt_selector.currentIndexChanged.connect(self._on_prompt_changed)
+        group_layout.addWidget(self._prompt_selector)
+
+        self._module_label = QLabel()
+        self._module_label.setObjectName("writtenModuleLabel")
+        self._module_label.setWordWrap(True)
+        self._kind_label = QLabel()
+        self._kind_label.setObjectName("writtenTaskKind")
+        self._objectives_label = QLabel()
+        self._objectives_label.setObjectName("writtenObjectives")
+        self._objectives_label.setWordWrap(True)
+        group_layout.addWidget(self._module_label)
+        group_layout.addWidget(self._kind_label)
+        group_layout.addWidget(self._objectives_label)
+        layout.addWidget(group)
+
+    def _build_task(self, layout: QVBoxLayout) -> None:
+        group = QGroupBox(self._text(WrittenAssessmentCopyKey.TASK))
+        group.setObjectName("writtenTaskGroup")
+        group_layout = QVBoxLayout(group)
+        self._task_text = QLabel()
+        self._task_text.setObjectName("writtenTaskText")
+        self._task_text.setWordWrap(True)
+        heading = QLabel(self._text(WrittenAssessmentCopyKey.FOCUS))
+        heading.setObjectName("contentSubheading")
+        self._focus_text = QLabel()
+        self._focus_text.setObjectName("writtenFocusPoints")
+        self._focus_text.setWordWrap(True)
+        group_layout.addWidget(self._task_text)
+        group_layout.addWidget(heading)
+        group_layout.addWidget(self._focus_text)
+        layout.addWidget(group)
+
+    def _build_draft(self, layout: QVBoxLayout) -> None:
+        group = QGroupBox(self._text(WrittenAssessmentCopyKey.DRAFT))
+        group.setObjectName("writtenDraftGroup")
+        group_layout = QVBoxLayout(group)
+        self._draft = QPlainTextEdit()
+        self._draft.setObjectName("writtenDraftEditor")
+        self._draft.setPlaceholderText(
+            self._text(WrittenAssessmentCopyKey.DRAFT_PLACEHOLDER)
+        )
+        self._draft.setMinimumHeight(260)
+        self._draft.textChanged.connect(self._on_draft_changed)
+        group_layout.addWidget(self._draft)
+
+        actions = QHBoxLayout()
+        self._save_button = QPushButton(self._text(WrittenAssessmentCopyKey.SAVE))
+        self._save_button.setObjectName("writtenSaveButton")
+        self._save_button.clicked.connect(lambda _checked=False: self.persist())
+        self._word_count = QLabel()
+        self._word_count.setObjectName("writtenWordCount")
+        self._save_status = QLabel()
+        self._save_status.setObjectName("writtenSaveStatus")
+        actions.addWidget(self._save_button)
+        actions.addWidget(self._word_count)
+        actions.addWidget(self._save_status, 1)
+        group_layout.addLayout(actions)
+        layout.addWidget(group)
+
+    def _build_feedback(self, layout: QVBoxLayout) -> None:
+        group = QGroupBox(self._text(WrittenAssessmentCopyKey.FEEDBACK_TITLE))
+        group.setObjectName("writtenFeedbackGroup")
+        group_layout = QVBoxLayout(group)
+        notice = QLabel(self._text(WrittenAssessmentCopyKey.FEEDBACK_NOTICE))
+        notice.setObjectName("writtenFeedbackNotice")
+        notice.setWordWrap(True)
+        group_layout.addWidget(notice)
+
+        actions = QHBoxLayout()
+        self._review_button = self._feedback_button(
+            WrittenAssessmentCopyKey.CONTENT_REVIEW,
+            "writtenContentReviewButton",
+            WrittenFeedbackMode.CONTENT_REVIEW,
+        )
+        self._revision_button = self._feedback_button(
+            WrittenAssessmentCopyKey.WRITING_REVISION,
+            "writtenRevisionButton",
+            WrittenFeedbackMode.WRITING_REVISION,
+        )
+        self._essay_button = self._feedback_button(
+            WrittenAssessmentCopyKey.ESSAY_COACH,
+            "writtenEssayButton",
+            WrittenFeedbackMode.ESSAY_COACH,
+        )
+        self._cancel_button = QPushButton(self._text(WrittenAssessmentCopyKey.CANCEL))
+        self._cancel_button.setObjectName("writtenCancelButton")
+        self._cancel_button.clicked.connect(self.cancel_request)
+        self._cancel_button.hide()
+        for button in (
+            self._review_button,
+            self._revision_button,
+            self._essay_button,
+            self._cancel_button,
+        ):
+            actions.addWidget(button)
+        actions.addStretch(1)
+        group_layout.addLayout(actions)
+
+        self._feedback_status = QLabel()
+        self._feedback_status.setObjectName("writtenFeedbackStatus")
+        self._feedback_status.setWordWrap(True)
+        self._feedback = QTextBrowser()
+        self._feedback.setObjectName("writtenFeedbackBrowser")
+        self._feedback.setOpenExternalLinks(False)
+        self._feedback.setMinimumHeight(240)
+        sources_heading = QLabel(self._text(WrittenAssessmentCopyKey.SOURCES))
+        sources_heading.setObjectName("contentSubheading")
+        self._sources = QLabel()
+        self._sources.setObjectName("writtenFeedbackSources")
+        self._sources.setWordWrap(True)
+        self._model_label = QLabel(
+            self._text(WrittenAssessmentCopyKey.MODEL, model=self._runner.model)
+        )
+        self._model_label.setObjectName("writtenFeedbackModel")
+        group_layout.addWidget(self._feedback_status)
+        group_layout.addWidget(self._feedback)
+        group_layout.addWidget(sources_heading)
+        group_layout.addWidget(self._sources)
+        group_layout.addWidget(self._model_label)
+        layout.addWidget(group)
+
+    def _feedback_button(
+        self,
+        key: WrittenAssessmentCopyKey,
+        object_name: str,
+        mode: WrittenFeedbackMode,
+    ) -> QPushButton:
+        button = QPushButton(self._text(key))
+        button.setObjectName(object_name)
+        button.clicked.connect(
+            lambda _checked=False, selected_mode=mode: self.request_feedback(
+                selected_mode
             )
         )
+        return button
+
+    def _default_runner(self) -> WrittenFeedbackService:
+        default_url = OllamaConfig().normalized_base_url()
+        base_url = str(self._settings.value(self.BASE_URL_KEY, default_url))
         model = str(self._settings.value(self.MODEL_KEY, DEFAULT_CHAT_MODEL)).strip()
-        if not model:
-            model = DEFAULT_CHAT_MODEL
         client = OllamaChatClient(OllamaConfig(base_url=base_url))
-        return WrittenFeedbackService(client, model=model)
+        return WrittenFeedbackService(client, model=model or DEFAULT_CHAT_MODEL)
 
     def _on_prompt_changed(self, _index: int) -> None:
         if self._loading:
@@ -507,12 +439,11 @@ class DM847WrittenAssessmentPage(QWidget):
                 else WrittenAssessmentCopyKey.OPEN_RESPONSE
             )
             self._module_label.setText(
-                f"{written_assessment_text(self._locale, WrittenAssessmentCopyKey.MODULE)}: "
-                f"{module.title}"
+                f"{self._text(WrittenAssessmentCopyKey.MODULE)}: {module.title}"
             )
             self._kind_label.setText(
-                f"{written_assessment_text(self._locale, WrittenAssessmentCopyKey.TASK_KIND)}: "
-                f"{written_assessment_text(self._locale, kind_key)}"
+                f"{self._text(WrittenAssessmentCopyKey.TASK_KIND)}: "
+                f"{self._text(kind_key)}"
             )
             objective_text = ", ".join(
                 objective.statement
@@ -520,8 +451,7 @@ class DM847WrittenAssessmentPage(QWidget):
                 if objective.objective_id in spec.objective_ids
             )
             self._objectives_label.setText(
-                written_assessment_text(
-                    self._locale,
+                self._text(
                     WrittenAssessmentCopyKey.OBJECTIVES,
                     objectives=objective_text,
                 )
@@ -531,14 +461,10 @@ class DM847WrittenAssessmentPage(QWidget):
             draft = self._snapshot.draft(prompt_id)
             self._draft.setPlainText(draft.response_text)
             self._render_feedback(draft.feedback_text, draft.source_ids)
-            self._feedback_status.setText(
-                ""
-                if draft.feedback_text
-                else written_assessment_text(
-                    self._locale,
-                    WrittenAssessmentCopyKey.NO_FEEDBACK,
-                )
+            status = "" if draft.feedback_text else self._text(
+                WrittenAssessmentCopyKey.NO_FEEDBACK
             )
+            self._feedback_status.setText(status)
             self._loaded_prompt_id = prompt_id
             self._update_word_count()
         finally:
@@ -547,22 +473,20 @@ class DM847WrittenAssessmentPage(QWidget):
     def _on_draft_changed(self) -> None:
         if self._loading:
             return
-        had_feedback = bool(self._snapshot.draft(self._loaded_prompt_id).feedback_text)
+        had_feedback = bool(
+            self._snapshot.draft(self._loaded_prompt_id).feedback_text
+        )
         self._snapshot = self._capture_prompt_draft(
             self._loaded_prompt_id,
             clear_feedback=True,
         )
         self._render_feedback("", ())
-        self._feedback_status.setText(
-            written_assessment_text(
-                self._locale,
-                (
-                    WrittenAssessmentCopyKey.FEEDBACK_STALE
-                    if had_feedback
-                    else WrittenAssessmentCopyKey.NO_FEEDBACK
-                ),
-            )
+        status_key = (
+            WrittenAssessmentCopyKey.FEEDBACK_STALE
+            if had_feedback
+            else WrittenAssessmentCopyKey.NO_FEEDBACK
         )
+        self._feedback_status.setText(self._text(status_key))
         self._save_status.clear()
         self._update_word_count()
         self._schedule_save()
@@ -584,23 +508,23 @@ class DM847WrittenAssessmentPage(QWidget):
 
     def _update_word_count(self) -> None:
         self._word_count.setText(
-            written_assessment_text(
-                self._locale,
+            self._text(
                 WrittenAssessmentCopyKey.WORD_COUNT,
                 words=_word_count(self._draft.toPlainText()),
             )
         )
 
     def _set_generating(self, generating: bool) -> None:
-        for button in (self._review_button, self._revision_button, self._essay_button):
+        for button in (
+            self._review_button,
+            self._revision_button,
+            self._essay_button,
+        ):
             button.setEnabled(not generating)
         self._cancel_button.setVisible(generating)
         if generating:
             self._feedback_status.setText(
-                written_assessment_text(
-                    self._locale,
-                    WrittenAssessmentCopyKey.GENERATING,
-                )
+                self._text(WrittenAssessmentCopyKey.GENERATING)
             )
 
     @Slot(int, object)
@@ -610,7 +534,7 @@ class DM847WrittenAssessmentPage(QWidget):
         if not isinstance(response_object, WrittenFeedbackResponse):
             self._apply_feedback_failure(
                 request_id,
-                TypeError("Ollama returned an unexpected written-feedback object."),
+                TypeError("Ollama returned an unexpected feedback object."),
             )
             return
 
@@ -625,11 +549,13 @@ class DM847WrittenAssessmentPage(QWidget):
             source_ids=response_object.source_ids,
         )
         if prompt_id == self._loaded_prompt_id:
-            self._render_feedback(response_object.content, response_object.source_ids)
+            self._render_feedback(
+                response_object.content,
+                response_object.source_ids,
+            )
             self._feedback_status.clear()
             self._model_label.setText(
-                written_assessment_text(
-                    self._locale,
+                self._text(
                     WrittenAssessmentCopyKey.MODEL,
                     model=response_object.model,
                 )
@@ -650,20 +576,25 @@ class DM847WrittenAssessmentPage(QWidget):
             if isinstance(error_object, Exception)
             else RuntimeError(str(error_object))
         )
-        message = str(error) or error.__class__.__name__
-        if not isinstance(error, (OllamaConnectionError, OllamaProtocolError, ValueError)):
-            message = str(error) or error.__class__.__name__
         self._feedback_status.setText(
-            written_assessment_text(
-                self._locale,
+            self._text(
                 WrittenAssessmentCopyKey.REQUEST_FAILED,
-                message=message,
+                message=str(error) or error.__class__.__name__,
             )
         )
 
     def _render_feedback(self, feedback: str, source_ids: tuple[str, ...]) -> None:
         self._feedback.setPlainText(feedback)
-        self._sources.setText(" · ".join(f"[{item}]" for item in source_ids) or "—")
+        self._sources.setText(
+            " · ".join(f"[{item}]" for item in source_ids) or "—"
+        )
+
+    def _text(
+        self,
+        key: WrittenAssessmentCopyKey,
+        **values: object,
+    ) -> str:
+        return written_assessment_text(self._locale, key, **values)
 
 
 def _word_count(text: str) -> int:
