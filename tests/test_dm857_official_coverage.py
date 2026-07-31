@@ -56,7 +56,12 @@ def test_official_dm857_matrix_exposes_exam_readiness_gaps() -> None:
         if row.requirement.kind is OfficialRequirementKind.EXAM_COMPONENT
     }
 
-    assert exam_rows["dm857.sdu.exam01"].requirement.status is CoverageStatus.PARTIAL
+    project_row = exam_rows["dm857.sdu.exam01"]
+    assert project_row.requirement.status is CoverageStatus.PARTIAL
+    assert "persistent five-milestone capstone" in project_row.requirement.rationale
+    assert "official project brief and rubric" in project_row.requirement.next_action
+    assert "no integrated" not in project_row.requirement.rationale.casefold()
+
     assert exam_rows["dm857.sdu.exam02"].requirement.status is CoverageStatus.GAP
     assert exam_rows["dm857.sdu.exam02"].evidence.module_count == 0
     assert exam_rows["dm857.sdu.exam03"].requirement.status is CoverageStatus.PARTIAL
