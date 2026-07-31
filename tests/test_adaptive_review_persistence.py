@@ -102,7 +102,7 @@ def test_snapshot_round_trip_restores_results_and_question_order() -> None:
     assert second is not None
     option_order = tuple(option.option_id for option in second.question.display_options)
 
-    snapshot = session.to_snapshot(updated_at=_NOW)
+    snapshot = session.to_snapshot()
     parsed = type(snapshot).from_json(snapshot.to_json())
     restored = AdaptiveReviewSession.from_snapshot(
         parsed,
@@ -129,7 +129,7 @@ def test_restore_rejects_changed_academic_contract() -> None:
         locale=AppLocale.ENGLISH,
         candidate_catalog=original,
     )
-    snapshot = session.to_snapshot(updated_at=_NOW)
+    snapshot = session.to_snapshot()
     changed = {due.key: (_candidate("o1", 2),)}
 
     with pytest.raises(AdaptiveReviewSnapshotError, match="catalog changed"):
@@ -149,7 +149,7 @@ def test_sidecar_store_round_trips_and_discards_malformed_documents(tmp_path: Pa
         locale=AppLocale.ENGLISH,
         candidate_catalog=catalog,
     )
-    snapshot = session.to_snapshot(updated_at=_NOW)
+    snapshot = session.to_snapshot()
     store = AdaptiveReviewSessionStore(progress_path)
 
     store.save(snapshot)

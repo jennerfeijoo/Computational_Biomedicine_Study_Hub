@@ -1,4 +1,4 @@
-"""Academic integrity tests for the initial BMB830 module block."""
+"""Academic integrity tests for the completed BMB830 module blocks."""
 
 from __future__ import annotations
 
@@ -12,18 +12,25 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.r_execution import can_execute_r
 
 
-def test_bmb830_registers_three_complete_modules_in_order() -> None:
+def test_bmb830_registers_six_complete_modules_in_order() -> None:
     assert tuple(module.module_id for module in MODULES) == (
         "bmb830.m01",
         "bmb830.m02",
         "bmb830.m03",
+        "bmb830.m04",
+        "bmb830.m05",
+        "bmb830.m06",
     )
-    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 3
+    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 6
     assert set(OBJECTIVE_QUESTION_BANKS) == {
         "bmb830.m01",
         "bmb830.m02",
         "bmb830.m03",
+        "bmb830.m04",
+        "bmb830.m05",
+        "bmb830.m06",
     }
+    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 96
 
     for bundle in BUNDLES:
         module = bundle.module
@@ -36,6 +43,28 @@ def test_bmb830_registers_three_complete_modules_in_order() -> None:
         assert len(bundle.objective_question_bank) == 16
         assert bundle.content_version == "1.0.0"
         assert all(can_execute_r(example.code) for example in module.worked_examples)
+
+
+def test_bmb830_inference_block_covers_required_concepts() -> None:
+    estimation, testing, comparison = MODULES[3:]
+
+    estimation_text = " ".join(
+        (estimation.summary, *(concept.body for concept in estimation.concepts))
+    ).casefold()
+    testing_text = " ".join(
+        (testing.summary, *(concept.body for concept in testing.concepts))
+    ).casefold()
+    comparison_text = " ".join(
+        (comparison.summary, *(concept.body for concept in comparison.concepts))
+    ).casefold()
+
+    assert "error estándar" in estimation_text
+    assert "intervalos de confianza" in estimation_text
+    assert "error tipo i" in testing_text
+    assert "potencia" in testing_text
+    assert "welch" in comparison_text
+    assert "anova" in comparison_text
+    assert "paread" in comparison_text
 
 
 def test_bmb830_locales_preserve_assessment_identity() -> None:
