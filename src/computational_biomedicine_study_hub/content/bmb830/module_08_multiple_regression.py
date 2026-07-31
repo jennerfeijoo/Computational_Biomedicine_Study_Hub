@@ -252,7 +252,13 @@ groupB=1.82""",
                 "Interpret βexposure=0.8 in Y~exposure+age.",
                 "Fortolk βeksponering=0,8 i Y~eksponering+alder.",
             ),
-            (("Mantén edad constante dentro del modelo.", "Hold age fixed within the model.", "Hold alder fast i modellen."),),
+            (
+                (
+                    "Mantén edad constante dentro del modelo.",
+                    "Hold age fixed within the model.",
+                    "Hold alder fast i modellen.",
+                ),
+            ),
             (
                 "Por cada unidad adicional de exposición, la media esperada de Y aumenta 0,8 unidades al comparar observaciones con la misma edad modelada.",
                 "For each additional exposure unit, expected mean Y increases by 0.8 units when comparing observations at the same modelled age.",
@@ -290,7 +296,13 @@ groupB=1.82""",
                 "Correct a matrix containing an intercept and one indicator for each of three levels.",
                 "Ret en matrix med skæring og én indikator for hvert af tre niveauer.",
             ),
-            (("Existe una combinación lineal exacta.", "There is an exact linear combination.", "Der findes en eksakt lineær kombination."),),
+            (
+                (
+                    "Existe una combinación lineal exacta.",
+                    "There is an exact linear combination.",
+                    "Der findes en eksakt lineær kombination.",
+                ),
+            ),
             (
                 "Conservar el intercepto y omitir un indicador como referencia, o eliminar el intercepto si se desean tres medias de grupo explícitas.",
                 "Keep the intercept and omit one indicator as reference, or remove the intercept when three explicit group means are desired.",
@@ -311,7 +323,13 @@ groupB=1.82""",
                 "Design an analysis to estimate the exposure–response association adjusted for confounding.",
                 "Design en analyse til at estimere eksponering–respons-associationen justeret for confounding.",
             ),
-            (("Selecciona covariables antes del ajuste.", "Select covariates before fitting.", "Vælg kovariater før tilpasning."),),
+            (
+                (
+                    "Selecciona covariables antes del ajuste.",
+                    "Select covariates before fitting.",
+                    "Vælg kovariater før tilpasning.",
+                ),
+            ),
             (
                 "Definir estimando y unidad; justificar covariables con conocimiento causal; inspeccionar codificación y datos faltantes; ajustar modelo; evaluar estimación, intervalo, residuos, colinealidad y sensibilidad.",
                 "Define estimand and unit; justify covariates using causal knowledge; inspect coding and missing data; fit the model; evaluate estimate, interval, residuals, collinearity, and sensitivity.",
@@ -332,7 +350,13 @@ groupB=1.82""",
                 "Explain what changes and what does not when the reference level changes.",
                 "Forklar hvad der ændres og ikke ændres, når referenceniveauet skiftes.",
             ),
-            (("Distingue parametrización de ajuste.", "Distinguish parameterisation from fit.", "Skeln mellem parametrisering og tilpasning."),),
+            (
+                (
+                    "Distingue parametrización de ajuste.",
+                    "Distinguish parameterisation from fit.",
+                    "Skeln mellem parametrisering og tilpasning.",
+                ),
+            ),
             (
                 "Cambian intercepto y coeficientes de contraste porque se expresan comparaciones distintas; no cambian valores ajustados, residuos ni ajuste global del mismo modelo.",
                 "The intercept and contrast coefficients change because different comparisons are expressed; fitted values, residuals, and overall fit of the same model do not change.",
@@ -353,7 +377,13 @@ groupB=1.82""",
                 "Interpret two nearly identical predictors with very wide intervals.",
                 "Fortolk to næsten identiske prædiktorer med meget brede intervaller.",
             ),
-            (("Piensa en información redundante.", "Think about redundant information.", "Tænk på redundant information."),),
+            (
+                (
+                    "Piensa en información redundante.",
+                    "Think about redundant information.",
+                    "Tænk på redundant information.",
+                ),
+            ),
             (
                 "La colinealidad dificulta separar sus contribuciones y aumenta la incertidumbre individual de los coeficientes, aunque las predicciones combinadas puedan mantenerse estables.",
                 "Collinearity makes their separate contributions difficult to identify and increases coefficient uncertainty even when combined predictions remain stable.",
@@ -370,70 +400,344 @@ groupB=1.82""",
     mcqs=(
         (
             "001",
-            ("¿Qué representa β1 en Y~X+Z?", "What does β1 represent in Y~X+Z?", "Hvad repræsenterer β1 i Y~X+Z?"),
-            (("a", ("Cambio medio en Y por unidad de X manteniendo Z constante", "Mean Y change per X unit holding Z fixed", "Ændring i middel-Y pr. X-enhed med Z holdt fast")), ("b", ("Correlación entre X y Z", "Correlation between X and Z", "Korrelation mellem X og Z")), ("c", ("Efecto causal garantizado", "Guaranteed causal effect", "Garanteret kausal effekt")), ("d", ("Varianza residual", "Residual variance", "Residualvarians"))),
+            (
+                "¿Qué representa β1 en Y~X+Z?",
+                "What does β1 represent in Y~X+Z?",
+                "Hvad repræsenterer β1 i Y~X+Z?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Cambio medio en Y por unidad de X manteniendo Z constante",
+                        "Mean Y change per X unit holding Z fixed",
+                        "Ændring i middel-Y pr. X-enhed med Z holdt fast",
+                    ),
+                ),
+                (
+                    "b",
+                    (
+                        "Correlación entre X y Z",
+                        "Correlation between X and Z",
+                        "Korrelation mellem X og Z",
+                    ),
+                ),
+                (
+                    "c",
+                    (
+                        "Efecto causal garantizado",
+                        "Guaranteed causal effect",
+                        "Garanteret kausal effekt",
+                    ),
+                ),
+                ("d", ("Varianza residual", "Residual variance", "Residualvarians")),
+            ),
             "a",
-            ("Es un contraste condicional dentro del modelo.", "It is a conditional contrast within the model.", "Det er en betinget kontrast i modellen."),
+            (
+                "Es un contraste condicional dentro del modelo.",
+                "It is a conditional contrast within the model.",
+                "Det er en betinget kontrast i modellen.",
+            ),
         ),
         (
             "002",
-            ("¿Cuántos indicadores crea un factor de 4 niveles con intercepto?", "How many indicators does a 4-level factor create with an intercept?", "Hvor mange indikatorer skaber en faktor med 4 niveauer og en skæring?"),
-            (("a", ("1", "1", "1")), ("b", ("2", "2", "2")), ("c", ("3", "3", "3")), ("d", ("4", "4", "4"))),
+            (
+                "¿Cuántos indicadores crea un factor de 4 niveles con intercepto?",
+                "How many indicators does a 4-level factor create with an intercept?",
+                "Hvor mange indikatorer skaber en faktor med 4 niveauer og en skæring?",
+            ),
+            (
+                ("a", ("1", "1", "1")),
+                ("b", ("2", "2", "2")),
+                ("c", ("3", "3", "3")),
+                ("d", ("4", "4", "4")),
+            ),
             "c",
-            ("Un nivel actúa como referencia.", "One level acts as reference.", "Ét niveau fungerer som reference."),
+            (
+                "Un nivel actúa como referencia.",
+                "One level acts as reference.",
+                "Ét niveau fungerer som reference.",
+            ),
         ),
         (
             "003",
-            ("¿Qué función muestra la codificación del modelo?", "Which function displays model coding?", "Hvilken funktion viser modelkodningen?"),
-            (("a", ("model.matrix", "model.matrix", "model.matrix")), ("b", ("mean", "mean", "mean")), ("c", ("table", "table", "table")), ("d", ("sample", "sample", "sample"))),
+            (
+                "¿Qué función muestra la codificación del modelo?",
+                "Which function displays model coding?",
+                "Hvilken funktion viser modelkodningen?",
+            ),
+            (
+                ("a", ("model.matrix", "model.matrix", "model.matrix")),
+                ("b", ("mean", "mean", "mean")),
+                ("c", ("table", "table", "table")),
+                ("d", ("sample", "sample", "sample")),
+            ),
             "a",
-            ("`model.matrix()` devuelve las columnas usadas para estimar parámetros.", "`model.matrix()` returns columns used to estimate parameters.", "`model.matrix()` returnerer kolonnerne, der bruges til at estimere parametre."),
+            (
+                "`model.matrix()` devuelve las columnas usadas para estimar parámetros.",
+                "`model.matrix()` returns columns used to estimate parameters.",
+                "`model.matrix()` returnerer kolonnerne, der bruges til at estimere parametre.",
+            ),
         ),
         (
             "004",
-            ("¿Qué cambia al elegir otra referencia?", "What changes when another reference is chosen?", "Hvad ændres, når en anden reference vælges?"),
-            (("a", ("Parametrización de coeficientes", "Coefficient parameterisation", "Koefficientparametrisering")), ("b", ("Valores ajustados", "Fitted values", "Tilpassede værdier")), ("c", ("Residuos", "Residuals", "Residualer")), ("d", ("Número de observaciones", "Number of observations", "Antal observationer"))),
+            (
+                "¿Qué cambia al elegir otra referencia?",
+                "What changes when another reference is chosen?",
+                "Hvad ændres, når en anden reference vælges?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Parametrización de coeficientes",
+                        "Coefficient parameterisation",
+                        "Koefficientparametrisering",
+                    ),
+                ),
+                ("b", ("Valores ajustados", "Fitted values", "Tilpassede værdier")),
+                ("c", ("Residuos", "Residuals", "Residualer")),
+                ("d", ("Número de observaciones", "Number of observations", "Antal observationer")),
+            ),
             "a",
-            ("Las mismas predicciones se expresan con contrastes distintos.", "The same predictions are expressed through different contrasts.", "De samme prædiktioner udtrykkes gennem andre kontraster."),
+            (
+                "Las mismas predicciones se expresan con contrastes distintos.",
+                "The same predictions are expressed through different contrasts.",
+                "De samme prædiktioner udtrykkes gennem andre kontraster.",
+            ),
         ),
         (
             "005",
-            ("¿Qué puede indicar intervalos amplios para predictores muy relacionados?", "What may wide intervals for strongly related predictors indicate?", "Hvad kan brede intervaller for stærkt relaterede prædiktorer indikere?"),
-            (("a", ("Colinealidad", "Collinearity", "Kollinearitet")), ("b", ("Causalidad", "Causation", "Kausalitet")), ("c", ("Mayor n efectivo", "Larger effective n", "Større effektivt n")), ("d", ("Ausencia de error", "Absence of error", "Fravær af fejl"))),
+            (
+                "¿Qué puede indicar intervalos amplios para predictores muy relacionados?",
+                "What may wide intervals for strongly related predictors indicate?",
+                "Hvad kan brede intervaller for stærkt relaterede prædiktorer indikere?",
+            ),
+            (
+                ("a", ("Colinealidad", "Collinearity", "Kollinearitet")),
+                ("b", ("Causalidad", "Causation", "Kausalitet")),
+                ("c", ("Mayor n efectivo", "Larger effective n", "Større effektivt n")),
+                ("d", ("Ausencia de error", "Absence of error", "Fravær af fejl")),
+            ),
             "a",
-            ("La información redundante dificulta separar coeficientes.", "Redundant information makes coefficients difficult to separate.", "Redundant information gør koefficienter svære at adskille."),
+            (
+                "La información redundante dificulta separar coeficientes.",
+                "Redundant information makes coefficients difficult to separate.",
+                "Redundant information gør koefficienter svære at adskille.",
+            ),
         ),
         (
             "006",
-            ("¿Cómo debe seleccionarse una covariable de ajuste?", "How should an adjustment covariate be selected?", "Hvordan bør en justeringskovariat vælges?"),
-            (("a", ("Según pregunta y conocimiento causal", "By question and causal knowledge", "Efter spørgsmål og kausal viden")), ("b", ("Solo por p<0,05", "Only by p<0.05", "Kun efter p<0,05")), ("c", ("Por disponibilidad", "By availability", "Efter tilgængelighed")), ("d", ("Después de probar todos los modelos", "After testing every model", "Efter at have testet alle modeller"))),
+            (
+                "¿Cómo debe seleccionarse una covariable de ajuste?",
+                "How should an adjustment covariate be selected?",
+                "Hvordan bør en justeringskovariat vælges?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Según pregunta y conocimiento causal",
+                        "By question and causal knowledge",
+                        "Efter spørgsmål og kausal viden",
+                    ),
+                ),
+                ("b", ("Solo por p<0,05", "Only by p<0.05", "Kun efter p<0,05")),
+                ("c", ("Por disponibilidad", "By availability", "Efter tilgængelighed")),
+                (
+                    "d",
+                    (
+                        "Después de probar todos los modelos",
+                        "After testing every model",
+                        "Efter at have testet alle modeller",
+                    ),
+                ),
+            ),
             "a",
-            ("El ajuste debe corresponder al estimando y al mecanismo causal supuesto.", "Adjustment should match the estimand and assumed causal mechanism.", "Justering bør passe til estimanden og den antagede kausale mekanisme."),
+            (
+                "El ajuste debe corresponder al estimando y al mecanismo causal supuesto.",
+                "Adjustment should match the estimand and assumed causal mechanism.",
+                "Justering bør passe til estimanden og den antagede kausale mekanisme.",
+            ),
         ),
         (
             "007",
-            ("¿Qué significa un coeficiente groupB?", "What does a groupB coefficient mean?", "Hvad betyder en groupB-koefficient?"),
-            (("a", ("Diferencia B–referencia ajustada", "Adjusted B-minus-reference difference", "Justeret forskel B minus reference")), ("b", ("Media absoluta de B", "Absolute mean of B", "Absolut middelværdi for B")), ("c", ("Varianza de B", "Variance of B", "Varians for B")), ("d", ("Comparación B–todos", "B-versus-all comparison", "Sammenligning B mod alle"))),
+            (
+                "¿Qué significa un coeficiente groupB?",
+                "What does a groupB coefficient mean?",
+                "Hvad betyder en groupB-koefficient?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Diferencia B–referencia ajustada",
+                        "Adjusted B-minus-reference difference",
+                        "Justeret forskel B minus reference",
+                    ),
+                ),
+                ("b", ("Media absoluta de B", "Absolute mean of B", "Absolut middelværdi for B")),
+                ("c", ("Varianza de B", "Variance of B", "Varians for B")),
+                (
+                    "d",
+                    ("Comparación B–todos", "B-versus-all comparison", "Sammenligning B mod alle"),
+                ),
+            ),
             "a",
-            ("La interpretación depende del nivel de referencia y de los demás términos.", "Interpretation depends on the reference level and other terms.", "Fortolkningen afhænger af referenceniveauet og de øvrige led."),
+            (
+                "La interpretación depende del nivel de referencia y de los demás términos.",
+                "Interpretation depends on the reference level and other terms.",
+                "Fortolkningen afhænger af referenceniveauet og de øvrige led.",
+            ),
         ),
         (
             "008",
-            ("¿Qué riesgo tiene incluir demasiados predictores con pocos datos?", "What is a risk of too many predictors with little data?", "Hvad er en risiko ved for mange prædiktorer og få data?"),
-            (("a", ("Sobreajuste e inestabilidad", "Overfitting and instability", "Overtilpasning og ustabilitet")), ("b", ("Causalidad automática", "Automatic causality", "Automatisk kausalitet")), ("c", ("Mayor potencia garantizada", "Guaranteed higher power", "Garanteret højere styrke")), ("d", ("Eliminación de sesgo", "Bias elimination", "Eliminering af bias"))),
+            (
+                "¿Qué riesgo tiene incluir demasiados predictores con pocos datos?",
+                "What is a risk of too many predictors with little data?",
+                "Hvad er en risiko ved for mange prædiktorer og få data?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Sobreajuste e inestabilidad",
+                        "Overfitting and instability",
+                        "Overtilpasning og ustabilitet",
+                    ),
+                ),
+                ("b", ("Causalidad automática", "Automatic causality", "Automatisk kausalitet")),
+                (
+                    "c",
+                    (
+                        "Mayor potencia garantizada",
+                        "Guaranteed higher power",
+                        "Garanteret højere styrke",
+                    ),
+                ),
+                ("d", ("Eliminación de sesgo", "Bias elimination", "Eliminering af bias")),
+            ),
             "a",
-            ("Cada parámetro consume información y puede aumentar varianza.", "Each parameter consumes information and may increase variance.", "Hver parameter bruger information og kan øge variansen."),
+            (
+                "Cada parámetro consume información y puede aumentar varianza.",
+                "Each parameter consumes information and may increase variance.",
+                "Hver parameter bruger information og kan øge variansen.",
+            ),
         ),
     ),
     true_false=(
-        ("009", ("Un coeficiente ajustado es automáticamente causal.", "An adjusted coefficient is automatically causal.", "En justeret koefficient er automatisk kausal."), False, ("La causalidad requiere diseño y supuestos adicionales.", "Causality requires additional design and assumptions.", "Kausalitet kræver yderligere design og antagelser.")),
-        ("010", ("Con intercepto, un factor de K niveles usa K−1 indicadores.", "With an intercept, a K-level factor uses K−1 indicators.", "Med en skæring bruger en faktor med K niveauer K−1 indikatorer."), True, ("El nivel omitido es la referencia.", "The omitted level is the reference.", "Det udeladte niveau er referencen.")),
-        ("011", ("Cambiar la referencia cambia los valores ajustados.", "Changing the reference changes fitted values.", "Et skift af reference ændrer de tilpassede værdier."), False, ("Solo cambia la parametrización del mismo ajuste.", "Only the parameterisation of the same fit changes.", "Kun parametrisering af samme tilpasning ændres.")),
-        ("012", ("La matriz de diseño tiene una fila por unidad analítica.", "The design matrix has one row per analysis unit.", "Designmatrixen har én række pr. analyseenhed."), True, ("Las columnas representan términos estimables.", "Columns represent estimable terms.", "Kolonner repræsenterer estimerbare led.")),
-        ("013", ("Agregar todas las variables disponibles garantiza control de confusión.", "Adding all available variables guarantees confounding control.", "At tilføje alle tilgængelige variable garanterer kontrol af confounding."), False, ("La selección incorrecta puede introducir sesgo o inestabilidad.", "Incorrect selection can introduce bias or instability.", "Forkert valg kan skabe bias eller ustabilitet.")),
-        ("014", ("La colinealidad puede ampliar intervalos de coeficientes.", "Collinearity can widen coefficient intervals.", "Kollinearitet kan gøre koefficientintervaller bredere."), True, ("Reduce la información independiente para separar efectos.", "It reduces independent information for separating effects.", "Den reducerer uafhængig information til at adskille effekter.")),
-        ("015", ("Centrar edad puede hacer más interpretable el intercepto.", "Centring age can make the intercept more interpretable.", "Centrering af alder kan gøre skæringen mere fortolkelig."), True, ("El cero pasa a representar el valor de centrado.", "Zero then represents the centring value.", "Nul repræsenterer derefter centreringsværdien.")),
-        ("016", ("Rango deficiente permite estimar todos los coeficientes de forma única.", "Rank deficiency allows every coefficient to be uniquely estimated.", "Rangmangel gør det muligt at estimere alle koefficienter entydigt."), False, ("La dependencia lineal impide identificación única.", "Linear dependence prevents unique identification.", "Lineær afhængighed forhindrer entydig identifikation.")),
+        (
+            "009",
+            (
+                "Un coeficiente ajustado es automáticamente causal.",
+                "An adjusted coefficient is automatically causal.",
+                "En justeret koefficient er automatisk kausal.",
+            ),
+            False,
+            (
+                "La causalidad requiere diseño y supuestos adicionales.",
+                "Causality requires additional design and assumptions.",
+                "Kausalitet kræver yderligere design og antagelser.",
+            ),
+        ),
+        (
+            "010",
+            (
+                "Con intercepto, un factor de K niveles usa K−1 indicadores.",
+                "With an intercept, a K-level factor uses K−1 indicators.",
+                "Med en skæring bruger en faktor med K niveauer K−1 indikatorer.",
+            ),
+            True,
+            (
+                "El nivel omitido es la referencia.",
+                "The omitted level is the reference.",
+                "Det udeladte niveau er referencen.",
+            ),
+        ),
+        (
+            "011",
+            (
+                "Cambiar la referencia cambia los valores ajustados.",
+                "Changing the reference changes fitted values.",
+                "Et skift af reference ændrer de tilpassede værdier.",
+            ),
+            False,
+            (
+                "Solo cambia la parametrización del mismo ajuste.",
+                "Only the parameterisation of the same fit changes.",
+                "Kun parametrisering af samme tilpasning ændres.",
+            ),
+        ),
+        (
+            "012",
+            (
+                "La matriz de diseño tiene una fila por unidad analítica.",
+                "The design matrix has one row per analysis unit.",
+                "Designmatrixen har én række pr. analyseenhed.",
+            ),
+            True,
+            (
+                "Las columnas representan términos estimables.",
+                "Columns represent estimable terms.",
+                "Kolonner repræsenterer estimerbare led.",
+            ),
+        ),
+        (
+            "013",
+            (
+                "Agregar todas las variables disponibles garantiza control de confusión.",
+                "Adding all available variables guarantees confounding control.",
+                "At tilføje alle tilgængelige variable garanterer kontrol af confounding.",
+            ),
+            False,
+            (
+                "La selección incorrecta puede introducir sesgo o inestabilidad.",
+                "Incorrect selection can introduce bias or instability.",
+                "Forkert valg kan skabe bias eller ustabilitet.",
+            ),
+        ),
+        (
+            "014",
+            (
+                "La colinealidad puede ampliar intervalos de coeficientes.",
+                "Collinearity can widen coefficient intervals.",
+                "Kollinearitet kan gøre koefficientintervaller bredere.",
+            ),
+            True,
+            (
+                "Reduce la información independiente para separar efectos.",
+                "It reduces independent information for separating effects.",
+                "Den reducerer uafhængig information til at adskille effekter.",
+            ),
+        ),
+        (
+            "015",
+            (
+                "Centrar edad puede hacer más interpretable el intercepto.",
+                "Centring age can make the intercept more interpretable.",
+                "Centrering af alder kan gøre skæringen mere fortolkelig.",
+            ),
+            True,
+            (
+                "El cero pasa a representar el valor de centrado.",
+                "Zero then represents the centring value.",
+                "Nul repræsenterer derefter centreringsværdien.",
+            ),
+        ),
+        (
+            "016",
+            (
+                "Rango deficiente permite estimar todos los coeficientes de forma única.",
+                "Rank deficiency allows every coefficient to be uniquely estimated.",
+                "Rangmangel gør det muligt at estimere alle koefficienter entydigt.",
+            ),
+            False,
+            (
+                "La dependencia lineal impide identificación única.",
+                "Linear dependence prevents unique identification.",
+                "Lineær afhængighed forhindrer entydig identifikation.",
+            ),
+        ),
     ),
     tutor=(
         (
@@ -442,30 +746,94 @@ groupB=1.82""",
             "Multipel regression repræsenterer betingede middelværdier gennem en designmatrix. Koefficienter skal fortolkes efter skala, reference og inkluderede led; justering for kovariater kræver videnskabelig begrundelse og gør ikke associationer kausale.",
         ),
         (
-            ("Los coeficientes son condicionales.", "Coefficients are conditional.", "Koefficienter er betingede."),
-            ("La matriz de diseño determina qué se estima.", "The design matrix determines what is estimated.", "Designmatrixen bestemmer, hvad der estimeres."),
-            ("Los factores requieren una referencia o una parametrización alternativa.", "Factors require a reference or an alternative parameterisation.", "Faktorer kræver en reference eller en alternativ parametrisering."),
-            ("El ajuste causal depende de selección de covariables defendible.", "Causal adjustment depends on defensible covariate selection.", "Kausal justering afhænger af et forsvarligt valg af kovariater."),
+            (
+                "Los coeficientes son condicionales.",
+                "Coefficients are conditional.",
+                "Koefficienter er betingede.",
+            ),
+            (
+                "La matriz de diseño determina qué se estima.",
+                "The design matrix determines what is estimated.",
+                "Designmatrixen bestemmer, hvad der estimeres.",
+            ),
+            (
+                "Los factores requieren una referencia o una parametrización alternativa.",
+                "Factors require a reference or an alternative parameterisation.",
+                "Faktorer kræver en reference eller en alternativ parametrisering.",
+            ),
+            (
+                "El ajuste causal depende de selección de covariables defendible.",
+                "Causal adjustment depends on defensible covariate selection.",
+                "Kausal justering afhænger af et forsvarligt valg af kovariater.",
+            ),
         ),
         (
-            ("Interpretar ajuste como causalidad automática.", "Interpreting adjustment as automatic causality.", "At fortolke justering som automatisk kausalitet."),
-            ("Ignorar el nivel de referencia.", "Ignoring the reference level.", "At ignorere referenceniveauet."),
-            ("Seleccionar variables solo por valores p.", "Selecting variables only by p-values.", "At vælge variable alene efter p-værdier."),
+            (
+                "Interpretar ajuste como causalidad automática.",
+                "Interpreting adjustment as automatic causality.",
+                "At fortolke justering som automatisk kausalitet.",
+            ),
+            (
+                "Ignorar el nivel de referencia.",
+                "Ignoring the reference level.",
+                "At ignorere referenceniveauet.",
+            ),
+            (
+                "Seleccionar variables solo por valores p.",
+                "Selecting variables only by p-values.",
+                "At vælge variable alene efter p-værdier.",
+            ),
         ),
         (
-            ("¿Cuál es el estimando ajustado?", "What is the adjusted estimand?", "Hvad er den justerede estimand?"),
-            ("¿Cómo está codificado cada predictor?", "How is each predictor coded?", "Hvordan er hver prædiktor kodet?"),
-            ("¿Qué variable actúa como referencia?", "Which variable level is the reference?", "Hvilket variabelniveau er reference?"),
+            (
+                "¿Cuál es el estimando ajustado?",
+                "What is the adjusted estimand?",
+                "Hvad er den justerede estimand?",
+            ),
+            (
+                "¿Cómo está codificado cada predictor?",
+                "How is each predictor coded?",
+                "Hvordan er hver prædiktor kodet?",
+            ),
+            (
+                "¿Qué variable actúa como referencia?",
+                "Which variable level is the reference?",
+                "Hvilket variabelniveau er reference?",
+            ),
         ),
         (
-            ("Interpreta coeficientes de forma condicional.", "Interprets coefficients conditionally.", "Fortolker koefficienter betinget."),
-            ("Reconstruye la matriz de diseño.", "Reconstructs the design matrix.", "Rekonstruerer designmatrixen."),
-            ("Justifica ajuste y reconoce colinealidad.", "Justifies adjustment and recognises collinearity.", "Begrunder justering og genkender kollinearitet."),
+            (
+                "Interpreta coeficientes de forma condicional.",
+                "Interprets coefficients conditionally.",
+                "Fortolker koefficienter betinget.",
+            ),
+            (
+                "Reconstruye la matriz de diseño.",
+                "Reconstructs the design matrix.",
+                "Rekonstruerer designmatrixen.",
+            ),
+            (
+                "Justifica ajuste y reconoce colinealidad.",
+                "Justifies adjustment and recognises collinearity.",
+                "Begrunder justering og genkender kollinearitet.",
+            ),
         ),
         (
-            ("No inventar causalidad a partir de ajuste estadístico.", "Do not invent causality from statistical adjustment.", "Udled ikke kausalitet alene fra statistisk justering."),
-            ("No recomendar selección automática por significación.", "Do not recommend automatic significance-based selection.", "Anbefal ikke automatisk selektion efter signifikans."),
-            ("Responder en el idioma activo.", "Respond in the active language.", "Svar på det aktive sprog."),
+            (
+                "No inventar causalidad a partir de ajuste estadístico.",
+                "Do not invent causality from statistical adjustment.",
+                "Udled ikke kausalitet alene fra statistisk justering.",
+            ),
+            (
+                "No recomendar selección automática por significación.",
+                "Do not recommend automatic significance-based selection.",
+                "Anbefal ikke automatisk selektion efter signifikans.",
+            ),
+            (
+                "Responder en el idioma activo.",
+                "Respond in the active language.",
+                "Svar på det aktive sprog.",
+            ),
         ),
         (
             "SDU ODIN BMB830 active course description approved 2025-03-06",
@@ -477,8 +845,8 @@ groupB=1.82""",
 
 LOCALIZED_MODULE_08_MULTIPLE_REGRESSION = build_module(_SPEC)
 LOCALIZED_OBJECTIVE_QUESTION_BANK_08 = build_question_bank(_SPEC)
-MODULE_08_MULTIPLE_REGRESSION: LearningModule = (
-    LOCALIZED_MODULE_08_MULTIPLE_REGRESSION.materialize(AppLocale.SPANISH_SPAIN)
+MODULE_08_MULTIPLE_REGRESSION: LearningModule = LOCALIZED_MODULE_08_MULTIPLE_REGRESSION.materialize(
+    AppLocale.SPANISH_SPAIN
 )
 OBJECTIVE_QUESTION_BANK_08: tuple[AssessmentItem, ...] = materialize_bank(
     LOCALIZED_OBJECTIVE_QUESTION_BANK_08
