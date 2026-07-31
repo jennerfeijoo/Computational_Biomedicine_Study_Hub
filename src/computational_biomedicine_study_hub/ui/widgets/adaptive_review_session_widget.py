@@ -108,9 +108,7 @@ class AdaptiveReviewSessionWidget(QFrame):
         actions = QHBoxLayout()
         actions.setContentsMargins(0, 0, 0, 0)
         actions.addStretch(1)
-        self._next_button = QPushButton(
-            adaptive_review_text(locale, AdaptiveReviewCopyKey.NEXT)
-        )
+        self._next_button = QPushButton(adaptive_review_text(locale, AdaptiveReviewCopyKey.NEXT))
         self._next_button.setObjectName("adaptiveReviewNextButton")
         self._next_button.clicked.connect(self.advance)
         self._next_button.hide()
@@ -159,9 +157,7 @@ class AdaptiveReviewSessionWidget(QFrame):
     def _capture_programming_result(self, item_id: str, is_correct: bool) -> None:
         current = self._session.current_activity
         if not isinstance(current, AdaptiveReviewProgramming):
-            raise RuntimeError(
-                "Programming feedback requires a programming review activity."
-            )
+            raise RuntimeError("Programming feedback requires a programming review activity.")
         if current.item_id != item_id:
             raise ValueError("Programming feedback must match the current challenge.")
         self._pending_programming_result = (item_id, is_correct)
@@ -252,9 +248,7 @@ class AdaptiveReviewSessionWidget(QFrame):
     def _show_advance_button(self, *, pending_programming: bool = False) -> None:
         reaches_target = self._session.answered_count >= self._session.target_questions
         if pending_programming:
-            reaches_target = (
-                self._session.answered_count + 1 >= self._session.target_questions
-            )
+            reaches_target = self._session.answered_count + 1 >= self._session.target_questions
         key = (
             AdaptiveReviewCopyKey.FINISH
             if reaches_target or self._session.is_complete
@@ -280,18 +274,14 @@ class AdaptiveReviewSessionWidget(QFrame):
         layout.setContentsMargins(18, 16, 18, 16)
         layout.setSpacing(9)
 
-        title = QLabel(
-            adaptive_review_text(self._locale, AdaptiveReviewCopyKey.SUMMARY_TITLE)
-        )
+        title = QLabel(adaptive_review_text(self._locale, AdaptiveReviewCopyKey.SUMMARY_TITLE))
         title.setObjectName("adaptiveReviewSummaryTitle")
         layout.addWidget(title)
 
         objective_labels: list[str] = []
         for key in summary.reviewed_objectives:
             descriptor = self._catalog.get(key)
-            objective_labels.append(
-                descriptor.statement if descriptor is not None else key[2]
-            )
+            objective_labels.append(descriptor.statement if descriptor is not None else key[2])
         summary_text = QLabel(
             adaptive_review_text(
                 self._locale,
