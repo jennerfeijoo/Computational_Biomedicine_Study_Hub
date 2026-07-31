@@ -87,7 +87,7 @@ def test_bmb830_regression_block_covers_required_concepts() -> None:
     assert "r²" in simple_text
     assert "intervalo de predicción" in simple_text
 
-    assert "media condicional" in multiple_text
+    assert "media esperada" in multiple_text
     assert "matriz de diseño" in multiple_text
     assert "referencia" in multiple_text
     assert "confus" in multiple_text
