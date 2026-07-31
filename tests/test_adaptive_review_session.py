@@ -242,11 +242,7 @@ def test_merged_activity_catalog_keeps_questions_and_code_distinct() -> None:
     question_key = ("DM847", "dm847.m01", "m01.o1")
     programming_key = ("DM857", "dm857.m09", "m09.o2")
 
+    assert any(candidate.kind is ReviewActivityKind.QUESTION for candidate in catalog[question_key])
     assert any(
-        candidate.kind is ReviewActivityKind.QUESTION
-        for candidate in catalog[question_key]
-    )
-    assert any(
-        candidate.kind is ReviewActivityKind.PROGRAMMING
-        for candidate in catalog[programming_key]
+        candidate.kind is ReviewActivityKind.PROGRAMMING for candidate in catalog[programming_key]
     )
