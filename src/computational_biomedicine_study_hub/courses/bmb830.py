@@ -15,9 +15,42 @@ from PySide6.QtWidgets import (
 
 from ..content.bmb830 import BUNDLES, LOCALIZED_BUNDLES
 from ..content.bundles import ModuleBundle
+from ..content.models import WorkedExample
 from ..i18n import DEFAULT_LOCALE, AppLocale, MessageKey, Translator
+from ..learning.r_execution import can_execute_r
 from ..ui.pages.module_reader_page import ModuleReaderPage
+from ..ui.widgets import RLabWidget
 from .models import CourseRegistration
+
+
+class BMB830ModuleReaderPage(ModuleReaderPage):
+    """BMB830 reader that attaches editable R labs to safe authored examples."""
+
+    def _example_card(self, example: WorkedExample) -> QFrame:
+        card, layout = self._card("exampleCard", example.title)
+        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_PROBLEM)))
+        layout.addWidget(self._label(example.problem, "contentBody"))
+        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_REASONING)))
+        layout.addWidget(self._label(self._numbered(example.reasoning), "contentBulletList"))
+        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_CODE)))
+        layout.addWidget(self._code_block(example.code, "exampleCode"))
+        layout.addWidget(
+            self._subheading(self._translator.text(MessageKey.MODULE_EXPECTED_OUTPUT))
+        )
+        layout.addWidget(self._code_block(example.expected_output, "exampleOutput"))
+        if can_execute_r(example.code):
+            layout.addWidget(
+                RLabWidget(
+                    example.code,
+                    example.expected_output,
+                    locale=self._translator.locale,
+                )
+            )
+        layout.addWidget(
+            self._subheading(self._translator.text(MessageKey.MODULE_EXPLANATION))
+        )
+        layout.addWidget(self._label(example.explanation, "contentBody"))
+        return card
 
 
 class BMB830Page(QWidget):
@@ -40,7 +73,7 @@ class BMB830Page(QWidget):
         self._module_title = QLabel()
         self._module_title.setObjectName("moduleContextTitle")
         self._module_title.setWordWrap(True)
-        self._reader_cache: dict[int, ModuleReaderPage] = {}
+        self._reader_cache: dict[int, BMB830ModuleReaderPage] = {}
 
         for number, bundle in enumerate(self._bundles, start=1):
             label = self._translator.text(MessageKey.MODULE_LABEL, number=number)
@@ -127,7 +160,7 @@ class BMB830Page(QWidget):
         self._module_stack.setCurrentWidget(reader)
         self._module_title.setText(reader.module.title)
 
-    def _reader_for_index(self, index: int) -> ModuleReaderPage:
+    def _reader_for_index(self, index: int) -> BMB830ModuleReaderPage:
         if not 0 <= index < self.module_count:
             raise IndexError(index)
         cached = self._reader_cache.get(index)
@@ -135,7 +168,7 @@ class BMB830Page(QWidget):
             return cached
 
         bundle = self._bundles[index]
-        reader = ModuleReaderPage(
+        reader = BMB830ModuleReaderPage(
             bundle.module,
             objective_question_bank=bundle.objective_question_bank,
             show_context_bar=False,
