@@ -12,7 +12,7 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.r_execution import can_execute_r
 
 
-def test_bmb830_registers_six_complete_modules_in_order() -> None:
+def test_bmb830_registers_seven_complete_modules_in_order() -> None:
     assert tuple(module.module_id for module in MODULES) == (
         "bmb830.m01",
         "bmb830.m02",
@@ -20,8 +20,9 @@ def test_bmb830_registers_six_complete_modules_in_order() -> None:
         "bmb830.m04",
         "bmb830.m05",
         "bmb830.m06",
+        "bmb830.m07",
     )
-    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 6
+    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 7
     assert set(OBJECTIVE_QUESTION_BANKS) == {
         "bmb830.m01",
         "bmb830.m02",
@@ -29,8 +30,9 @@ def test_bmb830_registers_six_complete_modules_in_order() -> None:
         "bmb830.m04",
         "bmb830.m05",
         "bmb830.m06",
+        "bmb830.m07",
     }
-    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 96
+    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 112
 
     for bundle in BUNDLES:
         module = bundle.module
@@ -46,7 +48,7 @@ def test_bmb830_registers_six_complete_modules_in_order() -> None:
 
 
 def test_bmb830_inference_block_covers_required_concepts() -> None:
-    estimation, testing, comparison = MODULES[3:]
+    estimation, testing, comparison = MODULES[3:6]
 
     estimation_text = " ".join(
         (estimation.summary, *(concept.body for concept in estimation.concepts))
@@ -65,6 +67,20 @@ def test_bmb830_inference_block_covers_required_concepts() -> None:
     assert "welch" in comparison_text
     assert "anova" in comparison_text
     assert "paread" in comparison_text
+
+
+def test_bmb830_regression_block_covers_required_concepts() -> None:
+    regression = MODULES[6]
+    regression_text = " ".join(
+        (regression.summary, *(concept.body for concept in regression.concepts))
+    ).casefold()
+
+    assert "causalidad" in regression_text
+    assert "pearson" in regression_text
+    assert "spearman" in regression_text
+    assert "pendiente" in regression_text
+    assert "r²" in regression_text
+    assert "intervalo de predicción" in regression_text
 
 
 def test_bmb830_locales_preserve_assessment_identity() -> None:
