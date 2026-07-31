@@ -117,9 +117,8 @@ class AdaptiveReviewSession:
         locale: AppLocale,
         target_questions: int = 6,
         rng: random.Random | None = None,
-        candidate_catalog: dict[
-            ReviewObjectiveKey, tuple[ReviewQuestionCandidate, ...]
-        ] | None = None,
+        candidate_catalog: dict[ReviewObjectiveKey, tuple[ReviewQuestionCandidate, ...]]
+        | None = None,
     ) -> None:
         if target_questions < 1:
             raise ValueError("Adaptive review sessions require at least one target question.")
@@ -136,7 +135,9 @@ class AdaptiveReviewSession:
             else authored_review_candidates(locale)
         )
         self._eligible_items = tuple(item for item in due_items if self._catalog.get(item.key))
-        self._unsupported_keys = tuple(item.key for item in due_items if not self._catalog.get(item.key))
+        self._unsupported_keys = tuple(
+            item.key for item in due_items if not self._catalog.get(item.key)
+        )
         self._asked_item_ids: set[str] = set()
         self._results: list[tuple[AdaptiveReviewQuestion, bool]] = []
         self._objective_correct: dict[ReviewObjectiveKey, int] = {}
