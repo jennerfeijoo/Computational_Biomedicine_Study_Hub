@@ -1,4 +1,4 @@
-"""Scoped stylesheet for the contextual programming tutor."""
+"""Scoped stylesheet for the adaptive programming tutor."""
 
 CHALLENGE_TUTOR_STYLESHEET = """
 QFrame#challengeTutorPanel {
@@ -14,7 +14,9 @@ QLabel#challengeTutorIntro,
 QLabel#challengeTutorStatus,
 QLabel#challengeTutorNotice,
 QLabel#challengeTutorSources,
-QLabel#challengeTutorModel {
+QLabel#challengeTutorModel,
+QLabel#challengeTutorLevelLabel,
+QLabel#challengeTutorRatingLabel {
     color: #3f4754;
 }
 QLabel#challengeTutorStatus[state="ready"] {
@@ -27,7 +29,9 @@ QLabel#challengeTutorStatus[state="error"] {
     color: #9b2c2c;
 }
 QPlainTextEdit#challengeTutorQuestion,
-QTextBrowser#challengeTutorResponse {
+QTextBrowser#challengeTutorResponse,
+QTextBrowser#challengeTutorHistory,
+QComboBox#challengeTutorLevelSelector {
     background: #ffffff;
     border: 1px solid #c4cad4;
     border-radius: 6px;
@@ -37,11 +41,14 @@ QPushButton#challengeTutorPrimaryButton {
     font-weight: 600;
     padding: 6px 12px;
 }
-QPushButton#challengeTutorSecondaryButton {
+QPushButton#challengeTutorSecondaryButton,
+QPushButton#challengeTutorCancelButton,
+QPushButton#challengeTutorHelpfulButton,
+QPushButton#challengeTutorNotHelpfulButton {
     padding: 6px 12px;
 }
-QPushButton#challengeTutorCancelButton {
-    padding: 6px 12px;
+QPushButton#challengeTutorHelpfulButton {
+    font-weight: 600;
 }
 """
 
