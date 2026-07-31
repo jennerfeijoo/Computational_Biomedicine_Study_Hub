@@ -5,6 +5,7 @@ from __future__ import annotations
 from PySide6.QtWidgets import (
     QApplication,
     QCheckBox,
+    QLabel,
     QLineEdit,
     QPlainTextEdit,
 )
@@ -96,7 +97,7 @@ def test_capstone_page_reaches_internal_readiness_only_with_all_evidence(
     assert page.progress.preparation_ready
     assert page.progress.ready_milestone_count == 5
     assert page.progress.weighted_rubric_percent == 75
-    readiness = page.findChild(object, "capstoneReadiness")
+    readiness = page.findChild(QLabel, "capstoneReadiness")
     assert readiness is not None
     assert readiness.property("preparationReady") is True
     progress_store.close()
