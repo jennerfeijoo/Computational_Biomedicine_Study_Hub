@@ -1,4 +1,4 @@
-"""PySide6 settings page for validating a local Ollama installation."""
+"""PySide6 settings page for appearance and local Ollama validation."""
 
 from __future__ import annotations
 
@@ -26,6 +26,8 @@ from ...integrations import (
     OllamaModel,
     OllamaProtocolError,
 )
+from ..theme import ThemeController
+from ..widgets.appearance_selector import AppearanceSelector
 
 ClientFactory = Callable[[OllamaConfig], OllamaClient]
 
@@ -56,7 +58,7 @@ class OllamaProbeWorker(QObject):
 
 
 class OllamaSettingsPage(QWidget):
-    """Configure, validate and persist the localized Ollama connection."""
+    """Configure appearance, validate Ollama and persist local preferences."""
 
     BASE_URL_KEY = "ollama/base_url"
     MODEL_KEY = "ollama/model"
@@ -69,6 +71,7 @@ class OllamaSettingsPage(QWidget):
         *,
         auto_probe: bool = True,
         locale: AppLocale = DEFAULT_LOCALE,
+        theme_controller: ThemeController | None = None,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
@@ -77,10 +80,13 @@ class OllamaSettingsPage(QWidget):
         self._settings = settings if settings is not None else QSettings()
         self._client_factory = client_factory or OllamaClient
         self._locale = locale
+        self._theme_controller = theme_controller or ThemeController(self._settings, self)
         self._probe_thread: QThread | None = None
         self._probe_worker: OllamaProbeWorker | None = None
         self._auto_probe_enabled = auto_probe
         self._auto_probe_started = False
+
+        self._appearance_selector = AppearanceSelector(self._theme_controller, locale)
 
         self._base_url = QLineEdit(self._stored_base_url())
         self._base_url.setObjectName("ollamaBaseUrl")
@@ -121,6 +127,7 @@ class OllamaSettingsPage(QWidget):
 
         group = QGroupBox(ui_text(locale, UiCopyKey.OLLAMA_GROUP))
         group.setObjectName("settingsGroup")
+        group.setProperty("settingsKind", "ollama")
         group_layout = QVBoxLayout(group)
         group_layout.addLayout(form)
         group_layout.addLayout(actions)
@@ -138,9 +145,16 @@ class OllamaSettingsPage(QWidget):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(16)
+        layout.addWidget(self._appearance_selector)
         layout.addWidget(explanation)
         layout.addWidget(group)
         layout.addStretch(1)
+
+    @property
+    def appearance_selector(self) -> AppearanceSelector:
+        """Return the shared persistent appearance control."""
+
+        return self._appearance_selector
 
     @property
     def base_url(self) -> str:
