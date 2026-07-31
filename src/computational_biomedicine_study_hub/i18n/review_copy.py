@@ -166,9 +166,7 @@ _CATALOGS: dict[AppLocale, dict[ReviewCopyKey, str]] = {
         ReviewCopyKey.PRIORITY_LOW: "Lav prioritet",
         ReviewCopyKey.ERROR_COUNT: "{open_count} åbne · {total_count} registrerede",
         ReviewCopyKey.ERROR_EMPTY_TITLE: "Der er endnu ingen registrerede fejl",
-        ReviewCopyKey.ERROR_EMPTY_BODY: (
-            "Forkerte svar med faglig kontekst vises automatisk her."
-        ),
+        ReviewCopyKey.ERROR_EMPTY_BODY: ("Forkerte svar med faglig kontekst vises automatisk her."),
         ReviewCopyKey.ERROR_STATUS_OPEN: "Skal rettes",
         ReviewCopyKey.ERROR_STATUS_RESOLVED: "Rettet senere",
         ReviewCopyKey.ERROR_KIND_KNOWLEDGE_GAP: "Videnshul eller usikkerhed",
