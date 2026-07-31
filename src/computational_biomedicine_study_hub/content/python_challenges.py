@@ -57,9 +57,7 @@ class PythonChallenge:
         if not 0.1 <= self.timeout_seconds <= 5.0:
             raise ValueError("Python challenge timeouts must be between 0.1 and 5.0 seconds.")
 
-        case_ids = tuple(
-            case.case_id for case in (*self.visible_cases, *self.hidden_cases)
-        )
+        case_ids = tuple(case.case_id for case in (*self.visible_cases, *self.hidden_cases))
         normalized = tuple(case_id.casefold() for case_id in case_ids)
         if len(normalized) != len(set(normalized)):
             raise ValueError(f"Python challenge {self.exercise_id!r} has duplicate case IDs.")
