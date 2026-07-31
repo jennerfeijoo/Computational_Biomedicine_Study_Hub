@@ -65,6 +65,7 @@ class DM857ModuleReaderPage(ModuleReaderPage):
                 self._module.practice_exercises,
                 locale=self._translator.locale,
                 progress_recorder=self._progress_recorder,
+                learning_module=self._module,
             )
         )
         layout.addStretch(1)

@@ -1,5 +1,11 @@
 """Reusable interactive widgets for the study hub."""
 
+from .challenge_tutor_panel import (
+    ChallengeTutorExecutor,
+    ChallengeTutorPanel,
+    ChallengeTutorRunner,
+    QtChallengeTutorExecutor,
+)
 from .confidence_selector import ConfidenceSelector
 from .guided_practice_widget import GuidedPracticeCard, GuidedPracticeWidget
 from .objective_assessment_widget import ObjectiveAssessmentWidget, ObjectiveQuestionCard
@@ -7,6 +13,9 @@ from .python_challenge_widget import PythonChallengeWidget
 from .python_lab_widget import PythonLabWidget
 
 __all__ = [
+    "ChallengeTutorExecutor",
+    "ChallengeTutorPanel",
+    "ChallengeTutorRunner",
     "ConfidenceSelector",
     "GuidedPracticeCard",
     "GuidedPracticeWidget",
@@ -14,4 +23,5 @@ __all__ = [
     "ObjectiveQuestionCard",
     "PythonChallengeWidget",
     "PythonLabWidget",
+    "QtChallengeTutorExecutor",
 ]
