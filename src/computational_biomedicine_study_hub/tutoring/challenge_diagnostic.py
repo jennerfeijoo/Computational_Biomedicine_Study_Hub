@@ -12,7 +12,6 @@ from ..integrations import ChatMessage, ChatResponse, ChatRole, OllamaChatClient
 from ..learning.progress import ConfidenceLevel
 from ..learning.python_challenge import (
     ChallengeCaseStatus,
-    PythonChallengeCaseResult,
     PythonChallengeResult,
 )
 from .context import ModuleTutorPromptBuilder, TutorPrompt
@@ -153,7 +152,7 @@ class ChallengeDiagnostic:
         return tuple(case for case in self.visible_cases if not case.passed)
 
     def verified_payload(self, module: LearningModule) -> str:
-        """Render bounded JSON data without exposing hidden test definitions."""
+        """Render JSON evidence without exposing hidden test definitions."""
 
         objective_statements = _validated_objective_statements(module, self)
         payload = {
@@ -219,11 +218,10 @@ class ChallengeTutorPromptBuilder:
             *(objective_statements[objective_id] for objective_id in diagnostic.objective_ids),
             *(case.description for case in diagnostic.failed_visible_cases),
         ]
-        base_prompt = self._module_prompt_builder.build(
-            normalized_question,
-            retrieval_query="\n".join(retrieval_parts),
-            verified_context=diagnostic.verified_payload(self._module),
-        )
+        base_prompt = self._module_prompt_builder.build("\n".join(retrieval_parts))
+        material_block = _authorized_material_block(base_prompt.messages[1].content)
+        verified_context = diagnostic.verified_payload(self._module)
+
         system_message = ChatMessage(
             ChatRole.SYSTEM,
             (
@@ -241,8 +239,19 @@ class ChallengeTutorPromptBuilder:
                 "nueva calificación."
             ),
         )
+        user_message = ChatMessage(
+            ChatRole.USER,
+            (
+                f"{material_block}\n\n"
+                "<contexto_verificado>\n"
+                f"{verified_context}\n"
+                "</contexto_verificado>\n\n"
+                "Pregunta del estudiante:\n"
+                f"{normalized_question}"
+            ),
+        )
         return TutorPrompt(
-            messages=(system_message, base_prompt.messages[1]),
+            messages=(system_message, user_message),
             source_ids=base_prompt.source_ids,
         )
 
@@ -291,6 +300,14 @@ class ChallengeTutorService:
             model=response.model,
             source_ids=prompt.source_ids,
         )
+
+
+def _authorized_material_block(user_message: str) -> str:
+    closing_tag = "</material_autorizado>"
+    end = user_message.find(closing_tag)
+    if end < 0:
+        raise ValueError("Module tutor prompt is missing its authorized-material block.")
+    return user_message[: end + len(closing_tag)]
 
 
 def _validated_objective_statements(
