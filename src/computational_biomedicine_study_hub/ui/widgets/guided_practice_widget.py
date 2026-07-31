@@ -14,6 +14,7 @@ from PySide6.QtWidgets import (
 )
 
 from ...content.models import PracticeExercise
+from ...content.python_challenges import python_challenge_for
 from ...i18n import (
     DEFAULT_LOCALE,
     AppLocale,
@@ -23,7 +24,9 @@ from ...i18n import (
     ui_text,
 )
 from ...learning.guided_practice import GuidedPracticeSessionGenerator
+from ...learning.python_challenge import PythonChallengeRunner
 from .guided_practice_styles import GUIDED_PRACTICE_STYLESHEET
+from .python_challenge_widget import PythonChallengeWidget
 
 _ACTIVITY_KEYS = {
     "code_tracing": MessageKey.ACTIVITY_CODE_TRACING,
@@ -51,6 +54,7 @@ class GuidedPracticeCard(QFrame):
         parent: QWidget | None = None,
         *,
         locale: AppLocale = DEFAULT_LOCALE,
+        challenge_runner: PythonChallengeRunner | None = None,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("guidedPracticeCard")
@@ -59,6 +63,8 @@ class GuidedPracticeCard(QFrame):
         self._translator = Translator(locale)
         self._visible_hint_count = 0
         self._assessment_state = ""
+        self._answer_editor: QPlainTextEdit | None = None
+        self._challenge_widget: PythonChallengeWidget | None = None
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(18, 16, 18, 16)
@@ -86,16 +92,30 @@ class GuidedPracticeCard(QFrame):
         answer_label.setObjectName("contentSubheading")
         layout.addWidget(answer_label)
 
-        self._answer_editor = QPlainTextEdit()
-        self._answer_editor.setObjectName("guidedPracticeAnswerEditor")
-        self._answer_editor.setPlaceholderText(
-            ui_text(locale, UiCopyKey.PRACTICE_ANSWER_PLACEHOLDER)
+        challenge = (
+            python_challenge_for(exercise.exercise_id, exercise.starter_code, locale)
+            if exercise.starter_code
+            else None
         )
-        self._answer_editor.setMinimumHeight(125)
-        self._answer_editor.setTabChangesFocus(False)
-        if exercise.starter_code:
-            self._answer_editor.setPlainText(exercise.starter_code)
-        layout.addWidget(self._answer_editor)
+        if challenge is not None:
+            self._challenge_widget = PythonChallengeWidget(
+                exercise.starter_code,
+                challenge,
+                locale=locale,
+                evaluator=challenge_runner,
+            )
+            layout.addWidget(self._challenge_widget)
+        else:
+            self._answer_editor = QPlainTextEdit()
+            self._answer_editor.setObjectName("guidedPracticeAnswerEditor")
+            self._answer_editor.setPlaceholderText(
+                ui_text(locale, UiCopyKey.PRACTICE_ANSWER_PLACEHOLDER)
+            )
+            self._answer_editor.setMinimumHeight(125)
+            self._answer_editor.setTabChangesFocus(False)
+            if exercise.starter_code:
+                self._answer_editor.setPlainText(exercise.starter_code)
+            layout.addWidget(self._answer_editor)
 
         hint_actions = QHBoxLayout()
         hint_actions.setContentsMargins(0, 0, 0, 0)
@@ -200,12 +220,26 @@ class GuidedPracticeCard(QFrame):
     @property
     def answer_text(self) -> str:
         """Return the student's current workspace text."""
+        if self._challenge_widget is not None:
+            return self._challenge_widget.source
+        if self._answer_editor is None:
+            return ""
         return self._answer_editor.toPlainText()
 
     @property
     def assessment_state(self) -> str:
         """Return the student's current self-assessment state."""
         return self._assessment_state
+
+    @property
+    def has_python_challenge(self) -> bool:
+        """Return whether this exercise has an authored executable test contract."""
+        return self._challenge_widget is not None
+
+    @property
+    def challenge_widget(self) -> PythonChallengeWidget | None:
+        """Return the executable challenge surface when one is available."""
+        return self._challenge_widget
 
     @Slot()
     def show_next_hint(self) -> None:
@@ -276,12 +310,14 @@ class GuidedPracticeWidget(QWidget):
         exercise_count: int = 4,
         generator: GuidedPracticeSessionGenerator | None = None,
         locale: AppLocale = DEFAULT_LOCALE,
+        challenge_runner: PythonChallengeRunner | None = None,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
         self.setObjectName("guidedPracticeWidget")
         self.setStyleSheet(GUIDED_PRACTICE_STYLESHEET)
         self._locale = locale
+        self._challenge_runner = challenge_runner
 
         self._generator = generator or GuidedPracticeSessionGenerator(
             bank,
@@ -361,7 +397,12 @@ class GuidedPracticeWidget(QWidget):
         self._clear_cards()
 
         for number, exercise in enumerate(session.exercises, start=1):
-            card = GuidedPracticeCard(number, exercise, locale=self._locale)
+            card = GuidedPracticeCard(
+                number,
+                exercise,
+                locale=self._locale,
+                challenge_runner=self._challenge_runner,
+            )
             card.self_assessed.connect(self._record_self_assessment)
             self._exercise_cards.append(card)
             self._cards_layout.addWidget(card)
