@@ -86,9 +86,9 @@ _SPEC = StandardModuleSpec(
                 "Produktled og hierarki",
             ),
             (
-                "En el modelo Y=β0+β1X+β2G+β3XG+ε, β1 es la pendiente de X cuando G=0 y β3 es cuánto cambia esa pendiente cuando G pasa de 0 a 1. La pendiente para G=1 es β1+β3. Mantener los términos principales preserva la jerarquía y evita parametrizaciones difíciles de interpretar.",
-                "In Y=β0+β1X+β2G+β3XG+ε, β1 is the slope of X when G=0 and β3 is the change in that slope when G moves from 0 to 1. The slope for G=1 is β1+β3. Retaining main effects preserves hierarchy and avoids hard-to-interpret parameterisations.",
-                "I Y=β0+β1X+β2G+β3XG+ε er β1 hældningen for X, når G=0, og β3 er ændringen i hældningen, når G går fra 0 til 1. Hældningen for G=1 er β1+β3. Bevarelse af hovedled opretholder hierarkiet og undgår svære parametriseringer.",
+                "En el modelo Y=β0+β1X+β2G+β3XG+ε, β1 es la pendiente de X cuando G=0 y β3 es la diferencia de pendientes cuando G pasa de 0 a 1. La pendiente para G=1 es β1+β3. Mantener los términos principales preserva la jerarquía y evita parametrizaciones difíciles de interpretar.",
+                "In Y=β0+β1X+β2G+β3XG+ε, β1 is the slope of X when G=0 and β3 is the difference in slopes when G moves from 0 to 1. The slope for G=1 is β1+β3. Retaining main effects preserves hierarchy and avoids hard-to-interpret parameterisations.",
+                "I Y=β0+β1X+β2G+β3XG+ε er β1 hældningen for X, når G=0, og β3 er forskellen i hældninger, når G går fra 0 til 1. Hældningen for G=1 er β1+β3. Bevarelse af hovedled opretholder hierarkiet og undgår svære parametriseringer.",
             ),
             (
                 (
@@ -231,7 +231,7 @@ comparison <- anova(linear, quadratic)
 new_data <- data.frame(x = c(1, 3, 5))
 predicted <- predict(quadratic, newdata = new_data)
 cat(sprintf("quadratic=%.3f\n", coef(quadratic)[["I(x^2)"]]))
-cat(sprintf("comparison_p=%.4f\n", comparison$`Pr(>F)`[[2]]))
+cat(sprintf("comparison_p=%.4f\n", comparison[2, "Pr(>F)"]))
 cat(paste(sprintf("%.2f", predicted), collapse = ", "))
 """,
             """quadratic=0.350
