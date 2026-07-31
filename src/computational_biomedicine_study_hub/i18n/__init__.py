@@ -17,6 +17,13 @@ from .appearance_copy import (
     appearance_text,
     validate_appearance_copy,
 )
+from .capstone_copy import (
+    CapstoneCopyKey,
+    capstone_milestone_copy,
+    capstone_rubric_text,
+    capstone_text,
+    validate_capstone_copy,
+)
 from .challenge_copy import ChallengeCopyKey, challenge_text, validate_challenge_copy
 from .challenge_tutor_copy import (
     ChallengeTutorCopyKey,
@@ -37,6 +44,7 @@ __all__ = [
     "AdaptiveTutorCopyKey",
     "AppearanceCopyKey",
     "AppLocale",
+    "CapstoneCopyKey",
     "ChallengeCopyKey",
     "ChallengeTutorCopyKey",
     "ConfidenceCopyKey",
@@ -51,6 +59,9 @@ __all__ = [
     "adaptive_review_text",
     "adaptive_tutor_text",
     "appearance_text",
+    "capstone_milestone_copy",
+    "capstone_rubric_text",
+    "capstone_text",
     "challenge_text",
     "challenge_tutor_text",
     "confidence_text",
@@ -59,6 +70,7 @@ __all__ = [
     "validate_adaptive_review_copy",
     "validate_adaptive_tutor_copy",
     "validate_appearance_copy",
+    "validate_capstone_copy",
     "validate_catalogs",
     "validate_challenge_copy",
     "validate_challenge_tutor_copy",
