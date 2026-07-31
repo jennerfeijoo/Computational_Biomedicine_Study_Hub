@@ -26,9 +26,7 @@ class DM847WrittenAssessmentStore:
         self._database = str(database)
         self._memory_owner = memory_owner
         self._path = (
-            None
-            if self._database == ":memory:"
-            else Path(f"{self._database}.dm847-writing.json")
+            None if self._database == ":memory:" else Path(f"{self._database}.dm847-writing.json")
         )
         if self._path is not None:
             self._path.parent.mkdir(parents=True, exist_ok=True)
