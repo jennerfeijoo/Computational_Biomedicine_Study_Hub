@@ -265,9 +265,7 @@ class ChallengeTutorPanel(QFrame):
         rating_layout = QHBoxLayout(self._rating_widget)
         rating_layout.setContentsMargins(0, 0, 0, 0)
         rating_layout.setSpacing(8)
-        rating_label = QLabel(
-            adaptive_tutor_text(locale, AdaptiveTutorCopyKey.HELPFUL_PROMPT)
-        )
+        rating_label = QLabel(adaptive_tutor_text(locale, AdaptiveTutorCopyKey.HELPFUL_PROMPT))
         rating_label.setObjectName("challengeTutorRatingLabel")
         self._helpful_button = QPushButton(
             adaptive_tutor_text(locale, AdaptiveTutorCopyKey.HELPFUL)
@@ -305,9 +303,7 @@ class ChallengeTutorPanel(QFrame):
         notice.setWordWrap(True)
         layout.addWidget(notice)
 
-        session_notice = QLabel(
-            adaptive_tutor_text(locale, AdaptiveTutorCopyKey.SESSION_NOTICE)
-        )
+        session_notice = QLabel(adaptive_tutor_text(locale, AdaptiveTutorCopyKey.SESSION_NOTICE))
         session_notice.setObjectName("challengeTutorNotice")
         session_notice.setWordWrap(True)
         layout.addWidget(session_notice)
