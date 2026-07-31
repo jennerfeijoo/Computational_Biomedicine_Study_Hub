@@ -115,9 +115,10 @@ def test_snapshot_round_trip_restores_results_and_question_order() -> None:
     assert restored.correct_count == 0
     assert restored.current_question is not None
     assert restored.current_question.item_id == second.item_id
-    assert tuple(
-        option.option_id for option in restored.current_question.question.display_options
-    ) == option_order
+    assert (
+        tuple(option.option_id for option in restored.current_question.question.display_options)
+        == option_order
+    )
 
 
 def test_restore_rejects_changed_academic_contract() -> None:
