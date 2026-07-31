@@ -12,8 +12,8 @@ from ..learning.dm847_written_assessment import (
 from .locales import AppLocale
 
 Triple = tuple[str, str, str]
-PromptCopy = tuple[str, str, tuple[str, ...]]
 PromptTopic = tuple[Triple, Triple]
+PromptCopy = tuple[str, str, tuple[str, ...]]
 
 _LOCALE_INDEX = {
     AppLocale.SPANISH_SPAIN: 0,
@@ -213,15 +213,9 @@ _PROMPT_TOPICS: dict[str, PromptTopic] = {
             "Molekylær information og kontekst",
         ),
         (
-            "Explica cómo representarías lecturas ambiguas y anotaciones procedentes de distintos "
-            "sistemas de coordenadas sin perder alfabeto, orientación, procedencia, incertidumbre "
-            "ni validación de las conversiones.",
-            "Explain how you would represent ambiguous reads and annotations from different "
-            "coordinate systems without losing alphabet, orientation, provenance, uncertainty, or "
-            "validation of the conversions.",
-            "Forklar, hvordan du vil repræsentere tvetydige reads og annotationer fra forskellige "
-            "koordinatsystemer uden at miste alfabet, orientering, proveniens, usikkerhed eller "
-            "validering af konverteringerne.",
+            "lecturas ambiguas, orientación, coordenadas, procedencia y validación",
+            "ambiguous reads, orientation, coordinates, provenance, and validation",
+            "tvetydige reads, orientering, koordinater, proveniens og validering",
         ),
     ),
     "dm847.w02": (
@@ -231,14 +225,9 @@ _PROMPT_TOPICS: dict[str, PromptTopic] = {
             "Reproducerbare forespørgsler og ontologier",
         ),
         (
-            "Diseña una consulta reproducible de genes relacionados con una enfermedad que integre "
-            "varias bases de datos, identificadores, versiones, relaciones ontológicas y evidencia "
-            "contradictoria.",
-            "Design a reproducible disease-gene query that integrates several databases, "
-            "identifiers, versions, ontology relations, and conflicting evidence.",
-            "Design en reproducerbar forespørgsel efter sygdomsrelaterede gener, der integrerer "
-            "flere databaser, identifikatorer, versioner, ontologiske relationer og modstridende "
-            "evidens.",
+            "genes de enfermedad, identificadores, versiones, ontologías y evidencia conflictiva",
+            "disease genes, identifiers, versions, ontologies, and conflicting evidence",
+            "sygdomsgener, identifikatorer, versioner, ontologier og modstridende evidens",
         ),
     ),
     "dm847.w03": (
@@ -248,15 +237,9 @@ _PROMPT_TOPICS: dict[str, PromptTopic] = {
             "Sekvensscores og matches",
         ),
         (
-            "Compara estrategias para detectar similitud entre secuencias cortas y justifica el "
-            "esquema de puntuación, modelo de fondo, umbral y separación entre azar, significación "
-            "estadística e interpretación biológica.",
-            "Compare strategies for detecting similarity between short sequences and justify the "
-            "scoring scheme, background model, threshold, and separation of chance, statistical "
-            "significance, and biological interpretation.",
-            "Sammenlign strategier til at opdage lighed mellem korte sekvenser, og begrund "
-            "scoringsskema, baggrundsmodel, tærskel og adskillelsen mellem tilfældighed, statistisk "
-            "signifikans og biologisk fortolkning.",
+            "esquemas de puntuación, fondo, umbrales, azar e interpretación biológica",
+            "scoring schemes, background models, thresholds, chance, and biological interpretation",
+            "scoringsskemaer, baggrundsmodeller, tærskler, tilfældighed og biologisk fortolkning",
         ),
     ),
     "dm847.w04": (
@@ -266,15 +249,9 @@ _PROMPT_TOPICS: dict[str, PromptTopic] = {
             "Valg af parvis alignment",
         ),
         (
-            "Dos proteínas comparten un dominio pero difieren en longitud y baja complejidad. "
-            "Defiende un alineamiento global, local o semiglobal, sus parámetros y los límites de "
-            "las conclusiones biológicas.",
-            "Two proteins share a domain but differ in length and low complexity. Defend a global, "
-            "local, or semiglobal alignment, its parameters, and the limits of the biological "
-            "conclusions.",
-            "To proteiner deler et domæne, men adskiller sig i længde og lav kompleksitet. Forsvar "
-            "en global, lokal eller semiglobal alignment, dens parametre og grænserne for de "
-            "biologiske konklusioner.",
+            "alineamiento global, local o semiglobal, gaps, baja complejidad y límites inferenciales",
+            "global, local, or semiglobal alignment, gaps, low complexity, and inferential limits",
+            "global, lokal eller semiglobal alignment, gaps, lav kompleksitet og inferensgrænser",
         ),
     ),
     "dm847.w05": (
@@ -284,15 +261,9 @@ _PROMPT_TOPICS: dict[str, PromptTopic] = {
             "HMM'er og biologiske antagelser",
         ),
         (
-            "Analiza cómo un modelo oculto de Markov convierte una hipótesis biológica en estados, "
-            "emisiones y transiciones, incluyendo entrenamiento, decodificación, identificabilidad, "
-            "validación y riesgos interpretativos.",
-            "Analyse how a hidden Markov model turns a biological hypothesis into states, "
-            "emissions, and transitions, including training, decoding, identifiability, validation, "
-            "and interpretive risks.",
-            "Analysér, hvordan en skjult Markov-model omsætter en biologisk hypotese til tilstande, "
-            "emissioner og transitioner, herunder træning, dekodning, identificerbarhed, validering "
-            "og fortolkningsrisici.",
+            "estados, emisiones, transiciones, aprendizaje, decodificación e identificabilidad",
+            "states, emissions, transitions, learning, decoding, and identifiability",
+            "tilstande, emissioner, transitioner, læring, dekodning og identificerbarhed",
         ),
     ),
     "dm847.w06": (
@@ -302,15 +273,9 @@ _PROMPT_TOPICS: dict[str, PromptTopic] = {
             "Sekvensindekser og usikker mapping",
         ),
         (
-            "Explica cómo suffix array, BWT y FM-index permiten buscar patrones y cómo un flujo "
-            "seed-and-extend debe representar mismatches, multimapping y calidad sin inventar una "
-            "coordenada única.",
-            "Explain how a suffix array, BWT, and FM-index support pattern search and how a "
-            "seed-and-extend workflow should represent mismatches, multimapping, and quality "
-            "without inventing a unique coordinate.",
-            "Forklar, hvordan suffix array, BWT og FM-index understøtter mønstersøgning, og hvordan "
-            "et seed-and-extend-forløb bør repræsentere mismatches, multimapping og kvalitet uden at "
-            "opfinde en entydig koordinat.",
+            "suffix arrays, BWT, FM-index, seed-and-extend, multimapping y calidad",
+            "suffix arrays, BWT, FM-index, seed-and-extend, multimapping, and quality",
+            "suffix arrays, BWT, FM-index, seed-and-extend, multimapping og kvalitet",
         ),
     ),
     "dm847.w07": (
@@ -320,15 +285,9 @@ _PROMPT_TOPICS: dict[str, PromptTopic] = {
             "Bakteriel organisering og evidens",
         ),
         (
-            "Integra proximidad genómica, orientación, RNA-seq y anotaciones para evaluar un posible "
-            "operón, proponer evidencia adicional y distinguir regulación compartida, transferencia "
-            "horizontal y coincidencia contextual.",
-            "Integrate genomic proximity, orientation, RNA-seq, and annotations to assess a possible "
-            "operon, propose additional evidence, and distinguish shared regulation, horizontal "
-            "transfer, and contextual coincidence.",
-            "Integrér genomisk nærhed, orientering, RNA-seq og annotationer for at vurdere et muligt "
-            "operon, foreslå yderligere evidens og skelne fælles regulering, horisontal overførsel og "
-            "kontekstuel tilfældighed.",
+            "operones, proximidad, orientación, RNA-seq, regulación y transferencia horizontal",
+            "operons, proximity, orientation, RNA-seq, regulation, and horizontal transfer",
+            "operoner, nærhed, orientering, RNA-seq, regulering og horisontal overførsel",
         ),
     ),
     "dm847.w08": (
@@ -338,15 +297,9 @@ _PROMPT_TOPICS: dict[str, PromptTopic] = {
             "Motivopdagelse og validering",
         ),
         (
-            "Evalúa críticamente un análisis de motivos con PWM y EM: modelo de fondo, "
-            "pseudoconteos, ocurrencia, inicializaciones, anchura, óptimos locales, estabilidad y "
-            "validación funcional independiente.",
-            "Critically evaluate a PWM- and EM-based motif analysis: background model, pseudocounts, "
-            "occurrence model, initialisations, width, local optima, stability, and independent "
-            "functional validation.",
-            "Vurdér kritisk en motivanalyse baseret på PWM og EM: baggrundsmodel, pseudotællinger, "
-            "forekomstmodel, initialiseringer, bredde, lokale optima, stabilitet og uafhængig "
-            "funktionel validering.",
+            "PWM, EM, fondo, pseudoconteos, óptimos locales, estabilidad y validación funcional",
+            "PWM, EM, background, pseudocounts, local optima, stability, and functional validation",
+            "PWM, EM, baggrund, pseudotællinger, lokale optima, stabilitet og funktionel validering",
         ),
     ),
     "dm847.w09": (
@@ -356,15 +309,9 @@ _PROMPT_TOPICS: dict[str, PromptTopic] = {
             "Netværk og berigelse",
         ),
         (
-            "Diseña un análisis de módulos de red y términos enriquecidos que controle universo de "
-            "referencia, dependencia, múltiples pruebas, robustez y sesgo de anotación sin convertir "
-            "asociaciones en mecanismos causales.",
-            "Design an analysis of network modules and enriched terms that controls the reference "
-            "universe, dependence, multiple testing, robustness, and annotation bias without turning "
-            "associations into causal mechanisms.",
-            "Design en analyse af netværksmoduler og berigede termer, der kontrollerer "
-            "referenceunivers, afhængighed, multiple test, robusthed og annotationsbias uden at gøre "
-            "associationer til kausale mekanismer.",
+            "universo, dependencia, múltiples pruebas, módulos, sesgo y causalidad",
+            "universe, dependence, multiple testing, modules, bias, and causality",
+            "univers, afhængighed, multiple test, moduler, bias og kausalitet",
         ),
     ),
     "dm847.w10": (
@@ -374,19 +321,29 @@ _PROMPT_TOPICS: dict[str, PromptTopic] = {
             "Prædiktivt omikstudie uden leakage",
         ),
         (
-            "Diseña un estudio ómico predictivo con unidad experimental, outcome, preprocesamiento, "
-            "splits agrupados, validación anidada, métricas, calibración, análisis de errores, "
-            "limitaciones y artefactos reproducibles.",
-            "Design a predictive omics study with an experimental unit, outcome, preprocessing, "
-            "grouped splits, nested validation, metrics, calibration, error analysis, limitations, "
-            "and reproducible artefacts.",
-            "Design et prædiktivt omikstudie med eksperimentel enhed, outcome, preprocessing, "
-            "grupperede splits, nested validering, metrikker, kalibrering, fejlanalyse, begrænsninger "
-            "og reproducerbare artefakter.",
+            "unidad experimental, preprocesamiento, splits agrupados, validación anidada y calibración",
+            "experimental unit, preprocessing, grouped splits, nested validation, and calibration",
+            "eksperimentel enhed, preprocessing, grupperede splits, nested validering og kalibrering",
         ),
     ),
 }
 
+_OPEN_TASK: Triple = (
+    "Construye una respuesta argumentada sobre {angle}. Explica las representaciones y supuestos, "
+    "justifica el método, propone validación y delimita la incertidumbre y las conclusiones.",
+    "Build a reasoned response about {angle}. Explain representations and assumptions, justify the "
+    "method, propose validation, and delimit uncertainty and conclusions.",
+    "Opbyg et begrundet svar om {angle}. Forklar repræsentationer og antagelser, begrund metoden, "
+    "foreslå validering og afgræns usikkerhed og konklusioner.",
+)
+_ESSAY_TASK: Triple = (
+    "Redacta un ensayo crítico sobre {angle}. Formula una tesis, organiza el argumento, integra "
+    "evidencia y contraargumentos y concluye de forma proporcional a las limitaciones.",
+    "Write a critical essay about {angle}. State a thesis, organise the argument, integrate evidence "
+    "and counterarguments, and conclude in proportion to the limitations.",
+    "Skriv et kritisk essay om {angle}. Formulér en tese, organisér argumentationen, integrér evidens "
+    "og modargumenter, og konkludér proportionalt med begrænsningerne.",
+)
 _OPEN_FOCUS: tuple[Triple, ...] = (
     (
         "supuestos y representaciones explícitos",
@@ -456,13 +413,15 @@ def written_prompt_copy(locale: AppLocale, prompt_id: str) -> PromptCopy:
     """Return localized title, task, and focus points for one stable prompt."""
 
     index = _LOCALE_INDEX[locale]
-    title, task = _PROMPT_TOPICS[prompt_id]
-    focus_catalog = (
-        _ESSAY_FOCUS
-        if _PROMPT_BY_ID[prompt_id].kind is WrittenTaskKind.ESSAY
-        else _OPEN_FOCUS
+    title, angle = _PROMPT_TOPICS[prompt_id]
+    is_essay = _PROMPT_BY_ID[prompt_id].kind is WrittenTaskKind.ESSAY
+    task_catalog = _ESSAY_TASK if is_essay else _OPEN_TASK
+    focus_catalog = _ESSAY_FOCUS if is_essay else _OPEN_FOCUS
+    return (
+        title[index],
+        task_catalog[index].format(angle=angle[index]),
+        tuple(item[index] for item in focus_catalog),
     )
-    return title[index], task[index], tuple(item[index] for item in focus_catalog)
 
 
 def validate_written_assessment_copy() -> None:
