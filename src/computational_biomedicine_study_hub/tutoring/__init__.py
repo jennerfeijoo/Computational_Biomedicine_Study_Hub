@@ -20,6 +20,13 @@ from .context import (
     TutorDocumentRetriever,
     TutorPrompt,
 )
+from .written_feedback import (
+    WrittenFeedbackPrompt,
+    WrittenFeedbackPromptBuilder,
+    WrittenFeedbackRequest,
+    WrittenFeedbackResponse,
+    WrittenFeedbackService,
+)
 
 __all__ = [
     "ChallengeDiagnostic",
@@ -35,5 +42,10 @@ __all__ = [
     "TutorPrompt",
     "TutorSessionSnapshot",
     "TutorSessionTurn",
+    "WrittenFeedbackPrompt",
+    "WrittenFeedbackPromptBuilder",
+    "WrittenFeedbackRequest",
+    "WrittenFeedbackResponse",
+    "WrittenFeedbackService",
     "bounded_history",
 ]
