@@ -9,7 +9,8 @@ from pathlib import Path
 from PySide6.QtCore import QStandardPaths
 from PySide6.QtWidgets import QApplication
 
-from .courses.dm847 import configure_progress_recorder
+from .courses.dm847 import configure_progress_recorder as configure_dm847_progress_recorder
+from .courses.dm857 import configure_progress_recorder as configure_dm857_progress_recorder
 from .learning.progress_service import LearningProgressService
 from .storage import SQLiteProgressStore
 from .ui.main_window import MainWindow
@@ -56,7 +57,9 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     app = create_application(argv)
     progress_store = SQLiteProgressStore(progress_database_path())
-    configure_progress_recorder(LearningProgressService(progress_store))
+    progress_service = LearningProgressService(progress_store)
+    configure_dm847_progress_recorder(progress_service)
+    configure_dm857_progress_recorder(progress_service)
     app.aboutToQuit.connect(progress_store.close)
 
     window = MainWindow(progress_store=progress_store)
