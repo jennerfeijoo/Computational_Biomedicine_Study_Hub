@@ -88,6 +88,25 @@ def test_widget_requires_confidence_before_revealing_test_feedback(
     assert "confidence" in widget.status_text.casefold()
 
 
+def test_widget_rejects_empty_source_without_evaluation(qapp: QApplication) -> None:
+    evaluator = _FakeEvaluator(_result(all_passed=False))
+    widget = PythonChallengeWidget(
+        "def unique_count(values):\n    pass",
+        _challenge(),
+        locale=AppLocale.ENGLISH,
+        evaluator=evaluator,
+    )
+    widget.set_source("  \n")
+    widget.choose_confidence(ConfidenceLevel.HIGH)
+
+    widget.run_tests()
+
+    assert evaluator.calls == []
+    assert widget.last_result is None
+    assert widget.status_text == "Write a solution before running the tests."
+    assert widget.selected_confidence is ConfidenceLevel.HIGH
+
+
 def test_widget_evaluates_edited_source_and_hides_test_inputs(qapp: QApplication) -> None:
     evaluator = _FakeEvaluator(_result(all_passed=False))
     widget = PythonChallengeWidget(
