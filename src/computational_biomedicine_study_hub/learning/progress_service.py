@@ -167,7 +167,9 @@ class LearningProgressService:
         if not identifier.strip():
             raise ValueError(f"{label} ID factories must return a non-empty identifier.")
         if identifier != identifier.strip():
-            raise ValueError(f"Generated {label.casefold()} IDs cannot contain surrounding whitespace.")
+            raise ValueError(
+                f"Generated {label.casefold()} IDs cannot contain surrounding whitespace."
+            )
         return identifier
 
 
