@@ -164,11 +164,14 @@ def test_challenge_attempts_update_mastery_and_error_notebook(qapp: QApplication
         assert all(attempt.is_correct for attempt in attempts[2:])
         assert all(attempt.response_time_ms == 2500 for attempt in attempts[2:])
         assert errors[0].is_resolved
-        assert store.get_mastery(
-            "m07.o6",
-            course_code="DM857",
-            module_id="dm857.m07",
-        ) is not None
+        assert (
+            store.get_mastery(
+                "m07.o6",
+                course_code="DM857",
+                module_id="dm857.m07",
+            )
+            is not None
+        )
 
 
 def test_widget_reset_restores_starter_code_and_clears_feedback(qapp: QApplication) -> None:
