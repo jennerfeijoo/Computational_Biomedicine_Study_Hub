@@ -31,6 +31,7 @@ from ...learning.python_challenge import (
     PythonChallengeResult,
     PythonChallengeRunner,
 )
+from ...tutoring import ChallengeDiagnostic
 from .confidence_selector import ConfidenceSelector
 from .python_challenge_styles import PYTHON_CHALLENGE_STYLESHEET
 
@@ -48,6 +49,7 @@ class PythonChallengeWidget(QFrame):
     """Run tested code attempts and persist objective evidence when configured."""
 
     tests_finished = Signal(str, bool)
+    diagnostic_ready = Signal(object)
 
     def __init__(
         self,
@@ -102,6 +104,7 @@ class PythonChallengeWidget(QFrame):
         self._clock = clock
         self._started_at = clock()
         self._last_result: PythonChallengeResult | None = None
+        self._last_diagnostic: ChallengeDiagnostic | None = None
         self._result_labels: list[QLabel] = []
 
         layout = QVBoxLayout(self)
@@ -180,6 +183,12 @@ class PythonChallengeWidget(QFrame):
         return self._last_result
 
     @property
+    def last_diagnostic(self) -> ChallengeDiagnostic | None:
+        """Return the latest verified tutor diagnostic when full context is available."""
+
+        return self._last_diagnostic
+
+    @property
     def selected_confidence(self) -> ConfidenceLevel | None:
         """Return the confidence judgement prepared for the next execution."""
 
@@ -255,12 +264,16 @@ class PythonChallengeWidget(QFrame):
         finally:
             self._set_busy(False)
 
+        diagnostic = self._build_diagnostic(source, result, confidence)
         self._record_attempt(source, result, confidence)
         self._last_result = result
+        self._last_diagnostic = diagnostic
         self._render_result(result)
         self._confidence_selector.clear()
         self._started_at = self._clock()
         self.tests_finished.emit(result.exercise_id, result.all_passed)
+        if diagnostic is not None:
+            self.diagnostic_ready.emit(diagnostic)
 
     @Slot()
     def reset_code(self) -> None:
@@ -270,6 +283,7 @@ class PythonChallengeWidget(QFrame):
         self._confidence_selector.clear()
         self._started_at = self._clock()
         self._last_result = None
+        self._last_diagnostic = None
         self._status.clear()
         self._status.hide()
         self._visible_heading.hide()
@@ -277,6 +291,25 @@ class PythonChallengeWidget(QFrame):
         self._hidden_summary.hide()
         self._clear_result_labels()
         self._results_container.hide()
+
+    def _build_diagnostic(
+        self,
+        source: str,
+        result: PythonChallengeResult,
+        confidence: ConfidenceLevel,
+    ) -> ChallengeDiagnostic | None:
+        context = (self._prompt, self._reference_solution, self._explanation)
+        if any(not value.strip() for value in context):
+            return None
+        return ChallengeDiagnostic.from_attempt(
+            challenge=self._challenge,
+            result=result,
+            confidence=confidence,
+            submitted_source=source,
+            prompt=self._prompt,
+            reference_solution=self._reference_solution,
+            explanation=self._explanation,
+        )
 
     def _record_attempt(
         self,
