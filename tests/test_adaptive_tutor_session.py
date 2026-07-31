@@ -87,7 +87,7 @@ def test_bounded_history_truncates_one_oversized_latest_response() -> None:
 
 
 def test_session_models_reject_invalid_state() -> None:
-    with pytest.raises(ValueError, match="source IDs"):
+    with pytest.raises(ValueError, match="source ID"):
         TutorSessionTurn(
             question="Question",
             response="Response",
