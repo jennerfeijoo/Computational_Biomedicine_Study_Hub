@@ -18,6 +18,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
+from ...content.models import LearningModule
 from ...content.python_challenges import PythonChallenge
 from ...i18n.challenge_copy import ChallengeCopyKey, challenge_text
 from ...i18n.confidence_copy import ConfidenceCopyKey, confidence_text
@@ -31,7 +32,12 @@ from ...learning.python_challenge import (
     PythonChallengeResult,
     PythonChallengeRunner,
 )
-from ...tutoring import ChallengeDiagnostic
+from ...tutoring import ChallengeDiagnostic, ChallengeTutorService
+from .challenge_tutor_panel import (
+    ChallengeTutorExecutor,
+    ChallengeTutorPanel,
+    ChallengeTutorRunner,
+)
 from .confidence_selector import ConfidenceSelector
 from .python_challenge_styles import PYTHON_CHALLENGE_STYLESHEET
 
@@ -46,7 +52,7 @@ _CASE_COPY = {
 
 
 class PythonChallengeWidget(QFrame):
-    """Run tested code attempts and persist objective evidence when configured."""
+    """Run tested code attempts and expose a non-grading contextual tutor."""
 
     tests_finished = Signal(str, bool)
     diagnostic_ready = Signal(object)
@@ -63,6 +69,9 @@ class PythonChallengeWidget(QFrame):
         reference_solution: str = "",
         explanation: str = "",
         progress_recorder: ObjectiveAttemptRecorder | None = None,
+        learning_module: LearningModule | None = None,
+        tutor_runner: ChallengeTutorRunner | None = None,
+        tutor_executor: ChallengeTutorExecutor | None = None,
         clock: Callable[[], float] = monotonic,
         parent: QWidget | None = None,
     ) -> None:
@@ -89,6 +98,8 @@ class PythonChallengeWidget(QFrame):
                         f"Persistent Python challenge field {field_name!r} cannot contain "
                         "surrounding whitespace."
                     )
+        if tutor_executor is not None and tutor_runner is None and learning_module is None:
+            raise ValueError("A tutor executor requires a tutor runner or learning module.")
 
         self.setObjectName("pythonChallengeWidget")
         self.setStyleSheet(PYTHON_CHALLENGE_STYLESHEET)
@@ -106,6 +117,18 @@ class PythonChallengeWidget(QFrame):
         self._last_result: PythonChallengeResult | None = None
         self._last_diagnostic: ChallengeDiagnostic | None = None
         self._result_labels: list[QLabel] = []
+        resolved_tutor = tutor_runner
+        if resolved_tutor is None and learning_module is not None:
+            resolved_tutor = ChallengeTutorService(learning_module, locale=locale)
+        self._tutor_panel = (
+            ChallengeTutorPanel(
+                resolved_tutor,
+                locale=locale,
+                executor=tutor_executor,
+            )
+            if resolved_tutor is not None
+            else None
+        )
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(16, 14, 16, 14)
@@ -170,6 +193,9 @@ class PythonChallengeWidget(QFrame):
         self._hidden_summary.hide()
         layout.addWidget(self._hidden_summary)
 
+        if self._tutor_panel is not None:
+            layout.addWidget(self._tutor_panel)
+
     @property
     def source(self) -> str:
         """Return the learner's current source code."""
@@ -187,6 +213,12 @@ class PythonChallengeWidget(QFrame):
         """Return the latest verified tutor diagnostic when full context is available."""
 
         return self._last_diagnostic
+
+    @property
+    def tutor_panel(self) -> ChallengeTutorPanel | None:
+        """Return the contextual tutor surface when one has been configured."""
+
+        return self._tutor_panel
 
     @property
     def selected_confidence(self) -> ConfidenceLevel | None:
@@ -236,6 +268,8 @@ class PythonChallengeWidget(QFrame):
             self._show_warning(challenge_text(self._locale, ChallengeCopyKey.SOURCE_REQUIRED))
             return
 
+        if self._tutor_panel is not None:
+            self._tutor_panel.begin_evaluation()
         self._set_busy(True)
         self._status.setProperty("resultState", "running")
         self._status.setText(challenge_text(self._locale, ChallengeCopyKey.RUNNING))
@@ -273,6 +307,8 @@ class PythonChallengeWidget(QFrame):
         self._started_at = self._clock()
         self.tests_finished.emit(result.exercise_id, result.all_passed)
         if diagnostic is not None:
+            if self._tutor_panel is not None:
+                self._tutor_panel.set_diagnostic(diagnostic)
             self.diagnostic_ready.emit(diagnostic)
 
     @Slot()
@@ -284,6 +320,8 @@ class PythonChallengeWidget(QFrame):
         self._started_at = self._clock()
         self._last_result = None
         self._last_diagnostic = None
+        if self._tutor_panel is not None:
+            self._tutor_panel.clear_diagnostic()
         self._status.clear()
         self._status.hide()
         self._visible_heading.hide()
