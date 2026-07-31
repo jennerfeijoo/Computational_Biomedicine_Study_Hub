@@ -130,7 +130,11 @@ class AdaptiveReviewSession:
         self._due_items = due_items
         self._target_questions = target_questions
         self._rng = rng or random.Random()
-        self._catalog = candidate_catalog or authored_review_candidates(locale)
+        self._catalog = (
+            candidate_catalog
+            if candidate_catalog is not None
+            else authored_review_candidates(locale)
+        )
         self._eligible_items = tuple(item for item in due_items if self._catalog.get(item.key))
         self._unsupported_keys = tuple(item.key for item in due_items if not self._catalog.get(item.key))
         self._asked_item_ids: set[str] = set()
