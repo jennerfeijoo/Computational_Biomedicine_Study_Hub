@@ -6,8 +6,8 @@ from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import QApplication, QPushButton
 
 from computational_biomedicine_study_hub.i18n import (
-    AppLocale,
     AppearanceCopyKey,
+    AppLocale,
     appearance_text,
     validate_appearance_copy,
 )
