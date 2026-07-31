@@ -1,6 +1,7 @@
 """Reusable interactive widgets for the study hub."""
 
 from .adaptive_review_session_widget import AdaptiveReviewSessionWidget
+from .appearance_selector import AppearanceSelector
 from .challenge_tutor_panel import (
     ChallengeTutorExecutor,
     ChallengeTutorPanel,
@@ -15,6 +16,7 @@ from .python_lab_widget import PythonLabWidget
 
 __all__ = [
     "AdaptiveReviewSessionWidget",
+    "AppearanceSelector",
     "ChallengeTutorExecutor",
     "ChallengeTutorPanel",
     "ChallengeTutorRunner",
