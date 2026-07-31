@@ -6,7 +6,7 @@ from PySide6.QtWidgets import QApplication, QComboBox, QStackedWidget
 
 from computational_biomedicine_study_hub.content.bmb830 import (
     MODULE_01_R_FOUNDATIONS,
-    MODULE_07_CORRELATION_REGRESSION,
+    MODULE_08_MULTIPLE_REGRESSION,
 )
 from computational_biomedicine_study_hub.courses.bmb830 import (
     BMB830ModuleReaderPage,
@@ -34,10 +34,10 @@ def test_bmb830_page_constructs_only_the_initial_reader(qapp: QApplication) -> N
 
     assert stack is not None
     assert selector is not None
-    assert stack.count() == selector.count() == page.module_count == 7
+    assert stack.count() == selector.count() == page.module_count == 8
     assert page.constructed_reader_count == 1
     assert page.has_constructed_reader(0)
-    assert not page.has_constructed_reader(6)
+    assert not page.has_constructed_reader(7)
     assert len(_constructed_readers(stack)) == 1
     assert page.reader.module is MODULE_01_R_FOUNDATIONS
 
@@ -49,11 +49,11 @@ def test_bmb830_selecting_a_module_constructs_and_reuses_it(
     page = BMB830Page()
     first_reader = page.reader
 
-    assert page.select_module_by_id("bmb830.m07")
+    assert page.select_module_by_id("bmb830.m08")
     final_reader = page.reader
 
     assert final_reader is not first_reader
-    assert final_reader.module is MODULE_07_CORRELATION_REGRESSION
+    assert final_reader.module is MODULE_08_MULTIPLE_REGRESSION
     assert final_reader.property("contentVersion") == "1.0.0"
     assert page.constructed_reader_count == 2
 
@@ -61,7 +61,7 @@ def test_bmb830_selecting_a_module_constructs_and_reuses_it(
     assert page.reader is first_reader
     assert page.constructed_reader_count == 2
     assert not page.select_module(-1)
-    assert not page.select_module(7)
+    assert not page.select_module(8)
 
 
 def test_bmb830_page_materializes_danish_and_attaches_r_labs(
@@ -76,8 +76,8 @@ def test_bmb830_page_materializes_danish_and_attaches_r_labs(
     assert page.reader.module.title.startswith("Grundlæggende")
     assert selector.itemText(0).startswith("Modul")
 
-    assert page.select_module_by_id("bmb830.m07")
-    assert page.reader.module.title.startswith("Korrelation")
+    assert page.select_module_by_id("bmb830.m08")
+    assert page.reader.module.title.startswith("Multipel regression")
     assert page.reader.select_section_index(2)
     labs = page.reader.findChildren(RLabWidget)
     assert len(labs) == len(page.reader.module.worked_examples) == 2
