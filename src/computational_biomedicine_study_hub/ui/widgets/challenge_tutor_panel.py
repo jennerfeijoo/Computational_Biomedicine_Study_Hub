@@ -159,9 +159,7 @@ class ChallengeTutorPanel(QFrame):
         actions.setContentsMargins(0, 0, 0, 0)
         actions.setSpacing(8)
 
-        self._hint_button = QPushButton(
-            challenge_tutor_text(locale, ChallengeTutorCopyKey.HINT)
-        )
+        self._hint_button = QPushButton(challenge_tutor_text(locale, ChallengeTutorCopyKey.HINT))
         self._hint_button.setObjectName("challengeTutorSecondaryButton")
         self._hint_button.clicked.connect(self.request_hint)
         actions.addWidget(self._hint_button)
@@ -195,9 +193,7 @@ class ChallengeTutorPanel(QFrame):
         self._response.hide()
         layout.addWidget(self._response)
 
-        self._sources_heading = QLabel(
-            challenge_tutor_text(locale, ChallengeTutorCopyKey.SOURCES)
-        )
+        self._sources_heading = QLabel(challenge_tutor_text(locale, ChallengeTutorCopyKey.SOURCES))
         self._sources_heading.setObjectName("contentSubheading")
         self._sources_heading.hide()
         layout.addWidget(self._sources_heading)
@@ -205,7 +201,6 @@ class ChallengeTutorPanel(QFrame):
         self._sources = QLabel()
         self._sources.setObjectName("challengeTutorSources")
         self._sources.setWordWrap(True)
-        self._sources.setTextInteractionFlags(self._sources.textInteractionFlags())
         self._sources.hide()
         layout.addWidget(self._sources)
 
@@ -214,9 +209,7 @@ class ChallengeTutorPanel(QFrame):
         self._model.hide()
         layout.addWidget(self._model)
 
-        notice = QLabel(
-            challenge_tutor_text(locale, ChallengeTutorCopyKey.NON_GRADING_NOTICE)
-        )
+        notice = QLabel(challenge_tutor_text(locale, ChallengeTutorCopyKey.NON_GRADING_NOTICE))
         notice.setObjectName("challengeTutorNotice")
         notice.setWordWrap(True)
         layout.addWidget(notice)
@@ -414,8 +407,7 @@ class ChallengeTutorPanel(QFrame):
         normalized = detail.casefold()
         if isinstance(error, OllamaConnectionError):
             model_missing = "model" in normalized and any(
-                token in normalized
-                for token in ("not found", "not installed", "pull", "missing")
+                token in normalized for token in ("not found", "not installed", "pull", "missing")
             )
             if model_missing:
                 return challenge_tutor_text(
