@@ -81,9 +81,7 @@ class ReviewProgrammingCandidate:
             objective.objective_id for objective in self.learning_module.objectives
         }
         if not set(self.challenge.objective_ids).issubset(authored_objectives):
-            raise ValueError(
-                "Programming review candidates cannot reference unknown objectives."
-            )
+            raise ValueError("Programming review candidates cannot reference unknown objectives.")
         required_context = (
             self.exercise.prompt,
             self.exercise.solution,
@@ -287,9 +285,7 @@ def authored_review_activity_candidates(
     for key, candidates in merged.items():
         activity_keys = tuple(candidate.activity_key for candidate in candidates)
         if len(activity_keys) != len(set(activity_keys)):
-            raise ValueError(
-                f"Duplicate adaptive review activities are registered for {key!r}."
-            )
+            raise ValueError(f"Duplicate adaptive review activities are registered for {key!r}.")
         result[key] = tuple(candidates)
     return result
 
@@ -311,14 +307,10 @@ class AdaptiveReviewSession:
         | None = None,
     ) -> None:
         if target_questions < 1:
-            raise ValueError(
-                "Adaptive review sessions require at least one target activity."
-            )
+            raise ValueError("Adaptive review sessions require at least one target activity.")
         keys = tuple(item.key for item in due_items)
         if len(keys) != len(set(keys)):
-            raise ValueError(
-                "Adaptive review sessions cannot contain duplicate due objectives."
-            )
+            raise ValueError("Adaptive review sessions cannot contain duplicate due objectives.")
 
         self._due_items = due_items
         self._target_questions = target_questions
@@ -328,13 +320,9 @@ class AdaptiveReviewSession:
             if candidate_catalog is not None
             else authored_review_activity_candidates(locale)
         )
-        self._catalog = {
-            key: tuple(candidates) for key, candidates in source_catalog.items()
-        }
+        self._catalog = {key: tuple(candidates) for key, candidates in source_catalog.items()}
         self._validate_catalog()
-        self._eligible_items = tuple(
-            item for item in due_items if self._catalog.get(item.key)
-        )
+        self._eligible_items = tuple(item for item in due_items if self._catalog.get(item.key))
         self._unsupported_keys = tuple(
             item.key for item in due_items if not self._catalog.get(item.key)
         )
@@ -400,12 +388,10 @@ class AdaptiveReviewSession:
             reviewed_objectives=tuple(reviewed),
             exhausted=self._exhausted,
             question_activities=sum(
-                activity.kind is ReviewActivityKind.QUESTION
-                for activity, _ in self._results
+                activity.kind is ReviewActivityKind.QUESTION for activity, _ in self._results
             ),
             programming_activities=sum(
-                activity.kind is ReviewActivityKind.PROGRAMMING
-                for activity, _ in self._results
+                activity.kind is ReviewActivityKind.PROGRAMMING for activity, _ in self._results
             ),
         )
 
@@ -432,9 +418,7 @@ class AdaptiveReviewSession:
             self._exhausted = True
 
     def _select_next(self) -> AdaptiveReviewActivity | None:
-        available = tuple(
-            item for item in self._eligible_items if self._available_candidates(item)
-        )
+        available = tuple(item for item in self._eligible_items if self._available_candidates(item))
         if not available:
             return None
 
@@ -455,9 +439,7 @@ class AdaptiveReviewSession:
         }
         best_score = max(scores.values())
         preferred = [
-            candidate
-            for candidate in candidates
-            if scores[candidate.activity_key] == best_score
+            candidate for candidate in candidates if scores[candidate.activity_key] == best_score
         ]
         candidate = self._rng.choice(preferred)
         if isinstance(candidate, ReviewProgrammingCandidate):
@@ -506,9 +488,7 @@ class AdaptiveReviewSession:
         incorrect = self._objective_incorrect.get(key, 0)
         previous_kind = self._results[-1][0].kind if self._results else None
         interleaving_bonus = (
-            0.35
-            if previous_kind is not None and candidate.kind is not previous_kind
-            else 0.0
+            0.35 if previous_kind is not None and candidate.kind is not previous_kind else 0.0
         )
 
         if candidate.kind is ReviewActivityKind.PROGRAMMING:
@@ -519,19 +499,14 @@ class AdaptiveReviewSession:
                 + interleaving_bonus
             )
         return (
-            (1.0 - item.state.mastery_score) * 0.8
-            + incorrect
-            - correct * 0.25
-            + interleaving_bonus
+            (1.0 - item.state.mastery_score) * 0.8 + incorrect - correct * 0.25 + interleaving_bonus
         )
 
     def _validate_catalog(self) -> None:
         for key, candidates in self._catalog.items():
             activity_keys = tuple(candidate.activity_key for candidate in candidates)
             if len(activity_keys) != len(set(activity_keys)):
-                raise ValueError(
-                    f"Adaptive review catalog {key!r} contains duplicate activities."
-                )
+                raise ValueError(f"Adaptive review catalog {key!r} contains duplicate activities.")
             for candidate in candidates:
                 identity = (candidate.course_code, candidate.module_id)
                 if identity != key[:2] or key[2] not in candidate.objective_ids:
