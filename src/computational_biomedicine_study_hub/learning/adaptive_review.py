@@ -944,10 +944,7 @@ class AdaptiveReviewSession:
                 + interleaving_bonus
             )
         return (
-            (1.0 - item.state.mastery_score) * 0.8
-            + incorrect
-            - correct * 0.25
-            + interleaving_bonus
+            (1.0 - item.state.mastery_score) * 0.8 + incorrect - correct * 0.25 + interleaving_bonus
         )
 
     def _validate_catalog(self) -> None:
