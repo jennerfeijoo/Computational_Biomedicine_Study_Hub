@@ -35,8 +35,7 @@ def test_catalog_materializes_complete_trilingual_challenges() -> None:
     validate_python_challenge_catalog()
 
     descriptions = {
-        locale: _unique_count_challenge(locale).visible_cases[0].description
-        for locale in AppLocale
+        locale: _unique_count_challenge(locale).visible_cases[0].description for locale in AppLocale
     }
 
     assert len(set(descriptions.values())) == 3
@@ -93,6 +92,4 @@ def test_policy_rejection_is_reported_without_running_hidden_tests() -> None:
 
     assert not result.all_passed
     assert result.hidden_passed == 0
-    assert all(
-        case.status is ChallengeCaseStatus.REJECTED for case in result.visible_results
-    )
+    assert all(case.status is ChallengeCaseStatus.REJECTED for case in result.visible_results)
