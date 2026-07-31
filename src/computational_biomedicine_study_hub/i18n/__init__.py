@@ -12,6 +12,11 @@ from .adaptive_tutor_copy import (
     adaptive_tutor_text,
     validate_adaptive_tutor_copy,
 )
+from .appearance_copy import (
+    AppearanceCopyKey,
+    appearance_text,
+    validate_appearance_copy,
+)
 from .challenge_copy import ChallengeCopyKey, challenge_text, validate_challenge_copy
 from .challenge_tutor_copy import (
     ChallengeTutorCopyKey,
@@ -30,6 +35,7 @@ __all__ = [
     "ALL_MESSAGE_KEYS",
     "AdaptiveReviewCopyKey",
     "AdaptiveTutorCopyKey",
+    "AppearanceCopyKey",
     "AppLocale",
     "ChallengeCopyKey",
     "ChallengeTutorCopyKey",
@@ -44,6 +50,7 @@ __all__ = [
     "UiCopyKey",
     "adaptive_review_text",
     "adaptive_tutor_text",
+    "appearance_text",
     "challenge_text",
     "challenge_tutor_text",
     "confidence_text",
@@ -51,6 +58,7 @@ __all__ = [
     "ui_text",
     "validate_adaptive_review_copy",
     "validate_adaptive_tutor_copy",
+    "validate_appearance_copy",
     "validate_catalogs",
     "validate_challenge_copy",
     "validate_challenge_tutor_copy",

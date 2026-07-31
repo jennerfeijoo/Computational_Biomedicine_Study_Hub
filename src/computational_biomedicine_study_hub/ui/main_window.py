@@ -1,4 +1,4 @@
-"""Main application window, navigation shell and immediate language switching."""
+"""Main application window, navigation shell and immediate preferences."""
 
 from __future__ import annotations
 
@@ -24,7 +24,6 @@ from ..i18n import (
 )
 from ..storage import SQLiteProgressStore
 from .header import PageHeader
-from .language_styles import LANGUAGE_STYLESHEET
 from .navigation import NavigationSidebar
 from .pages.home_page import HomePage
 from .pages.ollama_settings_page import OllamaSettingsPage
@@ -37,14 +36,15 @@ from .routes import (
     localized_page_descriptors,
     route_value,
 )
-from .styles import APPLICATION_STYLESHEET
+from .styles import build_application_stylesheet
+from .theme import AppearanceMode, ThemeController, VisualTheme
 
 ModularCoursePage = DM847Page | DM857Page
 StudyLocation = tuple[int, int]
 
 
 class MainWindow(QMainWindow):
-    """Provide localized navigation, course hosting and learning-state access."""
+    """Provide localized navigation, themed course hosting and learning-state access."""
 
     def __init__(
         self,
@@ -56,10 +56,12 @@ class MainWindow(QMainWindow):
         super().__init__(parent)
         self.resize(1200, 760)
         self.setMinimumSize(960, 640)
-        self.setStyleSheet(APPLICATION_STYLESHEET + LANGUAGE_STYLESHEET)
 
         self._settings = settings if settings is not None else QSettings()
         self._progress_store = progress_store
+        self._theme = ThemeController(self._settings, self)
+        self._theme.theme_changed.connect(self._apply_theme)
+        self._apply_theme(self._theme.theme.value)
         self._language = LanguageController(self._settings, self)
         self._translator = self._language.translator
         self._courses: tuple[CourseRegistration, ...] = COURSES
@@ -75,6 +77,7 @@ class MainWindow(QMainWindow):
         self._stack.setObjectName("mainPageStack")
 
         content = QWidget()
+        content.setObjectName("mainContentArea")
         content_layout = QVBoxLayout(content)
         content_layout.setContentsMargins(28, 24, 28, 24)
         content_layout.setSpacing(20)
@@ -82,6 +85,7 @@ class MainWindow(QMainWindow):
         content_layout.addWidget(self._stack, 1)
 
         shell = QWidget()
+        shell.setObjectName("applicationShell")
         shell_layout = QHBoxLayout(shell)
         shell_layout.setContentsMargins(0, 0, 0, 0)
         shell_layout.setSpacing(0)
@@ -112,6 +116,29 @@ class MainWindow(QMainWindow):
         """Return the active persisted application locale."""
 
         return self._language.locale
+
+    @property
+    def current_appearance(self) -> AppearanceMode:
+        """Return the persisted appearance preference."""
+
+        return self._theme.mode
+
+    @property
+    def current_theme(self) -> VisualTheme:
+        """Return the concrete theme currently rendered by the shell."""
+
+        return self._theme.theme
+
+    @property
+    def theme_controller(self) -> ThemeController:
+        """Return the shared application-wide appearance controller."""
+
+        return self._theme
+
+    def set_appearance(self, mode: AppearanceMode | str) -> bool:
+        """Apply and persist a new appearance preference immediately."""
+
+        return self._theme.set_mode(mode)
 
     def navigate(self, route: RouteLike) -> None:
         """Switch to a registered route and persist the selection."""
@@ -161,6 +188,7 @@ class MainWindow(QMainWindow):
             RouteId.SETTINGS.value: OllamaSettingsPage(
                 settings=self._settings,
                 locale=locale,
+                theme_controller=self._theme,
             ),
         }
 
@@ -192,6 +220,14 @@ class MainWindow(QMainWindow):
         self._set_window_title()
         self.navigate(route)
         self._restore_study_location(route, study_location)
+
+    @Slot(str)
+    def _apply_theme(self, theme_value: str) -> None:
+        """Render the selected semantic palette without rebuilding page state."""
+
+        theme = VisualTheme(theme_value)
+        self.setProperty("visualTheme", theme.value)
+        self.setStyleSheet(build_application_stylesheet(theme))
 
     def _capture_study_location(self, route: str) -> StudyLocation | None:
         page = self._modular_course_page(route)
