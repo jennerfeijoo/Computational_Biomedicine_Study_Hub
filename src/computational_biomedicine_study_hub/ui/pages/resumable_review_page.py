@@ -161,9 +161,7 @@ class ResumableReviewPage(BaseReviewPage):
                 self._session_state_store.save if self._session_state_store is not None else None
             ),
             snapshot_discarder=(
-                self._session_state_store.discard
-                if self._session_state_store is not None
-                else None
+                self._session_state_store.discard if self._session_state_store is not None else None
             ),
         )
         self._session_widget.queue_refresh_requested.connect(self.refresh)
