@@ -14,7 +14,8 @@ from ...learning.adaptive_review import (
 from ...learning.progress_service import LearningProgressService
 from ...storage import AdaptiveReviewSessionStore, SQLiteProgressStore
 from ..widgets.adaptive_review_session_widget import AdaptiveReviewSessionWidget
-from .review_page import Clock, ReviewPage as BaseReviewPage
+from .review_page import Clock
+from .review_page import ReviewPage as BaseReviewPage
 
 
 class ResumableReviewPage(BaseReviewPage):
@@ -36,7 +37,6 @@ class ResumableReviewPage(BaseReviewPage):
         self._resume_snapshot: AdaptiveReviewSessionSnapshot | None = None
         self._discard_button: QPushButton | None = None
         super().__init__(progress_store, locale, clock=clock, parent=parent)
-        self.setObjectName("resumableReviewPage")
 
     @property
     def resumable_snapshot(self) -> AdaptiveReviewSessionSnapshot | None:
