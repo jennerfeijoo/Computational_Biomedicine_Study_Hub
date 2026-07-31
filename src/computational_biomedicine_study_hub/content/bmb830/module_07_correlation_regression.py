@@ -253,7 +253,13 @@ prediction=[4.91, 6.20]""",
                 "Interpret r=−0.70 without claiming causation.",
                 "Fortolk r=−0,70 uden at hævde kausalitet.",
             ),
-            (("Describe dirección, fuerza y límites.", "Describe direction, strength, and limits.", "Beskriv retning, styrke og begrænsninger."),),
+            (
+                (
+                    "Describe dirección, fuerza y límites.",
+                    "Describe direction, strength, and limits.",
+                    "Beskriv retning, styrke og begrænsninger.",
+                ),
+            ),
             (
                 "Existe una asociación lineal negativa relativamente fuerte en la muestra; no demuestra que una variable cause cambios en la otra.",
                 "There is a relatively strong negative linear association in the sample; it does not show that one variable causes changes in the other.",
@@ -274,7 +280,13 @@ prediction=[4.91, 6.20]""",
                 "Complete a Spearman correlation between x and y.",
                 "Fuldfør en Spearman-korrelation mellem x og y.",
             ),
-            (("Declara el método explícitamente.", "Declare the method explicitly.", "Angiv metoden eksplicit."),),
+            (
+                (
+                    "Declara el método explícitamente.",
+                    "Declare the method explicitly.",
+                    "Angiv metoden eksplicit.",
+                ),
+            ),
             ("cor(x, y, method = 'spearman')",) * 3,
             (
                 "Spearman opera sobre rangos y resume asociación monótona.",
@@ -291,7 +303,13 @@ prediction=[4.91, 6.20]""",
                 "Complete a linear model with response and exposure.",
                 "Fuldfør en lineær model med respons og eksponering.",
             ),
-            (("La respuesta va a la izquierda de ~.", "The response goes to the left of ~.", "Responsen står til venstre for ~."),),
+            (
+                (
+                    "La respuesta va a la izquierda de ~.",
+                    "The response goes to the left of ~.",
+                    "Responsen står til venstre for ~.",
+                ),
+            ),
             ("lm(response ~ exposure, data = dataset)",) * 3,
             (
                 "La fórmula define la media condicional que se modela.",
@@ -308,7 +326,13 @@ prediction=[4.91, 6.20]""",
                 "Explain a slope of 2.4 mg/L per year.",
                 "Forklar en hældning på 2,4 mg/L pr. år.",
             ),
-            (("Mantén las unidades y la condición media.", "Retain units and the mean condition.", "Bevar enhederne og middelbetingelsen."),),
+            (
+                (
+                    "Mantén las unidades y la condición media.",
+                    "Retain units and the mean condition.",
+                    "Bevar enhederne og middelbetingelsen.",
+                ),
+            ),
             (
                 "Por cada año adicional, el modelo estima un aumento medio de 2,4 mg/L en la respuesta dentro del rango estudiado.",
                 "For each additional year, the model estimates a mean increase of 2.4 mg/L in the response within the studied range.",
@@ -329,7 +353,13 @@ prediction=[4.91, 6.20]""",
                 "Correct the conclusion 'R²=0.90 proves that X causes Y'.",
                 "Ret konklusionen 'R²=0,90 beviser, at X forårsager Y'.",
             ),
-            (("R² describe ajuste muestral, no causalidad.", "R² describes sample fit, not causation.", "R² beskriver tilpasning i stikprøven, ikke kausalitet."),),
+            (
+                (
+                    "R² describe ajuste muestral, no causalidad.",
+                    "R² describes sample fit, not causation.",
+                    "R² beskriver tilpasning i stikprøven, ikke kausalitet.",
+                ),
+            ),
             (
                 "El modelo explica el 90 % de la variabilidad muestral de Y mediante una relación lineal con X; la causalidad requiere evidencia adicional.",
                 "The model explains 90% of the sample variability in Y through a linear relationship with X; causality requires additional evidence.",
@@ -350,7 +380,13 @@ prediction=[4.91, 6.20]""",
                 "Design the minimum analysis of a continuous X–Y relationship.",
                 "Design minimumsanalysen af en kontinuert X–Y-relation.",
             ),
-            (("Incluye gráfico, estimando, ajuste y diagnóstico.", "Include plot, estimand, fit, and diagnostics.", "Medtag plot, estimand, tilpasning og diagnostik."),),
+            (
+                (
+                    "Incluye gráfico, estimando, ajuste y diagnóstico.",
+                    "Include plot, estimand, fit, and diagnostics.",
+                    "Medtag plot, estimand, tilpasning og diagnostik.",
+                ),
+            ),
             (
                 "Definir unidades y estimando; inspeccionar dispersión; justificar Pearson o Spearman; ajustar lm si la media lineal es pertinente; reportar pendiente, intervalo y R²; revisar residuos y limitar extrapolación.",
                 "Define units and estimand; inspect a scatterplot; justify Pearson or Spearman; fit lm when a linear mean is appropriate; report slope, interval, and R²; inspect residuals and limit extrapolation.",
@@ -368,69 +404,320 @@ prediction=[4.91, 6.20]""",
         (
             "001",
             ("¿Qué resume Pearson?", "What does Pearson summarise?", "Hvad opsummerer Pearson?"),
-            (("a", ("Relación lineal", "Linear relationship", "Lineær relation")), ("b", ("Causalidad", "Causation", "Kausalitet")), ("c", ("Diferencia de medianas", "Median difference", "Medianforskel")), ("d", ("Riesgo absoluto", "Absolute risk", "Absolut risiko"))),
+            (
+                ("a", ("Relación lineal", "Linear relationship", "Lineær relation")),
+                ("b", ("Causalidad", "Causation", "Kausalitet")),
+                ("c", ("Diferencia de medianas", "Median difference", "Medianforskel")),
+                ("d", ("Riesgo absoluto", "Absolute risk", "Absolut risiko")),
+            ),
             "a",
-            ("Pearson cuantifica asociación lineal estandarizada.", "Pearson quantifies standardised linear association.", "Pearson kvantificerer standardiseret lineær association."),
+            (
+                "Pearson cuantifica asociación lineal estandarizada.",
+                "Pearson quantifies standardised linear association.",
+                "Pearson kvantificerer standardiseret lineær association.",
+            ),
         ),
         (
             "002",
-            ("¿Cuándo puede ser preferible Spearman?", "When may Spearman be preferable?", "Hvornår kan Spearman være at foretrække?"),
-            (("a", ("Relación monótona y datos ordinales", "Monotonic relationship and ordinal data", "Monoton relation og ordinale data")), ("b", ("Para demostrar causalidad", "To prove causation", "For at bevise kausalitet")), ("c", ("Solo con n grande", "Only with large n", "Kun ved stort n")), ("d", ("Para estimar una media", "To estimate a mean", "For at estimere et gennemsnit"))),
+            (
+                "¿Cuándo puede ser preferible Spearman?",
+                "When may Spearman be preferable?",
+                "Hvornår kan Spearman være at foretrække?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Relación monótona y datos ordinales",
+                        "Monotonic relationship and ordinal data",
+                        "Monoton relation og ordinale data",
+                    ),
+                ),
+                (
+                    "b",
+                    ("Para demostrar causalidad", "To prove causation", "For at bevise kausalitet"),
+                ),
+                ("c", ("Solo con n grande", "Only with large n", "Kun ved stort n")),
+                (
+                    "d",
+                    (
+                        "Para estimar una media",
+                        "To estimate a mean",
+                        "For at estimere et gennemsnit",
+                    ),
+                ),
+            ),
             "a",
-            ("Spearman usa rangos y resume monotonicidad.", "Spearman uses ranks and summarises monotonicity.", "Spearman bruger rangordener og opsummerer monotonicitet."),
+            (
+                "Spearman usa rangos y resume monotonicidad.",
+                "Spearman uses ranks and summarises monotonicity.",
+                "Spearman bruger rangordener og opsummerer monotonicitet.",
+            ),
         ),
         (
             "003",
             ("¿Qué representa β1?", "What does β1 represent?", "Hvad repræsenterer β1?"),
-            (("a", ("Cambio medio esperado en Y por unidad de X", "Expected mean change in Y per X unit", "Forventet gennemsnitlig ændring i Y pr. X-enhed")), ("b", ("Media de X", "Mean of X", "Gennemsnittet af X")), ("c", ("Error individual", "Individual error", "Individuel fejl")), ("d", ("R²", "R²", "R²"))),
+            (
+                (
+                    "a",
+                    (
+                        "Cambio medio esperado en Y por unidad de X",
+                        "Expected mean change in Y per X unit",
+                        "Forventet gennemsnitlig ændring i Y pr. X-enhed",
+                    ),
+                ),
+                ("b", ("Media de X", "Mean of X", "Gennemsnittet af X")),
+                ("c", ("Error individual", "Individual error", "Individuel fejl")),
+                ("d", ("R²", "R²", "R²")),
+            ),
             "a",
-            ("La pendiente tiene unidades Y por unidad X.", "The slope has Y units per X unit.", "Hældningen har Y-enheder pr. X-enhed."),
+            (
+                "La pendiente tiene unidades Y por unidad X.",
+                "The slope has Y units per X unit.",
+                "Hældningen har Y-enheder pr. X-enhed.",
+            ),
         ),
         (
             "004",
             ("¿Qué representa β0?", "What does β0 represent?", "Hvad repræsenterer β0?"),
-            (("a", ("Media esperada de Y cuando X=0", "Expected mean Y when X=0", "Forventet middelværdi af Y ved X=0")), ("b", ("Correlación", "Correlation", "Korrelation")), ("c", ("Varianza residual", "Residual variance", "Residualvarians")), ("d", ("Tamaño muestral", "Sample size", "Stikprøvestørrelse"))),
+            (
+                (
+                    "a",
+                    (
+                        "Media esperada de Y cuando X=0",
+                        "Expected mean Y when X=0",
+                        "Forventet middelværdi af Y ved X=0",
+                    ),
+                ),
+                ("b", ("Correlación", "Correlation", "Korrelation")),
+                ("c", ("Varianza residual", "Residual variance", "Residualvarians")),
+                ("d", ("Tamaño muestral", "Sample size", "Stikprøvestørrelse")),
+            ),
             "a",
-            ("El intercepto debe interpretarse solo si X=0 es relevante.", "The intercept should be interpreted only when X=0 is relevant.", "Skæringen bør kun fortolkes, når X=0 er relevant."),
+            (
+                "El intercepto debe interpretarse solo si X=0 es relevante.",
+                "The intercept should be interpreted only when X=0 is relevant.",
+                "Skæringen bør kun fortolkes, når X=0 er relevant.",
+            ),
         ),
         (
             "005",
             ("¿Qué comunica R²?", "What does R² communicate?", "Hvad kommunikerer R²?"),
-            (("a", ("Proporción de variabilidad muestral explicada", "Proportion of sample variability explained", "Andel af stikprøvevariation forklaret")), ("b", ("Probabilidad causal", "Causal probability", "Kausal sandsynlighed")), ("c", ("Ausencia de sesgo", "Absence of bias", "Fravær af bias")), ("d", ("Validez externa", "External validity", "Ekstern validitet"))),
+            (
+                (
+                    "a",
+                    (
+                        "Proporción de variabilidad muestral explicada",
+                        "Proportion of sample variability explained",
+                        "Andel af stikprøvevariation forklaret",
+                    ),
+                ),
+                ("b", ("Probabilidad causal", "Causal probability", "Kausal sandsynlighed")),
+                ("c", ("Ausencia de sesgo", "Absence of bias", "Fravær af bias")),
+                ("d", ("Validez externa", "External validity", "Ekstern validitet")),
+            ),
             "a",
-            ("R² es una medida de ajuste dentro de la muestra.", "R² is a within-sample fit measure.", "R² er et mål for tilpasning i stikprøven."),
+            (
+                "R² es una medida de ajuste dentro de la muestra.",
+                "R² is a within-sample fit measure.",
+                "R² er et mål for tilpasning i stikprøven.",
+            ),
         ),
         (
             "006",
-            ("¿Qué intervalo suele ser más ancho?", "Which interval is usually wider?", "Hvilket interval er normalt bredere?"),
-            (("a", ("Predicción individual", "Individual prediction", "Individuel prædiktion")), ("b", ("Confianza de la media", "Confidence for the mean", "Konfidens for middelværdien")), ("c", ("Ambos iguales", "Both equal", "Begge ens")), ("d", ("Ninguno", "Neither", "Ingen"))),
+            (
+                "¿Qué intervalo suele ser más ancho?",
+                "Which interval is usually wider?",
+                "Hvilket interval er normalt bredere?",
+            ),
+            (
+                ("a", ("Predicción individual", "Individual prediction", "Individuel prædiktion")),
+                (
+                    "b",
+                    (
+                        "Confianza de la media",
+                        "Confidence for the mean",
+                        "Konfidens for middelværdien",
+                    ),
+                ),
+                ("c", ("Ambos iguales", "Both equal", "Begge ens")),
+                ("d", ("Ninguno", "Neither", "Ingen")),
+            ),
             "a",
-            ("La predicción individual añade variabilidad residual.", "Individual prediction adds residual variability.", "Individuel prædiktion tilføjer residualvariation."),
+            (
+                "La predicción individual añade variabilidad residual.",
+                "Individual prediction adds residual variability.",
+                "Individuel prædiktion tilføjer residualvariation.",
+            ),
         ),
         (
             "007",
-            ("¿Qué función ajusta un modelo lineal en R?", "Which function fits a linear model in R?", "Hvilken funktion tilpasser en lineær model i R?"),
-            (("a", ("lm", "lm", "lm")), ("b", ("cor", "cor", "cor")), ("c", ("mean", "mean", "mean")), ("d", ("table", "table", "table"))),
+            (
+                "¿Qué función ajusta un modelo lineal en R?",
+                "Which function fits a linear model in R?",
+                "Hvilken funktion tilpasser en lineær model i R?",
+            ),
+            (
+                ("a", ("lm", "lm", "lm")),
+                ("b", ("cor", "cor", "cor")),
+                ("c", ("mean", "mean", "mean")),
+                ("d", ("table", "table", "table")),
+            ),
             "a",
-            ("lm usa una fórmula para definir respuesta y predictores.", "lm uses a formula to define response and predictors.", "lm bruger en formel til at definere respons og prædiktorer."),
+            (
+                "lm usa una fórmula para definir respuesta y predictores.",
+                "lm uses a formula to define response and predictors.",
+                "lm bruger en formel til at definere respons og prædiktorer.",
+            ),
         ),
         (
             "008",
-            ("¿Cuál es el principal riesgo de extrapolar?", "What is the main risk of extrapolation?", "Hvad er den største risiko ved ekstrapolation?"),
-            (("a", ("La relación puede cambiar fuera del rango observado", "The relationship may change outside the observed range", "Relationen kan ændre sig uden for det observerede område")), ("b", ("R² siempre aumenta", "R² always increases", "R² stiger altid")), ("c", ("La pendiente se vuelve causal", "The slope becomes causal", "Hældningen bliver kausal")), ("d", ("El error desaparece", "Error disappears", "Fejlen forsvinder"))),
+            (
+                "¿Cuál es el principal riesgo de extrapolar?",
+                "What is the main risk of extrapolation?",
+                "Hvad er den største risiko ved ekstrapolation?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "La relación puede cambiar fuera del rango observado",
+                        "The relationship may change outside the observed range",
+                        "Relationen kan ændre sig uden for det observerede område",
+                    ),
+                ),
+                ("b", ("R² siempre aumenta", "R² always increases", "R² stiger altid")),
+                (
+                    "c",
+                    (
+                        "La pendiente se vuelve causal",
+                        "The slope becomes causal",
+                        "Hældningen bliver kausal",
+                    ),
+                ),
+                ("d", ("El error desaparece", "Error disappears", "Fejlen forsvinder")),
+            ),
             "a",
-            ("El modelo está respaldado principalmente dentro del rango de datos.", "The model is mainly supported within the data range.", "Modellen er primært understøttet inden for dataområdet."),
+            (
+                "El modelo está respaldado principalmente dentro del rango de datos.",
+                "The model is mainly supported within the data range.",
+                "Modellen er primært understøttet inden for dataområdet.",
+            ),
         ),
     ),
     true_false=(
-        ("009", ("Una correlación alta demuestra causalidad.", "A high correlation proves causation.", "En høj korrelation beviser kausalitet."), False, ("La causalidad requiere diseño y supuestos adicionales.", "Causation requires additional design and assumptions.", "Kausalitet kræver yderligere design og antagelser.")),
-        ("010", ("Pearson es sensible a valores extremos.", "Pearson is sensitive to outliers.", "Pearson er følsom over for ekstreme værdier."), True, ("Los extremos pueden cambiar fuertemente la covariación y las desviaciones.", "Outliers can strongly change covariance and deviations.", "Ekstreme værdier kan ændre kovarians og afvigelser markant.")),
-        ("011", ("Correlación cero descarta cualquier relación.", "Zero correlation rules out any relationship.", "Nulkorrelation udelukker enhver relation."), False, ("Puede existir una relación no lineal.", "A nonlinear relationship may exist.", "Der kan eksistere en ikke-lineær relation.")),
-        ("012", ("La pendiente conserva unidades de Y por unidad de X.", "The slope retains units of Y per X unit.", "Hældningen bevarer enheder af Y pr. X-enhed."), True, ("Por eso debe reportarse con unidades.", "That is why it should be reported with units.", "Derfor bør den rapporteres med enheder.")),
-        ("013", ("R² mide validez causal.", "R² measures causal validity.", "R² måler kausal gyldighed."), False, ("R² describe ajuste muestral.", "R² describes sample fit.", "R² beskriver tilpasning i stikprøven.")),
-        ("014", ("Un intervalo de predicción suele incluir más incertidumbre que uno para la media.", "A prediction interval usually includes more uncertainty than an interval for the mean.", "Et prædiktionsinterval indeholder normalt mere usikkerhed end et interval for middelværdien."), True, ("Incluye variabilidad individual además de incertidumbre de la media.", "It includes individual variability in addition to mean uncertainty.", "Det inkluderer individuel variation ud over usikkerheden på middelværdien.")),
-        ("015", ("El intercepto siempre tiene una interpretación científica útil.", "The intercept always has a useful scientific interpretation.", "Skæringen har altid en nyttig videnskabelig fortolkning."), False, ("Puede corresponder a X=0 fuera del rango o sin significado.", "It may correspond to X=0 outside the range or without meaning.", "Den kan svare til X=0 uden for området eller uden betydning.")),
-        ("016", ("La inspección gráfica sigue siendo necesaria aunque se calcule una correlación.", "Graphical inspection remains necessary even when a correlation is calculated.", "Grafisk inspektion er stadig nødvendig, selv når en korrelation beregnes."), True, ("Los gráficos muestran forma, grupos y valores extremos.", "Plots reveal shape, groups, and outliers.", "Plots viser form, grupper og ekstreme værdier.")),
+        (
+            "009",
+            (
+                "Una correlación alta demuestra causalidad.",
+                "A high correlation proves causation.",
+                "En høj korrelation beviser kausalitet.",
+            ),
+            False,
+            (
+                "La causalidad requiere diseño y supuestos adicionales.",
+                "Causation requires additional design and assumptions.",
+                "Kausalitet kræver yderligere design og antagelser.",
+            ),
+        ),
+        (
+            "010",
+            (
+                "Pearson es sensible a valores extremos.",
+                "Pearson is sensitive to outliers.",
+                "Pearson er følsom over for ekstreme værdier.",
+            ),
+            True,
+            (
+                "Los extremos pueden cambiar fuertemente la covariación y las desviaciones.",
+                "Outliers can strongly change covariance and deviations.",
+                "Ekstreme værdier kan ændre kovarians og afvigelser markant.",
+            ),
+        ),
+        (
+            "011",
+            (
+                "Correlación cero descarta cualquier relación.",
+                "Zero correlation rules out any relationship.",
+                "Nulkorrelation udelukker enhver relation.",
+            ),
+            False,
+            (
+                "Puede existir una relación no lineal.",
+                "A nonlinear relationship may exist.",
+                "Der kan eksistere en ikke-lineær relation.",
+            ),
+        ),
+        (
+            "012",
+            (
+                "La pendiente conserva unidades de Y por unidad de X.",
+                "The slope retains units of Y per X unit.",
+                "Hældningen bevarer enheder af Y pr. X-enhed.",
+            ),
+            True,
+            (
+                "Por eso debe reportarse con unidades.",
+                "That is why it should be reported with units.",
+                "Derfor bør den rapporteres med enheder.",
+            ),
+        ),
+        (
+            "013",
+            (
+                "R² mide validez causal.",
+                "R² measures causal validity.",
+                "R² måler kausal gyldighed.",
+            ),
+            False,
+            (
+                "R² describe ajuste muestral.",
+                "R² describes sample fit.",
+                "R² beskriver tilpasning i stikprøven.",
+            ),
+        ),
+        (
+            "014",
+            (
+                "Un intervalo de predicción suele incluir más incertidumbre que uno para la media.",
+                "A prediction interval usually includes more uncertainty than an interval for the mean.",
+                "Et prædiktionsinterval indeholder normalt mere usikkerhed end et interval for middelværdien.",
+            ),
+            True,
+            (
+                "Incluye variabilidad individual además de incertidumbre de la media.",
+                "It includes individual variability in addition to mean uncertainty.",
+                "Det inkluderer individuel variation ud over usikkerheden på middelværdien.",
+            ),
+        ),
+        (
+            "015",
+            (
+                "El intercepto siempre tiene una interpretación científica útil.",
+                "The intercept always has a useful scientific interpretation.",
+                "Skæringen har altid en nyttig videnskabelig fortolkning.",
+            ),
+            False,
+            (
+                "Puede corresponder a X=0 fuera del rango o sin significado.",
+                "It may correspond to X=0 outside the range or without meaning.",
+                "Den kan svare til X=0 uden for området eller uden betydning.",
+            ),
+        ),
+        (
+            "016",
+            (
+                "La inspección gráfica sigue siendo necesaria aunque se calcule una correlación.",
+                "Graphical inspection remains necessary even when a correlation is calculated.",
+                "Grafisk inspektion er stadig nødvendig, selv når en korrelation beregnes.",
+            ),
+            True,
+            (
+                "Los gráficos muestran forma, grupos y valores extremos.",
+                "Plots reveal shape, groups, and outliers.",
+                "Plots viser form, grupper og ekstreme værdier.",
+            ),
+        ),
     ),
     tutor=(
         (
@@ -439,30 +726,90 @@ prediction=[4.91, 6.20]""",
             "Korrelation opsummerer association, mens simpel lineær regression modellerer den forventede middelrespons gennem en fortolkelig hældning. Ingen af delene fastslår kausalitet uden yderligere design og antagelser.",
         ),
         (
-            ("Pearson resume linealidad; Spearman resume monotonicidad por rangos.", "Pearson summarises linearity; Spearman summarises rank monotonicity.", "Pearson opsummerer lineæritet; Spearman opsummerer monoton rangassociation."),
-            ("La pendiente debe interpretarse con unidades y rango.", "The slope should be interpreted with units and range.", "Hældningen bør fortolkes med enheder og område."),
-            ("R² no mide causalidad.", "R² does not measure causation.", "R² måler ikke kausalitet."),
-            ("Predicción individual y media requieren intervalos distintos.", "Individual and mean prediction require different intervals.", "Individuel prædiktion og middelprædiktion kræver forskellige intervaller."),
+            (
+                "Pearson resume linealidad; Spearman resume monotonicidad por rangos.",
+                "Pearson summarises linearity; Spearman summarises rank monotonicity.",
+                "Pearson opsummerer lineæritet; Spearman opsummerer monoton rangassociation.",
+            ),
+            (
+                "La pendiente debe interpretarse con unidades y rango.",
+                "The slope should be interpreted with units and range.",
+                "Hældningen bør fortolkes med enheder og område.",
+            ),
+            (
+                "R² no mide causalidad.",
+                "R² does not measure causation.",
+                "R² måler ikke kausalitet.",
+            ),
+            (
+                "Predicción individual y media requieren intervalos distintos.",
+                "Individual and mean prediction require different intervals.",
+                "Individuel prædiktion og middelprædiktion kræver forskellige intervaller.",
+            ),
         ),
         (
-            ("Convertir correlación en causalidad.", "Turning correlation into causation.", "At gøre korrelation til kausalitet."),
-            ("Interpretar la pendiente sin unidades.", "Interpreting slope without units.", "At fortolke hældningen uden enheder."),
-            ("Extrapolar sin justificar.", "Extrapolating without justification.", "At ekstrapolere uden begrundelse."),
+            (
+                "Convertir correlación en causalidad.",
+                "Turning correlation into causation.",
+                "At gøre korrelation til kausalitet.",
+            ),
+            (
+                "Interpretar la pendiente sin unidades.",
+                "Interpreting slope without units.",
+                "At fortolke hældningen uden enheder.",
+            ),
+            (
+                "Extrapolar sin justificar.",
+                "Extrapolating without justification.",
+                "At ekstrapolere uden begrundelse.",
+            ),
         ),
         (
-            ("¿La relación es lineal o solo monótona?", "Is the relationship linear or only monotonic?", "Er relationen lineær eller kun monoton?"),
+            (
+                "¿La relación es lineal o solo monótona?",
+                "Is the relationship linear or only monotonic?",
+                "Er relationen lineær eller kun monoton?",
+            ),
             ("¿X=0 tiene significado?", "Is X=0 meaningful?", "Har X=0 en betydning?"),
-            ("¿Se predice una media o un individuo?", "Are you predicting a mean or an individual?", "Prædikerer du en middelværdi eller et individ?"),
+            (
+                "¿Se predice una media o un individuo?",
+                "Are you predicting a mean or an individual?",
+                "Prædikerer du en middelværdi eller et individ?",
+            ),
         ),
         (
-            ("Distingue asociación y causalidad.", "Distinguishes association and causation.", "Skelner mellem association og kausalitet."),
-            ("Interpreta pendiente, intervalo y R².", "Interprets slope, interval, and R².", "Fortolker hældning, interval og R²."),
-            ("Limita predicción y extrapolación al soporte de datos.", "Limits prediction and extrapolation to data support.", "Begrænser prædiktion og ekstrapolation til dataunderstøttelsen."),
+            (
+                "Distingue asociación y causalidad.",
+                "Distinguishes association and causation.",
+                "Skelner mellem association og kausalitet.",
+            ),
+            (
+                "Interpreta pendiente, intervalo y R².",
+                "Interprets slope, interval, and R².",
+                "Fortolker hældning, interval og R².",
+            ),
+            (
+                "Limita predicción y extrapolación al soporte de datos.",
+                "Limits prediction and extrapolation to data support.",
+                "Begrænser prædiktion og ekstrapolation til dataunderstøttelsen.",
+            ),
         ),
         (
-            ("No inventar causalidad ni mecanismos.", "Do not invent causation or mechanisms.", "Opfind ikke kausalitet eller mekanismer."),
-            ("No interpretar R² como probabilidad.", "Do not interpret R² as a probability.", "Fortolk ikke R² som en sandsynlighed."),
-            ("Responder en el idioma activo.", "Respond in the active language.", "Svar på det aktive sprog."),
+            (
+                "No inventar causalidad ni mecanismos.",
+                "Do not invent causation or mechanisms.",
+                "Opfind ikke kausalitet eller mekanismer.",
+            ),
+            (
+                "No interpretar R² como probabilidad.",
+                "Do not interpret R² as a probability.",
+                "Fortolk ikke R² som en sandsynlighed.",
+            ),
+            (
+                "Responder en el idioma activo.",
+                "Respond in the active language.",
+                "Svar på det aktive sprog.",
+            ),
         ),
         (
             "SDU ODIN BMB830 active course description approved 2025-03-06",
