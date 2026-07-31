@@ -17,6 +17,17 @@ The application combines concise theory, worked examples, executable code, guide
   - molecular information, ontologies and databases, sequence scoring, pairwise alignment, hidden Markov models, suffix arrays and BWT, bacterial genetics, motif discovery, biological networks, and omics learning
   - persistent open-response and essay studio with one authored task per module
 
+### BMB830 implementation in progress
+
+- **BMB830 — Biostatistics in R I**
+  - 3 complete initial modules
+  - R objects and reproducible workflows
+  - data quality, descriptive statistics, and scientific visualization
+  - probability, sampling, and reference distributions
+  - optional editable R laboratories executed through a locally installed `Rscript`
+
+The remaining BMB830 blocks on statistical inference, modelling, regression, and introductory multivariate analysis are under development.
+
 ### Registered first-semester courses
 
 - **DM857** — Introduction to Programming
@@ -24,14 +35,14 @@ The application combines concise theory, worked examples, executable code, guide
 - **BMB830** — Biostatistics in R I
 - **BMB831** — Biostatistics in R II
 
-BMB830 and BMB831 are registered in the application shell but their complete academic modules are not yet implemented.
+BMB831 is registered in the application shell, but its complete academic modules are not yet implemented.
 
 ## Main capabilities
 
 - Immediate language switching between **ES**, **EN**, and **DK**
 - Stable question and answer identities across translations
 - Lazy construction of course modules and reader sections
-- Guided practice, executable Python challenges, and objective assessments
+- Guided practice, executable Python challenges, executable R examples, and objective assessments
 - Persistent objective evidence, confidence, spaced review, and error notebook
 - Resumable adaptive-review sessions across courses
 - Persistent DM857 project-and-report preparation with repository evidence
@@ -66,10 +77,17 @@ Connection settings are validated in the application. Preferences are stored onl
 
 DM847 written feedback is generated from the authorised tutor documents of the selected module. Source identifiers are preserved with the response. Ollama may identify omissions or suggest revisions, but it does not assign an official grade, declare mastery, or modify deterministic learning progress. Learner drafts and the latest feedback remain in local sidecar storage.
 
+## Local R laboratories
+
+BMB830 worked examples can be edited and executed when `Rscript` is available on the local `PATH`. The runner uses `Rscript --vanilla`, a temporary working directory, a hard timeout, bounded output, and a conservative policy that rejects file, network, external-process, package-installation, dynamic-evaluation, and native-code capabilities.
+
+R is optional. Without `Rscript`, all BMB830 theory, worked code, expected output, practice, and objective assessment remain available; attempting to run a laboratory produces an explicit local-runtime message.
+
 ## Requirements
 
 - Python 3.11 or 3.12
 - A desktop environment capable of running Qt 6
+- R with `Rscript` on `PATH` only when executable BMB830 laboratories are required
 - Ollama only when local tutor or written-feedback support is required
 
 ## Installation
@@ -142,7 +160,7 @@ src/computational_biomedicine_study_hub/
 ├── courses/        # Course registration and course-page construction
 ├── i18n/           # Locale resolution, UI copy, and language control
 ├── integrations/   # Optional local services such as Ollama
-├── learning/       # Practice, assessment, review, and persistent learner-state models
+├── learning/       # Practice, assessment, review, execution, and learner-state models
 ├── storage/        # SQLite and atomic local sidecar persistence
 ├── tutoring/       # Authored retrieval, diagnostics, and bounded model prompts
 └── ui/             # PySide6 application shell, pages, and widgets
@@ -158,10 +176,11 @@ tests/              # Unit, content-integrity, localization, persistence, and UI
 - **Stable assessment identity:** deterministic grading uses internal IDs rather than translated visible text.
 - **Model-bounded:** Ollama provides grounded assistance but cannot replace deterministic assessment or mutate mastery automatically.
 - **Learner-owned writing:** edits invalidate feedback attached to older text, and drafts remain stored locally.
+- **Conservative local execution:** editable Python and R laboratories run with explicit time, output, and capability boundaries.
 - **Lazy UI construction:** heavy readers are created only when selected.
 - **Testable:** content and interface behavior are protected by automated regression tests.
 - **Incremental:** new courses and features are added through reviewable pull requests.
 
 ## Development status
 
-Active development. DM857 and DM847 provide the first complete academic course implementations. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development. Group-presentation rehearsal is intentionally outside the application scope.
+Active development. DM857 and DM847 provide complete academic course implementations. BMB830 contains its first three complete modules, while inference, modelling, regression, and multivariate analysis remain under development. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development. Group-presentation rehearsal is intentionally outside the application scope.
