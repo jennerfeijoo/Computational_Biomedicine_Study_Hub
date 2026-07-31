@@ -8,7 +8,6 @@ from typing import Protocol
 from PySide6.QtCore import QObject, QRunnable, QSettings, QThreadPool, QTimer, Signal, Slot
 from PySide6.QtWidgets import (
     QComboBox,
-    QFrame,
     QGroupBox,
     QHBoxLayout,
     QLabel,
@@ -38,7 +37,6 @@ from ...integrations import (
 )
 from ...learning.dm847_written_assessment import (
     DM847_WRITTEN_PROMPTS,
-    WrittenAssessmentPrompt,
     WrittenAssessmentSnapshot,
     WrittenFeedbackMode,
     WrittenTaskKind,
@@ -174,6 +172,7 @@ class DM847WrittenAssessmentPage(QWidget):
         self._runner = feedback_runner or self._default_runner()
         self._executor = executor or QtWrittenFeedbackExecutor()
         self._loading = False
+        self._loaded_prompt_id = self._snapshot.active_prompt_id
         self._request_serial = 0
         self._active_request_id: int | None = None
         self._pending_prompt_id = ""
@@ -365,11 +364,11 @@ class DM847WrittenAssessmentPage(QWidget):
     def snapshot(self) -> WrittenAssessmentSnapshot:
         """Return the latest captured state, including the visible draft."""
 
-        return self._capture_visible_draft(clear_feedback=False)
+        return self._capture_prompt_draft(self._loaded_prompt_id, clear_feedback=False)
 
     @property
     def current_prompt_id(self) -> str:
-        """Return the stable identity of the visible task."""
+        """Return the stable identity selected in the task control."""
 
         value = self._prompt_selector.currentData()
         return str(value or DM847_WRITTEN_PROMPTS[0].prompt_id)
@@ -402,7 +401,10 @@ class DM847WrittenAssessmentPage(QWidget):
         """Capture and atomically save learner drafts without grading them."""
 
         self._save_timer.stop()
-        self._snapshot = self._capture_visible_draft(clear_feedback=False)
+        self._snapshot = self._capture_prompt_draft(
+            self._loaded_prompt_id,
+            clear_feedback=False,
+        )
         if self._store is not None:
             self._store.save(self._snapshot)
         self._save_status.setText(
@@ -427,7 +429,7 @@ class DM847WrittenAssessmentPage(QWidget):
             return
 
         self.persist()
-        prompt_id = self.current_prompt_id
+        prompt_id = self._loaded_prompt_id
         spec = self._prompt_by_id[prompt_id]
         _, task_prompt, focus_points = written_prompt_copy(self._locale, prompt_id)
         module = self._module_by_id[spec.module_id]
@@ -481,9 +483,15 @@ class DM847WrittenAssessmentPage(QWidget):
     def _on_prompt_changed(self, _index: int) -> None:
         if self._loading:
             return
-        self._snapshot = self._capture_visible_draft(clear_feedback=False)
-        self._snapshot = self._snapshot.with_active_prompt(self.current_prompt_id)
-        self._load_prompt(self.current_prompt_id)
+        if self._active_request_id is not None:
+            self.cancel_request()
+        self._snapshot = self._capture_prompt_draft(
+            self._loaded_prompt_id,
+            clear_feedback=False,
+        )
+        target_prompt_id = self.current_prompt_id
+        self._snapshot = self._snapshot.with_active_prompt(target_prompt_id)
+        self._load_prompt(target_prompt_id)
         self._schedule_save()
 
     def _load_prompt(self, prompt_id: str) -> None:
@@ -492,8 +500,7 @@ class DM847WrittenAssessmentPage(QWidget):
             self._snapshot = self._snapshot.with_active_prompt(prompt_id)
             spec = self._prompt_by_id[prompt_id]
             module = self._module_by_id[spec.module_id]
-            title, task, focus_points = written_prompt_copy(self._locale, prompt_id)
-            del title
+            _, task, focus_points = written_prompt_copy(self._locale, prompt_id)
             kind_key = (
                 WrittenAssessmentCopyKey.ESSAY
                 if spec.kind is WrittenTaskKind.ESSAY
@@ -532,6 +539,7 @@ class DM847WrittenAssessmentPage(QWidget):
                     WrittenAssessmentCopyKey.NO_FEEDBACK,
                 )
             )
+            self._loaded_prompt_id = prompt_id
             self._update_word_count()
         finally:
             self._loading = False
@@ -539,8 +547,11 @@ class DM847WrittenAssessmentPage(QWidget):
     def _on_draft_changed(self) -> None:
         if self._loading:
             return
-        had_feedback = bool(self._snapshot.draft(self.current_prompt_id).feedback_text)
-        self._snapshot = self._capture_visible_draft(clear_feedback=True)
+        had_feedback = bool(self._snapshot.draft(self._loaded_prompt_id).feedback_text)
+        self._snapshot = self._capture_prompt_draft(
+            self._loaded_prompt_id,
+            clear_feedback=True,
+        )
         self._render_feedback("", ())
         self._feedback_status.setText(
             written_assessment_text(
@@ -556,13 +567,17 @@ class DM847WrittenAssessmentPage(QWidget):
         self._update_word_count()
         self._schedule_save()
 
-    def _capture_visible_draft(self, *, clear_feedback: bool) -> WrittenAssessmentSnapshot:
-        prompt_id = self.current_prompt_id
+    def _capture_prompt_draft(
+        self,
+        prompt_id: str,
+        *,
+        clear_feedback: bool,
+    ) -> WrittenAssessmentSnapshot:
         return self._snapshot.with_response(
             prompt_id,
             self._draft.toPlainText(),
             clear_feedback=clear_feedback,
-        ).with_active_prompt(prompt_id)
+        ).with_active_prompt(self.current_prompt_id)
 
     def _schedule_save(self) -> None:
         self._save_timer.start()
@@ -592,8 +607,6 @@ class DM847WrittenAssessmentPage(QWidget):
     def _apply_feedback_success(self, request_id: int, response_object: object) -> None:
         if request_id != self._active_request_id:
             return
-        self._active_request_id = None
-        self._set_generating(False)
         if not isinstance(response_object, WrittenFeedbackResponse):
             self._apply_feedback_failure(
                 request_id,
@@ -601,6 +614,8 @@ class DM847WrittenAssessmentPage(QWidget):
             )
             return
 
+        self._active_request_id = None
+        self._set_generating(False)
         prompt_id = self._pending_prompt_id
         self._pending_prompt_id = ""
         self._snapshot = self._snapshot.with_feedback(
@@ -609,7 +624,7 @@ class DM847WrittenAssessmentPage(QWidget):
             feedback_mode=response_object.mode,
             source_ids=response_object.source_ids,
         )
-        if prompt_id == self.current_prompt_id:
+        if prompt_id == self._loaded_prompt_id:
             self._render_feedback(response_object.content, response_object.source_ids)
             self._feedback_status.clear()
             self._model_label.setText(
@@ -625,15 +640,18 @@ class DM847WrittenAssessmentPage(QWidget):
 
     @Slot(int, object)
     def _apply_feedback_failure(self, request_id: int, error_object: object) -> None:
-        if request_id != self._active_request_id and self._active_request_id is not None:
+        if request_id != self._active_request_id:
             return
         self._active_request_id = None
         self._pending_prompt_id = ""
         self._set_generating(False)
-        error = error_object if isinstance(error_object, Exception) else RuntimeError(str(error_object))
-        if isinstance(error, (OllamaConnectionError, OllamaProtocolError, ValueError)):
-            message = str(error)
-        else:
+        error = (
+            error_object
+            if isinstance(error_object, Exception)
+            else RuntimeError(str(error_object))
+        )
+        message = str(error) or error.__class__.__name__
+        if not isinstance(error, (OllamaConnectionError, OllamaProtocolError, ValueError)):
             message = str(error) or error.__class__.__name__
         self._feedback_status.setText(
             written_assessment_text(
