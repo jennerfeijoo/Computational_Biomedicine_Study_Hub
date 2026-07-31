@@ -190,6 +190,7 @@ class AdaptiveReviewSessionWidget(QFrame):
         self._summary_visible = False
         number = self._session.answered_count + 1
 
+        card: ObjectiveQuestionCard | PythonChallengeWidget
         if isinstance(current, AdaptiveReviewQuestion):
             card = ObjectiveQuestionCard(
                 number,
