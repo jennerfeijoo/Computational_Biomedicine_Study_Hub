@@ -89,7 +89,7 @@ class PythonChallengeEvaluator:
         try:
             validate_python_source(source)
         except PythonPolicyError as exc:
-            visible_results = tuple(
+            rejected_results = tuple(
                 PythonChallengeCaseResult(
                     case_id=case.case_id,
                     description=case.description,
@@ -100,7 +100,7 @@ class PythonChallengeEvaluator:
             )
             return PythonChallengeResult(
                 exercise_id=challenge.exercise_id,
-                visible_results=visible_results,
+                visible_results=rejected_results,
                 hidden_passed=0,
                 hidden_total=len(challenge.hidden_cases),
                 duration_ms=0,
