@@ -26,9 +26,7 @@ class AdaptiveReviewSessionStore:
         self._database = str(database)
         self._memory_owner = memory_owner
         self._path = (
-            None
-            if self._database == ":memory:"
-            else Path(f"{self._database}.active-review.json")
+            None if self._database == ":memory:" else Path(f"{self._database}.active-review.json")
         )
         if self._path is not None:
             self._path.parent.mkdir(parents=True, exist_ok=True)
@@ -67,18 +65,18 @@ class AdaptiveReviewSessionStore:
     def load(self) -> AdaptiveReviewSessionSnapshot | None:
         """Return the saved session, deleting malformed documents defensively."""
 
-        document: str | None
-        if self._path is None:
-            owner = self._require_memory_owner()
-            document = _MEMORY_DOCUMENTS.get(owner)
-        elif self._path.exists():
-            document = self._path.read_text(encoding="utf-8")
-        else:
-            document = None
-
-        if document is None:
-            return None
         try:
+            document: str | None
+            if self._path is None:
+                owner = self._require_memory_owner()
+                document = _MEMORY_DOCUMENTS.get(owner)
+            elif self._path.exists():
+                document = self._path.read_text(encoding="utf-8")
+            else:
+                document = None
+
+            if document is None:
+                return None
             return AdaptiveReviewSessionSnapshot.from_json(document)
         except (AdaptiveReviewSnapshotError, OSError, UnicodeError):
             self.discard()
