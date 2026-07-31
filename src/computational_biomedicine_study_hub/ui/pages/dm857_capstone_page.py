@@ -100,7 +100,7 @@ class CapstoneMilestoneEditor(QGroupBox):
         self._commit = QLineEdit(progress.commit_reference)
         self._commit.setObjectName("capstoneCommitReference")
         self._commit.setPlaceholderText(capstone_text(locale, CapstoneCopyKey.COMMIT_PLACEHOLDER))
-        self._commit.textChanged.connect(self.changed.emit)
+        self._commit.textChanged.connect(lambda _text: self.changed.emit())
 
         layout.addWidget(evidence_label)
         layout.addWidget(self._evidence)
