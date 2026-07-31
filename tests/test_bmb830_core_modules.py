@@ -59,7 +59,7 @@ def test_bmb830_inference_block_covers_required_concepts() -> None:
     ).casefold()
 
     assert "error estándar" in estimation_text
-    assert "intervalo de confianza" in estimation_text
+    assert "intervalos de confianza" in estimation_text
     assert "error tipo i" in testing_text
     assert "potencia" in testing_text
     assert "welch" in comparison_text
