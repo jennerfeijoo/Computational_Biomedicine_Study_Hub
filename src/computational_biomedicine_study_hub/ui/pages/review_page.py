@@ -339,9 +339,7 @@ class ReviewPage(QWidget):
 
     def _build_error_card(self, error: ErrorRecord) -> QFrame:
         first_objective = error.objective_ids[0]
-        descriptor = self._catalog.get(
-            (error.course_code, error.module_id, first_objective)
-        )
+        descriptor = self._catalog.get((error.course_code, error.module_id, first_objective))
 
         card = QFrame()
         card.setObjectName("errorNotebookCard")
@@ -386,9 +384,7 @@ class ReviewPage(QWidget):
         status_row.addStretch(1)
         layout.addLayout(status_row)
 
-        prompt = QLabel(
-            review_text(self._locale, ReviewCopyKey.ERROR_PROMPT, text=error.prompt)
-        )
+        prompt = QLabel(review_text(self._locale, ReviewCopyKey.ERROR_PROMPT, text=error.prompt))
         prompt.setObjectName("errorPrompt")
         prompt.setWordWrap(True)
         layout.addWidget(prompt)
