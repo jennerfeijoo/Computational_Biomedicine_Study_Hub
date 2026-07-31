@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 
@@ -20,7 +20,7 @@ from computational_biomedicine_study_hub.storage import (
     SQLiteProgressStore,
 )
 
-NOW = datetime(2026, 7, 31, 14, 0, tzinfo=timezone.utc)
+NOW = datetime(2026, 7, 31, 14, 0, tzinfo=UTC)
 
 
 def _ready_milestone(index: int) -> CapstoneMilestoneProgress:
