@@ -18,15 +18,11 @@ def test_official_dm857_matrix_matches_active_sdu_structure() -> None:
     assert DM857_ODIN_APPROVAL_DATE == "2025-04-11"
     assert DM857_ODIN_VERSION == "Approved - active"
     assert len(rows) == 16
-    assert sum(
-        row.requirement.kind is OfficialRequirementKind.LEARNING_OUTCOME for row in rows
-    ) == 8
-    assert sum(
-        row.requirement.kind is OfficialRequirementKind.CONTENT_TOPIC for row in rows
-    ) == 5
-    assert sum(
-        row.requirement.kind is OfficialRequirementKind.EXAM_COMPONENT for row in rows
-    ) == 3
+    assert (
+        sum(row.requirement.kind is OfficialRequirementKind.LEARNING_OUTCOME for row in rows) == 8
+    )
+    assert sum(row.requirement.kind is OfficialRequirementKind.CONTENT_TOPIC for row in rows) == 5
+    assert sum(row.requirement.kind is OfficialRequirementKind.EXAM_COMPONENT for row in rows) == 3
 
 
 def test_official_dm857_learning_and_content_requirements_have_practice_and_assessment() -> None:
