@@ -13,6 +13,7 @@ from .guided_practice_widget import GuidedPracticeCard, GuidedPracticeWidget
 from .objective_assessment_widget import ObjectiveAssessmentWidget, ObjectiveQuestionCard
 from .python_challenge_widget import PythonChallengeWidget
 from .python_lab_widget import PythonLabWidget
+from .r_lab_widget import RLabWidget
 
 __all__ = [
     "AdaptiveReviewSessionWidget",
@@ -28,4 +29,5 @@ __all__ = [
     "PythonChallengeWidget",
     "PythonLabWidget",
     "QtChallengeTutorExecutor",
+    "RLabWidget",
 ]
