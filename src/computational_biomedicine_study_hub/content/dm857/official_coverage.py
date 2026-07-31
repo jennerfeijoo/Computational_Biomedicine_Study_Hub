@@ -2,8 +2,8 @@
 
 The matrix is intentionally conservative. A requirement is marked covered only when
 current authored modules provide teaching, practice, and assessment evidence. Exam
-components that require a complete project workflow or live interaction remain partial
-or gaps until those experiences exist in the application.
+components remain partial or gaps until the application implements the required
+experience and can be checked against the available official assessment materials.
 """
 
 from __future__ import annotations
@@ -216,10 +216,13 @@ OFFICIAL_DM857_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "Complete a group project and a written report of no more than 10 pages.",
         ("dm857.m04", "dm857.m08", "dm857.m11", "dm857.m12", "dm857.m14"),
         CoverageStatus.PARTIAL,
-        "The modules contain project-design, implementation, debugging, and explanation activities, "
-        "but the application has no integrated multi-week group project or report workflow.",
-        "Add a bounded capstone project with milestones, repository evidence, a report template, and "
-        "a rubric aligned to the official exam format.",
+        "The application now provides a persistent five-milestone capstone with group metadata, "
+        "repository and commit evidence, a ten-page report scaffold, and an explicitly internal "
+        "weighted readiness rubric. It cannot yet validate work against the unavailable official "
+        "itslearning project brief and assessment rubric.",
+        "Import the official project brief and rubric when available, then add criterion-level "
+        "artifact review, submission checks, and verified alignment without treating internal "
+        "preparation aids as official assessment materials.",
     ),
     OfficialRequirement(
         "dm857.sdu.exam02",

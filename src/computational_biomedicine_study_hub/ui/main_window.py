@@ -25,6 +25,7 @@ from ..i18n import (
 from ..storage import SQLiteProgressStore
 from .header import PageHeader
 from .navigation import NavigationSidebar
+from .pages.dm857_capstone_page import DM857CapstonePage
 from .pages.home_page import HomePage
 from .pages.ollama_settings_page import OllamaSettingsPage
 from .pages.placeholder_page import PlaceholderPage
@@ -159,9 +160,10 @@ class MainWindow(QMainWindow):
         self._settings.setValue("navigation/last_route", key)
 
     def closeEvent(self, event: QCloseEvent) -> None:  # noqa: N802
-        """Persist geometry and active review work before the window closes."""
+        """Persist geometry and active learner work before the window closes."""
 
         self._persist_review_session()
+        self._persist_capstone()
         self._settings.setValue("window/geometry", self.saveGeometry())
         super().closeEvent(event)
 
@@ -176,9 +178,7 @@ class MainWindow(QMainWindow):
         pages: dict[str, QWidget] = {
             RouteId.HOME.value: home_page,
             RouteId.REVIEW.value: review_page,
-            RouteId.ASSESSMENTS.value: PlaceholderPage(
-                ui_text(locale, UiCopyKey.ASSESSMENTS_PLACEHOLDER)
-            ),
+            RouteId.ASSESSMENTS.value: DM857CapstonePage(self._progress_store, locale),
             RouteId.FLASHCARDS.value: PlaceholderPage(
                 ui_text(locale, UiCopyKey.FLASHCARDS_PLACEHOLDER)
             ),
@@ -206,11 +206,12 @@ class MainWindow(QMainWindow):
 
     @Slot(str)
     def _apply_locale(self, locale_code: str) -> None:
-        """Rebuild visible pages immediately while preserving study and review state."""
+        """Rebuild visible pages immediately while preserving study and learner state."""
 
         route = route_value(self.current_route)
         study_location = self._capture_study_location(route)
         self._persist_review_session()
+        self._persist_capstone()
 
         self._header.set_locale(locale_code)
         self._navigation.retranslate(self._translator)
@@ -259,6 +260,11 @@ class MainWindow(QMainWindow):
         page = self._pages.get(RouteId.REVIEW.value)
         if isinstance(page, ReviewPage):
             page.persist_active_session()
+
+    def _persist_capstone(self) -> None:
+        page = self._pages.get(RouteId.ASSESSMENTS.value)
+        if isinstance(page, DM857CapstonePage):
+            page.persist()
 
     def _clear_pages(self) -> None:
         self._pages.clear()
