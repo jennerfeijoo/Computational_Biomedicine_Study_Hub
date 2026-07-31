@@ -91,12 +91,8 @@ class DM847WrittenAssessmentPage(QWidget):
             if locale == DEFAULT_LOCALE
             else tuple(bundle.materialize(locale) for bundle in LOCALIZED_BUNDLES)
         )
-        self._module_by_id = {
-            bundle.module.module_id: bundle.module for bundle in self._bundles
-        }
-        self._prompt_by_id = {
-            item.prompt_id: item for item in DM847_WRITTEN_PROMPTS
-        }
+        self._module_by_id = {bundle.module.module_id: bundle.module for bundle in self._bundles}
+        self._prompt_by_id = {item.prompt_id: item for item in DM847_WRITTEN_PROMPTS}
         self._store = written_store
         if self._store is None and progress_store is not None:
             self._store = DM847WrittenAssessmentStore.for_progress_store(progress_store)
@@ -195,14 +191,10 @@ class DM847WrittenAssessmentPage(QWidget):
             return
         draft = self._draft.toPlainText().strip()
         if not draft:
-            self._feedback_status.setText(
-                self._text(WrittenAssessmentCopyKey.EMPTY_DRAFT)
-            )
+            self._feedback_status.setText(self._text(WrittenAssessmentCopyKey.EMPTY_DRAFT))
             return
         if _word_count(draft) < self.MINIMUM_FEEDBACK_WORDS:
-            self._feedback_status.setText(
-                self._text(WrittenAssessmentCopyKey.TOO_SHORT)
-            )
+            self._feedback_status.setText(self._text(WrittenAssessmentCopyKey.TOO_SHORT))
             return
 
         self.persist()
@@ -307,9 +299,7 @@ class DM847WrittenAssessmentPage(QWidget):
         group_layout = QVBoxLayout(group)
         self._draft = QPlainTextEdit()
         self._draft.setObjectName("writtenDraftEditor")
-        self._draft.setPlaceholderText(
-            self._text(WrittenAssessmentCopyKey.DRAFT_PLACEHOLDER)
-        )
+        self._draft.setPlaceholderText(self._text(WrittenAssessmentCopyKey.DRAFT_PLACEHOLDER))
         self._draft.setMinimumHeight(260)
         self._draft.textChanged.connect(self._on_draft_changed)
         group_layout.addWidget(self._draft)
@@ -399,9 +389,7 @@ class DM847WrittenAssessmentPage(QWidget):
         button = QPushButton(self._text(key))
         button.setObjectName(object_name)
         button.clicked.connect(
-            lambda _checked=False, selected_mode=mode: self.request_feedback(
-                selected_mode
-            )
+            lambda _checked=False, selected_mode=mode: self.request_feedback(selected_mode)
         )
         return button
 
@@ -442,8 +430,7 @@ class DM847WrittenAssessmentPage(QWidget):
                 f"{self._text(WrittenAssessmentCopyKey.MODULE)}: {module.title}"
             )
             self._kind_label.setText(
-                f"{self._text(WrittenAssessmentCopyKey.TASK_KIND)}: "
-                f"{self._text(kind_key)}"
+                f"{self._text(WrittenAssessmentCopyKey.TASK_KIND)}: {self._text(kind_key)}"
             )
             objective_text = ", ".join(
                 objective.statement
@@ -461,9 +448,7 @@ class DM847WrittenAssessmentPage(QWidget):
             draft = self._snapshot.draft(prompt_id)
             self._draft.setPlainText(draft.response_text)
             self._render_feedback(draft.feedback_text, draft.source_ids)
-            status = "" if draft.feedback_text else self._text(
-                WrittenAssessmentCopyKey.NO_FEEDBACK
-            )
+            status = "" if draft.feedback_text else self._text(WrittenAssessmentCopyKey.NO_FEEDBACK)
             self._feedback_status.setText(status)
             self._loaded_prompt_id = prompt_id
             self._update_word_count()
@@ -473,9 +458,7 @@ class DM847WrittenAssessmentPage(QWidget):
     def _on_draft_changed(self) -> None:
         if self._loading:
             return
-        had_feedback = bool(
-            self._snapshot.draft(self._loaded_prompt_id).feedback_text
-        )
+        had_feedback = bool(self._snapshot.draft(self._loaded_prompt_id).feedback_text)
         self._snapshot = self._capture_prompt_draft(
             self._loaded_prompt_id,
             clear_feedback=True,
@@ -523,9 +506,7 @@ class DM847WrittenAssessmentPage(QWidget):
             button.setEnabled(not generating)
         self._cancel_button.setVisible(generating)
         if generating:
-            self._feedback_status.setText(
-                self._text(WrittenAssessmentCopyKey.GENERATING)
-            )
+            self._feedback_status.setText(self._text(WrittenAssessmentCopyKey.GENERATING))
 
     @Slot(int, object)
     def _apply_feedback_success(self, request_id: int, response_object: object) -> None:
@@ -572,9 +553,7 @@ class DM847WrittenAssessmentPage(QWidget):
         self._pending_prompt_id = ""
         self._set_generating(False)
         error = (
-            error_object
-            if isinstance(error_object, Exception)
-            else RuntimeError(str(error_object))
+            error_object if isinstance(error_object, Exception) else RuntimeError(str(error_object))
         )
         self._feedback_status.setText(
             self._text(
@@ -585,9 +564,7 @@ class DM847WrittenAssessmentPage(QWidget):
 
     def _render_feedback(self, feedback: str, source_ids: tuple[str, ...]) -> None:
         self._feedback.setPlainText(feedback)
-        self._sources.setText(
-            " · ".join(f"[{item}]" for item in source_ids) or "—"
-        )
+        self._sources.setText(" · ".join(f"[{item}]" for item in source_ids) or "—")
 
     def _text(
         self,
