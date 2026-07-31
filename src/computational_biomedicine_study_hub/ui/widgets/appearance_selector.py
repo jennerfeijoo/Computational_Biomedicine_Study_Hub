@@ -13,7 +13,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ...i18n import AppLocale, AppearanceCopyKey, appearance_text
+from ...i18n import AppearanceCopyKey, AppLocale, appearance_text
 from ..theme import AppearanceMode, ThemeController, VisualTheme
 
 
