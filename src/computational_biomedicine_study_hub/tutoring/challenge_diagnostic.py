@@ -364,9 +364,7 @@ _SYSTEM_COPY: dict[AppLocale, tuple[str, str, str, tuple[str, ...]]] = {
                 "La calificación determinista es inmutable: no la recalcules, contradigas ni "
                 "modifiques."
             ),
-            (
-                "No inventes ni reveles definiciones, entradas o aserciones de pruebas ocultas."
-            ),
+            ("No inventes ni reveles definiciones, entradas o aserciones de pruebas ocultas."),
             "Distingue hechos observados, hipótesis diagnósticas y recomendaciones.",
             (
                 "Prioriza una pista concreta y una pregunta socrática; revela la solución completa "
