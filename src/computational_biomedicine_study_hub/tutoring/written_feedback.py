@@ -13,7 +13,7 @@ from ..integrations import (
     OllamaChatClient,
 )
 from ..learning.dm847_written_assessment import WrittenFeedbackMode
-from .context import TutorDocumentRetriever
+from .context import RankedTutorDocument, TutorDocumentRetriever
 
 
 @dataclass(frozen=True, slots=True)
@@ -87,9 +87,7 @@ class WrittenFeedbackPromptBuilder:
         context = self._retriever.retrieve(retrieval_query)
         context_text, source_ids = self._render_context(context.documents)
         focus = "\n".join(f"- {item}" for item in request.focus_points)
-        grading = "\n".join(
-            f"- {item}" for item in self._module.tutor_support.grading_criteria
-        )
+        grading = "\n".join(f"- {item}" for item in self._module.tutor_support.grading_criteria)
         constraints = "\n".join(
             f"- {item}" for item in self._module.tutor_support.response_constraints
         )
@@ -128,28 +126,24 @@ class WrittenFeedbackPromptBuilder:
         )
         return WrittenFeedbackPrompt(messages=(system, user), source_ids=source_ids)
 
-    def _render_context(self, documents: tuple[object, ...]) -> tuple[str, tuple[str, ...]]:
+    def _render_context(
+        self,
+        documents: tuple[RankedTutorDocument, ...],
+    ) -> tuple[str, tuple[str, ...]]:
         remaining = self._max_context_characters
         sections: list[str] = []
         source_ids: list[str] = []
 
-        for ranked_object in documents:
-            document = getattr(ranked_object, "document", None)
-            if document is None:
-                continue
-            document_id = str(getattr(document, "document_id", "")).strip()
-            title = str(getattr(document, "title", "")).strip()
-            text = str(getattr(document, "text", "")).strip()
-            if not document_id or not title or not text:
-                continue
-            header = f"SOURCE [{document_id}] — {title}\n"
+        for ranked in documents:
+            document = ranked.document
+            header = f"SOURCE [{document.document_id}] — {document.title}\n"
             if remaining <= len(header) + 240:
                 break
             body_limit = remaining - len(header)
-            body = _truncate(text, body_limit)
+            body = _truncate(document.text, body_limit)
             section = header + body
             sections.append(section)
-            source_ids.append(document_id)
+            source_ids.append(document.document_id)
             remaining -= len(section) + 2
 
         if not sections:
