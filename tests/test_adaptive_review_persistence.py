@@ -29,7 +29,7 @@ from computational_biomedicine_study_hub.ui.pages.resumable_review_page import (
     ResumableReviewPage,
 )
 
-_NOW = datetime(2026, 7, 31, 10, 0, tzinfo=UTC)
+_NOW = datetime(2026, 7, 31, 18, 0, tzinfo=UTC)
 
 
 def _review_item(objective_id: str, *, mastery: float = 0.25) -> ReviewItem:
