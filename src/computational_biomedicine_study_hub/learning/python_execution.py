@@ -260,9 +260,14 @@ def can_execute_python(source: str) -> bool:
 
 
 def normalize_output(value: str) -> str:
-    """Normalize terminal whitespace without altering content inside each line."""
+    """Normalize outer blank lines and trailing whitespace only."""
 
-    return "\n".join(line.rstrip() for line in value.strip().splitlines())
+    lines = value.splitlines()
+    while lines and not lines[0].strip():
+        lines.pop(0)
+    while lines and not lines[-1].strip():
+        lines.pop()
+    return "\n".join(line.rstrip() for line in lines)
 
 
 class PythonSubprocessRunner:
