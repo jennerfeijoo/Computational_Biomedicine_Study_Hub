@@ -1,4 +1,4 @@
-"""Asynchronous, non-grading Ollama tutor for verified programming diagnostics."""
+"""Asynchronous adaptive Ollama tutor for verified programming diagnostics."""
 
 from __future__ import annotations
 
@@ -7,6 +7,7 @@ from typing import Protocol
 
 from PySide6.QtCore import QObject, QRunnable, QThreadPool, Signal, Slot
 from PySide6.QtWidgets import (
+    QComboBox,
     QFrame,
     QHBoxLayout,
     QLabel,
@@ -17,21 +18,31 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
+from ...i18n.adaptive_tutor_copy import AdaptiveTutorCopyKey, adaptive_tutor_text
 from ...i18n.challenge_tutor_copy import ChallengeTutorCopyKey, challenge_tutor_text
 from ...i18n.locales import DEFAULT_LOCALE, AppLocale
-from ...integrations import (
-    DEFAULT_CHAT_MODEL,
-    OllamaConnectionError,
-    OllamaProtocolError,
+from ...integrations import DEFAULT_CHAT_MODEL, OllamaConnectionError, OllamaProtocolError
+from ...tutoring import (
+    ChallengeDiagnostic,
+    ChallengeTutorResponse,
+    TutorAssistanceLevel,
+    TutorSessionSnapshot,
+    TutorSessionTurn,
 )
-from ...tutoring import ChallengeDiagnostic, ChallengeTutorResponse
 from .challenge_tutor_styles import CHALLENGE_TUTOR_STYLESHEET
 
 
 class ChallengeTutorRunner(Protocol):
-    """Minimal service contract consumed by the tutor panel."""
+    """Minimal adaptive service contract consumed by the tutor panel."""
 
-    def ask(self, diagnostic: ChallengeDiagnostic, question: str) -> ChallengeTutorResponse:
+    def ask(
+        self,
+        diagnostic: ChallengeDiagnostic,
+        question: str,
+        *,
+        assistance_level: TutorAssistanceLevel = TutorAssistanceLevel.SOCRATIC,
+        history: tuple[TutorSessionTurn, ...] = (),
+    ) -> ChallengeTutorResponse:
         """Return one grounded explanation for a verified diagnostic."""
 
 
@@ -103,10 +114,26 @@ class QtChallengeTutorExecutor:
         del request_id
 
 
+_LEVEL_COPY = {
+    TutorAssistanceLevel.SOCRATIC: AdaptiveTutorCopyKey.LEVEL_SOCRATIC,
+    TutorAssistanceLevel.CONCEPTUAL: AdaptiveTutorCopyKey.LEVEL_CONCEPTUAL,
+    TutorAssistanceLevel.STRUCTURAL: AdaptiveTutorCopyKey.LEVEL_STRUCTURAL,
+    TutorAssistanceLevel.EXPLANATION: AdaptiveTutorCopyKey.LEVEL_EXPLANATION,
+}
+
+_HINT_COPY = {
+    TutorAssistanceLevel.SOCRATIC: AdaptiveTutorCopyKey.HINT_QUESTION_SOCRATIC,
+    TutorAssistanceLevel.CONCEPTUAL: AdaptiveTutorCopyKey.HINT_QUESTION_CONCEPTUAL,
+    TutorAssistanceLevel.STRUCTURAL: AdaptiveTutorCopyKey.HINT_QUESTION_STRUCTURAL,
+    TutorAssistanceLevel.EXPLANATION: AdaptiveTutorCopyKey.HINT_QUESTION_EXPLANATION,
+}
+
+
 class ChallengeTutorPanel(QFrame):
-    """Ask a local tutor about the latest immutable deterministic diagnostic."""
+    """Maintain one bounded adaptive dialogue for the latest verified diagnostic."""
 
     response_ready = Signal(object)
+    response_rated = Signal(bool)
 
     def __init__(
         self,
@@ -114,18 +141,25 @@ class ChallengeTutorPanel(QFrame):
         *,
         locale: AppLocale = DEFAULT_LOCALE,
         executor: ChallengeTutorExecutor | None = None,
+        max_session_turns: int = 6,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
+        if max_session_turns < 1:
+            raise ValueError("max_session_turns must be at least 1.")
         self.setObjectName("challengeTutorPanel")
         self.setStyleSheet(CHALLENGE_TUTOR_STYLESHEET)
         self._tutor = tutor
         self._locale = locale
         self._executor = executor or QtChallengeTutorExecutor()
+        self._max_session_turns = max_session_turns
         self._diagnostic: ChallengeDiagnostic | None = None
+        self._session = TutorSessionSnapshot()
         self._last_response: ChallengeTutorResponse | None = None
         self._request_serial = 0
         self._active_request_id: int | None = None
+        self._pending_question = ""
+        self._pending_level = TutorAssistanceLevel.SOCRATIC
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(16, 14, 16, 14)
@@ -145,6 +179,22 @@ class ChallengeTutorPanel(QFrame):
         self._status.setWordWrap(True)
         layout.addWidget(self._status)
 
+        level_row = QHBoxLayout()
+        level_row.setContentsMargins(0, 0, 0, 0)
+        level_row.setSpacing(8)
+        level_label = QLabel(adaptive_tutor_text(locale, AdaptiveTutorCopyKey.LEVEL_LABEL))
+        level_label.setObjectName("challengeTutorLevelLabel")
+        self._level_selector = QComboBox()
+        self._level_selector.setObjectName("challengeTutorLevelSelector")
+        for level in TutorAssistanceLevel:
+            self._level_selector.addItem(
+                adaptive_tutor_text(locale, _LEVEL_COPY[level]),
+                level.value,
+            )
+        level_row.addWidget(level_label)
+        level_row.addWidget(self._level_selector, 1)
+        layout.addLayout(level_row)
+
         self._question = QPlainTextEdit()
         self._question.setObjectName("challengeTutorQuestion")
         self._question.setPlaceholderText(
@@ -159,7 +209,9 @@ class ChallengeTutorPanel(QFrame):
         actions.setContentsMargins(0, 0, 0, 0)
         actions.setSpacing(8)
 
-        self._hint_button = QPushButton(challenge_tutor_text(locale, ChallengeTutorCopyKey.HINT))
+        self._hint_button = QPushButton(
+            adaptive_tutor_text(locale, AdaptiveTutorCopyKey.REQUEST_LEVEL)
+        )
         self._hint_button.setObjectName("challengeTutorSecondaryButton")
         self._hint_button.clicked.connect(self.request_hint)
         actions.addWidget(self._hint_button)
@@ -209,10 +261,52 @@ class ChallengeTutorPanel(QFrame):
         self._model.hide()
         layout.addWidget(self._model)
 
+        self._rating_widget = QWidget()
+        rating_layout = QHBoxLayout(self._rating_widget)
+        rating_layout.setContentsMargins(0, 0, 0, 0)
+        rating_layout.setSpacing(8)
+        rating_label = QLabel(adaptive_tutor_text(locale, AdaptiveTutorCopyKey.HELPFUL_PROMPT))
+        rating_label.setObjectName("challengeTutorRatingLabel")
+        self._helpful_button = QPushButton(
+            adaptive_tutor_text(locale, AdaptiveTutorCopyKey.HELPFUL)
+        )
+        self._helpful_button.setObjectName("challengeTutorHelpfulButton")
+        self._helpful_button.clicked.connect(self.mark_helpful)
+        self._not_helpful_button = QPushButton(
+            adaptive_tutor_text(locale, AdaptiveTutorCopyKey.NOT_HELPFUL)
+        )
+        self._not_helpful_button.setObjectName("challengeTutorNotHelpfulButton")
+        self._not_helpful_button.clicked.connect(self.mark_not_helpful)
+        rating_layout.addWidget(rating_label)
+        rating_layout.addWidget(self._helpful_button)
+        rating_layout.addWidget(self._not_helpful_button)
+        rating_layout.addStretch(1)
+        self._rating_widget.hide()
+        layout.addWidget(self._rating_widget)
+
+        self._history_heading = QLabel(
+            adaptive_tutor_text(locale, AdaptiveTutorCopyKey.HISTORY_TITLE)
+        )
+        self._history_heading.setObjectName("contentSubheading")
+        self._history_heading.hide()
+        layout.addWidget(self._history_heading)
+
+        self._history = QTextBrowser()
+        self._history.setObjectName("challengeTutorHistory")
+        self._history.setOpenExternalLinks(False)
+        self._history.setMinimumHeight(150)
+        self._history.hide()
+        layout.addWidget(self._history)
+
         notice = QLabel(challenge_tutor_text(locale, ChallengeTutorCopyKey.NON_GRADING_NOTICE))
         notice.setObjectName("challengeTutorNotice")
         notice.setWordWrap(True)
         layout.addWidget(notice)
+
+        session_notice = QLabel(adaptive_tutor_text(locale, AdaptiveTutorCopyKey.SESSION_NOTICE))
+        session_notice.setObjectName("challengeTutorNotice")
+        session_notice.setWordWrap(True)
+        layout.addWidget(session_notice)
 
         self._update_actions()
 
@@ -229,6 +323,31 @@ class ChallengeTutorPanel(QFrame):
         return self._last_response
 
     @property
+    def session_turns(self) -> tuple[TutorSessionTurn, ...]:
+        """Return the bounded source-traceable conversation history."""
+
+        return self._session.turns
+
+    @property
+    def assistance_count(self) -> int:
+        """Return how many tutor responses supported the current diagnostic."""
+
+        return self._session.assistance_count
+
+    @property
+    def solution_revealed(self) -> bool:
+        """Return whether full explanation was used before the next attempt."""
+
+        return self._session.solution_revealed
+
+    @property
+    def selected_level(self) -> TutorAssistanceLevel:
+        """Return the currently selected assistance level."""
+
+        data = self._level_selector.currentData()
+        return TutorAssistanceLevel(str(data))
+
+    @property
     def is_busy(self) -> bool:
         """Return whether this panel is waiting for an Ollama response."""
 
@@ -241,6 +360,10 @@ class ChallengeTutorPanel(QFrame):
     @property
     def response_text(self) -> str:
         return self._response.toPlainText()
+
+    @property
+    def history_text(self) -> str:
+        return self._history.toPlainText()
 
     @property
     def sources_text(self) -> str:
@@ -259,12 +382,20 @@ class ChallengeTutorPanel(QFrame):
 
         self._question.setPlainText(question)
 
+    def set_assistance_level(self, level: TutorAssistanceLevel) -> None:
+        """Select one stable pedagogical support level."""
+
+        index = self._level_selector.findData(level.value)
+        if index < 0:
+            raise ValueError(f"Unknown tutor assistance level: {level.value}")
+        self._level_selector.setCurrentIndex(index)
+
     def set_diagnostic(self, diagnostic: ChallengeDiagnostic) -> None:
-        """Install a new verified result and invalidate any older explanation."""
+        """Install a new verified result and start a clean tutor session."""
 
         self._cancel_active(silent=True)
         self._diagnostic = diagnostic
-        self._clear_response()
+        self._reset_session()
         self._set_status(
             challenge_tutor_text(self._locale, ChallengeTutorCopyKey.READY),
             state="ready",
@@ -272,11 +403,11 @@ class ChallengeTutorPanel(QFrame):
         self._update_actions()
 
     def begin_evaluation(self) -> None:
-        """Invalidate prior tutor output when a new deterministic run begins."""
+        """Invalidate dialogue state when a new deterministic run begins."""
 
         self._cancel_active(silent=True)
         self._diagnostic = None
-        self._clear_response()
+        self._reset_session()
         self._set_status(
             challenge_tutor_text(self._locale, ChallengeTutorCopyKey.WAITING),
             state="waiting",
@@ -287,16 +418,12 @@ class ChallengeTutorPanel(QFrame):
         """Remove all tutor state, for example when resetting the challenge."""
 
         self.begin_evaluation()
-        self._question.clear()
 
     @Slot()
     def request_hint(self) -> None:
-        """Submit a localized hint request without exposing hidden tests."""
+        """Submit a localized request for the selected assistance level."""
 
-        question = challenge_tutor_text(
-            self._locale,
-            ChallengeTutorCopyKey.DEFAULT_HINT_QUESTION,
-        )
+        question = adaptive_tutor_text(self._locale, _HINT_COPY[self.selected_level])
         self._question.setPlainText(question)
         self._start_request(question)
 
@@ -320,6 +447,18 @@ class ChallengeTutorPanel(QFrame):
 
         self._cancel_active(silent=False)
 
+    @Slot()
+    def mark_helpful(self) -> None:
+        """Record positive usefulness feedback for the latest response."""
+
+        self._rate_latest(True)
+
+    @Slot()
+    def mark_not_helpful(self) -> None:
+        """Record insufficient help and suggest the next stronger level."""
+
+        self._rate_latest(False)
+
     def _start_request(self, question: str) -> None:
         diagnostic = self._diagnostic
         if diagnostic is None or self.is_busy:
@@ -327,8 +466,12 @@ class ChallengeTutorPanel(QFrame):
 
         self._request_serial += 1
         request_id = self._request_serial
+        level = self.selected_level
+        history = self._session.turns
         self._active_request_id = request_id
-        self._clear_response()
+        self._pending_question = question
+        self._pending_level = level
+        self._clear_latest_response()
         self._set_status(
             challenge_tutor_text(self._locale, ChallengeTutorCopyKey.RUNNING),
             state="running",
@@ -338,7 +481,12 @@ class ChallengeTutorPanel(QFrame):
         try:
             self._executor.submit(
                 request_id,
-                lambda: self._tutor.ask(diagnostic, question),
+                lambda: self._tutor.ask(
+                    diagnostic,
+                    question,
+                    assistance_level=level,
+                    history=history,
+                ),
                 self._handle_success,
                 self._handle_failure,
             )
@@ -351,6 +499,7 @@ class ChallengeTutorPanel(QFrame):
             return
         self._executor.cancel(request_id)
         self._active_request_id = None
+        self._pending_question = ""
         self._set_busy(False)
         if not silent:
             self._set_status(
@@ -369,9 +518,22 @@ class ChallengeTutorPanel(QFrame):
             )
             return
 
+        question = self._pending_question
+        level = self._pending_level
         self._active_request_id = None
+        self._pending_question = ""
         self._set_busy(False)
         self._last_response = payload
+        self._session = self._session.append(
+            TutorSessionTurn(
+                question=question,
+                response=payload.content,
+                assistance_level=level,
+                model=payload.model,
+                source_ids=payload.source_ids,
+            ),
+            max_turns=self._max_session_turns,
+        )
         self._response.setMarkdown(payload.content)
         self._response_heading.show()
         self._response.show()
@@ -386,6 +548,8 @@ class ChallengeTutorPanel(QFrame):
             )
         )
         self._model.show()
+        self._rating_widget.show()
+        self._render_history()
         self._set_status(
             challenge_tutor_text(self._locale, ChallengeTutorCopyKey.READY),
             state="ready",
@@ -398,9 +562,93 @@ class ChallengeTutorPanel(QFrame):
             return
         error = payload if isinstance(payload, Exception) else RuntimeError(str(payload))
         self._active_request_id = None
+        self._pending_question = ""
         self._set_busy(False)
         self._last_response = None
         self._set_status(self._localized_error(error), state="error")
+
+    def _rate_latest(self, helpful: bool) -> None:
+        if not self._session.turns or self._session.turns[-1].helpful is not None:
+            return
+        previous_level = self._session.turns[-1].assistance_level
+        self._session = self._session.rate_latest(helpful)
+        self._rating_widget.hide()
+        self._render_history()
+        if helpful:
+            status = adaptive_tutor_text(
+                self._locale,
+                AdaptiveTutorCopyKey.RATED_HELPFUL,
+            )
+        else:
+            next_level = previous_level.next_level
+            if next_level is previous_level:
+                status = adaptive_tutor_text(
+                    self._locale,
+                    AdaptiveTutorCopyKey.RATED_NOT_HELPFUL,
+                )
+            else:
+                self.set_assistance_level(next_level)
+                level_text = adaptive_tutor_text(self._locale, _LEVEL_COPY[next_level])
+                status = " ".join(
+                    (
+                        adaptive_tutor_text(
+                            self._locale,
+                            AdaptiveTutorCopyKey.RATED_NOT_HELPFUL,
+                        ),
+                        adaptive_tutor_text(
+                            self._locale,
+                            AdaptiveTutorCopyKey.ESCALATED,
+                            level=level_text,
+                        ),
+                    )
+                )
+        self._set_status(status, state="ready")
+        self.response_rated.emit(helpful)
+
+    def _render_history(self) -> None:
+        sections: list[str] = []
+        for number, turn in enumerate(self._session.turns, start=1):
+            level = adaptive_tutor_text(self._locale, _LEVEL_COPY[turn.assistance_level])
+            title = adaptive_tutor_text(
+                self._locale,
+                AdaptiveTutorCopyKey.TURN_TITLE,
+                number=number,
+                level=level,
+            )
+            question = adaptive_tutor_text(
+                self._locale,
+                AdaptiveTutorCopyKey.TURN_QUESTION,
+                question=turn.question,
+            )
+            sources = adaptive_tutor_text(
+                self._locale,
+                AdaptiveTutorCopyKey.TURN_SOURCES,
+                sources=", ".join(turn.source_ids),
+            )
+            model = adaptive_tutor_text(
+                self._locale,
+                AdaptiveTutorCopyKey.TURN_MODEL,
+                model=turn.model,
+            )
+            rating = ""
+            if turn.helpful is not None:
+                rating_key = (
+                    AdaptiveTutorCopyKey.RATING_HELPFUL
+                    if turn.helpful
+                    else AdaptiveTutorCopyKey.RATING_NOT_HELPFUL
+                )
+                rating = f"\n\n**{adaptive_tutor_text(self._locale, rating_key)}**"
+            sections.append(
+                f"### {title}\n\n**{question}**\n\n{turn.response}\n\n{sources}\n\n{model}{rating}"
+            )
+        if sections:
+            self._history.setMarkdown("\n\n---\n\n".join(sections))
+            self._history_heading.show()
+            self._history.show()
+        else:
+            self._history.clear()
+            self._history.hide()
+            self._history_heading.hide()
 
     def _localized_error(self, error: Exception) -> str:
         detail = " ".join(str(error).split())
@@ -431,7 +679,7 @@ class ChallengeTutorPanel(QFrame):
             detail=safe_detail,
         )
 
-    def _clear_response(self) -> None:
+    def _clear_latest_response(self) -> None:
         self._last_response = None
         self._response.clear()
         self._response.hide()
@@ -441,9 +689,20 @@ class ChallengeTutorPanel(QFrame):
         self._sources_heading.hide()
         self._model.clear()
         self._model.hide()
+        self._rating_widget.hide()
+
+    def _reset_session(self) -> None:
+        self._session = TutorSessionSnapshot()
+        self._pending_question = ""
+        self._pending_level = TutorAssistanceLevel.SOCRATIC
+        self.set_assistance_level(TutorAssistanceLevel.SOCRATIC)
+        self._question.clear()
+        self._clear_latest_response()
+        self._render_history()
 
     def _set_busy(self, busy: bool) -> None:
         self._question.setReadOnly(busy)
+        self._level_selector.setEnabled(not busy)
         self._cancel_button.setVisible(busy)
         self._update_actions()
 

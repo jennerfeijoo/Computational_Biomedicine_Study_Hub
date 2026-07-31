@@ -13,15 +13,19 @@ from computational_biomedicine_study_hub.content.python_challenges import (
 from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.integrations import OllamaConnectionError
 from computational_biomedicine_study_hub.learning.progress import ConfidenceLevel
+from computational_biomedicine_study_hub.learning.progress_service import LearningProgressService
 from computational_biomedicine_study_hub.learning.python_challenge import (
     ChallengeCaseStatus,
     PythonChallengeCaseResult,
     PythonChallengeResult,
 )
+from computational_biomedicine_study_hub.storage import SQLiteProgressStore
 from computational_biomedicine_study_hub.tutoring import (
     ChallengeDiagnostic,
     ChallengeTutorPromptBuilder,
     ChallengeTutorResponse,
+    TutorAssistanceLevel,
+    TutorSessionTurn,
 )
 from computational_biomedicine_study_hub.ui.widgets import (
     ChallengeTutorPanel,
@@ -89,10 +93,24 @@ class _FakeTutor:
             ),
         )
     )
-    calls: list[tuple[ChallengeDiagnostic, str]] = field(default_factory=list)
+    calls: list[
+        tuple[
+            ChallengeDiagnostic,
+            str,
+            TutorAssistanceLevel,
+            tuple[TutorSessionTurn, ...],
+        ]
+    ] = field(default_factory=list)
 
-    def ask(self, diagnostic: ChallengeDiagnostic, question: str) -> ChallengeTutorResponse:
-        self.calls.append((diagnostic, question))
+    def ask(
+        self,
+        diagnostic: ChallengeDiagnostic,
+        question: str,
+        *,
+        assistance_level: TutorAssistanceLevel = TutorAssistanceLevel.SOCRATIC,
+        history: tuple[TutorSessionTurn, ...] = (),
+    ) -> ChallengeTutorResponse:
+        self.calls.append((diagnostic, question, assistance_level, history))
         return self.response
 
 
@@ -161,14 +179,12 @@ def test_panel_requires_a_verified_diagnostic_before_enabling_tutoring(
     assert panel.status_text == "The diagnostic is ready for a question."
 
 
-def test_panel_runs_outside_the_ui_flow_and_renders_sources(qapp: QApplication) -> None:
+def test_panel_runs_asynchronously_and_retains_sources_for_each_turn(
+    qapp: QApplication,
+) -> None:
     tutor = _FakeTutor()
     executor = _DeferredExecutor()
-    panel = ChallengeTutorPanel(
-        tutor,
-        locale=AppLocale.ENGLISH,
-        executor=executor,
-    )
+    panel = ChallengeTutorPanel(tutor, locale=AppLocale.ENGLISH, executor=executor)
     diagnostic = _diagnostic()
     panel.set_diagnostic(diagnostic)
     panel.set_question("Give me a hint.")
@@ -178,15 +194,76 @@ def test_panel_runs_outside_the_ui_flow_and_renders_sources(qapp: QApplication) 
     assert panel.is_busy
     assert panel.status_text == "Ollama is generating a response…"
     assert tutor.calls == []
-    assert tuple(executor.pending) == (1,)
-
     executor.succeed(1)
 
     assert not panel.is_busy
-    assert tutor.calls == [(diagnostic, "Give me a hint.")]
+    assert tutor.calls[0][:3] == (
+        diagnostic,
+        "Give me a hint.",
+        TutorAssistanceLevel.SOCRATIC,
+    )
+    assert tutor.calls[0][3] == ()
     assert panel.response_text.startswith("Check which collection")
     assert "dm857.m07.overview" in panel.sources_text
+    assert "dm857.m07.overview" in panel.history_text
     assert panel.model_text == "Local model: qwen3.5:9b-q8_0"
+    assert panel.assistance_count == 1
+
+
+def test_follow_up_receives_bounded_prior_turns_and_selected_level(
+    qapp: QApplication,
+) -> None:
+    tutor = _FakeTutor()
+    executor = _DeferredExecutor()
+    panel = ChallengeTutorPanel(tutor, locale=AppLocale.ENGLISH, executor=executor)
+    panel.set_diagnostic(_diagnostic())
+    panel.set_question("What should I inspect first?")
+    panel.ask_question()
+    executor.succeed(1)
+
+    panel.set_assistance_level(TutorAssistanceLevel.CONCEPTUAL)
+    panel.set_question("Why does a set change the count?")
+    panel.ask_question()
+    executor.succeed(2)
+
+    assert len(tutor.calls) == 2
+    assert tutor.calls[1][2] is TutorAssistanceLevel.CONCEPTUAL
+    assert len(tutor.calls[1][3]) == 1
+    assert tutor.calls[1][3][0].question == "What should I inspect first?"
+    assert panel.assistance_count == 2
+    assert "Turn 2" in panel.history_text
+
+
+def test_negative_feedback_escalates_help_and_preserves_the_rating(
+    qapp: QApplication,
+) -> None:
+    executor = _DeferredExecutor()
+    panel = ChallengeTutorPanel(_FakeTutor(), locale=AppLocale.ENGLISH, executor=executor)
+    panel.set_diagnostic(_diagnostic())
+    panel.request_hint()
+    executor.succeed(1)
+
+    panel.mark_not_helpful()
+
+    assert panel.session_turns[-1].helpful is False
+    assert panel.selected_level is TutorAssistanceLevel.CONCEPTUAL
+    assert "next suggested level" in panel.status_text
+    assert "Insufficient" in panel.history_text
+
+
+def test_full_explanation_marks_solution_support_for_the_next_attempt(
+    qapp: QApplication,
+) -> None:
+    executor = _DeferredExecutor()
+    panel = ChallengeTutorPanel(_FakeTutor(), locale=AppLocale.ENGLISH, executor=executor)
+    panel.set_diagnostic(_diagnostic())
+    panel.set_assistance_level(TutorAssistanceLevel.EXPLANATION)
+    panel.request_hint()
+    executor.succeed(1)
+
+    assert panel.assistance_count == 1
+    assert panel.solution_revealed
+    assert panel.session_turns[-1].assistance_level is TutorAssistanceLevel.EXPLANATION
 
 
 def test_cancelled_requests_cannot_overwrite_the_interface(qapp: QApplication) -> None:
@@ -209,11 +286,7 @@ def test_cancelled_requests_cannot_overwrite_the_interface(qapp: QApplication) -
 
 def test_panel_distinguishes_missing_model_from_offline_ollama(qapp: QApplication) -> None:
     executor = _DeferredExecutor()
-    panel = ChallengeTutorPanel(
-        _FakeTutor(),
-        locale=AppLocale.ENGLISH,
-        executor=executor,
-    )
+    panel = ChallengeTutorPanel(_FakeTutor(), locale=AppLocale.ENGLISH, executor=executor)
     panel.set_diagnostic(_diagnostic())
     panel.set_question("Help me.")
     panel.ask_question()
@@ -233,48 +306,61 @@ def test_panel_distinguishes_missing_model_from_offline_ollama(qapp: QApplicatio
     assert "Could not connect to Ollama" in panel.status_text
 
 
-def test_new_test_run_invalidates_old_tutor_output_but_source_edits_do_not(
+def test_new_test_run_resets_session_and_records_prior_help_in_mastery(
     qapp: QApplication,
 ) -> None:
     tutor = _FakeTutor()
     executor = _DeferredExecutor()
     evaluator = _FakeEvaluator(_result())
-    widget = PythonChallengeWidget(
-        "def unique_count(values):\n    pass",
-        _challenge(),
-        locale=AppLocale.ENGLISH,
-        evaluator=evaluator,
-        prompt="Write unique_count(values).",
-        reference_solution="def unique_count(values):\n    return len(set(values))",
-        explanation="A set removes duplicates before len counts the remaining values.",
-        tutor_runner=tutor,
-        tutor_executor=executor,
-    )
-    widget.set_source("def unique_count(values):\n    return len(values)")
-    widget.choose_confidence(ConfidenceLevel.HIGH)
-    widget.run_tests()
-    panel = widget.tutor_panel
-    assert panel is not None
-    first_diagnostic = panel.diagnostic
+    attempt_ids = iter(("attempt-1", "attempt-2", "attempt-3", "attempt-4"))
 
-    widget.set_source("def unique_count(values):\n    return len(set(values))")
+    with SQLiteProgressStore(":memory:") as store:
+        service = LearningProgressService(
+            store,
+            attempt_id_factory=lambda: next(attempt_ids),
+            error_id_factory=lambda: "error-1",
+        )
+        widget = PythonChallengeWidget(
+            "def unique_count(values):\n    pass",
+            _challenge(),
+            locale=AppLocale.ENGLISH,
+            evaluator=evaluator,
+            prompt="Write unique_count(values).",
+            reference_solution="def unique_count(values):\n    return len(set(values))",
+            explanation="A set removes duplicates before len counts the remaining values.",
+            progress_recorder=service,
+            tutor_runner=tutor,
+            tutor_executor=executor,
+        )
+        widget.set_source("def unique_count(values):\n    return len(values)")
+        widget.choose_confidence(ConfidenceLevel.HIGH)
+        widget.run_tests()
+        panel = widget.tutor_panel
+        assert panel is not None
 
-    assert panel.diagnostic is first_diagnostic
+        panel.set_assistance_level(TutorAssistanceLevel.CONCEPTUAL)
+        panel.request_hint()
+        executor.succeed(1)
+        assert panel.assistance_count == 1
 
-    panel.set_question("Why did the first attempt fail?")
-    panel.ask_question()
-    executor.succeed(1)
-    assert panel.response_text
+        evaluator.result = _result(all_passed=True)
+        widget.set_source("def unique_count(values):\n    return len(set(values))")
+        widget.choose_confidence(ConfidenceLevel.HIGH)
+        widget.run_tests()
 
-    evaluator.result = _result(all_passed=True)
-    widget.choose_confidence(ConfidenceLevel.MEDIUM)
-    widget.run_tests()
-
-    assert panel.response_text == ""
-    assert panel.diagnostic is widget.last_diagnostic
-    assert panel.diagnostic is not first_diagnostic
-    assert panel.diagnostic is not None
-    assert panel.diagnostic.submitted_source.endswith("len(set(values))")
+        attempts = store.list_attempts(course_code="DM857", module_id="dm857.m07")
+        assert all(attempt.hints_used == 0 for attempt in attempts[:2])
+        assert all(attempt.hints_used == 1 for attempt in attempts[2:])
+        assert all(not attempt.solution_revealed for attempt in attempts)
+        assert panel.assistance_count == 0
+        assert panel.history_text == ""
+        mastery = store.get_mastery(
+            "m07.o6",
+            course_code="DM857",
+            module_id="dm857.m07",
+        )
+        assert mastery is not None
+        assert (mastery.next_review_at - mastery.last_attempt_at).days == 2
 
 
 def test_guided_practice_supplies_module_context_to_authored_challenges(
@@ -294,20 +380,42 @@ def test_guided_practice_supplies_module_context_to_authored_challenges(
     assert card.challenge_widget.tutor_panel is not None
 
 
-def test_challenge_prompt_requests_the_active_interface_language() -> None:
+def test_challenge_prompt_requests_active_language_and_assistance_level() -> None:
     english = ChallengeTutorPromptBuilder(
         _module(),
         locale=AppLocale.ENGLISH,
-    ).build(_diagnostic(), "Why does my function fail?")
+    ).build(
+        _diagnostic(),
+        "Why does my function fail?",
+        assistance_level=TutorAssistanceLevel.STRUCTURAL,
+    )
     danish = ChallengeTutorPromptBuilder(
         _module(),
         locale=AppLocale.DANISH_DENMARK,
     ).build(_diagnostic(), "Hvorfor fejler min funktion?")
 
     assert "Respond in English" in english.messages[0].content
+    assert "Requested level: structural hint" in english.messages[0].content
     assert "Learner question:" in english.messages[1].content
     assert "Svar på dansk" in danish.messages[0].content
     assert "Den studerendes spørgsmål:" in danish.messages[1].content
+
+
+def test_new_diagnostic_clears_history_and_returns_to_socratic_level(
+    qapp: QApplication,
+) -> None:
+    executor = _DeferredExecutor()
+    panel = ChallengeTutorPanel(_FakeTutor(), locale=AppLocale.ENGLISH, executor=executor)
+    panel.set_diagnostic(_diagnostic())
+    panel.set_assistance_level(TutorAssistanceLevel.STRUCTURAL)
+    panel.request_hint()
+    executor.succeed(1)
+
+    panel.set_diagnostic(_diagnostic("def unique_count(values):\n    return len(set(values))"))
+
+    assert panel.session_turns == ()
+    assert panel.history_text == ""
+    assert panel.selected_level is TutorAssistanceLevel.SOCRATIC
 
 
 def test_danish_panel_copy_is_complete(qapp: QApplication) -> None:
@@ -318,4 +426,4 @@ def test_danish_panel_copy_is_complete(qapp: QApplication) -> None:
     assert title is not None
     assert hint is not None
     assert title.text() == "Kontekstuel tutor"
-    assert hint.text() == "Bed om et hint"
+    assert hint.text() == "Anmod om dette niveau"

@@ -26,6 +26,8 @@ class ObjectiveAnswerSubmission:
     response_time_ms: int
     objective_ids: tuple[str, ...]
     attempted_at: datetime
+    hints_used: int = 0
+    solution_revealed: bool = False
     prompt: str = ""
     selected_answer: str = ""
     correct_answer: str = ""
@@ -49,6 +51,8 @@ class ObjectiveAnswerSubmission:
 
         if self.response_time_ms < 0:
             raise ValueError("response_time_ms cannot be negative.")
+        if self.hints_used < 0:
+            raise ValueError("hints_used cannot be negative.")
         if self.attempted_at.tzinfo is None or self.attempted_at.utcoffset() is None:
             raise ValueError("attempted_at must be timezone-aware.")
         if not self.objective_ids:
@@ -79,7 +83,7 @@ class ObjectiveAnswerSubmission:
 
     @property
     def has_error_context(self) -> bool:
-        """Return whether the authored prompt, answers and explanation are available."""
+        """Return whether authored prompt, answers and explanation are available."""
 
         return bool(self.prompt)
 
@@ -131,9 +135,9 @@ class LearningProgressService:
                 answer=submission.answer,
                 is_correct=submission.is_correct,
                 confidence=submission.confidence,
-                hints_used=0,
+                hints_used=submission.hints_used,
                 response_time_ms=submission.response_time_ms,
-                solution_revealed=False,
+                solution_revealed=submission.solution_revealed,
                 attempted_at=submission.attempted_at,
             )
             for objective_id in submission.objective_ids

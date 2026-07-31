@@ -2,6 +2,11 @@
 
 from __future__ import annotations
 
+from .adaptive_tutor_copy import (
+    AdaptiveTutorCopyKey,
+    adaptive_tutor_text,
+    validate_adaptive_tutor_copy,
+)
 from .challenge_copy import ChallengeCopyKey, challenge_text, validate_challenge_copy
 from .challenge_tutor_copy import (
     ChallengeTutorCopyKey,
@@ -18,6 +23,7 @@ from .ui_copy import UiCopyKey, ui_text, validate_ui_copy
 
 __all__ = [
     "ALL_MESSAGE_KEYS",
+    "AdaptiveTutorCopyKey",
     "AppLocale",
     "ChallengeCopyKey",
     "ChallengeTutorCopyKey",
@@ -30,11 +36,13 @@ __all__ = [
     "TranslationError",
     "Translator",
     "UiCopyKey",
+    "adaptive_tutor_text",
     "challenge_text",
     "challenge_tutor_text",
     "confidence_text",
     "lab_text",
     "ui_text",
+    "validate_adaptive_tutor_copy",
     "validate_catalogs",
     "validate_challenge_copy",
     "validate_challenge_tutor_copy",
