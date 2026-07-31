@@ -241,7 +241,13 @@ cat(sprintf("n_per_group=%d", ceiling(plan$n)))
                 "Explain why p=0.03 does not mean that the null has 3% probability.",
                 "Forklar hvorfor p=0,03 ikke betyder, at nulhypotesen har 3 % sandsynlighed.",
             ),
-            (("Condiciona la probabilidad en H0, no al revés.", "Condition the probability on H0, not the reverse.", "Beting sandsynligheden på H0, ikke omvendt."),),
+            (
+                (
+                    "Condiciona la probabilidad en H0, no al revés.",
+                    "Condition the probability on H0, not the reverse.",
+                    "Beting sandsynligheden på H0, ikke omvendt.",
+                ),
+            ),
             (
                 "Es una probabilidad de datos extremos bajo H0 y el modelo, no una probabilidad posterior de H0.",
                 "It is a probability of extreme data under H0 and the model, not a posterior probability of H0.",
@@ -262,7 +268,13 @@ cat(sprintf("n_per_group=%d", ceiling(plan$n)))
                 "Classify as type I or II: declaring an ineffective biomarker effective; failing to detect it when effective.",
                 "Klassificér som type I eller II: at erklære en ineffektiv biomarkør effektiv; ikke at opdage den, når den er effektiv.",
             ),
-            (("Compara la decisión con el estado real.", "Compare the decision with the real state.", "Sammenlign beslutningen med den virkelige tilstand."),),
+            (
+                (
+                    "Compara la decisión con el estado real.",
+                    "Compare the decision with the real state.",
+                    "Sammenlign beslutningen med den virkelige tilstand.",
+                ),
+            ),
             (
                 "Falso positivo: tipo I. Falso negativo inferencial: tipo II.",
                 "False positive: type I. Inferential false negative: type II.",
@@ -283,7 +295,13 @@ cat(sprintf("n_per_group=%d", ceiling(plan$n)))
                 "Complete a two-sided one-mean test against zero.",
                 "Fuldfør en tosidet test af ét gennemsnit mod nul.",
             ),
-            (("t.test usa alternative='two.sided' por defecto, pero decláralo.", "t.test defaults to alternative='two.sided', but declare it.", "t.test bruger som standard alternative='two.sided', men erklær det."),),
+            (
+                (
+                    "t.test usa alternative='two.sided' por defecto, pero decláralo.",
+                    "t.test defaults to alternative='two.sided', but declare it.",
+                    "t.test bruger som standard alternative='two.sided', men erklær det.",
+                ),
+            ),
             ("t.test(x, mu = 0, alternative = 'two.sided')",) * 3,
             (
                 "La dirección queda explícita y auditable.",
@@ -300,7 +318,13 @@ cat(sprintf("n_per_group=%d", ceiling(plan$n)))
                 "Compare an effect of 0.2 with CI [0.18, 0.22] and one of 1.0 with CI [-0.5, 2.5].",
                 "Sammenlign en effekt på 0,2 med KI [0,18; 0,22] og en på 1,0 med KI [-0,5; 2,5].",
             ),
-            (("Separa magnitud y precisión.", "Separate magnitude and precision.", "Adskil størrelse og præcision."),),
+            (
+                (
+                    "Separa magnitud y precisión.",
+                    "Separate magnitude and precision.",
+                    "Adskil størrelse og præcision.",
+                ),
+            ),
             (
                 "El primero es pequeño y preciso; el segundo es mayor pero muy incierto e incluye cero.",
                 "The first is small and precise; the second is larger but highly uncertain and includes zero.",
@@ -321,7 +345,13 @@ cat(sprintf("n_per_group=%d", ceiling(plan$n)))
                 "Design a power plan before collecting data.",
                 "Design en styrkeplan før dataindsamling.",
             ),
-            (("Empieza por un efecto mínimo relevante.", "Begin with a minimum relevant effect.", "Begynd med en mindste relevant effekt."),),
+            (
+                (
+                    "Empieza por un efecto mínimo relevante.",
+                    "Begin with a minimum relevant effect.",
+                    "Begynd med en mindste relevant effekt.",
+                ),
+            ),
             (
                 "Definir estimando, contraste, alfa, potencia, efecto mínimo, variabilidad, diseño, pérdidas y análisis previsto.",
                 "Define estimand, contrast, alpha, power, minimum effect, variability, design, attrition, and planned analysis.",
@@ -342,7 +372,13 @@ cat(sprintf("n_per_group=%d", ceiling(plan$n)))
                 "Correct the conclusion 'p>0.05 proves the groups are equal'.",
                 "Ret konklusionen 'p>0,05 beviser, at grupperne er ens'.",
             ),
-            (("No rechazar no es aceptar equivalencia.", "Failure to reject is not accepting equivalence.", "Manglende forkastelse er ikke accept af ækvivalens."),),
+            (
+                (
+                    "No rechazar no es aceptar equivalencia.",
+                    "Failure to reject is not accepting equivalence.",
+                    "Manglende forkastelse er ikke accept af ækvivalens.",
+                ),
+            ),
             (
                 "Los datos no aportan evidencia suficiente contra H0 bajo este análisis; revisar intervalo, potencia y un margen de equivalencia predefinido.",
                 "The data do not provide sufficient evidence against H0 under this analysis; inspect the interval, power, and a predefined equivalence margin.",
@@ -360,69 +396,288 @@ cat(sprintf("n_per_group=%d", ceiling(plan$n)))
         (
             "001",
             ("¿Qué es un valor p?", "What is a p-value?", "Hvad er en p-værdi?"),
-            (("a", ("P(H0 verdadera)", "P(H0 true)", "P(H0 sand)")), ("b", ("Probabilidad de datos al menos tan extremos bajo H0", "Probability of data at least as extreme under H0", "Sandsynlighed for mindst lige så ekstreme data under H0")), ("c", ("Tamaño del efecto", "Effect size", "Effektstørrelse")), ("d", ("Potencia", "Power", "Styrke"))),
+            (
+                ("a", ("P(H0 verdadera)", "P(H0 true)", "P(H0 sand)")),
+                (
+                    "b",
+                    (
+                        "Probabilidad de datos al menos tan extremos bajo H0",
+                        "Probability of data at least as extreme under H0",
+                        "Sandsynlighed for mindst lige så ekstreme data under H0",
+                    ),
+                ),
+                ("c", ("Tamaño del efecto", "Effect size", "Effektstørrelse")),
+                ("d", ("Potencia", "Power", "Styrke")),
+            ),
             "b",
-            ("El valor p condiciona en H0 y el modelo.", "The p-value conditions on H0 and the model.", "P-værdien betinger på H0 og modellen."),
+            (
+                "El valor p condiciona en H0 y el modelo.",
+                "The p-value conditions on H0 and the model.",
+                "P-værdien betinger på H0 og modellen.",
+            ),
         ),
         (
             "002",
             ("¿Qué es un error tipo I?", "What is a type I error?", "Hvad er en type I-fejl?"),
-            (("a", ("No rechazar H0 falsa", "Fail to reject false H0", "Ikke forkaste falsk H0")), ("b", ("Rechazar H0 verdadera", "Reject true H0", "Forkaste sand H0")), ("c", ("Estimar SD", "Estimate SD", "Estimere SD")), ("d", ("Aumentar n", "Increase n", "Øge n"))),
+            (
+                (
+                    "a",
+                    ("No rechazar H0 falsa", "Fail to reject false H0", "Ikke forkaste falsk H0"),
+                ),
+                ("b", ("Rechazar H0 verdadera", "Reject true H0", "Forkaste sand H0")),
+                ("c", ("Estimar SD", "Estimate SD", "Estimere SD")),
+                ("d", ("Aumentar n", "Increase n", "Øge n")),
+            ),
             "b",
-            ("Alfa controla la tasa de rechazo de una nulidad verdadera.", "Alpha controls rejection of a true null.", "Alfa styrer forkastelse af en sand nulhypotese."),
+            (
+                "Alfa controla la tasa de rechazo de una nulidad verdadera.",
+                "Alpha controls rejection of a true null.",
+                "Alfa styrer forkastelse af en sand nulhypotese.",
+            ),
         ),
         (
             "003",
             ("¿Qué es potencia?", "What is power?", "Hvad er styrke?"),
-            (("a", ("1−beta", "1−beta", "1−beta")), ("b", ("1−alpha", "1−alpha", "1−alpha")), ("c", ("Valor p", "p-value", "p-værdi")), ("d", ("SD", "SD", "SD"))),
+            (
+                ("a", ("1−beta", "1−beta", "1−beta")),
+                ("b", ("1−alpha", "1−alpha", "1−alpha")),
+                ("c", ("Valor p", "p-value", "p-værdi")),
+                ("d", ("SD", "SD", "SD")),
+            ),
             "a",
-            ("Potencia es la probabilidad de rechazar H0 cuando la alternativa especificada es verdadera.", "Power is the probability of rejecting H0 when the specified alternative is true.", "Styrke er sandsynligheden for at forkaste H0, når det specificerede alternativ er sandt."),
+            (
+                "Potencia es la probabilidad de rechazar H0 cuando la alternativa especificada es verdadera.",
+                "Power is the probability of rejecting H0 when the specified alternative is true.",
+                "Styrke er sandsynligheden for at forkaste H0, når det specificerede alternativ er sandt.",
+            ),
         ),
         (
             "004",
-            ("¿Qué suele aumentar potencia?", "What usually increases power?", "Hvad øger normalt styrken?"),
-            (("a", ("Menor n", "Smaller n", "Mindre n")), ("b", ("Mayor variabilidad", "Higher variability", "Større variation")), ("c", ("Mayor n independiente", "Larger independent n", "Større uafhængigt n")), ("d", ("Alfa más estricto", "More stringent alpha", "Strengere alfa"))),
+            (
+                "¿Qué suele aumentar potencia?",
+                "What usually increases power?",
+                "Hvad øger normalt styrken?",
+            ),
+            (
+                ("a", ("Menor n", "Smaller n", "Mindre n")),
+                ("b", ("Mayor variabilidad", "Higher variability", "Større variation")),
+                ("c", ("Mayor n independiente", "Larger independent n", "Større uafhængigt n")),
+                ("d", ("Alfa más estricto", "More stringent alpha", "Strengere alfa")),
+            ),
             "c",
-            ("Más unidades independientes mejoran precisión.", "More independent units improve precision.", "Flere uafhængige enheder forbedrer præcisionen."),
+            (
+                "Más unidades independientes mejoran precisión.",
+                "More independent units improve precision.",
+                "Flere uafhængige enheder forbedrer præcisionen.",
+            ),
         ),
         (
             "005",
-            ("¿Qué debe definir una planificación de potencia?", "What should power planning define?", "Hvad bør styrkeplanlægning definere?"),
-            (("a", ("Efecto mínimo relevante", "Minimum relevant effect", "Mindste relevante effekt")), ("b", ("Efecto observado futuro", "Future observed effect", "Fremtidig observeret effekt")), ("c", ("Solo color del gráfico", "Plot colour only", "Kun plotfarve")), ("d", ("Valor p deseado", "Desired p-value", "Ønsket p-værdi"))),
+            (
+                "¿Qué debe definir una planificación de potencia?",
+                "What should power planning define?",
+                "Hvad bør styrkeplanlægning definere?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Efecto mínimo relevante",
+                        "Minimum relevant effect",
+                        "Mindste relevante effekt",
+                    ),
+                ),
+                (
+                    "b",
+                    (
+                        "Efecto observado futuro",
+                        "Future observed effect",
+                        "Fremtidig observeret effekt",
+                    ),
+                ),
+                ("c", ("Solo color del gráfico", "Plot colour only", "Kun plotfarve")),
+                ("d", ("Valor p deseado", "Desired p-value", "Ønsket p-værdi")),
+            ),
             "a",
-            ("El efecto de planificación debe tener significado científico previo.", "The planning effect should have prior scientific meaning.", "Planlægningseffekten bør have forudgående videnskabelig betydning."),
+            (
+                "El efecto de planificación debe tener significado científico previo.",
+                "The planning effect should have prior scientific meaning.",
+                "Planlægningseffekten bør have forudgående videnskabelig betydning.",
+            ),
         ),
         (
             "006",
-            ("¿Qué comunica un tamaño de efecto?", "What does an effect size communicate?", "Hvad kommunikerer en effektstørrelse?"),
-            (("a", ("Magnitud", "Magnitude", "Størrelse")), ("b", ("Probabilidad de H0", "Probability of H0", "Sandsynlighed for H0")), ("c", ("Solo precisión", "Precision only", "Kun præcision")), ("d", ("Número de variables", "Number of variables", "Antal variable"))),
+            (
+                "¿Qué comunica un tamaño de efecto?",
+                "What does an effect size communicate?",
+                "Hvad kommunikerer en effektstørrelse?",
+            ),
+            (
+                ("a", ("Magnitud", "Magnitude", "Størrelse")),
+                ("b", ("Probabilidad de H0", "Probability of H0", "Sandsynlighed for H0")),
+                ("c", ("Solo precisión", "Precision only", "Kun præcision")),
+                ("d", ("Número de variables", "Number of variables", "Antal variable")),
+            ),
             "a",
-            ("La magnitud debe contextualizarse e incluir incertidumbre.", "Magnitude should be contextualised and include uncertainty.", "Størrelsen bør sættes i kontekst og inkludere usikkerhed."),
+            (
+                "La magnitud debe contextualizarse e incluir incertidumbre.",
+                "Magnitude should be contextualised and include uncertainty.",
+                "Størrelsen bør sættes i kontekst og inkludere usikkerhed.",
+            ),
         ),
         (
             "007",
             ("¿Qué significa p>0,05?", "What does p>0.05 mean?", "Hvad betyder p>0,05?"),
-            (("a", ("H0 demostrada", "H0 proven", "H0 bevist")), ("b", ("Evidencia insuficiente para rechazar H0 con ese procedimiento", "Insufficient evidence to reject H0 with that procedure", "Utilstrækkelig evidens til at forkaste H0 med den procedure")), ("c", ("Grupos equivalentes", "Equivalent groups", "Ækvivalente grupper")), ("d", ("Efecto cero", "Zero effect", "Nuleffekt"))),
+            (
+                ("a", ("H0 demostrada", "H0 proven", "H0 bevist")),
+                (
+                    "b",
+                    (
+                        "Evidencia insuficiente para rechazar H0 con ese procedimiento",
+                        "Insufficient evidence to reject H0 with that procedure",
+                        "Utilstrækkelig evidens til at forkaste H0 med den procedure",
+                    ),
+                ),
+                ("c", ("Grupos equivalentes", "Equivalent groups", "Ækvivalente grupper")),
+                ("d", ("Efecto cero", "Zero effect", "Nuleffekt")),
+            ),
             "b",
-            ("No rechazo no prueba nulidad ni equivalencia.", "Non-rejection proves neither nullity nor equivalence.", "Manglende forkastelse beviser hverken nul eller ækvivalens."),
+            (
+                "No rechazo no prueba nulidad ni equivalencia.",
+                "Non-rejection proves neither nullity nor equivalence.",
+                "Manglende forkastelse beviser hverken nul eller ækvivalens.",
+            ),
         ),
         (
             "008",
-            ("¿Qué debe fijarse antes de inspeccionar resultados?", "What should be fixed before inspecting results?", "Hvad bør fastlægges før resultater inspiceres?"),
-            (("a", ("Dirección y alfa", "Direction and alpha", "Retning og alfa")), ("b", ("Conclusión", "Conclusion", "Konklusion")), ("c", ("Efecto observado", "Observed effect", "Observeret effekt")), ("d", ("Valor p", "p-value", "p-værdi"))),
+            (
+                "¿Qué debe fijarse antes de inspeccionar resultados?",
+                "What should be fixed before inspecting results?",
+                "Hvad bør fastlægges før resultater inspiceres?",
+            ),
+            (
+                ("a", ("Dirección y alfa", "Direction and alpha", "Retning og alfa")),
+                ("b", ("Conclusión", "Conclusion", "Konklusion")),
+                ("c", ("Efecto observado", "Observed effect", "Observeret effekt")),
+                ("d", ("Valor p", "p-value", "p-værdi")),
+            ),
             "a",
-            ("Las decisiones previas reducen flexibilidad analítica oportunista.", "Prior decisions reduce opportunistic analytical flexibility.", "Forudgående beslutninger reducerer opportunistisk analytisk fleksibilitet."),
+            (
+                "Las decisiones previas reducen flexibilidad analítica oportunista.",
+                "Prior decisions reduce opportunistic analytical flexibility.",
+                "Forudgående beslutninger reducerer opportunistisk analytisk fleksibilitet.",
+            ),
         ),
     ),
     true_false=(
-        ("009", ("p=0,01 significa que H0 tiene 1 % de probabilidad.", "p=0.01 means H0 has 1% probability.", "p=0,01 betyder, at H0 har 1 % sandsynlighed."), False, ("El valor p no es una probabilidad posterior de H0.", "The p-value is not a posterior probability of H0.", "P-værdien er ikke en posterior sandsynlighed for H0.")),
-        ("010", ("Alfa controla el error tipo I bajo el procedimiento.", "Alpha controls type I error under the procedure.", "Alfa styrer type I-fejl under proceduren."), True, ("Es la tasa nominal de falsos rechazos bajo H0.", "It is the nominal false-rejection rate under H0.", "Det er den nominelle rate af falske forkastelser under H0.")),
-        ("011", ("Potencia y beta suman uno.", "Power and beta sum to one.", "Styrke og beta summerer til ét."), True, ("Potencia = 1−beta.", "Power = 1−beta.", "Styrke = 1−beta.")),
-        ("012", ("Un resultado no significativo demuestra equivalencia.", "A non-significant result proves equivalence.", "Et ikke-signifikant resultat beviser ækvivalens."), False, ("La equivalencia necesita margen y procedimiento específicos.", "Equivalence needs a specific margin and procedure.", "Ækvivalens kræver en specifik margin og procedure.")),
-        ("013", ("Un efecto estadísticamente significativo puede ser científicamente trivial.", "A statistically significant effect may be scientifically trivial.", "En statistisk signifikant effekt kan være videnskabeligt triviel."), True, ("Significación y relevancia responden preguntas distintas.", "Significance and relevance answer different questions.", "Signifikans og relevans besvarer forskellige spørgsmål.")),
-        ("014", ("Mayor variabilidad suele reducir potencia.", "Higher variability usually reduces power.", "Større variation reducerer normalt styrken."), True, ("Aumenta el error estándar.", "It increases standard error.", "Det øger standardfejlen.")),
-        ("015", ("Elegir una prueba unilateral después de ver la dirección observada es válido.", "Choosing a one-sided test after seeing the observed direction is valid.", "Det er gyldigt at vælge en ensidet test efter at have set den observerede retning."), False, ("La dirección debe justificarse y fijarse previamente.", "Direction should be justified and fixed in advance.", "Retningen bør begrundes og fastlægges på forhånd.")),
-        ("016", ("El tamaño de efecto debe acompañarse de incertidumbre.", "Effect size should be accompanied by uncertainty.", "Effektstørrelse bør ledsages af usikkerhed."), True, ("Un intervalo muestra precisión y valores compatibles.", "An interval shows precision and compatible values.", "Et interval viser præcision og kompatible værdier.")),
+        (
+            "009",
+            (
+                "p=0,01 significa que H0 tiene 1 % de probabilidad.",
+                "p=0.01 means H0 has 1% probability.",
+                "p=0,01 betyder, at H0 har 1 % sandsynlighed.",
+            ),
+            False,
+            (
+                "El valor p no es una probabilidad posterior de H0.",
+                "The p-value is not a posterior probability of H0.",
+                "P-værdien er ikke en posterior sandsynlighed for H0.",
+            ),
+        ),
+        (
+            "010",
+            (
+                "Alfa controla el error tipo I bajo el procedimiento.",
+                "Alpha controls type I error under the procedure.",
+                "Alfa styrer type I-fejl under proceduren.",
+            ),
+            True,
+            (
+                "Es la tasa nominal de falsos rechazos bajo H0.",
+                "It is the nominal false-rejection rate under H0.",
+                "Det er den nominelle rate af falske forkastelser under H0.",
+            ),
+        ),
+        (
+            "011",
+            (
+                "Potencia y beta suman uno.",
+                "Power and beta sum to one.",
+                "Styrke og beta summerer til ét.",
+            ),
+            True,
+            ("Potencia = 1−beta.", "Power = 1−beta.", "Styrke = 1−beta."),
+        ),
+        (
+            "012",
+            (
+                "Un resultado no significativo demuestra equivalencia.",
+                "A non-significant result proves equivalence.",
+                "Et ikke-signifikant resultat beviser ækvivalens.",
+            ),
+            False,
+            (
+                "La equivalencia necesita margen y procedimiento específicos.",
+                "Equivalence needs a specific margin and procedure.",
+                "Ækvivalens kræver en specifik margin og procedure.",
+            ),
+        ),
+        (
+            "013",
+            (
+                "Un efecto estadísticamente significativo puede ser científicamente trivial.",
+                "A statistically significant effect may be scientifically trivial.",
+                "En statistisk signifikant effekt kan være videnskabeligt triviel.",
+            ),
+            True,
+            (
+                "Significación y relevancia responden preguntas distintas.",
+                "Significance and relevance answer different questions.",
+                "Signifikans og relevans besvarer forskellige spørgsmål.",
+            ),
+        ),
+        (
+            "014",
+            (
+                "Mayor variabilidad suele reducir potencia.",
+                "Higher variability usually reduces power.",
+                "Større variation reducerer normalt styrken.",
+            ),
+            True,
+            (
+                "Aumenta el error estándar.",
+                "It increases standard error.",
+                "Det øger standardfejlen.",
+            ),
+        ),
+        (
+            "015",
+            (
+                "Elegir una prueba unilateral después de ver la dirección observada es válido.",
+                "Choosing a one-sided test after seeing the observed direction is valid.",
+                "Det er gyldigt at vælge en ensidet test efter at have set den observerede retning.",
+            ),
+            False,
+            (
+                "La dirección debe justificarse y fijarse previamente.",
+                "Direction should be justified and fixed in advance.",
+                "Retningen bør begrundes og fastlægges på forhånd.",
+            ),
+        ),
+        (
+            "016",
+            (
+                "El tamaño de efecto debe acompañarse de incertidumbre.",
+                "Effect size should be accompanied by uncertainty.",
+                "Effektstørrelse bør ledsages af usikkerhed.",
+            ),
+            True,
+            (
+                "Un intervalo muestra precisión y valores compatibles.",
+                "An interval shows precision and compatible values.",
+                "Et interval viser præcision og kompatible værdier.",
+            ),
+        ),
     ),
     tutor=(
         (
@@ -430,19 +685,104 @@ cat(sprintf("n_per_group=%d", ceiling(plan$n)))
             "A rigorous hypothesis test starts from a predefined estimand and contrast, interprets the p-value conditionally on the model, and communicates magnitude, uncertainty, power, and scientific relevance.",
             "En grundig hypotesetest starter med en foruddefineret estimand og kontrast, fortolker p-værdien betinget på modellen og kommunikerer størrelse, usikkerhed, styrke og videnskabelig relevans.",
         ),
-        (("El valor p no es P(H0).", "The p-value is not P(H0).", "P-værdien er ikke P(H0)."), ("Alfa y beta describen errores distintos.", "Alpha and beta describe different errors.", "Alfa og beta beskriver forskellige fejl."), ("Potencia depende del efecto de planificación.", "Power depends on the planning effect.", "Styrke afhænger af planlægningseffekten."), ("La magnitud debe reportarse en contexto.", "Magnitude should be reported in context.", "Størrelsen bør rapporteres i kontekst.")),
-        (("Aceptar H0 tras p>0,05.", "Accepting H0 after p>0.05.", "At acceptere H0 efter p>0,05."), ("Confundir significación con importancia.", "Confusing significance with importance.", "At forveksle signifikans med betydning."), ("Calcular potencia post hoc como evidencia.", "Using post-hoc power as evidence.", "At bruge post hoc-styrke som evidens.")),
-        (("¿Cuál es el error científico más costoso?", "Which scientific error is most costly?", "Hvilken videnskabelig fejl er dyrest?"), ("¿Qué efecto mínimo importa?", "What minimum effect matters?", "Hvilken mindste effekt betyder noget?"), ("¿Qué valores admite el intervalo?", "Which values are compatible with the interval?", "Hvilke værdier er kompatible med intervallet?")),
-        (("Formula hipótesis coherentes.", "Formulates coherent hypotheses.", "Formulerer sammenhængende hypoteser."), ("Interpreta p sin inversión condicional.", "Interprets p without conditional inversion.", "Fortolker p uden betinget omvending."), ("Integra efecto, intervalo y potencia.", "Integrates effect, interval, and power.", "Integrerer effekt, interval og styrke.")),
-        (("No asignar probabilidades a H0 desde un valor p.", "Do not assign probabilities to H0 from a p-value.", "Tildel ikke H0 sandsynligheder ud fra en p-værdi."), ("No declarar equivalencia sin margen y prueba.", "Do not declare equivalence without a margin and test.", "Erklær ikke ækvivalens uden margin og test."), ("Responder en el idioma activo.", "Respond in the active language.", "Svar på det aktive sprog.")),
-        ("SDU ODIN BMB830 active course description approved 2025-03-06", "R base stats documentation: t.test and power.t.test", "Frequentist hypothesis-testing definitions"),
+        (
+            ("El valor p no es P(H0).", "The p-value is not P(H0).", "P-værdien er ikke P(H0)."),
+            (
+                "Alfa y beta describen errores distintos.",
+                "Alpha and beta describe different errors.",
+                "Alfa og beta beskriver forskellige fejl.",
+            ),
+            (
+                "Potencia depende del efecto de planificación.",
+                "Power depends on the planning effect.",
+                "Styrke afhænger af planlægningseffekten.",
+            ),
+            (
+                "La magnitud debe reportarse en contexto.",
+                "Magnitude should be reported in context.",
+                "Størrelsen bør rapporteres i kontekst.",
+            ),
+        ),
+        (
+            (
+                "Aceptar H0 tras p>0,05.",
+                "Accepting H0 after p>0.05.",
+                "At acceptere H0 efter p>0,05.",
+            ),
+            (
+                "Confundir significación con importancia.",
+                "Confusing significance with importance.",
+                "At forveksle signifikans med betydning.",
+            ),
+            (
+                "Calcular potencia post hoc como evidencia.",
+                "Using post-hoc power as evidence.",
+                "At bruge post hoc-styrke som evidens.",
+            ),
+        ),
+        (
+            (
+                "¿Cuál es el error científico más costoso?",
+                "Which scientific error is most costly?",
+                "Hvilken videnskabelig fejl er dyrest?",
+            ),
+            (
+                "¿Qué efecto mínimo importa?",
+                "What minimum effect matters?",
+                "Hvilken mindste effekt betyder noget?",
+            ),
+            (
+                "¿Qué valores admite el intervalo?",
+                "Which values are compatible with the interval?",
+                "Hvilke værdier er kompatible med intervallet?",
+            ),
+        ),
+        (
+            (
+                "Formula hipótesis coherentes.",
+                "Formulates coherent hypotheses.",
+                "Formulerer sammenhængende hypoteser.",
+            ),
+            (
+                "Interpreta p sin inversión condicional.",
+                "Interprets p without conditional inversion.",
+                "Fortolker p uden betinget omvending.",
+            ),
+            (
+                "Integra efecto, intervalo y potencia.",
+                "Integrates effect, interval, and power.",
+                "Integrerer effekt, interval og styrke.",
+            ),
+        ),
+        (
+            (
+                "No asignar probabilidades a H0 desde un valor p.",
+                "Do not assign probabilities to H0 from a p-value.",
+                "Tildel ikke H0 sandsynligheder ud fra en p-værdi.",
+            ),
+            (
+                "No declarar equivalencia sin margen y prueba.",
+                "Do not declare equivalence without a margin and test.",
+                "Erklær ikke ækvivalens uden margin og test.",
+            ),
+            (
+                "Responder en el idioma activo.",
+                "Respond in the active language.",
+                "Svar på det aktive sprog.",
+            ),
+        ),
+        (
+            "SDU ODIN BMB830 active course description approved 2025-03-06",
+            "R base stats documentation: t.test and power.t.test",
+            "Frequentist hypothesis-testing definitions",
+        ),
     ),
 )
 
 LOCALIZED_MODULE_05_HYPOTHESIS_TESTING = build_module(_SPEC)
 LOCALIZED_OBJECTIVE_QUESTION_BANK_05 = build_question_bank(_SPEC)
-MODULE_05_HYPOTHESIS_TESTING: LearningModule = (
-    LOCALIZED_MODULE_05_HYPOTHESIS_TESTING.materialize(AppLocale.SPANISH_SPAIN)
+MODULE_05_HYPOTHESIS_TESTING: LearningModule = LOCALIZED_MODULE_05_HYPOTHESIS_TESTING.materialize(
+    AppLocale.SPANISH_SPAIN
 )
 OBJECTIVE_QUESTION_BANK_05: tuple[AssessmentItem, ...] = materialize_bank(
     LOCALIZED_OBJECTIVE_QUESTION_BANK_05

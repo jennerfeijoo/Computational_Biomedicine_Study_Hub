@@ -243,7 +243,13 @@ ci=[0.575, 0.801]""",
                 "Distinguish parameter, estimator, and estimate when reporting a sample mean of 8.4.",
                 "Skeln mellem parameter, estimator og estimat ved rapportering af et stikprøvegennemsnit på 8,4.",
             ),
-            (("La media poblacional no se observa directamente.", "The population mean is not observed directly.", "Populationsgennemsnittet observeres ikke direkte."),),
+            (
+                (
+                    "La media poblacional no se observa directamente.",
+                    "The population mean is not observed directly.",
+                    "Populationsgennemsnittet observeres ikke direkte.",
+                ),
+            ),
             (
                 "Parámetro: media poblacional; estimador: media muestral; estimación: 8,4.",
                 "Parameter: population mean; estimator: sample mean; estimate: 8.4.",
@@ -264,7 +270,13 @@ ci=[0.575, 0.801]""",
                 "Complete the standard-error calculation for an independent mean.",
                 "Fuldfør beregningen af standardfejlen for et uafhængigt gennemsnit.",
             ),
-            (("Usa la desviación muestral y el tamaño efectivo.", "Use the sample deviation and effective sample size.", "Brug stikprøvens standardafvigelse og den effektive stikprøvestørrelse."),),
+            (
+                (
+                    "Usa la desviación muestral y el tamaño efectivo.",
+                    "Use the sample deviation and effective sample size.",
+                    "Brug stikprøvens standardafvigelse og den effektive stikprøvestørrelse.",
+                ),
+            ),
             ("sd(x) / sqrt(length(x))",) * 3,
             (
                 "El denominador es la raíz del número de unidades independientes.",
@@ -281,7 +293,13 @@ ci=[0.575, 0.801]""",
                 "Explain why a 95% interval does not assign 95% probability to the fixed parameter.",
                 "Forklar hvorfor et 95 %-interval ikke tildeler 95 % sandsynlighed til den faste parameter.",
             ),
-            (("La aleatoriedad pertenece al procedimiento de muestreo.", "Randomness belongs to the sampling procedure.", "Tilfældigheden tilhører stikprøveproceduren."),),
+            (
+                (
+                    "La aleatoriedad pertenece al procedimiento de muestreo.",
+                    "Randomness belongs to the sampling procedure.",
+                    "Tilfældigheden tilhører stikprøveproceduren.",
+                ),
+            ),
             (
                 "La cobertura del 95 % describe el rendimiento del procedimiento en muestreos repetidos.",
                 "The 95% coverage describes procedure performance over repeated samples.",
@@ -302,7 +320,13 @@ ci=[0.575, 0.801]""",
                 "Predict how an interval changes when effective sample size is quadrupled at constant variability.",
                 "Forudsig hvordan et interval ændres, når den effektive stikprøvestørrelse firedobles ved konstant variation.",
             ),
-            (("El error estándar escala aproximadamente con 1/√n.", "Standard error scales approximately with 1/√n.", "Standardfejlen skalerer omtrent med 1/√n."),),
+            (
+                (
+                    "El error estándar escala aproximadamente con 1/√n.",
+                    "Standard error scales approximately with 1/√n.",
+                    "Standardfejlen skalerer omtrent med 1/√n.",
+                ),
+            ),
             (
                 "El error estándar y la semianchura se reducen aproximadamente a la mitad.",
                 "Standard error and half-width are reduced by about half.",
@@ -323,7 +347,13 @@ ci=[0.575, 0.801]""",
                 "Correct a report that presents mean ± standard deviation as a confidence interval.",
                 "Ret en rapport, der præsenterer gennemsnit ± standardafvigelse som konfidensinterval.",
             ),
-            (("La desviación describe observaciones, no precisión del estimador.", "Deviation describes observations, not estimator precision.", "Standardafvigelsen beskriver observationer, ikke estimatorens præcision."),),
+            (
+                (
+                    "La desviación describe observaciones, no precisión del estimador.",
+                    "Deviation describes observations, not estimator precision.",
+                    "Standardafvigelsen beskriver observationer, ikke estimatorens præcision.",
+                ),
+            ),
             (
                 "Calcular SE y usar el cuantil apropiado; reportar SD por separado como dispersión.",
                 "Calculate SE and use the appropriate quantile; report SD separately as spread.",
@@ -344,7 +374,13 @@ ci=[0.575, 0.801]""",
                 "Design the minimum report for an estimated mean difference.",
                 "Design minimumsrapporteringen for en estimeret middelforskel.",
             ),
-            (("Incluye dirección, unidades e incertidumbre.", "Include direction, units, and uncertainty.", "Medtag retning, enheder og usikkerhed."),),
+            (
+                (
+                    "Incluye dirección, unidades e incertidumbre.",
+                    "Include direction, units, and uncertainty.",
+                    "Medtag retning, enheder og usikkerhed.",
+                ),
+            ),
             (
                 "Definir grupos y contraste, estimación con unidades, intervalo de confianza, tamaño muestral y supuestos.",
                 "Define groups and contrast, estimate with units, confidence interval, sample size, and assumptions.",
@@ -361,70 +397,295 @@ ci=[0.575, 0.801]""",
     mcqs=(
         (
             "001",
-            ("¿Qué describe el error estándar de la media?", "What does the standard error of the mean describe?", "Hvad beskriver standardfejlen for gennemsnittet?"),
-            (("a", ("Dispersión individual", "Individual spread", "Individuel spredning")), ("b", ("Precisión del estimador", "Estimator precision", "Estimatorens præcision")), ("c", ("Sesgo del diseño", "Design bias", "Designbias")), ("d", ("Rango total", "Total range", "Samlet variationsbredde"))),
+            (
+                "¿Qué describe el error estándar de la media?",
+                "What does the standard error of the mean describe?",
+                "Hvad beskriver standardfejlen for gennemsnittet?",
+            ),
+            (
+                ("a", ("Dispersión individual", "Individual spread", "Individuel spredning")),
+                ("b", ("Precisión del estimador", "Estimator precision", "Estimatorens præcision")),
+                ("c", ("Sesgo del diseño", "Design bias", "Designbias")),
+                ("d", ("Rango total", "Total range", "Samlet variationsbredde")),
+            ),
             "b",
-            ("El error estándar cuantifica variación muestral del estimador.", "Standard error quantifies sampling variation of the estimator.", "Standardfejlen kvantificerer estimatorens stikprøvevariation."),
+            (
+                "El error estándar cuantifica variación muestral del estimador.",
+                "Standard error quantifies sampling variation of the estimator.",
+                "Standardfejlen kvantificerer estimatorens stikprøvevariation.",
+            ),
         ),
         (
             "002",
-            ("¿Qué hace más estrecho un intervalo, manteniendo lo demás constante?", "What narrows an interval, all else equal?", "Hvad gør et interval smallere, alt andet lige?"),
-            (("a", ("Menor n", "Smaller n", "Mindre n")), ("b", ("Mayor n efectivo", "Larger effective n", "Større effektivt n")), ("c", ("Mayor confianza", "Higher confidence", "Højere konfidens")), ("d", ("Mayor variabilidad", "Higher variability", "Større variation"))),
+            (
+                "¿Qué hace más estrecho un intervalo, manteniendo lo demás constante?",
+                "What narrows an interval, all else equal?",
+                "Hvad gør et interval smallere, alt andet lige?",
+            ),
+            (
+                ("a", ("Menor n", "Smaller n", "Mindre n")),
+                ("b", ("Mayor n efectivo", "Larger effective n", "Større effektivt n")),
+                ("c", ("Mayor confianza", "Higher confidence", "Højere konfidens")),
+                ("d", ("Mayor variabilidad", "Higher variability", "Større variation")),
+            ),
             "b",
-            ("Más unidades independientes reducen el error estándar.", "More independent units reduce standard error.", "Flere uafhængige enheder reducerer standardfejlen."),
+            (
+                "Más unidades independientes reducen el error estándar.",
+                "More independent units reduce standard error.",
+                "Flere uafhængige enheder reducerer standardfejlen.",
+            ),
         ),
         (
             "003",
-            ("¿Cuál es la estimación en una media muestral de 8,4?", "What is the estimate when the sample mean is 8.4?", "Hvad er estimatet, når stikprøvegennemsnittet er 8,4?"),
-            (("a", ("La media poblacional", "The population mean", "Populationsgennemsnittet")), ("b", ("8,4", "8.4", "8,4")), ("c", ("La fórmula de la media", "The mean formula", "Formlen for gennemsnittet")), ("d", ("El diseño", "The design", "Designet"))),
+            (
+                "¿Cuál es la estimación en una media muestral de 8,4?",
+                "What is the estimate when the sample mean is 8.4?",
+                "Hvad er estimatet, når stikprøvegennemsnittet er 8,4?",
+            ),
+            (
+                ("a", ("La media poblacional", "The population mean", "Populationsgennemsnittet")),
+                ("b", ("8,4", "8.4", "8,4")),
+                ("c", ("La fórmula de la media", "The mean formula", "Formlen for gennemsnittet")),
+                ("d", ("El diseño", "The design", "Designet")),
+            ),
             "b",
-            ("La estimación es el valor observado del estimador.", "The estimate is the observed value of the estimator.", "Estimatet er estimatorens observerede værdi."),
+            (
+                "La estimación es el valor observado del estimador.",
+                "The estimate is the observed value of the estimator.",
+                "Estimatet er estimatorens observerede værdi.",
+            ),
         ),
         (
             "004",
-            ("¿Qué intervalo es adecuado para una media con desviación poblacional desconocida y n pequeño?", "Which interval suits a mean with unknown population deviation and small n?", "Hvilket interval passer til et gennemsnit med ukendt populationsafvigelse og lille n?"),
-            (("a", ("Intervalo t", "t interval", "t-interval")), ("b", ("Rango", "Range", "Variationsbredde")), ("c", ("Media ± SD", "Mean ± SD", "Gennemsnit ± SD")), ("d", ("Solo estimación", "Estimate only", "Kun estimat"))),
+            (
+                "¿Qué intervalo es adecuado para una media con desviación poblacional desconocida y n pequeño?",
+                "Which interval suits a mean with unknown population deviation and small n?",
+                "Hvilket interval passer til et gennemsnit med ukendt populationsafvigelse og lille n?",
+            ),
+            (
+                ("a", ("Intervalo t", "t interval", "t-interval")),
+                ("b", ("Rango", "Range", "Variationsbredde")),
+                ("c", ("Media ± SD", "Mean ± SD", "Gennemsnit ± SD")),
+                ("d", ("Solo estimación", "Estimate only", "Kun estimat")),
+            ),
             "a",
-            ("La distribución t refleja estimación de la variabilidad.", "The t distribution reflects estimation of variability.", "t-fordelingen afspejler estimering af variationen."),
+            (
+                "La distribución t refleja estimación de la variabilidad.",
+                "The t distribution reflects estimation of variability.",
+                "t-fordelingen afspejler estimering af variationen.",
+            ),
         ),
         (
             "005",
-            ("¿Qué describe una desviación estándar?", "What does a standard deviation describe?", "Hvad beskriver en standardafvigelse?"),
-            (("a", ("Precisión de la media", "Precision of the mean", "Præcisionen af gennemsnittet")), ("b", ("Dispersión entre observaciones", "Spread among observations", "Spredning mellem observationer")), ("c", ("Cobertura", "Coverage", "Dækning")), ("d", ("Sesgo", "Bias", "Bias"))),
+            (
+                "¿Qué describe una desviación estándar?",
+                "What does a standard deviation describe?",
+                "Hvad beskriver en standardafvigelse?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Precisión de la media",
+                        "Precision of the mean",
+                        "Præcisionen af gennemsnittet",
+                    ),
+                ),
+                (
+                    "b",
+                    (
+                        "Dispersión entre observaciones",
+                        "Spread among observations",
+                        "Spredning mellem observationer",
+                    ),
+                ),
+                ("c", ("Cobertura", "Coverage", "Dækning")),
+                ("d", ("Sesgo", "Bias", "Bias")),
+            ),
             "b",
-            ("SD resume dispersión observacional.", "SD summarises observational spread.", "SD opsummerer observationsspredning."),
+            (
+                "SD resume dispersión observacional.",
+                "SD summarises observational spread.",
+                "SD opsummerer observationsspredning.",
+            ),
         ),
         (
             "006",
-            ("¿Qué debe acompañar a un intervalo de confianza?", "What should accompany a confidence interval?", "Hvad bør ledsage et konfidensinterval?"),
-            (("a", ("Estimando y unidades", "Estimand and units", "Estimand og enheder")), ("b", ("Solo color", "Colour only", "Kun farve")), ("c", ("Solo valor p", "p-value only", "Kun p-værdi")), ("d", ("Workspace", "Workspace", "Workspace"))),
+            (
+                "¿Qué debe acompañar a un intervalo de confianza?",
+                "What should accompany a confidence interval?",
+                "Hvad bør ledsage et konfidensinterval?",
+            ),
+            (
+                ("a", ("Estimando y unidades", "Estimand and units", "Estimand og enheder")),
+                ("b", ("Solo color", "Colour only", "Kun farve")),
+                ("c", ("Solo valor p", "p-value only", "Kun p-værdi")),
+                ("d", ("Workspace", "Workspace", "Workspace")),
+            ),
             "a",
-            ("Sin estimando y unidades el intervalo es ambiguo.", "Without estimand and units the interval is ambiguous.", "Uden estimand og enheder er intervallet tvetydigt."),
+            (
+                "Sin estimando y unidades el intervalo es ambiguo.",
+                "Without estimand and units the interval is ambiguous.",
+                "Uden estimand og enheder er intervallet tvetydigt.",
+            ),
         ),
         (
             "007",
-            ("¿Qué aumenta la cobertura nominal?", "What increases nominal coverage?", "Hvad øger den nominelle dækning?"),
-            (("a", ("Usar 99 % en vez de 95 %", "Use 99% instead of 95%", "Brug 99 % i stedet for 95 %")), ("b", ("Reducir n", "Reduce n", "Reducér n")), ("c", ("Eliminar SD", "Remove SD", "Fjern SD")), ("d", ("Truncar datos", "Truncate data", "Afkort data"))),
+            (
+                "¿Qué aumenta la cobertura nominal?",
+                "What increases nominal coverage?",
+                "Hvad øger den nominelle dækning?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Usar 99 % en vez de 95 %",
+                        "Use 99% instead of 95%",
+                        "Brug 99 % i stedet for 95 %",
+                    ),
+                ),
+                ("b", ("Reducir n", "Reduce n", "Reducér n")),
+                ("c", ("Eliminar SD", "Remove SD", "Fjern SD")),
+                ("d", ("Truncar datos", "Truncate data", "Afkort data")),
+            ),
             "a",
-            ("Mayor cobertura requiere un intervalo más ancho.", "Higher coverage requires a wider interval.", "Højere dækning kræver et bredere interval."),
+            (
+                "Mayor cobertura requiere un intervalo más ancho.",
+                "Higher coverage requires a wider interval.",
+                "Højere dækning kræver et bredere interval.",
+            ),
         ),
         (
             "008",
-            ("¿Qué intervalo respeta mejor los límites de una proporción?", "Which interval better respects proportion boundaries?", "Hvilket interval respekterer bedst grænserne for en proportion?"),
-            (("a", ("Wilson", "Wilson", "Wilson")), ("b", ("Media ± SD", "Mean ± SD", "Gennemsnit ± SD")), ("c", ("Rango", "Range", "Variationsbredde")), ("d", ("Ninguno", "None", "Ingen"))),
+            (
+                "¿Qué intervalo respeta mejor los límites de una proporción?",
+                "Which interval better respects proportion boundaries?",
+                "Hvilket interval respekterer bedst grænserne for en proportion?",
+            ),
+            (
+                ("a", ("Wilson", "Wilson", "Wilson")),
+                ("b", ("Media ± SD", "Mean ± SD", "Gennemsnit ± SD")),
+                ("c", ("Rango", "Range", "Variationsbredde")),
+                ("d", ("Ninguno", "None", "Ingen")),
+            ),
             "a",
-            ("Wilson evita parte del mal comportamiento de la aproximación simétrica.", "Wilson avoids some poor behaviour of the symmetric approximation.", "Wilson undgår noget af den symmetriske approksimations dårlige adfærd."),
+            (
+                "Wilson evita parte del mal comportamiento de la aproximación simétrica.",
+                "Wilson avoids some poor behaviour of the symmetric approximation.",
+                "Wilson undgår noget af den symmetriske approksimations dårlige adfærd.",
+            ),
         ),
     ),
     true_false=(
-        ("009", ("La desviación estándar y el error estándar responden a la misma pregunta.", "Standard deviation and standard error answer the same question.", "Standardafvigelse og standardfejl besvarer samme spørgsmål."), False, ("SD describe observaciones; SE describe precisión del estimador.", "SD describes observations; SE describes estimator precision.", "SD beskriver observationer; SE beskriver estimatorens præcision.")),
-        ("010", ("Cuadruplicar n efectivo reduce aproximadamente a la mitad el SE.", "Quadrupling effective n approximately halves SE.", "En firedobling af effektivt n halverer omtrent SE."), True, ("SE escala con 1/√n.", "SE scales with 1/√n.", "SE skalerer med 1/√n.")),
-        ("011", ("Un intervalo estrecho demuestra ausencia de sesgo.", "A narrow interval proves absence of bias.", "Et smalt interval beviser fravær af bias."), False, ("Precisión y sesgo son propiedades distintas.", "Precision and bias are distinct properties.", "Præcision og bias er forskellige egenskaber.")),
-        ("012", ("Un intervalo del 99 % suele ser más ancho que uno del 95 %.", "A 99% interval is usually wider than a 95% interval.", "Et 99 %-interval er normalt bredere end et 95 %-interval."), True, ("Mayor cobertura requiere un valor crítico mayor.", "Higher coverage requires a larger critical value.", "Højere dækning kræver en større kritisk værdi.")),
-        ("013", ("La pseudorreplicación reduce válidamente el SE como nuevas unidades biológicas.", "Pseudoreplication validly reduces SE as new biological units.", "Pseudoreplikation reducerer gyldigt SE som nye biologiske enheder."), False, ("Las mediciones dependientes no aumentan n efectivo del mismo modo.", "Dependent measurements do not increase effective n in the same way.", "Afhængige målinger øger ikke effektivt n på samme måde.")),
-        ("014", ("La cobertura es una propiedad del procedimiento bajo supuestos.", "Coverage is a property of the procedure under assumptions.", "Dækning er en egenskab ved proceduren under antagelser."), True, ("Se evalúa sobre muestreos repetidos.", "It is evaluated over repeated samples.", "Den vurderes over gentagne stikprøver.")),
-        ("015", ("Un valor puntual comunica magnitud pero no precisión.", "A point value communicates magnitude but not precision.", "Et punktestimat kommunikerer størrelse, men ikke præcision."), True, ("Se necesita una medida de incertidumbre.", "A measure of uncertainty is needed.", "Der kræves et mål for usikkerhed.")),
-        ("016", ("La media ± SD es automáticamente un intervalo de confianza.", "Mean ± SD is automatically a confidence interval.", "Gennemsnit ± SD er automatisk et konfidensinterval."), False, ("SD no es el error estándar ni incorpora un valor crítico.", "SD is neither standard error nor a critical-value interval.", "SD er hverken standardfejl eller et interval med kritisk værdi.")),
+        (
+            "009",
+            (
+                "La desviación estándar y el error estándar responden a la misma pregunta.",
+                "Standard deviation and standard error answer the same question.",
+                "Standardafvigelse og standardfejl besvarer samme spørgsmål.",
+            ),
+            False,
+            (
+                "SD describe observaciones; SE describe precisión del estimador.",
+                "SD describes observations; SE describes estimator precision.",
+                "SD beskriver observationer; SE beskriver estimatorens præcision.",
+            ),
+        ),
+        (
+            "010",
+            (
+                "Cuadruplicar n efectivo reduce aproximadamente a la mitad el SE.",
+                "Quadrupling effective n approximately halves SE.",
+                "En firedobling af effektivt n halverer omtrent SE.",
+            ),
+            True,
+            ("SE escala con 1/√n.", "SE scales with 1/√n.", "SE skalerer med 1/√n."),
+        ),
+        (
+            "011",
+            (
+                "Un intervalo estrecho demuestra ausencia de sesgo.",
+                "A narrow interval proves absence of bias.",
+                "Et smalt interval beviser fravær af bias.",
+            ),
+            False,
+            (
+                "Precisión y sesgo son propiedades distintas.",
+                "Precision and bias are distinct properties.",
+                "Præcision og bias er forskellige egenskaber.",
+            ),
+        ),
+        (
+            "012",
+            (
+                "Un intervalo del 99 % suele ser más ancho que uno del 95 %.",
+                "A 99% interval is usually wider than a 95% interval.",
+                "Et 99 %-interval er normalt bredere end et 95 %-interval.",
+            ),
+            True,
+            (
+                "Mayor cobertura requiere un valor crítico mayor.",
+                "Higher coverage requires a larger critical value.",
+                "Højere dækning kræver en større kritisk værdi.",
+            ),
+        ),
+        (
+            "013",
+            (
+                "La pseudorreplicación reduce válidamente el SE como nuevas unidades biológicas.",
+                "Pseudoreplication validly reduces SE as new biological units.",
+                "Pseudoreplikation reducerer gyldigt SE som nye biologiske enheder.",
+            ),
+            False,
+            (
+                "Las mediciones dependientes no aumentan n efectivo del mismo modo.",
+                "Dependent measurements do not increase effective n in the same way.",
+                "Afhængige målinger øger ikke effektivt n på samme måde.",
+            ),
+        ),
+        (
+            "014",
+            (
+                "La cobertura es una propiedad del procedimiento bajo supuestos.",
+                "Coverage is a property of the procedure under assumptions.",
+                "Dækning er en egenskab ved proceduren under antagelser.",
+            ),
+            True,
+            (
+                "Se evalúa sobre muestreos repetidos.",
+                "It is evaluated over repeated samples.",
+                "Den vurderes over gentagne stikprøver.",
+            ),
+        ),
+        (
+            "015",
+            (
+                "Un valor puntual comunica magnitud pero no precisión.",
+                "A point value communicates magnitude but not precision.",
+                "Et punktestimat kommunikerer størrelse, men ikke præcision.",
+            ),
+            True,
+            (
+                "Se necesita una medida de incertidumbre.",
+                "A measure of uncertainty is needed.",
+                "Der kræves et mål for usikkerhed.",
+            ),
+        ),
+        (
+            "016",
+            (
+                "La media ± SD es automáticamente un intervalo de confianza.",
+                "Mean ± SD is automatically a confidence interval.",
+                "Gennemsnit ± SD er automatisk et konfidensinterval.",
+            ),
+            False,
+            (
+                "SD no es el error estándar ni incorpora un valor crítico.",
+                "SD is neither standard error nor a critical-value interval.",
+                "SD er hverken standardfejl eller et interval med kritisk værdi.",
+            ),
+        ),
     ),
     tutor=(
         (
@@ -432,12 +693,89 @@ ci=[0.575, 0.801]""",
             "Rigorous estimation declares the estimand, presents an estimate with units, and accompanies magnitude with uncertainty calculated for the appropriate design and model.",
             "Grundig estimation erklærer estimanden, præsenterer et estimat med enheder og ledsager størrelsen med usikkerhed beregnet for passende design og model.",
         ),
-        (("El error estándar pertenece al estimador.", "Standard error belongs to the estimator.", "Standardfejlen tilhører estimatoren."), ("La cobertura es frecuentista y procedimental.", "Coverage is frequentist and procedural.", "Dækning er frekventistisk og proceduremæssig."), ("La independencia determina n efectivo.", "Independence determines effective n.", "Uafhængighed bestemmer effektivt n."), ("Precisión y sesgo deben evaluarse por separado.", "Precision and bias must be evaluated separately.", "Præcision og bias skal vurderes separat.")),
-        (("Interpretar CI como probabilidad posterior.", "Interpreting a CI as posterior probability.", "At fortolke KI som posterior sandsynlighed."), ("Confundir SD y SE.", "Confusing SD and SE.", "At forveksle SD og SE."), ("Contar réplicas técnicas como n independiente.", "Counting technical replicates as independent n.", "At tælle tekniske replikater som uafhængigt n.")),
-        (("¿Cuál es el estimando?", "What is the estimand?", "Hvad er estimanden?"), ("¿Cuál es la unidad independiente?", "What is the independent unit?", "Hvad er den uafhængige enhed?"), ("¿Qué supuesto justifica el intervalo?", "Which assumption justifies the interval?", "Hvilken antagelse begrunder intervallet?")),
-        (("Distingue SD y SE.", "Distinguishes SD and SE.", "Skelner mellem SD og SE."), ("Interpreta cobertura correctamente.", "Interprets coverage correctly.", "Fortolker dækning korrekt."), ("Reporta magnitud, unidades e incertidumbre.", "Reports magnitude, units, and uncertainty.", "Rapporterer størrelse, enheder og usikkerhed.")),
-        (("No inventar tamaños muestrales ni intervalos.", "Do not invent sample sizes or intervals.", "Opfind ikke stikprøvestørrelser eller intervaller."), ("No convertir CI frecuentista en probabilidad posterior.", "Do not convert a frequentist CI into posterior probability.", "Konvertér ikke et frekventistisk KI til posterior sandsynlighed."), ("Responder en el idioma activo.", "Respond in the active language.", "Svar på det aktive sprog.")),
-        ("SDU ODIN BMB830 active course description approved 2025-03-06", "R base stats documentation: qt, qnorm, t.test", "Wilson score interval derivation"),
+        (
+            (
+                "El error estándar pertenece al estimador.",
+                "Standard error belongs to the estimator.",
+                "Standardfejlen tilhører estimatoren.",
+            ),
+            (
+                "La cobertura es frecuentista y procedimental.",
+                "Coverage is frequentist and procedural.",
+                "Dækning er frekventistisk og proceduremæssig.",
+            ),
+            (
+                "La independencia determina n efectivo.",
+                "Independence determines effective n.",
+                "Uafhængighed bestemmer effektivt n.",
+            ),
+            (
+                "Precisión y sesgo deben evaluarse por separado.",
+                "Precision and bias must be evaluated separately.",
+                "Præcision og bias skal vurderes separat.",
+            ),
+        ),
+        (
+            (
+                "Interpretar CI como probabilidad posterior.",
+                "Interpreting a CI as posterior probability.",
+                "At fortolke KI som posterior sandsynlighed.",
+            ),
+            ("Confundir SD y SE.", "Confusing SD and SE.", "At forveksle SD og SE."),
+            (
+                "Contar réplicas técnicas como n independiente.",
+                "Counting technical replicates as independent n.",
+                "At tælle tekniske replikater som uafhængigt n.",
+            ),
+        ),
+        (
+            ("¿Cuál es el estimando?", "What is the estimand?", "Hvad er estimanden?"),
+            (
+                "¿Cuál es la unidad independiente?",
+                "What is the independent unit?",
+                "Hvad er den uafhængige enhed?",
+            ),
+            (
+                "¿Qué supuesto justifica el intervalo?",
+                "Which assumption justifies the interval?",
+                "Hvilken antagelse begrunder intervallet?",
+            ),
+        ),
+        (
+            ("Distingue SD y SE.", "Distinguishes SD and SE.", "Skelner mellem SD og SE."),
+            (
+                "Interpreta cobertura correctamente.",
+                "Interprets coverage correctly.",
+                "Fortolker dækning korrekt.",
+            ),
+            (
+                "Reporta magnitud, unidades e incertidumbre.",
+                "Reports magnitude, units, and uncertainty.",
+                "Rapporterer størrelse, enheder og usikkerhed.",
+            ),
+        ),
+        (
+            (
+                "No inventar tamaños muestrales ni intervalos.",
+                "Do not invent sample sizes or intervals.",
+                "Opfind ikke stikprøvestørrelser eller intervaller.",
+            ),
+            (
+                "No convertir CI frecuentista en probabilidad posterior.",
+                "Do not convert a frequentist CI into posterior probability.",
+                "Konvertér ikke et frekventistisk KI til posterior sandsynlighed.",
+            ),
+            (
+                "Responder en el idioma activo.",
+                "Respond in the active language.",
+                "Svar på det aktive sprog.",
+            ),
+        ),
+        (
+            "SDU ODIN BMB830 active course description approved 2025-03-06",
+            "R base stats documentation: qt, qnorm, t.test",
+            "Wilson score interval derivation",
+        ),
     ),
 )
 

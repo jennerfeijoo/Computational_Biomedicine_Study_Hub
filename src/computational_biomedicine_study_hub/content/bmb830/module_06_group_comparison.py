@@ -247,7 +247,13 @@ p=0.0000""",
                 "Classify as independent or paired: different patients by treatment; before-after in the same patients.",
                 "Klassificér som uafhængigt eller parret: forskellige patienter efter behandling; før-efter hos de samme patienter.",
             ),
-            (("Busca si una observación puede emparejarse con otra por unidad.", "Ask whether one observation can be matched to another by unit.", "Spørg om en observation kan matches med en anden efter enhed."),),
+            (
+                (
+                    "Busca si una observación puede emparejarse con otra por unidad.",
+                    "Ask whether one observation can be matched to another by unit.",
+                    "Spørg om en observation kan matches med en anden efter enhed.",
+                ),
+            ),
             (
                 "Pacientes distintos: independiente. Mismos pacientes: pareado.",
                 "Different patients: independent. Same patients: paired.",
@@ -268,7 +274,13 @@ p=0.0000""",
                 "Complete a two-sided Welch test between x and y.",
                 "Fuldfør en tosidet Welch-test mellem x og y.",
             ),
-            (("No impongas varianzas iguales.", "Do not impose equal variances.", "Antag ikke ens varianser."),),
+            (
+                (
+                    "No impongas varianzas iguales.",
+                    "Do not impose equal variances.",
+                    "Antag ikke ens varianser.",
+                ),
+            ),
             ("t.test(x, y, var.equal = FALSE, alternative = 'two.sided')",) * 3,
             (
                 "Welch es el comportamiento predeterminado de t.test para dos muestras.",
@@ -285,7 +297,13 @@ p=0.0000""",
                 "Correct a before-after analysis run as two independent samples.",
                 "Ret en før-efter-analyse udført som to uafhængige stikprøver.",
             ),
-            (("Conserva la identidad de cada participante.", "Preserve participant identity.", "Bevar deltagernes identitet."),),
+            (
+                (
+                    "Conserva la identidad de cada participante.",
+                    "Preserve participant identity.",
+                    "Bevar deltagernes identitet.",
+                ),
+            ),
             (
                 "Analizar diferencias dentro de participante o usar t.test(before, after, paired=TRUE).",
                 "Analyse within-participant differences or use t.test(before, after, paired=TRUE).",
@@ -306,7 +324,13 @@ p=0.0000""",
                 "Design the comparison of three groups with two predefined scientific contrasts.",
                 "Design sammenligningen af tre grupper med to foruddefinerede videnskabelige kontraster.",
             ),
-            (("Separa prueba global y contrastes.", "Separate the global test and contrasts.", "Adskil global test og kontraster."),),
+            (
+                (
+                    "Separa prueba global y contrastes.",
+                    "Separate the global test and contrasts.",
+                    "Adskil global test og kontraster.",
+                ),
+            ),
             (
                 "Validar diseño; ajustar ANOVA; inspeccionar residuos; evaluar prueba global; estimar los dos contrastes con intervalos y control de multiplicidad.",
                 "Validate design; fit ANOVA; inspect residuals; evaluate the global test; estimate the two contrasts with intervals and multiplicity control.",
@@ -327,7 +351,13 @@ p=0.0000""",
                 "Explain why Shapiro-Wilk should not automatically decide between t and Wilcoxon.",
                 "Forklar hvorfor Shapiro-Wilk ikke automatisk bør afgøre valget mellem t og Wilcoxon.",
             ),
-            (("Considera diseño, tamaño, extremos y estimando.", "Consider design, size, outliers, and estimand.", "Overvej design, størrelse, ekstreme værdier og estimand."),),
+            (
+                (
+                    "Considera diseño, tamaño, extremos y estimando.",
+                    "Consider design, size, outliers, and estimand.",
+                    "Overvej design, størrelse, ekstreme værdier og estimand.",
+                ),
+            ),
             (
                 "Una prueba diagnóstica tiene potencia limitada o excesiva según n; la decisión debe integrar gráficos, robustez, escala y pregunta científica.",
                 "A diagnostic test has limited or excessive power depending on n; the decision should integrate plots, robustness, scale, and the scientific question.",
@@ -348,7 +378,13 @@ p=0.0000""",
                 "Interpret ANOVA p=0.01 without claiming that every group differs.",
                 "Fortolk ANOVA p=0,01 uden at hævde, at alle grupper er forskellige.",
             ),
-            (("La hipótesis global es que todas las medias son iguales.", "The global hypothesis is that all means are equal.", "Den globale hypotese er, at alle middelværdier er ens."),),
+            (
+                (
+                    "La hipótesis global es que todas las medias son iguales.",
+                    "The global hypothesis is that all means are equal.",
+                    "Den globale hypotese er, at alle middelværdier er ens.",
+                ),
+            ),
             (
                 "Existe evidencia contra la igualdad global de medias; se necesitan contrastes definidos para localizar y cuantificar diferencias.",
                 "There is evidence against global equality of means; defined contrasts are needed to locate and quantify differences.",
@@ -365,70 +401,333 @@ p=0.0000""",
     mcqs=(
         (
             "001",
-            ("¿Qué prueba compara dos grupos independientes sin asumir varianzas iguales?", "Which test compares two independent groups without assuming equal variances?", "Hvilken test sammenligner to uafhængige grupper uden at antage ens varianser?"),
-            (("a", ("Welch", "Welch", "Welch")), ("b", ("t pareada", "Paired t", "Parret t")), ("c", ("McNemar", "McNemar", "McNemar")), ("d", ("Correlación", "Correlation", "Korrelation"))),
+            (
+                "¿Qué prueba compara dos grupos independientes sin asumir varianzas iguales?",
+                "Which test compares two independent groups without assuming equal variances?",
+                "Hvilken test sammenligner to uafhængige grupper uden at antage ens varianser?",
+            ),
+            (
+                ("a", ("Welch", "Welch", "Welch")),
+                ("b", ("t pareada", "Paired t", "Parret t")),
+                ("c", ("McNemar", "McNemar", "McNemar")),
+                ("d", ("Correlación", "Correlation", "Korrelation")),
+            ),
             "a",
-            ("Welch ajusta el error estándar y los grados de libertad.", "Welch adjusts standard error and degrees of freedom.", "Welch justerer standardfejl og frihedsgrader."),
+            (
+                "Welch ajusta el error estándar y los grados de libertad.",
+                "Welch adjusts standard error and degrees of freedom.",
+                "Welch justerer standardfejl og frihedsgrader.",
+            ),
         ),
         (
             "002",
-            ("¿Cuál es la unidad de análisis en un diseño antes-después?", "What is the analysis unit in a before-after design?", "Hvad er analyseenheden i et før-efter-design?"),
-            (("a", ("Cada medición aislada", "Each isolated measurement", "Hver isoleret måling")), ("b", ("La diferencia por participante", "The participant-level difference", "Forskellen pr. deltager")), ("c", ("Cada grupo como una observación", "Each group as one observation", "Hver gruppe som én observation")), ("d", ("La mediana global", "The global median", "Den globale median"))),
+            (
+                "¿Cuál es la unidad de análisis en un diseño antes-después?",
+                "What is the analysis unit in a before-after design?",
+                "Hvad er analyseenheden i et før-efter-design?",
+            ),
+            (
+                (
+                    "a",
+                    ("Cada medición aislada", "Each isolated measurement", "Hver isoleret måling"),
+                ),
+                (
+                    "b",
+                    (
+                        "La diferencia por participante",
+                        "The participant-level difference",
+                        "Forskellen pr. deltager",
+                    ),
+                ),
+                (
+                    "c",
+                    (
+                        "Cada grupo como una observación",
+                        "Each group as one observation",
+                        "Hver gruppe som én observation",
+                    ),
+                ),
+                ("d", ("La mediana global", "The global median", "Den globale median")),
+            ),
             "b",
-            ("El pareamiento se representa mediante diferencias dentro de unidad.", "Pairing is represented through within-unit differences.", "Parring repræsenteres gennem forskelle inden for enheden."),
+            (
+                "El pareamiento se representa mediante diferencias dentro de unidad.",
+                "Pairing is represented through within-unit differences.",
+                "Parring repræsenteres gennem forskelle inden for enheden.",
+            ),
         ),
         (
             "003",
-            ("¿Qué evalúa primero ANOVA?", "What does ANOVA evaluate first?", "Hvad vurderer ANOVA først?"),
-            (("a", ("Una hipótesis global de medias", "A global hypothesis about means", "En global hypotese om middelværdier")), ("b", ("Cada par sin ajuste", "Every pair without adjustment", "Hvert par uden justering")), ("c", ("Normalidad de datos crudos", "Normality of raw data", "Normalitet af rådata")), ("d", ("Equivalencia clínica", "Clinical equivalence", "Klinisk ækvivalens"))),
+            (
+                "¿Qué evalúa primero ANOVA?",
+                "What does ANOVA evaluate first?",
+                "Hvad vurderer ANOVA først?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Una hipótesis global de medias",
+                        "A global hypothesis about means",
+                        "En global hypotese om middelværdier",
+                    ),
+                ),
+                (
+                    "b",
+                    (
+                        "Cada par sin ajuste",
+                        "Every pair without adjustment",
+                        "Hvert par uden justering",
+                    ),
+                ),
+                (
+                    "c",
+                    ("Normalidad de datos crudos", "Normality of raw data", "Normalitet af rådata"),
+                ),
+                ("d", ("Equivalencia clínica", "Clinical equivalence", "Klinisk ækvivalens")),
+            ),
             "a",
-            ("La prueba global pregunta si todas las medias pueden ser iguales.", "The global test asks whether all means may be equal.", "Den globale test spørger, om alle middelværdier kan være ens."),
+            (
+                "La prueba global pregunta si todas las medias pueden ser iguales.",
+                "The global test asks whether all means may be equal.",
+                "Den globale test spørger, om alle middelværdier kan være ens.",
+            ),
         ),
         (
             "004",
-            ("¿Qué problema crean muchas pruebas t sin ajuste?", "What problem is created by many unadjusted t tests?", "Hvilket problem skaber mange ujusterede t-tests?"),
-            (("a", ("Inflación del error tipo I", "Inflated type I error", "Øget type I-fejl")), ("b", ("Menor SD automática", "Automatically lower SD", "Automatisk lavere SD")), ("c", ("Mayor n", "Larger n", "Større n")), ("d", ("Pareamiento", "Pairing", "Parring"))),
+            (
+                "¿Qué problema crean muchas pruebas t sin ajuste?",
+                "What problem is created by many unadjusted t tests?",
+                "Hvilket problem skaber mange ujusterede t-tests?",
+            ),
+            (
+                ("a", ("Inflación del error tipo I", "Inflated type I error", "Øget type I-fejl")),
+                ("b", ("Menor SD automática", "Automatically lower SD", "Automatisk lavere SD")),
+                ("c", ("Mayor n", "Larger n", "Større n")),
+                ("d", ("Pareamiento", "Pairing", "Parring")),
+            ),
             "a",
-            ("Cada contraste adicional ofrece otra oportunidad de falso positivo.", "Each additional contrast offers another false-positive opportunity.", "Hver ekstra kontrast giver endnu en mulighed for falsk positiv."),
+            (
+                "Cada contraste adicional ofrece otra oportunidad de falso positivo.",
+                "Each additional contrast offers another false-positive opportunity.",
+                "Hver ekstra kontrast giver endnu en mulighed for falsk positiv.",
+            ),
         ),
         (
             "005",
-            ("¿Qué supuesto no corrige una prueba por rangos?", "Which assumption problem is not fixed by a rank test?", "Hvilket antagelsesproblem løses ikke af en rangtest?"),
-            (("a", ("Dependencia ignorada", "Ignored dependence", "Ignoreret afhængighed")), ("b", ("Escala ordinal", "Ordinal scale", "Ordinal skala")), ("c", ("Valores extremos", "Outliers", "Ekstreme værdier")), ("d", ("Asimetría", "Skewness", "Skævhed"))),
+            (
+                "¿Qué supuesto no corrige una prueba por rangos?",
+                "Which assumption problem is not fixed by a rank test?",
+                "Hvilket antagelsesproblem løses ikke af en rangtest?",
+            ),
+            (
+                ("a", ("Dependencia ignorada", "Ignored dependence", "Ignoreret afhængighed")),
+                ("b", ("Escala ordinal", "Ordinal scale", "Ordinal skala")),
+                ("c", ("Valores extremos", "Outliers", "Ekstreme værdier")),
+                ("d", ("Asimetría", "Skewness", "Skævhed")),
+            ),
             "a",
-            ("La estructura de dependencia pertenece al diseño.", "Dependence structure belongs to the design.", "Afhængighedsstrukturen tilhører designet."),
+            (
+                "La estructura de dependencia pertenece al diseño.",
+                "Dependence structure belongs to the design.",
+                "Afhængighedsstrukturen tilhører designet.",
+            ),
         ),
         (
             "006",
-            ("¿Qué debe inspeccionarse para una prueba t pareada?", "What should be inspected for a paired t test?", "Hvad bør inspiceres for en parret t-test?"),
-            (("a", ("Distribución de diferencias", "Distribution of differences", "Fordelingen af forskelle")), ("b", ("Solo cada margen", "Each margin only", "Kun hver marginalfordeling")), ("c", ("Color del grupo", "Group colour", "Gruppefarve")), ("d", ("Número de columnas", "Number of columns", "Antal kolonner"))),
+            (
+                "¿Qué debe inspeccionarse para una prueba t pareada?",
+                "What should be inspected for a paired t test?",
+                "Hvad bør inspiceres for en parret t-test?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Distribución de diferencias",
+                        "Distribution of differences",
+                        "Fordelingen af forskelle",
+                    ),
+                ),
+                ("b", ("Solo cada margen", "Each margin only", "Kun hver marginalfordeling")),
+                ("c", ("Color del grupo", "Group colour", "Gruppefarve")),
+                ("d", ("Número de columnas", "Number of columns", "Antal kolonner")),
+            ),
             "a",
-            ("La prueba opera sobre diferencias dentro de unidad.", "The test operates on within-unit differences.", "Testen arbejder på forskelle inden for enheden."),
+            (
+                "La prueba opera sobre diferencias dentro de unidad.",
+                "The test operates on within-unit differences.",
+                "Testen arbejder på forskelle inden for enheden.",
+            ),
         ),
         (
             "007",
-            ("¿Qué sigue a un ANOVA global significativo?", "What follows a significant global ANOVA?", "Hvad følger efter en signifikant global ANOVA?"),
-            (("a", ("Contrastes definidos con control de multiplicidad", "Defined contrasts with multiplicity control", "Definerede kontraster med multiplicitetskontrol")), ("b", ("Afirmar que todos difieren", "Claim all groups differ", "Hævde at alle grupper er forskellige")), ("c", ("Eliminar grupos", "Delete groups", "Slette grupper")), ("d", ("Aceptar causalidad", "Accept causality", "Acceptere kausalitet"))),
+            (
+                "¿Qué sigue a un ANOVA global significativo?",
+                "What follows a significant global ANOVA?",
+                "Hvad følger efter en signifikant global ANOVA?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Contrastes definidos con control de multiplicidad",
+                        "Defined contrasts with multiplicity control",
+                        "Definerede kontraster med multiplicitetskontrol",
+                    ),
+                ),
+                (
+                    "b",
+                    (
+                        "Afirmar que todos difieren",
+                        "Claim all groups differ",
+                        "Hævde at alle grupper er forskellige",
+                    ),
+                ),
+                ("c", ("Eliminar grupos", "Delete groups", "Slette grupper")),
+                ("d", ("Aceptar causalidad", "Accept causality", "Acceptere kausalitet")),
+            ),
             "a",
-            ("Los contrastes localizan y cuantifican diferencias.", "Contrasts locate and quantify differences.", "Kontraster lokaliserer og kvantificerer forskelle."),
+            (
+                "Los contrastes localizan y cuantifican diferencias.",
+                "Contrasts locate and quantify differences.",
+                "Kontraster lokaliserer og kvantificerer forskelle.",
+            ),
         ),
         (
             "008",
-            ("¿Qué determina primero la selección del método?", "What first determines method selection?", "Hvad bestemmer først metodevalget?"),
-            (("a", ("Diseño y estimando", "Design and estimand", "Design og estimand")), ("b", ("Valor p observado", "Observed p-value", "Observeret p-værdi")), ("c", ("Prueba más familiar", "Most familiar test", "Mest kendte test")), ("d", ("Mayor significación", "Greatest significance", "Størst signifikans"))),
+            (
+                "¿Qué determina primero la selección del método?",
+                "What first determines method selection?",
+                "Hvad bestemmer først metodevalget?",
+            ),
+            (
+                ("a", ("Diseño y estimando", "Design and estimand", "Design og estimand")),
+                ("b", ("Valor p observado", "Observed p-value", "Observeret p-værdi")),
+                ("c", ("Prueba más familiar", "Most familiar test", "Mest kendte test")),
+                ("d", ("Mayor significación", "Greatest significance", "Størst signifikans")),
+            ),
             "a",
-            ("La prueba debe representar la pregunta y la dependencia.", "The test must represent the question and dependence.", "Testen skal repræsentere spørgsmålet og afhængigheden."),
+            (
+                "La prueba debe representar la pregunta y la dependencia.",
+                "The test must represent the question and dependence.",
+                "Testen skal repræsentere spørgsmålet og afhængigheden.",
+            ),
         ),
     ),
     true_false=(
-        ("009", ("Welch requiere varianzas exactamente iguales.", "Welch requires exactly equal variances.", "Welch kræver præcis ens varianser."), False, ("Welch se diseñó para no imponer igualdad de varianzas.", "Welch was designed not to impose equal variances.", "Welch er designet til ikke at kræve ens varianser.")),
-        ("010", ("Un diseño pareado se analiza mediante diferencias dentro de unidad.", "A paired design is analysed through within-unit differences.", "Et parret design analyseres gennem forskelle inden for enheden."), True, ("La diferencia conserva el emparejamiento.", "The difference preserves pairing.", "Forskellen bevarer parringen.")),
-        ("011", ("ANOVA significativo implica que todos los pares difieren.", "A significant ANOVA implies every pair differs.", "En signifikant ANOVA indebærer, at alle par er forskellige."), False, ("Solo rechaza la igualdad global.", "It only rejects global equality.", "Den forkaster kun global lighed.")),
-        ("012", ("Múltiples contrastes pueden requerir ajuste.", "Multiple contrasts may require adjustment.", "Multiple kontraster kan kræve justering."), True, ("La multiplicidad aumenta oportunidades de error tipo I.", "Multiplicity increases type I error opportunities.", "Multiplicitet øger mulighederne for type I-fejl.")),
-        ("013", ("Una prueba no paramétrica corrige automáticamente la dependencia.", "A non-parametric test automatically fixes dependence.", "En ikkeparametrisk test løser automatisk afhængighed."), False, ("La dependencia debe modelarse según el diseño.", "Dependence must be handled according to design.", "Afhængighed skal håndteres efter designet.")),
-        ("014", ("Shapiro-Wilk por sí solo debe decidir el método.", "Shapiro-Wilk alone should decide the method.", "Shapiro-Wilk alene bør afgøre metoden."), False, ("La decisión integra diseño, gráficos, robustez y estimando.", "The decision integrates design, plots, robustness, and estimand.", "Beslutningen integrerer design, plots, robusthed og estimand.")),
-        ("015", ("Réplicas técnicas de una muestra son unidades biológicas independientes.", "Technical replicates from one sample are independent biological units.", "Tekniske replikater fra én prøve er uafhængige biologiske enheder."), False, ("Comparten la misma unidad experimental.", "They share the same experimental unit.", "De deler samme eksperimentelle enhed.")),
-        ("016", ("El resultado debe incluir diferencia, intervalo y supuestos relevantes.", "The result should include difference, interval, and relevant assumptions.", "Resultatet bør indeholde forskel, interval og relevante antagelser."), True, ("Esto comunica magnitud, precisión y validez del procedimiento.", "This communicates magnitude, precision, and procedural validity.", "Dette kommunikerer størrelse, præcision og procedurens gyldighed.")),
+        (
+            "009",
+            (
+                "Welch requiere varianzas exactamente iguales.",
+                "Welch requires exactly equal variances.",
+                "Welch kræver præcis ens varianser.",
+            ),
+            False,
+            (
+                "Welch se diseñó para no imponer igualdad de varianzas.",
+                "Welch was designed not to impose equal variances.",
+                "Welch er designet til ikke at kræve ens varianser.",
+            ),
+        ),
+        (
+            "010",
+            (
+                "Un diseño pareado se analiza mediante diferencias dentro de unidad.",
+                "A paired design is analysed through within-unit differences.",
+                "Et parret design analyseres gennem forskelle inden for enheden.",
+            ),
+            True,
+            (
+                "La diferencia conserva el emparejamiento.",
+                "The difference preserves pairing.",
+                "Forskellen bevarer parringen.",
+            ),
+        ),
+        (
+            "011",
+            (
+                "ANOVA significativo implica que todos los pares difieren.",
+                "A significant ANOVA implies every pair differs.",
+                "En signifikant ANOVA indebærer, at alle par er forskellige.",
+            ),
+            False,
+            (
+                "Solo rechaza la igualdad global.",
+                "It only rejects global equality.",
+                "Den forkaster kun global lighed.",
+            ),
+        ),
+        (
+            "012",
+            (
+                "Múltiples contrastes pueden requerir ajuste.",
+                "Multiple contrasts may require adjustment.",
+                "Multiple kontraster kan kræve justering.",
+            ),
+            True,
+            (
+                "La multiplicidad aumenta oportunidades de error tipo I.",
+                "Multiplicity increases type I error opportunities.",
+                "Multiplicitet øger mulighederne for type I-fejl.",
+            ),
+        ),
+        (
+            "013",
+            (
+                "Una prueba no paramétrica corrige automáticamente la dependencia.",
+                "A non-parametric test automatically fixes dependence.",
+                "En ikkeparametrisk test løser automatisk afhængighed.",
+            ),
+            False,
+            (
+                "La dependencia debe modelarse según el diseño.",
+                "Dependence must be handled according to design.",
+                "Afhængighed skal håndteres efter designet.",
+            ),
+        ),
+        (
+            "014",
+            (
+                "Shapiro-Wilk por sí solo debe decidir el método.",
+                "Shapiro-Wilk alone should decide the method.",
+                "Shapiro-Wilk alene bør afgøre metoden.",
+            ),
+            False,
+            (
+                "La decisión integra diseño, gráficos, robustez y estimando.",
+                "The decision integrates design, plots, robustness, and estimand.",
+                "Beslutningen integrerer design, plots, robusthed og estimand.",
+            ),
+        ),
+        (
+            "015",
+            (
+                "Réplicas técnicas de una muestra son unidades biológicas independientes.",
+                "Technical replicates from one sample are independent biological units.",
+                "Tekniske replikater fra én prøve er uafhængige biologiske enheder.",
+            ),
+            False,
+            (
+                "Comparten la misma unidad experimental.",
+                "They share the same experimental unit.",
+                "De deler samme eksperimentelle enhed.",
+            ),
+        ),
+        (
+            "016",
+            (
+                "El resultado debe incluir diferencia, intervalo y supuestos relevantes.",
+                "The result should include difference, interval, and relevant assumptions.",
+                "Resultatet bør indeholde forskel, interval og relevante antagelser.",
+            ),
+            True,
+            (
+                "Esto comunica magnitud, precisión y validez del procedimiento.",
+                "This communicates magnitude, precision, and procedural validity.",
+                "Dette kommunikerer størrelse, præcision og procedurens gyldighed.",
+            ),
+        ),
     ),
     tutor=(
         (
@@ -436,12 +735,97 @@ p=0.0000""",
             "Valid group comparison begins with design and experimental unit, selects a coherent estimand and method, evaluates assumptions, and communicates contrasts with magnitude, intervals, and multiplicity control.",
             "Gyldig gruppesammenligning begynder med design og eksperimentel enhed, vælger en sammenhængende estimand og metode, vurderer antagelser og kommunikerer kontraster med størrelse, intervaller og multiplicitetskontrol.",
         ),
-        (("Welch es el punto de partida para dos grupos independientes.", "Welch is the starting point for two independent groups.", "Welch er udgangspunktet for to uafhængige grupper."), ("El pareamiento cambia la unidad del análisis a diferencias.", "Pairing changes the analysis unit to differences.", "Parring ændrer analyseenheden til forskelle."), ("ANOVA global no localiza contrastes.", "Global ANOVA does not locate contrasts.", "Global ANOVA lokaliserer ikke kontraster."), ("Los supuestos se evalúan con diseño y diagnósticos.", "Assumptions are evaluated with design and diagnostics.", "Antagelser vurderes med design og diagnostik.")),
-        (("Ignorar pareamiento.", "Ignoring pairing.", "At ignorere parring."), ("Asumir varianzas iguales por defecto.", "Assuming equal variances by default.", "At antage ens varianser som standard."), ("Interpretar ANOVA como diferencias en todos los pares.", "Interpreting ANOVA as differences in every pair.", "At fortolke ANOVA som forskelle i alle par.")),
-        (("¿Cuál es la unidad experimental?", "What is the experimental unit?", "Hvad er den eksperimentelle enhed?"), ("¿Las observaciones pueden emparejarse?", "Can observations be paired?", "Kan observationerne parres?"), ("¿Qué contraste responde la pregunta?", "Which contrast answers the question?", "Hvilken kontrast besvarer spørgsmålet?")),
-        (("Selecciona método según diseño.", "Selects method according to design.", "Vælger metode efter design."), ("Evalúa supuestos sin automatismos.", "Evaluates assumptions without automatic rules.", "Vurderer antagelser uden automatik."), ("Controla e interpreta comparaciones múltiples.", "Controls and interprets multiple comparisons.", "Kontrollerer og fortolker multiple sammenligninger.")),
-        (("No inventar independencia ni pareamiento.", "Do not invent independence or pairing.", "Opfind ikke uafhængighed eller parring."), ("No recomendar pruebas solo por el valor p obtenido.", "Do not recommend tests based only on the obtained p-value.", "Anbefal ikke tests alene ud fra den opnåede p-værdi."), ("Responder en el idioma activo.", "Respond in the active language.", "Svar på det aktive sprog.")),
-        ("SDU ODIN BMB830 active course description approved 2025-03-06", "R base stats documentation: t.test, aov, pairwise.t.test, wilcox.test", "Frequentist model diagnostics and multiplicity principles"),
+        (
+            (
+                "Welch es el punto de partida para dos grupos independientes.",
+                "Welch is the starting point for two independent groups.",
+                "Welch er udgangspunktet for to uafhængige grupper.",
+            ),
+            (
+                "El pareamiento cambia la unidad del análisis a diferencias.",
+                "Pairing changes the analysis unit to differences.",
+                "Parring ændrer analyseenheden til forskelle.",
+            ),
+            (
+                "ANOVA global no localiza contrastes.",
+                "Global ANOVA does not locate contrasts.",
+                "Global ANOVA lokaliserer ikke kontraster.",
+            ),
+            (
+                "Los supuestos se evalúan con diseño y diagnósticos.",
+                "Assumptions are evaluated with design and diagnostics.",
+                "Antagelser vurderes med design og diagnostik.",
+            ),
+        ),
+        (
+            ("Ignorar pareamiento.", "Ignoring pairing.", "At ignorere parring."),
+            (
+                "Asumir varianzas iguales por defecto.",
+                "Assuming equal variances by default.",
+                "At antage ens varianser som standard.",
+            ),
+            (
+                "Interpretar ANOVA como diferencias en todos los pares.",
+                "Interpreting ANOVA as differences in every pair.",
+                "At fortolke ANOVA som forskelle i alle par.",
+            ),
+        ),
+        (
+            (
+                "¿Cuál es la unidad experimental?",
+                "What is the experimental unit?",
+                "Hvad er den eksperimentelle enhed?",
+            ),
+            (
+                "¿Las observaciones pueden emparejarse?",
+                "Can observations be paired?",
+                "Kan observationerne parres?",
+            ),
+            (
+                "¿Qué contraste responde la pregunta?",
+                "Which contrast answers the question?",
+                "Hvilken kontrast besvarer spørgsmålet?",
+            ),
+        ),
+        (
+            (
+                "Selecciona método según diseño.",
+                "Selects method according to design.",
+                "Vælger metode efter design.",
+            ),
+            (
+                "Evalúa supuestos sin automatismos.",
+                "Evaluates assumptions without automatic rules.",
+                "Vurderer antagelser uden automatik.",
+            ),
+            (
+                "Controla e interpreta comparaciones múltiples.",
+                "Controls and interprets multiple comparisons.",
+                "Kontrollerer og fortolker multiple sammenligninger.",
+            ),
+        ),
+        (
+            (
+                "No inventar independencia ni pareamiento.",
+                "Do not invent independence or pairing.",
+                "Opfind ikke uafhængighed eller parring.",
+            ),
+            (
+                "No recomendar pruebas solo por el valor p obtenido.",
+                "Do not recommend tests based only on the obtained p-value.",
+                "Anbefal ikke tests alene ud fra den opnåede p-værdi.",
+            ),
+            (
+                "Responder en el idioma activo.",
+                "Respond in the active language.",
+                "Svar på det aktive sprog.",
+            ),
+        ),
+        (
+            "SDU ODIN BMB830 active course description approved 2025-03-06",
+            "R base stats documentation: t.test, aov, pairwise.t.test, wilcox.test",
+            "Frequentist model diagnostics and multiplicity principles",
+        ),
     ),
 )
 
