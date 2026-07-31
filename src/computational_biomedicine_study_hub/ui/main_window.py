@@ -29,7 +29,7 @@ from .navigation import NavigationSidebar
 from .pages.home_page import HomePage
 from .pages.ollama_settings_page import OllamaSettingsPage
 from .pages.placeholder_page import PlaceholderPage
-from .pages.review_page import ReviewPage
+from .pages.resumable_review_page import ReviewPage
 from .routes import (
     PageDescriptor,
     RouteId,
@@ -132,8 +132,9 @@ class MainWindow(QMainWindow):
         self._settings.setValue("navigation/last_route", key)
 
     def closeEvent(self, event: QCloseEvent) -> None:  # noqa: N802
-        """Persist geometry before the window closes."""
+        """Persist geometry and active review work before the window closes."""
 
+        self._persist_review_session()
         self._settings.setValue("window/geometry", self.saveGeometry())
         super().closeEvent(event)
 
@@ -177,10 +178,11 @@ class MainWindow(QMainWindow):
 
     @Slot(str)
     def _apply_locale(self, locale_code: str) -> None:
-        """Rebuild visible pages immediately while preserving study location."""
+        """Rebuild visible pages immediately while preserving study and review state."""
 
         route = route_value(self.current_route)
         study_location = self._capture_study_location(route)
+        self._persist_review_session()
 
         self._header.set_locale(locale_code)
         self._navigation.retranslate(self._translator)
@@ -216,6 +218,11 @@ class MainWindow(QMainWindow):
         if isinstance(page, (DM847Page, DM857Page)):
             return page
         return None
+
+    def _persist_review_session(self) -> None:
+        page = self._pages.get(RouteId.REVIEW.value)
+        if isinstance(page, ReviewPage):
+            page.persist_active_session()
 
     def _clear_pages(self) -> None:
         self._pages.clear()
