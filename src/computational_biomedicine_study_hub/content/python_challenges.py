@@ -30,12 +30,13 @@ class PythonChallengeCase:
 
 @dataclass(frozen=True, slots=True)
 class PythonChallenge:
-    """Runtime challenge with visible examples and undisclosed behavioral tests."""
+    """Runtime challenge with explicit objectives and undisclosed behavioral tests."""
 
     course_code: str
     module_id: str
     exercise_id: str
     starter_code: str
+    objective_ids: tuple[str, ...]
     visible_cases: tuple[PythonChallengeCase, ...]
     hidden_cases: tuple[PythonChallengeCase, ...]
     timeout_seconds: float = 1.0
@@ -50,6 +51,31 @@ class PythonChallenge:
         for field_name, value in required.items():
             if not value.strip():
                 raise ValueError(f"Python challenge field {field_name!r} cannot be empty.")
+        if not self.objective_ids:
+            raise ValueError(f"Python challenge {self.exercise_id!r} requires objective links.")
+        normalized_objectives = tuple(
+            objective_id.strip().casefold() for objective_id in self.objective_ids
+        )
+        if any(not objective_id for objective_id in normalized_objectives):
+            raise ValueError("Python challenge objective IDs cannot be empty.")
+        if any(objective_id != objective_id.strip() for objective_id in self.objective_ids):
+            raise ValueError("Python challenge objective IDs cannot contain surrounding whitespace.")
+        if len(normalized_objectives) != len(set(normalized_objectives)):
+            raise ValueError("Python challenge objective IDs cannot contain duplicates.")
+
+        local_module_id = self.module_id.rsplit(".", maxsplit=1)[-1]
+        expected_prefix = f"{local_module_id}.o"
+        invalid_objectives = tuple(
+            objective_id
+            for objective_id in self.objective_ids
+            if not objective_id.startswith(expected_prefix)
+        )
+        if invalid_objectives:
+            raise ValueError(
+                f"Python challenge {self.exercise_id!r} has out-of-module objectives: "
+                + ", ".join(invalid_objectives)
+            )
+
         if not self.visible_cases:
             raise ValueError(f"Python challenge {self.exercise_id!r} requires visible tests.")
         if not self.hidden_cases:
@@ -87,6 +113,7 @@ class LocalizedPythonChallenge:
     module_id: str
     exercise_id: str
     starter_code: str
+    objective_ids: tuple[str, ...]
     visible_cases: tuple[LocalizedPythonChallengeCase, ...]
     hidden_cases: tuple[LocalizedPythonChallengeCase, ...]
     timeout_seconds: float = 1.0
@@ -97,6 +124,7 @@ class LocalizedPythonChallenge:
             module_id=self.module_id,
             exercise_id=self.exercise_id,
             starter_code=self.starter_code,
+            objective_ids=self.objective_ids,
             visible_cases=tuple(case.materialize(locale) for case in self.visible_cases),
             hidden_cases=tuple(case.materialize(locale) for case in self.hidden_cases),
             timeout_seconds=self.timeout_seconds,
@@ -125,6 +153,7 @@ _CHALLENGES: tuple[LocalizedPythonChallenge, ...] = (
         module_id="dm857.m07",
         exercise_id="m07.p04",
         starter_code="def unique_count(values):\n    pass",
+        objective_ids=("m07.o6", "m07.o8"),
         visible_cases=(
             _case(
                 "duplicates",
@@ -171,6 +200,7 @@ _CHALLENGES: tuple[LocalizedPythonChallenge, ...] = (
         module_id="dm857.m09",
         exercise_id="m09.p04",
         starter_code="def recursive_length(values, index=0):\n    pass",
+        objective_ids=("m09.o2", "m09.o3", "m09.o5"),
         visible_cases=(
             _case(
                 "three-elements",
