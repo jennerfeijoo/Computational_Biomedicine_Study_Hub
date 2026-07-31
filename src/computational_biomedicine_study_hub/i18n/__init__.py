@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .challenge_copy import ChallengeCopyKey, challenge_text, validate_challenge_copy
 from .confidence_copy import ConfidenceCopyKey, confidence_text, validate_confidence_copy
 from .controller import LanguageController
 from .lab_copy import LabCopyKey, lab_text, validate_lab_copy
@@ -13,6 +14,7 @@ from .ui_copy import UiCopyKey, ui_text, validate_ui_copy
 __all__ = [
     "ALL_MESSAGE_KEYS",
     "AppLocale",
+    "ChallengeCopyKey",
     "ConfidenceCopyKey",
     "DEFAULT_LOCALE",
     "LabCopyKey",
@@ -22,10 +24,12 @@ __all__ = [
     "TranslationError",
     "Translator",
     "UiCopyKey",
+    "challenge_text",
     "confidence_text",
     "lab_text",
     "ui_text",
     "validate_catalogs",
+    "validate_challenge_copy",
     "validate_confidence_copy",
     "validate_lab_copy",
     "validate_ui_copy",
