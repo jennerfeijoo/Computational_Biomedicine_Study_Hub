@@ -1,9 +1,9 @@
 """Regression tests for the active SDU DM857 coverage audit."""
 
 from computational_biomedicine_study_hub.content.dm857.official_coverage import (
-    CoverageStatus,
     DM857_ODIN_APPROVAL_DATE,
     DM857_ODIN_VERSION,
+    CoverageStatus,
     OfficialRequirementKind,
     dm857_official_coverage_matrix,
     dm857_official_coverage_summary,
