@@ -20,13 +20,17 @@ The application combines concise theory, worked examples, executable code, guide
 ### BMB830 implementation in progress
 
 - **BMB830 — Biostatistics in R I**
-  - 3 complete initial modules
+  - 6 complete modules
   - R objects and reproducible workflows
   - data quality, descriptive statistics, and scientific visualization
   - probability, sampling, and reference distributions
+  - estimation, standard errors, and confidence intervals
+  - hypothesis tests, type I and II errors, power, and effect sizes
+  - independent, paired, and multi-group comparisons with assumptions and multiplicity control
+  - 96 stable objective-bank questions
   - optional editable R laboratories executed through a locally installed `Rscript`
 
-The remaining BMB830 blocks on statistical inference, modelling, regression, and introductory multivariate analysis are under development.
+The remaining BMB830 blocks on statistical modelling, regression, and introductory multivariate analysis are under development.
 
 ### Registered first-semester courses
 
@@ -183,4 +187,4 @@ tests/              # Unit, content-integrity, localization, persistence, and UI
 
 ## Development status
 
-Active development. DM857 and DM847 provide complete academic course implementations. BMB830 contains its first three complete modules, while inference, modelling, regression, and multivariate analysis remain under development. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development. Group-presentation rehearsal is intentionally outside the application scope.
+Active development. DM857 and DM847 provide complete academic course implementations. BMB830 contains six complete modules covering foundations through group comparison; modelling, regression, and introductory multivariate analysis remain under development. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development. Group-presentation rehearsal is intentionally outside the application scope.
