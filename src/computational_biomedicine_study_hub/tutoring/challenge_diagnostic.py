@@ -102,7 +102,9 @@ class ChallengeDiagnostic:
             self.hidden_passed == self.hidden_total
         )
         if computed_grade is not self.deterministic_grade:
-            raise ValueError("Challenge diagnostic grade does not match deterministic test evidence.")
+            raise ValueError(
+                "Challenge diagnostic grade does not match deterministic test evidence."
+            )
 
     @classmethod
     def from_attempt(
@@ -119,7 +121,9 @@ class ChallengeDiagnostic:
         """Create one immutable diagnostic from the authoritative challenge result."""
 
         if result.exercise_id != challenge.exercise_id:
-            raise ValueError("Challenge result and challenge definition refer to different exercises.")
+            raise ValueError(
+                "Challenge result and challenge definition refer to different exercises."
+            )
         return cls(
             course_code=challenge.course_code,
             module_id=challenge.module_id,
