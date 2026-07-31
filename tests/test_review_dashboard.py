@@ -131,9 +131,10 @@ def test_schema_v1_is_migrated_without_losing_mastery(tmp_path: Path) -> None:
     connection.close()
 
     with SQLiteProgressStore(database) as store:
-        assert store.schema_version == 2
+        assert store.schema_version == 3
         state = store.get_mastery("m01.o1", course_code="DM847", module_id="dm847.m01")
         due = store.due_reviews(_NOW)
+        assert store.list_errors() == ()
 
     assert state is not None
     assert state.mastery_score == pytest.approx(0.2)

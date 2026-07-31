@@ -1,8 +1,8 @@
-"""SQLite persistence for attempts and objective-level mastery.
+"""SQLite persistence for attempts, mastery, review and authored errors.
 
 The store keeps study data local and uses only Python's standard library. Public
-methods are transaction-safe so attempts and their resulting mastery states can be
-saved atomically.
+methods are transaction-safe so one graded interaction, its objective mastery and
+its error-notebook state are saved atomically.
 """
 
 from __future__ import annotations
@@ -12,10 +12,16 @@ from datetime import datetime
 from pathlib import Path
 from types import TracebackType
 
-from ..learning.progress import AttemptRecord, ConfidenceLevel, MasteryState, ReviewItem
+from ..learning.progress import (
+    AttemptRecord,
+    ConfidenceLevel,
+    ErrorRecord,
+    MasteryState,
+    ReviewItem,
+)
 from ..learning.review_scheduler import update_mastery
 
-_SCHEMA_VERSION = 2
+_SCHEMA_VERSION = 3
 
 
 class SQLiteProgressStore:
@@ -71,11 +77,43 @@ class SQLiteProgressStore:
     ) -> tuple[MasteryState, ...]:
         """Atomically store one interaction expanded across explicit objectives."""
 
+        return self.record_learning_interaction(attempts)
+
+    def record_learning_interaction(
+        self,
+        attempts: tuple[AttemptRecord, ...],
+        *,
+        error: ErrorRecord | None = None,
+        resolve_item_errors: bool = False,
+    ) -> tuple[MasteryState, ...]:
+        """Persist attempts, mastery and one error-notebook transition atomically."""
+
         if not attempts:
             raise ValueError("Attempt batches cannot be empty.")
         attempt_ids = tuple(attempt.attempt_id for attempt in attempts)
         if len(attempt_ids) != len(set(attempt_ids)):
             raise ValueError("Attempt batches cannot contain duplicate attempt IDs.")
+
+        interaction_keys = {
+            (attempt.course_code, attempt.module_id, attempt.item_id) for attempt in attempts
+        }
+        if len(interaction_keys) != 1:
+            raise ValueError("One learning interaction must reference one course, module and item.")
+        course_code, module_id, item_id = next(iter(interaction_keys))
+        if error is not None:
+            if resolve_item_errors:
+                raise ValueError(
+                    "An interaction cannot create and resolve an error simultaneously."
+                )
+            if (error.course_code, error.module_id, error.item_id) != (
+                course_code,
+                module_id,
+                item_id,
+            ):
+                raise ValueError("Error records must match the attempt interaction identity.")
+            attempt_objectives = tuple(attempt.objective_id for attempt in attempts)
+            if error.objective_ids != attempt_objectives:
+                raise ValueError("Error objectives must preserve the attempt objective order.")
 
         states: list[MasteryState] = []
         staged: dict[tuple[str, str, str], MasteryState] = {}
@@ -94,6 +132,16 @@ class SQLiteProgressStore:
                 )
                 staged[key] = state
                 states.append(state)
+
+            if error is not None:
+                self._insert_error(error)
+            elif resolve_item_errors:
+                self._resolve_open_errors(
+                    course_code=course_code,
+                    module_id=module_id,
+                    item_id=item_id,
+                    resolved_at=attempts[0].attempted_at,
+                )
         return tuple(states)
 
     def get_attempt(self, attempt_id: str) -> AttemptRecord | None:
@@ -207,6 +255,36 @@ class SQLiteProgressStore:
 
         return tuple(item.state for item in self.due_reviews(as_of, limit=limit))
 
+    def get_error(self, error_id: str) -> ErrorRecord | None:
+        """Return one authored error event by stable ID."""
+
+        row = self._connection.execute(
+            "SELECT * FROM error_events WHERE error_id = ?",
+            (error_id,),
+        ).fetchone()
+        return self._error_from_row(row) if row is not None else None
+
+    def list_errors(
+        self,
+        *,
+        include_resolved: bool = True,
+        limit: int | None = None,
+    ) -> tuple[ErrorRecord, ...]:
+        """Return unresolved errors first, then resolved history, newest first."""
+
+        if limit is not None and limit < 1:
+            raise ValueError("limit must be at least 1 when provided.")
+        query = "SELECT * FROM error_events"
+        parameters: tuple[object, ...] = ()
+        if not include_resolved:
+            query += " WHERE resolved_at IS NULL"
+        query += " ORDER BY (resolved_at IS NOT NULL) ASC, occurred_at DESC, error_id ASC"
+        if limit is not None:
+            query += " LIMIT ?"
+            parameters = (limit,)
+        rows = self._connection.execute(query, parameters).fetchall()
+        return tuple(self._error_from_row(row) for row in rows)
+
     def close(self) -> None:
         """Close the underlying SQLite connection."""
 
@@ -239,14 +317,14 @@ class SQLiteProgressStore:
                 ):
                     self._migrate_v1_to_v2()
                 else:
-                    self._create_schema_v2()
+                    self._create_schema_v3()
             elif current_version == 1:
                 self._migrate_v1_to_v2()
             else:
-                self._create_schema_v2()
+                self._create_schema_v3()
             self._connection.execute(f"PRAGMA user_version = {_SCHEMA_VERSION}")
 
-    def _create_schema_v2(self) -> None:
+    def _create_schema_v3(self) -> None:
         self._connection.executescript(
             """
             CREATE TABLE IF NOT EXISTS attempts (
@@ -289,6 +367,34 @@ class SQLiteProgressStore:
                     module_id,
                     objective_id
                 );
+
+            CREATE TABLE IF NOT EXISTS error_events (
+                error_id TEXT PRIMARY KEY,
+                course_code TEXT NOT NULL,
+                module_id TEXT NOT NULL,
+                item_id TEXT NOT NULL,
+                prompt TEXT NOT NULL,
+                selected_answer TEXT NOT NULL,
+                correct_answer TEXT NOT NULL,
+                explanation TEXT NOT NULL,
+                confidence TEXT NOT NULL CHECK (confidence IN ('low', 'medium', 'high')),
+                occurred_at TEXT NOT NULL,
+                resolved_at TEXT
+            );
+
+            CREATE INDEX IF NOT EXISTS idx_error_events_status_time
+                ON error_events (resolved_at, occurred_at DESC);
+
+            CREATE INDEX IF NOT EXISTS idx_error_events_item_open
+                ON error_events (course_code, module_id, item_id, resolved_at);
+
+            CREATE TABLE IF NOT EXISTS error_event_objectives (
+                error_id TEXT NOT NULL,
+                objective_id TEXT NOT NULL,
+                ordinal INTEGER NOT NULL CHECK (ordinal >= 0),
+                PRIMARY KEY (error_id, objective_id),
+                FOREIGN KEY (error_id) REFERENCES error_events(error_id) ON DELETE CASCADE
+            );
             """
         )
 
@@ -300,7 +406,7 @@ class SQLiteProgressStore:
             ALTER TABLE mastery RENAME TO mastery_v1;
             """
         )
-        self._create_schema_v2()
+        self._create_schema_v3()
         self._connection.execute(
             """
             INSERT INTO mastery (
@@ -414,6 +520,75 @@ class SQLiteProgressStore:
             ),
         )
 
+    def _insert_error(self, error: ErrorRecord) -> None:
+        self._connection.execute(
+            """
+            INSERT INTO error_events (
+                error_id,
+                course_code,
+                module_id,
+                item_id,
+                prompt,
+                selected_answer,
+                correct_answer,
+                explanation,
+                confidence,
+                occurred_at,
+                resolved_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                error.error_id,
+                error.course_code,
+                error.module_id,
+                error.item_id,
+                error.prompt,
+                error.selected_answer,
+                error.correct_answer,
+                error.explanation,
+                error.confidence.value,
+                error.occurred_at.isoformat(),
+                error.resolved_at.isoformat() if error.resolved_at is not None else None,
+            ),
+        )
+        self._connection.executemany(
+            """
+            INSERT INTO error_event_objectives (error_id, objective_id, ordinal)
+            VALUES (?, ?, ?)
+            """,
+            tuple(
+                (error.error_id, objective_id, ordinal)
+                for ordinal, objective_id in enumerate(error.objective_ids)
+            ),
+        )
+
+    def _resolve_open_errors(
+        self,
+        *,
+        course_code: str,
+        module_id: str,
+        item_id: str,
+        resolved_at: datetime,
+    ) -> None:
+        self._connection.execute(
+            """
+            UPDATE error_events
+            SET resolved_at = ?
+            WHERE course_code = ?
+              AND module_id = ?
+              AND item_id = ?
+              AND resolved_at IS NULL
+              AND occurred_at <= ?
+            """,
+            (
+                resolved_at.isoformat(),
+                course_code,
+                module_id,
+                item_id,
+                resolved_at.isoformat(),
+            ),
+        )
+
     def _get_mastery(
         self,
         course_code: str,
@@ -471,6 +646,33 @@ class SQLiteProgressStore:
             lapse_count=int(row["lapse_count"]),
             last_attempt_at=datetime.fromisoformat(str(row["last_attempt_at"])),
             next_review_at=datetime.fromisoformat(str(row["next_review_at"])),
+        )
+
+    def _error_from_row(self, row: sqlite3.Row) -> ErrorRecord:
+        objective_rows = self._connection.execute(
+            """
+            SELECT objective_id FROM error_event_objectives
+            WHERE error_id = ?
+            ORDER BY ordinal ASC
+            """,
+            (str(row["error_id"]),),
+        ).fetchall()
+        resolved_value = row["resolved_at"]
+        return ErrorRecord(
+            error_id=str(row["error_id"]),
+            course_code=str(row["course_code"]),
+            module_id=str(row["module_id"]),
+            item_id=str(row["item_id"]),
+            prompt=str(row["prompt"]),
+            selected_answer=str(row["selected_answer"]),
+            correct_answer=str(row["correct_answer"]),
+            explanation=str(row["explanation"]),
+            confidence=ConfidenceLevel(str(row["confidence"])),
+            objective_ids=tuple(str(item["objective_id"]) for item in objective_rows),
+            occurred_at=datetime.fromisoformat(str(row["occurred_at"])),
+            resolved_at=(
+                datetime.fromisoformat(str(resolved_value)) if resolved_value is not None else None
+            ),
         )
 
     @staticmethod

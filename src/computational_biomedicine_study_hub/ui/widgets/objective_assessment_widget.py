@@ -220,6 +220,10 @@ class ObjectiveQuestionCard(QFrame):
                     response_time_ms=elapsed_ms,
                     objective_ids=self._objective_ids,
                     attempted_at=datetime.now(UTC),
+                    prompt=self._question.item.prompt,
+                    selected_answer=feedback.selected_answer,
+                    correct_answer=feedback.correct_answer,
+                    explanation=feedback.explanation,
                 )
             )
 

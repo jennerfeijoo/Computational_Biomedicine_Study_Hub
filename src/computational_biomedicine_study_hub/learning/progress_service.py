@@ -9,7 +9,7 @@ from typing import Protocol
 from uuid import uuid4
 
 from ..storage.sqlite_progress_store import SQLiteProgressStore
-from .progress import AttemptRecord, ConfidenceLevel, MasteryState
+from .progress import AttemptRecord, ConfidenceLevel, ErrorRecord, MasteryState
 
 
 @dataclass(frozen=True, slots=True)
@@ -26,6 +26,10 @@ class ObjectiveAnswerSubmission:
     response_time_ms: int
     objective_ids: tuple[str, ...]
     attempted_at: datetime
+    prompt: str = ""
+    selected_answer: str = ""
+    correct_answer: str = ""
+    explanation: str = ""
 
     def __post_init__(self) -> None:
         required = {
@@ -58,6 +62,27 @@ class ObjectiveAnswerSubmission:
         if len(normalized) != len(set(normalized)):
             raise ValueError("Objective submissions cannot contain duplicate objective IDs.")
 
+        context = {
+            "prompt": self.prompt,
+            "selected_answer": self.selected_answer,
+            "correct_answer": self.correct_answer,
+            "explanation": self.explanation,
+        }
+        supplied = tuple(bool(value) for value in context.values())
+        if any(supplied) and not all(supplied):
+            raise ValueError("Authored error context must be supplied completely or omitted.")
+        for field_name, value in context.items():
+            if value and value != value.strip():
+                raise ValueError(
+                    f"Submission field {field_name!r} cannot contain surrounding whitespace."
+                )
+
+    @property
+    def has_error_context(self) -> bool:
+        """Return whether the authored prompt, answers and explanation are available."""
+
+        return bool(self.prompt)
+
 
 class ObjectiveAttemptRecorder(Protocol):
     """Minimal interface required by objective-assessment widgets."""
@@ -70,16 +95,18 @@ class ObjectiveAttemptRecorder(Protocol):
 
 
 class LearningProgressService:
-    """Expand one activity interaction into atomic objective-level attempts."""
+    """Expand one activity interaction into atomic objective-level evidence."""
 
     def __init__(
         self,
         store: SQLiteProgressStore,
         *,
         attempt_id_factory: Callable[[], str] | None = None,
+        error_id_factory: Callable[[], str] | None = None,
     ) -> None:
         self._store = store
         self._attempt_id_factory = attempt_id_factory or (lambda: uuid4().hex)
+        self._error_id_factory = error_id_factory or (lambda: uuid4().hex)
 
     @property
     def store(self) -> SQLiteProgressStore:
@@ -91,11 +118,11 @@ class LearningProgressService:
         self,
         submission: ObjectiveAnswerSubmission,
     ) -> tuple[MasteryState, ...]:
-        """Persist one objective answer without inferring any objective relation."""
+        """Persist objective evidence and maintain the authored error notebook."""
 
         attempts = tuple(
             AttemptRecord(
-                attempt_id=self._new_attempt_id(),
+                attempt_id=self._new_identifier(self._attempt_id_factory, "Attempt"),
                 course_code=submission.course_code,
                 module_id=submission.module_id,
                 objective_id=objective_id,
@@ -111,15 +138,39 @@ class LearningProgressService:
             )
             for objective_id in submission.objective_ids
         )
-        return self._store.record_batch_and_update(attempts)
 
-    def _new_attempt_id(self) -> str:
-        attempt_id = self._attempt_id_factory()
-        if not attempt_id.strip():
-            raise ValueError("Attempt ID factories must return a non-empty identifier.")
-        if attempt_id != attempt_id.strip():
-            raise ValueError("Generated attempt IDs cannot contain surrounding whitespace.")
-        return attempt_id
+        error: ErrorRecord | None = None
+        if not submission.is_correct and submission.has_error_context:
+            error = ErrorRecord(
+                error_id=self._new_identifier(self._error_id_factory, "Error"),
+                course_code=submission.course_code,
+                module_id=submission.module_id,
+                item_id=submission.item_id,
+                prompt=submission.prompt,
+                selected_answer=submission.selected_answer,
+                correct_answer=submission.correct_answer,
+                explanation=submission.explanation,
+                confidence=submission.confidence,
+                objective_ids=submission.objective_ids,
+                occurred_at=submission.attempted_at,
+            )
+
+        return self._store.record_learning_interaction(
+            attempts,
+            error=error,
+            resolve_item_errors=submission.is_correct,
+        )
+
+    @staticmethod
+    def _new_identifier(factory: Callable[[], str], label: str) -> str:
+        identifier = factory()
+        if not identifier.strip():
+            raise ValueError(f"{label} ID factories must return a non-empty identifier.")
+        if identifier != identifier.strip():
+            raise ValueError(
+                f"Generated {label.casefold()} IDs cannot contain surrounding whitespace."
+            )
+        return identifier
 
 
 __all__ = [
