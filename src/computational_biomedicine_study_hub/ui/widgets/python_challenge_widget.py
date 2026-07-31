@@ -268,7 +268,11 @@ class PythonChallengeWidget(QFrame):
             self._show_warning(challenge_text(self._locale, ChallengeCopyKey.SOURCE_REQUIRED))
             return
 
+        hints_used = 0
+        solution_revealed = False
         if self._tutor_panel is not None:
+            hints_used = self._tutor_panel.assistance_count
+            solution_revealed = self._tutor_panel.solution_revealed
             self._tutor_panel.begin_evaluation()
         self._set_busy(True)
         self._status.setProperty("resultState", "running")
@@ -299,7 +303,13 @@ class PythonChallengeWidget(QFrame):
             self._set_busy(False)
 
         diagnostic = self._build_diagnostic(source, result, confidence)
-        self._record_attempt(source, result, confidence)
+        self._record_attempt(
+            source,
+            result,
+            confidence,
+            hints_used=hints_used,
+            solution_revealed=solution_revealed,
+        )
         self._last_result = result
         self._last_diagnostic = diagnostic
         self._render_result(result)
@@ -354,6 +364,9 @@ class PythonChallengeWidget(QFrame):
         source: str,
         result: PythonChallengeResult,
         confidence: ConfidenceLevel,
+        *,
+        hints_used: int,
+        solution_revealed: bool,
     ) -> None:
         if self._progress_recorder is None:
             return
@@ -371,6 +384,8 @@ class PythonChallengeWidget(QFrame):
                 response_time_ms=elapsed_ms,
                 objective_ids=self._challenge.objective_ids,
                 attempted_at=datetime.now(UTC),
+                hints_used=hints_used,
+                solution_revealed=solution_revealed,
                 prompt=self._prompt,
                 selected_answer=source,
                 correct_answer=self._reference_solution,
