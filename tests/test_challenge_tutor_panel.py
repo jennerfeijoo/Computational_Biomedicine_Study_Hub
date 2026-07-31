@@ -51,11 +51,7 @@ def _result(*, all_passed: bool = False) -> PythonChallengeResult:
             PythonChallengeCaseResult(
                 case_id="duplicates",
                 description="Counts repeated integers correctly.",
-                status=(
-                    ChallengeCaseStatus.PASSED
-                    if all_passed
-                    else ChallengeCaseStatus.FAILED
-                ),
+                status=(ChallengeCaseStatus.PASSED if all_passed else ChallengeCaseStatus.FAILED),
             ),
             PythonChallengeCaseResult(
                 case_id="empty",
@@ -285,9 +281,7 @@ def test_guided_practice_supplies_module_context_to_authored_challenges(
     qapp: QApplication,
 ) -> None:
     module = _module()
-    exercise = next(
-        item for item in module.practice_exercises if item.exercise_id == "m07.p04"
-    )
+    exercise = next(item for item in module.practice_exercises if item.exercise_id == "m07.p04")
 
     card = GuidedPracticeCard(
         1,
