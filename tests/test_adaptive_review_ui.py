@@ -187,7 +187,5 @@ def test_review_page_keeps_unmapped_due_objectives_in_the_module_queue(
         assert not start.isEnabled()
         assert page.due_count == 1
         assert page.pending_session is not None
-        assert page.pending_session.unsupported_keys == (
-            ("DM857", "dm857.m07", "m07.o1"),
-        )
+        assert page.pending_session.unsupported_keys == (("DM857", "dm857.m07", "m07.o1"),)
         assert "module queue" in unavailable.text()
