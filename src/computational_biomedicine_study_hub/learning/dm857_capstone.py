@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass, replace
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import StrEnum
 from typing import Any
 
@@ -61,22 +61,22 @@ class CapstoneRubricCriterion:
 
 DM857_CAPSTONE_MILESTONES: tuple[CapstoneMilestoneSpec, ...] = (
     CapstoneMilestoneSpec(
-        milestone_id="dm857.capstone.m01",
-        checklist_item_ids=(
+        "dm857.capstone.m01",
+        (
             "dm857.capstone.m01.problem",
             "dm857.capstone.m01.model",
             "dm857.capstone.m01.success",
         ),
-        official_requirement_ids=("dm857.sdu.lo01", "dm857.sdu.lo02"),
+        ("dm857.sdu.lo01", "dm857.sdu.lo02"),
     ),
     CapstoneMilestoneSpec(
-        milestone_id="dm857.capstone.m02",
-        checklist_item_ids=(
+        "dm857.capstone.m02",
+        (
             "dm857.capstone.m02.structure",
             "dm857.capstone.m02.data",
             "dm857.capstone.m02.interfaces",
         ),
-        official_requirement_ids=(
+        (
             "dm857.sdu.lo02",
             "dm857.sdu.lo07",
             "dm857.sdu.ct03",
@@ -84,40 +84,36 @@ DM857_CAPSTONE_MILESTONES: tuple[CapstoneMilestoneSpec, ...] = (
         ),
     ),
     CapstoneMilestoneSpec(
-        milestone_id="dm857.capstone.m03",
-        checklist_item_ids=(
+        "dm857.capstone.m03",
+        (
             "dm857.capstone.m03.implementation",
             "dm857.capstone.m03.library",
             "dm857.capstone.m03.versioned",
         ),
-        official_requirement_ids=("dm857.sdu.lo03", "dm857.sdu.lo04"),
+        ("dm857.sdu.lo03", "dm857.sdu.lo04"),
     ),
     CapstoneMilestoneSpec(
-        milestone_id="dm857.capstone.m04",
-        checklist_item_ids=(
+        "dm857.capstone.m04",
+        (
             "dm857.capstone.m04.plan",
             "dm857.capstone.m04.execute",
             "dm857.capstone.m04.analyse",
         ),
-        official_requirement_ids=("dm857.sdu.lo05", "dm857.sdu.ct03"),
+        ("dm857.sdu.lo05", "dm857.sdu.ct03"),
     ),
     CapstoneMilestoneSpec(
-        milestone_id="dm857.capstone.m05",
-        checklist_item_ids=(
+        "dm857.capstone.m05",
+        (
             "dm857.capstone.m05.traceability",
             "dm857.capstone.m05.limitations",
             "dm857.capstone.m05.page_limit",
         ),
-        official_requirement_ids=("dm857.sdu.exam01",),
+        ("dm857.sdu.exam01",),
     ),
 )
 
 DM857_CAPSTONE_RUBRIC: tuple[CapstoneRubricCriterion, ...] = (
-    CapstoneRubricCriterion(
-        "dm857.capstone.r01",
-        15,
-        ("dm857.sdu.lo01",),
-    ),
+    CapstoneRubricCriterion("dm857.capstone.r01", 15, ("dm857.sdu.lo01",)),
     CapstoneRubricCriterion(
         "dm857.capstone.r02",
         15,
@@ -128,33 +124,17 @@ DM857_CAPSTONE_RUBRIC: tuple[CapstoneRubricCriterion, ...] = (
         20,
         ("dm857.sdu.lo03", "dm857.sdu.lo04"),
     ),
-    CapstoneRubricCriterion(
-        "dm857.capstone.r04",
-        20,
-        ("dm857.sdu.lo05",),
-    ),
-    CapstoneRubricCriterion(
-        "dm857.capstone.r05",
-        10,
-        ("dm857.sdu.ct03",),
-    ),
-    CapstoneRubricCriterion(
-        "dm857.capstone.r06",
-        15,
-        ("dm857.sdu.exam01",),
-    ),
-    CapstoneRubricCriterion(
-        "dm857.capstone.r07",
-        5,
-        ("dm857.sdu.exam01",),
-    ),
+    CapstoneRubricCriterion("dm857.capstone.r04", 20, ("dm857.sdu.lo05",)),
+    CapstoneRubricCriterion("dm857.capstone.r05", 10, ("dm857.sdu.ct03",)),
+    CapstoneRubricCriterion("dm857.capstone.r06", 15, ("dm857.sdu.exam01",)),
+    CapstoneRubricCriterion("dm857.capstone.r07", 5, ("dm857.sdu.exam01",)),
 )
 
-if sum(criterion.weight_percent for criterion in DM857_CAPSTONE_RUBRIC) != 100:
+if sum(item.weight_percent for item in DM857_CAPSTONE_RUBRIC) != 100:
     raise ValueError("The DM857 capstone readiness rubric must total 100 percent.")
 
-_MILESTONE_BY_ID = {spec.milestone_id: spec for spec in DM857_CAPSTONE_MILESTONES}
-_RUBRIC_BY_ID = {criterion.criterion_id: criterion for criterion in DM857_CAPSTONE_RUBRIC}
+_MILESTONE_BY_ID = {item.milestone_id: item for item in DM857_CAPSTONE_MILESTONES}
+_RUBRIC_BY_ID = {item.criterion_id: item for item in DM857_CAPSTONE_RUBRIC}
 
 
 @dataclass(frozen=True, slots=True)
@@ -172,22 +152,24 @@ class CapstoneMilestoneProgress:
             raise ValueError(f"Unknown capstone milestone {self.milestone_id!r}.")
         if len(self.completed_item_ids) != len(set(self.completed_item_ids)):
             raise ValueError(f"Milestone {self.milestone_id!r} has duplicate completed items.")
-        unknown_items = set(self.completed_item_ids) - set(spec.checklist_item_ids)
-        if unknown_items:
+        unknown = set(self.completed_item_ids) - set(spec.checklist_item_ids)
+        if unknown:
             raise ValueError(
                 f"Milestone {self.milestone_id!r} references unknown checklist items: "
-                + ", ".join(sorted(unknown_items))
+                + ", ".join(sorted(unknown))
             )
 
     @property
     def status(self) -> CapstoneMilestoneStatus:
-        """Derive readiness from checklist completion and concrete repository evidence."""
+        """Derive readiness from checklist completion and repository evidence."""
 
         spec = _MILESTONE_BY_ID[self.milestone_id]
-        has_any_evidence = bool(
-            self.completed_item_ids or self.evidence_note.strip() or self.commit_reference.strip()
+        has_any = bool(
+            self.completed_item_ids
+            or self.evidence_note.strip()
+            or self.commit_reference.strip()
         )
-        if not has_any_evidence:
+        if not has_any:
             return CapstoneMilestoneStatus.NOT_STARTED
         if (
             set(self.completed_item_ids) == set(spec.checklist_item_ids)
@@ -218,36 +200,39 @@ class DM857CapstoneProgress:
                 f"expected {CAPSTONE_SCHEMA_VERSION}."
             )
         _require_aware(self.updated_at, "updated_at")
+        expected_milestones = tuple(
+            item.milestone_id for item in DM857_CAPSTONE_MILESTONES
+        )
+        if tuple(item.milestone_id for item in self.milestones) != expected_milestones:
+            raise ValueError(
+                "Capstone milestone progress must preserve the authored milestone order."
+            )
 
-        milestone_ids = tuple(item.milestone_id for item in self.milestones)
-        expected_ids = tuple(spec.milestone_id for spec in DM857_CAPSTONE_MILESTONES)
-        if milestone_ids != expected_ids:
-            raise ValueError("Capstone milestone progress must preserve the authored milestone order.")
-
-        member_keys = tuple(member.strip().casefold() for member in self.group_members)
-        if any(not key for key in member_keys):
+        member_keys = tuple(item.strip().casefold() for item in self.group_members)
+        if any(not item for item in member_keys):
             raise ValueError("Capstone group members cannot be empty.")
         if len(member_keys) != len(set(member_keys)):
             raise ValueError("Capstone group members cannot be duplicated.")
 
-        criterion_ids = tuple(criterion_id for criterion_id, _ in self.rubric_scores)
+        criterion_ids = tuple(item[0] for item in self.rubric_scores)
         if len(criterion_ids) != len(set(criterion_ids)):
             raise ValueError("Capstone rubric scores cannot contain duplicate criteria.")
-        unknown_criteria = set(criterion_ids) - set(_RUBRIC_BY_ID)
-        if unknown_criteria:
+        unknown = set(criterion_ids) - set(_RUBRIC_BY_ID)
+        if unknown:
             raise ValueError(
                 "Capstone rubric scores reference unknown criteria: "
-                + ", ".join(sorted(unknown_criteria))
+                + ", ".join(sorted(unknown))
             )
         for criterion_id, score in self.rubric_scores:
             if not 0 <= score <= 4:
-                raise ValueError(f"Criterion {criterion_id!r} requires a score from 0 to 4.")
+                raise ValueError(
+                    f"Criterion {criterion_id!r} requires a score from 0 to 4."
+                )
 
     @classmethod
     def empty(cls, *, now: datetime | None = None) -> DM857CapstoneProgress:
         """Create a validated empty project state."""
 
-        timestamp = now or datetime.now(timezone.utc)
         return cls(
             schema_version=CAPSTONE_SCHEMA_VERSION,
             project_title="",
@@ -255,11 +240,11 @@ class DM857CapstoneProgress:
             repository_url="",
             report_path="",
             milestones=tuple(
-                CapstoneMilestoneProgress(spec.milestone_id)
-                for spec in DM857_CAPSTONE_MILESTONES
+                CapstoneMilestoneProgress(item.milestone_id)
+                for item in DM857_CAPSTONE_MILESTONES
             ),
             rubric_scores=(),
-            updated_at=timestamp,
+            updated_at=now or datetime.now(UTC),
         )
 
     def with_metadata(
@@ -271,16 +256,16 @@ class DM857CapstoneProgress:
         report_path: str,
         now: datetime | None = None,
     ) -> DM857CapstoneProgress:
-        """Replace project-level metadata while preserving evidence and scores."""
+        """Replace project metadata while preserving evidence and scores."""
 
-        normalized_members = tuple(member.strip() for member in group_members if member.strip())
+        members = tuple(item.strip() for item in group_members if item.strip())
         return replace(
             self,
             project_title=project_title.strip(),
-            group_members=normalized_members,
+            group_members=members,
             repository_url=repository_url.strip(),
             report_path=report_path.strip(),
-            updated_at=now or datetime.now(timezone.utc),
+            updated_at=now or datetime.now(UTC),
         )
 
     def with_milestone(
@@ -294,10 +279,14 @@ class DM857CapstoneProgress:
         if milestone.milestone_id not in _MILESTONE_BY_ID:
             raise ValueError(f"Unknown capstone milestone {milestone.milestone_id!r}.")
         updated = tuple(
-            milestone if current.milestone_id == milestone.milestone_id else current
-            for current in self.milestones
+            milestone if item.milestone_id == milestone.milestone_id else item
+            for item in self.milestones
         )
-        return replace(self, milestones=updated, updated_at=now or datetime.now(timezone.utc))
+        return replace(
+            self,
+            milestones=updated,
+            updated_at=now or datetime.now(UTC),
+        )
 
     def with_rubric_score(
         self,
@@ -318,11 +307,15 @@ class DM857CapstoneProgress:
                 raise ValueError("Capstone rubric scores must be between 0 and 4.")
             scores[criterion_id] = score
         ordered = tuple(
-            (criterion.criterion_id, scores[criterion.criterion_id])
-            for criterion in DM857_CAPSTONE_RUBRIC
-            if criterion.criterion_id in scores
+            (item.criterion_id, scores[item.criterion_id])
+            for item in DM857_CAPSTONE_RUBRIC
+            if item.criterion_id in scores
         )
-        return replace(self, rubric_scores=ordered, updated_at=now or datetime.now(timezone.utc))
+        return replace(
+            self,
+            rubric_scores=ordered,
+            updated_at=now or datetime.now(UTC),
+        )
 
     def milestone(self, milestone_id: str) -> CapstoneMilestoneProgress:
         """Return one milestone progress record by stable ID."""
@@ -336,7 +329,9 @@ class DM857CapstoneProgress:
 
     @property
     def ready_milestone_count(self) -> int:
-        return sum(item.status is CapstoneMilestoneStatus.READY for item in self.milestones)
+        return sum(
+            item.status is CapstoneMilestoneStatus.READY for item in self.milestones
+        )
 
     @property
     def milestone_completion_percent(self) -> int:
@@ -344,20 +339,20 @@ class DM857CapstoneProgress:
 
     @property
     def weighted_rubric_percent(self) -> int | None:
-        """Return weighted self-assessment, or ``None`` until every criterion is scored."""
+        """Return weighted self-assessment after every criterion is scored."""
 
         scores = dict(self.rubric_scores)
         if set(scores) != set(_RUBRIC_BY_ID):
             return None
         weighted = sum(
-            scores[criterion.criterion_id] / 4 * criterion.weight_percent
-            for criterion in DM857_CAPSTONE_RUBRIC
+            scores[item.criterion_id] / 4 * item.weight_percent
+            for item in DM857_CAPSTONE_RUBRIC
         )
         return round(weighted)
 
     @property
     def preparation_ready(self) -> bool:
-        """Return whether the internal scaffold has complete evidence and self-assessment."""
+        """Return whether the internal scaffold has complete preparation evidence."""
 
         return bool(
             self.project_title.strip()
@@ -379,12 +374,12 @@ class DM857CapstoneProgress:
             "report_path": self.report_path,
             "milestones": [
                 {
-                    "milestone_id": milestone.milestone_id,
-                    "completed_item_ids": list(milestone.completed_item_ids),
-                    "evidence_note": milestone.evidence_note,
-                    "commit_reference": milestone.commit_reference,
+                    "milestone_id": item.milestone_id,
+                    "completed_item_ids": list(item.completed_item_ids),
+                    "evidence_note": item.evidence_note,
+                    "commit_reference": item.commit_reference,
                 }
-                for milestone in self.milestones
+                for item in self.milestones
             ],
             "rubric_scores": [
                 {"criterion_id": criterion_id, "score": score}
@@ -392,7 +387,12 @@ class DM857CapstoneProgress:
             ],
             "updated_at": self.updated_at.isoformat(),
         }
-        return json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        return json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
 
     @classmethod
     def from_json(cls, document: str) -> DM857CapstoneProgress:
@@ -402,37 +402,55 @@ class DM857CapstoneProgress:
             payload = json.loads(document)
             if not isinstance(payload, dict):
                 raise TypeError("Capstone document root must be an object.")
-            milestones_payload = payload["milestones"]
-            scores_payload = payload["rubric_scores"]
-            if not isinstance(milestones_payload, list) or not isinstance(scores_payload, list):
+            raw_milestones = payload["milestones"]
+            raw_scores = payload["rubric_scores"]
+            if not isinstance(raw_milestones, list) or not isinstance(raw_scores, list):
                 raise TypeError("Capstone milestones and rubric scores must be arrays.")
-
             milestones = tuple(
                 CapstoneMilestoneProgress(
                     milestone_id=_required_string(item, "milestone_id"),
-                    completed_item_ids=tuple(_required_string_list(item, "completed_item_ids")),
-                    evidence_note=_required_string(item, "evidence_note", allow_empty=True),
-                    commit_reference=_required_string(item, "commit_reference", allow_empty=True),
+                    completed_item_ids=tuple(
+                        _required_string_list(item, "completed_item_ids")
+                    ),
+                    evidence_note=_required_string(
+                        item,
+                        "evidence_note",
+                        allow_empty=True,
+                    ),
+                    commit_reference=_required_string(
+                        item,
+                        "commit_reference",
+                        allow_empty=True,
+                    ),
                 )
-                for item in milestones_payload
+                for item in raw_milestones
             )
             rubric_scores = tuple(
                 (
                     _required_string(item, "criterion_id"),
                     _required_int(item, "score"),
                 )
-                for item in scores_payload
+                for item in raw_scores
             )
-            updated_at = datetime.fromisoformat(_required_string(payload, "updated_at"))
             return cls(
                 schema_version=_required_int(payload, "schema_version"),
-                project_title=_required_string(payload, "project_title", allow_empty=True),
+                project_title=_required_string(
+                    payload,
+                    "project_title",
+                    allow_empty=True,
+                ),
                 group_members=tuple(_required_string_list(payload, "group_members")),
-                repository_url=_required_string(payload, "repository_url", allow_empty=True),
+                repository_url=_required_string(
+                    payload,
+                    "repository_url",
+                    allow_empty=True,
+                ),
                 report_path=_required_string(payload, "report_path", allow_empty=True),
                 milestones=milestones,
                 rubric_scores=rubric_scores,
-                updated_at=updated_at,
+                updated_at=datetime.fromisoformat(
+                    _required_string(payload, "updated_at")
+                ),
             )
         except (KeyError, TypeError, ValueError) as exc:
             raise CapstoneSnapshotError("Invalid DM857 capstone document.") from exc
