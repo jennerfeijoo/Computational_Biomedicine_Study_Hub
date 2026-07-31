@@ -64,7 +64,9 @@ class ResumableReviewPage(BaseReviewPage):
         self._discard_button = None
         invalidated = False
 
-        snapshot = self._session_state_store.load() if self._session_state_store is not None else None
+        snapshot = (
+            self._session_state_store.load() if self._session_state_store is not None else None
+        )
         if snapshot is not None:
             try:
                 restored = AdaptiveReviewSession.from_snapshot(
@@ -119,9 +121,7 @@ class ResumableReviewPage(BaseReviewPage):
                 adaptive_review_text(self._locale, AdaptiveReviewCopyKey.INVALIDATED)
             )
         if not self._items:
-            status_parts.append(
-                adaptive_review_text(self._locale, AdaptiveReviewCopyKey.NO_DUE)
-            )
+            status_parts.append(adaptive_review_text(self._locale, AdaptiveReviewCopyKey.NO_DUE))
             self._session_status.setText("\n\n".join(status_parts))
             return
 
@@ -158,9 +158,7 @@ class ResumableReviewPage(BaseReviewPage):
             progress_recorder=recorder,
             restored_snapshot=self._resume_snapshot,
             snapshot_saver=(
-                self._session_state_store.save
-                if self._session_state_store is not None
-                else None
+                self._session_state_store.save if self._session_state_store is not None else None
             ),
             snapshot_discarder=(
                 self._session_state_store.discard
