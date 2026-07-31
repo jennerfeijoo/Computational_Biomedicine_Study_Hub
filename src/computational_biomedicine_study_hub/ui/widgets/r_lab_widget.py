@@ -105,9 +105,7 @@ class RLabWidget(QFrame):
         self._status.hide()
         layout.addWidget(self._status)
 
-        self._expected_heading = self._output_heading(
-            lab_text(locale, LabCopyKey.EXPECTED)
-        )
+        self._expected_heading = self._output_heading(lab_text(locale, LabCopyKey.EXPECTED))
         self._expected = self._code_editor(
             expected_output or lab_text(locale, LabCopyKey.NO_OUTPUT),
             "rLabExpected",
@@ -116,18 +114,14 @@ class RLabWidget(QFrame):
         layout.addWidget(self._expected_heading)
         layout.addWidget(self._expected)
 
-        self._stdout_heading = self._output_heading(
-            lab_text(locale, LabCopyKey.STDOUT)
-        )
+        self._stdout_heading = self._output_heading(lab_text(locale, LabCopyKey.STDOUT))
         self._stdout = self._code_editor("", "rLabStdout", read_only=True)
         self._stdout_heading.hide()
         self._stdout.hide()
         layout.addWidget(self._stdout_heading)
         layout.addWidget(self._stdout)
 
-        self._stderr_heading = self._output_heading(
-            lab_text(locale, LabCopyKey.STDERR)
-        )
+        self._stderr_heading = self._output_heading(lab_text(locale, LabCopyKey.STDERR))
         self._stderr = self._code_editor("", "rLabStderr", read_only=True)
         self._stderr_heading.hide()
         self._stderr.hide()

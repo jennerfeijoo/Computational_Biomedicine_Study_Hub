@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from ...i18n import AppLocale
-from ..localized_models import LocalizedLearningModule
 from ..models import AssessmentItem, LearningModule
 from .standard import StandardModuleSpec, build_module, build_question_bank, materialize_bank
 
@@ -243,7 +242,13 @@ treated_yes=0.48""",
                 "Explain what mean 10 and median 5 suggest in a small sample.",
                 "Forklar hvad gennemsnit 10 og median 5 antyder i en lille stikprøve.",
             ),
-            (("Inspecciona forma y extremos.", "Inspect shape and extremes.", "Undersøg form og ekstremer."),),
+            (
+                (
+                    "Inspecciona forma y extremos.",
+                    "Inspect shape and extremes.",
+                    "Undersøg form og ekstremer.",
+                ),
+            ),
             (
                 "Sugieren asimetría o un extremo influyente, que debe inspeccionarse.",
                 "They suggest skewness or an influential extreme that should be inspected.",
@@ -264,7 +269,13 @@ treated_yes=0.48""",
                 "Design an audit before comparing groups.",
                 "Design en kontrol før grupper sammenlignes.",
             ),
-            (("Incluye claves, tipos, rangos y NA.", "Include keys, types, ranges, and NA.", "Medtag nøgler, typer, intervaller og NA."),),
+            (
+                (
+                    "Incluye claves, tipos, rangos y NA.",
+                    "Include keys, types, ranges, and NA.",
+                    "Medtag nøgler, typer, intervaller og NA.",
+                ),
+            ),
             (
                 "Verificar dimensiones, claves, tipos, rangos, ausencia, coherencia y exclusiones.",
                 "Check dimensions, keys, types, ranges, missingness, consistency, and exclusions.",
@@ -285,7 +296,13 @@ treated_yes=0.48""",
                 "Choose a plot for a continuous variable in two groups.",
                 "Vælg en figur for en kontinuert variabel i to grupper.",
             ),
-            (("Conserva observaciones individuales.", "Preserve individual observations.", "Bevar individuelle observationer."),),
+            (
+                (
+                    "Conserva observaciones individuales.",
+                    "Preserve individual observations.",
+                    "Bevar individuelle observationer.",
+                ),
+            ),
             (
                 "Puntos por grupo con boxplot o resumen superpuesto.",
                 "Group-wise points with a boxplot or summary overlay.",
@@ -306,7 +323,13 @@ treated_yes=0.48""",
                 "Complete the calculation of the IQR of x.",
                 "Fuldfør beregningen af IQR for x.",
             ),
-            (("Usa la función base IQR.", "Use the base IQR function.", "Brug basisfunktionen IQR."),),
+            (
+                (
+                    "Usa la función base IQR.",
+                    "Use the base IQR function.",
+                    "Brug basisfunktionen IQR.",
+                ),
+            ),
             ("IQR(x)", "IQR(x)", "IQR(x)"),
             (
                 "IQR resume la mitad central de la distribución.",
@@ -344,7 +367,13 @@ treated_yes=0.48""",
                 "Explain why a visual pattern does not demonstrate causality.",
                 "Forklar hvorfor et visuelt mønster ikke demonstrerer kausalitet.",
             ),
-            (("Considera confusión y diseño.", "Consider confounding and design.", "Overvej confounding og design."),),
+            (
+                (
+                    "Considera confusión y diseño.",
+                    "Consider confounding and design.",
+                    "Overvej confounding og design.",
+                ),
+            ),
             (
                 "El gráfico describe asociación observada; diseño, temporalidad y control de confusión sustentan afirmaciones causales.",
                 "The plot describes observed association; design, temporality, and confounding control support causal claims.",
@@ -359,24 +388,276 @@ treated_yes=0.48""",
         ),
     ),
     mcqs=(
-        ("001", ("¿Qué resumen es más robusto ante un extremo?", "Which summary is more robust to an extreme value?", "Hvilket mål er mere robust over for en ekstrem værdi?"), (("mean", ("Media", "Mean", "Gennemsnit")), ("median", ("Mediana", "Median", "Median")), ("range", ("Rango", "Range", "Interval")), ("sum", ("Suma", "Sum", "Sum"))), "median", ("La mediana depende del orden.", "The median depends on order.", "Medianen afhænger af rækkefølge.")),
-        ("002", ("¿Qué resume el 50 % central?", "What summarises the central 50%?", "Hvad opsummerer de centrale 50 %?"), (("iqr", ("IQR", "IQR", "IQR")), ("mean", ("Media", "Mean", "Gennemsnit")), ("max", ("Máximo", "Maximum", "Maksimum")), ("n", ("Tamaño", "Sample size", "Stikprøvestørrelse"))), "iqr", ("IQR es Q3 menos Q1.", "IQR is Q3 minus Q1.", "IQR er Q3 minus Q1.")),
-        ("003", ("¿Qué gráfico muestra una distribución continua?", "Which plot shows a continuous distribution?", "Hvilken figur viser en kontinuert fordeling?"), (("hist", ("Histograma", "Histogram", "Histogram")), ("pie", ("Circular", "Pie chart", "Cirkeldiagram")), ("table", ("Tabla", "Table", "Tabel")), ("label", ("Etiqueta", "Label", "Etiket"))), "hist", ("El histograma agrupa valores por intervalos.", "A histogram bins values into intervals.", "Et histogram grupperer værdier i intervaller.")),
-        ("004", ("¿Qué debe registrarse al excluir una fila?", "What should be recorded when excluding a row?", "Hvad bør registreres når en række udelukkes?"), (("reason", ("Motivo y regla", "Reason and rule", "Begrundelse og regel")), ("colour", ("Color", "Colour", "Farve")), ("screen", ("Captura", "Screenshot", "Skærmbillede")), ("nothing", ("Nada", "Nothing", "Intet"))), "reason", ("La exclusión debe ser trazable.", "Exclusion must be traceable.", "Udelukkelse skal kunne spores.")),
-        ("005", ("¿Qué normaliza proporciones dentro de filas?", "What normalises proportions within rows?", "Hvad normaliserer proportioner inden for rækker?"), (("row", ("prop.table(x, 1)", "prop.table(x, 1)", "prop.table(x, 1)")), ("all", ("prop.table(x)", "prop.table(x)", "prop.table(x)")), ("mean", ("mean(x)", "mean(x)", "mean(x)")), ("sort", ("sort(x)", "sort(x)", "sort(x)"))), "row", ("margin = 1 utiliza cada fila como denominador.", "margin = 1 uses each row as denominator.", "margin = 1 bruger hver række som nævner.")),
-        ("006", ("¿Qué puede distorsionar la impresión visual?", "What can distort visual impression?", "Hvad kan forvrænge det visuelle indtryk?"), (("truncated", ("Eje truncado", "Truncated axis", "Afkortet akse")), ("units", ("Unidades claras", "Clear units", "Klare enheder")), ("n", ("Mostrar n", "Showing n", "At vise n")), ("points", ("Mostrar puntos", "Showing points", "At vise punkter"))), "truncated", ("Un eje truncado amplifica diferencias visuales.", "A truncated axis amplifies visual differences.", "En afkortet akse forstærker visuelle forskelle.")),
-        ("007", ("¿Qué diferencia debe investigarse, no borrarse?", "What difference should be investigated, not erased?", "Hvilken forskel bør undersøges og ikke slettes?"), (("outlier", ("Valor extremo", "Extreme value", "Ekstrem værdi")), ("label", ("Etiqueta", "Label", "Etiket")), ("title", ("Título", "Title", "Titel")), ("unit", ("Unidad", "Unit", "Enhed"))), "outlier", ("Puede ser error o biología real.", "It may be error or real biology.", "Det kan være en fejl eller reel biologi.")),
-        ("008", ("¿Qué acompaña una comparación gráfica?", "What should accompany a graphical comparison?", "Hvad bør ledsage en grafisk sammenligning?"), (("sample", ("Tamaños de grupo", "Group sizes", "Gruppestørrelser")), ("logo", ("Logotipo", "Logo", "Logo")), ("animation", ("Animación", "Animation", "Animation")), ("random", ("Color aleatorio", "Random colour", "Tilfældig farve"))), "sample", ("El tamaño muestra cuánta evidencia sustenta el patrón.", "Size shows how much evidence supports the pattern.", "Størrelsen viser hvor meget evidens der understøtter mønstret.")),
+        (
+            "001",
+            (
+                "¿Qué resumen es más robusto ante un extremo?",
+                "Which summary is more robust to an extreme value?",
+                "Hvilket mål er mere robust over for en ekstrem værdi?",
+            ),
+            (
+                ("mean", ("Media", "Mean", "Gennemsnit")),
+                ("median", ("Mediana", "Median", "Median")),
+                ("range", ("Rango", "Range", "Interval")),
+                ("sum", ("Suma", "Sum", "Sum")),
+            ),
+            "median",
+            (
+                "La mediana depende del orden.",
+                "The median depends on order.",
+                "Medianen afhænger af rækkefølge.",
+            ),
+        ),
+        (
+            "002",
+            (
+                "¿Qué resume el 50 % central?",
+                "What summarises the central 50%?",
+                "Hvad opsummerer de centrale 50 %?",
+            ),
+            (
+                ("iqr", ("IQR", "IQR", "IQR")),
+                ("mean", ("Media", "Mean", "Gennemsnit")),
+                ("max", ("Máximo", "Maximum", "Maksimum")),
+                ("n", ("Tamaño", "Sample size", "Stikprøvestørrelse")),
+            ),
+            "iqr",
+            ("IQR es Q3 menos Q1.", "IQR is Q3 minus Q1.", "IQR er Q3 minus Q1."),
+        ),
+        (
+            "003",
+            (
+                "¿Qué gráfico muestra una distribución continua?",
+                "Which plot shows a continuous distribution?",
+                "Hvilken figur viser en kontinuert fordeling?",
+            ),
+            (
+                ("hist", ("Histograma", "Histogram", "Histogram")),
+                ("pie", ("Circular", "Pie chart", "Cirkeldiagram")),
+                ("table", ("Tabla", "Table", "Tabel")),
+                ("label", ("Etiqueta", "Label", "Etiket")),
+            ),
+            "hist",
+            (
+                "El histograma agrupa valores por intervalos.",
+                "A histogram bins values into intervals.",
+                "Et histogram grupperer værdier i intervaller.",
+            ),
+        ),
+        (
+            "004",
+            (
+                "¿Qué debe registrarse al excluir una fila?",
+                "What should be recorded when excluding a row?",
+                "Hvad bør registreres når en række udelukkes?",
+            ),
+            (
+                ("reason", ("Motivo y regla", "Reason and rule", "Begrundelse og regel")),
+                ("colour", ("Color", "Colour", "Farve")),
+                ("screen", ("Captura", "Screenshot", "Skærmbillede")),
+                ("nothing", ("Nada", "Nothing", "Intet")),
+            ),
+            "reason",
+            (
+                "La exclusión debe ser trazable.",
+                "Exclusion must be traceable.",
+                "Udelukkelse skal kunne spores.",
+            ),
+        ),
+        (
+            "005",
+            (
+                "¿Qué normaliza proporciones dentro de filas?",
+                "What normalises proportions within rows?",
+                "Hvad normaliserer proportioner inden for rækker?",
+            ),
+            (
+                ("row", ("prop.table(x, 1)", "prop.table(x, 1)", "prop.table(x, 1)")),
+                ("all", ("prop.table(x)", "prop.table(x)", "prop.table(x)")),
+                ("mean", ("mean(x)", "mean(x)", "mean(x)")),
+                ("sort", ("sort(x)", "sort(x)", "sort(x)")),
+            ),
+            "row",
+            (
+                "margin = 1 utiliza cada fila como denominador.",
+                "margin = 1 uses each row as denominator.",
+                "margin = 1 bruger hver række som nævner.",
+            ),
+        ),
+        (
+            "006",
+            (
+                "¿Qué puede distorsionar la impresión visual?",
+                "What can distort visual impression?",
+                "Hvad kan forvrænge det visuelle indtryk?",
+            ),
+            (
+                ("truncated", ("Eje truncado", "Truncated axis", "Afkortet akse")),
+                ("units", ("Unidades claras", "Clear units", "Klare enheder")),
+                ("n", ("Mostrar n", "Showing n", "At vise n")),
+                ("points", ("Mostrar puntos", "Showing points", "At vise punkter")),
+            ),
+            "truncated",
+            (
+                "Un eje truncado amplifica diferencias visuales.",
+                "A truncated axis amplifies visual differences.",
+                "En afkortet akse forstærker visuelle forskelle.",
+            ),
+        ),
+        (
+            "007",
+            (
+                "¿Qué diferencia debe investigarse, no borrarse?",
+                "What difference should be investigated, not erased?",
+                "Hvilken forskel bør undersøges og ikke slettes?",
+            ),
+            (
+                ("outlier", ("Valor extremo", "Extreme value", "Ekstrem værdi")),
+                ("label", ("Etiqueta", "Label", "Etiket")),
+                ("title", ("Título", "Title", "Titel")),
+                ("unit", ("Unidad", "Unit", "Enhed")),
+            ),
+            "outlier",
+            (
+                "Puede ser error o biología real.",
+                "It may be error or real biology.",
+                "Det kan være en fejl eller reel biologi.",
+            ),
+        ),
+        (
+            "008",
+            (
+                "¿Qué acompaña una comparación gráfica?",
+                "What should accompany a graphical comparison?",
+                "Hvad bør ledsage en grafisk sammenligning?",
+            ),
+            (
+                ("sample", ("Tamaños de grupo", "Group sizes", "Gruppestørrelser")),
+                ("logo", ("Logotipo", "Logo", "Logo")),
+                ("animation", ("Animación", "Animation", "Animation")),
+                ("random", ("Color aleatorio", "Random colour", "Tilfældig farve")),
+            ),
+            "sample",
+            (
+                "El tamaño muestra cuánta evidencia sustenta el patrón.",
+                "Size shows how much evidence supports the pattern.",
+                "Størrelsen viser hvor meget evidens der understøtter mønstret.",
+            ),
+        ),
     ),
     true_false=(
-        ("009", ("La media siempre representa mejor el centro.", "The mean always represents centre best.", "Gennemsnittet repræsenterer altid centrum bedst."), False, ("Depende de forma y extremos.", "It depends on shape and extremes.", "Det afhænger af form og ekstremer.")),
-        ("010", ("Un valor extremo es automáticamente un error.", "An extreme value is automatically an error.", "En ekstrem værdi er automatisk en fejl."), False, ("Requiere investigación y procedencia.", "It requires investigation and provenance.", "Det kræver undersøgelse og proveniens.")),
-        ("011", ("IQR es robusto ante valores extremos.", "IQR is robust to extreme values.", "IQR er robust over for ekstreme værdier."), True, ("Depende de cuantiles centrales.", "It depends on central quantiles.", "Det afhænger af centrale kvantiler.")),
-        ("012", ("Un boxplot muestra todas las observaciones.", "A boxplot shows every observation.", "Et boxplot viser alle observationer."), False, ("Resume cuantiles y posibles extremos.", "It summarises quantiles and possible extremes.", "Det opsummerer kvantiler og mulige ekstremer.")),
-        ("013", ("Los porcentajes requieren un denominador declarado.", "Percentages require a declared denominator.", "Procenter kræver en erklæret nævner."), True, ("El mismo numerador puede producir porcentajes distintos.", "The same numerator can yield different percentages.", "Samme tæller kan give forskellige procenter.")),
-        ("014", ("Una escala logarítmica debe indicarse.", "A logarithmic scale should be stated.", "En logaritmisk skala bør angives."), True, ("La transformación cambia distancias visuales.", "The transformation changes visual distances.", "Transformationen ændrer visuelle afstande.")),
-        ("015", ("Un gráfico por sí solo establece significación estadística.", "A plot alone establishes statistical significance.", "En figur alene fastslår statistisk signifikans."), False, ("La inferencia exige un modelo y supuestos.", "Inference requires a model and assumptions.", "Inferens kræver en model og antagelser.")),
-        ("016", ("Mostrar puntos puede revelar heterogeneidad oculta por una media.", "Showing points can reveal heterogeneity hidden by a mean.", "At vise punkter kan afsløre heterogenitet skjult af et gennemsnit."), True, ("La agregación puede ocultar estructura.", "Aggregation may hide structure.", "Aggregering kan skjule struktur.")),
+        (
+            "009",
+            (
+                "La media siempre representa mejor el centro.",
+                "The mean always represents centre best.",
+                "Gennemsnittet repræsenterer altid centrum bedst.",
+            ),
+            False,
+            (
+                "Depende de forma y extremos.",
+                "It depends on shape and extremes.",
+                "Det afhænger af form og ekstremer.",
+            ),
+        ),
+        (
+            "010",
+            (
+                "Un valor extremo es automáticamente un error.",
+                "An extreme value is automatically an error.",
+                "En ekstrem værdi er automatisk en fejl.",
+            ),
+            False,
+            (
+                "Requiere investigación y procedencia.",
+                "It requires investigation and provenance.",
+                "Det kræver undersøgelse og proveniens.",
+            ),
+        ),
+        (
+            "011",
+            (
+                "IQR es robusto ante valores extremos.",
+                "IQR is robust to extreme values.",
+                "IQR er robust over for ekstreme værdier.",
+            ),
+            True,
+            (
+                "Depende de cuantiles centrales.",
+                "It depends on central quantiles.",
+                "Det afhænger af centrale kvantiler.",
+            ),
+        ),
+        (
+            "012",
+            (
+                "Un boxplot muestra todas las observaciones.",
+                "A boxplot shows every observation.",
+                "Et boxplot viser alle observationer.",
+            ),
+            False,
+            (
+                "Resume cuantiles y posibles extremos.",
+                "It summarises quantiles and possible extremes.",
+                "Det opsummerer kvantiler og mulige ekstremer.",
+            ),
+        ),
+        (
+            "013",
+            (
+                "Los porcentajes requieren un denominador declarado.",
+                "Percentages require a declared denominator.",
+                "Procenter kræver en erklæret nævner.",
+            ),
+            True,
+            (
+                "El mismo numerador puede producir porcentajes distintos.",
+                "The same numerator can yield different percentages.",
+                "Samme tæller kan give forskellige procenter.",
+            ),
+        ),
+        (
+            "014",
+            (
+                "Una escala logarítmica debe indicarse.",
+                "A logarithmic scale should be stated.",
+                "En logaritmisk skala bør angives.",
+            ),
+            True,
+            (
+                "La transformación cambia distancias visuales.",
+                "The transformation changes visual distances.",
+                "Transformationen ændrer visuelle afstande.",
+            ),
+        ),
+        (
+            "015",
+            (
+                "Un gráfico por sí solo establece significación estadística.",
+                "A plot alone establishes statistical significance.",
+                "En figur alene fastslår statistisk signifikans.",
+            ),
+            False,
+            (
+                "La inferencia exige un modelo y supuestos.",
+                "Inference requires a model and assumptions.",
+                "Inferens kræver en model og antagelser.",
+            ),
+        ),
+        (
+            "016",
+            (
+                "Mostrar puntos puede revelar heterogeneidad oculta por una media.",
+                "Showing points can reveal heterogeneity hidden by a mean.",
+                "At vise punkter kan afsløre heterogenitet skjult af et gennemsnit.",
+            ),
+            True,
+            (
+                "La agregación puede ocultar estructura.",
+                "Aggregation may hide structure.",
+                "Aggregering kan skjule struktur.",
+            ),
+        ),
     ),
     tutor=(
         (
@@ -385,30 +666,90 @@ treated_yes=0.48""",
             "Gyldig deskriptiv analyse kombinerer kontrol, fordelingspassende opsummeringer, transparent visualisering og tydelig adskillelse af observation, inferens og kausalitet.",
         ),
         (
-            ("Media y mediana responden distinto a extremos.", "Mean and median respond differently to extremes.", "Gennemsnit og median reagerer forskelligt på ekstremer."),
-            ("IQR resume el 50 % central.", "IQR summarises the central 50%.", "IQR opsummerer de centrale 50 %."),
-            ("Cada porcentaje requiere denominador.", "Every percentage requires a denominator.", "Hver procent kræver en nævner."),
-            ("Un gráfico no identifica causalidad.", "A plot does not identify causality.", "En figur identificerer ikke kausalitet."),
+            (
+                "Media y mediana responden distinto a extremos.",
+                "Mean and median respond differently to extremes.",
+                "Gennemsnit og median reagerer forskelligt på ekstremer.",
+            ),
+            (
+                "IQR resume el 50 % central.",
+                "IQR summarises the central 50%.",
+                "IQR opsummerer de centrale 50 %.",
+            ),
+            (
+                "Cada porcentaje requiere denominador.",
+                "Every percentage requires a denominator.",
+                "Hver procent kræver en nævner.",
+            ),
+            (
+                "Un gráfico no identifica causalidad.",
+                "A plot does not identify causality.",
+                "En figur identificerer ikke kausalitet.",
+            ),
         ),
         (
-            ("Eliminar extremos por regla automática.", "Automatically deleting extremes.", "Automatisk at slette ekstremer."),
-            ("Usar barras para ocultar datos continuos.", "Using bars to hide continuous data.", "At bruge søjler til at skjule kontinuerte data."),
-            ("Interpretar asociación como causa.", "Interpreting association as cause.", "At fortolke association som årsag."),
+            (
+                "Eliminar extremos por regla automática.",
+                "Automatically deleting extremes.",
+                "Automatisk at slette ekstremer.",
+            ),
+            (
+                "Usar barras para ocultar datos continuos.",
+                "Using bars to hide continuous data.",
+                "At bruge søjler til at skjule kontinuerte data.",
+            ),
+            (
+                "Interpretar asociación como causa.",
+                "Interpreting association as cause.",
+                "At fortolke association som årsag.",
+            ),
         ),
         (
-            ("¿Qué distribución hay detrás del resumen?", "What distribution lies behind the summary?", "Hvilken fordeling ligger bag opsummeringen?"),
+            (
+                "¿Qué distribución hay detrás del resumen?",
+                "What distribution lies behind the summary?",
+                "Hvilken fordeling ligger bag opsummeringen?",
+            ),
             ("¿Cuál es el denominador?", "What is the denominator?", "Hvad er nævneren?"),
-            ("¿Qué puede ocultar esta visualización?", "What might this visualization hide?", "Hvad kan denne visualisering skjule?"),
+            (
+                "¿Qué puede ocultar esta visualización?",
+                "What might this visualization hide?",
+                "Hvad kan denne visualisering skjule?",
+            ),
         ),
         (
-            ("Audita antes de resumir.", "Audits before summarising.", "Kontrollerer før opsummering."),
-            ("Justifica centro y dispersión.", "Justifies centre and dispersion.", "Begrunder centrum og spredning."),
-            ("Separa descripción e inferencia.", "Separates description and inference.", "Adskiller beskrivelse og inferens."),
+            (
+                "Audita antes de resumir.",
+                "Audits before summarising.",
+                "Kontrollerer før opsummering.",
+            ),
+            (
+                "Justifica centro y dispersión.",
+                "Justifies centre and dispersion.",
+                "Begrunder centrum og spredning.",
+            ),
+            (
+                "Separa descripción e inferencia.",
+                "Separates description and inference.",
+                "Adskiller beskrivelse og inferens.",
+            ),
         ),
         (
-            ("No inventar valores ni tamaños muestrales.", "Do not invent values or sample sizes.", "Opfind ikke værdier eller stikprøvestørrelser."),
-            ("No recomendar exclusiones sin procedencia.", "Do not recommend exclusions without provenance.", "Anbefal ikke udelukkelser uden proveniens."),
-            ("Responder en el idioma activo.", "Respond in the active language.", "Svar på det aktive sprog."),
+            (
+                "No inventar valores ni tamaños muestrales.",
+                "Do not invent values or sample sizes.",
+                "Opfind ikke værdier eller stikprøvestørrelser.",
+            ),
+            (
+                "No recomendar exclusiones sin procedencia.",
+                "Do not recommend exclusions without provenance.",
+                "Anbefal ikke udelukkelser uden proveniens.",
+            ),
+            (
+                "Responder en el idioma activo.",
+                "Respond in the active language.",
+                "Svar på det aktive sprog.",
+            ),
         ),
         (
             "SDU ODIN BMB830 active course description approved 2025-03-06",

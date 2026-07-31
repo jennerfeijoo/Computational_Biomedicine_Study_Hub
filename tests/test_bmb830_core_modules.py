@@ -40,14 +40,10 @@ def test_bmb830_registers_three_complete_modules_in_order() -> None:
 
 def test_bmb830_locales_preserve_assessment_identity() -> None:
     for localized_bundle in LOCALIZED_BUNDLES:
-        materialized = {
-            locale: localized_bundle.materialize(locale) for locale in AppLocale
-        }
+        materialized = {locale: localized_bundle.materialize(locale) for locale in AppLocale}
         reference = materialized[AppLocale.SPANISH_SPAIN]
         reference_ids = tuple(item.item_id for item in reference.objective_question_bank)
-        reference_option_ids = tuple(
-            item.option_ids for item in reference.objective_question_bank
-        )
+        reference_option_ids = tuple(item.option_ids for item in reference.objective_question_bank)
         reference_correct_ids = tuple(
             item.correct_option_ids for item in reference.objective_question_bank
         )

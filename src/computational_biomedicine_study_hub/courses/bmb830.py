@@ -34,9 +34,7 @@ class BMB830ModuleReaderPage(ModuleReaderPage):
         layout.addWidget(self._label(self._numbered(example.reasoning), "contentBulletList"))
         layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_CODE)))
         layout.addWidget(self._code_block(example.code, "exampleCode"))
-        layout.addWidget(
-            self._subheading(self._translator.text(MessageKey.MODULE_EXPECTED_OUTPUT))
-        )
+        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_EXPECTED_OUTPUT)))
         layout.addWidget(self._code_block(example.expected_output, "exampleOutput"))
         if can_execute_r(example.code):
             layout.addWidget(
@@ -46,9 +44,7 @@ class BMB830ModuleReaderPage(ModuleReaderPage):
                     locale=self._translator.locale,
                 )
             )
-        layout.addWidget(
-            self._subheading(self._translator.text(MessageKey.MODULE_EXPLANATION))
-        )
+        layout.addWidget(self._subheading(self._translator.text(MessageKey.MODULE_EXPLANATION)))
         layout.addWidget(self._label(example.explanation, "contentBody"))
         return card
 

@@ -78,9 +78,7 @@ _FORBIDDEN_CALLS: Final = (
     "makeActiveBinding",
 )
 _FORBIDDEN_PATTERN: Final = re.compile(
-    r"(?i)\b(?:"
-    + "|".join(re.escape(name) for name in _FORBIDDEN_CALLS)
-    + r")\s*\("
+    r"(?i)\b(?:" + "|".join(re.escape(name) for name in _FORBIDDEN_CALLS) + r")\s*\("
 )
 _NATIVE_PATTERN: Final = re.compile(r"(?i)\.(?:Internal|Call|C|External)\s*\(")
 
