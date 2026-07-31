@@ -74,29 +74,35 @@ class DM857Page(QWidget):
     @property
     def reader(self) -> ModuleReaderPage:
         """Return the reader for the currently selected module."""
+
         return self._reader_for_index(self.current_module_index)
 
     @property
     def module_count(self) -> int:
         """Return the number of completed modules available in the course page."""
+
         return len(self._bundles)
 
     @property
     def current_module_index(self) -> int:
         """Return the zero-based selected module index."""
+
         return self._module_selector.currentIndex()
 
     @property
     def constructed_reader_count(self) -> int:
         """Return the number of readers constructed during this page lifetime."""
+
         return len(self._reader_cache)
 
     def has_constructed_reader(self, index: int) -> bool:
         """Return whether a module reader has been constructed for one index."""
+
         return index in self._reader_cache
 
     def select_module(self, index: int) -> bool:
         """Select a completed module by zero-based index."""
+
         if not 0 <= index < self.module_count:
             return False
         if index == self.current_module_index:
@@ -104,6 +110,14 @@ class DM857Page(QWidget):
         else:
             self._module_selector.setCurrentIndex(index)
         return True
+
+    def select_module_by_id(self, module_id: str) -> bool:
+        """Select an authored module by its stable language-independent ID."""
+
+        for index, bundle in enumerate(self._bundles):
+            if bundle.module.module_id == module_id:
+                return self.select_module(index)
+        return False
 
     @Slot(int)
     def _activate_module(self, index: int) -> None:
@@ -141,6 +155,7 @@ class DM857Page(QWidget):
 
 def create_page(locale: AppLocale = DEFAULT_LOCALE) -> QWidget:
     """Create the DM857 page without constructing widgets during import."""
+
     return DM857Page(locale)
 
 

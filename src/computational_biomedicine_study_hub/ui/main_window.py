@@ -22,12 +22,14 @@ from ..i18n import (
     UiCopyKey,
     ui_text,
 )
+from ..storage import SQLiteProgressStore
 from .header import PageHeader
 from .language_styles import LANGUAGE_STYLESHEET
 from .navigation import NavigationSidebar
 from .pages.home_page import HomePage
 from .pages.ollama_settings_page import OllamaSettingsPage
 from .pages.placeholder_page import PlaceholderPage
+from .pages.review_page import ReviewPage
 from .routes import (
     PageDescriptor,
     RouteId,
@@ -42,13 +44,14 @@ StudyLocation = tuple[int, int]
 
 
 class MainWindow(QMainWindow):
-    """Provide localized navigation, course hosting and lightweight persistence."""
+    """Provide localized navigation, course hosting and learning-state access."""
 
     def __init__(
         self,
         parent: QWidget | None = None,
         *,
         settings: QSettings | None = None,
+        progress_store: SQLiteProgressStore | None = None,
     ) -> None:
         super().__init__(parent)
         self.resize(1200, 760)
@@ -56,6 +59,7 @@ class MainWindow(QMainWindow):
         self.setStyleSheet(APPLICATION_STYLESHEET + LANGUAGE_STYLESHEET)
 
         self._settings = settings if settings is not None else QSettings()
+        self._progress_store = progress_store
         self._language = LanguageController(self._settings, self)
         self._translator = self._language.translator
         self._courses: tuple[CourseRegistration, ...] = COURSES
@@ -93,6 +97,7 @@ class MainWindow(QMainWindow):
     @property
     def current_route(self) -> RouteId | str:
         """Return the route associated with the current page."""
+
         current = self._stack.currentWidget()
         for route, page in self._pages.items():
             if page is current:
@@ -105,15 +110,20 @@ class MainWindow(QMainWindow):
     @property
     def current_locale(self) -> AppLocale:
         """Return the active persisted application locale."""
+
         return self._language.locale
 
     def navigate(self, route: RouteLike) -> None:
         """Switch to a registered route and persist the selection."""
+
         key = route_value(route)
         page = self._pages.get(key)
         if page is None:
             key = RouteId.HOME.value
             page = self._pages[key]
+
+        if isinstance(page, ReviewPage):
+            page.refresh()
 
         descriptor = self._descriptors[key]
         self._stack.setCurrentWidget(page)
@@ -123,6 +133,7 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event: QCloseEvent) -> None:  # noqa: N802
         """Persist geometry before the window closes."""
+
         self._settings.setValue("window/geometry", self.saveGeometry())
         super().closeEvent(event)
 
@@ -131,9 +142,12 @@ class MainWindow(QMainWindow):
         home_page = HomePage(self._courses, self._translator)
         home_page.course_selected.connect(self.navigate)
 
+        review_page = ReviewPage(self._progress_store, locale)
+        review_page.review_requested.connect(self._open_review_item)
+
         pages: dict[str, QWidget] = {
             RouteId.HOME.value: home_page,
-            RouteId.REVIEW.value: PlaceholderPage(ui_text(locale, UiCopyKey.REVIEW_PLACEHOLDER)),
+            RouteId.REVIEW.value: review_page,
             RouteId.ASSESSMENTS.value: PlaceholderPage(
                 ui_text(locale, UiCopyKey.ASSESSMENTS_PLACEHOLDER)
             ),
@@ -164,6 +178,7 @@ class MainWindow(QMainWindow):
     @Slot(str)
     def _apply_locale(self, locale_code: str) -> None:
         """Rebuild visible pages immediately while preserving study location."""
+
         route = route_value(self.current_route)
         study_location = self._capture_study_location(route)
 
@@ -216,6 +231,23 @@ class MainWindow(QMainWindow):
 
     def _on_route_selected(self, selected_route: str) -> None:
         self.navigate(selected_route)
+
+    @Slot(str, str, str)
+    def _open_review_item(
+        self,
+        course_code: str,
+        module_id: str,
+        objective_id: str,
+    ) -> None:
+        """Open the authored module and its assessment section for retrieval practice."""
+
+        del objective_id
+        route = f"course/{course_code.casefold()}"
+        self.navigate(route)
+        page = self._modular_course_page(route)
+        if page is None or not page.select_module_by_id(module_id):
+            return
+        page.reader.select_section_index(4)
 
     def _stored_route(self) -> str:
         value = str(

@@ -59,6 +59,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     configure_progress_recorder(LearningProgressService(progress_store))
     app.aboutToQuit.connect(progress_store.close)
 
-    window = MainWindow()
+    window = MainWindow(progress_store=progress_store)
     window.show()
     return app.exec()

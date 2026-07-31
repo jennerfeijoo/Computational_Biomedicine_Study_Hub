@@ -100,4 +100,37 @@ class MasteryState:
             raise ValueError("next_review_at cannot precede last_attempt_at.")
 
 
-__all__ = ["AttemptRecord", "ConfidenceLevel", "MasteryState"]
+@dataclass(frozen=True, slots=True)
+class ReviewItem:
+    """One course-scoped mastery state ready for review presentation."""
+
+    course_code: str
+    module_id: str
+    state: MasteryState
+
+    def __post_init__(self) -> None:
+        for field_name, value in {
+            "course_code": self.course_code,
+            "module_id": self.module_id,
+        }.items():
+            if not value.strip():
+                raise ValueError(f"Review field {field_name!r} cannot be empty.")
+            if value != value.strip():
+                raise ValueError(
+                    f"Review field {field_name!r} cannot contain surrounding whitespace."
+                )
+
+    @property
+    def objective_id(self) -> str:
+        """Return the objective identity held by the mastery state."""
+
+        return self.state.objective_id
+
+    @property
+    def key(self) -> tuple[str, str, str]:
+        """Return the collision-safe persisted identity."""
+
+        return self.course_code, self.module_id, self.objective_id
+
+
+__all__ = ["AttemptRecord", "ConfidenceLevel", "MasteryState", "ReviewItem"]
