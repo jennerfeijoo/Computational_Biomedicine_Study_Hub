@@ -44,6 +44,11 @@ from .module_08_multiple_regression import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_08,
     materialize_module_08_question_bank,
 )
+from .module_09_interactions_nonlinearity import (
+    LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_09,
+    materialize_module_09_question_bank,
+)
 
 LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
@@ -86,6 +91,11 @@ LOCALIZED_BUNDLES = (
         LOCALIZED_OBJECTIVE_QUESTION_BANK_08,
         "1.0.0",
     ),
+    LocalizedModuleBundle(
+        LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY,
+        LOCALIZED_OBJECTIVE_QUESTION_BANK_09,
+        "1.0.0",
+    ),
 )
 validate_bundle_catalog(LOCALIZED_BUNDLES)
 
@@ -104,6 +114,7 @@ MODULE_05_HYPOTHESIS_TESTING = BUNDLES[4].module
 MODULE_06_GROUP_COMPARISON = BUNDLES[5].module
 MODULE_07_CORRELATION_REGRESSION = BUNDLES[6].module
 MODULE_08_MULTIPLE_REGRESSION = BUNDLES[7].module
+MODULE_09_INTERACTIONS_NONLINEARITY = BUNDLES[8].module
 
 OBJECTIVE_QUESTION_BANK_01 = BUNDLES[0].objective_question_bank
 OBJECTIVE_QUESTION_BANK_02 = BUNDLES[1].objective_question_bank
@@ -113,6 +124,7 @@ OBJECTIVE_QUESTION_BANK_05 = BUNDLES[4].objective_question_bank
 OBJECTIVE_QUESTION_BANK_06 = BUNDLES[5].objective_question_bank
 OBJECTIVE_QUESTION_BANK_07 = BUNDLES[6].objective_question_bank
 OBJECTIVE_QUESTION_BANK_08 = BUNDLES[7].objective_question_bank
+OBJECTIVE_QUESTION_BANK_09 = BUNDLES[8].objective_question_bank
 
 __all__ = [
     "BUNDLES",
@@ -126,6 +138,7 @@ __all__ = [
     "LOCALIZED_MODULE_06_GROUP_COMPARISON",
     "LOCALIZED_MODULE_07_CORRELATION_REGRESSION",
     "LOCALIZED_MODULE_08_MULTIPLE_REGRESSION",
+    "LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_01",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_02",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_03",
@@ -134,6 +147,7 @@ __all__ = [
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_06",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_07",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_08",
+    "LOCALIZED_OBJECTIVE_QUESTION_BANK_09",
     "MODULES",
     "MODULE_01_R_FOUNDATIONS",
     "MODULE_02_DATA_SUMMARY",
@@ -143,6 +157,7 @@ __all__ = [
     "MODULE_06_GROUP_COMPARISON",
     "MODULE_07_CORRELATION_REGRESSION",
     "MODULE_08_MULTIPLE_REGRESSION",
+    "MODULE_09_INTERACTIONS_NONLINEARITY",
     "OBJECTIVE_QUESTION_BANKS",
     "OBJECTIVE_QUESTION_BANK_01",
     "OBJECTIVE_QUESTION_BANK_02",
@@ -152,6 +167,7 @@ __all__ = [
     "OBJECTIVE_QUESTION_BANK_06",
     "OBJECTIVE_QUESTION_BANK_07",
     "OBJECTIVE_QUESTION_BANK_08",
+    "OBJECTIVE_QUESTION_BANK_09",
     "materialize_module_01_question_bank",
     "materialize_module_02_question_bank",
     "materialize_module_03_question_bank",
@@ -160,4 +176,5 @@ __all__ = [
     "materialize_module_06_question_bank",
     "materialize_module_07_question_bank",
     "materialize_module_08_question_bank",
+    "materialize_module_09_question_bank",
 ]
