@@ -14,7 +14,7 @@ ODIN defines the public learning outcomes, principal content, teaching language,
 ## Status rules
 
 - **Covered:** current authored modules contain teaching, practice, and assessment evidence for the requirement.
-- **Partial:** related activities exist, but the complete official experience is not implemented.
+- **Partial:** related activities or a preparation workflow exist, but equivalence with the complete official experience cannot yet be established.
 - **Gap:** no equivalent learner workflow currently exists.
 
 ## Expected learning outcomes
@@ -46,12 +46,24 @@ The active examination consists of a group project and report of no more than te
 
 | ID | Examination requirement | Current evidence | Status | Required increment |
 |---|---|---|---|---|
-| `dm857.sdu.exam01` | Group project and report, maximum ten pages. | Project design, implementation, debugging, and explanation activities exist across several modules. | Partial | Add an integrated capstone with milestones, repository evidence, report template, and explicit rubric. |
+| `dm857.sdu.exam01` | Group project and report, maximum ten pages. | A persistent five-milestone capstone now records group metadata, repository and commit evidence, testing evidence, report traceability, a ten-page internal outline, and a seven-criterion internal readiness rubric. | Partial | Import the official itslearning project brief and rubric when available; then add criterion-level artifact review and verified submission checks. |
 | `dm857.sdu.exam02` | Group presentation. | No collaborative presentation rehearsal or assessment workflow. | Gap | Add role allocation, timing, slide checklist, rehearsal, and group rubric. |
 | `dm857.sdu.exam03` | Short individual oral examination. | Oral-explanation items exist, but they are not a timed defense of the learner's own project. | Partial | Add a timed oral-defense simulator grounded in capstone artifacts and code decisions. |
 
+## Capstone implementation boundary
+
+The capstone workflow is an operational preparation scaffold, not a reconstruction of unpublished SDU assessment material. It provides:
+
+- five evidence-bearing milestones from problem modelling through testing and report traceability;
+- persistent project title, group members, repository URL, report reference, checklist state, evidence notes, and commit references;
+- an internal weighted readiness rubric totaling 100 percent;
+- an internal report outline budgeted to 9.5 pages, leaving margin under the publicly confirmed ten-page maximum;
+- Spanish, English, and Danish interfaces with local atomic persistence.
+
+The internal report outline and readiness rubric are explicitly labelled as preparation aids. The project/report row remains **Partial** because the official project brief and grading rubric are not exposed by ODIN and cannot yet be used to validate equivalence.
+
 ## Current conclusion
 
-The public **learning outcomes and content topics are covered** by the current fourteen-module course. DM857 is **not yet examination-complete** because the application lacks the integrated group project/report workflow, group presentation rehearsal, and a project-grounded individual oral defense.
+The public **learning outcomes and content topics are covered** by the current fourteen-module course. DM857 is **not yet examination-complete**. The project/report component now has an integrated preparation workflow but remains partial pending official brief-and-rubric validation; the group presentation remains a confirmed gap; and the individual oral defense remains partial.
 
-The executable source of truth is `content/dm857/official_coverage.py`. Tests fail if the matrix references missing modules, changes the official row counts, duplicates requirement IDs, or labels a requirement covered without practice and assessment evidence.
+The executable source of truth is `content/dm857/official_coverage.py`. Tests fail if the matrix references missing modules, changes the official row counts, duplicates requirement IDs, labels a requirement covered without practice and assessment evidence, or regresses the project row to the obsolete claim that no integrated capstone exists.
