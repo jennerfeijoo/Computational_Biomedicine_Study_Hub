@@ -58,7 +58,7 @@ _BLOCKED_CALLS: Final = frozenset(
     }
 )
 
-_HARNESS = r'''
+_HARNESS = r"""
 import builtins
 import contextlib
 import io
@@ -139,7 +139,7 @@ payload = {
     "stderr": stderr.getvalue(),
 }
 sys.__stdout__.write(json.dumps(payload, ensure_ascii=False))
-'''
+"""
 
 
 class ExecutionStatus(StrEnum):
@@ -217,9 +217,7 @@ class _PolicyVisitor(ast.NodeVisitor):
 
     def visit_Call(self, node: ast.Call) -> None:  # noqa: N802
         if isinstance(node.func, ast.Name) and node.func.id in _BLOCKED_CALLS:
-            raise PythonPolicyError(
-                f"Calling {node.func.id!r} is not allowed in learning labs."
-            )
+            raise PythonPolicyError(f"Calling {node.func.id!r} is not allowed in learning labs.")
         self.generic_visit(node)
 
     def visit_Attribute(self, node: ast.Attribute) -> None:  # noqa: N802
@@ -336,7 +334,9 @@ class PythonSubprocessRunner:
         try:
             payload = json.loads(completed.stdout)
         except json.JSONDecodeError:
-            detail = completed.stderr or completed.stdout or "The execution harness returned no data."
+            detail = (
+                completed.stderr or completed.stdout or "The execution harness returned no data."
+            )
             return self._result(
                 ExecutionStatus.RUNTIME_ERROR,
                 stdout="",
