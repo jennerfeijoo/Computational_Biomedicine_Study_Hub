@@ -249,9 +249,13 @@ class AdaptiveReviewSessionSnapshot:
                 f"Unsupported adaptive review snapshot version {self.snapshot_version}."
             )
         if not self.session_id.strip() or self.session_id != self.session_id.strip():
-            raise AdaptiveReviewSnapshotError("Adaptive review snapshots require a stable session ID.")
+            raise AdaptiveReviewSnapshotError(
+                "Adaptive review snapshots require a stable session ID."
+            )
         if self.target_questions < 1:
-            raise AdaptiveReviewSnapshotError("Adaptive review snapshots require a positive target.")
+            raise AdaptiveReviewSnapshotError(
+                "Adaptive review snapshots require a positive target."
+            )
         due_keys = tuple(item.key for item in self.due_items)
         if not due_keys or len(due_keys) != len(set(due_keys)):
             raise AdaptiveReviewSnapshotError(
@@ -375,8 +379,7 @@ class AdaptiveReviewSessionSnapshot:
                 session_id=_require_str(payload, "session_id"),
                 target_questions=_require_int(payload, "target_questions"),
                 due_items=tuple(
-                    _review_item_from_payload(item)
-                    for item in _require_list(payload, "due_items")
+                    _review_item_from_payload(item) for item in _require_list(payload, "due_items")
                 ),
                 results=results,
                 current_primary_key=(
@@ -389,20 +392,14 @@ class AdaptiveReviewSessionSnapshot:
                     if current_activity_payload is not None
                     else None
                 ),
-                current_option_ids=tuple(
-                    _require_string_list(payload, "current_option_ids")
-                ),
+                current_option_ids=tuple(_require_string_list(payload, "current_option_ids")),
                 exhausted=_require_bool(payload, "exhausted"),
                 catalog_fingerprint=_require_str(payload, "catalog_fingerprint"),
                 created_at=datetime.fromisoformat(_require_str(payload, "created_at")),
                 updated_at=datetime.fromisoformat(_require_str(payload, "updated_at")),
                 draft_source=_optional_str(payload, "draft_source"),
-                pending_programming_result=_optional_bool(
-                    payload, "pending_programming_result"
-                ),
-                pending_programming_source=_optional_str(
-                    payload, "pending_programming_source"
-                ),
+                pending_programming_result=_optional_bool(payload, "pending_programming_result"),
+                pending_programming_source=_optional_str(payload, "pending_programming_source"),
             )
         except (KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
             if isinstance(exc, AdaptiveReviewSnapshotError):
@@ -850,9 +847,7 @@ class AdaptiveReviewSession:
                 )
             return AdaptiveReviewProgramming(primary_key=primary_key, candidate=candidate)
 
-        options_by_id = {
-            option.option_id: option for option in candidate.item.option_objects
-        }
+        options_by_id = {option.option_id: option for option in candidate.item.option_objects}
         resolved_ids = option_ids or tuple(options_by_id)
         if set(resolved_ids) != set(options_by_id) or len(resolved_ids) != len(options_by_id):
             raise AdaptiveReviewSnapshotError(
@@ -1015,12 +1010,8 @@ def _review_item_from_payload(value: object) -> ReviewItem:
             attempts=_require_int(state, "attempts"),
             consecutive_correct=_require_int(state, "consecutive_correct"),
             lapse_count=_require_int(state, "lapse_count"),
-            last_attempt_at=datetime.fromisoformat(
-                _require_str(state, "last_attempt_at")
-            ),
-            next_review_at=datetime.fromisoformat(
-                _require_str(state, "next_review_at")
-            ),
+            last_attempt_at=datetime.fromisoformat(_require_str(state, "last_attempt_at")),
+            next_review_at=datetime.fromisoformat(_require_str(state, "next_review_at")),
         ),
     )
 
