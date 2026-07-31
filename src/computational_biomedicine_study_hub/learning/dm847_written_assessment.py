@@ -253,8 +253,7 @@ class WrittenAssessmentSnapshot:
         now: datetime | None,
     ) -> WrittenAssessmentSnapshot:
         drafts = tuple(
-            replacement if item.prompt_id == replacement.prompt_id else item
-            for item in self.drafts
+            replacement if item.prompt_id == replacement.prompt_id else item for item in self.drafts
         )
         return replace(self, drafts=drafts, updated_at=now or datetime.now(UTC))
 
