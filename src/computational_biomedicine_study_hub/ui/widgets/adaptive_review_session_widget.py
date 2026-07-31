@@ -36,7 +36,9 @@ class AdaptiveReviewSessionWidget(QFrame):
     ) -> None:
         super().__init__(parent)
         if not session.can_start:
-            raise ValueError("Adaptive review widgets require a session with an available question.")
+            raise ValueError(
+                "Adaptive review widgets require a session with an available question."
+            )
 
         self.setObjectName("adaptiveReviewSessionWidget")
         self._session = session
@@ -214,7 +216,7 @@ class AdaptiveReviewSessionWidget(QFrame):
             adaptive_review_text(self._locale, AdaptiveReviewCopyKey.RETURN_TO_QUEUE)
         )
         refresh.setObjectName("adaptiveReviewRefreshQueueButton")
-        refresh.clicked.connect(self.queue_refresh_requested)
+        refresh.clicked.connect(self.queue_refresh_requested.emit)
         layout.addWidget(refresh)
 
         self._question_layout.addWidget(panel)
