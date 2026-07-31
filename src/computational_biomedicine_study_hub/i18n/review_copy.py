@@ -108,9 +108,7 @@ def review_text(
     resolved = locale if isinstance(locale, AppLocale) else AppLocale.resolve(locale)
     template = _CATALOGS[resolved][key]
     required = {
-        field_name
-        for _, field_name, _, _ in Formatter().parse(template)
-        if field_name is not None
+        field_name for _, field_name, _, _ in Formatter().parse(template) if field_name is not None
     }
     provided = set(values)
     if required != provided:
