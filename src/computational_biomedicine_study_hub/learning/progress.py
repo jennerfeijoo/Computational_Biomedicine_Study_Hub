@@ -20,6 +20,14 @@ class ConfidenceLevel(StrEnum):
     HIGH = "high"
 
 
+class ErrorKind(StrEnum):
+    """Pedagogical interpretation of an incorrect answer and its confidence."""
+
+    KNOWLEDGE_GAP = "knowledge_gap"
+    FRAGILE_UNDERSTANDING = "fragile_understanding"
+    MISCONCEPTION = "misconception"
+
+
 @dataclass(frozen=True, slots=True)
 class AttemptRecord:
     """One immutable interaction with an assessable learning activity."""
@@ -133,4 +141,82 @@ class ReviewItem:
         return self.course_code, self.module_id, self.objective_id
 
 
-__all__ = ["AttemptRecord", "ConfidenceLevel", "MasteryState", "ReviewItem"]
+@dataclass(frozen=True, slots=True)
+class ErrorRecord:
+    """One authored incorrect answer retained for deliberate error review."""
+
+    error_id: str
+    course_code: str
+    module_id: str
+    item_id: str
+    prompt: str
+    selected_answer: str
+    correct_answer: str
+    explanation: str
+    confidence: ConfidenceLevel
+    objective_ids: tuple[str, ...]
+    occurred_at: datetime
+    resolved_at: datetime | None = None
+
+    def __post_init__(self) -> None:
+        required = {
+            "error_id": self.error_id,
+            "course_code": self.course_code,
+            "module_id": self.module_id,
+            "item_id": self.item_id,
+            "prompt": self.prompt,
+            "selected_answer": self.selected_answer,
+            "correct_answer": self.correct_answer,
+            "explanation": self.explanation,
+        }
+        for field_name, value in required.items():
+            if not value.strip():
+                raise ValueError(f"Error field {field_name!r} cannot be empty.")
+            if value != value.strip():
+                raise ValueError(
+                    f"Error field {field_name!r} cannot contain surrounding whitespace."
+                )
+
+        if not self.objective_ids:
+            raise ValueError("Error records require at least one objective ID.")
+        normalized = tuple(objective_id.strip().casefold() for objective_id in self.objective_ids)
+        if any(not objective_id for objective_id in normalized):
+            raise ValueError("Error records cannot contain empty objective IDs.")
+        if any(objective_id != objective_id.strip() for objective_id in self.objective_ids):
+            raise ValueError("Error objective IDs cannot contain surrounding whitespace.")
+        if len(normalized) != len(set(normalized)):
+            raise ValueError("Error records cannot contain duplicate objective IDs.")
+
+        if self.occurred_at.tzinfo is None or self.occurred_at.utcoffset() is None:
+            raise ValueError("occurred_at must be timezone-aware.")
+        if self.resolved_at is not None:
+            if self.resolved_at.tzinfo is None or self.resolved_at.utcoffset() is None:
+                raise ValueError("resolved_at must be timezone-aware.")
+            if self.resolved_at < self.occurred_at:
+                raise ValueError("resolved_at cannot precede occurred_at.")
+
+    @property
+    def kind(self) -> ErrorKind:
+        """Classify the error from the learner's pre-feedback confidence."""
+
+        if self.confidence is ConfidenceLevel.HIGH:
+            return ErrorKind.MISCONCEPTION
+        if self.confidence is ConfidenceLevel.MEDIUM:
+            return ErrorKind.FRAGILE_UNDERSTANDING
+        return ErrorKind.KNOWLEDGE_GAP
+
+    @property
+    def is_resolved(self) -> bool:
+        """Return whether a later correct answer resolved this item."""
+
+        return self.resolved_at is not None
+
+
+__all__ = [
+    "AttemptRecord",
+    "ConfidenceLevel",
+    "ErrorKind",
+    "ErrorRecord",
+    "MasteryState",
+    "ReviewItem",
+]
