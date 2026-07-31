@@ -99,9 +99,7 @@ class CapstoneMilestoneEditor(QGroupBox):
         commit_label = QLabel(capstone_text(locale, CapstoneCopyKey.COMMIT_REFERENCE))
         self._commit = QLineEdit(progress.commit_reference)
         self._commit.setObjectName("capstoneCommitReference")
-        self._commit.setPlaceholderText(
-            capstone_text(locale, CapstoneCopyKey.COMMIT_PLACEHOLDER)
-        )
+        self._commit.setPlaceholderText(capstone_text(locale, CapstoneCopyKey.COMMIT_PLACEHOLDER))
         self._commit.textChanged.connect(self.changed.emit)
 
         layout.addWidget(evidence_label)
@@ -249,9 +247,7 @@ class DM857CapstonePage(QWidget):
             self._milestone_editors[spec.milestone_id] = editor
             layout.addWidget(editor)
 
-        rubric_group = QGroupBox(
-            capstone_text(locale, CapstoneCopyKey.RUBRIC_TITLE)
-        )
+        rubric_group = QGroupBox(capstone_text(locale, CapstoneCopyKey.RUBRIC_TITLE))
         rubric_group.setObjectName("capstoneRubric")
         rubric_layout = QVBoxLayout(rubric_group)
         rubric_notice = QLabel(capstone_text(locale, CapstoneCopyKey.RUBRIC_NOTICE))
@@ -278,9 +274,7 @@ class DM857CapstonePage(QWidget):
             for score in range(5):
                 combo.addItem(str(score), score)
             saved_score = self._progress.rubric_score(criterion.criterion_id)
-            combo.setCurrentIndex(
-                0 if saved_score is None else combo.findData(saved_score)
-            )
+            combo.setCurrentIndex(0 if saved_score is None else combo.findData(saved_score))
             combo.currentIndexChanged.connect(self._schedule_save)
             self._rubric_scores[criterion.criterion_id] = combo
             row_layout.addWidget(label, 1)
@@ -289,16 +283,12 @@ class DM857CapstonePage(QWidget):
             rubric_layout.addWidget(row)
         layout.addWidget(rubric_group)
 
-        report_group = QGroupBox(
-            capstone_text(locale, CapstoneCopyKey.REPORT_TITLE)
-        )
+        report_group = QGroupBox(capstone_text(locale, CapstoneCopyKey.REPORT_TITLE))
         report_group.setObjectName("capstoneReportTemplate")
         report_layout = QVBoxLayout(report_group)
         report_notice = QLabel(capstone_text(locale, CapstoneCopyKey.REPORT_NOTICE))
         report_notice.setWordWrap(True)
-        report_template = QPlainTextEdit(
-            capstone_text(locale, CapstoneCopyKey.REPORT_TEMPLATE)
-        )
+        report_template = QPlainTextEdit(capstone_text(locale, CapstoneCopyKey.REPORT_TEMPLATE))
         report_template.setObjectName("capstoneReportOutline")
         report_template.setReadOnly(True)
         report_template.setMinimumHeight(220)
@@ -307,9 +297,7 @@ class DM857CapstonePage(QWidget):
         layout.addWidget(report_group)
 
         actions = QHBoxLayout()
-        self._save_button = QPushButton(
-            capstone_text(locale, CapstoneCopyKey.SAVE)
-        )
+        self._save_button = QPushButton(capstone_text(locale, CapstoneCopyKey.SAVE))
         self._save_button.setObjectName("capstoneSaveButton")
         self._save_button.clicked.connect(lambda _checked=False: self.persist())
         self._save_status = QLabel()
@@ -346,17 +334,13 @@ class DM857CapstonePage(QWidget):
         self._progress = self._capture_progress()
         if self._store is not None:
             self._store.save(self._progress)
-        self._save_status.setText(
-            capstone_text(self._locale, CapstoneCopyKey.SAVED)
-        )
+        self._save_status.setText(capstone_text(self._locale, CapstoneCopyKey.SAVED))
         self._refresh_summary(self._progress)
 
     def _capture_progress(self) -> DM857CapstoneProgress:
         timestamp = datetime.now(UTC)
         members = tuple(
-            part.strip()
-            for part in self._group_members.text().split(",")
-            if part.strip()
+            part.strip() for part in self._group_members.text().split(",") if part.strip()
         )
         progress = self._progress.with_metadata(
             project_title=self._project_title.text(),
@@ -387,9 +371,7 @@ class DM857CapstonePage(QWidget):
 
     def _refresh_summary(self, progress: DM857CapstoneProgress) -> None:
         for milestone in progress.milestones:
-            self._milestone_editors[milestone.milestone_id].refresh_status(
-                milestone.status
-            )
+            self._milestone_editors[milestone.milestone_id].refresh_status(milestone.status)
         self._progress_bar.setValue(progress.milestone_completion_percent)
         self._progress_label.setText(
             capstone_text(
