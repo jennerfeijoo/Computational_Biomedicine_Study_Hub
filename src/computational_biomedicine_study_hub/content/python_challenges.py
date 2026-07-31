@@ -59,7 +59,9 @@ class PythonChallenge:
         if any(not objective_id for objective_id in normalized_objectives):
             raise ValueError("Python challenge objective IDs cannot be empty.")
         if any(objective_id != objective_id.strip() for objective_id in self.objective_ids):
-            raise ValueError("Python challenge objective IDs cannot contain surrounding whitespace.")
+            raise ValueError(
+                "Python challenge objective IDs cannot contain surrounding whitespace."
+            )
         if len(normalized_objectives) != len(set(normalized_objectives)):
             raise ValueError("Python challenge objective IDs cannot contain duplicates.")
 
