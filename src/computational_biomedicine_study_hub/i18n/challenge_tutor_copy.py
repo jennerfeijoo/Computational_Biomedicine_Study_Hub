@@ -124,9 +124,7 @@ _CATALOGS: dict[AppLocale, dict[ChallengeTutorCopyKey, str]] = {
             "Spørg om det seneste verificerede resultat. Tutoren kan forklare og foreslå hints, men "
             "kan ikke ændre bedømmelsen."
         ),
-        ChallengeTutorCopyKey.WAITING: (
-            "Kør testene for at oprette en verificerbar diagnose."
-        ),
+        ChallengeTutorCopyKey.WAITING: ("Kør testene for at oprette en verificerbar diagnose."),
         ChallengeTutorCopyKey.READY: "Diagnosen er klar til et spørgsmål.",
         ChallengeTutorCopyKey.QUESTION_PLACEHOLDER: (
             "Spørg om din kode, synlige fejl eller de vurderede læringsmål."
