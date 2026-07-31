@@ -148,7 +148,14 @@ def test_programming_review_keeps_retries_inside_one_session_activity(
             )
             if attempt.item_id == "m07.p04"
         ]
-        assert [attempt.is_correct for attempt in saved] == [False, True]
+        assert {attempt.objective_id for attempt in saved} == {"m07.o6", "m07.o8"}
+        for objective_id in ("m07.o6", "m07.o8"):
+            objective_results = [
+                attempt.is_correct
+                for attempt in saved
+                if attempt.objective_id == objective_id
+            ]
+            assert objective_results == [False, True]
         summary = widget.findChild(QLabel, "adaptiveReviewSummaryText")
         assert summary is not None
         assert "1 programming challenges" in summary.text()
