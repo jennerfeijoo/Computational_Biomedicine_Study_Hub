@@ -6,7 +6,7 @@ on:
   pull_request:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   quality:
@@ -20,8 +20,10 @@ jobs:
       QT_QPA_PLATFORM: offscreen
 
     steps:
-      - name: Check out repository
+      - name: Check out repository branch
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Install Qt runtime libraries
         run: sudo apt-get update && sudo apt-get install --yes libegl1
@@ -45,14 +47,17 @@ jobs:
             src/computational_biomedicine_study_hub/content/bmb831/module_03_differential_modeling.py \
             tests/test_bmb831_official_coverage.py
 
-      - name: Upload formatted files
-        uses: actions/upload-artifact@v4
-        with:
-          name: bmb831-formatted-${{ matrix.python-version }}
-          path: |
-            src/computational_biomedicine_study_hub/content/bmb831/module_02_omics_matrices_qc.py
-            src/computational_biomedicine_study_hub/content/bmb831/module_03_differential_modeling.py
+      - name: Commit formatted files
+        if: matrix.python-version == '3.11'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            src/computational_biomedicine_study_hub/content/bmb831/module_02_omics_matrices_qc.py \
+            src/computational_biomedicine_study_hub/content/bmb831/module_03_differential_modeling.py \
             tests/test_bmb831_official_coverage.py
+          git diff --cached --quiet || git commit -m "Apply Ruff formatting to BMB831 omics modules"
+          git push origin HEAD:${{ github.head_ref }}
 
       - name: Check formatting
         run: ruff format --check .
