@@ -56,7 +56,7 @@ def test_bmb830_master_level_evaluation_is_separate_and_conservative() -> None:
         rows[MasterCriterionKind.COMPUTATIONAL_WORKFLOW].criterion.status is CoverageStatus.COVERED
     )
     assert rows[MasterCriterionKind.BIOLOGICAL_REALISM].criterion.status is CoverageStatus.PARTIAL
-    assert rows[MasterCriterionKind.SCALE].criterion.status is CoverageStatus.PARTIAL
+    assert rows[MasterCriterionKind.SCALE].criterion.status is CoverageStatus.COVERED
     assert (
         rows[MasterCriterionKind.MULTIVARIATE_ANALYSIS].criterion.status is CoverageStatus.COVERED
     )
@@ -65,8 +65,8 @@ def test_bmb830_master_level_evaluation_is_separate_and_conservative() -> None:
 
     summary = bmb830_master_level_summary()
     assert summary.total == 8
-    assert summary.covered == 3
-    assert summary.partial == 4
+    assert summary.covered == 4
+    assert summary.partial == 3
     assert summary.gap == 0
     assert summary.not_required == 1
     assert not summary.fully_covered
