@@ -19,6 +19,10 @@ from .book_grounded_foundations import (
     apply_foundations_book_extensions,
     update_foundations_audit,
 )
+from .book_grounded_oop import (
+    apply_oop_book_extension,
+    update_oop_audit,
+)
 from .book_grounded_strings_mappings import (
     apply_strings_mappings_book_extensions,
     update_strings_mappings_audit,
@@ -98,9 +102,13 @@ from .module_14_testing_debugging_quality import (
     materialize_module_14_question_bank,
 )
 
-DM857_MODULE_SOURCE_AUDIT = update_adts_audit(
-    update_trees_audit(
-        update_strings_mappings_audit(update_foundations_audit(_BASE_DM857_MODULE_SOURCE_AUDIT))
+DM857_MODULE_SOURCE_AUDIT = update_oop_audit(
+    update_adts_audit(
+        update_trees_audit(
+            update_strings_mappings_audit(
+                update_foundations_audit(_BASE_DM857_MODULE_SOURCE_AUDIT)
+            )
+        )
     )
 )
 
@@ -119,26 +127,28 @@ DM857_MODULE_SOURCE_AUDIT = update_adts_audit(
     LOCALIZED_MODULE_12_OOP,
     LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES,
     LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,
-) = apply_adts_book_extension(
-    apply_trees_book_extension(
-        apply_strings_mappings_book_extensions(
-            apply_foundations_book_extensions(
-                apply_book_grounded_extensions(
-                    (
-                        LOCALIZED_MODULE_01_FOUNDATIONS,
-                        LOCALIZED_MODULE_02_CONDITIONALS,
-                        LOCALIZED_MODULE_03_ITERATION,
-                        LOCALIZED_MODULE_04_FUNCTIONS,
-                        LOCALIZED_MODULE_05_STRINGS,
-                        LOCALIZED_MODULE_06_SEQUENCES,
-                        LOCALIZED_MODULE_07_MAPPINGS_SETS,
-                        LOCALIZED_MODULE_08_FILES_EXCEPTIONS,
-                        LOCALIZED_MODULE_09_RECURSION,
-                        LOCALIZED_MODULE_10_TREES,
-                        LOCALIZED_MODULE_11_ADTS,
-                        LOCALIZED_MODULE_12_OOP,
-                        LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES,
-                        LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,
+) = apply_oop_book_extension(
+    apply_adts_book_extension(
+        apply_trees_book_extension(
+            apply_strings_mappings_book_extensions(
+                apply_foundations_book_extensions(
+                    apply_book_grounded_extensions(
+                        (
+                            LOCALIZED_MODULE_01_FOUNDATIONS,
+                            LOCALIZED_MODULE_02_CONDITIONALS,
+                            LOCALIZED_MODULE_03_ITERATION,
+                            LOCALIZED_MODULE_04_FUNCTIONS,
+                            LOCALIZED_MODULE_05_STRINGS,
+                            LOCALIZED_MODULE_06_SEQUENCES,
+                            LOCALIZED_MODULE_07_MAPPINGS_SETS,
+                            LOCALIZED_MODULE_08_FILES_EXCEPTIONS,
+                            LOCALIZED_MODULE_09_RECURSION,
+                            LOCALIZED_MODULE_10_TREES,
+                            LOCALIZED_MODULE_11_ADTS,
+                            LOCALIZED_MODULE_12_OOP,
+                            LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES,
+                            LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,
+                        )
                     )
                 )
             )
@@ -192,7 +202,7 @@ _CONTENT_VERSIONS = (
     "1.0.0",
     "1.1.0",
     "1.1.0",
-    "1.0.0",
+    "1.1.0",
     "1.0.0",
     "1.0.0",
 )
