@@ -1,4 +1,4 @@
-"""BMB830 module 12: individual high-dimensional biological case."""
+"""BMB830 module 12: individual synthetic high-dimensional proteomics case."""
 
 from __future__ import annotations
 
