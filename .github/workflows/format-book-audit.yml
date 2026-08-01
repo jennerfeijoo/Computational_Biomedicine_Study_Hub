@@ -1,0 +1,41 @@
+name: Format book audit
+
+on:
+  push:
+    branches:
+      - agent/book-grounded-content-audit-01
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/book-grounded-content-audit-01
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Ruff
+        run: python -m pip install "ruff==0.16.1"
+      - name: Format changed Python files
+        run: >-
+          ruff format
+          src/computational_biomedicine_study_hub/content/dm857/book_grounded_extensions.py
+          tests/test_dm857_book_grounded_extensions.py
+      - name: Commit formatting
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/computational_biomedicine_study_hub/content/dm857/book_grounded_extensions.py tests/test_dm857_book_grounded_extensions.py
+          git commit -m "Format DM857 book-grounded content"
+          git push origin HEAD:agent/book-grounded-content-audit-01
