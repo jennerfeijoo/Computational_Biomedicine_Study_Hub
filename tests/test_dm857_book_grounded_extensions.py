@@ -8,7 +8,9 @@ _REVIEWED_MODULE_IDS = {
     "dm857.m02",
     "dm857.m03",
     "dm857.m04",
+    "dm857.m05",
     "dm857.m06",
+    "dm857.m07",
     "dm857.m08",
     "dm857.m09",
     "dm857.m14",
@@ -53,12 +55,24 @@ def test_book_grounded_extensions_are_complete_in_every_locale() -> None:
 
     for locale in ("es-ES", "en", "da-DK"):
         functions = module_by_id["dm857.m04"].materialize(locale)
+        strings = module_by_id["dm857.m05"].materialize(locale)
+        mappings = module_by_id["dm857.m07"].materialize(locale)
         files = module_by_id["dm857.m08"].materialize(locale)
 
         assert "mutable-default-arguments" in {item.concept_id for item in functions.concepts}
         assert "m04.bg.e01" in {item.example_id for item in functions.worked_examples}
         assert "m04.bg.p01" in {item.exercise_id for item in functions.practice_exercises}
         assert "dm857.m04.book.001" in {item.item_id for item in functions.assessment_items}
+
+        assert "regex-validation-boundaries" in {item.concept_id for item in strings.concepts}
+        assert "m05.bg.e01" in {item.example_id for item in strings.worked_examples}
+        assert "m05.bg.p01" in {item.exercise_id for item in strings.practice_exercises}
+        assert "dm857.m05.book.001" in {item.item_id for item in strings.assessment_items}
+
+        assert "hash-tables-collisions-and-cost" in {item.concept_id for item in mappings.concepts}
+        assert "m07.bg.e01" in {item.example_id for item in mappings.worked_examples}
+        assert "m07.bg.p01" in {item.exercise_id for item in mappings.practice_exercises}
+        assert "dm857.m07.book.001" in {item.item_id for item in mappings.assessment_items}
 
         assert "exceptions-versus-assertions" in {item.concept_id for item in files.concepts}
         assert "m08.bg.e01" in {item.example_id for item in files.worked_examples}
@@ -70,7 +84,9 @@ def test_reviewed_modules_expose_named_source_basis() -> None:
     module_by_id = {module.module_id: module for module in dm857.LOCALIZED_MODULES}
 
     assert "guttag-2021-ch04" in module_by_id["dm857.m04"].tutor_support.source_basis
+    assert "downey-2024-strings-collections" in module_by_id["dm857.m05"].tutor_support.source_basis
     assert "guttag-2021-ch05" in module_by_id["dm857.m06"].tutor_support.source_basis
+    assert "guttag-2021-ch10-12" in module_by_id["dm857.m07"].tutor_support.source_basis
     assert "guttag-2021-ch07-09" in module_by_id["dm857.m08"].tutor_support.source_basis
     assert "guttag-2021-ch06" in module_by_id["dm857.m09"].tutor_support.source_basis
     assert "downey-2024-testing" in module_by_id["dm857.m14"].tutor_support.source_basis
@@ -79,6 +95,12 @@ def test_reviewed_modules_expose_named_source_basis() -> None:
 def test_new_examples_execute_deterministically(capsys) -> None:
     _run_example("dm857.m04", "m04.bg.e01")
     assert capsys.readouterr().out.rstrip("\n") == "['rna']\n['protein']"
+
+    _run_example("dm857.m05", "m05.bg.e01")
+    assert capsys.readouterr().out.rstrip("\n") == "True\nFalse\nFalse"
+
+    _run_example("dm857.m07", "m07.bg.e01")
+    assert capsys.readouterr().out.rstrip("\n") == "{1: [11, 16, 21]}"
 
     _run_example("dm857.m08", "m08.bg.e01")
     assert capsys.readouterr().out.rstrip("\n") == "0.125"

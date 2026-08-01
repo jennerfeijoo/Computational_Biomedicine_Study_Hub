@@ -31,6 +31,8 @@ def test_dm857_bundle_catalog_covers_every_completed_module_once() -> None:
         "dm857.m02": "1.1.0",
         "dm857.m03": "1.1.0",
         "dm857.m04": "1.1.0",
+        "dm857.m05": "1.1.0",
+        "dm857.m07": "1.1.0",
         "dm857.m08": "1.1.0",
     }
     assert all(bundle.objective_question_bank for bundle in BUNDLES)
