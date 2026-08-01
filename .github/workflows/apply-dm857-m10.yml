@@ -70,22 +70,12 @@ jobs:
           )
           if old_apply in text and new_apply not in text:
               text = text.replace(old_apply, new_apply, 1)
-              closing_anchor = (
-                  "            LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,\n"
-                  "        )\n"
-                  "    )\n"
-                  ")\n\n_LOCALIZED_MODULES"
-              )
-              closing_replacement = (
-                  "            LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,\n"
-                  "        )\n"
-                  "    )\n"
-                  ")\n"
-                  ")\n\n_LOCALIZED_MODULES"
-              )
-              if closing_anchor not in text:
-                  raise SystemExit("DM857 extension closing anchor not found")
-              text = text.replace(closing_anchor, closing_replacement, 1)
+              block_start = text.index(new_apply)
+              closing_marker = "\n)\n\n_LOCALIZED_MODULES = ("
+              marker_index = text.find(closing_marker, block_start)
+              if marker_index < 0:
+                  raise SystemExit("DM857 extension closing marker not found")
+              text = text[:marker_index] + "\n)" + text[marker_index:]
 
           version_marker = "_CONTENT_VERSIONS = (\n"
           prefix, tail = text.split(version_marker, 1)
