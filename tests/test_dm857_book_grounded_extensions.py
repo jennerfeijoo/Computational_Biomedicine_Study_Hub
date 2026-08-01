@@ -1,27 +1,20 @@
 """Regression tests for the DM857 book-grounded audit and extensions."""
 
-import contextlib
-import io
-
-import computational_biomedicine_study_hub.content.dm857 as dm857
-import computational_biomedicine_study_hub.i18n as i18n
+from computational_biomedicine_study_hub.content import dm857
 
 
 _EXPECTED_MODULE_IDS = {f"dm857.m{index:02d}" for index in range(1, 15)}
 
 
-def _run_example(module_id: str, example_id: str) -> str:
+def _run_example(module_id: str, example_id: str) -> None:
     localized_module = next(
         module for module in dm857.LOCALIZED_MODULES if module.module_id == module_id
     )
-    module = localized_module.materialize(i18n.AppLocale.ENGLISH)
+    module = localized_module.materialize("en")
     worked_example = next(
         item for item in module.worked_examples if item.example_id == example_id
     )
-    output = io.StringIO()
-    with contextlib.redirect_stdout(output):
-        exec(compile(worked_example.code, example_id, "exec"), {})
-    return output.getvalue().rstrip("\n")
+    exec(compile(worked_example.code, example_id, "exec"), {})
 
 
 def test_dm857_source_audit_maps_every_module_once() -> None:
@@ -59,7 +52,7 @@ def test_reviewed_modules_are_explicit_and_unreviewed_modules_remain_pending() -
 def test_book_grounded_extensions_are_complete_in_every_locale() -> None:
     module_by_id = {module.module_id: module for module in dm857.LOCALIZED_MODULES}
 
-    for locale in i18n.AppLocale:
+    for locale in ("es-ES", "en", "da-DK"):
         functions = module_by_id["dm857.m04"].materialize(locale)
         files = module_by_id["dm857.m08"].materialize(locale)
 
@@ -98,6 +91,9 @@ def test_reviewed_modules_expose_named_source_basis() -> None:
     assert "downey-2024-testing" in module_by_id["dm857.m14"].tutor_support.source_basis
 
 
-def test_new_examples_execute_deterministically() -> None:
-    assert _run_example("dm857.m04", "m04.bg.e01") == "['rna']\n['protein']"
-    assert _run_example("dm857.m08", "m08.bg.e01") == "0.125"
+def test_new_examples_execute_deterministically(capsys) -> None:
+    _run_example("dm857.m04", "m04.bg.e01")
+    assert capsys.readouterr().out.rstrip("\n") == "['rna']\n['protein']"
+
+    _run_example("dm857.m08", "m08.bg.e01")
+    assert capsys.readouterr().out.rstrip("\n") == "0.125"
