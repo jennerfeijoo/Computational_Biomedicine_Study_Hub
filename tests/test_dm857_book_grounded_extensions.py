@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from contextlib import redirect_stdout
-from io import StringIO
+import contextlib
+import io
 
 from computational_biomedicine_study_hub.content.dm857 import (
     DM857_BOOK_SOURCES,
@@ -24,8 +24,8 @@ def _run_example(module_id: str, example_id: str) -> str:
     worked_example = next(
         item for item in module.worked_examples if item.example_id == example_id
     )
-    output = StringIO()
-    with redirect_stdout(output):
+    output = io.StringIO()
+    with contextlib.redirect_stdout(output):
         exec(compile(worked_example.code, example_id, "exec"), {})
     return output.getvalue().rstrip("\n")
 
