@@ -60,8 +60,7 @@ def _correct_public_omics_sources(
     """Repair the canonical limma source URL before bundle materialization."""
 
     corrected_sources = tuple(
-        source.replace("/limpa.html", "/limma.html")
-        for source in module.tutor_support.source_basis
+        source.replace("/limpa.html", "/limma.html") for source in module.tutor_support.source_basis
     )
     return replace(
         module,
