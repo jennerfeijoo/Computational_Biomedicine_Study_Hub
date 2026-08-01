@@ -98,7 +98,8 @@ def test_new_concepts_preserve_their_scope_boundaries() -> None:
 
     assert "fullmatch" in regex.body
     assert "search" in regex.body
-    assert "semantic" in regex.body
+    assert "biological meaning" in regex.body
+    assert any("semantic validity" in point for point in regex.key_points)
     assert "collision" in hashing.body
     assert "equality" in hashing.body
     assert "average" in hashing.body
