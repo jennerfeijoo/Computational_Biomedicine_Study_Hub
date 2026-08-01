@@ -125,6 +125,20 @@ def test_bmb831_final_modules_cover_public_omics_proteins_and_reporting() -> Non
     assert "inglés" in report_text
 
 
+def test_bmb831_corrects_public_sources_and_hydropathy_example() -> None:
+    public_sources = LOCALIZED_BUNDLES[5].localized_module.tutor_support.source_basis
+    assert any(source.endswith("/limma.html") for source in public_sources)
+    assert all("/limpa.html" not in source for source in public_sources)
+
+    for locale in AppLocale:
+        bundle = LOCALIZED_BUNDLES[6].materialize(locale)
+        example = next(
+            item for item in bundle.module.worked_examples if item.example_id == "m07.e02"
+        )
+        assert example.expected_output == "best_start=5\nbest_score=3.60"
+        assert "ILMV" in example.explanation
+
+
 def test_bmb831_locales_preserve_assessment_identity() -> None:
     for localized_bundle in LOCALIZED_BUNDLES:
         materialized = {locale: localized_bundle.materialize(locale) for locale in AppLocale}
