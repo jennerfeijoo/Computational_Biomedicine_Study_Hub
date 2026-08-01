@@ -53,6 +53,10 @@ BMB830 does not include a group project, role allocation, collaborative submissi
   - scalable and auditable R workflow design
   - 16 stable objective-bank questions
   - two editable base-R laboratories using deterministic Synthea-structured fixtures
+  - local snapshot inspection with schemas, key validation, checksums, and a reproducibility manifest
+  - deterministic one-row-per-patient table construction with strict pre-index windows
+  - patient-level train, validation, and test assignment without encounter leakage
+  - derived-table checksum, metadata, and path-independent artifact fingerprint
   - conservative audit against all seven public learning outcomes, six public content topics, tutorial prerequisite, and individual-report examination
 
 Synthea is used as a temporary synthetic clinical-data source for relational, longitudinal, large-table, modelling, visualisation, and critical-reasoning practice. It is never described as real-patient evidence. It also does not replace transcriptomics, proteomics, protein-characterisation, or other omics data required by BMB831; those remain explicit gaps for subsequent modules.
@@ -74,6 +78,7 @@ Synthea is used as a temporary synthetic clinical-data source for relational, lo
 - Resumable adaptive-review sessions across courses
 - Persistent DM857 project-and-report preparation with repository evidence
 - Persistent DM847 open responses and essay drafts
+- Reproducible local Synthea snapshot inspection and patient-table derivation
 - Optional local Ollama support for:
   - scientific-content review of open answers
   - writing revision that preserves the learner's valid ideas
@@ -122,6 +127,28 @@ DM847 written feedback is generated from the authorised tutor documents of the s
 BMB830 and BMB831 worked examples can be edited and executed when `Rscript` is available on the local `PATH`. The runner uses `Rscript --vanilla`, a temporary working directory, a hard timeout, bounded output, and a conservative policy that rejects file, network, external-process, package-installation, dynamic-evaluation, and native-code capabilities.
 
 R is optional. Without `Rscript`, all theory, worked code, expected output, practice, and objective assessment remain available; attempting to run a laboratory produces an explicit local-runtime message.
+
+## Local Synthea workflow
+
+Inspect an extracted snapshot before analysis:
+
+```bash
+cb-synthea-inspect data/synthea/csv --manifest artifacts/synthea-manifest.json
+```
+
+Build a deterministic one-row-per-patient table:
+
+```bash
+cb-synthea-build-patient-table data/synthea/csv \
+  --output artifacts/synthea_patient_table.csv \
+  --metadata artifacts/synthea_patient_table.metadata.json \
+  --window-days 365 \
+  --train-percent 70 \
+  --validation-percent 15 \
+  --test-percent 15
+```
+
+The current table defines each patient's index date as the latest encounter start and derives event features only from the half-open interval `[index_date - window_days, index_date)`. It does not yet define a clinical outcome. See `docs/synthea_patient_table.md` for the complete contract, limitations, and reproducibility rules.
 
 ## Requirements
 
@@ -198,6 +225,7 @@ QT_QPA_PLATFORM=offscreen pytest
 src/computational_biomedicine_study_hub/
 ├── content/        # Academic models and course modules
 ├── courses/        # Course registration and course-page construction
+├── datasets/       # Synthea contracts, manifests, and analytical-table builders
 ├── i18n/           # Locale resolution, UI copy, and language control
 ├── integrations/   # Optional local services such as Ollama
 ├── learning/       # Practice, assessment, review, execution, and learner-state models
@@ -225,4 +253,4 @@ tests/              # Unit, content-integrity, localization, persistence, and UI
 
 ## Development status
 
-Active development. DM857 and DM847 provide complete authored course sequences, although additional executable practice remains desirable. BMB830 contains twelve complete modules covering foundations through an individual high-dimensional proteomics case. BMB831 now contains its first complete module on Synthea-based relational and longitudinal workflows, while advanced modelling, detailed visualisation, multivariate methods, publication appraisal, protein characterisation, omics pipelines, a downloaded versioned dataset snapshot, and the individual English report workflow remain to be implemented. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development.
+Active development. DM857 and DM847 provide complete authored course sequences, although additional executable practice remains desirable. BMB830 contains twelve complete modules covering foundations through an individual high-dimensional proteomics case. BMB831 now contains its first complete module, a validated local Synthea snapshot contract, and a deterministic pre-index patient-table workflow. Advanced modelling, detailed visualisation, multivariate methods, publication appraisal, protein characterisation, omics pipelines, task-specific outcome construction, a downloaded versioned dataset snapshot, and the individual English report workflow remain to be implemented. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development.
