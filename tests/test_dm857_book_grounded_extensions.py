@@ -1,12 +1,10 @@
 """Regression tests for the DM857 book-grounded audit and extensions."""
 
-from __future__ import annotations
-
 import contextlib
 import io
 
-from computational_biomedicine_study_hub import i18n
-from computational_biomedicine_study_hub.content import dm857
+import computational_biomedicine_study_hub.content.dm857 as dm857
+import computational_biomedicine_study_hub.i18n as i18n
 
 
 _EXPECTED_MODULE_IDS = {f"dm857.m{index:02d}" for index in range(1, 15)}
