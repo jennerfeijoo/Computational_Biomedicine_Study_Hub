@@ -38,6 +38,22 @@ jobs:
       - name: Lint
         run: ruff check .
 
+      - name: Format new BMB831 files
+        run: |
+          ruff format \
+            src/computational_biomedicine_study_hub/content/bmb831/module_02_omics_matrices_qc.py \
+            src/computational_biomedicine_study_hub/content/bmb831/module_03_differential_modeling.py \
+            tests/test_bmb831_official_coverage.py
+
+      - name: Upload formatted files
+        uses: actions/upload-artifact@v4
+        with:
+          name: bmb831-formatted-${{ matrix.python-version }}
+          path: |
+            src/computational_biomedicine_study_hub/content/bmb831/module_02_omics_matrices_qc.py
+            src/computational_biomedicine_study_hub/content/bmb831/module_03_differential_modeling.py
+            tests/test_bmb831_official_coverage.py
+
       - name: Check formatting
         run: ruff format --check .
 
