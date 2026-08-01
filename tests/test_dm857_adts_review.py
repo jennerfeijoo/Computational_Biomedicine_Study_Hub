@@ -84,6 +84,4 @@ def test_adt_shared_contract_example_executes_deterministically(capsys) -> None:
 
     exec(compile(worked_example.code, worked_example.example_id, "exec"), {})
 
-    assert capsys.readouterr().out.rstrip("\n") == (
-        "(True, False, 1)\n(True, False, 1)"
-    )
+    assert capsys.readouterr().out.rstrip("\n") == ("(True, False, 1)\n(True, False, 1)")

@@ -340,4 +340,6 @@ def apply_adts_book_extension(
     modules: tuple[LocalizedLearningModule, ...],
 ) -> tuple[LocalizedLearningModule, ...]:
     """Apply the M11 extension without changing any other module."""
-    return tuple(_extend_adts(module) if module.module_id == "dm857.m11" else module for module in modules)
+    return tuple(
+        _extend_adts(module) if module.module_id == "dm857.m11" else module for module in modules
+    )
