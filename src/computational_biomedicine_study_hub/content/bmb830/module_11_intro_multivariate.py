@@ -283,7 +283,7 @@ same_partition=TRUE""",
         ),
         (
             "m11.p02",
-            "METHOD_SELECTION",
+            "DATA_INTERPRETATION",
             (
                 "Dos biomarcadores están en ng/mL y uno en miles de células/µL. Decide si escalar antes de PCA y explica la consecuencia.",
                 "Two biomarkers are in ng/mL and one is in thousands of cells/µL. Decide whether to scale before PCA and explain the consequence.",
@@ -364,7 +364,7 @@ same_partition=TRUE""",
         ),
         (
             "m11.p05",
-            "METHOD_SELECTION",
+            "DATA_INTERPRETATION",
             (
                 "Un dendrograma cambia de tres grupos a dos al sustituir distancia euclídea por correlación. ¿Cómo debes reportarlo?",
                 "A dendrogram changes from three groups to two when Euclidean distance is replaced by correlation distance. How should this be reported?",
