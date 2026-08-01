@@ -17,9 +17,9 @@ BMB831_PUBLIC_EXAM = "Individual report"
 BMB831_SYNTHEA_BOUNDARY = (
     "Synthea is retained only as one synthetic clinical-data case for relational and "
     "longitudinal practice. It is not treated as real-patient evidence and no longer defines "
-    "the course scope. Separate omics modules cover assay matrices, quality control, "
-    "normalization, differential modeling, and multiplicity, while public or learner-owned real "
-    "omics data remain required for the final project."
+    "the course scope. Separate omics modules now cover assay matrices, quality control, "
+    "normalization, differential modeling, multiplicity, multivariate analysis, and advanced "
+    "visualization, while public or learner-owned real omics data remain required for the final project."
 )
 
 
@@ -90,10 +90,10 @@ class CoverageSummary:
         return self.partial == 0 and self.gap == 0
 
 
-_M01 = ("bmb831.m01",)
-_M02 = ("bmb831.m02",)
-_M03 = ("bmb831.m03",)
-_M01_03 = ("bmb831.m01", "bmb831.m02", "bmb831.m03")
+_M04 = ("bmb831.m04",)
+_M05 = ("bmb831.m05",)
+_M01_05 = tuple(f"bmb831.m{number:02d}" for number in range(1, 6))
+_M02_05 = tuple(f"bmb831.m{number:02d}" for number in range(2, 6))
 _M02_03 = ("bmb831.m02", "bmb831.m03")
 
 OFFICIAL_BMB831_REQUIREMENTS: tuple[Requirement, ...] = (
@@ -101,114 +101,114 @@ OFFICIAL_BMB831_REQUIREMENTS: tuple[Requirement, ...] = (
         "bmb831.sdu.lo01",
         RequirementKind.LEARNING_OUTCOME,
         "Independently analyse even conceptually demanding data sets.",
-        _M01_03,
+        _M01_05,
         CoverageStatus.PARTIAL,
-        "Three modules now require independent reasoning about relational clinical data, omics "
-        "matrix contracts, quality control, design matrices, differential effects, and multiplicity. "
-        "The sequence still lacks multivariate, protein-characterisation, interpretation, and final "
-        "report integration.",
-        "Complete the remaining advanced modules and one cumulative real-data project.",
+        "Five modules now require independent reasoning from data contracts through omics QC, "
+        "differential modeling, multivariate stability, and reproducible visualization. Protein "
+        "characterisation, biological interpretation, real-data integration, and the final report remain.",
+        "Complete modules 6–9 and one cumulative versioned real-data project.",
     ),
     Requirement(
         "bmb831.sdu.lo02",
         RequirementKind.LEARNING_OUTCOME,
         "Work with large data amounts and carry out standard statistical analysis to identify relevant features.",
-        _M01_03,
+        _M01_05,
         CoverageStatus.PARTIAL,
-        "The course now covers scalable contracts, early filtering, assay quality control, feature "
-        "screening, differential modeling, and false-discovery control with bounded executable "
-        "examples. A substantially larger versioned dataset is still absent.",
-        "Add a public transcriptomics or proteomics snapshot with measured memory and runtime.",
+        "The course covers scalable contracts, early filtering, differential screening, multivariate "
+        "reduction, and leakage control with bounded executable examples. A substantially larger "
+        "versioned public dataset and measured resource use remain absent.",
+        "Add a public transcriptomics or proteomics snapshot with runtime and memory evidence.",
     ),
     Requirement(
         "bmb831.sdu.lo03",
         RequirementKind.LEARNING_OUTCOME,
         "Use standard algorithms for multi-variate analysis.",
-        (),
-        CoverageStatus.GAP,
-        "No dedicated BMB831 multivariate module has yet been implemented.",
-        "Add PCA, clustering, distance choice, stability, and leakage-safe supervised reduction.",
+        _M04,
+        CoverageStatus.COVERED,
+        "Module 4 provides individually executable and assessed coverage of PCA, scores, loadings, "
+        "explained variance, distance choice, hierarchical clustering, partition comparison, "
+        "stability, batch interpretation, and leakage-safe supervised reduction.",
     ),
     Requirement(
         "bmb831.sdu.lo04",
         RequirementKind.LEARNING_OUTCOME,
         "Design scripts for detailed visualisation of results.",
-        _M02,
-        CoverageStatus.PARTIAL,
-        "Module 2 teaches diagnostic distributions, profile deviation, and PCA-quality reasoning, "
-        "but it does not yet provide a complete advanced figure-building laboratory.",
-        "Add layered QC, differential, multivariate, and annotation figures with reproducible export.",
+        _M05,
+        CoverageStatus.COVERED,
+        "Module 5 provides figure contracts, executable volcano and heatmap preparation, MA and "
+        "volcano interpretation, uncertainty, annotation alignment, accessibility, and reproducible export.",
     ),
     Requirement(
         "bmb831.sdu.lo05",
         RequirementKind.LEARNING_OUTCOME,
         "Know and apply tools for data interpretation.",
-        _M01_03,
+        _M01_05,
         CoverageStatus.PARTIAL,
-        "The modules apply provenance, design, effect-size, multiplicity, batch, leakage, and claim-"
-        "boundary reasoning. Enrichment, pathway, network, and protein tools remain absent.",
+        "The modules apply provenance, design, effect-size, multiplicity, multivariate stability, "
+        "batch, leakage, visualization, and claim-boundary reasoning. Enrichment, pathway, network, "
+        "and protein tools remain absent.",
         "Add biological interpretation and protein-characterisation workflows.",
     ),
     Requirement(
         "bmb831.sdu.lo06",
         RequirementKind.LEARNING_OUTCOME,
         "Know and apply standard pipelines for the processing of omics data.",
-        _M02_03,
+        _M02_05,
         CoverageStatus.PARTIAL,
-        "The omics core now covers assay contracts, sample alignment, filtering, normalization, "
-        "transformation, count-model reasoning, differential contrasts, and FDR. It remains based on "
-        "bounded teaching matrices rather than a complete public real-data pipeline.",
-        "Add end-to-end transcriptomics and proteomics cases with package-level provenance.",
+        "The omics sequence now covers matrix validation, QC, normalization, differential analysis, "
+        "multivariate analysis, and result visualization. It remains based on deterministic teaching "
+        "matrices rather than complete public transcriptomics and proteomics datasets.",
+        "Add end-to-end public-data pipelines with package-level provenance.",
     ),
     Requirement(
         "bmb831.sdu.lo07",
         RequirementKind.LEARNING_OUTCOME,
         "Objectively discuss applied data-analysis methods presented, for example, in publications.",
-        _M01_03,
+        _M01_05,
         CoverageStatus.PARTIAL,
-        "Every module trains explicit claim boundaries, method assumptions, alternative explanations, "
-        "and limitations, but no complete publication appraisal has yet been authored.",
-        "Add a source-grounded publication-appraisal studio linked to the report workflow.",
+        "Every module trains assumptions, alternatives, sensitivity, and inferential limits, but no "
+        "complete source-grounded publication appraisal has yet been authored.",
+        "Add a publication-appraisal studio linked to the English report workflow.",
     ),
     Requirement(
         "bmb831.sdu.ct01",
         RequirementKind.CONTENT_TOPIC,
         "Statistics for large data sets.",
-        _M01_03,
+        _M01_05,
         CoverageStatus.PARTIAL,
-        "Scalable relational and matrix workflows, early reduction, model design, and multiple testing "
-        "are present. Large external data and performance profiling remain incomplete.",
-        "Run the workflows on a versioned larger dataset and record resource use.",
+        "Scalable table and matrix workflows, high-dimensional reduction, differential modeling, "
+        "multiplicity, and visualization are present. Large external data and performance profiling remain.",
+        "Run the complete sequence on a versioned larger dataset and record resource use.",
     ),
     Requirement(
         "bmb831.sdu.ct02",
         RequirementKind.CONTENT_TOPIC,
         "Different types of data modelling.",
-        _M03,
+        ("bmb831.m03", "bmb831.m04"),
         CoverageStatus.PARTIAL,
-        "Module 3 distinguishes Gaussian and overdispersed count models and introduces covariate-"
-        "adjusted contrasts. Classification, regularization, survival, and longitudinal models remain.",
-        "Add advanced predictive and longitudinal modeling with leakage-safe validation.",
+        "Modules 3 and 4 distinguish Gaussian and count models, adjusted contrasts, unsupervised "
+        "projection, clustering, and supervised selection boundaries. Regularized prediction, survival, "
+        "and longitudinal models remain outside the authored sequence.",
+        "Add predictive and longitudinal modeling in the cumulative real-data workflow.",
     ),
     Requirement(
         "bmb831.sdu.ct03",
         RequirementKind.CONTENT_TOPIC,
         "Advanced data visualisation.",
-        _M02,
-        CoverageStatus.PARTIAL,
-        "Quality-control visual reasoning is introduced, but the detailed visualization requirement "
-        "is not yet covered by a dedicated scripting module.",
-        "Add a full visualization module with uncertainty, labels, panels, and export contracts.",
+        _M05,
+        CoverageStatus.COVERED,
+        "Module 5 provides a complete advanced visualization block covering figure contracts, QC and "
+        "differential plots, heatmaps, uncertainty, accessibility, alignment, and reproducible export.",
     ),
     Requirement(
         "bmb831.sdu.ct04",
         RequirementKind.CONTENT_TOPIC,
         "Advanced data interpretation.",
-        _M01_03,
+        _M01_05,
         CoverageStatus.PARTIAL,
-        "Interpretation now includes provenance, dependence, batch, estimands, effect size, "
-        "uncertainty, multiplicity, and inferential limits. Biological pathway and network "
-        "interpretation remain absent.",
+        "Interpretation includes provenance, dependence, batch, estimands, effect size, uncertainty, "
+        "multiplicity, geometry, stability, and visual evidence. Biological enrichment, pathways, "
+        "networks, and complete publication appraisal remain absent.",
         "Extend interpretation to enrichment, pathways, networks, and publication appraisal.",
     ),
     Requirement(
@@ -224,17 +224,17 @@ OFFICIAL_BMB831_REQUIREMENTS: tuple[Requirement, ...] = (
         "bmb831.sdu.ct06",
         RequirementKind.CONTENT_TOPIC,
         "Standard workflows for data from omics experiments.",
-        _M02_03,
+        _M02_05,
         CoverageStatus.PARTIAL,
-        "A standard omics core is now authored from matrix validation through differential results, "
-        "but complete transcriptomics and proteomics pipelines on versioned real data remain absent.",
+        "A standard omics workflow is authored from matrix validation through statistical and visual "
+        "results, but complete transcriptomics and proteomics pipelines on versioned real data remain absent.",
         "Add public real-data workflows and a cumulative analysis artifact.",
     ),
     Requirement(
         "bmb831.sdu.exam01",
         RequirementKind.EXAM_COMPONENT,
         "Complete the tutorial and exercise prerequisite, including at least 80 percent participation.",
-        _M01_03,
+        _M01_05,
         CoverageStatus.PARTIAL,
         "The application provides individual exercises for all completed modules, but it cannot "
         "certify attendance or equivalence with the official itslearning exercise set.",

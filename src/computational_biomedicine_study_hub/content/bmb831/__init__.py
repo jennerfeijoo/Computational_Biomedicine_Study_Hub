@@ -19,6 +19,16 @@ from .module_03_differential_modeling import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_03,
     materialize_module_03_question_bank,
 )
+from .module_04_multivariate_omics import (
+    LOCALIZED_MODULE_04_MULTIVARIATE_OMICS,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_04,
+    materialize_module_04_question_bank,
+)
+from .module_05_advanced_visualization import (
+    LOCALIZED_MODULE_05_ADVANCED_VISUALIZATION,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_05,
+    materialize_module_05_question_bank,
+)
 
 LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
@@ -36,6 +46,16 @@ LOCALIZED_BUNDLES = (
         LOCALIZED_OBJECTIVE_QUESTION_BANK_03,
         "1.0.0",
     ),
+    LocalizedModuleBundle(
+        LOCALIZED_MODULE_04_MULTIVARIATE_OMICS,
+        LOCALIZED_OBJECTIVE_QUESTION_BANK_04,
+        "1.0.0",
+    ),
+    LocalizedModuleBundle(
+        LOCALIZED_MODULE_05_ADVANCED_VISUALIZATION,
+        LOCALIZED_OBJECTIVE_QUESTION_BANK_05,
+        "1.0.0",
+    ),
 )
 validate_bundle_catalog(LOCALIZED_BUNDLES)
 
@@ -49,9 +69,13 @@ OBJECTIVE_QUESTION_BANKS = {
 MODULE_01_SYNTHEA_WORKFLOWS = BUNDLES[0].module
 MODULE_02_OMICS_MATRICES_QC = BUNDLES[1].module
 MODULE_03_DIFFERENTIAL_MODELING = BUNDLES[2].module
+MODULE_04_MULTIVARIATE_OMICS = BUNDLES[3].module
+MODULE_05_ADVANCED_VISUALIZATION = BUNDLES[4].module
 OBJECTIVE_QUESTION_BANK_01 = BUNDLES[0].objective_question_bank
 OBJECTIVE_QUESTION_BANK_02 = BUNDLES[1].objective_question_bank
 OBJECTIVE_QUESTION_BANK_03 = BUNDLES[2].objective_question_bank
+OBJECTIVE_QUESTION_BANK_04 = BUNDLES[3].objective_question_bank
+OBJECTIVE_QUESTION_BANK_05 = BUNDLES[4].objective_question_bank
 
 __all__ = [
     "BUNDLES",
@@ -60,18 +84,28 @@ __all__ = [
     "LOCALIZED_MODULE_01_SYNTHEA_WORKFLOWS",
     "LOCALIZED_MODULE_02_OMICS_MATRICES_QC",
     "LOCALIZED_MODULE_03_DIFFERENTIAL_MODELING",
+    "LOCALIZED_MODULE_04_MULTIVARIATE_OMICS",
+    "LOCALIZED_MODULE_05_ADVANCED_VISUALIZATION",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_01",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_02",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_03",
+    "LOCALIZED_OBJECTIVE_QUESTION_BANK_04",
+    "LOCALIZED_OBJECTIVE_QUESTION_BANK_05",
     "MODULES",
     "MODULE_01_SYNTHEA_WORKFLOWS",
     "MODULE_02_OMICS_MATRICES_QC",
     "MODULE_03_DIFFERENTIAL_MODELING",
+    "MODULE_04_MULTIVARIATE_OMICS",
+    "MODULE_05_ADVANCED_VISUALIZATION",
     "OBJECTIVE_QUESTION_BANKS",
     "OBJECTIVE_QUESTION_BANK_01",
     "OBJECTIVE_QUESTION_BANK_02",
     "OBJECTIVE_QUESTION_BANK_03",
+    "OBJECTIVE_QUESTION_BANK_04",
+    "OBJECTIVE_QUESTION_BANK_05",
     "materialize_module_01_question_bank",
     "materialize_module_02_question_bank",
     "materialize_module_03_question_bank",
+    "materialize_module_04_question_bank",
+    "materialize_module_05_question_bank",
 ]

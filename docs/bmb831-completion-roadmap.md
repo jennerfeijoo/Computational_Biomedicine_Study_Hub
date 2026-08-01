@@ -17,8 +17,8 @@ BMB831 is an omics and advanced-data-analysis course. Synthea remains one bounde
 | M01 | Reproducible relational and longitudinal workflows using Synthea as a synthetic case | Complete |
 | M02 | Omics matrix contracts, metadata alignment, quality control, filtering, normalization, transformation, and scaling | Complete |
 | M03 | Differential modeling, design matrices, count-model reasoning, effect sizes, uncertainty, and false-discovery control | Complete |
-| M04 | Multivariate analysis: PCA, distances, clustering, stability, supervised reduction, and leakage control | Pending |
-| M05 | Advanced visualization: QC panels, differential plots, multivariate figures, uncertainty, annotation, and reproducible export | Pending |
+| M04 | Multivariate analysis: PCA, distances, clustering, stability, supervised reduction, and leakage control | Complete |
+| M05 | Advanced visualization: figure contracts, MA and volcano reasoning, heatmaps, uncertainty, annotation, accessibility, and reproducible export | Complete |
 | M06 | End-to-end transcriptomics and proteomics workflows on versioned public data | Pending |
 | M07 | Protein characterisation: sequence, domains, physicochemical properties, structure, annotation, and provenance | Pending |
 | M08 | Biological interpretation: enrichment, pathways, networks, evidence hierarchy, and claim boundaries | Pending |
