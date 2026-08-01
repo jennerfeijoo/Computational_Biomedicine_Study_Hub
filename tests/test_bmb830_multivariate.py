@@ -16,7 +16,7 @@ def _academic_text() -> str:
     return " ".join(
         (
             module.summary,
-            *(objective.text for objective in module.objectives),
+            *(objective.statement for objective in module.objectives),
             *(concept.body for concept in module.concepts),
             *(point for concept in module.concepts for point in concept.key_points),
         )
