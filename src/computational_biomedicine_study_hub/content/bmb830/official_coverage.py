@@ -428,9 +428,7 @@ def validate_bmb830_coverage() -> None:
     referenced_official = {
         module_id for row in official_rows for module_id in row.requirement.module_ids
     }
-    referenced_master = {
-        module_id for row in master_rows for module_id in row.criterion.module_ids
-    }
+    referenced_master = {module_id for row in master_rows for module_id in row.criterion.module_ids}
     unknown = (referenced_official | referenced_master) - known
     if unknown:
         raise ValueError(
