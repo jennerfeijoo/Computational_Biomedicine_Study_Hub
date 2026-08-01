@@ -14,12 +14,12 @@ def test_module_one_materializes_complete_content_in_every_locale() -> None:
     modules = {locale: LOCALIZED_MODULE_01_FOUNDATIONS.materialize(locale) for locale in AppLocale}
 
     for module in modules.values():
-        assert len(module.objectives) == 6
-        assert len(module.concepts) == 6
-        assert len(module.worked_examples) == 3
-        assert len(module.practice_exercises) == 8
-        assert len(module.assessment_items) == 10
-        assert len(module.tutor_documents()) == 29
+        assert len(module.objectives) == 7
+        assert len(module.concepts) == 7
+        assert len(module.worked_examples) == 4
+        assert len(module.practice_exercises) == 9
+        assert len(module.assessment_items) == 11
+        assert len(module.tutor_documents()) == 33
         assert all(document.text.strip() for document in module.tutor_documents())
 
     assert modules[AppLocale.SPANISH_SPAIN].title.startswith("Resolución")
