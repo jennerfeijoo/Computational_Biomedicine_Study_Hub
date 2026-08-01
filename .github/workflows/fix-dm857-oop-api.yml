@@ -1,0 +1,53 @@
+name: Fix DM857 OOP authoring API
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.head_ref == 'agent/dm857-oop-review'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/dm857-oop-review
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Remove unsupported objective metadata argument
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path(
+              "src/computational_biomedicine_study_hub/content/dm857/book_grounded_oop.py"
+          )
+          text = path.read_text(encoding="utf-8")
+          old = '''                (
+                    "inheritance",
+                    "override",
+                    "substitution",
+                    "method-contract",
+                ),
+'''
+          if text.count(old) != 1:
+              raise SystemExit("expected one unsupported objective metadata block")
+          path.write_text(text.replace(old, "", 1), encoding="utf-8")
+      - name: Format changed file
+        run: |
+          python -m pip install "ruff==0.16.1"
+          ruff format \
+            src/computational_biomedicine_study_hub/content/dm857/book_grounded_oop.py
+      - name: Commit fix
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/computational_biomedicine_study_hub/content/dm857/book_grounded_oop.py
+          git commit -m "Fix DM857 M12 objective authoring call"
+          git push origin HEAD:agent/dm857-oop-review
