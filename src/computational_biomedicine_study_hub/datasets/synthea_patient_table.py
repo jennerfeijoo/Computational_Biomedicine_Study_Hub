@@ -277,8 +277,10 @@ def _age_at_index(birthdate: date, index_date: date, *, patient_id: str) -> int:
         raise PatientTableBuildError(
             f"Patient {patient_id} has a birthdate after the derived index date."
         )
-    return index_date.year - birthdate.year - (
-        (index_date.month, index_date.day) < (birthdate.month, birthdate.day)
+    return (
+        index_date.year
+        - birthdate.year
+        - ((index_date.month, index_date.day) < (birthdate.month, birthdate.day))
     )
 
 
@@ -540,9 +542,7 @@ def _materialise_rows(
             "condition_event_count_pre_index": str(aggregate.condition_event_count),
             "unique_condition_codes_pre_index": str(len(aggregate.condition_codes)),
             "observation_count_pre_index": str(aggregate.observation_count),
-            "numeric_observation_count_pre_index": str(
-                aggregate.numeric_observation_count
-            ),
+            "numeric_observation_count_pre_index": str(aggregate.numeric_observation_count),
         }
         row.update(_metric_columns("bmi", aggregate.bmi))
         row.update(_metric_columns("systolic_bp", aggregate.systolic_bp))
