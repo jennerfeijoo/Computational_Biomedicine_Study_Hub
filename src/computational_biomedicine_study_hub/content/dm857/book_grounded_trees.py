@@ -329,8 +329,7 @@ def apply_trees_book_extension(
 ) -> tuple[LocalizedLearningModule, ...]:
     """Apply the M10 extension without changing module order or stable IDs."""
     return tuple(
-        _extend_trees(module) if module.module_id == "dm857.m10" else module
-        for module in modules
+        _extend_trees(module) if module.module_id == "dm857.m10" else module for module in modules
     )
 
 
