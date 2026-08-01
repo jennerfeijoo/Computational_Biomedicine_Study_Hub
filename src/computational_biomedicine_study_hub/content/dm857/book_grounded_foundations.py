@@ -88,8 +88,7 @@ def _extend_foundations(module: LocalizedLearningModule) -> LocalizedLearningMod
                     "redondeo.",
                     "Distinguish approximate numeric representation, formatting, and rounding "
                     "policy.",
-                    "Skelne mellem tilnærmet talrepræsentation, formatering og "
-                    "afrundingspolitik.",
+                    "Skelne mellem tilnærmet talrepræsentation, formatering og afrundingspolitik.",
                 ),
             ),
         ),
@@ -178,7 +177,7 @@ def _extend_foundations(module: LocalizedLearningModule) -> LocalizedLearningMod
                         "Adskil reglen for round fra formatet anvendt på floating_sum.",
                     ),
                 ),
-                'print(round(18.5))\nprint(round(19.5))\n'
+                "print(round(18.5))\nprint(round(19.5))\n"
                 'floating_sum = 0.1 + 0.2\nprint(f"{floating_sum:.1f}")',
                 "18\n20\n0.3",
                 (
@@ -262,8 +261,7 @@ def _extend_foundations(module: LocalizedLearningModule) -> LocalizedLearningMod
                         (
                             "Un float puede ser aproximado y la política de redondeo debe "
                             "declararse.",
-                            "A float can be approximate and the rounding policy should be "
-                            "stated.",
+                            "A float can be approximate and the rounding policy should be stated.",
                             "Et float kan være tilnærmet, og afrundingspolitikken bør angives.",
                         ),
                     ),
@@ -301,8 +299,7 @@ def _extend_conditionals(module: LocalizedLearningModule) -> LocalizedLearningMo
             objective(
                 "m02.bg.o1",
                 (
-                    "Ordenar ramas para conservar categorías y detectar condiciones "
-                    "inalcanzables.",
+                    "Ordenar ramas para conservar categorías y detectar condiciones inalcanzables.",
                     "Order branches to preserve categories and detect unreachable conditions.",
                     "Ordne grene, så kategorier bevares, og utilgængelige betingelser opdages.",
                 ),

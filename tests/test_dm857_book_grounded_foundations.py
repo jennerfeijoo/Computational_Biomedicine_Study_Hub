@@ -77,8 +77,7 @@ def test_foundation_extensions_are_complete_in_all_locales() -> None:
 def test_foundation_extension_ids_are_locale_independent() -> None:
     reference = _materialized_modules(AppLocale.SPANISH_SPAIN)
     reference_signatures = {
-        module_id: _identifier_signature(reference[module_id])
-        for module_id in EXPECTED_EXTENSIONS
+        module_id: _identifier_signature(reference[module_id]) for module_id in EXPECTED_EXTENSIONS
     }
 
     for locale in AppLocale:
