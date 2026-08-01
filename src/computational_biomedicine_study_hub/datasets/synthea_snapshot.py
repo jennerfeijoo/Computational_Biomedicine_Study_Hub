@@ -35,9 +35,7 @@ class TableContract:
             self.encounter_foreign_key,
         ):
             if column is not None and column not in declared_columns:
-                raise ValueError(
-                    f"Contract column {column!r} must appear in required_columns."
-                )
+                raise ValueError(f"Contract column {column!r} must appear in required_columns.")
 
 
 SYNTHEA_CSV_CONTRACTS: Final[tuple[TableContract, ...]] = (
@@ -317,7 +315,7 @@ def _scan_table(
                     patient_reference = _cell(row, contract.patient_foreign_key)
                     if not patient_reference:
                         blank_patient_references += 1
-                    elif patient_ids and patient_reference not in patient_ids:
+                    elif patient_reference not in patient_ids:
                         orphan_patient_references += 1
 
                 if (
@@ -327,7 +325,7 @@ def _scan_table(
                     encounter_reference = _cell(row, contract.encounter_foreign_key)
                     if not encounter_reference:
                         blank_encounter_references += 1
-                    elif encounter_ids and encounter_reference not in encounter_ids:
+                    elif encounter_reference not in encounter_ids:
                         orphan_encounter_references += 1
     except (OSError, csv.Error, UnicodeError) as error:
         columns = ()
