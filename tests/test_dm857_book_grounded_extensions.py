@@ -69,9 +69,7 @@ def test_book_grounded_extensions_are_complete_in_every_locale() -> None:
         assert "m05.bg.p01" in {item.exercise_id for item in strings.practice_exercises}
         assert "dm857.m05.book.001" in {item.item_id for item in strings.assessment_items}
 
-        assert "hash-tables-collisions-and-cost" in {
-            item.concept_id for item in mappings.concepts
-        }
+        assert "hash-tables-collisions-and-cost" in {item.concept_id for item in mappings.concepts}
         assert "m07.bg.e01" in {item.example_id for item in mappings.worked_examples}
         assert "m07.bg.p01" in {item.exercise_id for item in mappings.practice_exercises}
         assert "dm857.m07.book.001" in {item.item_id for item in mappings.assessment_items}
@@ -86,10 +84,7 @@ def test_reviewed_modules_expose_named_source_basis() -> None:
     module_by_id = {module.module_id: module for module in dm857.LOCALIZED_MODULES}
 
     assert "guttag-2021-ch04" in module_by_id["dm857.m04"].tutor_support.source_basis
-    assert (
-        "downey-2024-strings-collections"
-        in module_by_id["dm857.m05"].tutor_support.source_basis
-    )
+    assert "downey-2024-strings-collections" in module_by_id["dm857.m05"].tutor_support.source_basis
     assert "guttag-2021-ch05" in module_by_id["dm857.m06"].tutor_support.source_basis
     assert "guttag-2021-ch10-12" in module_by_id["dm857.m07"].tutor_support.source_basis
     assert "guttag-2021-ch07-09" in module_by_id["dm857.m08"].tutor_support.source_basis
