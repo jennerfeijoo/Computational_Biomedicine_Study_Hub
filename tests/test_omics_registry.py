@@ -5,8 +5,8 @@ from __future__ import annotations
 import pytest
 
 from computational_biomedicine_study_hub.datasets import (
-    OmicsModality,
     PUBLIC_OMICS_SOURCES,
+    OmicsModality,
     public_omics_source,
 )
 
