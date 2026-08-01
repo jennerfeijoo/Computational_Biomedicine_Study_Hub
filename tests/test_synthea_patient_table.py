@@ -207,7 +207,13 @@ def test_invalid_clinical_date_is_reported_during_derivation(tmp_path: Path) -> 
             "CODE",
             "DESCRIPTION",
         ),
-        (("E01", "not-a-date", "2025-01-01", "P01", "ambulatory", "1", "Encounter"),),
+        (
+            ("E01", "not-a-date", "2023-01-01", "P01", "ambulatory", "1", "Old"),
+            ("E02", "2025-06-01", "2025-06-01", "P01", "ambulatory", "2", "Pre"),
+            ("E03", "2025-07-01", "2025-07-01", "P01", "inpatient", "3", "Index"),
+            ("E04", "2025-04-15", "2025-04-15", "P02", "wellness", "4", "Pre"),
+            ("E05", "2025-05-01", "2025-05-01", "P02", "ambulatory", "5", "Index"),
+        ),
     )
 
     with pytest.raises(PatientTableBuildError, match="invalid START date"):
