@@ -27,6 +27,9 @@ def test_dm857_bundle_catalog_covers_every_completed_module_once() -> None:
     ]
     assert {bundle.module.module_id: bundle.content_version for bundle in BUNDLES} == {
         **{f"dm857.m{number:02d}": "1.0.0" for number in range(1, expected_count + 1)},
+        "dm857.m01": "1.1.0",
+        "dm857.m02": "1.1.0",
+        "dm857.m03": "1.1.0",
         "dm857.m04": "1.1.0",
         "dm857.m08": "1.1.0",
     }

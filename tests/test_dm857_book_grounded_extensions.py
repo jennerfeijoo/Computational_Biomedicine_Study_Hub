@@ -3,6 +3,16 @@
 from computational_biomedicine_study_hub.content import dm857
 
 _EXPECTED_MODULE_IDS = {f"dm857.m{index:02d}" for index in range(1, 15)}
+_REVIEWED_MODULE_IDS = {
+    "dm857.m01",
+    "dm857.m02",
+    "dm857.m03",
+    "dm857.m04",
+    "dm857.m06",
+    "dm857.m08",
+    "dm857.m09",
+    "dm857.m14",
+}
 
 
 def _run_example(module_id: str, example_id: str) -> None:
@@ -30,22 +40,12 @@ def test_dm857_source_catalog_has_unique_stable_ids() -> None:
 
 def test_reviewed_modules_are_explicit_and_unreviewed_modules_remain_pending() -> None:
     state_by_module = {item.module_id: item.state for item in dm857.DM857_MODULE_SOURCE_AUDIT}
-    assert {module_id for module_id, state in state_by_module.items() if state == "consistent"} == {
-        "dm857.m04",
-        "dm857.m06",
-        "dm857.m08",
-        "dm857.m09",
-        "dm857.m14",
-    }
+    assert {
+        module_id for module_id, state in state_by_module.items() if state == "consistent"
+    } == _REVIEWED_MODULE_IDS
     assert {
         module_id for module_id, state in state_by_module.items() if state == "pending"
-    } == _EXPECTED_MODULE_IDS - {
-        "dm857.m04",
-        "dm857.m06",
-        "dm857.m08",
-        "dm857.m09",
-        "dm857.m14",
-    }
+    } == _EXPECTED_MODULE_IDS - _REVIEWED_MODULE_IDS
 
 
 def test_book_grounded_extensions_are_complete_in_every_locale() -> None:

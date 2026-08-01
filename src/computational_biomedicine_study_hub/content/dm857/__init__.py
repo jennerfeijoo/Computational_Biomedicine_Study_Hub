@@ -6,8 +6,14 @@ from ...i18n import AppLocale
 from ..bundles import LocalizedModuleBundle, validate_bundle_catalog
 from .book_grounded_extensions import (
     DM857_BOOK_SOURCES,
-    DM857_MODULE_SOURCE_AUDIT,
     apply_book_grounded_extensions,
+)
+from .book_grounded_extensions import (
+    DM857_MODULE_SOURCE_AUDIT as _BASE_DM857_MODULE_SOURCE_AUDIT,
+)
+from .book_grounded_foundations import (
+    apply_foundations_book_extensions,
+    update_foundations_audit,
 )
 from .module_01_localized import LOCALIZED_MODULE as LOCALIZED_MODULE_01_FOUNDATIONS
 from .module_01_objective_bank_localized import (
@@ -80,6 +86,8 @@ from .module_14_testing_debugging_quality import (
     materialize_module_14_question_bank,
 )
 
+DM857_MODULE_SOURCE_AUDIT = update_foundations_audit(_BASE_DM857_MODULE_SOURCE_AUDIT)
+
 (
     LOCALIZED_MODULE_01_FOUNDATIONS,
     LOCALIZED_MODULE_02_CONDITIONALS,
@@ -95,22 +103,24 @@ from .module_14_testing_debugging_quality import (
     LOCALIZED_MODULE_12_OOP,
     LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES,
     LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,
-) = apply_book_grounded_extensions(
-    (
-        LOCALIZED_MODULE_01_FOUNDATIONS,
-        LOCALIZED_MODULE_02_CONDITIONALS,
-        LOCALIZED_MODULE_03_ITERATION,
-        LOCALIZED_MODULE_04_FUNCTIONS,
-        LOCALIZED_MODULE_05_STRINGS,
-        LOCALIZED_MODULE_06_SEQUENCES,
-        LOCALIZED_MODULE_07_MAPPINGS_SETS,
-        LOCALIZED_MODULE_08_FILES_EXCEPTIONS,
-        LOCALIZED_MODULE_09_RECURSION,
-        LOCALIZED_MODULE_10_TREES,
-        LOCALIZED_MODULE_11_ADTS,
-        LOCALIZED_MODULE_12_OOP,
-        LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES,
-        LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,
+) = apply_foundations_book_extensions(
+    apply_book_grounded_extensions(
+        (
+            LOCALIZED_MODULE_01_FOUNDATIONS,
+            LOCALIZED_MODULE_02_CONDITIONALS,
+            LOCALIZED_MODULE_03_ITERATION,
+            LOCALIZED_MODULE_04_FUNCTIONS,
+            LOCALIZED_MODULE_05_STRINGS,
+            LOCALIZED_MODULE_06_SEQUENCES,
+            LOCALIZED_MODULE_07_MAPPINGS_SETS,
+            LOCALIZED_MODULE_08_FILES_EXCEPTIONS,
+            LOCALIZED_MODULE_09_RECURSION,
+            LOCALIZED_MODULE_10_TREES,
+            LOCALIZED_MODULE_11_ADTS,
+            LOCALIZED_MODULE_12_OOP,
+            LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES,
+            LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,
+        )
     )
 )
 
@@ -149,9 +159,9 @@ _LOCALIZED_OBJECTIVE_BANKS = (
 )
 
 _CONTENT_VERSIONS = (
-    "1.0.0",
-    "1.0.0",
-    "1.0.0",
+    "1.1.0",
+    "1.1.0",
+    "1.1.0",
     "1.1.0",
     "1.0.0",
     "1.0.0",
