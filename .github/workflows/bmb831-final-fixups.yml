@@ -1,0 +1,87 @@
+name: Apply BMB831 Final Integration Fixups
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  fixups:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Apply targeted integration fixups
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          assessments = Path("src/computational_biomedicine_study_hub/ui/pages/assessments_page.py")
+          text = assessments.read_text(encoding="utf-8")
+          old = '''    def persist(self) -> None:
+        """Flush all active assessment drafts."""
+
+        if (page := self.dm847_page) is not None:
+            page.persist()
+        if (page := self.capstone_page) is not None:
+            page.persist()
+        if (page := self.bmb831_report_page) is not None:
+            page.persist()
+'''
+          new = '''    def persist(self) -> None:
+        """Flush all active assessment drafts."""
+
+        dm847_page = self.dm847_page
+        if dm847_page is not None:
+            dm847_page.persist()
+        capstone_page = self.capstone_page
+        if capstone_page is not None:
+            capstone_page.persist()
+        bmb831_page = self.bmb831_report_page
+        if bmb831_page is not None:
+            bmb831_page.persist()
+'''
+          if old in text:
+              text = text.replace(old, new)
+          assessments.write_text(text, encoding="utf-8")
+
+          report_page = Path("src/computational_biomedicine_study_hub/ui/pages/bmb831_report_page.py")
+          text = report_page.read_text(encoding="utf-8")
+          text = text.replace(
+              '''        if index == self._selector.currentIndex():
+            self._load_section(section_id)
+        else:
+            self._selector.setCurrentIndex(index)
+        return True
+''',
+              '''        if index != self._selector.currentIndex():
+            self._selector.setCurrentIndex(index)
+        return True
+''',
+          )
+          report_page.write_text(text, encoding="utf-8")
+
+          for path in Path("tests").glob("test_*.py"):
+              test_text = path.read_text(encoding="utf-8")
+              if "assessmentCourseTabs" not in test_text:
+                  continue
+              test_text = test_text.replace("tabs.count() == 2", "tabs.count() == 3")
+              path.write_text(test_text, encoding="utf-8")
+          PY
+
+      - name: Format, remove workflow, and commit
+        run: |
+          python -m pip install ruff
+          ruff format src/computational_biomedicine_study_hub/ui/pages/assessments_page.py \
+            src/computational_biomedicine_study_hub/ui/pages/bmb831_report_page.py tests
+          rm .github/workflows/bmb831-final-fixups.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Apply final BMB831 integration fixups"
+          git pull --rebase origin ${{ github.head_ref }}
+          git push origin HEAD:${{ github.head_ref }}
