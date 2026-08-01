@@ -57,17 +57,18 @@ def test_bmb831_coverage_references_existing_modules_and_evidence() -> None:
             assert row.evidence.executable_example_count > 0
 
 
-def test_bmb831_initial_audit_remains_conservative() -> None:
+def test_bmb831_omics_core_reduces_but_does_not_close_public_gaps() -> None:
     summary = coverage_summary()
     assert summary.total == 15
     assert summary.covered == 0
-    assert summary.partial == 7
-    assert summary.gap == 8
+    assert summary.partial == 12
+    assert summary.gap == 3
     assert not summary.fully_covered
 
     assert BMB831_PUBLIC_EXAM == "Individual report"
     assert "not treated as real-patient evidence" in BMB831_SYNTHEA_BOUNDARY
-    assert "cannot satisfy omics-pipeline" in BMB831_SYNTHEA_BOUNDARY
+    assert "no longer defines the course scope" in BMB831_SYNTHEA_BOUNDARY
+    assert "real omics data remain required" in BMB831_SYNTHEA_BOUNDARY
 
     omics_rows = tuple(
         requirement
@@ -75,7 +76,19 @@ def test_bmb831_initial_audit_remains_conservative() -> None:
         if "omics" in requirement.official_text.casefold()
     )
     assert omics_rows
-    assert all(requirement.status is CoverageStatus.GAP for requirement in omics_rows)
+    assert all(requirement.status is CoverageStatus.PARTIAL for requirement in omics_rows)
+    assert all(requirement.module_ids == ("bmb831.m02", "bmb831.m03") for requirement in omics_rows)
+
+    remaining_gaps = {
+        requirement.requirement_id
+        for requirement in OFFICIAL_BMB831_REQUIREMENTS
+        if requirement.status is CoverageStatus.GAP
+    }
+    assert remaining_gaps == {
+        "bmb831.sdu.lo03",
+        "bmb831.sdu.ct05",
+        "bmb831.sdu.exam02",
+    }
 
     report = next(
         requirement
