@@ -12,12 +12,12 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.r_execution import can_execute_r
 
 
-def test_bmb831_registers_five_complete_modules() -> None:
-    expected_ids = tuple(f"bmb831.m{number:02d}" for number in range(1, 6))
+def test_bmb831_registers_nine_complete_modules() -> None:
+    expected_ids = tuple(f"bmb831.m{number:02d}" for number in range(1, 10))
     assert tuple(module.module_id for module in MODULES) == expected_ids
-    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 5
+    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 9
     assert set(OBJECTIVE_QUESTION_BANKS) == set(expected_ids)
-    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 80
+    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 144
 
     for bundle in BUNDLES:
         module = bundle.module
@@ -36,8 +36,10 @@ def _module_text(index: int) -> str:
     module = MODULES[index]
     return " ".join(
         (
+            module.title,
             module.summary,
             *(objective.statement for objective in module.objectives),
+            *(concept.title for concept in module.concepts),
             *(concept.body for concept in module.concepts),
             *(practice.explanation for practice in module.practice_exercises),
         )
@@ -93,6 +95,50 @@ def test_bmb831_multivariate_and_visualization_modules_are_advanced() -> None:
     assert "incertidumbre" in visualization_text
     assert "accesibilidad" in visualization_text
     assert "reproduc" in visualization_text
+
+
+def test_bmb831_final_modules_cover_public_omics_proteins_and_reporting() -> None:
+    public_omics_text = _module_text(5)
+    protein_text = _module_text(6)
+    interpretation_text = _module_text(7)
+    report_text = _module_text(8)
+
+    assert "transcript" in public_omics_text
+    assert "proteóm" in public_omics_text
+    assert "snapshot" in public_omics_text
+    assert "checksum" in public_omics_text
+
+    assert "secuencia" in protein_text
+    assert "interpro" in protein_text
+    assert "uniprot" in protein_text
+    assert "pdb" in protein_text
+    assert "alphafold" in protein_text
+
+    assert "universo" in interpretation_text
+    assert "enriquecimiento" in interpretation_text
+    assert "pathway" in interpretation_text
+    assert "red" in interpretation_text
+    assert "circular" in interpretation_text
+
+    assert "publicación" in report_text
+    assert "estimando" in report_text
+    assert "validez" in report_text
+    assert "informe" in report_text
+    assert "inglés" in report_text
+
+
+def test_bmb831_corrects_public_sources_and_hydropathy_example() -> None:
+    public_sources = LOCALIZED_BUNDLES[5].localized_module.tutor_support.source_basis
+    assert any(source.endswith("/limma.html") for source in public_sources)
+    assert all("/limpa.html" not in source for source in public_sources)
+
+    for locale in AppLocale:
+        bundle = LOCALIZED_BUNDLES[6].materialize(locale)
+        example = next(
+            item for item in bundle.module.worked_examples if item.example_id == "m07.e02"
+        )
+        assert example.expected_output == "best_start=5\nbest_score=3.60"
+        assert "ILMV" in example.explanation
 
 
 def test_bmb831_locales_preserve_assessment_identity() -> None:

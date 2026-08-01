@@ -1,5 +1,11 @@
 """Dataset contracts and reproducibility utilities."""
 
+from .omics_registry import (
+    PUBLIC_OMICS_SOURCES,
+    OmicsModality,
+    PublicOmicsSource,
+    public_omics_source,
+)
 from .synthea_patient_table import (
     PATIENT_TABLE_COLUMNS,
     PatientTableBuildError,
@@ -19,15 +25,19 @@ from .synthea_snapshot import (
 
 __all__ = [
     "PATIENT_TABLE_COLUMNS",
+    "PUBLIC_OMICS_SOURCES",
     "SYNTHEA_CSV_CONTRACTS",
     "IssueSeverity",
+    "OmicsModality",
     "PatientTableBuildError",
     "PatientTableConfig",
     "PatientTableReport",
+    "PublicOmicsSource",
     "SnapshotIssue",
     "SnapshotReport",
     "TableContract",
     "TableProfile",
     "build_synthea_patient_table",
     "inspect_synthea_csv_directory",
+    "public_omics_source",
 ]

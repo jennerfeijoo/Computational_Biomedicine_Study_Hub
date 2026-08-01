@@ -46,6 +46,8 @@ def test_bmb831_coverage_matrix_has_public_row_counts_and_unique_ids() -> None:
 
 def test_bmb831_coverage_references_existing_modules_and_evidence() -> None:
     module_ids = {module.module_id for module in MODULES}
+    assert module_ids == {f"bmb831.m{number:02d}" for number in range(1, 10)}
+
     for row in coverage_rows():
         assert set(row.requirement.module_ids) <= module_ids
         assert row.evidence.module_count == len(row.requirement.module_ids)
@@ -57,42 +59,41 @@ def test_bmb831_coverage_references_existing_modules_and_evidence() -> None:
             assert row.evidence.executable_example_count > 0
 
 
-def test_multivariate_and_visualization_close_only_their_public_requirements() -> None:
+def test_complete_authored_course_leaves_only_attendance_partial() -> None:
     summary = coverage_summary()
     assert summary.total == 15
-    assert summary.covered == 3
-    assert summary.partial == 10
-    assert summary.gap == 2
+    assert summary.covered == 14
+    assert summary.partial == 1
+    assert summary.gap == 0
     assert not summary.fully_covered
 
     assert BMB831_PUBLIC_EXAM == "Individual report"
     assert "not treated as real-patient evidence" in BMB831_SYNTHEA_BOUNDARY
-    assert "no longer defines the course scope" in BMB831_SYNTHEA_BOUNDARY
-    assert "real omics data remain required" in BMB831_SYNTHEA_BOUNDARY
+    assert "does not define the course scope" in BMB831_SYNTHEA_BOUNDARY
+    assert "public transcriptomics and proteomics" in BMB831_SYNTHEA_BOUNDARY
 
-    covered = {
+    partial = {
         requirement.requirement_id: requirement
         for requirement in OFFICIAL_BMB831_REQUIREMENTS
-        if requirement.status is CoverageStatus.COVERED
+        if requirement.status is CoverageStatus.PARTIAL
     }
-    assert set(covered) == {
-        "bmb831.sdu.lo03",
-        "bmb831.sdu.lo04",
-        "bmb831.sdu.ct03",
-    }
-    assert covered["bmb831.sdu.lo03"].module_ids == ("bmb831.m04",)
-    assert covered["bmb831.sdu.lo04"].module_ids == ("bmb831.m05",)
-    assert covered["bmb831.sdu.ct03"].module_ids == ("bmb831.m05",)
+    assert set(partial) == {"bmb831.sdu.exam01"}
+    assert partial["bmb831.sdu.exam01"].module_ids == tuple(
+        f"bmb831.m{number:02d}" for number in range(1, 10)
+    )
+    assert "attendance" in partial["bmb831.sdu.exam01"].rationale.casefold()
 
-    remaining_gaps = {
-        requirement.requirement_id
-        for requirement in OFFICIAL_BMB831_REQUIREMENTS
-        if requirement.status is CoverageStatus.GAP
+    assert not any(
+        requirement.status is CoverageStatus.GAP for requirement in OFFICIAL_BMB831_REQUIREMENTS
+    )
+
+    by_id = {
+        requirement.requirement_id: requirement for requirement in OFFICIAL_BMB831_REQUIREMENTS
     }
-    assert remaining_gaps == {
-        "bmb831.sdu.ct05",
-        "bmb831.sdu.exam02",
-    }
+    assert by_id["bmb831.sdu.ct05"].module_ids == ("bmb831.m07",)
+    assert by_id["bmb831.sdu.exam02"].module_ids == ("bmb831.m09",)
+    assert by_id["bmb831.sdu.ct05"].status is CoverageStatus.COVERED
+    assert by_id["bmb831.sdu.exam02"].status is CoverageStatus.COVERED
 
     omics_rows = tuple(
         requirement
@@ -100,8 +101,5 @@ def test_multivariate_and_visualization_close_only_their_public_requirements() -
         if "omics" in requirement.official_text.casefold()
     )
     assert omics_rows
-    assert all(requirement.status is CoverageStatus.PARTIAL for requirement in omics_rows)
-    assert all(
-        requirement.module_ids == ("bmb831.m02", "bmb831.m03", "bmb831.m04", "bmb831.m05")
-        for requirement in omics_rows
-    )
+    assert all(requirement.status is CoverageStatus.COVERED for requirement in omics_rows)
+    assert all("bmb831.m06" in requirement.module_ids for requirement in omics_rows)
