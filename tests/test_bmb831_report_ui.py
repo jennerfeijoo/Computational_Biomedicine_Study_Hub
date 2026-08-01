@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from PySide6.QtWidgets import QApplication, QComboBox, QTabWidget
+from PySide6.QtWidgets import QApplication, QComboBox, QLabel, QTabWidget
 
 from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.storage.bmb831_report_store import BMB831ReportStore
@@ -42,13 +42,12 @@ def test_report_page_localizes_controls_but_preserves_english_requirement(
     del qapp
     progress = SQLiteProgressStore(":memory:")
     page = BMB831ReportPage(progress, AppLocale.SPANISH_SPAIN)
+    selector = page.findChild(QComboBox, "bmb831ReportSectionSelector")
+    boundary = page.findChild(QLabel, "bmb831EnglishBoundary")
 
-    assert page.findChild(QComboBox, "bmb831ReportSectionSelector") is not None
-    assert (
-        "inglés" in page.findChild(type(page.findChild(QComboBox)), "unused").text()
-        if False
-        else True
-    )
+    assert selector is not None
+    assert boundary is not None
+    assert "inglés" in boundary.text().casefold()
     assert page.select_section("bmb831.report.abstract")
     assert page.current_section_id == "bmb831.report.abstract"
 
