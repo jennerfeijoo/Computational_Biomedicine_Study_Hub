@@ -22,6 +22,8 @@ def test_report_page_preserves_sections_and_drafts(qapp: QApplication) -> None:
     assert selector.count() == 10
     assert page.current_section_id == "bmb831.report.question"
     page.editor.setPlainText("We estimate a batch-adjusted treatment contrast.")
+    assert page.select_section(page.current_section_id)
+    assert page.editor.toPlainText() == "We estimate a batch-adjusted treatment contrast."
     page.persist()
 
     assert page.select_section("bmb831.report.results")
