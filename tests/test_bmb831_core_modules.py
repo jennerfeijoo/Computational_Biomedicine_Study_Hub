@@ -36,8 +36,10 @@ def _module_text(index: int) -> str:
     module = MODULES[index]
     return " ".join(
         (
+            module.title,
             module.summary,
             *(objective.statement for objective in module.objectives),
+            *(concept.title for concept in module.concepts),
             *(concept.body for concept in module.concepts),
             *(practice.explanation for practice in module.practice_exercises),
         )
