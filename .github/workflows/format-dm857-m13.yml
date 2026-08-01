@@ -1,0 +1,41 @@
+name: Format DM857 M13 review
+
+on:
+  push:
+    branches:
+      - agent/dm857-scientific-libraries-review
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/dm857-scientific-libraries-review
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Format changed Python files
+        run: |
+          python -m pip install "ruff==0.16.1"
+          ruff format \
+            src/computational_biomedicine_study_hub/content/dm857/book_grounded_scientific_libraries.py \
+            tests/test_dm857_book_grounded_extensions.py \
+            tests/test_dm857_scientific_libraries_review.py
+      - name: Commit formatting
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            src/computational_biomedicine_study_hub/content/dm857/book_grounded_scientific_libraries.py \
+            tests/test_dm857_book_grounded_extensions.py \
+            tests/test_dm857_scientific_libraries_review.py
+          git commit -m "Format DM857 M13 source review"
+          git push origin HEAD:agent/dm857-scientific-libraries-review
