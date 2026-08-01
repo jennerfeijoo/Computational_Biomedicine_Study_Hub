@@ -176,8 +176,8 @@ def _extend_strings(module: LocalizedLearningModule) -> LocalizedLearningModule:
                         "Anvend fullmatch, fordi kontrakten gælder hele identifikatoren.",
                     ),
                 ),
-                "import re\n\npattern = re.compile(r\"SMP-\\d{3}\")\n"
-                "for code in (\"SMP-104\", \"xSMP-104\", \"SMP-10A\"):\n"
+                'import re\n\npattern = re.compile(r"SMP-\\d{3}")\n'
+                'for code in ("SMP-104", "xSMP-104", "SMP-10A"):\n'
                 "    print(bool(pattern.fullmatch(code)))",
                 "True\nFalse\nFalse",
                 (
@@ -238,7 +238,7 @@ def _extend_strings(module: LocalizedLearningModule) -> LocalizedLearningModule:
                     "gyldighed.",
                 ),
                 "import re\n\ndef is_code(text: str) -> bool:\n"
-                "    return bool(re.search(r\"SMP-\\d{3}\", text))",
+                '    return bool(re.search(r"SMP-\\d{3}", text))',
             ),
         ),
         assessment_items=module.assessment_items

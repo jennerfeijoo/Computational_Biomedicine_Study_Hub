@@ -95,11 +95,17 @@ def test_new_modules_have_complete_learning_components(
 
     assert runtime_module.course_code == "DM857"
     assert runtime_module.module_id == module_id
-    assert len(runtime_module.objectives) == (9 if module_id == "dm857.m04" else 8)
-    assert len(runtime_module.concepts) == (9 if module_id == "dm857.m04" else 8)
-    assert len(runtime_module.worked_examples) == (6 if module_id == "dm857.m04" else 5)
-    assert len(runtime_module.practice_exercises) == (13 if module_id == "dm857.m04" else 12)
-    assert len(runtime_module.assessment_items) == (15 if module_id == "dm857.m04" else 14)
+    assert len(runtime_module.objectives) == (9 if module_id in {"dm857.m04", "dm857.m05"} else 8)
+    assert len(runtime_module.concepts) == (9 if module_id in {"dm857.m04", "dm857.m05"} else 8)
+    assert len(runtime_module.worked_examples) == (
+        6 if module_id in {"dm857.m04", "dm857.m05"} else 5
+    )
+    assert len(runtime_module.practice_exercises) == (
+        13 if module_id in {"dm857.m04", "dm857.m05"} else 12
+    )
+    assert len(runtime_module.assessment_items) == (
+        15 if module_id in {"dm857.m04", "dm857.m05"} else 14
+    )
     assert len(runtime_bank) == 30
 
 
@@ -133,11 +139,15 @@ def test_new_modules_materialize_completely_in_all_locales(
 
         assert module.module_id == module_id
         assert module.title.startswith(title_prefixes[locale])
-        assert len(module.objectives) == (9 if module_id == "dm857.m04" else 8)
-        assert len(module.concepts) == (9 if module_id == "dm857.m04" else 8)
-        assert len(module.worked_examples) == (6 if module_id == "dm857.m04" else 5)
-        assert len(module.practice_exercises) == (13 if module_id == "dm857.m04" else 12)
-        assert len(module.assessment_items) == (15 if module_id == "dm857.m04" else 14)
+        assert len(module.objectives) == (9 if module_id in {"dm857.m04", "dm857.m05"} else 8)
+        assert len(module.concepts) == (9 if module_id in {"dm857.m04", "dm857.m05"} else 8)
+        assert len(module.worked_examples) == (6 if module_id in {"dm857.m04", "dm857.m05"} else 5)
+        assert len(module.practice_exercises) == (
+            13 if module_id in {"dm857.m04", "dm857.m05"} else 12
+        )
+        assert len(module.assessment_items) == (
+            15 if module_id in {"dm857.m04", "dm857.m05"} else 14
+        )
         assert len(bank) == 30
         assert all(document.text.strip() for document in module.tutor_documents())
         assert all(item.prompt.strip() for item in bank)
