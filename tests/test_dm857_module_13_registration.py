@@ -12,7 +12,7 @@ from computational_biomedicine_study_hub.content.dm857 import (
 def test_module_13_remains_registered_at_its_stable_catalog_position() -> None:
     assert len(BUNDLES) == len(MODULES)
     assert len(BUNDLES) >= 13
-    assert BUNDLES[12].content_version == "1.0.0"
+    assert BUNDLES[12].content_version == "1.1.0"
     assert MODULES[12] is MODULE_13_SCIENTIFIC_LIBRARIES
     assert MODULES[12].module_id == "dm857.m13"
 
