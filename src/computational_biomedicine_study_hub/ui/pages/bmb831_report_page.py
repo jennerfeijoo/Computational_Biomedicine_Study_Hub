@@ -152,14 +152,12 @@ class BMB831ReportPage(QWidget):
         return str(value or BMB831_REPORT_SECTIONS[0].section_id)
 
     def select_section(self, section_id: str) -> bool:
-        """Select one report section by stable ID."""
+        """Select one report section by stable ID without reloading the active draft."""
 
         index = self._selector.findData(section_id)
         if index < 0:
             return False
-        if index == self._selector.currentIndex():
-            self._load_section(section_id)
-        else:
+        if index != self._selector.currentIndex():
             self._selector.setCurrentIndex(index)
         return True
 
