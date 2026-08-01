@@ -10,12 +10,11 @@ from dataclasses import dataclass, field
 from datetime import date, timedelta
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
-from typing import Final
 
 from .synthea_snapshot import inspect_synthea_csv_directory
 
 
-PATIENT_TABLE_COLUMNS: Final[tuple[str, ...]] = (
+PATIENT_TABLE_COLUMNS: tuple[str, ...] = (
     "patient_id",
     "birthdate",
     "gender",
@@ -41,7 +40,7 @@ PATIENT_TABLE_COLUMNS: Final[tuple[str, ...]] = (
     "latest_diastolic_bp_unit",
 )
 
-_TARGET_OBSERVATION_CODES: Final[dict[str, str]] = {
+_TARGET_OBSERVATION_CODES: dict[str, str] = {
     "39156-5": "bmi",
     "8480-6": "systolic_bp",
     "8462-4": "diastolic_bp",
