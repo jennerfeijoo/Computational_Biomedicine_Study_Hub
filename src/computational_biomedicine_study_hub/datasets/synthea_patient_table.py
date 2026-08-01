@@ -13,7 +13,6 @@ from pathlib import Path
 
 from .synthea_snapshot import inspect_synthea_csv_directory
 
-
 PATIENT_TABLE_COLUMNS: tuple[str, ...] = (
     "patient_id",
     "birthdate",
