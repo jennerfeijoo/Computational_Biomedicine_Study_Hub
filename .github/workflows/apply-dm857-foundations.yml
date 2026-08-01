@@ -58,23 +58,21 @@ jobs:
               "    )\n)\n)\n\n_LOCALIZED_MODULES",
               1,
           )
-          old_versions = (
-              '_CONTENT_VERSIONS = (\n'
-              '    "1.0.0",\n'
-              '    "1.0.0",\n'
-              '    "1.0.0",\n'
-              '    "1.1.0",'
-          )
-          new_versions = (
-              '_CONTENT_VERSIONS = (\n'
-              '    "1.1.0",\n'
-              '    "1.1.0",\n'
-              '    "1.1.0",\n'
-              '    "1.1.0",'
-          )
-          if old_versions not in text:
-              raise SystemExit("expected content-version block not found")
-          text = text.replace(old_versions, new_versions, 1)
+
+          version_marker = "_CONTENT_VERSIONS = (\n"
+          if version_marker not in text:
+              raise SystemExit("content-version tuple not found")
+          prefix, version_tail = text.split(version_marker, 1)
+          for _ in range(3):
+              old_version = '    "1.0.0",\n'
+              if old_version not in version_tail:
+                  raise SystemExit("expected initial 1.0.0 version not found")
+              version_tail = version_tail.replace(
+                  old_version,
+                  '    "1.1.0",\n',
+                  1,
+              )
+          text = prefix + version_marker + version_tail
           init_path.write_text(text, encoding="utf-8")
 
           replacements = {
