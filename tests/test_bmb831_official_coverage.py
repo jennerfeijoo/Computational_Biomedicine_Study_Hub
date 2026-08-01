@@ -84,13 +84,11 @@ def test_complete_authored_course_leaves_only_attendance_partial() -> None:
     assert "attendance" in partial["bmb831.sdu.exam01"].rationale.casefold()
 
     assert not any(
-        requirement.status is CoverageStatus.GAP
-        for requirement in OFFICIAL_BMB831_REQUIREMENTS
+        requirement.status is CoverageStatus.GAP for requirement in OFFICIAL_BMB831_REQUIREMENTS
     )
 
     by_id = {
-        requirement.requirement_id: requirement
-        for requirement in OFFICIAL_BMB831_REQUIREMENTS
+        requirement.requirement_id: requirement for requirement in OFFICIAL_BMB831_REQUIREMENTS
     }
     assert by_id["bmb831.sdu.ct05"].module_ids == ("bmb831.m07",)
     assert by_id["bmb831.sdu.exam02"].module_ids == ("bmb831.m09",)
