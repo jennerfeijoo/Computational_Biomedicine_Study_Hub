@@ -1,16 +1,16 @@
 name: Fix DM857 OOP authoring API
 
 on:
-  pull_request:
+  push:
     branches:
-      - main
+      - agent/dm857-oop-review
 
 permissions:
   contents: write
 
 jobs:
   fix:
-    if: github.head_ref == 'agent/dm857-oop-review'
+    if: github.ref == 'refs/heads/agent/dm857-oop-review'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
