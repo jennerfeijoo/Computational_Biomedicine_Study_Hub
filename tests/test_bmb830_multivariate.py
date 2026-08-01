@@ -17,8 +17,12 @@ def _academic_text() -> str:
         (
             module.summary,
             *(objective.statement for objective in module.objectives),
+            *(concept.title for concept in module.concepts),
             *(concept.body for concept in module.concepts),
             *(point for concept in module.concepts for point in concept.key_points),
+            *(exercise.prompt for exercise in module.practice_exercises),
+            *(exercise.solution for exercise in module.practice_exercises),
+            *(exercise.explanation for exercise in module.practice_exercises),
         )
     ).casefold()
 
