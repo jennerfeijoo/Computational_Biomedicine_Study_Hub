@@ -19,6 +19,7 @@ from computational_biomedicine_study_hub.tutoring import (
 )
 from computational_biomedicine_study_hub.ui.main_window import MainWindow
 from computational_biomedicine_study_hub.ui.pages.assessments_page import AssessmentsPage
+from computational_biomedicine_study_hub.ui.pages.bmb831_report_page import BMB831ReportPage
 from computational_biomedicine_study_hub.ui.pages.dm847_written_assessment_page import (
     DM847WrittenAssessmentPage,
 )
@@ -160,9 +161,7 @@ def test_switching_tasks_keeps_each_learner_draft_under_its_prompt(
     progress_store.close()
 
 
-def test_assessments_route_hosts_dm847_writing_and_dm857_project(
-    qapp: QApplication,
-) -> None:
+def test_assessments_route_hosts_all_course_workflows(qapp: QApplication) -> None:
     del qapp
     progress_store = SQLiteProgressStore(":memory:")
     window = MainWindow(progress_store=progress_store)
@@ -174,7 +173,8 @@ def test_assessments_route_hosts_dm847_writing_and_dm857_project(
     tabs = window.findChild(QTabWidget, "assessmentCourseTabs")
     assert hub is not None
     assert tabs is not None
-    assert tabs.count() == 2
+    assert tabs.count() == 3
     assert window.findChild(DM847WrittenAssessmentPage, "dm847WrittenAssessmentPage") is not None
     assert window.findChild(DM857CapstonePage, "dm857CapstonePage") is not None
+    assert window.findChild(BMB831ReportPage, "bmb831ReportPage") is not None
     progress_store.close()
