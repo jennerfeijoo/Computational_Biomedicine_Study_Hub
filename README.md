@@ -13,7 +13,7 @@ The application combines concise theory, worked examples, executable code, guide
   - Python foundations, control flow, functions, data structures, recursion, trees, abstract data types, object-oriented programming, scientific libraries, testing, debugging, and software quality
   - persistent five-milestone project-and-report preparation workflow
 - **DM847 — Introduction to Bioinformatics**
-  - 11 complete modules
+  - 10 complete modules
   - molecular information, ontologies and databases, sequence scoring, pairwise alignment, hidden Markov models, suffix arrays and BWT, bacterial genetics, motif discovery, biological networks, and omics learning
   - persistent open-response and essay studio with one authored task per module
 
@@ -38,9 +38,24 @@ The application combines concise theory, worked examples, executable code, guide
   - optional editable R laboratories executed through a locally installed `Rscript`
   - conservative audit against the active public SDU specification and a separate master-level readiness matrix
 
-The public multivariate requirement is covered, and an individual bounded high-dimensional proteomics case now exercises the complete exploratory workflow. A substantially larger externally sourced biological data set, detailed figure-building practice, structured publication appraisal, and a complete individual oral-exam rehearsal remain partial until suitable source materials are selected or become available.
+The public multivariate requirement is covered, and an individual bounded high-dimensional proteomics case now exercises the complete exploratory workflow. A substantially larger externally sourced biological data set, detailed figure-building practice, structured publication appraisal, and complete individual oral-reasoning preparation remain partial until suitable source materials are selected or become available.
 
 BMB830 does not include a group project, role allocation, collaborative submission, or group presentation. The public course description recommends discussion during exercise sessions but publishes an individual oral examination rather than a group-project assessment. All Study Hub activities for this course are individually completable.
+
+### BMB831 implementation in progress
+
+- **BMB831 — Biostatistics in R II**
+  - 1 complete module
+  - Synthea provenance and scientific-use boundary
+  - relational grain, primary and foreign keys, and cardinality validation
+  - patient-level aggregation of repeated clinical events
+  - temporal leakage and patient-level validation splits
+  - scalable and auditable R workflow design
+  - 16 stable objective-bank questions
+  - two editable base-R laboratories using deterministic Synthea-structured fixtures
+  - conservative audit against all seven public learning outcomes, six public content topics, tutorial prerequisite, and individual-report examination
+
+Synthea is used as a temporary synthetic clinical-data source for relational, longitudinal, large-table, modelling, visualisation, and critical-reasoning practice. It is never described as real-patient evidence. It also does not replace transcriptomics, proteomics, protein-characterisation, or other omics data required by BMB831; those remain explicit gaps for subsequent modules.
 
 ### Registered first-semester courses
 
@@ -48,8 +63,6 @@ BMB830 does not include a group project, role allocation, collaborative submissi
 - **DM847** — Introduction to Bioinformatics
 - **BMB830** — Biostatistics in R I
 - **BMB831** — Biostatistics in R II
-
-BMB831 is registered in the application shell, but its complete academic modules are not yet implemented.
 
 ## Main capabilities
 
@@ -66,6 +79,19 @@ BMB831 is registered in the application shell, but its complete academic modules
   - writing revision that preserves the learner's valid ideas
   - thesis, structure, and draft development for essays
 - Automated validation of content, localization, executable examples, UI behavior, persistence, and assessment integrity
+
+## Individual oral-reasoning preparation
+
+The application does not depend on speech recognition or attempt to grade pronunciation, fluency, or audio automatically. Oral preparation is instead decomposed into individually useful, inspectable activities:
+
+- timed answer outlines;
+- thesis–evidence–limitation structures;
+- code, table, and figure interpretation;
+- follow-up questions that change assumptions or data conditions;
+- concise explanations of model choice, diagnostics, uncertainty, and validity threats;
+- optional self-recording outside the application using prompts exported from the Study Hub.
+
+The first BMB831 module includes a no-audio oral-explanation exercise: the learner writes a 90-second reasoning outline, receives a reference structure, and can later verbalize the same argument independently. This approach trains scientific reasoning without pretending that typed text is an official oral examination.
 
 ## Local tutor model
 
@@ -93,15 +119,15 @@ DM847 written feedback is generated from the authorised tutor documents of the s
 
 ## Local R laboratories
 
-BMB830 worked examples can be edited and executed when `Rscript` is available on the local `PATH`. The runner uses `Rscript --vanilla`, a temporary working directory, a hard timeout, bounded output, and a conservative policy that rejects file, network, external-process, package-installation, dynamic-evaluation, and native-code capabilities.
+BMB830 and BMB831 worked examples can be edited and executed when `Rscript` is available on the local `PATH`. The runner uses `Rscript --vanilla`, a temporary working directory, a hard timeout, bounded output, and a conservative policy that rejects file, network, external-process, package-installation, dynamic-evaluation, and native-code capabilities.
 
-R is optional. Without `Rscript`, all BMB830 theory, worked code, expected output, practice, and objective assessment remain available; attempting to run a laboratory produces an explicit local-runtime message.
+R is optional. Without `Rscript`, all theory, worked code, expected output, practice, and objective assessment remain available; attempting to run a laboratory produces an explicit local-runtime message.
 
 ## Requirements
 
 - Python 3.11 or 3.12
 - A desktop environment capable of running Qt 6
-- R with `Rscript` on `PATH` only when executable BMB830 laboratories are required
+- R with `Rscript` on `PATH` only when executable BMB830 or BMB831 laboratories are required
 - Ollama only when local tutor or written-feedback support is required
 
 ## Installation
@@ -191,11 +217,12 @@ tests/              # Unit, content-integrity, localization, persistence, and UI
 - **Model-bounded:** Ollama provides grounded assistance but cannot replace deterministic assessment or mutate mastery automatically.
 - **Learner-owned writing:** edits invalidate feedback attached to older text, and drafts remain stored locally.
 - **Conservative local execution:** editable Python and R laboratories run with explicit time, output, and capability boundaries.
-- **Individual BMB830 work:** no group-project or presentation workflow is fabricated for a course whose public assessment is individual.
+- **Synthetic-data honesty:** Synthea is useful for reproducible technical practice but is not real-patient or omics evidence.
+- **Individual assessment focus:** group presentation workflows are intentionally excluded; oral reasoning is prepared through structured individual drills rather than fabricated audio grading.
 - **Lazy UI construction:** heavy readers are created only when selected.
 - **Testable:** content and interface behavior are protected by automated regression tests.
 - **Incremental:** new courses and features are added through reviewable pull requests.
 
 ## Development status
 
-Active development. DM857 and DM847 provide complete academic course implementations. BMB830 contains twelve complete modules covering foundations through an individual high-dimensional proteomics case. High-dimensional p-greater-than-n workflow readiness is now covered, while a substantially larger externally sourced biological data set, detailed visualisation practice, publication appraisal, and full individual oral-exam rehearsal remain partial. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development. Group-presentation rehearsal is intentionally outside the application scope.
+Active development. DM857 and DM847 provide complete authored course sequences, although additional executable practice remains desirable. BMB830 contains twelve complete modules covering foundations through an individual high-dimensional proteomics case. BMB831 now contains its first complete module on Synthea-based relational and longitudinal workflows, while advanced modelling, detailed visualisation, multivariate methods, publication appraisal, protein characterisation, omics pipelines, a downloaded versioned dataset snapshot, and the individual English report workflow remain to be implemented. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development.
