@@ -77,10 +77,7 @@ def test_bmb831_omics_core_reduces_but_does_not_close_public_gaps() -> None:
     )
     assert omics_rows
     assert all(requirement.status is CoverageStatus.PARTIAL for requirement in omics_rows)
-    assert all(
-        requirement.module_ids == ("bmb831.m02", "bmb831.m03")
-        for requirement in omics_rows
-    )
+    assert all(requirement.module_ids == ("bmb831.m02", "bmb831.m03") for requirement in omics_rows)
 
     remaining_gaps = {
         requirement.requirement_id

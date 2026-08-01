@@ -301,8 +301,16 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
                 "Skriv en minimumskontrakt for en RNA-seq-matrix: rækkeenhed, kolonneenhed, nøgler, metadata og kildeartefakter.",
             ),
             (
-                _t("Empieza por qué representa una celda.", "Start with what one cell represents.", "Start med hvad én celle repræsenterer."),
-                _t("Incluye el vínculo exacto con metadata.", "Include the exact metadata link.", "Medtag den præcise forbindelse til metadata."),
+                _t(
+                    "Empieza por qué representa una celda.",
+                    "Start with what one cell represents.",
+                    "Start med hvad én celle repræsenterer.",
+                ),
+                _t(
+                    "Incluye el vínculo exacto con metadata.",
+                    "Include the exact metadata link.",
+                    "Medtag den præcise forbindelse til metadata.",
+                ),
             ),
             _t(
                 "Una celda representa el conteo o abundancia de una característica en una muestra; filas y columnas tienen IDs únicos; colnames(counts) coincide exactamente con metadata$sample_id; la anotación de características está alineada con rownames(counts); los archivos fuente son inmutables y versionados.",
@@ -326,7 +334,11 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
             ),
             (
                 _t("match puede devolver NA.", "match can return NA.", "match kan returnere NA."),
-                _t("Un ID duplicado no define una fila única.", "A duplicated ID does not define a unique row.", "Et duplikeret ID definerer ikke en entydig række."),
+                _t(
+                    "Un ID duplicado no define una fila única.",
+                    "A duplicated ID does not define a unique row.",
+                    "Et duplikeret ID definerer ikke en entydig række.",
+                ),
             ),
             _t(
                 "La reordenación sólo es segura cuando todos los IDs de columnas aparecen exactamente una vez en metadata. Deben verificarse unicidad, ausencia de NA y equivalencia de conjuntos antes de aceptar el orden.",
@@ -350,7 +362,11 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
             ),
             (
                 _t("No son sinónimos.", "They are not synonyms.", "De er ikke synonymer."),
-                _t("Relaciona cada paso con el método posterior.", "Relate each step to the downstream method.", "Knyt hvert trin til den efterfølgende metode."),
+                _t(
+                    "Relaciona cada paso con el método posterior.",
+                    "Relate each step to the downstream method.",
+                    "Knyt hvert trin til den efterfølgende metode.",
+                ),
             ),
             _t(
                 "El filtrado retira características poco informativas; la normalización ajusta exposición técnica entre muestras; el log reduce asimetría y dependencia media-varianza para exploración; el z-score iguala escala entre características para métodos de distancia, pero elimina magnitudes absolutas.",
@@ -373,8 +389,16 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
                 "En analytiker fjerner S7, fordi den ligger separat i PCA, og rapporterer derefter tydeligere grupper. Rekonstruér fejlen og foreslå en følsomhedsanalyse.",
             ),
             (
-                _t("PCA no diagnostica por sí sola la causa.", "PCA alone does not diagnose the cause.", "PCA diagnosticerer ikke alene årsagen."),
-                _t("Compara resultados con y sin S7.", "Compare results with and without S7.", "Sammenlign resultater med og uden S7."),
+                _t(
+                    "PCA no diagnostica por sí sola la causa.",
+                    "PCA alone does not diagnose the cause.",
+                    "PCA diagnosticerer ikke alene årsagen.",
+                ),
+                _t(
+                    "Compara resultados con y sin S7.",
+                    "Compare results with and without S7.",
+                    "Sammenlign resultater med og uden S7.",
+                ),
             ),
             _t(
                 "La exclusión se decidió para mejorar el patrón, lo que introduce selección post hoc. Deben revisarse métricas técnicas, metadata, lote, identidad y procesamiento; justificar cualquier exclusión con criterios independientes; y presentar resultados con y sin S7.",
@@ -397,8 +421,16 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
                 "Færdiggør en base-R-funktion, der kontrollerer om prøve-ID'er i matrix og metadata er unikke og matcher i rækkefølge.",
             ),
             (
-                _t("Usa anyDuplicated e identical.", "Use anyDuplicated and identical.", "Brug anyDuplicated og identical."),
-                _t("Devuelve un único valor lógico.", "Return one logical value.", "Returnér én logisk værdi."),
+                _t(
+                    "Usa anyDuplicated e identical.",
+                    "Use anyDuplicated and identical.",
+                    "Brug anyDuplicated og identical.",
+                ),
+                _t(
+                    "Devuelve un único valor lógico.",
+                    "Return one logical value.",
+                    "Returnér én logisk værdi.",
+                ),
             ),
             _t(
                 "aligned_samples <- function(x, metadata) { !anyDuplicated(colnames(x)) && !anyDuplicated(metadata$sample_id) && identical(colnames(x), metadata$sample_id) }",
@@ -421,8 +453,16 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
                 "Forbered en 90-sekunders forklaring: hvorfor korrigerer normalisering ikke automatisk en batcheffekt?",
             ),
             (
-                _t("Define primero normalización y lote.", "Define normalization and batch first.", "Definér først normalisering og batch."),
-                _t("Incluye una estrategia de diagnóstico y modelado.", "Include a diagnostic and modeling strategy.", "Medtag en diagnostisk og modelleringsstrategi."),
+                _t(
+                    "Define primero normalización y lote.",
+                    "Define normalization and batch first.",
+                    "Definér først normalisering og batch.",
+                ),
+                _t(
+                    "Incluye una estrategia de diagnóstico y modelado.",
+                    "Include a diagnostic and modeling strategy.",
+                    "Medtag en diagnostisk og modelleringsstrategi.",
+                ),
             ),
             _t(
                 "La normalización ajusta factores técnicos específicos como profundidad o escala global. Un lote puede alterar subconjuntos de características o interactuar con la biología, por lo que debe diagnosticarse con metadata y visualización, incluirse en el diseño cuando sea identificable y evaluarse mediante sensibilidad. Si lote y grupo están confundidos, el efecto no puede separarse de forma fiable.",
@@ -446,10 +486,31 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
                 "Hvilken kontrol beskytter direkte mod at tildele en prøve til den forkerte gruppe?",
             ),
             (
-                _option("a", _t("Comparar media y mediana", "Compare mean and median", "Sammenlign middelværdi og median")),
-                _option("b", _t("Comprobar coincidencia exacta y única entre colnames y sample_id", "Check exact unique agreement between colnames and sample_id", "Kontrollér præcis unik overensstemmelse mellem colnames og sample_id")),
+                _option(
+                    "a",
+                    _t(
+                        "Comparar media y mediana",
+                        "Compare mean and median",
+                        "Sammenlign middelværdi og median",
+                    ),
+                ),
+                _option(
+                    "b",
+                    _t(
+                        "Comprobar coincidencia exacta y única entre colnames y sample_id",
+                        "Check exact unique agreement between colnames and sample_id",
+                        "Kontrollér præcis unik overensstemmelse mellem colnames og sample_id",
+                    ),
+                ),
                 _option("c", _t("Aplicar log2", "Apply log2", "Anvend log2")),
-                _option("d", _t("Eliminar genes constantes", "Remove constant genes", "Fjern konstante gener")),
+                _option(
+                    "d",
+                    _t(
+                        "Eliminar genes constantes",
+                        "Remove constant genes",
+                        "Fjern konstante gener",
+                    ),
+                ),
             ),
             "b",
             _t(
@@ -466,10 +527,38 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
                 "Hvilket udsagn beskriver bedst en ekstrem prøve i PCA?",
             ),
             (
-                _option("a", _t("Debe eliminarse siempre", "It must always be removed", "Den skal altid fjernes")),
-                _option("b", _t("Prueba contaminación", "It proves contamination", "Den beviser kontaminering")),
-                _option("c", _t("Es una señal que requiere investigación independiente", "It is a signal requiring independent investigation", "Det er et signal, der kræver uafhængig undersøgelse")),
-                _option("d", _t("Demuestra efecto biológico", "It proves a biological effect", "Den beviser en biologisk effekt")),
+                _option(
+                    "a",
+                    _t(
+                        "Debe eliminarse siempre",
+                        "It must always be removed",
+                        "Den skal altid fjernes",
+                    ),
+                ),
+                _option(
+                    "b",
+                    _t(
+                        "Prueba contaminación",
+                        "It proves contamination",
+                        "Den beviser kontaminering",
+                    ),
+                ),
+                _option(
+                    "c",
+                    _t(
+                        "Es una señal que requiere investigación independiente",
+                        "It is a signal requiring independent investigation",
+                        "Det er et signal, der kræver uafhængig undersøgelse",
+                    ),
+                ),
+                _option(
+                    "d",
+                    _t(
+                        "Demuestra efecto biológico",
+                        "It proves a biological effect",
+                        "Den beviser en biologisk effekt",
+                    ),
+                ),
             ),
             "c",
             _t(
@@ -480,7 +569,11 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
         ),
         _mcq(
             "q03",
-            _t("¿Qué operación elimina características poco informativas?", "Which operation removes poorly informative features?", "Hvilken operation fjerner features med lav information?"),
+            _t(
+                "¿Qué operación elimina características poco informativas?",
+                "Which operation removes poorly informative features?",
+                "Hvilken operation fjerner features med lav information?",
+            ),
             (
                 _option("a", _t("Filtrado", "Filtering", "Filtrering")),
                 _option("b", _t("Normalización", "Normalization", "Normalisering")),
@@ -488,11 +581,19 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
                 _option("d", _t("Ajuste por lote", "Batch adjustment", "Batchjustering")),
             ),
             "a",
-            _t("El filtrado aplica una regla explícita de información o abundancia.", "Filtering applies an explicit information or abundance rule.", "Filtrering anvender en eksplicit informations- eller abundansregel."),
+            _t(
+                "El filtrado aplica una regla explícita de información o abundancia.",
+                "Filtering applies an explicit information or abundance rule.",
+                "Filtrering anvender en eksplicit informations- eller abundansregel.",
+            ),
         ),
         _mcq(
             "q04",
-            _t("¿Qué operación ajusta principalmente diferencias de exposición técnica entre muestras?", "Which operation primarily adjusts differences in technical exposure among samples?", "Hvilken operation justerer primært forskelle i teknisk eksponering mellem prøver?"),
+            _t(
+                "¿Qué operación ajusta principalmente diferencias de exposición técnica entre muestras?",
+                "Which operation primarily adjusts differences in technical exposure among samples?",
+                "Hvilken operation justerer primært forskelle i teknisk eksponering mellem prøver?",
+            ),
             (
                 _option("a", _t("Anotación", "Annotation", "Annotering")),
                 _option("b", _t("Normalización", "Normalization", "Normalisering")),
@@ -500,66 +601,296 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
                 _option("d", _t("Imputación de grupo", "Group imputation", "Gruppeimputation")),
             ),
             "b",
-            _t("La normalización busca hacer comparables factores técnicos definidos.", "Normalization aims to make defined technical factors comparable.", "Normalisering sigter mod at gøre definerede tekniske faktorer sammenlignelige."),
+            _t(
+                "La normalización busca hacer comparables factores técnicos definidos.",
+                "Normalization aims to make defined technical factors comparable.",
+                "Normalisering sigter mod at gøre definerede tekniske faktorer sammenlignelige.",
+            ),
         ),
         _mcq(
             "q05",
-            _t("¿Por qué debe conservarse la matriz de conteos crudos?", "Why should the raw count matrix be retained?", "Hvorfor bør den rå count-matrix bevares?"),
+            _t(
+                "¿Por qué debe conservarse la matriz de conteos crudos?",
+                "Why should the raw count matrix be retained?",
+                "Hvorfor bør den rå count-matrix bevares?",
+            ),
             (
-                _option("a", _t("Para modificarla después", "To modify it later", "For at ændre den senere")),
-                _option("b", _t("Porque algunos modelos requieren conteos y para mantener trazabilidad", "Because some models require counts and to preserve provenance", "Fordi nogle modeller kræver counts, og for at bevare sporbarhed")),
-                _option("c", _t("Porque siempre es adecuada para PCA", "Because it is always suitable for PCA", "Fordi den altid er egnet til PCA")),
-                _option("d", _t("Para reemplazar metadata", "To replace metadata", "For at erstatte metadata")),
+                _option(
+                    "a",
+                    _t("Para modificarla después", "To modify it later", "For at ændre den senere"),
+                ),
+                _option(
+                    "b",
+                    _t(
+                        "Porque algunos modelos requieren conteos y para mantener trazabilidad",
+                        "Because some models require counts and to preserve provenance",
+                        "Fordi nogle modeller kræver counts, og for at bevare sporbarhed",
+                    ),
+                ),
+                _option(
+                    "c",
+                    _t(
+                        "Porque siempre es adecuada para PCA",
+                        "Because it is always suitable for PCA",
+                        "Fordi den altid er egnet til PCA",
+                    ),
+                ),
+                _option(
+                    "d",
+                    _t(
+                        "Para reemplazar metadata",
+                        "To replace metadata",
+                        "For at erstatte metadata",
+                    ),
+                ),
             ),
             "b",
-            _t("Los datos fuente inmutables permiten reproducir transformaciones y usar modelos compatibles con conteos.", "Immutable source data support reproducible transformations and count-compatible models.", "Uforanderlige kildedata understøtter reproducerbare transformationer og count-kompatible modeller."),
+            _t(
+                "Los datos fuente inmutables permiten reproducir transformaciones y usar modelos compatibles con conteos.",
+                "Immutable source data support reproducible transformations and count-compatible models.",
+                "Uforanderlige kildedata understøtter reproducerbare transformationer og count-kompatible modeller.",
+            ),
         ),
         _mcq(
             "q06",
-            _t("¿Qué riesgo tiene aplicar z-score por característica?", "What is a consequence of feature-wise z-scoring?", "Hvad er en konsekvens af featurevis z-score?"),
+            _t(
+                "¿Qué riesgo tiene aplicar z-score por característica?",
+                "What is a consequence of feature-wise z-scoring?",
+                "Hvad er en konsekvens af featurevis z-score?",
+            ),
             (
-                _option("a", _t("Conserva magnitudes absolutas", "It preserves absolute magnitudes", "Det bevarer absolutte størrelser")),
-                _option("b", _t("Elimina toda variación", "It removes all variation", "Det fjerner al variation")),
-                _option("c", _t("Iguala escala pero pierde magnitud absoluta", "It equalizes scale but loses absolute magnitude", "Det udligner skala men mister absolut størrelse")),
-                _option("d", _t("Corrige cualquier lote", "It corrects every batch", "Det korrigerer ethvert batch")),
+                _option(
+                    "a",
+                    _t(
+                        "Conserva magnitudes absolutas",
+                        "It preserves absolute magnitudes",
+                        "Det bevarer absolutte størrelser",
+                    ),
+                ),
+                _option(
+                    "b",
+                    _t(
+                        "Elimina toda variación",
+                        "It removes all variation",
+                        "Det fjerner al variation",
+                    ),
+                ),
+                _option(
+                    "c",
+                    _t(
+                        "Iguala escala pero pierde magnitud absoluta",
+                        "It equalizes scale but loses absolute magnitude",
+                        "Det udligner skala men mister absolut størrelse",
+                    ),
+                ),
+                _option(
+                    "d",
+                    _t(
+                        "Corrige cualquier lote",
+                        "It corrects every batch",
+                        "Det korrigerer ethvert batch",
+                    ),
+                ),
             ),
             "c",
-            _t("Centrar y dividir por desviación estándar cambia la interpretación de magnitud.", "Centering and dividing by standard deviation changes magnitude interpretation.", "Centrering og division med standardafvigelsen ændrer fortolkningen af størrelse."),
+            _t(
+                "Centrar y dividir por desviación estándar cambia la interpretación de magnitud.",
+                "Centering and dividing by standard deviation changes magnitude interpretation.",
+                "Centrering og division med standardafvigelsen ændrer fortolkningen af størrelse.",
+            ),
         ),
         _mcq(
             "q07",
-            _t("¿Qué debe acompañar una exclusión de muestra?", "What should accompany a sample exclusion?", "Hvad bør ledsage en prøveeksklusion?"),
+            _t(
+                "¿Qué debe acompañar una exclusión de muestra?",
+                "What should accompany a sample exclusion?",
+                "Hvad bør ledsage en prøveeksklusion?",
+            ),
             (
                 _option("a", _t("Sólo una figura PCA", "Only a PCA plot", "Kun et PCA-plot")),
-                _option("b", _t("Criterio independiente, trazabilidad y análisis de sensibilidad", "An independent criterion, provenance, and sensitivity analysis", "Et uafhængigt kriterium, sporbarhed og følsomhedsanalyse")),
-                _option("c", _t("Mejor separación de grupos", "Better group separation", "Bedre gruppeadskillelse")),
+                _option(
+                    "b",
+                    _t(
+                        "Criterio independiente, trazabilidad y análisis de sensibilidad",
+                        "An independent criterion, provenance, and sensitivity analysis",
+                        "Et uafhængigt kriterium, sporbarhed og følsomhedsanalyse",
+                    ),
+                ),
+                _option(
+                    "c",
+                    _t(
+                        "Mejor separación de grupos",
+                        "Better group separation",
+                        "Bedre gruppeadskillelse",
+                    ),
+                ),
                 _option("d", _t("Menor valor p", "A smaller p-value", "En mindre p-værdi")),
             ),
             "b",
-            _t("La exclusión no debe elegirse para mejorar el resultado observado.", "Exclusion should not be chosen to improve the observed result.", "Eksklusion bør ikke vælges for at forbedre det observerede resultat."),
+            _t(
+                "La exclusión no debe elegirse para mejorar el resultado observado.",
+                "Exclusion should not be chosen to improve the observed result.",
+                "Eksklusion bør ikke vælges for at forbedre det observerede resultat.",
+            ),
         ),
         _mcq(
             "q08",
-            _t("¿Qué práctica favorece escalabilidad y auditabilidad?", "Which practice supports scalability and auditability?", "Hvilken praksis understøtter skalerbarhed og auditérbarhed?"),
+            _t(
+                "¿Qué práctica favorece escalabilidad y auditabilidad?",
+                "Which practice supports scalability and auditability?",
+                "Hvilken praksis understøtter skalerbarhed og auditérbarhed?",
+            ),
             (
-                _option("a", _t("Crear copias completas en cada paso", "Create full copies at every step", "Opret fulde kopier ved hvert trin")),
-                _option("b", _t("Modificar los archivos fuente", "Modify source files", "Ændr kildefilerne")),
-                _option("c", _t("Registrar dimensiones, parámetros y artefactos", "Record dimensions, parameters, and artifacts", "Registrér dimensioner, parametre og artefakter")),
-                _option("d", _t("Omitir matrices pequeñas de prueba", "Skip small test matrices", "Spring små testmatricer over")),
+                _option(
+                    "a",
+                    _t(
+                        "Crear copias completas en cada paso",
+                        "Create full copies at every step",
+                        "Opret fulde kopier ved hvert trin",
+                    ),
+                ),
+                _option(
+                    "b",
+                    _t("Modificar los archivos fuente", "Modify source files", "Ændr kildefilerne"),
+                ),
+                _option(
+                    "c",
+                    _t(
+                        "Registrar dimensiones, parámetros y artefactos",
+                        "Record dimensions, parameters, and artifacts",
+                        "Registrér dimensioner, parametre og artefakter",
+                    ),
+                ),
+                _option(
+                    "d",
+                    _t(
+                        "Omitir matrices pequeñas de prueba",
+                        "Skip small test matrices",
+                        "Spring små testmatricer over",
+                    ),
+                ),
             ),
             "c",
-            _t("Los registros intermedios permiten detectar cambios inesperados y reproducir el flujo.", "Intermediate records allow unexpected changes to be detected and the workflow reproduced.", "Mellemregistreringer gør det muligt at opdage uventede ændringer og reproducere workflowet."),
+            _t(
+                "Los registros intermedios permiten detectar cambios inesperados y reproducir el flujo.",
+                "Intermediate records allow unexpected changes to be detected and the workflow reproduced.",
+                "Mellemregistreringer gør det muligt at opdage uventede ændringer og reproducere workflowet.",
+            ),
         ),
     ),
     true_false=(
-        _tf("tf01", _t("El orden de las muestras puede ignorarse si los nombres aparecen en ambos objetos.", "Sample order can be ignored when names occur in both objects.", "Prøverækkefølgen kan ignoreres, når navnene findes i begge objekter."), False, _t("El orden debe coincidir o reordenarse de forma validada.", "Order must match or be reordered with validation.", "Rækkefølgen skal matche eller omordnes med validering.")),
-        _tf("tf02", _t("Una muestra separada en PCA debe investigarse antes de decidir su exclusión.", "A sample separated in PCA should be investigated before deciding on exclusion.", "En prøve adskilt i PCA bør undersøges før beslutning om eksklusion."), True, _t("PCA es una señal diagnóstica, no una decisión causal.", "PCA is a diagnostic signal, not a causal decision.", "PCA er et diagnostisk signal, ikke en kausal beslutning.")),
-        _tf("tf03", _t("Filtrado y normalización responden a la misma pregunta.", "Filtering and normalization answer the same question.", "Filtrering og normalisering besvarer det samme spørgsmål."), False, _t("Filtrado decide qué características conservar; normalización ajusta comparabilidad técnica.", "Filtering decides which features to retain; normalization adjusts technical comparability.", "Filtrering afgør hvilke features der bevares; normalisering justerer teknisk sammenlignelighed.")),
-        _tf("tf04", _t("Los conteos crudos pueden ser necesarios para modelos de RNA-seq.", "Raw counts may be required by RNA-seq models.", "Rå counts kan være nødvendige for RNA-seq-modeller."), True, _t("Los modelos de conteo suelen estimar media y dispersión desde conteos no transformados.", "Count models commonly estimate mean and dispersion from untransformed counts.", "Count-modeller estimerer ofte middelværdi og dispersion fra utransformerede counts.")),
-        _tf("tf05", _t("Normalizar por profundidad elimina cualquier efecto de lote.", "Depth normalization removes every batch effect.", "Normalisering efter dybde fjerner enhver batcheffekt."), False, _t("Un lote puede afectar características selectivamente y debe modelarse o investigarse por separado.", "A batch may affect features selectively and must be modeled or investigated separately.", "Et batch kan påvirke features selektivt og skal modelleres eller undersøges separat.")),
-        _tf("tf06", _t("Una regla de filtrado supervisada debe aprenderse sólo con datos de entrenamiento.", "A supervised filtering rule should be learned only from training data.", "En superviseret filtreringsregel bør kun læres fra træningsdata."), True, _t("Usar etiquetas de validación o prueba para seleccionar features produce fuga.", "Using validation or test labels for feature selection causes leakage.", "Brug af validerings- eller testlabels til featurevalg skaber leakage.")),
-        _tf("tf07", _t("Los archivos fuente deberían permanecer inmutables.", "Source files should remain immutable.", "Kildefiler bør forblive uforanderlige."), True, _t("Las transformaciones deben producir artefactos derivados trazables.", "Transformations should produce traceable derived artifacts.", "Transformationer bør producere sporbare afledte artefakter.")),
-        _tf("tf08", _t("Un pipeline rápido puede considerarse válido aunque las muestras estén desalineadas.", "A fast pipeline can be considered valid even when samples are misaligned.", "En hurtig pipeline kan betragtes som gyldig, selv når prøver er fejlafstemt."), False, _t("El rendimiento no compensa una asociación incorrecta entre datos y metadata.", "Performance does not compensate for an incorrect data-metadata association.", "Ydeevne kompenserer ikke for en forkert forbindelse mellem data og metadata.")),
+        _tf(
+            "tf01",
+            _t(
+                "El orden de las muestras puede ignorarse si los nombres aparecen en ambos objetos.",
+                "Sample order can be ignored when names occur in both objects.",
+                "Prøverækkefølgen kan ignoreres, når navnene findes i begge objekter.",
+            ),
+            False,
+            _t(
+                "El orden debe coincidir o reordenarse de forma validada.",
+                "Order must match or be reordered with validation.",
+                "Rækkefølgen skal matche eller omordnes med validering.",
+            ),
+        ),
+        _tf(
+            "tf02",
+            _t(
+                "Una muestra separada en PCA debe investigarse antes de decidir su exclusión.",
+                "A sample separated in PCA should be investigated before deciding on exclusion.",
+                "En prøve adskilt i PCA bør undersøges før beslutning om eksklusion.",
+            ),
+            True,
+            _t(
+                "PCA es una señal diagnóstica, no una decisión causal.",
+                "PCA is a diagnostic signal, not a causal decision.",
+                "PCA er et diagnostisk signal, ikke en kausal beslutning.",
+            ),
+        ),
+        _tf(
+            "tf03",
+            _t(
+                "Filtrado y normalización responden a la misma pregunta.",
+                "Filtering and normalization answer the same question.",
+                "Filtrering og normalisering besvarer det samme spørgsmål.",
+            ),
+            False,
+            _t(
+                "Filtrado decide qué características conservar; normalización ajusta comparabilidad técnica.",
+                "Filtering decides which features to retain; normalization adjusts technical comparability.",
+                "Filtrering afgør hvilke features der bevares; normalisering justerer teknisk sammenlignelighed.",
+            ),
+        ),
+        _tf(
+            "tf04",
+            _t(
+                "Los conteos crudos pueden ser necesarios para modelos de RNA-seq.",
+                "Raw counts may be required by RNA-seq models.",
+                "Rå counts kan være nødvendige for RNA-seq-modeller.",
+            ),
+            True,
+            _t(
+                "Los modelos de conteo suelen estimar media y dispersión desde conteos no transformados.",
+                "Count models commonly estimate mean and dispersion from untransformed counts.",
+                "Count-modeller estimerer ofte middelværdi og dispersion fra utransformerede counts.",
+            ),
+        ),
+        _tf(
+            "tf05",
+            _t(
+                "Normalizar por profundidad elimina cualquier efecto de lote.",
+                "Depth normalization removes every batch effect.",
+                "Normalisering efter dybde fjerner enhver batcheffekt.",
+            ),
+            False,
+            _t(
+                "Un lote puede afectar características selectivamente y debe modelarse o investigarse por separado.",
+                "A batch may affect features selectively and must be modeled or investigated separately.",
+                "Et batch kan påvirke features selektivt og skal modelleres eller undersøges separat.",
+            ),
+        ),
+        _tf(
+            "tf06",
+            _t(
+                "Una regla de filtrado supervisada debe aprenderse sólo con datos de entrenamiento.",
+                "A supervised filtering rule should be learned only from training data.",
+                "En superviseret filtreringsregel bør kun læres fra træningsdata.",
+            ),
+            True,
+            _t(
+                "Usar etiquetas de validación o prueba para seleccionar features produce fuga.",
+                "Using validation or test labels for feature selection causes leakage.",
+                "Brug af validerings- eller testlabels til featurevalg skaber leakage.",
+            ),
+        ),
+        _tf(
+            "tf07",
+            _t(
+                "Los archivos fuente deberían permanecer inmutables.",
+                "Source files should remain immutable.",
+                "Kildefiler bør forblive uforanderlige.",
+            ),
+            True,
+            _t(
+                "Las transformaciones deben producir artefactos derivados trazables.",
+                "Transformations should produce traceable derived artifacts.",
+                "Transformationer bør producere sporbare afledte artefakter.",
+            ),
+        ),
+        _tf(
+            "tf08",
+            _t(
+                "Un pipeline rápido puede considerarse válido aunque las muestras estén desalineadas.",
+                "A fast pipeline can be considered valid even when samples are misaligned.",
+                "En hurtig pipeline kan betragtes som gyldig, selv når prøver er fejlafstemt.",
+            ),
+            False,
+            _t(
+                "El rendimiento no compensa una asociación incorrecta entre datos y metadata.",
+                "Performance does not compensate for an incorrect data-metadata association.",
+                "Ydeevne kompenserer ikke for en forkert forbindelse mellem data og metadata.",
+            ),
+        ),
     ),
     tutor=(
         _t(
@@ -568,34 +899,114 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
             "Omikanalyse begynder med en eksplicit kontrakt for matrix, metadata og proveniens. Tutoren skal adskille kvalitet, normalisering, transformation og skalering og må aldrig anbefale eksklusioner alene for at forbedre mønstre.",
         ),
         (
-            _t("Las muestras y metadata deben estar alineadas de forma única.", "Samples and metadata must be uniquely aligned.", "Prøver og metadata skal være entydigt afstemt."),
-            _t("El control de calidad produce preguntas para investigar, no exclusiones automáticas.", "Quality control produces questions to investigate, not automatic exclusions.", "Kvalitetskontrol skaber spørgsmål til undersøgelse, ikke automatiske eksklusioner."),
-            _t("Filtrado, normalización, transformación y escalado tienen objetivos diferentes.", "Filtering, normalization, transformation, and scaling have different purposes.", "Filtrering, normalisering, transformation og skalering har forskellige formål."),
-            _t("Los datos fuente y parámetros deben conservarse para reproducibilidad.", "Source data and parameters must be retained for reproducibility.", "Kildedata og parametre skal bevares for reproducerbarhed."),
+            _t(
+                "Las muestras y metadata deben estar alineadas de forma única.",
+                "Samples and metadata must be uniquely aligned.",
+                "Prøver og metadata skal være entydigt afstemt.",
+            ),
+            _t(
+                "El control de calidad produce preguntas para investigar, no exclusiones automáticas.",
+                "Quality control produces questions to investigate, not automatic exclusions.",
+                "Kvalitetskontrol skaber spørgsmål til undersøgelse, ikke automatiske eksklusioner.",
+            ),
+            _t(
+                "Filtrado, normalización, transformación y escalado tienen objetivos diferentes.",
+                "Filtering, normalization, transformation, and scaling have different purposes.",
+                "Filtrering, normalisering, transformation og skalering har forskellige formål.",
+            ),
+            _t(
+                "Los datos fuente y parámetros deben conservarse para reproducibilidad.",
+                "Source data and parameters must be retained for reproducibility.",
+                "Kildedata og parametre skal bevares for reproducerbarhed.",
+            ),
         ),
         (
-            _t("Eliminar toda muestra separada en PCA.", "Removing every sample separated in PCA.", "At fjerne enhver prøve adskilt i PCA."),
-            _t("Usar normalización como sinónimo de corrección de lote.", "Using normalization as a synonym for batch correction.", "At bruge normalisering som synonym for batchkorrektion."),
-            _t("Reordenar metadata sin comprobar NA o duplicados.", "Reordering metadata without checking NA or duplicates.", "At omordne metadata uden at kontrollere NA eller dubletter."),
-            _t("Sobrescribir la matriz fuente con valores transformados.", "Overwriting the source matrix with transformed values.", "At overskrive kildematricen med transformerede værdier."),
+            _t(
+                "Eliminar toda muestra separada en PCA.",
+                "Removing every sample separated in PCA.",
+                "At fjerne enhver prøve adskilt i PCA.",
+            ),
+            _t(
+                "Usar normalización como sinónimo de corrección de lote.",
+                "Using normalization as a synonym for batch correction.",
+                "At bruge normalisering som synonym for batchkorrektion.",
+            ),
+            _t(
+                "Reordenar metadata sin comprobar NA o duplicados.",
+                "Reordering metadata without checking NA or duplicates.",
+                "At omordne metadata uden at kontrollere NA eller dubletter.",
+            ),
+            _t(
+                "Sobrescribir la matriz fuente con valores transformados.",
+                "Overwriting the source matrix with transformed values.",
+                "At overskrive kildematricen med transformerede værdier.",
+            ),
         ),
         (
-            _t("¿Qué representa una celda y cuál es la unidad independiente?", "What does one cell represent, and what is the independent unit?", "Hvad repræsenterer én celle, og hvad er den uafhængige enhed?"),
-            _t("¿Qué factor técnico intenta ajustar la normalización?", "Which technical factor is normalization intended to adjust?", "Hvilken teknisk faktor skal normaliseringen justere?"),
-            _t("¿Qué evidencia independiente justificaría excluir una muestra?", "What independent evidence would justify excluding a sample?", "Hvilken uafhængig evidens ville retfærdiggøre at ekskludere en prøve?"),
-            _t("¿El método posterior requiere conteos, valores transformados o variables escaladas?", "Does the downstream method require counts, transformed values, or scaled variables?", "Kræver den efterfølgende metode counts, transformerede værdier eller skalerede variable?"),
+            _t(
+                "¿Qué representa una celda y cuál es la unidad independiente?",
+                "What does one cell represent, and what is the independent unit?",
+                "Hvad repræsenterer én celle, og hvad er den uafhængige enhed?",
+            ),
+            _t(
+                "¿Qué factor técnico intenta ajustar la normalización?",
+                "Which technical factor is normalization intended to adjust?",
+                "Hvilken teknisk faktor skal normaliseringen justere?",
+            ),
+            _t(
+                "¿Qué evidencia independiente justificaría excluir una muestra?",
+                "What independent evidence would justify excluding a sample?",
+                "Hvilken uafhængig evidens ville retfærdiggøre at ekskludere en prøve?",
+            ),
+            _t(
+                "¿El método posterior requiere conteos, valores transformados o variables escaladas?",
+                "Does the downstream method require counts, transformed values, or scaled variables?",
+                "Kræver den efterfølgende metode counts, transformerede værdier eller skalerede variable?",
+            ),
         ),
         (
-            _t("Declara matriz, metadata, IDs y procedencia.", "Declares matrix, metadata, IDs, and provenance.", "Deklarerer matrix, metadata, ID'er og proveniens."),
-            _t("Interpreta métricas de calidad sin automatizar exclusiones.", "Interprets quality metrics without automating exclusions.", "Fortolker kvalitetsmål uden at automatisere eksklusioner."),
-            _t("Justifica cada operación de preprocesamiento.", "Justifies each preprocessing operation.", "Begrunder hver præprocesseringsoperation."),
-            _t("Conserva artefactos y parámetros reproducibles.", "Retains reproducible artifacts and parameters.", "Bevarer reproducerbare artefakter og parametre."),
+            _t(
+                "Declara matriz, metadata, IDs y procedencia.",
+                "Declares matrix, metadata, IDs, and provenance.",
+                "Deklarerer matrix, metadata, ID'er og proveniens.",
+            ),
+            _t(
+                "Interpreta métricas de calidad sin automatizar exclusiones.",
+                "Interprets quality metrics without automating exclusions.",
+                "Fortolker kvalitetsmål uden at automatisere eksklusioner.",
+            ),
+            _t(
+                "Justifica cada operación de preprocesamiento.",
+                "Justifies each preprocessing operation.",
+                "Begrunder hver præprocesseringsoperation.",
+            ),
+            _t(
+                "Conserva artefactos y parámetros reproducibles.",
+                "Retains reproducible artifacts and parameters.",
+                "Bevarer reproducerbare artefakter og parametre.",
+            ),
         ),
         (
-            _t("No inventar propiedades del dataset que no estén declaradas.", "Do not invent dataset properties that are not declared.", "Opfind ikke egenskaber ved datasættet, der ikke er deklareret."),
-            _t("No confundir una transformación exploratoria con la entrada requerida por un modelo.", "Do not confuse an exploratory transformation with the input required by a model.", "Forveksl ikke en eksplorativ transformation med det input, en model kræver."),
-            _t("No convertir una señal de QC en una causa confirmada.", "Do not turn a QC signal into a confirmed cause.", "Gør ikke et QC-signal til en bekræftet årsag."),
-            _t("Responder en el idioma activo y preservar nombres técnicos de R.", "Respond in the active language and preserve technical R names.", "Svar på det aktive sprog og bevar tekniske R-navne."),
+            _t(
+                "No inventar propiedades del dataset que no estén declaradas.",
+                "Do not invent dataset properties that are not declared.",
+                "Opfind ikke egenskaber ved datasættet, der ikke er deklareret.",
+            ),
+            _t(
+                "No confundir una transformación exploratoria con la entrada requerida por un modelo.",
+                "Do not confuse an exploratory transformation with the input required by a model.",
+                "Forveksl ikke en eksplorativ transformation med det input, en model kræver.",
+            ),
+            _t(
+                "No convertir una señal de QC en una causa confirmada.",
+                "Do not turn a QC signal into a confirmed cause.",
+                "Gør ikke et QC-signal til en bekræftet årsag.",
+            ),
+            _t(
+                "Responder en el idioma activo y preservar nombres técnicos de R.",
+                "Respond in the active language and preserve technical R names.",
+                "Svar på det aktive sprog og bevar tekniske R-navne.",
+            ),
         ),
         (
             "https://odin.sdu.dk/sitecore/index.php?a=searchfagbesk&internkode=BMB831&lang=en",
