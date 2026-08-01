@@ -13,7 +13,11 @@ from computational_biomedicine_study_hub.datasets.synthea_snapshot import (
 )
 
 
-def _write_csv(path: Path, columns: tuple[str, ...], rows: tuple[tuple[str, ...], ...]) -> None:
+def _write_csv(
+    path: Path,
+    columns: tuple[str, ...],
+    rows: tuple[tuple[str, ...], ...],
+) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle, lineterminator="\n")
@@ -42,8 +46,24 @@ def _valid_snapshot(root: Path) -> None:
             "DESCRIPTION",
         ),
         (
-            ("E01", "2025-01-01", "2025-01-01", "P01", "ambulatory", "185349003", "Encounter"),
-            ("E02", "2025-02-01", "2025-02-01", "P02", "wellness", "162673000", "Checkup"),
+            (
+                "E01",
+                "2025-01-01",
+                "2025-01-01",
+                "P01",
+                "ambulatory",
+                "185349003",
+                "Encounter",
+            ),
+            (
+                "E02",
+                "2025-02-01",
+                "2025-02-01",
+                "P02",
+                "wellness",
+                "162673000",
+                "Checkup",
+            ),
         ),
     )
     _write_csv(
@@ -53,10 +73,37 @@ def _valid_snapshot(root: Path) -> None:
     )
     _write_csv(
         root / "observations.csv",
-        ("DATE", "PATIENT", "ENCOUNTER", "CODE", "DESCRIPTION", "VALUE", "UNITS", "TYPE"),
         (
-            ("2025-01-01", "P01", "E01", "39156-5", "Body Mass Index", "24.1", "kg/m2", "numeric"),
-            ("2025-02-01", "P02", "E02", "8480-6", "Systolic Blood Pressure", "125", "mm[Hg]", "numeric"),
+            "DATE",
+            "PATIENT",
+            "ENCOUNTER",
+            "CODE",
+            "DESCRIPTION",
+            "VALUE",
+            "UNITS",
+            "TYPE",
+        ),
+        (
+            (
+                "2025-01-01",
+                "P01",
+                "E01",
+                "39156-5",
+                "Body Mass Index",
+                "24.1",
+                "kg/m2",
+                "numeric",
+            ),
+            (
+                "2025-02-01",
+                "P02",
+                "E02",
+                "8480-6",
+                "Systolic Blood Pressure",
+                "125",
+                "mm[Hg]",
+                "numeric",
+            ),
         ),
     )
 
@@ -100,13 +147,21 @@ def test_duplicate_primary_key_and_orphan_patient_are_errors(tmp_path: Path) -> 
             "CODE",
             "DESCRIPTION",
         ),
-        (("E01", "2025-01-01", "2025-01-01", "P99", "ambulatory", "1", "Encounter"),),
+        (
+            (
+                "E01",
+                "2025-01-01",
+                "2025-01-01",
+                "P99",
+                "ambulatory",
+                "1",
+                "Encounter",
+            ),
+        ),
     )
 
     report = inspect_synthea_csv_directory(tmp_path)
-    error_codes = {
-        issue.code for issue in report.issues if issue.severity is IssueSeverity.ERROR
-    }
+    error_codes = {issue.code for issue in report.issues if issue.severity is IssueSeverity.ERROR}
 
     assert not report.valid
     assert "duplicate-primary-key" in error_codes
@@ -135,8 +190,28 @@ def test_blank_encounter_reference_is_warning_not_error(tmp_path: Path) -> None:
     _valid_snapshot(tmp_path)
     _write_csv(
         tmp_path / "observations.csv",
-        ("DATE", "PATIENT", "ENCOUNTER", "CODE", "DESCRIPTION", "VALUE", "UNITS", "TYPE"),
-        (("2025-01-01", "P01", "", "39156-5", "Body Mass Index", "24.1", "kg/m2", "numeric"),),
+        (
+            "DATE",
+            "PATIENT",
+            "ENCOUNTER",
+            "CODE",
+            "DESCRIPTION",
+            "VALUE",
+            "UNITS",
+            "TYPE",
+        ),
+        (
+            (
+                "2025-01-01",
+                "P01",
+                "",
+                "39156-5",
+                "Body Mass Index",
+                "24.1",
+                "kg/m2",
+                "numeric",
+            ),
+        ),
     )
 
     report = inspect_synthea_csv_directory(tmp_path)
@@ -147,11 +222,7 @@ def test_blank_encounter_reference_is_warning_not_error(tmp_path: Path) -> None:
     assert report.issues[0].severity is IssueSeverity.WARNING
 
 
-def test_cli_writes_manifest_and_returns_validation_status(
-    tmp_path: Path,
-    capsys: object,
-) -> None:
-    del capsys
+def test_cli_writes_manifest_and_returns_validation_status(tmp_path: Path) -> None:
     snapshot = tmp_path / "snapshot"
     manifest = tmp_path / "artifacts" / "synthea-manifest.json"
     _valid_snapshot(snapshot)
