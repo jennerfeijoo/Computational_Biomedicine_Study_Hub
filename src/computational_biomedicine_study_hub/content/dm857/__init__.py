@@ -6,8 +6,10 @@ from ...i18n import AppLocale
 from ..bundles import LocalizedModuleBundle, validate_bundle_catalog
 from .book_grounded_extensions import (
     DM857_BOOK_SOURCES,
-    DM857_MODULE_SOURCE_AUDIT as _BASE_DM857_MODULE_SOURCE_AUDIT,
     apply_book_grounded_extensions,
+)
+from .book_grounded_extensions import (
+    DM857_MODULE_SOURCE_AUDIT as _BASE_DM857_MODULE_SOURCE_AUDIT,
 )
 from .book_grounded_foundations import (
     apply_foundations_book_extensions,
