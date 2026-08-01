@@ -61,8 +61,8 @@ def test_bmb831_initial_audit_remains_conservative() -> None:
     summary = coverage_summary()
     assert summary.total == 15
     assert summary.covered == 0
-    assert summary.partial == 6
-    assert summary.gap == 9
+    assert summary.partial == 7
+    assert summary.gap == 8
     assert not summary.fully_covered
 
     assert BMB831_PUBLIC_EXAM == "Individual report"
