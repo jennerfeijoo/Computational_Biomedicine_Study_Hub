@@ -4,6 +4,11 @@ from __future__ import annotations
 
 from ...i18n import AppLocale
 from ..bundles import LocalizedModuleBundle, validate_bundle_catalog
+from .book_grounded_extensions import (
+    DM857_BOOK_SOURCES,
+    DM857_MODULE_SOURCE_AUDIT,
+    apply_book_grounded_extensions,
+)
 from .module_01_localized import LOCALIZED_MODULE as LOCALIZED_MODULE_01_FOUNDATIONS
 from .module_01_objective_bank_localized import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK,
@@ -75,77 +80,103 @@ from .module_14_testing_debugging_quality import (
     materialize_module_14_question_bank,
 )
 
-LOCALIZED_BUNDLES = (
+(
+    LOCALIZED_MODULE_01_FOUNDATIONS,
+    LOCALIZED_MODULE_02_CONDITIONALS,
+    LOCALIZED_MODULE_03_ITERATION,
+    LOCALIZED_MODULE_04_FUNCTIONS,
+    LOCALIZED_MODULE_05_STRINGS,
+    LOCALIZED_MODULE_06_SEQUENCES,
+    LOCALIZED_MODULE_07_MAPPINGS_SETS,
+    LOCALIZED_MODULE_08_FILES_EXCEPTIONS,
+    LOCALIZED_MODULE_09_RECURSION,
+    LOCALIZED_MODULE_10_TREES,
+    LOCALIZED_MODULE_11_ADTS,
+    LOCALIZED_MODULE_12_OOP,
+    LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES,
+    LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,
+) = apply_book_grounded_extensions(
+    (
+        LOCALIZED_MODULE_01_FOUNDATIONS,
+        LOCALIZED_MODULE_02_CONDITIONALS,
+        LOCALIZED_MODULE_03_ITERATION,
+        LOCALIZED_MODULE_04_FUNCTIONS,
+        LOCALIZED_MODULE_05_STRINGS,
+        LOCALIZED_MODULE_06_SEQUENCES,
+        LOCALIZED_MODULE_07_MAPPINGS_SETS,
+        LOCALIZED_MODULE_08_FILES_EXCEPTIONS,
+        LOCALIZED_MODULE_09_RECURSION,
+        LOCALIZED_MODULE_10_TREES,
+        LOCALIZED_MODULE_11_ADTS,
+        LOCALIZED_MODULE_12_OOP,
+        LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES,
+        LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,
+    )
+)
+
+_LOCALIZED_MODULES = (
+    LOCALIZED_MODULE_01_FOUNDATIONS,
+    LOCALIZED_MODULE_02_CONDITIONALS,
+    LOCALIZED_MODULE_03_ITERATION,
+    LOCALIZED_MODULE_04_FUNCTIONS,
+    LOCALIZED_MODULE_05_STRINGS,
+    LOCALIZED_MODULE_06_SEQUENCES,
+    LOCALIZED_MODULE_07_MAPPINGS_SETS,
+    LOCALIZED_MODULE_08_FILES_EXCEPTIONS,
+    LOCALIZED_MODULE_09_RECURSION,
+    LOCALIZED_MODULE_10_TREES,
+    LOCALIZED_MODULE_11_ADTS,
+    LOCALIZED_MODULE_12_OOP,
+    LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES,
+    LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,
+)
+
+_LOCALIZED_OBJECTIVE_BANKS = (
+    LOCALIZED_OBJECTIVE_QUESTION_BANK,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_02,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_03,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_04,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_05,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_06,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_07,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_08,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_09,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_11,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_12,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_13,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_14,
+)
+
+_CONTENT_VERSIONS = (
+    "1.0.0",
+    "1.0.0",
+    "1.0.0",
+    "1.1.0",
+    "1.0.0",
+    "1.0.0",
+    "1.0.0",
+    "1.1.0",
+    "1.0.0",
+    "1.0.0",
+    "1.0.0",
+    "1.0.0",
+    "1.0.0",
+    "1.0.0",
+)
+
+LOCALIZED_BUNDLES = tuple(
     LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_01_FOUNDATIONS,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_02_CONDITIONALS,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_02,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_03_ITERATION,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_03,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_04_FUNCTIONS,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_04,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_05_STRINGS,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_05,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_06_SEQUENCES,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_06,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_07_MAPPINGS_SETS,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_07,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_08_FILES_EXCEPTIONS,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_08,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_09_RECURSION,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_09,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_10_TREES,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_11_ADTS,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_11,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_12_OOP,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_12,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_13_SCIENTIFIC_LIBRARIES,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_13,
-        content_version="1.0.0",
-    ),
-    LocalizedModuleBundle(
-        localized_module=LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,
-        localized_objective_question_bank=LOCALIZED_OBJECTIVE_QUESTION_BANK_14,
-        content_version="1.0.0",
-    ),
+        localized_module=module,
+        localized_objective_question_bank=bank,
+        content_version=version,
+    )
+    for module, bank, version in zip(
+        _LOCALIZED_MODULES,
+        _LOCALIZED_OBJECTIVE_BANKS,
+        _CONTENT_VERSIONS,
+        strict=True,
+    )
 )
 validate_bundle_catalog(LOCALIZED_BUNDLES)
 
@@ -189,6 +220,8 @@ OBJECTIVE_QUESTION_BANKS = {
 
 __all__ = [
     "BUNDLES",
+    "DM857_BOOK_SOURCES",
+    "DM857_MODULE_SOURCE_AUDIT",
     "LOCALIZED_BUNDLES",
     "LOCALIZED_MODULES",
     "LOCALIZED_MODULE_01_FOUNDATIONS",
@@ -249,6 +282,7 @@ __all__ = [
     "OBJECTIVE_QUESTION_BANK_12",
     "OBJECTIVE_QUESTION_BANK_13",
     "OBJECTIVE_QUESTION_BANK_14",
+    "apply_book_grounded_extensions",
     "materialize_module_02_question_bank",
     "materialize_module_03_question_bank",
     "materialize_module_04_question_bank",
