@@ -12,12 +12,12 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.r_execution import can_execute_r
 
 
-def test_bmb831_registers_three_complete_modules() -> None:
-    expected_ids = ("bmb831.m01", "bmb831.m02", "bmb831.m03")
+def test_bmb831_registers_five_complete_modules() -> None:
+    expected_ids = tuple(f"bmb831.m{number:02d}" for number in range(1, 6))
     assert tuple(module.module_id for module in MODULES) == expected_ids
-    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 3
+    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 5
     assert set(OBJECTIVE_QUESTION_BANKS) == set(expected_ids)
-    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 48
+    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 80
 
     for bundle in BUNDLES:
         module = bundle.module
@@ -71,6 +71,27 @@ def test_bmb831_omics_modules_cover_matrix_and_inference_contracts() -> None:
     assert "tamaño del efecto" in differential_text
     assert "multiplicidad" in differential_text
     assert "benjamini-hochberg" in differential_text
+
+
+def test_bmb831_multivariate_and_visualization_modules_are_advanced() -> None:
+    multivariate_text = _module_text(3)
+    visualization_text = _module_text(4)
+
+    assert "pca" in multivariate_text
+    assert "scores" in multivariate_text
+    assert "loadings" in multivariate_text
+    assert "distancia" in multivariate_text
+    assert "clustering" in multivariate_text
+    assert "estabilidad" in multivariate_text
+    assert "fuga" in multivariate_text
+
+    assert "contrato de figura" in visualization_text
+    assert "volcano" in visualization_text
+    assert "ma plot" in visualization_text
+    assert "heatmap" in visualization_text
+    assert "incertidumbre" in visualization_text
+    assert "accesibilidad" in visualization_text
+    assert "reproduc" in visualization_text
 
 
 def test_bmb831_locales_preserve_assessment_identity() -> None:
