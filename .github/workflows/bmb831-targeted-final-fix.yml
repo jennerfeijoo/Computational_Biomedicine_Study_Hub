@@ -1,0 +1,93 @@
+name: Apply BMB831 Targeted Final Fixes
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bmb831-targeted-final-fix
+  cancel-in-progress: true
+
+jobs:
+  fix:
+    if: github.head_ref == 'agent/bmb831-complete-course'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out BMB831 branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Apply exact scientific and UI corrections
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          protein_path = Path(
+              "src/computational_biomedicine_study_hub/content/bmb831/"
+              "module_07_protein_characterization.py"
+          )
+          protein = protein_path.read_text(encoding="utf-8")
+          replacements = {
+              '"""best_start=4\nbest_score=3.00"""': '"""best_start=5\nbest_score=3.60"""',
+              "La ventana AILM inicia en la posición cuatro y maximiza la escala ilustrativa; no confirma por sí sola una hélice transmembrana.":
+                  "La ventana ILMV inicia en la posición cinco y maximiza la escala ilustrativa; no confirma por sí sola una hélice transmembrana.",
+              "The AILM window starts at position four and maximizes the illustrative scale; it does not by itself confirm a transmembrane helix.":
+                  "The ILMV window starts at position five and maximizes the illustrative scale; it does not by itself confirm a transmembrane helix.",
+              "AILM-vinduet starter ved position fire og maksimerer den illustrative skala; det bekræfter ikke i sig selv en transmembranhelix.":
+                  "ILMV-vinduet starter ved position fem og maksimerer den illustrative skala; det bekræfter ikke i sig selv en transmembranhelix.",
+          }
+          for old, new in replacements.items():
+              if old not in protein and new not in protein:
+                  raise SystemExit(f"Expected M07 text not found: {old[:60]}")
+              protein = protein.replace(old, new)
+          protein_path.write_text(protein, encoding="utf-8")
+
+          report_path = Path(
+              "src/computational_biomedicine_study_hub/ui/pages/bmb831_report_page.py"
+          )
+          report = report_path.read_text(encoding="utf-8")
+          old = '''        if index == self._selector.currentIndex():
+            self._load_section(section_id)
+        else:
+            self._selector.setCurrentIndex(index)
+        return True
+'''
+          new = '''        if index != self._selector.currentIndex():
+            self._selector.setCurrentIndex(index)
+        return True
+'''
+          if old not in report and new not in report:
+              raise SystemExit("Expected BMB831 select_section block not found")
+          report = report.replace(old, new)
+          report_path.write_text(report, encoding="utf-8")
+
+          public_omics_path = Path(
+              "src/computational_biomedicine_study_hub/content/bmb831/"
+              "module_06_public_omics_workflows.py"
+          )
+          public_omics = public_omics_path.read_text(encoding="utf-8")
+          public_omics = public_omics.replace(
+              "https://bioconductor.org/packages/release/bioc/html/limpa.html",
+              "https://bioconductor.org/packages/release/bioc/html/limma.html",
+          )
+          public_omics_path.write_text(public_omics, encoding="utf-8")
+          PY
+
+      - name: Normalize Python sources and tests
+        run: |
+          python -m pip install ruff
+          ruff check --fix src tests
+          ruff format src tests
+
+      - name: Commit clean branch state
+        run: |
+          rm .github/workflows/bmb831-targeted-final-fix.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Apply final BMB831 scientific and UI corrections"
+          git pull --rebase origin ${{ github.head_ref }}
+          git push origin HEAD:${{ github.head_ref }}
