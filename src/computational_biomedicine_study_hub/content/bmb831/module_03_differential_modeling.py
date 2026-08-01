@@ -283,7 +283,7 @@ adjusted=0.005,0.025,0.067,0.250,0.800""",
     practices=(
         (
             "m03.p01",
-            "OPEN_RESPONSE",
+            "SHORT_ANSWER",
             _t(
                 "Formula un estimando y un contraste para comparar tratamiento frente a control ajustando por lote.",
                 "Formulate an estimand and contrast for treatment versus control adjusted for batch.",
@@ -315,7 +315,7 @@ adjusted=0.005,0.025,0.067,0.250,0.800""",
         ),
         (
             "m03.p02",
-            "CODE_READING",
+            "CODE_TRACING",
             _t(
                 "Explica por qué design <- model.matrix(~ batch + group, metadata) puede ser singular cuando cada grupo aparece en un único lote.",
                 "Explain why design <- model.matrix(~ batch + group, metadata) can be singular when every group occurs in only one batch.",
@@ -347,7 +347,7 @@ adjusted=0.005,0.025,0.067,0.250,0.800""",
         ),
         (
             "m03.p03",
-            "OPEN_RESPONSE",
+            "SHORT_ANSWER",
             _t(
                 "Compara qué información aporta un log2 fold change, su intervalo de confianza, el valor p y el valor p ajustado.",
                 "Compare the information provided by a log2 fold change, its confidence interval, the p-value, and the adjusted p-value.",
@@ -379,7 +379,7 @@ adjusted=0.005,0.025,0.067,0.250,0.800""",
         ),
         (
             "m03.p04",
-            "ERROR_RECONSTRUCTION",
+            "DEBUGGING",
             _t(
                 "Un informe selecciona genes con p < 0.05 entre 20 000 pruebas y no informa ajuste. Reconstruye el problema y corrige la estrategia.",
                 "A report selects genes with p < 0.05 among 20,000 tests and reports no adjustment. Reconstruct the problem and correct the strategy.",
@@ -411,7 +411,7 @@ adjusted=0.005,0.025,0.067,0.250,0.800""",
         ),
         (
             "m03.p05",
-            "STARTER_CODE",
+            "CODE_COMPLETION",
             _t(
                 "Completa una función que añada valores BH y marque resultados con padj < alpha y |log2fc| >= min_effect.",
                 "Complete a function that adds BH values and marks results with padj < alpha and |log2fc| >= min_effect.",

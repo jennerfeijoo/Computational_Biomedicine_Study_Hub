@@ -294,7 +294,7 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
     practices=(
         (
             "m02.p01",
-            "OPEN_RESPONSE",
+            "SHORT_ANSWER",
             _t(
                 "Escribe un contrato mínimo para una matriz de RNA-seq: unidad de filas, unidad de columnas, claves, metadata y artefactos fuente.",
                 "Write a minimum contract for an RNA-seq matrix: row unit, column unit, keys, metadata, and source artifacts.",
@@ -326,7 +326,7 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
         ),
         (
             "m02.p02",
-            "CODE_READING",
+            "CODE_TRACING",
             _t(
                 "Explica por qué metadata <- metadata[match(colnames(counts), metadata$sample_id), ] requiere comprobar también valores NA y duplicados.",
                 "Explain why metadata <- metadata[match(colnames(counts), metadata$sample_id), ] also requires checking NA values and duplicates.",
@@ -354,7 +354,7 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
         ),
         (
             "m02.p03",
-            "OPEN_RESPONSE",
+            "SHORT_ANSWER",
             _t(
                 "Distingue qué pregunta responde cada operación: filtrado por baja abundancia, normalización por tamaño de biblioteca, log-transformación y z-score por característica.",
                 "Distinguish the question answered by each operation: low-abundance filtering, library-size normalization, log transformation, and feature-wise z-scoring.",
@@ -382,7 +382,7 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
         ),
         (
             "m02.p04",
-            "ERROR_RECONSTRUCTION",
+            "DEBUGGING",
             _t(
                 "Un analista elimina S7 porque aparece separada en PCA y luego informa grupos más claros. Reconstruye el error y propone un análisis de sensibilidad.",
                 "An analyst removes S7 because it separates in PCA and then reports clearer groups. Reconstruct the error and propose a sensitivity analysis.",
@@ -414,7 +414,7 @@ cat("largest_profile_deviation=", names(which.max(deviation)), sep = "")
         ),
         (
             "m02.p05",
-            "STARTER_CODE",
+            "CODE_COMPLETION",
             _t(
                 "Completa una función base R que compruebe que los IDs de muestras de una matriz y metadata son únicos y coinciden en orden.",
                 "Complete a base-R function that checks whether matrix and metadata sample IDs are unique and match in order.",
