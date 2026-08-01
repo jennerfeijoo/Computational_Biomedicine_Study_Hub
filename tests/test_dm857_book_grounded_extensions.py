@@ -2,7 +2,6 @@
 
 from computational_biomedicine_study_hub.content import dm857
 
-
 _EXPECTED_MODULE_IDS = {f"dm857.m{index:02d}" for index in range(1, 15)}
 
 
