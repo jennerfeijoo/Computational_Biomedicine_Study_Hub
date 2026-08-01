@@ -1,7 +1,8 @@
 name: Apply BMB831 Targeted Final Fixes
 
 on:
-  pull_request:
+  push:
+    branches: [agent/bmb831-complete-course]
 
 permissions:
   contents: write
@@ -12,13 +13,12 @@ concurrency:
 
 jobs:
   fix:
-    if: github.head_ref == 'agent/bmb831-complete-course'
     runs-on: ubuntu-latest
     steps:
       - name: Check out BMB831 branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.ref_name }}
 
       - name: Apply exact scientific and UI corrections
         run: |
@@ -89,5 +89,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git diff --cached --quiet || git commit -m "Apply final BMB831 scientific and UI corrections"
-          git pull --rebase origin ${{ github.head_ref }}
-          git push origin HEAD:${{ github.head_ref }}
+          git pull --rebase origin ${{ github.ref_name }}
+          git push origin HEAD:${{ github.ref_name }}
