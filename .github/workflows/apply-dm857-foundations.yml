@@ -1,15 +1,16 @@
 name: Apply DM857 foundations integration
 
 on:
-  push:
+  pull_request:
     branches:
-      - agent/dm857-book-grounded-foundations-02
+      - main
 
 permissions:
   contents: write
 
 jobs:
   integrate:
+    if: github.head_ref == 'agent/dm857-book-grounded-foundations-02'
     runs-on: ubuntu-24.04
     steps:
       - name: Check out branch
