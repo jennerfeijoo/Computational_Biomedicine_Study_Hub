@@ -1,0 +1,153 @@
+name: Apply DM857 foundations integration
+
+on:
+  push:
+    branches:
+      - agent/dm857-book-grounded-foundations-02
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/dm857-book-grounded-foundations-02
+      - name: Apply deterministic integration edits
+        shell: python
+        run: |
+          from pathlib import Path
+
+          init_path = Path(
+              "src/computational_biomedicine_study_hub/content/dm857/__init__.py"
+          )
+          text = init_path.read_text(encoding="utf-8")
+          text = text.replace(
+              "    DM857_MODULE_SOURCE_AUDIT,\n",
+              "    DM857_MODULE_SOURCE_AUDIT as _BASE_DM857_MODULE_SOURCE_AUDIT,\n",
+          )
+          text = text.replace(
+              ")\nfrom .module_01_localized import",
+              ")\nfrom .book_grounded_foundations import (\n"
+              "    apply_foundations_book_extensions,\n"
+              "    update_foundations_audit,\n"
+              ")\nfrom .module_01_localized import",
+              1,
+          )
+          text = text.replace(
+              "\n(\n    LOCALIZED_MODULE_01_FOUNDATIONS,",
+              "\nDM857_MODULE_SOURCE_AUDIT = update_foundations_audit(\n"
+              "    _BASE_DM857_MODULE_SOURCE_AUDIT\n"
+              ")\n\n(\n    LOCALIZED_MODULE_01_FOUNDATIONS,",
+              1,
+          )
+          text = text.replace(
+              ") = apply_book_grounded_extensions(\n",
+              ") = apply_foundations_book_extensions(\n"
+              "    apply_book_grounded_extensions(\n",
+              1,
+          )
+          text = text.replace(
+              "        LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,\n"
+              "    )\n)\n\n_LOCALIZED_MODULES",
+              "        LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,\n"
+              "    )\n)\n\n_LOCALIZED_MODULES",
+              1,
+          )
+          old_versions = (
+              '_CONTENT_VERSIONS = (\n'
+              '    "1.0.0",\n'
+              '    "1.0.0",\n'
+              '    "1.0.0",\n'
+              '    "1.1.0",'
+          )
+          new_versions = (
+              '_CONTENT_VERSIONS = (\n'
+              '    "1.1.0",\n'
+              '    "1.1.0",\n'
+              '    "1.1.0",\n'
+              '    "1.1.0",'
+          )
+          if old_versions not in text:
+              raise SystemExit("expected content-version block not found")
+          text = text.replace(old_versions, new_versions, 1)
+          init_path.write_text(text, encoding="utf-8")
+
+          replacements = {
+              Path("tests/test_dm857_module_02_content.py"): {
+                  "assert len(module.objectives) == 7": "assert len(module.objectives) == 8",
+                  "assert len(module.concepts) == 7": "assert len(module.concepts) == 8",
+                  "assert len(module.worked_examples) == 4": (
+                      "assert len(module.worked_examples) == 5"
+                  ),
+                  "assert len(module.practice_exercises) == 10": (
+                      "assert len(module.practice_exercises) == 11"
+                  ),
+                  "assert len(module.assessment_items) == 12": (
+                      "assert len(module.assessment_items) == 13"
+                  ),
+                  '        "validation-boundaries-and-branch-testing",\n': (
+                      '        "validation-boundaries-and-branch-testing",\n'
+                      '        "branch-ordering-and-shadowing",\n'
+                  ),
+              },
+              Path("tests/test_dm857_module_03_content.py"): {
+                  "assert len(module.objectives) == 8": "assert len(module.objectives) == 9",
+                  "assert len(module.concepts) == 8": "assert len(module.concepts) == 9",
+                  "assert len(module.worked_examples) == 5": (
+                      "assert len(module.worked_examples) == 6"
+                  ),
+                  "assert len(module.practice_exercises) == 12": (
+                      "assert len(module.practice_exercises) == 13"
+                  ),
+                  "assert len(module.assessment_items) == 14": (
+                      "assert len(module.assessment_items) == 15"
+                  ),
+                  '        "loop-tracing-and-testing",\n': (
+                      '        "loop-tracing-and-testing",\n'
+                      '        "bisection-search-and-tolerance",\n'
+                  ),
+              },
+              Path("tests/test_module_bundles.py"): {
+                  '        "dm857.m04": "1.1.0",\n': (
+                      '        "dm857.m01": "1.1.0",\n'
+                      '        "dm857.m02": "1.1.0",\n'
+                      '        "dm857.m03": "1.1.0",\n'
+                      '        "dm857.m04": "1.1.0",\n'
+                  ),
+              },
+          }
+
+          for path, mapping in replacements.items():
+              file_text = path.read_text(encoding="utf-8")
+              for old, new in mapping.items():
+                  if old not in file_text:
+                      raise SystemExit(f"missing expected text in {path}: {old}")
+                  file_text = file_text.replace(old, new)
+              path.write_text(file_text, encoding="utf-8")
+      - name: Format edited Python files
+        run: |
+          python -m pip install "ruff==0.16.1"
+          ruff format \
+            src/computational_biomedicine_study_hub/content/dm857/__init__.py \
+            tests/test_dm857_module_02_content.py \
+            tests/test_dm857_module_03_content.py \
+            tests/test_module_bundles.py
+      - name: Commit integration
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            src/computational_biomedicine_study_hub/content/dm857/__init__.py \
+            tests/test_dm857_module_02_content.py \
+            tests/test_dm857_module_03_content.py \
+            tests/test_module_bundles.py
+          git commit -m "Integrate DM857 book-grounded foundations"
+          git push origin HEAD:agent/dm857-book-grounded-foundations-02
