@@ -4,6 +4,7 @@ from contextlib import redirect_stdout
 from io import StringIO
 
 from computational_biomedicine_study_hub.content import dm857
+from computational_biomedicine_study_hub.content.models import LearningModule
 from computational_biomedicine_study_hub.i18n import AppLocale
 
 EXPECTED_EXTENSIONS = {
@@ -28,11 +29,11 @@ EXPECTED_EXTENSIONS = {
 }
 
 
-def _materialized_modules(locale: AppLocale) -> dict[str, object]:
+def _materialized_modules(locale: AppLocale) -> dict[str, LearningModule]:
     return {module.module_id: module.materialize(locale) for module in dm857.LOCALIZED_MODULES}
 
 
-def _identifier_signature(module: object) -> tuple[tuple[str, ...], ...]:
+def _identifier_signature(module: LearningModule) -> tuple[tuple[str, ...], ...]:
     return (
         tuple(item.objective_id for item in module.objectives),
         tuple(item.concept_id for item in module.concepts),
