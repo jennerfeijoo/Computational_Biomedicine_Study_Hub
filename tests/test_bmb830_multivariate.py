@@ -36,9 +36,7 @@ def test_multivariate_module_has_complete_individual_contract() -> None:
     assert len(LOCALIZED_OBJECTIVE_QUESTION_BANK_11) == 16
     assert all(can_execute_r(example.code) for example in module.worked_examples)
 
-    activity_text = " ".join(
-        exercise.prompt for exercise in module.practice_exercises
-    ).casefold()
+    activity_text = " ".join(exercise.prompt for exercise in module.practice_exercises).casefold()
     assert "proyecto grupal" not in activity_text
     assert "group project" not in activity_text
     assert "gruppeprojekt" not in activity_text

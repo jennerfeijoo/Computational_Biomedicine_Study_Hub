@@ -426,10 +426,34 @@ same_partition=TRUE""",
                 "Hvilken orientering er almindelig for PCA af biologiske prøver?",
             ),
             (
-                ("a", ("Muestras en filas y variables en columnas", "Samples in rows and variables in columns", "Prøver i rækker og variable i kolonner")),
-                ("b", ("Variables en filas y ninguna columna", "Variables in rows and no columns", "Variable i rækker og ingen kolonner")),
-                ("c", ("Solo metadatos numéricos", "Numeric metadata only", "Kun numeriske metadata")),
-                ("d", ("Una fila por proteína sin muestras", "One row per protein without samples", "Én række pr. protein uden prøver")),
+                (
+                    "a",
+                    (
+                        "Muestras en filas y variables en columnas",
+                        "Samples in rows and variables in columns",
+                        "Prøver i rækker og variable i kolonner",
+                    ),
+                ),
+                (
+                    "b",
+                    (
+                        "Variables en filas y ninguna columna",
+                        "Variables in rows and no columns",
+                        "Variable i rækker og ingen kolonner",
+                    ),
+                ),
+                (
+                    "c",
+                    ("Solo metadatos numéricos", "Numeric metadata only", "Kun numeriske metadata"),
+                ),
+                (
+                    "d",
+                    (
+                        "Una fila por proteína sin muestras",
+                        "One row per protein without samples",
+                        "Én række pr. protein uden prøver",
+                    ),
+                ),
             ),
             "a",
             (
@@ -446,10 +470,27 @@ same_partition=TRUE""",
                 "Hvornår er skalering særligt vigtig?",
             ),
             (
-                ("a", ("Cuando las variables tienen unidades o dispersiones muy distintas", "When variables have very different units or spreads", "Når variable har meget forskellige enheder eller spredninger")),
+                (
+                    "a",
+                    (
+                        "Cuando las variables tienen unidades o dispersiones muy distintas",
+                        "When variables have very different units or spreads",
+                        "Når variable har meget forskellige enheder eller spredninger",
+                    ),
+                ),
                 ("b", ("Solo cuando n=1", "Only when n=1", "Kun når n=1")),
-                ("c", ("Para demostrar causalidad", "To prove causality", "For at bevise kausalitet")),
-                ("d", ("Para eliminar toda variabilidad", "To remove all variability", "For at fjerne al variation")),
+                (
+                    "c",
+                    ("Para demostrar causalidad", "To prove causality", "For at bevise kausalitet"),
+                ),
+                (
+                    "d",
+                    (
+                        "Para eliminar toda variabilidad",
+                        "To remove all variability",
+                        "For at fjerne al variation",
+                    ),
+                ),
             ),
             "a",
             (
@@ -466,10 +507,38 @@ same_partition=TRUE""",
                 "Hvad repræsenterer PCA-scores?",
             ),
             (
-                ("a", ("Coordenadas de las muestras en los componentes", "Sample coordinates on the components", "Prøvernes koordinater på komponenterne")),
-                ("b", ("Valores p de cada variable", "P-values for each variable", "P-værdier for hver variabel")),
-                ("c", ("Errores de medición confirmados", "Confirmed measurement errors", "Bekræftede målefejl")),
-                ("d", ("Etiquetas clínicas predichas", "Predicted clinical labels", "Forudsagte kliniske etiketter")),
+                (
+                    "a",
+                    (
+                        "Coordenadas de las muestras en los componentes",
+                        "Sample coordinates on the components",
+                        "Prøvernes koordinater på komponenterne",
+                    ),
+                ),
+                (
+                    "b",
+                    (
+                        "Valores p de cada variable",
+                        "P-values for each variable",
+                        "P-værdier for hver variabel",
+                    ),
+                ),
+                (
+                    "c",
+                    (
+                        "Errores de medición confirmados",
+                        "Confirmed measurement errors",
+                        "Bekræftede målefejl",
+                    ),
+                ),
+                (
+                    "d",
+                    (
+                        "Etiquetas clínicas predichas",
+                        "Predicted clinical labels",
+                        "Forudsagte kliniske etiketter",
+                    ),
+                ),
             ),
             "a",
             (
@@ -486,10 +555,31 @@ same_partition=TRUE""",
                 "Hvad repræsenterer loadings?",
             ),
             (
-                ("a", ("Contribución y dirección de las variables", "Variable contribution and direction", "Variablernes bidrag og retning")),
+                (
+                    "a",
+                    (
+                        "Contribución y dirección de las variables",
+                        "Variable contribution and direction",
+                        "Variablernes bidrag og retning",
+                    ),
+                ),
                 ("b", ("Número de pacientes", "Number of patients", "Antal patienter")),
-                ("c", ("Probabilidad de causalidad", "Probability of causality", "Sandsynlighed for kausalitet")),
-                ("d", ("Altura del dendrograma únicamente", "Dendrogram height only", "Kun dendrogramhøjde")),
+                (
+                    "c",
+                    (
+                        "Probabilidad de causalidad",
+                        "Probability of causality",
+                        "Sandsynlighed for kausalitet",
+                    ),
+                ),
+                (
+                    "d",
+                    (
+                        "Altura del dendrograma únicamente",
+                        "Dendrogram height only",
+                        "Kun dendrogramhøjde",
+                    ),
+                ),
             ),
             "a",
             (
@@ -506,10 +596,38 @@ same_partition=TRUE""",
                 "Hvad betyder det, at PC1 forklarer 40 %?",
             ),
             (
-                ("a", ("Captura 40% de la variación total bajo el preprocesamiento usado", "It captures 40% of total variation under the chosen preprocessing", "Den indfanger 40 % af den samlede variation under den valgte forbehandling")),
-                ("b", ("Predice correctamente 40% de pacientes", "It correctly predicts 40% of patients", "Den forudsiger 40 % af patienterne korrekt")),
-                ("c", ("Demuestra 40% de causalidad", "It proves 40% causality", "Den beviser 40 % kausalitet")),
-                ("d", ("Elimina 40% de errores", "It removes 40% of errors", "Den fjerner 40 % af fejlene")),
+                (
+                    "a",
+                    (
+                        "Captura 40% de la variación total bajo el preprocesamiento usado",
+                        "It captures 40% of total variation under the chosen preprocessing",
+                        "Den indfanger 40 % af den samlede variation under den valgte forbehandling",
+                    ),
+                ),
+                (
+                    "b",
+                    (
+                        "Predice correctamente 40% de pacientes",
+                        "It correctly predicts 40% of patients",
+                        "Den forudsiger 40 % af patienterne korrekt",
+                    ),
+                ),
+                (
+                    "c",
+                    (
+                        "Demuestra 40% de causalidad",
+                        "It proves 40% causality",
+                        "Den beviser 40 % kausalitet",
+                    ),
+                ),
+                (
+                    "d",
+                    (
+                        "Elimina 40% de errores",
+                        "It removes 40% of errors",
+                        "Den fjerner 40 % af fejlene",
+                    ),
+                ),
             ),
             "a",
             (
@@ -526,8 +644,18 @@ same_partition=TRUE""",
                 "Hvad bestemmer hierarkisk klyngedannelse?",
             ),
             (
-                ("a", ("Preprocesamiento, distancia y linkage", "Preprocessing, distance, and linkage", "Forbehandling, afstand og linkage")),
-                ("b", ("Solo el nombre de las muestras", "Sample names only", "Kun prøvernes navne")),
+                (
+                    "a",
+                    (
+                        "Preprocesamiento, distancia y linkage",
+                        "Preprocessing, distance, and linkage",
+                        "Forbehandling, afstand og linkage",
+                    ),
+                ),
+                (
+                    "b",
+                    ("Solo el nombre de las muestras", "Sample names only", "Kun prøvernes navne"),
+                ),
                 ("c", ("Un valor p único", "A single p-value", "En enkelt p-værdi")),
                 ("d", ("La causalidad conocida", "Known causality", "Kendt kausalitet")),
             ),
@@ -546,10 +674,38 @@ same_partition=TRUE""",
                 "Hvad beviser det at skære et dendrogram i tre grupper?",
             ),
             (
-                ("a", ("Solo produce una partición bajo esa decisión", "It only produces a partition under that decision", "Det producerer kun en opdeling under denne beslutning")),
-                ("b", ("Demuestra tres subtipos verdaderos", "It proves three true subtypes", "Det beviser tre sande undertyper")),
-                ("c", ("Garantiza validación externa", "It guarantees external validation", "Det garanterer ekstern validering")),
-                ("d", ("Elimina efectos de lote", "It removes batch effects", "Det fjerner batcheffekter")),
+                (
+                    "a",
+                    (
+                        "Solo produce una partición bajo esa decisión",
+                        "It only produces a partition under that decision",
+                        "Det producerer kun en opdeling under denne beslutning",
+                    ),
+                ),
+                (
+                    "b",
+                    (
+                        "Demuestra tres subtipos verdaderos",
+                        "It proves three true subtypes",
+                        "Det beviser tre sande undertyper",
+                    ),
+                ),
+                (
+                    "c",
+                    (
+                        "Garantiza validación externa",
+                        "It guarantees external validation",
+                        "Det garanterer ekstern validering",
+                    ),
+                ),
+                (
+                    "d",
+                    (
+                        "Elimina efectos de lote",
+                        "It removes batch effects",
+                        "Det fjerner batcheffekter",
+                    ),
+                ),
             ),
             "a",
             (
@@ -566,10 +722,38 @@ same_partition=TRUE""",
                 "Hvilken rækkefølge undgår lækage, når PCA bruges til prædiktion?",
             ),
             (
-                ("a", ("Ajustar preprocesamiento y PCA en entrenamiento y proyectar validación", "Fit preprocessing and PCA on training and project validation", "Tilpas forbehandling og PCA på træning og projicér validering")),
-                ("b", ("Ajustar PCA con todos los pacientes antes de dividir", "Fit PCA on all patients before splitting", "Tilpas PCA på alle patienter før opdeling")),
-                ("c", ("Elegir componentes según el conjunto de prueba", "Choose components using the test set", "Vælg komponenter med testsættet")),
-                ("d", ("Repetir hasta obtener separación visual", "Repeat until visual separation appears", "Gentag indtil visuel adskillelse opstår")),
+                (
+                    "a",
+                    (
+                        "Ajustar preprocesamiento y PCA en entrenamiento y proyectar validación",
+                        "Fit preprocessing and PCA on training and project validation",
+                        "Tilpas forbehandling og PCA på træning og projicér validering",
+                    ),
+                ),
+                (
+                    "b",
+                    (
+                        "Ajustar PCA con todos los pacientes antes de dividir",
+                        "Fit PCA on all patients before splitting",
+                        "Tilpas PCA på alle patienter før opdeling",
+                    ),
+                ),
+                (
+                    "c",
+                    (
+                        "Elegir componentes según el conjunto de prueba",
+                        "Choose components using the test set",
+                        "Vælg komponenter med testsættet",
+                    ),
+                ),
+                (
+                    "d",
+                    (
+                        "Repetir hasta obtener separación visual",
+                        "Repeat until visual separation appears",
+                        "Gentag indtil visuel adskillelse opstår",
+                    ),
+                ),
             ),
             "a",
             (

@@ -13,7 +13,7 @@ The application combines concise theory, worked examples, executable code, guide
   - Python foundations, control flow, functions, data structures, recursion, trees, abstract data types, object-oriented programming, scientific libraries, testing, debugging, and software quality
   - persistent five-milestone project-and-report preparation workflow
 - **DM847 — Introduction to Bioinformatics**
-  - 10 complete modules
+  - 11 complete modules
   - molecular information, ontologies and databases, sequence scoring, pairwise alignment, hidden Markov models, suffix arrays and BWT, bacterial genetics, motif discovery, biological networks, and omics learning
   - persistent open-response and essay studio with one authored task per module
 
@@ -32,11 +32,12 @@ The application combines concise theory, worked examples, executable code, guide
   - multiple regression, design matrices, adjusted coefficients, factors, reference levels, confounding, and collinearity
   - interactions, effect modification, group-specific slopes, centring, polynomial terms, and nested-model comparison
   - residual diagnostics, heteroscedasticity, leverage, Cook's distance, sensitivity analysis, information leakage, and out-of-sample validation
-  - 160 stable objective-bank questions
+  - multivariate matrices, centring, scaling, distances, PCA, scores, loadings, explained variance, hierarchical clustering, and stability analysis
+  - 176 stable objective-bank questions
   - optional editable R laboratories executed through a locally installed `Rscript`
   - conservative audit against the active public SDU specification and a separate master-level readiness matrix
 
-The principal remaining academic gap is introductory multivariate analysis. Realistic large biological data, structured publication appraisal, and a complete individual oral-exam rehearsal remain partial until their official or source materials are available.
+The public multivariate requirement is now covered by an individual introductory module. Realistic large biological data, detailed figure-building practice, structured publication appraisal, and a complete individual oral-exam rehearsal remain partial until their official or source materials are available.
 
 BMB830 does not include a group project, role allocation, collaborative submission, or group presentation. The public course description recommends discussion during exercise sessions but publishes an individual oral examination rather than a group-project assessment. All Study Hub activities for this course are individually completable.
 
@@ -196,4 +197,4 @@ tests/              # Unit, content-integrity, localization, persistence, and UI
 
 ## Development status
 
-Active development. DM857 and DM847 provide complete academic course implementations. BMB830 contains ten complete modules covering foundations through model diagnostics and validation. The official and master-level audits deliberately keep the course incomplete until introductory multivariate analysis is implemented; realistic large biological data, publication appraisal, and full individual oral-exam rehearsal remain partial. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development. Group-presentation rehearsal is intentionally outside the application scope.
+Active development. DM857 and DM847 provide complete academic course implementations. BMB830 contains eleven complete modules covering foundations through introductory multivariate analysis. The official multivariate gap is closed, while realistic large biological data, detailed visualisation practice, publication appraisal, and full individual oral-exam rehearsal remain partial. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development. Group-presentation rehearsal is intentionally outside the application scope.

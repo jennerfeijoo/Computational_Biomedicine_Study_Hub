@@ -152,6 +152,7 @@ _INTERPRETATION_MODULES = (
     "bmb830.m08",
     "bmb830.m09",
     "bmb830.m10",
+    "bmb830.m11",
 )
 
 OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
@@ -170,7 +171,7 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.lo02",
         OfficialRequirementKind.LEARNING_OUTCOME,
         "Work with large data amounts and carry out standard statistical analysis to identify relevant features.",
-        ("bmb830.m01", "bmb830.m02", "bmb830.m06", "bmb830.m08", "bmb830.m10"),
+        ("bmb830.m01", "bmb830.m02", "bmb830.m06", "bmb830.m08", "bmb830.m10", "bmb830.m11"),
         CoverageStatus.PARTIAL,
         "Standard analysis and leakage-safe reasoning are covered, but no laboratory yet exercises "
         "memory-aware processing or feature screening on a realistically large matrix.",
@@ -181,16 +182,17 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.lo03",
         OfficialRequirementKind.LEARNING_OUTCOME,
         "Use standard algorithms for multi-variate analysis.",
-        (),
-        CoverageStatus.GAP,
-        "No completed BMB830 module yet teaches a standard multivariate algorithm.",
-        "Add scaling, distance, PCA, clustering, validation, and biological interpretation.",
+        ("bmb830.m11",),
+        CoverageStatus.COVERED,
+        "The individual multivariate module teaches matrix orientation, centring, scaling, "
+        "Euclidean and profile-based distance reasoning, PCA, hierarchical clustering, "
+        "sensitivity analysis, leakage prevention, and biological interpretation.",
     ),
     OfficialRequirement(
         "bmb830.sdu.lo04",
         OfficialRequirementKind.LEARNING_OUTCOME,
         "Design scripts for detailed visualisation of results.",
-        ("bmb830.m01", "bmb830.m02", "bmb830.m07", "bmb830.m09", "bmb830.m10"),
+        ("bmb830.m01", "bmb830.m02", "bmb830.m07", "bmb830.m09", "bmb830.m10", "bmb830.m11"),
         CoverageStatus.PARTIAL,
         "The modules connect scripts to distributions, associations, fitted effects, and diagnostics, "
         "but do not yet provide a complete individual laboratory for detailed statistical figures.",
@@ -210,7 +212,15 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.lo06",
         OfficialRequirementKind.LEARNING_OUTCOME,
         "Objectively discuss applied data-analysis methods presented, for example, in publications.",
-        ("bmb830.m05", "bmb830.m06", "bmb830.m07", "bmb830.m08", "bmb830.m09", "bmb830.m10"),
+        (
+            "bmb830.m05",
+            "bmb830.m06",
+            "bmb830.m07",
+            "bmb830.m08",
+            "bmb830.m09",
+            "bmb830.m10",
+            "bmb830.m11",
+        ),
         CoverageStatus.PARTIAL,
         "The course teaches the concepts required for critique and includes oral explanations, but "
         "does not yet provide a structured appraisal workflow using a real publication.",
@@ -238,7 +248,7 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.ct03",
         OfficialRequirementKind.CONTENT_TOPIC,
         "Basic statistical models.",
-        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES),
+        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES, "bmb830.m11"),
         CoverageStatus.COVERED,
         "The course provides estimation, tests, group comparison, regression, interactions, "
         "nonlinearity, diagnostics, and validation.",
@@ -247,7 +257,7 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.ct04",
         OfficialRequirementKind.CONTENT_TOPIC,
         "Data visualisation.",
-        ("bmb830.m02", "bmb830.m07", "bmb830.m09", "bmb830.m10"),
+        ("bmb830.m02", "bmb830.m07", "bmb830.m09", "bmb830.m10", "bmb830.m11"),
         CoverageStatus.COVERED,
         "Visualisation is treated as an analytical tool for distributions, relationships, fitted "
         "effects, and diagnostic patterns rather than decoration.",
@@ -264,10 +274,10 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.ct06",
         OfficialRequirementKind.CONTENT_TOPIC,
         "Basic multi-variate analysis.",
-        (),
-        CoverageStatus.GAP,
-        "The current catalog stops at regression diagnostics and validation.",
-        "Implement scaling, PCA, distances, clustering, validation, and biological interpretation.",
+        ("bmb830.m11",),
+        CoverageStatus.COVERED,
+        "A complete individual module now covers preprocessing, distance, PCA, hierarchical "
+        "clustering, sensitivity, validation boundaries, and cautious biological interpretation.",
     ),
     OfficialRequirement(
         "bmb830.sdu.exam01",
@@ -284,7 +294,7 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.exam02",
         OfficialRequirementKind.EXAM_COMPONENT,
         "Complete the individual oral examination.",
-        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES),
+        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES, "bmb830.m11"),
         CoverageStatus.PARTIAL,
         "Oral-explanation activities exist, but there is no dedicated timed individual oral-exam "
         "simulator spanning the complete syllabus.",
@@ -314,7 +324,7 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         "bmb830.master.03",
         MasterCriterionKind.BIOLOGICAL_REALISM,
         "Analyse biological measurements with realistic metadata, dependence, missingness, and scientific interpretation.",
-        ("bmb830.m02", "bmb830.m06", "bmb830.m08", "bmb830.m10"),
+        ("bmb830.m02", "bmb830.m06", "bmb830.m08", "bmb830.m10", "bmb830.m11"),
         CoverageStatus.PARTIAL,
         "Biological framing is strong, but most examples remain compact teaching data rather than a "
         "realistic end-to-end molecular or clinical data set.",
@@ -324,7 +334,7 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         "bmb830.master.04",
         MasterCriterionKind.SCALE,
         "Handle high-dimensional or large biological data without confusing rows, features, and independent units.",
-        ("bmb830.m01", "bmb830.m02", "bmb830.m08", "bmb830.m10"),
+        ("bmb830.m01", "bmb830.m02", "bmb830.m08", "bmb830.m10", "bmb830.m11"),
         CoverageStatus.PARTIAL,
         "The conceptual safeguards exist, but computational scale and high-dimensional feature "
         "workflows are not yet exercised.",
@@ -334,10 +344,10 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         "bmb830.master.05",
         MasterCriterionKind.MULTIVARIATE_ANALYSIS,
         "Use and interpret introductory multivariate methods such as PCA and clustering.",
-        (),
-        CoverageStatus.GAP,
-        "This is the clearest remaining gap relative to ODIN and normal master's-level expectations.",
-        "Implement scaling, PCA, distances, clustering, stability, and biological interpretation.",
+        ("bmb830.m11",),
+        CoverageStatus.COVERED,
+        "The module connects matrix orientation and preprocessing to PCA, hierarchical "
+        "clustering, sensitivity, leakage-safe use, and bounded biological interpretation.",
     ),
     MasterLevelCriterion(
         "bmb830.master.06",
@@ -352,7 +362,7 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         "bmb830.master.07",
         MasterCriterionKind.ORAL_REASONING,
         "Defend model choice, assumptions, diagnostics, and interpretation under follow-up questioning.",
-        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES),
+        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES, "bmb830.m11"),
         CoverageStatus.PARTIAL,
         "Oral prompts exist but are not assembled into a timed individual examination experience.",
         "Add individual oral-exam rehearsal after multivariate coverage is complete.",
