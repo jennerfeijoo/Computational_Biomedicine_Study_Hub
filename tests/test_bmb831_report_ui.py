@@ -44,9 +44,11 @@ def test_report_page_localizes_controls_but_preserves_english_requirement(
     page = BMB831ReportPage(progress, AppLocale.SPANISH_SPAIN)
 
     assert page.findChild(QComboBox, "bmb831ReportSectionSelector") is not None
-    assert "inglés" in page.findChild(
-        type(page.findChild(QComboBox)), "unused"
-    ).text() if False else True
+    assert (
+        "inglés" in page.findChild(type(page.findChild(QComboBox)), "unused").text()
+        if False
+        else True
+    )
     assert page.select_section("bmb831.report.abstract")
     assert page.current_section_id == "bmb831.report.abstract"
 

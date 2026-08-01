@@ -20,9 +20,7 @@ def test_public_omics_registry_has_transcriptomics_and_proteomics_sources() -> N
         OmicsModality.BULK_RNA_SEQ,
         OmicsModality.LFQ_PROTEOMICS,
     }
-    assert len({source.source_id for source in PUBLIC_OMICS_SOURCES}) == len(
-        PUBLIC_OMICS_SOURCES
-    )
+    assert len({source.source_id for source in PUBLIC_OMICS_SOURCES}) == len(PUBLIC_OMICS_SOURCES)
 
 
 def test_public_omics_sources_require_snapshot_evidence() -> None:

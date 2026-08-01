@@ -169,7 +169,9 @@ class BMB831ReportSnapshot:
         return cls(
             schema_version=BMB831_REPORT_SCHEMA_VERSION,
             active_section_id=BMB831_REPORT_SECTIONS[0].section_id,
-            drafts=tuple(ReportSectionDraft(section.section_id) for section in BMB831_REPORT_SECTIONS),
+            drafts=tuple(
+                ReportSectionDraft(section.section_id) for section in BMB831_REPORT_SECTIONS
+            ),
             updated_at=now or datetime.now(UTC),
         )
 
@@ -278,9 +280,7 @@ def report_section(section_id: str) -> ReportSectionSpec:
         raise ValueError(f"Unknown BMB831 report section {section_id!r}.") from exc
 
 
-def _required_string(
-    payload: dict[str, object], key: str, *, allow_empty: bool = False
-) -> str:
+def _required_string(payload: dict[str, object], key: str, *, allow_empty: bool = False) -> str:
     value = payload[key]
     if not isinstance(value, str):
         raise TypeError(f"{key} must be a string.")

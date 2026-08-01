@@ -218,9 +218,7 @@ class BMB831ReportPage(QWidget):
     def _update_counts(self) -> None:
         snapshot = self._capture_visible_text() if hasattr(self, "_editor") else self._snapshot
         current_words = len(self._editor.toPlainText().split())
-        self._word_count.setText(
-            f"{self._text(BMB831ReportCopyKey.WORD_COUNT)}: {current_words}"
-        )
+        self._word_count.setText(f"{self._text(BMB831ReportCopyKey.WORD_COUNT)}: {current_words}")
         self._progress.setText(
             f"{self._text(BMB831ReportCopyKey.PROGRESS)}: "
             f"{snapshot.completed_section_count}/{len(BMB831_REPORT_SECTIONS)} — "

@@ -42,22 +42,22 @@ The public multivariate requirement is covered, and an individual bounded high-d
 
 BMB830 does not include a group project, role allocation, collaborative submission, or group presentation. The public course description recommends discussion during exercise sessions but publishes an individual oral examination rather than a group-project assessment. All Study Hub activities for this course are individually completable.
 
-### BMB831 implementation in progress
+### BMB831 authored course complete
 
 - **BMB831 — Biostatistics in R II**
-  - 5 complete modules
-  - reproducible relational and longitudinal workflows using Synthea as one bounded synthetic case
-  - omics matrix contracts, metadata alignment, quality control, filtering, normalization, transformation, scaling, and batch-effect boundaries
-  - differential modeling with estimands, design matrices, count-model reasoning, effect sizes, uncertainty, and Benjamini-Hochberg false-discovery control
-  - multivariate omics analysis with PCA, distances, clustering, stability, batch interpretation, and leakage-safe supervised reduction
-  - advanced visualization with figure contracts, MA and volcano reasoning, heatmaps, uncertainty, accessibility, and reproducible export
-  - 80 stable objective-bank questions
-  - ten editable deterministic base-R laboratories
-  - local Synthea snapshot inspection and deterministic one-row-per-patient table derivation
-  - fixed nine-module roadmap covering public transcriptomics and proteomics workflows, protein characterization, biological interpretation, publication appraisal, and the individual English report
-  - conservative public audit: 3 covered, 10 partial, and 2 gaps
+  - 9 complete trilingual modules
+  - relational and longitudinal data engineering using Synthea as one bounded synthetic case
+  - omics matrix quality control, normalization, differential modeling, multiplicity, multivariate analysis, and advanced visualization
+  - versioned public transcriptomics and proteomics source contracts with snapshot and transition auditing
+  - computational protein characterization using sequence, domain, annotation, experimental-structure, and predicted-structure evidence boundaries
+  - biological interpretation through identifier mapping, universes, enrichment, pathways, networks, redundancy, and circularity checks
+  - publication appraisal and a persistent ten-section individual English-report studio
+  - 144 stable objective-bank questions
+  - 18 editable deterministic base-R laboratories
+  - public-source registry for Bioconductor airway and ProteomeXchange PXD000001 teaching workflows
+  - conservative public audit: 14 covered, 1 partial attendance requirement, and 0 academic-content gaps
 
-Synthea does not define the BMB831 curriculum. It remains one synthetic clinical-data case for relational and longitudinal practice and is never described as real-patient or omics evidence. The remaining explicit gaps are computational protein characterization and the individual English report; real-data pipelines and biological interpretation remain partial.
+Synthea does not define the BMB831 curriculum and is never described as real-patient or omics evidence. Public datasets are registered as identifiable sources rather than bundled as mutable remote content. The application is academically complete against the active public description, but it cannot certify the official 80% tutorial participation threshold, reproduce private itslearning exercises or grading rubrics, or assign an official grade.
 
 ### Registered first-semester courses
 
@@ -251,4 +251,4 @@ tests/              # Unit, content-integrity, localization, persistence, and UI
 
 ## Development status
 
-Active development. DM857 and DM847 provide complete authored course sequences, although additional executable practice remains desirable. BMB830 contains twelve complete modules covering foundations through an individual high-dimensional proteomics case. BMB831 now contains five complete modules covering the bounded Synthea case, omics quality control, differential modeling, multivariate analysis, and advanced visualization. Complete public transcriptomics and proteomics workflows, protein characterization, biological interpretation, publication appraisal, a versioned real-data project, and the individual English report workflow remain to be implemented. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development.
+Active development. DM857 and DM847 provide complete authored course sequences, although additional executable practice remains desirable. BMB830 contains twelve complete modules covering foundations through an individual high-dimensional proteomics case. BMB831 is authored-course complete with nine modules covering advanced omics analysis, public-source workflow contracts, protein characterization, biological interpretation, publication appraisal, and a persistent individual English-report studio. Only official attendance certification and equivalence with private itslearning materials remain outside the application's evidence model. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development.
