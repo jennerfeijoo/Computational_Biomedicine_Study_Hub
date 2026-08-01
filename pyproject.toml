@@ -26,6 +26,7 @@ dev = [
 [project.scripts]
 cb-study-hub = "computational_biomedicine_study_hub.application:main"
 cb-synthea-inspect = "computational_biomedicine_study_hub.datasets.synthea_cli:main"
+cb-synthea-build-patient-table = "computational_biomedicine_study_hub.datasets.synthea_patient_cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/computational_biomedicine_study_hub"]
