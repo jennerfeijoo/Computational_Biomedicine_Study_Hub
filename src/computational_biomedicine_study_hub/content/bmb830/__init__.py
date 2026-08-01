@@ -54,6 +54,11 @@ from .module_10_diagnostics_validation import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
     materialize_module_10_question_bank,
 )
+from .module_11_intro_multivariate import (
+    LOCALIZED_MODULE_11_INTRO_MULTIVARIATE,
+    LOCALIZED_OBJECTIVE_QUESTION_BANK_11,
+    materialize_module_11_question_bank,
+)
 
 LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
@@ -106,6 +111,11 @@ LOCALIZED_BUNDLES = (
         LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
         "1.0.0",
     ),
+    LocalizedModuleBundle(
+        LOCALIZED_MODULE_11_INTRO_MULTIVARIATE,
+        LOCALIZED_OBJECTIVE_QUESTION_BANK_11,
+        "1.0.0",
+    ),
 )
 validate_bundle_catalog(LOCALIZED_BUNDLES)
 
@@ -126,6 +136,7 @@ MODULE_07_CORRELATION_REGRESSION = BUNDLES[6].module
 MODULE_08_MULTIPLE_REGRESSION = BUNDLES[7].module
 MODULE_09_INTERACTIONS_NONLINEARITY = BUNDLES[8].module
 MODULE_10_DIAGNOSTICS_VALIDATION = BUNDLES[9].module
+MODULE_11_INTRO_MULTIVARIATE = BUNDLES[10].module
 
 OBJECTIVE_QUESTION_BANK_01 = BUNDLES[0].objective_question_bank
 OBJECTIVE_QUESTION_BANK_02 = BUNDLES[1].objective_question_bank
@@ -137,6 +148,7 @@ OBJECTIVE_QUESTION_BANK_07 = BUNDLES[6].objective_question_bank
 OBJECTIVE_QUESTION_BANK_08 = BUNDLES[7].objective_question_bank
 OBJECTIVE_QUESTION_BANK_09 = BUNDLES[8].objective_question_bank
 OBJECTIVE_QUESTION_BANK_10 = BUNDLES[9].objective_question_bank
+OBJECTIVE_QUESTION_BANK_11 = BUNDLES[10].objective_question_bank
 
 __all__ = [
     "BUNDLES",
@@ -152,6 +164,7 @@ __all__ = [
     "LOCALIZED_MODULE_08_MULTIPLE_REGRESSION",
     "LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY",
     "LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION",
+    "LOCALIZED_MODULE_11_INTRO_MULTIVARIATE",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_01",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_02",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_03",
@@ -162,6 +175,7 @@ __all__ = [
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_08",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_09",
     "LOCALIZED_OBJECTIVE_QUESTION_BANK_10",
+    "LOCALIZED_OBJECTIVE_QUESTION_BANK_11",
     "MODULES",
     "MODULE_01_R_FOUNDATIONS",
     "MODULE_02_DATA_SUMMARY",
@@ -173,6 +187,7 @@ __all__ = [
     "MODULE_08_MULTIPLE_REGRESSION",
     "MODULE_09_INTERACTIONS_NONLINEARITY",
     "MODULE_10_DIAGNOSTICS_VALIDATION",
+    "MODULE_11_INTRO_MULTIVARIATE",
     "OBJECTIVE_QUESTION_BANKS",
     "OBJECTIVE_QUESTION_BANK_01",
     "OBJECTIVE_QUESTION_BANK_02",
@@ -184,6 +199,7 @@ __all__ = [
     "OBJECTIVE_QUESTION_BANK_08",
     "OBJECTIVE_QUESTION_BANK_09",
     "OBJECTIVE_QUESTION_BANK_10",
+    "OBJECTIVE_QUESTION_BANK_11",
     "materialize_module_01_question_bank",
     "materialize_module_02_question_bank",
     "materialize_module_03_question_bank",
@@ -194,4 +210,5 @@ __all__ = [
     "materialize_module_08_question_bank",
     "materialize_module_09_question_bank",
     "materialize_module_10_question_bank",
+    "materialize_module_11_question_bank",
 ]

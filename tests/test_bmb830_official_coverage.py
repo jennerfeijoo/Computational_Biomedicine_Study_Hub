@@ -30,11 +30,11 @@ def test_bmb830_audit_matches_active_public_sdu_structure() -> None:
     assert sum(row.requirement.kind is OfficialRequirementKind.EXAM_COMPONENT for row in rows) == 2
 
 
-def test_bmb830_official_audit_exposes_remaining_academic_gaps() -> None:
+def test_bmb830_official_audit_closes_multivariate_gap_but_keeps_partial_work_visible() -> None:
     rows = {row.requirement.requirement_id: row for row in bmb830_official_coverage_matrix()}
 
-    assert rows["bmb830.sdu.lo03"].requirement.status is CoverageStatus.GAP
-    assert rows["bmb830.sdu.ct06"].requirement.status is CoverageStatus.GAP
+    assert rows["bmb830.sdu.lo03"].requirement.status is CoverageStatus.COVERED
+    assert rows["bmb830.sdu.ct06"].requirement.status is CoverageStatus.COVERED
     assert rows["bmb830.sdu.lo01"].requirement.status is CoverageStatus.PARTIAL
     assert rows["bmb830.sdu.lo02"].requirement.status is CoverageStatus.PARTIAL
     assert rows["bmb830.sdu.lo06"].requirement.status is CoverageStatus.PARTIAL
@@ -42,9 +42,9 @@ def test_bmb830_official_audit_exposes_remaining_academic_gaps() -> None:
 
     summary = bmb830_official_coverage_summary()
     assert summary.total == 14
-    assert summary.covered == 6
+    assert summary.covered == 8
     assert summary.partial == 6
-    assert summary.gap == 2
+    assert summary.gap == 0
     assert not summary.fully_covered
 
 
@@ -57,15 +57,17 @@ def test_bmb830_master_level_evaluation_is_separate_and_conservative() -> None:
     )
     assert rows[MasterCriterionKind.BIOLOGICAL_REALISM].criterion.status is CoverageStatus.PARTIAL
     assert rows[MasterCriterionKind.SCALE].criterion.status is CoverageStatus.PARTIAL
-    assert rows[MasterCriterionKind.MULTIVARIATE_ANALYSIS].criterion.status is CoverageStatus.GAP
+    assert (
+        rows[MasterCriterionKind.MULTIVARIATE_ANALYSIS].criterion.status is CoverageStatus.COVERED
+    )
     assert rows[MasterCriterionKind.CRITICAL_APPRAISAL].criterion.status is CoverageStatus.PARTIAL
     assert rows[MasterCriterionKind.ORAL_REASONING].criterion.status is CoverageStatus.PARTIAL
 
     summary = bmb830_master_level_summary()
     assert summary.total == 8
-    assert summary.covered == 2
+    assert summary.covered == 3
     assert summary.partial == 4
-    assert summary.gap == 1
+    assert summary.gap == 0
     assert summary.not_required == 1
     assert not summary.fully_covered
 
