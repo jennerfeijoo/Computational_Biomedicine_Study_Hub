@@ -15,10 +15,11 @@ BMB831_ODIN_VERSION = "Approved - active"
 BMB831_ODIN_AUDIT_DATE = "2026-08-01"
 BMB831_PUBLIC_EXAM = "Individual report"
 BMB831_SYNTHEA_BOUNDARY = (
-    "Synthea is used as a temporary synthetic clinical-data source for relational, "
-    "longitudinal, large-table, modelling, visualisation, and critical-reasoning practice. "
-    "It is not treated as real-patient evidence and cannot satisfy omics-pipeline or protein-"
-    "characterisation requirements by itself."
+    "Synthea is retained only as one synthetic clinical-data case for relational and "
+    "longitudinal practice. It is not treated as real-patient evidence and no longer defines "
+    "the course scope. Separate omics modules cover assay matrices, quality control, "
+    "normalization, differential modeling, and multiplicity, while public or learner-owned real "
+    "omics data remain required for the final project."
 )
 
 
@@ -90,30 +91,34 @@ class CoverageSummary:
 
 
 _M01 = ("bmb831.m01",)
+_M02 = ("bmb831.m02",)
+_M03 = ("bmb831.m03",)
+_M01_03 = ("bmb831.m01", "bmb831.m02", "bmb831.m03")
+_M02_03 = ("bmb831.m02", "bmb831.m03")
 
 OFFICIAL_BMB831_REQUIREMENTS: tuple[Requirement, ...] = (
     Requirement(
         "bmb831.sdu.lo01",
         RequirementKind.LEARNING_OUTCOME,
         "Independently analyse even conceptually demanding data sets.",
-        _M01,
+        _M01_03,
         CoverageStatus.PARTIAL,
-        "The first module requires independent reasoning about relational grain, patient-level "
-        "aggregation, time, provenance, and validation, but one bounded module is not a complete "
-        "advanced analysis sequence.",
-        "Add cumulative modelling, visualisation, interpretation, and report modules using the "
-        "same explicit data contracts.",
+        "Three modules now require independent reasoning about relational clinical data, omics "
+        "matrix contracts, quality control, design matrices, differential effects, and multiplicity. "
+        "The sequence still lacks multivariate, protein-characterisation, interpretation, and final "
+        "report integration.",
+        "Complete the remaining advanced modules and one cumulative real-data project.",
     ),
     Requirement(
         "bmb831.sdu.lo02",
         RequirementKind.LEARNING_OUTCOME,
         "Work with large data amounts and carry out standard statistical analysis to identify relevant features.",
-        _M01,
+        _M01_03,
         CoverageStatus.PARTIAL,
-        "The module teaches scalable table reduction, early filtering, dimension audits, and "
-        "patient-level feature construction, but it currently uses deterministic teaching fixtures "
-        "rather than a complete downloaded Synthea snapshot.",
-        "Add a versioned Synthea CSV snapshot and memory-aware end-to-end feature pipeline.",
+        "The course now covers scalable contracts, early filtering, assay quality control, feature "
+        "screening, differential modeling, and false-discovery control with bounded executable "
+        "examples. A substantially larger versioned dataset is still absent.",
+        "Add a public transcriptomics or proteomics snapshot with measured memory and runtime.",
     ),
     Requirement(
         "bmb831.sdu.lo03",
@@ -121,87 +126,90 @@ OFFICIAL_BMB831_REQUIREMENTS: tuple[Requirement, ...] = (
         "Use standard algorithms for multi-variate analysis.",
         (),
         CoverageStatus.GAP,
-        "No BMB831 multivariate module has yet been implemented.",
-        "Add PCA, clustering, supervised dimensionality reduction, stability, and validation at "
-        "advanced-course depth.",
+        "No dedicated BMB831 multivariate module has yet been implemented.",
+        "Add PCA, clustering, distance choice, stability, and leakage-safe supervised reduction.",
     ),
     Requirement(
         "bmb831.sdu.lo04",
         RequirementKind.LEARNING_OUTCOME,
         "Design scripts for detailed visualisation of results.",
-        (),
-        CoverageStatus.GAP,
-        "The first module audits tables but does not yet provide a complete advanced figure-building laboratory.",
-        "Add layered statistical graphics, uncertainty, annotation, longitudinal displays, and "
-        "reproducible export.",
+        _M02,
+        CoverageStatus.PARTIAL,
+        "Module 2 teaches diagnostic distributions, profile deviation, and PCA-quality reasoning, "
+        "but it does not yet provide a complete advanced figure-building laboratory.",
+        "Add layered QC, differential, multivariate, and annotation figures with reproducible export.",
     ),
     Requirement(
         "bmb831.sdu.lo05",
         RequirementKind.LEARNING_OUTCOME,
         "Know and apply tools for data interpretation.",
-        _M01,
+        _M01_03,
         CoverageStatus.PARTIAL,
-        "The module applies provenance, cardinality, temporal-leakage, and external-validity "
-        "reasoning, but does not yet include enrichment, pathway, or protein interpretation tools.",
-        "Add biological interpretation modules and source-bounded appraisal tasks.",
+        "The modules apply provenance, design, effect-size, multiplicity, batch, leakage, and claim-"
+        "boundary reasoning. Enrichment, pathway, network, and protein tools remain absent.",
+        "Add biological interpretation and protein-characterisation workflows.",
     ),
     Requirement(
         "bmb831.sdu.lo06",
         RequirementKind.LEARNING_OUTCOME,
         "Know and apply standard pipelines for the processing of omics data.",
-        (),
-        CoverageStatus.GAP,
-        "Synthea produces synthetic health records rather than omics abundance matrices and cannot "
-        "stand in for transcriptomics or proteomics processing.",
-        "Add separate synthetic or public omics matrices with explicit pipeline provenance.",
+        _M02_03,
+        CoverageStatus.PARTIAL,
+        "The omics core now covers assay contracts, sample alignment, filtering, normalization, "
+        "transformation, count-model reasoning, differential contrasts, and FDR. It remains based on "
+        "bounded teaching matrices rather than a complete public real-data pipeline.",
+        "Add end-to-end transcriptomics and proteomics cases with package-level provenance.",
     ),
     Requirement(
         "bmb831.sdu.lo07",
         RequirementKind.LEARNING_OUTCOME,
         "Objectively discuss applied data-analysis methods presented, for example, in publications.",
-        _M01,
+        _M01_03,
         CoverageStatus.PARTIAL,
-        "The first module trains claim boundaries and written reasoning but does not yet provide a "
-        "structured appraisal of a complete publication.",
-        "Add an individual publication-appraisal studio linked to the final report workflow.",
+        "Every module trains explicit claim boundaries, method assumptions, alternative explanations, "
+        "and limitations, but no complete publication appraisal has yet been authored.",
+        "Add a source-grounded publication-appraisal studio linked to the report workflow.",
     ),
     Requirement(
         "bmb831.sdu.ct01",
         RequirementKind.CONTENT_TOPIC,
         "Statistics for large data sets.",
-        _M01,
+        _M01_03,
         CoverageStatus.PARTIAL,
-        "Scalable relational preparation is introduced, while large-data estimation and modelling remain absent.",
-        "Add chunked ingestion, efficient summaries, modelling, and performance measurement on a "
-        "larger Synthea snapshot.",
+        "Scalable relational and matrix workflows, early reduction, model design, and multiple testing "
+        "are present. Large external data and performance profiling remain incomplete.",
+        "Run the workflows on a versioned larger dataset and record resource use.",
     ),
     Requirement(
         "bmb831.sdu.ct02",
         RequirementKind.CONTENT_TOPIC,
         "Different types of data modelling.",
-        (),
-        CoverageStatus.GAP,
-        "No complete BMB831 modelling block exists yet.",
-        "Add regression, classification, count, survival or longitudinal models with explicit estimands and validation.",
+        _M03,
+        CoverageStatus.PARTIAL,
+        "Module 3 distinguishes Gaussian and overdispersed count models and introduces covariate-"
+        "adjusted contrasts. Classification, regularization, survival, and longitudinal models remain.",
+        "Add advanced predictive and longitudinal modeling with leakage-safe validation.",
     ),
     Requirement(
         "bmb831.sdu.ct03",
         RequirementKind.CONTENT_TOPIC,
         "Advanced data visualisation.",
-        (),
-        CoverageStatus.GAP,
-        "No advanced visualisation module exists yet.",
-        "Add a complete individually executable visualisation laboratory.",
+        _M02,
+        CoverageStatus.PARTIAL,
+        "Quality-control visual reasoning is introduced, but the detailed visualization requirement "
+        "is not yet covered by a dedicated scripting module.",
+        "Add a full visualization module with uncertainty, labels, panels, and export contracts.",
     ),
     Requirement(
         "bmb831.sdu.ct04",
         RequirementKind.CONTENT_TOPIC,
         "Advanced data interpretation.",
-        _M01,
+        _M01_03,
         CoverageStatus.PARTIAL,
-        "The first module introduces interpretation of provenance, dependency, leakage, and "
-        "generalisation boundaries but not the full advanced biological interpretation scope.",
-        "Extend interpretation to models, multiplicity, multivariate structure, and biological tools.",
+        "Interpretation now includes provenance, dependence, batch, estimands, effect size, "
+        "uncertainty, multiplicity, and inferential limits. Biological pathway and network "
+        "interpretation remain absent.",
+        "Extend interpretation to enrichment, pathways, networks, and publication appraisal.",
     ),
     Requirement(
         "bmb831.sdu.ct05",
@@ -210,28 +218,27 @@ OFFICIAL_BMB831_REQUIREMENTS: tuple[Requirement, ...] = (
         (),
         CoverageStatus.GAP,
         "No protein-characterisation workflow is implemented.",
-        "Add a dedicated protein-characterisation module using appropriate sequence, structure, "
-        "annotation, and provenance resources.",
+        "Add sequence, domain, physicochemical, structure, annotation, and provenance practice.",
     ),
     Requirement(
         "bmb831.sdu.ct06",
         RequirementKind.CONTENT_TOPIC,
         "Standard workflows for data from omics experiments.",
-        (),
-        CoverageStatus.GAP,
-        "No omics processing workflow is implemented and Synthea is explicitly excluded as a substitute.",
-        "Add transcriptomics and proteomics teaching pipelines with synthetic or public matrices.",
+        _M02_03,
+        CoverageStatus.PARTIAL,
+        "A standard omics core is now authored from matrix validation through differential results, "
+        "but complete transcriptomics and proteomics pipelines on versioned real data remain absent.",
+        "Add public real-data workflows and a cumulative analysis artifact.",
     ),
     Requirement(
         "bmb831.sdu.exam01",
         RequirementKind.EXAM_COMPONENT,
         "Complete the tutorial and exercise prerequisite, including at least 80 percent participation.",
-        _M01,
+        _M01_03,
         CoverageStatus.PARTIAL,
-        "The authored module provides individual exercises, but the application cannot certify "
-        "attendance or equivalence with the official itslearning exercise set.",
-        "Import the official exercise specification when available and keep attendance outside the "
-        "application evidence model.",
+        "The application provides individual exercises for all completed modules, but it cannot "
+        "certify attendance or equivalence with the official itslearning exercise set.",
+        "Import official exercises when available and keep attendance outside the evidence model.",
     ),
     Requirement(
         "bmb831.sdu.exam02",
@@ -240,8 +247,8 @@ OFFICIAL_BMB831_REQUIREMENTS: tuple[Requirement, ...] = (
         (),
         CoverageStatus.GAP,
         "No persistent BMB831 report workflow or internal preparation rubric exists yet.",
-        "Add an individual English report studio with question, data manifest, methods, diagnostics, "
-        "figures, results, limitations, reproducibility, and source-grounded revision.",
+        "Add an English report studio covering question, data, methods, diagnostics, figures, results, "
+        "limitations, reproducibility, and source-grounded revision.",
     ),
 )
 
