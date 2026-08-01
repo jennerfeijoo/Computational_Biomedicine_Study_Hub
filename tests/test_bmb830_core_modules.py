@@ -12,7 +12,7 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.r_execution import can_execute_r
 
 
-def test_bmb830_registers_nine_complete_modules_in_order() -> None:
+def test_bmb830_registers_ten_complete_modules_in_order() -> None:
     assert tuple(module.module_id for module in MODULES) == (
         "bmb830.m01",
         "bmb830.m02",
@@ -23,8 +23,9 @@ def test_bmb830_registers_nine_complete_modules_in_order() -> None:
         "bmb830.m07",
         "bmb830.m08",
         "bmb830.m09",
+        "bmb830.m10",
     )
-    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 9
+    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 10
     assert set(OBJECTIVE_QUESTION_BANKS) == {
         "bmb830.m01",
         "bmb830.m02",
@@ -35,8 +36,9 @@ def test_bmb830_registers_nine_complete_modules_in_order() -> None:
         "bmb830.m07",
         "bmb830.m08",
         "bmb830.m09",
+        "bmb830.m10",
     }
-    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 144
+    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 160
 
     for bundle in BUNDLES:
         module = bundle.module
@@ -74,7 +76,7 @@ def test_bmb830_inference_block_covers_required_concepts() -> None:
 
 
 def test_bmb830_regression_block_covers_required_concepts() -> None:
-    simple, multiple, interaction = MODULES[6:9]
+    simple, multiple, interaction, diagnostics = MODULES[6:10]
     simple_text = " ".join(
         (simple.summary, *(concept.body for concept in simple.concepts))
     ).casefold()
@@ -83,6 +85,9 @@ def test_bmb830_regression_block_covers_required_concepts() -> None:
     ).casefold()
     interaction_text = " ".join(
         (interaction.summary, *(concept.body for concept in interaction.concepts))
+    ).casefold()
+    diagnostics_text = " ".join(
+        (diagnostics.summary, *(concept.body for concept in diagnostics.concepts))
     ).casefold()
 
     assert "causalidad" in simple_text
@@ -103,6 +108,12 @@ def test_bmb830_regression_block_covers_required_concepts() -> None:
     assert "centrar" in interaction_text
     assert "cuadrático" in interaction_text
     assert "extrapol" in interaction_text
+
+    assert "residuo" in diagnostics_text
+    assert "heterocedasticidad" in diagnostics_text
+    assert "distancia de cook" in diagnostics_text
+    assert "fuga de información" in diagnostics_text
+    assert "fuera de muestra" in diagnostics_text
 
 
 def test_bmb830_locales_preserve_assessment_identity() -> None:
