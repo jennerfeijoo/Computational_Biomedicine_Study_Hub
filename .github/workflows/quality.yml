@@ -6,75 +6,43 @@ on:
   pull_request:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  update-readme:
+  quality:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    env:
+      QT_QPA_PLATFORM: offscreen
+
     steps:
-      - name: Check out repository branch
+      - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Install Qt runtime libraries
+        run: sudo apt-get update && sudo apt-get install --yes libegl1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          ref: ${{ github.head_ref }}
+          python-version: ${{ matrix.python-version }}
+          cache: pip
 
-      - name: Update BMB831 status
-        run: |
-          python - <<'PY'
-          from pathlib import Path
+      - name: Install project and development dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
 
-          path = Path("README.md")
-          text = path.read_text(encoding="utf-8")
-          old = '''### BMB831 implementation in progress
+      - name: Lint
+        run: ruff check .
 
-          - **BMB831 — Biostatistics in R II**
-            - 1 complete module
-            - Synthea provenance and scientific-use boundary
-            - relational grain, primary and foreign keys, and cardinality validation
-            - patient-level aggregation of repeated clinical events
-            - temporal leakage and patient-level validation splits
-            - scalable and auditable R workflow design
-            - 16 stable objective-bank questions
-            - two editable base-R laboratories using deterministic Synthea-structured fixtures
-            - local snapshot inspection with schemas, key validation, checksums, and a reproducibility manifest
-            - deterministic one-row-per-patient table construction with strict pre-index windows
-            - patient-level train, validation, and test assignment without encounter leakage
-            - derived-table checksum, metadata, and path-independent artifact fingerprint
-            - conservative audit against all seven public learning outcomes, six public content topics, tutorial prerequisite, and individual-report examination
+      - name: Check formatting
+        run: ruff format --check .
 
-          Synthea is used as a temporary synthetic clinical-data source for relational, longitudinal, large-table, modelling, visualisation, and critical-reasoning practice. It is never described as real-patient evidence. It also does not replace transcriptomics, proteomics, protein-characterisation, or other omics data required by BMB831; those remain explicit gaps for subsequent modules.
-          '''
-          new = '''### BMB831 implementation in progress
+      - name: Type check
+        run: mypy
 
-          - **BMB831 — Biostatistics in R II**
-            - 3 complete modules
-            - reproducible relational and longitudinal workflows using Synthea as one bounded synthetic case
-            - omics matrix and metadata contracts, sample alignment, quality control, filtering, normalization, transformation, scaling, and batch-effect boundaries
-            - differential modeling with estimands, design matrices, contrasts, count-model reasoning, covariate adjustment, effect sizes, uncertainty, and Benjamini-Hochberg false-discovery control
-            - 48 stable objective-bank questions
-            - six editable deterministic base-R laboratories
-            - local Synthea snapshot inspection with schemas, key validation, checksums, and a reproducibility manifest
-            - deterministic one-row-per-patient table construction with strict pre-index windows and patient-level splits
-            - fixed nine-module completion roadmap covering multivariate analysis, advanced visualization, public transcriptomics and proteomics workflows, protein characterization, biological interpretation, publication appraisal, and the individual English report
-            - conservative audit against all seven public learning outcomes, six public content topics, tutorial prerequisite, and individual-report examination: 0 covered, 12 partial, and 3 gaps
-
-          Synthea no longer defines the BMB831 curriculum. It remains one synthetic clinical-data case for relational and longitudinal practice and is never described as real-patient or omics evidence. The omics core is now authored separately, while a versioned public transcriptomics or proteomics project remains necessary before the course can be considered complete.
-          '''
-          if old not in text:
-              raise SystemExit("Expected BMB831 README block was not found")
-          text = text.replace(old, new)
-
-          old_status = "BMB831 now contains its first complete module, a validated local Synthea snapshot contract, and a deterministic pre-index patient-table workflow. Advanced modelling, detailed visualisation, multivariate methods, publication appraisal, protein characterisation, omics pipelines, task-specific outcome construction, a downloaded versioned dataset snapshot, and the individual English report workflow remain to be implemented."
-          new_status = "BMB831 now contains three complete modules: the bounded Synthea relational case, omics matrix quality control and normalization, and differential modeling with multiplicity control. Multivariate analysis, detailed visualization, complete public transcriptomics and proteomics pipelines, protein characterization, biological interpretation, publication appraisal, a versioned real-data project, and the individual English report workflow remain to be implemented."
-          if old_status not in text:
-              raise SystemExit("Expected development-status sentence was not found")
-          text = text.replace(old_status, new_status)
-          path.write_text(text, encoding="utf-8")
-          PY
-
-      - name: Commit README update
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git diff --cached --quiet || git commit -m "Update BMB831 omics core status"
-          git push origin HEAD:${{ github.head_ref }}
+      - name: Test
+        run: pytest
