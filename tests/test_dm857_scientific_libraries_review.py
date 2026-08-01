@@ -9,9 +9,7 @@ def _localized_module(locale: AppLocale | str):
 
 
 def test_m13_audit_is_complete_and_names_the_ingestion_gap() -> None:
-    audit = next(
-        item for item in dm857.DM857_MODULE_SOURCE_AUDIT if item.module_id == "dm857.m13"
-    )
+    audit = next(item for item in dm857.DM857_MODULE_SOURCE_AUDIT if item.module_id == "dm857.m13")
 
     assert audit.state == "consistent"
     assert "file-to-DataFrame" in audit.finding
@@ -83,9 +81,7 @@ def test_m13_practice_rejects_silent_repairs() -> None:
 
 def test_m13_objective_item_rewards_explicit_contract_validation() -> None:
     module = _localized_module(AppLocale.ENGLISH)
-    item = next(
-        item for item in module.assessment_items if item.item_id == "dm857.m13.book.001"
-    )
+    item = next(item for item in module.assessment_items if item.item_id == "dm857.m13.book.001")
 
     assert item.correct_option_ids == ("explicit_contract",)
     assert set(item.option_ids) == {

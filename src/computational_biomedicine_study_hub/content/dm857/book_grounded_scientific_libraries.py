@@ -318,8 +318,6 @@ def apply_scientific_libraries_book_extension(
 ) -> tuple[LocalizedLearningModule, ...]:
     """Apply the focused M13 extension without changing other modules."""
     return tuple(
-        _extend_scientific_libraries(module)
-        if module.module_id == "dm857.m13"
-        else module
+        _extend_scientific_libraries(module) if module.module_id == "dm857.m13" else module
         for module in modules
     )

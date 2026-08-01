@@ -34,9 +34,7 @@ def test_reviewed_modules_are_explicit_and_no_module_remains_pending() -> None:
     assert {
         module_id for module_id, state in state_by_module.items() if state == "consistent"
     } == _REVIEWED_MODULE_IDS
-    assert not {
-        module_id for module_id, state in state_by_module.items() if state == "pending"
-    }
+    assert not {module_id for module_id, state in state_by_module.items() if state == "pending"}
 
 
 def test_book_grounded_extensions_are_complete_in_every_locale() -> None:
@@ -74,9 +72,7 @@ def test_book_grounded_extensions_are_complete_in_every_locale() -> None:
         }
         assert "m13.bg.e01" in {item.example_id for item in scientific.worked_examples}
         assert "m13.bg.p01" in {item.exercise_id for item in scientific.practice_exercises}
-        assert "dm857.m13.book.001" in {
-            item.item_id for item in scientific.assessment_items
-        }
+        assert "dm857.m13.book.001" in {item.item_id for item in scientific.assessment_items}
 
 
 def test_reviewed_modules_expose_named_source_basis() -> None:
