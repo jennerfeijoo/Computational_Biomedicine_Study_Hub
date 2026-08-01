@@ -5,12 +5,8 @@ from __future__ import annotations
 import contextlib
 import io
 
-from computational_biomedicine_study_hub.content.dm857 import (
-    DM857_BOOK_SOURCES,
-    DM857_MODULE_SOURCE_AUDIT,
-    LOCALIZED_MODULES,
-)
-from computational_biomedicine_study_hub.i18n import AppLocale
+from computational_biomedicine_study_hub import i18n
+from computational_biomedicine_study_hub.content import dm857
 
 
 _EXPECTED_MODULE_IDS = {f"dm857.m{index:02d}" for index in range(1, 15)}
@@ -18,9 +14,9 @@ _EXPECTED_MODULE_IDS = {f"dm857.m{index:02d}" for index in range(1, 15)}
 
 def _run_example(module_id: str, example_id: str) -> str:
     localized_module = next(
-        module for module in LOCALIZED_MODULES if module.module_id == module_id
+        module for module in dm857.LOCALIZED_MODULES if module.module_id == module_id
     )
-    module = localized_module.materialize(AppLocale.ENGLISH)
+    module = localized_module.materialize(i18n.AppLocale.ENGLISH)
     worked_example = next(
         item for item in module.worked_examples if item.example_id == example_id
     )
@@ -31,21 +27,23 @@ def _run_example(module_id: str, example_id: str) -> str:
 
 
 def test_dm857_source_audit_maps_every_module_once() -> None:
-    audited_ids = tuple(item.module_id for item in DM857_MODULE_SOURCE_AUDIT)
+    audited_ids = tuple(item.module_id for item in dm857.DM857_MODULE_SOURCE_AUDIT)
     assert len(audited_ids) == 14
     assert len(set(audited_ids)) == 14
     assert set(audited_ids) == _EXPECTED_MODULE_IDS
 
 
 def test_dm857_source_catalog_has_unique_stable_ids() -> None:
-    source_ids = tuple(source.source_id for source in DM857_BOOK_SOURCES)
+    source_ids = tuple(source.source_id for source in dm857.DM857_BOOK_SOURCES)
     assert len(source_ids) == len(set(source_ids))
     assert "guttag-2021-ch04" in source_ids
     assert "downey-2024-testing" in source_ids
 
 
 def test_reviewed_modules_are_explicit_and_unreviewed_modules_remain_pending() -> None:
-    state_by_module = {item.module_id: item.state for item in DM857_MODULE_SOURCE_AUDIT}
+    state_by_module = {
+        item.module_id: item.state for item in dm857.DM857_MODULE_SOURCE_AUDIT
+    }
     assert {
         module_id for module_id, state in state_by_module.items() if state == "consistent"
     } == {"dm857.m04", "dm857.m06", "dm857.m08", "dm857.m09", "dm857.m14"}
@@ -61,9 +59,9 @@ def test_reviewed_modules_are_explicit_and_unreviewed_modules_remain_pending() -
 
 
 def test_book_grounded_extensions_are_complete_in_every_locale() -> None:
-    module_by_id = {module.module_id: module for module in LOCALIZED_MODULES}
+    module_by_id = {module.module_id: module for module in dm857.LOCALIZED_MODULES}
 
-    for locale in AppLocale:
+    for locale in i18n.AppLocale:
         functions = module_by_id["dm857.m04"].materialize(locale)
         files = module_by_id["dm857.m08"].materialize(locale)
 
@@ -93,7 +91,7 @@ def test_book_grounded_extensions_are_complete_in_every_locale() -> None:
 
 
 def test_reviewed_modules_expose_named_source_basis() -> None:
-    module_by_id = {module.module_id: module for module in LOCALIZED_MODULES}
+    module_by_id = {module.module_id: module for module in dm857.LOCALIZED_MODULES}
 
     assert "guttag-2021-ch04" in module_by_id["dm857.m04"].tutor_support.source_basis
     assert "guttag-2021-ch05" in module_by_id["dm857.m06"].tutor_support.source_basis
