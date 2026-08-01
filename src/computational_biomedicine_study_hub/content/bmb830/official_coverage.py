@@ -1,9 +1,9 @@
 """Conservative BMB830 audit against the active public SDU specification.
 
-Official requirements are transcribed from the active ODIN course description. Master-level
-criteria are an explicit expert judgement layer and are never presented as unpublished SDU
-requirements. The public specification contains an individual oral examination and tutorial
-exercises; it does not publish a group project or group-presentation requirement.
+Official requirements below are based on the public ODIN course description. The
+master-level criteria are an explicit expert-judgement layer and are not presented
+as unpublished SDU requirements. The public specification contains an individual
+oral examination; it does not publish a group project or group presentation.
 """
 
 from __future__ import annotations
@@ -21,13 +21,13 @@ BMB830_ODIN_VERSION = "Approved - active"
 BMB830_ODIN_AUDIT_DATE = "2026-08-01"
 BMB830_PUBLIC_GROUP_PROJECT_REQUIRED = False
 BMB830_APPLICATION_TEAMWORK_POLICY = (
-    "No group project, role allocation, collaborative submission, or group-presentation workflow. "
-    "All authored study activities are individually completable."
+    "No group project, role allocation, collaborative submission, or group-presentation "
+    "workflow. All authored study activities are individually completable."
 )
 
 
 class CoverageStatus(StrEnum):
-    """Conservative implementation state."""
+    """Conservative implementation state for one requirement or criterion."""
 
     COVERED = "covered"
     PARTIAL = "partial"
@@ -44,7 +44,7 @@ class OfficialRequirementKind(StrEnum):
 
 
 class MasterCriterionKind(StrEnum):
-    """Expert judgement axis used to assess master's-level readiness."""
+    """Expert-judgement axis used to assess master's-level readiness."""
 
     CONCEPTUAL_RIGOUR = "conceptual_rigour"
     COMPUTATIONAL_WORKFLOW = "computational_workflow"
@@ -136,6 +136,23 @@ class CoverageSummary:
 
 
 _ALL_MODULE_IDS = tuple(bundle.module.module_id for bundle in BUNDLES)
+_REGRESSION_MODULES = (
+    "bmb830.m06",
+    "bmb830.m07",
+    "bmb830.m08",
+    "bmb830.m09",
+    "bmb830.m10",
+)
+_INTERPRETATION_MODULES = (
+    "bmb830.m02",
+    "bmb830.m04",
+    "bmb830.m05",
+    "bmb830.m06",
+    "bmb830.m07",
+    "bmb830.m08",
+    "bmb830.m09",
+    "bmb830.m10",
+)
 
 OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
     OfficialRequirement(
@@ -144,10 +161,9 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "Independently analyse biological data sets.",
         _ALL_MODULE_IDS,
         CoverageStatus.PARTIAL,
-        "The course now provides a coherent individual workflow from R foundations through model "
-        "validation, but most worked data are intentionally small and synthetic rather than one "
-        "integrated biological data set.",
-        "Add an individually completed biological-data analysis case with provenance, data quality, "
+        "The course provides an individual workflow from R foundations through model validation, "
+        "but most worked data remain compact teaching examples rather than one integrated biological data set.",
+        "Add an individually completed biological-data case with provenance, quality control, "
         "visualisation, modelling, diagnostics, interpretation, and reproducible reporting.",
     ),
     OfficialRequirement(
@@ -156,10 +172,10 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "Work with large data amounts and carry out standard statistical analysis to identify relevant features.",
         ("bmb830.m01", "bmb830.m02", "bmb830.m06", "bmb830.m08", "bmb830.m10"),
         CoverageStatus.PARTIAL,
-        "Standard analysis and reproducible R reasoning are covered, but the current laboratories do "
-        "not yet exercise memory-aware processing or feature screening on a realistically large matrix.",
-        "Add an individual high-dimensional biological matrix laboratory with explicit dimensions, "
-        "missingness, filtering, feature summaries, and leakage-safe validation.",
+        "Standard analysis and leakage-safe reasoning are covered, but no laboratory yet exercises "
+        "memory-aware processing or feature screening on a realistically large matrix.",
+        "Add an individual high-dimensional biological matrix laboratory with dimensions, missingness, "
+        "filtering, feature summaries, and leakage-safe validation.",
     ),
     OfficialRequirement(
         "bmb830.sdu.lo03",
@@ -168,32 +184,24 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         (),
         CoverageStatus.GAP,
         "No completed BMB830 module yet teaches a standard multivariate algorithm.",
-        "Add an introductory multivariate module covering scaling, distance, PCA, clustering, and "
-        "biological interpretation with deterministic R examples.",
+        "Add scaling, distance, PCA, clustering, validation, and biological interpretation.",
     ),
     OfficialRequirement(
         "bmb830.sdu.lo04",
         OfficialRequirementKind.LEARNING_OUTCOME,
         "Design scripts for detailed visualisation of results.",
         ("bmb830.m01", "bmb830.m02", "bmb830.m07", "bmb830.m09", "bmb830.m10"),
-        CoverageStatus.COVERED,
-        "The authored modules connect reproducible scripts to distribution, association, interaction, "
-        "prediction, and diagnostic visualisation decisions, with practice and assessment evidence.",
+        CoverageStatus.PARTIAL,
+        "The modules connect scripts to distributions, associations, fitted effects, and diagnostics, "
+        "but do not yet provide a complete individual laboratory for detailed statistical figures.",
+        "Add individually executable figure-building exercises with layered statistical graphics, "
+        "diagnostic annotations, and interpretation independent of cosmetic styling.",
     ),
     OfficialRequirement(
         "bmb830.sdu.lo05",
         OfficialRequirementKind.LEARNING_OUTCOME,
         "Apply tools for data interpretation.",
-        (
-            "bmb830.m02",
-            "bmb830.m04",
-            "bmb830.m05",
-            "bmb830.m06",
-            "bmb830.m07",
-            "bmb830.m08",
-            "bmb830.m09",
-            "bmb830.m10",
-        ),
+        _INTERPRETATION_MODULES,
         CoverageStatus.COVERED,
         "Effect sizes, intervals, tests, regression, interactions, diagnostics, and validation are "
         "interpreted in biomedical rather than purely computational terms.",
@@ -204,10 +212,10 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "Objectively discuss applied data-analysis methods presented, for example, in publications.",
         ("bmb830.m05", "bmb830.m06", "bmb830.m07", "bmb830.m08", "bmb830.m09", "bmb830.m10"),
         CoverageStatus.PARTIAL,
-        "The course teaches the concepts needed for critique and includes oral explanations, but it "
-        "does not yet provide a structured publication-methods appraisal workflow using a real paper.",
-        "Add an individual critical-appraisal studio that separates design, estimand, assumptions, "
-        "analysis, diagnostics, uncertainty, multiplicity, validation, and justified conclusions.",
+        "The course teaches the concepts required for critique and includes oral explanations, but "
+        "does not yet provide a structured appraisal workflow using a real publication.",
+        "Add an individual source-bounded critical-appraisal studio covering design, estimand, "
+        "assumptions, diagnostics, uncertainty, multiplicity, validation, and conclusions.",
     ),
     OfficialRequirement(
         "bmb830.sdu.ct01",
@@ -221,7 +229,7 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.ct02",
         OfficialRequirementKind.CONTENT_TOPIC,
         "Different types of data modelling.",
-        ("bmb830.m06", "bmb830.m07", "bmb830.m08", "bmb830.m09", "bmb830.m10"),
+        _REGRESSION_MODULES,
         CoverageStatus.COVERED,
         "Independent, paired, multi-group, linear, adjusted, interaction, nonlinear, and validation "
         "settings are represented with explicit design assumptions.",
@@ -230,17 +238,9 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.ct03",
         OfficialRequirementKind.CONTENT_TOPIC,
         "Basic statistical models.",
-        (
-            "bmb830.m04",
-            "bmb830.m05",
-            "bmb830.m06",
-            "bmb830.m07",
-            "bmb830.m08",
-            "bmb830.m09",
-            "bmb830.m10",
-        ),
+        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES),
         CoverageStatus.COVERED,
-        "The course provides estimation, tests, ANOVA-style comparisons, regression, interactions, "
+        "The course provides estimation, tests, group comparison, regression, interactions, "
         "nonlinearity, diagnostics, and validation.",
     ),
     OfficialRequirement(
@@ -256,16 +256,7 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.ct05",
         OfficialRequirementKind.CONTENT_TOPIC,
         "Data interpretation.",
-        (
-            "bmb830.m02",
-            "bmb830.m04",
-            "bmb830.m05",
-            "bmb830.m06",
-            "bmb830.m07",
-            "bmb830.m08",
-            "bmb830.m09",
-            "bmb830.m10",
-        ),
+        _INTERPRETATION_MODULES,
         CoverageStatus.COVERED,
         "Every statistical block includes interpretation, uncertainty, assumptions, and limits of conclusions.",
     ),
@@ -276,7 +267,7 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         (),
         CoverageStatus.GAP,
         "The current catalog stops at regression diagnostics and validation.",
-        "Implement scaling, PCA, clustering, distance choices, validation, and biological interpretation.",
+        "Implement scaling, PCA, distances, clustering, validation, and biological interpretation.",
     ),
     OfficialRequirement(
         "bmb830.sdu.exam01",
@@ -285,28 +276,20 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         _ALL_MODULE_IDS,
         CoverageStatus.PARTIAL,
         "Every module includes individually completable practice, but the official itslearning "
-        "exercise set and completion criteria are not public and cannot be reproduced or certified.",
-        "Import the official exercise specification when available and map it without inventing "
-        "group roles, group submissions, or unpublished grading rules.",
+        "exercise set and completion criteria are not public and cannot be certified.",
+        "Import the official exercise specification when available without inventing group roles, "
+        "group submissions, or unpublished grading rules.",
     ),
     OfficialRequirement(
         "bmb830.sdu.exam02",
         OfficialRequirementKind.EXAM_COMPONENT,
         "Complete the individual oral examination.",
-        (
-            "bmb830.m04",
-            "bmb830.m05",
-            "bmb830.m06",
-            "bmb830.m07",
-            "bmb830.m08",
-            "bmb830.m09",
-            "bmb830.m10",
-        ),
+        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES),
         CoverageStatus.PARTIAL,
-        "Oral-explanation activities exist throughout the course, but there is no dedicated timed "
-        "individual oral-exam simulator spanning the complete syllabus.",
-        "Add an individual oral-exam workflow with randomised syllabus coverage, statistical figures, "
-        "R-output interpretation, follow-up questions, and an internal non-official rubric.",
+        "Oral-explanation activities exist, but there is no dedicated timed individual oral-exam "
+        "simulator spanning the complete syllabus.",
+        "Add an individual oral workflow with randomised coverage, figure and R-output interpretation, "
+        "follow-up questions, and an explicitly internal non-official rubric.",
     ),
 )
 
@@ -315,18 +298,9 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         "bmb830.master.01",
         MasterCriterionKind.CONCEPTUAL_RIGOUR,
         "Explain assumptions, estimands, uncertainty, effect size, and limitations rather than applying tests by recipe.",
-        (
-            "bmb830.m03",
-            "bmb830.m04",
-            "bmb830.m05",
-            "bmb830.m06",
-            "bmb830.m07",
-            "bmb830.m08",
-            "bmb830.m09",
-            "bmb830.m10",
-        ),
+        ("bmb830.m03", "bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES),
         CoverageStatus.COVERED,
-        "The course consistently prioritises reasoning, interpretation, and failure modes over menu-driven test selection.",
+        "The course prioritises reasoning, interpretation, and failure modes over menu-driven test selection.",
     ),
     MasterLevelCriterion(
         "bmb830.master.02",
@@ -344,7 +318,7 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         CoverageStatus.PARTIAL,
         "Biological framing is strong, but most examples remain compact teaching data rather than a "
         "realistic end-to-end molecular or clinical data set.",
-        "Add a provenance-preserving individual biological case study without fabricating an official SDU assignment.",
+        "Add a provenance-preserving individual biological case without fabricating an SDU assignment.",
     ),
     MasterLevelCriterion(
         "bmb830.master.04",
@@ -352,7 +326,8 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         "Handle high-dimensional or large biological data without confusing rows, features, and independent units.",
         ("bmb830.m01", "bmb830.m02", "bmb830.m08", "bmb830.m10"),
         CoverageStatus.PARTIAL,
-        "The conceptual safeguards exist, but computational scale and high-dimensional feature workflows are not yet exercised.",
+        "The conceptual safeguards exist, but computational scale and high-dimensional feature "
+        "workflows are not yet exercised.",
         "Add a bounded large-matrix laboratory and explicit patient-versus-feature dimension checks.",
     ),
     MasterLevelCriterion(
@@ -361,33 +336,25 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         "Use and interpret introductory multivariate methods such as PCA and clustering.",
         (),
         CoverageStatus.GAP,
-        "This is the clearest remaining academic gap relative to both ODIN and normal master's-level biostatistics expectations.",
-        "Implement the next module on scaling, PCA, distances, clustering, and validation.",
+        "This is the clearest remaining gap relative to ODIN and normal master's-level expectations.",
+        "Implement scaling, PCA, distances, clustering, stability, and biological interpretation.",
     ),
     MasterLevelCriterion(
         "bmb830.master.06",
         MasterCriterionKind.CRITICAL_APPRAISAL,
         "Critically appraise statistical methods and conclusions in biomedical publications.",
-        ("bmb830.m05", "bmb830.m06", "bmb830.m07", "bmb830.m08", "bmb830.m09", "bmb830.m10"),
+        ("bmb830.m05", *_REGRESSION_MODULES),
         CoverageStatus.PARTIAL,
-        "The necessary reasoning is present, but no real-paper appraisal workflow has been implemented.",
-        "Add an individual methods-critique exercise with source-bounded Ollama writing feedback and no model grading authority.",
+        "The required reasoning is present, but no real-paper appraisal workflow has been implemented.",
+        "Add an individual methods critique with source-bounded writing feedback and no model grading authority.",
     ),
     MasterLevelCriterion(
         "bmb830.master.07",
         MasterCriterionKind.ORAL_REASONING,
-        "Defend model choice, assumptions, diagnostics, and interpretation orally under follow-up questioning.",
-        (
-            "bmb830.m04",
-            "bmb830.m05",
-            "bmb830.m06",
-            "bmb830.m07",
-            "bmb830.m08",
-            "bmb830.m09",
-            "bmb830.m10",
-        ),
+        "Defend model choice, assumptions, diagnostics, and interpretation under follow-up questioning.",
+        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES),
         CoverageStatus.PARTIAL,
-        "Oral prompts exist, but they are not yet assembled into a timed individual examination experience.",
+        "Oral prompts exist but are not assembled into a timed individual examination experience.",
         "Add individual oral-exam rehearsal after multivariate coverage is complete.",
     ),
     MasterLevelCriterion(
@@ -396,9 +363,9 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         "Require a collaborative project or group presentation.",
         (),
         CoverageStatus.NOT_REQUIRED,
-        "The active public BMB830 specification describes an individual oral exam and recommends "
-        "group discussion during exercises, but it does not publish a group project or group presentation. "
-        "The application deliberately keeps all activities individually completable.",
+        "The public BMB830 specification describes an individual oral exam and recommends group "
+        "discussion during exercises, but does not publish a group project or presentation. All "
+        "application activities remain individually completable.",
     ),
 )
 
@@ -450,6 +417,7 @@ def bmb830_master_level_summary() -> CoverageSummary:
 def validate_bmb830_coverage() -> None:
     official_rows = bmb830_official_coverage_matrix()
     master_rows = bmb830_master_level_matrix()
+
     ids = tuple(row.requirement.requirement_id for row in official_rows) + tuple(
         row.criterion.criterion_id for row in master_rows
     )
@@ -457,27 +425,24 @@ def validate_bmb830_coverage() -> None:
         raise ValueError("The BMB830 audit contains duplicate stable IDs.")
 
     known = set(_ALL_MODULE_IDS)
-    referenced = {
-        module_id
-        for row in (*official_rows, *master_rows)
-        for module_id in (
-            row.requirement.module_ids
-            if isinstance(row, OfficialCoverageRow)
-            else row.criterion.module_ids
-        )
+    referenced_official = {
+        module_id for row in official_rows for module_id in row.requirement.module_ids
     }
-    unknown = referenced - known
+    referenced_master = {
+        module_id for row in master_rows for module_id in row.criterion.module_ids
+    }
+    unknown = (referenced_official | referenced_master) - known
     if unknown:
         raise ValueError(
             "The BMB830 audit references unknown modules: " + ", ".join(sorted(unknown))
         )
 
-    expected_official_counts = {
+    expected_counts = {
         OfficialRequirementKind.LEARNING_OUTCOME: 6,
         OfficialRequirementKind.CONTENT_TOPIC: 6,
         OfficialRequirementKind.EXAM_COMPONENT: 2,
     }
-    for kind, expected in expected_official_counts.items():
+    for kind, expected in expected_counts.items():
         actual = sum(row.requirement.kind is kind for row in official_rows)
         if actual != expected:
             raise ValueError(f"BMB830 requires {expected} {kind.value} rows, found {actual}.")
@@ -517,8 +482,8 @@ __all__ = [
     "CoverageStatus",
     "CoverageSummary",
     "MASTER_LEVEL_CRITERIA",
-    "MasterCriterionKind",
     "MasterCoverageRow",
+    "MasterCriterionKind",
     "MasterLevelCriterion",
     "OFFICIAL_BMB830_REQUIREMENTS",
     "OfficialCoverageRow",
