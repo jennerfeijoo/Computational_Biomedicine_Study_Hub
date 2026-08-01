@@ -318,12 +318,6 @@ def _extend_oop(module: LocalizedLearningModule) -> LocalizedLearningModule:
                     "kompatible garantier. super() kan genbruge basisimplementeringen, men "
                     "kompatibilitet afhænger af hele kontrakten.",
                 ),
-                (
-                    "inheritance",
-                    "override",
-                    "substitution",
-                    "method-contract",
-                ),
             ),
         ),
     )
