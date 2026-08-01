@@ -10,9 +10,7 @@ def _run_example(module_id: str, example_id: str) -> None:
         module for module in dm857.LOCALIZED_MODULES if module.module_id == module_id
     )
     module = localized_module.materialize("en")
-    worked_example = next(
-        item for item in module.worked_examples if item.example_id == example_id
-    )
+    worked_example = next(item for item in module.worked_examples if item.example_id == example_id)
     exec(compile(worked_example.code, example_id, "exec"), {})
 
 
@@ -31,12 +29,14 @@ def test_dm857_source_catalog_has_unique_stable_ids() -> None:
 
 
 def test_reviewed_modules_are_explicit_and_unreviewed_modules_remain_pending() -> None:
-    state_by_module = {
-        item.module_id: item.state for item in dm857.DM857_MODULE_SOURCE_AUDIT
+    state_by_module = {item.module_id: item.state for item in dm857.DM857_MODULE_SOURCE_AUDIT}
+    assert {module_id for module_id, state in state_by_module.items() if state == "consistent"} == {
+        "dm857.m04",
+        "dm857.m06",
+        "dm857.m08",
+        "dm857.m09",
+        "dm857.m14",
     }
-    assert {
-        module_id for module_id, state in state_by_module.items() if state == "consistent"
-    } == {"dm857.m04", "dm857.m06", "dm857.m08", "dm857.m09", "dm857.m14"}
     assert {
         module_id for module_id, state in state_by_module.items() if state == "pending"
     } == _EXPECTED_MODULE_IDS - {
@@ -55,29 +55,15 @@ def test_book_grounded_extensions_are_complete_in_every_locale() -> None:
         functions = module_by_id["dm857.m04"].materialize(locale)
         files = module_by_id["dm857.m08"].materialize(locale)
 
-        assert "mutable-default-arguments" in {
-            item.concept_id for item in functions.concepts
-        }
-        assert "m04.bg.e01" in {
-            item.example_id for item in functions.worked_examples
-        }
-        assert "m04.bg.p01" in {
-            item.exercise_id for item in functions.practice_exercises
-        }
-        assert "dm857.m04.book.001" in {
-            item.item_id for item in functions.assessment_items
-        }
+        assert "mutable-default-arguments" in {item.concept_id for item in functions.concepts}
+        assert "m04.bg.e01" in {item.example_id for item in functions.worked_examples}
+        assert "m04.bg.p01" in {item.exercise_id for item in functions.practice_exercises}
+        assert "dm857.m04.book.001" in {item.item_id for item in functions.assessment_items}
 
-        assert "exceptions-versus-assertions" in {
-            item.concept_id for item in files.concepts
-        }
+        assert "exceptions-versus-assertions" in {item.concept_id for item in files.concepts}
         assert "m08.bg.e01" in {item.example_id for item in files.worked_examples}
-        assert "m08.bg.p01" in {
-            item.exercise_id for item in files.practice_exercises
-        }
-        assert "dm857.m08.book.001" in {
-            item.item_id for item in files.assessment_items
-        }
+        assert "m08.bg.p01" in {item.exercise_id for item in files.practice_exercises}
+        assert "dm857.m08.book.001" in {item.item_id for item in files.assessment_items}
 
 
 def test_reviewed_modules_expose_named_source_basis() -> None:
