@@ -54,7 +54,7 @@ jobs:
               "        LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,\n"
               "    )\n)\n\n_LOCALIZED_MODULES",
               "        LOCALIZED_MODULE_14_TESTING_DEBUGGING_QUALITY,\n"
-              "    )\n)\n\n_LOCALIZED_MODULES",
+              "    )\n)\n)\n\n_LOCALIZED_MODULES",
               1,
           )
           old_versions = (
