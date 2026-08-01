@@ -16,11 +16,11 @@ def test_module_two_has_complete_learning_components() -> None:
 
     assert module.course_code == "DM857"
     assert module.module_id == "dm857.m02"
-    assert len(module.objectives) == 7
-    assert len(module.concepts) == 7
-    assert len(module.worked_examples) == 4
-    assert len(module.practice_exercises) == 10
-    assert len(module.assessment_items) == 12
+    assert len(module.objectives) == 8
+    assert len(module.concepts) == 8
+    assert len(module.worked_examples) == 5
+    assert len(module.practice_exercises) == 11
+    assert len(module.assessment_items) == 13
 
 
 def test_module_two_covers_conditionals_and_varied_activity_types() -> None:
@@ -37,6 +37,7 @@ def test_module_two_covers_conditionals_and_varied_activity_types() -> None:
         "if-elif-else-control-flow",
         "compound-versus-nested-conditionals",
         "validation-boundaries-and-branch-testing",
+        "branch-ordering-and-shadowing",
     } == concept_ids
     assert {
         ActivityType.CODE_TRACING,
@@ -67,11 +68,11 @@ def test_module_two_materializes_complete_spanish_english_and_danish_versions() 
 
     for module in modules.values():
         assert module.module_id == "dm857.m02"
-        assert len(module.objectives) == 7
-        assert len(module.concepts) == 7
-        assert len(module.worked_examples) == 4
-        assert len(module.practice_exercises) == 10
-        assert len(module.assessment_items) == 12
+        assert len(module.objectives) == 8
+        assert len(module.concepts) == 8
+        assert len(module.worked_examples) == 5
+        assert len(module.practice_exercises) == 11
+        assert len(module.assessment_items) == 13
         assert all(document.text.strip() for document in module.tutor_documents())
 
     assert modules[AppLocale.SPANISH_SPAIN].title.startswith("Lógica booleana")

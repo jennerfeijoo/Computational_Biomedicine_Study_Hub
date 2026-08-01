@@ -16,11 +16,11 @@ def test_module_three_has_complete_learning_components() -> None:
 
     assert module.course_code == "DM857"
     assert module.module_id == "dm857.m03"
-    assert len(module.objectives) == 8
-    assert len(module.concepts) == 8
-    assert len(module.worked_examples) == 5
-    assert len(module.practice_exercises) == 12
-    assert len(module.assessment_items) == 14
+    assert len(module.objectives) == 9
+    assert len(module.concepts) == 9
+    assert len(module.worked_examples) == 6
+    assert len(module.practice_exercises) == 13
+    assert len(module.assessment_items) == 15
 
 
 def test_module_three_covers_iteration_and_varied_activity_types() -> None:
@@ -38,6 +38,7 @@ def test_module_three_covers_iteration_and_varied_activity_types() -> None:
         "sentinels-break-and-continue",
         "nested-loops-and-operation-count",
         "loop-tracing-and-testing",
+        "bisection-search-and-tolerance",
     } == concept_ids
     assert {
         ActivityType.CODE_TRACING,
@@ -69,11 +70,11 @@ def test_module_three_materializes_complete_spanish_english_and_danish_versions(
 
     for module in modules.values():
         assert module.module_id == "dm857.m03"
-        assert len(module.objectives) == 8
-        assert len(module.concepts) == 8
-        assert len(module.worked_examples) == 5
-        assert len(module.practice_exercises) == 12
-        assert len(module.assessment_items) == 14
+        assert len(module.objectives) == 9
+        assert len(module.concepts) == 9
+        assert len(module.worked_examples) == 6
+        assert len(module.practice_exercises) == 13
+        assert len(module.assessment_items) == 15
         assert all(document.text.strip() for document in module.tutor_documents())
 
     assert modules[AppLocale.SPANISH_SPAIN].title.startswith("Iteración controlada")
