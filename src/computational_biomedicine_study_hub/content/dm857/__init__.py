@@ -105,9 +105,7 @@ from .module_14_testing_debugging_quality import (
 DM857_MODULE_SOURCE_AUDIT = update_oop_audit(
     update_adts_audit(
         update_trees_audit(
-            update_strings_mappings_audit(
-                update_foundations_audit(_BASE_DM857_MODULE_SOURCE_AUDIT)
-            )
+            update_strings_mappings_audit(update_foundations_audit(_BASE_DM857_MODULE_SOURCE_AUDIT))
         )
     )
 )

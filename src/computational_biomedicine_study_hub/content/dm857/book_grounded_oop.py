@@ -337,4 +337,6 @@ def apply_oop_book_extension(
     modules: tuple[LocalizedLearningModule, ...],
 ) -> tuple[LocalizedLearningModule, ...]:
     """Apply the focused M12 extension without changing other modules."""
-    return tuple(_extend_oop(module) if module.module_id == "dm857.m12" else module for module in modules)
+    return tuple(
+        _extend_oop(module) if module.module_id == "dm857.m12" else module for module in modules
+    )
