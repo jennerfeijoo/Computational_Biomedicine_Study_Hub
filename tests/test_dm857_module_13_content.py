@@ -26,11 +26,11 @@ def test_module_13_has_complete_learning_components() -> None:
 
     assert module.course_code == "DM857"
     assert module.module_id == "dm857.m13"
-    assert len(module.objectives) == 8
-    assert len(module.concepts) == 8
-    assert len(module.worked_examples) == 5
-    assert len(module.practice_exercises) == 12
-    assert len(module.assessment_items) == 14
+    assert len(module.objectives) == 9
+    assert len(module.concepts) == 9
+    assert len(module.worked_examples) == 6
+    assert len(module.practice_exercises) == 13
+    assert len(module.assessment_items) == 15
     assert len(OBJECTIVE_QUESTION_BANK_13) == 30
     assert all(module.tutor_support.source_basis)
 
@@ -42,11 +42,11 @@ def test_module_13_materializes_completely_in_every_locale(locale: AppLocale) ->
 
     assert module.module_id == "dm857.m13"
     assert module.title.startswith(TITLE_PREFIXES[locale])
-    assert len(module.objectives) == 8
-    assert len(module.concepts) == 8
-    assert len(module.worked_examples) == 5
-    assert len(module.practice_exercises) == 12
-    assert len(module.assessment_items) == 14
+    assert len(module.objectives) == 9
+    assert len(module.concepts) == 9
+    assert len(module.worked_examples) == 6
+    assert len(module.practice_exercises) == 13
+    assert len(module.assessment_items) == 15
     assert len(bank) == 30
     assert all(document.text.strip() for document in module.tutor_documents())
     assert all(item.prompt.strip() for item in bank)
