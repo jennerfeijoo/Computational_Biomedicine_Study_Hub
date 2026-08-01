@@ -102,7 +102,6 @@ def test_multivariate_and_visualization_close_only_their_public_requirements() -
     assert omics_rows
     assert all(requirement.status is CoverageStatus.PARTIAL for requirement in omics_rows)
     assert all(
-        requirement.module_ids
-        == ("bmb831.m02", "bmb831.m03", "bmb831.m04", "bmb831.m05")
+        requirement.module_ids == ("bmb831.m02", "bmb831.m03", "bmb831.m04", "bmb831.m05")
         for requirement in omics_rows
     )
