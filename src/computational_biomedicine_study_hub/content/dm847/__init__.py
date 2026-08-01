@@ -61,6 +61,7 @@ from .module_10_omics_learning_project import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
     materialize_module_10_question_bank,
 )
+from .textbook_enrichment import DM847_TEXTBOOK_EVIDENCE, enrich_module_06
 
 
 def _replace_spanish(
@@ -135,6 +136,9 @@ LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING = replace(
             ),
         ),
     ),
+)
+LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING = enrich_module_06(
+    LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING
 )
 
 _module_08_tutor = _RAW_LOCALIZED_MODULE_08.tutor_support
@@ -228,7 +232,7 @@ LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
         LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_06,
-        "1.0.0",
+        "1.1.0",
     ),
     LocalizedModuleBundle(
         LOCALIZED_MODULE_07_OPERONS_BACTERIAL_GENETICS,
@@ -284,6 +288,7 @@ OBJECTIVE_QUESTION_BANK_10 = BUNDLES[9].objective_question_bank
 
 __all__ = [
     "BUNDLES",
+    "DM847_TEXTBOOK_EVIDENCE",
     "LOCALIZED_BUNDLES",
     "LOCALIZED_MODULES",
     "LOCALIZED_MODULE_01_MOLECULAR_INFORMATION",
