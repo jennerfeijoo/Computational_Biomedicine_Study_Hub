@@ -85,7 +85,8 @@ def test_bmb831_multivariate_and_visualization_modules_are_advanced() -> None:
     assert "estabilidad" in multivariate_text
     assert "fuga" in multivariate_text
 
-    assert "contrato de figura" in visualization_text
+    assert "pregunta" in visualization_text
+    assert "unidad analítica" in visualization_text
     assert "volcano" in visualization_text
     assert "ma plot" in visualization_text
     assert "heatmap" in visualization_text
