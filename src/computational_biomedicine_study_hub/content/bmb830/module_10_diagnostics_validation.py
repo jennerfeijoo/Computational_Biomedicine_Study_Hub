@@ -250,7 +250,13 @@ quadratic_rmse=0.000""",
                 "A residual-versus-fitted plot shows a funnel. Which assumption is questioned and what should you investigate?",
                 "Et plot af residualer mod tilpassede værdier viser en tragt. Hvilken antagelse udfordres, og hvad bør undersøges?",
             ),
-            (("Relaciona dispersión vertical con nivel ajustado.", "Relate vertical spread to fitted level.", "Relatér lodret spredning til det tilpassede niveau."),),
+            (
+                (
+                    "Relaciona dispersión vertical con nivel ajustado.",
+                    "Relate vertical spread to fitted level.",
+                    "Relatér lodret spredning til det tilpassede niveau.",
+                ),
+            ),
             (
                 "Sugiere heterocedasticidad; revisar escala, proceso de medición, grupos omitidos, especificación de varianza y métodos robustos.",
                 "It suggests heteroscedasticity; inspect scale, measurement process, omitted groups, variance specification, and robust methods.",
@@ -271,7 +277,13 @@ quadratic_rmse=0.000""",
                 "Complete the calculation of leverage and Cook's distance for a fitted model.",
                 "Fuldfør beregningen af leverage og Cooks afstand for en tilpasset model.",
             ),
-            (("Usa funciones diagnósticas de stats.", "Use diagnostic functions from stats.", "Brug diagnostiske funktioner fra stats."),),
+            (
+                (
+                    "Usa funciones diagnósticas de stats.",
+                    "Use diagnostic functions from stats.",
+                    "Brug diagnostiske funktioner fra stats.",
+                ),
+            ),
             ("hatvalues(fit)\ncooks.distance(fit)",) * 3,
             (
                 "Los dos diagnósticos describen propiedades diferentes y deben interpretarse juntos.",
@@ -288,7 +300,13 @@ quadratic_rmse=0.000""",
                 "Correct the rule: delete every observation with Cook's distance greater than 4/n.",
                 "Ret reglen: slet enhver observation med Cooks afstand større end 4/n.",
             ),
-            (("Un umbral es una señal, no una orden.", "A threshold is a signal, not an order.", "En grænse er et signal, ikke en ordre."),),
+            (
+                (
+                    "Un umbral es una señal, no una orden.",
+                    "A threshold is a signal, not an order.",
+                    "En grænse er et signal, ikke en ordre.",
+                ),
+            ),
             (
                 "Usar el umbral para revisión; comprobar errores de medición, diseño y plausibilidad; realizar análisis de sensibilidad y documentar cualquier exclusión.",
                 "Use the threshold for review; check measurement errors, design, and plausibility; perform sensitivity analysis and document any exclusion.",
@@ -309,7 +327,13 @@ quadratic_rmse=0.000""",
                 "Design validation for repeated samples per patient from two hospitals.",
                 "Design validering for gentagne prøver pr. patient fra to hospitaler.",
             ),
-            (("La unidad de partición no puede ser cada fila.", "The split unit cannot be each row.", "Opdelingsenheden kan ikke være hver række."),),
+            (
+                (
+                    "La unidad de partición no puede ser cada fila.",
+                    "The split unit cannot be each row.",
+                    "Opdelingsenheden kan ikke være hver række.",
+                ),
+            ),
             (
                 "Agrupar todas las muestras de un paciente en la misma partición; evaluar separación por hospital o validación externa; ajustar transformaciones solo en entrenamiento; fijar métrica y reportar incertidumbre.",
                 "Keep all samples from one patient in the same split; evaluate hospital-based or external validation; fit transformations only on training data; define the metric and report uncertainty.",
@@ -330,7 +354,13 @@ quadratic_rmse=0.000""",
                 "Explain why training error alone does not estimate generalisation.",
                 "Forklar hvorfor træningsfejl alene ikke estimerer generalisering.",
             ),
-            (("El modelo fue elegido usando esos mismos datos.", "The model was chosen using those same data.", "Modellen blev valgt med de samme data."),),
+            (
+                (
+                    "El modelo fue elegido usando esos mismos datos.",
+                    "The model was chosen using those same data.",
+                    "Modellen blev valgt med de samme data.",
+                ),
+            ),
             (
                 "El ajuste optimiza el rendimiento sobre entrenamiento y puede aprender ruido; se necesitan datos no usados o resampling correctamente anidado para estimar rendimiento futuro.",
                 "Fitting optimises training performance and may learn noise; unused data or correctly nested resampling are needed to estimate future performance.",
@@ -351,7 +381,13 @@ quadratic_rmse=0.000""",
                 "An observation has high leverage but a near-zero residual. Is it necessarily influential?",
                 "En observation har høj leverage men næsten nul residual. Er den nødvendigvis indflydelsesrig?",
             ),
-            (("Influencia combina posición y discrepancia.", "Influence combines position and discrepancy.", "Indflydelse kombinerer position og afvigelse."),),
+            (
+                (
+                    "Influencia combina posición y discrepancia.",
+                    "Influence combines position and discrepancy.",
+                    "Indflydelse kombinerer position og afvigelse.",
+                ),
+            ),
             (
                 "No. Puede estar lejos en el espacio de predictores pero ajustarse a la tendencia; revisar Cook, cambios de coeficientes y sensibilidad.",
                 "No. It may be remote in predictor space but align with the trend; inspect Cook's distance, coefficient changes, and sensitivity.",
@@ -368,70 +404,361 @@ quadratic_rmse=0.000""",
     mcqs=(
         (
             "001",
-            ("¿Qué muestra un residuo?", "What does a residual represent?", "Hvad repræsenterer en residual?"),
-            (("a", ("Observado menos ajustado", "Observed minus fitted", "Observeret minus tilpasset")), ("b", ("Solo error de medición", "Measurement error only", "Kun målefejl")), ("c", ("Probabilidad del modelo", "Model probability", "Modelsandsynlighed")), ("d", ("Leverage", "Leverage", "Leverage"))),
+            (
+                "¿Qué muestra un residuo?",
+                "What does a residual represent?",
+                "Hvad repræsenterer en residual?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Observado menos ajustado",
+                        "Observed minus fitted",
+                        "Observeret minus tilpasset",
+                    ),
+                ),
+                ("b", ("Solo error de medición", "Measurement error only", "Kun målefejl")),
+                ("c", ("Probabilidad del modelo", "Model probability", "Modelsandsynlighed")),
+                ("d", ("Leverage", "Leverage", "Leverage")),
+            ),
             "a",
-            ("El residuo combina discrepancias de datos y modelo.", "The residual combines data and model discrepancies.", "Residualen kombinerer afvigelser i data og model."),
+            (
+                "El residuo combina discrepancias de datos y modelo.",
+                "The residual combines data and model discrepancies.",
+                "Residualen kombinerer afvigelser i data og model.",
+            ),
         ),
         (
             "002",
-            ("¿Qué sugiere un embudo en residuos frente a ajustados?", "What does a funnel in residuals versus fitted suggest?", "Hvad antyder en tragt i residualer mod tilpassede værdier?"),
-            (("a", ("Heterocedasticidad", "Heteroscedasticity", "Heteroskedasticitet")), ("b", ("Causalidad", "Causality", "Kausalitet")), ("c", ("Independencia demostrada", "Proven independence", "Bevist uafhængighed")), ("d", ("Ausencia de extremos", "No outliers", "Ingen ekstreme værdier"))),
+            (
+                "¿Qué sugiere un embudo en residuos frente a ajustados?",
+                "What does a funnel in residuals versus fitted suggest?",
+                "Hvad antyder en tragt i residualer mod tilpassede værdier?",
+            ),
+            (
+                ("a", ("Heterocedasticidad", "Heteroscedasticity", "Heteroskedasticitet")),
+                ("b", ("Causalidad", "Causality", "Kausalitet")),
+                ("c", ("Independencia demostrada", "Proven independence", "Bevist uafhængighed")),
+                ("d", ("Ausencia de extremos", "No outliers", "Ingen ekstreme værdier")),
+            ),
             "a",
-            ("La dispersión cambia con el nivel ajustado.", "Spread changes with fitted level.", "Spredningen ændres med det tilpassede niveau."),
+            (
+                "La dispersión cambia con el nivel ajustado.",
+                "Spread changes with fitted level.",
+                "Spredningen ændres med det tilpassede niveau.",
+            ),
         ),
         (
             "003",
             ("¿Qué mide leverage?", "What does leverage measure?", "Hvad måler leverage?"),
-            (("a", ("Posición inusual de predictores", "Unusual predictor position", "Usædvanlig prædiktorposition")), ("b", ("Tamaño del residuo únicamente", "Residual size only", "Kun residualens størrelse")), ("c", ("Error de prueba", "Test error", "Testfejl")), ("d", ("Normalidad", "Normality", "Normalitet"))),
+            (
+                (
+                    "a",
+                    (
+                        "Posición inusual de predictores",
+                        "Unusual predictor position",
+                        "Usædvanlig prædiktorposition",
+                    ),
+                ),
+                (
+                    "b",
+                    (
+                        "Tamaño del residuo únicamente",
+                        "Residual size only",
+                        "Kun residualens størrelse",
+                    ),
+                ),
+                ("c", ("Error de prueba", "Test error", "Testfejl")),
+                ("d", ("Normalidad", "Normality", "Normalitet")),
+            ),
             "a",
-            ("Leverage depende de la matriz de diseño.", "Leverage depends on the design matrix.", "Leverage afhænger af designmatricen."),
+            (
+                "Leverage depende de la matriz de diseño.",
+                "Leverage depends on the design matrix.",
+                "Leverage afhænger af designmatricen.",
+            ),
         ),
         (
             "004",
-            ("¿Qué combina la distancia de Cook?", "What does Cook's distance combine?", "Hvad kombinerer Cooks afstand?"),
-            (("a", ("Discrepancia y leverage", "Discrepancy and leverage", "Afvigelse og leverage")), ("b", ("Solo tamaño muestral", "Sample size only", "Kun stikprøvestørrelse")), ("c", ("Solo R²", "R-squared only", "Kun R-kvadrat")), ("d", ("Solo normalidad", "Normality only", "Kun normalitet"))),
+            (
+                "¿Qué combina la distancia de Cook?",
+                "What does Cook's distance combine?",
+                "Hvad kombinerer Cooks afstand?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Discrepancia y leverage",
+                        "Discrepancy and leverage",
+                        "Afvigelse og leverage",
+                    ),
+                ),
+                ("b", ("Solo tamaño muestral", "Sample size only", "Kun stikprøvestørrelse")),
+                ("c", ("Solo R²", "R-squared only", "Kun R-kvadrat")),
+                ("d", ("Solo normalidad", "Normality only", "Kun normalitet")),
+            ),
             "a",
-            ("Resume potencial de cambio del ajuste al omitir una observación.", "It summarises potential fit change when omitting an observation.", "Den opsummerer potentiel ændring i tilpasningen ved udeladelse af en observation."),
+            (
+                "Resume potencial de cambio del ajuste al omitir una observación.",
+                "It summarises potential fit change when omitting an observation.",
+                "Den opsummerer potentiel ændring i tilpasningen ved udeladelse af en observation.",
+            ),
         ),
         (
             "005",
-            ("¿Qué estima un conjunto de prueba intacto?", "What does an untouched test set estimate?", "Hvad estimerer et uberørt testsæt?"),
-            (("a", ("Rendimiento fuera de muestra", "Out-of-sample performance", "Præstation uden for stikprøven")), ("b", ("Error de entrenamiento", "Training error", "Træningsfejl")), ("c", ("Causalidad", "Causality", "Kausalitet")), ("d", ("Leverage", "Leverage", "Leverage"))),
+            (
+                "¿Qué estima un conjunto de prueba intacto?",
+                "What does an untouched test set estimate?",
+                "Hvad estimerer et uberørt testsæt?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Rendimiento fuera de muestra",
+                        "Out-of-sample performance",
+                        "Præstation uden for stikprøven",
+                    ),
+                ),
+                ("b", ("Error de entrenamiento", "Training error", "Træningsfejl")),
+                ("c", ("Causalidad", "Causality", "Kausalitet")),
+                ("d", ("Leverage", "Leverage", "Leverage")),
+            ),
             "a",
-            ("No participó en selección ni ajuste.", "It did not participate in selection or fitting.", "Det deltog ikke i valg eller tilpasning."),
+            (
+                "No participó en selección ni ajuste.",
+                "It did not participate in selection or fitting.",
+                "Det deltog ikke i valg eller tilpasning.",
+            ),
         ),
         (
             "006",
-            ("¿Qué constituye fuga de información?", "What constitutes information leakage?", "Hvad udgør informationslækage?"),
-            (("a", ("Normalizar usando todo el conjunto antes de dividir", "Normalising with all data before splitting", "Normalisering med alle data før opdeling")), ("b", ("Fijar una métrica previamente", "Predefining a metric", "Foruddefinere en metrik")), ("c", ("Reservar pacientes completos", "Holding out complete patients", "Holde komplette patienter ude")), ("d", ("Documentar exclusiones", "Documenting exclusions", "Dokumentere udelukkelser"))),
+            (
+                "¿Qué constituye fuga de información?",
+                "What constitutes information leakage?",
+                "Hvad udgør informationslækage?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Normalizar usando todo el conjunto antes de dividir",
+                        "Normalising with all data before splitting",
+                        "Normalisering med alle data før opdeling",
+                    ),
+                ),
+                (
+                    "b",
+                    (
+                        "Fijar una métrica previamente",
+                        "Predefining a metric",
+                        "Foruddefinere en metrik",
+                    ),
+                ),
+                (
+                    "c",
+                    (
+                        "Reservar pacientes completos",
+                        "Holding out complete patients",
+                        "Holde komplette patienter ude",
+                    ),
+                ),
+                (
+                    "d",
+                    (
+                        "Documentar exclusiones",
+                        "Documenting exclusions",
+                        "Dokumentere udelukkelser",
+                    ),
+                ),
+            ),
             "a",
-            ("La transformación usa información del futuro conjunto de prueba.", "The transformation uses information from the future test set.", "Transformationen bruger information fra det fremtidige testsæt."),
+            (
+                "La transformación usa información del futuro conjunto de prueba.",
+                "The transformation uses information from the future test set.",
+                "Transformationen bruger information fra det fremtidige testsæt.",
+            ),
         ),
         (
             "007",
-            ("¿Cuándo es válida una comparación ANOVA de modelos lm?", "When is an ANOVA comparison of lm models valid?", "Hvornår er en ANOVA-sammenligning af lm-modeller gyldig?"),
-            (("a", ("Cuando son anidados y usan las mismas observaciones", "When nested and fitted to the same observations", "Når de er indlejrede og tilpasset de samme observationer")), ("b", ("Siempre que R² cambie", "Whenever R-squared changes", "Når R-kvadrat ændres")), ("c", ("Solo si ambos tienen igual número de parámetros", "Only with equal parameter counts", "Kun med samme antal parametre")), ("d", ("Solo con datos de prueba", "Only with test data", "Kun med testdata"))),
+            (
+                "¿Cuándo es válida una comparación ANOVA de modelos lm?",
+                "When is an ANOVA comparison of lm models valid?",
+                "Hvornår er en ANOVA-sammenligning af lm-modeller gyldig?",
+            ),
+            (
+                (
+                    "a",
+                    (
+                        "Cuando son anidados y usan las mismas observaciones",
+                        "When nested and fitted to the same observations",
+                        "Når de er indlejrede og tilpasset de samme observationer",
+                    ),
+                ),
+                (
+                    "b",
+                    ("Siempre que R² cambie", "Whenever R-squared changes", "Når R-kvadrat ændres"),
+                ),
+                (
+                    "c",
+                    (
+                        "Solo si ambos tienen igual número de parámetros",
+                        "Only with equal parameter counts",
+                        "Kun med samme antal parametre",
+                    ),
+                ),
+                ("d", ("Solo con datos de prueba", "Only with test data", "Kun med testdata")),
+            ),
             "a",
-            ("El modelo reducido debe ser un caso especial del completo.", "The reduced model must be a special case of the full model.", "Den reducerede model skal være et specialtilfælde af den fulde model."),
+            (
+                "El modelo reducido debe ser un caso especial del completo.",
+                "The reduced model must be a special case of the full model.",
+                "Den reducerede model skal være et specialtilfælde af den fulde model.",
+            ),
         ),
         (
             "008",
-            ("¿Qué partición evita fuga con medidas repetidas?", "Which split avoids leakage with repeated measures?", "Hvilken opdeling undgår lækage ved gentagne målinger?"),
-            (("a", ("Por paciente", "By patient", "Efter patient")), ("b", ("Por fila al azar", "Randomly by row", "Tilfældigt efter række")), ("c", ("Por variable", "By variable", "Efter variabel")), ("d", ("Después de seleccionar el modelo", "After model selection", "Efter modelvalg"))),
+            (
+                "¿Qué partición evita fuga con medidas repetidas?",
+                "Which split avoids leakage with repeated measures?",
+                "Hvilken opdeling undgår lækage ved gentagne målinger?",
+            ),
+            (
+                ("a", ("Por paciente", "By patient", "Efter patient")),
+                ("b", ("Por fila al azar", "Randomly by row", "Tilfældigt efter række")),
+                ("c", ("Por variable", "By variable", "Efter variabel")),
+                (
+                    "d",
+                    (
+                        "Después de seleccionar el modelo",
+                        "After model selection",
+                        "Efter modelvalg",
+                    ),
+                ),
+            ),
             "a",
-            ("Todas las observaciones dependientes deben permanecer juntas.", "All dependent observations should remain together.", "Alle afhængige observationer bør forblive sammen."),
+            (
+                "Todas las observaciones dependientes deben permanecer juntas.",
+                "All dependent observations should remain together.",
+                "Alle afhængige observationer bør forblive sammen.",
+            ),
         ),
     ),
     true_false=(
-        ("009", ("Un residuo grande demuestra que la observación es errónea.", "A large residual proves the observation is erroneous.", "En stor residual beviser, at observationen er forkert."), False, ("Puede reflejar error, biología real o especificación insuficiente.", "It may reflect error, real biology, or inadequate specification.", "Den kan afspejle fejl, reel biologi eller utilstrækkelig specifikation.")),
-        ("010", ("La independencia depende principalmente del diseño.", "Independence depends primarily on design.", "Uafhængighed afhænger primært af designet."), True, ("Un gráfico no puede crear independencia ausente.", "A plot cannot create missing independence.", "Et plot kan ikke skabe manglende uafhængighed.")),
-        ("011", ("Alto leverage implica siempre alta distancia de Cook.", "High leverage always implies high Cook's distance.", "Høj leverage indebærer altid stor Cooks afstand."), False, ("También se necesita discrepancia residual.", "Residual discrepancy is also needed.", "Residualafvigelse er også nødvendig.")),
-        ("012", ("Eliminar puntos por un umbral diagnóstico puede introducir sesgo.", "Deleting points by a diagnostic threshold can introduce bias.", "Sletning af punkter efter en diagnostisk grænse kan indføre bias."), True, ("La exclusión requiere justificación y sensibilidad.", "Exclusion requires justification and sensitivity analysis.", "Udelukkelse kræver begrundelse og følsomhedsanalyse.")),
-        ("013", ("El error de entrenamiento suele disminuir al añadir parámetros.", "Training error usually decreases when parameters are added.", "Træningsfejl falder normalt, når parametre tilføjes."), True, ("Esto no garantiza mejor generalización.", "This does not guarantee better generalisation.", "Det garanterer ikke bedre generalisering.")),
-        ("014", ("Seleccionar variables usando el conjunto de prueba mantiene una validación imparcial.", "Selecting variables using the test set preserves unbiased validation.", "Variabelvalg med testsættet bevarer upartisk validering."), False, ("Contamina la estimación de rendimiento.", "It contaminates the performance estimate.", "Det forurener præstationsestimatet.")),
-        ("015", ("La validación cruzada sustituye siempre una cohorte externa.", "Cross-validation always replaces an external cohort.", "Krydsvalidering erstatter altid en ekstern kohorte."), False, ("No evalúa todos los cambios de población o procedimiento.", "It does not assess every population or process shift.", "Den vurderer ikke alle ændringer i population eller procedure.")),
-        ("016", ("La métrica de validación debe corresponder al uso previsto del modelo.", "The validation metric should match the model's intended use.", "Valideringsmetrikken bør passe til modellens tilsigtede brug."), True, ("Una métrica irrelevante puede premiar el modelo equivocado.", "An irrelevant metric may reward the wrong model.", "En irrelevant metrik kan belønne den forkerte model.")),
+        (
+            "009",
+            (
+                "Un residuo grande demuestra que la observación es errónea.",
+                "A large residual proves the observation is erroneous.",
+                "En stor residual beviser, at observationen er forkert.",
+            ),
+            False,
+            (
+                "Puede reflejar error, biología real o especificación insuficiente.",
+                "It may reflect error, real biology, or inadequate specification.",
+                "Den kan afspejle fejl, reel biologi eller utilstrækkelig specifikation.",
+            ),
+        ),
+        (
+            "010",
+            (
+                "La independencia depende principalmente del diseño.",
+                "Independence depends primarily on design.",
+                "Uafhængighed afhænger primært af designet.",
+            ),
+            True,
+            (
+                "Un gráfico no puede crear independencia ausente.",
+                "A plot cannot create missing independence.",
+                "Et plot kan ikke skabe manglende uafhængighed.",
+            ),
+        ),
+        (
+            "011",
+            (
+                "Alto leverage implica siempre alta distancia de Cook.",
+                "High leverage always implies high Cook's distance.",
+                "Høj leverage indebærer altid stor Cooks afstand.",
+            ),
+            False,
+            (
+                "También se necesita discrepancia residual.",
+                "Residual discrepancy is also needed.",
+                "Residualafvigelse er også nødvendig.",
+            ),
+        ),
+        (
+            "012",
+            (
+                "Eliminar puntos por un umbral diagnóstico puede introducir sesgo.",
+                "Deleting points by a diagnostic threshold can introduce bias.",
+                "Sletning af punkter efter en diagnostisk grænse kan indføre bias.",
+            ),
+            True,
+            (
+                "La exclusión requiere justificación y sensibilidad.",
+                "Exclusion requires justification and sensitivity analysis.",
+                "Udelukkelse kræver begrundelse og følsomhedsanalyse.",
+            ),
+        ),
+        (
+            "013",
+            (
+                "El error de entrenamiento suele disminuir al añadir parámetros.",
+                "Training error usually decreases when parameters are added.",
+                "Træningsfejl falder normalt, når parametre tilføjes.",
+            ),
+            True,
+            (
+                "Esto no garantiza mejor generalización.",
+                "This does not guarantee better generalisation.",
+                "Det garanterer ikke bedre generalisering.",
+            ),
+        ),
+        (
+            "014",
+            (
+                "Seleccionar variables usando el conjunto de prueba mantiene una validación imparcial.",
+                "Selecting variables using the test set preserves unbiased validation.",
+                "Variabelvalg med testsættet bevarer upartisk validering.",
+            ),
+            False,
+            (
+                "Contamina la estimación de rendimiento.",
+                "It contaminates the performance estimate.",
+                "Det forurener præstationsestimatet.",
+            ),
+        ),
+        (
+            "015",
+            (
+                "La validación cruzada sustituye siempre una cohorte externa.",
+                "Cross-validation always replaces an external cohort.",
+                "Krydsvalidering erstatter altid en ekstern kohorte.",
+            ),
+            False,
+            (
+                "No evalúa todos los cambios de población o procedimiento.",
+                "It does not assess every population or process shift.",
+                "Den vurderer ikke alle ændringer i population eller procedure.",
+            ),
+        ),
+        (
+            "016",
+            (
+                "La métrica de validación debe corresponder al uso previsto del modelo.",
+                "The validation metric should match the model's intended use.",
+                "Valideringsmetrikken bør passe til modellens tilsigtede brug.",
+            ),
+            True,
+            (
+                "Una métrica irrelevante puede premiar el modelo equivocado.",
+                "An irrelevant metric may reward the wrong model.",
+                "En irrelevant metrik kan belønne den forkerte model.",
+            ),
+        ),
     ),
     tutor=(
         (
@@ -440,30 +767,94 @@ quadratic_rmse=0.000""",
             "Modeldiagnostik kombinerer residualer, designstruktur, indflydelse og validering uden for stikprøven. Intet enkelt plot, grænse eller metrik afgør automatisk modellens gyldighed.",
         ),
         (
-            ("Residuos evalúan discrepancia, no solo error de medición.", "Residuals assess discrepancy, not only measurement error.", "Residualer vurderer afvigelse, ikke kun målefejl."),
-            ("Leverage, residuo e influencia son conceptos distintos.", "Leverage, residual, and influence are distinct concepts.", "Leverage, residual og indflydelse er forskellige begreber."),
-            ("La validación debe aislar todo el proceso de aprendizaje.", "Validation must isolate the entire learning process.", "Validering skal isolere hele læringsprocessen."),
-            ("La comparación depende del objetivo científico.", "Comparison depends on the scientific purpose.", "Sammenligning afhænger af det videnskabelige formål."),
+            (
+                "Residuos evalúan discrepancia, no solo error de medición.",
+                "Residuals assess discrepancy, not only measurement error.",
+                "Residualer vurderer afvigelse, ikke kun målefejl.",
+            ),
+            (
+                "Leverage, residuo e influencia son conceptos distintos.",
+                "Leverage, residual, and influence are distinct concepts.",
+                "Leverage, residual og indflydelse er forskellige begreber.",
+            ),
+            (
+                "La validación debe aislar todo el proceso de aprendizaje.",
+                "Validation must isolate the entire learning process.",
+                "Validering skal isolere hele læringsprocessen.",
+            ),
+            (
+                "La comparación depende del objetivo científico.",
+                "Comparison depends on the scientific purpose.",
+                "Sammenligning afhænger af det videnskabelige formål.",
+            ),
         ),
         (
-            ("Eliminar observaciones automáticamente.", "Automatically deleting observations.", "Automatisk sletning af observationer."),
-            ("Usar el conjunto de prueba durante el desarrollo.", "Using the test set during development.", "Brug af testsættet under udvikling."),
-            ("Elegir por R² sin penalizar complejidad.", "Choosing by R-squared without considering complexity.", "Valg efter R-kvadrat uden hensyn til kompleksitet."),
+            (
+                "Eliminar observaciones automáticamente.",
+                "Automatically deleting observations.",
+                "Automatisk sletning af observationer.",
+            ),
+            (
+                "Usar el conjunto de prueba durante el desarrollo.",
+                "Using the test set during development.",
+                "Brug af testsættet under udvikling.",
+            ),
+            (
+                "Elegir por R² sin penalizar complejidad.",
+                "Choosing by R-squared without considering complexity.",
+                "Valg efter R-kvadrat uden hensyn til kompleksitet.",
+            ),
         ),
         (
-            ("¿Qué patrón exacto observas en los residuos?", "What exact residual pattern do you observe?", "Hvilket præcist residualmønster observerer du?"),
-            ("¿La partición respeta la unidad experimental?", "Does the split respect the experimental unit?", "Respekterer opdelingen den eksperimentelle enhed?"),
-            ("¿Cambian las conclusiones en sensibilidad?", "Do conclusions change in sensitivity analysis?", "Ændres konklusionerne i følsomhedsanalysen?"),
+            (
+                "¿Qué patrón exacto observas en los residuos?",
+                "What exact residual pattern do you observe?",
+                "Hvilket præcist residualmønster observerer du?",
+            ),
+            (
+                "¿La partición respeta la unidad experimental?",
+                "Does the split respect the experimental unit?",
+                "Respekterer opdelingen den eksperimentelle enhed?",
+            ),
+            (
+                "¿Cambian las conclusiones en sensibilidad?",
+                "Do conclusions change in sensitivity analysis?",
+                "Ændres konklusionerne i følsomhedsanalysen?",
+            ),
         ),
         (
-            ("Interpreta diagnósticos conjuntamente.", "Interprets diagnostics jointly.", "Fortolker diagnostikker samlet."),
-            ("Distingue entrenamiento y generalización.", "Distinguishes training and generalisation.", "Skelner mellem træning og generalisering."),
-            ("Detecta y evita fuga de información.", "Detects and avoids information leakage.", "Opdager og undgår informationslækage."),
+            (
+                "Interpreta diagnósticos conjuntamente.",
+                "Interprets diagnostics jointly.",
+                "Fortolker diagnostikker samlet.",
+            ),
+            (
+                "Distingue entrenamiento y generalización.",
+                "Distinguishes training and generalisation.",
+                "Skelner mellem træning og generalisering.",
+            ),
+            (
+                "Detecta y evita fuga de información.",
+                "Detects and avoids information leakage.",
+                "Opdager og undgår informationslækage.",
+            ),
         ),
         (
-            ("No ordenar borrar datos desde un umbral.", "Do not order data deletion from a threshold.", "Anbefal ikke datasletning ud fra en grænse."),
-            ("No declarar validación externa a partir de resampling interno.", "Do not claim external validation from internal resampling.", "Erklær ikke ekstern validering ud fra intern resampling."),
-            ("Responder en el idioma activo.", "Respond in the active language.", "Svar på det aktive sprog."),
+            (
+                "No ordenar borrar datos desde un umbral.",
+                "Do not order data deletion from a threshold.",
+                "Anbefal ikke datasletning ud fra en grænse.",
+            ),
+            (
+                "No declarar validación externa a partir de resampling interno.",
+                "Do not claim external validation from internal resampling.",
+                "Erklær ikke ekstern validering ud fra intern resampling.",
+            ),
+            (
+                "Responder en el idioma activo.",
+                "Respond in the active language.",
+                "Svar på det aktive sprog.",
+            ),
         ),
         (
             "SDU ODIN BMB830 active course description approved 2025-03-06",

@@ -23,15 +23,11 @@ def test_bmb830_audit_matches_active_public_sdu_structure() -> None:
     assert BMB830_ODIN_APPROVAL_DATE == "2025-03-06"
     assert BMB830_ODIN_VERSION == "Approved - active"
     assert len(rows) == 14
-    assert sum(
-        row.requirement.kind is OfficialRequirementKind.LEARNING_OUTCOME for row in rows
-    ) == 6
-    assert sum(
-        row.requirement.kind is OfficialRequirementKind.CONTENT_TOPIC for row in rows
-    ) == 6
-    assert sum(
-        row.requirement.kind is OfficialRequirementKind.EXAM_COMPONENT for row in rows
-    ) == 2
+    assert (
+        sum(row.requirement.kind is OfficialRequirementKind.LEARNING_OUTCOME for row in rows) == 6
+    )
+    assert sum(row.requirement.kind is OfficialRequirementKind.CONTENT_TOPIC for row in rows) == 6
+    assert sum(row.requirement.kind is OfficialRequirementKind.EXAM_COMPONENT for row in rows) == 2
 
 
 def test_bmb830_official_audit_exposes_remaining_academic_gaps() -> None:
@@ -57,15 +53,11 @@ def test_bmb830_master_level_evaluation_is_separate_and_conservative() -> None:
 
     assert rows[MasterCriterionKind.CONCEPTUAL_RIGOUR].criterion.status is CoverageStatus.COVERED
     assert (
-        rows[MasterCriterionKind.COMPUTATIONAL_WORKFLOW].criterion.status
-        is CoverageStatus.COVERED
+        rows[MasterCriterionKind.COMPUTATIONAL_WORKFLOW].criterion.status is CoverageStatus.COVERED
     )
     assert rows[MasterCriterionKind.BIOLOGICAL_REALISM].criterion.status is CoverageStatus.PARTIAL
     assert rows[MasterCriterionKind.SCALE].criterion.status is CoverageStatus.PARTIAL
-    assert (
-        rows[MasterCriterionKind.MULTIVARIATE_ANALYSIS].criterion.status
-        is CoverageStatus.GAP
-    )
+    assert rows[MasterCriterionKind.MULTIVARIATE_ANALYSIS].criterion.status is CoverageStatus.GAP
     assert rows[MasterCriterionKind.CRITICAL_APPRAISAL].criterion.status is CoverageStatus.PARTIAL
     assert rows[MasterCriterionKind.ORAL_REASONING].criterion.status is CoverageStatus.PARTIAL
 

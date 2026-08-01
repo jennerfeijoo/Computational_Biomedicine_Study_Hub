@@ -184,7 +184,16 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.lo05",
         OfficialRequirementKind.LEARNING_OUTCOME,
         "Apply tools for data interpretation.",
-        ("bmb830.m02", "bmb830.m04", "bmb830.m05", "bmb830.m06", "bmb830.m07", "bmb830.m08", "bmb830.m09", "bmb830.m10"),
+        (
+            "bmb830.m02",
+            "bmb830.m04",
+            "bmb830.m05",
+            "bmb830.m06",
+            "bmb830.m07",
+            "bmb830.m08",
+            "bmb830.m09",
+            "bmb830.m10",
+        ),
         CoverageStatus.COVERED,
         "Effect sizes, intervals, tests, regression, interactions, diagnostics, and validation are "
         "interpreted in biomedical rather than purely computational terms.",
@@ -221,7 +230,15 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.ct03",
         OfficialRequirementKind.CONTENT_TOPIC,
         "Basic statistical models.",
-        ("bmb830.m04", "bmb830.m05", "bmb830.m06", "bmb830.m07", "bmb830.m08", "bmb830.m09", "bmb830.m10"),
+        (
+            "bmb830.m04",
+            "bmb830.m05",
+            "bmb830.m06",
+            "bmb830.m07",
+            "bmb830.m08",
+            "bmb830.m09",
+            "bmb830.m10",
+        ),
         CoverageStatus.COVERED,
         "The course provides estimation, tests, ANOVA-style comparisons, regression, interactions, "
         "nonlinearity, diagnostics, and validation.",
@@ -239,7 +256,16 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.ct05",
         OfficialRequirementKind.CONTENT_TOPIC,
         "Data interpretation.",
-        ("bmb830.m02", "bmb830.m04", "bmb830.m05", "bmb830.m06", "bmb830.m07", "bmb830.m08", "bmb830.m09", "bmb830.m10"),
+        (
+            "bmb830.m02",
+            "bmb830.m04",
+            "bmb830.m05",
+            "bmb830.m06",
+            "bmb830.m07",
+            "bmb830.m08",
+            "bmb830.m09",
+            "bmb830.m10",
+        ),
         CoverageStatus.COVERED,
         "Every statistical block includes interpretation, uncertainty, assumptions, and limits of conclusions.",
     ),
@@ -267,7 +293,15 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.exam02",
         OfficialRequirementKind.EXAM_COMPONENT,
         "Complete the individual oral examination.",
-        ("bmb830.m04", "bmb830.m05", "bmb830.m06", "bmb830.m07", "bmb830.m08", "bmb830.m09", "bmb830.m10"),
+        (
+            "bmb830.m04",
+            "bmb830.m05",
+            "bmb830.m06",
+            "bmb830.m07",
+            "bmb830.m08",
+            "bmb830.m09",
+            "bmb830.m10",
+        ),
         CoverageStatus.PARTIAL,
         "Oral-explanation activities exist throughout the course, but there is no dedicated timed "
         "individual oral-exam simulator spanning the complete syllabus.",
@@ -281,7 +315,16 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         "bmb830.master.01",
         MasterCriterionKind.CONCEPTUAL_RIGOUR,
         "Explain assumptions, estimands, uncertainty, effect size, and limitations rather than applying tests by recipe.",
-        ("bmb830.m03", "bmb830.m04", "bmb830.m05", "bmb830.m06", "bmb830.m07", "bmb830.m08", "bmb830.m09", "bmb830.m10"),
+        (
+            "bmb830.m03",
+            "bmb830.m04",
+            "bmb830.m05",
+            "bmb830.m06",
+            "bmb830.m07",
+            "bmb830.m08",
+            "bmb830.m09",
+            "bmb830.m10",
+        ),
         CoverageStatus.COVERED,
         "The course consistently prioritises reasoning, interpretation, and failure modes over menu-driven test selection.",
     ),
@@ -334,7 +377,15 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         "bmb830.master.07",
         MasterCriterionKind.ORAL_REASONING,
         "Defend model choice, assumptions, diagnostics, and interpretation orally under follow-up questioning.",
-        ("bmb830.m04", "bmb830.m05", "bmb830.m06", "bmb830.m07", "bmb830.m08", "bmb830.m09", "bmb830.m10"),
+        (
+            "bmb830.m04",
+            "bmb830.m05",
+            "bmb830.m06",
+            "bmb830.m07",
+            "bmb830.m08",
+            "bmb830.m09",
+            "bmb830.m10",
+        ),
         CoverageStatus.PARTIAL,
         "Oral prompts exist, but they are not yet assembled into a timed individual examination experience.",
         "Add individual oral-exam rehearsal after multivariate coverage is complete.",
@@ -417,7 +468,9 @@ def validate_bmb830_coverage() -> None:
     }
     unknown = referenced - known
     if unknown:
-        raise ValueError("The BMB830 audit references unknown modules: " + ", ".join(sorted(unknown)))
+        raise ValueError(
+            "The BMB830 audit references unknown modules: " + ", ".join(sorted(unknown))
+        )
 
     expected_official_counts = {
         OfficialRequirementKind.LEARNING_OUTCOME: 6,
@@ -430,13 +483,17 @@ def validate_bmb830_coverage() -> None:
             raise ValueError(f"BMB830 requires {expected} {kind.value} rows, found {actual}.")
 
     for row in official_rows:
-        if row.requirement.module_ids and row.evidence.module_count != len(row.requirement.module_ids):
+        if row.requirement.module_ids and row.evidence.module_count != len(
+            row.requirement.module_ids
+        ):
             raise ValueError(f"Incomplete evidence for {row.requirement.requirement_id}.")
         if row.requirement.status is CoverageStatus.COVERED:
             if row.evidence.practice_count == 0 or (
                 row.evidence.assessment_count + row.evidence.objective_bank_count == 0
             ):
-                raise ValueError(f"Covered requirement {row.requirement.requirement_id} lacks evidence.")
+                raise ValueError(
+                    f"Covered requirement {row.requirement.requirement_id} lacks evidence."
+                )
 
     teamwork = next(
         row for row in master_rows if row.criterion.kind is MasterCriterionKind.TEAMWORK
