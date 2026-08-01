@@ -339,7 +339,7 @@ def _extend_functions(module: LocalizedLearningModule) -> LocalizedLearningModul
                         "Listen oprettes inde i kroppen og tilhører kun det kald.",
                     ),
                 ),
-                "def add_label(label: str, labels: list[str] | None = None) -> list[str]:\n    if labels is None:\n        labels = []\n    labels.append(label)\n    return labels\n\nprint(add_label(\"rna\"))\nprint(add_label(\"protein\"))",
+                'def add_label(label: str, labels: list[str] | None = None) -> list[str]:\n    if labels is None:\n        labels = []\n    labels.append(label)\n    return labels\n\nprint(add_label("rna"))\nprint(add_label("protein"))',
                 "['rna']\n['protein']",
                 (
                     "Cada llamada que omite labels crea su propia lista; una colección entregada explícitamente todavía puede modificarse según el contrato.",
@@ -508,7 +508,7 @@ def _extend_files_and_exceptions(module: LocalizedLearningModule) -> LocalizedLe
                         "Efter validering bør brøken opfylde en intern invariant.",
                     ),
                 ),
-                "def parse_percentage(text: str) -> float:\n    value = float(text)\n    if not 0.0 <= value <= 100.0:\n        raise ValueError(\"percentage must be between 0 and 100\")\n    fraction = value / 100.0\n    assert 0.0 <= fraction <= 1.0\n    return fraction\n\nprint(parse_percentage(\"12.5\"))",
+                'def parse_percentage(text: str) -> float:\n    value = float(text)\n    if not 0.0 <= value <= 100.0:\n        raise ValueError("percentage must be between 0 and 100")\n    fraction = value / 100.0\n    assert 0.0 <= fraction <= 1.0\n    return fraction\n\nprint(parse_percentage("12.5"))',
                 "0.125",
                 (
                     "ValueError comunica una condición inválida prevista al llamador; assert documenta y comprueba una consecuencia interna de la validación.",
