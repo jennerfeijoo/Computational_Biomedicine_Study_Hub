@@ -54,14 +54,12 @@ def test_reviewed_modules_have_complete_stable_extensions_in_every_locale() -> N
 
 def test_reviewed_module_identifiers_are_locale_independent() -> None:
     reference = {
-        module_id: _signature(module)
-        for module_id, module in _modules(AppLocale.ENGLISH).items()
+        module_id: _signature(module) for module_id, module in _modules(AppLocale.ENGLISH).items()
     }
 
     for locale in AppLocale:
         assert {
-            module_id: _signature(module)
-            for module_id, module in _modules(locale).items()
+            module_id: _signature(module) for module_id, module in _modules(locale).items()
         } == reference
 
 
