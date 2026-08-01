@@ -16,18 +16,27 @@ from computational_biomedicine_study_hub.content.bmb831.official_coverage import
 
 def test_bmb831_coverage_matrix_has_public_row_counts_and_unique_ids() -> None:
     assert len(OFFICIAL_BMB831_REQUIREMENTS) == 15
-    assert sum(
-        requirement.kind is RequirementKind.LEARNING_OUTCOME
-        for requirement in OFFICIAL_BMB831_REQUIREMENTS
-    ) == 7
-    assert sum(
-        requirement.kind is RequirementKind.CONTENT_TOPIC
-        for requirement in OFFICIAL_BMB831_REQUIREMENTS
-    ) == 6
-    assert sum(
-        requirement.kind is RequirementKind.EXAM_COMPONENT
-        for requirement in OFFICIAL_BMB831_REQUIREMENTS
-    ) == 2
+    assert (
+        sum(
+            requirement.kind is RequirementKind.LEARNING_OUTCOME
+            for requirement in OFFICIAL_BMB831_REQUIREMENTS
+        )
+        == 7
+    )
+    assert (
+        sum(
+            requirement.kind is RequirementKind.CONTENT_TOPIC
+            for requirement in OFFICIAL_BMB831_REQUIREMENTS
+        )
+        == 6
+    )
+    assert (
+        sum(
+            requirement.kind is RequirementKind.EXAM_COMPONENT
+            for requirement in OFFICIAL_BMB831_REQUIREMENTS
+        )
+        == 2
+    )
 
     requirement_ids = tuple(
         requirement.requirement_id for requirement in OFFICIAL_BMB831_REQUIREMENTS
