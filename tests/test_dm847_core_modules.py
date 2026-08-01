@@ -14,6 +14,11 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.activity_types import ActivityType
 
 EXPECTED_IDS = tuple(f"dm847.m{number:02d}" for number in range(1, 11))
+EXPECTED_VERSIONS = {
+    **{module_id: "1.0.0" for module_id in EXPECTED_IDS},
+    "dm847.m03": "1.1.0",
+    "dm847.m04": "1.1.0",
+}
 
 
 def test_dm847_catalog_has_ten_complete_modules() -> None:
@@ -23,14 +28,16 @@ def test_dm847_catalog_has_ten_complete_modules() -> None:
 
     for bundle in BUNDLES:
         module = bundle.module
+        expected_assessment_count = 11 if module.module_id in {"dm847.m03", "dm847.m04"} else 10
+
         assert module.course_code == "DM847"
         assert len(module.objectives) >= 6
         assert len(module.concepts) >= 6
         assert len(module.worked_examples) >= 3
         assert len(module.practice_exercises) >= 8
-        assert len(module.assessment_items) == 10
+        assert len(module.assessment_items) == expected_assessment_count
         assert len(bundle.objective_question_bank) == 20
-        assert bundle.content_version == "1.0.0"
+        assert bundle.content_version == EXPECTED_VERSIONS[module.module_id]
 
 
 @pytest.mark.parametrize("locale", tuple(AppLocale))
