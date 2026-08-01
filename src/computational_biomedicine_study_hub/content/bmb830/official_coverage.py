@@ -153,6 +153,7 @@ _INTERPRETATION_MODULES = (
     "bmb830.m09",
     "bmb830.m10",
     "bmb830.m11",
+    "bmb830.m12",
 )
 
 OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
@@ -162,21 +163,29 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "Independently analyse biological data sets.",
         _ALL_MODULE_IDS,
         CoverageStatus.PARTIAL,
-        "The course provides an individual workflow from R foundations through model validation, "
-        "but most worked data remain compact teaching examples rather than one integrated biological data set.",
-        "Add an individually completed biological-data case with provenance, quality control, "
-        "visualisation, modelling, diagnostics, interpretation, and reproducible reporting.",
+        "An integrated individual synthetic proteomics case now joins provenance, quality control, "
+        "multivariate exploration, feature screening, and reporting, but it is deliberately not presented "
+        "as an externally sourced biological data set.",
+        "Add a source-bounded real biological data case when suitable public data and provenance are selected.",
     ),
     OfficialRequirement(
         "bmb830.sdu.lo02",
         OfficialRequirementKind.LEARNING_OUTCOME,
         "Work with large data amounts and carry out standard statistical analysis to identify relevant features.",
-        ("bmb830.m01", "bmb830.m02", "bmb830.m06", "bmb830.m08", "bmb830.m10", "bmb830.m11"),
+        (
+            "bmb830.m01",
+            "bmb830.m02",
+            "bmb830.m06",
+            "bmb830.m08",
+            "bmb830.m10",
+            "bmb830.m11",
+            "bmb830.m12",
+        ),
         CoverageStatus.PARTIAL,
-        "Standard analysis and leakage-safe reasoning are covered, but no laboratory yet exercises "
-        "memory-aware processing or feature screening on a realistically large matrix.",
-        "Add an individual high-dimensional biological matrix laboratory with dimensions, missingness, "
-        "filtering, feature summaries, and leakage-safe validation.",
+        "The bounded p-greater-than-n proteomics case exercises dimensions, missingness, filtering, "
+        "feature summaries, PCA, and training-only screening, but 48 by 240 remains a teaching matrix "
+        "rather than a realistically large data amount.",
+        "Add memory-aware processing of a substantially larger public biological matrix.",
     ),
     OfficialRequirement(
         "bmb830.sdu.lo03",
@@ -220,6 +229,7 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
             "bmb830.m09",
             "bmb830.m10",
             "bmb830.m11",
+            "bmb830.m12",
         ),
         CoverageStatus.PARTIAL,
         "The course teaches the concepts required for critique and includes oral explanations, but "
@@ -294,7 +304,7 @@ OFFICIAL_BMB830_REQUIREMENTS: tuple[OfficialRequirement, ...] = (
         "bmb830.sdu.exam02",
         OfficialRequirementKind.EXAM_COMPONENT,
         "Complete the individual oral examination.",
-        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES, "bmb830.m11"),
+        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES, "bmb830.m11", "bmb830.m12"),
         CoverageStatus.PARTIAL,
         "Oral-explanation activities exist, but there is no dedicated timed individual oral-exam "
         "simulator spanning the complete syllabus.",
@@ -324,29 +334,28 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         "bmb830.master.03",
         MasterCriterionKind.BIOLOGICAL_REALISM,
         "Analyse biological measurements with realistic metadata, dependence, missingness, and scientific interpretation.",
-        ("bmb830.m02", "bmb830.m06", "bmb830.m08", "bmb830.m10", "bmb830.m11"),
+        ("bmb830.m02", "bmb830.m06", "bmb830.m08", "bmb830.m10", "bmb830.m11", "bmb830.m12"),
         CoverageStatus.PARTIAL,
-        "Biological framing is strong, but most examples remain compact teaching data rather than a "
-        "realistic end-to-end molecular or clinical data set.",
-        "Add a provenance-preserving individual biological case without fabricating an SDU assignment.",
+        "The synthetic proteomics case provides realistic metadata, missingness, batch structure, and "
+        "end-to-end decisions, but synthetic provenance cannot replace analysis of an external biological data set.",
+        "Add a provenance-preserving public biological case without fabricating an SDU assignment.",
     ),
     MasterLevelCriterion(
         "bmb830.master.04",
         MasterCriterionKind.SCALE,
         "Handle high-dimensional or large biological data without confusing rows, features, and independent units.",
-        ("bmb830.m01", "bmb830.m02", "bmb830.m08", "bmb830.m10", "bmb830.m11"),
-        CoverageStatus.PARTIAL,
-        "The conceptual safeguards exist, but computational scale and high-dimensional feature "
-        "workflows are not yet exercised.",
-        "Add a bounded large-matrix laboratory and explicit patient-versus-feature dimension checks.",
+        ("bmb830.m01", "bmb830.m02", "bmb830.m08", "bmb830.m10", "bmb830.m11", "bmb830.m12"),
+        CoverageStatus.COVERED,
+        "The individual proteomics case explicitly exercises a p-greater-than-n matrix, dimension and "
+        "memory checks, feature-level missingness, filtering, PCA, and training-only feature screening.",
     ),
     MasterLevelCriterion(
         "bmb830.master.05",
         MasterCriterionKind.MULTIVARIATE_ANALYSIS,
         "Use and interpret introductory multivariate methods such as PCA and clustering.",
-        ("bmb830.m11",),
+        ("bmb830.m11", "bmb830.m12"),
         CoverageStatus.COVERED,
-        "The module connects matrix orientation and preprocessing to PCA, hierarchical "
+        "The modules connect matrix orientation and preprocessing to PCA, hierarchical "
         "clustering, sensitivity, leakage-safe use, and bounded biological interpretation.",
     ),
     MasterLevelCriterion(
@@ -362,7 +371,7 @@ MASTER_LEVEL_CRITERIA: tuple[MasterLevelCriterion, ...] = (
         "bmb830.master.07",
         MasterCriterionKind.ORAL_REASONING,
         "Defend model choice, assumptions, diagnostics, and interpretation under follow-up questioning.",
-        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES, "bmb830.m11"),
+        ("bmb830.m04", "bmb830.m05", *_REGRESSION_MODULES, "bmb830.m11", "bmb830.m12"),
         CoverageStatus.PARTIAL,
         "Oral prompts exist but are not assembled into a timed individual examination experience.",
         "Add individual oral-exam rehearsal after multivariate coverage is complete.",

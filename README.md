@@ -20,7 +20,7 @@ The application combines concise theory, worked examples, executable code, guide
 ### BMB830 implementation in progress
 
 - **BMB830 — Biostatistics in R I**
-  - 10 complete modules
+  - 12 complete modules
   - R objects and reproducible workflows
   - data quality, descriptive statistics, and scientific visualization
   - probability, sampling, and reference distributions
@@ -33,11 +33,12 @@ The application combines concise theory, worked examples, executable code, guide
   - interactions, effect modification, group-specific slopes, centring, polynomial terms, and nested-model comparison
   - residual diagnostics, heteroscedasticity, leverage, Cook's distance, sensitivity analysis, information leakage, and out-of-sample validation
   - multivariate matrices, centring, scaling, distances, PCA, scores, loadings, explained variance, hierarchical clustering, and stability analysis
-  - 176 stable objective-bank questions
+  - individual synthetic proteomics case with provenance, p-greater-than-n quality control, missingness, filtering, imputation, batch assessment, leakage-safe feature screening, and reproducible reporting
+  - 192 stable objective-bank questions
   - optional editable R laboratories executed through a locally installed `Rscript`
   - conservative audit against the active public SDU specification and a separate master-level readiness matrix
 
-The public multivariate requirement is now covered by an individual introductory module. Realistic large biological data, detailed figure-building practice, structured publication appraisal, and a complete individual oral-exam rehearsal remain partial until their official or source materials are available.
+The public multivariate requirement is covered, and an individual bounded high-dimensional proteomics case now exercises the complete exploratory workflow. A substantially larger externally sourced biological data set, detailed figure-building practice, structured publication appraisal, and a complete individual oral-exam rehearsal remain partial until suitable source materials are selected or become available.
 
 BMB830 does not include a group project, role allocation, collaborative submission, or group presentation. The public course description recommends discussion during exercise sessions but publishes an individual oral examination rather than a group-project assessment. All Study Hub activities for this course are individually completable.
 
@@ -197,4 +198,4 @@ tests/              # Unit, content-integrity, localization, persistence, and UI
 
 ## Development status
 
-Active development. DM857 and DM847 provide complete academic course implementations. BMB830 contains eleven complete modules covering foundations through introductory multivariate analysis. The official multivariate gap is closed, while realistic large biological data, detailed visualisation practice, publication appraisal, and full individual oral-exam rehearsal remain partial. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development. Group-presentation rehearsal is intentionally outside the application scope.
+Active development. DM857 and DM847 provide complete academic course implementations. BMB830 contains twelve complete modules covering foundations through an individual high-dimensional proteomics case. High-dimensional p-greater-than-n workflow readiness is now covered, while a substantially larger externally sourced biological data set, detailed visualisation practice, publication appraisal, and full individual oral-exam rehearsal remain partial. Shared flashcard, glossary, search, notes, export, backup, and distribution workflows remain under development. Group-presentation rehearsal is intentionally outside the application scope.

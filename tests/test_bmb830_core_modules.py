@@ -12,7 +12,7 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.r_execution import can_execute_r
 
 
-def test_bmb830_registers_eleven_complete_modules_in_order() -> None:
+def test_bmb830_registers_twelve_complete_modules_in_order() -> None:
     assert tuple(module.module_id for module in MODULES) == (
         "bmb830.m01",
         "bmb830.m02",
@@ -25,8 +25,9 @@ def test_bmb830_registers_eleven_complete_modules_in_order() -> None:
         "bmb830.m09",
         "bmb830.m10",
         "bmb830.m11",
+        "bmb830.m12",
     )
-    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 11
+    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 12
     assert set(OBJECTIVE_QUESTION_BANKS) == {
         "bmb830.m01",
         "bmb830.m02",
@@ -39,8 +40,9 @@ def test_bmb830_registers_eleven_complete_modules_in_order() -> None:
         "bmb830.m09",
         "bmb830.m10",
         "bmb830.m11",
+        "bmb830.m12",
     }
-    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 176
+    assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 192
 
     for bundle in BUNDLES:
         module = bundle.module

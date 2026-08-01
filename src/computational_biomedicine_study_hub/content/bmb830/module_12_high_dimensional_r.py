@@ -1,0 +1,72 @@
+"""Executable base-R examples for BMB830 module 12."""
+
+from __future__ import annotations
+
+from .module_12_high_dimensional_text import tr
+
+R_DATA = 'n <- 48\np <- 240\npatient_id <- sprintf("P%02d", seq_len(n))\ndisease <- factor(rep(c("control", "case"), each = n / 2))\nbatch <- factor(rep(c("B1", "B2"), times = n / 2))\nrow_effect <- seq(-0.6, 0.6, length.out = n)\nfeature_effect <- seq(-0.4, 0.4, length.out = p)\nx <- 100 + outer(row_effect, feature_effect, "+")\nx[disease == "case", 1:12] <- x[disease == "case", 1:12] + 10\nx[batch == "B2", 13:42] <- x[batch == "B2", 13:42] + 14\nx[seq(1, n, by = 2), 221:224] <- NA\nx[seq(3, n, by = 6), 5:20] <- NA\nx[, 240] <- 100\ncolnames(x) <- sprintf("protein_%03d", seq_len(p))\nrownames(x) <- patient_id\nmetadata <- data.frame(patient_id, disease, batch, row.names = patient_id)\n'
+
+EXAMPLES = (
+    (
+        "m12.e01",
+        tr("Auditoría y preprocesamiento", "Audit and preprocessing", "Revision og forbehandling"),
+        tr(
+            "Audita 48 pacientes y 240 proteínas; filtra >20% de ausencia o varianza cero, imputa medianas, aplica log2, escala y calcula PCA.",
+            "Audit 48 patients and 240 proteins; filter >20% missingness or zero variance, median-impute, log2-transform, scale, and run PCA.",
+            "Revidér 48 patienter og 240 proteiner; filtrér >20 % manglende værdier eller nulvarians, medianimputér, log2-transformér, skalér og udfør PCA.",
+        ),
+        (
+            tr(
+                "La matriz tiene p mayor que n.",
+                "The matrix has p greater than n.",
+                "Matricen har p større end n.",
+            ),
+            tr(
+                "Las reglas se aplican sin usar etiquetas de enfermedad.",
+                "Rules are applied without disease labels.",
+                "Regler anvendes uden sygdomsetiketter.",
+            ),
+        ),
+        R_DATA
+        + 'stopifnot(identical(rownames(x), rownames(metadata)))\nfeature_missing <- colMeans(is.na(x))\nfeature_sd <- apply(x, 2, sd, na.rm = TRUE)\nkeep <- feature_missing <= 0.20 & feature_sd > 0\nfiltered <- x[, keep, drop = FALSE]\nfor (j in seq_len(ncol(filtered))) {\n  filtered[is.na(filtered[, j]), j] <- median(filtered[, j], na.rm = TRUE)\n}\nlog_matrix <- log2(filtered)\nscaled <- scale(log_matrix)\nfit <- prcomp(scaled, center = FALSE, scale. = FALSE, rank. = 5)\ncat("patients=", nrow(x), "\\n", sep = "")\ncat("features_raw=", ncol(x), "\\n", sep = "")\ncat("missing_cells=", sum(is.na(x)), "\\n", sep = "")\ncat("features_retained=", ncol(filtered), "\\n", sep = "")\ncat("p_gt_n=", ncol(x) > nrow(x), "\\n", sep = "")\ncat("missing_after=", sum(is.na(filtered)), "\\n", sep = "")\ncat("pca_scores=", paste(dim(fit$x), collapse = "x"), sep = "")\n',
+        "patients=48\nfeatures_raw=240\nmissing_cells=96\nfeatures_retained=235\np_gt_n=TRUE\nmissing_after=0\npca_scores=48x5",
+        tr(
+            "El flujo conserva 235 características y produce cinco scores por paciente. Es una auditoría reproducible de datos sintéticos, no validación clínica.",
+            "The workflow retains 235 features and produces five scores per patient. It is a reproducible synthetic-data audit, not clinical validation.",
+            "Workflowet bevarer 235 features og producerer fem scores pr. patient. Det er en reproducerbar revision af syntetiske data, ikke klinisk validering.",
+        ),
+    ),
+    (
+        "m12.e02",
+        tr(
+            "Lote y cribado sin fuga",
+            "Batch and leakage-safe screening",
+            "Batch og lækagesikker screening",
+        ),
+        tr(
+            "Identifica si PC1 se asocia más con lote o enfermedad y ordena características usando solo entrenamiento.",
+            "Identify whether PC1 is more associated with batch or disease and rank features using training only.",
+            "Identificér om PC1 er stærkere associeret med batch eller sygdom, og rangér features kun med træning.",
+        ),
+        (
+            tr(
+                "El efecto de lote afecta más proteínas que la señal de enfermedad.",
+                "The batch effect affects more proteins than the disease signal.",
+                "Batcheffekten påvirker flere proteiner end sygdomssignalet.",
+            ),
+            tr(
+                "La validación no participa en el ranking.",
+                "Validation does not participate in ranking.",
+                "Validering deltager ikke i rangeringen.",
+            ),
+        ),
+        R_DATA
+        + 'for (j in seq_len(ncol(x))) {\n  x[is.na(x[, j]), j] <- median(x[, j], na.rm = TRUE)\n}\nfit <- prcomp(log2(x), center = TRUE, scale. = TRUE, rank. = 3)\npc1 <- fit$x[, 1]\ndisease_numeric <- as.integer(disease == "case")\nbatch_numeric <- as.integer(batch == "B2")\npc1_metadata <- if (abs(cor(pc1, batch_numeric)) > abs(cor(pc1, disease_numeric))) "batch" else "disease"\nvalidation <- seq(1, n, by = 5)\ntraining <- setdiff(seq_len(n), validation)\nstandardised_difference <- function(values, groups) {\n  abs(diff(tapply(values, groups, mean))) / sd(values)\n}\nscores <- apply(log2(x[training, , drop = FALSE]), 2, standardised_difference, groups = disease[training])\ntop10 <- order(scores, decreasing = TRUE)[1:10]\ncat("pc1_metadata=", pc1_metadata, "\\n", sep = "")\ncat("top10_true_signal=", sum(top10 %in% 1:12), "\\n", sep = "")\ncat("validation_rows=", length(validation), "\\n", sep = "")\ncat("ranking_uses_validation=FALSE", sep = "")\n',
+        "pc1_metadata=batch\ntop10_true_signal=10\nvalidation_rows=10\nranking_uses_validation=FALSE",
+        tr(
+            "PC1 prioriza lote; el ranking recupera señal implantada usando entrenamiento. En datos reales, la verdad no se conoce y se requieren multiplicidad y validación externa.",
+            "PC1 prioritises batch; the ranking recovers implanted signal using training. In real data, truth is unknown and multiplicity control and external validation are required.",
+            "PC1 prioriterer batch; rangeringen genfinder indbygget signal ved brug af træning. I virkelige data er sandheden ukendt, og multiplicitetskontrol samt ekstern validering kræves.",
+        ),
+    ),
+)
