@@ -7,7 +7,7 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import cast
 
-from .omics_analysis_input import (
+from .omics_analysis import (
     DEFAULT_OMICS_ANALYSIS_PLAN_FILENAME,
     OmicsAnalysisSeverity,
     inspect_omics_analysis_input,
