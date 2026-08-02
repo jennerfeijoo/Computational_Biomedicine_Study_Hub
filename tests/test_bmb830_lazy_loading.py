@@ -54,7 +54,7 @@ def test_bmb830_selecting_a_module_constructs_and_reuses_it(
 
     assert final_reader is not first_reader
     assert final_reader.module is MODULE_12_HIGH_DIMENSIONAL_CASE
-    assert final_reader.property("contentVersion") == "1.0.0"
+    assert final_reader.property("contentVersion") == "1.1.0"
     assert page.constructed_reader_count == 2
 
     assert page.select_module(0)
@@ -80,4 +80,4 @@ def test_bmb830_page_materializes_danish_and_attaches_r_labs(
     assert page.reader.module.title.startswith("Individuel")
     assert page.reader.select_section_index(2)
     labs = page.reader.findChildren(RLabWidget)
-    assert len(labs) == len(page.reader.module.worked_examples) == 2
+    assert len(labs) == len(page.reader.module.worked_examples) == 3
