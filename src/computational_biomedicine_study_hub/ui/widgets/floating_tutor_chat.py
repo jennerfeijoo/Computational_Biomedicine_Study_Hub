@@ -11,8 +11,8 @@ from PySide6.QtCore import (
     QPoint,
     QRunnable,
     QSettings,
-    QThreadPool,
     Qt,
+    QThreadPool,
     Signal,
     Slot,
 )
