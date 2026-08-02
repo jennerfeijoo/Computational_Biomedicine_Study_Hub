@@ -51,6 +51,8 @@ class OmicsAnalysisIssue:
     count: int = 1
 
     def as_dict(self) -> dict[str, object]:
+        """Return a JSON-compatible representation."""
+
         return {
             "code": self.code,
             "severity": self.severity.value,
@@ -63,7 +65,7 @@ class OmicsAnalysisIssue:
 
 @dataclass(frozen=True, slots=True)
 class AssayMatrixProfile:
-    """Profile of one feature-by-sample assay table."""
+    """Structural and numerical profile of one feature-by-sample assay."""
 
     relative_path: str
     sha256: str
@@ -87,19 +89,29 @@ class AssayMatrixProfile:
 
     @property
     def sample_count(self) -> int:
+        """Return the number of sample columns."""
+
         return len(self.sample_ids)
 
     @property
     def missing_fraction(self) -> float:
-        return 0.0 if self.value_count == 0 else self.missing_value_count / self.value_count
+        """Return the fraction of assay cells that are empty."""
+
+        if self.value_count == 0:
+            return 0.0
+        return self.missing_value_count / self.value_count
 
     @property
     def zero_fraction_observed(self) -> float:
+        """Return the observed-cell fraction equal to zero."""
+
         if self.observed_value_count == 0:
             return 0.0
         return self.zero_value_count / self.observed_value_count
 
     def as_dict(self) -> dict[str, object]:
+        """Return a JSON-compatible representation."""
+
         return {
             "relative_path": self.relative_path,
             "sha256": self.sha256,
@@ -128,7 +140,7 @@ class AssayMatrixProfile:
 
 @dataclass(frozen=True, slots=True)
 class SampleMetadataProfile:
-    """Profile of one row-per-sample metadata table."""
+    """Structural profile of one row-per-sample metadata table."""
 
     relative_path: str
     sha256: str
@@ -143,6 +155,8 @@ class SampleMetadataProfile:
     blank_required_cells: int
 
     def as_dict(self) -> dict[str, object]:
+        """Return a JSON-compatible representation."""
+
         return {
             "relative_path": self.relative_path,
             "sha256": self.sha256,
@@ -176,16 +190,22 @@ class OmicsAnalysisInputReport:
 
     @property
     def valid(self) -> bool:
+        """Return whether no error-severity findings were detected."""
+
         return not any(issue.severity is OmicsAnalysisSeverity.ERROR for issue in self.issues)
 
     @property
     def sample_sets_match(self) -> bool:
+        """Return whether assay and metadata contain identical sample-ID sets."""
+
         if self.assay is None or self.metadata is None:
             return False
         return set(self.assay.sample_ids) == set(self.metadata.sample_ids)
 
     @property
     def sample_order_matches(self) -> bool:
+        """Return whether assay and metadata also share sample order."""
+
         if self.assay is None or self.metadata is None:
             return False
         return self.assay.sample_ids == self.metadata.sample_ids
@@ -211,6 +231,8 @@ class OmicsAnalysisInputReport:
 
     @property
     def fingerprint(self) -> str:
+        """Return a root-independent transition fingerprint."""
+
         encoded = json.dumps(
             self._identity_payload(),
             ensure_ascii=False,
@@ -220,6 +242,8 @@ class OmicsAnalysisInputReport:
         return hashlib.sha256(encoded).hexdigest()
 
     def manifest_payload(self) -> dict[str, object]:
+        """Return the complete transition manifest."""
+
         payload = self._identity_payload()
         payload.update(
             {
@@ -239,6 +263,8 @@ class OmicsAnalysisInputReport:
         return payload
 
     def to_json(self, *, indent: int = 2) -> str:
+        """Serialize the transition manifest with stable key ordering."""
+
         return json.dumps(
             self.manifest_payload(),
             ensure_ascii=False,
@@ -283,7 +309,10 @@ def _unique_object(pairs: list[tuple[str, object]]) -> dict[str, object]:
 def _load_object(path: Path) -> dict[str, object]:
     raw = cast(
         object,
-        json.loads(path.read_text(encoding="utf-8-sig"), object_pairs_hook=_unique_object),
+        json.loads(
+            path.read_text(encoding="utf-8-sig"),
+            object_pairs_hook=_unique_object,
+        ),
     )
     if not isinstance(raw, dict) or not all(isinstance(key, str) for key in raw):
         raise ValueError("JSON root must be an object.")
@@ -296,7 +325,12 @@ def _relative_path(value: object) -> str:
     if "\\" in value:
         raise ValueError("Path must use POSIX '/' separators.")
     path = PurePosixPath(value)
-    if path.is_absolute() or ".." in path.parts or path.as_posix() != value:
+    if (
+        path.is_absolute()
+        or ".." in path.parts
+        or path.as_posix() != value
+        or value == "."
+    ):
         raise ValueError("Path must be normalized and remain inside the analysis directory.")
     return value
 
@@ -306,6 +340,24 @@ def _string(mapping: dict[str, object], key: str) -> str | None:
     if isinstance(value, str) and value and value.strip() == value:
         return value
     return None
+
+
+def _delimiter_value(value: object) -> OmicsDelimiter | None:
+    if not isinstance(value, str):
+        return None
+    try:
+        return OmicsDelimiter(value)
+    except ValueError:
+        return None
+
+
+def _scale_value(value: object) -> AssayValueScale | None:
+    if not isinstance(value, str):
+        return None
+    try:
+        return AssayValueScale(value)
+    except ValueError:
+        return None
 
 
 def _issue(
@@ -361,7 +413,10 @@ def _regular_file(
     return path
 
 
-def _parse_assay(plan: dict[str, object], issues: list[OmicsAnalysisIssue]) -> _AssayConfig | None:
+def _parse_assay(
+    plan: dict[str, object],
+    issues: list[OmicsAnalysisIssue],
+) -> _AssayConfig | None:
     raw = plan.get("assay")
     if not isinstance(raw, dict):
         _issue(
@@ -373,32 +428,44 @@ def _parse_assay(plan: dict[str, object], issues: list[OmicsAnalysisIssue]) -> _
         return None
     mapping = cast(dict[str, object], raw)
     feature_column = _string(mapping, "feature_id_column")
+    delimiter = _delimiter_value(mapping.get("delimiter"))
+    value_scale = _scale_value(mapping.get("value_scale"))
     allow_missing = mapping.get("allow_missing_values")
     try:
         path = _relative_path(mapping.get("path"))
-        delimiter = OmicsDelimiter(mapping.get("delimiter"))
-        value_scale = AssayValueScale(mapping.get("value_scale"))
-    except (TypeError, ValueError) as error:
+    except ValueError as error:
         _issue(
             issues,
-            "invalid-assay-config-values",
+            "invalid-assay-path",
             OmicsAnalysisSeverity.ERROR,
-            f"Invalid assay path, delimiter, or value scale: {error}",
+            str(error),
         )
         return None
-    if feature_column is None or not isinstance(allow_missing, bool):
+    if (
+        feature_column is None
+        or delimiter is None
+        or value_scale is None
+        or not isinstance(allow_missing, bool)
+    ):
         _issue(
             issues,
             "incomplete-assay-config",
             OmicsAnalysisSeverity.ERROR,
-            "assay requires feature_id_column and boolean allow_missing_values.",
+            "assay requires supported delimiter, value scale, feature ID, and missingness fields.",
         )
         return None
-    return _AssayConfig(path, delimiter, feature_column, value_scale, allow_missing)
+    return _AssayConfig(
+        path=path,
+        delimiter=delimiter,
+        feature_id_column=feature_column,
+        value_scale=value_scale,
+        allow_missing_values=allow_missing,
+    )
 
 
 def _parse_metadata(
-    plan: dict[str, object], issues: list[OmicsAnalysisIssue]
+    plan: dict[str, object],
+    issues: list[OmicsAnalysisIssue],
 ) -> _MetadataConfig | None:
     raw = plan.get("sample_metadata")
     if not isinstance(raw, dict):
@@ -411,29 +478,36 @@ def _parse_metadata(
         return None
     mapping = cast(dict[str, object], raw)
     sample_column = _string(mapping, "sample_id_column")
+    delimiter = _delimiter_value(mapping.get("delimiter"))
     try:
         path = _relative_path(mapping.get("path"))
-        delimiter = OmicsDelimiter(mapping.get("delimiter"))
-    except (TypeError, ValueError) as error:
+    except ValueError as error:
         _issue(
             issues,
-            "invalid-metadata-config-values",
+            "invalid-metadata-path",
             OmicsAnalysisSeverity.ERROR,
-            f"Invalid metadata path or delimiter: {error}",
+            str(error),
         )
         return None
-    if sample_column is None:
+    if sample_column is None or delimiter is None:
         _issue(
             issues,
             "incomplete-metadata-config",
             OmicsAnalysisSeverity.ERROR,
-            "sample_metadata requires sample_id_column.",
+            "sample_metadata requires a supported delimiter and sample_id_column.",
         )
         return None
-    return _MetadataConfig(path, delimiter, sample_column)
+    return _MetadataConfig(
+        path=path,
+        delimiter=delimiter,
+        sample_id_column=sample_column,
+    )
 
 
-def _required_columns(plan: dict[str, object], issues: list[OmicsAnalysisIssue]) -> tuple[str, ...]:
+def _required_columns(
+    plan: dict[str, object],
+    issues: list[OmicsAnalysisIssue],
+) -> tuple[str, ...]:
     raw = plan.get("required_metadata_columns")
     if not isinstance(raw, list) or not raw:
         _issue(
@@ -444,7 +518,9 @@ def _required_columns(plan: dict[str, object], issues: list[OmicsAnalysisIssue])
         )
         return ()
     values = tuple(value for value in raw if isinstance(value, str))
-    invalid = len(values) != len(raw) or any(not value or value.strip() != value for value in values)
+    invalid = len(values) != len(raw) or any(
+        not value or value.strip() != value for value in values
+    )
     if invalid:
         _issue(
             issues,
@@ -463,33 +539,49 @@ def _required_columns(plan: dict[str, object], issues: list[OmicsAnalysisIssue])
     return values
 
 
-def _delimiter(value: OmicsDelimiter) -> str:
-    return "," if value is OmicsDelimiter.COMMA else "\t"
+def _delimiter_character(value: OmicsDelimiter) -> str:
+    if value is OmicsDelimiter.COMMA:
+        return ","
+    return "\t"
 
 
 def _scan_assay(
-    path: Path, config: _AssayConfig, issues: list[OmicsAnalysisIssue]
+    path: Path,
+    config: _AssayConfig,
+    issues: list[OmicsAnalysisIssue],
 ) -> AssayMatrixProfile | None:
     feature_ids: set[str] = set()
     sample_ids: tuple[str, ...] = ()
-    counts = {
-        "features": 0,
-        "values": 0,
-        "observed": 0,
-        "missing": 0,
-        "zero": 0,
-        "duplicate_features": 0,
-        "blank_features": 0,
-        "malformed": 0,
-        "non_numeric": 0,
-        "non_finite": 0,
-        "negative": 0,
-        "non_integer": 0,
-    }
+    feature_count = 0
+    value_count = 0
+    observed_count = 0
+    missing_count = 0
+    zero_count = 0
+    duplicate_features = 0
+    blank_features = 0
+    malformed_rows = 0
+    non_numeric = 0
+    non_finite = 0
+    negative = 0
+    non_integer = 0
+
     try:
         with path.open("r", encoding="utf-8-sig", newline="") as handle:
-            reader = csv.reader(handle, delimiter=_delimiter(config.delimiter))
-            header = tuple(next(reader))
+            reader = csv.reader(
+                handle,
+                delimiter=_delimiter_character(config.delimiter),
+            )
+            header_list = next(reader, None)
+            if header_list is None:
+                _issue(
+                    issues,
+                    "empty-assay-table",
+                    OmicsAnalysisSeverity.ERROR,
+                    "Assay table has no header.",
+                    relative_path=config.path,
+                )
+                return None
+            header = tuple(header_list)
             if any(not item or item.strip() != item for item in header):
                 _issue(
                     issues,
@@ -517,7 +609,9 @@ def _scan_assay(
                 )
                 return None
             feature_index = header.index(config.feature_id_column)
-            sample_ids = tuple(item for index, item in enumerate(header) if index != feature_index)
+            sample_ids = tuple(
+                item for index, item in enumerate(header) if index != feature_index
+            )
             if not sample_ids:
                 _issue(
                     issues,
@@ -526,48 +620,41 @@ def _scan_assay(
                     "Assay requires at least one sample column.",
                     relative_path=config.path,
                 )
+
             for row in reader:
-                counts["features"] += 1
+                feature_count += 1
                 if len(row) != len(header):
-                    counts["malformed"] += 1
+                    malformed_rows += 1
                     continue
                 feature_id = row[feature_index]
                 if not feature_id or feature_id.strip() != feature_id:
-                    counts["blank_features"] += 1
+                    blank_features += 1
                 elif feature_id in feature_ids:
-                    counts["duplicate_features"] += 1
+                    duplicate_features += 1
                 else:
                     feature_ids.add(feature_id)
+
                 for index, raw_value in enumerate(row):
                     if index == feature_index:
                         continue
-                    counts["values"] += 1
+                    value_count += 1
                     text = raw_value.strip()
                     if not text:
-                        counts["missing"] += 1
+                        missing_count += 1
                         continue
-                    counts["observed"] += 1
+                    observed_count += 1
                     try:
                         number = float(text)
                     except ValueError:
-                        counts["non_numeric"] += 1
+                        non_numeric += 1
                         continue
                     if not math.isfinite(number):
-                        counts["non_finite"] += 1
+                        non_finite += 1
                         continue
-                    counts["zero"] += int(number == 0)
-                    counts["negative"] += int(number < 0)
+                    zero_count += int(number == 0)
+                    negative += int(number < 0)
                     if config.value_scale is AssayValueScale.RAW_COUNTS:
-                        counts["non_integer"] += int(not number.is_integer())
-    except StopIteration:
-        _issue(
-            issues,
-            "empty-assay-table",
-            OmicsAnalysisSeverity.ERROR,
-            "Assay table has no header.",
-            relative_path=config.path,
-        )
-        return None
+                        non_integer += int(not number.is_integer())
     except (OSError, csv.Error, UnicodeError) as error:
         _issue(
             issues,
@@ -578,31 +665,31 @@ def _scan_assay(
         )
         return None
 
-    checks = (
-        ("assay-has-no-features", int(counts["features"] == 0), "Assay contains no features."),
-        ("malformed-assay-rows", counts["malformed"], "Assay rows do not match header width."),
+    assay_errors = (
+        ("assay-has-no-features", int(feature_count == 0), "Assay contains no features."),
+        ("malformed-assay-rows", malformed_rows, "Assay rows do not match header width."),
         (
             "blank-or-padded-feature-ids",
-            counts["blank_features"],
+            blank_features,
             "Feature IDs must be non-empty and unpadded.",
         ),
         (
             "duplicate-feature-ids",
-            counts["duplicate_features"],
+            duplicate_features,
             "Feature IDs must be unique at the declared analytical level.",
         ),
         (
             "non-numeric-assay-values",
-            counts["non_numeric"],
+            non_numeric,
             "Assay cells must be numeric or empty.",
         ),
         (
             "non-finite-assay-values",
-            counts["non_finite"],
-            "Assay cells cannot be NaN or infinity.",
+            non_finite,
+            "Assay cells cannot contain NaN or infinity.",
         ),
     )
-    for code, count, message in checks:
+    for code, count, message in assay_errors:
         if count:
             _issue(
                 issues,
@@ -612,7 +699,7 @@ def _scan_assay(
                 relative_path=config.path,
                 count=count,
             )
-    if counts["missing"]:
+    if missing_count:
         _issue(
             issues,
             "declared-missing-assay-values"
@@ -623,26 +710,27 @@ def _scan_assay(
             else OmicsAnalysisSeverity.ERROR,
             "Missing assay cells require an explicit downstream missingness strategy.",
             relative_path=config.path,
-            count=counts["missing"],
+            count=missing_count,
         )
-    if counts["negative"] and config.value_scale is not AssayValueScale.REAL_CONTINUOUS:
+    if negative and config.value_scale is not AssayValueScale.REAL_CONTINUOUS:
         _issue(
             issues,
             "negative-values-in-nonnegative-scale",
             OmicsAnalysisSeverity.ERROR,
             "Declared raw-count and nonnegative-continuous scales cannot be negative.",
             relative_path=config.path,
-            count=counts["negative"],
+            count=negative,
         )
-    if counts["non_integer"]:
+    if non_integer:
         _issue(
             issues,
             "non-integer-raw-counts",
             OmicsAnalysisSeverity.ERROR,
             "raw_counts requires integer-valued observed cells.",
             relative_path=config.path,
-            count=counts["non_integer"],
+            count=non_integer,
         )
+
     return AssayMatrixProfile(
         relative_path=config.path,
         sha256=_sha256(path),
@@ -651,18 +739,18 @@ def _scan_assay(
         value_scale=config.value_scale,
         allow_missing_values=config.allow_missing_values,
         sample_ids=sample_ids,
-        feature_count=counts["features"],
-        value_count=counts["values"],
-        observed_value_count=counts["observed"],
-        missing_value_count=counts["missing"],
-        zero_value_count=counts["zero"],
-        duplicate_feature_ids=counts["duplicate_features"],
-        blank_feature_ids=counts["blank_features"],
-        malformed_rows=counts["malformed"],
-        non_numeric_values=counts["non_numeric"],
-        non_finite_values=counts["non_finite"],
-        negative_values=counts["negative"],
-        non_integer_values=counts["non_integer"],
+        feature_count=feature_count,
+        value_count=value_count,
+        observed_value_count=observed_count,
+        missing_value_count=missing_count,
+        zero_value_count=zero_count,
+        duplicate_feature_ids=duplicate_features,
+        blank_feature_ids=blank_features,
+        malformed_rows=malformed_rows,
+        non_numeric_values=non_numeric,
+        non_finite_values=non_finite,
+        negative_values=negative,
+        non_integer_values=non_integer,
     )
 
 
@@ -673,16 +761,30 @@ def _scan_metadata(
     issues: list[OmicsAnalysisIssue],
 ) -> SampleMetadataProfile | None:
     sample_ids: list[str] = []
-    seen: set[str] = set()
+    seen_sample_ids: set[str] = set()
+    row_count = 0
     duplicate_ids = 0
     blank_ids = 0
-    malformed = 0
+    malformed_rows = 0
     blank_required = 0
-    row_count = 0
+
     try:
         with path.open("r", encoding="utf-8-sig", newline="") as handle:
-            reader = csv.reader(handle, delimiter=_delimiter(config.delimiter))
-            header = tuple(next(reader))
+            reader = csv.reader(
+                handle,
+                delimiter=_delimiter_character(config.delimiter),
+            )
+            header_list = next(reader, None)
+            if header_list is None:
+                _issue(
+                    issues,
+                    "empty-metadata-table",
+                    OmicsAnalysisSeverity.ERROR,
+                    "Metadata table has no header.",
+                    relative_path=config.path,
+                )
+                return None
+            header = tuple(header_list)
             if any(not item or item.strip() != item for item in header):
                 _issue(
                     issues,
@@ -709,7 +811,9 @@ def _scan_metadata(
                     column=config.sample_id_column,
                 )
                 return None
-            missing_columns = tuple(item for item in required_columns if item not in header)
+            missing_columns = tuple(
+                item for item in required_columns if item not in header
+            )
             if missing_columns:
                 _issue(
                     issues,
@@ -723,28 +827,22 @@ def _scan_metadata(
             required_indices = tuple(
                 header.index(item) for item in required_columns if item in header
             )
+
             for row in reader:
                 row_count += 1
                 if len(row) != len(header):
-                    malformed += 1
+                    malformed_rows += 1
                     continue
                 sample_id = row[sample_index]
                 if not sample_id or sample_id.strip() != sample_id:
                     blank_ids += 1
                 else:
                     sample_ids.append(sample_id)
-                    duplicate_ids += int(sample_id in seen)
-                    seen.add(sample_id)
-                blank_required += sum(not row[index].strip() for index in required_indices)
-    except StopIteration:
-        _issue(
-            issues,
-            "empty-metadata-table",
-            OmicsAnalysisSeverity.ERROR,
-            "Metadata table has no header.",
-            relative_path=config.path,
-        )
-        return None
+                    duplicate_ids += int(sample_id in seen_sample_ids)
+                    seen_sample_ids.add(sample_id)
+                blank_required += sum(
+                    not row[index].strip() for index in required_indices
+                )
     except (OSError, csv.Error, UnicodeError) as error:
         _issue(
             issues,
@@ -755,17 +853,30 @@ def _scan_metadata(
         )
         return None
 
-    for code, count, message in (
-        ("metadata-has-no-samples", int(row_count == 0), "Metadata contains no sample rows."),
-        ("malformed-metadata-rows", malformed, "Metadata rows do not match header width."),
-        ("blank-or-padded-sample-ids", blank_ids, "Sample IDs must be non-empty and unpadded."),
-        ("duplicate-sample-ids", duplicate_ids, "Metadata must contain one row per sample ID."),
+    metadata_errors = (
+        ("metadata-has-no-samples", int(row_count == 0), "Metadata contains no samples."),
+        (
+            "malformed-metadata-rows",
+            malformed_rows,
+            "Metadata rows do not match header width.",
+        ),
+        (
+            "blank-or-padded-sample-ids",
+            blank_ids,
+            "Sample IDs must be non-empty and unpadded.",
+        ),
+        (
+            "duplicate-sample-ids",
+            duplicate_ids,
+            "Metadata must contain one row per sample ID.",
+        ),
         (
             "blank-required-metadata-cells",
             blank_required,
             "Required metadata columns cannot contain blank cells.",
         ),
-    ):
+    )
+    for code, count, message in metadata_errors:
         if count:
             _issue(
                 issues,
@@ -775,6 +886,7 @@ def _scan_metadata(
                 relative_path=config.path,
                 count=count,
             )
+
     return SampleMetadataProfile(
         relative_path=config.path,
         sha256=_sha256(path),
@@ -785,7 +897,7 @@ def _scan_metadata(
         row_count=row_count,
         duplicate_sample_ids=duplicate_ids,
         blank_sample_ids=blank_ids,
-        malformed_rows=malformed,
+        malformed_rows=malformed_rows,
         blank_required_cells=blank_required,
     )
 
@@ -811,6 +923,76 @@ def _empty_report(
     )
 
 
+def _validate_parent_manifest(
+    root: Path,
+    root_resolved: Path,
+    source: PublicOmicsSource,
+    relative_path: str,
+    issues: list[OmicsAnalysisIssue],
+) -> tuple[str | None, str | None]:
+    path = _regular_file(
+        root,
+        root_resolved,
+        relative_path,
+        "parent-snapshot-manifest",
+        issues,
+    )
+    if path is None:
+        return None, None
+    manifest_sha256 = _sha256(path)
+    try:
+        parent = _load_object(path)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        _issue(
+            issues,
+            "invalid-parent-snapshot-json",
+            OmicsAnalysisSeverity.ERROR,
+            f"Could not read parent snapshot manifest: {error}",
+            relative_path=relative_path,
+        )
+        return manifest_sha256, None
+
+    fingerprint = _string(parent, "fingerprint")
+    if parent.get("valid") is not True:
+        _issue(
+            issues,
+            "parent-snapshot-not-valid",
+            OmicsAnalysisSeverity.ERROR,
+            "Parent snapshot manifest must record valid=true.",
+            relative_path=relative_path,
+        )
+    if _string(parent, "source_id") != source.source_id:
+        _issue(
+            issues,
+            "parent-source-id-mismatch",
+            OmicsAnalysisSeverity.ERROR,
+            "Parent snapshot source_id does not match this analysis.",
+            relative_path=relative_path,
+        )
+    if _string(parent, "access_identifier") != source.access_identifier:
+        _issue(
+            issues,
+            "parent-access-identifier-mismatch",
+            OmicsAnalysisSeverity.ERROR,
+            "Parent snapshot accession does not match the registry.",
+            relative_path=relative_path,
+        )
+    invalid_fingerprint = (
+        fingerprint is None
+        or len(fingerprint) != 64
+        or any(character not in "0123456789abcdefABCDEF" for character in fingerprint)
+    )
+    if invalid_fingerprint:
+        _issue(
+            issues,
+            "invalid-parent-snapshot-fingerprint",
+            OmicsAnalysisSeverity.ERROR,
+            "Parent snapshot fingerprint must be a 64-character hex digest.",
+            relative_path=relative_path,
+        )
+    return manifest_sha256, fingerprint
+
+
 def inspect_omics_analysis_input(
     root: Path | str,
     *,
@@ -829,9 +1011,9 @@ def inspect_omics_analysis_input(
             root_path,
             plan_filename,
             OmicsAnalysisIssue(
-                "invalid-analysis-plan-path",
-                OmicsAnalysisSeverity.ERROR,
-                str(error),
+                code="invalid-analysis-plan-path",
+                severity=OmicsAnalysisSeverity.ERROR,
+                message=str(error),
                 relative_path=plan_filename,
             ),
         )
@@ -841,9 +1023,9 @@ def inspect_omics_analysis_input(
             root_path,
             normalized_plan,
             OmicsAnalysisIssue(
-                "root-not-directory",
-                OmicsAnalysisSeverity.ERROR,
-                f"Analysis directory does not exist: {root_path}",
+                code="root-not-directory",
+                severity=OmicsAnalysisSeverity.ERROR,
+                message=f"Analysis directory does not exist: {root_path}",
             ),
         )
     plan_path = root_path.joinpath(*PurePosixPath(normalized_plan).parts)
@@ -853,9 +1035,9 @@ def inspect_omics_analysis_input(
             root_path,
             normalized_plan,
             OmicsAnalysisIssue(
-                "missing-or-symlinked-analysis-plan",
-                OmicsAnalysisSeverity.ERROR,
-                "Analysis plan must be a regular local file.",
+                code="missing-or-symlinked-analysis-plan",
+                severity=OmicsAnalysisSeverity.ERROR,
+                message="Analysis plan must be a regular local file.",
                 relative_path=normalized_plan,
             ),
         )
@@ -867,9 +1049,9 @@ def inspect_omics_analysis_input(
             root_path,
             normalized_plan,
             OmicsAnalysisIssue(
-                "invalid-analysis-plan-json",
-                OmicsAnalysisSeverity.ERROR,
-                f"Could not read analysis plan: {error}",
+                code="invalid-analysis-plan-json",
+                severity=OmicsAnalysisSeverity.ERROR,
+                message=f"Could not read analysis plan: {error}",
                 relative_path=normalized_plan,
             ),
         )
@@ -889,13 +1071,14 @@ def inspect_omics_analysis_input(
             OmicsAnalysisSeverity.ERROR,
             "Analysis source_id does not match the requested registry source.",
         )
+
     required_columns = _required_columns(plan, issues)
     assay_config = _parse_assay(plan, issues)
     metadata_config = _parse_metadata(plan, issues)
-
     root_resolved = root_path.resolve()
+
     parent_relative: str | None = None
-    parent_sha: str | None = None
+    parent_sha256: str | None = None
     parent_fingerprint: str | None = None
     try:
         parent_relative = _relative_path(plan.get("parent_snapshot_manifest"))
@@ -907,74 +1090,24 @@ def inspect_omics_analysis_input(
             str(error),
         )
     if parent_relative is not None:
-        parent_path = _regular_file(
+        parent_sha256, parent_fingerprint = _validate_parent_manifest(
             root_path,
             root_resolved,
+            source,
             parent_relative,
-            "parent-snapshot-manifest",
             issues,
         )
-        if parent_path is not None:
-            parent_sha = _sha256(parent_path)
-            try:
-                parent = _load_object(parent_path)
-            except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as error:
-                _issue(
-                    issues,
-                    "invalid-parent-snapshot-json",
-                    OmicsAnalysisSeverity.ERROR,
-                    f"Could not read parent snapshot manifest: {error}",
-                    relative_path=parent_relative,
-                )
-            else:
-                parent_fingerprint = _string(parent, "fingerprint")
-                if parent.get("valid") is not True:
-                    _issue(
-                        issues,
-                        "parent-snapshot-not-valid",
-                        OmicsAnalysisSeverity.ERROR,
-                        "Parent snapshot manifest must record valid=true.",
-                        relative_path=parent_relative,
-                    )
-                if _string(parent, "source_id") != source.source_id:
-                    _issue(
-                        issues,
-                        "parent-source-id-mismatch",
-                        OmicsAnalysisSeverity.ERROR,
-                        "Parent snapshot source_id does not match this analysis.",
-                        relative_path=parent_relative,
-                    )
-                if _string(parent, "access_identifier") != source.access_identifier:
-                    _issue(
-                        issues,
-                        "parent-access-identifier-mismatch",
-                        OmicsAnalysisSeverity.ERROR,
-                        "Parent snapshot accession does not match the registry.",
-                        relative_path=parent_relative,
-                    )
-                invalid_fingerprint = (
-                    parent_fingerprint is None
-                    or len(parent_fingerprint) != 64
-                    or any(item not in "0123456789abcdefABCDEF" for item in parent_fingerprint)
-                )
-                if invalid_fingerprint:
-                    _issue(
-                        issues,
-                        "invalid-parent-snapshot-fingerprint",
-                        OmicsAnalysisSeverity.ERROR,
-                        "Parent snapshot fingerprint must be a 64-character hex digest.",
-                        relative_path=parent_relative,
-                    )
 
     assay: AssayMatrixProfile | None = None
     metadata: SampleMetadataProfile | None = None
     if assay_config is not None and metadata_config is not None:
-        reserved = {
+        reserved_paths = {
             normalized_plan,
             DEFAULT_OMICS_ANALYSIS_MANIFEST_FILENAME,
-            parent_relative,
         }
-        if assay_config.path in reserved or metadata_config.path in reserved:
+        if parent_relative is not None:
+            reserved_paths.add(parent_relative)
+        if assay_config.path in reserved_paths or metadata_config.path in reserved_paths:
             _issue(
                 issues,
                 "reserved-analysis-input-path",
@@ -989,8 +1122,13 @@ def inspect_omics_analysis_input(
                 "Assay and metadata must be separate files.",
                 relative_path=assay_config.path,
             )
+
         assay_path = _regular_file(
-            root_path, root_resolved, assay_config.path, "assay-file", issues
+            root_path,
+            root_resolved,
+            assay_config.path,
+            "assay-file",
+            issues,
         )
         metadata_path = _regular_file(
             root_path,
@@ -1002,7 +1140,12 @@ def inspect_omics_analysis_input(
         if assay_path is not None:
             assay = _scan_assay(assay_path, assay_config, issues)
         if metadata_path is not None:
-            metadata = _scan_metadata(metadata_path, metadata_config, required_columns, issues)
+            metadata = _scan_metadata(
+                metadata_path,
+                metadata_config,
+                required_columns,
+                issues,
+            )
 
     if assay is not None and metadata is not None:
         assay_ids = set(assay.sample_ids)
@@ -1053,7 +1196,7 @@ def inspect_omics_analysis_input(
         plan_filename=normalized_plan,
         plan_sha256=_sha256(plan_path),
         parent_snapshot_manifest=parent_relative,
-        parent_manifest_sha256=parent_sha,
+        parent_manifest_sha256=parent_sha256,
         parent_snapshot_fingerprint=parent_fingerprint,
         required_metadata_columns=required_columns,
         assay=assay,
