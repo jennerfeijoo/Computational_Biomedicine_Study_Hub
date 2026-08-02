@@ -66,7 +66,7 @@ def test_bmb830_inference_block_covers_required_concepts() -> None:
     assert "error tipo i" in testing_text
     assert "potencia" in testing_text
     assert "aleatorización" in testing_text
-    assert "intercambiabilidad" in testing_text
+    assert "intercambiables" in testing_text
     assert "welch" in comparison_text
     assert "anova" in comparison_text
     assert "paread" in comparison_text
