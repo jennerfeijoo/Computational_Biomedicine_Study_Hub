@@ -135,7 +135,7 @@ def test_reviewed_modules_expose_named_source_basis() -> None:
 def test_foundations_example_contract_is_explicit() -> None:
     module = _module("dm847.m01")
     example = next(item for item in module.worked_examples if item.example_id == "m01.bg.e01")
-    exported = "\n".join((example.problem, *example.walkthrough, example.interpretation)).casefold()
+    exported = "\n".join((example.problem, *example.reasoning, example.explanation)).casefold()
 
     assert "zero-based" in exported
     assert "overlap" in exported
@@ -146,7 +146,7 @@ def test_foundations_example_contract_is_explicit() -> None:
 def test_omics_example_compares_restarts_without_overclaiming() -> None:
     module = _module("dm847.m10")
     example = next(item for item in module.worked_examples if item.example_id == "m10.bg.e01")
-    exported = "\n".join((example.problem, *example.walkthrough, example.interpretation)).casefold()
+    exported = "\n".join((example.problem, *example.reasoning, example.explanation)).casefold()
 
     assert "initial" in exported
     assert "distortion" in exported
