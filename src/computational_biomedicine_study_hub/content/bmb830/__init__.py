@@ -14,11 +14,11 @@ from .book_grounded_audit import (
     BMB830_MODULE_SOURCE_AUDIT as _BASE_BMB830_MODULE_SOURCE_AUDIT,
 )
 from .book_grounded_inference import apply_inference_review, update_inference_audit
-from .book_grounded_regression import apply_regression_review, update_regression_audit
 from .book_grounded_model_diagnostics import (
     apply_model_diagnostics_review,
     update_model_diagnostics_audit,
 )
+from .book_grounded_regression import apply_regression_review, update_regression_audit
 from .module_01_r_foundations import (
     LOCALIZED_MODULE_01_R_FOUNDATIONS as _BASE_LOCALIZED_MODULE_01_R_FOUNDATIONS,
 )
