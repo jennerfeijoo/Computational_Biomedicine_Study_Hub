@@ -18,6 +18,10 @@ from .book_grounded_review_m04_m05 import (
     apply_multivariate_visualization_extensions,
     review_module_source_audit,
 )
+from .book_grounded_review_m06_m07 import (
+    apply_public_omics_protein_extensions,
+    review_public_omics_protein_audit,
+)
 from .module_01_synthea_workflows import (
     LOCALIZED_MODULE_01_SYNTHEA_WORKFLOWS,
     LOCALIZED_OBJECTIVE_QUESTION_BANK_01,
@@ -120,7 +124,8 @@ def _correct_protein_hydropathy_example(
     return replace(module, worked_examples=tuple(corrected_examples))
 
 
-BMB831_MODULE_SOURCE_AUDIT = review_module_source_audit(_BASE_BMB831_MODULE_SOURCE_AUDIT)
+_BMB831_MODULE_SOURCE_AUDIT_M04_M05 = review_module_source_audit(_BASE_BMB831_MODULE_SOURCE_AUDIT)
+BMB831_MODULE_SOURCE_AUDIT = review_public_omics_protein_audit(_BMB831_MODULE_SOURCE_AUDIT_M04_M05)
 
 LOCALIZED_MODULE_06_PUBLIC_OMICS_WORKFLOWS = _correct_public_omics_sources(
     LOCALIZED_MODULE_06_PUBLIC_OMICS_WORKFLOWS
@@ -143,6 +148,10 @@ _BOOK_GROUNDED_MODULES = apply_book_grounded_extensions(
     )
 )
 
+_MULTIVARIATE_VISUALIZATION_MODULES = apply_multivariate_visualization_extensions(
+    _BOOK_GROUNDED_MODULES
+)
+
 (
     LOCALIZED_MODULE_01_SYNTHEA_WORKFLOWS,
     LOCALIZED_MODULE_02_OMICS_MATRICES_QC,
@@ -153,7 +162,7 @@ _BOOK_GROUNDED_MODULES = apply_book_grounded_extensions(
     LOCALIZED_MODULE_07_PROTEIN_CHARACTERIZATION,
     LOCALIZED_MODULE_08_BIOLOGICAL_INTERPRETATION,
     LOCALIZED_MODULE_09_PUBLICATION_REPORT,
-) = apply_multivariate_visualization_extensions(_BOOK_GROUNDED_MODULES)
+) = apply_public_omics_protein_extensions(_MULTIVARIATE_VISUALIZATION_MODULES)
 
 LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
@@ -184,12 +193,12 @@ LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
         LOCALIZED_MODULE_06_PUBLIC_OMICS_WORKFLOWS,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_06,
-        "1.0.0",
+        "1.1.0",
     ),
     LocalizedModuleBundle(
         LOCALIZED_MODULE_07_PROTEIN_CHARACTERIZATION,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_07,
-        "1.0.0",
+        "1.1.0",
     ),
     LocalizedModuleBundle(
         LOCALIZED_MODULE_08_BIOLOGICAL_INTERPRETATION,

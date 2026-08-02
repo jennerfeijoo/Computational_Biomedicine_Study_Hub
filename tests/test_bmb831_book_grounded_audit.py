@@ -61,7 +61,7 @@ def _matrix_rank(rows: tuple[tuple[float, ...], ...], tolerance: float = 1e-10) 
     return pivot_row
 
 
-def test_bmb831_source_registry_maps_all_modules_and_reviews_first_five() -> None:
+def test_bmb831_source_registry_maps_all_modules_and_reviews_first_seven() -> None:
     source_ids = {source.source_id for source in bmb831.BMB831_BOOK_SOURCES}
     audits = {item.module_id: item for item in bmb831.BMB831_MODULE_SOURCE_AUDIT}
     reviewed = {
@@ -69,10 +69,10 @@ def test_bmb831_source_registry_maps_all_modules_and_reviews_first_five() -> Non
     }
 
     assert set(audits) == {f"bmb831.m{index:02d}" for index in range(1, 10)}
-    assert reviewed == {f"bmb831.m{index:02d}" for index in range(1, 6)}
+    assert reviewed == {f"bmb831.m{index:02d}" for index in range(1, 8)}
     assert {audits[module_id].state for module_id in reviewed} == {"consistent"}
     assert {module_id for module_id, audit in audits.items() if audit.state == "pending"} == {
-        f"bmb831.m{index:02d}" for index in range(6, 10)
+        f"bmb831.m{index:02d}" for index in range(8, 10)
     }
     assert all(set(audit.source_ids) <= source_ids for audit in audits.values())
     assert "sdu-bmb831-active-2025" in source_ids
@@ -82,10 +82,12 @@ def test_bmb831_source_registry_maps_all_modules_and_reviews_first_five() -> Non
     assert "limma-empirical-bayes" in source_ids
     assert "islr-2021-unsupervised-multiple-testing" in source_ids
     assert "ims-2024-visualisation-reporting" in source_ids
+    assert "bioconductor-public-omics-workflows" in source_ids
+    assert "protein-public-resources" in source_ids
 
 
 def test_reviewed_module_identity_is_locale_stable() -> None:
-    for module_id in (f"bmb831.m{index:02d}" for index in range(1, 6)):
+    for module_id in (f"bmb831.m{index:02d}" for index in range(1, 8)):
         reference = _identities(module_id, AppLocale.SPANISH_SPAIN)
         for locale in AppLocale:
             assert _identities(module_id, locale) == reference
@@ -306,7 +308,105 @@ def test_m05_uncertainty_extension_distinguishes_error_bar_targets() -> None:
     assert "ims-2024-visualisation-reporting" in module.tutor_support.source_basis
 
 
-def test_m01_m05_versions_counts_and_source_basis() -> None:
+def test_m06_protein_inference_extension_preserves_identifiable_level() -> None:
+    module = _module("bmb831.m06")
+    inference = next(
+        item
+        for item in module.concepts
+        if item.concept_id == "shared-peptides-and-protein-inference"
+    )
+    exported = "\n".join((inference.title, inference.body, *inference.key_points)).casefold()
+
+    assert "shared peptide" in exported
+    assert "proteotypic" in exported
+    assert "protein group" in exported
+    assert "grouping rules" in exported
+    assert "individual protein" in exported
+
+    worked = next(item for item in module.worked_examples if item.example_id == "m06.bg.e01")
+    assert can_execute_r(worked.code)
+    assert worked.expected_output == (
+        "peptides=4\n"
+        "unique_peptides=2\n"
+        "shared_peptides=2\n"
+        "proteins_with_unique=2\n"
+        "proteins_shared_only=2"
+    )
+
+    mapping = (
+        ("pep1", "P1"),
+        ("pep2", "P1"),
+        ("pep2", "P2"),
+        ("pep3", "P2"),
+        ("pep4", "P3"),
+        ("pep4", "P4"),
+    )
+    multiplicity: dict[str, int] = {}
+    for peptide, _protein in mapping:
+        multiplicity[peptide] = multiplicity.get(peptide, 0) + 1
+    unique_peptides = {peptide for peptide, count in multiplicity.items() if count == 1}
+    shared_peptides = {peptide for peptide, count in multiplicity.items() if count > 1}
+    proteins_with_unique = {protein for peptide, protein in mapping if peptide in unique_peptides}
+    all_proteins = {protein for _peptide, protein in mapping}
+
+    assert len(multiplicity) == 4
+    assert len(unique_peptides) == 2
+    assert len(shared_peptides) == 2
+    assert len(proteins_with_unique) == 2
+    assert len(all_proteins - proteins_with_unique) == 2
+    assert "bioconductor-public-omics-workflows" in module.tutor_support.source_basis
+
+
+def test_m07_alphafold_extension_separates_local_and_relative_confidence() -> None:
+    module = _module("bmb831.m07")
+    confidence = next(
+        item
+        for item in module.concepts
+        if item.concept_id == "local-confidence-versus-domain-placement"
+    )
+    exported = "\n".join((confidence.title, confidence.body, *confidence.key_points)).casefold()
+
+    assert "plddt" in exported
+    assert "per-residue" in exported
+    assert "pae" in exported
+    assert "relative positions" in exported
+    assert "domain packing" in exported
+    assert "mechanism" in exported
+
+    worked = next(item for item in module.worked_examples if item.example_id == "m07.bg.e01")
+    assert can_execute_r(worked.code)
+    assert worked.expected_output == (
+        "domain_A_plddt=90.0\n"
+        "domain_B_plddt=89.0\n"
+        "within_A_pae=2.0\n"
+        "within_B_pae=2.0\n"
+        "between_pae=18.0"
+    )
+
+    plddt = (92.0, 90.0, 88.0, 91.0, 89.0, 87.0)
+    pae = (
+        (0.0, 2.0, 2.0, 18.0, 18.0, 18.0),
+        (2.0, 0.0, 2.0, 18.0, 18.0, 18.0),
+        (2.0, 2.0, 0.0, 18.0, 18.0, 18.0),
+        (18.0, 18.0, 18.0, 0.0, 2.0, 2.0),
+        (18.0, 18.0, 18.0, 2.0, 0.0, 2.0),
+        (18.0, 18.0, 18.0, 2.0, 2.0, 0.0),
+    )
+    domain_a = (0, 1, 2)
+    domain_b = (3, 4, 5)
+    within_a = tuple(pae[row][column] for row in domain_a for column in domain_a if row < column)
+    within_b = tuple(pae[row][column] for row in domain_b for column in domain_b if row < column)
+    between = tuple(pae[row][column] for row in domain_a for column in domain_b)
+
+    assert round(sum(plddt[index] for index in domain_a) / len(domain_a), 1) == 90.0
+    assert round(sum(plddt[index] for index in domain_b) / len(domain_b), 1) == 89.0
+    assert round(sum(within_a) / len(within_a), 1) == 2.0
+    assert round(sum(within_b) / len(within_b), 1) == 2.0
+    assert round(sum(between) / len(between), 1) == 18.0
+    assert "protein-public-resources" in module.tutor_support.source_basis
+
+
+def test_m01_m07_versions_counts_and_source_basis() -> None:
     bundles = {bundle.localized_module.module_id: bundle for bundle in bmb831.LOCALIZED_BUNDLES}
     expected_versions = {
         "bmb831.m01": "1.0.0",
@@ -314,16 +414,16 @@ def test_m01_m05_versions_counts_and_source_basis() -> None:
         "bmb831.m03": "1.1.0",
         "bmb831.m04": "1.1.0",
         "bmb831.m05": "1.1.0",
+        "bmb831.m06": "1.1.0",
+        "bmb831.m07": "1.1.0",
     }
 
     for module_id, version in expected_versions.items():
         assert bundles[module_id].content_version == version
 
     assert len(_module("bmb831.m01").assessment_items) == 8
-    assert len(_module("bmb831.m02").assessment_items) == 9
-    assert len(_module("bmb831.m03").assessment_items) == 9
-    assert len(_module("bmb831.m04").assessment_items) == 9
-    assert len(_module("bmb831.m05").assessment_items) == 9
+    for module_id in (f"bmb831.m{index:02d}" for index in range(2, 8)):
+        assert len(_module(module_id).assessment_items) == 9
     assert "bioconductor-summarizedexperiment" in _module("bmb831.m02").tutor_support.source_basis
     assert "bioconductor-deseq2" in _module("bmb831.m03").tutor_support.source_basis
     assert "limma-empirical-bayes" in _module("bmb831.m03").tutor_support.source_basis
@@ -332,3 +432,5 @@ def test_m01_m05_versions_counts_and_source_basis() -> None:
         in _module("bmb831.m04").tutor_support.source_basis
     )
     assert "ims-2024-visualisation-reporting" in _module("bmb831.m05").tutor_support.source_basis
+    assert "bioconductor-public-omics-workflows" in _module("bmb831.m06").tutor_support.source_basis
+    assert "protein-public-resources" in _module("bmb831.m07").tutor_support.source_basis

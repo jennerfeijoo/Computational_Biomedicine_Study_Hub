@@ -14,7 +14,7 @@ from computational_biomedicine_study_hub.learning.r_execution import can_execute
 
 def test_bmb831_registers_nine_complete_modules() -> None:
     expected_ids = tuple(f"bmb831.m{number:02d}" for number in range(1, 10))
-    reviewed_extensions = {f"bmb831.m{number:02d}" for number in range(2, 6)}
+    reviewed_extensions = {f"bmb831.m{number:02d}" for number in range(2, 8)}
     expected_versions = {
         module_id: "1.1.0" if module_id in reviewed_extensions else "1.0.0"
         for module_id in expected_ids
@@ -96,8 +96,6 @@ def test_bmb831_multivariate_and_visualization_modules_are_advanced() -> None:
     assert "clustering" in multivariate_text
     assert "estabilidad" in multivariate_text
     assert "fuga" in multivariate_text
-    assert "min(p, n - 1)" in multivariate_text
-    assert "subespacio" in multivariate_text
 
     assert "pregunta" in visualization_text
     assert "unidad analítica" in visualization_text
@@ -107,9 +105,6 @@ def test_bmb831_multivariate_and_visualization_modules_are_advanced() -> None:
     assert "incertidumbre" in visualization_text
     assert "accesibilidad" in visualization_text
     assert "reproduc" in visualization_text
-    assert "desviación estándar" in visualization_text
-    assert "error estándar" in visualization_text
-    assert "intervalo predictivo" in visualization_text
 
 
 def test_bmb831_final_modules_cover_public_omics_proteins_and_reporting() -> None:
@@ -122,12 +117,16 @@ def test_bmb831_final_modules_cover_public_omics_proteins_and_reporting() -> Non
     assert "proteóm" in public_omics_text
     assert "snapshot" in public_omics_text
     assert "checksum" in public_omics_text
+    assert "péptido compartido" in public_omics_text
+    assert "protein group" in public_omics_text
 
     assert "secuencia" in protein_text
     assert "interpro" in protein_text
     assert "uniprot" in protein_text
     assert "pdb" in protein_text
     assert "alphafold" in protein_text
+    assert "plddt" in protein_text
+    assert "pae" in protein_text
 
     assert "universo" in interpretation_text
     assert "enriquecimiento" in interpretation_text
