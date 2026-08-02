@@ -1,0 +1,379 @@
+name: Temporary BMB830 Model Diagnostics Patch
+
+on:
+  push:
+    branches:
+      - agent/bmb830-model-diagnostics-review
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/bmb830-model-diagnostics-review
+          fetch-depth: 0
+
+      - name: Patch cumulative audit integration
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(text: str, old: str, new: str, label: str) -> str:
+              if old not in text:
+                  raise SystemExit(f"Missing patch marker: {label}")
+              return text.replace(old, new, 1)
+
+          audit_path = Path(
+              "src/computational_biomedicine_study_hub/content/bmb830/book_grounded_audit.py"
+          )
+          audit = audit_path.read_text(encoding="utf-8")
+          if '"islr-2021-ch07"' not in audit:
+              marker = '''    AcademicReference(
+                  "yachay-probability-statistics",'''
+              addition = '''    AcademicReference(
+                  "islr-2021-ch07",
+                  (
+                      "Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani, "
+                      "An Introduction to Statistical Learning with Applications in R, 2nd ed. "
+                      "(2021), chapter 7."
+                  ),
+                  (
+                      "polynomial regression, basis functions, piecewise polynomials, regression "
+                      "splines, smoothing splines, local regression, and generalized additive models"
+                  ),
+              ),
+          '''
+              audit = replace_once(audit, marker, addition + marker, "ISLR chapter 7 source")
+          audit_path.write_text(audit, encoding="utf-8")
+
+          init_path = Path("src/computational_biomedicine_study_hub/content/bmb830/__init__.py")
+          init = init_path.read_text(encoding="utf-8")
+          regression_import = (
+              "from .book_grounded_regression import apply_regression_review, update_regression_audit\n"
+          )
+          model_import = '''from .book_grounded_model_diagnostics import (
+              apply_model_diagnostics_review,
+              update_model_diagnostics_audit,
+          )
+          '''
+          if "book_grounded_model_diagnostics" not in init:
+              init = replace_once(
+                  init,
+                  regression_import,
+                  regression_import + model_import,
+                  "model diagnostics import",
+              )
+
+          init = replace_once(
+              init,
+              '''from .module_09_interactions_nonlinearity import (
+              LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY,
+              LOCALIZED_OBJECTIVE_QUESTION_BANK_09,
+              materialize_module_09_question_bank,
+          )
+          ''',
+              '''from .module_09_interactions_nonlinearity import (
+              LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY as _BASE_LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY,
+          )
+          from .module_09_interactions_nonlinearity import (
+              LOCALIZED_OBJECTIVE_QUESTION_BANK_09,
+              materialize_module_09_question_bank,
+          )
+          ''',
+              "M09 base alias",
+          )
+          init = replace_once(
+              init,
+              '''from .module_10_diagnostics_validation import (
+              LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION,
+              LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
+              materialize_module_10_question_bank,
+          )
+          ''',
+              '''from .module_10_diagnostics_validation import (
+              LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION as _BASE_LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION,
+          )
+          from .module_10_diagnostics_validation import (
+              LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
+              materialize_module_10_question_bank,
+          )
+          ''',
+              "M10 base alias",
+          )
+          init = replace_once(
+              init,
+              '''_INFERENCE_BMB830_MODULE_SOURCE_AUDIT = update_inference_audit(_BASE_BMB830_MODULE_SOURCE_AUDIT)
+          BMB830_MODULE_SOURCE_AUDIT = update_regression_audit(_INFERENCE_BMB830_MODULE_SOURCE_AUDIT)
+          ''',
+              '''_INFERENCE_BMB830_MODULE_SOURCE_AUDIT = update_inference_audit(_BASE_BMB830_MODULE_SOURCE_AUDIT)
+          _REGRESSION_BMB830_MODULE_SOURCE_AUDIT = update_regression_audit(
+              _INFERENCE_BMB830_MODULE_SOURCE_AUDIT
+          )
+          BMB830_MODULE_SOURCE_AUDIT = update_model_diagnostics_audit(
+              _REGRESSION_BMB830_MODULE_SOURCE_AUDIT
+          )
+          ''',
+              "cumulative audit chain",
+          )
+          init = replace_once(
+              init,
+              '''LOCALIZED_MODULE_08_MULTIPLE_REGRESSION = apply_regression_review(
+              _BASE_LOCALIZED_MODULE_08_MULTIPLE_REGRESSION
+          )
+          
+          LOCALIZED_BUNDLES = (
+          ''',
+              '''LOCALIZED_MODULE_08_MULTIPLE_REGRESSION = apply_regression_review(
+              _BASE_LOCALIZED_MODULE_08_MULTIPLE_REGRESSION
+          )
+          LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY = apply_model_diagnostics_review(
+              _BASE_LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY
+          )
+          LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION = apply_model_diagnostics_review(
+              _BASE_LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION
+          )
+          
+          LOCALIZED_BUNDLES = (
+          ''',
+              "M09-M10 review application",
+          )
+          init = replace_once(
+              init,
+              '''    LocalizedModuleBundle(
+                  LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY,
+                  LOCALIZED_OBJECTIVE_QUESTION_BANK_09,
+                  "1.0.0",
+              ),
+          ''',
+              '''    LocalizedModuleBundle(
+                  LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY,
+                  LOCALIZED_OBJECTIVE_QUESTION_BANK_09,
+                  "1.1.0",
+              ),
+          ''',
+              "M09 version",
+          )
+          init = replace_once(
+              init,
+              '''    LocalizedModuleBundle(
+                  LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION,
+                  LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
+                  "1.0.0",
+              ),
+          ''',
+              '''    LocalizedModuleBundle(
+                  LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION,
+                  LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
+                  "1.1.0",
+              ),
+          ''',
+              "M10 version",
+          )
+          init_path.write_text(init, encoding="utf-8")
+
+          audit_test_path = Path("tests/test_bmb830_book_grounded_audit.py")
+          audit_test = audit_test_path.read_text(encoding="utf-8")
+          audit_test = replace_once(
+              audit_test,
+              '_REVIEWED_MODULE_IDS = {f"bmb830.m{index:02d}" for index in range(1, 9)}',
+              '_REVIEWED_MODULE_IDS = {f"bmb830.m{index:02d}" for index in range(1, 11)}',
+              "reviewed module range",
+          )
+          audit_test = replace_once(
+              audit_test,
+              '    assert "islr-2021-ch02-05" in source_ids\n',
+              '    assert "islr-2021-ch02-05" in source_ids\n    assert "islr-2021-ch07" in source_ids\n',
+              "chapter 7 source assertion",
+          )
+          audit_test = replace_once(
+              audit_test,
+              '    assert state_by_module["bmb830.m08"] == "correct"\n',
+              '    assert state_by_module["bmb830.m08"] == "correct"\n    assert state_by_module["bmb830.m09"] == "correct"\n    assert state_by_module["bmb830.m10"] == "consistent"\n',
+              "M09-M10 state assertions",
+          )
+          audit_test = replace_once(
+              audit_test,
+              '''        "bmb830.m07",
+                  "bmb830.m08",
+              ):
+          ''',
+              '''        "bmb830.m07",
+                  "bmb830.m08",
+                  "bmb830.m09",
+                  "bmb830.m10",
+              ):
+          ''',
+              "locale identity modules",
+          )
+          audit_test_path.write_text(audit_test, encoding="utf-8")
+
+          core_test_path = Path("tests/test_bmb830_core_modules.py")
+          core_test = core_test_path.read_text(encoding="utf-8")
+          core_test = replace_once(
+              core_test,
+              '**{f"bmb830.m{index:02d}": "1.1.0" for index in range(3, 9)},',
+              '**{f"bmb830.m{index:02d}": "1.1.0" for index in range(3, 11)},',
+              "content version reviewed range",
+          )
+          core_test = replace_once(
+              core_test,
+              '**{f"bmb830.m{index:02d}": "1.0.0" for index in range(9, 13)},',
+              '**{f"bmb830.m{index:02d}": "1.0.0" for index in range(11, 13)},',
+              "content version pending range",
+          )
+          core_test = replace_once(
+              core_test,
+              '**{f"bmb830.m{index:02d}": 9 for index in range(3, 9)},',
+              '**{f"bmb830.m{index:02d}": 9 for index in range(3, 11)},',
+              "assessment count range",
+          )
+          core_test_path.write_text(core_test, encoding="utf-8")
+
+          docs_path = Path("docs/bmb830-book-grounded-audit.md")
+          docs = docs_path.read_text(encoding="utf-8")
+          docs = docs.replace(
+              "*An Introduction to Statistical Learning with Applications in R*, second edition, for statistical learning, regression identities, resampling, model assessment, and validation;",
+              "*An Introduction to Statistical Learning with Applications in R*, second edition, for statistical learning, regression identities, resampling, model assessment, validation, basis functions, and nonlinear modelling;",
+          )
+          current_start = docs.index("## Current focused review")
+          findings_start = docs.index("## Findings and additions")
+          current = '''## Current focused review
+
+          Reviewed and marked `consistent`:
+
+          - M01 — R foundations and reproducible workflow;
+          - M02 — data quality, descriptive summaries, and visualisation;
+          - M03 — probability, sampling, and distributions;
+          - M04 — estimation and confidence intervals;
+          - M05 — hypothesis testing, errors, power, and randomization tests;
+          - M06 — group comparison, ANOVA, and planned contrasts;
+          - M10 — diagnostics, influence, PRESS, and validation.
+
+          Reviewed and marked `correct` because numerical output required correction:
+
+          - M07 — correlation and simple regression;
+          - M08 — multiple regression;
+          - M09 — interactions and nonlinearity.
+
+          Pending focused review:
+
+          - M11 — introductory multivariate analysis;
+          - M12 — high-dimensional biological case.
+
+          Source mapping alone is not treated as completed verification. Current BMB830 completion is 10 of 12 modules.
+
+          '''
+          docs = docs[:current_start] + current + docs[findings_start:]
+
+          version_start = docs.index("## Version state")
+          experimental_start = docs.index("Experimental-data acquisition remains deferred.")
+          additions = '''### M09 — local nonlinear bases and corrected quadratic output
+
+          The module already covered effect modification, product terms, hierarchy, conditional slopes, centring, quadratic curvature, nested comparisons, and extrapolation. The focused comparison identified two issues:
+
+          - nonlinearity was represented only through a global quadratic polynomial;
+          - `m09.e02` contained incorrect coefficient, p-value, and prediction output.
+
+          The extension adds a piecewise-linear hinge basis `(x-k)+ = max(0, x-k)` and makes explicit that:
+
+          - the slope before the knot is `beta1`;
+          - the slope after the knot is `beta1 + beta2`;
+          - `beta2` is the change in slope, not the complete post-knot slope;
+          - the curve remains continuous at the knot;
+          - local bases and global polynomials distribute flexibility differently;
+          - knot selection must occur inside the modelling and validation procedure.
+
+          The deterministic example returns:
+
+          ```text
+          slope_before=0.50
+          slope_after=2.00
+          predictions=2.00, 6.50
+          ```
+
+          The corrected quadratic example output is:
+
+          ```text
+          quadratic=0.344
+          comparison_p=0.0000
+          2.34, 1.04, 2.49
+          ```
+
+          ### M10 — PRESS residuals and leave-one-out validation
+
+          The module already covered residual patterns, heteroscedasticity, leverage, studentised residuals, Cook's distance, sensitivity analysis, held-out validation, leakage, and dependence-aware splitting. The extension adds the exact fixed-design OLS identity:
+
+          - deleted residual `e_(i) = e_i / (1-h_ii)`;
+          - `PRESS = sum(e_(i)^2)`;
+          - leave-one-out RMSE `sqrt(PRESS/n)`;
+          - amplification of validation error by high leverage;
+          - the boundary that adaptive preprocessing and model selection must be repeated inside each fold.
+
+          The deterministic example returns:
+
+          ```text
+          train_rmse=0.563
+          loocv_rmse=1.018
+          press=6.219
+          largest_loo_residual=2.000
+          ```
+
+          ## Version state
+
+          - M01: `1.0.0` — reviewed, no visible extension;
+          - M02: `1.0.0` — reviewed, no visible extension;
+          - M03: `1.1.0` — Bayesian extension;
+          - M04: `1.1.0` — bootstrap extension;
+          - M05: `1.1.0` — randomization-test extension;
+          - M06: `1.1.0` — ANOVA and contrast extension;
+          - M07: `1.1.0` — correlation-slope extension and interval-output correction;
+          - M08: `1.1.0` — partial-regression extension and worked-output corrections;
+          - M09: `1.1.0` — piecewise-linear basis extension and quadratic-output correction;
+          - M10: `1.1.0` — PRESS and leave-one-out extension;
+          - M11–M12: `1.0.0` — focused review pending.
+
+          '''
+          docs = docs[:version_start] + additions + docs[experimental_start:]
+          docs_path.write_text(docs, encoding="utf-8")
+          PY
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Format changed Python files
+        run: |
+          python -m pip install 'ruff<1,>=0.5'
+          ruff format \
+            src/computational_biomedicine_study_hub/content/bmb830/book_grounded_audit.py \
+            src/computational_biomedicine_study_hub/content/bmb830/book_grounded_model_diagnostics.py \
+            src/computational_biomedicine_study_hub/content/bmb830/__init__.py \
+            tests/test_bmb830_book_grounded_audit.py \
+            tests/test_bmb830_core_modules.py \
+            tests/test_bmb830_model_diagnostics_review.py
+
+      - name: Commit cumulative patch
+        run: |
+          if git diff --quiet; then
+            echo 'No patch changes required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            src/computational_biomedicine_study_hub/content/bmb830/book_grounded_audit.py \
+            src/computational_biomedicine_study_hub/content/bmb830/book_grounded_model_diagnostics.py \
+            src/computational_biomedicine_study_hub/content/bmb830/__init__.py \
+            tests/test_bmb830_book_grounded_audit.py \
+            tests/test_bmb830_core_modules.py \
+            tests/test_bmb830_model_diagnostics_review.py \
+            docs/bmb830-book-grounded-audit.md
+          git commit -m 'Integrate BMB830 nonlinear and validation review'
+          git push origin HEAD:agent/bmb830-model-diagnostics-review
