@@ -5,16 +5,7 @@ from __future__ import annotations
 from computational_biomedicine_study_hub.content import dm847
 from computational_biomedicine_study_hub.i18n import AppLocale
 
-_REVIEWED_MODULE_IDS = {
-    "dm847.m01",
-    "dm847.m03",
-    "dm847.m04",
-    "dm847.m05",
-    "dm847.m06",
-    "dm847.m08",
-    "dm847.m09",
-    "dm847.m10",
-}
+_REVIEWED_MODULE_IDS = {f"dm847.m{index:02d}" for index in range(1, 11)}
 
 
 def _module(module_id: str, locale: AppLocale | str = AppLocale.ENGLISH):
@@ -34,10 +25,7 @@ def test_omics_and_foundations_reviews_update_only_completed_audit_states() -> N
     assert {
         module_id for module_id, state in state_by_module.items() if state == "consistent"
     } == _REVIEWED_MODULE_IDS
-    assert {module_id for module_id, state in state_by_module.items() if state == "pending"} == {
-        "dm847.m02",
-        "dm847.m07",
-    }
+    assert {module_id for module_id, state in state_by_module.items() if state == "pending"} == set()
 
     for item in dm847.DM847_MODULE_SOURCE_AUDIT:
         if item.module_id in {"dm847.m01", "dm847.m10"}:
