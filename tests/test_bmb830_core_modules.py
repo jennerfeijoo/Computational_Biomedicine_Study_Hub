@@ -17,11 +17,11 @@ def test_bmb830_registers_twelve_complete_modules_in_order() -> None:
     expected_versions = {
         "bmb830.m01": "1.0.0",
         "bmb830.m02": "1.0.0",
-        **{f"bmb830.m{index:02d}": "1.1.0" for index in range(3, 9)},
-        **{f"bmb830.m{index:02d}": "1.0.0" for index in range(9, 13)},
+        **{f"bmb830.m{index:02d}": "1.1.0" for index in range(3, 11)},
+        **{f"bmb830.m{index:02d}": "1.0.0" for index in range(11, 13)},
     }
     expected_assessment_counts = {
-        **{f"bmb830.m{index:02d}": 9 for index in range(3, 9)},
+        **{f"bmb830.m{index:02d}": 9 for index in range(3, 11)},
     }
 
     assert tuple(module.module_id for module in MODULES) == expected_ids

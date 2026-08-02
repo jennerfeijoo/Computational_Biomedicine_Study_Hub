@@ -14,6 +14,10 @@ from .book_grounded_audit import (
     BMB830_MODULE_SOURCE_AUDIT as _BASE_BMB830_MODULE_SOURCE_AUDIT,
 )
 from .book_grounded_inference import apply_inference_review, update_inference_audit
+from .book_grounded_model_diagnostics import (
+    apply_model_diagnostics_review,
+    update_model_diagnostics_audit,
+)
 from .book_grounded_regression import apply_regression_review, update_regression_audit
 from .module_01_r_foundations import (
     LOCALIZED_MODULE_01_R_FOUNDATIONS as _BASE_LOCALIZED_MODULE_01_R_FOUNDATIONS,
@@ -72,12 +76,16 @@ from .module_08_multiple_regression import (
     materialize_module_08_question_bank,
 )
 from .module_09_interactions_nonlinearity import (
-    LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY,
+    LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY as _BASE_LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY,
+)
+from .module_09_interactions_nonlinearity import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_09,
     materialize_module_09_question_bank,
 )
 from .module_10_diagnostics_validation import (
-    LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION,
+    LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION as _BASE_LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION,
+)
+from .module_10_diagnostics_validation import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
     materialize_module_10_question_bank,
 )
@@ -93,7 +101,10 @@ from .module_12_high_dimensional_case import (
 )
 
 _INFERENCE_BMB830_MODULE_SOURCE_AUDIT = update_inference_audit(_BASE_BMB830_MODULE_SOURCE_AUDIT)
-BMB830_MODULE_SOURCE_AUDIT = update_regression_audit(_INFERENCE_BMB830_MODULE_SOURCE_AUDIT)
+_REGRESSION_BMB830_MODULE_SOURCE_AUDIT = update_regression_audit(
+    _INFERENCE_BMB830_MODULE_SOURCE_AUDIT
+)
+BMB830_MODULE_SOURCE_AUDIT = update_model_diagnostics_audit(_REGRESSION_BMB830_MODULE_SOURCE_AUDIT)
 
 LOCALIZED_MODULE_01_R_FOUNDATIONS = apply_foundation_review(_BASE_LOCALIZED_MODULE_01_R_FOUNDATIONS)
 LOCALIZED_MODULE_02_DATA_SUMMARY = apply_foundation_review(_BASE_LOCALIZED_MODULE_02_DATA_SUMMARY)
@@ -110,6 +121,12 @@ LOCALIZED_MODULE_07_CORRELATION_REGRESSION = apply_regression_review(
 )
 LOCALIZED_MODULE_08_MULTIPLE_REGRESSION = apply_regression_review(
     _BASE_LOCALIZED_MODULE_08_MULTIPLE_REGRESSION
+)
+LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY = apply_model_diagnostics_review(
+    _BASE_LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY
+)
+LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION = apply_model_diagnostics_review(
+    _BASE_LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION
 )
 
 LOCALIZED_BUNDLES = (
@@ -156,12 +173,12 @@ LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
         LOCALIZED_MODULE_09_INTERACTIONS_NONLINEARITY,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_09,
-        "1.0.0",
+        "1.1.0",
     ),
     LocalizedModuleBundle(
         LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
-        "1.0.0",
+        "1.1.0",
     ),
     LocalizedModuleBundle(
         LOCALIZED_MODULE_11_INTRO_MULTIVARIATE,
