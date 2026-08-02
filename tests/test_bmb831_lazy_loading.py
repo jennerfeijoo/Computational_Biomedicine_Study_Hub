@@ -68,4 +68,4 @@ def test_bmb831_page_materializes_danish_and_attaches_r_labs(
     assert page.reader.module.module_id == "bmb831.m08"
     assert page.reader.select_section_index(2)
     labs = page.reader.findChildren(RLabWidget)
-    assert len(labs) == len(page.reader.module.worked_examples) == 2
+    assert len(labs) == len(page.reader.module.worked_examples) == 3
