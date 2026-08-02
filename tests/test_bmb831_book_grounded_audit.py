@@ -1,9 +1,9 @@
-"""Regression tests for the BMB831 M01-M03 source-grounded review."""
+"""Regression tests for the cumulative BMB831 source-grounded review."""
 
 from __future__ import annotations
 
 import math
-from statistics import median
+from statistics import median, stdev
 
 from computational_biomedicine_study_hub.content import bmb831
 from computational_biomedicine_study_hub.i18n import AppLocale
@@ -26,7 +26,42 @@ def _identities(module_id: str, locale: AppLocale) -> tuple[tuple[str, ...], ...
     )
 
 
-def test_bmb831_source_registry_maps_all_modules_and_reviews_first_three() -> None:
+def _matrix_rank(rows: tuple[tuple[float, ...], ...], tolerance: float = 1e-10) -> int:
+    matrix = [list(row) for row in rows]
+    row_count = len(matrix)
+    column_count = len(matrix[0])
+    pivot_row = 0
+    pivot_column = 0
+
+    while pivot_row < row_count and pivot_column < column_count:
+        candidate = max(
+            range(pivot_row, row_count),
+            key=lambda row: abs(matrix[row][pivot_column]),
+        )
+        if abs(matrix[candidate][pivot_column]) <= tolerance:
+            pivot_column += 1
+            continue
+
+        matrix[pivot_row], matrix[candidate] = matrix[candidate], matrix[pivot_row]
+        pivot = matrix[pivot_row][pivot_column]
+        matrix[pivot_row] = [value / pivot for value in matrix[pivot_row]]
+
+        for row in range(row_count):
+            if row == pivot_row:
+                continue
+            factor = matrix[row][pivot_column]
+            matrix[row] = [
+                value - factor * reference
+                for value, reference in zip(matrix[row], matrix[pivot_row], strict=True)
+            ]
+
+        pivot_row += 1
+        pivot_column += 1
+
+    return pivot_row
+
+
+def test_bmb831_source_registry_maps_all_modules_and_reviews_first_five() -> None:
     source_ids = {source.source_id for source in bmb831.BMB831_BOOK_SOURCES}
     audits = {item.module_id: item for item in bmb831.BMB831_MODULE_SOURCE_AUDIT}
     reviewed = {
@@ -34,10 +69,10 @@ def test_bmb831_source_registry_maps_all_modules_and_reviews_first_three() -> No
     }
 
     assert set(audits) == {f"bmb831.m{index:02d}" for index in range(1, 10)}
-    assert reviewed == {"bmb831.m01", "bmb831.m02", "bmb831.m03"}
+    assert reviewed == {f"bmb831.m{index:02d}" for index in range(1, 6)}
     assert {audits[module_id].state for module_id in reviewed} == {"consistent"}
     assert {module_id for module_id, audit in audits.items() if audit.state == "pending"} == {
-        f"bmb831.m{index:02d}" for index in range(4, 10)
+        f"bmb831.m{index:02d}" for index in range(6, 10)
     }
     assert all(set(audit.source_ids) <= source_ids for audit in audits.values())
     assert "sdu-bmb831-active-2025" in source_ids
@@ -45,10 +80,12 @@ def test_bmb831_source_registry_maps_all_modules_and_reviews_first_three() -> No
     assert "bioconductor-edger-normalization" in source_ids
     assert "bioconductor-deseq2" in source_ids
     assert "limma-empirical-bayes" in source_ids
+    assert "islr-2021-unsupervised-multiple-testing" in source_ids
+    assert "ims-2024-visualisation-reporting" in source_ids
 
 
 def test_reviewed_module_identity_is_locale_stable() -> None:
-    for module_id in ("bmb831.m01", "bmb831.m02", "bmb831.m03"):
+    for module_id in (f"bmb831.m{index:02d}" for index in range(1, 6)):
         reference = _identities(module_id, AppLocale.SPANISH_SPAIN)
         for locale in AppLocale:
             assert _identities(module_id, locale) == reference
@@ -179,12 +216,111 @@ def test_m03_information_sharing_extension_separates_three_procedures() -> None:
     assert tuple(round(value, 2) for value in moderated_t) == (1.69, 1.41, 0.95)
 
 
-def test_m01_m03_versions_counts_and_source_basis() -> None:
+def test_m04_finite_sample_rank_extension_has_deterministic_contract() -> None:
+    module = _module("bmb831.m04")
+    rank_concept = next(
+        item
+        for item in module.concepts
+        if item.concept_id == "finite-sample-rank-and-subspace-stability"
+    )
+    exported = "\n".join(
+        (rank_concept.title, rank_concept.body, *rank_concept.key_points)
+    ).casefold()
+
+    assert "min(p, n - 1)" in exported
+    assert "independent samples" in exported
+    assert "subspace" in exported
+    assert "eigenvalues" in exported
+    assert "resampling" in exported
+
+    worked = next(item for item in module.worked_examples if item.example_id == "m04.bg.e01")
+    assert can_execute_r(worked.code)
+    assert worked.expected_output == (
+        "samples=4\n"
+        "features=6\n"
+        "rank_ceiling=3\n"
+        "observed_rank=3\n"
+        "nonzero_pcs=3"
+    )
+
+    matrix = (
+        (1.0, 2.0, 3.0, 4.0, 5.0, 6.0),
+        (2.0, 1.0, 4.0, 3.0, 6.0, 5.0),
+        (3.0, 5.0, 1.0, 6.0, 2.0, 4.0),
+        (5.0, 3.0, 6.0, 1.0, 4.0, 2.0),
+    )
+    column_means = tuple(sum(row[column] for row in matrix) / len(matrix) for column in range(6))
+    centered = tuple(
+        tuple(value - column_means[column] for column, value in enumerate(row))
+        for row in matrix
+    )
+
+    assert min(len(matrix) - 1, len(matrix[0])) == 3
+    assert _matrix_rank(centered) == 3
+    assert "islr-2021-unsupervised-multiple-testing" in module.tutor_support.source_basis
+
+
+def test_m05_uncertainty_extension_distinguishes_error_bar_targets() -> None:
+    module = _module("bmb831.m05")
+    uncertainty = next(
+        item
+        for item in module.concepts
+        if item.concept_id == "spread-versus-estimator-uncertainty"
+    )
+    exported = "\n".join((uncertainty.title, uncertainty.body, *uncertainty.key_points)).casefold()
+
+    assert "standard deviation" in exported
+    assert "standard error" in exported
+    assert "confidence interval" in exported
+    assert "prediction interval" in exported
+    assert "analytical unit" in exported
+
+    worked = next(item for item in module.worked_examples if item.example_id == "m05.bg.e01")
+    assert can_execute_r(worked.code)
+    assert worked.expected_output == (
+        "group_A=mean:10.000,sd:1.633,se:0.816,ci_half:2.598\n"
+        "group_B=mean:10.000,sd:4.899,se:2.449,ci_half:7.795"
+    )
+
+    groups = {
+        "A": (8.0, 10.0, 10.0, 12.0),
+        "B": (4.0, 10.0, 10.0, 16.0),
+    }
+    t_critical_df3 = 3.182446305284263
+    summaries = {}
+    for label, values in groups.items():
+        sample_sd = stdev(values)
+        standard_error = sample_sd / math.sqrt(len(values))
+        summaries[label] = (
+            sum(values) / len(values),
+            sample_sd,
+            standard_error,
+            t_critical_df3 * standard_error,
+        )
+
+    assert tuple(round(value, 3) for value in summaries["A"]) == (
+        10.0,
+        1.633,
+        0.816,
+        2.598,
+    )
+    assert tuple(round(value, 3) for value in summaries["B"]) == (
+        10.0,
+        4.899,
+        2.449,
+        7.795,
+    )
+    assert "ims-2024-visualisation-reporting" in module.tutor_support.source_basis
+
+
+def test_m01_m05_versions_counts_and_source_basis() -> None:
     bundles = {bundle.localized_module.module_id: bundle for bundle in bmb831.LOCALIZED_BUNDLES}
     expected_versions = {
         "bmb831.m01": "1.0.0",
         "bmb831.m02": "1.1.0",
         "bmb831.m03": "1.1.0",
+        "bmb831.m04": "1.1.0",
+        "bmb831.m05": "1.1.0",
     }
 
     for module_id, version in expected_versions.items():
@@ -193,6 +329,14 @@ def test_m01_m03_versions_counts_and_source_basis() -> None:
     assert len(_module("bmb831.m01").assessment_items) == 8
     assert len(_module("bmb831.m02").assessment_items) == 9
     assert len(_module("bmb831.m03").assessment_items) == 9
+    assert len(_module("bmb831.m04").assessment_items) == 9
+    assert len(_module("bmb831.m05").assessment_items) == 9
     assert "bioconductor-summarizedexperiment" in _module("bmb831.m02").tutor_support.source_basis
     assert "bioconductor-deseq2" in _module("bmb831.m03").tutor_support.source_basis
     assert "limma-empirical-bayes" in _module("bmb831.m03").tutor_support.source_basis
+    assert "islr-2021-unsupervised-multiple-testing" in _module(
+        "bmb831.m04"
+    ).tutor_support.source_basis
+    assert "ims-2024-visualisation-reporting" in _module(
+        "bmb831.m05"
+    ).tutor_support.source_basis
