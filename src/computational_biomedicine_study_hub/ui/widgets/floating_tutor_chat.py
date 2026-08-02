@@ -500,9 +500,7 @@ class TutorSelectionEventFilter(QObject):
         menu = self._standard_menu(watched)
         if menu.actions():
             menu.addSeparator()
-        action = menu.addAction(
-            tutor_chat_text(self._locale, TutorChatCopyKey.EXPLAIN_SELECTION)
-        )
+        action = menu.addAction(tutor_chat_text(self._locale, TutorChatCopyKey.EXPLAIN_SELECTION))
         action.triggered.connect(
             lambda checked=False, text=selection: self._panel.explain_selection(text)
         )
