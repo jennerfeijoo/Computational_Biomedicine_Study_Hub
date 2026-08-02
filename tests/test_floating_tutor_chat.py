@@ -22,9 +22,7 @@ from computational_biomedicine_study_hub.ui.widgets.floating_tutor_chat import (
 
 @dataclass
 class _FakeRunner:
-    calls: list[tuple[str, tuple[ChatMessage, ...], str, AppLocale]] = field(
-        default_factory=list
-    )
+    calls: list[tuple[str, tuple[ChatMessage, ...], str, AppLocale]] = field(default_factory=list)
 
     def ask(
         self,
@@ -43,9 +41,9 @@ class _FakeRunner:
 
 @dataclass
 class _DeferredExecutor:
-    submissions: list[
-        tuple[int, TutorTask, TutorSuccessCallback, TutorFailureCallback]
-    ] = field(default_factory=list)
+    submissions: list[tuple[int, TutorTask, TutorSuccessCallback, TutorFailureCallback]] = field(
+        default_factory=list
+    )
     cancelled: list[int] = field(default_factory=list)
 
     def submit(
