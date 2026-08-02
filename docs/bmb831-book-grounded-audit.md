@@ -38,10 +38,10 @@ Mapping a module to sources is not treated as completed verification. A module r
 | M05 — advanced visualisation | `consistent` | Existing figure contracts, omics plots, heatmaps, accessibility, and reproducible export were adequate. Error-bar targets and the distinction among spread, SE, confidence intervals, and prediction uncertainty required explicit treatment. |
 | M06 — public omics workflows | `consistent` | Existing public-source snapshots, assay-specific contracts, missingness, transition checks, and reproducibility boundaries were adequate. Shared peptides and protein-group inference required explicit treatment. |
 | M07 — protein characterisation | `consistent` | Existing sequence identity, annotation provenance, PDB coverage, and AlphaFold limits were adequate. The distinction between local pLDDT and relative-domain PAE required explicit treatment. |
-| M08 — biological interpretation | `pending` | Source scope mapped; focused comparison pending. |
-| M09 — publication appraisal and report | `pending` | Source scope mapped; focused comparison pending. |
+| M08 — biological interpretation | `consistent` | Existing identifier mapping, universes, enrichment, networks, redundancy, circularity, and evidence boundaries were adequate. Ontology propagation and dependence among parent and child terms required explicit treatment. |
+| M09 — publication appraisal and report | `consistent` | Existing estimand reconstruction, claim traceability, validity appraisal, reproducibility, and report structure were adequate. Specification sensitivity and selective reporting required explicit treatment. |
 
-Progress: **7/9 modules source-reviewed**.
+Progress: **9/9 modules source-reviewed**.
 
 ## M01 review
 
@@ -226,11 +226,63 @@ The example demonstrates confidence separation; it is not an experimental struct
 
 M07 content version is `1.1.0`.
 
-## Deferred work
+## M08 extension — ontology propagation and dependent terms
 
-The final focused block is:
+Stable additions:
 
-- M08 — identifier mapping, tested universes, enrichment, pathway and network interpretation, redundancy, circularity, and annotation provenance;
-- M09 — estimands, design and validity appraisal, reproducibility, evidence boundaries, and individual English scientific reporting without reconstructing private assessment material.
+- objective `m08.bg.o1`;
+- concept `ontology-propagation-and-term-dependence`;
+- example `m08.bg.e01`;
+- practice `m08.bg.p01`;
+- assessment item `bmb831.m08.book.001`.
 
-Experimental-data acquisition remains deferred until all nine source reviews are complete.
+The unit makes ontology inheritance explicit. A direct annotation to a specific term can propagate to compatible ancestors, so parent and child terms share genes by construction. Significant parent and child results are therefore dependent and may summarize one annotation signal rather than independent biological confirmations.
+
+Multiplicity adjustment does not remove ontology dependence or semantic redundancy. Interpretation must retain ontology release, relations, evidence codes, direct and propagated annotations, and driver genes. Term reduction or clustering requires a declared reproducible rule and must not hide the complete result table.
+
+Deterministic example:
+
+```text
+direct_annotations=3
+propagated_annotations=6
+parent_genes=3
+child_terms=2
+```
+
+The propagated parent annotations arise from the same three direct observations; they are not additional biological replicates.
+
+M08 content version is `1.1.0`.
+
+## M09 extension — specification sensitivity and selective reporting
+
+Stable additions:
+
+- objective `m09.bg.o1`;
+- concept `specification-sensitivity-and-selective-reporting`;
+- example `m09.bg.e01`;
+- practice `m09.bg.p01`;
+- assessment item `bmb831.m09.book.001`.
+
+The unit treats analytical decisions as part of the evidence chain. Inclusion criteria, filters, transformations, covariates, contrasts, missing-data handling, multiplicity, and model choice may all alter magnitude, direction, or uncertainty. One favourable specification does not establish robustness when other scientifically defensible analyses are absent or discordant.
+
+The appraisal should define the expected specification set, separate primary and sensitivity analyses, preserve complete results, record deviations, and mark missing evidence rather than reconstructing it by assumption. A report may describe the observed model while classifying robustness as not assessable when declared alternatives are unavailable.
+
+Deterministic example:
+
+```text
+specifications=4
+positive=3
+negative=1
+range=-0.20,0.80
+sign_stable=FALSE
+```
+
+The example contains a sign reversal, so it does not support a robust directional claim without explaining the analytical decisions.
+
+M09 content version is `1.1.0`.
+
+## Audit completion and next boundary
+
+The source-grounded review is complete for all nine BMB831 modules. Completion means that each module has a mapped public source scope, focused comparison, implemented correction or extension where needed, deterministic regression coverage, and stable trilingual identities.
+
+It does **not** establish official equivalence with private teaching, attendance, examination, or grading material. The next distinct repository phase may evaluate controlled acquisition of public experimental datasets and executable end-to-end workflows. Any such phase should preserve licenses, immutable snapshots, checksums, dataset cards, assay-specific processing, computational resource limits, and a strict separation between reproducibility and scientific validity.
