@@ -26,8 +26,8 @@ from ...learning.python_execution import (
 from .python_lab_styles import PYTHON_LAB_STYLESHEET
 
 _STATUS_COPY = {
-    ExecutionStatus.PASSED: LabCopyKey.STATUS_PASSED,
-    ExecutionStatus.OUTPUT_MISMATCH: LabCopyKey.STATUS_MISMATCH,
+    ExecutionStatus.PASSED: LabCopyKey.STATUS_COMPLETED,
+    ExecutionStatus.OUTPUT_MISMATCH: LabCopyKey.STATUS_COMPLETED,
     ExecutionStatus.RUNTIME_ERROR: LabCopyKey.STATUS_RUNTIME_ERROR,
     ExecutionStatus.TIMED_OUT: LabCopyKey.STATUS_TIMED_OUT,
     ExecutionStatus.REJECTED: LabCopyKey.STATUS_REJECTED,
@@ -157,9 +157,9 @@ class PythonLabWidget(QFrame):
 
     @property
     def reference_visible(self) -> bool:
-        """Return whether the optional authored reference output is displayed."""
+        """Return whether the optional authored reference output is enabled."""
 
-        return self._expected.isVisible()
+        return not self._expected.isHidden()
 
     def set_source(self, source: str) -> None:
         """Replace editable source without changing the reset point."""
