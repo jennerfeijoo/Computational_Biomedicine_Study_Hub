@@ -10,6 +10,8 @@ _REVIEWED_MODULE_IDS = {
     "dm847.m04",
     "dm847.m05",
     "dm847.m06",
+    "dm847.m08",
+    "dm847.m09",
 }
 
 

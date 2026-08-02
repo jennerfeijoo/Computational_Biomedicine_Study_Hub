@@ -19,8 +19,8 @@ The textbook is used selectively. Chapters on genome assembly, peptide sequencin
 | M05 Hidden Markov models | Volume II chapter 10 | Consistent |
 | M06 Suffix arrays, BWT, mapping | Volume II chapter 9 | Consistent |
 | M07 Operons and bacterial genetics | Active course scope; specialized source still required | Pending |
-| M08 Motif discovery and EM | Volume I chapter 2; Volume II chapter 8 | Pending |
-| M09 Biological networks | Volume II chapter 11 | Pending |
+| M08 Motif discovery and EM | Volume I chapter 2; Volume II chapter 8 | Consistent |
+| M09 Biological networks | Active DM847 scope; Ideker et al. (2002); Alcaraz et al. (2012) | Consistent |
 | M10 OMICS learning | Volume II chapter 8 plus active course scope | Pending |
 
 ## Completed focused review: M03
@@ -129,6 +129,69 @@ Stable IDs:
 - `m06.bg.e01`
 - `m06.bg.p01`
 - `dm847.m06.book.001`
+
+Content version: `1.1.0`.
+
+## Completed focused review: M08
+
+The existing module already covered PWM construction, pseudocounts, entropy, log-odds scoring, OOPS/ZOOPS/TCM occurrence models, latent positions, EM responsibilities, local optima, background choice, and independent validation.
+
+The missing implementation boundary was the complete soft M-step and an auditable stopping rule. The extension now covers:
+
+- responsibilities normalized within the occurrence model;
+- fractional expected base counts rather than hard argmax assignments;
+- pseudocount addition and column normalization;
+- monotonic observed-data likelihood up to numerical tolerance;
+- absolute or relative convergence tolerance;
+- a maximum iteration limit as a separate safeguard;
+- comparable objective functions across random restarts.
+
+The deterministic example produces a two-column PWM from fractional responsibilities:
+
+```text
+[{'A': 0.4, 'C': 0.167, 'G': 0.267, 'T': 0.167}, {'A': 0.167, 'C': 0.367, 'G': 0.167, 'T': 0.3}]
+```
+
+Stable IDs:
+
+- `m08.bg.o1`
+- `fractional-counts-and-em-convergence`
+- `m08.bg.e01`
+- `m08.bg.p01`
+- `dm847.m08.book.001`
+
+Content version: `1.1.0`.
+
+## Completed focused review: M09
+
+The existing module already covered network semantics, topology, centrality, hypergeometric over-representation analysis, multiplicity, random-walk propagation, computational modules, and structure-aware null models.
+
+The source audit also found and corrected an inaccurate mapping: chapter 11 of Compeau and Pevzner volume II concerns peptide sequencing and peptide-spectrum analysis, not biological network enrichment. M09 is now grounded in the active DM847 description and the primary jActiveModules and KeyPathwayMiner publications.
+
+The missing methodological boundary was between testing predefined gene sets and selecting connected active subnetworks from the observed data. The extension now covers:
+
+- ORA as a test of terms fixed before observing the selected list;
+- connected active-module extraction from topology and node evidence;
+- jActiveModules-style size-normalized aggregate scores;
+- KeyPathwayMiner-style connected extraction with explicit exceptions;
+- heuristic search and the absence of a guaranteed global optimum;
+- module scores versus calibrated p-values;
+- selection-aware null models that reproduce search and constraints;
+- stability under network and score perturbation.
+
+The deterministic example compares two connected candidates:
+
+```text
+{'AB': 3.536, 'ABC': 2.309}
+```
+
+Stable IDs:
+
+- `m09.bg.o1`
+- `predefined-enrichment-vs-active-subnetworks`
+- `m09.bg.e01`
+- `m09.bg.p01`
+- `dm847.m09.book.001`
 
 Content version: `1.1.0`.
 
