@@ -12,9 +12,10 @@ The audit uses:
 
 - the active SDU BMB830 description;
 - *Introduction to Modern Statistics*, second edition, for data, exploratory analysis, probability, inference, randomization tests, group comparison, regression, and model interpretation;
-- *An Introduction to Statistical Learning with Applications in R*, second edition, for statistical learning, regression identities, resampling, model assessment, validation, basis functions, and nonlinear modelling;
+- *An Introduction to Statistical Learning with Applications in R*, second edition, for statistical learning, regression identities, resampling, model assessment, validation, nonlinear modelling, regularisation, and high-dimensional analysis;
+- *Probabilistic Machine Learning: An Introduction* for PCA, covariance eigendecomposition, reconstruction, and effective dimension;
 - the uploaded Yachay Tech probability/statistics notes;
-- the uploaded Yachay Tech biostatistics and linear-model notes.
+- the uploaded Yachay Tech biostatistics, linear-model, and multivariate-analysis material.
 
 Visible teaching material remains original trilingual paraphrase and adaptation. Textbook prose, figures, tables, and proprietary exercises are not reproduced.
 
@@ -28,7 +29,9 @@ Reviewed and marked `consistent`:
 - M04 — estimation and confidence intervals;
 - M05 — hypothesis testing, errors, power, and randomization tests;
 - M06 — group comparison, ANOVA, and planned contrasts;
-- M10 — diagnostics, influence, PRESS, and validation.
+- M10 — diagnostics, influence, PRESS, and validation;
+- M11 — introductory multivariate analysis;
+- M12 — high-dimensional biological case.
 
 Reviewed and marked `correct` because numerical output required correction:
 
@@ -36,12 +39,7 @@ Reviewed and marked `correct` because numerical output required correction:
 - M08 — multiple regression;
 - M09 — interactions and nonlinearity.
 
-Pending focused review:
-
-- M11 — introductory multivariate analysis;
-- M12 — high-dimensional biological case.
-
-Source mapping alone is not treated as completed verification. Current BMB830 completion is 10 of 12 modules.
+No BMB830 module remains pending. Source-grounded completion is 12 of 12 modules.
 
 ## Findings and additions
 
@@ -254,6 +252,46 @@ press=6.219
 largest_loo_residual=2.000
 ```
 
+### M11 — covariance PCA versus correlation PCA
+
+The module already covered matrix orientation, preprocessing, scaling, PCA scores, loadings, explained variance, sign indeterminacy, hierarchical clustering, and sensitivity analysis. The focused gap was the explicit operational distinction between covariance-matrix and correlation-matrix PCA.
+
+The extension establishes that:
+
+- covariance PCA centres variables but preserves original scales;
+- correlation PCA centres and divides each non-constant variable by its standard deviation;
+- large numerical variance can dominate an unscaled component;
+- standardisation changes geometry, loadings, and explained variance;
+- the choice depends on units and the biological question rather than visual separation;
+- zero-variance variables must be handled before standardisation.
+
+The deterministic example returns:
+
+```text
+covariance_abs_loadings=0.010,1.000
+correlation_abs_loadings=0.707,0.707
+```
+
+### M12 — rank ceiling in p-greater-than-n matrices
+
+The module already covered provenance, quality control, missingness, filtering, imputation, log2 transformation, scaling, PCA, batch effects, training-only screening, multiplicity, leakage, and external validation. The extension adds the geometric reason high-dimensional matrices remain sample-limited:
+
+- `rank(centered X) <= min(n-1,p)`;
+- at most `n-1` principal components can have non-zero variance when `p>n`;
+- the feature covariance matrix is singular;
+- unregularised models may have non-unique solutions or perfect training fit;
+- regularisation and dimension reduction add assumptions rather than observations;
+- selection and tuning must remain inside resampling, with an outer validation layer for performance estimation.
+
+The deterministic example returns:
+
+```text
+samples=4
+features=6
+rank_ceiling=3
+nonzero_pcs=3
+```
+
 ## Version state
 
 - M01: `1.0.0` — reviewed, no visible extension;
@@ -266,6 +304,7 @@ largest_loo_residual=2.000
 - M08: `1.1.0` — partial-regression extension and worked-output corrections;
 - M09: `1.1.0` — piecewise-linear basis extension and quadratic-output correction;
 - M10: `1.1.0` — PRESS and leave-one-out extension;
-- M11–M12: `1.0.0` — focused review pending.
+- M11: `1.1.0` — covariance-versus-correlation PCA extension;
+- M12: `1.1.0` — high-dimensional rank-ceiling extension.
 
 Experimental-data acquisition remains deferred. Synthea and bounded synthetic matrices are not treated as substitutes for external biological evidence.

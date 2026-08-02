@@ -9,14 +9,10 @@ from ..localized_models import LocalizedLearningModule, LocalizedTutorSupportPac
 from .authoring import concept, example, objective, objective_mcq, practice
 from .book_grounded_audit import AcademicReference, ModuleSourceAudit
 
-
 BMB830_MULTIVARIATE_SOURCES: tuple[AcademicReference, ...] = (
     AcademicReference(
         "murphy-2023-ch20",
-        (
-            "Kevin P. Murphy, Probabilistic Machine Learning: An Introduction "
-            "(2023), chapter 20."
-        ),
+        ("Kevin P. Murphy, Probabilistic Machine Learning: An Introduction (2023), chapter 20."),
         (
             "principal component analysis, covariance eigendecomposition, centring, "
             "linear dimensionality reduction, reconstruction, and effective dimension"

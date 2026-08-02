@@ -95,8 +95,7 @@ def test_covariance_and_correlation_pca_extension_exposes_scale_contract() -> No
     example = next(item for item in module.worked_examples if item.example_id == "m11.bg.e01")
     assert can_execute_r(example.code)
     assert example.expected_output == (
-        "covariance_abs_loadings=0.010,1.000\n"
-        "correlation_abs_loadings=0.707,0.707"
+        "covariance_abs_loadings=0.010,1.000\ncorrelation_abs_loadings=0.707,0.707"
     )
 
     covariance_small = 1 / math.sqrt(1 + 100**2)
@@ -109,9 +108,7 @@ def test_covariance_and_correlation_pca_extension_exposes_scale_contract() -> No
 def test_high_dimensional_extension_enforces_rank_ceiling() -> None:
     module = _module("bmb830.m12")
     rank_concept = next(
-        item
-        for item in module.concepts
-        if item.concept_id == "rank-ceiling-and-p-greater-than-n"
+        item for item in module.concepts if item.concept_id == "rank-ceiling-and-p-greater-than-n"
     )
     exported = "\n".join((rank_concept.body, *rank_concept.key_points)).casefold()
 
@@ -125,9 +122,7 @@ def test_high_dimensional_extension_enforces_rank_ceiling() -> None:
 
     example = next(item for item in module.worked_examples if item.example_id == "m12.bg.e01")
     assert can_execute_r(example.code)
-    assert example.expected_output == (
-        "samples=4\nfeatures=6\nrank_ceiling=3\nnonzero_pcs=3"
-    )
+    assert example.expected_output == ("samples=4\nfeatures=6\nrank_ceiling=3\nnonzero_pcs=3")
 
     matrix = (
         (1.0, 0.0, 0.0, 1.0, 1.0, 0.0),
@@ -137,8 +132,7 @@ def test_high_dimensional_extension_enforces_rank_ceiling() -> None:
     )
     column_means = tuple(sum(row[column] for row in matrix) / len(matrix) for column in range(6))
     centred = tuple(
-        tuple(value - column_means[column] for column, value in enumerate(row))
-        for row in matrix
+        tuple(value - column_means[column] for column, value in enumerate(row)) for row in matrix
     )
     assert _matrix_rank(centred) == 3
     assert min(len(matrix) - 1, len(matrix[0])) == 3
