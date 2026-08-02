@@ -12,7 +12,7 @@ The audit uses:
 
 - the active SDU BMB830 description;
 - *Introduction to Modern Statistics*, second edition, for data, exploratory analysis, probability, inference, randomization tests, group comparison, regression, and model interpretation;
-- *An Introduction to Statistical Learning with Applications in R*, second edition, for statistical learning, resampling, model assessment, and validation;
+- *An Introduction to Statistical Learning with Applications in R*, second edition, for statistical learning, regression identities, resampling, model assessment, and validation;
 - the uploaded Yachay Tech probability/statistics notes;
 - the uploaded Yachay Tech biostatistics and linear-model notes.
 
@@ -29,16 +29,19 @@ Reviewed and marked `consistent`:
 - M05 — hypothesis testing, errors, power, and randomization tests;
 - M06 — group comparison, ANOVA, and planned contrasts.
 
-Pending focused review:
+Reviewed and marked `correct` because numerical output required correction:
 
 - M07 — correlation and simple regression;
-- M08 — multiple regression;
+- M08 — multiple regression.
+
+Pending focused review:
+
 - M09 — interactions and nonlinearity;
 - M10 — diagnostics and validation;
 - M11 — introductory multivariate analysis;
 - M12 — high-dimensional biological case.
 
-Source mapping alone is not treated as completed verification.
+Source mapping alone is not treated as completed verification. Current BMB830 completion is 8 of 12 modules.
 
 ## Findings and additions
 
@@ -127,6 +130,79 @@ p=0.0066
 C_minus_A=4.00
 ```
 
+### M07 — correlation, slope, scale, and R-squared
+
+The module already covered association versus causation, Pearson and Spearman correlation, simple linear regression, coefficient interpretation, confidence intervals, prediction intervals, and extrapolation. The focused comparison identified two issues:
+
+- the exact relationship among correlation, slope, measurement scale, and R-squared was implicit rather than operational;
+- the expected confidence and prediction interval output in `m07.e02` was numerically incorrect.
+
+The extension makes explicit that, for ordinary least-squares simple regression with an intercept:
+
+- the slope is `r * sY / sX`;
+- correlation is dimensionless and symmetric, while slope has units and is asymmetric;
+- the standardised slope equals `r`;
+- `R-squared = r-squared`;
+- centring changes the intercept but not slope or fitted values;
+- these identities do not transfer unchanged to multiple regression.
+
+The deterministic example returns:
+
+```text
+r=0.998
+slope=1.342
+r_sy_sx=1.342
+standardised_slope=0.998
+r2=0.997
+r_squared=0.997
+```
+
+The corrected output for the existing interval example is:
+
+```text
+mean=5.55
+mean_ci=[5.31, 5.79]
+prediction=[4.99, 6.12]
+```
+
+### M08 — partial regression and adjusted coefficients
+
+The module already covered conditional means, design matrices, factor coding, reference levels, confounding, collinearity, and overfitting. The focused comparison identified two issues:
+
+- the phrase “holding other predictors fixed” lacked an executable partial-regression interpretation;
+- both existing worked examples contained incorrect numerical output.
+
+The extension adds the residualisation identity for `Y ~ X + Z`:
+
+- residualise `X` against `Z`;
+- residualise `Y` against the same `Z` design matrix;
+- regress the residual of `Y` on the residual of `X`;
+- recover exactly the adjusted coefficient of `X`;
+- connect small residual variation in `X` with collinearity and unstable estimation;
+- retain the boundary that algebraic adjustment does not prove causal sufficiency.
+
+The deterministic example returns:
+
+```text
+adjusted=0.382
+partial=0.382
+max_abs_exposure_residual=0.457
+```
+
+The corrected outputs for the existing examples are:
+
+```text
+crude_exposure=1.191
+adjusted_exposure=0.382
+adjusted_age=0.123
+```
+
+```text
+(Intercept),groupA,groupB,age
+groupA=0.95
+groupB=1.89
+```
+
 ## Version state
 
 - M01: `1.0.0` — reviewed, no visible extension;
@@ -135,6 +211,8 @@ C_minus_A=4.00
 - M04: `1.1.0` — bootstrap extension;
 - M05: `1.1.0` — randomization-test extension;
 - M06: `1.1.0` — ANOVA and contrast extension;
-- M07–M12: `1.0.0` — focused review pending.
+- M07: `1.1.0` — correlation-slope extension and interval-output correction;
+- M08: `1.1.0` — partial-regression extension and worked-output corrections;
+- M09–M12: `1.0.0` — focused review pending.
 
 Experimental-data acquisition remains deferred. Synthea and bounded synthetic matrices are not treated as substitutes for external biological evidence.
