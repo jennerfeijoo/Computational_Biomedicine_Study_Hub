@@ -1,0 +1,155 @@
+name: Agent DM847 motif network integration
+
+on:
+  push:
+    branches:
+      - agent/dm847-motifs-networks-review
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/dm847-motifs-networks-review
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Integrate extensions and update regressions
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          init_path = Path('src/computational_biomedicine_study_hub/content/dm847/__init__.py')
+          text = init_path.read_text()
+          text = text.replace(
+              'from .book_grounded_audit import (\n'
+              '    DM847_BOOK_SOURCES,\n'
+              '    apply_book_grounded_extensions,\n'
+              ')',
+              'from .book_grounded_audit import (\n'
+              '    DM847_BOOK_SOURCES as _BASE_DM847_BOOK_SOURCES,\n'
+              '    apply_book_grounded_extensions,\n'
+              ')',
+          )
+          text = text.replace(
+              'from .book_grounded_hmm_bwt import apply_hmm_bwt_extensions, update_hmm_bwt_audit\n',
+              'from .book_grounded_hmm_bwt import apply_hmm_bwt_extensions, update_hmm_bwt_audit\n'
+              'from .book_grounded_motifs_networks import (\n'
+              '    apply_motif_network_extensions,\n'
+              '    update_motif_network_audit,\n'
+              '    update_motif_network_source_catalog,\n'
+              ')\n',
+          )
+          text = text.replace(
+              'DM847_MODULE_SOURCE_AUDIT = update_hmm_bwt_audit(_BASE_DM847_MODULE_SOURCE_AUDIT)\n',
+              'DM847_BOOK_SOURCES = update_motif_network_source_catalog(_BASE_DM847_BOOK_SOURCES)\n'
+              'DM847_MODULE_SOURCE_AUDIT = update_motif_network_audit(\n'
+              '    update_hmm_bwt_audit(_BASE_DM847_MODULE_SOURCE_AUDIT)\n'
+              ')\n',
+          )
+          old_apply = '''\n) = apply_hmm_bwt_extensions(\n    apply_book_grounded_extensions(\n        (\n            LOCALIZED_MODULE_01_MOLECULAR_INFORMATION,\n            LOCALIZED_MODULE_02_ONTOLOGIES_DATABASES,\n            LOCALIZED_MODULE_03_SEQUENCE_SCORING_MATCHING,\n            LOCALIZED_MODULE_04_PAIRWISE_ALIGNMENT,\n            LOCALIZED_MODULE_05_HIDDEN_MARKOV_MODELS,\n            LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING,\n            LOCALIZED_MODULE_07_OPERONS_BACTERIAL_GENETICS,\n            LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM,\n            LOCALIZED_MODULE_09_BIOLOGICAL_NETWORKS_ENRICHMENT,\n            LOCALIZED_MODULE_10_OMICS_LEARNING_PROJECT,\n        )\n    )\n)\n'''
+          new_apply = '''\n) = apply_motif_network_extensions(\n    apply_hmm_bwt_extensions(\n        apply_book_grounded_extensions(\n            (\n                LOCALIZED_MODULE_01_MOLECULAR_INFORMATION,\n                LOCALIZED_MODULE_02_ONTOLOGIES_DATABASES,\n                LOCALIZED_MODULE_03_SEQUENCE_SCORING_MATCHING,\n                LOCALIZED_MODULE_04_PAIRWISE_ALIGNMENT,\n                LOCALIZED_MODULE_05_HIDDEN_MARKOV_MODELS,\n                LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING,\n                LOCALIZED_MODULE_07_OPERONS_BACTERIAL_GENETICS,\n                LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM,\n                LOCALIZED_MODULE_09_BIOLOGICAL_NETWORKS_ENRICHMENT,\n                LOCALIZED_MODULE_10_OMICS_LEARNING_PROJECT,\n            )\n        )\n    )\n)\n'''
+          if old_apply not in text:
+              raise RuntimeError('Could not find DM847 extension application block')
+          text = text.replace(old_apply, new_apply)
+          text = text.replace(
+              '    "1.0.0",\n    "1.0.0",\n    "1.0.0",\n    "1.0.0",\n)\n\nLOCALIZED_BUNDLES',
+              '    "1.0.0",\n    "1.1.0",\n    "1.1.0",\n    "1.0.0",\n)\n\nLOCALIZED_BUNDLES',
+          )
+          text = text.replace(
+              '    "apply_hmm_bwt_extensions",\n',
+              '    "apply_hmm_bwt_extensions",\n    "apply_motif_network_extensions",\n',
+          )
+          init_path.write_text(text)
+
+          reviewed_additions = {
+              Path('tests/test_dm847_core_modules.py'): (
+                  '_REVIEWED_IDS = {"dm847.m03", "dm847.m04", "dm847.m05", "dm847.m06"}',
+                  '_REVIEWED_IDS = {\n'
+                  '    "dm847.m03",\n'
+                  '    "dm847.m04",\n'
+                  '    "dm847.m05",\n'
+                  '    "dm847.m06",\n'
+                  '    "dm847.m08",\n'
+                  '    "dm847.m09",\n'
+                  '}',
+              ),
+              Path('tests/test_dm847_book_grounded_audit.py'): (
+                  '    "dm847.m06",\n}',
+                  '    "dm847.m06",\n    "dm847.m08",\n    "dm847.m09",\n}',
+              ),
+              Path('tests/test_dm847_hmm_bwt_review.py'): (
+                  '    "dm847.m06",\n}',
+                  '    "dm847.m06",\n    "dm847.m08",\n    "dm847.m09",\n}',
+              ),
+          }
+          for path, (old, new) in reviewed_additions.items():
+              value = path.read_text()
+              if old not in value:
+                  raise RuntimeError(f'Could not find reviewed ID block in {path}')
+              path.write_text(value.replace(old, new, 1))
+
+          audit_test_path = Path('tests/test_dm847_book_grounded_audit.py')
+          value = audit_test_path.read_text()
+          value = value.replace(
+              '    assert "compeau-pevzner-v2-ch09" in source_ids\n',
+              '    assert "compeau-pevzner-v2-ch09" in source_ids\n'
+              '    assert "ideker-2002-active-modules" in source_ids\n'
+              '    assert "alcaraz-2012-keypathwayminer" in source_ids\n',
+          )
+          audit_test_path.write_text(value)
+
+          docs_path = Path('docs/dm847-book-grounded-audit.md')
+          docs = docs_path.read_text()
+          docs = docs.replace(
+              '| M08 Motif discovery and EM | Volume I chapter 2; Volume II chapter 8 | Pending |',
+              '| M08 Motif discovery and EM | Volume I chapter 2; Volume II chapter 8 | Consistent |',
+          )
+          docs = docs.replace(
+              '| M09 Biological networks | Volume II chapter 11 | Pending |',
+              '| M09 Biological networks | Active DM847 scope; Ideker et al. (2002); Alcaraz et al. (2012) | Consistent |',
+          )
+          insertion = '''\n## Completed focused review: M08\n\nThe existing module already covered PWM construction, pseudocounts, entropy, log-odds scoring, OOPS/ZOOPS/TCM occurrence models, latent positions, EM responsibilities, local optima, background choice, and independent validation.\n\nThe missing implementation boundary was the complete soft M-step and an auditable stopping rule. The extension now covers:\n\n- responsibilities normalized within the occurrence model;\n- fractional expected base counts rather than hard argmax assignments;\n- pseudocount addition and column normalization;\n- monotonic observed-data likelihood up to numerical tolerance;\n- absolute or relative convergence tolerance;\n- a maximum iteration limit as a separate safeguard;\n- comparable objective functions across random restarts.\n\nThe deterministic example produces a two-column PWM from fractional responsibilities:\n\n```text\n[{'A': 0.4, 'C': 0.167, 'G': 0.267, 'T': 0.167}, {'A': 0.167, 'C': 0.367, 'G': 0.167, 'T': 0.3}]\n```\n\nStable IDs:\n\n- `m08.bg.o1`\n- `fractional-counts-and-em-convergence`\n- `m08.bg.e01`\n- `m08.bg.p01`\n- `dm847.m08.book.001`\n\nContent version: `1.1.0`.\n\n## Completed focused review: M09\n\nThe existing module already covered network semantics, topology, centrality, hypergeometric over-representation analysis, multiplicity, random-walk propagation, computational modules, and structure-aware null models.\n\nThe source audit also found and corrected an inaccurate mapping: chapter 11 of Compeau and Pevzner volume II concerns peptide sequencing and peptide-spectrum analysis, not biological network enrichment. M09 is now grounded in the active DM847 description and the primary jActiveModules and KeyPathwayMiner publications.\n\nThe missing methodological boundary was between testing predefined gene sets and selecting connected active subnetworks from the observed data. The extension now covers:\n\n- ORA as a test of terms fixed before observing the selected list;\n- connected active-module extraction from topology and node evidence;\n- jActiveModules-style size-normalized aggregate scores;\n- KeyPathwayMiner-style connected extraction with explicit exceptions;\n- heuristic search and the absence of a guaranteed global optimum;\n- module scores versus calibrated p-values;\n- selection-aware null models that reproduce search and constraints;\n- stability under network and score perturbation.\n\nThe deterministic example compares two connected candidates:\n\n```text\n{'AB': 3.536, 'ABC': 2.309}\n```\n\nStable IDs:\n\n- `m09.bg.o1`\n- `predefined-enrichment-vs-active-subnetworks`\n- `m09.bg.e01`\n- `m09.bg.p01`\n- `dm847.m09.book.001`\n\nContent version: `1.1.0`.\n'''
+          marker = '\n## Source boundary\n'
+          if marker not in docs:
+              raise RuntimeError('Could not find source-boundary section in audit documentation')
+          docs = docs.replace(marker, insertion + marker, 1)
+          docs_path.write_text(docs)
+          PY
+      - name: Format and lint targeted files
+        run: |
+          python -m pip install ruff
+          ruff check --fix \
+            src/computational_biomedicine_study_hub/content/dm847/__init__.py \
+            src/computational_biomedicine_study_hub/content/dm847/book_grounded_motifs_networks.py \
+            tests/test_dm847_book_grounded_audit.py \
+            tests/test_dm847_core_modules.py \
+            tests/test_dm847_hmm_bwt_review.py \
+            tests/test_dm847_motif_network_review.py
+          ruff format \
+            src/computational_biomedicine_study_hub/content/dm847/__init__.py \
+            src/computational_biomedicine_study_hub/content/dm847/book_grounded_motifs_networks.py \
+            tests/test_dm847_book_grounded_audit.py \
+            tests/test_dm847_core_modules.py \
+            tests/test_dm847_hmm_bwt_review.py \
+            tests/test_dm847_motif_network_review.py
+      - name: Commit integrated changes
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/dm847-book-grounded-audit.md \
+            src/computational_biomedicine_study_hub/content/dm847/__init__.py \
+            src/computational_biomedicine_study_hub/content/dm847/book_grounded_motifs_networks.py \
+            tests/test_dm847_book_grounded_audit.py \
+            tests/test_dm847_core_modules.py \
+            tests/test_dm847_hmm_bwt_review.py \
+            tests/test_dm847_motif_network_review.py
+          git diff --cached --quiet || git commit -m "Integrate DM847 motif and network reviews"
+          git push origin HEAD:agent/dm847-motifs-networks-review
