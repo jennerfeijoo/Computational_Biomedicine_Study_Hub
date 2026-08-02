@@ -272,7 +272,9 @@ BMB830_MODULE_SOURCE_AUDIT: tuple[ModuleSourceAudit, ...] = (
 
 
 def _source_ids(module_id: str) -> tuple[str, ...]:
-    return next(item.source_ids for item in BMB830_MODULE_SOURCE_AUDIT if item.module_id == module_id)
+    return next(
+        item.source_ids for item in BMB830_MODULE_SOURCE_AUDIT if item.module_id == module_id
+    )
 
 
 def _with_source_basis(module: LocalizedLearningModule) -> LocalizedLearningModule:
@@ -423,15 +425,27 @@ cat(sprintf("P(D|+)=%.3f\n", posterior))
                 (
                     (
                         "sample_mean",
-                        ("La media de una variable continua.", "The mean of a continuous variable.", "Gennemsnittet af en kontinuert variabel."),
+                        (
+                            "La media de una variable continua.",
+                            "The mean of a continuous variable.",
+                            "Gennemsnittet af en kontinuert variabel.",
+                        ),
                     ),
                     (
                         "prevalence",
-                        ("La prevalencia en la población objetivo.", "Prevalence in the target population.", "Prævalensen i målpopulationen."),
+                        (
+                            "La prevalencia en la población objetivo.",
+                            "Prevalence in the target population.",
+                            "Prævalensen i målpopulationen.",
+                        ),
                     ),
                     (
                         "plot_colour",
-                        ("El color usado en el gráfico.", "The colour used in the plot.", "Farven anvendt i figuren."),
+                        (
+                            "El color usado en el gráfico.",
+                            "The colour used in the plot.",
+                            "Farven anvendt i figuren.",
+                        ),
                     ),
                 ),
                 "prevalence",
@@ -589,15 +603,27 @@ ci=[2.75, 7.75]""",
                 (
                     (
                         "isolated_rows",
-                        ("Filas aisladas ignorando paciente.", "Isolated rows while ignoring patient.", "Enkelte rækker uden hensyn til patient."),
+                        (
+                            "Filas aisladas ignorando paciente.",
+                            "Isolated rows while ignoring patient.",
+                            "Enkelte rækker uden hensyn til patient.",
+                        ),
                     ),
                     (
                         "complete_patients",
-                        ("Pacientes completos con sus mediciones.", "Complete patients with their measurements.", "Hele patienter med deres målinger."),
+                        (
+                            "Pacientes completos con sus mediciones.",
+                            "Complete patients with their measurements.",
+                            "Hele patienter med deres målinger.",
+                        ),
                     ),
                     (
                         "only_outliers",
-                        ("Sólo las observaciones extremas.", "Only the extreme observations.", "Kun de ekstreme observationer."),
+                        (
+                            "Sólo las observaciones extremas.",
+                            "Only the extreme observations.",
+                            "Kun de ekstreme observationer.",
+                        ),
                     ),
                 ),
                 "complete_patients",

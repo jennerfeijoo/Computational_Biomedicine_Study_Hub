@@ -40,9 +40,7 @@ def test_bmb830_source_catalog_has_unique_stable_ids() -> None:
 
 
 def test_only_completed_foundation_reviews_are_marked_consistent() -> None:
-    state_by_module = {
-        item.module_id: item.state for item in bmb830.BMB830_MODULE_SOURCE_AUDIT
-    }
+    state_by_module = {item.module_id: item.state for item in bmb830.BMB830_MODULE_SOURCE_AUDIT}
 
     assert {
         module_id for module_id, state in state_by_module.items() if state == "consistent"
@@ -97,8 +95,8 @@ def test_probability_extension_covers_bayes_and_base_rates() -> None:
     prevalence = 0.02
     sensitivity = 0.90
     specificity = 0.95
-    posterior = sensitivity * prevalence / (
-        sensitivity * prevalence + (1 - specificity) * (1 - prevalence)
+    posterior = (
+        sensitivity * prevalence / (sensitivity * prevalence + (1 - specificity) * (1 - prevalence))
     )
     assert round(posterior, 3) == 0.269
 
