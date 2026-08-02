@@ -17,17 +17,11 @@ def test_bmb830_registers_twelve_complete_modules_in_order() -> None:
     expected_versions = {
         "bmb830.m01": "1.0.0",
         "bmb830.m02": "1.0.0",
-        "bmb830.m03": "1.1.0",
-        "bmb830.m04": "1.1.0",
-        "bmb830.m05": "1.1.0",
-        "bmb830.m06": "1.1.0",
-        **{f"bmb830.m{index:02d}": "1.0.0" for index in range(7, 13)},
+        **{f"bmb830.m{index:02d}": "1.1.0" for index in range(3, 9)},
+        **{f"bmb830.m{index:02d}": "1.0.0" for index in range(9, 13)},
     }
     expected_assessment_counts = {
-        "bmb830.m03": 9,
-        "bmb830.m04": 9,
-        "bmb830.m05": 9,
-        "bmb830.m06": 9,
+        **{f"bmb830.m{index:02d}": 9 for index in range(3, 9)},
     }
 
     assert tuple(module.module_id for module in MODULES) == expected_ids
@@ -94,12 +88,16 @@ def test_bmb830_regression_block_covers_required_concepts() -> None:
     assert "pendiente" in simple_text
     assert "r²" in simple_text
     assert "intervalo de predicción" in simple_text
+    assert "adimensional" in simple_text
+    assert "sy/sx" in simple_text
 
     assert "media esperada" in multiple_text
     assert "matriz de diseño" in multiple_text
     assert "referencia" in multiple_text
     assert "confus" in multiple_text
     assert "colinealidad" in multiple_text
+    assert "residualiz" in multiple_text
+    assert "coeficiente ajustado" in multiple_text
 
     assert "modificación de efecto" in interaction_text
     assert "diferencia de pendientes" in interaction_text
