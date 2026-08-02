@@ -61,19 +61,18 @@ def _matrix_rank(rows: tuple[tuple[float, ...], ...], tolerance: float = 1e-10) 
     return pivot_row
 
 
-def test_bmb831_source_registry_maps_all_modules_and_reviews_first_seven() -> None:
+def test_bmb831_source_registry_maps_and_reviews_all_modules() -> None:
     source_ids = {source.source_id for source in bmb831.BMB831_BOOK_SOURCES}
     audits = {item.module_id: item for item in bmb831.BMB831_MODULE_SOURCE_AUDIT}
     reviewed = {
         module_id for module_id, audit in audits.items() if audit.state in {"consistent", "correct"}
     }
 
-    assert set(audits) == {f"bmb831.m{index:02d}" for index in range(1, 10)}
-    assert reviewed == {f"bmb831.m{index:02d}" for index in range(1, 8)}
+    expected_ids = {f"bmb831.m{index:02d}" for index in range(1, 10)}
+    assert set(audits) == expected_ids
+    assert reviewed == expected_ids
     assert {audits[module_id].state for module_id in reviewed} == {"consistent"}
-    assert {module_id for module_id, audit in audits.items() if audit.state == "pending"} == {
-        f"bmb831.m{index:02d}" for index in range(8, 10)
-    }
+    assert not {module_id for module_id, audit in audits.items() if audit.state == "pending"}
     assert all(set(audit.source_ids) <= source_ids for audit in audits.values())
     assert "sdu-bmb831-active-2025" in source_ids
     assert "bioconductor-summarizedexperiment" in source_ids
@@ -84,10 +83,11 @@ def test_bmb831_source_registry_maps_all_modules_and_reviews_first_seven() -> No
     assert "ims-2024-visualisation-reporting" in source_ids
     assert "bioconductor-public-omics-workflows" in source_ids
     assert "protein-public-resources" in source_ids
+    assert "functional-interpretation-resources" in source_ids
 
 
 def test_reviewed_module_identity_is_locale_stable() -> None:
-    for module_id in (f"bmb831.m{index:02d}" for index in range(1, 8)):
+    for module_id in (f"bmb831.m{index:02d}" for index in range(1, 10)):
         reference = _identities(module_id, AppLocale.SPANISH_SPAIN)
         for locale in AppLocale:
             assert _identities(module_id, locale) == reference
@@ -406,23 +406,92 @@ def test_m07_alphafold_extension_separates_local_and_relative_confidence() -> No
     assert "protein-public-resources" in module.tutor_support.source_basis
 
 
-def test_m01_m07_versions_counts_and_source_basis() -> None:
+def test_m08_ontology_extension_exposes_propagated_dependence() -> None:
+    module = _module("bmb831.m08")
+    propagation = next(
+        item
+        for item in module.concepts
+        if item.concept_id == "ontology-propagation-and-term-dependence"
+    )
+    exported = "\n".join((propagation.title, propagation.body, *propagation.key_points)).casefold()
+
+    assert "ancestor" in exported
+    assert "parent" in exported
+    assert "child" in exported
+    assert "not independent" in exported
+    assert "semantic redundancy" in exported
+    assert "evidence codes" in exported
+
+    worked = next(item for item in module.worked_examples if item.example_id == "m08.bg.e01")
+    assert can_execute_r(worked.code)
+    assert worked.expected_output == (
+        "direct_annotations=3\n"
+        "propagated_annotations=6\n"
+        "parent_genes=3\n"
+        "child_terms=2"
+    )
+
+    direct = (("G1", "child_A"), ("G2", "child_A"), ("G3", "child_B"))
+    parent_map = {"child_A": "parent", "child_B": "parent"}
+    propagated = (*direct, *((gene, parent_map[term]) for gene, term in direct))
+    parent_genes = {gene for gene, term in propagated if term == "parent"}
+
+    assert len(direct) == 3
+    assert len(propagated) == 6
+    assert len(parent_genes) == 3
+    assert len({term for _gene, term in direct}) == 2
+    assert "functional-interpretation-resources" in module.tutor_support.source_basis
+
+
+def test_m09_specification_extension_detects_directional_instability() -> None:
+    module = _module("bmb831.m09")
+    sensitivity = next(
+        item
+        for item in module.concepts
+        if item.concept_id == "specification-sensitivity-and-selective-reporting"
+    )
+    exported = "\n".join((sensitivity.title, sensitivity.body, *sensitivity.key_points)).casefold()
+
+    assert "favourable specification" in exported
+    assert "sensitivity analyses" in exported
+    assert "selective reporting" in exported
+    assert "sign" in exported
+    assert "unreported" in exported
+
+    worked = next(item for item in module.worked_examples if item.example_id == "m09.bg.e01")
+    assert can_execute_r(worked.code)
+    assert worked.expected_output == (
+        "specifications=4\n"
+        "positive=3\n"
+        "negative=1\n"
+        "range=-0.20,0.80\n"
+        "sign_stable=FALSE"
+    )
+
+    estimates = (0.8, 0.6, 0.1, -0.2)
+    positive = sum(value > 0 for value in estimates)
+    negative = sum(value < 0 for value in estimates)
+    sign_stable = positive == len(estimates) or negative == len(estimates)
+
+    assert len(estimates) == 4
+    assert positive == 3
+    assert negative == 1
+    assert (min(estimates), max(estimates)) == (-0.2, 0.8)
+    assert sign_stable is False
+    assert "ims-2024-visualisation-reporting" in module.tutor_support.source_basis
+
+
+def test_m01_m09_versions_counts_and_source_basis() -> None:
     bundles = {bundle.localized_module.module_id: bundle for bundle in bmb831.LOCALIZED_BUNDLES}
-    expected_versions = {
-        "bmb831.m01": "1.0.0",
-        "bmb831.m02": "1.1.0",
-        "bmb831.m03": "1.1.0",
-        "bmb831.m04": "1.1.0",
-        "bmb831.m05": "1.1.0",
-        "bmb831.m06": "1.1.0",
-        "bmb831.m07": "1.1.0",
+    expected_versions = {"bmb831.m01": "1.0.0"} | {
+        f"bmb831.m{index:02d}": "1.1.0" for index in range(2, 10)
     }
 
     for module_id, version in expected_versions.items():
         assert bundles[module_id].content_version == version
 
     assert len(_module("bmb831.m01").assessment_items) == 8
-    for module_id in (f"bmb831.m{index:02d}" for index in range(2, 8)):
+    for module_id in (f"bmb831.m{index:02d}" for index in range(2, 10)):
         assert len(_module(module_id).assessment_items) == 9
     assert "bioconductor-summarizedexperiment" in _module("bmb831.m02").tutor_support.source_basis
     assert "bioconductor-deseq2" in _module("bmb831.m03").tutor_support.source_basis
@@ -434,3 +503,5 @@ def test_m01_m07_versions_counts_and_source_basis() -> None:
     assert "ims-2024-visualisation-reporting" in _module("bmb831.m05").tutor_support.source_basis
     assert "bioconductor-public-omics-workflows" in _module("bmb831.m06").tutor_support.source_basis
     assert "protein-public-resources" in _module("bmb831.m07").tutor_support.source_basis
+    assert "functional-interpretation-resources" in _module("bmb831.m08").tutor_support.source_basis
+    assert "ims-2024-visualisation-reporting" in _module("bmb831.m09").tutor_support.source_basis
