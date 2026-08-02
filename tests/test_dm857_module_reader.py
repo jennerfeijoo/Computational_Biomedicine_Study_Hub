@@ -125,7 +125,7 @@ def test_module_reader_constructs_authored_sections_only_when_selected(
     assert reader.constructed_section_count == 5
 
 
-def test_course_reader_shows_objective_practice_and_complete_assessment(
+def test_course_reader_shows_only_the_active_objective_evaluator(
     qapp: QApplication,
 ) -> None:
     page = DM857Page()
@@ -136,10 +136,8 @@ def test_course_reader_shows_objective_practice_and_complete_assessment(
         assert reader.select_section("Evaluación")
         assert reader.findChild(ObjectiveAssessmentWidget, "objectiveAssessmentWidget") is not None
         assert reader.findChild(QLabel, "objectiveAssessmentSectionTitle") is not None
-        assert reader.findChild(QLabel, "authoredAssessmentSectionTitle") is not None
-        assert len(reader.findChildren(QFrame, "assessmentCard")) == len(
-            reader.module.assessment_items
-        )
+        assert reader.findChild(QLabel, "authoredAssessmentSectionTitle") is None
+        assert reader.findChildren(QFrame, "assessmentCard") == []
 
 
 def test_assessment_reader_does_not_render_answer_feedback(qapp: QApplication) -> None:
