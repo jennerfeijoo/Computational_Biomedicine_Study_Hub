@@ -51,11 +51,11 @@ def test_m09_m10_review_states_and_source_registry() -> None:
         if state in {"consistent", "correct"}
     }
 
-    assert reviewed == {f"bmb830.m{index:02d}" for index in range(1, 11)}
+    assert reviewed == {f"bmb830.m{index:02d}" for index in range(1, 13)}
     assert state_by_module["bmb830.m09"] == "correct"
     assert state_by_module["bmb830.m10"] == "consistent"
-    assert state_by_module["bmb830.m11"] == "pending"
-    assert state_by_module["bmb830.m12"] == "pending"
+    assert state_by_module["bmb830.m11"] == "consistent"
+    assert state_by_module["bmb830.m12"] == "consistent"
     assert "islr-2021-ch07" in {source.source_id for source in bmb830.BMB830_BOOK_SOURCES}
 
 
