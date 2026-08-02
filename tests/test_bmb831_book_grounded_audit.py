@@ -30,17 +30,15 @@ def test_bmb831_source_registry_maps_all_modules_and_reviews_first_three() -> No
     source_ids = {source.source_id for source in bmb831.BMB831_BOOK_SOURCES}
     audits = {item.module_id: item for item in bmb831.BMB831_MODULE_SOURCE_AUDIT}
     reviewed = {
-        module_id
-        for module_id, audit in audits.items()
-        if audit.state in {"consistent", "correct"}
+        module_id for module_id, audit in audits.items() if audit.state in {"consistent", "correct"}
     }
 
     assert set(audits) == {f"bmb831.m{index:02d}" for index in range(1, 10)}
     assert reviewed == {"bmb831.m01", "bmb831.m02", "bmb831.m03"}
     assert {audits[module_id].state for module_id in reviewed} == {"consistent"}
-    assert {
-        module_id for module_id, audit in audits.items() if audit.state == "pending"
-    } == {f"bmb831.m{index:02d}" for index in range(4, 10)}
+    assert {module_id for module_id, audit in audits.items() if audit.state == "pending"} == {
+        f"bmb831.m{index:02d}" for index in range(4, 10)
+    }
     assert all(set(audit.source_ids) <= source_ids for audit in audits.values())
     assert "sdu-bmb831-active-2025" in source_ids
     assert "bioconductor-summarizedexperiment" in source_ids
@@ -106,14 +104,17 @@ def test_m02_composition_bias_extension_has_deterministic_contract() -> None:
     library_factors = tuple(value / library_reference for value in library_sizes)
     geometric_means = tuple(math.prod(row) ** (1 / len(row)) for row in counts)
     ratios = tuple(
-        tuple(counts[row][column] / geometric_means[row] for row in range(3))
-        for column in range(4)
+        tuple(counts[row][column] / geometric_means[row] for row in range(3)) for column in range(4)
     )
     raw_median_factors = tuple(median(column) for column in ratios)
     factor_reference = math.prod(raw_median_factors) ** (1 / len(raw_median_factors))
     median_factors = tuple(value / factor_reference for value in raw_median_factors)
-    total_normalized = tuple(counts[0][index] / value for index, value in enumerate(library_factors))
-    median_normalized = tuple(counts[0][index] / value for index, value in enumerate(median_factors))
+    total_normalized = tuple(
+        counts[0][index] / value for index, value in enumerate(library_factors)
+    )
+    median_normalized = tuple(
+        counts[0][index] / value for index, value in enumerate(median_factors)
+    )
 
     assert tuple(round(value, 3) for value in library_factors) == (0.456, 0.548, 1.826, 2.191)
     assert tuple(round(value, 3) for value in median_factors) == (0.913, 1.095, 0.913, 1.095)
@@ -192,8 +193,6 @@ def test_m01_m03_versions_counts_and_source_basis() -> None:
     assert len(_module("bmb831.m01").assessment_items) == 8
     assert len(_module("bmb831.m02").assessment_items) == 9
     assert len(_module("bmb831.m03").assessment_items) == 9
-    assert "bioconductor-summarizedexperiment" in _module(
-        "bmb831.m02"
-    ).tutor_support.source_basis
+    assert "bioconductor-summarizedexperiment" in _module("bmb831.m02").tutor_support.source_basis
     assert "bioconductor-deseq2" in _module("bmb831.m03").tutor_support.source_basis
     assert "limma-empirical-bayes" in _module("bmb831.m03").tutor_support.source_basis
