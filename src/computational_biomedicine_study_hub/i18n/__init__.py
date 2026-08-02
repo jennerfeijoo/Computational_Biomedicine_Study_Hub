@@ -36,6 +36,7 @@ from .lab_copy import LabCopyKey, lab_text, validate_lab_copy
 from .locales import DEFAULT_LOCALE, SUPPORTED_LOCALES, AppLocale
 from .messages import ALL_MESSAGE_KEYS, MessageKey
 from .service import TranslationError, Translator, validate_catalogs
+from .tutor_chat_copy import TutorChatCopyKey, tutor_chat_text, validate_tutor_chat_copy
 from .ui_copy import UiCopyKey, ui_text, validate_ui_copy
 
 __all__ = [
@@ -55,6 +56,7 @@ __all__ = [
     "SUPPORTED_LOCALES",
     "TranslationError",
     "Translator",
+    "TutorChatCopyKey",
     "UiCopyKey",
     "adaptive_review_text",
     "adaptive_tutor_text",
@@ -66,6 +68,7 @@ __all__ = [
     "challenge_tutor_text",
     "confidence_text",
     "lab_text",
+    "tutor_chat_text",
     "ui_text",
     "validate_adaptive_review_copy",
     "validate_adaptive_tutor_copy",
@@ -76,5 +79,6 @@ __all__ = [
     "validate_challenge_tutor_copy",
     "validate_confidence_copy",
     "validate_lab_copy",
+    "validate_tutor_chat_copy",
     "validate_ui_copy",
 ]

@@ -16,10 +16,11 @@ from PySide6.QtWidgets import (
 
 from ..content.bundles import ModuleBundle
 from ..content.dm857 import BUNDLES, LOCALIZED_BUNDLES
-from ..i18n import DEFAULT_LOCALE, AppLocale, MessageKey, Translator
+from ..i18n import DEFAULT_LOCALE, AppLocale, MessageKey, Translator, UiCopyKey, ui_text
 from ..learning.progress_service import ObjectiveAttemptRecorder
 from ..ui.pages.module_reader_page import ModuleReaderPage
-from ..ui.widgets import GuidedPracticeWidget
+from ..ui.widgets.dm857_practice_widget import DM857GuidedPracticeWidget
+from ..ui.widgets.objective_assessment_widget import ObjectiveAssessmentWidget
 from .models import CourseRegistration
 
 _DEFAULT_PROGRESS_RECORDER: ObjectiveAttemptRecorder | None = None
@@ -33,7 +34,7 @@ def configure_progress_recorder(recorder: ObjectiveAttemptRecorder | None) -> No
 
 
 class DM857ModuleReaderPage(ModuleReaderPage):
-    """DM857 reader that persists tested programming-practice evidence."""
+    """DM857 reader with executable practice and one focused evaluator."""
 
     def __init__(
         self,
@@ -61,7 +62,7 @@ class DM857ModuleReaderPage(ModuleReaderPage):
         )
         layout.addWidget(notice)
         layout.addWidget(
-            GuidedPracticeWidget(
+            DM857GuidedPracticeWidget(
                 self._module.practice_exercises,
                 locale=self._translator.locale,
                 progress_recorder=self._progress_recorder,
@@ -70,6 +71,36 @@ class DM857ModuleReaderPage(ModuleReaderPage):
         )
         layout.addStretch(1)
         return self._scroll_area(body, "modulePracticeScroll")
+
+    def _build_assessment_tab(self) -> QScrollArea:
+        """Render only the active deterministic evaluator, not a static question dump."""
+
+        body = self._scroll_body()
+        layout = body.layout()
+        assert isinstance(layout, QVBoxLayout)
+
+        heading = self._subheading(
+            ui_text(self._translator.locale, UiCopyKey.MODULE_OBJECTIVE_SECTION)
+        )
+        heading.setObjectName("objectiveAssessmentSectionTitle")
+        layout.addWidget(heading)
+
+        notice = self._label(
+            self._translator.text(MessageKey.MODULE_ASSESSMENT_NOTICE),
+            "moduleSectionNotice",
+        )
+        layout.addWidget(notice)
+
+        if self._objective_question_bank:
+            layout.addWidget(
+                ObjectiveAssessmentWidget(
+                    self._objective_question_bank,
+                    locale=self._translator.locale,
+                )
+            )
+
+        layout.addStretch(1)
+        return self._scroll_area(body, "moduleAssessmentScroll")
 
 
 class DM857Page(QWidget):

@@ -1,4 +1,4 @@
-"""Editable PySide6 surface for restricted local Python execution."""
+"""Editable PySide6 surface for exploratory local Python execution."""
 
 from __future__ import annotations
 
@@ -26,8 +26,8 @@ from ...learning.python_execution import (
 from .python_lab_styles import PYTHON_LAB_STYLESHEET
 
 _STATUS_COPY = {
-    ExecutionStatus.PASSED: LabCopyKey.STATUS_PASSED,
-    ExecutionStatus.OUTPUT_MISMATCH: LabCopyKey.STATUS_MISMATCH,
+    ExecutionStatus.PASSED: LabCopyKey.STATUS_COMPLETED,
+    ExecutionStatus.OUTPUT_MISMATCH: LabCopyKey.STATUS_COMPLETED,
     ExecutionStatus.RUNTIME_ERROR: LabCopyKey.STATUS_RUNTIME_ERROR,
     ExecutionStatus.TIMED_OUT: LabCopyKey.STATUS_TIMED_OUT,
     ExecutionStatus.REJECTED: LabCopyKey.STATUS_REJECTED,
@@ -36,23 +36,23 @@ _STATUS_COPY = {
 
 
 class PythonLabWidget(QFrame):
-    """Let learners edit and execute one authored Python example locally."""
+    """Let learners change variables and inspect the resulting local output."""
 
     execution_finished = Signal(str)
 
     def __init__(
         self,
-        source: str,
-        expected_output: str,
+        source: str = "",
+        expected_output: str | None = None,
         *,
         locale: AppLocale = DEFAULT_LOCALE,
         runner: PythonCodeRunner | None = None,
         timeout_seconds: float = 2.0,
+        compare_output: bool = False,
+        show_reference: bool = False,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
-        if not source.strip():
-            raise ValueError("Python labs require non-empty source code.")
         if not 0.1 <= timeout_seconds <= 10.0:
             raise ValueError("timeout_seconds must be between 0.1 and 10.0.")
 
@@ -61,6 +61,7 @@ class PythonLabWidget(QFrame):
         self._locale = locale
         self._original_source = source
         self._expected_output = expected_output
+        self._compare_output = compare_output
         self._runner = runner or PythonSubprocessRunner()
         self._timeout_seconds = timeout_seconds
         self._last_result: PythonExecutionResult | None = None
@@ -72,11 +73,6 @@ class PythonLabWidget(QFrame):
         title = QLabel(lab_text(locale, LabCopyKey.TITLE))
         title.setObjectName("pythonLabTitle")
         layout.addWidget(title)
-
-        intro = QLabel(lab_text(locale, LabCopyKey.INTRO))
-        intro.setObjectName("pythonLabIntro")
-        intro.setWordWrap(True)
-        layout.addWidget(intro)
 
         self._editor = self._code_editor(source, "pythonLabEditor", read_only=False)
         self._editor.setMinimumHeight(150)
@@ -110,6 +106,8 @@ class PythonLabWidget(QFrame):
             "pythonLabExpected",
             read_only=True,
         )
+        self._expected_heading.setVisible(show_reference)
+        self._expected.setVisible(show_reference)
         layout.addWidget(self._expected_heading)
         layout.addWidget(self._expected)
 
@@ -157,14 +155,27 @@ class PythonLabWidget(QFrame):
 
         return self._stderr.toPlainText()
 
+    @property
+    def reference_visible(self) -> bool:
+        """Return whether the optional authored reference output is enabled."""
+
+        return not self._expected.isHidden()
+
     def set_source(self, source: str) -> None:
-        """Replace editable source without changing the authored reset point."""
+        """Replace editable source without changing the reset point."""
 
         self._editor.setPlainText(source)
 
     @Slot()
     def run_code(self) -> None:
-        """Execute the current source with a hard timeout and bounded output."""
+        """Execute the current source and display what actually happened."""
+
+        if not self.source.strip():
+            self._status.setProperty("executionStatus", "warning")
+            self._status.setText(lab_text(self._locale, LabCopyKey.SOURCE_REQUIRED))
+            self._status.show()
+            self._refresh_style(self._status)
+            return
 
         self._set_busy(True)
         self._status.setProperty("executionStatus", "running")
@@ -173,11 +184,12 @@ class PythonLabWidget(QFrame):
         self._refresh_style(self._status)
         QApplication.processEvents()
 
+        expected = self._expected_output if self._compare_output else None
         try:
             result = self._runner.run(
                 PythonExecutionRequest(
                     source=self.source,
-                    expected_output=self._expected_output,
+                    expected_output=expected,
                     timeout_seconds=self._timeout_seconds,
                 )
             )
@@ -187,7 +199,7 @@ class PythonLabWidget(QFrame):
                 stdout="",
                 stderr=str(exc),
                 duration_ms=0,
-                expected_output=self._expected_output,
+                expected_output=expected,
             )
         finally:
             self._set_busy(False)
@@ -198,7 +210,7 @@ class PythonLabWidget(QFrame):
 
     @Slot()
     def reset_code(self) -> None:
-        """Restore authored code and clear all execution feedback."""
+        """Restore the initial workspace and clear execution feedback."""
 
         self._editor.setPlainText(self._original_source)
         self._last_result = None
