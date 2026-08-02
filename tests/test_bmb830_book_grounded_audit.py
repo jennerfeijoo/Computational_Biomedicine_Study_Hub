@@ -10,12 +10,23 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.r_execution import can_execute_r
 
 _EXPECTED_MODULE_IDS = {f"bmb830.m{index:02d}" for index in range(1, 13)}
-_REVIEWED_MODULE_IDS = {"bmb830.m01", "bmb830.m02", "bmb830.m03", "bmb830.m04"}
+_REVIEWED_MODULE_IDS = {f"bmb830.m{index:02d}" for index in range(1, 7)}
 
 
 def _module(module_id: str, locale: AppLocale | str = AppLocale.ENGLISH):
     localized = next(item for item in bmb830.LOCALIZED_MODULES if item.module_id == module_id)
     return localized.materialize(locale)
+
+
+def _identities(module_id: str, locale: AppLocale) -> tuple[tuple[str, ...], ...]:
+    module = _module(module_id, locale)
+    return (
+        tuple(item.objective_id for item in module.objectives),
+        tuple(item.concept_id for item in module.concepts),
+        tuple(item.example_id for item in module.worked_examples),
+        tuple(item.exercise_id for item in module.practice_exercises),
+        tuple(item.item_id for item in module.assessment_items),
+    )
 
 
 def test_bmb830_source_audit_maps_every_module_once() -> None:
@@ -39,7 +50,7 @@ def test_bmb830_source_catalog_has_unique_stable_ids() -> None:
     assert "yachay-biostatistics-linear-models" in source_ids
 
 
-def test_only_completed_foundation_reviews_are_marked_consistent() -> None:
+def test_only_completed_reviews_are_marked_consistent() -> None:
     state_by_module = {item.module_id: item.state for item in bmb830.BMB830_MODULE_SOURCE_AUDIT}
 
     assert {
@@ -50,28 +61,11 @@ def test_only_completed_foundation_reviews_are_marked_consistent() -> None:
     } == _EXPECTED_MODULE_IDS - _REVIEWED_MODULE_IDS
 
 
-def test_foundation_review_identity_is_locale_stable() -> None:
-    reference: tuple[tuple[str, ...], ...] | None = None
-
-    for locale in AppLocale:
-        probability = _module("bmb830.m03", locale)
-        estimation = _module("bmb830.m04", locale)
-        identities = (
-            tuple(item.objective_id for item in probability.objectives),
-            tuple(item.concept_id for item in probability.concepts),
-            tuple(item.example_id for item in probability.worked_examples),
-            tuple(item.exercise_id for item in probability.practice_exercises),
-            tuple(item.item_id for item in probability.assessment_items),
-            tuple(item.objective_id for item in estimation.objectives),
-            tuple(item.concept_id for item in estimation.concepts),
-            tuple(item.example_id for item in estimation.worked_examples),
-            tuple(item.exercise_id for item in estimation.practice_exercises),
-            tuple(item.item_id for item in estimation.assessment_items),
-        )
-        if reference is None:
-            reference = identities
-        else:
-            assert identities == reference
+def test_review_identity_is_locale_stable() -> None:
+    for module_id in ("bmb830.m03", "bmb830.m04", "bmb830.m05", "bmb830.m06"):
+        reference = _identities(module_id, AppLocale.SPANISH_SPAIN)
+        for locale in AppLocale:
+            assert _identities(module_id, locale) == reference
 
 
 def test_probability_extension_covers_bayes_and_base_rates() -> None:
@@ -132,11 +126,68 @@ def test_estimation_extension_preserves_bootstrap_design_units() -> None:
     assert (len(means), lower, upper) == (256, 2.75, 7.75)
 
 
+def test_hypothesis_extension_preserves_randomization_design() -> None:
+    module = _module("bmb830.m05")
+    randomization = next(
+        item
+        for item in module.concepts
+        if item.concept_id == "randomization-tests-and-exchangeability"
+    )
+    exported = "\n".join((randomization.body, *randomization.key_points)).casefold()
+
+    assert "exchangeable" in exported
+    assert "group sizes" in exported
+    assert "paired" in exported
+    assert "clusters" in exported
+    assert "absolute value" in exported
+    assert "(extreme+1)/(b+1)" in exported
+
+    example = next(item for item in module.worked_examples if item.example_id == "m05.bg.e01")
+    assert can_execute_r(example.code)
+    assert example.expected_output == "observed=4.33\nassignments=20\np=0.100"
+
+    values = (2, 3, 4, 6, 7, 9)
+    observed = sum(values[3:]) / 3 - sum(values[:3]) / 3
+    statistics = []
+    for group_a in itertools.combinations(range(len(values)), 3):
+        group_a_set = set(group_a)
+        mean_a = sum(values[index] for index in group_a) / 3
+        mean_b = sum(values[index] for index in range(len(values)) if index not in group_a_set) / 3
+        statistics.append(mean_b - mean_a)
+    p_value = sum(abs(value) >= abs(observed) for value in statistics) / len(statistics)
+    assert (round(observed, 2), len(statistics), round(p_value, 3)) == (4.33, 20, 0.1)
+
+
+def test_group_comparison_extension_separates_global_test_and_contrasts() -> None:
+    module = _module("bmb830.m06")
+    anova = next(
+        item
+        for item in module.concepts
+        if item.concept_id == "anova-global-test-and-planned-contrasts"
+    )
+    exported = "\n".join((anova.body, *anova.key_points)).casefold()
+
+    assert "between-group" in exported
+    assert "within groups" in exported
+    assert "f-statistic" in exported
+    assert "at least one differs" in exported
+    assert "planned contrast" in exported
+    assert "multiplicity" in exported
+    assert "welch's anova" in exported
+
+    example = next(item for item in module.worked_examples if item.example_id == "m06.bg.e01")
+    assert can_execute_r(example.code)
+    assert "pf(" in example.code
+    assert example.expected_output == "F=13.00\np=0.0066\nC_minus_A=4.00"
+
+
 def test_reviewed_modules_expose_named_source_basis() -> None:
     foundations = _module("bmb830.m01")
     summary = _module("bmb830.m02")
     probability = _module("bmb830.m03")
     estimation = _module("bmb830.m04")
+    testing = _module("bmb830.m05")
+    comparison = _module("bmb830.m06")
 
     assert "sdu-bmb830-active-2025" in foundations.tutor_support.source_basis
     assert "ims-2024-data-eda" in foundations.tutor_support.source_basis
@@ -144,3 +195,7 @@ def test_reviewed_modules_expose_named_source_basis() -> None:
     assert "ims-2024-probability-inference" in probability.tutor_support.source_basis
     assert "yachay-biostatistics-linear-models" in estimation.tutor_support.source_basis
     assert "islr-2021-ch02-05" in estimation.tutor_support.source_basis
+    assert "ims-2024-probability-inference" in testing.tutor_support.source_basis
+    assert "yachay-biostatistics-linear-models" in testing.tutor_support.source_basis
+    assert "ims-2024-probability-inference" in comparison.tutor_support.source_basis
+    assert "yachay-biostatistics-linear-models" in comparison.tutor_support.source_basis

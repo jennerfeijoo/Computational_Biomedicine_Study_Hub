@@ -6,11 +6,14 @@ from ...i18n import AppLocale
 from ..bundles import LocalizedModuleBundle, validate_bundle_catalog
 from .book_grounded_audit import (
     BMB830_BOOK_SOURCES,
-    BMB830_MODULE_SOURCE_AUDIT,
     AcademicReference,
     ModuleSourceAudit,
     apply_foundation_review,
 )
+from .book_grounded_audit import (
+    BMB830_MODULE_SOURCE_AUDIT as _BASE_BMB830_MODULE_SOURCE_AUDIT,
+)
+from .book_grounded_inference import apply_inference_review, update_inference_audit
 from .module_01_r_foundations import (
     LOCALIZED_MODULE_01_R_FOUNDATIONS as _BASE_LOCALIZED_MODULE_01_R_FOUNDATIONS,
 )
@@ -40,12 +43,16 @@ from .module_04_estimation import (
     materialize_module_04_question_bank,
 )
 from .module_05_hypothesis_testing import (
-    LOCALIZED_MODULE_05_HYPOTHESIS_TESTING,
+    LOCALIZED_MODULE_05_HYPOTHESIS_TESTING as _BASE_LOCALIZED_MODULE_05_HYPOTHESIS_TESTING,
+)
+from .module_05_hypothesis_testing import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_05,
     materialize_module_05_question_bank,
 )
 from .module_06_group_comparison import (
-    LOCALIZED_MODULE_06_GROUP_COMPARISON,
+    LOCALIZED_MODULE_06_GROUP_COMPARISON as _BASE_LOCALIZED_MODULE_06_GROUP_COMPARISON,
+)
+from .module_06_group_comparison import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_06,
     materialize_module_06_question_bank,
 )
@@ -80,10 +87,18 @@ from .module_12_high_dimensional_case import (
     materialize_module_12_question_bank,
 )
 
+BMB830_MODULE_SOURCE_AUDIT = update_inference_audit(_BASE_BMB830_MODULE_SOURCE_AUDIT)
+
 LOCALIZED_MODULE_01_R_FOUNDATIONS = apply_foundation_review(_BASE_LOCALIZED_MODULE_01_R_FOUNDATIONS)
 LOCALIZED_MODULE_02_DATA_SUMMARY = apply_foundation_review(_BASE_LOCALIZED_MODULE_02_DATA_SUMMARY)
 LOCALIZED_MODULE_03_PROBABILITY = apply_foundation_review(_BASE_LOCALIZED_MODULE_03_PROBABILITY)
 LOCALIZED_MODULE_04_ESTIMATION = apply_foundation_review(_BASE_LOCALIZED_MODULE_04_ESTIMATION)
+LOCALIZED_MODULE_05_HYPOTHESIS_TESTING = apply_inference_review(
+    _BASE_LOCALIZED_MODULE_05_HYPOTHESIS_TESTING
+)
+LOCALIZED_MODULE_06_GROUP_COMPARISON = apply_inference_review(
+    _BASE_LOCALIZED_MODULE_06_GROUP_COMPARISON
+)
 
 LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
@@ -109,12 +124,12 @@ LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
         LOCALIZED_MODULE_05_HYPOTHESIS_TESTING,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_05,
-        "1.0.0",
+        "1.1.0",
     ),
     LocalizedModuleBundle(
         LOCALIZED_MODULE_06_GROUP_COMPARISON,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_06,
-        "1.0.0",
+        "1.1.0",
     ),
     LocalizedModuleBundle(
         LOCALIZED_MODULE_07_CORRELATION_REGRESSION,
