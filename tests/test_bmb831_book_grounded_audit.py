@@ -76,7 +76,7 @@ def test_m02_composition_bias_extension_has_deterministic_contract() -> None:
     composition = next(
         item for item in module.concepts if item.concept_id == "composition-bias-and-size-factors"
     )
-    exported = "\n".join((composition.body, *composition.key_points)).casefold()
+    exported = "\n".join((composition.title, composition.body, *composition.key_points)).casefold()
 
     assert "composition bias" in exported
     assert "library size" in exported
