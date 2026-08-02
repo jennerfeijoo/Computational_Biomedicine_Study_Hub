@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Callable
+from pathlib import Path
 
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import QApplication, QPlainTextEdit
@@ -65,13 +65,13 @@ class _DeferredExecutor:
         on_success(request_id, task())
 
 
-def _settings(tmp_path: object) -> QSettings:
-    return QSettings(str(tmp_path) + "/tutor.ini", QSettings.Format.IniFormat)
+def _settings(tmp_path: Path) -> QSettings:
+    return QSettings(str(tmp_path / "tutor.ini"), QSettings.Format.IniFormat)
 
 
 def test_floating_tutor_sends_current_context_and_keeps_history(
     qapp: QApplication,
-    tmp_path: object,
+    tmp_path: Path,
 ) -> None:
     runner = _FakeRunner()
     executor = _DeferredExecutor()
@@ -106,7 +106,7 @@ def test_floating_tutor_sends_current_context_and_keeps_history(
 
 def test_floating_tutor_reset_and_minimize_are_local_only(
     qapp: QApplication,
-    tmp_path: object,
+    tmp_path: Path,
 ) -> None:
     runner = _FakeRunner()
     executor = _DeferredExecutor()
@@ -134,7 +134,7 @@ def test_floating_tutor_reset_and_minimize_are_local_only(
 
 def test_selection_explanation_opens_chat_and_uses_selected_text(
     qapp: QApplication,
-    tmp_path: object,
+    tmp_path: Path,
 ) -> None:
     runner = _FakeRunner()
     executor = _DeferredExecutor()
