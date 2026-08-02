@@ -2,26 +2,28 @@
 
 ## Scope
 
-This audit compares the ten authored DM847 modules with the active SDU course description and the relevant chapters of Compeau and Pevzner, *Bioinformatics Algorithms: An Active Learning Approach*, volumes I and II.
+This audit compares the ten authored DM847 modules with the active SDU course description and the mapped textbook or specialized sources appropriate to each topic.
 
 A source mapping is not treated as a completed review. A module becomes `consistent` only after its existing content has been inspected, any genuine gap has been addressed, and regression tests protect the result.
 
-The textbook is used selectively. Chapters on genome assembly, peptide sequencing, phylogeny, and rearrangements are not inserted merely because they appear in the books; the active DM847 course scope remains the curricular boundary.
+The sources are used selectively. Topics outside the active DM847 course scope are not inserted merely because they occur in a reference.
 
-## Current source map
+## Completed source map
 
 | Module | Main mapped source scope | State |
 |---|---|---|
 | M01 Molecular information | Volume I chapter 1 plus active course scope | Consistent |
-| M02 Ontologies and databases | Active course scope; specialized source still required | Pending |
+| M02 Ontologies and databases | Active course scope; *Computational Biomedicine* chapters 3 and 8 | Consistent |
 | M03 Sequence scoring and matching | Volume I chapters 1 and 5 | Consistent |
 | M04 Pairwise alignment | Volume I chapter 5 | Consistent |
 | M05 Hidden Markov models | Volume II chapter 10 | Consistent |
 | M06 Suffix arrays, BWT, mapping | Volume II chapter 9 | Consistent |
-| M07 Operons and bacterial genetics | Active course scope; specialized source still required | Pending |
+| M07 Operons and bacterial genetics | Active course scope; Yachay molecular-biology chapters 19 and 26 | Consistent |
 | M08 Motif discovery and EM | Volume I chapter 2; Volume II chapter 8 | Consistent |
 | M09 Biological networks | Active DM847 scope; Ideker et al. (2002); Alcaraz et al. (2012) | Consistent |
 | M10 OMICS learning | Volume II chapter 8 plus active course scope | Consistent |
+
+All ten authored modules have now completed a focused source review.
 
 ## Completed focused review: M03
 
@@ -253,8 +255,70 @@ Stable IDs:
 
 Content version: `1.1.0`.
 
+## Completed focused review: M02
+
+The existing module already covered persistent identifiers, labels and synonyms, ontology relation semantics, relational schemas, provenance, evidence levels, FAIR principles, joins, cardinalities, and integrity checks.
+
+The missing semantic boundary was between source assertions and ontology-derived results. The extension now covers:
+
+- direct or `asserted` annotations versus `inferred` annotations;
+- relation-specific closure instead of universal transitivity;
+- propagation through authorized `is_a` relations;
+- direction-sensitive rules;
+- preservation of the complete inference path;
+- ontology and annotation release as part of the query contract;
+- exact versus semantically expanded queries;
+- separate counts and provenance for direct and derived results.
+
+The deterministic example preserves both status and inference path:
+
+```text
+[('T-cell', ('T-cell',), 'asserted'), ('lymphocyte', ('T-cell', 'lymphocyte'), 'inferred'), ('cell', ('T-cell', 'lymphocyte', 'cell'), 'inferred')]
+```
+
+Stable IDs:
+
+- `m02.bg.o1`
+- `semantic-closure-and-assertion-provenance`
+- `m02.bg.e01`
+- `m02.bg.p01`
+- `dm847.m02.book.001`
+
+Content version: `1.1.0`.
+
+## Completed focused review: M07
+
+The existing module already covered operon biology, polycistronic transcription, genomic adjacency, intergenic distance and overlap, predictive features, model discrimination and calibration, cross-species validation, horizontal transfer, and independent transcriptomic evidence.
+
+The missing algorithmic boundary was between genomic coordinate order and transcriptional order. The extension now covers:
+
+- grouping by replicon before ordering;
+- constructing adjacency from all genomic features before filtering by strand;
+- why strand-first grouping can skip an intervening gene and create a false pair;
+- positive-strand transcription toward increasing coordinates;
+- negative-strand transcription toward decreasing coordinates;
+- strand-relative upstream and downstream regions;
+- reverse-complement orientation of negative-strand regulatory windows;
+- the distinction between correct orientation and evidence of co-transcription.
+
+The deterministic example returns same-strand genomic neighbors in transcriptional order:
+
+```text
+[('g1', 'g2', 20), ('g4', 'g3', 20)]
+```
+
+Stable IDs:
+
+- `m07.bg.o1`
+- `genomic-order-vs-transcriptional-order`
+- `m07.bg.e01`
+- `m07.bg.p01`
+- `dm847.m07.book.001`
+
+Content version: `1.1.0`.
+
 ## Source boundary
 
 All visible explanations, code, examples, exercises, values, and solutions are original paraphrases and adaptations. No textbook exercise, figure, table, or extended passage is reproduced verbatim.
 
-No experimental dataset acquisition is implemented in this increment.
+No experimental dataset acquisition is implemented in this audit.
