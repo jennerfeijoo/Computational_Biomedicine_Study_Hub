@@ -325,12 +325,7 @@ def _relative_path(value: object) -> str:
     if "\\" in value:
         raise ValueError("Path must use POSIX '/' separators.")
     path = PurePosixPath(value)
-    if (
-        path.is_absolute()
-        or ".." in path.parts
-        or path.as_posix() != value
-        or value == "."
-    ):
+    if path.is_absolute() or ".." in path.parts or path.as_posix() != value or value == ".":
         raise ValueError("Path must be normalized and remain inside the analysis directory.")
     return value
 
@@ -609,9 +604,7 @@ def _scan_assay(
                 )
                 return None
             feature_index = header.index(config.feature_id_column)
-            sample_ids = tuple(
-                item for index, item in enumerate(header) if index != feature_index
-            )
+            sample_ids = tuple(item for index, item in enumerate(header) if index != feature_index)
             if not sample_ids:
                 _issue(
                     issues,
@@ -811,9 +804,7 @@ def _scan_metadata(
                     column=config.sample_id_column,
                 )
                 return None
-            missing_columns = tuple(
-                item for item in required_columns if item not in header
-            )
+            missing_columns = tuple(item for item in required_columns if item not in header)
             if missing_columns:
                 _issue(
                     issues,
@@ -840,9 +831,7 @@ def _scan_metadata(
                     sample_ids.append(sample_id)
                     duplicate_ids += int(sample_id in seen_sample_ids)
                     seen_sample_ids.add(sample_id)
-                blank_required += sum(
-                    not row[index].strip() for index in required_indices
-                )
+                blank_required += sum(not row[index].strip() for index in required_indices)
     except (OSError, csv.Error, UnicodeError) as error:
         _issue(
             issues,
