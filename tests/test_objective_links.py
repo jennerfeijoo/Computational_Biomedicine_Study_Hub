@@ -65,9 +65,7 @@ def test_specific_multidimensional_activities_keep_all_objective_links() -> None
         "m01.o6",
     )
     assert DM847_M01_OBJECTIVE_LINKS.objectives_for("m01.bg.p01") == ("m01.bg.o1",)
-    assert DM847_M01_OBJECTIVE_LINKS.objectives_for("dm847.m01.book.001") == (
-        "m01.bg.o1",
-    )
+    assert DM847_M01_OBJECTIVE_LINKS.objectives_for("dm847.m01.book.001") == ("m01.bg.o1",)
     assert DM847_M01_OBJECTIVE_LINKS.objectives_for("unknown") == ()
 
 
