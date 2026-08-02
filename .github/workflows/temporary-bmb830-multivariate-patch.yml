@@ -1,0 +1,374 @@
+name: Temporary BMB830 Multivariate Patch
+
+on:
+  push:
+    branches:
+      - agent/bmb830-multivariate-high-dimensional-review
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/bmb830-multivariate-high-dimensional-review
+          fetch-depth: 0
+
+      - name: Patch cumulative BMB830 integration
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(text: str, old: str, new: str, label: str) -> str:
+              if old not in text:
+                  raise SystemExit(f"Missing patch marker: {label}")
+              return text.replace(old, new, 1)
+
+          init_path = Path("src/computational_biomedicine_study_hub/content/bmb830/__init__.py")
+          init = init_path.read_text(encoding="utf-8")
+          init = replace_once(
+              init,
+              '''from .book_grounded_audit import (
+              BMB830_BOOK_SOURCES,
+              AcademicReference,
+              ModuleSourceAudit,
+              apply_foundation_review,
+          )
+          ''',
+              '''from .book_grounded_audit import (
+              BMB830_BOOK_SOURCES as _BASE_BMB830_BOOK_SOURCES,
+          )
+          from .book_grounded_audit import (
+              AcademicReference,
+              ModuleSourceAudit,
+              apply_foundation_review,
+          )
+          ''',
+              "base source alias",
+          )
+          init = replace_once(
+              init,
+              '''from .book_grounded_model_diagnostics import (
+              apply_model_diagnostics_review,
+              update_model_diagnostics_audit,
+          )
+          from .book_grounded_regression import apply_regression_review, update_regression_audit
+          ''',
+              '''from .book_grounded_model_diagnostics import (
+              apply_model_diagnostics_review,
+              update_model_diagnostics_audit,
+          )
+          from .book_grounded_multivariate import (
+              BMB830_MULTIVARIATE_SOURCES,
+              apply_multivariate_review,
+              update_multivariate_audit,
+          )
+          from .book_grounded_regression import apply_regression_review, update_regression_audit
+          ''',
+              "multivariate import",
+          )
+          init = replace_once(
+              init,
+              '''from .module_11_intro_multivariate import (
+              LOCALIZED_MODULE_11_INTRO_MULTIVARIATE,
+              LOCALIZED_OBJECTIVE_QUESTION_BANK_11,
+              materialize_module_11_question_bank,
+          )
+          ''',
+              '''from .module_11_intro_multivariate import (
+              LOCALIZED_MODULE_11_INTRO_MULTIVARIATE as _BASE_LOCALIZED_MODULE_11_INTRO_MULTIVARIATE,
+          )
+          from .module_11_intro_multivariate import (
+              LOCALIZED_OBJECTIVE_QUESTION_BANK_11,
+              materialize_module_11_question_bank,
+          )
+          ''',
+              "M11 base alias",
+          )
+          init = replace_once(
+              init,
+              '''from .module_12_high_dimensional_case import (
+              LOCALIZED_MODULE_12_HIGH_DIMENSIONAL_CASE,
+              LOCALIZED_OBJECTIVE_QUESTION_BANK_12,
+              materialize_module_12_question_bank,
+          )
+          ''',
+              '''from .module_12_high_dimensional_case import (
+              LOCALIZED_MODULE_12_HIGH_DIMENSIONAL_CASE as _BASE_LOCALIZED_MODULE_12_HIGH_DIMENSIONAL_CASE,
+          )
+          from .module_12_high_dimensional_case import (
+              LOCALIZED_OBJECTIVE_QUESTION_BANK_12,
+              materialize_module_12_question_bank,
+          )
+          ''',
+              "M12 base alias",
+          )
+          init = replace_once(
+              init,
+              '''BMB830_MODULE_SOURCE_AUDIT = update_model_diagnostics_audit(_REGRESSION_BMB830_MODULE_SOURCE_AUDIT)
+          ''',
+              '''_MODEL_DIAGNOSTICS_BMB830_MODULE_SOURCE_AUDIT = update_model_diagnostics_audit(
+              _REGRESSION_BMB830_MODULE_SOURCE_AUDIT
+          )
+          BMB830_MODULE_SOURCE_AUDIT = update_multivariate_audit(
+              _MODEL_DIAGNOSTICS_BMB830_MODULE_SOURCE_AUDIT
+          )
+          BMB830_BOOK_SOURCES = (
+              *_BASE_BMB830_BOOK_SOURCES,
+              *BMB830_MULTIVARIATE_SOURCES,
+          )
+          ''',
+              "final audit and source chain",
+          )
+          init = replace_once(
+              init,
+              '''LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION = apply_model_diagnostics_review(
+              _BASE_LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION
+          )
+          
+          LOCALIZED_BUNDLES = (
+          ''',
+              '''LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION = apply_model_diagnostics_review(
+              _BASE_LOCALIZED_MODULE_10_DIAGNOSTICS_VALIDATION
+          )
+          LOCALIZED_MODULE_11_INTRO_MULTIVARIATE = apply_multivariate_review(
+              _BASE_LOCALIZED_MODULE_11_INTRO_MULTIVARIATE
+          )
+          LOCALIZED_MODULE_12_HIGH_DIMENSIONAL_CASE = apply_multivariate_review(
+              _BASE_LOCALIZED_MODULE_12_HIGH_DIMENSIONAL_CASE
+          )
+          
+          LOCALIZED_BUNDLES = (
+          ''',
+              "M11-M12 review application",
+          )
+          init = replace_once(
+              init,
+              '''    LocalizedModuleBundle(
+                  LOCALIZED_MODULE_11_INTRO_MULTIVARIATE,
+                  LOCALIZED_OBJECTIVE_QUESTION_BANK_11,
+                  "1.0.0",
+              ),
+          ''',
+              '''    LocalizedModuleBundle(
+                  LOCALIZED_MODULE_11_INTRO_MULTIVARIATE,
+                  LOCALIZED_OBJECTIVE_QUESTION_BANK_11,
+                  "1.1.0",
+              ),
+          ''',
+              "M11 version",
+          )
+          init = replace_once(
+              init,
+              '''    LocalizedModuleBundle(
+                  LOCALIZED_MODULE_12_HIGH_DIMENSIONAL_CASE,
+                  LOCALIZED_OBJECTIVE_QUESTION_BANK_12,
+                  "1.0.0",
+              ),
+          ''',
+              '''    LocalizedModuleBundle(
+                  LOCALIZED_MODULE_12_HIGH_DIMENSIONAL_CASE,
+                  LOCALIZED_OBJECTIVE_QUESTION_BANK_12,
+                  "1.1.0",
+              ),
+          ''',
+              "M12 version",
+          )
+          init_path.write_text(init, encoding="utf-8")
+
+          audit_test_path = Path("tests/test_bmb830_book_grounded_audit.py")
+          audit_test = audit_test_path.read_text(encoding="utf-8")
+          audit_test = replace_once(
+              audit_test,
+              '_REVIEWED_MODULE_IDS = {f"bmb830.m{index:02d}" for index in range(1, 11)}',
+              '_REVIEWED_MODULE_IDS = {f"bmb830.m{index:02d}" for index in range(1, 13)}',
+              "reviewed range",
+          )
+          audit_test = replace_once(
+              audit_test,
+              '    assert "islr-2021-ch07" in source_ids\n',
+              '    assert "islr-2021-ch07" in source_ids\n    assert "islr-2021-ch06" in source_ids\n    assert "murphy-2023-ch20" in source_ids\n    assert "yachay-biostatistics-multivariate" in source_ids\n',
+              "new source assertions",
+          )
+          audit_test = replace_once(
+              audit_test,
+              '    assert state_by_module["bmb830.m10"] == "consistent"\n',
+              '    assert state_by_module["bmb830.m10"] == "consistent"\n    assert state_by_module["bmb830.m11"] == "consistent"\n    assert state_by_module["bmb830.m12"] == "consistent"\n',
+              "M11-M12 state assertions",
+          )
+          audit_test = replace_once(
+              audit_test,
+              '''        "bmb830.m09",
+                  "bmb830.m10",
+              ):
+          ''',
+              '''        "bmb830.m09",
+                  "bmb830.m10",
+                  "bmb830.m11",
+                  "bmb830.m12",
+              ):
+          ''',
+              "locale identity modules",
+          )
+          audit_test_path.write_text(audit_test, encoding="utf-8")
+
+          core_test_path = Path("tests/test_bmb830_core_modules.py")
+          core_test = core_test_path.read_text(encoding="utf-8")
+          core_test = replace_once(
+              core_test,
+              '''        **{f"bmb830.m{index:02d}": "1.1.0" for index in range(3, 11)},
+                  **{f"bmb830.m{index:02d}": "1.0.0" for index in range(11, 13)},
+          ''',
+              '''        **{f"bmb830.m{index:02d}": "1.1.0" for index in range(3, 13)},
+          ''',
+              "version ranges",
+          )
+          core_test = replace_once(
+              core_test,
+              '**{f"bmb830.m{index:02d}": 9 for index in range(3, 11)},',
+              '**{f"bmb830.m{index:02d}": 9 for index in range(3, 13)},',
+              "assessment count range",
+          )
+          core_test_path.write_text(core_test, encoding="utf-8")
+
+          docs_path = Path("docs/bmb830-book-grounded-audit.md")
+          docs = docs_path.read_text(encoding="utf-8")
+          docs = docs.replace(
+              "- *An Introduction to Statistical Learning with Applications in R*, second edition, for statistical learning, regression identities, resampling, model assessment, validation, basis functions, and nonlinear modelling;",
+              "- *An Introduction to Statistical Learning with Applications in R*, second edition, for statistical learning, regression identities, resampling, model assessment, validation, nonlinear modelling, regularisation, and high-dimensional analysis;\n- *Probabilistic Machine Learning: An Introduction* for PCA, covariance eigendecomposition, reconstruction, and effective dimension;",
+          )
+          docs = docs.replace(
+              "- the uploaded Yachay Tech biostatistics and linear-model notes.",
+              "- the uploaded Yachay Tech biostatistics, linear-model, and multivariate-analysis material.",
+          )
+          current_start = docs.index("## Current focused review")
+          findings_start = docs.index("## Findings and additions")
+          current = '''## Current focused review
+
+          Reviewed and marked `consistent`:
+
+          - M01 — R foundations and reproducible workflow;
+          - M02 — data quality, descriptive summaries, and visualisation;
+          - M03 — probability, sampling, and distributions;
+          - M04 — estimation and confidence intervals;
+          - M05 — hypothesis testing, errors, power, and randomization tests;
+          - M06 — group comparison, ANOVA, and planned contrasts;
+          - M10 — diagnostics, influence, PRESS, and validation;
+          - M11 — introductory multivariate analysis;
+          - M12 — high-dimensional biological case.
+
+          Reviewed and marked `correct` because numerical output required correction:
+
+          - M07 — correlation and simple regression;
+          - M08 — multiple regression;
+          - M09 — interactions and nonlinearity.
+
+          No BMB830 module remains pending. Source-grounded completion is 12 of 12 modules.
+
+          '''
+          docs = docs[:current_start] + current + docs[findings_start:]
+          version_start = docs.index("## Version state")
+          experimental_start = docs.index("Experimental-data acquisition remains deferred.")
+          additions = '''### M11 — covariance PCA versus correlation PCA
+
+          The module already covered matrix orientation, preprocessing, scaling, PCA scores, loadings, explained variance, sign indeterminacy, hierarchical clustering, and sensitivity analysis. The focused gap was the explicit operational distinction between covariance-matrix and correlation-matrix PCA.
+
+          The extension establishes that:
+
+          - covariance PCA centres variables but preserves original scales;
+          - correlation PCA centres and divides each non-constant variable by its standard deviation;
+          - large numerical variance can dominate an unscaled component;
+          - standardisation changes geometry, loadings, and explained variance;
+          - the choice depends on units and the biological question rather than visual separation;
+          - zero-variance variables must be handled before standardisation.
+
+          The deterministic example returns:
+
+          ```text
+          covariance_abs_loadings=0.010,1.000
+          correlation_abs_loadings=0.707,0.707
+          ```
+
+          ### M12 — rank ceiling in p-greater-than-n matrices
+
+          The module already covered provenance, quality control, missingness, filtering, imputation, log2 transformation, scaling, PCA, batch effects, training-only screening, multiplicity, leakage, and external validation. The extension adds the geometric reason high-dimensional matrices remain sample-limited:
+
+          - `rank(centered X) <= min(n-1,p)`;
+          - at most `n-1` principal components can have non-zero variance when `p>n`;
+          - the feature covariance matrix is singular;
+          - unregularised models may have non-unique solutions or perfect training fit;
+          - regularisation and dimension reduction add assumptions rather than observations;
+          - selection and tuning must remain inside resampling, with an outer validation layer for performance estimation.
+
+          The deterministic example returns:
+
+          ```text
+          samples=4
+          features=6
+          rank_ceiling=3
+          nonzero_pcs=3
+          ```
+
+          ## Version state
+
+          - M01: `1.0.0` — reviewed, no visible extension;
+          - M02: `1.0.0` — reviewed, no visible extension;
+          - M03: `1.1.0` — Bayesian extension;
+          - M04: `1.1.0` — bootstrap extension;
+          - M05: `1.1.0` — randomization-test extension;
+          - M06: `1.1.0` — ANOVA and contrast extension;
+          - M07: `1.1.0` — correlation-slope extension and interval-output correction;
+          - M08: `1.1.0` — partial-regression extension and worked-output corrections;
+          - M09: `1.1.0` — piecewise-linear basis extension and quadratic-output correction;
+          - M10: `1.1.0` — PRESS and leave-one-out extension;
+          - M11: `1.1.0` — covariance-versus-correlation PCA extension;
+          - M12: `1.1.0` — high-dimensional rank-ceiling extension.
+
+          '''
+          docs = docs[:version_start] + additions + docs[experimental_start:]
+          docs_path.write_text(docs, encoding="utf-8")
+          PY
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Format changed Python files
+        run: |
+          python -m pip install 'ruff<1,>=0.5'
+          ruff check --fix \
+            src/computational_biomedicine_study_hub/content/bmb830/book_grounded_multivariate.py \
+            src/computational_biomedicine_study_hub/content/bmb830/__init__.py \
+            tests/test_bmb830_book_grounded_audit.py \
+            tests/test_bmb830_core_modules.py \
+            tests/test_bmb830_multivariate_high_dimensional_review.py
+          ruff format \
+            src/computational_biomedicine_study_hub/content/bmb830/book_grounded_multivariate.py \
+            src/computational_biomedicine_study_hub/content/bmb830/__init__.py \
+            tests/test_bmb830_book_grounded_audit.py \
+            tests/test_bmb830_core_modules.py \
+            tests/test_bmb830_multivariate_high_dimensional_review.py
+
+      - name: Commit cumulative patch
+        run: |
+          if git diff --quiet; then
+            echo 'No patch changes required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            docs/bmb830-book-grounded-audit.md \
+            src/computational_biomedicine_study_hub/content/bmb830/book_grounded_multivariate.py \
+            src/computational_biomedicine_study_hub/content/bmb830/__init__.py \
+            tests/test_bmb830_book_grounded_audit.py \
+            tests/test_bmb830_core_modules.py \
+            tests/test_bmb830_multivariate_high_dimensional_review.py
+          git commit -m 'Integrate BMB830 multivariate review'
+          git push origin HEAD:agent/bmb830-multivariate-high-dimensional-review
