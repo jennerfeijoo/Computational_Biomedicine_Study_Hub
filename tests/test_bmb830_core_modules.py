@@ -19,11 +19,15 @@ def test_bmb830_registers_twelve_complete_modules_in_order() -> None:
         "bmb830.m02": "1.0.0",
         "bmb830.m03": "1.1.0",
         "bmb830.m04": "1.1.0",
-        **{f"bmb830.m{index:02d}": "1.0.0" for index in range(5, 13)},
+        "bmb830.m05": "1.1.0",
+        "bmb830.m06": "1.1.0",
+        **{f"bmb830.m{index:02d}": "1.0.0" for index in range(7, 13)},
     }
     expected_assessment_counts = {
         "bmb830.m03": 9,
         "bmb830.m04": 9,
+        "bmb830.m05": 9,
+        "bmb830.m06": 9,
     }
 
     assert tuple(module.module_id for module in MODULES) == expected_ids
@@ -61,9 +65,12 @@ def test_bmb830_inference_block_covers_required_concepts() -> None:
     assert "intervalos de confianza" in estimation_text
     assert "error tipo i" in testing_text
     assert "potencia" in testing_text
+    assert "aleatorización" in testing_text
+    assert "intercambiabilidad" in testing_text
     assert "welch" in comparison_text
     assert "anova" in comparison_text
     assert "paread" in comparison_text
+    assert "contraste" in comparison_text
 
 
 def test_bmb830_regression_block_covers_required_concepts() -> None:
