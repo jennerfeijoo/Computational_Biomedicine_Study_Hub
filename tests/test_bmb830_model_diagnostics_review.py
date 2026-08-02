@@ -141,7 +141,9 @@ def test_press_extension_links_leverage_and_leave_one_out_error() -> None:
 
 
 def test_m09_m10_review_versions_counts_and_source_basis() -> None:
-    bundles = {bundle.module.module_id: bundle for bundle in bmb830.LOCALIZED_BUNDLES}
+    bundles = {
+        bundle.localized_module.module_id: bundle for bundle in bmb830.LOCALIZED_BUNDLES
+    }
     interaction = _module("bmb830.m09")
     diagnostics = _module("bmb830.m10")
 
