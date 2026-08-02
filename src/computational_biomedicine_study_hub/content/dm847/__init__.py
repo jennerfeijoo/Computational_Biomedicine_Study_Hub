@@ -9,9 +9,10 @@ from ..bundles import LocalizedModuleBundle, validate_bundle_catalog
 from ..localized_models import LocalizedText
 from .book_grounded_audit import (
     DM847_BOOK_SOURCES,
-    DM847_MODULE_SOURCE_AUDIT,
+    DM847_MODULE_SOURCE_AUDIT as _BASE_DM847_MODULE_SOURCE_AUDIT,
     apply_book_grounded_extensions,
 )
+from .book_grounded_hmm_bwt import apply_hmm_bwt_extensions, update_hmm_bwt_audit
 from .module_01_molecular_information import (
     LOCALIZED_MODULE_01_MOLECULAR_INFORMATION,
     LOCALIZED_OBJECTIVE_QUESTION_BANK_01,
@@ -66,6 +67,8 @@ from .module_10_omics_learning_project import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
     materialize_module_10_question_bank,
 )
+
+DM847_MODULE_SOURCE_AUDIT = update_hmm_bwt_audit(_BASE_DM847_MODULE_SOURCE_AUDIT)
 
 
 def _replace_spanish(
@@ -215,18 +218,20 @@ LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM = replace(
     LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM,
     LOCALIZED_MODULE_09_BIOLOGICAL_NETWORKS_ENRICHMENT,
     LOCALIZED_MODULE_10_OMICS_LEARNING_PROJECT,
-) = apply_book_grounded_extensions(
-    (
-        LOCALIZED_MODULE_01_MOLECULAR_INFORMATION,
-        LOCALIZED_MODULE_02_ONTOLOGIES_DATABASES,
-        LOCALIZED_MODULE_03_SEQUENCE_SCORING_MATCHING,
-        LOCALIZED_MODULE_04_PAIRWISE_ALIGNMENT,
-        LOCALIZED_MODULE_05_HIDDEN_MARKOV_MODELS,
-        LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING,
-        LOCALIZED_MODULE_07_OPERONS_BACTERIAL_GENETICS,
-        LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM,
-        LOCALIZED_MODULE_09_BIOLOGICAL_NETWORKS_ENRICHMENT,
-        LOCALIZED_MODULE_10_OMICS_LEARNING_PROJECT,
+) = apply_hmm_bwt_extensions(
+    apply_book_grounded_extensions(
+        (
+            LOCALIZED_MODULE_01_MOLECULAR_INFORMATION,
+            LOCALIZED_MODULE_02_ONTOLOGIES_DATABASES,
+            LOCALIZED_MODULE_03_SEQUENCE_SCORING_MATCHING,
+            LOCALIZED_MODULE_04_PAIRWISE_ALIGNMENT,
+            LOCALIZED_MODULE_05_HIDDEN_MARKOV_MODELS,
+            LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING,
+            LOCALIZED_MODULE_07_OPERONS_BACTERIAL_GENETICS,
+            LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM,
+            LOCALIZED_MODULE_09_BIOLOGICAL_NETWORKS_ENRICHMENT,
+            LOCALIZED_MODULE_10_OMICS_LEARNING_PROJECT,
+        )
     )
 )
 
@@ -261,8 +266,8 @@ _CONTENT_VERSIONS = (
     "1.0.0",
     "1.1.0",
     "1.1.0",
-    "1.0.0",
-    "1.0.0",
+    "1.1.0",
+    "1.1.0",
     "1.0.0",
     "1.0.0",
     "1.0.0",
@@ -362,6 +367,7 @@ __all__ = [
     "OBJECTIVE_QUESTION_BANK_09",
     "OBJECTIVE_QUESTION_BANK_10",
     "apply_book_grounded_extensions",
+    "apply_hmm_bwt_extensions",
     "materialize_module_01_question_bank",
     "materialize_module_02_question_bank",
     "materialize_module_03_question_bank",
