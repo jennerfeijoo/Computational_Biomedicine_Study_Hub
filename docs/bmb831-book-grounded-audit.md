@@ -36,12 +36,12 @@ Mapping a module to sources is not treated as completed verification. A module r
 | M03 — differential modelling | `consistent` | Existing design, contrast, model-scale, effect, uncertainty, and FDR content was adequate, but information sharing across features and the separation of moderation, effect shrinkage, and multiplicity required explicit treatment. |
 | M04 — multivariate omics | `consistent` | Existing PCA, distance, clustering, batch, stability, and leakage coverage was adequate. Finite-sample rank and near-degenerate subspace stability required explicit treatment. |
 | M05 — advanced visualisation | `consistent` | Existing figure contracts, omics plots, heatmaps, accessibility, and reproducible export were adequate. Error-bar targets and the distinction among spread, SE, confidence intervals, and prediction uncertainty required explicit treatment. |
-| M06 — public omics workflows | `pending` | Source scope mapped; focused comparison pending. |
-| M07 — protein characterisation | `pending` | Source scope mapped; focused comparison pending. |
+| M06 — public omics workflows | `consistent` | Existing public-source snapshots, assay-specific contracts, missingness, transition checks, and reproducibility boundaries were adequate. Shared peptides and protein-group inference required explicit treatment. |
+| M07 — protein characterisation | `consistent` | Existing sequence identity, annotation provenance, PDB coverage, and AlphaFold limits were adequate. The distinction between local pLDDT and relative-domain PAE required explicit treatment. |
 | M08 — biological interpretation | `pending` | Source scope mapped; focused comparison pending. |
 | M09 — publication appraisal and report | `pending` | Source scope mapped; focused comparison pending. |
 
-Progress: **5/9 modules source-reviewed**.
+Progress: **7/9 modules source-reviewed**.
 
 ## M01 review
 
@@ -170,11 +170,67 @@ The groups have the same mean but different spread and estimator uncertainty. Th
 
 M05 content version is `1.1.0`.
 
+## M06 extension — shared peptides and protein inference
+
+Stable additions:
+
+- objective `m06.bg.o1`;
+- concept `shared-peptides-and-protein-inference`;
+- example `m06.bg.e01`;
+- practice `m06.bg.p01`;
+- assessment item `bmb831.m06.book.001`.
+
+The unit distinguishes peptide-level quantification from protein-level identification. A proteotypic peptide can support an individual protein, whereas a shared peptide remains compatible with multiple proteins, isoforms, or family members. Parsimony, razor-peptide, and protein-grouping rules produce a usable table but do not manufacture evidence that separates indistinguishable entities.
+
+The analytical package must therefore retain precursor–peptide–protein mappings, declare grouping rules, and limit the estimand and biological claim to the level actually identified. A differential signal assigned to a protein group does not identify which member changed.
+
+Deterministic example:
+
+```text
+peptides=4
+unique_peptides=2
+shared_peptides=2
+proteins_with_unique=2
+proteins_shared_only=2
+```
+
+The fixture contains individual evidence for P1 and P2, but only group-compatible evidence for P3 and P4.
+
+M06 content version is `1.1.0`.
+
+## M07 extension — pLDDT and relative-domain PAE
+
+Stable additions:
+
+- objective `m07.bg.o1`;
+- concept `local-confidence-versus-domain-placement`;
+- example `m07.bg.e01`;
+- practice `m07.bg.p01`;
+- assessment item `bmb831.m07.book.001`.
+
+The unit separates local structural confidence from confidence in long-range placement. pLDDT is interpreted per residue or region as local confidence. PAE is used to assess how confidently one region is positioned relative to another and is therefore necessary when interpreting domain packing or global topology.
+
+Two domains may each have high pLDDT and low internal PAE while retaining high PAE between domains. In that case the internal folds may be plausible, but their mutual orientation remains uncertain. Neither metric proves biological interaction, dynamics, active state, function, or mechanism.
+
+Deterministic example:
+
+```text
+domain_A_plddt=90.0
+domain_B_plddt=89.0
+within_A_pae=2.0
+within_B_pae=2.0
+between_pae=18.0
+```
+
+The example demonstrates confidence separation; it is not an experimental structure or a validation of a biological assembly.
+
+M07 content version is `1.1.0`.
+
 ## Deferred work
 
-The next focused block is:
+The final focused block is:
 
-- M06 — public transcriptomics and proteomics workflows, assay-specific preprocessing, immutable public data, checksums, dataset cards, and reproducible environments;
-- M07 — sequence-derived protein properties, UniProt and InterPro provenance, PDB experimental evidence, and AlphaFold confidence boundaries.
+- M08 — identifier mapping, tested universes, enrichment, pathway and network interpretation, redundancy, circularity, and annotation provenance;
+- M09 — estimands, design and validity appraisal, reproducibility, evidence boundaries, and individual English scientific reporting without reconstructing private assessment material.
 
-M08 biological interpretation and M09 publication appraisal/report preparation remain mapped and pending after that block. Experimental-data acquisition remains deferred until all nine source reviews are complete.
+Experimental-data acquisition remains deferred until all nine source reviews are complete.
