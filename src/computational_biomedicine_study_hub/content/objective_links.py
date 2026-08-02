@@ -149,6 +149,7 @@ DM847_M01_OBJECTIVE_LINKS = ObjectiveLinkCatalog(
         _link("m01.p06", "m01.o4"),
         _link("m01.p07", "m01.o5"),
         _link("m01.p08", "m01.o3"),
+        _link("m01.bg.p01", "m01.bg.o1"),
         # Complete authored assessment: MCQ 001-005 followed by true/false 011-015.
         _link("dm847.m01.assessment.001", "m01.o3"),
         _link("dm847.m01.assessment.002", "m01.o2"),
@@ -160,6 +161,7 @@ DM847_M01_OBJECTIVE_LINKS = ObjectiveLinkCatalog(
         _link("dm847.m01.assessment.008", "m01.o3"),
         _link("dm847.m01.assessment.009", "m01.o4"),
         _link("dm847.m01.assessment.010", "m01.o4", "m01.o6"),
+        _link("dm847.m01.book.001", "m01.bg.o1"),
         # Randomized objective bank
         _link("dm847.m01.bank.001", "m01.o3"),
         _link("dm847.m01.bank.002", "m01.o2"),
