@@ -16,6 +16,7 @@ class LabCopyKey(StrEnum):
     RUN = "lab.run"
     RESET = "lab.reset"
     RUNNING = "lab.running"
+    SOURCE_REQUIRED = "lab.source_required"
     STDOUT = "lab.stdout"
     STDERR = "lab.stderr"
     EXPECTED = "lab.expected"
@@ -32,19 +33,17 @@ class LabCopyKey(StrEnum):
 _CATALOGS: dict[AppLocale, dict[LabCopyKey, str]] = {
     AppLocale.SPANISH_SPAIN: {
         LabCopyKey.TITLE: "Laboratorio ejecutable",
-        LabCopyKey.INTRO: (
-            "Edita el ejemplo y ejecútalo en un proceso local restringido. El acceso a archivos, "
-            "red y procesos externos está deshabilitado."
-        ),
+        LabCopyKey.INTRO: "",
         LabCopyKey.RUN: "Ejecutar",
         LabCopyKey.RESET: "Restablecer",
         LabCopyKey.RUNNING: "Ejecutando…",
+        LabCopyKey.SOURCE_REQUIRED: "Escribe código antes de ejecutarlo.",
         LabCopyKey.STDOUT: "Salida",
         LabCopyKey.STDERR: "Errores",
-        LabCopyKey.EXPECTED: "Salida esperada",
+        LabCopyKey.EXPECTED: "Salida de referencia",
         LabCopyKey.NO_OUTPUT: "(sin salida)",
-        LabCopyKey.STATUS_PASSED: "Salida correcta",
-        LabCopyKey.STATUS_MISMATCH: "El programa terminó, pero la salida no coincide",
+        LabCopyKey.STATUS_PASSED: "Ejecución completada",
+        LabCopyKey.STATUS_MISMATCH: "Ejecución completada",
         LabCopyKey.STATUS_RUNTIME_ERROR: "Error durante la ejecución",
         LabCopyKey.STATUS_TIMED_OUT: "Tiempo de ejecución agotado",
         LabCopyKey.STATUS_REJECTED: "Código rechazado por la política del laboratorio",
@@ -53,19 +52,17 @@ _CATALOGS: dict[AppLocale, dict[LabCopyKey, str]] = {
     },
     AppLocale.ENGLISH: {
         LabCopyKey.TITLE: "Executable lab",
-        LabCopyKey.INTRO: (
-            "Edit the example and run it in a restricted local process. File, network and external "
-            "process access are disabled."
-        ),
+        LabCopyKey.INTRO: "",
         LabCopyKey.RUN: "Run",
         LabCopyKey.RESET: "Reset",
         LabCopyKey.RUNNING: "Running…",
+        LabCopyKey.SOURCE_REQUIRED: "Write some code before running it.",
         LabCopyKey.STDOUT: "Output",
         LabCopyKey.STDERR: "Errors",
-        LabCopyKey.EXPECTED: "Expected output",
+        LabCopyKey.EXPECTED: "Reference output",
         LabCopyKey.NO_OUTPUT: "(no output)",
-        LabCopyKey.STATUS_PASSED: "Output is correct",
-        LabCopyKey.STATUS_MISMATCH: "The program finished, but its output does not match",
+        LabCopyKey.STATUS_PASSED: "Execution completed",
+        LabCopyKey.STATUS_MISMATCH: "Execution completed",
         LabCopyKey.STATUS_RUNTIME_ERROR: "Runtime error",
         LabCopyKey.STATUS_TIMED_OUT: "Execution timed out",
         LabCopyKey.STATUS_REJECTED: "Code rejected by the lab policy",
@@ -74,19 +71,17 @@ _CATALOGS: dict[AppLocale, dict[LabCopyKey, str]] = {
     },
     AppLocale.DANISH_DENMARK: {
         LabCopyKey.TITLE: "Kørbart laboratorium",
-        LabCopyKey.INTRO: (
-            "Redigér eksemplet og kør det i en begrænset lokal proces. Adgang til filer, netværk "
-            "og eksterne processer er deaktiveret."
-        ),
+        LabCopyKey.INTRO: "",
         LabCopyKey.RUN: "Kør",
         LabCopyKey.RESET: "Nulstil",
         LabCopyKey.RUNNING: "Kører…",
+        LabCopyKey.SOURCE_REQUIRED: "Skriv kode, før du kører den.",
         LabCopyKey.STDOUT: "Output",
         LabCopyKey.STDERR: "Fejl",
-        LabCopyKey.EXPECTED: "Forventet output",
+        LabCopyKey.EXPECTED: "Referenceoutput",
         LabCopyKey.NO_OUTPUT: "(intet output)",
-        LabCopyKey.STATUS_PASSED: "Outputtet er korrekt",
-        LabCopyKey.STATUS_MISMATCH: "Programmet afsluttede, men outputtet stemmer ikke",
+        LabCopyKey.STATUS_PASSED: "Kørslen er afsluttet",
+        LabCopyKey.STATUS_MISMATCH: "Kørslen er afsluttet",
         LabCopyKey.STATUS_RUNTIME_ERROR: "Kørselsfejl",
         LabCopyKey.STATUS_TIMED_OUT: "Kørselstiden udløb",
         LabCopyKey.STATUS_REJECTED: "Koden blev afvist af laboratoriets regler",
