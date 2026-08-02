@@ -6,7 +6,7 @@ from dataclasses import replace
 
 from ...learning.activity_types import ActivityType
 from ..localized_models import LocalizedLearningModule, LocalizedTutorSupportPacket
-from .authoring import concept, example, objective, objective_mcq, practice
+from .authoring import concept, example, objective, objective_mcq, practice, same
 from .book_grounded_audit import ModuleSourceAudit
 
 
@@ -96,7 +96,7 @@ def _correct_example_output(
     expected_output: str,
 ) -> LocalizedLearningModule:
     corrected = tuple(
-        replace(item, expected_output=expected_output) if item.example_id == example_id else item
+        replace(item, expected_output=same(expected_output)) if item.example_id == example_id else item
         for item in module.worked_examples
     )
     return replace(module, worked_examples=corrected)
