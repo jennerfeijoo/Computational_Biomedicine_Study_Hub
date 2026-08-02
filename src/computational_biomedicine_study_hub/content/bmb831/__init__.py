@@ -9,8 +9,10 @@ from ..bundles import LocalizedModuleBundle, validate_bundle_catalog
 from ..localized_models import LocalizedLearningModule, LocalizedText
 from .book_grounded_audit import (
     BMB831_BOOK_SOURCES,
-    BMB831_MODULE_SOURCE_AUDIT as _BASE_BMB831_MODULE_SOURCE_AUDIT,
     apply_book_grounded_extensions,
+)
+from .book_grounded_audit import (
+    BMB831_MODULE_SOURCE_AUDIT as _BASE_BMB831_MODULE_SOURCE_AUDIT,
 )
 from .book_grounded_review_m04_m05 import (
     apply_multivariate_visualization_extensions,
