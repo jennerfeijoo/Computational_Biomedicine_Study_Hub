@@ -47,7 +47,7 @@ def test_dm847_selecting_a_module_constructs_and_reuses_it(
 
     assert final_reader is not first_reader
     assert final_reader.module is MODULE_10_OMICS_LEARNING_PROJECT
-    assert final_reader.property("contentVersion") == "1.0.0"
+    assert final_reader.property("contentVersion") == "1.1.0"
     assert page.constructed_reader_count == 2
     assert page.has_constructed_reader(9)
 
