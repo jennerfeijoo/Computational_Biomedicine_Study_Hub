@@ -311,7 +311,9 @@ def test_m05_uncertainty_extension_distinguishes_error_bar_targets() -> None:
 def test_m06_protein_inference_extension_preserves_identifiable_level() -> None:
     module = _module("bmb831.m06")
     inference = next(
-        item for item in module.concepts if item.concept_id == "shared-peptides-and-protein-inference"
+        item
+        for item in module.concepts
+        if item.concept_id == "shared-peptides-and-protein-inference"
     )
     exported = "\n".join((inference.title, inference.body, *inference.key_points)).casefold()
 
@@ -344,9 +346,7 @@ def test_m06_protein_inference_extension_preserves_identifiable_level() -> None:
         multiplicity[peptide] = multiplicity.get(peptide, 0) + 1
     unique_peptides = {peptide for peptide, count in multiplicity.items() if count == 1}
     shared_peptides = {peptide for peptide, count in multiplicity.items() if count > 1}
-    proteins_with_unique = {
-        protein for peptide, protein in mapping if peptide in unique_peptides
-    }
+    proteins_with_unique = {protein for peptide, protein in mapping if peptide in unique_peptides}
     all_proteins = {protein for _peptide, protein in mapping}
 
     assert len(multiplicity) == 4
@@ -432,7 +432,5 @@ def test_m01_m07_versions_counts_and_source_basis() -> None:
         in _module("bmb831.m04").tutor_support.source_basis
     )
     assert "ims-2024-visualisation-reporting" in _module("bmb831.m05").tutor_support.source_basis
-    assert "bioconductor-public-omics-workflows" in _module(
-        "bmb831.m06"
-    ).tutor_support.source_basis
+    assert "bioconductor-public-omics-workflows" in _module("bmb831.m06").tutor_support.source_basis
     assert "protein-public-resources" in _module("bmb831.m07").tutor_support.source_basis
