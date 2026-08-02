@@ -1,5 +1,17 @@
 """Dataset contracts and reproducibility utilities."""
 
+from .omics_analysis import (
+    DEFAULT_OMICS_ANALYSIS_MANIFEST_FILENAME,
+    DEFAULT_OMICS_ANALYSIS_PLAN_FILENAME,
+    AssayMatrixProfile,
+    AssayValueScale,
+    OmicsAnalysisInputReport,
+    OmicsAnalysisIssue,
+    OmicsAnalysisSeverity,
+    OmicsDelimiter,
+    SampleMetadataProfile,
+    inspect_omics_analysis_input,
+)
 from .omics_registry import (
     PUBLIC_OMICS_SOURCES,
     OmicsModality,
@@ -33,13 +45,21 @@ from .synthea_snapshot import (
 )
 
 __all__ = [
+    "DEFAULT_OMICS_ANALYSIS_MANIFEST_FILENAME",
+    "DEFAULT_OMICS_ANALYSIS_PLAN_FILENAME",
     "DEFAULT_OMICS_PLAN_FILENAME",
     "GENERATED_OMICS_MANIFEST_ROLE",
     "PATIENT_TABLE_COLUMNS",
     "PUBLIC_OMICS_SOURCES",
     "SYNTHEA_CSV_CONTRACTS",
+    "AssayMatrixProfile",
+    "AssayValueScale",
     "IssueSeverity",
+    "OmicsAnalysisInputReport",
+    "OmicsAnalysisIssue",
+    "OmicsAnalysisSeverity",
     "OmicsArtifactProfile",
+    "OmicsDelimiter",
     "OmicsModality",
     "OmicsSnapshotIssue",
     "OmicsSnapshotReport",
@@ -48,11 +68,13 @@ __all__ = [
     "PatientTableConfig",
     "PatientTableReport",
     "PublicOmicsSource",
+    "SampleMetadataProfile",
     "SnapshotIssue",
     "SnapshotReport",
     "TableContract",
     "TableProfile",
     "build_synthea_patient_table",
+    "inspect_omics_analysis_input",
     "inspect_public_omics_snapshot",
     "inspect_synthea_csv_directory",
     "public_omics_source",
