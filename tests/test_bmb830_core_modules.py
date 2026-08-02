@@ -13,35 +13,22 @@ from computational_biomedicine_study_hub.learning.r_execution import can_execute
 
 
 def test_bmb830_registers_twelve_complete_modules_in_order() -> None:
-    assert tuple(module.module_id for module in MODULES) == (
-        "bmb830.m01",
-        "bmb830.m02",
-        "bmb830.m03",
-        "bmb830.m04",
-        "bmb830.m05",
-        "bmb830.m06",
-        "bmb830.m07",
-        "bmb830.m08",
-        "bmb830.m09",
-        "bmb830.m10",
-        "bmb830.m11",
-        "bmb830.m12",
-    )
-    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 12
-    assert set(OBJECTIVE_QUESTION_BANKS) == {
-        "bmb830.m01",
-        "bmb830.m02",
-        "bmb830.m03",
-        "bmb830.m04",
-        "bmb830.m05",
-        "bmb830.m06",
-        "bmb830.m07",
-        "bmb830.m08",
-        "bmb830.m09",
-        "bmb830.m10",
-        "bmb830.m11",
-        "bmb830.m12",
+    expected_ids = tuple(f"bmb830.m{index:02d}" for index in range(1, 13))
+    expected_versions = {
+        "bmb830.m01": "1.0.0",
+        "bmb830.m02": "1.0.0",
+        "bmb830.m03": "1.1.0",
+        "bmb830.m04": "1.1.0",
+        **{f"bmb830.m{index:02d}": "1.0.0" for index in range(5, 13)},
     }
+    expected_assessment_counts = {
+        "bmb830.m03": 9,
+        "bmb830.m04": 9,
+    }
+
+    assert tuple(module.module_id for module in MODULES) == expected_ids
+    assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 12
+    assert set(OBJECTIVE_QUESTION_BANKS) == set(expected_ids)
     assert sum(len(bundle.objective_question_bank) for bundle in BUNDLES) == 192
 
     for bundle in BUNDLES:
@@ -51,9 +38,9 @@ def test_bmb830_registers_twelve_complete_modules_in_order() -> None:
         assert len(module.concepts) >= 4
         assert len(module.worked_examples) >= 2
         assert len(module.practice_exercises) >= 6
-        assert len(module.assessment_items) == 8
+        assert len(module.assessment_items) == expected_assessment_counts.get(module.module_id, 8)
         assert len(bundle.objective_question_bank) == 16
-        assert bundle.content_version == "1.0.0"
+        assert bundle.content_version == expected_versions[module.module_id]
         assert all(can_execute_r(example.code) for example in module.worked_examples)
 
 
