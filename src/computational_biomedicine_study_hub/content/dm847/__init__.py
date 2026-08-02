@@ -9,8 +9,10 @@ from ..bundles import LocalizedModuleBundle, validate_bundle_catalog
 from ..localized_models import LocalizedText
 from .book_grounded_audit import (
     DM847_BOOK_SOURCES,
-    DM847_MODULE_SOURCE_AUDIT as _BASE_DM847_MODULE_SOURCE_AUDIT,
     apply_book_grounded_extensions,
+)
+from .book_grounded_audit import (
+    DM847_MODULE_SOURCE_AUDIT as _BASE_DM847_MODULE_SOURCE_AUDIT,
 )
 from .book_grounded_hmm_bwt import apply_hmm_bwt_extensions, update_hmm_bwt_audit
 from .module_01_molecular_information import (
