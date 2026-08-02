@@ -236,11 +236,7 @@ def test_m04_finite_sample_rank_extension_has_deterministic_contract() -> None:
     worked = next(item for item in module.worked_examples if item.example_id == "m04.bg.e01")
     assert can_execute_r(worked.code)
     assert worked.expected_output == (
-        "samples=4\n"
-        "features=6\n"
-        "rank_ceiling=3\n"
-        "observed_rank=3\n"
-        "nonzero_pcs=3"
+        "samples=4\nfeatures=6\nrank_ceiling=3\nobserved_rank=3\nnonzero_pcs=3"
     )
 
     matrix = (
@@ -251,8 +247,7 @@ def test_m04_finite_sample_rank_extension_has_deterministic_contract() -> None:
     )
     column_means = tuple(sum(row[column] for row in matrix) / len(matrix) for column in range(6))
     centered = tuple(
-        tuple(value - column_means[column] for column, value in enumerate(row))
-        for row in matrix
+        tuple(value - column_means[column] for column, value in enumerate(row)) for row in matrix
     )
 
     assert min(len(matrix) - 1, len(matrix[0])) == 3
@@ -263,9 +258,7 @@ def test_m04_finite_sample_rank_extension_has_deterministic_contract() -> None:
 def test_m05_uncertainty_extension_distinguishes_error_bar_targets() -> None:
     module = _module("bmb831.m05")
     uncertainty = next(
-        item
-        for item in module.concepts
-        if item.concept_id == "spread-versus-estimator-uncertainty"
+        item for item in module.concepts if item.concept_id == "spread-versus-estimator-uncertainty"
     )
     exported = "\n".join((uncertainty.title, uncertainty.body, *uncertainty.key_points)).casefold()
 
@@ -334,9 +327,8 @@ def test_m01_m05_versions_counts_and_source_basis() -> None:
     assert "bioconductor-summarizedexperiment" in _module("bmb831.m02").tutor_support.source_basis
     assert "bioconductor-deseq2" in _module("bmb831.m03").tutor_support.source_basis
     assert "limma-empirical-bayes" in _module("bmb831.m03").tutor_support.source_basis
-    assert "islr-2021-unsupervised-multiple-testing" in _module(
-        "bmb831.m04"
-    ).tutor_support.source_basis
-    assert "ims-2024-visualisation-reporting" in _module(
-        "bmb831.m05"
-    ).tutor_support.source_basis
+    assert (
+        "islr-2021-unsupervised-multiple-testing"
+        in _module("bmb831.m04").tutor_support.source_basis
+    )
+    assert "ims-2024-visualisation-reporting" in _module("bmb831.m05").tutor_support.source_basis
