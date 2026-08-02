@@ -14,10 +14,10 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.activity_types import ActivityType
 
 EXPECTED_IDS = tuple(f"dm847.m{number:02d}" for number in range(1, 11))
+_REVIEWED_IDS = {"dm847.m03", "dm847.m04", "dm847.m05", "dm847.m06"}
 EXPECTED_VERSIONS = {
     **{module_id: "1.0.0" for module_id in EXPECTED_IDS},
-    "dm847.m03": "1.1.0",
-    "dm847.m04": "1.1.0",
+    **{module_id: "1.1.0" for module_id in _REVIEWED_IDS},
 }
 
 
@@ -28,7 +28,7 @@ def test_dm847_catalog_has_ten_complete_modules() -> None:
 
     for bundle in BUNDLES:
         module = bundle.module
-        expected_assessment_count = 11 if module.module_id in {"dm847.m03", "dm847.m04"} else 10
+        expected_assessment_count = 11 if module.module_id in _REVIEWED_IDS else 10
 
         assert module.course_code == "DM847"
         assert len(module.objectives) >= 6
