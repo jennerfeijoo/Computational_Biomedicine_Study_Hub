@@ -6,10 +6,12 @@ from ...i18n import AppLocale
 from ..bundles import LocalizedModuleBundle, validate_bundle_catalog
 from .book_grounded_audit import (
     BMB830_BOOK_SOURCES,
-    BMB830_MODULE_SOURCE_AUDIT as _BASE_BMB830_MODULE_SOURCE_AUDIT,
     AcademicReference,
     ModuleSourceAudit,
     apply_foundation_review,
+)
+from .book_grounded_audit import (
+    BMB830_MODULE_SOURCE_AUDIT as _BASE_BMB830_MODULE_SOURCE_AUDIT,
 )
 from .book_grounded_inference import apply_inference_review, update_inference_audit
 from .module_01_r_foundations import (
