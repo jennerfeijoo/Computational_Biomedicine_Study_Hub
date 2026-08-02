@@ -1,9 +1,4 @@
-"""Validate lineage, assay orientation, and sample metadata before omics analysis.
-
-The validator links a declared feature-by-sample matrix to a valid public-omics
-snapshot manifest. It checks structural and numerical contracts without performing
-normalization, imputation, statistical modelling, or biological interpretation.
-"""
+"""Validate lineage, assay orientation, and sample metadata before omics analysis."""
 
 from __future__ import annotations
 
@@ -302,7 +297,7 @@ def _relative_path(value: object) -> str:
         raise ValueError("Path must use POSIX '/' separators.")
     path = PurePosixPath(value)
     if path.is_absolute() or ".." in path.parts or path.as_posix() != value:
-        raise ValueError("Path must be a normalized relative path inside the analysis directory.")
+        raise ValueError("Path must be normalized and remain inside the analysis directory.")
     return value
 
 
@@ -354,21 +349,12 @@ def _regular_file(
             relative_path=relative_path,
         )
         return None
-    if path.is_symlink():
+    if path.is_symlink() or not path.is_file() or path.stat().st_size == 0:
         _issue(
             issues,
-            f"{role}-is-symlink",
+            f"missing-empty-or-symlinked-{role}",
             OmicsAnalysisSeverity.ERROR,
-            "Declared input must be a regular local file, not a symbolic link.",
-            relative_path=relative_path,
-        )
-        return None
-    if not path.is_file() or path.stat().st_size == 0:
-        _issue(
-            issues,
-            f"missing-or-empty-{role}",
-            OmicsAnalysisSeverity.ERROR,
-            "Declared input file is missing or empty.",
+            "Declared input must be a non-empty regular local file.",
             relative_path=relative_path,
         )
         return None
@@ -386,15 +372,12 @@ def _parse_assay(plan: dict[str, object], issues: list[OmicsAnalysisIssue]) -> _
         )
         return None
     mapping = cast(dict[str, object], raw)
-    path_value = mapping.get("path")
     feature_column = _string(mapping, "feature_id_column")
-    delimiter_value = mapping.get("delimiter")
-    scale_value = mapping.get("value_scale")
     allow_missing = mapping.get("allow_missing_values")
     try:
-        relative_path = _relative_path(path_value)
-        delimiter = OmicsDelimiter(delimiter_value)
-        value_scale = AssayValueScale(scale_value)
+        path = _relative_path(mapping.get("path"))
+        delimiter = OmicsDelimiter(mapping.get("delimiter"))
+        value_scale = AssayValueScale(mapping.get("value_scale"))
     except (TypeError, ValueError) as error:
         _issue(
             issues,
@@ -411,7 +394,7 @@ def _parse_assay(plan: dict[str, object], issues: list[OmicsAnalysisIssue]) -> _
             "assay requires feature_id_column and boolean allow_missing_values.",
         )
         return None
-    return _AssayConfig(relative_path, delimiter, feature_column, value_scale, allow_missing)
+    return _AssayConfig(path, delimiter, feature_column, value_scale, allow_missing)
 
 
 def _parse_metadata(
@@ -429,7 +412,7 @@ def _parse_metadata(
     mapping = cast(dict[str, object], raw)
     sample_column = _string(mapping, "sample_id_column")
     try:
-        relative_path = _relative_path(mapping.get("path"))
+        path = _relative_path(mapping.get("path"))
         delimiter = OmicsDelimiter(mapping.get("delimiter"))
     except (TypeError, ValueError) as error:
         _issue(
@@ -447,12 +430,10 @@ def _parse_metadata(
             "sample_metadata requires sample_id_column.",
         )
         return None
-    return _MetadataConfig(relative_path, delimiter, sample_column)
+    return _MetadataConfig(path, delimiter, sample_column)
 
 
-def _required_columns(
-    plan: dict[str, object], issues: list[OmicsAnalysisIssue]
-) -> tuple[str, ...]:
+def _required_columns(plan: dict[str, object], issues: list[OmicsAnalysisIssue]) -> tuple[str, ...]:
     raw = plan.get("required_metadata_columns")
     if not isinstance(raw, list) or not raw:
         _issue(
@@ -463,7 +444,8 @@ def _required_columns(
         )
         return ()
     values = tuple(value for value in raw if isinstance(value, str))
-    if len(values) != len(raw) or any(not value or value.strip() != value for value in values):
+    invalid = len(values) != len(raw) or any(not value or value.strip() != value for value in values)
+    if invalid:
         _issue(
             issues,
             "invalid-required-metadata-columns",
@@ -573,10 +555,10 @@ def _scan_assay(
                     if not math.isfinite(number):
                         counts["non_finite"] += 1
                         continue
-                    counts["zero"] += number == 0
-                    counts["negative"] += number < 0
+                    counts["zero"] += int(number == 0)
+                    counts["negative"] += int(number < 0)
                     if config.value_scale is AssayValueScale.RAW_COUNTS:
-                        counts["non_integer"] += not number.is_integer()
+                        counts["non_integer"] += int(not number.is_integer())
     except StopIteration:
         _issue(
             issues,
@@ -597,38 +579,38 @@ def _scan_assay(
         return None
 
     checks = (
-        ("assay-has-no-features", counts["features"] == 0, "Assay contains no feature rows."),
-        ("malformed-assay-rows", counts["malformed"] > 0, "Assay rows do not match header width."),
+        ("assay-has-no-features", int(counts["features"] == 0), "Assay contains no features."),
+        ("malformed-assay-rows", counts["malformed"], "Assay rows do not match header width."),
         (
             "blank-or-padded-feature-ids",
-            counts["blank_features"] > 0,
+            counts["blank_features"],
             "Feature IDs must be non-empty and unpadded.",
         ),
         (
             "duplicate-feature-ids",
-            counts["duplicate_features"] > 0,
+            counts["duplicate_features"],
             "Feature IDs must be unique at the declared analytical level.",
         ),
-        ("non-numeric-assay-values", counts["non_numeric"] > 0, "Assay cells must be numeric or empty."),
-        ("non-finite-assay-values", counts["non_finite"] > 0, "Assay cells cannot be NaN or infinity."),
+        (
+            "non-numeric-assay-values",
+            counts["non_numeric"],
+            "Assay cells must be numeric or empty.",
+        ),
+        (
+            "non-finite-assay-values",
+            counts["non_finite"],
+            "Assay cells cannot be NaN or infinity.",
+        ),
     )
-    issue_counts = {
-        "assay-has-no-features": 1,
-        "malformed-assay-rows": counts["malformed"],
-        "blank-or-padded-feature-ids": counts["blank_features"],
-        "duplicate-feature-ids": counts["duplicate_features"],
-        "non-numeric-assay-values": counts["non_numeric"],
-        "non-finite-assay-values": counts["non_finite"],
-    }
-    for code, active, message in checks:
-        if active:
+    for code, count, message in checks:
+        if count:
             _issue(
                 issues,
                 code,
                 OmicsAnalysisSeverity.ERROR,
                 message,
                 relative_path=config.path,
-                count=issue_counts[code],
+                count=count,
             )
     if counts["missing"]:
         _issue(
@@ -738,7 +720,9 @@ def _scan_metadata(
                     count=len(missing_columns),
                 )
             sample_index = header.index(config.sample_id_column)
-            required_indices = tuple(header.index(item) for item in required_columns if item in header)
+            required_indices = tuple(
+                header.index(item) for item in required_columns if item in header
+            )
             for row in reader:
                 row_count += 1
                 if len(row) != len(header):
@@ -749,8 +733,7 @@ def _scan_metadata(
                     blank_ids += 1
                 else:
                     sample_ids.append(sample_id)
-                    if sample_id in seen:
-                        duplicate_ids += 1
+                    duplicate_ids += int(sample_id in seen)
                     seen.add(sample_id)
                 blank_required += sum(not row[index].strip() for index in required_indices)
     except StopIteration:
@@ -969,11 +952,12 @@ def inspect_omics_analysis_input(
                         "Parent snapshot accession does not match the registry.",
                         relative_path=parent_relative,
                     )
-                if (
+                invalid_fingerprint = (
                     parent_fingerprint is None
                     or len(parent_fingerprint) != 64
                     or any(item not in "0123456789abcdefABCDEF" for item in parent_fingerprint)
-                ):
+                )
+                if invalid_fingerprint:
                     _issue(
                         issues,
                         "invalid-parent-snapshot-fingerprint",
@@ -1005,7 +989,9 @@ def inspect_omics_analysis_input(
                 "Assay and metadata must be separate files.",
                 relative_path=assay_config.path,
             )
-        assay_path = _regular_file(root_path, root_resolved, assay_config.path, "assay-file", issues)
+        assay_path = _regular_file(
+            root_path, root_resolved, assay_config.path, "assay-file", issues
+        )
         metadata_path = _regular_file(
             root_path,
             root_resolved,
