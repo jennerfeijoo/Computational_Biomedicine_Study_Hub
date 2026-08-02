@@ -21,6 +21,7 @@ class LabCopyKey(StrEnum):
     STDERR = "lab.stderr"
     EXPECTED = "lab.expected"
     NO_OUTPUT = "lab.no_output"
+    STATUS_COMPLETED = "lab.status.completed"
     STATUS_PASSED = "lab.status.passed"
     STATUS_MISMATCH = "lab.status.mismatch"
     STATUS_RUNTIME_ERROR = "lab.status.runtime_error"
@@ -42,8 +43,9 @@ _CATALOGS: dict[AppLocale, dict[LabCopyKey, str]] = {
         LabCopyKey.STDERR: "Errores",
         LabCopyKey.EXPECTED: "Salida de referencia",
         LabCopyKey.NO_OUTPUT: "(sin salida)",
-        LabCopyKey.STATUS_PASSED: "Ejecución completada",
-        LabCopyKey.STATUS_MISMATCH: "Ejecución completada",
+        LabCopyKey.STATUS_COMPLETED: "Ejecución completada",
+        LabCopyKey.STATUS_PASSED: "Salida correcta",
+        LabCopyKey.STATUS_MISMATCH: "El programa terminó, pero la salida no coincide",
         LabCopyKey.STATUS_RUNTIME_ERROR: "Error durante la ejecución",
         LabCopyKey.STATUS_TIMED_OUT: "Tiempo de ejecución agotado",
         LabCopyKey.STATUS_REJECTED: "Código rechazado por la política del laboratorio",
@@ -61,8 +63,9 @@ _CATALOGS: dict[AppLocale, dict[LabCopyKey, str]] = {
         LabCopyKey.STDERR: "Errors",
         LabCopyKey.EXPECTED: "Reference output",
         LabCopyKey.NO_OUTPUT: "(no output)",
-        LabCopyKey.STATUS_PASSED: "Execution completed",
-        LabCopyKey.STATUS_MISMATCH: "Execution completed",
+        LabCopyKey.STATUS_COMPLETED: "Execution completed",
+        LabCopyKey.STATUS_PASSED: "Output is correct",
+        LabCopyKey.STATUS_MISMATCH: "The program finished, but its output does not match",
         LabCopyKey.STATUS_RUNTIME_ERROR: "Runtime error",
         LabCopyKey.STATUS_TIMED_OUT: "Execution timed out",
         LabCopyKey.STATUS_REJECTED: "Code rejected by the lab policy",
@@ -80,8 +83,9 @@ _CATALOGS: dict[AppLocale, dict[LabCopyKey, str]] = {
         LabCopyKey.STDERR: "Fejl",
         LabCopyKey.EXPECTED: "Referenceoutput",
         LabCopyKey.NO_OUTPUT: "(intet output)",
-        LabCopyKey.STATUS_PASSED: "Kørslen er afsluttet",
-        LabCopyKey.STATUS_MISMATCH: "Kørslen er afsluttet",
+        LabCopyKey.STATUS_COMPLETED: "Kørslen er afsluttet",
+        LabCopyKey.STATUS_PASSED: "Outputtet er korrekt",
+        LabCopyKey.STATUS_MISMATCH: "Programmet afsluttede, men outputtet stemmer ikke",
         LabCopyKey.STATUS_RUNTIME_ERROR: "Kørselsfejl",
         LabCopyKey.STATUS_TIMED_OUT: "Kørselstiden udløb",
         LabCopyKey.STATUS_REJECTED: "Koden blev afvist af laboratoriets regler",
