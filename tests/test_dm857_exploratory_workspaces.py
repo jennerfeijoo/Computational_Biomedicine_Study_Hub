@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication, QFrame, QLabel
 
 from computational_biomedicine_study_hub.content.models import PracticeExercise
 from computational_biomedicine_study_hub.courses.dm857 import DM857Page
@@ -39,5 +39,5 @@ def test_dm857_assessment_tab_does_not_dump_static_question_cards(
     assert reader.select_section_index(4)
 
     assert reader.findChild(ObjectiveAssessmentWidget) is not None
-    assert reader.findChild(type(reader), "authoredAssessmentSectionTitle") is None
-    assert not reader.findChildren(type(page), "assessmentCard")
+    assert reader.findChild(QLabel, "authoredAssessmentSectionTitle") is None
+    assert not reader.findChildren(QFrame, "assessmentCard")
