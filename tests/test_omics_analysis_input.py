@@ -51,22 +51,11 @@ def _write_analysis(
     (root / "derived").mkdir(exist_ok=True)
     (root / "derived" / "assay.csv").write_text(
         assay_text
-        or (
-            "feature_id,S1,S2,S3\n"
-            "ENSG000001,10,11,12\n"
-            "ENSG000002,0,4,8\n"
-            "ENSG000003,5,5,5\n"
-        ),
+        or ("feature_id,S1,S2,S3\nENSG000001,10,11,12\nENSG000002,0,4,8\nENSG000003,5,5,5\n"),
         encoding="utf-8",
     )
     (root / "derived" / "samples.csv").write_text(
-        metadata_text
-        or (
-            "sample_id,condition,batch\n"
-            "S1,control,A\n"
-            "S2,treated,A\n"
-            "S3,treated,B\n"
-        ),
+        metadata_text or ("sample_id,condition,batch\nS1,control,A\nS2,treated,A\nS3,treated,B\n"),
         encoding="utf-8",
     )
     plan = {
@@ -148,12 +137,7 @@ def test_analysis_fingerprint_is_independent_of_root_name(tmp_path: Path) -> Non
 def test_sample_order_difference_warns_but_requires_id_join(tmp_path: Path) -> None:
     _write_analysis(
         tmp_path,
-        metadata_text=(
-            "sample_id,condition,batch\n"
-            "S3,treated,B\n"
-            "S1,control,A\n"
-            "S2,treated,A\n"
-        ),
+        metadata_text=("sample_id,condition,batch\nS3,treated,B\nS1,control,A\nS2,treated,A\n"),
     )
 
     report = inspect_omics_analysis_input(tmp_path, source_id="bioconductor.airway")
@@ -168,12 +152,7 @@ def test_sample_order_difference_warns_but_requires_id_join(tmp_path: Path) -> N
 def test_sample_set_mismatch_is_an_error(tmp_path: Path) -> None:
     _write_analysis(
         tmp_path,
-        metadata_text=(
-            "sample_id,condition,batch\n"
-            "S1,control,A\n"
-            "S2,treated,A\n"
-            "S4,treated,B\n"
-        ),
+        metadata_text=("sample_id,condition,batch\nS1,control,A\nS2,treated,A\nS4,treated,B\n"),
     )
 
     report = inspect_omics_analysis_input(tmp_path, source_id="bioconductor.airway")
@@ -187,11 +166,7 @@ def test_sample_set_mismatch_is_an_error(tmp_path: Path) -> None:
 
 
 def test_missing_values_require_explicit_declaration(tmp_path: Path) -> None:
-    assay = (
-        "feature_id,S1,S2,S3\n"
-        "P001,10,,12\n"
-        "P002,3,4,5\n"
-    )
+    assay = "feature_id,S1,S2,S3\nP001,10,,12\nP002,3,4,5\n"
     _write_analysis(tmp_path, assay_text=assay, allow_missing_values=False)
 
     rejected = inspect_omics_analysis_input(tmp_path, source_id="bioconductor.airway")
@@ -209,11 +184,7 @@ def test_missing_values_require_explicit_declaration(tmp_path: Path) -> None:
 def test_raw_count_scale_rejects_negative_and_fractional_values(tmp_path: Path) -> None:
     _write_analysis(
         tmp_path,
-        assay_text=(
-            "feature_id,S1,S2,S3\n"
-            "ENSG1,10,-1,12\n"
-            "ENSG2,3.5,4,5\n"
-        ),
+        assay_text=("feature_id,S1,S2,S3\nENSG1,10,-1,12\nENSG2,3.5,4,5\n"),
     )
 
     report = inspect_omics_analysis_input(tmp_path, source_id="bioconductor.airway")
