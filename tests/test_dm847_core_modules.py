@@ -14,7 +14,14 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.activity_types import ActivityType
 
 EXPECTED_IDS = tuple(f"dm847.m{number:02d}" for number in range(1, 11))
-_REVIEWED_IDS = {"dm847.m03", "dm847.m04", "dm847.m05", "dm847.m06"}
+_REVIEWED_IDS = {
+    "dm847.m03",
+    "dm847.m04",
+    "dm847.m05",
+    "dm847.m06",
+    "dm847.m08",
+    "dm847.m09",
+}
 EXPECTED_VERSIONS = {
     **{module_id: "1.0.0" for module_id in EXPECTED_IDS},
     **{module_id: "1.1.0" for module_id in _REVIEWED_IDS},

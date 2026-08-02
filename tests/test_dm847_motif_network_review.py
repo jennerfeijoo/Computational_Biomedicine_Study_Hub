@@ -47,9 +47,7 @@ def test_network_source_catalog_corrects_chapter_11_and_adds_primary_sources() -
     )
 
     assert "peptide sequencing" in catalog["compeau-pevzner-v2-ch11"].relevant_scope
-    assert "not biological network enrichment" in catalog[
-        "compeau-pevzner-v2-ch11"
-    ].relevant_scope
+    assert "not biological network enrichment" in catalog["compeau-pevzner-v2-ch11"].relevant_scope
     assert "ideker-2002-active-modules" in catalog
     assert "alcaraz-2012-keypathwayminer" in catalog
     assert "compeau-pevzner-v2-ch11" not in network_audit.source_ids
@@ -101,9 +99,7 @@ def test_motif_and_network_extensions_are_complete_and_locale_stable() -> None:
 def test_motif_extension_preserves_soft_em_boundaries() -> None:
     motif = _module("dm847.m08")
     concept = next(
-        item
-        for item in motif.concepts
-        if item.concept_id == "fractional-counts-and-em-convergence"
+        item for item in motif.concepts if item.concept_id == "fractional-counts-and-em-convergence"
     )
     exported = "\n".join((concept.body, *concept.key_points)).casefold()
 

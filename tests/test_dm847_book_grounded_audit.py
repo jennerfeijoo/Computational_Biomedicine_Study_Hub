@@ -11,6 +11,8 @@ _REVIEWED_MODULE_IDS = {
     "dm847.m04",
     "dm847.m05",
     "dm847.m06",
+    "dm847.m08",
+    "dm847.m09",
 }
 
 
@@ -41,6 +43,8 @@ def test_dm847_source_catalog_has_unique_stable_ids() -> None:
     assert "compeau-pevzner-v1-ch01" in source_ids
     assert "compeau-pevzner-v1-ch05" in source_ids
     assert "compeau-pevzner-v2-ch09" in source_ids
+    assert "ideker-2002-active-modules" in source_ids
+    assert "alcaraz-2012-keypathwayminer" in source_ids
 
 
 def test_only_completed_focused_reviews_are_marked_consistent() -> None:
