@@ -23,7 +23,7 @@ def test_module_01_mapping_exactly_covers_every_assessable_activity() -> None:
         *(item.item_id for item in bundle.objective_question_bank),
     }
     assert set(catalog.activity_ids) == expected_ids
-    assert len(catalog.activity_ids) == 38
+    assert len(catalog.activity_ids) == 40
 
 
 def test_module_01_mapping_is_identical_in_every_locale() -> None:
@@ -36,7 +36,8 @@ def test_module_01_mapping_is_identical_in_every_locale() -> None:
 
 
 def test_every_module_01_objective_receives_practice_and_assessment_evidence() -> None:
-    objective_ids = {f"m01.o{index}" for index in range(1, 7)}
+    bundle = LOCALIZED_BUNDLES[0].materialize(AppLocale.ENGLISH)
+    objective_ids = {objective.objective_id for objective in bundle.module.objectives}
     practice_targets = {
         objective_id
         for link in DM847_M01_OBJECTIVE_LINKS.links
@@ -46,7 +47,7 @@ def test_every_module_01_objective_receives_practice_and_assessment_evidence() -
     assessment_targets = {
         objective_id
         for link in DM847_M01_OBJECTIVE_LINKS.links
-        if ".assessment." in link.activity_id or ".bank." in link.activity_id
+        if any(marker in link.activity_id for marker in (".assessment.", ".bank.", ".book."))
         for objective_id in link.objective_ids
     }
 
@@ -62,6 +63,10 @@ def test_specific_multidimensional_activities_keep_all_objective_links() -> None
     assert DM847_M01_OBJECTIVE_LINKS.objectives_for("dm847.m01.bank.006") == (
         "m01.o5",
         "m01.o6",
+    )
+    assert DM847_M01_OBJECTIVE_LINKS.objectives_for("m01.bg.p01") == ("m01.bg.o1",)
+    assert DM847_M01_OBJECTIVE_LINKS.objectives_for("dm847.m01.book.001") == (
+        "m01.bg.o1",
     )
     assert DM847_M01_OBJECTIVE_LINKS.objectives_for("unknown") == ()
 
