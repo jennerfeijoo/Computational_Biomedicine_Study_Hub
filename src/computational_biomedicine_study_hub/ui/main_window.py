@@ -3,11 +3,16 @@
 from __future__ import annotations
 
 from PySide6.QtCore import QByteArray, QSettings, Slot
-from PySide6.QtGui import QCloseEvent
+from PySide6.QtGui import QCloseEvent, QResizeEvent
 from PySide6.QtWidgets import (
+    QApplication,
+    QComboBox,
     QHBoxLayout,
+    QLabel,
     QMainWindow,
+    QPushButton,
     QStackedWidget,
+    QTabWidget,
     QVBoxLayout,
     QWidget,
 )
@@ -22,6 +27,7 @@ from ..i18n import (
     UiCopyKey,
     ui_text,
 )
+from ..i18n.tutor_chat_copy import TutorChatCopyKey, tutor_chat_text
 from ..storage import SQLiteProgressStore
 from .header import PageHeader
 from .navigation import NavigationSidebar
@@ -39,6 +45,11 @@ from .routes import (
 )
 from .styles import build_application_stylesheet
 from .theme import AppearanceMode, ThemeController, VisualTheme
+from .widgets.floating_tutor_chat import (
+    FloatingTutorChat,
+    TutorSelectionEventFilter,
+    position_floating_tutor,
+)
 
 ModularCoursePage = DM847Page | DM857Page
 StudyLocation = tuple[int, int]
@@ -99,6 +110,26 @@ class MainWindow(QMainWindow):
         self._restore_window_state()
         self.navigate(self._stored_route())
 
+        self._tutor_launcher = QPushButton(self)
+        self._tutor_launcher.setObjectName("floatingTutorLauncher")
+        self._tutor_launcher.clicked.connect(self._show_floating_tutor)
+        self._floating_tutor = FloatingTutorChat(
+            settings=self._settings,
+            context_provider=self._tutor_context,
+            locale=self._language.locale,
+            parent=self,
+        )
+        self._selection_tutor_filter = TutorSelectionEventFilter(
+            self._floating_tutor,
+            locale=self._language.locale,
+            parent=self,
+        )
+        application = QApplication.instance()
+        if isinstance(application, QApplication):
+            application.installEventFilter(self._selection_tutor_filter)
+        self._retranslate_tutor_controls()
+        position_floating_tutor(self._floating_tutor, self._tutor_launcher, self)
+
     @property
     def current_route(self) -> RouteId | str:
         """Return the route associated with the current page."""
@@ -136,6 +167,12 @@ class MainWindow(QMainWindow):
 
         return self._theme
 
+    @property
+    def floating_tutor(self) -> FloatingTutorChat:
+        """Return the application-wide contextual tutor panel."""
+
+        return self._floating_tutor
+
     def set_appearance(self, mode: AppearanceMode | str) -> bool:
         """Apply and persist a new appearance preference immediately."""
 
@@ -158,12 +195,26 @@ class MainWindow(QMainWindow):
         self._header.set_text(descriptor.title, descriptor.subtitle)
         self._navigation.set_active_route(key)
         self._settings.setValue("navigation/last_route", key)
+        if hasattr(self, "_floating_tutor") and self._floating_tutor.isVisible():
+            self._floating_tutor.refresh_context()
+
+    def resizeEvent(self, event: QResizeEvent) -> None:  # noqa: N802
+        """Keep the floating tutor anchored to the lower-right corner."""
+
+        super().resizeEvent(event)
+        if hasattr(self, "_floating_tutor"):
+            position_floating_tutor(self._floating_tutor, self._tutor_launcher, self)
 
     def closeEvent(self, event: QCloseEvent) -> None:  # noqa: N802
         """Persist geometry and active learner work before the window closes."""
 
         self._persist_review_session()
         self._persist_assessments()
+        if hasattr(self, "_floating_tutor"):
+            self._floating_tutor.cancel_request()
+        application = QApplication.instance()
+        if isinstance(application, QApplication) and hasattr(self, "_selection_tutor_filter"):
+            application.removeEventFilter(self._selection_tutor_filter)
         self._settings.setValue("window/geometry", self.saveGeometry())
         super().closeEvent(event)
 
@@ -225,6 +276,7 @@ class MainWindow(QMainWindow):
         self._set_window_title()
         self.navigate(route)
         self._restore_study_location(route, study_location)
+        self._retranslate_tutor_controls()
 
     @Slot(str)
     def _apply_theme(self, theme_value: str) -> None:
@@ -284,6 +336,52 @@ class MainWindow(QMainWindow):
 
     def _on_route_selected(self, selected_route: str) -> None:
         self.navigate(selected_route)
+
+    @Slot()
+    def _show_floating_tutor(self) -> None:
+        self._floating_tutor.show_panel()
+        position_floating_tutor(self._floating_tutor, self._tutor_launcher, self)
+
+    def _retranslate_tutor_controls(self) -> None:
+        locale = self._language.locale
+        self._tutor_launcher.setText(tutor_chat_text(locale, TutorChatCopyKey.OPEN))
+        self._floating_tutor.set_locale(locale)
+        self._selection_tutor_filter.set_locale(locale)
+        position_floating_tutor(self._floating_tutor, self._tutor_launcher, self)
+
+    def _tutor_context(self) -> str:
+        """Describe the currently visible page, module and section for Ollama."""
+
+        route = route_value(self.current_route)
+        descriptor = self._descriptors.get(route)
+        parts: list[str] = []
+        if descriptor is not None:
+            parts.extend((descriptor.title, descriptor.subtitle))
+
+        modular_page = self._modular_course_page(route)
+        if modular_page is not None:
+            reader = modular_page.reader
+            parts.extend(
+                (
+                    f"Module: {reader.module.title}",
+                    f"Module summary: {reader.module.summary}",
+                    f"Visible section: {reader.current_section}",
+                )
+            )
+        else:
+            page = self._stack.currentWidget()
+            if page is not None:
+                module_title = page.findChild(QLabel, "moduleContextTitle")
+                if module_title is not None and module_title.text().strip():
+                    parts.append(f"Module: {module_title.text().strip()}")
+                selector = page.findChild(QComboBox, "courseModuleSelector")
+                if selector is not None and selector.currentText().strip():
+                    parts.append(f"Selected module: {selector.currentText().strip()}")
+                tabs = page.findChild(QTabWidget, "moduleTabs")
+                if tabs is not None and tabs.currentIndex() >= 0:
+                    parts.append(f"Visible section: {tabs.tabText(tabs.currentIndex())}")
+
+        return "\n".join(dict.fromkeys(part for part in parts if part.strip()))
 
     @Slot(str, str, str)
     def _open_review_item(
