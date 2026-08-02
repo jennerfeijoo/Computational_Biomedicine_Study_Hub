@@ -14,6 +14,10 @@ from computational_biomedicine_study_hub.learning.r_execution import can_execute
 
 def test_bmb831_registers_nine_complete_modules() -> None:
     expected_ids = tuple(f"bmb831.m{number:02d}" for number in range(1, 10))
+    expected_versions = {
+        module_id: "1.1.0" if module_id in {"bmb831.m02", "bmb831.m03"} else "1.0.0"
+        for module_id in expected_ids
+    }
     assert tuple(module.module_id for module in MODULES) == expected_ids
     assert len(BUNDLES) == len(LOCALIZED_BUNDLES) == 9
     assert set(OBJECTIVE_QUESTION_BANKS) == set(expected_ids)
@@ -21,14 +25,15 @@ def test_bmb831_registers_nine_complete_modules() -> None:
 
     for bundle in BUNDLES:
         module = bundle.module
+        expected_assessment_count = 9 if module.module_id in {"bmb831.m02", "bmb831.m03"} else 8
         assert module.course_code == "BMB831"
         assert len(module.objectives) >= 4
         assert len(module.concepts) >= 4
         assert len(module.worked_examples) >= 2
         assert len(module.practice_exercises) >= 6
-        assert len(module.assessment_items) == 8
+        assert len(module.assessment_items) == expected_assessment_count
         assert len(bundle.objective_question_bank) == 16
-        assert bundle.content_version == "1.0.0"
+        assert bundle.content_version == expected_versions[module.module_id]
         assert all(can_execute_r(example.code) for example in module.worked_examples)
 
 
@@ -66,6 +71,8 @@ def test_bmb831_omics_modules_cover_matrix_and_inference_contracts() -> None:
     assert "normalización" in matrix_text
     assert "muestra" in matrix_text
     assert "lote" in matrix_text
+    assert "sesgo composicional" in matrix_text
+    assert "factor de normalización" in matrix_text
 
     assert "contraste" in differential_text
     assert "diseño" in differential_text
@@ -73,6 +80,8 @@ def test_bmb831_omics_modules_cover_matrix_and_inference_contracts() -> None:
     assert "tamaño del efecto" in differential_text
     assert "multiplicidad" in differential_text
     assert "benjamini-hochberg" in differential_text
+    assert "empírico-bayes" in differential_text
+    assert "préstamo de información" in differential_text
 
 
 def test_bmb831_multivariate_and_visualization_modules_are_advanced() -> None:
