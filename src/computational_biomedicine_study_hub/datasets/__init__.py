@@ -6,6 +6,15 @@ from .omics_registry import (
     PublicOmicsSource,
     public_omics_source,
 )
+from .omics_snapshot import (
+    DEFAULT_OMICS_PLAN_FILENAME,
+    GENERATED_OMICS_MANIFEST_ROLE,
+    OmicsArtifactProfile,
+    OmicsSnapshotIssue,
+    OmicsSnapshotReport,
+    OmicsSnapshotSeverity,
+    inspect_public_omics_snapshot,
+)
 from .synthea_patient_table import (
     PATIENT_TABLE_COLUMNS,
     PatientTableBuildError,
@@ -24,11 +33,17 @@ from .synthea_snapshot import (
 )
 
 __all__ = [
+    "DEFAULT_OMICS_PLAN_FILENAME",
+    "GENERATED_OMICS_MANIFEST_ROLE",
     "PATIENT_TABLE_COLUMNS",
     "PUBLIC_OMICS_SOURCES",
     "SYNTHEA_CSV_CONTRACTS",
     "IssueSeverity",
+    "OmicsArtifactProfile",
     "OmicsModality",
+    "OmicsSnapshotIssue",
+    "OmicsSnapshotReport",
+    "OmicsSnapshotSeverity",
     "PatientTableBuildError",
     "PatientTableConfig",
     "PatientTableReport",
@@ -38,6 +53,7 @@ __all__ = [
     "TableContract",
     "TableProfile",
     "build_synthea_patient_table",
+    "inspect_public_omics_snapshot",
     "inspect_synthea_csv_directory",
     "public_omics_source",
 ]
