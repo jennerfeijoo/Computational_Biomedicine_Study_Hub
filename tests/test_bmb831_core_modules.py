@@ -14,8 +14,9 @@ from computational_biomedicine_study_hub.learning.r_execution import can_execute
 
 def test_bmb831_registers_nine_complete_modules() -> None:
     expected_ids = tuple(f"bmb831.m{number:02d}" for number in range(1, 10))
+    reviewed_extensions = {f"bmb831.m{number:02d}" for number in range(2, 6)}
     expected_versions = {
-        module_id: "1.1.0" if module_id in {"bmb831.m02", "bmb831.m03"} else "1.0.0"
+        module_id: "1.1.0" if module_id in reviewed_extensions else "1.0.0"
         for module_id in expected_ids
     }
     assert tuple(module.module_id for module in MODULES) == expected_ids
@@ -25,7 +26,7 @@ def test_bmb831_registers_nine_complete_modules() -> None:
 
     for bundle in BUNDLES:
         module = bundle.module
-        expected_assessment_count = 9 if module.module_id in {"bmb831.m02", "bmb831.m03"} else 8
+        expected_assessment_count = 9 if module.module_id in reviewed_extensions else 8
         assert module.course_code == "BMB831"
         assert len(module.objectives) >= 4
         assert len(module.concepts) >= 4
@@ -95,6 +96,8 @@ def test_bmb831_multivariate_and_visualization_modules_are_advanced() -> None:
     assert "clustering" in multivariate_text
     assert "estabilidad" in multivariate_text
     assert "fuga" in multivariate_text
+    assert "min(p, n - 1)" in multivariate_text
+    assert "subespacio" in multivariate_text
 
     assert "pregunta" in visualization_text
     assert "unidad analítica" in visualization_text
@@ -104,6 +107,9 @@ def test_bmb831_multivariate_and_visualization_modules_are_advanced() -> None:
     assert "incertidumbre" in visualization_text
     assert "accesibilidad" in visualization_text
     assert "reproduc" in visualization_text
+    assert "desviación estándar" in visualization_text
+    assert "error estándar" in visualization_text
+    assert "intervalo predictivo" in visualization_text
 
 
 def test_bmb831_final_modules_cover_public_omics_proteins_and_reporting() -> None:
