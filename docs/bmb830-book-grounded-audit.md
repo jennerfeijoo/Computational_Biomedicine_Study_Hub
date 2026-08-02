@@ -12,7 +12,7 @@ The audit uses:
 
 - the active SDU BMB830 description;
 - *Introduction to Modern Statistics*, second edition, for data, exploratory analysis, probability, inference, randomization tests, group comparison, regression, and model interpretation;
-- *An Introduction to Statistical Learning with Applications in R*, second edition, for statistical learning, regression identities, resampling, model assessment, and validation;
+- *An Introduction to Statistical Learning with Applications in R*, second edition, for statistical learning, regression identities, resampling, model assessment, validation, basis functions, and nonlinear modelling;
 - the uploaded Yachay Tech probability/statistics notes;
 - the uploaded Yachay Tech biostatistics and linear-model notes.
 
@@ -27,21 +27,21 @@ Reviewed and marked `consistent`:
 - M03 — probability, sampling, and distributions;
 - M04 — estimation and confidence intervals;
 - M05 — hypothesis testing, errors, power, and randomization tests;
-- M06 — group comparison, ANOVA, and planned contrasts.
+- M06 — group comparison, ANOVA, and planned contrasts;
+- M10 — diagnostics, influence, PRESS, and validation.
 
 Reviewed and marked `correct` because numerical output required correction:
 
 - M07 — correlation and simple regression;
-- M08 — multiple regression.
+- M08 — multiple regression;
+- M09 — interactions and nonlinearity.
 
 Pending focused review:
 
-- M09 — interactions and nonlinearity;
-- M10 — diagnostics and validation;
 - M11 — introductory multivariate analysis;
 - M12 — high-dimensional biological case.
 
-Source mapping alone is not treated as completed verification. Current BMB830 completion is 8 of 12 modules.
+Source mapping alone is not treated as completed verification. Current BMB830 completion is 10 of 12 modules.
 
 ## Findings and additions
 
@@ -203,6 +203,57 @@ groupA=0.95
 groupB=1.89
 ```
 
+### M09 — local nonlinear bases and corrected quadratic output
+
+The module already covered effect modification, product terms, hierarchy, conditional slopes, centring, quadratic curvature, nested comparisons, and extrapolation. The focused comparison identified two issues:
+
+- nonlinearity was represented only through a global quadratic polynomial;
+- `m09.e02` contained incorrect coefficient, p-value, and prediction output.
+
+The extension adds a piecewise-linear hinge basis `(x-k)+ = max(0, x-k)` and makes explicit that:
+
+- the slope before the knot is `beta1`;
+- the slope after the knot is `beta1 + beta2`;
+- `beta2` is the change in slope, not the complete post-knot slope;
+- the curve remains continuous at the knot;
+- local bases and global polynomials distribute flexibility differently;
+- knot selection must occur inside the modelling and validation procedure.
+
+The deterministic example returns:
+
+```text
+slope_before=0.50
+slope_after=2.00
+predictions=2.00, 6.50
+```
+
+The corrected quadratic example output is:
+
+```text
+quadratic=0.344
+comparison_p=0.0000
+2.34, 1.04, 2.49
+```
+
+### M10 — PRESS residuals and leave-one-out validation
+
+The module already covered residual patterns, heteroscedasticity, leverage, studentised residuals, Cook's distance, sensitivity analysis, held-out validation, leakage, and dependence-aware splitting. The extension adds the exact fixed-design OLS identity:
+
+- deleted residual `e_(i) = e_i / (1-h_ii)`;
+- `PRESS = sum(e_(i)^2)`;
+- leave-one-out RMSE `sqrt(PRESS/n)`;
+- amplification of validation error by high leverage;
+- the boundary that adaptive preprocessing and model selection must be repeated inside each fold.
+
+The deterministic example returns:
+
+```text
+train_rmse=0.563
+loocv_rmse=1.018
+press=6.219
+largest_loo_residual=2.000
+```
+
 ## Version state
 
 - M01: `1.0.0` — reviewed, no visible extension;
@@ -213,6 +264,8 @@ groupB=1.89
 - M06: `1.1.0` — ANOVA and contrast extension;
 - M07: `1.1.0` — correlation-slope extension and interval-output correction;
 - M08: `1.1.0` — partial-regression extension and worked-output corrections;
-- M09–M12: `1.0.0` — focused review pending.
+- M09: `1.1.0` — piecewise-linear basis extension and quadratic-output correction;
+- M10: `1.1.0` — PRESS and leave-one-out extension;
+- M11–M12: `1.0.0` — focused review pending.
 
 Experimental-data acquisition remains deferred. Synthea and bounded synthetic matrices are not treated as substitutes for external biological evidence.

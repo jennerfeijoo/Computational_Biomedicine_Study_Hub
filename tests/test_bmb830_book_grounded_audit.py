@@ -10,7 +10,7 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.r_execution import can_execute_r
 
 _EXPECTED_MODULE_IDS = {f"bmb830.m{index:02d}" for index in range(1, 13)}
-_REVIEWED_MODULE_IDS = {f"bmb830.m{index:02d}" for index in range(1, 9)}
+_REVIEWED_MODULE_IDS = {f"bmb830.m{index:02d}" for index in range(1, 11)}
 
 
 def _module(module_id: str, locale: AppLocale | str = AppLocale.ENGLISH):
@@ -75,6 +75,7 @@ def test_bmb830_source_catalog_has_unique_stable_ids() -> None:
     assert "ims-2024-probability-inference" in source_ids
     assert "ims-2024-regression-models" in source_ids
     assert "islr-2021-ch02-05" in source_ids
+    assert "islr-2021-ch07" in source_ids
     assert "yachay-probability-statistics" in source_ids
     assert "yachay-biostatistics-linear-models" in source_ids
 
@@ -91,6 +92,8 @@ def test_only_completed_reviews_are_marked_reviewed() -> None:
     } == _EXPECTED_MODULE_IDS - _REVIEWED_MODULE_IDS
     assert state_by_module["bmb830.m07"] == "correct"
     assert state_by_module["bmb830.m08"] == "correct"
+    assert state_by_module["bmb830.m09"] == "correct"
+    assert state_by_module["bmb830.m10"] == "consistent"
 
 
 def test_review_identity_is_locale_stable() -> None:
@@ -101,6 +104,8 @@ def test_review_identity_is_locale_stable() -> None:
         "bmb830.m06",
         "bmb830.m07",
         "bmb830.m08",
+        "bmb830.m09",
+        "bmb830.m10",
     ):
         reference = _identities(module_id, AppLocale.SPANISH_SPAIN)
         for locale in AppLocale:

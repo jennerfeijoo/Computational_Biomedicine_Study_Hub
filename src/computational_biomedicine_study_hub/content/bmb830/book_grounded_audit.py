@@ -94,6 +94,18 @@ BMB830_BOOK_SOURCES: tuple[AcademicReference, ...] = (
         ),
     ),
     AcademicReference(
+        "islr-2021-ch07",
+        (
+            "Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani, "
+            "An Introduction to Statistical Learning with Applications in R, 2nd ed. "
+            "(2021), chapter 7."
+        ),
+        (
+            "polynomial regression, basis functions, piecewise polynomials, regression "
+            "splines, smoothing splines, local regression, and generalized additive models"
+        ),
+    ),
+    AcademicReference(
         "yachay-probability-statistics",
         "Yachay Tech, Clases probabilidad y estadística, course notes.",
         (

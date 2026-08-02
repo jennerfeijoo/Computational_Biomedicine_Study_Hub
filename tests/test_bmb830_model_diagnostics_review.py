@@ -33,14 +33,12 @@ def _simple_fit(
     y_mean = sum(y) / len(y)
     sxx = sum((value - x_mean) ** 2 for value in x)
     sxy = sum(
-        (x_value - x_mean) * (y_value - y_mean)
-        for x_value, y_value in zip(x, y, strict=True)
+        (x_value - x_mean) * (y_value - y_mean) for x_value, y_value in zip(x, y, strict=True)
     )
     slope = sxy / sxx
     intercept = y_mean - slope * x_mean
     residuals = tuple(
-        observed - (intercept + slope * predictor)
-        for predictor, observed in zip(x, y, strict=True)
+        observed - (intercept + slope * predictor) for predictor, observed in zip(x, y, strict=True)
     )
     return intercept, slope, residuals
 
@@ -101,16 +99,12 @@ def test_piecewise_linear_extension_recovers_local_slopes_and_corrects_quadratic
     assert response[5] - response[4] == 2.0
 
     corrected = next(item for item in module.worked_examples if item.example_id == "m09.e02")
-    assert corrected.expected_output == (
-        "quadratic=0.344\ncomparison_p=0.0000\n2.34, 1.04, 2.49"
-    )
+    assert corrected.expected_output == ("quadratic=0.344\ncomparison_p=0.0000\n2.34, 1.04, 2.49")
 
 
 def test_press_extension_links_leverage_and_leave_one_out_error() -> None:
     module = _module("bmb830.m10")
-    press = next(
-        item for item in module.concepts if item.concept_id == "press-residuals-and-loocv"
-    )
+    press = next(item for item in module.concepts if item.concept_id == "press-residuals-and-loocv")
     exported = "\n".join((press.body, *press.key_points)).casefold()
 
     assert "e_i/(1-h_ii)" in exported
