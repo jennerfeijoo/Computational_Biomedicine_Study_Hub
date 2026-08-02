@@ -328,8 +328,7 @@ def inspect_public_omics_snapshot(
                 code="source-id-mismatch",
                 severity=OmicsSnapshotSeverity.ERROR,
                 message=(
-                    f"Plan source_id must be {source.source_id!r}; "
-                    f"received {declared_source_id!r}."
+                    f"Plan source_id must be {source.source_id!r}; received {declared_source_id!r}."
                 ),
             )
         )
@@ -395,9 +394,7 @@ def inspect_public_omics_snapshot(
 
     artifact_paths = cast(dict[str, object], raw_artifact_paths)
     required_roles = tuple(
-        role
-        for role in source.required_local_artifacts
-        if role != GENERATED_OMICS_MANIFEST_ROLE
+        role for role in source.required_local_artifacts if role != GENERATED_OMICS_MANIFEST_ROLE
     )
     missing_roles = tuple(role for role in required_roles if role not in artifact_paths)
     if missing_roles:
@@ -424,11 +421,7 @@ def inspect_public_omics_snapshot(
         )
 
     extra_roles = tuple(
-        sorted(
-            role
-            for role in artifact_paths
-            if role not in source.required_local_artifacts
-        )
+        sorted(role for role in artifact_paths if role not in source.required_local_artifacts)
     )
     if extra_roles:
         issues.append(
