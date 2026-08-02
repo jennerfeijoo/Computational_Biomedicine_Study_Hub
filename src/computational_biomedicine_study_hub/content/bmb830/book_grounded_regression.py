@@ -60,9 +60,7 @@ def update_regression_audit(
             updated.append(
                 replace(
                     item,
-                    source_ids=tuple(
-                        dict.fromkeys((*item.source_ids, "islr-2021-ch02-05"))
-                    ),
+                    source_ids=tuple(dict.fromkeys((*item.source_ids, "islr-2021-ch02-05"))),
                     source_scope=item.source_scope
                     + (
                         "correlation-slope scale identity",

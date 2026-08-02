@@ -47,7 +47,9 @@ def _sample_covariance(left: tuple[float, ...], right: tuple[float, ...]) -> flo
     ) / (len(left) - 1)
 
 
-def _simple_residuals(response: tuple[float, ...], predictor: tuple[float, ...]) -> tuple[float, ...]:
+def _simple_residuals(
+    response: tuple[float, ...], predictor: tuple[float, ...]
+) -> tuple[float, ...]:
     slope = _sample_covariance(predictor, response) / _sample_variance(predictor)
     intercept = _sample_mean(response) - slope * _sample_mean(predictor)
     return tuple(
@@ -237,19 +239,12 @@ def test_simple_regression_extension_links_scale_slope_and_r_squared() -> None:
     example = next(item for item in module.worked_examples if item.example_id == "m07.bg.e01")
     assert can_execute_r(example.code)
     assert example.expected_output == (
-        "r=0.998\n"
-        "slope=1.342\n"
-        "r_sy_sx=1.342\n"
-        "standardised_slope=0.998\n"
-        "r2=0.997\n"
-        "r_squared=0.997"
+        "r=0.998\nslope=1.342\nr_sy_sx=1.342\nstandardised_slope=0.998\nr2=0.997\nr_squared=0.997"
     )
 
     x = (1.0, 2.0, 4.0, 5.0, 7.0)
     y = (2.0, 3.0, 6.0, 7.0, 10.0)
-    correlation = _sample_covariance(x, y) / math.sqrt(
-        _sample_variance(x) * _sample_variance(y)
-    )
+    correlation = _sample_covariance(x, y) / math.sqrt(_sample_variance(x) * _sample_variance(y))
     slope = _sample_covariance(x, y) / _sample_variance(x)
     scale_identity = correlation * math.sqrt(_sample_variance(y) / _sample_variance(x))
     assert (round(correlation, 3), round(slope, 3), round(scale_identity, 3)) == (
@@ -260,9 +255,7 @@ def test_simple_regression_extension_links_scale_slope_and_r_squared() -> None:
     assert round(correlation**2, 3) == 0.997
 
     corrected = next(item for item in module.worked_examples if item.example_id == "m07.e02")
-    assert corrected.expected_output == (
-        "mean=5.55\nmean_ci=[5.31, 5.79]\nprediction=[4.99, 6.12]"
-    )
+    assert corrected.expected_output == ("mean=5.55\nmean_ci=[5.31, 5.79]\nprediction=[4.99, 6.12]")
 
 
 def test_multiple_regression_extension_recovers_partial_slope_and_corrects_outputs() -> None:
@@ -302,9 +295,7 @@ def test_multiple_regression_extension_recovers_partial_slope_and_corrects_outpu
     assert crude.expected_output == (
         "crude_exposure=1.191\nadjusted_exposure=0.382\nadjusted_age=0.123"
     )
-    assert factors.expected_output == (
-        "(Intercept),groupA,groupB,age\ngroupA=0.95\ngroupB=1.89"
-    )
+    assert factors.expected_output == ("(Intercept),groupA,groupB,age\ngroupA=0.95\ngroupB=1.89")
 
 
 def test_reviewed_modules_expose_named_source_basis() -> None:
