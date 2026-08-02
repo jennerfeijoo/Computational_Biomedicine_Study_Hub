@@ -1,4 +1,4 @@
-"""Regression tests for the DM847 book-grounded audit and first extensions."""
+"""Regression tests for the cumulative DM847 source-grounded audit."""
 
 from __future__ import annotations
 
@@ -6,16 +6,7 @@ from computational_biomedicine_study_hub.content import dm847
 from computational_biomedicine_study_hub.i18n import AppLocale
 
 _EXPECTED_MODULE_IDS = {f"dm847.m{index:02d}" for index in range(1, 11)}
-_REVIEWED_MODULE_IDS = {
-    "dm847.m01",
-    "dm847.m03",
-    "dm847.m04",
-    "dm847.m05",
-    "dm847.m06",
-    "dm847.m08",
-    "dm847.m09",
-    "dm847.m10",
-}
+_REVIEWED_MODULE_IDS = set(_EXPECTED_MODULE_IDS)
 
 
 def _module(module_id: str, locale: AppLocale | str = AppLocale.ENGLISH):
@@ -47,6 +38,8 @@ def test_dm847_source_catalog_has_unique_stable_ids() -> None:
     assert "compeau-pevzner-v2-ch09" in source_ids
     assert "ideker-2002-active-modules" in source_ids
     assert "alcaraz-2012-keypathwayminer" in source_ids
+    assert "coveney-2014-ch03-ch08" in source_ids
+    assert "yachay-molecular-biology-ch19-ch26" in source_ids
 
 
 def test_only_completed_focused_reviews_are_marked_consistent() -> None:
@@ -57,7 +50,7 @@ def test_only_completed_focused_reviews_are_marked_consistent() -> None:
     } == _REVIEWED_MODULE_IDS
     assert {
         module_id for module_id, state in state_by_module.items() if state == "pending"
-    } == _EXPECTED_MODULE_IDS - _REVIEWED_MODULE_IDS
+    } == set()
 
 
 def test_first_extensions_are_complete_and_locale_stable() -> None:
