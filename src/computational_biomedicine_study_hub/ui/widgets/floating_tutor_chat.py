@@ -5,8 +5,18 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Protocol
 
-from PySide6.QtCore import QEvent, QObject, QRunnable, QSettings, QThreadPool, Signal, Slot
-from PySide6.QtGui import QContextMenuEvent
+from PySide6.QtCore import (
+    QEvent,
+    QObject,
+    QPoint,
+    QRunnable,
+    QSettings,
+    Qt,
+    QThreadPool,
+    Signal,
+    Slot,
+)
+from PySide6.QtGui import QContextMenuEvent, QMouseEvent
 from PySide6.QtWidgets import (
     QFrame,
     QHBoxLayout,
@@ -168,7 +178,7 @@ class QtTutorChatExecutor:
 
 
 class FloatingTutorChat(QFrame):
-    """Maintain one in-memory contextual tutor conversation across application pages."""
+    """Maintain one movable in-memory tutor conversation across application pages."""
 
     visibility_changed = Signal(bool)
 
@@ -199,14 +209,24 @@ class FloatingTutorChat(QFrame):
         self._active_request_id: int | None = None
         self._pending_user_message: ChatMessage | None = None
         self._minimized = False
+        self._drag_offset: QPoint | None = None
+        self._custom_position = False
 
         root = QVBoxLayout(self)
         root.setContentsMargins(14, 12, 14, 12)
         root.setSpacing(8)
 
-        header = QHBoxLayout()
+        self._header = QFrame()
+        self._header.setObjectName("floatingTutorDragHandle")
+        self._header.setCursor(Qt.CursorShape.OpenHandCursor)
+        self._header.installEventFilter(self)
+        header = QHBoxLayout(self._header)
+        header.setContentsMargins(0, 0, 0, 0)
+        header.setSpacing(8)
+
         self._title = QLabel()
         self._title.setObjectName("floatingTutorTitle")
+        self._title.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
         header.addWidget(self._title, 1)
 
         self._minimize_button = self._header_button()
@@ -220,7 +240,7 @@ class FloatingTutorChat(QFrame):
         self._close_button = self._header_button()
         self._close_button.clicked.connect(self.close_panel)
         header.addWidget(self._close_button)
-        root.addLayout(header)
+        root.addWidget(self._header)
 
         self._body = QWidget()
         body_layout = QVBoxLayout(self._body)
@@ -285,8 +305,53 @@ class FloatingTutorChat(QFrame):
         return self._minimized
 
     @property
+    def has_custom_position(self) -> bool:
+        """Return whether the learner has dragged the panel away from its default anchor."""
+
+        return self._custom_position
+
+    @property
     def active_context(self) -> str:
         return self._context_provider().strip()
+
+    def eventFilter(self, watched: QObject, event: QEvent) -> bool:  # noqa: N802
+        """Drag the panel from its header while leaving header buttons interactive."""
+
+        if watched is not self._header or not isinstance(event, QMouseEvent):
+            return super().eventFilter(watched, event)
+
+        if (
+            event.type() == QEvent.Type.MouseButtonPress
+            and event.button() == Qt.MouseButton.LeftButton
+        ):
+            self._drag_offset = self.mapFromGlobal(event.globalPosition().toPoint())
+            self._header.setCursor(Qt.CursorShape.ClosedHandCursor)
+            self._header.grabMouse()
+            self.raise_()
+            event.accept()
+            return True
+
+        if event.type() == QEvent.Type.MouseMove and self._drag_offset is not None:
+            host = self.parentWidget()
+            if host is not None:
+                pointer = host.mapFromGlobal(event.globalPosition().toPoint())
+                self.move(self._bounded_position(pointer - self._drag_offset, host))
+                self._custom_position = True
+            event.accept()
+            return True
+
+        if (
+            event.type() == QEvent.Type.MouseButtonRelease
+            and event.button() == Qt.MouseButton.LeftButton
+            and self._drag_offset is not None
+        ):
+            self._drag_offset = None
+            self._header.releaseMouse()
+            self._header.setCursor(Qt.CursorShape.OpenHandCursor)
+            event.accept()
+            return True
+
+        return super().eventFilter(watched, event)
 
     def set_locale(self, locale: AppLocale | str) -> None:
         """Retranslate controls without discarding the conversation."""
@@ -328,6 +393,7 @@ class FloatingTutorChat(QFrame):
         self._minimized = not self._minimized
         self._body.setVisible(not self._minimized)
         self.setFixedHeight(54 if self._minimized else 560)
+        self.clamp_to_host()
         self._update_minimize_copy()
         self.raise_()
 
@@ -339,6 +405,13 @@ class FloatingTutorChat(QFrame):
         self._question.clear()
         self._status.clear()
         self._status.hide()
+
+    def clamp_to_host(self) -> None:
+        """Keep the complete panel reachable after dragging or host resizing."""
+
+        host = self.parentWidget()
+        if host is not None:
+            self.move(self._bounded_position(self.pos(), host))
 
     def explain_selection(self, selection: str) -> None:
         normalized = " ".join(selection.split())
@@ -463,6 +536,14 @@ class FloatingTutorChat(QFrame):
         self._minimize_button.setText("□" if self._minimized else "—")
         self._minimize_button.setToolTip(tutor_chat_text(self._locale, key))
 
+    def _bounded_position(self, position: QPoint, host: QWidget) -> QPoint:
+        max_x = max(0, host.width() - self.width())
+        max_y = max(0, host.height() - self.height())
+        return QPoint(
+            min(max(0, position.x()), max_x),
+            min(max(0, position.y()), max_y),
+        )
+
     @staticmethod
     def _refresh_style(widget: QWidget) -> None:
         widget.style().unpolish(widget)
@@ -532,7 +613,7 @@ def position_floating_tutor(
     launcher: QPushButton,
     host: QWidget,
 ) -> None:
-    """Place launcher and panel in the host's lower-right corner."""
+    """Anchor a new panel, then preserve and constrain any learner-selected position."""
 
     margin = 18
     launcher.adjustSize()
@@ -542,10 +623,13 @@ def position_floating_tutor(
     )
     panel_height = 54 if panel.is_minimized else min(560, host.height() - 90)
     panel.setFixedHeight(max(54, panel_height))
-    panel.move(
-        max(margin, host.width() - panel.width() - margin),
-        max(margin, host.height() - panel.height() - launcher.height() - margin * 2),
-    )
+    if panel.has_custom_position:
+        panel.clamp_to_host()
+    else:
+        panel.move(
+            max(margin, host.width() - panel.width() - margin),
+            max(margin, host.height() - panel.height() - launcher.height() - margin * 2),
+        )
     launcher.raise_()
     if panel.isVisible():
         panel.raise_()
