@@ -115,7 +115,7 @@ def test_operon_extension_preserves_strand_aware_ordering_boundaries() -> None:
     )
     exported = "\n".join((concept.body, *concept.key_points)).casefold()
 
-    assert "genomic order" in exported
+    assert "coordinates" in exported
     assert "transcriptional order" in exported
     assert "negative strand" in exported
     assert "before filtering by strand" in exported
