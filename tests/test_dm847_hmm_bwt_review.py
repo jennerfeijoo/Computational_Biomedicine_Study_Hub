@@ -6,12 +6,14 @@ from computational_biomedicine_study_hub.content import dm847
 from computational_biomedicine_study_hub.i18n import AppLocale
 
 _REVIEWED_MODULE_IDS = {
+    "dm847.m01",
     "dm847.m03",
     "dm847.m04",
     "dm847.m05",
     "dm847.m06",
     "dm847.m08",
     "dm847.m09",
+    "dm847.m10",
 }
 
 
