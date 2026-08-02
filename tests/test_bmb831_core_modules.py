@@ -14,7 +14,7 @@ from computational_biomedicine_study_hub.learning.r_execution import can_execute
 
 def test_bmb831_registers_nine_complete_modules() -> None:
     expected_ids = tuple(f"bmb831.m{number:02d}" for number in range(1, 10))
-    reviewed_extensions = {f"bmb831.m{number:02d}" for number in range(2, 8)}
+    reviewed_extensions = {f"bmb831.m{number:02d}" for number in range(2, 10)}
     expected_versions = {
         module_id: "1.1.0" if module_id in reviewed_extensions else "1.0.0"
         for module_id in expected_ids
@@ -133,12 +133,16 @@ def test_bmb831_final_modules_cover_public_omics_proteins_and_reporting() -> Non
     assert "pathway" in interpretation_text
     assert "red" in interpretation_text
     assert "circular" in interpretation_text
+    assert "propagación" in interpretation_text
+    assert "ancestro" in interpretation_text
 
     assert "publicación" in report_text
     assert "estimando" in report_text
     assert "validez" in report_text
     assert "informe" in report_text
     assert "inglés" in report_text
+    assert "especificación" in report_text
+    assert "reporte selectivo" in report_text
 
 
 def test_bmb831_corrects_public_sources_and_hydropathy_example() -> None:
