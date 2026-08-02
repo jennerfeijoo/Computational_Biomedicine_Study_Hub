@@ -120,9 +120,7 @@ def _correct_protein_hydropathy_example(
     return replace(module, worked_examples=tuple(corrected_examples))
 
 
-BMB831_MODULE_SOURCE_AUDIT = review_module_source_audit(
-    _BASE_BMB831_MODULE_SOURCE_AUDIT
-)
+BMB831_MODULE_SOURCE_AUDIT = review_module_source_audit(_BASE_BMB831_MODULE_SOURCE_AUDIT)
 
 LOCALIZED_MODULE_06_PUBLIC_OMICS_WORKFLOWS = _correct_public_omics_sources(
     LOCALIZED_MODULE_06_PUBLIC_OMICS_WORKFLOWS
