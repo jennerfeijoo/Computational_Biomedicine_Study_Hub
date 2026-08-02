@@ -160,6 +160,5 @@ def test_new_examples_execute_deterministically(capsys) -> None:
 
     _run_example("dm847.m10", "m10.bg.e01")
     assert capsys.readouterr().out.rstrip("\n") == (
-        "{'left_start': ((1.0, 12.5), 11.286), "
-        "'right_start': ((5.5, 20.0), 17.929)}"
+        "{'left_start': ((1.0, 12.5), 11.286), 'right_start': ((5.5, 20.0), 17.929)}"
     )

@@ -7,12 +7,14 @@ from computational_biomedicine_study_hub.i18n import AppLocale
 
 _EXPECTED_MODULE_IDS = {f"dm847.m{index:02d}" for index in range(1, 11)}
 _REVIEWED_MODULE_IDS = {
+    "dm847.m01",
     "dm847.m03",
     "dm847.m04",
     "dm847.m05",
     "dm847.m06",
     "dm847.m08",
     "dm847.m09",
+    "dm847.m10",
 }
 
 

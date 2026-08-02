@@ -12,7 +12,7 @@ The textbook is used selectively. Chapters on genome assembly, peptide sequencin
 
 | Module | Main mapped source scope | State |
 |---|---|---|
-| M01 Molecular information | Active course scope; biological-question framing and sequence orientation | Pending |
+| M01 Molecular information | Volume I chapter 1 plus active course scope | Consistent |
 | M02 Ontologies and databases | Active course scope; specialized source still required | Pending |
 | M03 Sequence scoring and matching | Volume I chapters 1 and 5 | Consistent |
 | M04 Pairwise alignment | Volume I chapter 5 | Consistent |
@@ -21,7 +21,7 @@ The textbook is used selectively. Chapters on genome assembly, peptide sequencin
 | M07 Operons and bacterial genetics | Active course scope; specialized source still required | Pending |
 | M08 Motif discovery and EM | Volume I chapter 2; Volume II chapter 8 | Consistent |
 | M09 Biological networks | Active DM847 scope; Ideker et al. (2002); Alcaraz et al. (2012) | Consistent |
-| M10 OMICS learning | Volume II chapter 8 plus active course scope | Pending |
+| M10 OMICS learning | Volume II chapter 8 plus active course scope | Consistent |
 
 ## Completed focused review: M03
 
@@ -192,6 +192,64 @@ Stable IDs:
 - `m09.bg.e01`
 - `m09.bg.p01`
 - `dm847.m09.book.001`
+
+Content version: `1.1.0`.
+
+## Completed focused review: M01
+
+The existing module already covered molecular information flow, sequence alphabets, ambiguity, strand orientation, coordinate systems, regulation, bacterial genetics, phages, provenance, and biological question framing.
+
+The missing boundary was an explicit computational problem contract. The extension now covers:
+
+- inputs, outputs, alphabets, orientation, and coordinate conventions;
+- overlap and reverse-complement policies;
+- invalid symbols, empty patterns, and short-input edge cases;
+- known-answer examples and invariants before algorithm selection;
+- separation of computational correctness from biological interpretation.
+
+The deterministic example searches canonical DNA on the supplied strand with zero-based positions and overlapping matches:
+
+```text
+[0, 2]
+```
+
+Stable IDs:
+
+- `m01.bg.o1`
+- `computational-problem-contracts`
+- `m01.bg.e01`
+- `m01.bg.p01`
+- `dm847.m01.book.001`
+
+Content version: `1.1.0`.
+
+## Completed focused review: M10
+
+The existing module already covered OMICS matrix design, preprocessing, leakage, PCA, clustering, supervised learning, nested validation, metrics, interpretation, and reproducibility.
+
+The missing algorithmic boundary was the relation between clustering objective, initialization, assignment type, and scientific stability. The extension now covers:
+
+- hard k-means assignments and distortion;
+- Lloyd updates and local optima;
+- multiple restarts and comparable objectives;
+- soft responsibilities that sum to one;
+- hierarchical distance and linkage choices;
+- dependence on transformation, scaling, feature selection, and batch;
+- resampling stability and external replication.
+
+The deterministic example compares two Lloyd restarts:
+
+```text
+{'left_start': ((1.0, 12.5), 11.286), 'right_start': ((5.5, 20.0), 17.929)}
+```
+
+Stable IDs:
+
+- `m10.bg.o1`
+- `clustering-objectives-initialization-and-stability`
+- `m10.bg.e01`
+- `m10.bg.p01`
+- `dm847.m10.book.001`
 
 Content version: `1.1.0`.
 

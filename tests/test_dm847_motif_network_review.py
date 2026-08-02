@@ -6,12 +6,14 @@ from computational_biomedicine_study_hub.content import dm847
 from computational_biomedicine_study_hub.i18n import AppLocale
 
 _REVIEWED_MODULE_IDS = {
+    "dm847.m01",
     "dm847.m03",
     "dm847.m04",
     "dm847.m05",
     "dm847.m06",
     "dm847.m08",
     "dm847.m09",
+    "dm847.m10",
 }
 
 
@@ -33,10 +35,8 @@ def test_motif_and_network_reviews_update_the_cumulative_audit() -> None:
         module_id for module_id, state in state_by_module.items() if state == "consistent"
     } == _REVIEWED_MODULE_IDS
     assert {module_id for module_id, state in state_by_module.items() if state == "pending"} == {
-        "dm847.m01",
         "dm847.m02",
         "dm847.m07",
-        "dm847.m10",
     }
 
 
