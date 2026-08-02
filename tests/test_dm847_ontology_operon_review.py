@@ -144,6 +144,4 @@ def test_new_examples_execute_deterministically(capsys) -> None:
     )
 
     _run_example("dm847.m07", "m07.bg.e01")
-    assert capsys.readouterr().out.rstrip("\n") == (
-        "[('g1', 'g2', 20), ('g4', 'g3', 20)]"
-    )
+    assert capsys.readouterr().out.rstrip("\n") == ("[('g1', 'g2', 20), ('g4', 'g3', 20)]")
