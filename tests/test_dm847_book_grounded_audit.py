@@ -6,7 +6,12 @@ from computational_biomedicine_study_hub.content import dm847
 from computational_biomedicine_study_hub.i18n import AppLocale
 
 _EXPECTED_MODULE_IDS = {f"dm847.m{index:02d}" for index in range(1, 11)}
-_REVIEWED_MODULE_IDS = {"dm847.m03", "dm847.m04"}
+_REVIEWED_MODULE_IDS = {
+    "dm847.m03",
+    "dm847.m04",
+    "dm847.m05",
+    "dm847.m06",
+}
 
 
 def _module(module_id: str, locale: AppLocale | str = AppLocale.ENGLISH):
