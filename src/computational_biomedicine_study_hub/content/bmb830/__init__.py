@@ -13,21 +13,29 @@ from .book_grounded_audit import (
 )
 from .module_01_r_foundations import (
     LOCALIZED_MODULE_01_R_FOUNDATIONS as _BASE_LOCALIZED_MODULE_01_R_FOUNDATIONS,
+)
+from .module_01_r_foundations import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_01,
     materialize_module_01_question_bank,
 )
 from .module_02_data_summary import (
     LOCALIZED_MODULE_02_DATA_SUMMARY as _BASE_LOCALIZED_MODULE_02_DATA_SUMMARY,
+)
+from .module_02_data_summary import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_02,
     materialize_module_02_question_bank,
 )
 from .module_03_probability import (
     LOCALIZED_MODULE_03_PROBABILITY as _BASE_LOCALIZED_MODULE_03_PROBABILITY,
+)
+from .module_03_probability import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_03,
     materialize_module_03_question_bank,
 )
 from .module_04_estimation import (
     LOCALIZED_MODULE_04_ESTIMATION as _BASE_LOCALIZED_MODULE_04_ESTIMATION,
+)
+from .module_04_estimation import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_04,
     materialize_module_04_question_bank,
 )
@@ -78,12 +86,8 @@ LOCALIZED_MODULE_01_R_FOUNDATIONS = apply_foundation_review(
 LOCALIZED_MODULE_02_DATA_SUMMARY = apply_foundation_review(
     _BASE_LOCALIZED_MODULE_02_DATA_SUMMARY
 )
-LOCALIZED_MODULE_03_PROBABILITY = apply_foundation_review(
-    _BASE_LOCALIZED_MODULE_03_PROBABILITY
-)
-LOCALIZED_MODULE_04_ESTIMATION = apply_foundation_review(
-    _BASE_LOCALIZED_MODULE_04_ESTIMATION
-)
+LOCALIZED_MODULE_03_PROBABILITY = apply_foundation_review(_BASE_LOCALIZED_MODULE_03_PROBABILITY)
+LOCALIZED_MODULE_04_ESTIMATION = apply_foundation_review(_BASE_LOCALIZED_MODULE_04_ESTIMATION)
 
 LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
