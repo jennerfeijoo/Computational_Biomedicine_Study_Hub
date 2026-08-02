@@ -536,10 +536,9 @@ class FloatingTutorChat(QFrame):
         self._minimize_button.setText("□" if self._minimized else "—")
         self._minimize_button.setToolTip(tutor_chat_text(self._locale, key))
 
-    @staticmethod
-    def _bounded_position(position: QPoint, host: QWidget) -> QPoint:
-        max_x = max(0, host.width() - 430)
-        max_y = max(0, host.height() - 54)
+    def _bounded_position(self, position: QPoint, host: QWidget) -> QPoint:
+        max_x = max(0, host.width() - self.width())
+        max_y = max(0, host.height() - self.height())
         return QPoint(
             min(max(0, position.x()), max_x),
             min(max(0, position.y()), max_y),
