@@ -425,10 +425,7 @@ def test_m08_ontology_extension_exposes_propagated_dependence() -> None:
     worked = next(item for item in module.worked_examples if item.example_id == "m08.bg.e01")
     assert can_execute_r(worked.code)
     assert worked.expected_output == (
-        "direct_annotations=3\n"
-        "propagated_annotations=6\n"
-        "parent_genes=3\n"
-        "child_terms=2"
+        "direct_annotations=3\npropagated_annotations=6\nparent_genes=3\nchild_terms=2"
     )
 
     direct = (("G1", "child_A"), ("G2", "child_A"), ("G3", "child_B"))
@@ -461,11 +458,7 @@ def test_m09_specification_extension_detects_directional_instability() -> None:
     worked = next(item for item in module.worked_examples if item.example_id == "m09.bg.e01")
     assert can_execute_r(worked.code)
     assert worked.expected_output == (
-        "specifications=4\n"
-        "positive=3\n"
-        "negative=1\n"
-        "range=-0.20,0.80\n"
-        "sign_stable=FALSE"
+        "specifications=4\npositive=3\nnegative=1\nrange=-0.20,0.80\nsign_stable=FALSE"
     )
 
     estimates = (0.8, 0.6, 0.1, -0.2)
