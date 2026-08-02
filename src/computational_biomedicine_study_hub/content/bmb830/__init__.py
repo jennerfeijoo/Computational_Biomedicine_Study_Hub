@@ -4,23 +4,38 @@ from __future__ import annotations
 
 from ...i18n import AppLocale
 from ..bundles import LocalizedModuleBundle, validate_bundle_catalog
+from .book_grounded_audit import (
+    BMB830_BOOK_SOURCES,
+    BMB830_MODULE_SOURCE_AUDIT,
+    AcademicReference,
+    ModuleSourceAudit,
+    apply_foundation_review,
+)
 from .module_01_r_foundations import (
-    LOCALIZED_MODULE_01_R_FOUNDATIONS,
+    LOCALIZED_MODULE_01_R_FOUNDATIONS as _BASE_LOCALIZED_MODULE_01_R_FOUNDATIONS,
+)
+from .module_01_r_foundations import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_01,
     materialize_module_01_question_bank,
 )
 from .module_02_data_summary import (
-    LOCALIZED_MODULE_02_DATA_SUMMARY,
+    LOCALIZED_MODULE_02_DATA_SUMMARY as _BASE_LOCALIZED_MODULE_02_DATA_SUMMARY,
+)
+from .module_02_data_summary import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_02,
     materialize_module_02_question_bank,
 )
 from .module_03_probability import (
-    LOCALIZED_MODULE_03_PROBABILITY,
+    LOCALIZED_MODULE_03_PROBABILITY as _BASE_LOCALIZED_MODULE_03_PROBABILITY,
+)
+from .module_03_probability import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_03,
     materialize_module_03_question_bank,
 )
 from .module_04_estimation import (
-    LOCALIZED_MODULE_04_ESTIMATION,
+    LOCALIZED_MODULE_04_ESTIMATION as _BASE_LOCALIZED_MODULE_04_ESTIMATION,
+)
+from .module_04_estimation import (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_04,
     materialize_module_04_question_bank,
 )
@@ -65,6 +80,11 @@ from .module_12_high_dimensional_case import (
     materialize_module_12_question_bank,
 )
 
+LOCALIZED_MODULE_01_R_FOUNDATIONS = apply_foundation_review(_BASE_LOCALIZED_MODULE_01_R_FOUNDATIONS)
+LOCALIZED_MODULE_02_DATA_SUMMARY = apply_foundation_review(_BASE_LOCALIZED_MODULE_02_DATA_SUMMARY)
+LOCALIZED_MODULE_03_PROBABILITY = apply_foundation_review(_BASE_LOCALIZED_MODULE_03_PROBABILITY)
+LOCALIZED_MODULE_04_ESTIMATION = apply_foundation_review(_BASE_LOCALIZED_MODULE_04_ESTIMATION)
+
 LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
         LOCALIZED_MODULE_01_R_FOUNDATIONS,
@@ -79,12 +99,12 @@ LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
         LOCALIZED_MODULE_03_PROBABILITY,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_03,
-        "1.0.0",
+        "1.1.0",
     ),
     LocalizedModuleBundle(
         LOCALIZED_MODULE_04_ESTIMATION,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_04,
-        "1.0.0",
+        "1.1.0",
     ),
     LocalizedModuleBundle(
         LOCALIZED_MODULE_05_HYPOTHESIS_TESTING,
@@ -163,6 +183,9 @@ OBJECTIVE_QUESTION_BANK_11 = BUNDLES[10].objective_question_bank
 OBJECTIVE_QUESTION_BANK_12 = BUNDLES[11].objective_question_bank
 
 __all__ = [
+    "AcademicReference",
+    "BMB830_BOOK_SOURCES",
+    "BMB830_MODULE_SOURCE_AUDIT",
     "BUNDLES",
     "LOCALIZED_BUNDLES",
     "LOCALIZED_MODULES",
@@ -203,6 +226,7 @@ __all__ = [
     "MODULE_10_DIAGNOSTICS_VALIDATION",
     "MODULE_11_INTRO_MULTIVARIATE",
     "MODULE_12_HIGH_DIMENSIONAL_CASE",
+    "ModuleSourceAudit",
     "OBJECTIVE_QUESTION_BANKS",
     "OBJECTIVE_QUESTION_BANK_01",
     "OBJECTIVE_QUESTION_BANK_02",
