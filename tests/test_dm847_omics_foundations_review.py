@@ -25,7 +25,9 @@ def test_omics_and_foundations_reviews_update_only_completed_audit_states() -> N
     assert {
         module_id for module_id, state in state_by_module.items() if state == "consistent"
     } == _REVIEWED_MODULE_IDS
-    assert {module_id for module_id, state in state_by_module.items() if state == "pending"} == set()
+    assert {
+        module_id for module_id, state in state_by_module.items() if state == "pending"
+    } == set()
 
     for item in dm847.DM847_MODULE_SOURCE_AUDIT:
         if item.module_id in {"dm847.m01", "dm847.m10"}:
