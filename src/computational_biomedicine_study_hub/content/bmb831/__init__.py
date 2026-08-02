@@ -9,8 +9,14 @@ from ..bundles import LocalizedModuleBundle, validate_bundle_catalog
 from ..localized_models import LocalizedLearningModule, LocalizedText
 from .book_grounded_audit import (
     BMB831_BOOK_SOURCES,
-    BMB831_MODULE_SOURCE_AUDIT,
     apply_book_grounded_extensions,
+)
+from .book_grounded_audit import (
+    BMB831_MODULE_SOURCE_AUDIT as _BASE_BMB831_MODULE_SOURCE_AUDIT,
+)
+from .book_grounded_review_m04_m05 import (
+    apply_multivariate_visualization_extensions,
+    review_module_source_audit,
 )
 from .module_01_synthea_workflows import (
     LOCALIZED_MODULE_01_SYNTHEA_WORKFLOWS,
@@ -114,6 +120,8 @@ def _correct_protein_hydropathy_example(
     return replace(module, worked_examples=tuple(corrected_examples))
 
 
+BMB831_MODULE_SOURCE_AUDIT = review_module_source_audit(_BASE_BMB831_MODULE_SOURCE_AUDIT)
+
 LOCALIZED_MODULE_06_PUBLIC_OMICS_WORKFLOWS = _correct_public_omics_sources(
     LOCALIZED_MODULE_06_PUBLIC_OMICS_WORKFLOWS
 )
@@ -121,17 +129,7 @@ LOCALIZED_MODULE_07_PROTEIN_CHARACTERIZATION = _correct_protein_hydropathy_examp
     LOCALIZED_MODULE_07_PROTEIN_CHARACTERIZATION
 )
 
-(
-    LOCALIZED_MODULE_01_SYNTHEA_WORKFLOWS,
-    LOCALIZED_MODULE_02_OMICS_MATRICES_QC,
-    LOCALIZED_MODULE_03_DIFFERENTIAL_MODELING,
-    LOCALIZED_MODULE_04_MULTIVARIATE_OMICS,
-    LOCALIZED_MODULE_05_ADVANCED_VISUALIZATION,
-    LOCALIZED_MODULE_06_PUBLIC_OMICS_WORKFLOWS,
-    LOCALIZED_MODULE_07_PROTEIN_CHARACTERIZATION,
-    LOCALIZED_MODULE_08_BIOLOGICAL_INTERPRETATION,
-    LOCALIZED_MODULE_09_PUBLICATION_REPORT,
-) = apply_book_grounded_extensions(
+_BOOK_GROUNDED_MODULES = apply_book_grounded_extensions(
     (
         LOCALIZED_MODULE_01_SYNTHEA_WORKFLOWS,
         LOCALIZED_MODULE_02_OMICS_MATRICES_QC,
@@ -144,6 +142,18 @@ LOCALIZED_MODULE_07_PROTEIN_CHARACTERIZATION = _correct_protein_hydropathy_examp
         LOCALIZED_MODULE_09_PUBLICATION_REPORT,
     )
 )
+
+(
+    LOCALIZED_MODULE_01_SYNTHEA_WORKFLOWS,
+    LOCALIZED_MODULE_02_OMICS_MATRICES_QC,
+    LOCALIZED_MODULE_03_DIFFERENTIAL_MODELING,
+    LOCALIZED_MODULE_04_MULTIVARIATE_OMICS,
+    LOCALIZED_MODULE_05_ADVANCED_VISUALIZATION,
+    LOCALIZED_MODULE_06_PUBLIC_OMICS_WORKFLOWS,
+    LOCALIZED_MODULE_07_PROTEIN_CHARACTERIZATION,
+    LOCALIZED_MODULE_08_BIOLOGICAL_INTERPRETATION,
+    LOCALIZED_MODULE_09_PUBLICATION_REPORT,
+) = apply_multivariate_visualization_extensions(_BOOK_GROUNDED_MODULES)
 
 LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
@@ -164,12 +174,12 @@ LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
         LOCALIZED_MODULE_04_MULTIVARIATE_OMICS,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_04,
-        "1.0.0",
+        "1.1.0",
     ),
     LocalizedModuleBundle(
         LOCALIZED_MODULE_05_ADVANCED_VISUALIZATION,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_05,
-        "1.0.0",
+        "1.1.0",
     ),
     LocalizedModuleBundle(
         LOCALIZED_MODULE_06_PUBLIC_OMICS_WORKFLOWS,
