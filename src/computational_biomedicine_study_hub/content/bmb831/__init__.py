@@ -22,6 +22,10 @@ from .book_grounded_review_m06_m07 import (
     apply_public_omics_protein_extensions,
     review_public_omics_protein_audit,
 )
+from .book_grounded_review_m08_m09 import (
+    apply_interpretation_report_extensions,
+    review_interpretation_report_audit,
+)
 from .module_01_synthea_workflows import (
     LOCALIZED_MODULE_01_SYNTHEA_WORKFLOWS,
     LOCALIZED_OBJECTIVE_QUESTION_BANK_01,
@@ -124,8 +128,9 @@ def _correct_protein_hydropathy_example(
     return replace(module, worked_examples=tuple(corrected_examples))
 
 
-_BMB831_MODULE_SOURCE_AUDIT_M04_M05 = review_module_source_audit(_BASE_BMB831_MODULE_SOURCE_AUDIT)
-BMB831_MODULE_SOURCE_AUDIT = review_public_omics_protein_audit(_BMB831_MODULE_SOURCE_AUDIT_M04_M05)
+_AUDIT_M04_M05 = review_module_source_audit(_BASE_BMB831_MODULE_SOURCE_AUDIT)
+_AUDIT_M06_M07 = review_public_omics_protein_audit(_AUDIT_M04_M05)
+BMB831_MODULE_SOURCE_AUDIT = review_interpretation_report_audit(_AUDIT_M06_M07)
 
 LOCALIZED_MODULE_06_PUBLIC_OMICS_WORKFLOWS = _correct_public_omics_sources(
     LOCALIZED_MODULE_06_PUBLIC_OMICS_WORKFLOWS
@@ -151,6 +156,9 @@ _BOOK_GROUNDED_MODULES = apply_book_grounded_extensions(
 _MULTIVARIATE_VISUALIZATION_MODULES = apply_multivariate_visualization_extensions(
     _BOOK_GROUNDED_MODULES
 )
+_PUBLIC_OMICS_PROTEIN_MODULES = apply_public_omics_protein_extensions(
+    _MULTIVARIATE_VISUALIZATION_MODULES
+)
 
 (
     LOCALIZED_MODULE_01_SYNTHEA_WORKFLOWS,
@@ -162,7 +170,7 @@ _MULTIVARIATE_VISUALIZATION_MODULES = apply_multivariate_visualization_extension
     LOCALIZED_MODULE_07_PROTEIN_CHARACTERIZATION,
     LOCALIZED_MODULE_08_BIOLOGICAL_INTERPRETATION,
     LOCALIZED_MODULE_09_PUBLICATION_REPORT,
-) = apply_public_omics_protein_extensions(_MULTIVARIATE_VISUALIZATION_MODULES)
+) = apply_interpretation_report_extensions(_PUBLIC_OMICS_PROTEIN_MODULES)
 
 LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
@@ -203,12 +211,12 @@ LOCALIZED_BUNDLES = (
     LocalizedModuleBundle(
         LOCALIZED_MODULE_08_BIOLOGICAL_INTERPRETATION,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_08,
-        "1.0.0",
+        "1.1.0",
     ),
     LocalizedModuleBundle(
         LOCALIZED_MODULE_09_PUBLICATION_REPORT,
         LOCALIZED_OBJECTIVE_QUESTION_BANK_09,
-        "1.0.0",
+        "1.1.0",
     ),
 )
 validate_bundle_catalog(LOCALIZED_BUNDLES)
