@@ -10,7 +10,7 @@ Synthea remains one bounded synthetic relational example. It does not define the
 
 ## Stable source registry
 
-The repository now exposes `BMB831_BOOK_SOURCES` and `BMB831_MODULE_SOURCE_AUDIT`.
+The repository exposes `BMB831_BOOK_SOURCES` and `BMB831_MODULE_SOURCE_AUDIT`.
 
 Core mapped sources include:
 
@@ -34,14 +34,14 @@ Mapping a module to sources is not treated as completed verification. A module r
 | M01 — reproducible Synthea workflows | `consistent` | Existing boundaries, relational contracts, patient-level independence, temporal leakage controls, and reproducibility are adequate. Source traceability was added without expanding Synthea's curricular role. |
 | M02 — omics matrices, QC, and normalisation | `consistent` | Existing matrix and QC content was adequate, but composition bias and the distinction between library size and robust size factors required explicit treatment. |
 | M03 — differential modelling | `consistent` | Existing design, contrast, model-scale, effect, uncertainty, and FDR content was adequate, but information sharing across features and the separation of moderation, effect shrinkage, and multiplicity required explicit treatment. |
-| M04 — multivariate omics | `pending` | Source scope mapped; focused comparison pending. |
-| M05 — advanced visualisation | `pending` | Source scope mapped; focused comparison pending. |
+| M04 — multivariate omics | `consistent` | Existing PCA, distance, clustering, batch, stability, and leakage coverage was adequate. Finite-sample rank and near-degenerate subspace stability required explicit treatment. |
+| M05 — advanced visualisation | `consistent` | Existing figure contracts, omics plots, heatmaps, accessibility, and reproducible export were adequate. Error-bar targets and the distinction among spread, SE, confidence intervals, and prediction uncertainty required explicit treatment. |
 | M06 — public omics workflows | `pending` | Source scope mapped; focused comparison pending. |
 | M07 — protein characterisation | `pending` | Source scope mapped; focused comparison pending. |
 | M08 — biological interpretation | `pending` | Source scope mapped; focused comparison pending. |
 | M09 — publication appraisal and report | `pending` | Source scope mapped; focused comparison pending. |
 
-Progress: **3/9 modules source-reviewed**.
+Progress: **5/9 modules source-reviewed**.
 
 ## M01 review
 
@@ -112,11 +112,69 @@ This is an explanatory algebraic model, not a reimplementation of limma, edgeR, 
 
 M03 content version is `1.1.0`.
 
+## M04 extension — finite-sample rank and subspace stability
+
+Stable additions:
+
+- objective `m04.bg.o1`;
+- concept `finite-sample-rank-and-subspace-stability`;
+- example `m04.bg.e01`;
+- practice `m04.bg.p01`;
+- assessment item `bmb831.m04.book.001`.
+
+The unit makes the finite-sample boundary explicit. After centering an `n × p` sample-by-feature matrix, no more than `min(p, n - 1)` principal components can contain non-zero sample variation. Thousands of measured genes therefore do not substitute for independent samples or create thousands of identifiable dimensions.
+
+It also distinguishes stability of individual component axes from stability of their joint subspace. When eigenvalues are tied or close, small perturbations can rotate scores and loadings while preserving the scientifically relevant plane. Stability checks should therefore include resampling, feature perturbation, explained variance, metadata, and subspace comparisons rather than rigid loading lists from one run.
+
+Deterministic example:
+
+```text
+samples=4
+features=6
+rank_ceiling=3
+observed_rank=3
+nonzero_pcs=3
+```
+
+The example establishes a mathematical ceiling. It does not claim that the retained components are biologically sufficient or externally validated.
+
+M04 content version is `1.1.0`.
+
+## M05 extension — spread and uncertainty targets
+
+Stable additions:
+
+- objective `m05.bg.o1`;
+- concept `spread-versus-estimator-uncertainty`;
+- example `m05.bg.e01`;
+- practice `m05.bg.p01`;
+- assessment item `bmb831.m05.book.001`.
+
+The unit distinguishes:
+
+- standard deviation as observed spread;
+- standard error as estimated variability of a mean;
+- confidence intervals as uncertainty from a defined inferential procedure;
+- prediction intervals as uncertainty for future observations, including residual variation.
+
+Error bars must state their type, level, method, sample size, and analytical unit. A mean-only figure can hide skew, outliers, dependence, and heterogeneity, so individual observations or distributions should accompany summaries when appropriate.
+
+Deterministic example:
+
+```text
+group_A=mean:10.000,sd:1.633,se:0.816,ci_half:2.598
+group_B=mean:10.000,sd:4.899,se:2.449,ci_half:7.795
+```
+
+The groups have the same mean but different spread and estimator uncertainty. The example assumes four independent observations per group and does not replace paired, longitudinal, or hierarchical models.
+
+M05 content version is `1.1.0`.
+
 ## Deferred work
 
 The next focused block is:
 
-- M04 — PCA, distances, clustering, stability, batch effects, and leakage;
-- M05 — advanced statistical visualisation, uncertainty, visual integrity, and reproducible export.
+- M06 — public transcriptomics and proteomics workflows, assay-specific preprocessing, immutable public data, checksums, dataset cards, and reproducible environments;
+- M07 — sequence-derived protein properties, UniProt and InterPro provenance, PDB experimental evidence, and AlphaFold confidence boundaries.
 
-Experimental-data acquisition remains deferred until all nine source reviews are complete.
+M08 biological interpretation and M09 publication appraisal/report preparation remain mapped and pending after that block. Experimental-data acquisition remains deferred until all nine source reviews are complete.
