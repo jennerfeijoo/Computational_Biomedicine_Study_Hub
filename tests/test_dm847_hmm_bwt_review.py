@@ -30,9 +30,9 @@ def test_hmm_and_bwt_reviews_update_only_completed_audit_states() -> None:
     assert {
         module_id for module_id, state in state_by_module.items() if state == "consistent"
     } == _REVIEWED_MODULE_IDS
-    assert {
-        module_id for module_id, state in state_by_module.items() if state == "pending"
-    } == {f"dm847.m{index:02d}" for index in range(1, 11)} - _REVIEWED_MODULE_IDS
+    assert {module_id for module_id, state in state_by_module.items() if state == "pending"} == {
+        f"dm847.m{index:02d}" for index in range(1, 11)
+    } - _REVIEWED_MODULE_IDS
 
     for item in dm847.DM847_MODULE_SOURCE_AUDIT:
         if item.module_id in {"dm847.m05", "dm847.m06"}:
@@ -48,17 +48,13 @@ def test_hmm_and_bwt_extensions_are_complete_and_locale_stable() -> None:
         bwt = _module("dm847.m06", locale)
 
         assert "m05.bg.o1" in {item.objective_id for item in hmm.objectives}
-        assert "soft-decoding-forward-backward" in {
-            item.concept_id for item in hmm.concepts
-        }
+        assert "soft-decoding-forward-backward" in {item.concept_id for item in hmm.concepts}
         assert "m05.bg.e01" in {item.example_id for item in hmm.worked_examples}
         assert "m05.bg.p01" in {item.exercise_id for item in hmm.practice_exercises}
         assert "dm847.m05.book.001" in {item.item_id for item in hmm.assessment_items}
 
         assert "m06.bg.o1" in {item.objective_id for item in bwt.objectives}
-        assert "pigeonhole-seeding-and-verification" in {
-            item.concept_id for item in bwt.concepts
-        }
+        assert "pigeonhole-seeding-and-verification" in {item.concept_id for item in bwt.concepts}
         assert "m06.bg.e01" in {item.example_id for item in bwt.worked_examples}
         assert "m06.bg.p01" in {item.exercise_id for item in bwt.practice_exercises}
         assert "dm847.m06.book.001" in {item.item_id for item in bwt.assessment_items}
@@ -101,9 +97,7 @@ def test_hmm_soft_decoding_preserves_probability_boundaries() -> None:
 def test_bwt_pigeonhole_seeding_preserves_algorithmic_boundaries() -> None:
     bwt = _module("dm847.m06")
     concept = next(
-        item
-        for item in bwt.concepts
-        if item.concept_id == "pigeonhole-seeding-and-verification"
+        item for item in bwt.concepts if item.concept_id == "pigeonhole-seeding-and-verification"
     )
     exported = "\n".join((concept.body, *concept.key_points)).casefold()
 
