@@ -25,7 +25,9 @@ def test_motif_and_network_reviews_update_the_cumulative_audit() -> None:
     assert {
         module_id for module_id, state in state_by_module.items() if state == "consistent"
     } == _REVIEWED_MODULE_IDS
-    assert {module_id for module_id, state in state_by_module.items() if state == "pending"} == set()
+    assert {
+        module_id for module_id, state in state_by_module.items() if state == "pending"
+    } == set()
 
 
 def test_network_source_catalog_corrects_chapter_11_and_adds_primary_sources() -> None:
