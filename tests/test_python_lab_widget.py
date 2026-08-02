@@ -24,19 +24,19 @@ class _FakeRunner:
         return self.result
 
 
-def test_lab_runs_edited_source_and_renders_success(qapp: QApplication) -> None:
+def test_lab_runs_edited_source_without_grading_against_example(qapp: QApplication) -> None:
     runner = _FakeRunner(
         PythonExecutionResult(
             status=ExecutionStatus.PASSED,
             stdout="12\n",
             stderr="",
             duration_ms=24,
-            expected_output="12",
+            expected_output=None,
         )
     )
     widget = PythonLabWidget(
         "print(6)",
-        "12",
+        "6",
         locale=AppLocale.ENGLISH,
         runner=runner,
     )
@@ -46,15 +46,16 @@ def test_lab_runs_edited_source_and_renders_success(qapp: QApplication) -> None:
 
     assert len(runner.requests) == 1
     assert runner.requests[0].source == "print(6 * 2)"
-    assert runner.requests[0].expected_output == "12"
+    assert runner.requests[0].expected_output is None
     assert widget.last_result is runner.result
     assert widget.stdout_text == "12\n"
     assert widget.stderr_text == ""
-    assert "Output is correct" in widget.status_text
+    assert "Execution completed" in widget.status_text
     assert "24 ms" in widget.status_text
+    assert not widget.reference_visible
 
 
-def test_lab_reset_restores_authored_code_and_clears_feedback(qapp: QApplication) -> None:
+def test_lab_can_opt_into_reference_comparison(qapp: QApplication) -> None:
     runner = _FakeRunner(
         PythonExecutionResult(
             status=ExecutionStatus.OUTPUT_MISMATCH,
@@ -62,6 +63,34 @@ def test_lab_reset_restores_authored_code_and_clears_feedback(qapp: QApplication
             stderr="",
             duration_ms=8,
             expected_output="5",
+        )
+    )
+    widget = PythonLabWidget(
+        "print(5)",
+        "5",
+        runner=runner,
+        compare_output=True,
+        show_reference=True,
+    )
+
+    widget.set_source("print(4)")
+    widget.run_code()
+
+    assert runner.requests[0].expected_output == "5"
+    assert widget.reference_visible
+    assert "Ejecución completada" in widget.status_text
+
+
+def test_lab_reset_restores_initial_workspace_and_clears_feedback(
+    qapp: QApplication,
+) -> None:
+    runner = _FakeRunner(
+        PythonExecutionResult(
+            status=ExecutionStatus.PASSED,
+            stdout="4\n",
+            stderr="",
+            duration_ms=8,
+            expected_output=None,
         )
     )
     widget = PythonLabWidget("print(5)", "5", runner=runner)
@@ -77,6 +106,24 @@ def test_lab_reset_restores_authored_code_and_clears_feedback(qapp: QApplication
     assert widget.stderr_text == ""
 
 
+def test_blank_lab_requires_code_before_execution(qapp: QApplication) -> None:
+    runner = _FakeRunner(
+        PythonExecutionResult(
+            status=ExecutionStatus.PASSED,
+            stdout="",
+            stderr="",
+            duration_ms=1,
+            expected_output=None,
+        )
+    )
+    widget = PythonLabWidget("", runner=runner)
+
+    widget.run_code()
+
+    assert not runner.requests
+    assert "Escribe código" in widget.status_text
+
+
 def test_lab_renders_runtime_errors(qapp: QApplication) -> None:
     runner = _FakeRunner(
         PythonExecutionResult(
@@ -84,10 +131,10 @@ def test_lab_renders_runtime_errors(qapp: QApplication) -> None:
             stdout="",
             stderr="ZeroDivisionError: division by zero",
             duration_ms=4,
-            expected_output="",
+            expected_output=None,
         )
     )
-    widget = PythonLabWidget("1 / 0", "", runner=runner)
+    widget = PythonLabWidget("1 / 0", runner=runner)
 
     widget.run_code()
 
@@ -98,7 +145,6 @@ def test_lab_renders_runtime_errors(qapp: QApplication) -> None:
 def test_lab_buttons_are_localized_in_danish(qapp: QApplication) -> None:
     widget = PythonLabWidget(
         "print(1)",
-        "1",
         locale=AppLocale.DANISH_DENMARK,
         runner=_FakeRunner(
             PythonExecutionResult(
@@ -106,7 +152,7 @@ def test_lab_buttons_are_localized_in_danish(qapp: QApplication) -> None:
                 stdout="1\n",
                 stderr="",
                 duration_ms=1,
-                expected_output="1",
+                expected_output=None,
             )
         ),
     )
@@ -120,7 +166,7 @@ def test_lab_buttons_are_localized_in_danish(qapp: QApplication) -> None:
     assert reset_button.text() == "Nulstil"
 
 
-def test_module_reader_embeds_labs_only_for_policy_compatible_examples(
+def test_module_reader_embeds_exploratory_labs_for_policy_compatible_examples(
     qapp: QApplication,
 ) -> None:
     page = ModuleReaderPage(MODULE_01_FOUNDATIONS)
@@ -133,3 +179,4 @@ def test_module_reader_embeds_labs_only_for_policy_compatible_examples(
 
     assert expected > 0
     assert len(labs) == expected
+    assert all(not lab.reference_visible for lab in labs)
