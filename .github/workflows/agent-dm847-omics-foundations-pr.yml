@@ -1,0 +1,61 @@
+name: Agent DM847 OMICS foundations PR integration
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Integrate review content
+        run: python scripts/agent_integrate_dm847_omics_foundations.py
+      - name: Format review files
+        run: |
+          python -m pip install ruff
+          ruff check --fix \
+            src/computational_biomedicine_study_hub/content/dm847/__init__.py \
+            src/computational_biomedicine_study_hub/content/dm847/book_grounded_omics_foundations.py \
+            tests/test_dm847_book_grounded_audit.py \
+            tests/test_dm847_core_modules.py \
+            tests/test_dm847_hmm_bwt_review.py \
+            tests/test_dm847_motif_network_review.py \
+            tests/test_dm847_omics_foundations_review.py
+          ruff format \
+            src/computational_biomedicine_study_hub/content/dm847/__init__.py \
+            src/computational_biomedicine_study_hub/content/dm847/book_grounded_omics_foundations.py \
+            tests/test_dm847_book_grounded_audit.py \
+            tests/test_dm847_core_modules.py \
+            tests/test_dm847_hmm_bwt_review.py \
+            tests/test_dm847_motif_network_review.py \
+            tests/test_dm847_omics_foundations_review.py
+      - name: Commit integration
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/dm847-book-grounded-audit.md \
+            src/computational_biomedicine_study_hub/content/dm847/__init__.py \
+            src/computational_biomedicine_study_hub/content/dm847/book_grounded_omics_foundations.py \
+            tests/test_dm847_book_grounded_audit.py \
+            tests/test_dm847_core_modules.py \
+            tests/test_dm847_hmm_bwt_review.py \
+            tests/test_dm847_motif_network_review.py \
+            tests/test_dm847_omics_foundations_review.py
+          git diff --cached --quiet || git commit -m "Integrate DM847 OMICS and foundations reviews"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
