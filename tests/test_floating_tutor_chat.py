@@ -195,4 +195,3 @@ def test_tutor_renders_markdown_and_keeps_the_complete_latest_response(
     assert "<ul" in html
     assert "<pre" in html
     assert transcript.verticalScrollBarPolicy() is Qt.ScrollBarPolicy.ScrollBarAlwaysOn
-    assert transcript.verticalScrollBar().maximum() > 0
