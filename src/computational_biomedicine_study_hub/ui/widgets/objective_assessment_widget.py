@@ -321,11 +321,6 @@ class ObjectiveAssessmentWidget(QWidget):
         title.setObjectName("objectiveAssessmentTitle")
         header_text_layout.addWidget(title)
 
-        self._metadata = QLabel()
-        self._metadata.setObjectName("objectiveAssessmentMetadata")
-        self._metadata.setWordWrap(True)
-        header_text_layout.addWidget(self._metadata)
-
         self._score = QLabel()
         self._score.setObjectName("objectiveAssessmentScore")
 
@@ -395,14 +390,6 @@ class ObjectiveAssessmentWidget(QWidget):
             self._question_cards.append(card)
             self._cards_layout.addWidget(card)
 
-        self._metadata.setText(
-            ui_text(
-                self._locale,
-                UiCopyKey.OBJECTIVE_METADATA,
-                count=self._generator.question_count,
-                bank=self._generator.bank_size,
-            )
-        )
         self._update_score()
 
     @Slot(str, bool)
