@@ -255,6 +255,10 @@ QPlainTextEdit {
     padding: 9px;
 }
 
+QTextBrowser#floatingTutorTranscript {
+    padding: 9px 9px 18px 9px;
+}
+
 QLineEdit:focus,
 QComboBox:focus,
 QSpinBox:focus,
