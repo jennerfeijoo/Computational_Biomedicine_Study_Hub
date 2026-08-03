@@ -119,9 +119,8 @@ def test_module_reader_constructs_authored_sections_only_when_selected(
     assert reader.findChildren(QFrame, "practiceCard") == []
 
     assert reader.select_section("Evaluación")
-    assert len(reader.findChildren(QFrame, "assessmentCard")) == len(
-        MODULE_01_FOUNDATIONS.assessment_items
-    )
+    assert reader.findChildren(QFrame, "assessmentCard") == []
+    assert reader.findChild(QLabel, "authoredAssessmentSectionTitle") is None
     assert reader.constructed_section_count == 5
 
 
