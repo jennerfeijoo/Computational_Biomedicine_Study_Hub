@@ -251,6 +251,8 @@ class ModuleReaderPage(QWidget):
         return self._scroll_area(body, "modulePracticeScroll")
 
     def _build_assessment_tab(self) -> QScrollArea:
+        """Render only questions participating in the active evaluator."""
+
         body = self._scroll_body()
         layout = body.layout()
         assert isinstance(layout, QVBoxLayout)
@@ -272,23 +274,6 @@ class ModuleReaderPage(QWidget):
                     locale=self._translator.locale,
                 )
             )
-
-        complete_heading = self._subheading(
-            ui_text(self._translator.locale, UiCopyKey.MODULE_COMPLETE_ASSESSMENT)
-        )
-        complete_heading.setObjectName("authoredAssessmentSectionTitle")
-        layout.addWidget(complete_heading)
-        complete_notice = self._label(
-            ui_text(
-                self._translator.locale,
-                UiCopyKey.MODULE_COMPLETE_ASSESSMENT_NOTICE,
-            ),
-            "moduleSectionNotice",
-        )
-        layout.addWidget(complete_notice)
-
-        for number, item in enumerate(self._module.assessment_items, start=1):
-            layout.addWidget(self._assessment_card(number, item))
 
         layout.addStretch(1)
         return self._scroll_area(body, "moduleAssessmentScroll")
