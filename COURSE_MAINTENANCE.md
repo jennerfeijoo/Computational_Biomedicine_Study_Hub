@@ -1,33 +1,33 @@
 # Adding and Removing Courses
 
-This guide documents the current developer workflow for adding or removing a course from Computational Biomedicine Study Hub. It describes the existing Python-based architecture. It does not introduce a plugin system, external course format, or end-user course editor.
+This guide describes the current developer workflow for adding or removing a course from Computational Biomedicine Study Hub. It documents the existing Python architecture. It does not introduce a plugin system, external course format, or end-user course editor.
 
-## 1. Scope and integration levels
+## Integration levels
 
 A course can be integrated at three levels:
 
 1. **Catalog only** — the course appears in the home page and sidebar and provides its own `QWidget` page.
-2. **Standard modular course** — the course uses authored `LearningModule` content, a module selector, the shared `ModuleReaderPage`, guided practice, and objective assessment.
-3. **Fully tracked modular course** — objective questions are linked to learning objectives and attempts are persisted for review, mastery, and the error notebook.
+2. **Standard modular course** — the course uses authored modules, the shared reader, guided practice, and objective assessment.
+3. **Fully tracked modular course** — assessment activities are linked to learning objectives and attempts contribute to mastery, review, and the error notebook.
 
-A new course should normally target level 2. Use level 3 when its activity-to-objective mapping has been authored and validated.
+A new academic course should normally target level 2. Use level 3 only after its activity-to-objective mapping is complete and validated.
 
-## 2. Choose the nearest existing template
+## Choose the nearest existing template
 
 Start from the course whose behavior is closest to the new subject:
 
-- `courses/dm847.py` — general multi-module course with objective assessment and optional persistent objective evidence.
-- `courses/dm857.py` — programming course with executable Python work and course-specific project workflows.
-- `courses/bmb830.py` — multi-module course with editable R laboratories.
-- `courses/bmb831.py` — advanced biostatistics and omics course with R laboratories and additional persistent writing workflows.
+- `src/computational_biomedicine_study_hub/courses/dm847.py` — general multi-module course with objective assessment and optional persistent objective evidence.
+- `src/computational_biomedicine_study_hub/courses/dm857.py` — programming course with executable Python and course-specific project workflows.
+- `src/computational_biomedicine_study_hub/courses/bmb830.py` — multi-module course with editable R laboratories.
+- `src/computational_biomedicine_study_hub/courses/bmb831.py` — advanced biostatistics and omics course with R laboratories and persistent writing workflows.
 
-Do not copy a specialized workflow unless the new course actually needs it.
+Do not copy a specialized workflow unless the new course needs it.
 
-## 3. Stable naming rules
+# Adding a Course
 
-Choose identifiers before authoring content.
+## 1. Choose stable identifiers
 
-Example course:
+Define the identifiers before writing content.
 
 ```text
 Course code: GEN101
@@ -36,20 +36,22 @@ Course route: course/gen101
 Module IDs: gen101.m01, gen101.m02, ...
 Objective IDs: m01.o1, m01.o2, ...
 Practice IDs: m01.p01, m01.p02, ...
-Objective bank IDs: gen101.m01.bank.001, gen101.m01.bank.002, ...
+Objective-bank IDs: gen101.m01.bank.001, gen101.m01.bank.002, ...
 ```
 
 Rules:
 
-- Course codes and routes must be unique.
-- Module IDs must be stable and unique within the repository.
-- Activity IDs must not be reused for unrelated content.
-- Do not reuse a removed course code or module ID for a different subject. Existing local progress may still refer to those identifiers.
-- Changing visible wording does not require changing an ID. Changing the meaning of an activity usually does.
+- Course codes and generated routes must be unique.
+- Module, objective, activity, and option IDs must be stable.
+- Do not reuse retired IDs for unrelated material.
+- Visible wording may change without changing an ID when the underlying meaning remains the same.
+- Change an ID when an activity is replaced by a substantially different activity.
 
-## 4. Create the content package
+Old learner progress may still reference removed identifiers, so identifier reuse can attach historical evidence to unrelated content.
 
-Create:
+## 2. Create the academic content package
+
+Create a package such as:
 
 ```text
 src/computational_biomedicine_study_hub/content/gen101/
@@ -60,15 +62,15 @@ src/computational_biomedicine_study_hub/content/gen101/
 └── source_audit.py            # recommended
 ```
 
-Each completed module should be authored using the localized content models in:
+Use the authoring models in:
 
 ```text
 src/computational_biomedicine_study_hub/content/localized_models.py
 ```
 
-The runtime models require a complete module with:
+A completed module requires:
 
-- title and summary;
+- course code, module ID, title, and summary;
 - learning objectives;
 - concept blocks;
 - worked examples;
@@ -76,138 +78,93 @@ The runtime models require a complete module with:
 - authored assessment items;
 - tutor support material.
 
-A module that omits a required collection is rejected during import or testing.
+The runtime models reject missing required collections and duplicate IDs.
 
-### Minimal module structure
+### Localization helper
 
-The exact content will be longer, but the shape is:
+Completed content must exist in Spanish, English, and Danish.
 
 ```python
-from computational_biomedicine_study_hub.content.localized_models import (
-    LocalizedAssessmentItem,
-    LocalizedAssessmentOption,
-    LocalizedConceptBlock,
-    LocalizedLearningModule,
-    LocalizedLearningObjective,
-    LocalizedPracticeExercise,
-    LocalizedText,
-    LocalizedTutorSupportPacket,
-    LocalizedWorkedExample,
-)
-from computational_biomedicine_study_hub.learning import ActivityType
+from computational_biomedicine_study_hub.content.localized_models import LocalizedText
 
 
 def text(es: str, en: str, da: str) -> LocalizedText:
     return LocalizedText(spanish=es, english=en, danish=da)
+```
 
+`LocalizedText` rejects empty values. Use a meaningful description such as "Not applicable" rather than an empty string when a field is structurally required but not computationally relevant.
 
-LOCALIZED_MODULE_01 = LocalizedLearningModule(
+### Module shape
+
+The following is a structural outline, not a complete course module:
+
+```text
+LocalizedLearningModule(
     course_code="GEN101",
     module_id="gen101.m01",
-    title=text(
-        "Organización del genoma",
-        "Genome organization",
-        "Genomets organisering",
-    ),
-    summary=text("...", "...", "..."),
-    objectives=(
-        LocalizedLearningObjective(
-            objective_id="m01.o1",
-            statement=text("...", "...", "..."),
-        ),
-    ),
-    concepts=(
-        LocalizedConceptBlock(
-            concept_id="m01.c01",
-            title=text("...", "...", "..."),
-            body=text("...", "...", "..."),
-            key_points=(text("...", "...", "..."),),
-        ),
-    ),
-    worked_examples=(
-        LocalizedWorkedExample(
-            example_id="m01.e01",
-            title=text("...", "...", "..."),
-            problem=text("...", "...", "..."),
-            reasoning=(text("...", "...", "..."),),
-            code=text("", "", ""),
-            expected_output=text("", "", ""),
-            explanation=text("...", "...", "..."),
-        ),
-    ),
-    practice_exercises=(
-        LocalizedPracticeExercise(
-            exercise_id="m01.p01",
-            activity_type=ActivityType.SHORT_ANSWER,
-            prompt=text("...", "...", "..."),
-            hints=(text("...", "...", "..."),),
-            solution=text("...", "...", "..."),
-            explanation=text("...", "...", "..."),
-        ),
-    ),
-    assessment_items=(
-        # Add at least one authored assessment item.
-    ),
-    tutor_support=LocalizedTutorSupportPacket(
-        canonical_explanation=text("...", "...", "..."),
-        knowledge_fragments=(text("...", "...", "..."),),
-        common_misconceptions=(text("...", "...", "..."),),
-        socratic_questions=(text("...", "...", "..."),),
-        grading_criteria=(text("...", "...", "..."),),
-        response_constraints=(text("...", "...", "..."),),
-        source_basis=("Source identifier or bibliographic reference",),
-    ),
+    title=LocalizedText(...),
+    summary=LocalizedText(...),
+    objectives=(LocalizedLearningObjective(...), ...),
+    concepts=(LocalizedConceptBlock(...), ...),
+    worked_examples=(LocalizedWorkedExample(...), ...),
+    practice_exercises=(LocalizedPracticeExercise(...), ...),
+    assessment_items=(LocalizedAssessmentItem(...), ...),
+    tutor_support=LocalizedTutorSupportPacket(...),
 )
 ```
 
-The example above is structural. Replace every placeholder and ensure all required collections are non-empty. For text-free worked examples, use a meaningful non-empty description rather than empty localized strings because `LocalizedText` rejects empty values.
-
-## 5. Author the objective question bank
+## 3. Author the objective question bank
 
 The interactive objective evaluator currently supports:
 
 - `ActivityType.MULTIPLE_CHOICE`;
 - `ActivityType.TRUE_FALSE`.
 
-The default session contains six questions, so each module bank must contain at least six valid items. A larger bank is strongly preferred so sessions vary meaningfully.
+The default session contains six questions. Each module bank therefore needs at least six valid questions. A larger bank is preferred so repeated sessions vary meaningfully.
 
-Use stable option IDs so grading remains independent of translation:
+Use stable option IDs so answer identity remains independent of language:
 
 ```python
+from computational_biomedicine_study_hub.content.localized_models import (
+    LocalizedAssessmentItem,
+    LocalizedAssessmentOption,
+)
+from computational_biomedicine_study_hub.learning import ActivityType
+
 LOCALIZED_OBJECTIVE_QUESTION_BANK_01 = (
     LocalizedAssessmentItem(
         item_id="gen101.m01.bank.001",
         activity_type=ActivityType.MULTIPLE_CHOICE,
-        prompt=text("...", "...", "..."),
+        prompt=text("Pregunta", "Question", "Spørgsmål"),
         options=(
             LocalizedAssessmentOption(
                 option_id="option_a",
-                text=text("...", "...", "..."),
+                text=text("Opción A", "Option A", "Mulighed A"),
             ),
             LocalizedAssessmentOption(
                 option_id="option_b",
-                text=text("...", "...", "..."),
+                text=text("Opción B", "Option B", "Mulighed B"),
             ),
         ),
         correct_option_ids=("option_a",),
         accepted_answers=(),
-        explanation=text("...", "...", "..."),
+        explanation=text("Explicación", "Explanation", "Forklaring"),
     ),
 )
 ```
 
 Every bank item ID must begin with the complete module ID followed by a period.
 
-## 6. Create validated module bundles
+## 4. Create validated bundles
 
-In `content/gen101/__init__.py`, combine modules, question banks, and content versions:
+In `content/gen101/__init__.py`, pair each localized module with its objective bank and content version.
 
 ```python
-from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.content.bundles import (
     LocalizedModuleBundle,
     validate_bundle_catalog,
 )
+from computational_biomedicine_study_hub.i18n import AppLocale
 
 from .module_01_genome_organization import (
     LOCALIZED_MODULE_01,
@@ -224,25 +181,27 @@ LOCALIZED_BUNDLES = (
 
 validate_bundle_catalog(LOCALIZED_BUNDLES)
 
-BUNDLES = tuple(
-    bundle.materialize(AppLocale.SPANISH_SPAIN)
-    for bundle in LOCALIZED_BUNDLES
-)
+BUNDLES = tuple(bundle.materialize(AppLocale.SPANISH_SPAIN) for bundle in LOCALIZED_BUNDLES)
 ```
 
-Bundle validation checks non-empty versions, non-empty question banks, identifier scope, supported objective item types, module uniqueness, and course consistency.
+Bundle validation checks:
 
-## 7. Link activities to objectives for persistent learning evidence
+- non-empty content versions;
+- non-empty question banks;
+- unique and correctly scoped item IDs;
+- supported objective-question types;
+- unique module IDs;
+- one consistent course code per bundle catalog.
 
-The evaluator can display questions without persistence. To contribute to mastery, spaced review, and the error notebook, every assessable activity must be linked to one or more learning objectives.
+## 5. Link activities to objectives for persistent evidence
+
+Questions can be displayed without persistence. To contribute to mastery, spaced review, and the error notebook, activities must be mapped to learning objectives.
 
 Add an `ObjectiveLinkCatalog` in:
 
 ```text
 src/computational_biomedicine_study_hub/content/objective_links.py
 ```
-
-Example:
 
 ```python
 GEN101_M01_OBJECTIVE_LINKS = ObjectiveLinkCatalog(
@@ -260,7 +219,7 @@ GEN101_M01_OBJECTIVE_LINKS = ObjectiveLinkCatalog(
 )
 ```
 
-Register it in `_CATALOGS`:
+Register the catalog while preserving existing entries:
 
 ```python
 _CATALOGS = {
@@ -269,11 +228,15 @@ _CATALOGS = {
 }
 ```
 
-`ObjectiveLinkCatalog.validate_against(...)` requires exact coverage of the module's guided practice, authored assessments, and objective question bank. It also rejects references to objectives that do not exist.
+`ObjectiveLinkCatalog.validate_against(...)` requires exact coverage of:
 
-Do not enable persistent objective recording until this mapping validates.
+- guided practice exercises;
+- authored assessment items;
+- objective-bank questions.
 
-## 8. Create the course page
+It also rejects references to objectives that do not exist. Do not enable persistent recording until this mapping validates.
+
+## 6. Create the course page
 
 Create:
 
@@ -281,14 +244,14 @@ Create:
 src/computational_biomedicine_study_hub/courses/gen101.py
 ```
 
-For a normal multi-module course, copy the structure of `courses/dm847.py` or `courses/bmb830.py` and change:
+For a normal multi-module course, copy the structure of `courses/dm847.py` or `courses/bmb830.py` and update:
 
-- imports;
+- content imports;
 - page and reader class names;
-- object names;
-- course-code label;
-- `COURSE` metadata;
-- any specialized laboratory widget.
+- Qt object names;
+- the course-code label;
+- course metadata;
+- specialized laboratory widgets, when needed.
 
 The page must expose a locale-aware factory:
 
@@ -297,7 +260,7 @@ def create_page(locale: AppLocale = DEFAULT_LOCALE) -> QWidget:
     return GEN101Page(locale)
 ```
 
-Register the visible course metadata:
+Declare the course registration:
 
 ```python
 COURSE = CourseRegistration(
@@ -313,14 +276,14 @@ COURSE = CourseRegistration(
         AppLocale.DANISH_DENMARK: "Molekylær genetik",
     },
     localized_summaries={
-        AppLocale.SPANISH_SPAIN: "...",
-        AppLocale.ENGLISH: "...",
-        AppLocale.DANISH_DENMARK: "...",
+        AppLocale.SPANISH_SPAIN: "Resumen en español.",
+        AppLocale.ENGLISH: "English summary.",
+        AppLocale.DANISH_DENMARK: "Dansk resumé.",
     },
 )
 ```
 
-## 9. Register the course in the central catalog
+## 7. Register the course in the central catalog
 
 Edit:
 
@@ -334,7 +297,7 @@ Add the import:
 from .gen101 import COURSE as GEN101
 ```
 
-Add the course to `COURSES`:
+Add the registration to `COURSES`:
 
 ```python
 COURSES: tuple[CourseRegistration, ...] = (
@@ -346,17 +309,24 @@ COURSES: tuple[CourseRegistration, ...] = (
 )
 ```
 
-The home page, sidebar, route, header, title, and summary are derived from this catalog. `validate_catalog()` rejects duplicate codes and routes.
+The catalog automatically supplies the course to:
 
-Update `tests/test_course_catalog.py` so the expected codes, routes, and ECTS totals match the new catalog.
+- the home page;
+- the navigation sidebar;
+- route registration;
+- localized page headers.
 
-## 10. Optional full-progress integration
+`validate_catalog()` rejects duplicate course codes and routes.
 
-The current architecture uses explicit course-specific hooks for some fully tracked modular courses.
+Update `tests/test_course_catalog.py` so expected codes, routes, and ECTS totals match the new catalog.
 
-### Application-level recorder
+## 8. Add optional full-progress integration
 
-When the course page accepts a shared progress recorder, add its configuration in:
+The current architecture uses explicit course-specific hooks for some tracked modular courses.
+
+### Configure the progress recorder
+
+When the new course page exposes `configure_progress_recorder(...)`, update:
 
 ```text
 src/computational_biomedicine_study_hub/application.py
@@ -371,39 +341,39 @@ from .courses.gen101 import configure_progress_recorder as configure_gen101_prog
 configure_gen101_progress_recorder(progress_service)
 ```
 
-### Restoring module and section position
+### Preserve module and tab location
 
-`MainWindow` currently recognizes selected modular page classes explicitly. To preserve the current module and tab across language changes and to open the course from review, update:
+`MainWindow` currently recognizes modular page classes explicitly. To preserve the selected module and tab across language changes and to open a module from review, update:
 
 ```text
 src/computational_biomedicine_study_hub/ui/main_window.py
 ```
 
-Add the page class to:
+Add the new page class to:
 
 - the imports;
 - `ModularCoursePage`;
 - `_modular_course_page(...)`.
 
-This step is not required for basic navigation, but it is required for the same location-restoration behavior currently provided to recognized modular pages.
+This is not required for basic course navigation. It is required for the same location-restoration behavior provided to recognized modular pages.
 
-## 11. Add tests
+## 9. Add tests
 
-At minimum, add tests for:
+At minimum, test:
 
-- course registration and stable route;
-- all required module sections;
+- course registration and route stability;
+- required module sections;
 - non-empty and unique IDs;
 - complete ES, EN, and DA materialization;
 - at least six valid objective questions per module;
 - stable answer identities across locales;
 - active evaluation rendering for every module;
 - exact objective-link coverage when persistence is enabled;
-- progress persistence under the expected course, module, item, and objective IDs;
-- source catalog and source audit when the course makes academic coverage claims;
+- persistence under the expected course, module, item, and objective IDs;
+- source catalogs and source audits when academic coverage claims are made;
 - specialized executable examples or laboratories, when present.
 
-Recommended file names:
+Suggested files:
 
 ```text
 tests/test_gen101_course.py
@@ -413,7 +383,7 @@ tests/test_gen101_assessment.py
 tests/test_gen101_objective_links.py
 ```
 
-## 12. Validate before merging
+## 10. Validate before merging
 
 Run the same checks as GitHub Actions:
 
@@ -424,21 +394,17 @@ mypy
 pytest
 ```
 
-For a focused first pass:
+Focused first pass:
 
 ```bash
 pytest tests/test_course_catalog.py tests/test_gen101_*.py
 ```
 
-Do not merge a course while content validation, localization, assessment integrity, or objective-link tests are failing.
-
----
+Do not merge while content validation, localization, assessment integrity, or objective-link tests are failing.
 
 # Removing a Course
 
-Removing a course from the visible application is simpler than deleting all of its content.
-
-## 13. Recommended safe removal: unregister first
+## 11. Unregister it first
 
 Edit:
 
@@ -448,30 +414,30 @@ src/computational_biomedicine_study_hub/courses/catalog.py
 
 Remove the course import and remove it from `COURSES`.
 
-This immediately removes it from:
+This removes the course from:
 
 - the home-page course list;
 - the navigation sidebar;
 - route registration;
 - normal application access.
 
-Keeping the content and course files temporarily is useful when the removal may be reversed or when historical data must remain inspectable.
+Keeping the implementation files temporarily is useful when removal may be reversed or historical material must remain inspectable.
 
-## 14. Remove course-specific integrations
+## 12. Remove course-specific integrations
 
 When applicable, remove:
 
-- the course progress-recorder import and configuration from `application.py`;
-- the page import from `ui/main_window.py`;
+- progress-recorder imports and configuration from `application.py`;
+- page imports from `ui/main_window.py`;
 - the page class from `ModularCoursePage`;
 - the page class from `_modular_course_page(...)`;
-- course-specific persistent pages or workflows;
+- course-specific persistent workflows;
 - course-specific CLI entry points;
-- course-specific datasets or source registries that are no longer used.
+- course-specific datasets or registries no longer used.
 
 Do not remove shared infrastructure used by other courses.
 
-## 15. Update tests and documented catalog claims
+## 13. Update tests and documentation
 
 Update:
 
@@ -479,10 +445,10 @@ Update:
 - tests that enumerate all courses;
 - README course lists and totals;
 - source-audit summaries;
-- documentation that names the removed course;
-- any expected navigation labels or routes.
+- navigation and route expectations;
+- documentation that names the removed course.
 
-Run a repository search for the course code before deleting files:
+Search the complete repository before deleting files:
 
 ```bash
 rg -n "GEN101|gen101" .
@@ -490,9 +456,9 @@ rg -n "GEN101|gen101" .
 
 Review every match rather than deleting mechanically.
 
-## 16. Decide whether to delete the implementation
+## 14. Decide whether to delete the implementation
 
-After the course is unregistered and all references are removed, the following may be deleted if the course is permanently retired:
+For a permanent removal, delete the course-specific files after all references have been removed:
 
 ```text
 src/computational_biomedicine_study_hub/courses/gen101.py
@@ -500,26 +466,26 @@ src/computational_biomedicine_study_hub/content/gen101/
 tests/test_gen101_*.py
 ```
 
-Keep source-license records or provenance documents when their retention is legally or scientifically necessary.
+Retain source-license or provenance records when their preservation is legally or scientifically necessary.
 
-## 17. Existing learner data
+## 15. Existing learner data
 
-Unregistering or deleting course code does **not** automatically delete rows from the user's local SQLite progress database.
+Unregistering or deleting course code does **not** automatically delete rows from the local SQLite progress database.
 
 Consequences:
 
-- historical attempts may remain stored but become unreachable from the current navigation;
+- historical attempts may remain stored but become unreachable through normal navigation;
 - review items for an unregistered route may no longer open the original module;
-- reusing the same course, module, objective, or item IDs for unrelated material can attach old evidence to new content.
+- reusing retired IDs can attach old evidence to unrelated new content.
 
 Therefore:
 
-- never reuse retired IDs for a different meaning;
-- treat database cleanup as a separate, explicit migration;
+- never reuse retired identifiers for a different meaning;
+- treat database cleanup as a separate migration;
 - do not silently delete learner data during course removal;
 - document any intentional migration or purge.
 
-## 18. Final removal checklist
+## Removal checklist
 
 ```text
 [ ] Removed from courses/catalog.py
@@ -533,18 +499,18 @@ Therefore:
 [ ] Ran ruff, mypy, and pytest successfully
 ```
 
-# Pull request checklist for a new course
+# New-course pull request checklist
 
 ```text
-[ ] Stable course code, route, module IDs, objective IDs, and item IDs
+[ ] Stable course, route, module, objective, item, and option IDs
 [ ] Complete ES, EN, and DA content
 [ ] Required module collections are non-empty
 [ ] At least six objective questions per module
 [ ] Deterministic answer keys use stable option IDs
-[ ] Content version assigned to every module bundle
+[ ] Content version assigned to every bundle
 [ ] Objective links complete before persistence is enabled
 [ ] Course registered in the central catalog
-[ ] Course location restoration added when required
+[ ] Location restoration added when required
 [ ] Source basis and licensing reviewed
 [ ] Course-specific and full test suites pass
 ```
