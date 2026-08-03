@@ -50,7 +50,9 @@ class DM847ModuleReaderPage(ModuleReaderPage):
         progress_recorder: ObjectiveAttemptRecorder | None,
     ) -> None:
         self._objective_links = bundle.objective_links
-        self._progress_recorder = progress_recorder
+        self._progress_recorder = (
+            progress_recorder if self._objective_links is not None else None
+        )
         super().__init__(
             bundle.module,
             objective_question_bank=bundle.objective_question_bank,
