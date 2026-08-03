@@ -16,7 +16,7 @@ from PySide6.QtCore import (
     Signal,
     Slot,
 )
-from PySide6.QtGui import QContextMenuEvent, QMouseEvent
+from PySide6.QtGui import QContextMenuEvent, QMouseEvent, QTextOption
 from PySide6.QtWidgets import (
     QFrame,
     QHBoxLayout,
@@ -257,6 +257,16 @@ class FloatingTutorChat(QFrame):
         self._transcript.setObjectName("floatingTutorTranscript")
         self._transcript.setOpenExternalLinks(False)
         self._transcript.setMinimumHeight(210)
+        self._transcript.setLineWrapMode(QTextEdit.LineWrapMode.WidgetWidth)
+        self._transcript.setWordWrapMode(QTextOption.WrapMode.WrapAtWordBoundaryOrAnywhere)
+        self._transcript.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+        self._transcript.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self._transcript.document().setDocumentMargin(8)
+        self._transcript.document().setDefaultStyleSheet(
+            "pre, code { font-family: monospace; white-space: pre-wrap; } "
+            "table { border-collapse: collapse; } "
+            "th, td { padding: 3px 6px; }"
+        )
         body_layout.addWidget(self._transcript, 1)
 
         self._status = QLabel()
@@ -478,7 +488,6 @@ class FloatingTutorChat(QFrame):
         if request_id != self._active_request_id or pending is None:
             return
         self._history.extend((pending, response.message))
-        self._trim_history()
         self._active_request_id = None
         self._pending_user_message = None
         self._set_busy(False)
@@ -499,12 +508,9 @@ class FloatingTutorChat(QFrame):
 
     def _bounded_history(self) -> tuple[ChatMessage, ...]:
         history = self._history[-12:]
-        while history and sum(len(message.content) for message in history) > 18_000:
+        while len(history) > 2 and sum(len(message.content) for message in history) > 18_000:
             history = history[2:]
         return tuple(history)
-
-    def _trim_history(self) -> None:
-        self._history[:] = list(self._bounded_history())
 
     def _render_transcript(self) -> None:
         user_label, tutor_label = {
@@ -515,8 +521,8 @@ class FloatingTutorChat(QFrame):
         blocks: list[str] = []
         for message in self._history:
             label = user_label if message.role is ChatRole.USER else tutor_label
-            blocks.append(f"{label}\n{message.content}")
-        self._transcript.setPlainText("\n\n".join(blocks))
+            blocks.append(f"**{label}**\n\n{message.content.strip()}")
+        self._transcript.setMarkdown("\n\n---\n\n".join(blocks))
         scrollbar = self._transcript.verticalScrollBar()
         scrollbar.setValue(scrollbar.maximum())
 

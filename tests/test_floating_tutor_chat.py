@@ -3,8 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from PySide6.QtCore import QSettings
-from PySide6.QtWidgets import QApplication, QPlainTextEdit
+from PySide6.QtCore import QSettings, Qt
+from PySide6.QtWidgets import QApplication, QPlainTextEdit, QTextBrowser
 
 from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.integrations import (
@@ -22,6 +22,7 @@ from computational_biomedicine_study_hub.ui.widgets.floating_tutor_chat import (
 
 @dataclass
 class _FakeRunner:
+    response_text: str = "Contextual answer"
     calls: list[tuple[str, tuple[ChatMessage, ...], str, AppLocale]] = field(default_factory=list)
 
     def ask(
@@ -35,7 +36,7 @@ class _FakeRunner:
         self.calls.append((context, history, question, locale))
         return ChatResponse(
             model="test-model",
-            message=ChatMessage(ChatRole.ASSISTANT, "Contextual answer"),
+            message=ChatMessage(ChatRole.ASSISTANT, self.response_text),
         )
 
 
@@ -154,3 +155,43 @@ def test_selection_explanation_opens_chat_and_uses_selected_text(
     assert history == ()
     assert "representación binaria aproximada" in question
     assert locale is AppLocale.SPANISH_SPAIN
+
+
+def test_tutor_renders_markdown_and_keeps_the_complete_latest_response(
+    qapp: QApplication,
+    tmp_path: Path,
+) -> None:
+    tail_marker = "COMPLETE-RESPONSE-END"
+    response = (
+        "## Idea principal\n\n"
+        "- Primer punto\n"
+        "- Segundo punto\n\n"
+        "```python\nvalue = 3\nprint(value)\n```\n\n"
+        + ("Explicación extensa. " * 1200)
+        + tail_marker
+    )
+    runner = _FakeRunner(response_text=response)
+    executor = _DeferredExecutor()
+    panel = FloatingTutorChat(
+        settings=_settings(tmp_path),
+        context_provider=lambda: "DM857 | Concepts",
+        locale=AppLocale.SPANISH_SPAIN,
+        runner=runner,
+        executor=executor,
+    )
+    question = panel.findChild(QPlainTextEdit, "floatingTutorQuestion")
+    transcript = panel.findChild(QTextBrowser, "floatingTutorTranscript")
+    assert question is not None
+    assert transcript is not None
+    question.setPlainText("Explica el concepto")
+
+    panel.send_question()
+    executor.complete_next()
+
+    assert tail_marker in panel.transcript_text
+    assert len(panel.conversation) == 2
+    html = transcript.toHtml().casefold()
+    assert "idea principal" in html
+    assert "<ul" in html
+    assert "<pre" in html
+    assert transcript.verticalScrollBarPolicy() is Qt.ScrollBarPolicy.ScrollBarAlwaysOn
