@@ -11,11 +11,13 @@ from PySide6.QtCore import QObject
 from ..i18n.locales import AppLocale
 from .temporary_tutor_voice import (
     AudioFormatDescriptor,
-    QtTemporaryTutorVoice as _QtTemporaryTutorVoice,
     TutorSpeechController,
     VoicePlaybackState,
     speech_text_from_markdown,
     write_wave_file,
+)
+from .temporary_tutor_voice import (
+    QtTemporaryTutorVoice as _QtTemporaryTutorVoice,
 )
 
 
