@@ -243,9 +243,7 @@ class TechnicalStationAttempt:
                     "Technical-station checked criteria must be text identities."
                 )
             if isinstance(hint_level, bool) or not isinstance(hint_level, int):
-                raise TechnicalStationSnapshotError(
-                    "Technical-station hint level must be integer."
-                )
+                raise TechnicalStationSnapshotError("Technical-station hint level must be integer.")
             if not isinstance(reviewed, bool):
                 raise TechnicalStationSnapshotError(
                     "Technical-station reviewed flag must be boolean."
@@ -333,15 +331,9 @@ class TechnicalStationSnapshot:
         version = raw.get("schema_version")
         attempts = raw.get("attempts")
         if isinstance(version, bool) or not isinstance(version, int):
-            raise TechnicalStationSnapshotError(
-                "Technical-station schema version must be integer."
-            )
-        if not isinstance(attempts, list) or not all(
-            isinstance(item, dict) for item in attempts
-        ):
-            raise TechnicalStationSnapshotError(
-                "Technical-station attempts must be objects."
-            )
+            raise TechnicalStationSnapshotError("Technical-station schema version must be integer.")
+        if not isinstance(attempts, list) or not all(isinstance(item, dict) for item in attempts):
+            raise TechnicalStationSnapshotError("Technical-station attempts must be objects.")
         try:
             return cls(
                 attempts=tuple(
@@ -358,9 +350,7 @@ class TechnicalStationSnapshot:
 
 def _required_text(value: object, label: str) -> str:
     if not isinstance(value, str) or not value.strip():
-        raise TechnicalStationSnapshotError(
-            f"Technical-station {label} must be non-empty text."
-        )
+        raise TechnicalStationSnapshotError(f"Technical-station {label} must be non-empty text.")
     return value
 
 
