@@ -1,5 +1,7 @@
 """Qt integration tests for project-grounded DM857 technical reasoning."""
 
+# ruff: noqa: I001
+
 from __future__ import annotations
 
 from PySide6.QtWidgets import QCheckBox, QPlainTextEdit, QPushButton
