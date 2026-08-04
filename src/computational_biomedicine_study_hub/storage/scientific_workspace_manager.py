@@ -98,7 +98,9 @@ class ScientificWorkspaceManager:
         try:
             return path.read_text(encoding="utf-8")
         except OSError as exc:
-            raise WorkspaceDefinitionError(f"Unable to read workspace file {relative_path!r}.") from exc
+            raise WorkspaceDefinitionError(
+                f"Unable to read workspace file {relative_path!r}."
+            ) from exc
 
     def write_text(
         self,
