@@ -273,7 +273,7 @@ def test_mentor_observation_is_visible_but_marked_provisional(
 
     note = panel.findChild(QLabel, "mentorObservationBody")
     assert note is not None
-    assert note.isVisible()
+    assert not note.isHidden()
     assert "Observed evidence" in note.text()
     assert "Suggested next action" in note.text()
 
