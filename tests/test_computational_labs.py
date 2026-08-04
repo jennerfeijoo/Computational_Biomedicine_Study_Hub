@@ -10,6 +10,7 @@ from computational_biomedicine_study_hub.content.labs import (
     DM847_LAB_01,
     DM847_LAB_02,
     DM847_LAB_03,
+    DM847_LAB_04,
     DM857_LAB_01,
     LABS,
 )
@@ -52,11 +53,18 @@ _REFERENCE_IMPLEMENTATION = """def summarize_measurements(values, lower, upper):
 
 
 def test_registered_labs_cover_the_complete_pedagogical_cycle() -> None:
-    assert LABS == (DM857_LAB_01, DM847_LAB_01, DM847_LAB_02, DM847_LAB_03)
+    assert LABS == (
+        DM857_LAB_01,
+        DM847_LAB_01,
+        DM847_LAB_02,
+        DM847_LAB_03,
+        DM847_LAB_04,
+    )
     assert DM857_LAB_01.estimated_minutes == 120
     assert DM847_LAB_01.estimated_minutes == 190
     assert DM847_LAB_02.estimated_minutes == 150
     assert DM847_LAB_03.estimated_minutes == 170
+    assert DM847_LAB_04.estimated_minutes == 185
     for lab in LABS:
         assert tuple(dict.fromkeys(task.stage for task in lab.tasks)) == tuple(LabStage)
         assert all(task.objective_ids for task in lab.tasks)
