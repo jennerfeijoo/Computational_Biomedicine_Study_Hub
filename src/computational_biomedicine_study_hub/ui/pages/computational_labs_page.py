@@ -300,7 +300,7 @@ class ComputationalLabsPage(QWidget):
     @staticmethod
     def _action_button(callback: object) -> QPushButton:
         button = QPushButton()
-        button.clicked.connect(callback)  # type: ignore[arg-type]
+        button.clicked.connect(callback)
         return button
 
     def _render_lab(self) -> None:
