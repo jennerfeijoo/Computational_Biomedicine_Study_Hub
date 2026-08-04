@@ -176,17 +176,15 @@ class ScientificWorkspacePanel(QFrame):
             workspace = self._manager.materialize(self._template)
         except WorkspaceDefinitionError as exc:
             self._set_enabled(False)
-            self._status.setText(
-                self._text(ScientificWorkspaceCopyKey.LOAD_FAILED, error=str(exc))
-            )
+            self._status.setText(self._text(ScientificWorkspaceCopyKey.LOAD_FAILED, error=str(exc)))
             return
-        self._location.setText(
-            self._text(ScientificWorkspaceCopyKey.LOCATION, path=str(workspace))
-        )
+        self._location.setText(self._text(ScientificWorkspaceCopyKey.LOCATION, path=str(workspace)))
         blocker = QSignalBlocker(self._selector)
         self._selector.clear()
         for file_template in self._template.files:
-            self._selector.addItem(file_template.relative_path, userData=file_template.relative_path)
+            self._selector.addItem(
+                file_template.relative_path, userData=file_template.relative_path
+            )
         self._selector.setCurrentIndex(0)
         del blocker
         self._set_enabled(True)
@@ -207,14 +205,10 @@ class ScientificWorkspacePanel(QFrame):
         try:
             self._manager.write_text(template, self._current_path, self._editor.toPlainText())
         except WorkspaceDefinitionError as exc:
-            self._status.setText(
-                self._text(ScientificWorkspaceCopyKey.SAVE_FAILED, error=str(exc))
-            )
+            self._status.setText(self._text(ScientificWorkspaceCopyKey.SAVE_FAILED, error=str(exc)))
             return
         self._dirty = False
-        self._status.setText(
-            self._text(ScientificWorkspaceCopyKey.SAVED, path=self._current_path)
-        )
+        self._status.setText(self._text(ScientificWorkspaceCopyKey.SAVED, path=self._current_path))
 
     def mentor_context(self) -> str:
         """Return bounded workspace evidence for the Socratic laboratory mentor."""
@@ -255,9 +249,7 @@ class ScientificWorkspacePanel(QFrame):
             content = self._manager.read_text(template, self._current_path)
             file_template = template.file(self._current_path)
         except WorkspaceDefinitionError as exc:
-            self._status.setText(
-                self._text(ScientificWorkspaceCopyKey.LOAD_FAILED, error=str(exc))
-            )
+            self._status.setText(self._text(ScientificWorkspaceCopyKey.LOAD_FAILED, error=str(exc)))
             return
         self._loading = True
         blocker = QSignalBlocker(self._editor)
@@ -305,9 +297,7 @@ class ScientificWorkspacePanel(QFrame):
             record_name = "last_run.txt" if mode is WorkspaceExecutionMode.RUN else "last_tests.txt"
             self._manager.write_execution_record(template, record_name, rendered)
         except WorkspaceDefinitionError as exc:
-            self._status.setText(
-                self._text(ScientificWorkspaceCopyKey.LOAD_FAILED, error=str(exc))
-            )
+            self._status.setText(self._text(ScientificWorkspaceCopyKey.LOAD_FAILED, error=str(exc)))
             return
         self._last_execution = rendered
         self._output.setPlainText(rendered)
