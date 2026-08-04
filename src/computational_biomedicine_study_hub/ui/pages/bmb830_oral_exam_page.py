@@ -12,6 +12,7 @@ from PySide6.QtCore import (
     QRunnable,
     QSettings,
     QThreadPool,
+    Qt,
     Signal,
     Slot,
 )
@@ -232,7 +233,7 @@ class BMB830OralExamPage(QWidget):
         self._question.setWordWrap(True)
         self._question.setTextInteractionFlags(
             self._question.textInteractionFlags()
-            | self._question.textInteractionFlags().TextSelectableByMouse
+            | Qt.TextInteractionFlag.TextSelectableByMouse
         )
         prompt_layout.addWidget(self._question)
         self._next_button = QPushButton(self._text(BMB830OralCopyKey.NEXT_RECOMMENDED))
@@ -270,7 +271,7 @@ class BMB830OralExamPage(QWidget):
         self._feedback.setWordWrap(True)
         self._feedback.setTextInteractionFlags(
             self._feedback.textInteractionFlags()
-            | self._feedback.textInteractionFlags().TextSelectableByMouse
+            | Qt.TextInteractionFlag.TextSelectableByMouse
         )
         feedback_layout.addWidget(self._feedback)
 
@@ -313,7 +314,7 @@ class BMB830OralExamPage(QWidget):
         self._follow_up.setWordWrap(True)
         self._follow_up.setTextInteractionFlags(
             self._follow_up.textInteractionFlags()
-            | self._follow_up.textInteractionFlags().TextSelectableByMouse
+            | Qt.TextInteractionFlag.TextSelectableByMouse
         )
         feedback_layout.addWidget(self._follow_up)
         self._confidence = QLabel()
