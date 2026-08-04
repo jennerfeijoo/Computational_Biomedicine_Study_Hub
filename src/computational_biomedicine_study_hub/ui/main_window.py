@@ -47,10 +47,10 @@ from .routes import (
 from .styles import build_application_stylesheet
 from .theme import AppearanceMode, ThemeController, VisualTheme
 from .widgets.floating_tutor_chat import (
-    FloatingTutorChat,
     TutorSelectionEventFilter,
     position_floating_tutor,
 )
+from .widgets.voiced_floating_tutor_chat import VoicedFloatingTutorChat
 
 StudyLocation = tuple[int, int]
 
@@ -118,7 +118,7 @@ class MainWindow(QMainWindow):
         self._tutor_launcher = QPushButton(self)
         self._tutor_launcher.setObjectName("floatingTutorLauncher")
         self._tutor_launcher.clicked.connect(self._show_floating_tutor)
-        self._floating_tutor = FloatingTutorChat(
+        self._floating_tutor = VoicedFloatingTutorChat(
             settings=self._settings,
             context_provider=self._tutor_context,
             locale=self._language.locale,
@@ -174,7 +174,7 @@ class MainWindow(QMainWindow):
         return self._theme
 
     @property
-    def floating_tutor(self) -> FloatingTutorChat:
+    def floating_tutor(self) -> VoicedFloatingTutorChat:
         """Return the application-wide contextual tutor panel."""
 
         return self._floating_tutor
@@ -219,7 +219,7 @@ class MainWindow(QMainWindow):
         self._persist_review_session()
         self._persist_assessments()
         if hasattr(self, "_floating_tutor"):
-            self._floating_tutor.cancel_request()
+            self._floating_tutor.shutdown()
         application = QApplication.instance()
         if isinstance(application, QApplication) and hasattr(self, "_selection_tutor_filter"):
             application.removeEventFilter(self._selection_tutor_filter)
