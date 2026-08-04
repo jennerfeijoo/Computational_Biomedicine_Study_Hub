@@ -17,7 +17,7 @@ from computational_biomedicine_study_hub.learning.python_execution import (
     PythonSubprocessRunner,
 )
 
-_SUFFIX_REFERENCE = '''def validate_terminated_text(text):
+_SUFFIX_REFERENCE = """def validate_terminated_text(text):
     if not isinstance(text, str):
         raise TypeError("text must be a string")
     normalized = "".join(text.split()).upper()
@@ -38,9 +38,9 @@ def bwt_from_suffix_array(text, suffixes):
     if sorted(suffixes) != list(range(len(text))):
         raise ValueError("suffix array must be a permutation")
     return "".join(text[position - 1] if position else text[-1] for position in suffixes)
-'''
+"""
 
-_FM_REFERENCE = '''def validate_terminated_text(text):
+_FM_REFERENCE = """def validate_terminated_text(text):
     if not isinstance(text, str):
         raise TypeError("text must be a string")
     normalized = "".join(text.split()).upper()
@@ -117,7 +117,7 @@ def backward_search(pattern, index):
 def locate(pattern, index):
     top, bottom = backward_search(pattern, index)
     return sorted(index["suffix_array"][top:bottom])
-'''
+"""
 
 
 def test_sequence_index_lab_covers_the_complete_cycle_and_locales() -> None:
@@ -137,9 +137,7 @@ def test_sequence_index_lab_covers_the_complete_cycle_and_locales() -> None:
 
 def test_reference_implementations_pass_both_python_checkpoints() -> None:
     runner = PythonSubprocessRunner()
-    python_tasks = tuple(
-        task for task in DM847_LAB_03.tasks if task.kind is LabTaskKind.PYTHON
-    )
+    python_tasks = tuple(task for task in DM847_LAB_03.tasks if task.kind is LabTaskKind.PYTHON)
     references = (_SUFFIX_REFERENCE, _FM_REFERENCE)
 
     for task, reference in zip(python_tasks, references, strict=True):
