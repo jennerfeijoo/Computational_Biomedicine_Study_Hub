@@ -72,9 +72,7 @@ class AssessmentRegistration:
 
         page = self.page_factory(progress_store, locale, settings)
         if not isinstance(page, PersistableAssessmentPage):
-            raise TypeError(
-                f"Assessment page {self.assessment_id!r} must implement persist()."
-            )
+            raise TypeError(f"Assessment page {self.assessment_id!r} must implement persist().")
         return page
 
 
