@@ -16,6 +16,7 @@ from ..assessment_registry import (
     PersistableAssessmentPage,
     validate_assessment_registrations,
 )
+from .bmb830_oral_exam_page import BMB830OralExamPage
 from .bmb831_report_page import BMB831ReportPage
 from .dm847_written_assessment_page import DM847WrittenAssessmentPage
 from .dm857_capstone_page import DM857CapstonePage
@@ -96,6 +97,12 @@ class AssessmentsPage(QWidget):
         """Return the DM857 capstone using its descriptive alias."""
 
         return self.dm857_page
+
+    @property
+    def bmb830_oral_page(self) -> BMB830OralExamPage:
+        """Return the BMB830 oral-exam preparation workflow."""
+
+        return cast(BMB830OralExamPage, self.page("bmb830.oral"))
 
     @property
     def bmb831_report_page(self) -> BMB831ReportPage:
