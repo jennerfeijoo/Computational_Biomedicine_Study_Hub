@@ -39,17 +39,6 @@ class TutorChatCopyKey(StrEnum):
     NOTE_NEXT = "tutor_chat.note_next"
     NOTE_CONFIDENCE = "tutor_chat.note_confidence"
     NOTE_DISCLAIMER = "tutor_chat.note_disclaimer"
-    VOICE_PLAY = "tutor_chat.voice_play"
-    VOICE_PAUSE = "tutor_chat.voice_pause"
-    VOICE_RESUME = "tutor_chat.voice_resume"
-    VOICE_STOP = "tutor_chat.voice_stop"
-    VOICE_AUTOPLAY = "tutor_chat.voice_autoplay"
-    VOICE_RATE = "tutor_chat.voice_rate"
-    VOICE_SYNTHESIZING = "tutor_chat.voice_synthesizing"
-    VOICE_PLAYING = "tutor_chat.voice_playing"
-    VOICE_PAUSED = "tutor_chat.voice_paused"
-    VOICE_UNAVAILABLE = "tutor_chat.voice_unavailable"
-    VOICE_ERROR = "tutor_chat.voice_error"
 
 
 _CATALOGS: dict[AppLocale, dict[TutorChatCopyKey, str]] = {
@@ -89,19 +78,6 @@ _CATALOGS: dict[AppLocale, dict[TutorChatCopyKey, str]] = {
             "Esta nota es una inferencia del modelo para orientar el aprendizaje; no es una nota "
             "oficial ni modifica tu dominio objetivo."
         ),
-        TutorChatCopyKey.VOICE_PLAY: "Reproducir la última respuesta",
-        TutorChatCopyKey.VOICE_PAUSE: "Pausar",
-        TutorChatCopyKey.VOICE_RESUME: "Continuar",
-        TutorChatCopyKey.VOICE_STOP: "Detener",
-        TutorChatCopyKey.VOICE_AUTOPLAY: "Leer automáticamente",
-        TutorChatCopyKey.VOICE_RATE: "Velocidad",
-        TutorChatCopyKey.VOICE_SYNTHESIZING: "Generando audio temporal…",
-        TutorChatCopyKey.VOICE_PLAYING: "Reproduciendo la respuesta del mentor.",
-        TutorChatCopyKey.VOICE_PAUSED: "Reproducción en pausa.",
-        TutorChatCopyKey.VOICE_UNAVAILABLE: (
-            "No hay un motor local de voz compatible con la generación temporal de audio."
-        ),
-        TutorChatCopyKey.VOICE_ERROR: "No se pudo generar o reproducir la voz: {detail}",
     },
     AppLocale.ENGLISH: {
         TutorChatCopyKey.OPEN: "Mentor",
@@ -139,19 +115,6 @@ _CATALOGS: dict[AppLocale, dict[TutorChatCopyKey, str]] = {
             "This note is a model inference used to guide learning; it is not an official grade "
             "and does not change objective mastery."
         ),
-        TutorChatCopyKey.VOICE_PLAY: "Play the latest response",
-        TutorChatCopyKey.VOICE_PAUSE: "Pause",
-        TutorChatCopyKey.VOICE_RESUME: "Resume",
-        TutorChatCopyKey.VOICE_STOP: "Stop",
-        TutorChatCopyKey.VOICE_AUTOPLAY: "Read responses automatically",
-        TutorChatCopyKey.VOICE_RATE: "Speed",
-        TutorChatCopyKey.VOICE_SYNTHESIZING: "Generating temporary audio…",
-        TutorChatCopyKey.VOICE_PLAYING: "Playing the mentor response.",
-        TutorChatCopyKey.VOICE_PAUSED: "Playback paused.",
-        TutorChatCopyKey.VOICE_UNAVAILABLE: (
-            "No local voice engine supports temporary audio generation."
-        ),
-        TutorChatCopyKey.VOICE_ERROR: "Voice generation or playback failed: {detail}",
     },
     AppLocale.DANISH_DENMARK: {
         TutorChatCopyKey.OPEN: "Mentor",
@@ -189,19 +152,6 @@ _CATALOGS: dict[AppLocale, dict[TutorChatCopyKey, str]] = {
             "Denne note er en modelbaseret inferens til læringsvejledning; den er ikke en officiel "
             "karakter og ændrer ikke objektiv mestring."
         ),
-        TutorChatCopyKey.VOICE_PLAY: "Afspil det seneste svar",
-        TutorChatCopyKey.VOICE_PAUSE: "Sæt på pause",
-        TutorChatCopyKey.VOICE_RESUME: "Fortsæt",
-        TutorChatCopyKey.VOICE_STOP: "Stop",
-        TutorChatCopyKey.VOICE_AUTOPLAY: "Læs svar automatisk",
-        TutorChatCopyKey.VOICE_RATE: "Hastighed",
-        TutorChatCopyKey.VOICE_SYNTHESIZING: "Opretter midlertidig lyd…",
-        TutorChatCopyKey.VOICE_PLAYING: "Afspiller mentorens svar.",
-        TutorChatCopyKey.VOICE_PAUSED: "Afspilningen er sat på pause.",
-        TutorChatCopyKey.VOICE_UNAVAILABLE: (
-            "Ingen lokal stemmemotor understøtter midlertidig lydgenerering."
-        ),
-        TutorChatCopyKey.VOICE_ERROR: "Stemmen kunne ikke genereres eller afspilles: {detail}",
     },
 }
 
