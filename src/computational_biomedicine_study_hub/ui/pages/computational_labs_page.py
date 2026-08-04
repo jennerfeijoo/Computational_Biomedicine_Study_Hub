@@ -43,6 +43,7 @@ from ...learning.python_execution import (
 )
 from ...storage.computational_lab_store import ComputationalLabStore
 from ...storage.sqlite_progress_store import SQLiteProgressStore
+from ..widgets.scientific_workspace_panel import ScientificWorkspacePanel
 
 
 class ComputationalLabsPage(QWidget):
@@ -100,6 +101,8 @@ class ComputationalLabsPage(QWidget):
         self._build_overview()
         self._build_progress()
         self._build_task_card()
+        self._workspace = ScientificWorkspacePanel(progress_store, locale, parent=self)
+        self._body_layout.addWidget(self._workspace)
         self._body_layout.addStretch(1)
 
         scroll.setWidget(body)
@@ -124,10 +127,17 @@ class ComputationalLabsPage(QWidget):
 
         return self._attempt
 
+    @property
+    def workspace_panel(self) -> ScientificWorkspacePanel:
+        """Return the persistent multi-file workspace panel."""
+
+        return self._workspace
+
     def persist(self) -> None:
         """Persist visible work and deterministic evidence atomically."""
 
         self._capture_response()
+        self._workspace.persist()
         self._snapshot = self._snapshot.with_attempt(self._attempt)
         if self._store is not None:
             self._store.save(self._snapshot)
@@ -158,9 +168,10 @@ class ComputationalLabsPage(QWidget):
                 f"Checkpoint passed: {task.task_id in self._attempt.passed_checkpoints}",
                 f"Requested hint level: {self._attempt.hint_level_for(task.task_id)}/6",
                 f"Authored mentor notes: {task.mentor_notes.text(self._locale)}",
+                self._workspace.mentor_context(),
                 "Mentor policy: use the Socratic method, ask for reasoning first, provide one "
-                "progressive hint at a time, never reveal hidden verification code, and do not "
-                "treat model feedback as mastery.",
+                "progressive hint at a time, never reveal hidden verification code or authored "
+                "workspace tests, and do not treat model feedback as mastery.",
             )
         )
 
@@ -333,6 +344,7 @@ class ComputationalLabsPage(QWidget):
         self._save.setText(self._text(ComputationalLabCopyKey.SAVE))
         self._export.setText(self._text(ComputationalLabCopyKey.EXPORT))
         self._output_heading.setText(self._text(ComputationalLabCopyKey.OUTPUT))
+        self._workspace.set_lab(self._lab.lab_id)
         self._load_task()
 
     def _load_task(self) -> None:
