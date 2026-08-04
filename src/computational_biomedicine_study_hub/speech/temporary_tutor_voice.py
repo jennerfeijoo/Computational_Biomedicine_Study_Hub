@@ -265,7 +265,7 @@ class QtTemporaryTutorVoice(QObject):
 
         bounded_rate = min(1.0, max(-1.0, rate))
         cache_key = hashlib.sha256(
-            f"{locale.value}\0{bounded_rate:.3f}\0{spoken}".encode("utf-8")
+            f"{locale.value}\0{bounded_rate:.3f}\0{spoken}".encode()
         ).hexdigest()
         if self._audio_path is not None and self._audio_path.exists() and cache_key == self._cache_key:
             self._player.setSource(QUrl.fromLocalFile(str(self._audio_path)))
@@ -294,15 +294,20 @@ class QtTemporaryTutorVoice(QObject):
             self._player.play()
 
     def stop(self) -> None:
+        if self._synthesizing:
+            self._synthesizing = False
+            self._pending_chunks = []
+            self._pending_format = None
+            self._speech.stop()
         self._player.stop()
         if self._state not in {VoicePlaybackState.UNAVAILABLE, VoicePlaybackState.ERROR}:
             self._emit_state(VoicePlaybackState.IDLE)
 
     def discard(self) -> None:
-        self._speech.stop()
         self._synthesizing = False
         self._pending_chunks = []
         self._pending_format = None
+        self._speech.stop()
         self._player.stop()
         self._player.setSource(QUrl())
         path = self._audio_path
