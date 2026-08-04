@@ -157,10 +157,7 @@ class ComputationalLabsPage(QWidget):
     def mentor_context(self) -> str:
         """Return bounded Socratic context for the active laboratory activity."""
 
-        if (
-            self._mentor_focus == "station"
-            and self._technical_stations.current_station is not None
-        ):
+        if self._mentor_focus == "station" and self._technical_stations.current_station is not None:
             return "\n".join(
                 (
                     self._technical_stations.mentor_context(),
