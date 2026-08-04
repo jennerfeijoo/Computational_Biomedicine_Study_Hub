@@ -12,12 +12,8 @@ from computational_biomedicine_study_hub.i18n.locales import AppLocale
 from computational_biomedicine_study_hub.storage.sqlite_progress_store import (
     SQLiteProgressStore,
 )
-from computational_biomedicine_study_hub.ui.pages.assessments_page import (
-    AssessmentsPage,
-)
-from computational_biomedicine_study_hub.ui.pages.dm857_capstone_page import (
-    DM857CapstonePage,
-)
+from computational_biomedicine_study_hub.ui.pages import assessments_page
+from computational_biomedicine_study_hub.ui.pages import dm857_capstone_page
 
 
 _PROJECT_RESPONSE = """<ARTIFACT>
@@ -39,7 +35,7 @@ it does not establish that the threshold is clinically valid or scientifically j
 
 
 def test_capstone_embeds_eight_project_grounded_stations(qtbot) -> None:  # type: ignore[no-untyped-def]
-    page = DM857CapstonePage(None, AppLocale.ENGLISH)
+    page = dm857_capstone_page.DM857CapstonePage(None, AppLocale.ENGLISH)
     qtbot.addWidget(page)
 
     panel = page.technical_station_panel
@@ -52,7 +48,7 @@ def test_capstone_embeds_eight_project_grounded_stations(qtbot) -> None:  # type
 
 
 def test_project_station_routes_real_code_to_socratic_mentor(qtbot) -> None:  # type: ignore[no-untyped-def]
-    page = DM857CapstonePage(None, AppLocale.ENGLISH)
+    page = dm857_capstone_page.DM857CapstonePage(None, AppLocale.ENGLISH)
     qtbot.addWidget(page)
     panel = page.technical_station_panel
     editor = panel.findChild(QPlainTextEdit, "technicalStationResponse")
@@ -76,7 +72,7 @@ def test_project_station_routes_real_code_to_socratic_mentor(qtbot) -> None:  # 
 def test_project_reasoning_self_review_persists_with_capstone(qtbot) -> None:  # type: ignore[no-untyped-def]
     progress = SQLiteProgressStore(":memory:")
     try:
-        page = DM857CapstonePage(progress, AppLocale.ENGLISH)
+        page = dm857_capstone_page.DM857CapstonePage(progress, AppLocale.ENGLISH)
         qtbot.addWidget(page)
         panel = page.technical_station_panel
         editor = panel.findChild(QPlainTextEdit, "technicalStationResponse")
@@ -92,7 +88,7 @@ def test_project_reasoning_self_review_persists_with_capstone(qtbot) -> None:  #
         review_button.click()
         page.persist()
 
-        restored = DM857CapstonePage(progress, AppLocale.ENGLISH)
+        restored = dm857_capstone_page.DM857CapstonePage(progress, AppLocale.ENGLISH)
         qtbot.addWidget(restored)
         restored_attempt = restored.technical_station_panel.current_attempt
         assert restored_attempt is not None
@@ -103,7 +99,7 @@ def test_project_reasoning_self_review_persists_with_capstone(qtbot) -> None:  #
 
 
 def test_assessment_workspace_forwards_dm857_mentor_request(qtbot) -> None:  # type: ignore[no-untyped-def]
-    page = AssessmentsPage(None, AppLocale.ENGLISH)
+    page = assessments_page.AssessmentsPage(None, AppLocale.ENGLISH)
     qtbot.addWidget(page)
     assert page.select_assessment("dm857.capstone")
     panel = page.dm857_page.technical_station_panel
