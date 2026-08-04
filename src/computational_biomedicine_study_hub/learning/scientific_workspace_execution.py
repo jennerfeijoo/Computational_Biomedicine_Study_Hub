@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import ast
-import json
 import os
 import subprocess
 import sys
@@ -53,7 +52,6 @@ _BLOCKED_CALLS: Final = frozenset(
 _HARNESS: Final = r"""
 import builtins
 import io
-import json
 import pathlib
 import runpy
 import socket
@@ -87,20 +85,17 @@ def _blocked_socket(*args, **kwargs):
     raise WorkspaceAccessError("Network access is blocked in laboratory workspaces.")
 
 _real_open = builtins.open
-_real_io_open = io.open
 builtins.open = _guarded_open
 io.open = _guarded_open
 socket.socket = _blocked_socket
 socket.create_connection = _blocked_socket
 
-payload = {"status": "ok", "error": ""}
 try:
     target.relative_to(workspace)
     runpy.run_path(str(target), run_name="__main__")
 except BaseException:
-    payload["status"] = "runtime_error"
-    payload["error"] = traceback.format_exc()
-    sys.stderr.write(payload["error"])
+    traceback.print_exc(file=sys.stderr)
+    raise SystemExit(1)
 """
 
 
@@ -144,6 +139,8 @@ class _WorkspacePolicyVisitor(ast.NodeVisitor):
 
     def _require_allowed(self, name: str) -> None:
         root = name.split(".", 1)[0]
+        if root == "__future__":
+            return
         if root in _BLOCKED_IMPORT_ROOTS or root not in self._allowed_import_roots:
             raise WorkspacePolicyError(
                 f"Import {name!r} is not authorized for this laboratory workspace."
