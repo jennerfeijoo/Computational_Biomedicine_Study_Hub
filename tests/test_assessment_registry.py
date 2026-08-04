@@ -22,6 +22,7 @@ def test_default_assessment_registry_has_stable_order_and_localized_titles() -> 
     assert tuple(item.assessment_id for item in ASSESSMENT_REGISTRATIONS) == (
         "dm847.written",
         "dm857.capstone",
+        "bmb830.oral",
         "bmb831.report",
     )
     for locale in AppLocale:
