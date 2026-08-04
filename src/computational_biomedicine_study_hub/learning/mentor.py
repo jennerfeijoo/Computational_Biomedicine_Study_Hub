@@ -273,9 +273,7 @@ class MentorJournalSnapshot:
         if not selected:
             return "No previous mentor observations are available."
 
-        lines = [
-            "These are provisional model-generated mentor observations, not verified mastery:"
-        ]
+        lines = ["These are provisional model-generated mentor observations, not verified mastery:"]
         for turn in reversed(selected):
             observation = turn.observation
             parts: list[str] = []

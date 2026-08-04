@@ -263,12 +263,16 @@ class FloatingTutorChat(QFrame):
         self._executor = executor or QtTutorChatExecutor()
         self._journal_store = journal_store
         self._journal = (
-            journal_store.load_or_empty() if journal_store is not None else MentorJournalSnapshot.empty()
+            journal_store.load_or_empty()
+            if journal_store is not None
+            else MentorJournalSnapshot.empty()
         )
         self._session_id = self._journal.latest_session_id or uuid4().hex
         self._history: list[ChatMessage] = list(self._journal.chat_history(limit=6))
         self._last_observation = (
-            self._journal.turns[-1].observation if self._journal.turns else MentorObservation.empty()
+            self._journal.turns[-1].observation
+            if self._journal.turns
+            else MentorObservation.empty()
         )
         self._request_serial = 0
         self._active_request_id: int | None = None
@@ -757,9 +761,7 @@ class FloatingTutorChat(QFrame):
                     percent=round(observation.confidence * 100),
                 )
             )
-            self._note_title.setText(
-                tutor_chat_text(self._locale, TutorChatCopyKey.NOTE_TITLE)
-            )
+            self._note_title.setText(tutor_chat_text(self._locale, TutorChatCopyKey.NOTE_TITLE))
             self._note_body.setText("\n".join(lines))
             self._note_disclaimer.setText(
                 tutor_chat_text(self._locale, TutorChatCopyKey.NOTE_DISCLAIMER)
