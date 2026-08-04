@@ -407,17 +407,11 @@ class TechnicalStationPanel(QFrame):
             render_technical_station_record(station, self._attempt, self._locale),
             encoding="utf-8",
         )
-        self._status.setText(
-            self._text(TechnicalStationCopyKey.EXPORTED, path=str(path))
-        )
+        self._status.setText(self._text(TechnicalStationCopyKey.EXPORTED, path=str(path)))
 
     def _update_progress(self) -> None:
         total = len(self._stations)
-        reviewed = {
-            item.station_id
-            for item in self._snapshot.attempts
-            if item.reviewed
-        }
+        reviewed = {item.station_id for item in self._snapshot.attempts if item.reviewed}
         if self._attempt is not None and self._attempt.reviewed:
             reviewed.add(self._attempt.station_id)
         completed = len(reviewed & {item.station_id for item in self._stations})
