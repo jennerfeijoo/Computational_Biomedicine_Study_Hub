@@ -279,8 +279,7 @@ class LearningPathEngine:
         plans = self._plans_by_course[course_code]
         for plan in plans:
             states = tuple(
-                self._mastery(progress, plan, objective_id)
-                for objective_id in plan.objective_ids
+                self._mastery(progress, plan, objective_id) for objective_id in plan.objective_ids
             )
             available = tuple(state for state in states if state is not None)
             ratio = self._mastery_ratio(states)
