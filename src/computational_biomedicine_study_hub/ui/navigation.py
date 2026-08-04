@@ -18,6 +18,7 @@ from PySide6.QtWidgets import (
 
 from ..courses.models import CourseRegistration
 from ..i18n import MessageKey, Translator
+from ..i18n.learning_path_copy import LearningPathCopyKey, learning_path_text
 from .routes import RouteId, RouteLike, route_value
 
 
@@ -57,6 +58,14 @@ def build_navigation(
     learning = active_translator.text(MessageKey.NAV_LEARNING)
     entries.extend(
         [
+            NavigationEntry(
+                RouteId.LEARNING_PATH.value,
+                learning_path_text(
+                    active_translator.locale,
+                    LearningPathCopyKey.NAVIGATION,
+                ),
+                learning,
+            ),
             NavigationEntry(
                 RouteId.REVIEW.value,
                 active_translator.text(MessageKey.NAV_REVIEW),
