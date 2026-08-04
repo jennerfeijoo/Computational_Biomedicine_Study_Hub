@@ -63,7 +63,9 @@ class TechnicalStation:
 
     def __post_init__(self) -> None:
         if not self.station_id.strip() or not self.course_code.strip() or not self.lab_id.strip():
-            raise ValueError("Technical stations require station, course, and laboratory identities.")
+            raise ValueError(
+                "Technical stations require station, course, and laboratory identities."
+            )
         if not self.artifact.strip():
             raise ValueError("Technical stations require a concrete artifact.")
         if not 2 <= len(self.criteria) <= 8:
@@ -76,7 +78,9 @@ class TechnicalStation:
         if not self.source_basis or any(not item.strip() for item in self.source_basis):
             raise ValueError("Technical stations require an explicit authored source basis.")
         if not 40 <= self.minimum_response_chars <= 2_000:
-            raise ValueError("Technical-station minimum response must be between 40 and 2000 chars.")
+            raise ValueError(
+                "Technical-station minimum response must be between 40 and 2000 chars."
+            )
 
     def criterion(self, criterion_id: str) -> TechnicalStationCriterion:
         """Return one review criterion by stable identity."""
@@ -119,7 +123,9 @@ class TechnicalStationAttempt:
         if self.reviewed and self.reviewed_at is None:
             raise ValueError("Reviewed technical-station attempts require a review timestamp.")
         if not self.reviewed and self.reviewed_at is not None:
-            raise ValueError("Unreviewed technical-station attempts cannot have a review timestamp.")
+            raise ValueError(
+                "Unreviewed technical-station attempts cannot have a review timestamp."
+            )
 
     @classmethod
     def new(
@@ -237,9 +243,13 @@ class TechnicalStationAttempt:
                     "Technical-station checked criteria must be text identities."
                 )
             if isinstance(hint_level, bool) or not isinstance(hint_level, int):
-                raise TechnicalStationSnapshotError("Technical-station hint level must be integer.")
+                raise TechnicalStationSnapshotError(
+                    "Technical-station hint level must be integer."
+                )
             if not isinstance(reviewed, bool):
-                raise TechnicalStationSnapshotError("Technical-station reviewed flag must be boolean.")
+                raise TechnicalStationSnapshotError(
+                    "Technical-station reviewed flag must be boolean."
+                )
             if reviewed_at_raw is not None and not isinstance(reviewed_at_raw, str):
                 raise TechnicalStationSnapshotError(
                     "Technical-station review timestamp must be text or null."
@@ -326,7 +336,9 @@ class TechnicalStationSnapshot:
             raise TechnicalStationSnapshotError(
                 "Technical-station schema version must be integer."
             )
-        if not isinstance(attempts, list) or not all(isinstance(item, dict) for item in attempts):
+        if not isinstance(attempts, list) or not all(
+            isinstance(item, dict) for item in attempts
+        ):
             raise TechnicalStationSnapshotError(
                 "Technical-station attempts must be objects."
             )
@@ -346,7 +358,9 @@ class TechnicalStationSnapshot:
 
 def _required_text(value: object, label: str) -> str:
     if not isinstance(value, str) or not value.strip():
-        raise TechnicalStationSnapshotError(f"Technical-station {label} must be non-empty text.")
+        raise TechnicalStationSnapshotError(
+            f"Technical-station {label} must be non-empty text."
+        )
     return value
 
 
