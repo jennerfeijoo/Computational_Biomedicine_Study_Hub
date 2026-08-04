@@ -21,6 +21,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
+from ...content.technical_stations import DM857_PROJECT_ID
 from ...i18n import DEFAULT_LOCALE, AppLocale
 from ...i18n.capstone_copy import (
     CapstoneCopyKey,
@@ -37,6 +38,7 @@ from ...learning.dm857_capstone import (
     DM857CapstoneProgress,
 )
 from ...storage import DM857CapstoneStore, SQLiteProgressStore
+from ..widgets.technical_station_panel import TechnicalStationPanel
 
 
 class CapstoneMilestoneEditor(QGroupBox):
@@ -141,6 +143,8 @@ class CapstoneMilestoneEditor(QGroupBox):
 
 class DM857CapstonePage(QWidget):
     """Guide and persist one evidence-backed DM857 capstone preparation project."""
+
+    mentor_requested = Signal()
 
     def __init__(
         self,
@@ -296,6 +300,15 @@ class DM857CapstonePage(QWidget):
         report_layout.addWidget(report_template)
         layout.addWidget(report_group)
 
+        self._technical_stations = TechnicalStationPanel(
+            progress_store,
+            locale,
+            parent=self,
+        )
+        self._technical_stations.set_lab(DM857_PROJECT_ID)
+        self._technical_stations.mentor_requested.connect(self.mentor_requested.emit)
+        layout.addWidget(self._technical_stations)
+
         actions = QHBoxLayout()
         self._save_button = QPushButton(capstone_text(locale, CapstoneCopyKey.SAVE))
         self._save_button.setObjectName("capstoneSaveButton")
@@ -317,6 +330,12 @@ class DM857CapstonePage(QWidget):
 
         return self._capture_progress()
 
+    @property
+    def technical_station_panel(self) -> TechnicalStationPanel:
+        """Return the project-grounded technical reasoning panel."""
+
+        return self._technical_stations
+
     def milestone_editor(self, milestone_id: str) -> CapstoneMilestoneEditor:
         """Return one editor for deterministic UI tests and integrations."""
 
@@ -332,10 +351,30 @@ class DM857CapstonePage(QWidget):
 
         self._save_timer.stop()
         self._progress = self._capture_progress()
+        self._technical_stations.persist()
         if self._store is not None:
             self._store.save(self._progress)
         self._save_status.setText(capstone_text(self._locale, CapstoneCopyKey.SAVED))
         self._refresh_summary(self._progress)
+
+    def mentor_context(self) -> str:
+        """Ground the Socratic mentor in current project evidence and learner reasoning."""
+
+        progress = self._capture_progress()
+        station_context = self._technical_stations.mentor_context()
+        return "\n".join(
+            (
+                "Assessment preparation: DM857 group project and report.",
+                f"Project title: {progress.project_title or '[not set]'}",
+                f"Group members recorded: {len(progress.group_members)}",
+                f"Repository reference: {progress.repository_url or '[not set]'}",
+                f"Report reference: {progress.report_path or '[not set]'}",
+                f"Ready milestones: {progress.ready_milestone_count}/{len(progress.milestones)}",
+                "The detailed project brief and official grading rubric are not available in this "
+                "application. Treat all station feedback as formative preparation.",
+                station_context,
+            )
+        )
 
     def _capture_progress(self) -> DM857CapstoneProgress:
         timestamp = datetime.now(UTC)
