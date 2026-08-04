@@ -26,6 +26,7 @@ from ..i18n import (
     ui_text,
 )
 from ..i18n.tutor_chat_copy import TutorChatCopyKey, tutor_chat_text
+from ..learning.mentor_context import build_module_mentor_context
 from ..storage import MentorJournalStore, SQLiteProgressStore
 from .course_page_protocol import ModularCoursePageProtocol
 from .header import PageHeader
@@ -361,7 +362,7 @@ class MainWindow(QMainWindow):
         position_floating_tutor(self._floating_tutor, self._tutor_launcher, self)
 
     def _tutor_context(self) -> str:
-        """Describe the currently visible page, module and section for Ollama."""
+        """Ground Ollama in the visible page and deterministic learning evidence."""
 
         route = route_value(self.current_route)
         descriptor = self._descriptors.get(route)
@@ -372,11 +373,12 @@ class MainWindow(QMainWindow):
         modular_page = self._modular_course_page(route)
         if modular_page is not None:
             reader = modular_page.reader
-            parts.extend(
-                (
-                    f"Module: {reader.module.title}",
-                    f"Module summary: {reader.module.summary}",
-                    f"Visible section: {reader.current_section}",
+            parts.append(
+                build_module_mentor_context(
+                    reader.module,
+                    section_index=reader.current_section_index,
+                    section_label=reader.current_section,
+                    progress=self._progress_store,
                 )
             )
         else:
@@ -392,7 +394,7 @@ class MainWindow(QMainWindow):
                 if tabs is not None and tabs.currentIndex() >= 0:
                     parts.append(f"Visible section: {tabs.tabText(tabs.currentIndex())}")
 
-        return "\n".join(dict.fromkeys(part for part in parts if part.strip()))
+        return "\n\n".join(dict.fromkeys(part for part in parts if part.strip()))
 
     @Slot(str, str, int, str)
     def _open_learning_destination(
