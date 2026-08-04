@@ -6,6 +6,10 @@ from dataclasses import dataclass
 from enum import StrEnum
 
 from ..i18n import MessageKey, Translator
+from ..i18n.computational_lab_copy import (
+    ComputationalLabCopyKey,
+    computational_lab_text,
+)
 from ..i18n.learning_path_copy import LearningPathCopyKey, learning_path_text
 
 
@@ -14,6 +18,7 @@ class RouteId(StrEnum):
 
     HOME = "home"
     LEARNING_PATH = "learning_path"
+    LABS = "labs"
     REVIEW = "review"
     ASSESSMENTS = "assessments"
     FLASHCARDS = "flashcards"
@@ -75,6 +80,17 @@ def localized_page_descriptors(translator: Translator) -> dict[str, PageDescript
         subtitle=learning_path_text(
             translator.locale,
             LearningPathCopyKey.PAGE_SUBTITLE,
+        ),
+    )
+    descriptors[RouteId.LABS.value] = PageDescriptor(
+        route=RouteId.LABS.value,
+        title=computational_lab_text(
+            translator.locale,
+            ComputationalLabCopyKey.PAGE_TITLE,
+        ),
+        subtitle=computational_lab_text(
+            translator.locale,
+            ComputationalLabCopyKey.PAGE_SUBTITLE,
         ),
     )
     return descriptors

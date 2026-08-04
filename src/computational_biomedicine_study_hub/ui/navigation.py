@@ -18,6 +18,10 @@ from PySide6.QtWidgets import (
 
 from ..courses.models import CourseRegistration
 from ..i18n import MessageKey, Translator
+from ..i18n.computational_lab_copy import (
+    ComputationalLabCopyKey,
+    computational_lab_text,
+)
 from ..i18n.learning_path_copy import LearningPathCopyKey, learning_path_text
 from .routes import RouteId, RouteLike, route_value
 
@@ -63,6 +67,14 @@ def build_navigation(
                 learning_path_text(
                     active_translator.locale,
                     LearningPathCopyKey.NAVIGATION,
+                ),
+                learning,
+            ),
+            NavigationEntry(
+                RouteId.LABS.value,
+                computational_lab_text(
+                    active_translator.locale,
+                    ComputationalLabCopyKey.NAVIGATION,
                 ),
                 learning,
             ),

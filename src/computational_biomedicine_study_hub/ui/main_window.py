@@ -32,6 +32,7 @@ from .course_page_protocol import ModularCoursePageProtocol
 from .header import PageHeader
 from .navigation import NavigationSidebar
 from .pages.assessments_page import AssessmentsPage
+from .pages.computational_labs_page import ComputationalLabsPage
 from .pages.home_page import HomePage
 from .pages.learning_path_page import LearningPathPage
 from .pages.ollama_settings_page import OllamaSettingsPage
@@ -218,6 +219,7 @@ class MainWindow(QMainWindow):
 
         self._persist_review_session()
         self._persist_assessments()
+        self._persist_labs()
         if hasattr(self, "_floating_tutor"):
             self._floating_tutor.cancel_request()
         application = QApplication.instance()
@@ -234,12 +236,16 @@ class MainWindow(QMainWindow):
         learning_path_page = LearningPathPage(self._progress_store, locale)
         learning_path_page.destination_requested.connect(self._open_learning_destination)
 
+        labs_page = ComputationalLabsPage(self._progress_store, locale)
+        labs_page.mentor_requested.connect(self._show_floating_tutor)
+
         review_page = ReviewPage(self._progress_store, locale)
         review_page.review_requested.connect(self._open_review_item)
 
         pages: dict[str, QWidget] = {
             RouteId.HOME.value: home_page,
             RouteId.LEARNING_PATH.value: learning_path_page,
+            RouteId.LABS.value: labs_page,
             RouteId.REVIEW.value: review_page,
             RouteId.ASSESSMENTS.value: AssessmentsPage(
                 self._progress_store,
@@ -279,6 +285,7 @@ class MainWindow(QMainWindow):
         study_location = self._capture_study_location(route)
         self._persist_review_session()
         self._persist_assessments()
+        self._persist_labs()
 
         self._header.set_locale(locale_code)
         self._navigation.retranslate(self._translator)
@@ -334,6 +341,11 @@ class MainWindow(QMainWindow):
         if isinstance(page, AssessmentsPage):
             page.persist()
 
+    def _persist_labs(self) -> None:
+        page = self._pages.get(RouteId.LABS.value)
+        if isinstance(page, ComputationalLabsPage):
+            page.persist()
+
     def _clear_pages(self) -> None:
         self._pages.clear()
         while self._stack.count():
@@ -370,27 +382,29 @@ class MainWindow(QMainWindow):
         if descriptor is not None:
             parts.extend((descriptor.title, descriptor.subtitle))
 
-        modular_page = self._modular_course_page(route)
-        if modular_page is not None:
-            reader = modular_page.reader
-            parts.append(
-                build_module_mentor_context(
-                    reader.module,
-                    section_index=reader.current_section_index,
-                    section_label=reader.current_section,
-                    progress=self._progress_store,
-                )
-            )
+        current_page = self._stack.currentWidget()
+        if isinstance(current_page, ComputationalLabsPage):
+            parts.append(current_page.mentor_context())
         else:
-            page = self._stack.currentWidget()
-            if page is not None:
-                module_title = page.findChild(QLabel, "moduleContextTitle")
+            modular_page = self._modular_course_page(route)
+            if modular_page is not None:
+                reader = modular_page.reader
+                parts.append(
+                    build_module_mentor_context(
+                        reader.module,
+                        section_index=reader.current_section_index,
+                        section_label=reader.current_section,
+                        progress=self._progress_store,
+                    )
+                )
+            elif current_page is not None:
+                module_title = current_page.findChild(QLabel, "moduleContextTitle")
                 if module_title is not None and module_title.text().strip():
                     parts.append(f"Module: {module_title.text().strip()}")
-                selector = page.findChild(QComboBox, "courseModuleSelector")
+                selector = current_page.findChild(QComboBox, "courseModuleSelector")
                 if selector is not None and selector.currentText().strip():
                     parts.append(f"Selected module: {selector.currentText().strip()}")
-                tabs = page.findChild(QTabWidget, "moduleTabs")
+                tabs = current_page.findChild(QTabWidget, "moduleTabs")
                 if tabs is not None and tabs.currentIndex() >= 0:
                     parts.append(f"Visible section: {tabs.tabText(tabs.currentIndex())}")
 
