@@ -32,6 +32,7 @@ from .header import PageHeader
 from .navigation import NavigationSidebar
 from .pages.assessments_page import AssessmentsPage
 from .pages.home_page import HomePage
+from .pages.learning_path_page import LearningPathPage
 from .pages.ollama_settings_page import OllamaSettingsPage
 from .pages.placeholder_page import PlaceholderPage
 from .pages.resumable_review_page import ReviewPage
@@ -187,6 +188,8 @@ class MainWindow(QMainWindow):
 
         if isinstance(page, ReviewPage):
             page.refresh()
+        if isinstance(page, LearningPathPage):
+            page.refresh()
 
         descriptor = self._descriptors[key]
         self._stack.setCurrentWidget(page)
@@ -221,11 +224,15 @@ class MainWindow(QMainWindow):
         home_page = HomePage(self._courses, self._translator)
         home_page.course_selected.connect(self.navigate)
 
+        learning_path_page = LearningPathPage(self._progress_store, locale)
+        learning_path_page.destination_requested.connect(self._open_learning_destination)
+
         review_page = ReviewPage(self._progress_store, locale)
         review_page.review_requested.connect(self._open_review_item)
 
         pages: dict[str, QWidget] = {
             RouteId.HOME.value: home_page,
+            RouteId.LEARNING_PATH.value: learning_path_page,
             RouteId.REVIEW.value: review_page,
             RouteId.ASSESSMENTS.value: AssessmentsPage(
                 self._progress_store,
@@ -380,6 +387,30 @@ class MainWindow(QMainWindow):
                     parts.append(f"Visible section: {tabs.tabText(tabs.currentIndex())}")
 
         return "\n".join(dict.fromkeys(part for part in parts if part.strip()))
+
+    @Slot(str, str, int, str)
+    def _open_learning_destination(
+        self,
+        route: str,
+        module_id: str,
+        section_index: int,
+        assessment_id: str,
+    ) -> None:
+        """Open one stable destination emitted by the learning-path engine."""
+
+        self.navigate(route)
+        if assessment_id:
+            page = self._pages.get(RouteId.ASSESSMENTS.value)
+            if isinstance(page, AssessmentsPage):
+                page.select_assessment(assessment_id)
+            return
+        if not module_id:
+            return
+        page = self._modular_course_page(route)
+        if page is None or not page.select_module_by_id(module_id):
+            return
+        if section_index >= 0:
+            page.reader.select_section_index(section_index)
 
     @Slot(str, str, str)
     def _open_review_item(
