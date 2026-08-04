@@ -22,7 +22,6 @@ from computational_biomedicine_study_hub.learning.mentor import (
     parse_mentor_turn,
 )
 
-
 NOW = datetime(2026, 8, 4, 12, 0, tzinfo=UTC)
 
 
