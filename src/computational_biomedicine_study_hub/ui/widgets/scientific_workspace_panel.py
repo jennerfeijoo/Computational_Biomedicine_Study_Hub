@@ -63,7 +63,7 @@ class ScientificWorkspacePanel(QFrame):
             self._manager = ScientificWorkspaceManager(
                 Path(tempfile.mkdtemp(prefix="cb-study-workspaces-"))
             )
-        self._runner = runner or ScientificWorkspaceRunner()
+        self._runner: ScientificWorkspaceRunnerProtocol = runner or ScientificWorkspaceRunner()
         self._template: ScientificWorkspaceTemplate | None = None
         self._current_path = ""
         self._loading = False
@@ -187,9 +187,10 @@ class ScientificWorkspacePanel(QFrame):
         self._selector.clear()
         for file_template in self._template.files:
             self._selector.addItem(file_template.relative_path, userData=file_template.relative_path)
+        self._selector.setCurrentIndex(0)
         del blocker
         self._set_enabled(True)
-        self._selector.setCurrentIndex(0)
+        self._current_path = str(self._selector.itemData(0) or "")
         self._load_selected_file()
         self._status.setText(self._text(ScientificWorkspaceCopyKey.MATERIALIZED))
 
@@ -297,13 +298,19 @@ class ScientificWorkspacePanel(QFrame):
         if template is None:
             return
         self.persist()
-        workspace = self._manager.materialize(template)
-        result = self._runner.run(template, workspace, mode)
-        rendered = result.render()
+        try:
+            workspace = self._manager.materialize(template)
+            result = self._runner.run(template, workspace, mode)
+            rendered = result.render()
+            record_name = "last_run.txt" if mode is WorkspaceExecutionMode.RUN else "last_tests.txt"
+            self._manager.write_execution_record(template, record_name, rendered)
+        except WorkspaceDefinitionError as exc:
+            self._status.setText(
+                self._text(ScientificWorkspaceCopyKey.LOAD_FAILED, error=str(exc))
+            )
+            return
         self._last_execution = rendered
         self._output.setPlainText(rendered)
-        record_name = "last_run.txt" if mode is WorkspaceExecutionMode.RUN else "last_tests.txt"
-        self._manager.write_execution_record(template, record_name, rendered)
         key = (
             ScientificWorkspaceCopyKey.RUN_COMPLETE
             if mode is WorkspaceExecutionMode.RUN
