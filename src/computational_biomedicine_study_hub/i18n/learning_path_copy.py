@@ -5,7 +5,6 @@ from __future__ import annotations
 from enum import StrEnum
 
 from ..learning.activity_types import StudyCycleStage
-from ..learning.pathway import RecommendationReason
 from .locales import AppLocale
 
 
@@ -120,38 +119,38 @@ _STAGE_COPY: dict[StudyCycleStage, dict[AppLocale, str]] = {
 }
 
 
-_REASON_COPY: dict[RecommendationReason, dict[AppLocale, str]] = {
-    RecommendationReason.NO_EVIDENCE: {
+_REASON_COPY: dict[str, dict[AppLocale, str]] = {
+    "no_evidence": {
         AppLocale.SPANISH_SPAIN: "Todavía no existe evidencia objetiva para este módulo.",
         AppLocale.ENGLISH: "No objective evidence exists for this module yet.",
         AppLocale.DANISH_DENMARK: "Der findes endnu ingen objektiv evidens for dette modul.",
     },
-    RecommendationReason.PARTIAL_EVIDENCE: {
+    "partial_evidence": {
         AppLocale.SPANISH_SPAIN: "Algunos objetivos aún no tienen evidencia y requieren ejemplos adicionales.",
         AppLocale.ENGLISH: "Some objectives still lack evidence and need additional examples.",
         AppLocale.DANISH_DENMARK: "Nogle læringsmål mangler stadig evidens og kræver flere eksempler.",
     },
-    RecommendationReason.WEAK_MASTERY: {
+    "weak_mastery": {
         AppLocale.SPANISH_SPAIN: "El dominio actual es débil; conviene practicar antes de volver a evaluarse.",
         AppLocale.ENGLISH: "Current mastery is weak; practise before reassessment.",
         AppLocale.DANISH_DENMARK: "Den aktuelle mestring er svag; øv før ny evaluering.",
     },
-    RecommendationReason.RETRIEVAL_NEEDED: {
+    "retrieval_needed": {
         AppLocale.SPANISH_SPAIN: "El contenido necesita recuperación adicional para demostrar estabilidad.",
         AppLocale.ENGLISH: "The content needs further retrieval to demonstrate stability.",
         AppLocale.DANISH_DENMARK: "Indholdet kræver yderligere genkaldelse for at vise stabilitet.",
     },
-    RecommendationReason.COURSE_READY_FOR_ASSESSMENT: {
+    "course_ready_for_assessment": {
         AppLocale.SPANISH_SPAIN: "Los objetivos del curso superan el umbral interno y corresponde practicar su formato de evaluación.",
         AppLocale.ENGLISH: "Course objectives exceed the internal threshold; practise the course assessment format.",
         AppLocale.DANISH_DENMARK: "Kursets læringsmål overstiger den interne tærskel; øv kursets eksamensformat.",
     },
-    RecommendationReason.TRANSFER_NEEDED: {
+    "transfer_needed": {
         AppLocale.SPANISH_SPAIN: "El contenido está recuperado, pero falta demostrar transferencia en un caso nuevo.",
         AppLocale.ENGLISH: "Content has been retrieved, but transfer to a novel case is still needed.",
         AppLocale.DANISH_DENMARK: "Indholdet er genkaldt, men transfer til en ny case mangler stadig.",
     },
-    RecommendationReason.REVIEW_DUE: {
+    "review_due": {
         AppLocale.SPANISH_SPAIN: "Un objetivo alcanzó su fecha de revisión espaciada.",
         AppLocale.ENGLISH: "An objective has reached its spaced-review date.",
         AppLocale.DANISH_DENMARK: "Et læringsmål har nået sin dato for intervalrepetition.",
@@ -175,10 +174,13 @@ def learning_stage_text(locale: AppLocale, stage: StudyCycleStage) -> str:
     return _STAGE_COPY[stage][locale]
 
 
-def learning_reason_text(locale: AppLocale, reason: RecommendationReason) -> str:
-    """Return one localized recommendation rationale."""
+def learning_reason_text(locale: AppLocale, reason: str) -> str:
+    """Return one localized recommendation rationale by stable reason value."""
 
-    return _REASON_COPY[reason][locale]
+    try:
+        return _REASON_COPY[reason][locale]
+    except KeyError as exc:
+        raise ValueError(f"Unknown learning-path reason {reason!r}.") from exc
 
 
 __all__ = [
