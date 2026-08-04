@@ -8,7 +8,7 @@ from datetime import UTC, datetime
 from enum import StrEnum
 from typing import cast
 
-from ..i18n.locales import AppLocale, SUPPORTED_LOCALES
+from ..i18n.locales import SUPPORTED_LOCALES, AppLocale
 
 LAB_NOTEBOOK_SCHEMA_VERSION = 1
 MAX_LAB_RESPONSE_LENGTH = 60_000
@@ -348,10 +348,11 @@ class LabNotebookSnapshot:
     def attempt_for(self, lab: ComputationalLab) -> LabAttempt:
         """Return saved work or create a new attempt for an authored lab."""
 
-        return next(
+        existing = next(
             (attempt for attempt in self.attempts if attempt.lab_id == lab.lab_id),
-            LabAttempt.new(lab),
+            None,
         )
+        return existing if existing is not None else LabAttempt.new(lab)
 
     def with_attempt(self, attempt: LabAttempt) -> LabNotebookSnapshot:
         """Replace one attempt while preserving other laboratory work."""
