@@ -81,9 +81,7 @@ class _FakeSpeechController:
     played: list[tuple[str, AppLocale, float]] = field(default_factory=list)
     discarded: int = 0
     shutdowns: int = 0
-    _state_callback: Callable[[VoicePlaybackState], None] = field(
-        default=lambda state: None
-    )
+    _state_callback: Callable[[VoicePlaybackState], None] = field(default=lambda state: None)
     _error_callback: Callable[[str], None] = field(default=lambda detail: None)
 
     def set_callbacks(
