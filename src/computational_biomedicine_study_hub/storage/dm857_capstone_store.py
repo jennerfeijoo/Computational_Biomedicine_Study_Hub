@@ -1,17 +1,19 @@
-"""Atomic sidecar persistence for durable DM857 capstone preparation state."""
+"""Typed atomic sidecar persistence for durable DM857 capstone state."""
 
 from __future__ import annotations
 
 from pathlib import Path
-from weakref import WeakKeyDictionary
 
 from ..learning.dm857_capstone import CapstoneSnapshotError, DM857CapstoneProgress
+from .atomic_json_store import AtomicJsonSidecarStore
 from .sqlite_progress_store import SQLiteProgressStore
 
-_MEMORY_DOCUMENTS: WeakKeyDictionary[SQLiteProgressStore, str] = WeakKeyDictionary()
+
+def _serialize(progress: DM857CapstoneProgress) -> str:
+    return progress.to_json()
 
 
-class DM857CapstoneStore:
+class DM857CapstoneStore(AtomicJsonSidecarStore[DM857CapstoneProgress]):
     """Persist one private capstone scaffold beside the learning database."""
 
     def __init__(
@@ -20,13 +22,14 @@ class DM857CapstoneStore:
         *,
         memory_owner: SQLiteProgressStore | None = None,
     ) -> None:
-        self._database = str(database)
-        self._memory_owner = memory_owner
-        self._path = (
-            None if self._database == ":memory:" else Path(f"{self._database}.dm857-capstone.json")
+        super().__init__(
+            database,
+            suffix=".dm857-capstone.json",
+            serializer=_serialize,
+            deserializer=DM857CapstoneProgress.from_json,
+            invalid_exceptions=(CapstoneSnapshotError,),
+            memory_owner=memory_owner,
         )
-        if self._path is not None:
-            self._path.parent.mkdir(parents=True, exist_ok=True)
 
     @classmethod
     def for_progress_store(cls, progress_store: SQLiteProgressStore) -> DM857CapstoneStore:
@@ -36,65 +39,6 @@ class DM857CapstoneStore:
             progress_store.database,
             memory_owner=progress_store if progress_store.database == ":memory:" else None,
         )
-
-    @property
-    def path(self) -> Path | None:
-        """Return the sidecar path, or ``None`` for an in-memory test store."""
-
-        return self._path
-
-    def save(self, progress: DM857CapstoneProgress) -> None:
-        """Atomically replace the current capstone document."""
-
-        document = progress.to_json()
-        if self._path is None:
-            owner = self._require_memory_owner()
-            _MEMORY_DOCUMENTS[owner] = document
-            return
-
-        temporary = self._path.with_name(f"{self._path.name}.tmp")
-        temporary.write_text(document, encoding="utf-8")
-        temporary.replace(self._path)
-
-    def load(self) -> DM857CapstoneProgress | None:
-        """Return saved progress, deleting malformed documents defensively."""
-
-        try:
-            document: str | None
-            if self._path is None:
-                owner = self._require_memory_owner()
-                document = _MEMORY_DOCUMENTS.get(owner)
-            elif self._path.exists():
-                document = self._path.read_text(encoding="utf-8")
-            else:
-                document = None
-
-            if document is None:
-                return None
-            return DM857CapstoneProgress.from_json(document)
-        except (CapstoneSnapshotError, OSError, UnicodeError):
-            self.discard()
-            return None
-
-    def discard(self) -> None:
-        """Remove capstone preparation state without touching learning evidence."""
-
-        if self._path is None:
-            owner = self._require_memory_owner()
-            _MEMORY_DOCUMENTS.pop(owner, None)
-            return
-
-        for path in (self._path, self._path.with_name(f"{self._path.name}.tmp")):
-            try:
-                path.unlink()
-            except FileNotFoundError:
-                pass
-
-    def _require_memory_owner(self) -> SQLiteProgressStore:
-        owner = self._memory_owner
-        if owner is None:
-            raise RuntimeError("In-memory capstone storage requires a progress-store owner.")
-        return owner
 
 
 __all__ = ["DM857CapstoneStore"]

@@ -34,4 +34,5 @@ class StudyCycleStage(StrEnum):
     RETRIEVAL = "retrieval"
     FEEDBACK = "feedback"
     TRANSFER = "transfer"
+    ASSESSMENT = "assessment"
     SPACED_REVIEW = "spaced_review"

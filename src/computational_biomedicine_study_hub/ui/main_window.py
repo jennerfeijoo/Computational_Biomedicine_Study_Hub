@@ -18,8 +18,6 @@ from PySide6.QtWidgets import (
 )
 
 from ..courses import COURSES, CourseRegistration
-from ..courses.dm847 import DM847Page
-from ..courses.dm857 import DM857Page
 from ..i18n import (
     AppLocale,
     LanguageController,
@@ -29,10 +27,12 @@ from ..i18n import (
 )
 from ..i18n.tutor_chat_copy import TutorChatCopyKey, tutor_chat_text
 from ..storage import SQLiteProgressStore
+from .course_page_protocol import ModularCoursePageProtocol
 from .header import PageHeader
 from .navigation import NavigationSidebar
 from .pages.assessments_page import AssessmentsPage
 from .pages.home_page import HomePage
+from .pages.learning_path_page import LearningPathPage
 from .pages.ollama_settings_page import OllamaSettingsPage
 from .pages.placeholder_page import PlaceholderPage
 from .pages.resumable_review_page import ReviewPage
@@ -51,7 +51,6 @@ from .widgets.floating_tutor_chat import (
     position_floating_tutor,
 )
 
-ModularCoursePage = DM847Page | DM857Page
 StudyLocation = tuple[int, int]
 
 
@@ -189,6 +188,8 @@ class MainWindow(QMainWindow):
 
         if isinstance(page, ReviewPage):
             page.refresh()
+        if isinstance(page, LearningPathPage):
+            page.refresh()
 
         descriptor = self._descriptors[key]
         self._stack.setCurrentWidget(page)
@@ -223,11 +224,15 @@ class MainWindow(QMainWindow):
         home_page = HomePage(self._courses, self._translator)
         home_page.course_selected.connect(self.navigate)
 
+        learning_path_page = LearningPathPage(self._progress_store, locale)
+        learning_path_page.destination_requested.connect(self._open_learning_destination)
+
         review_page = ReviewPage(self._progress_store, locale)
         review_page.review_requested.connect(self._open_review_item)
 
         pages: dict[str, QWidget] = {
             RouteId.HOME.value: home_page,
+            RouteId.LEARNING_PATH.value: learning_path_page,
             RouteId.REVIEW.value: review_page,
             RouteId.ASSESSMENTS.value: AssessmentsPage(
                 self._progress_store,
@@ -306,9 +311,9 @@ class MainWindow(QMainWindow):
         page.select_module(module_index)
         page.reader.select_section_index(section_index)
 
-    def _modular_course_page(self, route: str) -> ModularCoursePage | None:
+    def _modular_course_page(self, route: str) -> ModularCoursePageProtocol | None:
         page = self._pages.get(route)
-        if isinstance(page, (DM847Page, DM857Page)):
+        if isinstance(page, ModularCoursePageProtocol):
             return page
         return None
 
@@ -382,6 +387,30 @@ class MainWindow(QMainWindow):
                     parts.append(f"Visible section: {tabs.tabText(tabs.currentIndex())}")
 
         return "\n".join(dict.fromkeys(part for part in parts if part.strip()))
+
+    @Slot(str, str, int, str)
+    def _open_learning_destination(
+        self,
+        route: str,
+        module_id: str,
+        section_index: int,
+        assessment_id: str,
+    ) -> None:
+        """Open one stable destination emitted by the learning-path engine."""
+
+        self.navigate(route)
+        if assessment_id:
+            assessments_page = self._pages.get(RouteId.ASSESSMENTS.value)
+            if isinstance(assessments_page, AssessmentsPage):
+                assessments_page.select_assessment(assessment_id)
+            return
+        if not module_id:
+            return
+        course_page = self._modular_course_page(route)
+        if course_page is None or not course_page.select_module_by_id(module_id):
+            return
+        if section_index >= 0:
+            course_page.reader.select_section_index(section_index)
 
     @Slot(str, str, str)
     def _open_review_item(

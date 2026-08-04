@@ -6,12 +6,14 @@ from dataclasses import dataclass
 from enum import StrEnum
 
 from ..i18n import MessageKey, Translator
+from ..i18n.learning_path_copy import LearningPathCopyKey, learning_path_text
 
 
 class RouteId(StrEnum):
     """Stable identifiers for application-wide pages."""
 
     HOME = "home"
+    LEARNING_PATH = "learning_path"
     REVIEW = "review"
     ASSESSMENTS = "assessments"
     FLASHCARDS = "flashcards"
@@ -56,7 +58,7 @@ _DESCRIPTOR_KEYS = {
 
 def localized_page_descriptors(translator: Translator) -> dict[str, PageDescriptor]:
     """Return complete shell descriptors in the translator's active locale."""
-    return {
+    descriptors = {
         route.value: PageDescriptor(
             route=route.value,
             title=translator.text(title_key),
@@ -64,6 +66,18 @@ def localized_page_descriptors(translator: Translator) -> dict[str, PageDescript
         )
         for route, (title_key, subtitle_key) in _DESCRIPTOR_KEYS.items()
     }
+    descriptors[RouteId.LEARNING_PATH.value] = PageDescriptor(
+        route=RouteId.LEARNING_PATH.value,
+        title=learning_path_text(
+            translator.locale,
+            LearningPathCopyKey.PAGE_TITLE,
+        ),
+        subtitle=learning_path_text(
+            translator.locale,
+            LearningPathCopyKey.PAGE_SUBTITLE,
+        ),
+    )
+    return descriptors
 
 
 PAGE_DESCRIPTORS = localized_page_descriptors(Translator())
