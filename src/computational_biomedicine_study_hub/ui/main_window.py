@@ -400,17 +400,17 @@ class MainWindow(QMainWindow):
 
         self.navigate(route)
         if assessment_id:
-            page = self._pages.get(RouteId.ASSESSMENTS.value)
-            if isinstance(page, AssessmentsPage):
-                page.select_assessment(assessment_id)
+            assessments_page = self._pages.get(RouteId.ASSESSMENTS.value)
+            if isinstance(assessments_page, AssessmentsPage):
+                assessments_page.select_assessment(assessment_id)
             return
         if not module_id:
             return
-        page = self._modular_course_page(route)
-        if page is None or not page.select_module_by_id(module_id):
+        course_page = self._modular_course_page(route)
+        if course_page is None or not course_page.select_module_by_id(module_id):
             return
         if section_index >= 0:
-            page.reader.select_section_index(section_index)
+            course_page.reader.select_section_index(section_index)
 
     @Slot(str, str, str)
     def _open_review_item(
