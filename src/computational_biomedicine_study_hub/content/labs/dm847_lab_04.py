@@ -100,7 +100,7 @@ model = {
     },
 }
 score, path = viterbi_decode("GGGCAATT", model)
-print(round(score, 6), path)
+print(round(score, 6), "".join(path))
 posteriors = forward_backward("ACGT", model)
 rounded = [{state: round(probability, 3) for state, probability in row.items()} for row in posteriors]
 print(rounded)
