@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import weakref
+
 from PySide6.QtCore import QSettings, Slot
 from PySide6.QtWidgets import (
     QCheckBox,
@@ -67,10 +69,20 @@ class VoicedFloatingTutorChat(FloatingTutorChat):
         if not isinstance(body_layout, QVBoxLayout):
             raise RuntimeError("The floating mentor body requires a vertical layout.")
         body_layout.insertWidget(3, self._voice_frame)
-        self._speech.set_callbacks(
-            state_changed=self._apply_voice_state,
-            error=self._show_voice_error,
-        )
+
+        owner = weakref.ref(self)
+
+        def apply_state(state: VoicePlaybackState) -> None:
+            panel = owner()
+            if panel is not None:
+                panel._apply_voice_state(state)
+
+        def show_error(detail: str) -> None:
+            panel = owner()
+            if panel is not None:
+                panel._show_voice_error(detail)
+
+        self._speech.set_callbacks(state_changed=apply_state, error=show_error)
         self._retranslate_voice_controls()
         self._apply_voice_state(self._speech.state)
 
@@ -148,9 +160,13 @@ class VoicedFloatingTutorChat(FloatingTutorChat):
         super().close_panel()
 
     def shutdown(self) -> None:
-        """Cancel generation and remove all temporary speech resources."""
+        """Cancel generation, detach callbacks, and remove temporary speech resources."""
 
         self.cancel_request()
+        self._speech.set_callbacks(
+            state_changed=lambda state: None,
+            error=lambda detail: None,
+        )
         self._speech.shutdown()
 
     def _accept_response(self, request_id: int, result: MentorTurnResult) -> None:
