@@ -242,16 +242,19 @@ class MainWindow(QMainWindow):
         review_page = ReviewPage(self._progress_store, locale)
         review_page.review_requested.connect(self._open_review_item)
 
+        assessments_page = AssessmentsPage(
+            self._progress_store,
+            locale,
+            settings=self._settings,
+        )
+        assessments_page.mentor_requested.connect(self._show_floating_tutor)
+
         pages: dict[str, QWidget] = {
             RouteId.HOME.value: home_page,
             RouteId.LEARNING_PATH.value: learning_path_page,
             RouteId.LABS.value: labs_page,
             RouteId.REVIEW.value: review_page,
-            RouteId.ASSESSMENTS.value: AssessmentsPage(
-                self._progress_store,
-                locale,
-                settings=self._settings,
-            ),
+            RouteId.ASSESSMENTS.value: assessments_page,
             RouteId.FLASHCARDS.value: PlaceholderPage(
                 ui_text(locale, UiCopyKey.FLASHCARDS_PLACEHOLDER)
             ),
@@ -384,6 +387,8 @@ class MainWindow(QMainWindow):
 
         current_page = self._stack.currentWidget()
         if isinstance(current_page, ComputationalLabsPage):
+            parts.append(current_page.mentor_context())
+        elif isinstance(current_page, AssessmentsPage):
             parts.append(current_page.mentor_context())
         else:
             modular_page = self._modular_course_page(route)
