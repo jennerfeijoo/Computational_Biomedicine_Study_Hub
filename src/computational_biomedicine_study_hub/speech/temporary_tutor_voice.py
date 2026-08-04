@@ -3,12 +3,17 @@
 The controller synthesizes raw PCM data with Qt TextToSpeech, writes one ephemeral
 WAV file, and plays it through Qt Multimedia. Only the latest response is retained;
 resetting or shutting down the mentor removes the file and temporary directory.
+
+Qt Multimedia is loaded lazily. A missing native audio runtime therefore disables
+voice playback without preventing the written mentor or the rest of the application
+from starting.
 """
 
 from __future__ import annotations
 
 import hashlib
 import html
+import importlib
 import re
 import struct
 import tempfile
@@ -16,17 +21,16 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from enum import StrEnum
 from pathlib import Path
-from typing import Protocol, cast
+from typing import Any, Protocol, cast
 
 from PySide6.QtCore import QByteArray, QLocale, QObject, QUrl, Slot
-from PySide6.QtMultimedia import QAudioFormat, QAudioOutput, QMediaPlayer
 from PySide6.QtTextToSpeech import QTextToSpeech
 
 from ..i18n.locales import AppLocale
 
 VoiceStateCallback = Callable[["VoicePlaybackState"], None]
 VoiceErrorCallback = Callable[[str], None]
-SynthesizeCallback = Callable[[QAudioFormat, QByteArray], None]
+SynthesizeCallback = Callable[[Any, QByteArray], None]
 SynthesizeMethod = Callable[[str, SynthesizeCallback], None]
 
 
@@ -99,18 +103,19 @@ class AudioFormatDescriptor:
             raise ValueError("Floating-point WAV output requires 32-bit samples.")
 
     @classmethod
-    def from_qt(cls, audio_format: QAudioFormat) -> AudioFormatDescriptor:
-        """Create a validated descriptor from Qt's PCM format."""
+    def from_qt(cls, audio_format: Any) -> AudioFormatDescriptor:
+        """Create a validated descriptor from a Qt PCM-format object."""
 
         sample_format = audio_format.sampleFormat()
-        if sample_format is QAudioFormat.SampleFormat.Unknown:
+        sample_name = str(getattr(sample_format, "name", ""))
+        sample_width = int(audio_format.bytesPerSample())
+        if sample_name == "Unknown" or sample_width <= 0:
             raise ValueError("The speech engine returned an unknown sample format.")
-        floating = sample_format is QAudioFormat.SampleFormat.Float
         return cls(
-            sample_rate=audio_format.sampleRate(),
-            channel_count=audio_format.channelCount(),
-            sample_width=audio_format.bytesPerSample(),
-            floating_point=floating,
+            sample_rate=int(audio_format.sampleRate()),
+            channel_count=int(audio_format.channelCount()),
+            sample_width=sample_width,
+            floating_point=sample_name == "Float",
         )
 
 
@@ -204,12 +209,23 @@ class QtTemporaryTutorVoice(QObject):
         self._state_callback: VoiceStateCallback = lambda state: None
         self._error_callback: VoiceErrorCallback = lambda message: None
         self._state = VoicePlaybackState.IDLE
+        self._multimedia: Any | None = None
+        self._multimedia_error = ""
+        self._player: Any | None = None
+        self._audio_output: Any | None = None
+        try:
+            multimedia = importlib.import_module("PySide6.QtMultimedia")
+        except ImportError as exc:
+            self._multimedia_error = str(exc).strip() or exc.__class__.__name__
+        else:
+            self._multimedia = multimedia
+            self._player = multimedia.QMediaPlayer(self)
+            self._audio_output = multimedia.QAudioOutput(self)
+            self._player.setAudioOutput(self._audio_output)
+            self._player.playbackStateChanged.connect(self._playback_state_changed)
+            self._player.errorOccurred.connect(self._player_error)
+
         self._speech = QTextToSpeech(self)
-        self._player = QMediaPlayer(self)
-        self._audio_output = QAudioOutput(self)
-        self._player.setAudioOutput(self._audio_output)
-        self._player.playbackStateChanged.connect(self._playback_state_changed)
-        self._player.errorOccurred.connect(self._player_error)
         self._speech.stateChanged.connect(self._speech_state_changed)
         self._speech.errorOccurred.connect(self._speech_error)
         self._temporary_directory = tempfile.TemporaryDirectory(
@@ -226,8 +242,10 @@ class QtTemporaryTutorVoice(QObject):
 
     @property
     def available(self) -> bool:
-        """Return whether the active engine can expose raw PCM synthesis."""
+        """Return whether synthesis and local playback are both available."""
 
+        if self._multimedia is None or self._player is None:
+            return False
         if not QTextToSpeech.availableEngines():
             return False
         capabilities = self._speech.engineCapabilities()
@@ -260,11 +278,13 @@ class QtTemporaryTutorVoice(QObject):
             return
         if not self.available:
             self._emit_state(VoicePlaybackState.UNAVAILABLE)
-            self._error_callback(
+            detail = self._multimedia_error or (
                 "No installed Qt text-to-speech engine supports temporary audio synthesis."
             )
+            self._error_callback(detail)
             return
 
+        player = self._require_player()
         bounded_rate = min(1.0, max(-1.0, rate))
         cache_key = hashlib.sha256(
             f"{locale.value}\0{bounded_rate:.3f}\0{spoken}".encode()
@@ -274,8 +294,8 @@ class QtTemporaryTutorVoice(QObject):
             and self._audio_path.exists()
             and cache_key == self._cache_key
         ):
-            self._player.setSource(QUrl.fromLocalFile(str(self._audio_path)))
-            self._player.play()
+            player.setSource(QUrl.fromLocalFile(str(self._audio_path)))
+            player.play()
             return
 
         self.discard()
@@ -296,11 +316,17 @@ class QtTemporaryTutorVoice(QObject):
             self._fail(str(exc).strip() or exc.__class__.__name__)
 
     def pause(self) -> None:
-        if self._player.playbackState() is QMediaPlayer.PlaybackState.PlayingState:
+        if self._multimedia is None or self._player is None:
+            return
+        playing = self._multimedia.QMediaPlayer.PlaybackState.PlayingState
+        if self._player.playbackState() is playing:
             self._player.pause()
 
     def resume(self) -> None:
-        if self._player.playbackState() is QMediaPlayer.PlaybackState.PausedState:
+        if self._multimedia is None or self._player is None:
+            return
+        paused = self._multimedia.QMediaPlayer.PlaybackState.PausedState
+        if self._player.playbackState() is paused:
             self._player.play()
 
     def stop(self) -> None:
@@ -309,7 +335,8 @@ class QtTemporaryTutorVoice(QObject):
             self._pending_chunks = []
             self._pending_format = None
             self._speech.stop()
-        self._player.stop()
+        if self._player is not None:
+            self._player.stop()
         if self._state not in {VoicePlaybackState.UNAVAILABLE, VoicePlaybackState.ERROR}:
             self._emit_state(VoicePlaybackState.IDLE)
 
@@ -318,8 +345,9 @@ class QtTemporaryTutorVoice(QObject):
         self._pending_chunks = []
         self._pending_format = None
         self._speech.stop()
-        self._player.stop()
-        self._player.setSource(QUrl())
+        if self._player is not None:
+            self._player.stop()
+            self._player.setSource(QUrl())
         path = self._audio_path
         self._audio_path = None
         self._cache_key = ""
@@ -337,7 +365,7 @@ class QtTemporaryTutorVoice(QObject):
         self.discard()
         self._temporary_directory.cleanup()
 
-    def _collect_pcm(self, audio_format: QAudioFormat, data: QByteArray) -> None:
+    def _collect_pcm(self, audio_format: Any, data: QByteArray) -> None:
         if not self._synthesizing:
             return
         try:
@@ -367,20 +395,22 @@ class QtTemporaryTutorVoice(QObject):
         del reason
         self._fail(message.strip() or "Text-to-speech synthesis failed.")
 
-    @Slot(QMediaPlayer.PlaybackState)
-    def _playback_state_changed(self, state: QMediaPlayer.PlaybackState) -> None:
-        if self._synthesizing:
+    def _playback_state_changed(self, state: Any) -> None:
+        if self._synthesizing or self._multimedia is None:
             return
+        playback_state = self._multimedia.QMediaPlayer.PlaybackState
         mapped = {
-            QMediaPlayer.PlaybackState.PlayingState: VoicePlaybackState.PLAYING,
-            QMediaPlayer.PlaybackState.PausedState: VoicePlaybackState.PAUSED,
-            QMediaPlayer.PlaybackState.StoppedState: VoicePlaybackState.IDLE,
-        }[state]
-        self._emit_state(mapped)
+            playback_state.PlayingState: VoicePlaybackState.PLAYING,
+            playback_state.PausedState: VoicePlaybackState.PAUSED,
+            playback_state.StoppedState: VoicePlaybackState.IDLE,
+        }.get(state)
+        if mapped is not None:
+            self._emit_state(mapped)
 
-    @Slot(QMediaPlayer.Error, str)
-    def _player_error(self, error: QMediaPlayer.Error, message: str) -> None:
-        if error is QMediaPlayer.Error.NoError:
+    def _player_error(self, error: Any, message: str) -> None:
+        if self._multimedia is None:
+            return
+        if error is self._multimedia.QMediaPlayer.Error.NoError:
             return
         self._fail(message.strip() or "Temporary speech playback failed.")
 
@@ -400,8 +430,14 @@ class QtTemporaryTutorVoice(QObject):
             self._fail(str(exc).strip() or exc.__class__.__name__)
             return
         self._audio_path = path
-        self._player.setSource(QUrl.fromLocalFile(str(path)))
-        self._player.play()
+        player = self._require_player()
+        player.setSource(QUrl.fromLocalFile(str(path)))
+        player.play()
+
+    def _require_player(self) -> Any:
+        if self._player is None:
+            raise RuntimeError(self._multimedia_error or "Qt Multimedia is unavailable.")
+        return self._player
 
     def _fail(self, message: str) -> None:
         self._synthesizing = False
