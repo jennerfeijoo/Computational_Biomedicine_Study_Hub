@@ -9,6 +9,7 @@ from typing import Protocol, runtime_checkable
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import QWidget
 
+from ..i18n.bmb830_oral_copy import BMB830OralCopyKey, bmb830_oral_text
 from ..i18n.bmb831_report_copy import BMB831ReportCopyKey, bmb831_report_text
 from ..i18n.locales import AppLocale
 from ..i18n.written_assessment_copy import (
@@ -16,6 +17,7 @@ from ..i18n.written_assessment_copy import (
     written_assessment_text,
 )
 from ..storage.sqlite_progress_store import SQLiteProgressStore
+from .pages.bmb830_oral_exam_page import BMB830OralExamPage
 from .pages.bmb831_report_page import BMB831ReportPage
 from .pages.dm847_written_assessment_page import DM847WrittenAssessmentPage
 from .pages.dm857_capstone_page import DM857CapstonePage
@@ -97,6 +99,18 @@ def _dm857_page(
     return DM857CapstonePage(progress_store, locale)
 
 
+def _bmb830_page(
+    progress_store: SQLiteProgressStore | None,
+    locale: AppLocale,
+    settings: QSettings | None,
+) -> QWidget:
+    return BMB830OralExamPage(
+        progress_store,
+        locale,
+        settings=settings,
+    )
+
+
 def _bmb831_page(
     progress_store: SQLiteProgressStore | None,
     locale: AppLocale,
@@ -128,9 +142,19 @@ ASSESSMENT_REGISTRATIONS: tuple[AssessmentRegistration, ...] = (
         page_factory=_dm857_page,
     ),
     AssessmentRegistration(
+        assessment_id="bmb830.oral",
+        course_code="BMB830",
+        order=30,
+        title_factory=lambda locale: bmb830_oral_text(
+            locale,
+            BMB830OralCopyKey.TAB,
+        ),
+        page_factory=_bmb830_page,
+    ),
+    AssessmentRegistration(
         assessment_id="bmb831.report",
         course_code="BMB831",
-        order=30,
+        order=40,
         title_factory=lambda locale: bmb831_report_text(
             locale,
             BMB831ReportCopyKey.TAB,
