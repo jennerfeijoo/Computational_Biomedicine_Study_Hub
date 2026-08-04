@@ -204,9 +204,7 @@ class VoicedFloatingTutorChat(FloatingTutorChat):
         stored_rate = self._stored_rate()
         index = min(
             range(self._voice_rate_selector.count()),
-            key=lambda item: abs(
-                float(self._voice_rate_selector.itemData(item)) - stored_rate
-            ),
+            key=lambda item: abs(float(self._voice_rate_selector.itemData(item)) - stored_rate),
         )
         self._voice_rate_selector.setCurrentIndex(index)
         self._voice_rate_selector.currentIndexChanged.connect(self._persist_voice_preferences)
@@ -237,12 +235,8 @@ class VoicedFloatingTutorChat(FloatingTutorChat):
         self._voice_stop_button.setToolTip(
             tutor_chat_text(self._locale, TutorChatCopyKey.VOICE_STOP)
         )
-        self._voice_autoplay.setText(
-            tutor_chat_text(self._locale, TutorChatCopyKey.VOICE_AUTOPLAY)
-        )
-        self._voice_rate_label.setText(
-            tutor_chat_text(self._locale, TutorChatCopyKey.VOICE_RATE)
-        )
+        self._voice_autoplay.setText(tutor_chat_text(self._locale, TutorChatCopyKey.VOICE_AUTOPLAY))
+        self._voice_rate_label.setText(tutor_chat_text(self._locale, TutorChatCopyKey.VOICE_RATE))
 
     def _apply_voice_state(self, state: VoicePlaybackState) -> None:
         has_response = any(message.role is ChatRole.ASSISTANT for message in self.conversation)
