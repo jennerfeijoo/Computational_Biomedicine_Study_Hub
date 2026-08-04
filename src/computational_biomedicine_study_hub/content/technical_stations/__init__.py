@@ -4,7 +4,8 @@ from .dm847_alignment import DM847_ALIGNMENT_STATIONS
 from .dm847_hmm import DM847_HMM_STATIONS
 from .dm847_index import DM847_INDEX_STATIONS
 from .dm847_mapping import DM847_MAPPING_STATIONS
-from .dm857_project import DM857_PROJECT_STATIONS, PROJECT_ID as DM857_PROJECT_ID
+from .dm857_project import DM857_PROJECT_STATIONS
+from .dm857_project import PROJECT_ID as DM857_PROJECT_ID
 
 DM847_TECHNICAL_STATIONS = (
     *DM847_MAPPING_STATIONS,
