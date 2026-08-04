@@ -97,6 +97,7 @@ DM847_LAB_03 = ComputationalLab(
     lab_id="dm847.lab03.sequence-indexes",
     course_code="DM847",
     version="1.0.0",
+    estimated_minutes=170,
     title=_text(
         "Laboratorio 3: índices de secuencia y FM-index",
         "Laboratory 3: sequence indexes and the FM-index",
@@ -223,7 +224,7 @@ DM847_LAB_03 = ComputationalLab(
             instructions=_text(
                 "Para GATTACA$, enumera todos los sufijos, ordénalos, deriva SA=[7,6,4,1,5,0,3,2], calcula el LCP entre filas adyacentes y deriva la BWT. Explica qué conserva y qué reordena la transformación.",
                 "For GATTACA$, enumerate and sort all suffixes, derive SA=[7,6,4,1,5,0,3,2], calculate adjacent-row LCP values, and derive the BWT. Explain what the transform preserves and reorders.",
-                "For GATTACA$ skal du opstille og sortere alle suffixer, udlede SA=[7,6,4,1,5,0,3,2], beregne LCP mellem nab​orækker og udlede BWT. Forklar hvad transformationen bevarer og omordner.",
+                "For GATTACA$ skal du opstille og sortere alle suffixer, udlede SA=[7,6,4,1,5,0,3,2], beregne LCP mellem naborækker og udlede BWT. Forklar hvad transformationen bevarer og omordner.",
             ),
             mentor_notes=_text(
                 "No entregues la tabla completa. Revisa primero el orden de $, A, C, G y T; después localiza el primer par de sufijos mal ordenado.",
