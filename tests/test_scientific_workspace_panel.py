@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from PySide6.QtWidgets import QPlainTextEdit
+from PySide6.QtWidgets import QPlainTextEdit, QPushButton
 
 from computational_biomedicine_study_hub.i18n import AppLocale
 from computational_biomedicine_study_hub.learning.scientific_workspace import (
@@ -110,9 +110,9 @@ def test_workspace_panel_runs_script_and_writes_execution_record(
     qtbot.addWidget(panel)
     panel.set_lab(template.lab_id)
 
-    run_button = panel.findChild(object, "scientificWorkspaceRun")
+    run_button = panel.findChild(QPushButton, "scientificWorkspaceRun")
     assert run_button is not None
-    panel._run_script()  # noqa: SLF001
+    run_button.click()
 
     record = manager.workspace_path(template) / "output" / "last_run.txt"
     assert record.is_file()
