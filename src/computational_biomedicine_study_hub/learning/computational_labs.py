@@ -110,7 +110,9 @@ class ComputationalLab:
 
     def __post_init__(self) -> None:
         if not self.lab_id.strip() or not self.course_code.strip() or not self.version.strip():
-            raise ValueError("Laboratories require stable course, laboratory, and version identities.")
+            raise ValueError(
+                "Laboratories require stable course, laboratory, and version identities."
+            )
         if not 30 <= self.estimated_minutes <= 480:
             raise ValueError("Laboratory duration must be between 30 and 480 minutes.")
         if not self.objectives or not self.prerequisites or not self.tasks:
@@ -134,7 +136,9 @@ class ComputationalLab:
             if task.seed_from_task_id is not None and task.seed_from_task_id not in task_ids:
                 raise ValueError(f"Task {task.task_id!r} has an unknown response seed.")
         if sum(task.estimated_minutes for task in self.tasks) > self.estimated_minutes + 30:
-            raise ValueError("Task estimates exceed the laboratory estimate by more than 30 minutes.")
+            raise ValueError(
+                "Task estimates exceed the laboratory estimate by more than 30 minutes."
+            )
 
     def task(self, task_id: str) -> LabTask:
         """Return one authored task by stable identity."""
@@ -466,9 +470,7 @@ def _string_mapping(value: object, label: str) -> dict[str, str]:
 
 def _int_mapping(value: object, label: str) -> dict[str, int]:
     if not isinstance(value, dict) or not all(
-        isinstance(key, str)
-        and isinstance(item, int)
-        and not isinstance(item, bool)
+        isinstance(key, str) and isinstance(item, int) and not isinstance(item, bool)
         for key, item in value.items()
     ):
         raise LabSnapshotError(f"Laboratory {label} must be an integer mapping.")
