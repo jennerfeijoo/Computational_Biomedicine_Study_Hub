@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Iterable
 from typing import cast
 
-from PySide6.QtCore import QSettings
+from PySide6.QtCore import QSettings, Signal
 from PySide6.QtWidgets import QTabWidget, QVBoxLayout, QWidget
 
 from ...i18n.locales import DEFAULT_LOCALE, AppLocale
@@ -24,6 +24,8 @@ from .dm857_capstone_page import DM857CapstonePage
 
 class AssessmentsPage(QWidget):
     """Construct registered course-specific assessment pages without central branching."""
+
+    mentor_requested = Signal()
 
     def __init__(
         self,
@@ -47,6 +49,9 @@ class AssessmentsPage(QWidget):
             self._pages[registration.assessment_id] = page
             self._tab_index_by_id[registration.assessment_id] = index
             self._tabs.addTab(page, registration.title_for(locale))
+            mentor_signal = getattr(page, "mentor_requested", None)
+            if mentor_signal is not None:
+                mentor_signal.connect(self.mentor_requested.emit)
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
@@ -119,6 +124,18 @@ class AssessmentsPage(QWidget):
                     f"Registered assessment page {assessment_id!r} lost its persist contract."
                 )
             page.persist()
+
+    def mentor_context(self) -> str:
+        """Return bounded context from the currently visible assessment workflow."""
+
+        page = self._tabs.currentWidget()
+        if page is not None:
+            provider = getattr(page, "mentor_context", None)
+            if callable(provider):
+                rendered = provider()
+                if isinstance(rendered, str) and rendered.strip():
+                    return rendered
+        return f"Assessment preparation: {self.current_assessment_id}"
 
 
 __all__ = ["AssessmentsPage"]
