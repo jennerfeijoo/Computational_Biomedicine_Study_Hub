@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 from collections.abc import Callable
 from pathlib import Path
+from typing import Protocol, cast
 
 from PySide6.QtCore import QObject
 
@@ -21,7 +22,16 @@ from .temporary_tutor_voice import (
 )
 
 
-class _UnavailableTutorVoice(_QtTemporaryTutorVoice):
+class _VoiceControllerFactory(Protocol):
+    def __call__(
+        self,
+        parent: QObject | None = None,
+        *,
+        temporary_root: Path | None = None,
+    ) -> TutorSpeechController: ...
+
+
+class _UnavailableTutorVoice(QObject):
     """Avoid constructing native audio objects on Qt's headless platform."""
 
     def __init__(
@@ -30,8 +40,8 @@ class _UnavailableTutorVoice(_QtTemporaryTutorVoice):
         *,
         temporary_root: Path | None = None,
     ) -> None:
+        super().__init__(parent)
         del temporary_root
-        QObject.__init__(self, parent)
         self._voice_state_callback: Callable[[VoicePlaybackState], None] = lambda state: None
         self._voice_error_callback: Callable[[str], None] = lambda detail: None
 
@@ -42,10 +52,6 @@ class _UnavailableTutorVoice(_QtTemporaryTutorVoice):
     @property
     def state(self) -> VoicePlaybackState:
         return VoicePlaybackState.UNAVAILABLE
-
-    @property
-    def temporary_audio_path(self) -> Path | None:
-        return None
 
     def set_callbacks(
         self,
@@ -80,10 +86,11 @@ class _UnavailableTutorVoice(_QtTemporaryTutorVoice):
         pass
 
 
-QtTemporaryTutorVoice: type[_QtTemporaryTutorVoice] = (
+QtTemporaryTutorVoice = cast(
+    _VoiceControllerFactory,
     _UnavailableTutorVoice
     if os.environ.get("QT_QPA_PLATFORM", "").strip().casefold() == "offscreen"
-    else _QtTemporaryTutorVoice
+    else _QtTemporaryTutorVoice,
 )
 
 __all__ = [
