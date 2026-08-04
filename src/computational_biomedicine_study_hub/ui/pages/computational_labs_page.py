@@ -44,6 +44,7 @@ from ...learning.python_execution import (
 from ...storage.computational_lab_store import ComputationalLabStore
 from ...storage.sqlite_progress_store import SQLiteProgressStore
 from ..widgets.scientific_workspace_panel import ScientificWorkspacePanel
+from ..widgets.technical_station_panel import TechnicalStationPanel
 
 
 class ComputationalLabsPage(QWidget):
@@ -81,6 +82,7 @@ class ComputationalLabsPage(QWidget):
         self._attempt = self._validated_attempt(self._snapshot.attempt_for(self._lab))
         self._task_index = self._task_index_for(self._attempt.current_task_id)
         self._loading_task = False
+        self._mentor_focus = "task"
 
         self._autosave = QTimer(self)
         self._autosave.setSingleShot(True)
@@ -103,6 +105,9 @@ class ComputationalLabsPage(QWidget):
         self._build_task_card()
         self._workspace = ScientificWorkspacePanel(progress_store, locale, parent=self)
         self._body_layout.addWidget(self._workspace)
+        self._technical_stations = TechnicalStationPanel(progress_store, locale, parent=self)
+        self._technical_stations.mentor_requested.connect(self._request_station_mentor)
+        self._body_layout.addWidget(self._technical_stations)
         self._body_layout.addStretch(1)
 
         scroll.setWidget(body)
@@ -133,17 +138,35 @@ class ComputationalLabsPage(QWidget):
 
         return self._workspace
 
+    @property
+    def technical_station_panel(self) -> TechnicalStationPanel:
+        """Return the artifact-based technical reasoning panel."""
+
+        return self._technical_stations
+
     def persist(self) -> None:
         """Persist visible work and deterministic evidence atomically."""
 
         self._capture_response()
         self._workspace.persist()
+        self._technical_stations.persist()
         self._snapshot = self._snapshot.with_attempt(self._attempt)
         if self._store is not None:
             self._store.save(self._snapshot)
 
     def mentor_context(self) -> str:
-        """Return bounded Socratic context for the current laboratory task."""
+        """Return bounded Socratic context for the active laboratory activity."""
+
+        if (
+            self._mentor_focus == "station"
+            and self._technical_stations.current_station is not None
+        ):
+            return "\n".join(
+                (
+                    self._technical_stations.mentor_context(),
+                    self._workspace.mentor_context(),
+                )
+            )
 
         self._capture_response()
         task = self.current_task
@@ -345,6 +368,7 @@ class ComputationalLabsPage(QWidget):
         self._export.setText(self._text(ComputationalLabCopyKey.EXPORT))
         self._output_heading.setText(self._text(ComputationalLabCopyKey.OUTPUT))
         self._workspace.set_lab(self._lab.lab_id)
+        self._technical_stations.set_lab(self._lab.lab_id)
         self._load_task()
 
     def _load_task(self) -> None:
@@ -411,6 +435,7 @@ class ComputationalLabsPage(QWidget):
         self._lab = self._labs[index]
         self._attempt = self._validated_attempt(self._snapshot.attempt_for(self._lab))
         self._task_index = self._task_index_for(self._attempt.current_task_id)
+        self._mentor_focus = "task"
         self._render_lab()
 
     @Slot(int)
@@ -490,6 +515,7 @@ class ComputationalLabsPage(QWidget):
 
     @Slot()
     def _request_mentor(self) -> None:
+        self._mentor_focus = "task"
         self._capture_response()
         task_id = self.current_task.task_id
         self._attempt = self._attempt.with_requested_hint(task_id)
@@ -500,6 +526,12 @@ class ComputationalLabsPage(QWidget):
                 level=self._attempt.hint_level_for(task_id),
             )
         )
+        self.mentor_requested.emit()
+
+    @Slot()
+    def _request_station_mentor(self) -> None:
+        self._mentor_focus = "station"
+        self.persist()
         self.mentor_requested.emit()
 
     @Slot()
