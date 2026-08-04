@@ -52,8 +52,10 @@ class LearningPathPage(QWidget):
         self._progress_store = progress_store
         self._locale = locale
         self._engine = engine or LearningPathEngine()
-        self._assessment_ids = assessment_ids or tuple(
-            item.assessment_id for item in ASSESSMENT_REGISTRATIONS
+        self._assessment_ids = (
+            tuple(item.assessment_id for item in ASSESSMENT_REGISTRATIONS)
+            if assessment_ids is None
+            else assessment_ids
         )
         self._course_titles = {
             course.code: course.title_for(locale) for course in COURSES
@@ -73,16 +75,16 @@ class LearningPathPage(QWidget):
         self._layout.setSpacing(14)
 
         title = QLabel(self._text(LearningPathCopyKey.PAGE_TITLE))
-        title.setObjectName("learningPathTitle")
+        title.setObjectName("sectionHeading")
         self._layout.addWidget(title)
 
         intro = QLabel(self._text(LearningPathCopyKey.INTRO))
-        intro.setObjectName("learningPathIntro")
+        intro.setObjectName("homeDescription")
         intro.setWordWrap(True)
         self._layout.addWidget(intro)
 
         due_heading = QLabel(self._text(LearningPathCopyKey.DUE_TITLE))
-        due_heading.setObjectName("learningPathSectionHeading")
+        due_heading.setObjectName("sectionHeading")
         self._layout.addWidget(due_heading)
 
         due_container = QWidget()
@@ -91,7 +93,7 @@ class LearningPathPage(QWidget):
         self._layout.addWidget(due_container)
 
         course_heading = QLabel(self._text(LearningPathCopyKey.COURSE_TITLE))
-        course_heading.setObjectName("learningPathSectionHeading")
+        course_heading.setObjectName("sectionHeading")
         self._layout.addWidget(course_heading)
 
         course_container = QWidget()
@@ -131,7 +133,7 @@ class LearningPathPage(QWidget):
         recommendation = snapshot.due_review
         if recommendation is None:
             label = QLabel(self._text(LearningPathCopyKey.NO_DUE))
-            label.setObjectName("learningPathNoDue")
+            label.setProperty("semanticTone", "muted")
             label.setWordWrap(True)
             self._due_layout.addWidget(label)
             return
@@ -162,29 +164,30 @@ class LearningPathPage(QWidget):
     ) -> QFrame:
         card = QFrame()
         card.setObjectName("learningPathCard")
+        card.setProperty("cardRole", "surface")
         layout = QVBoxLayout(card)
         layout.setContentsMargins(16, 16, 16, 16)
         layout.setSpacing(8)
 
         course = QLabel(f"{recommendation.course_code} · {title_text}")
-        course.setObjectName("learningPathCourse")
+        course.setObjectName("courseCardTitle")
         course.setWordWrap(True)
         layout.addWidget(course)
 
         stage = QLabel(learning_stage_text(self._locale, recommendation.stage))
-        stage.setObjectName("learningPathStage")
+        stage.setObjectName("courseCardCode")
         stage.setWordWrap(True)
         layout.addWidget(stage)
 
         if recommendation.module_id is not None:
             module = QLabel(recommendation.module_id)
-            module.setObjectName("learningPathModule")
+            module.setProperty("semanticTone", "subtle")
             layout.addWidget(module)
 
         reason = QLabel(
             learning_reason_text(self._locale, recommendation.reason.value)
         )
-        reason.setObjectName("learningPathReason")
+        reason.setProperty("semanticTone", "muted")
         reason.setWordWrap(True)
         layout.addWidget(reason)
 
@@ -194,7 +197,7 @@ class LearningPathPage(QWidget):
                 percent=round(100 * recommendation.mastery_ratio),
             )
         )
-        mastery.setObjectName("learningPathMastery")
+        mastery.setProperty("semanticTone", "subtle")
         layout.addWidget(mastery)
 
         objectives = QLabel(
@@ -203,12 +206,13 @@ class LearningPathPage(QWidget):
                 count=len(recommendation.objective_ids),
             )
         )
-        objectives.setObjectName("learningPathObjectives")
+        objectives.setProperty("semanticTone", "subtle")
         layout.addWidget(objectives)
         layout.addStretch(1)
 
         open_button = QPushButton(self._text(LearningPathCopyKey.OPEN))
         open_button.setObjectName("learningPathOpenButton")
+        open_button.setProperty("buttonRole", "primary")
         open_button.clicked.connect(
             lambda checked=False, item=recommendation: self._emit_destination(item)
         )
