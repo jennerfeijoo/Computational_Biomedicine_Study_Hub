@@ -8,7 +8,7 @@ from computational_biomedicine_study_hub.storage.atomic_json_store import Atomic
 from computational_biomedicine_study_hub.storage.sqlite_progress_store import SQLiteProgressStore
 
 
-class InvalidDocument(ValueError):
+class InvalidDocumentError(ValueError):
     pass
 
 
@@ -23,7 +23,7 @@ def _serialize(document: Document) -> str:
 
 def _deserialize(document: str) -> Document:
     if document == "invalid":
-        raise InvalidDocument("invalid fixture")
+        raise InvalidDocumentError("invalid fixture")
     return Document(document)
 
 
@@ -36,7 +36,7 @@ def _store(
         suffix=suffix,
         serializer=_serialize,
         deserializer=_deserialize,
-        invalid_exceptions=(InvalidDocument,),
+        invalid_exceptions=(InvalidDocumentError,),
         memory_owner=progress,
     )
 
@@ -78,7 +78,7 @@ def test_file_sidecar_uses_atomic_replacement_and_cleanup(tmp_path) -> None:  # 
         suffix=".assessment.json",
         serializer=_serialize,
         deserializer=_deserialize,
-        invalid_exceptions=(InvalidDocument,),
+        invalid_exceptions=(InvalidDocumentError,),
     )
 
     store.save(Document("first"))
