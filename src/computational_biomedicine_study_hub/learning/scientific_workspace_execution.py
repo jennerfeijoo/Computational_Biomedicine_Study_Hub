@@ -126,7 +126,9 @@ class _WorkspacePolicyVisitor(ast.NodeVisitor):
 
     def visit_ImportFrom(self, node: ast.ImportFrom) -> None:  # noqa: N802
         if node.level != 0 or node.module is None:
-            raise WorkspacePolicyError("Relative imports are not allowed in learner workspace files.")
+            raise WorkspacePolicyError(
+                "Relative imports are not allowed in learner workspace files."
+            )
         self._require_allowed(node.module)
         self.generic_visit(node)
 
@@ -177,9 +179,7 @@ class ScientificWorkspaceRunner:
         started = monotonic()
         workspace = workspace_root.expanduser().resolve()
         target_relative = (
-            template.entrypoint
-            if mode is WorkspaceExecutionMode.RUN
-            else template.test_entrypoint
+            template.entrypoint if mode is WorkspaceExecutionMode.RUN else template.test_entrypoint
         )
         target = (workspace / target_relative).resolve()
         try:
@@ -261,7 +261,10 @@ class ScientificWorkspaceRunner:
 
         stdout = _bounded_text(completed.stdout, template.output_limit)
         stderr = _bounded_text(completed.stderr, template.output_limit)
-        if len(completed.stdout) > template.output_limit or len(completed.stderr) > template.output_limit:
+        if (
+            len(completed.stdout) > template.output_limit
+            or len(completed.stderr) > template.output_limit
+        ):
             status = WorkspaceExecutionStatus.OUTPUT_LIMIT
         elif completed.returncode == 0:
             status = WorkspaceExecutionStatus.PASSED
