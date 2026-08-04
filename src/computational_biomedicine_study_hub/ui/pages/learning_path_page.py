@@ -57,9 +57,7 @@ class LearningPathPage(QWidget):
             if assessment_ids is None
             else assessment_ids
         )
-        self._course_titles = {
-            course.code: course.title_for(locale) for course in COURSES
-        }
+        self._course_titles = {course.code: course.title_for(locale) for course in COURSES}
         self._snapshot: LearningPathSnapshot | None = None
 
         root = QVBoxLayout(self)
@@ -184,9 +182,7 @@ class LearningPathPage(QWidget):
             module.setProperty("semanticTone", "subtle")
             layout.addWidget(module)
 
-        reason = QLabel(
-            learning_reason_text(self._locale, recommendation.reason.value)
-        )
+        reason = QLabel(learning_reason_text(self._locale, recommendation.reason.value))
         reason.setProperty("semanticTone", "muted")
         reason.setWordWrap(True)
         layout.addWidget(reason)
