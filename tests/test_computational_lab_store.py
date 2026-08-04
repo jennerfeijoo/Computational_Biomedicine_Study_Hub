@@ -29,8 +29,10 @@ def test_in_memory_lab_store_roundtrip_is_namespaced() -> None:
         restored = store.load()
 
         assert restored is not None
-        assert restored.attempt_for(DM857_LAB_01).response_for(task.task_id).startswith(
-            "A persistent"
+        assert (
+            restored.attempt_for(DM857_LAB_01)
+            .response_for(task.task_id)
+            .startswith("A persistent")
         )
     finally:
         progress.close()
