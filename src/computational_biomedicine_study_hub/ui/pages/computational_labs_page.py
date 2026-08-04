@@ -444,11 +444,12 @@ class ComputationalLabsPage(QWidget):
             )
             self._status.setText(self._text(ComputationalLabCopyKey.CHECKPOINT_PASSED))
         else:
-            self._attempt = self._attempt.mark_complete(
+            failed_attempt = self._attempt.mark_complete(
                 task.task_id,
                 checkpoint_passed=False,
                 output=rendered,
             )
+            self._attempt = failed_attempt.with_response(task.task_id, response)
             self._status.setText(self._text(ComputationalLabCopyKey.CHECKPOINT_FAILED))
         self.persist()
         self._update_progress()
@@ -488,9 +489,7 @@ class ComputationalLabsPage(QWidget):
         if path.suffix.casefold() != ".md":
             path = path.with_suffix(".md")
         path.write_text(render_lab_record(self._lab, self._attempt, self._locale), encoding="utf-8")
-        self._status.setText(
-            self._text(ComputationalLabCopyKey.EXPORTED, path=str(path))
-        )
+        self._status.setText(self._text(ComputationalLabCopyKey.EXPORTED, path=str(path)))
 
     def _update_progress(self) -> None:
         percent = round(100 * self._attempt.completion_ratio(self._lab))
