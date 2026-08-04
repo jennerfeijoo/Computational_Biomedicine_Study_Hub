@@ -7,43 +7,37 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Protocol, cast
 
-from PySide6.QtCore import QObject
-
 from ..i18n.locales import AppLocale
-from .temporary_tutor_voice import (
+from .core import (
     AudioFormatDescriptor,
     TutorSpeechController,
     VoicePlaybackState,
     speech_text_from_markdown,
     write_wave_file,
 )
-from .temporary_tutor_voice import (
-    QtTemporaryTutorVoice as _QtTemporaryTutorVoice,
-)
 
 
 class _VoiceControllerFactory(Protocol):
     def __call__(
         self,
-        parent: QObject | None = None,
+        parent: object | None = None,
         *,
         temporary_root: Path | None = None,
     ) -> TutorSpeechController: ...
 
 
-class _UnavailableTutorVoice(QObject):
-    """Avoid constructing native audio objects on Qt's headless platform."""
+class _UnavailableTutorVoice:
+    """Headless controller that never imports native Qt audio modules."""
 
     def __init__(
         self,
-        parent: QObject | None = None,
+        parent: object | None = None,
         *,
         temporary_root: Path | None = None,
     ) -> None:
-        super().__init__(parent)
-        del temporary_root
-        self._voice_state_callback: Callable[[VoicePlaybackState], None] = lambda state: None
-        self._voice_error_callback: Callable[[str], None] = lambda detail: None
+        del parent, temporary_root
+        self._state_callback: Callable[[VoicePlaybackState], None] = lambda state: None
+        self._error_callback: Callable[[str], None] = lambda detail: None
 
     @property
     def available(self) -> bool:
@@ -59,14 +53,14 @@ class _UnavailableTutorVoice(QObject):
         state_changed: Callable[[VoicePlaybackState], None],
         error: Callable[[str], None],
     ) -> None:
-        self._voice_state_callback = state_changed
-        self._voice_error_callback = error
+        self._state_callback = state_changed
+        self._error_callback = error
         state_changed(VoicePlaybackState.UNAVAILABLE)
 
     def play_text(self, text: str, locale: AppLocale, *, rate: float = 0.0) -> None:
         del text, locale, rate
-        self._voice_state_callback(VoicePlaybackState.UNAVAILABLE)
-        self._voice_error_callback(
+        self._state_callback(VoicePlaybackState.UNAVAILABLE)
+        self._error_callback(
             "Temporary speech is disabled while Qt uses the offscreen platform."
         )
 
@@ -86,12 +80,13 @@ class _UnavailableTutorVoice(QObject):
         pass
 
 
-QtTemporaryTutorVoice = cast(
-    _VoiceControllerFactory,
-    _UnavailableTutorVoice
-    if os.environ.get("QT_QPA_PLATFORM", "").strip().casefold() == "offscreen"
-    else _QtTemporaryTutorVoice,
-)
+if os.environ.get("QT_QPA_PLATFORM", "").strip().casefold() == "offscreen":
+    QtTemporaryTutorVoice = cast(_VoiceControllerFactory, _UnavailableTutorVoice)
+else:
+    from .temporary_tutor_voice import QtTemporaryTutorVoice as _NativeTutorVoice
+
+    QtTemporaryTutorVoice = cast(_VoiceControllerFactory, _NativeTutorVoice)
+
 
 __all__ = [
     "AudioFormatDescriptor",
