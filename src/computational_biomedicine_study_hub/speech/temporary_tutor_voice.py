@@ -16,7 +16,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from enum import StrEnum
 from pathlib import Path
-from typing import Protocol
+from typing import Protocol, cast
 
 from PySide6.QtCore import QByteArray, QLocale, QObject, QUrl, Slot
 from PySide6.QtMultimedia import QAudioFormat, QAudioOutput, QMediaPlayer
@@ -26,6 +26,8 @@ from ..i18n.locales import AppLocale
 
 VoiceStateCallback = Callable[["VoicePlaybackState"], None]
 VoiceErrorCallback = Callable[[str], None]
+SynthesizeCallback = Callable[[QAudioFormat, QByteArray], None]
+SynthesizeMethod = Callable[[str, SynthesizeCallback], None]
 
 
 class VoicePlaybackState(StrEnum):
@@ -285,8 +287,9 @@ class QtTemporaryTutorVoice(QObject):
         self._speech.setRate(bounded_rate)
         self._emit_state(VoicePlaybackState.SYNTHESIZING)
         try:
-            self._speech.synthesize(spoken, self._collect_pcm)  # type: ignore[call-overload]
-        except (RuntimeError, TypeError, ValueError) as exc:
+            synthesize = cast(SynthesizeMethod, getattr(self._speech, "synthesize"))
+            synthesize(spoken, self._collect_pcm)
+        except (AttributeError, RuntimeError, TypeError, ValueError) as exc:
             self._fail(str(exc).strip() or exc.__class__.__name__)
 
     def pause(self) -> None:
@@ -344,7 +347,7 @@ class QtTemporaryTutorVoice(QObject):
         elif descriptor != self._pending_format:
             self._fail("The speech engine changed PCM format during one utterance.")
             return
-        chunk = bytes(data)
+        chunk = cast(bytes, data.data())
         if chunk:
             self._pending_chunks.append(chunk)
 
