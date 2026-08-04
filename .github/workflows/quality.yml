@@ -24,10 +24,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install Qt, audio and R runtimes
+      - name: Install Qt and R runtimes
         run: |
           sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends libegl1 libpulse0 r-base-core
+          sudo apt-get install --yes --no-install-recommends libegl1 r-base-core
 
       - name: Set up Python
         uses: actions/setup-python@v5
