@@ -57,8 +57,7 @@ def test_page_records_checkpoint_and_persists_code(qtbot) -> None:  # type: igno
 
         selector.setCurrentIndex(2)
         editor.setPlainText(
-            "def summarize_measurements(values, lower, upper):\n"
-            "    return (3, 2, 70.67)\n"
+            "def summarize_measurements(values, lower, upper):\n    return (3, 2, 70.67)\n"
         )
         page._verify_or_complete()
         page.persist()
@@ -89,8 +88,7 @@ def test_failed_checkpoint_preserves_output_without_increasing_progress(qtbot) -
     selector.setCurrentIndex(2)
     task_id = DM857_LAB_01.tasks[2].task_id
     editor.setPlainText(
-        "def summarize_measurements(values, lower, upper):\n"
-        "    return (0, 0, None)\n"
+        "def summarize_measurements(values, lower, upper):\n    return (0, 0, None)\n"
     )
     page._verify_or_complete()
 
