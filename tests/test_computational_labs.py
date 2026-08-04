@@ -22,7 +22,7 @@ from computational_biomedicine_study_hub.learning.python_execution import (
     PythonSubprocessRunner,
 )
 
-_REFERENCE_IMPLEMENTATION = '''def summarize_measurements(values, lower, upper):
+_REFERENCE_IMPLEMENTATION = """def summarize_measurements(values, lower, upper):
     if isinstance(lower, bool) or isinstance(upper, bool):
         raise TypeError("limits must be numeric")
     if not isinstance(lower, (int, float)) or not isinstance(upper, (int, float)):
@@ -42,7 +42,7 @@ _REFERENCE_IMPLEMENTATION = '''def summarize_measurements(values, lower, upper):
             invalid_count += 1
     mean = None if not valid else round(sum(valid) / len(valid), 2)
     return len(valid), invalid_count, mean
-'''
+"""
 
 
 def test_pilot_lab_covers_the_complete_pedagogical_cycle() -> None:
@@ -58,9 +58,7 @@ def test_pilot_lab_covers_the_complete_pedagogical_cycle() -> None:
 
 def test_reference_implementation_passes_every_python_checkpoint() -> None:
     runner = PythonSubprocessRunner()
-    python_tasks = tuple(
-        task for task in DM857_LAB_01.tasks if task.kind is LabTaskKind.PYTHON
-    )
+    python_tasks = tuple(task for task in DM857_LAB_01.tasks if task.kind is LabTaskKind.PYTHON)
     assert len(python_tasks) == 2
     for task in python_tasks:
         result = runner.run(
