@@ -12,8 +12,7 @@ from computational_biomedicine_study_hub.i18n.locales import AppLocale
 from computational_biomedicine_study_hub.storage.sqlite_progress_store import (
     SQLiteProgressStore,
 )
-from computational_biomedicine_study_hub.ui.pages import assessments_page
-from computational_biomedicine_study_hub.ui.pages import dm857_capstone_page
+from computational_biomedicine_study_hub.ui.pages import assessments_page, dm857_capstone_page
 
 
 _PROJECT_RESPONSE = """<ARTIFACT>
