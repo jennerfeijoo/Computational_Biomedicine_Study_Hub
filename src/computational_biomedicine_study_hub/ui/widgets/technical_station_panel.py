@@ -301,12 +301,7 @@ class TechnicalStationPanel(QFrame):
         station: TechnicalStation,
         attempt: TechnicalStationAttempt,
     ) -> None:
-        while self._criteria_layout.count():
-            item = self._criteria_layout.takeAt(0)
-            widget = item.widget()
-            if widget is not None:
-                widget.deleteLater()
-        self._criterion_boxes = {}
+        self._clear_criteria_widgets()
         for criterion in station.criteria:
             checkbox = QCheckBox(criterion.text.text(self._locale))
             checkbox.setObjectName(f"technicalStationCriterion_{criterion.criterion_id}")
@@ -318,6 +313,16 @@ class TechnicalStationPanel(QFrame):
             )
             self._criteria_layout.addWidget(checkbox)
             self._criterion_boxes[criterion.criterion_id] = checkbox
+
+    def _clear_criteria_widgets(self) -> None:
+        while self._criteria_layout.count():
+            item = self._criteria_layout.takeAt(0)
+            if item is None:
+                continue
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+        self._criterion_boxes = {}
 
     @Slot()
     def _response_changed(self) -> None:
@@ -443,12 +448,7 @@ class TechnicalStationPanel(QFrame):
         self._response.clear()
         self._meta.clear()
         self._hint_level.clear()
-        while self._criteria_layout.count():
-            item = self._criteria_layout.takeAt(0)
-            widget = item.widget()
-            if widget is not None:
-                widget.deleteLater()
-        self._criterion_boxes = {}
+        self._clear_criteria_widgets()
         self._progress.setValue(0)
         self._progress_label.clear()
 
