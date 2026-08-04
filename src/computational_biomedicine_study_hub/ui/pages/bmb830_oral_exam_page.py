@@ -36,11 +36,10 @@ from ...i18n.bmb830_oral_copy import (
     bmb830_oral_text,
 )
 from ...i18n.locales import DEFAULT_LOCALE, AppLocale
-from ...integrations import (
-    DEFAULT_CHAT_MODEL,
+from ...integrations import DEFAULT_CHAT_MODEL, OllamaConfig
+from ...integrations.bmb830_oral import (
     BMB830OralEvaluationResult,
     BMB830OralEvaluator,
-    OllamaConfig,
 )
 from ...learning.bmb830_oral_exam import (
     BMB830OralAttempt,
