@@ -12,7 +12,10 @@ from computational_biomedicine_study_hub.learning.pathway import (
     LearningPathRecommendation,
     RecommendationReason,
 )
-from computational_biomedicine_study_hub.learning.progress import MasteryState, ReviewItem
+from computational_biomedicine_study_hub.learning.progress import (
+    MasteryState,
+    ReviewItem,
+)
 
 
 NOW = datetime(2026, 8, 4, 12, 0, tzinfo=UTC)
