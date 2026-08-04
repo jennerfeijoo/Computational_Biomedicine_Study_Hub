@@ -54,18 +54,20 @@ def test_report_page_localizes_controls_but_preserves_english_requirement(
     assert page.current_section_id == "bmb831.report.abstract"
 
 
-def test_assessments_page_hosts_three_course_workflows(qapp: QApplication) -> None:
+def test_assessments_page_hosts_four_course_workflows(qapp: QApplication) -> None:
     del qapp
     progress = SQLiteProgressStore(":memory:")
     page = AssessmentsPage(progress, AppLocale.ENGLISH)
     tabs = page.findChild(QTabWidget, "assessmentCourseTabs")
 
     assert tabs is not None
-    assert tabs.count() == 3
+    assert tabs.count() == 4
     assert page.dm847_page is not None
     assert page.capstone_page is not None
+    assert page.bmb830_oral_page is not None
     assert page.bmb831_report_page is not None
-    assert "BMB831" in tabs.tabText(2)
+    assert "BMB830" in tabs.tabText(2)
+    assert "BMB831" in tabs.tabText(3)
 
     page.bmb831_report_page.editor.setPlainText("An English report draft.")
     page.persist()
