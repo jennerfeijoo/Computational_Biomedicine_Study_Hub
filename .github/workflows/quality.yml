@@ -41,7 +41,9 @@ jobs:
           python -m pip install -e ".[dev]"
 
       - name: Lint
-        run: ruff check .
+        run: |
+          ruff check . --fix
+          git diff --exit-code
 
       - name: Check formatting
         run: ruff format --check .
