@@ -28,7 +28,7 @@ from computational_biomedicine_study_hub.storage.scientific_workspace_manager im
     ScientificWorkspaceManager,
 )
 
-_REFERENCE_IMPLEMENTATION = '''def normalize_dna(sequence):
+_REFERENCE_IMPLEMENTATION = """def normalize_dna(sequence):
     if not isinstance(sequence, str):
         raise TypeError("sequence must be text")
     normalized = "".join(sequence.split()).upper()
@@ -73,7 +73,7 @@ def classify_mapping(matches):
     if len(candidates) == 1:
         return "unique"
     return "multimapping"
-'''
+"""
 
 _WORKSPACE_IMPLEMENTATION = '''"""Reference implementation used only by automated tests."""
 
