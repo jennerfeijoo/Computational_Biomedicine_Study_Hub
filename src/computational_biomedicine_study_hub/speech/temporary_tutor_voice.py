@@ -177,7 +177,7 @@ def speech_text_from_markdown(text: str, *, limit: int = 8_000) -> str:
     normalized = re.sub(r"(?m)^\s{0,3}#{1,6}\s*", "", normalized)
     normalized = re.sub(r"(?m)^\s*[-*+]\s+", "", normalized)
     normalized = re.sub(r"(?m)^\s*\d+[.)]\s+", "", normalized)
-    normalized = re.sub(r"[*_~>|]", "", normalized)
+    normalized = re.sub(r"[*~>|]", "", normalized)
     normalized = re.sub(r"\[([A-Za-z0-9_.:-]{5,})\]", "", normalized)
     replacements = {
         "≤": " less than or equal to ",
