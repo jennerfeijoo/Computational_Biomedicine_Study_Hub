@@ -60,9 +60,7 @@ class _UnavailableTutorVoice:
     def play_text(self, text: str, locale: AppLocale, *, rate: float = 0.0) -> None:
         del text, locale, rate
         self._state_callback(VoicePlaybackState.UNAVAILABLE)
-        self._error_callback(
-            "Temporary speech is disabled while Qt uses the offscreen platform."
-        )
+        self._error_callback("Temporary speech is disabled while Qt uses the offscreen platform.")
 
     def pause(self) -> None:
         pass
