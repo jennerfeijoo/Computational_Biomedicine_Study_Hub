@@ -30,6 +30,17 @@ class PassingRunner:
         )
 
 
+class FailingRunner:
+    def run(self, request: PythonExecutionRequest) -> PythonExecutionResult:
+        return PythonExecutionResult(
+            status=ExecutionStatus.OUTPUT_MISMATCH,
+            stdout="incorrect",
+            stderr="",
+            duration_ms=2,
+            expected_output=request.expected_output,
+        )
+
+
 def test_page_records_checkpoint_and_persists_code(qtbot) -> None:  # type: ignore[no-untyped-def]
     progress = SQLiteProgressStore(":memory:")
     page = ComputationalLabsPage(
@@ -45,7 +56,10 @@ def test_page_records_checkpoint_and_persists_code(qtbot) -> None:  # type: igno
         assert editor is not None
 
         selector.setCurrentIndex(2)
-        editor.setPlainText("def summarize_measurements(values, lower, upper):\n    return (3, 2, 70.67)\n")
+        editor.setPlainText(
+            "def summarize_measurements(values, lower, upper):\n"
+            "    return (3, 2, 70.67)\n"
+        )
         page._verify_or_complete()
         page.persist()
 
@@ -62,6 +76,28 @@ def test_page_records_checkpoint_and_persists_code(qtbot) -> None:  # type: igno
         assert task_id in restored.attempt.passed_checkpoints
     finally:
         progress.close()
+
+
+def test_failed_checkpoint_preserves_output_without_increasing_progress(qtbot) -> None:  # type: ignore[no-untyped-def]
+    page = ComputationalLabsPage(None, AppLocale.ENGLISH, runner=FailingRunner())
+    qtbot.addWidget(page)
+    selector = page.findChild(QComboBox, "computationalLabTaskSelector")
+    editor = page.findChild(QPlainTextEdit, "computationalLabResponse")
+    assert selector is not None
+    assert editor is not None
+
+    selector.setCurrentIndex(2)
+    task_id = DM857_LAB_01.tasks[2].task_id
+    editor.setPlainText(
+        "def summarize_measurements(values, lower, upper):\n"
+        "    return (0, 0, None)\n"
+    )
+    page._verify_or_complete()
+
+    assert task_id not in page.attempt.completed_tasks
+    assert task_id not in page.attempt.passed_checkpoints
+    assert "output_mismatch" in page.attempt.execution_outputs[task_id]
+    assert page.attempt.completion_ratio(DM857_LAB_01) == 0.0
 
 
 def test_requesting_mentor_increases_support_without_completing_task(qtbot) -> None:  # type: ignore[no-untyped-def]
