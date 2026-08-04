@@ -4,11 +4,12 @@ from __future__ import annotations
 
 from datetime import UTC, datetime, timedelta
 
+from computational_biomedicine_study_hub.learning.activity_types import StudyCycleStage
 from computational_biomedicine_study_hub.learning.pathway import (
     CourseModulePlan,
     LearningDestinationKind,
     LearningPathEngine,
-    LearningStage,
+    LearningPathRecommendation,
     RecommendationReason,
 )
 from computational_biomedicine_study_hub.learning.progress import MasteryState, ReviewItem
@@ -71,7 +72,10 @@ class FakeProgress:
         return self._due if limit is None else self._due[:limit]
 
 
-def _recommendation(progress: FakeProgress | None, assessment_ids=()):  # type: ignore[no-untyped-def]
+def _recommendation(
+    progress: FakeProgress | None,
+    assessment_ids: tuple[str, ...] = (),
+) -> LearningPathRecommendation:
     engine = LearningPathEngine((PLAN,))
     return engine.snapshot(
         progress,
@@ -80,23 +84,23 @@ def _recommendation(progress: FakeProgress | None, assessment_ids=()):  # type: 
     ).course_recommendations[0]
 
 
-def test_no_objective_evidence_starts_with_orientation() -> None:
+def test_no_objective_evidence_starts_with_authored_concepts() -> None:
     recommendation = _recommendation(None)
 
-    assert recommendation.stage is LearningStage.ORIENT
+    assert recommendation.stage is StudyCycleStage.CONCEPT
     assert recommendation.reason is RecommendationReason.NO_EVIDENCE
     assert recommendation.destination.kind is LearningDestinationKind.COURSE_SECTION
     assert recommendation.destination.section_index == 0
 
 
-def test_partial_evidence_returns_to_authored_learning_content() -> None:
+def test_partial_evidence_returns_to_worked_examples() -> None:
     progress = FakeProgress({("TEST", "test.m01", "o1"): _state("o1", 0.8)})
 
     recommendation = _recommendation(progress)
 
-    assert recommendation.stage is LearningStage.LEARN
+    assert recommendation.stage is StudyCycleStage.WORKED_EXAMPLE
     assert recommendation.objective_ids == ("o2",)
-    assert recommendation.destination.section_index == 1
+    assert recommendation.destination.section_index == 2
 
 
 def test_weak_mastery_prioritizes_guided_practice() -> None:
@@ -109,7 +113,7 @@ def test_weak_mastery_prioritizes_guided_practice() -> None:
 
     recommendation = _recommendation(progress)
 
-    assert recommendation.stage is LearningStage.PRACTICE
+    assert recommendation.stage is StudyCycleStage.GUIDED_PRACTICE
     assert recommendation.objective_ids == ("o1",)
     assert recommendation.destination.section_index == 3
 
@@ -124,7 +128,7 @@ def test_fragile_mastery_prioritizes_retrieval() -> None:
 
     recommendation = _recommendation(progress)
 
-    assert recommendation.stage is LearningStage.RETRIEVE
+    assert recommendation.stage is StudyCycleStage.RETRIEVAL
     assert recommendation.objective_ids == ("o1",)
     assert recommendation.destination.section_index == 4
 
@@ -139,7 +143,7 @@ def test_mastered_course_routes_to_registered_assessment() -> None:
 
     recommendation = _recommendation(progress, ("TEST.exam",))
 
-    assert recommendation.stage is LearningStage.ASSESS
+    assert recommendation.stage is StudyCycleStage.ASSESSMENT
     assert recommendation.destination.kind is LearningDestinationKind.ASSESSMENT
     assert recommendation.destination.assessment_id == "TEST.exam"
 
@@ -153,5 +157,15 @@ def test_due_review_is_exposed_separately_from_course_progression() -> None:
     snapshot = LearningPathEngine((PLAN,)).snapshot(progress, as_of=NOW)
 
     assert snapshot.due_review is not None
-    assert snapshot.due_review.stage is LearningStage.CONSOLIDATE
+    assert snapshot.due_review.stage is StudyCycleStage.SPACED_REVIEW
     assert snapshot.due_review.destination.kind is LearningDestinationKind.REVIEW
+
+
+def test_generator_input_preserves_authored_course_order() -> None:
+    plans = (
+        CourseModulePlan("SECOND", "second.m01", 1, ("o1",)),
+        CourseModulePlan("FIRST", "first.m01", 1, ("o1",)),
+    )
+    engine = LearningPathEngine(plan for plan in plans)
+
+    assert engine.course_codes == ("SECOND", "FIRST")
