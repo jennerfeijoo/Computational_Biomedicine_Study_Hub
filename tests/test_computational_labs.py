@@ -6,7 +6,7 @@ from datetime import UTC, datetime
 
 import pytest
 
-from computational_biomedicine_study_hub.content.labs import DM857_LAB_01, LABS
+from computational_biomedicine_study_hub.content.labs import LABS, DM857_LAB_01
 from computational_biomedicine_study_hub.i18n.locales import AppLocale
 from computational_biomedicine_study_hub.learning.computational_labs import (
     LabAttempt,
@@ -21,7 +21,6 @@ from computational_biomedicine_study_hub.learning.python_execution import (
     PythonExecutionRequest,
     PythonSubprocessRunner,
 )
-
 
 _REFERENCE_IMPLEMENTATION = '''def summarize_measurements(values, lower, upper):
     if isinstance(lower, bool) or isinstance(upper, bool):
@@ -78,7 +77,11 @@ def test_attempt_roundtrip_preserves_evidence_and_progress() -> None:
     now = datetime(2026, 8, 4, 10, 0, tzinfo=UTC)
     attempt = LabAttempt.new(DM857_LAB_01, now=now)
     first_task = DM857_LAB_01.tasks[0]
-    attempt = attempt.with_response(first_task.task_id, "A sufficiently detailed learner response.", now=now)
+    attempt = attempt.with_response(
+        first_task.task_id,
+        "A sufficiently detailed learner response.",
+        now=now,
+    )
     attempt = attempt.mark_complete(first_task.task_id, now=now)
     attempt = attempt.with_requested_hint(first_task.task_id, now=now)
     snapshot = LabNotebookSnapshot((attempt,))
