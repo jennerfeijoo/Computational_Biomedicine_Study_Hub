@@ -267,7 +267,11 @@ class QtTemporaryTutorVoice(QObject):
         cache_key = hashlib.sha256(
             f"{locale.value}\0{bounded_rate:.3f}\0{spoken}".encode()
         ).hexdigest()
-        if self._audio_path is not None and self._audio_path.exists() and cache_key == self._cache_key:
+        if (
+            self._audio_path is not None
+            and self._audio_path.exists()
+            and cache_key == self._cache_key
+        ):
             self._player.setSource(QUrl.fromLocalFile(str(self._audio_path)))
             self._player.play()
             return
