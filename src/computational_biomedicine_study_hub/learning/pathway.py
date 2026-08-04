@@ -18,19 +18,8 @@ from ..content.bmb831 import BUNDLES as BMB831_BUNDLES
 from ..content.bundles import ModuleBundle
 from ..content.dm847 import BUNDLES as DM847_BUNDLES
 from ..content.dm857 import BUNDLES as DM857_BUNDLES
+from .activity_types import StudyCycleStage
 from .progress import MasteryState, ReviewItem
-
-
-class LearningStage(StrEnum):
-    """Evidence-producing phases in one course learning cycle."""
-
-    ORIENT = "orient"
-    LEARN = "learn"
-    PRACTICE = "practice"
-    RETRIEVE = "retrieve"
-    TRANSFER = "transfer"
-    ASSESS = "assess"
-    CONSOLIDATE = "consolidate"
 
 
 class LearningDestinationKind(StrEnum):
@@ -119,7 +108,11 @@ class LearningDestination:
                 raise ValueError("Assessment destinations require a registered assessment ID.")
             if self.module_id is not None or self.section_index is not None:
                 raise ValueError("Assessment destinations cannot contain module locations.")
-        elif self.module_id is not None or self.section_index is not None or self.assessment_id is not None:
+        elif (
+            self.module_id is not None
+            or self.section_index is not None
+            or self.assessment_id is not None
+        ):
             raise ValueError("Review destinations use only their application route.")
 
 
@@ -129,7 +122,7 @@ class LearningPathRecommendation:
 
     recommendation_id: str
     course_code: str
-    stage: LearningStage
+    stage: StudyCycleStage
     reason: RecommendationReason
     destination: LearningDestination
     module_id: str | None
@@ -193,9 +186,17 @@ class LearningPathEngine:
     ) -> None:
         if not 0.0 < practice_threshold < mastery_threshold <= 1.0:
             raise ValueError("Learning-path thresholds require 0 < practice < mastery <= 1.")
-        ordered = tuple(sorted(plans, key=lambda item: (item.course_code, item.ordinal)))
-        if not ordered:
+        raw_plans = tuple(plans)
+        if not raw_plans:
             raise ValueError("Learning-path engines require at least one authored module.")
+        course_order = tuple(dict.fromkeys(item.course_code for item in raw_plans))
+        course_rank = {course_code: index for index, course_code in enumerate(course_order)}
+        ordered = tuple(
+            sorted(
+                raw_plans,
+                key=lambda item: (course_rank[item.course_code], item.ordinal),
+            )
+        )
         module_ids = tuple(item.module_id.casefold() for item in ordered)
         if len(module_ids) != len(set(module_ids)):
             raise ValueError("Learning-path module IDs must be globally unique.")
@@ -210,7 +211,7 @@ class LearningPathEngine:
                     f"Course {course_code!r} learning-path ordinals must be contiguous."
                 )
         self._plans = ordered
-        self._course_order = tuple(dict.fromkeys(item.course_code for item in plans))
+        self._course_order = course_order
         self._plans_by_course = {
             course_code: tuple(per_course[course_code]) for course_code in self._course_order
         }
@@ -258,7 +259,7 @@ class LearningPathEngine:
                 f"path.review.{item.course_code.casefold()}.{item.module_id}.{item.objective_id}"
             ),
             course_code=item.course_code,
-            stage=LearningStage.CONSOLIDATE,
+            stage=StudyCycleStage.SPACED_REVIEW,
             reason=RecommendationReason.REVIEW_DUE,
             destination=LearningDestination(
                 kind=LearningDestinationKind.REVIEW,
@@ -286,7 +287,7 @@ class LearningPathEngine:
             if not available:
                 return self._module_recommendation(
                     plan,
-                    LearningStage.ORIENT,
+                    StudyCycleStage.CONCEPT,
                     RecommendationReason.NO_EVIDENCE,
                     section_index=0,
                     objective_ids=plan.objective_ids,
@@ -300,9 +301,9 @@ class LearningPathEngine:
             if missing:
                 return self._module_recommendation(
                     plan,
-                    LearningStage.LEARN,
+                    StudyCycleStage.WORKED_EXAMPLE,
                     RecommendationReason.PARTIAL_EVIDENCE,
-                    section_index=1,
+                    section_index=2,
                     objective_ids=missing,
                     mastery_ratio=ratio,
                 )
@@ -314,7 +315,7 @@ class LearningPathEngine:
             if weak:
                 return self._module_recommendation(
                     plan,
-                    LearningStage.PRACTICE,
+                    StudyCycleStage.GUIDED_PRACTICE,
                     RecommendationReason.WEAK_MASTERY,
                     section_index=3,
                     objective_ids=weak,
@@ -329,26 +330,26 @@ class LearningPathEngine:
             if retrieval:
                 return self._module_recommendation(
                     plan,
-                    LearningStage.RETRIEVE,
+                    StudyCycleStage.RETRIEVAL,
                     RecommendationReason.RETRIEVAL_NEEDED,
                     section_index=4,
                     objective_ids=retrieval,
                     mastery_ratio=ratio,
                 )
 
-        assessment_id = next(
-            (
+        matching_assessments = tuple(
+            sorted(
                 assessment_id
                 for assessment_id in assessment_ids
                 if assessment_id.casefold().startswith(f"{course_code.casefold()}.")
-            ),
-            None,
+            )
         )
-        if assessment_id is not None:
+        if matching_assessments:
+            assessment_id = matching_assessments[0]
             return LearningPathRecommendation(
                 recommendation_id=f"path.assess.{course_code.casefold()}",
                 course_code=course_code,
-                stage=LearningStage.ASSESS,
+                stage=StudyCycleStage.ASSESSMENT,
                 reason=RecommendationReason.COURSE_READY_FOR_ASSESSMENT,
                 destination=LearningDestination(
                     kind=LearningDestinationKind.ASSESSMENT,
@@ -363,7 +364,7 @@ class LearningPathEngine:
         final_plan = plans[-1]
         return self._module_recommendation(
             final_plan,
-            LearningStage.TRANSFER,
+            StudyCycleStage.TRANSFER,
             RecommendationReason.TRANSFER_NEEDED,
             section_index=3,
             objective_ids=final_plan.objective_ids,
@@ -395,7 +396,7 @@ class LearningPathEngine:
     @staticmethod
     def _module_recommendation(
         plan: CourseModulePlan,
-        stage: LearningStage,
+        stage: StudyCycleStage,
         reason: RecommendationReason,
         *,
         section_index: int,
@@ -429,7 +430,6 @@ __all__ = [
     "LearningPathEngine",
     "LearningPathRecommendation",
     "LearningPathSnapshot",
-    "LearningStage",
     "ProgressReader",
     "RecommendationReason",
 ]
