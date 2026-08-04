@@ -29,12 +29,12 @@ _IMPLEMENT_STARTER = '''def summarize_measurements(values, lower, upper):
     raise NotImplementedError
 '''
 
-_IMPLEMENT_CHECKS = '''
+_IMPLEMENT_CHECKS = """
 print(summarize_measurements([72, 80, 250, None, 60], 40, 220))
 print(summarize_measurements([40, 60, 20], 40, 60))
-'''
+"""
 
-_EDGE_CHECKS = '''
+_EDGE_CHECKS = """
 assert summarize_measurements([], 40, 220) == (0, 0, None)
 assert summarize_measurements([True, False, 50], 40, 220) == (1, 2, 50.0)
 assert summarize_measurements([39.9, 40, 220, 220.1], 40, 220) == (2, 2, 130.0)
@@ -45,7 +45,7 @@ except ValueError:
 else:
     raise AssertionError("lower > upper must raise ValueError")
 print("edge cases passed")
-'''
+"""
 
 
 DM857_LAB_01 = ComputationalLab(
@@ -164,7 +164,9 @@ DM857_LAB_01 = ComputationalLab(
             task_id="dm857.lab01.implement.function",
             stage=LabStage.IMPLEMENT,
             kind=LabTaskKind.PYTHON,
-            title=_text("Implementación modular", "Modular implementation", "Modulær implementering"),
+            title=_text(
+                "Implementación modular", "Modular implementation", "Modulær implementering"
+            ),
             instructions=_text(
                 "Implementa summarize_measurements. Debe devolver (válidos, inválidos, media_redondeada), usar límites inclusivos, excluir booleanos y devolver None cuando no haya valores válidos.",
                 "Implement summarize_measurements. It must return (valid, invalid, rounded_mean), use inclusive limits, exclude Boolean values, and return None when no valid values exist.",
@@ -206,7 +208,9 @@ DM857_LAB_01 = ComputationalLab(
             task_id="dm857.lab01.interpret.result",
             stage=LabStage.INTERPRET,
             kind=LabTaskKind.SHORT_ANSWER,
-            title=_text("Interpretación biomédica", "Biomedical interpretation", "Biomedicinsk fortolkning"),
+            title=_text(
+                "Interpretación biomédica", "Biomedical interpretation", "Biomedicinsk fortolkning"
+            ),
             instructions=_text(
                 "Interpreta el resumen (3 válidos, 2 inválidos, media 70.67). Explica qué afirma el programa, qué no demuestra clínicamente y qué metadatos necesitarías antes de usarlo en una investigación.",
                 "Interpret the summary (3 valid, 2 invalid, mean 70.67). Explain what the program establishes, what it does not establish clinically, and which metadata would be needed before research use.",
