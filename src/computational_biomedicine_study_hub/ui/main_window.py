@@ -18,8 +18,6 @@ from PySide6.QtWidgets import (
 )
 
 from ..courses import COURSES, CourseRegistration
-from ..courses.dm847 import DM847Page
-from ..courses.dm857 import DM857Page
 from ..i18n import (
     AppLocale,
     LanguageController,
@@ -29,6 +27,7 @@ from ..i18n import (
 )
 from ..i18n.tutor_chat_copy import TutorChatCopyKey, tutor_chat_text
 from ..storage import SQLiteProgressStore
+from .course_page_protocol import ModularCoursePageProtocol
 from .header import PageHeader
 from .navigation import NavigationSidebar
 from .pages.assessments_page import AssessmentsPage
@@ -51,7 +50,6 @@ from .widgets.floating_tutor_chat import (
     position_floating_tutor,
 )
 
-ModularCoursePage = DM847Page | DM857Page
 StudyLocation = tuple[int, int]
 
 
@@ -306,9 +304,9 @@ class MainWindow(QMainWindow):
         page.select_module(module_index)
         page.reader.select_section_index(section_index)
 
-    def _modular_course_page(self, route: str) -> ModularCoursePage | None:
+    def _modular_course_page(self, route: str) -> ModularCoursePageProtocol | None:
         page = self._pages.get(route)
-        if isinstance(page, (DM847Page, DM857Page)):
+        if isinstance(page, ModularCoursePageProtocol):
             return page
         return None
 
