@@ -60,12 +60,16 @@ class WorkspaceFileTemplate:
             raise WorkspaceDefinitionError(
                 f"Workspace file {normalized!r} exceeds the authored size limit."
             )
-        if self.role in {
-            WorkspaceFileRole.DATA,
-            WorkspaceFileRole.METADATA,
-            WorkspaceFileRole.TEST,
-            WorkspaceFileRole.README,
-        } and self.editable:
+        if (
+            self.role
+            in {
+                WorkspaceFileRole.DATA,
+                WorkspaceFileRole.METADATA,
+                WorkspaceFileRole.TEST,
+                WorkspaceFileRole.README,
+            }
+            and self.editable
+        ):
             raise WorkspaceDefinitionError(
                 f"Workspace file {normalized!r} has an immutable role and cannot be editable."
             )
@@ -93,7 +97,9 @@ class ScientificWorkspaceTemplate:
             ("version", self.version),
         ):
             if not value.strip():
-                raise WorkspaceDefinitionError(f"Scientific workspace {field_name} cannot be blank.")
+                raise WorkspaceDefinitionError(
+                    f"Scientific workspace {field_name} cannot be blank."
+                )
         if not self.files:
             raise WorkspaceDefinitionError("Scientific workspaces require authored files.")
         paths = tuple(item.relative_path for item in self.files)
@@ -103,13 +109,25 @@ class ScientificWorkspaceTemplate:
         test_entrypoint = normalize_workspace_path(self.test_entrypoint)
         by_path = {item.relative_path: item for item in self.files}
         if entrypoint not in by_path or by_path[entrypoint].role is not WorkspaceFileRole.SOURCE:
-            raise WorkspaceDefinitionError("Workspace entrypoint must reference an authored source file.")
+            raise WorkspaceDefinitionError(
+                "Workspace entrypoint must reference an authored source file."
+            )
         if not by_path[entrypoint].editable:
             raise WorkspaceDefinitionError("Workspace entrypoint must be learner editable.")
-        if test_entrypoint not in by_path or by_path[test_entrypoint].role is not WorkspaceFileRole.TEST:
-            raise WorkspaceDefinitionError("Workspace test entrypoint must reference an authored test file.")
-        if any(not root.strip() or "." in root or "/" in root for root in self.allowed_import_roots):
-            raise WorkspaceDefinitionError("Allowed import roots must be plain top-level module names.")
+        if (
+            test_entrypoint not in by_path
+            or by_path[test_entrypoint].role is not WorkspaceFileRole.TEST
+        ):
+            raise WorkspaceDefinitionError(
+                "Workspace test entrypoint must reference an authored test file."
+            )
+        if any(
+            not root.strip() or "." in root or "/" in root
+            for root in self.allowed_import_roots
+        ):
+            raise WorkspaceDefinitionError(
+                "Allowed import roots must be plain top-level module names."
+            )
         if not 0.5 <= self.timeout_seconds <= 60.0:
             raise WorkspaceDefinitionError("Workspace timeout must be between 0.5 and 60 seconds.")
         if not 1_024 <= self.output_limit <= MAX_WORKSPACE_OUTPUT_CHARS:
@@ -182,7 +200,9 @@ def normalize_workspace_path(value: str) -> str:
     if path.is_absolute() or path.anchor or ".." in path.parts:
         raise WorkspaceDefinitionError("Workspace paths must remain inside the workspace root.")
     if any(part in {"", "."} for part in path.parts):
-        raise WorkspaceDefinitionError("Workspace paths must not contain empty or current segments.")
+        raise WorkspaceDefinitionError(
+            "Workspace paths must not contain empty or current segments."
+        )
     normalized = path.as_posix()
     if len(normalized) > 240:
         raise WorkspaceDefinitionError("Workspace paths cannot exceed 240 characters.")
