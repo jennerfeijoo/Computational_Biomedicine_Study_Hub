@@ -11,11 +11,13 @@ shell from starting.
 
 from __future__ import annotations
 
+import ctypes.util
 import hashlib
 import html
 import importlib
 import re
 import struct
+import sys
 import tempfile
 from collections.abc import Callable
 from dataclasses import dataclass
@@ -31,6 +33,14 @@ VoiceStateCallback = Callable[["VoicePlaybackState"], None]
 VoiceErrorCallback = Callable[[str], None]
 SynthesizeCallback = Callable[[Any, QByteArray], None]
 SynthesizeMethod = Callable[[str, SynthesizeCallback], None]
+
+
+def _native_audio_runtime_error() -> str:
+    """Return a stable reason before importing Qt modules with missing native libraries."""
+
+    if sys.platform.startswith("linux") and ctypes.util.find_library("pulse") is None:
+        return "The native PulseAudio runtime (libpulse.so.0) is not installed."
+    return ""
 
 
 class VoicePlaybackState(StrEnum):
@@ -216,27 +226,32 @@ class QtTemporaryTutorVoice(QObject):
         self._player: Any | None = None
         self._audio_output: Any | None = None
 
-        try:
-            speech_module = importlib.import_module("PySide6.QtTextToSpeech")
-        except ImportError as exc:
-            self._speech_import_error = str(exc).strip() or exc.__class__.__name__
+        runtime_error = _native_audio_runtime_error()
+        if runtime_error:
+            self._speech_import_error = runtime_error
+            self._multimedia_error = runtime_error
         else:
-            self._speech_module = speech_module
-            self._speech = speech_module.QTextToSpeech(self)
-            self._speech.stateChanged.connect(self._speech_state_changed)
-            self._speech.errorOccurred.connect(self._speech_error)
+            try:
+                speech_module = importlib.import_module("PySide6.QtTextToSpeech")
+            except ImportError as exc:
+                self._speech_import_error = str(exc).strip() or exc.__class__.__name__
+            else:
+                self._speech_module = speech_module
+                self._speech = speech_module.QTextToSpeech(self)
+                self._speech.stateChanged.connect(self._speech_state_changed)
+                self._speech.errorOccurred.connect(self._speech_error)
 
-        try:
-            multimedia = importlib.import_module("PySide6.QtMultimedia")
-        except ImportError as exc:
-            self._multimedia_error = str(exc).strip() or exc.__class__.__name__
-        else:
-            self._multimedia = multimedia
-            self._player = multimedia.QMediaPlayer(self)
-            self._audio_output = multimedia.QAudioOutput(self)
-            self._player.setAudioOutput(self._audio_output)
-            self._player.playbackStateChanged.connect(self._playback_state_changed)
-            self._player.errorOccurred.connect(self._player_error)
+            try:
+                multimedia = importlib.import_module("PySide6.QtMultimedia")
+            except ImportError as exc:
+                self._multimedia_error = str(exc).strip() or exc.__class__.__name__
+            else:
+                self._multimedia = multimedia
+                self._player = multimedia.QMediaPlayer(self)
+                self._audio_output = multimedia.QAudioOutput(self)
+                self._player.setAudioOutput(self._audio_output)
+                self._player.playbackStateChanged.connect(self._playback_state_changed)
+                self._player.errorOccurred.connect(self._player_error)
 
         self._temporary_directory = tempfile.TemporaryDirectory(
             prefix="cb-study-hub-tts-",
