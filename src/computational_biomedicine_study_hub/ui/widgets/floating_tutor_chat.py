@@ -169,7 +169,7 @@ class OllamaTutorChatRunner:
     def _positive_setting(self, key: str, default: int) -> int:
         raw = self._settings.value(key, default)
         try:
-            value = int(raw)
+            value = int(str(raw))
         except (TypeError, ValueError):
             return default
         return value if value > 0 else default
