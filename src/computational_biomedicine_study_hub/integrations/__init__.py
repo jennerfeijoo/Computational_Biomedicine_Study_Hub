@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from .bmb830_oral import BMB830OralEvaluationResult, BMB830OralEvaluator
 from .ollama import (
     JsonObject,
     JsonTransport,
@@ -23,8 +22,6 @@ from .ollama_chat import (
 )
 
 __all__ = [
-    "BMB830OralEvaluationResult",
-    "BMB830OralEvaluator",
     "DEFAULT_CHAT_MODEL",
     "ChatMessage",
     "ChatResponse",
