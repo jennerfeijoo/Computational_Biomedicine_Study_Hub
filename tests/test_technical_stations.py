@@ -7,7 +7,10 @@ from datetime import UTC, datetime
 import pytest
 
 from computational_biomedicine_study_hub.content.technical_stations import (
+    ALL_TECHNICAL_STATIONS,
     DM847_TECHNICAL_STATIONS,
+    DM857_PROJECT_ID,
+    DM857_PROJECT_STATIONS,
     STATIONS_BY_LAB,
 )
 from computational_biomedicine_study_hub.i18n.locales import SUPPORTED_LOCALES, AppLocale
@@ -18,7 +21,7 @@ from computational_biomedicine_study_hub.learning.technical_stations import (
     render_technical_station_record,
 )
 
-_EXPECTED_LABS = {
+_EXPECTED_DM847_LABS = {
     "dm847.lab01.short-read-mapping",
     "dm847.lab02.pairwise-alignment",
     "dm847.lab03.sequence-indexes",
@@ -28,10 +31,31 @@ _EXPECTED_LABS = {
 
 def test_dm847_station_registry_has_four_stations_per_current_lab() -> None:
     assert len(DM847_TECHNICAL_STATIONS) == 16
-    assert set(STATIONS_BY_LAB) == _EXPECTED_LABS
-    assert all(len(stations) == 4 for stations in STATIONS_BY_LAB.values())
-    assert {station.lab_id for station in DM847_TECHNICAL_STATIONS} == _EXPECTED_LABS
+    assert _EXPECTED_DM847_LABS <= set(STATIONS_BY_LAB)
+    assert all(len(STATIONS_BY_LAB[lab_id]) == 4 for lab_id in _EXPECTED_DM847_LABS)
+    assert {station.lab_id for station in DM847_TECHNICAL_STATIONS} == _EXPECTED_DM847_LABS
     assert len({station.station_id for station in DM847_TECHNICAL_STATIONS}) == 16
+
+
+def test_dm857_project_registry_requires_real_project_evidence() -> None:
+    assert len(DM857_PROJECT_STATIONS) == 8
+    assert STATIONS_BY_LAB[DM857_PROJECT_ID] == DM857_PROJECT_STATIONS
+    assert all(station.course_code == "DM857" for station in DM857_PROJECT_STATIONS)
+    assert all(station.lab_id == DM857_PROJECT_ID for station in DM857_PROJECT_STATIONS)
+    assert all("<ARTIFACT>" in station.artifact for station in DM857_PROJECT_STATIONS)
+    assert all("<ANALYSIS>" in station.artifact for station in DM857_PROJECT_STATIONS)
+    assert {
+        TechnicalStationKind.CODE_READING,
+        TechnicalStationKind.EXECUTION_TRACE,
+        TechnicalStationKind.DEBUGGING,
+        TechnicalStationKind.METHOD_SELECTION,
+        TechnicalStationKind.COMPLEXITY_ANALYSIS,
+        TechnicalStationKind.SCIENTIFIC_INTERPRETATION,
+        TechnicalStationKind.PROJECT_REASONING,
+    } <= {station.kind for station in DM857_PROJECT_STATIONS}
+    assert len({station.station_id for station in ALL_TECHNICAL_STATIONS}) == len(
+        ALL_TECHNICAL_STATIONS
+    )
 
 
 def test_station_content_is_complete_in_every_supported_locale() -> None:
@@ -46,7 +70,7 @@ def test_station_content_is_complete_in_every_supported_locale() -> None:
         TechnicalStationKind.SCIENTIFIC_INTERPRETATION,
     } <= kinds
 
-    for station in DM847_TECHNICAL_STATIONS:
+    for station in ALL_TECHNICAL_STATIONS:
         assert station.artifact.strip()
         assert station.source_basis
         for locale in SUPPORTED_LOCALES:
