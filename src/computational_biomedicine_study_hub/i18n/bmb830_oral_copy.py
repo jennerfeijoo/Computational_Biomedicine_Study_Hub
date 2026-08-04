@@ -234,9 +234,9 @@ def validate_bmb830_oral_copy() -> None:
         available = {key for key, translations in _COPY.items() if locale in translations}
         if available != expected:
             raise ValueError(f"Incomplete BMB830 oral copy for {locale.value}.")
-        if {criterion for criterion, translations in _CRITERIA.items() if locale in translations} != set(
-            OralCriterion
-        ):
+        if {
+            criterion for criterion, translations in _CRITERIA.items() if locale in translations
+        } != set(OralCriterion):
             raise ValueError(f"Incomplete BMB830 oral criterion copy for {locale.value}.")
 
 

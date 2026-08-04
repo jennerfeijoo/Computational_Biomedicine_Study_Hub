@@ -38,9 +38,7 @@ from computational_biomedicine_study_hub.ui.pages.bmb830_oral_exam_page import (
 
 @dataclass
 class FakeEvaluator:
-    calls: list[tuple[BMB830OralPrompt, str, str, AppLocale, str]] = field(
-        default_factory=list
-    )
+    calls: list[tuple[BMB830OralPrompt, str, str, AppLocale, str]] = field(default_factory=list)
 
     def evaluate(
         self,
@@ -51,9 +49,7 @@ class FakeEvaluator:
         locale: AppLocale,
         previous_follow_up: str = "",
     ) -> BMB830OralEvaluationResult:
-        self.calls.append(
-            (prompt, transcript, authoritative_context, locale, previous_follow_up)
-        )
+        self.calls.append((prompt, transcript, authoritative_context, locale, previous_follow_up))
         evaluation = BMB830OralEvaluation(
             feedback="The explanation is coherent but needs a more explicit assumption.",
             strengths=("Linked the method to the biological question",),

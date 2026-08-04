@@ -25,9 +25,7 @@ def _snapshot() -> BMB830OralSnapshot:
         strengths=("Strength",),
         gaps=("Gap",),
         misconceptions=(),
-        scores=tuple(
-            OralCriterionScore(criterion, 3, "Evidence") for criterion in OralCriterion
-        ),
+        scores=tuple(OralCriterionScore(criterion, 3, "Evidence") for criterion in OralCriterion),
         follow_up_question="Why?",
         recommended_next_action="Revise",
         confidence=0.7,

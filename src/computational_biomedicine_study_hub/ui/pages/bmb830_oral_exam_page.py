@@ -11,8 +11,8 @@ from PySide6.QtCore import (
     QObject,
     QRunnable,
     QSettings,
-    QThreadPool,
     Qt,
+    QThreadPool,
     Signal,
     Slot,
 )
@@ -232,8 +232,7 @@ class BMB830OralExamPage(QWidget):
         self._question.setObjectName("bmb830OralQuestion")
         self._question.setWordWrap(True)
         self._question.setTextInteractionFlags(
-            self._question.textInteractionFlags()
-            | Qt.TextInteractionFlag.TextSelectableByMouse
+            self._question.textInteractionFlags() | Qt.TextInteractionFlag.TextSelectableByMouse
         )
         prompt_layout.addWidget(self._question)
         self._next_button = QPushButton(self._text(BMB830OralCopyKey.NEXT_RECOMMENDED))
@@ -247,9 +246,7 @@ class BMB830OralExamPage(QWidget):
         self._transcript = QPlainTextEdit()
         self._transcript.setObjectName("bmb830OralTranscript")
         self._transcript.setMinimumHeight(220)
-        self._transcript.setPlaceholderText(
-            self._text(BMB830OralCopyKey.TRANSCRIPT_PLACEHOLDER)
-        )
+        self._transcript.setPlaceholderText(self._text(BMB830OralCopyKey.TRANSCRIPT_PLACEHOLDER))
         self._transcript.textChanged.connect(self._save_visible_draft)
         answer_layout.addWidget(self._transcript)
         self._evaluate_button = QPushButton(self._text(BMB830OralCopyKey.EVALUATE))
@@ -270,8 +267,7 @@ class BMB830OralExamPage(QWidget):
         self._feedback.setObjectName("bmb830OralFeedback")
         self._feedback.setWordWrap(True)
         self._feedback.setTextInteractionFlags(
-            self._feedback.textInteractionFlags()
-            | Qt.TextInteractionFlag.TextSelectableByMouse
+            self._feedback.textInteractionFlags() | Qt.TextInteractionFlag.TextSelectableByMouse
         )
         feedback_layout.addWidget(self._feedback)
 
@@ -313,8 +309,7 @@ class BMB830OralExamPage(QWidget):
         self._follow_up.setObjectName("bmb830OralFollowUp")
         self._follow_up.setWordWrap(True)
         self._follow_up.setTextInteractionFlags(
-            self._follow_up.textInteractionFlags()
-            | Qt.TextInteractionFlag.TextSelectableByMouse
+            self._follow_up.textInteractionFlags() | Qt.TextInteractionFlag.TextSelectableByMouse
         )
         feedback_layout.addWidget(self._follow_up)
         self._confidence = QLabel()
@@ -443,9 +438,7 @@ class BMB830OralExamPage(QWidget):
         self._snapshot = self._snapshot.with_active_prompt(prompt_id)
         self._question.setText(prompt.question)
         self._transcript.blockSignals(True)
-        self._transcript.setPlainText(
-            str(self._settings.value(self._draft_key(prompt_id), ""))
-        )
+        self._transcript.setPlainText(str(self._settings.value(self._draft_key(prompt_id), "")))
         self._transcript.blockSignals(False)
         latest = self._snapshot.latest_for(prompt_id)
         if latest is None:
@@ -532,15 +525,11 @@ class BMB830OralExamPage(QWidget):
         self._feedback.setText(evaluation.feedback)
         for criterion in OralCriterion:
             result = evaluation.score_for(criterion)
-            self._score_labels[criterion].setText(
-                f"{result.score}/4 — {result.evidence}"
-            )
+            self._score_labels[criterion].setText(f"{result.score}/4 — {result.evidence}")
         self._strengths.setText(
             self._observation_text(BMB830OralCopyKey.STRENGTHS, evaluation.strengths)
         )
-        self._gaps.setText(
-            self._observation_text(BMB830OralCopyKey.GAPS, evaluation.gaps)
-        )
+        self._gaps.setText(self._observation_text(BMB830OralCopyKey.GAPS, evaluation.gaps))
         self._misconceptions.setText(
             self._observation_text(
                 BMB830OralCopyKey.MISCONCEPTIONS,
@@ -548,8 +537,7 @@ class BMB830OralExamPage(QWidget):
             )
         )
         self._next_action.setText(
-            f"{self._text(BMB830OralCopyKey.NEXT_ACTION)}: "
-            f"{evaluation.recommended_next_action}"
+            f"{self._text(BMB830OralCopyKey.NEXT_ACTION)}: {evaluation.recommended_next_action}"
         )
         self._follow_up.setText(evaluation.follow_up_question)
         self._confidence.setText(

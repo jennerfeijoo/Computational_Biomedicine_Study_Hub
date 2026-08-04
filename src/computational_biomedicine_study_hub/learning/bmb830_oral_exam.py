@@ -121,7 +121,9 @@ class BMB830OralEvaluation:
             raise ValueError("Oral evaluation confidence must be between zero and one.")
         criteria = tuple(item.criterion for item in self.scores)
         if criteria != tuple(OralCriterion):
-            raise ValueError("Oral evaluations require every criterion exactly once in stable order.")
+            raise ValueError(
+                "Oral evaluations require every criterion exactly once in stable order."
+            )
         for collection in (self.strengths, self.gaps, self.misconceptions):
             if len(collection) != len(set(collection)):
                 raise ValueError("Oral evaluation observation lists cannot contain duplicates.")
@@ -219,8 +221,7 @@ class BMB830OralAttempt:
         if self.created_at.tzinfo is None or self.created_at.utcoffset() is None:
             raise ValueError("Oral attempt timestamps must be timezone-aware.")
         if any(
-            value < 0
-            for value in (self.prompt_eval_count, self.eval_count, self.total_duration_ns)
+            value < 0 for value in (self.prompt_eval_count, self.eval_count, self.total_duration_ns)
         ):
             raise ValueError("Oral evaluation telemetry cannot be negative.")
 
@@ -336,9 +337,7 @@ class BMB830OralSnapshot:
     def criterion_average(self, criterion: OralCriterion) -> float | None:
         if not self.attempts:
             return None
-        return mean(
-            attempt.evaluation.score_for(criterion).score for attempt in self.attempts
-        )
+        return mean(attempt.evaluation.score_for(criterion).score for attempt in self.attempts)
 
     def recommended_prompt(self, prompts: tuple[BMB830OralPrompt, ...]) -> BMB830OralPrompt:
         if not prompts:
@@ -382,8 +381,7 @@ class BMB830OralSnapshot:
                     "active prompt ID",
                 ),
                 attempts=tuple(
-                    BMB830OralAttempt.from_dict(cast(JsonObject, item))
-                    for item in raw_attempts
+                    BMB830OralAttempt.from_dict(cast(JsonObject, item)) for item in raw_attempts
                 ),
                 updated_at=datetime.fromisoformat(str(payload.get("updated_at") or "")),
             )
@@ -409,9 +407,7 @@ def bmb830_oral_prompt_bank(locale: AppLocale) -> tuple[BMB830OralPrompt, ...]:
                     module_id=module.module_id,
                     module_title=module.title,
                     question=question,
-                    objective_ids=tuple(
-                        objective.objective_id for objective in module.objectives
-                    ),
+                    objective_ids=tuple(objective.objective_id for objective in module.objectives),
                     grading_criteria=module.tutor_support.grading_criteria,
                     source_basis=module.tutor_support.source_basis,
                 )
