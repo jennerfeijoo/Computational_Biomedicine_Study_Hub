@@ -36,13 +36,15 @@ class AssessmentsPage(QWidget):
         super().__init__(parent)
         self.setObjectName("assessmentsPage")
         self._pages: dict[str, QWidget] = {}
+        self._tab_index_by_id: dict[str, int] = {}
         self._registrations = validate_assessment_registrations(registrations)
 
         self._tabs = QTabWidget()
         self._tabs.setObjectName("assessmentCourseTabs")
-        for registration in self._registrations:
+        for index, registration in enumerate(self._registrations):
             page = registration.create_page(progress_store, locale, settings)
             self._pages[registration.assessment_id] = page
+            self._tab_index_by_id[registration.assessment_id] = index
             self._tabs.addTab(page, registration.title_for(locale))
 
         layout = QVBoxLayout(self)
@@ -56,6 +58,26 @@ class AssessmentsPage(QWidget):
             return self._pages[assessment_id]
         except KeyError as exc:
             raise ValueError(f"Unknown assessment page {assessment_id!r}.") from exc
+
+    def select_assessment(self, assessment_id: str) -> bool:
+        """Select one registered assessment tab by stable identity."""
+
+        index = self._tab_index_by_id.get(assessment_id)
+        if index is None:
+            return False
+        self._tabs.setCurrentIndex(index)
+        return True
+
+    @property
+    def current_assessment_id(self) -> str:
+        """Return the stable identity of the currently visible assessment page."""
+
+        index = self._tabs.currentIndex()
+        return next(
+            assessment_id
+            for assessment_id, tab_index in self._tab_index_by_id.items()
+            if tab_index == index
+        )
 
     @property
     def dm847_page(self) -> DM847WrittenAssessmentPage:
