@@ -9,9 +9,7 @@ from computational_biomedicine_study_hub.content.technical_stations import (
     DM857_PROJECT_STATIONS,
 )
 from computational_biomedicine_study_hub.i18n.locales import AppLocale
-from computational_biomedicine_study_hub.storage.sqlite_progress_store import (
-    SQLiteProgressStore,
-)
+from computational_biomedicine_study_hub.storage.sqlite_progress_store import SQLiteProgressStore
 
 
 _PROJECT_RESPONSE = """<ARTIFACT>
