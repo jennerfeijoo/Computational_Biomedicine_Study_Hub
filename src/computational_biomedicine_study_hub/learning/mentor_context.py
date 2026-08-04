@@ -111,11 +111,7 @@ def _active_section_material(module: LearningModule, section_index: int) -> str:
         if len(material) > MAX_ACTIVE_SECTION_CHARACTERS
         else ""
     )
-    return (
-        "<authoritative_active_section>\n"
-        f"{bounded}{truncation}\n"
-        "</authoritative_active_section>"
-    )
+    return f"<authoritative_active_section>\n{bounded}{truncation}\n</authoritative_active_section>"
 
 
 def _overview_material(module: LearningModule) -> str:
@@ -131,8 +127,7 @@ def _concept_material(module: LearningModule) -> str:
         blocks.append(
             f"Concept {concept.concept_id}: {concept.title}\n"
             f"{concept.body}\n"
-            "Key points:\n- "
-            + "\n- ".join(concept.key_points)
+            "Key points:\n- " + "\n- ".join(concept.key_points)
         )
     return "\n\n".join(blocks)
 
@@ -143,9 +138,7 @@ def _example_material(module: LearningModule) -> str:
         blocks.append(
             f"Worked example {example.example_id}: {example.title}\n"
             f"Problem:\n{example.problem}\n"
-            "Reasoning:\n- "
-            + "\n- ".join(example.reasoning)
-            + f"\nCode:\n{example.code}\n"
+            "Reasoning:\n- " + "\n- ".join(example.reasoning) + f"\nCode:\n{example.code}\n"
             f"Expected output:\n{example.expected_output}\n"
             f"Explanation:\n{example.explanation}"
         )
