@@ -1,12 +1,12 @@
 """Temporary local text-to-speech files for mentor responses.
 
-The controller synthesizes raw PCM data with Qt TextToSpeech, writes one ephemeral
+The controller synthesizes raw PCM data through Qt TextToSpeech, writes one ephemeral
 WAV file, and plays it through Qt Multimedia. Only the latest response is retained;
 resetting or shutting down the mentor removes the file and temporary directory.
 
-Qt Multimedia is loaded lazily. A missing native audio runtime therefore disables
-voice playback without preventing the written mentor or the rest of the application
-from starting.
+The optional Qt speech and multimedia modules are loaded lazily. Missing native audio
+libraries therefore disable voice without preventing the written mentor or application
+shell from starting.
 """
 
 from __future__ import annotations
@@ -23,8 +23,7 @@ from enum import StrEnum
 from pathlib import Path
 from typing import Any, Protocol, cast
 
-from PySide6.QtCore import QByteArray, QLocale, QObject, QUrl, Slot
-from PySide6.QtTextToSpeech import QTextToSpeech
+from PySide6.QtCore import QByteArray, QLocale, QObject, QUrl
 
 from ..i18n.locales import AppLocale
 
@@ -209,10 +208,24 @@ class QtTemporaryTutorVoice(QObject):
         self._state_callback: VoiceStateCallback = lambda state: None
         self._error_callback: VoiceErrorCallback = lambda message: None
         self._state = VoicePlaybackState.IDLE
+        self._speech_module: Any | None = None
+        self._speech: Any | None = None
+        self._speech_import_error = ""
         self._multimedia: Any | None = None
         self._multimedia_error = ""
         self._player: Any | None = None
         self._audio_output: Any | None = None
+
+        try:
+            speech_module = importlib.import_module("PySide6.QtTextToSpeech")
+        except ImportError as exc:
+            self._speech_import_error = str(exc).strip() or exc.__class__.__name__
+        else:
+            self._speech_module = speech_module
+            self._speech = speech_module.QTextToSpeech(self)
+            self._speech.stateChanged.connect(self._speech_state_changed)
+            self._speech.errorOccurred.connect(self._speech_error)
+
         try:
             multimedia = importlib.import_module("PySide6.QtMultimedia")
         except ImportError as exc:
@@ -225,9 +238,6 @@ class QtTemporaryTutorVoice(QObject):
             self._player.playbackStateChanged.connect(self._playback_state_changed)
             self._player.errorOccurred.connect(self._player_error)
 
-        self._speech = QTextToSpeech(self)
-        self._speech.stateChanged.connect(self._speech_state_changed)
-        self._speech.errorOccurred.connect(self._speech_error)
         self._temporary_directory = tempfile.TemporaryDirectory(
             prefix="cb-study-hub-tts-",
             dir=str(temporary_root) if temporary_root is not None else None,
@@ -244,12 +254,15 @@ class QtTemporaryTutorVoice(QObject):
     def available(self) -> bool:
         """Return whether synthesis and local playback are both available."""
 
+        if self._speech_module is None or self._speech is None:
+            return False
         if self._multimedia is None or self._player is None:
             return False
-        if not QTextToSpeech.availableEngines():
+        if not self._speech_module.QTextToSpeech.availableEngines():
             return False
         capabilities = self._speech.engineCapabilities()
-        return bool(capabilities & QTextToSpeech.Capability.Synthesize)
+        synthesize = self._speech_module.QTextToSpeech.Capability.Synthesize
+        return bool(capabilities & synthesize)
 
     @property
     def state(self) -> VoicePlaybackState:
@@ -278,12 +291,15 @@ class QtTemporaryTutorVoice(QObject):
             return
         if not self.available:
             self._emit_state(VoicePlaybackState.UNAVAILABLE)
-            detail = self._multimedia_error or (
-                "No installed Qt text-to-speech engine supports temporary audio synthesis."
+            detail = (
+                self._speech_import_error
+                or self._multimedia_error
+                or "No installed local speech engine supports temporary audio synthesis."
             )
             self._error_callback(detail)
             return
 
+        speech = self._require_speech()
         player = self._require_player()
         bounded_rate = min(1.0, max(-1.0, rate))
         cache_key = hashlib.sha256(
@@ -303,14 +319,11 @@ class QtTemporaryTutorVoice(QObject):
         self._pending_format = None
         self._pending_chunks = []
         self._synthesizing = True
-        self._speech.setLocale(QLocale(locale.value))
-        self._speech.setRate(bounded_rate)
+        speech.setLocale(QLocale(locale.value))
+        speech.setRate(bounded_rate)
         self._emit_state(VoicePlaybackState.SYNTHESIZING)
         try:
-            synthesize = cast(
-                SynthesizeMethod,
-                self._speech.synthesize,  # type: ignore[attr-defined]
-            )
+            synthesize = cast(SynthesizeMethod, speech.synthesize)
             synthesize(spoken, self._collect_pcm)
         except (AttributeError, RuntimeError, TypeError, ValueError) as exc:
             self._fail(str(exc).strip() or exc.__class__.__name__)
@@ -334,7 +347,8 @@ class QtTemporaryTutorVoice(QObject):
             self._synthesizing = False
             self._pending_chunks = []
             self._pending_format = None
-            self._speech.stop()
+            if self._speech is not None:
+                self._speech.stop()
         if self._player is not None:
             self._player.stop()
         if self._state not in {VoicePlaybackState.UNAVAILABLE, VoicePlaybackState.ERROR}:
@@ -344,7 +358,8 @@ class QtTemporaryTutorVoice(QObject):
         self._synthesizing = False
         self._pending_chunks = []
         self._pending_format = None
-        self._speech.stop()
+        if self._speech is not None:
+            self._speech.stop()
         if self._player is not None:
             self._player.stop()
             self._player.setSource(QUrl())
@@ -382,16 +397,17 @@ class QtTemporaryTutorVoice(QObject):
         if chunk:
             self._pending_chunks.append(chunk)
 
-    @Slot(QTextToSpeech.State)
-    def _speech_state_changed(self, state: QTextToSpeech.State) -> None:
-        if state is QTextToSpeech.State.Error:
+    def _speech_state_changed(self, state: Any) -> None:
+        if self._speech_module is None or self._speech is None:
+            return
+        speech_state = self._speech_module.QTextToSpeech.State
+        if state is speech_state.Error:
             self._fail(self._speech.errorString() or "Text-to-speech synthesis failed.")
             return
-        if state is QTextToSpeech.State.Ready and self._synthesizing:
+        if state is speech_state.Ready and self._synthesizing:
             self._finalize_synthesis()
 
-    @Slot(QTextToSpeech.ErrorReason, str)
-    def _speech_error(self, reason: QTextToSpeech.ErrorReason, message: str) -> None:
+    def _speech_error(self, reason: Any, message: str) -> None:
         del reason
         self._fail(message.strip() or "Text-to-speech synthesis failed.")
 
@@ -433,6 +449,11 @@ class QtTemporaryTutorVoice(QObject):
         player = self._require_player()
         player.setSource(QUrl.fromLocalFile(str(path)))
         player.play()
+
+    def _require_speech(self) -> Any:
+        if self._speech is None:
+            raise RuntimeError(self._speech_import_error or "Qt TextToSpeech is unavailable.")
+        return self._speech
 
     def _require_player(self) -> Any:
         if self._player is None:
