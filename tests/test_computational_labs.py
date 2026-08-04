@@ -6,7 +6,11 @@ from datetime import UTC, datetime
 
 import pytest
 
-from computational_biomedicine_study_hub.content.labs import DM857_LAB_01, LABS
+from computational_biomedicine_study_hub.content.labs import (
+    DM847_LAB_01,
+    DM857_LAB_01,
+    LABS,
+)
 from computational_biomedicine_study_hub.i18n.locales import AppLocale
 from computational_biomedicine_study_hub.learning.computational_labs import (
     LabAttempt,
@@ -45,15 +49,17 @@ _REFERENCE_IMPLEMENTATION = """def summarize_measurements(values, lower, upper):
 """
 
 
-def test_pilot_lab_covers_the_complete_pedagogical_cycle() -> None:
-    assert LABS == (DM857_LAB_01,)
-    assert tuple(dict.fromkeys(task.stage for task in DM857_LAB_01.tasks)) == tuple(LabStage)
+def test_registered_labs_cover_the_complete_pedagogical_cycle() -> None:
+    assert LABS == (DM857_LAB_01, DM847_LAB_01)
     assert DM857_LAB_01.estimated_minutes == 120
-    assert all(task.objective_ids for task in DM857_LAB_01.tasks)
-    for locale in AppLocale:
-        assert DM857_LAB_01.title.text(locale)
-        assert DM857_LAB_01.research_question.text(locale)
-        assert "SDU" in DM857_LAB_01.disclaimer.text(locale)
+    assert DM847_LAB_01.estimated_minutes == 190
+    for lab in LABS:
+        assert tuple(dict.fromkeys(task.stage for task in lab.tasks)) == tuple(LabStage)
+        assert all(task.objective_ids for task in lab.tasks)
+        for locale in AppLocale:
+            assert lab.title.text(locale)
+            assert lab.research_question.text(locale)
+            assert "SDU" in lab.disclaimer.text(locale)
 
 
 def test_reference_implementation_passes_every_python_checkpoint() -> None:
