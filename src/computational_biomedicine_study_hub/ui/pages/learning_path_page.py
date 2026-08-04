@@ -9,6 +9,7 @@ from PySide6.QtWidgets import (
     QFrame,
     QGridLayout,
     QLabel,
+    QLayout,
     QPushButton,
     QScrollArea,
     QVBoxLayout,
@@ -80,25 +81,25 @@ class LearningPathPage(QWidget):
         intro.setWordWrap(True)
         self._layout.addWidget(intro)
 
-        self._due_heading = QLabel(self._text(LearningPathCopyKey.DUE_TITLE))
-        self._due_heading.setObjectName("learningPathSectionHeading")
-        self._layout.addWidget(self._due_heading)
+        due_heading = QLabel(self._text(LearningPathCopyKey.DUE_TITLE))
+        due_heading.setObjectName("learningPathSectionHeading")
+        self._layout.addWidget(due_heading)
 
-        self._due_container = QWidget()
-        self._due_layout = QVBoxLayout(self._due_container)
+        due_container = QWidget()
+        self._due_layout = QVBoxLayout(due_container)
         self._due_layout.setContentsMargins(0, 0, 0, 0)
-        self._layout.addWidget(self._due_container)
+        self._layout.addWidget(due_container)
 
         course_heading = QLabel(self._text(LearningPathCopyKey.COURSE_TITLE))
         course_heading.setObjectName("learningPathSectionHeading")
         self._layout.addWidget(course_heading)
 
-        self._course_container = QWidget()
-        self._course_grid = QGridLayout(self._course_container)
+        course_container = QWidget()
+        self._course_grid = QGridLayout(course_container)
         self._course_grid.setContentsMargins(0, 0, 0, 0)
         self._course_grid.setHorizontalSpacing(14)
         self._course_grid.setVerticalSpacing(14)
-        self._layout.addWidget(self._course_container)
+        self._layout.addWidget(course_container)
         self._layout.addStretch(1)
 
         scroll.setWidget(body)
@@ -137,7 +138,7 @@ class LearningPathPage(QWidget):
         self._due_layout.addWidget(
             self._recommendation_card(
                 recommendation,
-                f"{recommendation.course_code} · {recommendation.module_id or ''}".rstrip(),
+                recommendation.module_id or recommendation.course_code,
             )
         )
 
@@ -180,7 +181,9 @@ class LearningPathPage(QWidget):
             module.setObjectName("learningPathModule")
             layout.addWidget(module)
 
-        reason = QLabel(learning_reason_text(self._locale, recommendation.reason))
+        reason = QLabel(
+            learning_reason_text(self._locale, recommendation.reason.value)
+        )
         reason.setObjectName("learningPathReason")
         reason.setWordWrap(True)
         layout.addWidget(reason)
@@ -225,7 +228,7 @@ class LearningPathPage(QWidget):
         return learning_path_text(self._locale, key, **values)
 
     @staticmethod
-    def _clear_layout(layout: QVBoxLayout | QGridLayout) -> None:
+    def _clear_layout(layout: QLayout) -> None:
         while layout.count():
             item = layout.takeAt(0)
             if item is None:
