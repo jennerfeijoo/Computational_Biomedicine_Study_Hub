@@ -494,9 +494,7 @@ class ComputationalLabsPage(QWidget):
     def _update_progress(self) -> None:
         percent = round(100 * self._attempt.completion_ratio(self._lab))
         self._progress.setValue(percent)
-        self._progress_label.setText(
-            self._text(ComputationalLabCopyKey.PROGRESS, percent=percent)
-        )
+        self._progress_label.setText(self._text(ComputationalLabCopyKey.PROGRESS, percent=percent))
 
     def _task_index_for(self, task_id: str) -> int:
         return next(
