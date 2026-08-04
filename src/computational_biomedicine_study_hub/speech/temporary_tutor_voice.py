@@ -287,7 +287,10 @@ class QtTemporaryTutorVoice(QObject):
         self._speech.setRate(bounded_rate)
         self._emit_state(VoicePlaybackState.SYNTHESIZING)
         try:
-            synthesize = cast(SynthesizeMethod, getattr(self._speech, "synthesize"))
+            synthesize = cast(
+                SynthesizeMethod,
+                self._speech.synthesize,  # type: ignore[attr-defined]
+            )
             synthesize(spoken, self._collect_pcm)
         except (AttributeError, RuntimeError, TypeError, ValueError) as exc:
             self._fail(str(exc).strip() or exc.__class__.__name__)
