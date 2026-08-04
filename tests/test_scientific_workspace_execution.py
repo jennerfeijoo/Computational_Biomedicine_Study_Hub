@@ -48,7 +48,9 @@ def _template(source: str) -> ScientificWorkspaceTemplate:
 
 
 def test_workspace_runner_executes_authored_script_and_tests(tmp_path: Path) -> None:
-    template = _template("from pathlib import Path\nPath('output.txt').write_text('42')\nprint(42)\n")
+    template = _template(
+        "from pathlib import Path\nPath('output.txt').write_text('42')\nprint(42)\n"
+    )
     manager = ScientificWorkspaceManager(tmp_path)
     workspace = manager.materialize(template)
     runner = ScientificWorkspaceRunner()
