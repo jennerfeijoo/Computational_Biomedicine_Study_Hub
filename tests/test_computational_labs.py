@@ -6,7 +6,7 @@ from datetime import UTC, datetime
 
 import pytest
 
-from computational_biomedicine_study_hub.content.labs import LABS, DM857_LAB_01
+from computational_biomedicine_study_hub.content.labs import DM857_LAB_01, LABS
 from computational_biomedicine_study_hub.i18n.locales import AppLocale
 from computational_biomedicine_study_hub.learning.computational_labs import (
     LabAttempt,
