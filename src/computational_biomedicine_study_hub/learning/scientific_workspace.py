@@ -122,8 +122,7 @@ class ScientificWorkspaceTemplate:
                 "Workspace test entrypoint must reference an authored test file."
             )
         if any(
-            not root.strip() or "." in root or "/" in root
-            for root in self.allowed_import_roots
+            not root.strip() or "." in root or "/" in root for root in self.allowed_import_roots
         ):
             raise WorkspaceDefinitionError(
                 "Allowed import roots must be plain top-level module names."
