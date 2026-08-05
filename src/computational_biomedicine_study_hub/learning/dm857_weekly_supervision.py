@@ -75,9 +75,7 @@ class DM857WeeklyCycle:
     def __post_init__(self) -> None:
         expected_id = cycle_id_for(self.week_start)
         if self.cycle_id != expected_id:
-            raise ValueError(
-                f"Weekly cycle ID {self.cycle_id!r} does not match {expected_id!r}."
-            )
+            raise ValueError(f"Weekly cycle ID {self.cycle_id!r} does not match {expected_id!r}.")
         if self.week_start.weekday() != 0:
             raise ValueError("DM857 weekly cycles must start on a Monday.")
         _require_aware(self.updated_at, "updated_at")
@@ -154,7 +152,12 @@ class DM857WeeklyCycle:
 
         has_any_text = any(
             bool(getattr(self, field_name).strip())
-            for field_name in (*_REQUIRED_FIELD_NAMES, "changed_files", "biomedical_interpretation", "blockers")
+            for field_name in (
+                *_REQUIRED_FIELD_NAMES,
+                "changed_files",
+                "biomedical_interpretation",
+                "blockers",
+            )
         )
         if not has_any_text and not self.blocked:
             return WeeklyCycleStatus.EMPTY
