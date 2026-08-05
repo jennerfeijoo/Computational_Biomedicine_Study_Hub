@@ -430,7 +430,7 @@ def _required_int(payload: dict[str, Any], key: str) -> int:
     value = payload[key]
     if isinstance(value, bool) or not isinstance(value, int):
         raise TypeError(f"{key} must be an integer.")
-    return value
+    return int(value)
 
 
 def _required_bool(payload: dict[str, Any], key: str) -> bool:
