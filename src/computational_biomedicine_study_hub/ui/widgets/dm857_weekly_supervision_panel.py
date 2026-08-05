@@ -64,7 +64,9 @@ class DM857WeeklySupervisionPanel(QFrame):
         if not self._snapshot.cycles:
             first_cycle = DM857WeeklyCycle.empty(self._snapshot.next_week_start(self._today))
             self._snapshot = self._snapshot.with_cycle(first_cycle)
-        self._current_cycle_id = self._snapshot.selected_cycle_id or self._snapshot.cycles[-1].cycle_id
+        self._current_cycle_id = (
+            self._snapshot.selected_cycle_id or self._snapshot.cycles[-1].cycle_id
+        )
         self._loading = False
 
         self._autosave = QTimer(self)
@@ -342,9 +344,7 @@ class DM857WeeklySupervisionPanel(QFrame):
         self._next_commitment.setPlainText(cycle.next_commitment)
         self._loading = False
         self._save_status.setText(
-            self._text(WeeklySupervisionCopyKey.EMPTY_HINT)
-            if cycle.status.value == "empty"
-            else ""
+            self._text(WeeklySupervisionCopyKey.EMPTY_HINT) if cycle.status.value == "empty" else ""
         )
         self._refresh_summary(cycle)
 
