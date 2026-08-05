@@ -38,7 +38,7 @@ class DM857WeeklySupervisionStore(AtomicJsonSidecarStore[DM857WeeklySupervisionS
     def for_progress_store(
         cls,
         progress_store: SQLiteProgressStore,
-    ) -> "DM857WeeklySupervisionStore":
+    ) -> DM857WeeklySupervisionStore:
         """Create a store sharing the progress store's local lifetime."""
 
         return cls(
