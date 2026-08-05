@@ -69,9 +69,12 @@ class DM857SupervisedCapstonePage(DM857CapstonePage):
 
     def _insert_weekly_panel(self) -> None:
         scroll = self.findChild(QScrollArea, "capstoneScroll")
-        if scroll is None or scroll.widget() is None:
+        if scroll is None:
             raise RuntimeError("DM857 capstone scroll body is unavailable.")
-        body_layout = scroll.widget().layout()
+        body = scroll.widget()
+        if body is None:
+            raise RuntimeError("DM857 capstone scroll body is unavailable.")
+        body_layout = body.layout()
         if not isinstance(body_layout, QVBoxLayout):
             raise RuntimeError("DM857 capstone body must use a vertical layout.")
         station_index = body_layout.indexOf(self.technical_station_panel)
