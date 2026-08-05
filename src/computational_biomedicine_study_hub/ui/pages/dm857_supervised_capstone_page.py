@@ -33,7 +33,6 @@ class DM857SupervisedCapstonePage(DM857CapstonePage):
             capstone_store=capstone_store,
             parent=parent,
         )
-        self.setObjectName("dm857SupervisedCapstonePage")
         self._weekly_supervision = DM857WeeklySupervisionPanel(
             progress_store,
             locale,
