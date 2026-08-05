@@ -20,7 +20,7 @@ from ..storage.sqlite_progress_store import SQLiteProgressStore
 from .pages.bmb830_oral_exam_page import BMB830OralExamPage
 from .pages.bmb831_report_page import BMB831ReportPage
 from .pages.dm847_written_assessment_page import DM847WrittenAssessmentPage
-from .pages.dm857_capstone_page import DM857CapstonePage
+from .pages.dm857_supervised_capstone_page import DM857SupervisedCapstonePage
 
 
 @runtime_checkable
@@ -96,7 +96,7 @@ def _dm857_page(
     settings: QSettings | None,
 ) -> QWidget:
     del settings
-    return DM857CapstonePage(progress_store, locale)
+    return DM857SupervisedCapstonePage(progress_store, locale)
 
 
 def _bmb830_page(

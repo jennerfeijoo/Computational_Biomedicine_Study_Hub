@@ -7,6 +7,7 @@ from .bmb831_report_store import BMB831ReportStore
 from .computational_lab_store import ComputationalLabStore
 from .dm847_written_assessment_store import DM847WrittenAssessmentStore
 from .dm857_capstone_store import DM857CapstoneStore
+from .dm857_weekly_supervision_store import DM857WeeklySupervisionStore
 from .mentor_journal_store import MentorJournalStore
 from .sqlite_progress_store import SQLiteProgressStore
 
@@ -18,6 +19,7 @@ __all__ = [
     "ComputationalLabStore",
     "DM847WrittenAssessmentStore",
     "DM857CapstoneStore",
+    "DM857WeeklySupervisionStore",
     "MentorJournalStore",
     "SQLiteProgressStore",
 ]
