@@ -27,15 +27,22 @@ class OllamaProtocolError(OllamaError):
 class OllamaConfig:
     """Connection settings for the local Ollama API."""
 
-    base_url: str = "http://localhost:11434/api"
+    base_url: str = "http://127.0.0.1:11434/api"
     timeout_seconds: float = 5.0
     generation_timeout_seconds: float = 180.0
 
     def normalized_base_url(self) -> str:
-        """Return a normalized URL ending in ``/api``."""
+        """Return a normalized URL ending in ``/api``.
+
+        Ollama binds to ``127.0.0.1:11434`` by default. Using the explicit IPv4
+        loopback address avoids Windows ``localhost`` resolution selecting an
+        IPv6 listener when Ollama is only listening on IPv4.
+        """
         value = self.base_url.strip().rstrip("/")
         if not value:
-            value = "http://localhost:11434/api"
+            value = "http://127.0.0.1:11434/api"
+        elif value.startswith("http://localhost"):
+            value = "http://127.0.0.1" + value[len("http://localhost") :]
         if not value.endswith("/api"):
             value = f"{value}/api"
         return value
@@ -131,9 +138,11 @@ class UrllibJsonTransport:
             detail = _read_http_error(exc)
             raise OllamaConnectionError(f"Ollama returned HTTP {exc.code}: {detail}") from exc
         except (URLError, TimeoutError, OSError) as exc:
+            reason = getattr(exc, "reason", None)
+            detail = str(reason or exc).strip()
             raise OllamaConnectionError(
-                "No se pudo conectar con Ollama. Comprueba que el servicio "
-                "esté activo y que la URL configurada sea correcta."
+                "No se pudo conectar con Ollama en la URL configurada. "
+                f"Endpoint: {url}. Detalle: {detail}"
             ) from exc
 
         return _decode_json_object(raw_content)
