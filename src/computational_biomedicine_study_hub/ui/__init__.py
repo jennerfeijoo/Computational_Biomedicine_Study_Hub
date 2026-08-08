@@ -46,7 +46,7 @@ class _TutorResizeGrip(QSizeGrip):
 
 
 class _ResizableFloatingTutorChat(_floating_tutor_chat.FloatingTutorChat):
-    """Floating tutor with hidden context metadata and a user-resizable viewport."""
+    """Floating tutor with hidden context/observation metadata and a user-resizable viewport."""
 
     MIN_WIDTH = 420
     MAX_WIDTH = 960
@@ -56,6 +56,7 @@ class _ResizableFloatingTutorChat(_floating_tutor_chat.FloatingTutorChat):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self._context.hide()
+        self._note_frame.hide()
         self.setMinimumSize(self.MIN_WIDTH, self.MIN_HEIGHT)
         self.setMaximumSize(self.MAX_WIDTH, self.MAX_HEIGHT)
         self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
