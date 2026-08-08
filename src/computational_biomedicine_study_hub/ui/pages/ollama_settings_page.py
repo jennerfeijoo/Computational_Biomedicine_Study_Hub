@@ -62,7 +62,6 @@ class OllamaSettingsPage(QWidget):
 
     BASE_URL_KEY = "ollama/base_url"
     MODEL_KEY = "ollama/model"
-    PREFERRED_MODEL = "qwen3.5:9b-q8_0"
 
     def __init__(
         self,
@@ -136,7 +135,7 @@ class OllamaSettingsPage(QWidget):
             ui_text(
                 locale,
                 UiCopyKey.OLLAMA_EXPLANATION,
-                model=self.PREFERRED_MODEL,
+                model="el modelo local seleccionado",
             )
         )
         explanation.setObjectName("settingsExplanation")
@@ -212,7 +211,7 @@ class OllamaSettingsPage(QWidget):
 
     @Slot(str, object)
     def apply_probe_success(self, version: str, models_payload: object) -> None:
-        """Display a successful connection result and select the preferred model."""
+        """Display a successful connection result and preserve the user's model selection."""
         models = (
             tuple(model for model in models_payload if isinstance(model, OllamaModel))
             if isinstance(models_payload, tuple)
@@ -229,29 +228,20 @@ class OllamaSettingsPage(QWidget):
             self._set_status_state("success")
             return
 
-        preferred_index = self._models.findText(self.PREFERRED_MODEL)
-        if preferred_index >= 0:
-            self._models.setCurrentIndex(preferred_index)
-            self._status.setText(
-                ui_text(
-                    self._locale,
-                    UiCopyKey.OLLAMA_CONNECTED,
-                    model=self.PREFERRED_MODEL,
-                )
-            )
+        stored_model = str(self._settings.value(self.MODEL_KEY, "")).strip()
+        stored_index = self._models.findText(stored_model) if stored_model else -1
+        if stored_index >= 0:
+            self._models.setCurrentIndex(stored_index)
         else:
-            stored_model = str(self._settings.value(self.MODEL_KEY, "")).strip()
-            stored_index = self._models.findText(stored_model) if stored_model else -1
-            if stored_index >= 0:
-                self._models.setCurrentIndex(stored_index)
-            self._status.setText(
-                ui_text(
-                    self._locale,
-                    UiCopyKey.OLLAMA_PREFERRED_MISSING,
-                    model=self.PREFERRED_MODEL,
-                )
-            )
+            self._models.setCurrentIndex(0)
 
+        self._status.setText(
+            ui_text(
+                self._locale,
+                UiCopyKey.OLLAMA_CONNECTED,
+                model=self.selected_model,
+            )
+        )
         self._models.setEnabled(True)
         self._save_button.setEnabled(True)
         self._set_status_state("success")
