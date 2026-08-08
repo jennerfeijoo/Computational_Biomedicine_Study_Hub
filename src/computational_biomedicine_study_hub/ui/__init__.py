@@ -46,7 +46,7 @@ class _TutorResizeGrip(QSizeGrip):
 
 
 class _ResizableFloatingTutorChat(_floating_tutor_chat.FloatingTutorChat):
-    """Floating tutor with hidden context/observation metadata and a user-resizable viewport."""
+    """Floating tutor with hidden presentation metadata and a user-resizable viewport."""
 
     MIN_WIDTH = 420
     MAX_WIDTH = 960
@@ -68,6 +68,11 @@ class _ResizableFloatingTutorChat(_floating_tutor_chat.FloatingTutorChat):
         self._resize_grip.setFixedSize(18, 18)
         self._resize_grip.raise_()
         self._position_resize_grip()
+
+    def _render_observation(self, observation) -> None:
+        """Keep mentor observations private; never render them in the floating chat."""
+        del observation
+        self._note_frame.hide()
 
     def resizeEvent(self, event: QResizeEvent) -> None:  # noqa: N802
         super().resizeEvent(event)
