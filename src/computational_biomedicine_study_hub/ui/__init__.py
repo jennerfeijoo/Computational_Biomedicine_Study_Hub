@@ -6,6 +6,7 @@ from PySide6.QtCore import QPoint, QResizeEvent, Qt
 from PySide6.QtGui import QMouseEvent
 from PySide6.QtWidgets import QSizeGrip, QSizePolicy
 
+from . import widgets as _widgets_package
 from .widgets import floating_tutor_chat as _floating_tutor_chat
 
 
@@ -112,3 +113,5 @@ def _position_resizable_floating_tutor(panel, launcher, host) -> None:
 
 _floating_tutor_chat.FloatingTutorChat = _ResizableFloatingTutorChat
 _floating_tutor_chat.position_floating_tutor = _position_resizable_floating_tutor
+_widgets_package.FloatingTutorChat = _ResizableFloatingTutorChat
+_widgets_package.position_floating_tutor = _position_resizable_floating_tutor
