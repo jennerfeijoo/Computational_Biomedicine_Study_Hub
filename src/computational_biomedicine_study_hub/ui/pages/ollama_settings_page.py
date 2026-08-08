@@ -90,7 +90,7 @@ class OllamaSettingsPage(QWidget):
 
         self._base_url = QLineEdit(self._stored_base_url())
         self._base_url.setObjectName("ollamaBaseUrl")
-        self._base_url.setPlaceholderText("http://localhost:11434/api")
+        self._base_url.setPlaceholderText("http://127.0.0.1:11434/api")
 
         self._probe_button = QPushButton(ui_text(locale, UiCopyKey.OLLAMA_RECONNECT))
         self._probe_button.setObjectName("primaryActionButton")
