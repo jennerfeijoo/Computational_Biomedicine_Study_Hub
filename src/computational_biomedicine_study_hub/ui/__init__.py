@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from PySide6.QtCore import QPoint, QResizeEvent, Qt
-from PySide6.QtGui import QMouseEvent
+from PySide6.QtCore import QPoint, Qt
+from PySide6.QtGui import QMouseEvent, QResizeEvent
 from PySide6.QtWidgets import QSizeGrip, QSizePolicy
 
 from . import widgets as _widgets_package
@@ -58,27 +58,17 @@ class _ResizableFloatingTutorChat(_floating_tutor_chat.FloatingTutorChat):
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-
-        # Context remains available to the runner through the existing provider,
-        # but is intentionally not rendered in the chat UI.
         self._context.hide()
-
         self.setMinimumSize(self.MIN_WIDTH, self.MIN_HEIGHT)
         self.setMaximumSize(self.MAX_WIDTH, self.MAX_HEIGHT)
         self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-
         self._transcript.setSizePolicy(
             QSizePolicy.Policy.Expanding,
             QSizePolicy.Policy.Expanding,
         )
         self._transcript.setMinimumHeight(180)
-        self._transcript.setHorizontalScrollBarPolicy(
-            Qt.ScrollBarPolicy.ScrollBarAsNeeded
-        )
-        self._transcript.setVerticalScrollBarPolicy(
-            Qt.ScrollBarPolicy.ScrollBarAlwaysOn
-        )
-
+        self._transcript.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self._transcript.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
         self._resize_grip = _TutorResizeGrip(self)
         self._resize_grip.setFixedSize(18, 18)
         self._resize_grip.raise_()
@@ -103,7 +93,6 @@ _original_position_floating_tutor = _floating_tutor_chat.position_floating_tutor
 
 def _position_resizable_floating_tutor(panel, launcher, host) -> None:
     """Preserve the original anchoring while keeping the panel resizable."""
-
     _original_position_floating_tutor(panel, launcher, host)
     if isinstance(panel, _ResizableFloatingTutorChat):
         panel.setMinimumSize(panel.MIN_WIDTH, panel.MIN_HEIGHT)
