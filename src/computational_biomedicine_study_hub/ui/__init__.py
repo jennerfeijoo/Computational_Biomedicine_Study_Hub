@@ -36,10 +36,7 @@ class _TutorResizeGrip(QSizeGrip):
         if panel is None:
             return
         delta = event.globalPosition().toPoint() - self._start_global
-        panel.resize(
-            self._start_size.width() + delta.x(),
-            self._start_size.height() + delta.y(),
-        )
+        panel.resize(self._start_size.width() + delta.x(), self._start_size.height() + delta.y())
         event.accept()
 
     def mouseReleaseEvent(self, event: QMouseEvent) -> None:  # noqa: N802
@@ -62,10 +59,7 @@ class _ResizableFloatingTutorChat(_floating_tutor_chat.FloatingTutorChat):
         self.setMinimumSize(self.MIN_WIDTH, self.MIN_HEIGHT)
         self.setMaximumSize(self.MAX_WIDTH, self.MAX_HEIGHT)
         self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        self._transcript.setSizePolicy(
-            QSizePolicy.Policy.Expanding,
-            QSizePolicy.Policy.Expanding,
-        )
+        self._transcript.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         self._transcript.setMinimumHeight(180)
         self._transcript.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self._transcript.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
@@ -81,10 +75,7 @@ class _ResizableFloatingTutorChat(_floating_tutor_chat.FloatingTutorChat):
     def _position_resize_grip(self) -> None:
         if hasattr(self, "_resize_grip"):
             margin = 3
-            self._resize_grip.move(
-                self.width() - self._resize_grip.width() - margin,
-                self.height() - self._resize_grip.height() - margin,
-            )
+            self._resize_grip.move(self.width() - self._resize_grip.width() - margin, self.height() - self._resize_grip.height() - margin)
             self._resize_grip.raise_()
 
 
