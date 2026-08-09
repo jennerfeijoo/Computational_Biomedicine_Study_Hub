@@ -105,11 +105,11 @@ The integrated capstone now records observable evidence for: biological question
 
 ## DM857 source-grounded verification boundary
 
-The source-review record is being kept separate from the readiness gate. The uploaded Guttag 3rd edition contains dedicated chapters on functions, structured types and mutability, recursion, modules/files, testing/debugging, exceptions/assertions, classes/OOP, algorithmic complexity and data structures. fileciteturn202file0L1-L1
+The uploaded Guttag 3rd edition contains dedicated chapters on functions, structured types and mutability, recursion, modules/files, testing/debugging, exceptions/assertions, classes/OOP, algorithmic complexity and data structures.
 
-The uploaded Think Python 3rd edition explicitly emphasizes programming practice, exercises, recursion, core data structures, files, OOP, testing/debugging and Jupyter-based executable learning. fileciteturn202file8L1-L1
+The uploaded Think Python 3rd edition explicitly emphasizes programming practice, exercises, recursion, core data structures, files, OOP, testing/debugging and Jupyter-based executable learning.
 
-The repository already contains book-grounded DM857 extension modules for foundations, strings/mappings, trees, ADTs, OOP and scientific libraries. The historical `pending` table in `docs/dm857-book-grounded-audit.md` therefore remains a record of what was documented in that older audit, not a claim that those runtime modules are missing. fileciteturn195file0L2-L2
+The repository already contains book-grounded DM857 extension modules for foundations, strings/mappings, trees, ADTs, OOP and scientific libraries. The historical `pending` table in `docs/dm857-book-grounded-audit.md` therefore remains a record of what was documented in that older audit, not a claim that those runtime modules are missing.
 
 A module is not marked `consistent` merely because a matching chapter exists. The final source-grounded state requires an explicit chapter-level comparison and regression evidence.
 
