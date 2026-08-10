@@ -7,7 +7,6 @@ from pathlib import Path
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import QWidget
 
-from ..i18n import AppLocale
 from ..storage import AILearningStore, SQLiteProgressStore
 from .main_window import MainWindow as BaseMainWindow
 from .pages.ai_study_pages import FlashcardsPage
