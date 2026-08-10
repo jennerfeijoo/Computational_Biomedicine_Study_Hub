@@ -24,6 +24,7 @@ class MainWindow(BaseMainWindow):
         settings: QSettings | None = None,
         progress_store: SQLiteProgressStore | None = None,
     ) -> None:
+        self._ai_settings = settings if settings is not None else QSettings()
         self._ai_learning_store: AILearningStore | None = None
         if progress_store is not None and progress_store.database != ":memory:":
             database = Path(progress_store.database).with_name("ai_learning.sqlite3")
@@ -43,7 +44,7 @@ class MainWindow(BaseMainWindow):
         )
         self._replace_page(
             RouteId.ASSESSMENTS.value,
-            SmartAssessmentsPage(self._ai_learning_store, locale),
+            SmartAssessmentsPage(self._ai_learning_store, locale, self._ai_settings),
         )
 
     def _replace_page(self, route: str, page: QWidget) -> None:
