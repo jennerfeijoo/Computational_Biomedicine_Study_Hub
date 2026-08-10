@@ -1,15 +1,14 @@
 """Module-aware intelligent assessment UI.
 
-Programming review is intentionally embedded in the assessment workflow and is shown only
-for selected modules that actually contain code-completion, code-tracing, debugging, or
-starter-code exercises.
+Programming review is part of an assessment session and is shown only when the selected
+modules contain explicit programming exercises.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 
-from PySide6.QtCore import QRegularExpression, QThread, Qt, Signal
+from PySide6.QtCore import QRegularExpression, Qt
 from PySide6.QtGui import QFont, QSyntaxHighlighter, QTextCharFormat
 from PySide6.QtWidgets import (
     QComboBox,
@@ -27,8 +26,10 @@ from PySide6.QtWidgets import (
 
 from ...content.models import LearningModule
 from ...i18n import AppLocale
+from ...integrations.ollama import OllamaConfig
+from ...integrations.ollama_chat import OllamaChatClient
 from ...learning.ai_study_service import CodeFeedback
-from ...learning.module_catalog import modules_for_course, modules_for_locale
+from ...learning.module_catalog import modules_for_course
 from ...learning.smart_assessment_service import SmartAssessmentService, programming_exercises
 from ...storage.ai_learning_store import AILearningStore, GeneratedQuestion
 from .ai_study_pages import _AsyncResult, _Worker
@@ -66,11 +67,14 @@ class _AssessmentState:
 class SmartAssessmentsPage(QWidget):
     """Run mixed module assessments and optional module-specific code review."""
 
-    def __init__(self, store: AILearningStore, locale: AppLocale, parent: QWidget | None = None) -> None:
+    def __init__(self, store: AILearningStore, locale: AppLocale, settings=None, parent: QWidget | None = None) -> None:
         super().__init__(parent)
         self._store = store
         self._locale = locale
-        self._service = SmartAssessmentService(store)
+        base_url = str(settings.value("ollama/base_url", "") if settings is not None else "").strip()
+        selected_model = str(settings.value("ollama/model", "") if settings is not None else "").strip()
+        client = OllamaChatClient(OllamaConfig(base_url=base_url)) if base_url else OllamaChatClient()
+        self._service = SmartAssessmentService(store, client=client, model=selected_model)
         self._state = _AssessmentState()
         self._worker: _Worker | None = None
         self._modules: tuple[LearningModule, ...] = ()
