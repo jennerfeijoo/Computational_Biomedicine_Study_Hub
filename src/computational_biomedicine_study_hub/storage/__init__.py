@@ -1,6 +1,7 @@
 """Local persistence services for private study data."""
 
 from .adaptive_review_session_store import AdaptiveReviewSessionStore
+from .ai_learning_store import AILearningStore, FlashcardRecord, GeneratedQuestion
 from .atomic_json_store import AtomicJsonSidecarStore
 from .bmb830_oral_exam_store import BMB830OralExamStore
 from .bmb831_report_store import BMB831ReportStore
@@ -13,6 +14,7 @@ from .sqlite_progress_store import SQLiteProgressStore
 
 __all__ = [
     "AdaptiveReviewSessionStore",
+    "AILearningStore",
     "AtomicJsonSidecarStore",
     "BMB830OralExamStore",
     "BMB831ReportStore",
@@ -20,6 +22,8 @@ __all__ = [
     "DM847WrittenAssessmentStore",
     "DM857CapstoneStore",
     "DM857WeeklySupervisionStore",
+    "FlashcardRecord",
+    "GeneratedQuestion",
     "MentorJournalStore",
     "SQLiteProgressStore",
 ]
