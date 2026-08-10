@@ -13,7 +13,7 @@ from .courses.dm847 import configure_progress_recorder as configure_dm847_progre
 from .courses.dm857 import configure_progress_recorder as configure_dm857_progress_recorder
 from .learning.progress_service import LearningProgressService
 from .storage import SQLiteProgressStore
-from .ui.main_window import MainWindow
+from .ui.ai_feature_window import MainWindow
 
 APPLICATION_NAME = "Computational Biomedicine Study Hub"
 ORGANIZATION_NAME = "Jenner Feijoo"
