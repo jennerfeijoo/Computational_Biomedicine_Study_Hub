@@ -1,4 +1,4 @@
-"""Stable public-source contracts for the BMB831 real-omics workflow.
+"""Stable public-source contracts for cumulative first-semester omics labs.
 
 The registry identifies public sources and the local artifacts a learner must retain.
 It deliberately does not auto-download mutable remote content or claim a checksum
@@ -12,7 +12,7 @@ from enum import StrEnum
 
 
 class OmicsModality(StrEnum):
-    """Supported real-data modalities in the BMB831 cumulative workflow."""
+    """Supported real-data modalities in the first-semester cumulative workflow."""
 
     BULK_RNA_SEQ = "bulk_rna_seq"
     LFQ_PROTEOMICS = "lfq_proteomics"
@@ -50,6 +50,14 @@ class PublicOmicsSource:
             raise ValueError("Public omics artifact expectations cannot contain duplicates.")
 
 
+_COMMON_ARTIFACTS = (
+    "study_metadata_snapshot",
+    "sample_metadata_snapshot",
+    "feature_annotation_snapshot",
+    "sha256_manifest.json",
+    "dataset_card.md",
+)
+
 PUBLIC_OMICS_SOURCES: tuple[PublicOmicsSource, ...] = (
     PublicOmicsSource(
         source_id="bioconductor.airway",
@@ -71,6 +79,45 @@ PUBLIC_OMICS_SOURCES: tuple[PublicOmicsSource, ...] = (
             "The public package is a teaching dataset. A local analysis must record the exact "
             "package or export version, sample metadata, feature identifiers, and checksums. "
             "Results cannot be generalized beyond the represented experiment without external evidence."
+        ),
+    ),
+    PublicOmicsSource(
+        source_id="ncbi.geo.gse305298",
+        title="Human HCT116 RNA-seq: wild-type and DNMT1/UHRF1 hypomorph conditions",
+        modality=OmicsModality.BULK_RNA_SEQ,
+        provider="NCBI Gene Expression Omnibus",
+        access_identifier="GSE305298",
+        landing_page="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE305298",
+        expected_sample_unit="one human HCT116 RNA-seq sample in the declared genotype/condition",
+        required_local_artifacts=(
+            *_COMMON_ARTIFACTS,
+            "raw_or_NCBI_generated_count_matrix",
+            "analysis_ready_metadata.tsv",
+        ),
+        scientific_boundary=(
+            "This public series is suitable for teaching experimental design, count-matrix handling, "
+            "QC, normalization, differential modelling and biological interpretation. The learner must "
+            "preserve the original accession metadata and must not infer clinical conclusions from a cell-line experiment."
+        ),
+    ),
+    PublicOmicsSource(
+        source_id="ucsc.xena.tcga-target-gtex",
+        title="TCGA/TARGET/GTEx integrated public expression cohort",
+        modality=OmicsModality.BULK_RNA_SEQ,
+        provider="UCSC Xena",
+        access_identifier="TCGA TARGET GTEx",
+        landing_page="https://xenabrowser.net/datapages/?cohort=TCGA%20TARGET%20GTEx",
+        expected_sample_unit="one molecular sample with linked cohort/tissue metadata",
+        required_local_artifacts=(
+            *_COMMON_ARTIFACTS,
+            "expression_matrix_snapshot",
+            "phenotype_snapshot",
+            "cohort_filter_definition.json",
+        ),
+        scientific_boundary=(
+            "This is an integration-scale resource for teaching feature selection, covariate handling, "
+            "batch/cohort effects, multivariate exploration and reproducible filtering. Cohort composition, "
+            "normalization and data release must be recorded before interpretation."
         ),
     ),
     PublicOmicsSource(
