@@ -1,4 +1,4 @@
-"""Reliable multi-module assessment generation with explicit reinforcement quotas."""
+"""Reliable module-aware assessment generation and programming relevance."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from typing import Any
 from uuid import uuid4
 
 from ..content.models import LearningModule
-from ..integrations.ollama_chat import ChatMessage, ChatRole
+from ..integrations.ollama_chat import ChatMessage, ChatRole, OllamaChatClient
 from ..storage.ai_learning_store import GeneratedQuestion
 from .activity_types import ActivityType
 from .ai_study_service import AIStudyService
@@ -27,11 +27,8 @@ QUESTION_SCHEMA: dict[str, Any] = {
                     "correct_answer": {"type": "string"},
                     "rationale": {"type": "string"},
                     "rubric": {"type": "array", "items": {"type": "string"}},
-                    "module_id": {"type": "string"},
                 },
-                "required": [
-                    "type", "prompt", "options", "correct_answer", "rationale", "rubric", "module_id"
-                ],
+                "required": ["type", "prompt", "options", "correct_answer", "rationale", "rubric"],
                 "additionalProperties": False,
             },
         }
@@ -41,8 +38,31 @@ QUESTION_SCHEMA: dict[str, Any] = {
 }
 
 
+class _SelectedModelChatClient:
+    """Proxy that makes the model selected in Settings apply to every AI operation."""
+
+    def __init__(self, client: OllamaChatClient, model: str) -> None:
+        self._client = client
+        self._model = model.strip()
+
+    def chat(self, messages, **kwargs):
+        if self._model:
+            kwargs["model"] = self._model
+        return self._client.chat(messages, **kwargs)
+
+
 class SmartAssessmentService(AIStudyService):
-    """Generate reliable mixed assessments one authored module at a time."""
+    """Generate mixed assessments one authored module at a time."""
+
+    def __init__(
+        self,
+        store,
+        *,
+        client: OllamaChatClient | None = None,
+        model: str = "",
+    ) -> None:
+        base_client = client or OllamaChatClient()
+        super().__init__(store, client=_SelectedModelChatClient(base_client, model))
 
     def generate_assessment(
         self,
@@ -61,13 +81,12 @@ class SmartAssessmentService(AIStudyService):
         generated: list[GeneratedQuestion] = []
 
         for module in modules:
-            quota = quotas[module.module_id]
-            generated.extend(self._generate_for_module(module, quota, weights[module.module_id]))
+            generated.extend(self._generate_for_module(module, quotas[module.module_id], weights[module.module_id]))
 
         if not generated:
             raise ValueError(
-                "No se pudieron generar preguntas válidas. Comprueba que Ollama esté conectado "
-                "y que el modelo seleccionado pueda producir JSON estructurado."
+                "No se pudieron generar preguntas válidas. Comprueba Ollama, el modelo seleccionado "
+                "y la conexión local."
             )
 
         result = generated[:count]
@@ -85,22 +104,21 @@ class SmartAssessmentService(AIStudyService):
         context = self._module_context(module)
         system = (
             "Generate rigorous study questions ONLY from the supplied authored module. "
-            "Create a balanced mixture of multiple-choice and short-reasoning questions. "
-            "Return module_id only as hidden provenance. The prompt and rationale are user-visible "
-            "and MUST NOT contain the module title, module ID, course code, or phrases such as "
-            "'this module' or 'in this topic'. Do not reveal provenance. "
+            "Create a mixture of multiple-choice and short-reasoning questions. "
+            "This request is already scoped to one module, so DO NOT output module metadata. "
+            "The visible prompt and rationale MUST NOT contain the module title, module ID, course code, "
+            "or phrases such as 'this module' or 'in this topic'. Do not reveal provenance. "
             "For multiple-choice questions provide at least four options and one exact correct answer. "
-            "For short_reasoning questions use an empty options array and provide a reference answer "
-            "plus rubric criteria."
+            "For short_reasoning questions use an empty options array and provide a reference answer plus rubric criteria."
         )
         user = (
-            f"Generate exactly {quota} questions. Weakness weight for this source is {weakness_weight:.3f}. "
-            "Use that weight only to prioritize difficult/reinforcing concepts; do not mention it.\n\n"
+            f"Generate exactly {quota} questions. Weakness weight is {weakness_weight:.3f}. "
+            "Use the weight only to prioritize reinforcement; never mention it.\n\n"
             f"AUTHORED MODULE CONTENT:\n{context}"
         )
         response = self.client.chat(
             (ChatMessage(ChatRole.SYSTEM, system), ChatMessage(ChatRole.USER, user)),
-            temperature=0.45,
+            temperature=0.35,
             format_schema=QUESTION_SCHEMA,
             num_ctx=32768,
             num_predict=3500,
@@ -121,8 +139,6 @@ class SmartAssessmentService(AIStudyService):
         created_at: str,
     ) -> GeneratedQuestion | None:
         if not isinstance(item, dict):
-            return None
-        if str(item.get("module_id", "")).strip() != module.module_id:
             return None
         kind = str(item.get("type", "")).strip()
         if kind not in {"multiple_choice", "short_reasoning"}:
@@ -155,13 +171,13 @@ class SmartAssessmentService(AIStudyService):
 
 
 def programming_exercises(module: LearningModule):
-    """Return only exercises that are genuinely code-reviewable."""
+    """Return only authored practice exercises that are explicitly code-reviewable."""
 
     code_types = {ActivityType.CODE_COMPLETION, ActivityType.CODE_TRACING, ActivityType.DEBUGGING}
     return tuple(
         exercise
         for exercise in module.practice_exercises
-        if exercise.activity_type in code_types or exercise.starter_code.strip()
+        if exercise.activity_type in code_types
     )
 
 
@@ -170,8 +186,6 @@ def _allocate_quotas(
     modules: tuple[LearningModule, ...],
     weights: dict[str, float],
 ) -> dict[str, int]:
-    """Give every selected module coverage and put extra questions on weak modules."""
-
     count = max(count, len(modules))
     quotas = {module.module_id: 1 for module in modules}
     remaining = count - len(modules)
@@ -186,7 +200,7 @@ def _allocate_quotas(
 
 
 def _deterministic_shuffle(questions: list[GeneratedQuestion]) -> None:
-    """Mix source modules without using global random state."""
+    """Interleave questions from different source modules without global random state."""
 
     questions[:] = questions[::2] + questions[1::2]
 
