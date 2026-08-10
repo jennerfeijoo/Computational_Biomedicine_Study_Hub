@@ -13,9 +13,7 @@ from .book_grounded_audit import (
 from .book_grounded_audit import (
     DM847_MODULE_SOURCE_AUDIT as _BASE_DM847_MODULE_SOURCE_AUDIT,
 )
-from .book_grounded_audit import (
-    apply_book_grounded_extensions,
-)
+from .book_grounded_audit import apply_book_grounded_extensions
 from .book_grounded_hmm_bwt import apply_hmm_bwt_extensions, update_hmm_bwt_audit
 from .book_grounded_motifs_networks import (
     apply_motif_network_extensions,
@@ -30,6 +28,10 @@ from .book_grounded_ontologies_operons import (
     apply_ontology_operon_extensions,
     update_ontology_operon_audit,
     update_ontology_operon_source_catalog,
+)
+from .book_grounded_suffix_trees_peak_calling import (
+    apply_suffix_tree_peak_calling_extensions,
+    update_suffix_tree_peak_calling_audit,
 )
 from .module_01_molecular_information import (
     LOCALIZED_MODULE_01_MOLECULAR_INFORMATION,
@@ -89,9 +91,11 @@ from .module_10_omics_learning_project import (
 DM847_BOOK_SOURCES = update_ontology_operon_source_catalog(
     update_motif_network_source_catalog(_BASE_DM847_BOOK_SOURCES)
 )
-DM847_MODULE_SOURCE_AUDIT = update_ontology_operon_audit(
-    update_omics_foundations_audit(
-        update_motif_network_audit(update_hmm_bwt_audit(_BASE_DM847_MODULE_SOURCE_AUDIT))
+DM847_MODULE_SOURCE_AUDIT = update_suffix_tree_peak_calling_audit(
+    update_ontology_operon_audit(
+        update_omics_foundations_audit(
+            update_motif_network_audit(update_hmm_bwt_audit(_BASE_DM847_MODULE_SOURCE_AUDIT))
+        )
     )
 )
 
@@ -104,7 +108,8 @@ def _replace_spanish(
     if len(texts) != len(spanish_values):
         raise ValueError("Localized tutor correction must preserve item count.")
     return tuple(
-        replace(text, spanish=spanish) for text, spanish in zip(texts, spanish_values, strict=True)
+        replace(text, spanish=spanish)
+        for text, spanish in zip(texts, spanish_values, strict=True)
     )
 
 
@@ -243,22 +248,24 @@ LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM = replace(
     LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM,
     LOCALIZED_MODULE_09_BIOLOGICAL_NETWORKS_ENRICHMENT,
     LOCALIZED_MODULE_10_OMICS_LEARNING_PROJECT,
-) = apply_ontology_operon_extensions(
-    apply_omics_foundations_extensions(
-        apply_motif_network_extensions(
-            apply_hmm_bwt_extensions(
-                apply_book_grounded_extensions(
-                    (
-                        LOCALIZED_MODULE_01_MOLECULAR_INFORMATION,
-                        LOCALIZED_MODULE_02_ONTOLOGIES_DATABASES,
-                        LOCALIZED_MODULE_03_SEQUENCE_SCORING_MATCHING,
-                        LOCALIZED_MODULE_04_PAIRWISE_ALIGNMENT,
-                        LOCALIZED_MODULE_05_HIDDEN_MARKOV_MODELS,
-                        LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING,
-                        LOCALIZED_MODULE_07_OPERONS_BACTERIAL_GENETICS,
-                        LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM,
-                        LOCALIZED_MODULE_09_BIOLOGICAL_NETWORKS_ENRICHMENT,
-                        LOCALIZED_MODULE_10_OMICS_LEARNING_PROJECT,
+) = apply_suffix_tree_peak_calling_extensions(
+    apply_ontology_operon_extensions(
+        apply_omics_foundations_extensions(
+            apply_motif_network_extensions(
+                apply_hmm_bwt_extensions(
+                    apply_book_grounded_extensions(
+                        (
+                            LOCALIZED_MODULE_01_MOLECULAR_INFORMATION,
+                            LOCALIZED_MODULE_02_ONTOLOGIES_DATABASES,
+                            LOCALIZED_MODULE_03_SEQUENCE_SCORING_MATCHING,
+                            LOCALIZED_MODULE_04_PAIRWISE_ALIGNMENT,
+                            LOCALIZED_MODULE_05_HIDDEN_MARKOV_MODELS,
+                            LOCALIZED_MODULE_06_SUFFIX_ARRAYS_BWT_MAPPING,
+                            LOCALIZED_MODULE_07_OPERONS_BACTERIAL_GENETICS,
+                            LOCALIZED_MODULE_08_MOTIF_DISCOVERY_EM,
+                            LOCALIZED_MODULE_09_BIOLOGICAL_NETWORKS_ENRICHMENT,
+                            LOCALIZED_MODULE_10_OMICS_LEARNING_PROJECT,
+                        )
                     )
                 )
             )
@@ -292,18 +299,7 @@ _LOCALIZED_OBJECTIVE_BANKS = (
     LOCALIZED_OBJECTIVE_QUESTION_BANK_10,
 )
 
-_CONTENT_VERSIONS = (
-    "1.1.0",
-    "1.1.0",
-    "1.1.0",
-    "1.1.0",
-    "1.1.0",
-    "1.1.0",
-    "1.1.0",
-    "1.1.0",
-    "1.1.0",
-    "1.1.0",
-)
+_CONTENT_VERSIONS = ("1.2.0",) * 10
 
 LOCALIZED_BUNDLES = tuple(
     LocalizedModuleBundle(
@@ -402,6 +398,7 @@ __all__ = [
     "apply_motif_network_extensions",
     "apply_omics_foundations_extensions",
     "apply_ontology_operon_extensions",
+    "apply_suffix_tree_peak_calling_extensions",
     "materialize_module_01_question_bank",
     "materialize_module_02_question_bank",
     "materialize_module_03_question_bank",
