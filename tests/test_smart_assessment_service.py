@@ -18,7 +18,7 @@ def _module(module_id: str, activity_types: tuple[ActivityType, ...]):
         )
         for index, activity_type in enumerate(activity_types)
     )
-    return SimpleNamespace(module_id=module_id)
+    return SimpleNamespace(module_id=module_id, practice_exercises=exercises)
 
 
 def test_programming_exercises_only_returns_code_relevant_activities():
