@@ -14,14 +14,14 @@ def _module(module_id: str, activity_types: tuple[ActivityType, ...]):
         SimpleNamespace(
             exercise_id=f"{module_id}-{index}",
             activity_type=activity_type,
-            starter_code="" if activity_type != ActivityType.CODE_COMPLETION else "def solve():\n    pass",
+            starter_code="def solve():\n    pass" if activity_type == ActivityType.CODE_COMPLETION else "",
         )
         for index, activity_type in enumerate(activity_types)
     )
     return SimpleNamespace(module_id=module_id, practice_exercises=exercises)
 
 
-def test_programming_exercises_only_returns_code_relevant_activities():
+def test_programming_exercises_only_returns_explicit_code_activities():
     module = _module(
         "DM857-M01",
         (
@@ -40,17 +40,19 @@ def test_programming_exercises_only_returns_code_relevant_activities():
     ]
 
 
-def test_programming_exercises_accepts_starter_code_even_when_activity_type_is_generic():
-    module = _module("DM857-M01", (ActivityType.SHORT_ANSWER,))
-    module.practice_exercises = (
-        SimpleNamespace(
-            exercise_id="code-1",
-            activity_type=ActivityType.SHORT_ANSWER,
-            starter_code="print('x')",
+def test_generic_activity_with_starter_code_is_not_treated_as_programming():
+    module = SimpleNamespace(
+        module_id="BMB830-M01",
+        practice_exercises=(
+            SimpleNamespace(
+                exercise_id="generic-1",
+                activity_type=ActivityType.SHORT_ANSWER,
+                starter_code="print('x')",
+            ),
         ),
     )
 
-    assert [exercise.exercise_id for exercise in programming_exercises(module)] == ["code-1"]
+    assert programming_exercises(module) == ()
 
 
 def test_weak_modules_receive_more_assessment_quota():
