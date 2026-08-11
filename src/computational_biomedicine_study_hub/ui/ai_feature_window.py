@@ -1,4 +1,4 @@
-"""Application shell extension that wires the new AI study features into existing routes."""
+"""Application shell extension that wires the AI study features into existing routes."""
 
 from __future__ import annotations
 
@@ -7,15 +7,15 @@ from pathlib import Path
 from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import QWidget
 
-from ..i18n import AppLocale
 from ..storage import AILearningStore, SQLiteProgressStore
 from .main_window import MainWindow as BaseMainWindow
-from .pages.ai_study_pages import FlashcardsPage, SmartAssessmentsPage
+from .pages.ai_study_pages import FlashcardsPage
+from .pages.smart_assessments_page import SmartAssessmentsPage
 from .routes import RouteId
 
 
 class MainWindow(BaseMainWindow):
-    """Existing shell with real flashcards and intelligent assessment pages."""
+    """Existing shell with flashcards and module-aware intelligent assessments."""
 
     def __init__(
         self,
@@ -24,6 +24,7 @@ class MainWindow(BaseMainWindow):
         settings: QSettings | None = None,
         progress_store: SQLiteProgressStore | None = None,
     ) -> None:
+        self._ai_settings = settings if settings is not None else QSettings()
         self._ai_learning_store: AILearningStore | None = None
         if progress_store is not None and progress_store.database != ":memory:":
             database = Path(progress_store.database).with_name("ai_learning.sqlite3")
@@ -31,16 +32,20 @@ class MainWindow(BaseMainWindow):
         super().__init__(parent, settings=settings, progress_store=progress_store)
 
     def _register_pages(self) -> None:
-        """Reuse the base page registration and replace placeholder/legacy assessment routes."""
+        """Reuse the base shell and replace the affected routes with real AI pages."""
 
         super()._register_pages()
         if self._ai_learning_store is None:
             return
         locale = self.current_locale
-        flashcards = FlashcardsPage(self._ai_learning_store, locale)
-        assessments = SmartAssessmentsPage(self._ai_learning_store, locale)
-        self._replace_page(RouteId.FLASHCARDS.value, flashcards)
-        self._replace_page(RouteId.ASSESSMENTS.value, assessments)
+        self._replace_page(
+            RouteId.FLASHCARDS.value,
+            FlashcardsPage(self._ai_learning_store, locale),
+        )
+        self._replace_page(
+            RouteId.ASSESSMENTS.value,
+            SmartAssessmentsPage(self._ai_learning_store, locale, self._ai_settings),
+        )
 
     def _replace_page(self, route: str, page: QWidget) -> None:
         existing = self._pages.get(route)

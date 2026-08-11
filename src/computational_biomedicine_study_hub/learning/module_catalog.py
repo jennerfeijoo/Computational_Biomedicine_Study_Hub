@@ -9,9 +9,9 @@ from __future__ import annotations
 
 from functools import lru_cache
 
+from ..content import bmb830, bmb831, dm847, dm857
 from ..content.models import LearningModule
 from ..i18n import AppLocale
-from ..content import bmb830, bmb831, dm847, dm857
 
 _COURSE_MODULES = {
     "DM857": dm857.LOCALIZED_BUNDLES,
