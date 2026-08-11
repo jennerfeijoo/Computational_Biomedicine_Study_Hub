@@ -66,7 +66,7 @@ class AILearningStore:
     def close(self) -> None:
         self._connection.close()
 
-    def __enter__(self) -> "AILearningStore":
+    def __enter__(self) -> AILearningStore:
         return self
 
     def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> None:
