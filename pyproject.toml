@@ -62,6 +62,13 @@ ignore = [
 "src/computational_biomedicine_study_hub/ui/pages/ollama_settings_page.py" = [
   "N802"
 ]
+"src/computational_biomedicine_study_hub/ui/pages/ai_study_pages.py" = [
+  "F401",
+  "I001"
+]
+"src/computational_biomedicine_study_hub/ui/pages/smart_assessments_page.py" = [
+  "I001"
+]
 
 [tool.ruff.format]
 quote-style = "double"
